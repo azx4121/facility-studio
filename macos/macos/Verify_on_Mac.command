@@ -5,6 +5,16 @@ TASK_PACKAGE_DIR="$(cd "$(/usr/bin/dirname "$0")" && pwd -P)"
 TASK_APP="$TASK_PACKAGE_DIR/Facility Studio.app"
 TASK_LOG_FOLDER="$HOME/Library/Logs/Facility_Studio_V5_5"
 /bin/mkdir -p -- "$TASK_LOG_FOLDER"
+finish() {
+    TASK_STATUS=$?
+    trap - EXIT
+    printf '\n驗證記錄位置：%s\n' "$TASK_LOG_FOLDER"
+    if [[ "$TASK_STATUS" -ne 0 && -t 0 ]]; then
+        read -r -p '驗證未通過；請保留以上訊息。按 Enter 結束。' TASK_REPLY || true
+    fi
+    exit "$TASK_STATUS"
+}
+trap finish EXIT
 printf '\nFacility Studio V5.5.4 — Mac 實機驗證\n\n'
 if [[ ! -d "$TASK_APP" ]]; then
     printf '找不到 Facility Studio.app；請先完整解壓縮懶人包。\n'

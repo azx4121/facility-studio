@@ -7,15 +7,32 @@ TASK_APP_SOURCE="$TASK_PACKAGE_DIR/Facility Studio.app"
 TASK_APP_FOLDER="$HOME/Applications"
 TASK_DESTINATION="$TASK_APP_FOLDER/Facility Studio V5.5.4.app"
 TASK_STAGE=""
+TASK_BACKUP=""
+TASK_LOG_FOLDER="$HOME/Library/Logs/Facility_Studio_V5_5"
+/bin/mkdir -p "$TASK_LOG_FOLDER"
+TASK_LOG="$TASK_LOG_FOLDER/Install_on_Mac.log"
+exec > >(/usr/bin/tee "$TASK_LOG") 2>&1
 
 cleanup() {
+    TASK_STATUS=$?
+    trap - EXIT
     if [[ -n "$TASK_STAGE" && -d "$TASK_STAGE" ]]; then
         /bin/rm -rf "$TASK_STAGE"
     fi
+    if [[ "$TASK_STATUS" -ne 0 ]]; then
+        if [[ -n "$TASK_BACKUP" && -d "$TASK_BACKUP" && ! -e "$TASK_DESTINATION" ]]; then
+            /bin/mv "$TASK_BACKUP" "$TASK_DESTINATION" || true
+        fi
+        printf '\n安裝未完成。請提供記錄：%s\n' "$TASK_LOG"
+        if [[ -t 0 ]]; then
+            read -r -p '按 Enter 結束；錯誤訊息已保留。' TASK_REPLY || true
+        fi
+    fi
+    exit "$TASK_STATUS"
 }
 trap cleanup EXIT
 
-printf '\nFacility Studio V5.5.4 — macOS 安裝\n\n'
+printf '\nFacility Studio V5.5.4 mac.2 — macOS 安裝\n\n'
 if [[ ! -d "$TASK_APP_SOURCE" ]]; then
     printf '請先完整解壓縮懶人包，讓此檔案與 Facility Studio.app 放在同一個資料夾。\n'
     exit 2

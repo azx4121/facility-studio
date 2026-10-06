@@ -5,7 +5,10 @@ Apple `codesign --verify --deep --strict`。Tcl/Tk 的設定腳本沒有被跨�
 簽署工具正確納入資源封印；檔案雜湊正確，仍不足以表示 Apple 會接受封裝。
 
 mac.2 保留已核對 SHA-256 的原 CPython framework、雙架構啟動器與第三方
-wheel，更新本專案程式後，改由 Apple codesign 逐一簽署 Mach-O、內層
+wheel，更新本專案程式後，把 Tcl/Tk 編譯用設定腳本完整保留於 framework
+的 Resources/BuildConfiguration。Apple 會把版本根目錄的腳本視為巢狀程式，
+放入 Resources 才能以資料資源封印；執行環境不需編譯擴充模組。
+接著改由 Apple codesign 逐一簽署 Mach-O、內層
 framework、外層 framework 與最後的 App。這是 ad-hoc 簽章，沒有冒充
 Developer ID，也不表示已公證。
 
