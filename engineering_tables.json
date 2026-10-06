@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "version": "legacy-project-tables-5.5",
+  "source": "User supplied V3.1 tables; installation conditions not independently established",
+  "status": "estimate_only",
+  "tables": {
+    "WIRE_DB": [
+      {
+        "size_mm2": 2.0,
+        "PVC_A": 19,
+        "XLPE_A": 20
+      },
+      {
+        "size_mm2": 3.5,
+        "PVC_A": 19,
+        "XLPE_A": 25
+      },
+      {
+        "size_mm2": 5.5,
+        "PVC_A": 25,
+        "XLPE_A": 35
+      },
+      {
+        "size_mm2": 8.0,
+        "PVC_A": 33,
+        "XLPE_A": 45
+      },
+      {
+        "size_mm2": 14.0,
+        "PVC_A": 50,
+        "XLPE_A": 65
+      },
+      {
+        "size_mm2": 22.0,
+        "PVC_A": 60,
+        "XLPE_A": 85
+      },
+      {
+        "size_mm2": 38.0,
+        "PVC_A": 85,
+        "XLPE_A": 120
+      },
+      {
+        "size_mm2": 50.0,
+        "PVC_A": 105,
+        "XLPE_A": 145
+      },
+      {
+        "size_mm2": 60.0,
+        "PVC_A": 115,
+        "XLPE_A": 165
+      },
+      {
+        "size_mm2": 100.0,
+        "PVC_A": 164,
+        "XLPE_A": 230
+      },
+      {
+        "size_mm2": 150.0,
+        "PVC_A": 211,
+        "XLPE_A": 295
+      },
+      {
+        "size_mm2": 250.0,
+        "PVC_A": 300,
+        "XLPE_A": 415
+      }
+    ],
+    "PIPE_DB": [
+      {
+        "name": "1/2\" (15A)",
+        "id": 16.1
+      },
+      {
+        "name": "3/4\" (20A)",
+        "id": 21.4
+      },
+      {
+        "name": "1\" (25A)",
+        "id": 27.6
+      },
+      {
+        "name": "1.5\" (40A)",
+        "id": 41.6
+      },
+      {
+        "name": "2\" (50A)",
+        "id": 52.9
+      },
+      {
+        "name": "2.5\" (65A)",
+        "id": 67.9
+      },
+      {
+        "name": "3\" (80A)",
+        "id": 83.1
+      },
+      {
+        "name": "4\" (100A)",
+        "id": 108.3
+      },
+      {
+        "name": "6\" (150A)",
+        "id": 160.3
+      },
+      {
+        "name": "8\" (200A)",
+        "id": 212.7
+      },
+      {
+        "name": "10\" (250A)",
+        "id": 264.9
+      },
+      {
+        "name": "12\" (300A)",
+        "id": 314.7
+      },
+      {
+        "name": "14\" (350A)",
+        "id": 339.6
+      },
+      {
+        "name": "16\" (400A)",
+        "id": 387.4
+      },
+      {
+        "name": "20\" (500A)",
+        "id": 488.9
+      }
+    ],
+    "HVAC_PIPES": [
+      {
+        "size": "15A (1/2\")",
+        "id_mm": 15.8,
+        "max_flow_lpm": 12.0
+      },
+      {
+        "size": "20A (3/4\")",
+        "id_mm": 20.9,
+        "max_flow_lpm": 26.0
+      },
+      {
+        "size": "25A (1\")",
+        "id_mm": 26.6,
+        "max_flow_lpm": 46.0
+      },
+      {
+        "size": "40A (1-1/2\")",
+        "id_mm": 40.9,
+        "max_flow_lpm": 130.0
+      },
+      {
+        "size": "50A (2\")",
+        "id_mm": 52.5,
+        "max_flow_lpm": 230.0
+      },
+      {
+        "size": "65A (2-1/2\")",
+        "id_mm": 67.9,
+        "max_flow_lpm": 400.0
+      },
+      {
+        "size": "80A (3\")",
+        "id_mm": 80.7,
+        "max_flow_lpm": 650.0
+      },
+      {
+        "size": "100A (4\")",
+        "id_mm": 105.3,
+        "max_flow_lpm": 1250.0
+      },
+      {
+        "size": "150A (6\")",
+        "id_mm": 155.2,
+        "max_flow_lpm": 3000.0
+      },
+      {
+        "size": "200A (8\")",
+        "id_mm": 204.7,
+        "max_flow_lpm": 5800.0
+      },
+      {
+        "size": "250A (10\")",
+        "id_mm": 254.2,
+        "max_flow_lpm": 9500.0
+      },
+      {
+        "size": "300A (12\")",
+        "id_mm": 303.2,
+        "max_flow_lpm": 15000.0
+      }
+    ],
+    "NFB_SIZES": [
+      15,
+      20,
+      25,
+      30,
+      35,
+      40,
+      45,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      125,
+      150,
+      175,
+      200,
+      225,
+      250,
+      300,
+      350,
+      400,
+      450,
+      500,
+      600,
+      700,
+      800,
+      1000,
+      1200,
+      1600,
+      2000,
+      2500,
+      3000,
+      4000,
+      5000,
+      6000
+    ],
+    "VOLTAGE_MAP": {
+      "3Φ4W 190/110V": 190.0,
+      "3Φ4W 208/120V": 208.0,
+      "3Φ3W 220V": 220.0,
+      "3Φ4W 380/220V": 380.0,
+      "3Φ4W 400/230V": 400.0,
+      "3Φ4W 415/240V": 415.0,
+      "3Φ4W 480/277V": 480.0
+    },
+    "GAS_DESIGN_VELOCITY_MPS": {
+      "N2": 12.0,
+      "CDA": 15.0,
+      "O2": 8.0,
+      "Ar": 12.0,
+      "He": 12.0,
+      "H2": 12.0,
+      "CO2": 10.0,
+      "GN2": 12.0,
+      "PN2": 12.0,
+      "PV": 18.0
+    },
+    "CLEANROOM_DB": {
+      "無 (None)": {
+        "ach": 0,
+        "pressure": 0
+      },
+      "Class 10": {
+        "ach": 500,
+        "pressure": 25
+      },
+      "Class 100": {
+        "ach": 120,
+        "pressure": 20
+      },
+      "Class 1,000": {
+        "ach": 70,
+        "pressure": 15
+      },
+      "Class 10,000": {
+        "ach": 35,
+        "pressure": 15
+      },
+      "Class 100,000": {
+        "ach": 20,
+        "pressure": 10
+      }
+    }
+  },
+  "units": {
+    "WIRE_DB": "mm2/A",
+    "PIPE_DB": "ID mm",
+    "HVAC_PIPES": "ID mm/LPM",
+    "NFB_SIZES": "A",
+    "VOLTAGE_MAP": "V line-to-line",
+    "GAS_DESIGN_VELOCITY_MPS": "m/s",
+    "CLEANROOM_DB": "ACH/Pa reference only"
+  }
+}
