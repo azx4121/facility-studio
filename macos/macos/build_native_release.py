@@ -93,6 +93,14 @@ def main():
     if not result["passed"]:
         raise ValueError("Native Mac acceptance did not pass.")
     shutil.copy2(acceptance, evidence / "Mac_Acceptance.json")
+    print("Verifying native Launch Services startup...", flush=True)
+    acceptance.unlink()
+    command(["/usr/bin/open", "-W", "-n", str(app), "--args", "--self-test"],
+            evidence / "Launch_Services.txt", timeout=180)
+    launch_result = json.loads(acceptance.read_text(encoding="utf-8"))
+    if not launch_result["passed"]:
+        raise ValueError("Launch Services acceptance did not pass.")
+    shutil.copy2(acceptance, evidence / "Launch_Services_Acceptance.json")
     stage = output / PACKAGE_NAME
     stage.mkdir()
     shutil.move(str(app), stage / "Facility Studio.app")

@@ -11,6 +11,7 @@ import platform
 import sys
 import subprocess
 import tempfile
+import time
 import traceback
 
 
@@ -126,13 +127,30 @@ def run():
     os.environ["LOCALAPPDATA"] = gui_storage.name
     print("Creating native Tk window...", flush=True)
     root = tk.Tk()
-    root.withdraw()
+    callback_errors = []
+
+    def callback_error(*details):
+        callback_errors.append("".join(traceback.format_exception(*details)))
+
+    root.report_callback_exception = callback_error
+
+    def pump_gui():
+        # Exercise the actual application event loop. Tk Aqua's update() can
+        # wait indefinitely with hidden multiple-window layouts. A timed
+        # mainloop also proves that native UI timers are still responsive.
+        started = time.monotonic()
+        root.after(150, root.quit)
+        root.mainloop()
+        if time.monotonic() - started > 5:
+            raise AssertionError("Native UI event processing stalled")
+
     try:
         from facility_studio.simple_desktop import SimpleToolsApp
 
         print("Creating independent-tools interface...", flush=True)
         app = SimpleToolsApp(root)
-        root.update()
+        root.geometry("1100x760")
+        pump_gui()
         check(
             "Tk Aqua native window system",
             lambda: root.tk.call("tk", "windowingsystem") == "aqua",
@@ -141,7 +159,7 @@ def run():
 
             def open_tool(tool=name):
                 app.show_tool(tool)
-                root.update()
+                pump_gui()
                 return app.active_page().result is not None
 
             check(f"Live GUI: {name}", open_tool)
@@ -155,9 +173,19 @@ def run():
         )
         print("Creating engineering workbench...", flush=True)
         workbench = app.open_workbench()
-        workbench.root.withdraw()
-        root.update()
+        root.report_callback_exception = callback_error
+        pump_gui()
         check("Full workbench GUI calculates", lambda: workbench.result is not None)
+        for page in range(8):
+
+            def open_page(index=page):
+                workbench.show_page(index)
+                pump_gui()
+                return workbench.pages[index].winfo_ismapped() == 1
+
+            check(f"Workbench live page: {page}", open_page)
+        check("Native UI heartbeat", lambda: (pump_gui(), True)[1])
+        check("No native GUI callback exceptions", lambda: not callback_errors)
         from matplotlib.figure import Figure
         from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
