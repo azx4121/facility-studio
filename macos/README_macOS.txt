@@ -52,8 +52,9 @@ Facility_Studio_Equipment_Template.xlsx 含七個系統工作表與填寫說明�
 
 驗證與支援範圍
 App 為 Universal：Apple Silicon（M 系列）及 Intel x86_64；封裝最低版本為 macOS 11。
-發布流程會在兩種 CPU 的 macOS 15 原生環境檢查 Apple 深度簽章、七種命令列
-工具、Tk Aqua 視窗、Matplotlib 繪圖、設備匯入及完整工程工作台。
+發布流程先在 Apple Silicon 執行七種命令列工具，再於兩種 CPU 的 macOS 15
+原生環境檢查 Apple 深度簽章、Tk Aqua、七種工具介面、Matplotlib 繪圖、
+設備匯入及完整工程工作台。
 實際交付 ZIP 重新解壓縮後、DMG 掛載後也會再次簽章檢查與介面驗證。
 只有兩種 CPU 的交付驗證皆通過，才會建立本修訂的新 Release。
 macOS 11～14、macOS 27 Beta、Finder 下載隔離提示、企業管理政策、實體數字
