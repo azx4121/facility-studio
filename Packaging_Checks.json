@@ -1,0 +1,62 @@
+[
+  {
+    "name": "01_real_payload_manifest",
+    "passed": true
+  },
+  {
+    "name": "02_payload_matches_release_sources",
+    "passed": true
+  },
+  {
+    "name": "03_all_local_module_dependencies_present",
+    "passed": true
+  },
+  {
+    "name": "04_missing_AHU_schema_blocked",
+    "passed": true
+  },
+  {
+    "name": "05_modified_module_blocked",
+    "passed": true
+  },
+  {
+    "name": "11_missing_simple_tool_UI_blocked",
+    "passed": true
+  },
+  {
+    "name": "14_missing_template_blocked",
+    "passed": true
+  },
+  {
+    "name": "06_unexpected_module_blocked",
+    "passed": true
+  },
+  {
+    "name": "07_empty_manifest_blocked",
+    "passed": true
+  },
+  {
+    "name": "08_path_traversal_blocked",
+    "passed": true
+  },
+  {
+    "name": "09_setup_is_windows_PE",
+    "passed": true
+  },
+  {
+    "name": "10_setup_version_resource",
+    "passed": true
+  },
+  {
+    "name": "12_setup_NSIS_integrity",
+    "passed": true
+  },
+  {
+    "name": "13_setup_complete_archive_files",
+    "passed": true
+  },
+  {
+    "name": "15_CMD_real_line_endings_and_version",
+    "passed": true
+  }
+]

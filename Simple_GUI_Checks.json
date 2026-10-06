@@ -1,0 +1,237 @@
+{
+  "version": "5.5.4",
+  "checks": [
+    {
+      "name": "01_four_primary_tools",
+      "passed": true
+    },
+    {
+      "name": "02_no_project_required",
+      "passed": true
+    },
+    {
+      "name": "03_electrical_three_visible_fields",
+      "passed": true
+    },
+    {
+      "name": "04_defaults_exposed",
+      "passed": true
+    },
+    {
+      "name": "05_default_electrical_calculates",
+      "passed": true
+    },
+    {
+      "name": "06_stale_values_cleared_immediately",
+      "passed": true
+    },
+    {
+      "name": "07_inline_field_error",
+      "passed": true
+    },
+    {
+      "name": "08_invalid_copy_blocked",
+      "passed": true
+    },
+    {
+      "name": "09_invalid_export_blocked",
+      "passed": true
+    },
+    {
+      "name": "10_unrelated_bad_power_ignored",
+      "passed": true
+    },
+    {
+      "name": "11_duct_two_visible_fields",
+      "passed": true
+    },
+    {
+      "name": "12_pressure_not_certified",
+      "passed": true
+    },
+    {
+      "name": "13_flow_equivalence_0",
+      "passed": true
+    },
+    {
+      "name": "13_flow_equivalence_1",
+      "passed": true
+    },
+    {
+      "name": "13_flow_equivalence_2",
+      "passed": true
+    },
+    {
+      "name": "13_flow_equivalence_3",
+      "passed": true
+    },
+    {
+      "name": "14_duct_pressure_equivalence",
+      "passed": true
+    },
+    {
+      "name": "15_path_rows_enabled",
+      "passed": true
+    },
+    {
+      "name": "16_insufficient_pressure_flagged",
+      "passed": true
+    },
+    {
+      "name": "17_inactive_path_draft_ignored",
+      "passed": true
+    },
+    {
+      "name": "18_reactivated_path_error",
+      "passed": true
+    },
+    {
+      "name": "19_invalid_draft_preserved",
+      "passed": true
+    },
+    {
+      "name": "20_advanced_error_revealed",
+      "passed": true
+    },
+    {
+      "name": "21_single_phase_current",
+      "passed": true
+    },
+    {
+      "name": "22_gas_four_visible_fields",
+      "passed": true
+    },
+    {
+      "name": "23_flow_is_required",
+      "passed": true
+    },
+    {
+      "name": "24_gas_unit_equivalence",
+      "passed": true
+    },
+    {
+      "name": "25_gas_reference_velocity",
+      "passed": true
+    },
+    {
+      "name": "26_custom_velocity_retained",
+      "passed": true
+    },
+    {
+      "name": "27_invalid_unit_switch_rolls_back",
+      "passed": true
+    },
+    {
+      "name": "28_lighting_five_visible_fields",
+      "passed": true
+    },
+    {
+      "name": "29_default_lux",
+      "passed": true
+    },
+    {
+      "name": "30_ping_switch_equivalence",
+      "passed": true
+    },
+    {
+      "name": "31_volume_requires_height",
+      "passed": true
+    },
+    {
+      "name": "32_reverse_count_interlock",
+      "passed": true
+    },
+    {
+      "name": "33_catalog_lumen_interlock",
+      "passed": true
+    },
+    {
+      "name": "34_reset_local_only",
+      "passed": true
+    },
+    {
+      "name": "35_copy_current_only",
+      "passed": true
+    },
+    {
+      "name": "36_export_current_formula",
+      "passed": true
+    },
+    {
+      "name": "37_more_tool_navigation",
+      "passed": true
+    },
+    {
+      "name": "38_water_unit_equivalence",
+      "passed": true
+    },
+    {
+      "name": "39_water_known_load_interlock",
+      "passed": true
+    },
+    {
+      "name": "40_air_error_locator",
+      "passed": true
+    },
+    {
+      "name": "41_air_advanced_locator",
+      "passed": true
+    },
+    {
+      "name": "42_unit_options_linked",
+      "passed": true
+    },
+    {
+      "name": "43_compact_actions_visible",
+      "passed": true
+    },
+    {
+      "name": "44_compact_labels_stack",
+      "passed": true
+    },
+    {
+      "name": "45_compact_cards_stack",
+      "passed": true
+    },
+    {
+      "name": "46_compact_no_horizontal_cutoff",
+      "passed": true
+    },
+    {
+      "name": "46b_hide_unneeded_horizontal_scroll",
+      "passed": true
+    },
+    {
+      "name": "46c_mousewheel_scrolls_form",
+      "passed": true
+    },
+    {
+      "name": "47_full_width_restores_columns",
+      "passed": true
+    },
+    {
+      "name": "48_full_workbench_retained",
+      "passed": true
+    },
+    {
+      "name": "49_workbench_single_instance",
+      "passed": true
+    },
+    {
+      "name": "50_no_implicit_data_transfer",
+      "passed": true
+    },
+    {
+      "name": "50b_wheel_survives_workbench",
+      "passed": true
+    },
+    {
+      "name": "51_unsaved_workbench_cancel_keeps_app",
+      "passed": true
+    },
+    {
+      "name": "52_no_callback_errors",
+      "passed": true
+    }
+  ]
+}

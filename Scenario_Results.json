@@ -1,0 +1,262 @@
+[
+  {
+    "id": "F01",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "F02",
+    "status": "待補資料",
+    "failed": 0
+  },
+  {
+    "id": "F03",
+    "status": "待補資料",
+    "failed": 0
+  },
+  {
+    "id": "F04",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "F05",
+    "status": "未達條件",
+    "failed": 2
+  },
+  {
+    "id": "F06",
+    "status": "待補資料",
+    "failed": 0
+  },
+  {
+    "id": "F07",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "F08",
+    "status": "待補資料",
+    "failed": 0
+  },
+  {
+    "id": "F09",
+    "status": "待補資料",
+    "failed": 0
+  },
+  {
+    "id": "F10",
+    "status": "未達條件",
+    "failed": 2
+  },
+  {
+    "id": "F11",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "F12",
+    "error": "可達含濕量不足以處理室內產濕，請降低二段 ADP",
+    "field": "chw2_in"
+  },
+  {
+    "id": "F13",
+    "error": "不可小於 5",
+    "field": "ra_t"
+  },
+  {
+    "id": "F14",
+    "error": "不可小於 0",
+    "field": "en_p_A"
+  },
+  {
+    "id": "B01",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B02",
+    "status": "未達條件",
+    "failed": 3
+  },
+  {
+    "id": "B03",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B04",
+    "status": "未達條件",
+    "failed": 2
+  },
+  {
+    "id": "B05",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B06",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B07",
+    "error": "指定外氣 1 低於補償下限 3062.5 CMH",
+    "field": "en_manual_oa"
+  },
+  {
+    "id": "B08",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B09",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B10",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B11",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B12",
+    "error": "本路管內表壓高於供氣表壓",
+    "field": "gas1_barg"
+  },
+  {
+    "id": "B13",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B14",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B15",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B16",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B17",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B18",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B19",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B20",
+    "error": "遠端最低表壓不得高於供氣表壓",
+    "field": "gas_min_barg"
+  },
+  {
+    "id": "B21",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "B22",
+    "status": "未達條件",
+    "failed": 2
+  },
+  {
+    "id": "N01",
+    "status": "未達條件",
+    "failed": 2
+  },
+  {
+    "id": "N02",
+    "status": "未達條件",
+    "failed": 5
+  },
+  {
+    "id": "N03",
+    "status": "未達條件",
+    "failed": 3
+  },
+  {
+    "id": "N04",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "N05",
+    "status": "待補資料",
+    "failed": 0
+  },
+  {
+    "id": "N06",
+    "status": "待補資料",
+    "failed": 0
+  },
+  {
+    "id": "N07",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "N08",
+    "status": "未達條件",
+    "failed": 1
+  },
+  {
+    "id": "N09",
+    "status": "待補資料",
+    "failed": 0
+  },
+  {
+    "id": "N10",
+    "status": "未達條件",
+    "failed": 2
+  },
+  {
+    "id": "N11",
+    "status": "未達條件",
+    "failed": 3
+  },
+  {
+    "id": "N12",
+    "status": "未達條件",
+    "failed": 3
+  },
+  {
+    "id": "N13",
+    "error": "冷卻出口不得加熱或增加水氣；請檢查 T/RH",
+    "field": "summer_c1_mode"
+  },
+  {
+    "id": "N14",
+    "status": "未達條件",
+    "failed": 3
+  },
+  {
+    "id": "N15",
+    "status": "未達條件",
+    "failed": 2
+  },
+  {
+    "id": "N16",
+    "status": "待補資料",
+    "failed": 0
+  }
+]

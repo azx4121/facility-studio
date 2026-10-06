@@ -1,0 +1,3105 @@
+{
+  "version": "5.5.4",
+  "cases": [
+    {
+      "id": "S01",
+      "tool": "electrical",
+      "inputs": {
+        "power": "10",
+        "supply": "三相 380V",
+        "kind": "一般設備",
+        "pf": ".85",
+        "length": "30",
+        "insulation": "XLPE",
+        "terminal": "60",
+        "ambient": "35",
+        "loaded": "3",
+        "drop_limit": "3"
+      },
+      "result": {
+        "tool": "electrical",
+        "power_kw": 10.0,
+        "supply": "三相 380V",
+        "phases": 3,
+        "voltage": 380.0,
+        "pf": 0.85,
+        "current_a": 17.87462133714012,
+        "design_a": 17.87462133714012,
+        "kind": "一般設備",
+        "selected": {
+          "runs": 1,
+          "size_mm2": 5.5,
+          "ampacity_a": 25,
+          "nfb_a": 20,
+          "drop_v": 2.90296258979388,
+          "drop_pct": 0.7639375236299684
+        },
+        "length_m": 30.0,
+        "dt": 1,
+        "dp": 1,
+        "terminal_c": 60,
+        "drop_basis": "運轉電流及輸入PF",
+        "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+        "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+      }
+    },
+    {
+      "id": "S02",
+      "tool": "electrical",
+      "inputs": {
+        "power": "5",
+        "supply": "單相 220V",
+        "kind": "一般設備",
+        "pf": ".85",
+        "length": "30",
+        "insulation": "XLPE",
+        "terminal": "60",
+        "ambient": "35",
+        "loaded": "3",
+        "drop_limit": "3"
+      },
+      "result": {
+        "tool": "electrical",
+        "power_kw": 5.0,
+        "supply": "單相 220V",
+        "phases": 1,
+        "voltage": 220.0,
+        "pf": 0.85,
+        "current_a": 26.737967914438503,
+        "design_a": 26.737967914438503,
+        "kind": "一般設備",
+        "selected": {
+          "runs": 1,
+          "size_mm2": 8.0,
+          "ampacity_a": 33,
+          "nfb_a": 30,
+          "drop_v": 3.4683957232803375,
+          "drop_pct": 1.5765435105819716
+        },
+        "length_m": 30.0,
+        "dt": 1,
+        "dp": 1,
+        "terminal_c": 60,
+        "drop_basis": "運轉電流及輸入PF",
+        "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+        "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+      }
+    },
+    {
+      "id": "S03",
+      "tool": "electrical",
+      "inputs": {
+        "power": "1",
+        "supply": "單相 110V",
+        "kind": "一般設備",
+        "pf": ".85",
+        "length": "30",
+        "insulation": "XLPE",
+        "terminal": "60",
+        "ambient": "35",
+        "loaded": "3",
+        "drop_limit": "3"
+      },
+      "result": {
+        "tool": "electrical",
+        "power_kw": 1.0,
+        "supply": "單相 110V",
+        "phases": 1,
+        "voltage": 110.0,
+        "pf": 0.85,
+        "current_a": 10.695187165775401,
+        "design_a": 10.695187165775401,
+        "kind": "一般設備",
+        "selected": {
+          "runs": 1,
+          "size_mm2": 3.5,
+          "ampacity_a": 19,
+          "nfb_a": 15,
+          "drop_v": 3.1363345893121353,
+          "drop_pct": 2.851213263011032
+        },
+        "length_m": 30.0,
+        "dt": 1,
+        "dp": 1,
+        "terminal_c": 60,
+        "drop_basis": "運轉電流及輸入PF",
+        "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+        "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+      }
+    },
+    {
+      "id": "S04",
+      "tool": "electrical",
+      "inputs": {
+        "power": "25",
+        "supply": "三相 380V",
+        "kind": "連續運轉",
+        "pf": ".85",
+        "length": "30",
+        "insulation": "XLPE",
+        "terminal": "60",
+        "ambient": "35",
+        "loaded": "3",
+        "drop_limit": "3"
+      },
+      "result": {
+        "tool": "electrical",
+        "power_kw": 25.0,
+        "supply": "三相 380V",
+        "phases": 3,
+        "voltage": 380.0,
+        "pf": 0.85,
+        "current_a": 44.686553342850296,
+        "design_a": 55.85819167856287,
+        "kind": "連續運轉",
+        "selected": {
+          "runs": 1,
+          "size_mm2": 22.0,
+          "ampacity_a": 60,
+          "nfb_a": 60,
+          "drop_v": 1.8877423955373318,
+          "drop_pct": 0.4967743146150873
+        },
+        "length_m": 30.0,
+        "dt": 1,
+        "dp": 1,
+        "terminal_c": 60,
+        "drop_basis": "運轉電流及輸入PF",
+        "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+        "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+      }
+    },
+    {
+      "id": "S05",
+      "tool": "electrical",
+      "inputs": {
+        "power": "100",
+        "supply": "三相 480V",
+        "kind": "一般設備",
+        "pf": ".85",
+        "length": "75",
+        "insulation": "XLPE",
+        "terminal": "60",
+        "ambient": "35",
+        "loaded": "3",
+        "drop_limit": "3"
+      },
+      "result": {
+        "tool": "electrical",
+        "power_kw": 100.0,
+        "supply": "三相 480V",
+        "phases": 3,
+        "voltage": 480.0,
+        "pf": 0.85,
+        "current_a": 141.50741891902595,
+        "design_a": 141.50741891902595,
+        "kind": "一般設備",
+        "selected": {
+          "runs": 1,
+          "size_mm2": 100.0,
+          "ampacity_a": 164,
+          "nfb_a": 150,
+          "drop_v": 3.8920687355038774,
+          "drop_pct": 0.8108476532299744
+        },
+        "length_m": 75.0,
+        "dt": 1,
+        "dp": 1,
+        "terminal_c": 60,
+        "drop_basis": "運轉電流及輸入PF",
+        "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+        "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+      }
+    },
+    {
+      "id": "S06",
+      "tool": "electrical",
+      "inputs": {
+        "power": "12",
+        "supply": "三相 380V",
+        "kind": "一般設備",
+        "pf": "1",
+        "length": "30",
+        "insulation": "XLPE",
+        "terminal": "60",
+        "ambient": "35",
+        "loaded": "3",
+        "drop_limit": "3"
+      },
+      "result": {
+        "tool": "electrical",
+        "power_kw": 12.0,
+        "supply": "三相 380V",
+        "phases": 3,
+        "voltage": 380.0,
+        "pf": 1.0,
+        "current_a": 18.23211376388292,
+        "design_a": 18.23211376388292,
+        "kind": "一般設備",
+        "selected": {
+          "runs": 1,
+          "size_mm2": 5.5,
+          "ampacity_a": 25,
+          "nfb_a": 20,
+          "drop_v": 3.436585010526316,
+          "drop_pct": 0.9043644764542937
+        },
+        "length_m": 30.0,
+        "dt": 1,
+        "dp": 1,
+        "terminal_c": 60,
+        "drop_basis": "運轉電流及輸入PF",
+        "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+        "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+      }
+    },
+    {
+      "id": "S07",
+      "tool": "electrical",
+      "inputs": {
+        "power": "30",
+        "supply": "三相 380V",
+        "kind": "一般設備",
+        "pf": "0.6",
+        "length": "30",
+        "insulation": "XLPE",
+        "terminal": "60",
+        "ambient": "35",
+        "loaded": "3",
+        "drop_limit": "3"
+      },
+      "result": {
+        "tool": "electrical",
+        "power_kw": 30.0,
+        "supply": "三相 380V",
+        "phases": 3,
+        "voltage": 380.0,
+        "pf": 0.6,
+        "current_a": 75.96714068284551,
+        "design_a": 75.96714068284551,
+        "kind": "一般設備",
+        "selected": {
+          "runs": 1,
+          "size_mm2": 38.0,
+          "ampacity_a": 85,
+          "nfb_a": 80,
+          "drop_v": 1.496132734072022,
+          "drop_pct": 0.39371914054526896
+        },
+        "length_m": 30.0,
+        "dt": 1,
+        "dp": 1,
+        "terminal_c": 60,
+        "drop_basis": "運轉電流及輸入PF",
+        "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+        "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+      }
+    },
+    {
+      "id": "S08",
+      "tool": "electrical",
+      "inputs": {
+        "power": "0",
+        "supply": "三相 380V",
+        "kind": "一般設備",
+        "pf": ".85",
+        "length": "30",
+        "insulation": "XLPE",
+        "terminal": "60",
+        "ambient": "35",
+        "loaded": "3",
+        "drop_limit": "3"
+      },
+      "result": {
+        "tool": "electrical",
+        "power_kw": 0.0,
+        "supply": "三相 380V",
+        "phases": 3,
+        "voltage": 380.0,
+        "pf": 0.85,
+        "current_a": 0.0,
+        "design_a": 0.0,
+        "kind": "一般設備",
+        "selected": null,
+        "length_m": 30.0,
+        "dt": 1,
+        "dp": 1,
+        "terminal_c": 60,
+        "drop_basis": "運轉電流及輸入PF",
+        "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+        "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+      }
+    },
+    {
+      "id": "S09",
+      "tool": "electrical",
+      "inputs": {
+        "power": "30",
+        "supply": "三相 380V",
+        "kind": "一般設備",
+        "pf": ".85",
+        "length": "30",
+        "insulation": "XLPE",
+        "terminal": "60",
+        "ambient": "55",
+        "loaded": "12",
+        "drop_limit": "3"
+      },
+      "result": {
+        "tool": "electrical",
+        "power_kw": 30.0,
+        "supply": "三相 380V",
+        "phases": 3,
+        "voltage": 380.0,
+        "pf": 0.85,
+        "current_a": 53.62386401142035,
+        "design_a": 53.62386401142035,
+        "kind": "一般設備",
+        "selected": {
+          "runs": 1,
+          "size_mm2": 60.0,
+          "ampacity_a": 66.0,
+          "nfb_a": 60,
+          "drop_v": 0.9049759746447982,
+          "drop_pct": 0.2381515722749469
+        },
+        "length_m": 30.0,
+        "dt": 0.8,
+        "dp": 0.5,
+        "terminal_c": 60,
+        "drop_basis": "運轉電流及輸入PF",
+        "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+        "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+      }
+    },
+    {
+      "id": "S10",
+      "tool": "electrical",
+      "inputs": {
+        "power": "300",
+        "supply": "三相 380V",
+        "kind": "馬達",
+        "pf": ".85",
+        "length": "30",
+        "insulation": "XLPE",
+        "terminal": "90",
+        "ambient": "35",
+        "loaded": "3",
+        "drop_limit": "3"
+      },
+      "result": {
+        "tool": "electrical",
+        "power_kw": 300.0,
+        "supply": "三相 380V",
+        "phases": 3,
+        "voltage": 380.0,
+        "pf": 0.85,
+        "current_a": 536.2386401142036,
+        "design_a": 670.2983001427544,
+        "kind": "馬達",
+        "selected": {
+          "runs": 2,
+          "size_mm2": 250.0,
+          "ampacity_a": 830,
+          "nfb_a": 700,
+          "drop_v": 1.628473541118729,
+          "drop_pct": 0.428545668715455
+        },
+        "length_m": 30.0,
+        "dt": 1,
+        "dp": 1,
+        "terminal_c": 90,
+        "drop_basis": "運轉電流及輸入PF",
+        "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+        "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+      }
+    },
+    {
+      "id": "S11",
+      "tool": "duct",
+      "inputs": {
+        "flow": "3000",
+        "pressure": "200",
+        "velocity": "8",
+        "ratio": "2",
+        "check_path": "0",
+        "length": "20",
+        "k_sum": "4",
+        "equipment": "100",
+        "flow_unit": "CMH",
+        "pressure_unit": "Pa"
+      },
+      "result": {
+        "tool": "duct",
+        "flow_cmh": 3000.0,
+        "pressure_pa": 200.0,
+        "velocity_limit": 8.0,
+        "ratio": 2.0,
+        "rectangle": {
+          "flow_cmh": 3000.0,
+          "shape": "方管",
+          "area_m2": 0.105,
+          "diameter_m": 0.3230769230769231,
+          "velocity_mps": 7.936507936507937,
+          "w_mm": 350,
+          "h_mm": 300,
+          "round_in": 16,
+          "ratio_actual": 1.1666666666666667,
+          "velocity_limit_mps": 8.0
+        },
+        "round": {
+          "flow_cmh": 3000.0,
+          "shape": "圓管",
+          "area_m2": 0.1297171146489594,
+          "diameter_m": 0.4064,
+          "velocity_mps": 6.4242358118163585,
+          "w_mm": 350,
+          "h_mm": 300,
+          "round_in": 16,
+          "ratio_actual": 1.1666666666666667,
+          "velocity_limit_mps": 8.0
+        },
+        "path_checked": false,
+        "length_m": null,
+        "formula": "A=風量/3600/風速；圓管D=√(4A/π)。路徑阻力=f×L/Dh×ρv²/2＋ΣK×ρv²/2＋設備壓降。",
+        "note": "靜壓是可用於管路的壓力預算，不能單獨決定尺寸。未勾選已知路徑時不判定壓力是否足夠；圓管依2英吋級距選取。"
+      }
+    },
+    {
+      "id": "S12",
+      "tool": "duct",
+      "inputs": {
+        "flow": "0",
+        "pressure": "200",
+        "velocity": "8",
+        "ratio": "2",
+        "check_path": "0",
+        "length": "20",
+        "k_sum": "4",
+        "equipment": "100",
+        "flow_unit": "CMH",
+        "pressure_unit": "Pa"
+      },
+      "result": {
+        "tool": "duct",
+        "flow_cmh": 0.0,
+        "pressure_pa": 200.0,
+        "velocity_limit": 8.0,
+        "ratio": 2.0,
+        "rectangle": {
+          "flow_cmh": 0,
+          "shape": "方管",
+          "area_m2": 0,
+          "diameter_m": 0,
+          "velocity_mps": 0,
+          "w_mm": 0,
+          "h_mm": 0,
+          "round_in": 0
+        },
+        "round": {
+          "flow_cmh": 0,
+          "shape": "圓管",
+          "area_m2": 0,
+          "diameter_m": 0,
+          "velocity_mps": 0,
+          "w_mm": 0,
+          "h_mm": 0,
+          "round_in": 0
+        },
+        "path_checked": false,
+        "length_m": null,
+        "formula": "A=風量/3600/風速；圓管D=√(4A/π)。路徑阻力=f×L/Dh×ρv²/2＋ΣK×ρv²/2＋設備壓降。",
+        "note": "靜壓是可用於管路的壓力預算，不能單獨決定尺寸。未勾選已知路徑時不判定壓力是否足夠；圓管依2英吋級距選取。"
+      }
+    },
+    {
+      "id": "S13",
+      "tool": "duct",
+      "inputs": {
+        "flow": "750",
+        "pressure": "200",
+        "velocity": "8",
+        "ratio": "2",
+        "check_path": "0",
+        "length": "20",
+        "k_sum": "4",
+        "equipment": "100",
+        "flow_unit": "CFM",
+        "pressure_unit": "Pa"
+      },
+      "result": {
+        "tool": "duct",
+        "flow_cmh": 1274.25809664,
+        "pressure_pa": 200.0,
+        "velocity_limit": 8.0,
+        "ratio": 2.0,
+        "rectangle": {
+          "flow_cmh": 1274.25809664,
+          "shape": "方管",
+          "area_m2": 0.045,
+          "diameter_m": 0.2,
+          "velocity_mps": 7.865790720000001,
+          "w_mm": 300,
+          "h_mm": 150,
+          "round_in": 10,
+          "ratio_actual": 2.0,
+          "velocity_limit_mps": 8.0
+        },
+        "round": {
+          "flow_cmh": 1274.25809664,
+          "shape": "圓管",
+          "area_m2": 0.05067074790974978,
+          "diameter_m": 0.254,
+          "velocity_mps": 6.985501438234996,
+          "w_mm": 300,
+          "h_mm": 150,
+          "round_in": 10,
+          "ratio_actual": 2.0,
+          "velocity_limit_mps": 8.0
+        },
+        "path_checked": false,
+        "length_m": null,
+        "formula": "A=風量/3600/風速；圓管D=√(4A/π)。路徑阻力=f×L/Dh×ρv²/2＋ΣK×ρv²/2＋設備壓降。",
+        "note": "靜壓是可用於管路的壓力預算，不能單獨決定尺寸。未勾選已知路徑時不判定壓力是否足夠；圓管依2英吋級距選取。"
+      }
+    },
+    {
+      "id": "S14",
+      "tool": "duct",
+      "inputs": {
+        "flow": "100",
+        "pressure": "200",
+        "velocity": "4",
+        "ratio": "2",
+        "check_path": "0",
+        "length": "20",
+        "k_sum": "4",
+        "equipment": "100",
+        "flow_unit": "CMH",
+        "pressure_unit": "Pa"
+      },
+      "result": {
+        "tool": "duct",
+        "flow_cmh": 100.0,
+        "pressure_pa": 200.0,
+        "velocity_limit": 4.0,
+        "ratio": 2.0,
+        "rectangle": {
+          "flow_cmh": 100.0,
+          "shape": "方管",
+          "area_m2": 0.01,
+          "diameter_m": 0.1,
+          "velocity_mps": 2.7777777777777777,
+          "w_mm": 100,
+          "h_mm": 100,
+          "round_in": 4,
+          "ratio_actual": 1.0,
+          "velocity_limit_mps": 4.0
+        },
+        "round": {
+          "flow_cmh": 100.0,
+          "shape": "圓管",
+          "area_m2": 0.008107319665559963,
+          "diameter_m": 0.1016,
+          "velocity_mps": 3.4262590996353905,
+          "w_mm": 100,
+          "h_mm": 100,
+          "round_in": 4,
+          "ratio_actual": 1.0,
+          "velocity_limit_mps": 4.0
+        },
+        "path_checked": false,
+        "length_m": null,
+        "formula": "A=風量/3600/風速；圓管D=√(4A/π)。路徑阻力=f×L/Dh×ρv²/2＋ΣK×ρv²/2＋設備壓降。",
+        "note": "靜壓是可用於管路的壓力預算，不能單獨決定尺寸。未勾選已知路徑時不判定壓力是否足夠；圓管依2英吋級距選取。"
+      }
+    },
+    {
+      "id": "S15",
+      "tool": "duct",
+      "inputs": {
+        "flow": "50000",
+        "pressure": "200",
+        "velocity": "6",
+        "ratio": "4",
+        "check_path": "0",
+        "length": "20",
+        "k_sum": "4",
+        "equipment": "100",
+        "flow_unit": "CMH",
+        "pressure_unit": "Pa"
+      },
+      "result": {
+        "tool": "duct",
+        "flow_cmh": 50000.0,
+        "pressure_pa": 200.0,
+        "velocity_limit": 6.0,
+        "ratio": 4.0,
+        "rectangle": {
+          "flow_cmh": 50000.0,
+          "shape": "方管",
+          "area_m2": 2.32,
+          "diameter_m": 1.254054054054054,
+          "velocity_mps": 5.986590038314177,
+          "w_mm": 2900,
+          "h_mm": 800,
+          "round_in": 68,
+          "ratio_actual": 3.625,
+          "velocity_limit_mps": 6.0
+        },
+        "round": {
+          "flow_cmh": 50000.0,
+          "shape": "圓管",
+          "area_m2": 2.3430153833468292,
+          "diameter_m": 1.7271999999999998,
+          "velocity_mps": 5.927783909403791,
+          "w_mm": 2900,
+          "h_mm": 800,
+          "round_in": 68,
+          "ratio_actual": 3.625,
+          "velocity_limit_mps": 6.0
+        },
+        "path_checked": false,
+        "length_m": null,
+        "formula": "A=風量/3600/風速；圓管D=√(4A/π)。路徑阻力=f×L/Dh×ρv²/2＋ΣK×ρv²/2＋設備壓降。",
+        "note": "靜壓是可用於管路的壓力預算，不能單獨決定尺寸。未勾選已知路徑時不判定壓力是否足夠；圓管依2英吋級距選取。"
+      }
+    },
+    {
+      "id": "S16",
+      "tool": "duct",
+      "inputs": {
+        "flow": "3000",
+        "pressure": "1000",
+        "velocity": "8",
+        "ratio": "2",
+        "check_path": "1",
+        "length": "20",
+        "k_sum": "4",
+        "equipment": "100",
+        "flow_unit": "CMH",
+        "pressure_unit": "Pa"
+      },
+      "result": {
+        "tool": "duct",
+        "flow_cmh": 3000.0,
+        "pressure_pa": 1000.0,
+        "velocity_limit": 8.0,
+        "ratio": 2.0,
+        "rectangle": {
+          "flow_cmh": 3000.0,
+          "shape": "方管",
+          "area_m2": 0.105,
+          "diameter_m": 0.3230769230769231,
+          "velocity_mps": 7.936507936507937,
+          "w_mm": 350,
+          "h_mm": 300,
+          "round_in": 16,
+          "ratio_actual": 1.1666666666666667,
+          "velocity_limit_mps": 8.0,
+          "loss_pa": 293.17298642312466,
+          "friction_pa": 42.00140668011633,
+          "k": 4.0,
+          "equipment_pa": 100.0,
+          "pressure_margin_pa": 706.8270135768753,
+          "budget_sufficient": true
+        },
+        "round": {
+          "flow_cmh": 3000.0,
+          "shape": "圓管",
+          "area_m2": 0.1297171146489594,
+          "diameter_m": 0.4064,
+          "velocity_mps": 6.4242358118163585,
+          "w_mm": 350,
+          "h_mm": 300,
+          "round_in": 16,
+          "ratio_actual": 1.1666666666666667,
+          "velocity_limit_mps": 8.0,
+          "loss_pa": 220.46796025576157,
+          "friction_pa": 21.41802641778449,
+          "k": 4.0,
+          "equipment_pa": 100.0,
+          "pressure_margin_pa": 779.5320397442384,
+          "budget_sufficient": true
+        },
+        "path_checked": true,
+        "length_m": 20.0,
+        "formula": "A=風量/3600/風速；圓管D=√(4A/π)。路徑阻力=f×L/Dh×ρv²/2＋ΣK×ρv²/2＋設備壓降。",
+        "note": "靜壓是可用於管路的壓力預算，不能單獨決定尺寸。未勾選已知路徑時不判定壓力是否足夠；圓管依2英吋級距選取。"
+      }
+    },
+    {
+      "id": "S17",
+      "tool": "duct",
+      "inputs": {
+        "flow": "3000",
+        "pressure": "50",
+        "velocity": "8",
+        "ratio": "2",
+        "check_path": "1",
+        "length": "20",
+        "k_sum": "4",
+        "equipment": "100",
+        "flow_unit": "CMH",
+        "pressure_unit": "Pa"
+      },
+      "result": {
+        "tool": "duct",
+        "flow_cmh": 3000.0,
+        "pressure_pa": 50.0,
+        "velocity_limit": 8.0,
+        "ratio": 2.0,
+        "rectangle": {
+          "flow_cmh": 3000.0,
+          "shape": "方管",
+          "area_m2": 0.105,
+          "diameter_m": 0.3230769230769231,
+          "velocity_mps": 7.936507936507937,
+          "w_mm": 350,
+          "h_mm": 300,
+          "round_in": 16,
+          "ratio_actual": 1.1666666666666667,
+          "velocity_limit_mps": 8.0,
+          "loss_pa": 293.17298642312466,
+          "friction_pa": 42.00140668011633,
+          "k": 4.0,
+          "equipment_pa": 100.0,
+          "pressure_margin_pa": -243.17298642312466,
+          "budget_sufficient": false
+        },
+        "round": {
+          "flow_cmh": 3000.0,
+          "shape": "圓管",
+          "area_m2": 0.1297171146489594,
+          "diameter_m": 0.4064,
+          "velocity_mps": 6.4242358118163585,
+          "w_mm": 350,
+          "h_mm": 300,
+          "round_in": 16,
+          "ratio_actual": 1.1666666666666667,
+          "velocity_limit_mps": 8.0,
+          "loss_pa": 220.46796025576157,
+          "friction_pa": 21.41802641778449,
+          "k": 4.0,
+          "equipment_pa": 100.0,
+          "pressure_margin_pa": -170.46796025576157,
+          "budget_sufficient": false
+        },
+        "path_checked": true,
+        "length_m": 20.0,
+        "formula": "A=風量/3600/風速；圓管D=√(4A/π)。路徑阻力=f×L/Dh×ρv²/2＋ΣK×ρv²/2＋設備壓降。",
+        "note": "靜壓是可用於管路的壓力預算，不能單獨決定尺寸。未勾選已知路徑時不判定壓力是否足夠；圓管依2英吋級距選取。"
+      }
+    },
+    {
+      "id": "S18",
+      "tool": "gas",
+      "inputs": {
+        "gas": "CDA",
+        "flow": "800",
+        "pressure": "6",
+        "velocity": "15",
+        "temperature": "25",
+        "atmosphere": "101.325",
+        "reference_t": "25",
+        "reference_p": "101.325",
+        "flow_unit": "SLPM",
+        "pressure_unit": "bar(g)"
+      },
+      "result": {
+        "tool": "gas",
+        "gas": "CDA",
+        "standard_lpm": 800.0,
+        "actual_lpm": 115.58122125975831,
+        "absolute_kpa": 701.325,
+        "gauge_kpa": 600.0,
+        "minimum_id_mm": 12.787258481990266,
+        "pipe": {
+          "name": "1/2\" (15A)",
+          "id": 16.1
+        },
+        "velocity_mps": 9.46224949762154,
+        "velocity_limit": 15.0,
+        "temperature_c": 25.0,
+        "reference_t": 25.0,
+        "reference_p": 101.325,
+        "formula": "實際流量=標準流量×P標準/P絕對×T管內(K)/T標準(K)；D內=√(4Q實際/πv)。",
+        "note": "壓力採管內表壓，另加所在地大氣壓。理想氣體Z=1，僅流速定寸；參考內徑需依實供管材核對，長管路另算壓降。"
+      }
+    },
+    {
+      "id": "S19",
+      "tool": "gas",
+      "inputs": {
+        "gas": "CDA",
+        "flow": "1000",
+        "pressure": "0",
+        "velocity": "15",
+        "temperature": "25",
+        "atmosphere": "101.325",
+        "reference_t": "25",
+        "reference_p": "101.325",
+        "flow_unit": "SLPM",
+        "pressure_unit": "bar(g)"
+      },
+      "result": {
+        "tool": "gas",
+        "gas": "CDA",
+        "standard_lpm": 1000.0,
+        "actual_lpm": 1000.0000000000001,
+        "absolute_kpa": 101.325,
+        "gauge_kpa": 0.0,
+        "minimum_id_mm": 37.61263890318376,
+        "pipe": {
+          "name": "1.5\" (40A)",
+          "id": 41.6
+        },
+        "velocity_mps": 12.262307622341545,
+        "velocity_limit": 15.0,
+        "temperature_c": 25.0,
+        "reference_t": 25.0,
+        "reference_p": 101.325,
+        "formula": "實際流量=標準流量×P標準/P絕對×T管內(K)/T標準(K)；D內=√(4Q實際/πv)。",
+        "note": "壓力採管內表壓，另加所在地大氣壓。理想氣體Z=1，僅流速定寸；參考內徑需依實供管材核對，長管路另算壓降。"
+      }
+    },
+    {
+      "id": "S20",
+      "tool": "gas",
+      "inputs": {
+        "gas": "CDA",
+        "flow": "800",
+        "pressure": "6",
+        "velocity": "15",
+        "temperature": "25",
+        "atmosphere": "101.325",
+        "reference_t": "0",
+        "reference_p": "101.325",
+        "flow_unit": "SLPM",
+        "pressure_unit": "bar(g)"
+      },
+      "result": {
+        "tool": "gas",
+        "gas": "CDA",
+        "standard_lpm": 800.0,
+        "actual_lpm": 126.15976979167834,
+        "absolute_kpa": 701.325,
+        "gauge_kpa": 600.0,
+        "minimum_id_mm": 13.359624406457337,
+        "pipe": {
+          "name": "1/2\" (15A)",
+          "id": 16.1
+        },
+        "velocity_mps": 10.328280020925728,
+        "velocity_limit": 15.0,
+        "temperature_c": 25.0,
+        "reference_t": 0.0,
+        "reference_p": 101.325,
+        "formula": "實際流量=標準流量×P標準/P絕對×T管內(K)/T標準(K)；D內=√(4Q實際/πv)。",
+        "note": "壓力採管內表壓，另加所在地大氣壓。理想氣體Z=1，僅流速定寸；參考內徑需依實供管材核對，長管路另算壓降。"
+      }
+    },
+    {
+      "id": "S21",
+      "tool": "gas",
+      "inputs": {
+        "gas": "CDA",
+        "flow": "100",
+        "pressure": "6",
+        "velocity": "15",
+        "temperature": "25",
+        "atmosphere": "101.325",
+        "reference_t": "25",
+        "reference_p": "101.325",
+        "flow_unit": "SCFM",
+        "pressure_unit": "bar(g)"
+      },
+      "result": {
+        "tool": "gas",
+        "gas": "CDA",
+        "standard_lpm": 2831.6846592,
+        "actual_lpm": 409.1119639160732,
+        "absolute_kpa": 701.325,
+        "gauge_kpa": 600.0,
+        "minimum_id_mm": 24.057743744818293,
+        "pipe": {
+          "name": "1\" (25A)",
+          "id": 27.6
+        },
+        "velocity_mps": 11.396798875459664,
+        "velocity_limit": 15.0,
+        "temperature_c": 25.0,
+        "reference_t": 25.0,
+        "reference_p": 101.325,
+        "formula": "實際流量=標準流量×P標準/P絕對×T管內(K)/T標準(K)；D內=√(4Q實際/πv)。",
+        "note": "壓力採管內表壓，另加所在地大氣壓。理想氣體Z=1，僅流速定寸；參考內徑需依實供管材核對，長管路另算壓降。"
+      }
+    },
+    {
+      "id": "S22",
+      "tool": "gas",
+      "inputs": {
+        "gas": "CDA",
+        "flow": "800",
+        "pressure": "600",
+        "velocity": "15",
+        "temperature": "25",
+        "atmosphere": "101.325",
+        "reference_t": "25",
+        "reference_p": "101.325",
+        "flow_unit": "SLPM",
+        "pressure_unit": "kPa(g)"
+      },
+      "result": {
+        "tool": "gas",
+        "gas": "CDA",
+        "standard_lpm": 800.0,
+        "actual_lpm": 115.58122125975831,
+        "absolute_kpa": 701.325,
+        "gauge_kpa": 600.0,
+        "minimum_id_mm": 12.787258481990266,
+        "pipe": {
+          "name": "1/2\" (15A)",
+          "id": 16.1
+        },
+        "velocity_mps": 9.46224949762154,
+        "velocity_limit": 15.0,
+        "temperature_c": 25.0,
+        "reference_t": 25.0,
+        "reference_p": 101.325,
+        "formula": "實際流量=標準流量×P標準/P絕對×T管內(K)/T標準(K)；D內=√(4Q實際/πv)。",
+        "note": "壓力採管內表壓，另加所在地大氣壓。理想氣體Z=1，僅流速定寸；參考內徑需依實供管材核對，長管路另算壓降。"
+      }
+    },
+    {
+      "id": "S23",
+      "tool": "gas",
+      "inputs": {
+        "gas": "CDA",
+        "flow": "0",
+        "pressure": "6",
+        "velocity": "15",
+        "temperature": "25",
+        "atmosphere": "101.325",
+        "reference_t": "25",
+        "reference_p": "101.325",
+        "flow_unit": "SLPM",
+        "pressure_unit": "bar(g)"
+      },
+      "result": {
+        "tool": "gas",
+        "gas": "CDA",
+        "standard_lpm": 0.0,
+        "actual_lpm": 0.0,
+        "absolute_kpa": 701.325,
+        "gauge_kpa": 600.0,
+        "minimum_id_mm": 0.0,
+        "pipe": null,
+        "velocity_mps": 0.0,
+        "velocity_limit": 15.0,
+        "temperature_c": 25.0,
+        "reference_t": 25.0,
+        "reference_p": 101.325,
+        "formula": "實際流量=標準流量×P標準/P絕對×T管內(K)/T標準(K)；D內=√(4Q實際/πv)。",
+        "note": "壓力採管內表壓，另加所在地大氣壓。理想氣體Z=1，僅流速定寸；參考內徑需依實供管材核對，長管路另算壓降。"
+      }
+    },
+    {
+      "id": "S24",
+      "tool": "lighting",
+      "inputs": {
+        "mode": "估算照度",
+        "area_mode": "面積 m²",
+        "area": "30",
+        "length": "6",
+        "width": "5",
+        "height": "3",
+        "watts": "40",
+        "quantity": "10",
+        "target": "500",
+        "lumen_mode": "LED功率初估",
+        "efficacy": "100",
+        "lumens": "4000",
+        "utilization": ".6",
+        "maintenance": ".8"
+      },
+      "result": {
+        "tool": "lighting",
+        "area_m2": 30.0,
+        "quantity": 10,
+        "watts": 40.0,
+        "lumens_per_lamp": 4000.0,
+        "lumen_mode": "LED功率初估",
+        "utilization": 0.6,
+        "maintenance": 0.8,
+        "illuminance_lux": 640.0,
+        "total_kw": 0.4,
+        "target_lux": null,
+        "formula": "平均照度Lux=盞數×每盞流明lm×利用率U×維護係數M/面積m²；所需盞數向上取整。",
+        "note": "Lux是空間照度，燈具光通量使用lm。體積須除以淨高換算面積；LED功率初估使用假設光效，不能代替型錄流明或照度均勻度模擬。"
+      }
+    },
+    {
+      "id": "S25",
+      "tool": "lighting",
+      "inputs": {
+        "mode": "反算燈數",
+        "area_mode": "面積 m²",
+        "area": "30",
+        "length": "6",
+        "width": "5",
+        "height": "3",
+        "watts": "40",
+        "quantity": "10",
+        "target": "500",
+        "lumen_mode": "LED功率初估",
+        "efficacy": "100",
+        "lumens": "4000",
+        "utilization": ".6",
+        "maintenance": ".8"
+      },
+      "result": {
+        "tool": "lighting",
+        "area_m2": 30.0,
+        "quantity": 8,
+        "watts": 40.0,
+        "lumens_per_lamp": 4000.0,
+        "lumen_mode": "LED功率初估",
+        "utilization": 0.6,
+        "maintenance": 0.8,
+        "illuminance_lux": 512.0,
+        "total_kw": 0.32,
+        "target_lux": 500.0,
+        "formula": "平均照度Lux=盞數×每盞流明lm×利用率U×維護係數M/面積m²；所需盞數向上取整。",
+        "note": "Lux是空間照度，燈具光通量使用lm。體積須除以淨高換算面積；LED功率初估使用假設光效，不能代替型錄流明或照度均勻度模擬。"
+      }
+    },
+    {
+      "id": "S26",
+      "tool": "lighting",
+      "inputs": {
+        "mode": "估算照度",
+        "area_mode": "面積 m²",
+        "area": "30",
+        "length": "6",
+        "width": "5",
+        "height": "3",
+        "watts": "40",
+        "quantity": "10",
+        "target": "500",
+        "lumen_mode": "燈具型錄流明",
+        "efficacy": "100",
+        "lumens": "2000",
+        "utilization": ".6",
+        "maintenance": ".8"
+      },
+      "result": {
+        "tool": "lighting",
+        "area_m2": 30.0,
+        "quantity": 10,
+        "watts": 40.0,
+        "lumens_per_lamp": 2000.0,
+        "lumen_mode": "燈具型錄流明",
+        "utilization": 0.6,
+        "maintenance": 0.8,
+        "illuminance_lux": 320.0,
+        "total_kw": 0.4,
+        "target_lux": null,
+        "formula": "平均照度Lux=盞數×每盞流明lm×利用率U×維護係數M/面積m²；所需盞數向上取整。",
+        "note": "Lux是空間照度，燈具光通量使用lm。體積須除以淨高換算面積；LED功率初估使用假設光效，不能代替型錄流明或照度均勻度模擬。"
+      }
+    },
+    {
+      "id": "S27",
+      "tool": "lighting",
+      "inputs": {
+        "mode": "估算照度",
+        "area_mode": "體積 m³",
+        "area": "90",
+        "length": "6",
+        "width": "5",
+        "height": "3",
+        "watts": "40",
+        "quantity": "10",
+        "target": "500",
+        "lumen_mode": "LED功率初估",
+        "efficacy": "100",
+        "lumens": "4000",
+        "utilization": ".6",
+        "maintenance": ".8"
+      },
+      "result": {
+        "tool": "lighting",
+        "area_m2": 30.0,
+        "quantity": 10,
+        "watts": 40.0,
+        "lumens_per_lamp": 4000.0,
+        "lumen_mode": "LED功率初估",
+        "utilization": 0.6,
+        "maintenance": 0.8,
+        "illuminance_lux": 640.0,
+        "total_kw": 0.4,
+        "target_lux": null,
+        "formula": "平均照度Lux=盞數×每盞流明lm×利用率U×維護係數M/面積m²；所需盞數向上取整。",
+        "note": "Lux是空間照度，燈具光通量使用lm。體積須除以淨高換算面積；LED功率初估使用假設光效，不能代替型錄流明或照度均勻度模擬。"
+      }
+    },
+    {
+      "id": "S28",
+      "tool": "lighting",
+      "inputs": {
+        "mode": "估算照度",
+        "area_mode": "面積 坪",
+        "area": "9.075",
+        "length": "6",
+        "width": "5",
+        "height": "3",
+        "watts": "40",
+        "quantity": "10",
+        "target": "500",
+        "lumen_mode": "LED功率初估",
+        "efficacy": "100",
+        "lumens": "4000",
+        "utilization": ".6",
+        "maintenance": ".8"
+      },
+      "result": {
+        "tool": "lighting",
+        "area_m2": 30.0,
+        "quantity": 10,
+        "watts": 40.0,
+        "lumens_per_lamp": 4000.0,
+        "lumen_mode": "LED功率初估",
+        "utilization": 0.6,
+        "maintenance": 0.8,
+        "illuminance_lux": 640.0,
+        "total_kw": 0.4,
+        "target_lux": null,
+        "formula": "平均照度Lux=盞數×每盞流明lm×利用率U×維護係數M/面積m²；所需盞數向上取整。",
+        "note": "Lux是空間照度，燈具光通量使用lm。體積須除以淨高換算面積；LED功率初估使用假設光效，不能代替型錄流明或照度均勻度模擬。"
+      }
+    },
+    {
+      "id": "S29",
+      "tool": "lighting",
+      "inputs": {
+        "mode": "估算照度",
+        "area_mode": "長×寬",
+        "area": "30",
+        "length": "10",
+        "width": "5",
+        "height": "3",
+        "watts": "40",
+        "quantity": "10",
+        "target": "500",
+        "lumen_mode": "LED功率初估",
+        "efficacy": "100",
+        "lumens": "4000",
+        "utilization": ".6",
+        "maintenance": ".8"
+      },
+      "result": {
+        "tool": "lighting",
+        "area_m2": 50.0,
+        "quantity": 10,
+        "watts": 40.0,
+        "lumens_per_lamp": 4000.0,
+        "lumen_mode": "LED功率初估",
+        "utilization": 0.6,
+        "maintenance": 0.8,
+        "illuminance_lux": 384.0,
+        "total_kw": 0.4,
+        "target_lux": null,
+        "formula": "平均照度Lux=盞數×每盞流明lm×利用率U×維護係數M/面積m²；所需盞數向上取整。",
+        "note": "Lux是空間照度，燈具光通量使用lm。體積須除以淨高換算面積；LED功率初估使用假設光效，不能代替型錄流明或照度均勻度模擬。"
+      }
+    },
+    {
+      "id": "S30",
+      "tool": "lighting",
+      "inputs": {
+        "mode": "估算照度",
+        "area_mode": "面積 m²",
+        "area": "30",
+        "length": "6",
+        "width": "5",
+        "height": "3",
+        "watts": "40",
+        "quantity": "0",
+        "target": "500",
+        "lumen_mode": "LED功率初估",
+        "efficacy": "100",
+        "lumens": "4000",
+        "utilization": ".6",
+        "maintenance": ".8"
+      },
+      "result": {
+        "tool": "lighting",
+        "area_m2": 30.0,
+        "quantity": 0,
+        "watts": 40.0,
+        "lumens_per_lamp": 4000.0,
+        "lumen_mode": "LED功率初估",
+        "utilization": 0.6,
+        "maintenance": 0.8,
+        "illuminance_lux": 0.0,
+        "total_kw": 0.0,
+        "target_lux": null,
+        "formula": "平均照度Lux=盞數×每盞流明lm×利用率U×維護係數M/面積m²；所需盞數向上取整。",
+        "note": "Lux是空間照度，燈具光通量使用lm。體積須除以淨高換算面積；LED功率初估使用假設光效，不能代替型錄流明或照度均勻度模擬。"
+      }
+    },
+    {
+      "id": "S31",
+      "tool": "lighting",
+      "inputs": {
+        "mode": "反算燈數",
+        "area_mode": "面積 m²",
+        "area": "30",
+        "length": "6",
+        "width": "5",
+        "height": "3",
+        "watts": "40",
+        "quantity": "10",
+        "target": "640",
+        "lumen_mode": "LED功率初估",
+        "efficacy": "100",
+        "lumens": "4000",
+        "utilization": ".6",
+        "maintenance": ".8"
+      },
+      "result": {
+        "tool": "lighting",
+        "area_m2": 30.0,
+        "quantity": 10,
+        "watts": 40.0,
+        "lumens_per_lamp": 4000.0,
+        "lumen_mode": "LED功率初估",
+        "utilization": 0.6,
+        "maintenance": 0.8,
+        "illuminance_lux": 640.0,
+        "total_kw": 0.4,
+        "target_lux": 640.0,
+        "formula": "平均照度Lux=盞數×每盞流明lm×利用率U×維護係數M/面積m²；所需盞數向上取整。",
+        "note": "Lux是空間照度，燈具光通量使用lm。體積須除以淨高換算面積；LED功率初估使用假設光效，不能代替型錄流明或照度均勻度模擬。"
+      }
+    },
+    {
+      "id": "S32",
+      "tool": "water",
+      "inputs": {
+        "mode": "已知水量",
+        "flow": "100",
+        "power": "100",
+        "delta": "5",
+        "velocity": "1.5",
+        "flow_unit": "LPM",
+        "power_unit": "kW"
+      },
+      "result": {
+        "tool": "water",
+        "thermal": {
+          "kw": 34.89000000000001,
+          "lpm": 100.0,
+          "delta_t": 5.0,
+          "us_rt": 9.920801798319399,
+          "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]"
+        },
+        "pipe": {
+          "lpm": 100.0,
+          "id_mm": 40.9,
+          "runs": 1,
+          "velocity_mps": 1.268563619234664,
+          "area_m2": 0.0013138219017128853,
+          "size": "40A (1-1/2\")"
+        },
+        "velocity_limit": 1.5,
+        "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]",
+        "note": "水物性採ρ=1000 kg/m³、cp=4.1868 kJ/(kg·K)；管徑按流速上限初估。未計水泵揚程與設備壓降。"
+      }
+    },
+    {
+      "id": "S33",
+      "tool": "water",
+      "inputs": {
+        "mode": "已知熱量",
+        "flow": "100",
+        "power": "100",
+        "delta": "5",
+        "velocity": "1.5",
+        "flow_unit": "LPM",
+        "power_unit": "kW"
+      },
+      "result": {
+        "tool": "water",
+        "thermal": {
+          "kw": 100.0,
+          "lpm": 286.6150759529951,
+          "delta_t": 5.0,
+          "us_rt": 28.434513609399247,
+          "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]"
+        },
+        "pipe": {
+          "lpm": 286.6150759529951,
+          "id_mm": 67.9,
+          "runs": 1,
+          "velocity_mps": 1.3192234125982485,
+          "area_m2": 0.00362100754650923,
+          "size": "65A (2-1/2\")"
+        },
+        "velocity_limit": 1.5,
+        "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]",
+        "note": "水物性採ρ=1000 kg/m³、cp=4.1868 kJ/(kg·K)；管徑按流速上限初估。未計水泵揚程與設備壓降。"
+      }
+    },
+    {
+      "id": "S34",
+      "tool": "water",
+      "inputs": {
+        "mode": "已知熱量",
+        "flow": "100",
+        "power": "10",
+        "delta": "5",
+        "velocity": "1.5",
+        "flow_unit": "LPM",
+        "power_unit": "US RT"
+      },
+      "result": {
+        "tool": "water",
+        "thermal": {
+          "kw": 35.168528420667,
+          "lpm": 100.79830444444539,
+          "delta_t": 5.0,
+          "us_rt": 10.0,
+          "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]"
+        },
+        "pipe": {
+          "lpm": 100.79830444444539,
+          "id_mm": 40.9,
+          "runs": 1,
+          "velocity_mps": 1.2786906189876315,
+          "area_m2": 0.0013138219017128853,
+          "size": "40A (1-1/2\")"
+        },
+        "velocity_limit": 1.5,
+        "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]",
+        "note": "水物性採ρ=1000 kg/m³、cp=4.1868 kJ/(kg·K)；管徑按流速上限初估。未計水泵揚程與設備壓降。"
+      }
+    },
+    {
+      "id": "S35",
+      "tool": "water",
+      "inputs": {
+        "mode": "已知水量",
+        "flow": "100",
+        "power": "100",
+        "delta": "5",
+        "velocity": "1.5",
+        "flow_unit": "US GPM",
+        "power_unit": "kW"
+      },
+      "result": {
+        "tool": "water",
+        "thermal": {
+          "kw": 132.07301714376,
+          "lpm": 378.5411784,
+          "delta_t": 5.0,
+          "us_rt": 37.55432003408664,
+          "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]"
+        },
+        "pipe": {
+          "lpm": 378.5411784,
+          "id_mm": 80.7,
+          "runs": 1,
+          "velocity_mps": 1.2334595975055316,
+          "area_m2": 0.005114897685144249,
+          "size": "80A (3\")"
+        },
+        "velocity_limit": 1.5,
+        "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]",
+        "note": "水物性採ρ=1000 kg/m³、cp=4.1868 kJ/(kg·K)；管徑按流速上限初估。未計水泵揚程與設備壓降。"
+      }
+    },
+    {
+      "id": "S36",
+      "tool": "water",
+      "inputs": {
+        "mode": "已知水量",
+        "flow": "0",
+        "power": "100",
+        "delta": "5",
+        "velocity": "1.5",
+        "flow_unit": "LPM",
+        "power_unit": "kW"
+      },
+      "result": {
+        "tool": "water",
+        "thermal": {
+          "kw": 0.0,
+          "lpm": 0.0,
+          "delta_t": 5.0,
+          "us_rt": 0.0,
+          "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]"
+        },
+        "pipe": {
+          "lpm": 0,
+          "id_mm": 0,
+          "runs": 0,
+          "velocity_mps": 0,
+          "area_m2": 0,
+          "size": "無需求"
+        },
+        "velocity_limit": 1.5,
+        "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]",
+        "note": "水物性採ρ=1000 kg/m³、cp=4.1868 kJ/(kg·K)；管徑按流速上限初估。未計水泵揚程與設備壓降。"
+      }
+    },
+    {
+      "id": "S37",
+      "tool": "air",
+      "inputs": {
+        "temperature": "25",
+        "rh": "50",
+        "atmosphere": "101.325"
+      },
+      "result": {
+        "tool": "air",
+        "state": {
+          "t": 25.0,
+          "w": 0.009881043690749623,
+          "x": 0.009881043690749623,
+          "rh": 50.00000000000001,
+          "h": 50.32195880218467,
+          "v_da": 0.8580432739997833,
+          "rho_moist": 1.176958172497725,
+          "dewpoint_c": 13.863973269509785,
+          "wetbulb_c": 17.889342251605314,
+          "pressure_kpa": 101.325
+        },
+        "formula": "w=0.621945×Pw/(P−Pw)；h=1.006T＋w(2501＋1.86T)，以kg乾空氣為基準。",
+        "note": "濕度0%時露點無有限值；顯示為無有限露點，不以假數值代替。"
+      }
+    },
+    {
+      "id": "S38",
+      "tool": "air",
+      "inputs": {
+        "temperature": "-5",
+        "rh": "80",
+        "atmosphere": "101.325"
+      },
+      "result": {
+        "tool": "air",
+        "state": {
+          "t": -5.0,
+          "w": 0.001979139081026242,
+          "x": 0.001979139081026242,
+          "rh": 80.0,
+          "h": -0.09857915180691279,
+          "v_da": 0.7620552228800458,
+          "rho_moist": 1.314837965802836,
+          "dewpoint_c": -7.5852684521305775,
+          "wetbulb_c": -5.884162789121639,
+          "pressure_kpa": 101.325
+        },
+        "formula": "w=0.621945×Pw/(P−Pw)；h=1.006T＋w(2501＋1.86T)，以kg乾空氣為基準。",
+        "note": "濕度0%時露點無有限值；顯示為無有限露點，不以假數值代替。"
+      }
+    },
+    {
+      "id": "S39",
+      "tool": "air",
+      "inputs": {
+        "temperature": "35",
+        "rh": "70",
+        "atmosphere": "101.325"
+      },
+      "result": {
+        "tool": "air",
+        "state": {
+          "t": 35.0,
+          "w": 0.025159138188848906,
+          "x": 0.025159138188848906,
+          "rh": 70.0,
+          "h": 99.77086450640519,
+          "v_da": 0.9082663058996859,
+          "rho_moist": 1.1286988535519595,
+          "dewpoint_c": 28.700939273048704,
+          "wetbulb_c": 30.05899227029343,
+          "pressure_kpa": 101.325
+        },
+        "formula": "w=0.621945×Pw/(P−Pw)；h=1.006T＋w(2501＋1.86T)，以kg乾空氣為基準。",
+        "note": "濕度0%時露點無有限值；顯示為無有限露點，不以假數值代替。"
+      }
+    },
+    {
+      "id": "S40",
+      "tool": "air",
+      "inputs": {
+        "temperature": "25",
+        "rh": "0",
+        "atmosphere": "101.325"
+      },
+      "result": {
+        "tool": "air",
+        "state": {
+          "t": 25.0,
+          "w": 0.0,
+          "x": 0.0,
+          "rh": 0.0,
+          "h": 25.15,
+          "v_da": 0.8446244490500864,
+          "rho_moist": 1.1839581498317482,
+          "dewpoint_c": null,
+          "wetbulb_c": 8.271439639132069,
+          "pressure_kpa": 101.325
+        },
+        "formula": "w=0.621945×Pw/(P−Pw)；h=1.006T＋w(2501＋1.86T)，以kg乾空氣為基準。",
+        "note": "濕度0%時露點無有限值；顯示為無有限露點，不以假數值代替。"
+      }
+    },
+    {
+      "id": "S41",
+      "tool": "units",
+      "inputs": {
+        "category": "風量",
+        "value": "1000",
+        "unit": "CMH"
+      },
+      "result": {
+        "tool": "units",
+        "category": "風量",
+        "values": {
+          "CMH": 1000.0,
+          "CFM": 588.5777786914765,
+          "L/s": 277.77777777777777,
+          "m³/s": 0.2777777777777778
+        },
+        "formula": "依所選物理量進行等值換算；溫度本身包含零點位移。",
+        "note": "依所選單位等值換算。"
+      }
+    },
+    {
+      "id": "S42",
+      "tool": "units",
+      "inputs": {
+        "category": "溫度",
+        "value": "32",
+        "unit": "°F"
+      },
+      "result": {
+        "tool": "units",
+        "category": "溫度",
+        "values": {
+          "°C": 0.0,
+          "°F": 32.0,
+          "K": 273.15
+        },
+        "formula": "依所選物理量進行等值換算；溫度本身包含零點位移。",
+        "note": "換算溫度本身，例如25°C＝77°F＝298.15K；若要換算升溫或降溫的幅度，請選『溫度差（升溫／降溫）』。"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "S01_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S01_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S01_current",
+      "passed": true
+    },
+    {
+      "name": "S01_design",
+      "passed": true
+    },
+    {
+      "name": "S01_protection",
+      "passed": true
+    },
+    {
+      "name": "S01_parallel_minimum",
+      "passed": true
+    },
+    {
+      "name": "S01_derating",
+      "passed": true
+    },
+    {
+      "name": "S01_drop",
+      "passed": true
+    },
+    {
+      "name": "S01_drop_limit",
+      "passed": true
+    },
+    {
+      "name": "S01_published_reverse_kw",
+      "passed": true
+    },
+    {
+      "name": "S02_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S02_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S02_current",
+      "passed": true
+    },
+    {
+      "name": "S02_design",
+      "passed": true
+    },
+    {
+      "name": "S02_protection",
+      "passed": true
+    },
+    {
+      "name": "S02_parallel_minimum",
+      "passed": true
+    },
+    {
+      "name": "S02_derating",
+      "passed": true
+    },
+    {
+      "name": "S02_drop",
+      "passed": true
+    },
+    {
+      "name": "S02_drop_limit",
+      "passed": true
+    },
+    {
+      "name": "S02_published_reverse_kw",
+      "passed": true
+    },
+    {
+      "name": "S03_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S03_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S03_current",
+      "passed": true
+    },
+    {
+      "name": "S03_design",
+      "passed": true
+    },
+    {
+      "name": "S03_protection",
+      "passed": true
+    },
+    {
+      "name": "S03_parallel_minimum",
+      "passed": true
+    },
+    {
+      "name": "S03_derating",
+      "passed": true
+    },
+    {
+      "name": "S03_drop",
+      "passed": true
+    },
+    {
+      "name": "S03_drop_limit",
+      "passed": true
+    },
+    {
+      "name": "S03_published_reverse_kw",
+      "passed": true
+    },
+    {
+      "name": "S04_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S04_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S04_current",
+      "passed": true
+    },
+    {
+      "name": "S04_design",
+      "passed": true
+    },
+    {
+      "name": "S04_protection",
+      "passed": true
+    },
+    {
+      "name": "S04_parallel_minimum",
+      "passed": true
+    },
+    {
+      "name": "S04_derating",
+      "passed": true
+    },
+    {
+      "name": "S04_drop",
+      "passed": true
+    },
+    {
+      "name": "S04_drop_limit",
+      "passed": true
+    },
+    {
+      "name": "S04_published_reverse_kw",
+      "passed": true
+    },
+    {
+      "name": "S05_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S05_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S05_current",
+      "passed": true
+    },
+    {
+      "name": "S05_design",
+      "passed": true
+    },
+    {
+      "name": "S05_protection",
+      "passed": true
+    },
+    {
+      "name": "S05_parallel_minimum",
+      "passed": true
+    },
+    {
+      "name": "S05_derating",
+      "passed": true
+    },
+    {
+      "name": "S05_drop",
+      "passed": true
+    },
+    {
+      "name": "S05_drop_limit",
+      "passed": true
+    },
+    {
+      "name": "S05_published_reverse_kw",
+      "passed": true
+    },
+    {
+      "name": "S06_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S06_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S06_current",
+      "passed": true
+    },
+    {
+      "name": "S06_design",
+      "passed": true
+    },
+    {
+      "name": "S06_protection",
+      "passed": true
+    },
+    {
+      "name": "S06_parallel_minimum",
+      "passed": true
+    },
+    {
+      "name": "S06_derating",
+      "passed": true
+    },
+    {
+      "name": "S06_drop",
+      "passed": true
+    },
+    {
+      "name": "S06_drop_limit",
+      "passed": true
+    },
+    {
+      "name": "S06_published_reverse_kw",
+      "passed": true
+    },
+    {
+      "name": "S07_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S07_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S07_current",
+      "passed": true
+    },
+    {
+      "name": "S07_design",
+      "passed": true
+    },
+    {
+      "name": "S07_protection",
+      "passed": true
+    },
+    {
+      "name": "S07_parallel_minimum",
+      "passed": true
+    },
+    {
+      "name": "S07_derating",
+      "passed": true
+    },
+    {
+      "name": "S07_drop",
+      "passed": true
+    },
+    {
+      "name": "S07_drop_limit",
+      "passed": true
+    },
+    {
+      "name": "S07_published_reverse_kw",
+      "passed": true
+    },
+    {
+      "name": "S08_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S08_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S08_current",
+      "passed": true
+    },
+    {
+      "name": "S08_design",
+      "passed": true
+    },
+    {
+      "name": "S08_no_hardware",
+      "passed": true
+    },
+    {
+      "name": "S09_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S09_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S09_current",
+      "passed": true
+    },
+    {
+      "name": "S09_design",
+      "passed": true
+    },
+    {
+      "name": "S09_protection",
+      "passed": true
+    },
+    {
+      "name": "S09_parallel_minimum",
+      "passed": true
+    },
+    {
+      "name": "S09_derating",
+      "passed": true
+    },
+    {
+      "name": "S09_drop",
+      "passed": true
+    },
+    {
+      "name": "S09_drop_limit",
+      "passed": true
+    },
+    {
+      "name": "S09_published_reverse_kw",
+      "passed": true
+    },
+    {
+      "name": "S10_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S10_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S10_current",
+      "passed": true
+    },
+    {
+      "name": "S10_design",
+      "passed": true
+    },
+    {
+      "name": "S10_protection",
+      "passed": true
+    },
+    {
+      "name": "S10_parallel_minimum",
+      "passed": true
+    },
+    {
+      "name": "S10_derating",
+      "passed": true
+    },
+    {
+      "name": "S10_drop",
+      "passed": true
+    },
+    {
+      "name": "S10_drop_limit",
+      "passed": true
+    },
+    {
+      "name": "S10_published_reverse_kw",
+      "passed": true
+    },
+    {
+      "name": "S11_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S11_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S11_flow",
+      "passed": true
+    },
+    {
+      "name": "S11_pressure",
+      "passed": true
+    },
+    {
+      "name": "S11_real_area_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S11_velocity_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S11_velocity_limit_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S11_real_area_round",
+      "passed": true
+    },
+    {
+      "name": "S11_velocity_round",
+      "passed": true
+    },
+    {
+      "name": "S11_velocity_limit_round",
+      "passed": true
+    },
+    {
+      "name": "S11_static_not_size",
+      "passed": true
+    },
+    {
+      "name": "S11_published_area",
+      "passed": true
+    },
+    {
+      "name": "S12_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S12_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S12_flow",
+      "passed": true
+    },
+    {
+      "name": "S12_pressure",
+      "passed": true
+    },
+    {
+      "name": "S12_zero_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S12_zero_round",
+      "passed": true
+    },
+    {
+      "name": "S12_static_not_size",
+      "passed": true
+    },
+    {
+      "name": "S13_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S13_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S13_flow",
+      "passed": true
+    },
+    {
+      "name": "S13_pressure",
+      "passed": true
+    },
+    {
+      "name": "S13_real_area_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S13_velocity_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S13_velocity_limit_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S13_real_area_round",
+      "passed": true
+    },
+    {
+      "name": "S13_velocity_round",
+      "passed": true
+    },
+    {
+      "name": "S13_velocity_limit_round",
+      "passed": true
+    },
+    {
+      "name": "S13_static_not_size",
+      "passed": true
+    },
+    {
+      "name": "S13_published_area",
+      "passed": true
+    },
+    {
+      "name": "S14_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S14_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S14_flow",
+      "passed": true
+    },
+    {
+      "name": "S14_pressure",
+      "passed": true
+    },
+    {
+      "name": "S14_real_area_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S14_velocity_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S14_velocity_limit_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S14_real_area_round",
+      "passed": true
+    },
+    {
+      "name": "S14_velocity_round",
+      "passed": true
+    },
+    {
+      "name": "S14_velocity_limit_round",
+      "passed": true
+    },
+    {
+      "name": "S14_static_not_size",
+      "passed": true
+    },
+    {
+      "name": "S14_published_area",
+      "passed": true
+    },
+    {
+      "name": "S15_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S15_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S15_flow",
+      "passed": true
+    },
+    {
+      "name": "S15_pressure",
+      "passed": true
+    },
+    {
+      "name": "S15_real_area_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S15_velocity_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S15_velocity_limit_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S15_real_area_round",
+      "passed": true
+    },
+    {
+      "name": "S15_velocity_round",
+      "passed": true
+    },
+    {
+      "name": "S15_velocity_limit_round",
+      "passed": true
+    },
+    {
+      "name": "S15_static_not_size",
+      "passed": true
+    },
+    {
+      "name": "S15_published_area",
+      "passed": true
+    },
+    {
+      "name": "S16_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S16_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S16_flow",
+      "passed": true
+    },
+    {
+      "name": "S16_pressure",
+      "passed": true
+    },
+    {
+      "name": "S16_real_area_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S16_velocity_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S16_velocity_limit_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S16_independent_loss_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S16_budget_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S16_real_area_round",
+      "passed": true
+    },
+    {
+      "name": "S16_velocity_round",
+      "passed": true
+    },
+    {
+      "name": "S16_velocity_limit_round",
+      "passed": true
+    },
+    {
+      "name": "S16_independent_loss_round",
+      "passed": true
+    },
+    {
+      "name": "S16_budget_round",
+      "passed": true
+    },
+    {
+      "name": "S16_static_not_size",
+      "passed": true
+    },
+    {
+      "name": "S16_published_area",
+      "passed": true
+    },
+    {
+      "name": "S17_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S17_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S17_flow",
+      "passed": true
+    },
+    {
+      "name": "S17_pressure",
+      "passed": true
+    },
+    {
+      "name": "S17_real_area_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S17_velocity_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S17_velocity_limit_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S17_independent_loss_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S17_budget_rectangle",
+      "passed": true
+    },
+    {
+      "name": "S17_real_area_round",
+      "passed": true
+    },
+    {
+      "name": "S17_velocity_round",
+      "passed": true
+    },
+    {
+      "name": "S17_velocity_limit_round",
+      "passed": true
+    },
+    {
+      "name": "S17_independent_loss_round",
+      "passed": true
+    },
+    {
+      "name": "S17_budget_round",
+      "passed": true
+    },
+    {
+      "name": "S17_static_not_size",
+      "passed": true
+    },
+    {
+      "name": "S17_published_area",
+      "passed": true
+    },
+    {
+      "name": "S18_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S18_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S18_absolute_pressure",
+      "passed": true
+    },
+    {
+      "name": "S18_actual_flow",
+      "passed": true
+    },
+    {
+      "name": "S18_real_velocity",
+      "passed": true
+    },
+    {
+      "name": "S18_velocity_limit",
+      "passed": true
+    },
+    {
+      "name": "S18_smallest_reference_pipe",
+      "passed": true
+    },
+    {
+      "name": "S18_published_reverse_flow",
+      "passed": true
+    },
+    {
+      "name": "S19_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S19_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S19_absolute_pressure",
+      "passed": true
+    },
+    {
+      "name": "S19_actual_flow",
+      "passed": true
+    },
+    {
+      "name": "S19_real_velocity",
+      "passed": true
+    },
+    {
+      "name": "S19_velocity_limit",
+      "passed": true
+    },
+    {
+      "name": "S19_smallest_reference_pipe",
+      "passed": true
+    },
+    {
+      "name": "S19_published_reverse_flow",
+      "passed": true
+    },
+    {
+      "name": "S20_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S20_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S20_absolute_pressure",
+      "passed": true
+    },
+    {
+      "name": "S20_actual_flow",
+      "passed": true
+    },
+    {
+      "name": "S20_real_velocity",
+      "passed": true
+    },
+    {
+      "name": "S20_velocity_limit",
+      "passed": true
+    },
+    {
+      "name": "S20_smallest_reference_pipe",
+      "passed": true
+    },
+    {
+      "name": "S20_published_reverse_flow",
+      "passed": true
+    },
+    {
+      "name": "S21_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S21_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S21_absolute_pressure",
+      "passed": true
+    },
+    {
+      "name": "S21_actual_flow",
+      "passed": true
+    },
+    {
+      "name": "S21_real_velocity",
+      "passed": true
+    },
+    {
+      "name": "S21_velocity_limit",
+      "passed": true
+    },
+    {
+      "name": "S21_smallest_reference_pipe",
+      "passed": true
+    },
+    {
+      "name": "S21_published_reverse_flow",
+      "passed": true
+    },
+    {
+      "name": "S22_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S22_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S22_absolute_pressure",
+      "passed": true
+    },
+    {
+      "name": "S22_actual_flow",
+      "passed": true
+    },
+    {
+      "name": "S22_real_velocity",
+      "passed": true
+    },
+    {
+      "name": "S22_velocity_limit",
+      "passed": true
+    },
+    {
+      "name": "S22_smallest_reference_pipe",
+      "passed": true
+    },
+    {
+      "name": "S22_published_reverse_flow",
+      "passed": true
+    },
+    {
+      "name": "S23_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S23_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S23_absolute_pressure",
+      "passed": true
+    },
+    {
+      "name": "S23_actual_flow",
+      "passed": true
+    },
+    {
+      "name": "S23_published_reverse_flow",
+      "passed": true
+    },
+    {
+      "name": "S24_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S24_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S24_area",
+      "passed": true
+    },
+    {
+      "name": "S24_quantity",
+      "passed": true
+    },
+    {
+      "name": "S24_illuminance",
+      "passed": true
+    },
+    {
+      "name": "S24_lighting_kw",
+      "passed": true
+    },
+    {
+      "name": "S24_published_lux",
+      "passed": true
+    },
+    {
+      "name": "S25_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S25_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S25_area",
+      "passed": true
+    },
+    {
+      "name": "S25_quantity",
+      "passed": true
+    },
+    {
+      "name": "S25_illuminance",
+      "passed": true
+    },
+    {
+      "name": "S25_lighting_kw",
+      "passed": true
+    },
+    {
+      "name": "S25_minimal_count",
+      "passed": true
+    },
+    {
+      "name": "S25_published_lux",
+      "passed": true
+    },
+    {
+      "name": "S26_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S26_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S26_area",
+      "passed": true
+    },
+    {
+      "name": "S26_quantity",
+      "passed": true
+    },
+    {
+      "name": "S26_illuminance",
+      "passed": true
+    },
+    {
+      "name": "S26_lighting_kw",
+      "passed": true
+    },
+    {
+      "name": "S26_published_lux",
+      "passed": true
+    },
+    {
+      "name": "S27_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S27_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S27_area",
+      "passed": true
+    },
+    {
+      "name": "S27_quantity",
+      "passed": true
+    },
+    {
+      "name": "S27_illuminance",
+      "passed": true
+    },
+    {
+      "name": "S27_lighting_kw",
+      "passed": true
+    },
+    {
+      "name": "S27_published_lux",
+      "passed": true
+    },
+    {
+      "name": "S28_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S28_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S28_area",
+      "passed": true
+    },
+    {
+      "name": "S28_quantity",
+      "passed": true
+    },
+    {
+      "name": "S28_illuminance",
+      "passed": true
+    },
+    {
+      "name": "S28_lighting_kw",
+      "passed": true
+    },
+    {
+      "name": "S28_published_lux",
+      "passed": true
+    },
+    {
+      "name": "S29_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S29_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S29_area",
+      "passed": true
+    },
+    {
+      "name": "S29_quantity",
+      "passed": true
+    },
+    {
+      "name": "S29_illuminance",
+      "passed": true
+    },
+    {
+      "name": "S29_lighting_kw",
+      "passed": true
+    },
+    {
+      "name": "S29_published_lux",
+      "passed": true
+    },
+    {
+      "name": "S30_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S30_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S30_area",
+      "passed": true
+    },
+    {
+      "name": "S30_quantity",
+      "passed": true
+    },
+    {
+      "name": "S30_illuminance",
+      "passed": true
+    },
+    {
+      "name": "S30_lighting_kw",
+      "passed": true
+    },
+    {
+      "name": "S30_published_lux",
+      "passed": true
+    },
+    {
+      "name": "S31_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S31_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S31_area",
+      "passed": true
+    },
+    {
+      "name": "S31_quantity",
+      "passed": true
+    },
+    {
+      "name": "S31_illuminance",
+      "passed": true
+    },
+    {
+      "name": "S31_lighting_kw",
+      "passed": true
+    },
+    {
+      "name": "S31_minimal_count",
+      "passed": true
+    },
+    {
+      "name": "S31_published_lux",
+      "passed": true
+    },
+    {
+      "name": "S32_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S32_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S32_water_kw",
+      "passed": true
+    },
+    {
+      "name": "S32_water_lpm",
+      "passed": true
+    },
+    {
+      "name": "S32_water_speed",
+      "passed": true
+    },
+    {
+      "name": "S32_water_limit",
+      "passed": true
+    },
+    {
+      "name": "S32_published_kw",
+      "passed": true
+    },
+    {
+      "name": "S33_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S33_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S33_water_kw",
+      "passed": true
+    },
+    {
+      "name": "S33_water_lpm",
+      "passed": true
+    },
+    {
+      "name": "S33_water_speed",
+      "passed": true
+    },
+    {
+      "name": "S33_water_limit",
+      "passed": true
+    },
+    {
+      "name": "S33_published_kw",
+      "passed": true
+    },
+    {
+      "name": "S34_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S34_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S34_water_kw",
+      "passed": true
+    },
+    {
+      "name": "S34_water_lpm",
+      "passed": true
+    },
+    {
+      "name": "S34_water_speed",
+      "passed": true
+    },
+    {
+      "name": "S34_water_limit",
+      "passed": true
+    },
+    {
+      "name": "S34_published_kw",
+      "passed": true
+    },
+    {
+      "name": "S35_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S35_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S35_water_kw",
+      "passed": true
+    },
+    {
+      "name": "S35_water_lpm",
+      "passed": true
+    },
+    {
+      "name": "S35_water_speed",
+      "passed": true
+    },
+    {
+      "name": "S35_water_limit",
+      "passed": true
+    },
+    {
+      "name": "S35_published_kw",
+      "passed": true
+    },
+    {
+      "name": "S36_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S36_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S36_water_kw",
+      "passed": true
+    },
+    {
+      "name": "S36_water_lpm",
+      "passed": true
+    },
+    {
+      "name": "S36_published_kw",
+      "passed": true
+    },
+    {
+      "name": "S37_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S37_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S37_humidity_ratio",
+      "passed": true
+    },
+    {
+      "name": "S37_enthalpy",
+      "passed": true
+    },
+    {
+      "name": "S37_wetbulb_order",
+      "passed": true
+    },
+    {
+      "name": "S37_dewpoint_order",
+      "passed": true
+    },
+    {
+      "name": "S37_dewpoint_pressure",
+      "passed": true
+    },
+    {
+      "name": "S37_published_enthalpy",
+      "passed": true
+    },
+    {
+      "name": "S38_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S38_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S38_humidity_ratio",
+      "passed": true
+    },
+    {
+      "name": "S38_enthalpy",
+      "passed": true
+    },
+    {
+      "name": "S38_wetbulb_order",
+      "passed": true
+    },
+    {
+      "name": "S38_dewpoint_order",
+      "passed": true
+    },
+    {
+      "name": "S38_dewpoint_pressure",
+      "passed": true
+    },
+    {
+      "name": "S38_published_enthalpy",
+      "passed": true
+    },
+    {
+      "name": "S39_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S39_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S39_humidity_ratio",
+      "passed": true
+    },
+    {
+      "name": "S39_enthalpy",
+      "passed": true
+    },
+    {
+      "name": "S39_wetbulb_order",
+      "passed": true
+    },
+    {
+      "name": "S39_dewpoint_order",
+      "passed": true
+    },
+    {
+      "name": "S39_dewpoint_pressure",
+      "passed": true
+    },
+    {
+      "name": "S39_published_enthalpy",
+      "passed": true
+    },
+    {
+      "name": "S40_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S40_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S40_humidity_ratio",
+      "passed": true
+    },
+    {
+      "name": "S40_enthalpy",
+      "passed": true
+    },
+    {
+      "name": "S40_wetbulb_order",
+      "passed": true
+    },
+    {
+      "name": "S40_dry_dewpoint",
+      "passed": true
+    },
+    {
+      "name": "S40_published_enthalpy",
+      "passed": true
+    },
+    {
+      "name": "S41_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S41_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S41_cfm",
+      "passed": true
+    },
+    {
+      "name": "S42_finite_export",
+      "passed": true
+    },
+    {
+      "name": "S42_report_scope",
+      "passed": true
+    },
+    {
+      "name": "S42_freezing_c",
+      "passed": true
+    },
+    {
+      "name": "S42_freezing_k",
+      "passed": true
+    },
+    {
+      "name": "reject_electrical_power_356",
+      "passed": true
+    },
+    {
+      "name": "reject_electrical_pf_357",
+      "passed": true
+    },
+    {
+      "name": "reject_electrical_power_358",
+      "passed": true
+    },
+    {
+      "name": "reject_electrical_length_359",
+      "passed": true
+    },
+    {
+      "name": "reject_duct_flow_360",
+      "passed": true
+    },
+    {
+      "name": "reject_duct_check_path_361",
+      "passed": true
+    },
+    {
+      "name": "reject_gas_pressure_362",
+      "passed": true
+    },
+    {
+      "name": "reject_gas_velocity_363",
+      "passed": true
+    },
+    {
+      "name": "reject_lighting_quantity_364",
+      "passed": true
+    },
+    {
+      "name": "reject_lighting_height_365",
+      "passed": true
+    },
+    {
+      "name": "reject_lighting_watts_366",
+      "passed": true
+    },
+    {
+      "name": "reject_water_delta_367",
+      "passed": true
+    },
+    {
+      "name": "reject_air_rh_368",
+      "passed": true
+    },
+    {
+      "name": "reject_air_atmosphere_369",
+      "passed": true
+    },
+    {
+      "name": "reject_units_value_370",
+      "passed": true
+    },
+    {
+      "name": "inactive_duct_371",
+      "passed": true
+    },
+    {
+      "name": "inactive_lighting_372",
+      "passed": true
+    },
+    {
+      "name": "inactive_lighting_373",
+      "passed": true
+    },
+    {
+      "name": "inactive_water_374",
+      "passed": true
+    }
+  ]
+}
