@@ -11,6 +11,7 @@ from .errors import ValidationError
 from .schema import FIELDS, PD_DEFAULTS, PD_KEYS, SCHEMA_VERSION, VERSION
 from .ahu_schema import NM_DEFAULTS
 from .project_store import validate_provenance
+from .json_io import read_json_file
 
 
 def raw_project(project):
@@ -114,6 +115,4 @@ def read_workspace(path):
     path = Path(path)
     if path.stat().st_size > 15_000_000:
         raise ValidationError("整案檔案不得超過 15 MB")
-    def reject(value):
-        raise ValidationError("專案不得包含非有限數字")
-    return validate_workspace(json.loads(path.read_text(encoding="utf-8-sig"), parse_constant=reject))
+    return validate_workspace(read_json_file(path))

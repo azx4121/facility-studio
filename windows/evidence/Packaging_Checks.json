@@ -28,6 +28,22 @@
     "passed": true
   },
   {
+    "name": "16_missing_license_or_security_member_blocked",
+    "passed": true
+  },
+  {
+    "name": "17_missing_license_or_security_member_blocked",
+    "passed": true
+  },
+  {
+    "name": "18_missing_license_or_security_member_blocked",
+    "passed": true
+  },
+  {
+    "name": "19_missing_license_or_security_member_blocked",
+    "passed": true
+  },
+  {
     "name": "06_unexpected_module_blocked",
     "passed": true
   },

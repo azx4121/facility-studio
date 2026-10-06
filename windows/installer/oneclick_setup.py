@@ -21,6 +21,8 @@ def verify_payload(root: Path):
     entries = json.loads((root / "payload_sha256.json").read_text(encoding="utf-8"))
     required = {
         "LICENSE",
+        "LICENSE_GUIDE.md",
+        "LICENSE_LEGACY_MIT",
         "THIRD_PARTY_NOTICES.md",
         "Facility_Studio_V5_5.py",
         "facility_studio/ahu_schema.py",
@@ -29,6 +31,7 @@ def verify_payload(root: Path):
         "facility_studio/air_chart.py",
         "facility_studio/equipment_schema.py",
         "facility_studio/equipment_io.py",
+        "facility_studio/json_io.py",
         "facility_studio/equipment_analysis.py",
         "facility_studio/equipment_view.py",
         "facility_studio/resources/Equipment_Template.xlsx",
@@ -235,6 +238,10 @@ def main():
                     "--add-data",
                     str(PACKAGE / "payload/LICENSE") + ":.",
                     "--add-data",
+                    str(PACKAGE / "payload/LICENSE_GUIDE.md") + ":.",
+                    "--add-data",
+                    str(PACKAGE / "payload/LICENSE_LEGACY_MIT") + ":.",
+                    "--add-data",
                     str(PACKAGE / "payload/THIRD_PARTY_NOTICES.md") + ":.",
                     "--add-data",
                     str(PACKAGE / "payload/facility_studio/resources")
@@ -263,7 +270,7 @@ def main():
             exe = release / "Facility_Studio_V5_5_4.exe"
             if not exe.is_file() or exe.stat().st_size < 100000:
                 raise RuntimeError("EXE build did not complete.")
-            for name in ("LICENSE", "THIRD_PARTY_NOTICES.md"):
+            for name in ("LICENSE", "LICENSE_GUIDE.md", "LICENSE_LEGACY_MIT", "THIRD_PARTY_NOTICES.md"):
                 shutil.copy2(PACKAGE / "payload" / name, release / name)
             print("[4/5] Checking the EXE by generating a design report...", flush=True)
             check_output(

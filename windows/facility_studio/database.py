@@ -3,6 +3,7 @@
 from pathlib import Path
 import json
 import math
+from .json_io import read_json_file
 from .errors import ValidationError
 
 
@@ -13,7 +14,7 @@ def load_tables(path=None):
         else Path(__file__).with_name("resources") / "engineering_tables.json"
     )
     try:
-        doc = json.loads(path.read_text(encoding="utf-8"))
+        doc = read_json_file(path)
     except (OSError, UnicodeError, ValueError) as error:
         raise ValidationError(
             "工程資料表無法讀取；請確認檔案存在、UTF-8 編碼及 JSON 格式",

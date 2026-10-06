@@ -3,6 +3,7 @@ from .errors import InputError
 from pathlib import Path
 import copy
 import json
+from .json_io import read_json_file
 from .ahu_schema import AHU_OPTIONAL_NUMBERS, NM_DEFAULTS, NM_FIELDS, NM_V1_KEYS
 from .engine import blend, coil_record
 from .quality import assess_ahu
@@ -335,7 +336,7 @@ def nm_validate(i):
 def nm_read_project(path):
     if Path(path).stat().st_size > 2000000:
         raise InputError(f"檔案過大")
-    doc = json.loads(Path(path).read_text(encoding="utf-8-sig"))
+    doc = read_json_file(path, max_bytes=2_000_000)
     if (
         not isinstance(doc, dict)
         or set(doc) != {"kind", "schema_version", "inputs"}

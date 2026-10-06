@@ -1,0 +1,323 @@
+{
+  "source": "macos",
+  "checks": [
+    {
+      "name": "valid_xlsx",
+      "passed": true,
+      "observed": "accepted"
+    },
+    {
+      "name": "valid_utf16_xlsx",
+      "passed": true,
+      "observed": "accepted"
+    },
+    {
+      "name": "reject_internal_entity_utf-8",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：Excel XML 不接受 DTD 或實體宣告"
+    },
+    {
+      "name": "reject_external_entity_utf-8",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：Excel XML 不接受 DTD 或實體宣告"
+    },
+    {
+      "name": "reject_internal_entity_utf-16",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：Excel XML 不接受 DTD 或實體宣告"
+    },
+    {
+      "name": "reject_external_entity_utf-16",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：Excel XML 不接受 DTD 或實體宣告"
+    },
+    {
+      "name": "reject_non_zip_xlsx",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：不是有效.xlsx檔；請另存為Excel活頁簿"
+    },
+    {
+      "name": "reject_missing_workbook",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：Excel缺少必要內容：xl/workbook.xml"
+    },
+    {
+      "name": "reject_duplicate_zip_members",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：Excel含重複封存項目"
+    },
+    {
+      "name": "reject_macro_payload",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：不接受含巨集的活頁簿，請另存無巨集.xlsx"
+    },
+    {
+      "name": "reject_excessive_zip_members",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：Excel解壓內容過大"
+    },
+    {
+      "name": "reject_oversized_input",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：檔案不存在或超過20MB"
+    },
+    {
+      "name": "reject_oversized_decompression",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：Excel解壓內容過大"
+    },
+    {
+      "name": "reject_worksheet_path_parent",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：Excel含不安全的工作表路徑"
+    },
+    {
+      "name": "reject_worksheet_path_backslash",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：Excel含不安全的工作表路徑"
+    },
+    {
+      "name": "reject_external_sheet_reference",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "電力：工作表連結缺少或為外部連結"
+    },
+    {
+      "name": "reject_xlsm_extension",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：僅接受.xlsx或.csv；.xls／巨集檔請另存.xlsx"
+    },
+    {
+      "name": "reject_power_nan",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：電力第6列／每台輸入功率(kW)：不可為空白、NaN 或無限值"
+    },
+    {
+      "name": "reject_power_infinity",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：電力第6列／每台輸入功率(kW)：不可為空白、NaN 或無限值"
+    },
+    {
+      "name": "reject_power_negative",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：電力第6列／每台輸入功率(kW)：不可小於 0"
+    },
+    {
+      "name": "reject_power_bool",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：電力第6列／每台輸入功率(kW)：請填數字或選項，不使用TRUE／FALSE"
+    },
+    {
+      "name": "reject_cached_xlsx_formula",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：電力第6列／每台輸入功率(kW)：輸入欄位請填實際數字／文字，不接受公式；請貼上值"
+    },
+    {
+      "name": "reject_text_controls",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：電力第6列／設備名稱：文字過長或含換行／控制字元"
+    },
+    {
+      "name": "reject_long_text",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：電力第6列／設備名稱：文字過長或含換行／控制字元"
+    },
+    {
+      "name": "reject_invalid_voltage",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：電力第6列／供電電壓(V)：不可小於 50"
+    },
+    {
+      "name": "code_like_text_is_plain_data",
+      "passed": true,
+      "observed": "accepted"
+    },
+    {
+      "name": "valid_csv",
+      "passed": true,
+      "observed": "accepted"
+    },
+    {
+      "name": "reject_csv_formula",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：電力第2列／每台輸入功率(kW)：輸入欄位請填實際數字／文字，不接受公式；請貼上值"
+    },
+    {
+      "name": "reject_excess_csv_columns",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：CSV輸入欄位超過支援範圍（128欄）"
+    },
+    {
+      "name": "reject_unknown_csv_columns",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "電力第1列／unknown：未知或公式欄名；請保留範本欄名"
+    },
+    {
+      "name": "valid_workspace",
+      "passed": true,
+      "observed": "accepted"
+    },
+    {
+      "name": "reject_invalid_json",
+      "passed": true,
+      "observed": "ValidationError",
+      "detail": "JSON 格式、編碼或巢狀結構不合法"
+    },
+    {
+      "name": "reject_nonfinite_json",
+      "passed": true,
+      "observed": "ValidationError",
+      "detail": "JSON 不接受 NaN 或無限大"
+    },
+    {
+      "name": "reject_oversized_json",
+      "passed": true,
+      "observed": "ValidationError",
+      "detail": "整案檔案不得超過 15 MB"
+    },
+    {
+      "name": "deep_json_has_controlled_validation_error",
+      "passed": true,
+      "observed": "ValidationError",
+      "detail": "JSON 結構超過 64 層，請使用本工具匯出的檔案"
+    },
+    {
+      "name": "html_report_escapes_project_name",
+      "passed": true,
+      "observed": "accepted"
+    },
+    {
+      "name": "xml_comment_is_not_dtd_utf-8",
+      "passed": true,
+      "observed": "accepted"
+    },
+    {
+      "name": "xml_comment_is_not_dtd_utf-16",
+      "passed": true,
+      "observed": "accepted"
+    },
+    {
+      "name": "reject_entity_bom_utf-16-le",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：Excel XML 不接受 DTD 或實體宣告"
+    },
+    {
+      "name": "reject_entity_bom_utf-16-be",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：Excel XML 不接受 DTD 或實體宣告"
+    },
+    {
+      "name": "xml_depth_64",
+      "passed": true,
+      "observed": "accepted"
+    },
+    {
+      "name": "reject_xml_depth_65",
+      "passed": true,
+      "observed": "EquipmentImportError",
+      "detail": "檔案：Excel XML 結構過深或節點過多"
+    },
+    {
+      "name": "json_depth_64",
+      "passed": true,
+      "observed": "accepted"
+    },
+    {
+      "name": "reject_json_depth_65",
+      "passed": true,
+      "observed": "ValidationError",
+      "detail": "JSON 結構超過 64 層，請使用本工具匯出的檔案"
+    },
+    {
+      "name": "reject_json_duplicate",
+      "passed": true,
+      "observed": "ValidationError",
+      "detail": "JSON 欄位重複：a"
+    },
+    {
+      "name": "reject_json_overflow",
+      "passed": true,
+      "observed": "ValidationError",
+      "detail": "JSON 數值超過有限範圍"
+    },
+    {
+      "name": "reject_json_encoding",
+      "passed": true,
+      "observed": "ValidationError",
+      "detail": "JSON 格式、編碼或巢狀結構不合法"
+    },
+    {
+      "name": "json_quoted_brackets_and_escapes",
+      "passed": true,
+      "observed": "accepted"
+    },
+    {
+      "name": "controlled_deep_json_main",
+      "passed": true,
+      "observed": "ValidationError",
+      "detail": "JSON 結構超過 64 層，請使用本工具匯出的檔案"
+    },
+    {
+      "name": "controlled_deep_json_ahu",
+      "passed": true,
+      "observed": "ValidationError",
+      "detail": "JSON 結構超過 64 層，請使用本工具匯出的檔案"
+    },
+    {
+      "name": "controlled_deep_json_recovery",
+      "passed": true,
+      "observed": "ValidationError",
+      "detail": "JSON 結構超過 64 層，請使用本工具匯出的檔案"
+    },
+    {
+      "name": "controlled_main_json_list",
+      "passed": true,
+      "observed": "ValidationError",
+      "detail": "專案 JSON 必須為物件"
+    },
+    {
+      "name": "all_current_license_copies_match",
+      "passed": true,
+      "observed": "accepted"
+    },
+    {
+      "name": "current_license_has_internal_permission",
+      "passed": true,
+      "observed": "accepted"
+    },
+    {
+      "name": "all_historical_mit_copies_match",
+      "passed": true,
+      "observed": "accepted"
+    }
+  ],
+  "passed": 55,
+  "failed": []
+}

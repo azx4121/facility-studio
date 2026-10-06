@@ -2,6 +2,7 @@
 
 import copy
 import json
+from .database import load_tables
 from pathlib import Path
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
@@ -159,12 +160,7 @@ class WorkspaceWindow:
         ttk.Button(recovery, text="選擇復原快照", command=self.restore).pack(
             anchor="w", pady=8
         )
-        data = json.loads(
-            Path(__file__)
-            .with_name("resources")
-            .joinpath("engineering_tables.json")
-            .read_text(encoding="utf-8-sig")
-        )
+        data = load_tables()
         txt = tk.Text(recovery, height=18, wrap="word")
         txt.pack(fill="both", expand=True, pady=8)
         txt.insert(

@@ -3,6 +3,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 import json, math
+from .json_io import read_json_file
 from . import quick_tools as q
 from .project_store import app_data
 from .utils import atomic_text, state_trh
@@ -152,7 +153,9 @@ class QuickToolsWindow:
         self.suspended = False
         self.settings = app_data() / "Quick_Tools.json"
         try:
-            data = json.loads(self.settings.read_text(encoding="utf-8-sig"))
+            data = read_json_file(self.settings, max_bytes=2_000_000)
+            if not isinstance(data, dict):
+                raise ValueError("小工具設定必須為 JSON 物件")
             raw_drafts = data.get("drafts", {})
             if isinstance(raw_drafts, dict):
                 self.drafts = {
