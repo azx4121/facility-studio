@@ -1,0 +1,48 @@
+{
+  "checks": [
+    {
+      "name": "電力_formula_recalculation",
+      "passed": true,
+      "connected": 20,
+      "demand": 10
+    },
+    {
+      "name": "PCW_formula_recalculation",
+      "passed": true,
+      "connected": 60,
+      "demand": 30
+    },
+    {
+      "name": "CDA_formula_recalculation",
+      "passed": true,
+      "connected": 200,
+      "demand": 100
+    },
+    {
+      "name": "N2_formula_recalculation",
+      "passed": true,
+      "connected": 100,
+      "demand": 50
+    },
+    {
+      "name": "EXHAUST_formula_recalculation",
+      "passed": true,
+      "connected": 1000,
+      "demand": 500
+    },
+    {
+      "name": "DI_formula_recalculation",
+      "passed": true,
+      "connected": 20,
+      "demand": 10
+    },
+    {
+      "name": "PV_formula_recalculation",
+      "passed": true,
+      "connected": 200,
+      "demand": 100
+    }
+  ],
+  "formula_error_scan": "{\"kind\":\"notice\",\"message\":\"Cell search matched 0 entries.\"}",
+  "native_excel_execution_tested": false
+}
