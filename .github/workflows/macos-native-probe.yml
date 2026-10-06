@@ -1,0 +1,45 @@
+name: macOS native release probe
+
+on:
+  push:
+    branches:
+      - maintenance/macos-launch-repair
+    paths:
+      - .github/workflows/macos-native-probe.yml
+      - macos/macos/native_probe.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-probe:
+    name: ${{ matrix.architecture }} native macOS
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - architecture: arm64
+            runner: macos-15
+          - architecture: x86_64
+            runner: macos-15-intel
+    steps:
+      - name: Checkout probe source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Probe unchanged shipped application
+        run: python3 macos/macos/native_probe.py --output "$RUNNER_TEMP/native-probe"
+      - name: Retain native diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: macos-native-probe-${{ matrix.architecture }}
+          path: |
+            ${{ runner.temp }}/native-probe/*.json
+            ${{ runner.temp }}/native-probe/*.txt
+            ${{ runner.temp }}/native-probe/*.log
+          if-no-files-found: warn
+          retention-days: 14

@@ -2,6 +2,7 @@
 
 from datetime import datetime, timezone
 import csv
+import faulthandler
 import json
 import math
 import os
@@ -10,13 +11,17 @@ import platform
 import sys
 import subprocess
 import tempfile
+import time
 import traceback
 
 
 def run():
     checks = []
+    if sys.platform == "darwin":
+        faulthandler.dump_traceback_later(25, repeat=True)
 
     def check(name, action):
+        print("Checking: " + name, flush=True)
         try:
             value = action()
             if value is False:
@@ -27,6 +32,7 @@ def run():
                 {"name": name, "passed": False, "detail": traceback.format_exc()}
             )
 
+    print("Loading native calculation and graphics libraries...", flush=True)
     import numpy as np
     import matplotlib
     from PIL import Image
@@ -119,13 +125,32 @@ def run():
     gui_storage = tempfile.TemporaryDirectory(prefix="FacilityStudioMacGui-")
     old_storage = os.environ.get("LOCALAPPDATA")
     os.environ["LOCALAPPDATA"] = gui_storage.name
+    print("Creating native Tk window...", flush=True)
     root = tk.Tk()
-    root.withdraw()
+    callback_errors = []
+
+    def callback_error(*details):
+        callback_errors.append("".join(traceback.format_exception(*details)))
+
+    root.report_callback_exception = callback_error
+
+    def pump_gui():
+        # Exercise the actual application event loop. Tk Aqua's update() can
+        # wait indefinitely with hidden multiple-window layouts. A timed
+        # mainloop also proves that native UI timers are still responsive.
+        started = time.monotonic()
+        root.after(150, root.quit)
+        root.mainloop()
+        if time.monotonic() - started > 5:
+            raise AssertionError("Native UI event processing stalled")
+
     try:
         from facility_studio.simple_desktop import SimpleToolsApp
 
+        print("Creating independent-tools interface...", flush=True)
         app = SimpleToolsApp(root)
-        root.update()
+        root.geometry("1100x760")
+        pump_gui()
         check(
             "Tk Aqua native window system",
             lambda: root.tk.call("tk", "windowingsystem") == "aqua",
@@ -134,7 +159,7 @@ def run():
 
             def open_tool(tool=name):
                 app.show_tool(tool)
-                root.update()
+                pump_gui()
                 return app.active_page().result is not None
 
             check(f"Live GUI: {name}", open_tool)
@@ -146,10 +171,21 @@ def run():
             "Mac application Quit uses the document workflow",
             lambda: bool(root.tk.call("info", "commands", "tk::mac::Quit")),
         )
+        print("Creating engineering workbench...", flush=True)
         workbench = app.open_workbench()
-        workbench.root.withdraw()
-        root.update()
+        root.report_callback_exception = callback_error
+        pump_gui()
         check("Full workbench GUI calculates", lambda: workbench.result is not None)
+        for page in range(8):
+
+            def open_page(index=page):
+                workbench.show_page(index)
+                pump_gui()
+                return workbench.pages[index].winfo_ismapped() == 1
+
+            check(f"Workbench live page: {page}", open_page)
+        check("Native UI heartbeat", lambda: (pump_gui(), True)[1])
+        check("No native GUI callback exceptions", lambda: not callback_errors)
         from matplotlib.figure import Figure
         from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
@@ -185,4 +221,6 @@ def run():
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False, indent=2))
     print(f"\nMac acceptance report: {path}")
+    if sys.platform == "darwin":
+        faulthandler.cancel_dump_traceback_later()
     return 0 if report["passed"] else 2

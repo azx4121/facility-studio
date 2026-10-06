@@ -43,14 +43,23 @@ class ScrollPage(ttk.Frame):
         self.body = ttk.Frame(self.canvas, padding=18)
         self.body.columnconfigure(0, weight=1)
         self.win = self.canvas.create_window(0, 0, window=self.body, anchor="nw")
-        self.body.bind(
-            "<Configure>",
-            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")),
-        )
-        self.canvas.bind(
-            "<Configure>",
-            lambda e: self.canvas.itemconfigure(self.win, width=max(700, e.width)),
-        )
+        self.minimum_body_width = 700
+        self._scroll_bounds = None
+        self._body_width = None
+        self.body.bind("<Configure>", self.sync_scroll_region)
+        self.canvas.bind("<Configure>", self.fit_body)
+
+    def sync_scroll_region(self, event=None):
+        bounds = self.canvas.bbox("all")
+        if bounds != self._scroll_bounds:
+            self._scroll_bounds = bounds
+            self.canvas.configure(scrollregion=bounds or (0, 0, 0, 0))
+
+    def fit_body(self, event):
+        width = max(self.minimum_body_width, event.width)
+        if width != self._body_width:
+            self._body_width = width
+            self.canvas.itemconfigure(self.win, width=width)
 
     def reveal(self, widget):
         self.update_idletasks()

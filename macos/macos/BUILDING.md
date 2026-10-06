@@ -1,3 +1,56 @@
+# Native macOS release building (mac.2)
+
+The mac.1 download passed byte-level checks but failed Apple's native deep
+signature validation on both macOS 15 architectures. Static verification must
+not be treated as native release acceptance. The original release is retained.
+
+## Shipping build
+
+On a native Mac, from the repository root:
+
+```sh
+python3 macos/macos/build_native_release.py --output /absolute/path/fresh-mac2-build
+```
+
+No Zig or third-party signing tool is needed for this rebuild. The builder:
+
+1. Verifies the original runtime ZIP's pinned SHA-256 and extracts it with `ditto`.
+2. Replaces application sources with this checkout, including current security
+   fixes and license files; retains the FY icon and Universal native launcher.
+3. Retains Tcl/Tk build-only scripts under framework Resources, applies the
+   documented five-second Matplotlib discovery limits, and updates RECORD.
+4. Signs Mach-O files, nested frameworks, the outer framework and app with Apple
+   `codesign`; requires `--verify --deep --strict` to pass.
+5. Executes all seven CLI tools and native GUI/Excel/equipment acceptance.
+6. Creates the delivery ZIP with `ditto`, extracts it again, checks its native
+   signature and executes the extracted app. Creates a DMG, mounts it read-only,
+   verifies its app and repeats native acceptance before detaching.
+7. Writes checksums and evidence. Fails the build when any required check fails.
+
+To validate those exact delivery files on a second Mac architecture:
+
+```sh
+python3 macos/macos/verify_native_release.py \
+  --package /absolute/path/Facility_Studio_V5_5_4_macOS_mac2_OneClick.zip \
+  --dmg /absolute/path/Facility_Studio_V5_5_4_macOS_mac2.dmg \
+  --checksums /absolute/path/SHA256SUMS.txt \
+  --output /absolute/path/second-mac-evidence
+```
+
+The workflow `.github/workflows/macos-native-release.yml` uses Apple Silicon
+macOS 15 to build and Intel macOS 15 to execute the same ZIP and DMG. On the
+repair branch it only tests. On main, publication runs only after both jobs pass;
+it creates a new `v5.5.4-mac.2` release without modifying old release assets or tags.
+GitHub upload sizes and SHA-256 digests must match before the draft is published.
+
+These are ad-hoc integrity signatures, not Developer ID or notarization.
+Finder quarantine, managed Mac policies, macOS versions outside the CI matrix,
+physical keyboards/trackpads, Retina layout and Excel for Mac require separate
+user-machine acceptance. Never disable Gatekeeper globally to mask packaging errors.
+Runtime patch details and attribution: `../MAC_RUNTIME_PATCHES.md`.
+
+---
+
 # macOS bundle build
 
 This source package targets macOS 11+, Intel x86_64 and Apple Silicon arm64.
@@ -8,7 +61,7 @@ library. Matplotlib and its dependencies are separated by CPU architecture.
 
 General users should open the already-built `Facility Studio.app`.
 
-## Rebuild
+## Historical cross-platform runtime preparation
 
 Use an isolated Python environment with Zig 0.16.0 and Pillow. Obtain
 rcodesign 0.29.0 from its official project release and verify that release's
@@ -53,6 +106,6 @@ For public commercial distribution, finish Mac hardware QA and use your own
 Developer ID signing and notarization workflow after the final build.
 
 ZIP delivery must retain Unix executable permissions and symlink entries.
-The tested delivery builder is `macos/make_package.py`; ordinary Python ZIP
+The historical ZIP builder is `macos/make_package.py`; ordinary Python ZIP
 extraction may turn symlinks into text files, so its byte-verification routine
 recreates them using their stored Unix file types.
