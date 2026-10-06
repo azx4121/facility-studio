@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Keep the original release build verification records
+!/windows/evidence/NSIS_Build.log
+!/macos/evidence/NSIS_Build.log

@@ -1,0 +1,2836 @@
+{
+  "version": "5.5.4",
+  "scenario_count": 49,
+  "cases": [
+    {
+      "name": "01_socket_points_not_power",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "02_mixed_pf",
+      "active": 2,
+      "groups": 1
+    },
+    {
+      "name": "03_continuous_and_general",
+      "active": 2,
+      "groups": 1
+    },
+    {
+      "name": "04_motor_largest_only",
+      "active": 2,
+      "groups": 1
+    },
+    {
+      "name": "05_motor_partial_demand",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "06_mixed_voltage_panel",
+      "active": 2,
+      "groups": 2
+    },
+    {
+      "name": "07_single_110",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "08_zero_electric",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "09_zero_usage_branch_still_rated",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "10_distinct_panels",
+      "active": 2,
+      "groups": 2
+    },
+    {
+      "name": "11_pcw_mixed_units_and_delta",
+      "active": 2,
+      "groups": 1
+    },
+    {
+      "name": "12_pcw_m3h",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "13_pcw_ls",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "14_zero_pcw",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "15_di_circulation_continuous",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "16_di_zero_process",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "17_cda_scfm",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "18_n2_reference_zero_c",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "19_cda_alpm",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "20_cda_mixed_gauge_and_atmosphere",
+      "active": 2,
+      "groups": 1
+    },
+    {
+      "name": "21_n2_sm3h_mpa",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "22_n2_kgf",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "23_pv_torr",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "24_pv_kpa",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "25_pv_mbar",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "26_pv_alpm_at_pressure",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "27_pv_low_pressure_large_pipe",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "28_exhaust_mixed_unit",
+      "active": 2,
+      "groups": 1
+    },
+    {
+      "name": "29_exhaust_types_separate",
+      "active": 2,
+      "groups": 2
+    },
+    {
+      "name": "30_exhaust_unknown_pressure",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "31_exhaust_zero",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "32_defaults_reported_with_values",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "33_invalid_disabled_row_ignored",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "34_cross_system_same_equipment_id",
+      "active": 2,
+      "groups": 2
+    },
+    {
+      "name": "35_natural_panel_order",
+      "active": 4,
+      "groups": 4
+    },
+    {
+      "name": "36_low_diversity_cannot_undersize_single_device",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "37_continuous_floor",
+      "active": 1,
+      "groups": 1
+    },
+    {
+      "name": "real_workbook_active",
+      "active": 7,
+      "groups": 7
+    },
+    {
+      "name": "real_workbook_derived_cache_error",
+      "active": 7,
+      "groups": 7
+    },
+    {
+      "name": "delta_c_to_f"
+    },
+    {
+      "name": "negative_delta"
+    },
+    {
+      "name": "absolute_temperature"
+    },
+    {
+      "name": "kv_to_cv"
+    },
+    {
+      "name": "chart_conditions_0",
+      "temperature": 25,
+      "rh": 50,
+      "pressure": 101.325
+    },
+    {
+      "name": "chart_conditions_1",
+      "temperature": 35,
+      "rh": 70,
+      "pressure": 101.325
+    },
+    {
+      "name": "chart_conditions_2",
+      "temperature": -10,
+      "rh": 80,
+      "pressure": 80
+    },
+    {
+      "name": "chart_conditions_3",
+      "temperature": 0,
+      "rh": 100,
+      "pressure": 101.325
+    },
+    {
+      "name": "chart_conditions_4",
+      "temperature": 22,
+      "rh": 0,
+      "pressure": 101.325
+    },
+    {
+      "name": "chart_conditions_5",
+      "temperature": 80,
+      "rh": 50,
+      "pressure": 101.325
+    }
+  ],
+  "checks": [
+    {
+      "name": "01_socket_points_not_power_finite_json",
+      "passed": true
+    },
+    {
+      "name": "01_socket_points_not_power_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "01_socket_points_not_power_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "01_socket_points_not_power_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "01_connected",
+      "passed": true
+    },
+    {
+      "name": "01_demand",
+      "passed": true
+    },
+    {
+      "name": "01_points",
+      "passed": true
+    },
+    {
+      "name": "01_current",
+      "passed": true
+    },
+    {
+      "name": "01_branch_undiscounted",
+      "passed": true
+    },
+    {
+      "name": "02_mixed_pf_finite_json",
+      "passed": true
+    },
+    {
+      "name": "02_mixed_pf_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "02_mixed_pf_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "02_mixed_pf_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "02_Q",
+      "passed": true
+    },
+    {
+      "name": "02_S",
+      "passed": true
+    },
+    {
+      "name": "02_no_kva_scalar_sum",
+      "passed": true
+    },
+    {
+      "name": "03_continuous_and_general_finite_json",
+      "passed": true
+    },
+    {
+      "name": "03_continuous_and_general_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "03_continuous_and_general_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "03_continuous_and_general_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "03_design",
+      "passed": true
+    },
+    {
+      "name": "04_motor_largest_only_finite_json",
+      "passed": true
+    },
+    {
+      "name": "04_motor_largest_only_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "04_motor_largest_only_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "04_motor_largest_only_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "04_design",
+      "passed": true
+    },
+    {
+      "name": "04_motor_pending",
+      "passed": true
+    },
+    {
+      "name": "05_motor_partial_demand_finite_json",
+      "passed": true
+    },
+    {
+      "name": "05_motor_partial_demand_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "05_motor_partial_demand_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "05_motor_partial_demand_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "05_design",
+      "passed": true
+    },
+    {
+      "name": "06_mixed_voltage_panel_finite_json",
+      "passed": true
+    },
+    {
+      "name": "06_mixed_voltage_panel_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "06_mixed_voltage_panel_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "06_mixed_voltage_panel_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "06_mixed_voltage_panel_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "06_mixed_voltage_panel_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "06_separate",
+      "passed": true
+    },
+    {
+      "name": "06_single_phase",
+      "passed": true
+    },
+    {
+      "name": "07_single_110_finite_json",
+      "passed": true
+    },
+    {
+      "name": "07_single_110_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "07_single_110_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "07_single_110_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "07_single_I",
+      "passed": true
+    },
+    {
+      "name": "08_zero_electric_finite_json",
+      "passed": true
+    },
+    {
+      "name": "08_zero_electric_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "08_zero_electric_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "08_zero_electric_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "08_zero",
+      "passed": true
+    },
+    {
+      "name": "08_no_fake_nfb",
+      "passed": true
+    },
+    {
+      "name": "09_zero_usage_branch_still_rated_finite_json",
+      "passed": true
+    },
+    {
+      "name": "09_zero_usage_branch_still_rated_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "09_zero_usage_branch_still_rated_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "09_zero_usage_branch_still_rated_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "09_no_feeder_demand",
+      "passed": true
+    },
+    {
+      "name": "09_branch",
+      "passed": true
+    },
+    {
+      "name": "10_distinct_panels_finite_json",
+      "passed": true
+    },
+    {
+      "name": "10_distinct_panels_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "10_distinct_panels_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "10_distinct_panels_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "10_distinct_panels_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "10_distinct_panels_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "10_group_counts",
+      "passed": true
+    },
+    {
+      "name": "11_pcw_mixed_units_and_delta_finite_json",
+      "passed": true
+    },
+    {
+      "name": "11_pcw_mixed_units_and_delta_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "11_pcw_mixed_units_and_delta_printed_water",
+      "passed": true
+    },
+    {
+      "name": "11_water",
+      "passed": true
+    },
+    {
+      "name": "11_heat",
+      "passed": true
+    },
+    {
+      "name": "11_actual_pipe_velocity",
+      "passed": true
+    },
+    {
+      "name": "11_v_limit",
+      "passed": true
+    },
+    {
+      "name": "12_pcw_m3h_finite_json",
+      "passed": true
+    },
+    {
+      "name": "12_pcw_m3h_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "12_pcw_m3h_printed_water",
+      "passed": true
+    },
+    {
+      "name": "12_water",
+      "passed": true
+    },
+    {
+      "name": "12_kw",
+      "passed": true
+    },
+    {
+      "name": "13_pcw_ls_finite_json",
+      "passed": true
+    },
+    {
+      "name": "13_pcw_ls_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "13_pcw_ls_printed_water",
+      "passed": true
+    },
+    {
+      "name": "13_water",
+      "passed": true
+    },
+    {
+      "name": "14_zero_pcw_finite_json",
+      "passed": true
+    },
+    {
+      "name": "14_zero_pcw_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "14_zero_pcw_printed_water",
+      "passed": true
+    },
+    {
+      "name": "14_zero_kw",
+      "passed": true
+    },
+    {
+      "name": "15_di_circulation_continuous_finite_json",
+      "passed": true
+    },
+    {
+      "name": "15_di_circulation_continuous_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "15_di_circulation_continuous_printed_water",
+      "passed": true
+    },
+    {
+      "name": "15_total",
+      "passed": true
+    },
+    {
+      "name": "15_connected",
+      "passed": true
+    },
+    {
+      "name": "15_no_carbon_steel",
+      "passed": true
+    },
+    {
+      "name": "16_di_zero_process_finite_json",
+      "passed": true
+    },
+    {
+      "name": "16_di_zero_process_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "16_di_zero_process_printed_water",
+      "passed": true
+    },
+    {
+      "name": "16_circulation",
+      "passed": true
+    },
+    {
+      "name": "17_cda_scfm_finite_json",
+      "passed": true
+    },
+    {
+      "name": "17_cda_scfm_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "17_cda_scfm_printed_alpm",
+      "passed": true
+    },
+    {
+      "name": "17_cda_scfm_printed_reverse_standard",
+      "passed": true
+    },
+    {
+      "name": "17_standard",
+      "passed": true
+    },
+    {
+      "name": "17_actual",
+      "passed": true
+    },
+    {
+      "name": "18_n2_reference_zero_c_finite_json",
+      "passed": true
+    },
+    {
+      "name": "18_n2_reference_zero_c_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "18_n2_reference_zero_c_printed_alpm",
+      "passed": true
+    },
+    {
+      "name": "18_n2_reference_zero_c_printed_reverse_standard",
+      "passed": true
+    },
+    {
+      "name": "18_standard",
+      "passed": true
+    },
+    {
+      "name": "19_cda_alpm_finite_json",
+      "passed": true
+    },
+    {
+      "name": "19_cda_alpm_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "19_cda_alpm_printed_alpm",
+      "passed": true
+    },
+    {
+      "name": "19_cda_alpm_printed_reverse_standard",
+      "passed": true
+    },
+    {
+      "name": "19_actual_roundtrip",
+      "passed": true
+    },
+    {
+      "name": "19_standard",
+      "passed": true
+    },
+    {
+      "name": "20_cda_mixed_gauge_and_atmosphere_finite_json",
+      "passed": true
+    },
+    {
+      "name": "20_cda_mixed_gauge_and_atmosphere_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "20_cda_mixed_gauge_and_atmosphere_printed_alpm",
+      "passed": true
+    },
+    {
+      "name": "20_cda_mixed_gauge_and_atmosphere_printed_reverse_standard",
+      "passed": true
+    },
+    {
+      "name": "20_worst_actual",
+      "passed": true
+    },
+    {
+      "name": "20_pressure_note",
+      "passed": true
+    },
+    {
+      "name": "20_velocity_limit",
+      "passed": true
+    },
+    {
+      "name": "21_n2_sm3h_mpa_finite_json",
+      "passed": true
+    },
+    {
+      "name": "21_n2_sm3h_mpa_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "21_n2_sm3h_mpa_printed_alpm",
+      "passed": true
+    },
+    {
+      "name": "21_n2_sm3h_mpa_printed_reverse_standard",
+      "passed": true
+    },
+    {
+      "name": "21_standard",
+      "passed": true
+    },
+    {
+      "name": "22_n2_kgf_finite_json",
+      "passed": true
+    },
+    {
+      "name": "22_n2_kgf_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "22_n2_kgf_printed_alpm",
+      "passed": true
+    },
+    {
+      "name": "22_n2_kgf_printed_reverse_standard",
+      "passed": true
+    },
+    {
+      "name": "22_absolute",
+      "passed": true
+    },
+    {
+      "name": "23_pv_torr_finite_json",
+      "passed": true
+    },
+    {
+      "name": "23_pv_torr_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "23_pv_torr_printed_alpm",
+      "passed": true
+    },
+    {
+      "name": "23_pv_torr_printed_reverse_standard",
+      "passed": true
+    },
+    {
+      "name": "23_pv_torr_actual",
+      "passed": true
+    },
+    {
+      "name": "23_pv_torr_effective_pump",
+      "passed": true
+    },
+    {
+      "name": "23_pv_torr_throughput",
+      "passed": true
+    },
+    {
+      "name": "24_pv_kpa_finite_json",
+      "passed": true
+    },
+    {
+      "name": "24_pv_kpa_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "24_pv_kpa_printed_alpm",
+      "passed": true
+    },
+    {
+      "name": "24_pv_kpa_printed_reverse_standard",
+      "passed": true
+    },
+    {
+      "name": "24_pv_kpa_actual",
+      "passed": true
+    },
+    {
+      "name": "24_pv_kpa_effective_pump",
+      "passed": true
+    },
+    {
+      "name": "24_pv_kpa_throughput",
+      "passed": true
+    },
+    {
+      "name": "25_pv_mbar_finite_json",
+      "passed": true
+    },
+    {
+      "name": "25_pv_mbar_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "25_pv_mbar_printed_alpm",
+      "passed": true
+    },
+    {
+      "name": "25_pv_mbar_printed_reverse_standard",
+      "passed": true
+    },
+    {
+      "name": "25_pv_mbar_actual",
+      "passed": true
+    },
+    {
+      "name": "25_pv_mbar_effective_pump",
+      "passed": true
+    },
+    {
+      "name": "25_pv_mbar_throughput",
+      "passed": true
+    },
+    {
+      "name": "25_same_diameter_all_units",
+      "passed": true
+    },
+    {
+      "name": "26_pv_alpm_at_pressure_finite_json",
+      "passed": true
+    },
+    {
+      "name": "26_pv_alpm_at_pressure_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "26_pv_alpm_at_pressure_printed_alpm",
+      "passed": true
+    },
+    {
+      "name": "26_pv_alpm_at_pressure_printed_reverse_standard",
+      "passed": true
+    },
+    {
+      "name": "26_actual_roundtrip",
+      "passed": true
+    },
+    {
+      "name": "27_pv_low_pressure_large_pipe_finite_json",
+      "passed": true
+    },
+    {
+      "name": "27_pv_low_pressure_large_pipe_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "27_pv_low_pressure_large_pipe_printed_alpm",
+      "passed": true
+    },
+    {
+      "name": "27_pv_low_pressure_large_pipe_printed_reverse_standard",
+      "passed": true
+    },
+    {
+      "name": "27_outside_table",
+      "passed": true
+    },
+    {
+      "name": "28_exhaust_mixed_unit_finite_json",
+      "passed": true
+    },
+    {
+      "name": "28_exhaust_mixed_unit_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "28_exhaust_mixed_unit_printed_exhaust",
+      "passed": true
+    },
+    {
+      "name": "28_total",
+      "passed": true
+    },
+    {
+      "name": "28_terminal_max_not_sum",
+      "passed": true
+    },
+    {
+      "name": "28_report_pressure_known",
+      "passed": true
+    },
+    {
+      "name": "28_velocity_actual_area",
+      "passed": true
+    },
+    {
+      "name": "29_exhaust_types_separate_finite_json",
+      "passed": true
+    },
+    {
+      "name": "29_exhaust_types_separate_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "29_exhaust_types_separate_printed_exhaust",
+      "passed": true
+    },
+    {
+      "name": "29_exhaust_types_separate_printed_exhaust",
+      "passed": true
+    },
+    {
+      "name": "29_separate_groups",
+      "passed": true
+    },
+    {
+      "name": "30_exhaust_unknown_pressure_finite_json",
+      "passed": true
+    },
+    {
+      "name": "30_exhaust_unknown_pressure_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "30_exhaust_unknown_pressure_printed_exhaust",
+      "passed": true
+    },
+    {
+      "name": "30_missing_is_not_zero",
+      "passed": true
+    },
+    {
+      "name": "31_exhaust_zero_finite_json",
+      "passed": true
+    },
+    {
+      "name": "31_exhaust_zero_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "31_exhaust_zero_printed_exhaust",
+      "passed": true
+    },
+    {
+      "name": "31_zero_flow",
+      "passed": true
+    },
+    {
+      "name": "31_zero_known",
+      "passed": true
+    },
+    {
+      "name": "32_defaults_reported_with_values_finite_json",
+      "passed": true
+    },
+    {
+      "name": "32_defaults_reported_with_values_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "32_defaults_reported_with_values_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "32_defaults_reported_with_values_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "32_defaults_values",
+      "passed": true
+    },
+    {
+      "name": "blank_power_not_zero",
+      "passed": true
+    },
+    {
+      "name": "negative_power",
+      "passed": true
+    },
+    {
+      "name": "nan_power",
+      "passed": true
+    },
+    {
+      "name": "inf_power",
+      "passed": true
+    },
+    {
+      "name": "non_integer_qty",
+      "passed": true
+    },
+    {
+      "name": "zero_qty",
+      "passed": true
+    },
+    {
+      "name": "usage_over_100",
+      "passed": true
+    },
+    {
+      "name": "pf_zero",
+      "passed": true
+    },
+    {
+      "name": "blank_enable",
+      "passed": true
+    },
+    {
+      "name": "phase_two",
+      "passed": true
+    },
+    {
+      "name": "formula_input",
+      "passed": true
+    },
+    {
+      "name": "duplicate_identity",
+      "passed": true
+    },
+    {
+      "name": "all_inactive",
+      "passed": true
+    },
+    {
+      "name": "pv_subrange",
+      "passed": true
+    },
+    {
+      "name": "wrong_flow_unit",
+      "passed": true
+    },
+    {
+      "name": "33_invalid_disabled_row_ignored_finite_json",
+      "passed": true
+    },
+    {
+      "name": "33_invalid_disabled_row_ignored_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "33_invalid_disabled_row_ignored_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "33_invalid_disabled_row_ignored_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "33_inactive_count",
+      "passed": true
+    },
+    {
+      "name": "34_cross_system_same_equipment_id_finite_json",
+      "passed": true
+    },
+    {
+      "name": "34_cross_system_same_equipment_id_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "34_cross_system_same_equipment_id_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "34_cross_system_same_equipment_id_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "34_cross_system_same_equipment_id_printed_alpm",
+      "passed": true
+    },
+    {
+      "name": "34_cross_system_same_equipment_id_printed_reverse_standard",
+      "passed": true
+    },
+    {
+      "name": "34_link_same_device",
+      "passed": true
+    },
+    {
+      "name": "35_natural_panel_order_finite_json",
+      "passed": true
+    },
+    {
+      "name": "35_natural_panel_order_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "35_natural_panel_order_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "35_natural_panel_order_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "35_natural_panel_order_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "35_natural_panel_order_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "35_natural_panel_order_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "35_natural_panel_order_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "35_natural_panel_order_printed_water",
+      "passed": true
+    },
+    {
+      "name": "35_panel_sort",
+      "passed": true
+    },
+    {
+      "name": "35_system_sort",
+      "passed": true
+    },
+    {
+      "name": "36_low_diversity_cannot_undersize_single_device_finite_json",
+      "passed": true
+    },
+    {
+      "name": "36_low_diversity_cannot_undersize_single_device_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "36_low_diversity_cannot_undersize_single_device_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "36_low_diversity_cannot_undersize_single_device_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "36_demand_stays_estimate",
+      "passed": true
+    },
+    {
+      "name": "36_feeder_floor",
+      "passed": true
+    },
+    {
+      "name": "36_protection_at_least_one_device",
+      "passed": true
+    },
+    {
+      "name": "36_floor_reason_published",
+      "passed": true
+    },
+    {
+      "name": "36_conservative_drop",
+      "passed": true
+    },
+    {
+      "name": "37_continuous_floor_finite_json",
+      "passed": true
+    },
+    {
+      "name": "37_continuous_floor_report_inputs",
+      "passed": true
+    },
+    {
+      "name": "37_continuous_floor_printed_kw_kva",
+      "passed": true
+    },
+    {
+      "name": "37_continuous_floor_rounded_power",
+      "passed": true
+    },
+    {
+      "name": "37_continuous_floor",
+      "passed": true
+    },
+    {
+      "name": "xlsx_all_systems",
+      "passed": true
+    },
+    {
+      "name": "template_examples_inactive",
+      "passed": true
+    },
+    {
+      "name": "xlsx_active_seven_active",
+      "passed": true
+    },
+    {
+      "name": "xlsx_formula_columns_ignored",
+      "passed": true
+    },
+    {
+      "name": "xlsx_reject_input_formula",
+      "passed": true
+    },
+    {
+      "name": "xlsx_reject_duplicate_row",
+      "passed": true
+    },
+    {
+      "name": "xlsx_reject_negative_shared_index",
+      "passed": true
+    },
+    {
+      "name": "xlsx_reject_broken_row_number",
+      "passed": true
+    },
+    {
+      "name": "xlsx_active_seven_derived_cache_error",
+      "passed": true
+    },
+    {
+      "name": "xlsx_formula_columns_ignored",
+      "passed": true
+    },
+    {
+      "name": "xlsx_reject_input_cache_error",
+      "passed": true
+    },
+    {
+      "name": "csv_電力",
+      "passed": true
+    },
+    {
+      "name": "csv_PCW",
+      "passed": true
+    },
+    {
+      "name": "csv_CDA",
+      "passed": true
+    },
+    {
+      "name": "csv_N2",
+      "passed": true
+    },
+    {
+      "name": "csv_EXHAUST",
+      "passed": true
+    },
+    {
+      "name": "csv_DI",
+      "passed": true
+    },
+    {
+      "name": "csv_PV",
+      "passed": true
+    },
+    {
+      "name": "missing_header",
+      "passed": true
+    },
+    {
+      "name": "csv_column_limit",
+      "passed": true
+    },
+    {
+      "name": "delta_c_to_f",
+      "passed": true
+    },
+    {
+      "name": "negative_delta",
+      "passed": true
+    },
+    {
+      "name": "absolute_temperature",
+      "passed": true
+    },
+    {
+      "name": "kv_to_cv",
+      "passed": true
+    },
+    {
+      "name": "chart_0_point_ratio",
+      "passed": true
+    },
+    {
+      "name": "chart_0_point_t",
+      "passed": true
+    },
+    {
+      "name": "chart_0_point_in_axes",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_10_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_10_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_10_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_10_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_10_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_10_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_10_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_20_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_20_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_20_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_20_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_20_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_20_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_20_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_30_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_30_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_30_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_30_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_30_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_30_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_30_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_40_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_40_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_40_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_40_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_40_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_40_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_50_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_50_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_50_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_50_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_50_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_50_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_60_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_60_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_60_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_60_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_60_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_60_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_70_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_70_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_70_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_70_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_70_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_80_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_80_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_80_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_80_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_80_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_90_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_90_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_90_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_90_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_90_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_100_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_100_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_100_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_100_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_0_curve_100_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_point_ratio",
+      "passed": true
+    },
+    {
+      "name": "chart_1_point_t",
+      "passed": true
+    },
+    {
+      "name": "chart_1_point_in_axes",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_10_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_10_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_10_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_10_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_10_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_10_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_10_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_20_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_20_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_20_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_20_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_20_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_20_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_20_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_30_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_30_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_30_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_30_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_30_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_30_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_30_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_40_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_40_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_40_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_40_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_40_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_40_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_40_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_50_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_50_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_50_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_50_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_50_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_50_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_60_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_60_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_60_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_60_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_60_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_60_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_70_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_70_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_70_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_70_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_70_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_70_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_80_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_80_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_80_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_80_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_80_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_90_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_90_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_90_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_90_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_90_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_100_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_100_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_100_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_100_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_1_curve_100_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_point_ratio",
+      "passed": true
+    },
+    {
+      "name": "chart_2_point_t",
+      "passed": true
+    },
+    {
+      "name": "chart_2_point_in_axes",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_10_-30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_10_-16.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_10_-3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_10_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_10_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_10_36.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_10_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_20_-30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_20_-16.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_20_-3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_20_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_20_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_20_36.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_20_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_30_-30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_30_-16.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_30_-3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_30_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_30_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_30_36.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_30_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_40_-30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_40_-16.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_40_-3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_40_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_40_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_40_36.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_50_-30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_50_-16.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_50_-3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_50_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_50_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_50_36.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_60_-30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_60_-16.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_60_-3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_60_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_60_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_60_36.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_70_-30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_70_-16.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_70_-3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_70_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_70_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_80_-30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_80_-16.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_80_-3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_80_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_80_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_90_-30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_90_-16.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_90_-3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_90_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_90_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_100_-30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_100_-16.67",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_100_-3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_100_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_2_curve_100_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_point_ratio",
+      "passed": true
+    },
+    {
+      "name": "chart_3_point_t",
+      "passed": true
+    },
+    {
+      "name": "chart_3_point_in_axes",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_10_-20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_10_-8.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_10_3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_10_15.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_10_26.67",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_10_38.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_10_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_20_-20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_20_-8.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_20_3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_20_15.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_20_26.67",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_20_38.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_20_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_30_-20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_30_-8.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_30_3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_30_15.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_30_26.67",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_30_38.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_30_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_40_-20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_40_-8.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_40_3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_40_15.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_40_26.67",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_40_38.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_50_-20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_50_-8.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_50_3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_50_15.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_50_26.67",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_50_38.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_60_-20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_60_-8.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_60_3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_60_15.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_60_26.67",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_60_38.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_70_-20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_70_-8.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_70_3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_70_15.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_70_26.67",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_70_38.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_80_-20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_80_-8.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_80_3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_80_15.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_80_26.67",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_90_-20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_90_-8.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_90_3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_90_15.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_90_26.67",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_100_-20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_100_-8.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_100_3.33",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_100_15.00",
+      "passed": true
+    },
+    {
+      "name": "chart_3_curve_100_26.67",
+      "passed": true
+    },
+    {
+      "name": "chart_4_point_ratio",
+      "passed": true
+    },
+    {
+      "name": "chart_4_point_t",
+      "passed": true
+    },
+    {
+      "name": "chart_4_point_in_axes",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_10_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_10_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_10_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_10_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_10_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_10_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_10_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_20_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_20_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_20_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_20_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_20_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_20_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_20_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_30_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_30_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_30_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_30_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_30_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_30_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_30_50.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_40_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_40_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_40_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_40_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_40_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_40_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_50_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_50_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_50_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_50_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_50_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_50_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_60_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_60_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_60_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_60_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_60_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_60_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_70_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_70_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_70_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_70_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_70_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_80_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_80_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_80_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_80_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_80_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_90_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_90_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_90_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_90_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_90_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_100_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_100_0.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_100_10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_100_20.00",
+      "passed": true
+    },
+    {
+      "name": "chart_4_curve_100_30.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_point_ratio",
+      "passed": true
+    },
+    {
+      "name": "chart_5_point_t",
+      "passed": true
+    },
+    {
+      "name": "chart_5_point_in_axes",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_10_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_10_6.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_10_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_10_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_10_56.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_10_73.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_10_90.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_20_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_20_6.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_20_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_20_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_20_56.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_20_73.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_20_90.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_30_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_30_6.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_30_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_30_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_30_56.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_30_73.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_30_90.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_40_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_40_6.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_40_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_40_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_40_56.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_40_73.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_40_90.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_50_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_50_6.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_50_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_50_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_50_56.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_50_73.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_60_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_60_6.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_60_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_60_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_60_56.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_60_73.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_70_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_70_6.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_70_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_70_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_70_56.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_70_73.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_80_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_80_6.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_80_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_80_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_80_56.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_80_73.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_90_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_90_6.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_90_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_90_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_90_56.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_100_-10.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_100_6.67",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_100_23.33",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_100_40.00",
+      "passed": true
+    },
+    {
+      "name": "chart_5_curve_100_56.67",
+      "passed": true
+    },
+    {
+      "name": "keypad_KP_Decimal_linux_91",
+      "passed": true
+    },
+    {
+      "name": "keypad_KP_Separator_linux_91",
+      "passed": true
+    },
+    {
+      "name": "keypad_Delete_win32_110",
+      "passed": true
+    },
+    {
+      "name": "keypad_Delete_win32_46",
+      "passed": true
+    },
+    {
+      "name": "keypad_period_win32_190",
+      "passed": true
+    },
+    {
+      "name": "keypad_KP_Delete_linux_91",
+      "passed": true
+    }
+  ],
+  "windows_keyboard_hardware_tested": false
+}

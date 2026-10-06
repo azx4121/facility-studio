@@ -1,0 +1,7484 @@
+[
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 78.08176238972793,
+    "expected": 78.08176238972793,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.003105114265568168,
+    "expected": 0.003105114265568168,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 1.583366653338681,
+    "expected": 1.5833666533386648,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 60.448,
+    "expected": 60.447673,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.8918514820338057,
+    "expected": 1.8918514820338057,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 85.73294602191217,
+    "expected": 85.73294602191217,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 96145.40968545194,
+    "expected": 96145.40968545194,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 73958.00745034765,
+    "expected": 73958.00745034764,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 50.950139907601084,
+    "expected": 50.950139907601084,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.005308335104793813,
+    "expected": 0.005308335104793813,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 3.1667333066773384,
+    "expected": 3.1667333066773296,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 33.178,
+    "expected": 33.17821,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.228665105315749,
+    "expected": 1.228665105315749,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 55.679359692548985,
+    "expected": 55.679359692548985,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 42637.4573394699,
+    "expected": 42637.4573394699,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 32798.044107284535,
+    "expected": 32798.04410728454,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 807.5041931807247,
+    "expected": 807.5041931807247,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.00030660026942834446,
+    "expected": 0.00030660026942834446,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 0.15833666533397714,
+    "expected": 0.15833666533386645,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 623.918,
+    "expected": 623.918031,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.2892936744477574,
+    "expected": 1.2892936744477574,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 888.2385921407308,
+    "expected": 888.2385921407308,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 8784.900604561408,
+    "expected": 8784.900604561408,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 6757.615849662622,
+    "expected": 6757.61584966262,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 331.627001251322,
+    "expected": 331.627001251322,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.08314462974013903,
+    "expected": 0.08314462974013903,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 610.8052019685094,
+    "expected": 610.8052019685094,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.14959121221372512,
+    "expected": 0.14959121221372512,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 67.91683326669329,
+    "expected": 67.91683326669332,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.9463730664964158,
+    "expected": 1.9463730664964158,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 354.8337572126883,
+    "expected": 354.8337572126883,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.6823632417843324,
+    "expected": 1.6823632417843324,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 666.26240148507,
+    "expected": 666.26240148507,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 43016.405965430225,
+    "expected": 43016.405965430225,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 33089.54305033094,
+    "expected": 33089.54305033096,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 20321.405345045438,
+    "expected": 20321.405345045438,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 15631.850265419567,
+    "expected": 15631.850265419569,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 833.318,
+    "expected": 833.317553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.6631654002301774,
+    "expected": 1.6631654002301774,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 916.6493083,
+    "expected": 916.6493083,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 14214.22527934978,
+    "expected": 14214.22527934978,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 10934.019445653676,
+    "expected": 10934.019445653677,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 46.38795213547281,
+    "expected": 46.38795213547281,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.011630262584632659,
+    "expected": 0.011630262584632659,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 85.43937123967848,
+    "expected": 85.43937123967848,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.020924803969139934,
+    "expected": 0.020924803969139934,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 9.500199920031985,
+    "expected": 9.500199920031987,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 791.938,
+    "expected": 791.937553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.8046439471263456,
+    "expected": 1.8046439471263456,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 49.63411086408498,
+    "expected": 49.63411086408498,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.2294729344871893,
+    "expected": 1.2294729344871893,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 93.1967188230617,
+    "expected": 93.1967188230617,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.58057769520253,
+    "expected": 1.58057769520253,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 871.1313083,
+    "expected": 871.1313083,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 120021.0281924555,
+    "expected": 120021.0281924555,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 92323.86784035039,
+    "expected": 92323.86784035039,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 31017.616227170984,
+    "expected": 31017.616227170984,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 23859.704790131527,
+    "expected": 23859.70479013153,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12906.315328452929,
+    "expected": 12906.315328452929,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9927.934868040715,
+    "expected": 9927.934868040715,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 175.06647685000524,
+    "expected": 175.06647685000524,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.02240870931431025,
+    "expected": 0.02240870931431025,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 24.500199920031978,
+    "expected": 24.50019992003199,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 103.127,
+    "expected": 103.127315,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.78795193576451,
+    "expected": 1.78795193576451,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 191.44543294486468,
+    "expected": 191.44543294486468,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 50754.99259180141,
+    "expected": 50754.99259180141,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 39042.30199369339,
+    "expected": 39042.3019936934,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 96.72638152720367,
+    "expected": 96.72638152720367,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.017092750466646076,
+    "expected": 0.017092750466646076,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 140.83236101209334,
+    "expected": 140.83236101209334,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 0.7916833266693027,
+    "expected": 0.7916833266693324,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 193.576,
+    "expected": 193.57623999999998,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.3766398590590971,
+    "expected": 1.3766398590590971,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 104.3522913490267,
+    "expected": 104.3522913490267,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.4467915869197767,
+    "expected": 1.4467915869197767,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 154.9155971133027,
+    "expected": 154.9155971133027,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 38346.88525435068,
+    "expected": 38346.88525435068,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 29497.604041808216,
+    "expected": 29497.60404180822,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 34019.32928180017,
+    "expected": 34019.32928180017,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 26168.71483215398,
+    "expected": 26168.71483215398,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 207.1781548174869,
+    "expected": 207.1781548174869,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.05194314970598758,
+    "expected": 0.05194314970598758,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 337.84603592601167,
+    "expected": 337.84603592601167,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.08386753781328217,
+    "expected": 0.08386753781328217,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693323,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.2159624487198588,
+    "expected": 1.2159624487198588,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 221.6761687344294,
+    "expected": 221.6761687344294,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 0.9280586888539786,
+    "expected": 0.9280586888539786,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 367.5369238923272,
+    "expected": 367.5369238923272,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 17691.86197794312,
+    "expected": 17691.86197794312,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 13609.124598417786,
+    "expected": 13609.124598417784,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 6642.888163527628,
+    "expected": 6642.888163527628,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 5109.913971944329,
+    "expected": 5109.91397194433,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "VEX_pressure_sum",
+    "actual": 233.97072135177615,
+    "expected": 233.97072135177615,
+    "passed": true
+  },
+  {
+    "name": "VEX_Colebrook_or_laminar",
+    "actual": 179.97747796290474,
+    "expected": 179.97747796290474,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 36.692039938648676,
+    "expected": 36.692039938648676,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009782956363819798,
+    "expected": 0.009782956363819798,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 66.97453670127199,
+    "expected": 66.97453670127199,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017489829979139025,
+    "expected": 0.017489829979139025,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693324,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.4249001225894589,
+    "expected": 1.4249001225894589,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 39.18980847577798,
+    "expected": 39.18980847577798,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.611196557088306,
+    "expected": 1.611196557088306,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 73.01451978198898,
+    "expected": 73.01451978198898,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 86.6025641025641,
+    "expected": 86.6025641025641,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 138.56410256410257,
+    "expected": 138.56410256410257,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 76877.78935340232,
+    "expected": 76877.78935340232,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 59136.76104107871,
+    "expected": 59136.76104107873,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 70954.89406988409,
+    "expected": 70954.89406988409,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 54580.68774606468,
+    "expected": 54580.687746064694,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.3517448260993254,
+    "expected": 1.3517448260993254,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 162609.84669415432,
+    "expected": 162609.84669415432,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 125084.49745704178,
+    "expected": 125084.49745704183,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 912.518,
+    "expected": 912.517553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.998858010007561,
+    "expected": 1.998858010007561,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.3617876407700966,
+    "expected": 1.3617876407700966,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5697207291646698,
+    "expected": 1.5697207291646698,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 1003.7693083000001,
+    "expected": 1003.7693083000001,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 393.75,
+    "expected": 393.75,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 52.50000000000001,
+    "expected": 52.50000000000001,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 185157.35859745106,
+    "expected": 185157.35859745106,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 142428.73738265465,
+    "expected": 142428.7373826547,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 48887.60904772304,
+    "expected": 48887.60904772304,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 37605.85311363311,
+    "expected": 37605.85311363312,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12401.172680932079,
+    "expected": 12401.172680932079,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9539.363600716984,
+    "expected": 9539.363600716984,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 16582.027206673727,
+    "expected": 16582.027206673727,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 12755.405543595176,
+    "expected": 12755.405543595183,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 81606.15966733264,
+    "expected": 81606.15966733264,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 62773.96897487126,
+    "expected": 62773.968974871284,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 0.0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 61.769426855448415,
+    "expected": 61.769426855448415,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 38.0,
+    "expected": 38.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 1465.7189496454896,
+    "expected": 1465.7189496454896,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 8,
+    "expected": 8,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 2,
+    "expected": 2,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 50.0,
+    "expected": 50.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 478.55236216252405,
+    "expected": 478.55236216252405,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 3,
+    "expected": 3,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 169.80890270283112,
+    "expected": 169.80890270283112,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 168.13241516634864,
+    "expected": 168.13241516634864,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 161.6915174786815,
+    "expected": 161.69151747868148,
+    "passed": true
+  },
+  {
+    "name": "3_gas_ideal_state",
+    "actual": 50.55086683573774,
+    "expected": 50.55086683573774,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7312577786362287,
+    "expected": 1.7312577786362287,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 5233.5,
+    "expected": 5233.5,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 9553.41394140463,
+    "expected": 9553.41394140463,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 7348.779954926638,
+    "expected": 7348.779954926642,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 80.61115025520674,
+    "expected": 80.61115025520674,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.0202106107633151,
+    "expected": 0.0202106107633151,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 137.45827824356448,
+    "expected": 137.45827824356448,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.03397556452806755,
+    "expected": 0.03397556452806755,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693324,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.903309679491618,
+    "expected": 1.903309679491618,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 86.25219662561335,
+    "expected": 86.25219662561335,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.9745684993789268,
+    "expected": 1.9745684993789268,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 149.67658097349533,
+    "expected": 149.67658097349533,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 97253.0156368355,
+    "expected": 97253.0156368355,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 74810.012028335,
+    "expected": 74810.01202833501,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 75824.9555223919,
+    "expected": 75824.9555223919,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 58326.888863378386,
+    "expected": 58326.88886337839,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "GEX_pressure_sum",
+    "actual": 1098.9980756450514,
+    "expected": 1098.9980756450514,
+    "passed": true
+  },
+  {
+    "name": "GEX_Colebrook_or_laminar",
+    "actual": 445.66474231171793,
+    "expected": 445.6647423117178,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 79731.3218805334,
+    "expected": 79731.3218805334,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 38.656626779560675,
+    "expected": 38.656626779560675,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.009691885487193882,
+    "expected": 0.009691885487193882,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 71.1994760330654,
+    "expected": 71.1994760330654,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.017437336640949944,
+    "expected": 0.017437336640949944,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 7.916833266693319,
+    "expected": 7.916833266693323,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.5038699559386208,
+    "expected": 1.5038699559386208,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 41.36175905340414,
+    "expected": 41.36175905340414,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.7137941986059213,
+    "expected": 1.7137941986059213,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 77.66393235255144,
+    "expected": 77.66393235255144,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 85081.76467787294,
+    "expected": 85081.76467787294,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 65447.511290671486,
+    "expected": 65447.511290671486,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 87413.1280847925,
+    "expected": 87413.1280847925,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 61331.78606194878,
+    "expected": 61331.78606194878,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_air_energy",
+    "actual": 331.627001251322,
+    "expected": 331.627001251322,
+    "passed": true
+  },
+  {
+    "name": "summer_c1_condensate_mass",
+    "actual": 0.08314462974013903,
+    "expected": 0.08314462974013903,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_air_energy",
+    "actual": 610.8052019685094,
+    "expected": 610.8052019685094,
+    "passed": true
+  },
+  {
+    "name": "summer_c2_condensate_mass",
+    "actual": 0.14959121221372512,
+    "expected": 0.14959121221372512,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c1_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_air_energy",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "winter_c2_condensate_mass",
+    "actual": 0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "room_moisture_kg_h",
+    "actual": 67.91683326669329,
+    "expected": 67.91683326669332,
+    "passed": true
+  },
+  {
+    "name": "printed_room_sensible",
+    "actual": 782.918,
+    "expected": 782.917553,
+    "passed": true
+  },
+  {
+    "name": "MCHW_area_flow_velocity",
+    "actual": 1.9463730664964158,
+    "expected": 1.9463730664964158,
+    "passed": true
+  },
+  {
+    "name": "MCHW_water_capacity",
+    "actual": 354.8337572126883,
+    "expected": 354.8337572126883,
+    "passed": true
+  },
+  {
+    "name": "CHW_area_flow_velocity",
+    "actual": 1.6823632417843324,
+    "expected": 1.6823632417843324,
+    "passed": true
+  },
+  {
+    "name": "CHW_water_capacity",
+    "actual": 666.26240148507,
+    "expected": 666.26240148507,
+    "passed": true
+  },
+  {
+    "name": "DCCW_area_flow_velocity",
+    "actual": 1.5625752520089737,
+    "expected": 1.5625752520089737,
+    "passed": true
+  },
+  {
+    "name": "DCCW_water_capacity",
+    "actual": 861.2093083000002,
+    "expected": 861.2093083000002,
+    "passed": true
+  },
+  {
+    "name": "PCW_area_flow_velocity",
+    "actual": 1.321498557663336,
+    "expected": 1.321498557663336,
+    "passed": true
+  },
+  {
+    "name": "PCW_water_capacity",
+    "actual": 523.35,
+    "expected": 523.35,
+    "passed": true
+  },
+  {
+    "name": "HW_area_flow_velocity",
+    "actual": 1.268563619234664,
+    "expected": 1.268563619234664,
+    "passed": true
+  },
+  {
+    "name": "HW_water_capacity",
+    "actual": 69.78,
+    "expected": 69.78,
+    "passed": true
+  },
+  {
+    "name": "1_gas_ideal_state",
+    "actual": 84.25144472622958,
+    "expected": 84.25144472622956,
+    "passed": true
+  },
+  {
+    "name": "2_gas_ideal_state",
+    "actual": 134.80231156196731,
+    "expected": 134.80231156196731,
+    "passed": true
+  },
+  {
+    "name": "4_gas_ideal_state",
+    "actual": 10133.333333337334,
+    "expected": 10133.333333337336,
+    "passed": true
+  },
+  {
+    "name": "MCHW_pressure_sum",
+    "actual": 43016.405965430225,
+    "expected": 43016.405965430225,
+    "passed": true
+  },
+  {
+    "name": "MCHW_Colebrook_or_laminar",
+    "actual": 33089.54305033094,
+    "expected": 33089.54305033096,
+    "passed": true
+  },
+  {
+    "name": "CHW_pressure_sum",
+    "actual": 20321.405345045438,
+    "expected": 20321.405345045438,
+    "passed": true
+  },
+  {
+    "name": "CHW_Colebrook_or_laminar",
+    "actual": 15631.850265419567,
+    "expected": 15631.850265419569,
+    "passed": true
+  },
+  {
+    "name": "DCCW_pressure_sum",
+    "actual": 12629.378390626356,
+    "expected": 12629.378390626356,
+    "passed": true
+  },
+  {
+    "name": "DCCW_Colebrook_or_laminar",
+    "actual": 9714.906454327966,
+    "expected": 9714.906454327971,
+    "passed": true
+  },
+  {
+    "name": "PCW_pressure_sum",
+    "actual": 12878.454575871638,
+    "expected": 12878.454575871638,
+    "passed": true
+  },
+  {
+    "name": "PCW_Colebrook_or_laminar",
+    "actual": 9906.50351990126,
+    "expected": 9906.503519901265,
+    "passed": true
+  },
+  {
+    "name": "HW_pressure_sum",
+    "actual": 61829.052170171155,
+    "expected": 61829.052170171155,
+    "passed": true
+  },
+  {
+    "name": "HW_Colebrook_or_laminar",
+    "actual": 47560.80936167012,
+    "expected": 47560.809361670115,
+    "passed": true
+  },
+  {
+    "name": "UP_current",
+    "actual": 277.0566307256718,
+    "expected": 277.0566307256718,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "UP_rank_size",
+    "actual": 250.0,
+    "expected": 250.0,
+    "passed": true
+  },
+  {
+    "name": "UP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_current",
+    "actual": 98.31041735427065,
+    "expected": 98.31041735427065,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_runs",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "NP_rank_size",
+    "actual": 100.0,
+    "expected": 100.0,
+    "passed": true
+  },
+  {
+    "name": "NP_protection_inequalities",
+    "actual": 1.0,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.2088500257703,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786396,
+    "passed": true
+  },
+  {
+    "name": "summer_wetfilm_enthalpy",
+    "actual": 61.89051630531624,
+    "expected": 61.89051630531625,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 659.6401679386319,
+    "expected": 659.640167938632,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 472.38477454914727,
+    "expected": 472.38477454914727,
+    "passed": true
+  },
+  {
+    "name": "winter_wetfilm_enthalpy",
+    "actual": 40.60389732518888,
+    "expected": 40.60389732518888,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1078.9175910258596,
+    "expected": -1078.9175910258598,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1159.4012349103962,
+    "expected": -1159.4012349103962,
+    "passed": true
+  },
+  {
+    "name": "summer_wetfilm_enthalpy",
+    "actual": 61.89051630531624,
+    "expected": 61.89051630531625,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 620.1782125160549,
+    "expected": 620.1782125160548,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 415.88518155443916,
+    "expected": 415.88518155443916,
+    "passed": true
+  },
+  {
+    "name": "winter_wetfilm_enthalpy",
+    "actual": 36.55314745992815,
+    "expected": 36.55314745992815,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.2088500257703,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786396,
+    "passed": true
+  },
+  {
+    "name": "summer_wetfilm_enthalpy",
+    "actual": 61.89051630531624,
+    "expected": 61.89051630531625,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 591.3911633310511,
+    "expected": 591.3911633310511,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 375.72696604719175,
+    "expected": 375.72696604719175,
+    "passed": true
+  },
+  {
+    "name": "winter_wetfilm_enthalpy",
+    "actual": 33.65603664263414,
+    "expected": 33.65603664263414,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.2088500257703,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786396,
+    "passed": true
+  },
+  {
+    "name": "summer_wetfilm_enthalpy",
+    "actual": 61.89051630531624,
+    "expected": 61.89051630531625,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 659.6401679386319,
+    "expected": 659.640167938632,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 472.38477454914727,
+    "expected": 472.38477454914727,
+    "passed": true
+  },
+  {
+    "name": "winter_wetfilm_enthalpy",
+    "actual": 40.60389732518888,
+    "expected": 40.60389732518888,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.20885002577,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786398,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 659.6401679386319,
+    "expected": 659.640167938632,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 472.38477454914727,
+    "expected": 472.38477454914715,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.2088500257703,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786396,
+    "passed": true
+  },
+  {
+    "name": "summer_wetfilm_enthalpy",
+    "actual": 61.89051630531624,
+    "expected": 61.89051630531625,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 659.6401679386319,
+    "expected": 659.640167938632,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 472.38477454914727,
+    "expected": 472.3847745491472,
+    "passed": true
+  },
+  {
+    "name": "winter_wetfilm_enthalpy",
+    "actual": 30.04336412626627,
+    "expected": 30.04336412626627,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.2088500257703,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786396,
+    "passed": true
+  },
+  {
+    "name": "summer_wetfilm_enthalpy",
+    "actual": 61.89051630531624,
+    "expected": 61.89051630531625,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 659.6401679386319,
+    "expected": 659.640167938632,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 472.38477454914727,
+    "expected": 472.38477454914727,
+    "passed": true
+  },
+  {
+    "name": "winter_wetfilm_enthalpy",
+    "actual": 40.60389732518888,
+    "expected": 40.60389732518888,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.2088500257703,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786396,
+    "passed": true
+  },
+  {
+    "name": "summer_wetfilm_enthalpy",
+    "actual": 61.89051630531624,
+    "expected": 61.89051630531625,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 659.6401679386319,
+    "expected": 659.640167938632,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 472.38477454914727,
+    "expected": 472.38477454914727,
+    "passed": true
+  },
+  {
+    "name": "winter_wetfilm_enthalpy",
+    "actual": 40.60389732518888,
+    "expected": 40.60389732518888,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.2088500257703,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786396,
+    "passed": true
+  },
+  {
+    "name": "summer_wetfilm_enthalpy",
+    "actual": 61.89051630531624,
+    "expected": 61.89051630531625,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 659.6401679386319,
+    "expected": 659.640167938632,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 472.38477454914727,
+    "expected": 472.38477454914727,
+    "passed": true
+  },
+  {
+    "name": "winter_wetfilm_enthalpy",
+    "actual": 40.60389732518888,
+    "expected": 40.60389732518888,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.2088500257703,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786396,
+    "passed": true
+  },
+  {
+    "name": "summer_wetfilm_enthalpy",
+    "actual": 61.89051630531624,
+    "expected": 61.89051630531625,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 659.6401679386319,
+    "expected": 659.640167938632,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 472.38477454914727,
+    "expected": 472.38477454914727,
+    "passed": true
+  },
+  {
+    "name": "winter_wetfilm_enthalpy",
+    "actual": 40.60389732518888,
+    "expected": 40.60389732518888,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.2088500257703,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786396,
+    "passed": true
+  },
+  {
+    "name": "summer_wetfilm_enthalpy",
+    "actual": 61.89051630531624,
+    "expected": 61.89051630531625,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 659.6401679386319,
+    "expected": 659.640167938632,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 472.38477454914727,
+    "expected": 472.38477454914727,
+    "passed": true
+  },
+  {
+    "name": "winter_wetfilm_enthalpy",
+    "actual": 40.60389732518888,
+    "expected": 40.60389732518888,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.20885002577,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786398,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 326.0945273491962,
+    "expected": 326.0945273491962,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 0.0,
+    "expected": 0.0,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.2088500257705,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786396,
+    "passed": true
+  },
+  {
+    "name": "summer_wetfilm_enthalpy",
+    "actual": 61.89051630531624,
+    "expected": 61.89051630531625,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 659.6401679386319,
+    "expected": 659.6401679386319,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 472.38477454914727,
+    "expected": 472.38477454914727,
+    "passed": true
+  },
+  {
+    "name": "winter_wetfilm_enthalpy",
+    "actual": 40.60389732518888,
+    "expected": 40.60389732518888,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.2088500257703,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786396,
+    "passed": true
+  },
+  {
+    "name": "summer_wetfilm_enthalpy",
+    "actual": 61.89051630531624,
+    "expected": 61.89051630531625,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 1018.5986506578939,
+    "expected": 1018.5986506578939,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 575.6803202630255,
+    "expected": 575.6803202630255,
+    "passed": true
+  },
+  {
+    "name": "winter_wetfilm_enthalpy",
+    "actual": 41.71323449166786,
+    "expected": 41.71323449166786,
+    "passed": true
+  },
+  {
+    "name": "summer_energy",
+    "actual": -1037.2088500257703,
+    "expected": -1037.2088500257703,
+    "passed": true
+  },
+  {
+    "name": "summer_moisture",
+    "actual": -1100.8185746786398,
+    "expected": -1100.8185746786396,
+    "passed": true
+  },
+  {
+    "name": "summer_wetfilm_enthalpy",
+    "actual": 61.89051630531624,
+    "expected": 61.89051630531625,
+    "passed": true
+  },
+  {
+    "name": "winter_energy",
+    "actual": 659.6401679386319,
+    "expected": 659.640167938632,
+    "passed": true
+  },
+  {
+    "name": "winter_moisture",
+    "actual": 472.38477454914727,
+    "expected": 472.38477454914727,
+    "passed": true
+  },
+  {
+    "name": "winter_wetfilm_enthalpy",
+    "actual": 40.60389732518888,
+    "expected": 40.60389732518888,
+    "passed": true
+  }
+]

@@ -1,0 +1,178 @@
+[
+  {
+    "name": "01_default_valid",
+    "passed": true
+  },
+  {
+    "name": "02_inactive_blank_ignored",
+    "passed": true
+  },
+  {
+    "name": "03_reactivated_draft_located",
+    "passed": true
+  },
+  {
+    "name": "04_closed_adopts_zero_keeps_draft",
+    "passed": true
+  },
+  {
+    "name": "05_reopen_restores_pressure",
+    "passed": true
+  },
+  {
+    "name": "06_kg_h_equivalent_0",
+    "passed": true
+  },
+  {
+    "name": "06_kg_h_equivalent_1",
+    "passed": true
+  },
+  {
+    "name": "06_kg_h_equivalent_2",
+    "passed": true
+  },
+  {
+    "name": "07_latent_roundtrip",
+    "passed": true
+  },
+  {
+    "name": "08_auto_spec_resets_provenance",
+    "passed": true
+  },
+  {
+    "name": "09_custom_spec_and_source_restored",
+    "passed": true
+  },
+  {
+    "name": "10_source_editor_rejects_stale_value",
+    "passed": true
+  },
+  {
+    "name": "11_source_captures_current_value",
+    "passed": true
+  },
+  {
+    "name": "12_AB_frozen_and_named",
+    "passed": true
+  },
+  {
+    "name": "13_linked_basis_fixed",
+    "passed": true
+  },
+  {
+    "name": "14_seasonal_override_interlock",
+    "passed": true
+  },
+  {
+    "name": "15_electrode_requirements_in_basic",
+    "passed": true
+  },
+  {
+    "name": "16_inactive_steam_draft_valid",
+    "passed": true
+  },
+  {
+    "name": "17_control_note_tracks_fans",
+    "passed": true
+  },
+  {
+    "name": "18_receipt_created",
+    "passed": true
+  },
+  {
+    "name": "19_changed_source_flagged_in_report",
+    "passed": true
+  },
+  {
+    "name": "20_refreshed_source_applied",
+    "passed": true
+  },
+  {
+    "name": "21_rename_preserves_boundary",
+    "passed": true
+  },
+  {
+    "name": "22_save_all",
+    "passed": true
+  },
+  {
+    "name": "23_saved_complete_graph",
+    "passed": true
+  },
+  {
+    "name": "24_new_clears_owned_windows_and_AB",
+    "passed": true
+  },
+  {
+    "name": "25_load_restores_identity_and_all_drafts",
+    "passed": true
+  },
+  {
+    "name": "26_reopen_saved_AHU_draft",
+    "passed": true
+  },
+  {
+    "name": "27_quick_outside_main_range_computable",
+    "passed": true
+  },
+  {
+    "name": "28_preflight_rolls_back",
+    "passed": true
+  },
+  {
+    "name": "29_named_fields_and_equivalent_mode",
+    "passed": true
+  },
+  {
+    "name": "30_quick_target_choice",
+    "passed": true
+  },
+  {
+    "name": "31_tool_draft_retained",
+    "passed": true
+  },
+  {
+    "name": "32_water_scope_and_full_properties",
+    "passed": true
+  },
+  {
+    "name": "33_water_target_and_scope",
+    "passed": true
+  },
+  {
+    "name": "34_duct_preview_scope_and_margin",
+    "passed": true
+  },
+  {
+    "name": "35_duct_dimensions_visible",
+    "passed": true
+  },
+  {
+    "name": "36_pressure_adopted_id_visible",
+    "passed": true
+  },
+  {
+    "name": "37_error_label",
+    "passed": true
+  },
+  {
+    "name": "38_hidden_modified_assumptions",
+    "passed": true
+  },
+  {
+    "name": "39_plain_boolean_control",
+    "passed": true
+  },
+  {
+    "name": "40_summer_summary_and_design_DCC",
+    "passed": true
+  },
+  {
+    "name": "41_compact_actions_visible",
+    "passed": true
+  },
+  {
+    "name": "42_no_unexpected_modals",
+    "passed": true
+  }
+]

@@ -69,6 +69,9 @@ macOS 懶人包包含 `Verify_on_Mac.command`，可在 Mac 上產生本機驗收
 
 ## 原始碼與授權進度
 
-完整原始碼與測試紀錄已隨懶人包提供，請解壓縮其中的原始碼 ZIP 查閱。
-GitHub 的 Code 原始碼上架與專案 LICENSE 尚待補齊；在明確授權完成前，不應把此專案視為已授予開源授權。
+Windows 原始碼位於 [windows](windows/)；macOS 原始碼位於 [macos](macos/)。
+各平台的啟動檔為 `Facility_Studio_V5_5.py`，請保留同層的 `facility_studio` 資料夾與資源檔。
+測試與驗證紀錄分別保留於各平台的 `tests/` 與 `evidence/`；Windows 安裝器位於 `windows/installer/`，macOS 封裝腳本位於 `macos/macos/`。
+
+專案 LICENSE 尚未選定；在明確授權完成前，不應把此專案視為已授予開源授權。
 第三方執行環境及套件保留各自的原有授權文件。

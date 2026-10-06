@@ -1,0 +1,284 @@
+{
+  "version": "5.5.4",
+  "checks": [
+    {
+      "name": "01_keypad_binding_before_class",
+      "passed": true
+    },
+    {
+      "name": "02_numlock_decimal_inserts",
+      "passed": true
+    },
+    {
+      "name": "03_decimal_live_calculation",
+      "passed": true
+    },
+    {
+      "name": "04_selection_replaced_once",
+      "passed": true
+    },
+    {
+      "name": "05_incomplete_decimal_clears_results",
+      "passed": true
+    },
+    {
+      "name": "06_regular_delete_unchanged",
+      "passed": true
+    },
+    {
+      "name": "07_disabled_input_no_change",
+      "passed": true
+    },
+    {
+      "name": "08_main_period_unchanged",
+      "passed": true
+    },
+    {
+      "name": "09_new_child_entry_uses_binding",
+      "passed": true
+    },
+    {
+      "name": "10_delta_help",
+      "passed": true
+    },
+    {
+      "name": "11_delta_correct",
+      "passed": true
+    },
+    {
+      "name": "12_valve_help",
+      "passed": true
+    },
+    {
+      "name": "13_valve_units_updated",
+      "passed": true
+    },
+    {
+      "name": "14_volume_explicit_label",
+      "passed": true
+    },
+    {
+      "name": "15_volume_hint",
+      "passed": true
+    },
+    {
+      "name": "16_height_same_room",
+      "passed": true
+    },
+    {
+      "name": "17_volume_to_floor_area",
+      "passed": true
+    },
+    {
+      "name": "18_published_geometry",
+      "passed": true
+    },
+    {
+      "name": "19_export_geometry",
+      "passed": true
+    },
+    {
+      "name": "20_geometry_preserved_面積 m²",
+      "passed": true
+    },
+    {
+      "name": "21_height_interlock_面積 m²",
+      "passed": true
+    },
+    {
+      "name": "20_geometry_preserved_面積 坪",
+      "passed": true
+    },
+    {
+      "name": "21_height_interlock_面積 坪",
+      "passed": true
+    },
+    {
+      "name": "20_geometry_preserved_長×寬",
+      "passed": true
+    },
+    {
+      "name": "21_height_interlock_長×寬",
+      "passed": true
+    },
+    {
+      "name": "20_geometry_preserved_體積 m³",
+      "passed": true
+    },
+    {
+      "name": "21_height_interlock_體積 m³",
+      "passed": true
+    },
+    {
+      "name": "20_geometry_preserved_長×寬",
+      "passed": true
+    },
+    {
+      "name": "21_height_interlock_長×寬",
+      "passed": true
+    },
+    {
+      "name": "20_geometry_preserved_面積 m²",
+      "passed": true
+    },
+    {
+      "name": "21_height_interlock_面積 m²",
+      "passed": true
+    },
+    {
+      "name": "22_changed_height_changes_area",
+      "passed": true
+    },
+    {
+      "name": "23_invalid_geometry_switch_rollback",
+      "passed": true
+    },
+    {
+      "name": "24_chart_has_point",
+      "passed": true
+    },
+    {
+      "name": "25_chart_tied_to_state",
+      "passed": true
+    },
+    {
+      "name": "26_curves_count",
+      "passed": true
+    },
+    {
+      "name": "27_chart_point_matches_gkg",
+      "passed": true
+    },
+    {
+      "name": "28_input_clears_old_point",
+      "passed": true
+    },
+    {
+      "name": "29_live_update_without_calculate",
+      "passed": true
+    },
+    {
+      "name": "30_live_label_matches",
+      "passed": true
+    },
+    {
+      "name": "31_invalid_chart_and_export_cleared",
+      "passed": true
+    },
+    {
+      "name": "32_saturated_point_valid",
+      "passed": true
+    },
+    {
+      "name": "33_pressure_updates_chart_title",
+      "passed": true
+    },
+    {
+      "name": "34_dry_air_point_at_axis",
+      "passed": true
+    },
+    {
+      "name": "35_single_equipment_window",
+      "passed": true
+    },
+    {
+      "name": "36_export_excel_template",
+      "passed": true
+    },
+    {
+      "name": "37_export_csv_templates",
+      "passed": true
+    },
+    {
+      "name": "38_start_async_import",
+      "passed": true
+    },
+    {
+      "name": "39_no_second_concurrent_import",
+      "passed": true
+    },
+    {
+      "name": "40_import_disables_old_export",
+      "passed": true
+    },
+    {
+      "name": "41_seven_groups_displayed",
+      "passed": true
+    },
+    {
+      "name": "42_report_enabled_on_success",
+      "passed": true
+    },
+    {
+      "name": "43_analysis_conditions_visible",
+      "passed": true
+    },
+    {
+      "name": "44_export_all_report",
+      "passed": true
+    },
+    {
+      "name": "45_export_all_json",
+      "passed": true
+    },
+    {
+      "name": "46_bad_import_clears_previous_result",
+      "passed": true
+    },
+    {
+      "name": "47_error_locates_no_enabled_row",
+      "passed": true
+    },
+    {
+      "name": "48_invalid_export_blocked",
+      "passed": true
+    },
+    {
+      "name": "49_retry_available",
+      "passed": true
+    },
+    {
+      "name": "50_retry_result_two_groups",
+      "passed": true
+    },
+    {
+      "name": "51_selection_filters_supply_rows",
+      "passed": true
+    },
+    {
+      "name": "52_selection_keeps_global_total_label",
+      "passed": true
+    },
+    {
+      "name": "53_import_footer_visible",
+      "passed": true
+    },
+    {
+      "name": "54_import_detail_scroll",
+      "passed": true
+    },
+    {
+      "name": "54a_tree_not_clipped_by_pane",
+      "passed": true
+    },
+    {
+      "name": "55_reopen_after_close",
+      "passed": true
+    },
+    {
+      "name": "56_compact_chart_accessible",
+      "passed": true
+    },
+    {
+      "name": "57_compact_footer_visible",
+      "passed": true
+    },
+    {
+      "name": "58_no_callback_errors",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "platform": "real Tk/Xvfb",
+  "windows_hardware_tested": false
+}

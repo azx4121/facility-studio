@@ -1,0 +1,126 @@
+[
+  {
+    "name": "A_preset_is_applied",
+    "passed": true
+  },
+  {
+    "name": "A_preset_origin",
+    "passed": true
+  },
+  {
+    "name": "A_undo_complete_snapshot",
+    "passed": true
+  },
+  {
+    "name": "B_preset_is_applied",
+    "passed": true
+  },
+  {
+    "name": "B_preset_origin",
+    "passed": true
+  },
+  {
+    "name": "B_undo_complete_snapshot",
+    "passed": true
+  },
+  {
+    "name": "cp950_workspace_opens",
+    "passed": true
+  },
+  {
+    "name": "cp950_Chinese_favorite_read",
+    "passed": true
+  },
+  {
+    "name": "cp950_history_roundtrip",
+    "passed": true
+  },
+  {
+    "name": "cp1252_workspace_opens",
+    "passed": true
+  },
+  {
+    "name": "cp1252_Chinese_favorite_read",
+    "passed": true
+  },
+  {
+    "name": "cp1252_history_roundtrip",
+    "passed": true
+  },
+  {
+    "name": "legacy_v1_migrates",
+    "passed": true
+  },
+  {
+    "name": "legacy_v1_unknown_pump",
+    "passed": true
+  },
+  {
+    "name": "legacy_v2_migrates",
+    "passed": true
+  },
+  {
+    "name": "legacy_v2_unknown_pump",
+    "passed": true
+  },
+  {
+    "name": "legacy_v3_migrates",
+    "passed": true
+  },
+  {
+    "name": "legacy_v3_unknown_pump",
+    "passed": true
+  },
+  {
+    "name": "legacy_v4_migrates",
+    "passed": true
+  },
+  {
+    "name": "legacy_v4_unknown_pump",
+    "passed": true
+  },
+  {
+    "name": "bad_recovery_structured_error",
+    "passed": true
+  },
+  {
+    "name": "main_model_valid",
+    "passed": true
+  },
+  {
+    "name": "seasonal_preset_both_targets",
+    "passed": true
+  },
+  {
+    "name": "seasonal_preset_retains_flows",
+    "passed": true
+  },
+  {
+    "name": "preset_clears_link_claim",
+    "passed": true
+  },
+  {
+    "name": "manual_target_clears_link",
+    "passed": true
+  },
+  {
+    "name": "rating_change_keeps_boundary_link",
+    "passed": true
+  },
+  {
+    "name": "changed_main_flags_stale_link",
+    "passed": true
+  },
+  {
+    "name": "cached_report_includes_staleness",
+    "passed": true
+  },
+  {
+    "name": "custom_target_report_clear",
+    "passed": true
+  },
+  {
+    "name": "no_unexpected_dialogs",
+    "passed": true
+  }
+]
