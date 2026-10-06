@@ -27,12 +27,7 @@ class SimplePage(ScrollPage):
         }
         self.previous = {key: var.get() for key, var in self.variables.items()}
         self.widgets, self.rows, self.labels, self.hints = {}, {}, {}, {}
-        self.canvas.bind(
-            "<Configure>",
-            lambda event: self.canvas.itemconfigure(
-                self.win, width=max(520, event.width)
-            ),
-        )
+        self.minimum_body_width = 520
         self.horizontal = self.grid_slaves(row=1, column=0)[0]
         self.canvas.configure(xscrollcommand=self.horizontal_scroll)
         self.advanced = tk.BooleanVar(self, False)
@@ -523,6 +518,10 @@ class SimpleToolsApp:
         compact = self.root.winfo_width() < 1000
         width = max(430, min(710, self.root.winfo_width() - 235))
         for page in self.pages.values():
+            layout = (compact, width)
+            if getattr(page, "_last_layout", None) == layout:
+                continue
+            page._last_layout = layout
             for spec in TOOLS[page.tool]["fields"]:
                 key = spec["key"]
                 stacked = compact or page.tool == "air"

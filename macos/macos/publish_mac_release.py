@@ -43,11 +43,15 @@ def main():
     try:
         with urllib.request.urlopen(existing, timeout=30) as response:
             release = json.load(response)
-        print("Existing release retained: " + release["html_url"])
-        return
+        if not release["draft"]:
+            print("Existing published release retained: " + release["html_url"])
+            return
+        if release["target_commitish"] != commit:
+            raise ValueError("A draft from another commit exists; it has been retained.")
     except urllib.error.HTTPError as error:
         if error.code != 404:
             raise
+        release = None
     body = (
         "macOS 專用修訂 mac.2，保留 V5.5.4 功能與 FY 圖示。\n\n"
         "修正 Tcl/Tk 資源封印不符合 Apple 原生檢查，以及第一次字型快取建立時的無時限外部查詢。"
@@ -57,22 +61,26 @@ def main():
         "本版仍是 ad-hoc 簽章，沒有 Developer ID／Apple 公證；使用者 macOS 27 Beta 與企業管理政策仍須另行確認。"
         "新修訂採公司內部工程使用附加許可；完整條款隨包提供。原 MIT 版本權利、v5.5.4-beta.1 與 Windows 舊包保持原樣。"
     )
-    data = json.dumps(dict(tag_name=TAG,target_commitish=commit,name="Facility Studio V5.5.4｜macOS 修正版 mac.2",
-                           body=body,draft=True,prerelease=True)).encode()
-    request = urllib.request.Request("https://api.github.com/repos/" + REPOSITORY + "/releases",
-                                     headers={**headers,"Content-Type":"application/json"},data=data,method="POST")
-    with urllib.request.urlopen(request, timeout=30) as response:
-        release = json.load(response)
+    if release is None:
+        data = json.dumps(dict(tag_name=TAG,target_commitish=commit,name="Facility Studio V5.5.4｜macOS 修正版 mac.2",
+                               body=body,draft=True,prerelease=True)).encode()
+        request = urllib.request.Request("https://api.github.com/repos/" + REPOSITORY + "/releases",
+                                         headers={**headers,"Content-Type":"application/json"},data=data,method="POST")
+        with urllib.request.urlopen(request, timeout=30) as response:
+            release = json.load(response)
     upload = release["upload_url"].split("{",1)[0]
     if urllib.parse.urlparse(upload).hostname != "uploads.github.com":
         raise ValueError("Unexpected GitHub upload host.")
+    uploaded = {asset["name"]: asset for asset in release.get("assets", [])}
     for filename in filenames:
         path = folder / filename
-        url = upload + "?" + urllib.parse.urlencode({"name":filename})
-        request = urllib.request.Request(url,headers={**headers,"Content-Type":"application/octet-stream"},
-                                         data=path.read_bytes(),method="POST")
-        with urllib.request.urlopen(request,timeout=180) as response:
-            asset=json.load(response)
+        asset = uploaded.get(filename)
+        if asset is None:
+            url = upload + "?" + urllib.parse.urlencode({"name":filename})
+            request = urllib.request.Request(url,headers={**headers,"Content-Type":"application/octet-stream"},
+                                             data=path.read_bytes(),method="POST")
+            with urllib.request.urlopen(request,timeout=180) as response:
+                asset=json.load(response)
         if asset["size"] != path.stat().st_size:
             raise ValueError("Uploaded asset size mismatch: " + filename)
         if asset.get("digest") != "sha256:" + digests[filename]:

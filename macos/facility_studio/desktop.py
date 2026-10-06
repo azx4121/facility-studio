@@ -470,10 +470,12 @@ class DesktopApp(SessionController, MainView):
             foot, text="啟動檢核中…", wraplength=470, style="Muted.TLabel"
         )
         self.status.grid(row=0, column=0, sticky="w")
-        foot.bind(
-            "<Configure>",
-            lambda e: self.status.configure(wraplength=max(120, e.width - 340)),
-        )
+        def wrap_status(event):
+            width = max(120, event.width - 340)
+            if str(self.status.cget("wraplength")) != str(width):
+                self.status.configure(wraplength=width)
+
+        foot.bind("<Configure>", wrap_status)
         ttk.Button(foot, text="定位問題", command=self.focus_issue, width=9).grid(
             row=0, column=1, padx=4
         )
