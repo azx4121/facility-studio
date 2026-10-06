@@ -1,0 +1,153 @@
+{
+  "environment": "Linux real Tk/Xvfb; macOS decisions simulated",
+  "checks": [
+    {
+      "name": "Mac data belongs in Application Support",
+      "passed": true
+    },
+    {
+      "name": "Windows user data preserved",
+      "passed": true
+    },
+    {
+      "name": "Linux data location preserved",
+      "passed": true
+    },
+    {
+      "name": "Isolated recovery test directory honored",
+      "passed": true
+    },
+    {
+      "name": "Mac Chinese font selected",
+      "passed": true
+    },
+    {
+      "name": "Mac Chinese fallback selected",
+      "passed": true
+    },
+    {
+      "name": "Windows font preserved",
+      "passed": true
+    },
+    {
+      "name": "No installed font gives Tk default",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 1",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 2",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 3",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 4",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 5",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 6",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 7",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 8",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 9",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 10",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 11",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 12",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 13",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 14",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 15",
+      "passed": true
+    },
+    {
+      "name": "Wheel condition 16",
+      "passed": true
+    },
+    {
+      "name": "Select matching wheels for arm64",
+      "passed": true
+    },
+    {
+      "name": "Paths remain relative for arm64",
+      "passed": true
+    },
+    {
+      "name": "Select matching wheels for x86_64",
+      "passed": true
+    },
+    {
+      "name": "Paths remain relative for x86_64",
+      "passed": true
+    },
+    {
+      "name": "Unsupported CPU rejected",
+      "passed": true
+    },
+    {
+      "name": "Partial app extraction detected",
+      "passed": true
+    },
+    {
+      "name": "Zero delta leaves real page stationary",
+      "passed": true
+    },
+    {
+      "name": "Mac calculate shortcut registered",
+      "passed": true
+    },
+    {
+      "name": "Mac small trackpad event scrolls real page",
+      "passed": true
+    },
+    {
+      "name": "Combo wheel does not scroll its containing form",
+      "passed": true
+    },
+    {
+      "name": "Full workbench still calculates",
+      "passed": true
+    },
+    {
+      "name": "Full Mac save shortcut",
+      "passed": true
+    },
+    {
+      "name": "Full Mac open shortcut",
+      "passed": true
+    }
+  ]
+}

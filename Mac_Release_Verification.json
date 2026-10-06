@@ -1,0 +1,158 @@
+{
+  "version": "5.5.4-mac.1",
+  "release_date": "2026-10-06",
+  "recorded_at_utc": "2026-10-06T01:57:34.306466+00:00",
+  "delivery_status": "offline universal2 App packaged; native Mac acceptance pending",
+  "target_macos": "11.0 and later",
+  "target_architectures": [
+    "arm64",
+    "x86_64"
+  ],
+  "bundled_python": "3.13.15",
+  "administrator_required": false,
+  "runtime_downloads_required": false,
+  "preserved_features": [
+    "electrical",
+    "duct",
+    "gas",
+    "lighting",
+    "water",
+    "air and psychrometric chart",
+    "units",
+    "equipment Excel/CSV import: electrical/PCW/CDA/N2/EXHAUST/DI/PV",
+    "full engineering workbench and multistage AHU",
+    "project save/recovery/export",
+    "FY icon"
+  ],
+  "executed_suites": [
+    {
+      "script": "tests/regression.py",
+      "evidence": "Numeric_Checks.json",
+      "scenarios": 52,
+      "checks": 1247,
+      "passed": true,
+      "execution": "Linux Python; GUI suites in real Tk/Xvfb"
+    },
+    {
+      "script": "tests/v55_features.py",
+      "evidence": "V55_Feature_Checks.json",
+      "scenarios": 20,
+      "checks": 93,
+      "passed": true,
+      "execution": "Linux Python; GUI suites in real Tk/Xvfb"
+    },
+    {
+      "script": "tests/v552_core.py",
+      "evidence": "V552_Core_Checks.json",
+      "scenarios": null,
+      "checks": 305,
+      "passed": true,
+      "execution": "Linux Python; GUI suites in real Tk/Xvfb"
+    },
+    {
+      "script": "tests/simple_features.py",
+      "evidence": "Simple_Numeric_Checks.json",
+      "scenarios": 42,
+      "checks": 375,
+      "passed": true,
+      "execution": "Linux Python; GUI suites in real Tk/Xvfb"
+    },
+    {
+      "script": "tests/v554_features.py",
+      "evidence": "V554_New_Feature_Checks.json",
+      "scenarios": 49,
+      "checks": 646,
+      "passed": true,
+      "execution": "Linux Python; GUI suites in real Tk/Xvfb"
+    },
+    {
+      "script": "tests/gui_features.py",
+      "evidence": "GUI_V55_Checks.json",
+      "scenarios": null,
+      "checks": 42,
+      "passed": true,
+      "execution": "Linux Python; GUI suites in real Tk/Xvfb"
+    },
+    {
+      "script": "tests/v551_fixes.py",
+      "evidence": "V551_Fix_Checks.json",
+      "scenarios": null,
+      "checks": 31,
+      "passed": true,
+      "execution": "Linux Python; GUI suites in real Tk/Xvfb"
+    },
+    {
+      "script": "tests/v552_interactions.py",
+      "evidence": "V552_Interaction_Checks.json",
+      "scenarios": null,
+      "checks": 44,
+      "passed": true,
+      "execution": "Linux Python; GUI suites in real Tk/Xvfb"
+    },
+    {
+      "script": "tests/simple_gui.py",
+      "evidence": "Simple_GUI_Checks.json",
+      "scenarios": null,
+      "checks": 58,
+      "passed": true,
+      "execution": "Linux Python; GUI suites in real Tk/Xvfb"
+    },
+    {
+      "script": "tests/v554_gui.py",
+      "evidence": "V554_GUI_Checks.json",
+      "scenarios": null,
+      "checks": 69,
+      "passed": true,
+      "execution": "Linux Python; GUI suites in real Tk/Xvfb"
+    },
+    {
+      "script": "tests/mac_portability.py",
+      "evidence": "Mac_Portability_Checks.json",
+      "scenarios": null,
+      "checks": 37,
+      "passed": true,
+      "execution": "Linux Python/Tk; macOS portability decisions simulated"
+    }
+  ],
+  "recorded_checks": 2947,
+  "numerical_scenarios": 163,
+  "real_tk_interactions": 244,
+  "mac_portability_checks": 37,
+  "bundle_checks": {
+    "passed": true,
+    "macho_files": 220,
+    "macho_slices": 314,
+    "hashed_code_pages": 45825,
+    "sealed_resources": 5673,
+    "embedding_api": [
+      {
+        "cpu": "0x1000007",
+        "Py_BytesMain_exported": true
+      },
+      {
+        "cpu": "0x100000c",
+        "Py_BytesMain_exported": true
+      }
+    ]
+  },
+  "signing": "ad-hoc integrity seals; no Developer ID or Apple notarization",
+  "apple_native_codesign_verified": false,
+  "mac_hardware_execution": false,
+  "native_acceptance_tool": "Verify_on_Mac.command",
+  "pending": [
+    "Apple codesign --verify --deep --strict on a Mac",
+    "Finder/Gatekeeper first launch",
+    "native Tk Aqua and Matplotlib execution",
+    "physical keypad and trackpad",
+    "Retina layout",
+    "native Mac Excel edit/save/import"
+  ],
+  "rcodesign_verify_diagnostic": "The Linux verifier reports its documented empty-CMS parse issue for ad-hoc signatures; independent code pages and resource seals pass. Apple native verification remains pending.",
+  "scope": "Engineering assumptions and calculation formulas are identical to V5.5.4. Numeric and GUI tests are host-side evidence, not formal engineering design certification or Mac execution evidence.",
+  "mac_acceptance_tool_host_validation": {
+    "cross_platform_checks": 31,
+    "expected_unavailable_native_checks": 4,
+    "passed": true,
+    "context": "Linux/Xvfb; no native Mac execution"
+  }
+}

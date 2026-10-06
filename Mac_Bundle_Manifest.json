@@ -1,0 +1,4246 @@
+{
+  "version": "5.5.4-mac.1",
+  "minimum_macos": "11.0",
+  "architectures": [
+    "arm64",
+    "x86_64"
+  ],
+  "runtime": {
+    "python": "3.13.15",
+    "pkg_sha256": "3b7eaf7f29825f796e8267024435540ddf1f17fc9a97ad58095daa7a75bfdcd3"
+  },
+  "wheels": [
+    {
+      "architecture": "arm64",
+      "filename": "contourpy-1.4.0-cp313-cp313-macosx_11_0_arm64.whl",
+      "sha256": "196759a3e4db60e1546167e361090ebb6d199aa3aafc9e34ea17a5ac3b23e814"
+    },
+    {
+      "architecture": "arm64",
+      "filename": "cycler-0.12.1-py3-none-any.whl",
+      "sha256": "85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30"
+    },
+    {
+      "architecture": "arm64",
+      "filename": "fonttools-4.66.1-cp313-cp313-macosx_10_13_universal2.whl",
+      "sha256": "53e5854ea8003efec34adc0863c18ce91da923018354d27366f7fee7db928d7a"
+    },
+    {
+      "architecture": "arm64",
+      "filename": "kiwisolver-1.5.1-cp313-cp313-macosx_11_0_arm64.whl",
+      "sha256": "77a4c8187a5948d7f8795adb765a3c7b553d07d86d88e43038fc32fc1fb9a3f3"
+    },
+    {
+      "architecture": "arm64",
+      "filename": "matplotlib-3.10.8-cp313-cp313-macosx_11_0_arm64.whl",
+      "sha256": "56271f3dac49a88d7fca5060f004d9d22b865f743a12a23b1e937a0be4818ee1"
+    },
+    {
+      "architecture": "arm64",
+      "filename": "numpy-2.5.3-cp313-cp313-macosx_11_0_arm64.whl",
+      "sha256": "92f30e89b8ee0ecf363033576c422b2f58fed6a80bed0aa48dff6d14c654663e"
+    },
+    {
+      "architecture": "arm64",
+      "filename": "packaging-26.3-py3-none-any.whl",
+      "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c"
+    },
+    {
+      "architecture": "arm64",
+      "filename": "pillow-12.3.0-cp313-cp313-macosx_11_0_arm64.whl",
+      "sha256": "d69141514cc30b774ceea5e3ed3a6635c8d8a96edf664689b890f4089111fb35"
+    },
+    {
+      "architecture": "arm64",
+      "filename": "pyparsing-3.3.3-py3-none-any.whl",
+      "sha256": "ece8c00a69cf01b45d0b1dedabb469c90d8caf996d4fda40f147627a122849a4"
+    },
+    {
+      "architecture": "arm64",
+      "filename": "python_dateutil-2.9.0.post0-py2.py3-none-any.whl",
+      "sha256": "a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427"
+    },
+    {
+      "architecture": "arm64",
+      "filename": "six-1.17.0-py2.py3-none-any.whl",
+      "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "contourpy-1.4.0-cp313-cp313-macosx_10_13_x86_64.whl",
+      "sha256": "e21d1d4a9db5b3a793649c7ab0ddb4697f2818929eec871a7b9c45fce7b2a1ea"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "cycler-0.12.1-py3-none-any.whl",
+      "sha256": "85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "fonttools-4.66.1-cp313-cp313-macosx_10_13_x86_64.whl",
+      "sha256": "60f5ea17aed4262630afa43f26997ceabd6417fa05dcedf54c665f5a29193e18"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "kiwisolver-1.5.1-cp313-cp313-macosx_10_13_x86_64.whl",
+      "sha256": "1ed0f5e49d0ceff8b72190824d9e59c062fbbc02c231b853112c78474b3f5ec2"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "matplotlib-3.10.8-cp313-cp313-macosx_10_13_x86_64.whl",
+      "sha256": "3f2e409836d7f5ac2f1c013110a4d50b9f7edc26328c108915f9075d7d7a91b6"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "numpy-2.5.3-cp313-cp313-macosx_10_13_x86_64.whl",
+      "sha256": "66a78fe4556c60aceda5916f9eacd638b18e9e681016ec302dcb4682d6d4d034"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "packaging-26.3-py3-none-any.whl",
+      "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "pillow-12.3.0-cp313-cp313-macosx_10_13_x86_64.whl",
+      "sha256": "7a743ff716f746fc19a9557f60dab1600d4613255f8a7aeb3cdde4db7eb15a66"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "pyparsing-3.3.3-py3-none-any.whl",
+      "sha256": "ece8c00a69cf01b45d0b1dedabb469c90d8caf996d4fda40f147627a122849a4"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "python_dateutil-2.9.0.post0-py2.py3-none-any.whl",
+      "sha256": "a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "six-1.17.0-py2.py3-none-any.whl",
+      "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274"
+    }
+  ],
+  "relocated_commands": 42,
+  "signing": "ad-hoc; no Developer ID certificate or Apple notarization",
+  "mac_hardware_execution": false,
+  "binaries": [
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/Frameworks/Tcl.framework/Versions/8.6/Tcl",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libz.1.dylib",
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libz.1.dylib",
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/Frameworks/Tk.framework/Versions/8.6/Tk",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa",
+            "/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon",
+            "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+            "/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore",
+            "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+            "/usr/lib/libz.1.dylib",
+            "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+            "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices",
+            "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+            "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+            "/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText",
+            "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+            "/usr/lib/libobjc.A.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa",
+            "/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon",
+            "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+            "/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore",
+            "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+            "/usr/lib/libz.1.dylib",
+            "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+            "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices",
+            "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+            "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+            "/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText",
+            "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+            "/usr/lib/libobjc.A.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/Python",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/libcrypto.3.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/libform.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/libmenu.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/libncurses.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/libpanel.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/libssl.3.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libcrypto.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libcrypto.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_asyncio.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_bisect.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_blake2.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_bz2.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libbz2.1.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libbz2.1.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_codecs_cn.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_codecs_hk.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_codecs_iso2022.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_codecs_jp.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_codecs_kr.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_codecs_tw.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_contextvars.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_csv.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_ctypes.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libffi.dylib",
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libffi.dylib",
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_ctypes_test.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_curses.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../../libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../../libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_curses_panel.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../../libpanel.6.dylib",
+            "@loader_path/../../libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../../libpanel.6.dylib",
+            "@loader_path/../../libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_datetime.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_dbm.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_decimal.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_elementtree.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_hashlib.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../../libcrypto.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../../libcrypto.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_heapq.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_interpchannels.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_interpqueues.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_interpreters.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_json.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_lsprof.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_lzma.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_md5.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_multibytecodec.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_multiprocessing.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_opcode.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_pickle.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_posixshmem.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_posixsubprocess.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_queue.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_random.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_scproxy.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_sha1.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_sha2.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_sha3.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_socket.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_sqlite3.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_ssl.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../../libssl.3.dylib",
+            "@loader_path/../../libcrypto.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../../libssl.3.dylib",
+            "@loader_path/../../libcrypto.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_statistics.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_struct.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testbuffer.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testcapi.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testclinic.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testclinic_limited.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testexternalinspection.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testimportmultiple.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testinternalcapi.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testlimitedcapi.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testmultiphase.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testsinglephase.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_tkinter.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../../../Frameworks/Tcl.framework/Tcl",
+            "@loader_path/../../../Frameworks/Tk.framework/Tk",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../../../Frameworks/Tcl.framework/Tcl",
+            "@loader_path/../../../Frameworks/Tk.framework/Tk",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_uuid.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_xxtestfuzz.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_zoneinfo.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/array.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/binascii.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libz.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libz.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/cmath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/fcntl.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/grp.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/math.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/mmap.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/pyexpat.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/readline.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libedit.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libedit.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/resource.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/select.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/syslog.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/termios.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/unicodedata.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/xxlimited.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/xxlimited_35.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/xxsubtype.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/zlib.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libz.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libz.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/MacOS/FacilityStudio",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libXau.6.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libavif.16.4.2.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libbrotlicommon.1.2.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libbrotlidec.1.2.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libbrotlicommon.1.2.0.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libfreetype.6.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libbz2.1.0.dylib",
+            "@loader_path/libpng16.16.dylib",
+            "@loader_path/libz.1.3.1.zlib-ng.dylib",
+            "@loader_path/libbrotlidec.1.2.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libharfbuzz.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libfreetype.6.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libjpeg.62.4.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "/Users/runner/work/Pillow/Pillow/build/deps/darwin/lib"
+          ],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/liblcms2.2.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/liblzma.5.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libopenjp2.2.5.4.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libpng16.16.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libz.1.3.1.zlib-ng.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libsharpyuv.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libtiff.6.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/liblzma.5.dylib",
+            "@loader_path/libjpeg.62.4.0.dylib",
+            "@loader_path/libz.1.3.1.zlib-ng.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libwebp.7.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libsharpyuv.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libwebpdemux.2.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libwebp.7.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libwebpmux.3.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libwebp.7.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libxcb.1.1.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libXau.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libz.1.3.1.zlib-ng.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_avif.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/.dylibs/libavif.16.4.2.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_imaging.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/.dylibs/libtiff.6.dylib",
+            "@loader_path/.dylibs/libjpeg.62.4.0.dylib",
+            "@loader_path/.dylibs/libopenjp2.2.5.4.dylib",
+            "@loader_path/.dylibs/libz.1.3.1.zlib-ng.dylib",
+            "@loader_path/.dylibs/libxcb.1.1.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_imagingcms.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/.dylibs/liblcms2.2.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_imagingft.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/.dylibs/libfreetype.6.dylib",
+            "@loader_path/.dylibs/libharfbuzz.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_imagingmath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_imagingmorph.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_imagingtk.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_webp.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/.dylibs/libwebp.7.dylib",
+            "@loader_path/.dylibs/libwebpmux.3.dylib",
+            "@loader_path/.dylibs/libwebpdemux.2.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/contourpy/_contourpy.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/fontTools/cu2qu/cu2qu.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/fontTools/feaLib/lexer.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/fontTools/misc/bezierTools.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/fontTools/pens/momentsPen.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/fontTools/qu2cu/qu2cu.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/fontTools/varLib/iup.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/kiwisolver/_cext.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/_c_internal_utils.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/_image.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/_path.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/_qhull.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/_tri.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/backends/_backend_agg.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/backends/_macosx.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+            "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+            "/usr/lib/libobjc.A.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/backends/_tkagg.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/ft2font.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/.dylibs/libgcc_s.1.1.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "@loader_path/"
+          ],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/.dylibs/libgfortran.5.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libquadmath.0.dylib",
+            "@loader_path/libgcc_s.1.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "@loader_path/"
+          ],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/.dylibs/libquadmath.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "@loader_path/",
+            "@loader_path"
+          ],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/.dylibs/libscipy_openblas64_.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libgfortran.5.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_multiarray_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_multiarray_umath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../.dylibs/libscipy_openblas64_.dylib",
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_operand_flag_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_rational_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_simd.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_struct_ufunc_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_umath_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/fft/_pocketfft_umath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/linalg/_umath_linalg.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../.dylibs/libscipy_openblas64_.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/linalg/lapack_lite.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/../.dylibs/libscipy_openblas64_.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_bounded_integers.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_common.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_generator.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_mt19937.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_pcg64.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_philox.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_sfc64.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/bit_generator.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/mtrand.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libXau.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libavif.16.4.2.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libbrotlicommon.1.2.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libbrotlidec.1.2.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libbrotlicommon.1.2.0.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libfreetype.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libbz2.1.0.dylib",
+            "@loader_path/libpng16.16.dylib",
+            "@loader_path/libz.1.3.1.zlib-ng.dylib",
+            "@loader_path/libbrotlidec.1.2.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libharfbuzz.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libfreetype.6.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libjpeg.62.4.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "/Users/runner/work/Pillow/Pillow/build/deps/darwin/lib"
+          ],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/liblcms2.2.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/liblzma.5.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libopenjp2.2.5.4.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libpng16.16.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libz.1.3.1.zlib-ng.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libsharpyuv.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libtiff.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/liblzma.5.dylib",
+            "@loader_path/libjpeg.62.4.0.dylib",
+            "@loader_path/libz.1.3.1.zlib-ng.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libwebp.7.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libsharpyuv.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libwebpdemux.2.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libwebp.7.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libwebpmux.3.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libwebp.7.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libxcb.1.1.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libXau.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libz.1.3.1.zlib-ng.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_avif.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/.dylibs/libavif.16.4.2.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_imaging.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/.dylibs/libtiff.6.dylib",
+            "@loader_path/.dylibs/libjpeg.62.4.0.dylib",
+            "@loader_path/.dylibs/libopenjp2.2.5.4.dylib",
+            "@loader_path/.dylibs/libz.1.3.1.zlib-ng.dylib",
+            "@loader_path/.dylibs/libxcb.1.1.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_imagingcms.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/.dylibs/liblcms2.2.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_imagingft.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/.dylibs/libfreetype.6.dylib",
+            "@loader_path/.dylibs/libharfbuzz.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_imagingmath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_imagingmorph.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_imagingtk.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_webp.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/.dylibs/libwebp.7.dylib",
+            "@loader_path/.dylibs/libwebpmux.3.dylib",
+            "@loader_path/.dylibs/libwebpdemux.2.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/contourpy/_contourpy.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/fontTools/cu2qu/cu2qu.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/fontTools/feaLib/lexer.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/fontTools/misc/bezierTools.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/fontTools/pens/momentsPen.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/fontTools/qu2cu/qu2cu.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/fontTools/varLib/iup.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/kiwisolver/_cext.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/_c_internal_utils.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/_image.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/_path.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/_qhull.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/_tri.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/backends/_backend_agg.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/backends/_macosx.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+            "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+            "/usr/lib/libobjc.A.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/backends/_tkagg.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/ft2font.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/.dylibs/libgcc_s.1.1.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "@loader_path/"
+          ],
+          "minimum_macos": "10.8.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/.dylibs/libgfortran.5.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libquadmath.0.dylib",
+            "@loader_path/libgcc_s.1.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "@loader_path/"
+          ],
+          "minimum_macos": "10.9.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/.dylibs/libquadmath.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "@loader_path/"
+          ],
+          "minimum_macos": "10.9.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/.dylibs/libscipy_openblas64_.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libgfortran.5.dylib",
+            "@loader_path/libquadmath.0.dylib",
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libgcc_s.1.1.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.9.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_multiarray_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_multiarray_umath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../.dylibs/libscipy_openblas64_.dylib",
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_operand_flag_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_rational_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_simd.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_struct_ufunc_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_umath_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/fft/_pocketfft_umath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/linalg/_umath_linalg.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../.dylibs/libscipy_openblas64_.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/linalg/lapack_lite.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/../.dylibs/libscipy_openblas64_.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_bounded_integers.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_common.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_generator.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_mt19937.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_pcg64.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_philox.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_sfc64.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/bit_generator.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/mtrand.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ]
+    }
+  ]
+}

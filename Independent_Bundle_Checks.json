@@ -1,0 +1,6829 @@
+{
+  "version": "5.5.4-mac.1",
+  "passed": true,
+  "embedding_api": [
+    {
+      "cpu": "0x1000007",
+      "Py_BytesMain_exported": true
+    },
+    {
+      "cpu": "0x100000c",
+      "Py_BytesMain_exported": true
+    }
+  ],
+  "macho_files": 220,
+  "macho_slices": 314,
+  "hashed_code_pages": 45825,
+  "sealed_resources": 5673,
+  "seals": [
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/Frameworks/Tcl.framework/Versions/8.6/_CodeSignature/CodeResources",
+      "entries": 114,
+      "passed": true
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/Frameworks/Tk.framework/Versions/8.6/_CodeSignature/CodeResources",
+      "entries": 114,
+      "passed": true
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/_CodeSignature/CodeResources",
+      "entries": 1092,
+      "passed": true
+    },
+    {
+      "path": "Contents/_CodeSignature/CodeResources",
+      "entries": 4353,
+      "passed": true
+    }
+  ],
+  "binaries": [
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/Frameworks/Tcl.framework/Versions/8.6/Tcl",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libz.1.dylib",
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libz.1.dylib",
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 525,
+          "code_limit": 2147520,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 594,
+          "code_limit": 2429584,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/Frameworks/Tk.framework/Versions/8.6/Tk",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa",
+            "/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon",
+            "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+            "/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore",
+            "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+            "/usr/lib/libz.1.dylib",
+            "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+            "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices",
+            "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+            "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+            "/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText",
+            "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+            "/usr/lib/libobjc.A.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa",
+            "/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon",
+            "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+            "/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore",
+            "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+            "/usr/lib/libz.1.dylib",
+            "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+            "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices",
+            "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+            "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+            "/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText",
+            "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+            "/usr/lib/libobjc.A.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 465,
+          "code_limit": 1902400,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 499,
+          "code_limit": 2040240,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/Python",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 1672,
+          "code_limit": 6845152,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 1629,
+          "code_limit": 6671696,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/libcrypto.3.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 1004,
+          "code_limit": 4111264,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 873,
+          "code_limit": 3573680,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/libform.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 20,
+          "code_limit": 81056,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 32,
+          "code_limit": 130208,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/libmenu.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 10,
+          "code_limit": 39024,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 18,
+          "code_limit": 71808,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/libncurses.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 97,
+          "code_limit": 394432,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 109,
+          "code_limit": 443552,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/libpanel.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 7,
+          "code_limit": 26080,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 17,
+          "code_limit": 67040,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/libssl.3.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libcrypto.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libcrypto.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 154,
+          "code_limit": 628368,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 154,
+          "code_limit": 627472,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_asyncio.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 18,
+          "code_limit": 72672,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 27,
+          "code_limit": 109504,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_bisect.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 6,
+          "code_limit": 20864,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 53632,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_blake2.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 11,
+          "code_limit": 44624,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 18,
+          "code_limit": 73296,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_bz2.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libbz2.1.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libbz2.1.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 6,
+          "code_limit": 23584,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 56336,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_codecs_cn.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 36,
+          "code_limit": 144032,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 42,
+          "code_limit": 168608,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_codecs_hk.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 38,
+          "code_limit": 151792,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 42,
+          "code_limit": 168176,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_codecs_iso2022.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 7,
+          "code_limit": 24768,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 15,
+          "code_limit": 57504,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_codecs_jp.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 62,
+          "code_limit": 251632,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 70,
+          "code_limit": 284400,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_codecs_kr.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 33,
+          "code_limit": 131616,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 38,
+          "code_limit": 152080,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_codecs_tw.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 27,
+          "code_limit": 110304,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 37,
+          "code_limit": 151248,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_contextvars.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 3,
+          "code_limit": 9664,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 50624,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_csv.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 9,
+          "code_limit": 34960,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 19,
+          "code_limit": 75888,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_ctypes.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libffi.dylib",
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libffi.dylib",
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 37,
+          "code_limit": 148464,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 45,
+          "code_limit": 181088,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_ctypes_test.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 7,
+          "code_limit": 25680,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 16,
+          "code_limit": 62544,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_curses.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../../libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../../libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 33,
+          "code_limit": 133680,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 42,
+          "code_limit": 170448,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_curses_panel.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../../libpanel.6.dylib",
+            "@loader_path/../../libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../../libpanel.6.dylib",
+            "@loader_path/../../libncurses.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 6,
+          "code_limit": 24352,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 57120,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_datetime.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 28,
+          "code_limit": 113952,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 36,
+          "code_limit": 146672,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_dbm.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 5,
+          "code_limit": 18864,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 55728,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_decimal.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 79,
+          "code_limit": 320256,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 83,
+          "code_limit": 336784,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_elementtree.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 21,
+          "code_limit": 83888,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 27,
+          "code_limit": 108432,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_hashlib.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../../libcrypto.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../../libcrypto.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 15,
+          "code_limit": 61184,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 21,
+          "code_limit": 85760,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_heapq.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 5,
+          "code_limit": 19904,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 52672,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_interpchannels.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 11,
+          "code_limit": 41296,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 20,
+          "code_limit": 78144,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_interpqueues.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 8,
+          "code_limit": 29360,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 15,
+          "code_limit": 58016,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_interpreters.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 9,
+          "code_limit": 33776,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 16,
+          "code_limit": 62432,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_json.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 11,
+          "code_limit": 41536,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 19,
+          "code_limit": 74272,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_lsprof.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 6,
+          "code_limit": 23728,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 56496,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_lzma.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 51,
+          "code_limit": 206800,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 63,
+          "code_limit": 255760,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_md5.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 6,
+          "code_limit": 22144,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 54912,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_multibytecodec.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 12,
+          "code_limit": 46368,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 21,
+          "code_limit": 83200,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_multiprocessing.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 5,
+          "code_limit": 20416,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 57264,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_opcode.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 6,
+          "code_limit": 24352,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 57104,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_pickle.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 34,
+          "code_limit": 137616,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 39,
+          "code_limit": 158048,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_posixshmem.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 3,
+          "code_limit": 10784,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 51744,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_posixsubprocess.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 6,
+          "code_limit": 22144,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 54880,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_queue.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 5,
+          "code_limit": 18912,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 55760,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_random.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 5,
+          "code_limit": 18016,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 54864,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_scproxy.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 4,
+          "code_limit": 12416,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 53360,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_sha1.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 5,
+          "code_limit": 17968,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 54832,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_sha2.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 53664,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 19,
+          "code_limit": 74128,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_sha3.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 9,
+          "code_limit": 33040,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 15,
+          "code_limit": 57584,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_socket.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 22,
+          "code_limit": 86048,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 31,
+          "code_limit": 122896,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_sqlite3.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 303,
+          "code_limit": 1238128,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 304,
+          "code_limit": 1241584,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_ssl.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../../libssl.3.dylib",
+            "@loader_path/../../libcrypto.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../../libssl.3.dylib",
+            "@loader_path/../../libcrypto.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 48,
+          "code_limit": 194752,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 54,
+          "code_limit": 219232,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_statistics.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 3,
+          "code_limit": 9744,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 50704,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_struct.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 55344,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 21,
+          "code_limit": 83968,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testbuffer.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 11,
+          "code_limit": 41616,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 20,
+          "code_limit": 78464,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testcapi.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 78,
+          "code_limit": 318528,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 89,
+          "code_limit": 363552,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testclinic.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 26,
+          "code_limit": 106192,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 31,
+          "code_limit": 126656,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testclinic_limited.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 3,
+          "code_limit": 10496,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 51456,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testexternalinspection.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 4,
+          "code_limit": 14944,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 51776,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testimportmultiple.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 3,
+          "code_limit": 9312,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 50272,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testinternalcapi.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 20,
+          "code_limit": 81088,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 28,
+          "code_limit": 113824,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testlimitedcapi.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 44,
+          "code_limit": 179248,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 47,
+          "code_limit": 191536,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testmultiphase.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 9,
+          "code_limit": 34576,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 16,
+          "code_limit": 63232,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_testsinglephase.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 5,
+          "code_limit": 17968,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 54832,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_tkinter.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../../../Frameworks/Tcl.framework/Tcl",
+            "@loader_path/../../../Frameworks/Tk.framework/Tk",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../../../Frameworks/Tcl.framework/Tcl",
+            "@loader_path/../../../Frameworks/Tk.framework/Tk",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 17,
+          "code_limit": 67440,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 27,
+          "code_limit": 108368,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_uuid.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 3,
+          "code_limit": 9568,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 50528,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_xxtestfuzz.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 5,
+          "code_limit": 17184,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 54096,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_zoneinfo.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 10,
+          "code_limit": 39024,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 19,
+          "code_limit": 75872,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/array.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 16,
+          "code_limit": 62464,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 26,
+          "code_limit": 103344,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/binascii.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libz.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libz.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 7,
+          "code_limit": 27184,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 55824,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/cmath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 10,
+          "code_limit": 40576,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 18,
+          "code_limit": 73328,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/fcntl.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 5,
+          "code_limit": 20336,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 53104,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/grp.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 5,
+          "code_limit": 16928,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 53792,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/math.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 18,
+          "code_limit": 70656,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 25,
+          "code_limit": 99248,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/mmap.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 8,
+          "code_limit": 28800,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 15,
+          "code_limit": 57440,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/pyexpat.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 58,
+          "code_limit": 234304,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 58,
+          "code_limit": 233760,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/readline.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libedit.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libedit.3.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 9,
+          "code_limit": 35568,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 16,
+          "code_limit": 64208,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/resource.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 5,
+          "code_limit": 17232,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 54080,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/select.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 9,
+          "code_limit": 36464,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 19,
+          "code_limit": 77456,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/syslog.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 4,
+          "code_limit": 16240,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 53088,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/termios.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 6,
+          "code_limit": 22480,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 55248,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/unicodedata.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 171,
+          "code_limit": 699024,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 179,
+          "code_limit": 731776,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/xxlimited.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 4,
+          "code_limit": 12832,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 53776,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/xxlimited_35.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 3,
+          "code_limit": 12048,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 52992,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/xxsubtype.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 3,
+          "code_limit": 11072,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 52032,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/zlib.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libz.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libz.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 12,
+          "code_limit": 47584,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 20,
+          "code_limit": 80352,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/MacOS/FacilityStudio",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 5,
+          "code_limit": 17456,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 50592,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libXau.6.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 51408,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libavif.16.4.2.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 735,
+          "code_limit": 3007872,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libbrotlicommon.1.2.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 41,
+          "code_limit": 165120,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libbrotlidec.1.2.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libbrotlicommon.1.2.0.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 21,
+          "code_limit": 85664,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libfreetype.6.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libbz2.1.0.dylib",
+            "@loader_path/libpng16.16.dylib",
+            "@loader_path/libz.1.3.1.zlib-ng.dylib",
+            "@loader_path/libbrotlidec.1.2.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 269,
+          "code_limit": 1100496,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libharfbuzz.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libfreetype.6.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 436,
+          "code_limit": 1784864,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libjpeg.62.4.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "/Users/runner/work/Pillow/Pillow/build/deps/darwin/lib"
+          ],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 158,
+          "code_limit": 646704,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/liblcms2.2.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 123,
+          "code_limit": 503008,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/liblzma.5.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 75,
+          "code_limit": 304496,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libopenjp2.2.5.4.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 158,
+          "code_limit": 643104,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libpng16.16.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libz.1.3.1.zlib-ng.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 79,
+          "code_limit": 323568,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libsharpyuv.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 17,
+          "code_limit": 67472,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libtiff.6.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/liblzma.5.dylib",
+            "@loader_path/libjpeg.62.4.0.dylib",
+            "@loader_path/libz.1.3.1.zlib-ng.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 183,
+          "code_limit": 746368,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libwebp.7.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libsharpyuv.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 121,
+          "code_limit": 493456,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libwebpdemux.2.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libwebp.7.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 51264,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libwebpmux.3.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libwebp.7.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 22,
+          "code_limit": 87376,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libxcb.1.1.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libXau.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 63,
+          "code_limit": 257424,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/.dylibs/libz.1.3.1.zlib-ng.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 39,
+          "code_limit": 157760,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_avif.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/.dylibs/libavif.16.4.2.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 55280,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_imaging.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/.dylibs/libtiff.6.dylib",
+            "@loader_path/.dylibs/libjpeg.62.4.0.dylib",
+            "@loader_path/.dylibs/libopenjp2.2.5.4.dylib",
+            "@loader_path/.dylibs/libz.1.3.1.zlib-ng.dylib",
+            "@loader_path/.dylibs/libxcb.1.1.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 146,
+          "code_limit": 597760,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_imagingcms.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/.dylibs/liblcms2.2.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 20,
+          "code_limit": 79520,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_imagingft.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/.dylibs/libfreetype.6.dylib",
+            "@loader_path/.dylibs/libharfbuzz.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 25,
+          "code_limit": 98688,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_imagingmath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 18,
+          "code_limit": 71440,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_imagingmorph.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 50880,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_imagingtk.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 52224,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/PIL/_webp.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/.dylibs/libwebp.7.dylib",
+            "@loader_path/.dylibs/libwebpmux.3.dylib",
+            "@loader_path/.dylibs/libwebpdemux.2.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 15,
+          "code_limit": 57440,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/contourpy/_contourpy.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 222,
+          "code_limit": 906880,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/fontTools/cu2qu/cu2qu.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 36,
+          "code_limit": 147200,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 43,
+          "code_limit": 173600,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/fontTools/feaLib/lexer.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 44,
+          "code_limit": 176928,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 52,
+          "code_limit": 211632,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/fontTools/misc/bezierTools.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 130,
+          "code_limit": 530064,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 129,
+          "code_limit": 524992,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/fontTools/pens/momentsPen.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 27,
+          "code_limit": 109392,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 36,
+          "code_limit": 145776,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/fontTools/qu2cu/qu2cu.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 44,
+          "code_limit": 178352,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 50,
+          "code_limit": 203440,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/fontTools/varLib/iup.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        },
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 52,
+          "code_limit": 211760,
+          "passed": true
+        },
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 60,
+          "code_limit": 244768,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/kiwisolver/_cext.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 54,
+          "code_limit": 220528,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/_c_internal_utils.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 43,
+          "code_limit": 173120,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/_image.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 90,
+          "code_limit": 366176,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/_path.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 88,
+          "code_limit": 359120,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/_qhull.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 137,
+          "code_limit": 558992,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/_tri.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 74,
+          "code_limit": 301840,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/backends/_backend_agg.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 118,
+          "code_limit": 481600,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/backends/_macosx.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+            "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+            "/usr/lib/libobjc.A.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 26,
+          "code_limit": 104576,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/backends/_tkagg.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 47,
+          "code_limit": 192496,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/matplotlib/ft2font.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 260,
+          "code_limit": 1064176,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/.dylibs/libgcc_s.1.1.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "@loader_path/"
+          ],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 31,
+          "code_limit": 123376,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/.dylibs/libgfortran.5.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libquadmath.0.dylib",
+            "@loader_path/libgcc_s.1.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "@loader_path/"
+          ],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 893,
+          "code_limit": 3653984,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/.dylibs/libquadmath.0.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "@loader_path/",
+            "@loader_path"
+          ],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 86,
+          "code_limit": 350464,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/.dylibs/libscipy_openblas64_.dylib",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/libgfortran.5.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 3331,
+          "code_limit": 13640144,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_multiarray_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 30,
+          "code_limit": 119904,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_multiarray_umath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../.dylibs/libscipy_openblas64_.dylib",
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 968,
+          "code_limit": 3964240,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_operand_flag_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 50672,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_rational_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 18,
+          "code_limit": 72576,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_simd.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 83,
+          "code_limit": 336848,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_struct_ufunc_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 50896,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/_core/_umath_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 18,
+          "code_limit": 71152,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/fft/_pocketfft_umath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 80,
+          "code_limit": 327200,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/linalg/_umath_linalg.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "@loader_path/../.dylibs/libscipy_openblas64_.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 38,
+          "code_limit": 153088,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/linalg/lapack_lite.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/../.dylibs/libscipy_openblas64_.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 13,
+          "code_limit": 52336,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_bounded_integers.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 73,
+          "code_limit": 295376,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_common.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 61,
+          "code_limit": 248544,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_generator.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 168,
+          "code_limit": 685456,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_mt19937.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 33,
+          "code_limit": 132288,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_pcg64.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 37,
+          "code_limit": 151120,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_philox.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 33,
+          "code_limit": 132496,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/_sfc64.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 24,
+          "code_limit": 97264,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/bit_generator.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 51,
+          "code_limit": 208192,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/arm64/numpy/random/mtrand.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "11.0.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x100000c",
+          "hash_type": 2,
+          "pages": 141,
+          "code_limit": 576304,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libXau.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 4,
+          "code_limit": 14560,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libavif.16.4.2.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 1129,
+          "code_limit": 4622448,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libbrotlicommon.1.2.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 35,
+          "code_limit": 140576,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libbrotlidec.1.2.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libbrotlicommon.1.2.0.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 14,
+          "code_limit": 57024,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libfreetype.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libbz2.1.0.dylib",
+            "@loader_path/libpng16.16.dylib",
+            "@loader_path/libz.1.3.1.zlib-ng.dylib",
+            "@loader_path/libbrotlidec.1.2.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 244,
+          "code_limit": 998208,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libharfbuzz.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libfreetype.6.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 408,
+          "code_limit": 1667904,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libjpeg.62.4.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "/Users/runner/work/Pillow/Pillow/build/deps/darwin/lib"
+          ],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 173,
+          "code_limit": 708560,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/liblcms2.2.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 114,
+          "code_limit": 466080,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/liblzma.5.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 61,
+          "code_limit": 248304,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libopenjp2.2.5.4.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 139,
+          "code_limit": 565488,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libpng16.16.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libz.1.3.1.zlib-ng.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 63,
+          "code_limit": 257600,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libsharpyuv.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 8,
+          "code_limit": 30848,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libtiff.6.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/liblzma.5.dylib",
+            "@loader_path/libjpeg.62.4.0.dylib",
+            "@loader_path/libz.1.3.1.zlib-ng.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 174,
+          "code_limit": 710000,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libwebp.7.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libsharpyuv.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 152,
+          "code_limit": 619696,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libwebpdemux.2.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libwebp.7.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 6,
+          "code_limit": 22608,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libwebpmux.3.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libwebp.7.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 12,
+          "code_limit": 46448,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libxcb.1.1.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libXau.6.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 52,
+          "code_limit": 212384,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/.dylibs/libz.1.3.1.zlib-ng.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 47,
+          "code_limit": 191872,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_avif.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/.dylibs/libavif.16.4.2.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 6,
+          "code_limit": 22576,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_imaging.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/.dylibs/libtiff.6.dylib",
+            "@loader_path/.dylibs/libjpeg.62.4.0.dylib",
+            "@loader_path/.dylibs/libopenjp2.2.5.4.dylib",
+            "@loader_path/.dylibs/libz.1.3.1.zlib-ng.dylib",
+            "@loader_path/.dylibs/libxcb.1.1.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 154,
+          "code_limit": 626928,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_imagingcms.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/.dylibs/liblcms2.2.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 11,
+          "code_limit": 42736,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_imagingft.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/.dylibs/libfreetype.6.dylib",
+            "@loader_path/.dylibs/libharfbuzz.0.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 17,
+          "code_limit": 66048,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_imagingmath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 10,
+          "code_limit": 38688,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_imagingmorph.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 4,
+          "code_limit": 14016,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_imagingtk.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 4,
+          "code_limit": 15568,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/PIL/_webp.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/.dylibs/libwebp.7.dylib",
+            "@loader_path/.dylibs/libwebpmux.3.dylib",
+            "@loader_path/.dylibs/libwebpdemux.2.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 7,
+          "code_limit": 24752,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/contourpy/_contourpy.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 220,
+          "code_limit": 897312,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/fontTools/cu2qu/cu2qu.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 36,
+          "code_limit": 147056,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/fontTools/feaLib/lexer.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 43,
+          "code_limit": 172544,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/fontTools/misc/bezierTools.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 130,
+          "code_limit": 529248,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/fontTools/pens/momentsPen.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 28,
+          "code_limit": 113488,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/fontTools/qu2cu/qu2cu.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 44,
+          "code_limit": 178064,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/fontTools/varLib/iup.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 53,
+          "code_limit": 215696,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/kiwisolver/_cext.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 45,
+          "code_limit": 183360,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/_c_internal_utils.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 36,
+          "code_limit": 145584,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/_image.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 94,
+          "code_limit": 384336,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/_path.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 85,
+          "code_limit": 345456,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/_qhull.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 143,
+          "code_limit": 584688,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/_tri.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 68,
+          "code_limit": 276464,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/backends/_backend_agg.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 125,
+          "code_limit": 508784,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/backends/_macosx.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+            "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+            "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+            "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+            "/usr/lib/libobjc.A.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 19,
+          "code_limit": 77440,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/backends/_tkagg.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 40,
+          "code_limit": 161712,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/matplotlib/ft2font.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 274,
+          "code_limit": 1118800,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/.dylibs/libgcc_s.1.1.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "@loader_path/"
+          ],
+          "minimum_macos": "10.8.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 1,
+          "pages": 26,
+          "code_limit": 102592,
+          "passed": true
+        },
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 26,
+          "code_limit": 102592,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/.dylibs/libgfortran.5.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libquadmath.0.dylib",
+            "@loader_path/libgcc_s.1.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "@loader_path/"
+          ],
+          "minimum_macos": "10.9.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 1,
+          "pages": 1632,
+          "code_limit": 6683056,
+          "passed": true
+        },
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 1632,
+          "code_limit": 6683056,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/.dylibs/libquadmath.0.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [
+            "@loader_path/"
+          ],
+          "minimum_macos": "10.9.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 1,
+          "pages": 81,
+          "code_limit": 330112,
+          "passed": true
+        },
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 81,
+          "code_limit": 330112,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/.dylibs/libscipy_openblas64_.dylib",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/libgfortran.5.dylib",
+            "@loader_path/libquadmath.0.dylib",
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/libgcc_s.1.1.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.9.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 1,
+          "pages": 6104,
+          "code_limit": 25001312,
+          "passed": true
+        },
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 6104,
+          "code_limit": 25001312,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_multiarray_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 25,
+          "code_limit": 100128,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_multiarray_umath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../.dylibs/libscipy_openblas64_.dylib",
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 1666,
+          "code_limit": 6823024,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_operand_flag_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 4,
+          "code_limit": 13840,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_rational_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 12,
+          "code_limit": 48384,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_simd.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 281,
+          "code_limit": 1149920,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_struct_ufunc_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 4,
+          "code_limit": 14064,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/_core/_umath_tests.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 10,
+          "code_limit": 38864,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/fft/_pocketfft_umath.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libc++.1.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 128,
+          "code_limit": 523600,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/linalg/_umath_linalg.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "@loader_path/../.dylibs/libscipy_openblas64_.dylib",
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 42,
+          "code_limit": 170064,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/linalg/lapack_lite.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib",
+            "@loader_path/../.dylibs/libscipy_openblas64_.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 5,
+          "code_limit": 19648,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_bounded_integers.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 76,
+          "code_limit": 310272,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_common.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 56,
+          "code_limit": 229120,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_generator.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 183,
+          "code_limit": 745488,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_mt19937.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 28,
+          "code_limit": 112704,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_pcg64.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 32,
+          "code_limit": 128816,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_philox.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 26,
+          "code_limit": 105008,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/_sfc64.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 18,
+          "code_limit": 71968,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/bit_generator.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 52,
+          "code_limit": 210384,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Contents/Resources/python-packages/x86_64/numpy/random/mtrand.cpython-313-darwin.so",
+      "slices": [
+        {
+          "architecture": "x86_64",
+          "dependencies": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "rpaths": [],
+          "minimum_macos": "10.13.0",
+          "signed": true
+        }
+      ],
+      "code_hashes": [
+        {
+          "cpu": "0x1000007",
+          "hash_type": 2,
+          "pages": 148,
+          "code_limit": 604992,
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "mac_hardware_execution": false,
+  "apple_native_codesign_verification": "pending Mac self-test",
+  "developer_id_and_notarization": false,
+  "rcodesign_verify_note": "rcodesign 0.29.0 verify cannot parse empty CMS wrappers in ad-hoc signatures and warns that it is buggy. Page and resource digests were independently reconstructed; this does not replace Apple's native verification."
+}

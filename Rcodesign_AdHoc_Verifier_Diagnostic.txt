@@ -1,0 +1,4 @@
+(the verify command is known to be buggy and gives misleading results; we highly recommend using Apple's tooling until this message is removed)
+@0: CMS error: missing further values (at position 0)
+@1: CMS error: missing further values (at position 0)
+Error: problems reported during verification
