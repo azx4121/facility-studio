@@ -2,6 +2,7 @@
 
 from datetime import datetime, timezone
 import csv
+import faulthandler
 import json
 import math
 import os
@@ -15,8 +16,11 @@ import traceback
 
 def run():
     checks = []
+    if sys.platform == "darwin":
+        faulthandler.dump_traceback_later(25, repeat=True)
 
     def check(name, action):
+        print("Checking: " + name, flush=True)
         try:
             value = action()
             if value is False:
@@ -27,6 +31,7 @@ def run():
                 {"name": name, "passed": False, "detail": traceback.format_exc()}
             )
 
+    print("Loading native calculation and graphics libraries...", flush=True)
     import numpy as np
     import matplotlib
     from PIL import Image
@@ -119,11 +124,13 @@ def run():
     gui_storage = tempfile.TemporaryDirectory(prefix="FacilityStudioMacGui-")
     old_storage = os.environ.get("LOCALAPPDATA")
     os.environ["LOCALAPPDATA"] = gui_storage.name
+    print("Creating native Tk window...", flush=True)
     root = tk.Tk()
     root.withdraw()
     try:
         from facility_studio.simple_desktop import SimpleToolsApp
 
+        print("Creating independent-tools interface...", flush=True)
         app = SimpleToolsApp(root)
         root.update()
         check(
@@ -146,6 +153,7 @@ def run():
             "Mac application Quit uses the document workflow",
             lambda: bool(root.tk.call("info", "commands", "tk::mac::Quit")),
         )
+        print("Creating engineering workbench...", flush=True)
         workbench = app.open_workbench()
         workbench.root.withdraw()
         root.update()
@@ -185,4 +193,6 @@ def run():
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False, indent=2))
     print(f"\nMac acceptance report: {path}")
+    if sys.platform == "darwin":
+        faulthandler.cancel_dump_traceback_later()
     return 0 if report["passed"] else 2

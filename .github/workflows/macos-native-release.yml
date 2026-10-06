@@ -1,0 +1,93 @@
+name: Build and verify macOS revision
+
+on:
+  push:
+    branches: [main, maintenance/macos-launch-repair]
+    paths:
+      - .github/workflows/macos-native-release.yml
+      - macos/macos/**
+      - macos/facility_studio/**
+      - macos/README_macOS.txt
+      - macos/MAC_RUNTIME_PATCHES.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Build, sign and execute Universal App on Apple Silicon
+        run: python3 macos/macos/build_native_release.py --output "$RUNNER_TEMP/mac2-build"
+      - name: Retain Apple Silicon evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: mac2-arm64-evidence
+          path: ${{ runner.temp }}/mac2-build/evidence
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Retain tested delivery files
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: mac2-delivery
+          path: |
+            ${{ runner.temp }}/mac2-build/Facility_Studio_V5_5_4_macOS_mac2_OneClick.zip
+            ${{ runner.temp }}/mac2-build/Facility_Studio_V5_5_4_macOS_mac2.dmg
+            ${{ runner.temp }}/mac2-build/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14
+  verify-intel:
+    needs: build
+    runs-on: macos-15-intel
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: mac2-delivery
+          path: ${{ runner.temp }}/mac2-delivery
+      - name: Execute the same delivered ZIP and DMG on Intel
+        run: >-
+          python3 macos/macos/verify_native_release.py
+          --package "$RUNNER_TEMP/mac2-delivery/Facility_Studio_V5_5_4_macOS_mac2_OneClick.zip"
+          --checksums "$RUNNER_TEMP/mac2-delivery/SHA256SUMS.txt"
+          --dmg "$RUNNER_TEMP/mac2-delivery/Facility_Studio_V5_5_4_macOS_mac2.dmg"
+          --output "$RUNNER_TEMP/mac2-intel"
+      - name: Retain Intel evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: mac2-intel-evidence
+          path: |
+            ${{ runner.temp }}/mac2-intel/*.txt
+            ${{ runner.temp }}/mac2-intel/*.json
+          if-no-files-found: warn
+          retention-days: 14
+  publish:
+    needs: [build, verify-intel]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: mac2-delivery
+          path: ${{ runner.temp }}/mac2-delivery
+      - name: Publish a new revision after both native checks pass
+        env:
+          FACILITY_GITHUB_TOKEN: ${{ github.token }}
+          FACILITY_RELEASE_COMMIT: ${{ github.sha }}
+        run: python3 macos/macos/publish_mac_release.py --assets "$RUNNER_TEMP/mac2-delivery"
