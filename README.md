@@ -67,11 +67,29 @@ macOS 懶人包包含 `Verify_on_Mac.command`，可在 Mac 上產生本機驗收
 
 回報範例請使用測試資料，移除業主或現場的機密資訊。
 
-## 原始碼與授權進度
+## 原始碼與授權
 
 Windows 原始碼位於 [windows](windows/)；macOS 原始碼位於 [macos](macos/)。
 各平台的啟動檔為 `Facility_Studio_V5_5.py`，請保留同層的 `facility_studio` 資料夾與資源檔。
 測試與驗證紀錄分別保留於各平台的 `tests/` 與 `evidence/`；Windows 安裝器位於 `windows/installer/`，macOS 封裝腳本位於 `macos/macos/`。
 
-專案 LICENSE 尚未選定；在明確授權完成前，不應把此專案視為已授予開源授權。
-第三方執行環境及套件保留各自的原有授權文件。
+本專案採 [MIT 授權](LICENSE)，保留 Andy Huang 及貢獻者版權標示。允許使用、修改、散布及商用，包含閉源衍生版本；散布時須保留版權與授權聲明。
+第三方執行環境及套件保留各自的原有授權文件，詳 [第三方元件說明](THIRD_PARTY_NOTICES.md)。
+
+本次維護修正低溫露點反算、大氣壓防呆與工程資料表驗證，詳 [測試與修正紀錄](docs/2026-10-06-review.md)。既有 Release 與標籤保留；下載區的既有安裝包尚未替換成本次維護版。
+
+### 執行數值回歸測試
+
+在專案根目錄使用已安裝的 Python 3：
+
+```sh
+python windows/tests/regression.py
+python windows/tests/v55_features.py
+python windows/tests/v552_core.py
+python windows/tests/simple_features.py
+python windows/tests/v554_features.py
+python windows/tests/maintenance_checks.py
+```
+
+macOS 原始碼測試將路徑中的 `windows/` 改為 `macos/`；若系統指令名稱為 `python3`，請使用 `python3`。
+測試會更新各平台 `evidence/` 內的驗證紀錄。介面回歸另需可用的 Tk 顯示服務及測試用 Pillow／Matplotlib；數值測試無需先開啟 GUI。

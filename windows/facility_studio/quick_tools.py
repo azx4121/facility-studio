@@ -4,6 +4,8 @@ import math
 from .errors import ValidationError
 from .utils import (
     number,
+    sat_pa,
+    MW_RATIO,
     state_trh,
     state_tw,
     dewpoint,
@@ -77,17 +79,27 @@ PSY_MODES = ["乾球＋RH", "乾球＋濕球", "乾球＋露點", "焓＋含濕�
 
 
 def psychrometric(mode, first, second, pressure=101.325):
-    p = number(pressure, "pressure", 30, 120)
+    p = number(pressure, "pressure", 60, 120)
     if mode not in PSY_MODES:
         raise ValidationError("不支援的空氣狀態組合", "mode")
     x = number(first, "first")
     y = number(second, "second")
+    if mode != "焓＋含濕比":
+        x = number(x, "first", -60, 90)
     if mode == "乾球＋RH":
-        s = state_trh(x, y, p)
+        s = state_trh(x, number(y, "second", 0, 100), p)
     elif mode == "乾球＋露點":
-        if y > x:
+        y = number(y, "second", -100, 90)
+        if y > x + 1e-7:
             raise ValidationError("露點不能高於乾球", "second")
-        w = state_trh(y, 100, p)["w"]
+        y = min(y, x)
+        # Dew/frost point can be colder than the dry-bulb operating range.
+        # Use the saturation-pressure correlation directly instead of treating
+        # the dew point as a separate supported air state.
+        pw = sat_pa(y)
+        if pw >= p * 1000:
+            raise ValidationError("露點水蒸氣分壓不得達到總壓", "second")
+        w = MW_RATIO * pw / (p * 1000 - pw)
         s = state_tw(x, w, p)
     elif mode == "焓＋含濕比":
         w = number(y, "second", 0, 0.5 * 1000) / 1000
@@ -114,9 +126,9 @@ def psychrometric(mode, first, second, pressure=101.325):
 
 
 def mix_air(t1, rh1, flow1, t2, rh2, flow2, pressure=101.325):
-    p = number(pressure, "pressure", 30, 120)
-    a = state_trh(float(t1), float(rh1), p)
-    b = state_trh(float(t2), float(rh2), p)
+    p = number(pressure, "pressure", 60, 120)
+    a = state_trh(number(t1, "t1", -60, 90), number(rh1, "rh1", 0, 100), p)
+    b = state_trh(number(t2, "t2", -60, 90), number(rh2, "rh2", 0, 100), p)
     m1 = number(flow1, "flow1", 0) / 3600 / a["v_da"]
     m2 = number(flow2, "flow2", 0) / 3600 / b["v_da"]
     m = m1 + m2
@@ -136,9 +148,9 @@ def mix_air(t1, rh1, flow1, t2, rh2, flow2, pressure=101.325):
 
 
 def air_process(t1, rh1, t2, rh2, flow, pressure=101.325):
-    p = number(pressure, "pressure", 30, 120)
-    a = state_trh(float(t1), float(rh1), p)
-    b = state_trh(float(t2), float(rh2), p)
+    p = number(pressure, "pressure", 60, 120)
+    a = state_trh(number(t1, "t1", -60, 90), number(rh1, "rh1", 0, 100), p)
+    b = state_trh(number(t2, "t2", -60, 90), number(rh2, "rh2", 0, 100), p)
     m = number(flow, "flow", 0) / 3600 / a["v_da"]
     return dict(
         inlet=a,

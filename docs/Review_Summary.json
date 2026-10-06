@@ -1,0 +1,48 @@
+{
+  "review_date": "2026-10-06",
+  "original_main": "703aec40ee9cc8bf17880c005c4fe27d820a69dd",
+  "release_tag_preserved": "v5.5.4-beta.1",
+  "license": "MIT",
+  "native_windows_installation_tested": false,
+  "native_macos_installation_tested": false,
+  "source_tree_checks": {
+    "windows": {
+      "inherited_scenarios": 163,
+      "inherited_numeric_checks": 2666,
+      "new_air_and_report_conditions": 90,
+      "new_maintenance_checks": 1129,
+      "gui_checks_per_tk_version": 258,
+      "tested_tk_versions": [
+        "9.0.4",
+        "8.6.14"
+      ],
+      "independent_reference_conditions": 264,
+      "independent_reference_checks": 1320
+    },
+    "macos": {
+      "inherited_scenarios": 163,
+      "inherited_numeric_checks": 2666,
+      "new_air_and_report_conditions": 90,
+      "new_maintenance_checks": 1129,
+      "gui_checks_per_tk_version": 258,
+      "tested_tk_versions": [
+        "9.0.4",
+        "8.6.14"
+      ],
+      "independent_reference_conditions": 264,
+      "independent_reference_checks": 1320
+    }
+  },
+  "fixed_areas": [
+    "low-temperature and saturated dew-point round trips",
+    "consistent 60-120 kPa air pressure validation and field names",
+    "corrupt engineering database structure and content validation",
+    "quick-tool error field highlighting",
+    "license included in future packages and installer payload"
+  ],
+  "windows_setup_sha256": "73110109daaab684316a40c71324fef3aee82156369df4b95cfdd81a5dcfca96",
+  "windows_installer_integrity_checks": 36,
+  "mac_selftest_cross_platform_checks": 31,
+  "mac_selftest_expected_unavailable_native_checks": 4,
+  "syntax_checked_python_files": 172
+}

@@ -77,7 +77,10 @@ def main():
     )
     app_source = resources / "app"
     app_source.mkdir()
-    for name in ("Facility_Studio_V5_5.py", "facility_studio", "Default_Project.json"):
+    for name in (
+        "Facility_Studio_V5_5.py", "facility_studio", "Default_Project.json",
+        "LICENSE", "THIRD_PARTY_NOTICES.md",
+    ):
         source = ROOT / name
         if source.is_dir():
             shutil.copytree(
@@ -87,6 +90,8 @@ def main():
             )
         elif source.is_file():
             shutil.copy2(source, app_source / name)
+        else:
+            raise ValueError("Missing required application source: " + name)
     shutil.copy2(ROOT / "macos/bootstrap.py", resources / "bootstrap.py")
     shutil.copy2(ROOT / "macos/mac_selftest.py", app_source / "mac_selftest.py")
     wheel_records = []

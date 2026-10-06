@@ -33,6 +33,12 @@
     },
     {
       "command": [
+        "tests/maintenance_gui.py"
+      ],
+      "passed": true
+    },
+    {
+      "command": [
         "Facility_Studio_V5_5.py",
         "--gui-smoke"
       ],

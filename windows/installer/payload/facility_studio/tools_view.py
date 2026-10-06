@@ -18,7 +18,7 @@ TOOLS = {
         ("mode", "輸入組合", "乾球＋RH", q.PSY_MODES),
         ("first", "第一個值", "35", None),
         ("second", "第二個值", "70", None),
-        ("pressure", "大氣壓 kPa", "101.325", None),
+        ("pressure", "大氣壓 kPa(abs)，60～120", "101.325", None),
     ],
     "兩股混風": [
         ("t1", "第一股乾球 °C", "35", None),
@@ -27,7 +27,7 @@ TOOLS = {
         ("t2", "第二股乾球 °C", "22", None),
         ("rh2", "第二股 RH %", "50", None),
         ("flow2", "第二股實際風量 CMH", "4000", None),
-        ("pressure", "大氣壓 kPa", "101.325", None),
+        ("pressure", "大氣壓 kPa(abs)，60～120", "101.325", None),
     ],
     "兩點空氣過程": [
         ("t1", "入口乾球 °C", "35", None),
@@ -35,7 +35,7 @@ TOOLS = {
         ("t2", "出口乾球 °C", "15", None),
         ("rh2", "出口 RH %", "95", None),
         ("flow", "入口實際風量 CMH", "5000", None),
-        ("pressure", "大氣壓 kPa", "101.325", None),
+        ("pressure", "大氣壓 kPa(abs)，60～120", "101.325", None),
     ],
     "水量與熱量": [
         ("solve", "求解目標", "熱量 kW", ["熱量 kW", "流量 LPM", "溫差 K"]),
@@ -456,6 +456,9 @@ class QuickToolsWindow:
         )
 
     def calculate(self):
+        for widget in self.widgets.values():
+            if widget.winfo_class() == "TEntry":
+                widget.configure(style="TEntry")
         args = {k: v.get() for k, v in self.values.items()}
         name = self.tool.get()
         funcs = {
@@ -497,7 +500,13 @@ class QuickToolsWindow:
             )
         except (ValueError, KeyError, TypeError, OverflowError) as e:
             self.result = None
-            self.set_text("請修正：" + str(e))
+            key = getattr(e, "field_name", None)
+            label = self.field_labels.get(key)
+            prefix = f"請修正「{label.cget('text')}」：" if label else "請修正："
+            self.set_text(prefix + str(e))
+            widget = self.widgets.get(key)
+            if widget is not None and widget.winfo_class() == "TEntry":
+                widget.configure(style="Invalid.TEntry")
 
     def draw(self):
         if not self.plot:

@@ -55,6 +55,8 @@ for path in modules.glob("*.py"):
                 missing.append(name)
 check("03_all_local_module_dependencies_present", not missing)
 required = (
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
     "Facility_Studio_V5_5.py",
     "facility_studio/ahu_schema.py",
     "facility_studio/simple_desktop.py",

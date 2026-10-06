@@ -1,0 +1,58 @@
+[
+  {
+    "name": "default_valid",
+    "passed": true
+  },
+  {
+    "name": "invalid_pressure_blocks_result",
+    "passed": true
+  },
+  {
+    "name": "pressure_label_explains_range",
+    "passed": true
+  },
+  {
+    "name": "pressure_error_identifies_field",
+    "passed": true
+  },
+  {
+    "name": "pressure_field_marked",
+    "passed": true
+  },
+  {
+    "name": "low_temperature_valid",
+    "passed": true
+  },
+  {
+    "name": "corrected_style_clears",
+    "passed": true
+  },
+  {
+    "name": "dewpoint_switch_stays_valid",
+    "passed": true
+  },
+  {
+    "name": "dewpoint_switch_preserves_humidity",
+    "passed": true
+  },
+  {
+    "name": "saturated_dewpoint_valid",
+    "passed": true
+  },
+  {
+    "name": "bad_temperature_blocks_result",
+    "passed": true
+  },
+  {
+    "name": "temperature_error_identifies_field",
+    "passed": true
+  },
+  {
+    "name": "temperature_field_marked",
+    "passed": true
+  },
+  {
+    "name": "no_unhandled_callbacks",
+    "passed": true
+  }
+]

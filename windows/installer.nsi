@@ -37,7 +37,7 @@ Section "安裝"
  SetShellVarContext current
  RMDir /r "$INSTDIR\installer\payload"
  SetOutPath "$INSTDIR\installer"
- File /r "installer/*"
+ File /r /x "__pycache__" /x "*.pyc" "installer/*"
  DetailPrint "正在下載、建立程式與驗證，請保留開啟的進度視窗。"
  ClearErrors
  ExecWait '"$SYSDIR\cmd.exe" /D /C ""$INSTDIR\installer\START.cmd" /installer"' $0

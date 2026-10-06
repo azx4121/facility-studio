@@ -20,6 +20,8 @@ PACKAGE = Path(__file__).resolve().parent
 def verify_payload(root: Path):
     entries = json.loads((root / "payload_sha256.json").read_text(encoding="utf-8"))
     required = {
+        "LICENSE",
+        "THIRD_PARTY_NOTICES.md",
         "Facility_Studio_V5_5.py",
         "facility_studio/ahu_schema.py",
         "facility_studio/simple_desktop.py",
@@ -231,6 +233,10 @@ def main():
                     "--icon",
                     PACKAGE / "payload/facility_studio/resources/app.ico",
                     "--add-data",
+                    str(PACKAGE / "payload/LICENSE") + ":.",
+                    "--add-data",
+                    str(PACKAGE / "payload/THIRD_PARTY_NOTICES.md") + ":.",
+                    "--add-data",
                     str(PACKAGE / "payload/facility_studio/resources")
                     + ":"
                     + "facility_studio/resources",
@@ -257,6 +263,8 @@ def main():
             exe = release / "Facility_Studio_V5_5_4.exe"
             if not exe.is_file() or exe.stat().st_size < 100000:
                 raise RuntimeError("EXE build did not complete.")
+            for name in ("LICENSE", "THIRD_PARTY_NOTICES.md"):
+                shutil.copy2(PACKAGE / "payload" / name, release / name)
             print("[4/5] Checking the EXE by generating a design report...", flush=True)
             check_output(
                 exe, PACKAGE / "payload" / "Default_Project.json", release, log

@@ -15,6 +15,7 @@ commands = [
     ["tests/v552_interactions.py"],
     ["tests/simple_gui.py"],
     ["tests/v554_gui.py"],
+    ["tests/maintenance_gui.py"],
     ["Facility_Studio_V5_5.py", "--gui-smoke"],
 ]
 for command in commands:
