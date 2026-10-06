@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 import json, os, uuid
 from .errors import ValidationError
 from .utils import atomic_text
+from .platform_support import app_data_root
 
 SOURCE_TYPES = [
     "系統預設",
@@ -18,8 +19,12 @@ SOURCE_TYPES = [
 
 
 def provenance_record(source, note, value):
-    return {"source": source, "note": note[:1000], "value": str(value),
-            "recorded_at": datetime.now(timezone.utc).isoformat()}
+    return {
+        "source": source,
+        "note": note[:1000],
+        "value": str(value),
+        "recorded_at": datetime.now(timezone.utc).isoformat(),
+    }
 
 
 def validate_provenance(provenance, fields):
@@ -36,7 +41,9 @@ def validate_provenance(provenance, fields):
         ):
             raise ValidationError("參數來源格式不合法", key, "invalid_provenance")
         for name in ["value", "recorded_at"]:
-            if name in item and (not isinstance(item[name], str) or len(item[name]) > 1000):
+            if name in item and (
+                not isinstance(item[name], str) or len(item[name]) > 1000
+            ):
                 raise ValidationError("來源版本資料不合法", key, "invalid_provenance")
         if item["source"] == "原廠資料" and not item["note"].strip():
             raise ValidationError(
@@ -45,10 +52,7 @@ def validate_provenance(provenance, fields):
 
 
 def app_data():
-    root = (
-        Path(os.environ.get("LOCALAPPDATA", str(Path.home() / ".local/share")))
-        / "Facility_Studio_V5_5"
-    )
+    root = app_data_root()
     root.mkdir(parents=True, exist_ok=True)
     return root
 

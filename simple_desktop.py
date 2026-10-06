@@ -486,10 +486,16 @@ class SimpleToolsApp:
         )
         self.export_button.grid(row=0, column=3, padx=3)
         root.bind("<F5>", lambda event: self.active_page().calculate(True))
+        from .platform_support import bind_mac_shortcuts
+
+        bind_mac_shortcuts(root, calculate=lambda: self.active_page().calculate(True))
         for event in ("<MouseWheel>", "<Button-4>", "<Button-5>"):
             root.bind(event, self.wheel, add="+")
         root.bind("<Configure>", self.resize, add="+")
         root.protocol("WM_DELETE_WINDOW", self.close)
+        from .platform_support import install_mac_quit
+
+        install_mac_quit(root, self.close)
         self.show_tool("electrical")
 
     def wheel(self, event):
@@ -503,8 +509,11 @@ class SimpleToolsApp:
             ancestor = getattr(ancestor, "master", None)
         if ancestor is None:
             return
-        delta = getattr(event, "delta", 0)
-        step = -3 if getattr(event, "num", 0) == 4 or delta > 0 else 3
+        from .platform_support import scroll_units
+
+        step = scroll_units(event)
+        if not step:
+            return
         page.canvas.yview_scroll(step, "units")
         return "break"
 
@@ -567,14 +576,9 @@ class SimpleToolsApp:
 
     def configure_style(self):
         families = set(font.families(self.root))
-        self.family = next(
-            (
-                name
-                for name in ("Microsoft JhengHei", "Noto Sans CJK TC", "Segoe UI")
-                if name in families
-            ),
-            "TkDefaultFont",
-        )
+        from .platform_support import preferred_ui_font
+
+        self.family = preferred_ui_font(families)
         style = ttk.Style(self.root)
         style.theme_use("clam")
         style.configure(

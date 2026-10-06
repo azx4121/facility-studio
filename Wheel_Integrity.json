@@ -1,0 +1,156 @@
+[
+  {
+    "path": "wheels_arm64/contourpy-1.4.0-cp313-cp313-macosx_11_0_arm64.whl",
+    "package": "contourpy",
+    "version": "1.4.0",
+    "sha256": "196759a3e4db60e1546167e361090ebb6d199aa3aafc9e34ea17a5ac3b23e814",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_arm64/cycler-0.12.1-py3-none-any.whl",
+    "package": "cycler",
+    "version": "0.12.1",
+    "sha256": "85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_arm64/fonttools-4.66.1-cp313-cp313-macosx_10_13_universal2.whl",
+    "package": "fonttools",
+    "version": "4.66.1",
+    "sha256": "53e5854ea8003efec34adc0863c18ce91da923018354d27366f7fee7db928d7a",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_arm64/kiwisolver-1.5.1-cp313-cp313-macosx_11_0_arm64.whl",
+    "package": "kiwisolver",
+    "version": "1.5.1",
+    "sha256": "77a4c8187a5948d7f8795adb765a3c7b553d07d86d88e43038fc32fc1fb9a3f3",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_arm64/matplotlib-3.10.8-cp313-cp313-macosx_11_0_arm64.whl",
+    "package": "matplotlib",
+    "version": "3.10.8",
+    "sha256": "56271f3dac49a88d7fca5060f004d9d22b865f743a12a23b1e937a0be4818ee1",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_arm64/numpy-2.5.3-cp313-cp313-macosx_11_0_arm64.whl",
+    "package": "numpy",
+    "version": "2.5.3",
+    "sha256": "92f30e89b8ee0ecf363033576c422b2f58fed6a80bed0aa48dff6d14c654663e",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_arm64/packaging-26.3-py3-none-any.whl",
+    "package": "packaging",
+    "version": "26.3",
+    "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_arm64/pillow-12.3.0-cp313-cp313-macosx_11_0_arm64.whl",
+    "package": "pillow",
+    "version": "12.3.0",
+    "sha256": "d69141514cc30b774ceea5e3ed3a6635c8d8a96edf664689b890f4089111fb35",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_arm64/pyparsing-3.3.3-py3-none-any.whl",
+    "package": "pyparsing",
+    "version": "3.3.3",
+    "sha256": "ece8c00a69cf01b45d0b1dedabb469c90d8caf996d4fda40f147627a122849a4",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_arm64/python_dateutil-2.9.0.post0-py2.py3-none-any.whl",
+    "package": "python-dateutil",
+    "version": "2.9.0.post0",
+    "sha256": "a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_arm64/six-1.17.0-py2.py3-none-any.whl",
+    "package": "six",
+    "version": "1.17.0",
+    "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_x86_64/contourpy-1.4.0-cp313-cp313-macosx_10_13_x86_64.whl",
+    "package": "contourpy",
+    "version": "1.4.0",
+    "sha256": "e21d1d4a9db5b3a793649c7ab0ddb4697f2818929eec871a7b9c45fce7b2a1ea",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_x86_64/cycler-0.12.1-py3-none-any.whl",
+    "package": "cycler",
+    "version": "0.12.1",
+    "sha256": "85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_x86_64/fonttools-4.66.1-cp313-cp313-macosx_10_13_x86_64.whl",
+    "package": "fonttools",
+    "version": "4.66.1",
+    "sha256": "60f5ea17aed4262630afa43f26997ceabd6417fa05dcedf54c665f5a29193e18",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_x86_64/kiwisolver-1.5.1-cp313-cp313-macosx_10_13_x86_64.whl",
+    "package": "kiwisolver",
+    "version": "1.5.1",
+    "sha256": "1ed0f5e49d0ceff8b72190824d9e59c062fbbc02c231b853112c78474b3f5ec2",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_x86_64/matplotlib-3.10.8-cp313-cp313-macosx_10_13_x86_64.whl",
+    "package": "matplotlib",
+    "version": "3.10.8",
+    "sha256": "3f2e409836d7f5ac2f1c013110a4d50b9f7edc26328c108915f9075d7d7a91b6",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_x86_64/numpy-2.5.3-cp313-cp313-macosx_10_13_x86_64.whl",
+    "package": "numpy",
+    "version": "2.5.3",
+    "sha256": "66a78fe4556c60aceda5916f9eacd638b18e9e681016ec302dcb4682d6d4d034",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_x86_64/packaging-26.3-py3-none-any.whl",
+    "package": "packaging",
+    "version": "26.3",
+    "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_x86_64/pillow-12.3.0-cp313-cp313-macosx_10_13_x86_64.whl",
+    "package": "pillow",
+    "version": "12.3.0",
+    "sha256": "7a743ff716f746fc19a9557f60dab1600d4613255f8a7aeb3cdde4db7eb15a66",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_x86_64/pyparsing-3.3.3-py3-none-any.whl",
+    "package": "pyparsing",
+    "version": "3.3.3",
+    "sha256": "ece8c00a69cf01b45d0b1dedabb469c90d8caf996d4fda40f147627a122849a4",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_x86_64/python_dateutil-2.9.0.post0-py2.py3-none-any.whl",
+    "package": "python-dateutil",
+    "version": "2.9.0.post0",
+    "sha256": "a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427",
+    "pypi_verified": true
+  },
+  {
+    "path": "wheels_x86_64/six-1.17.0-py2.py3-none-any.whl",
+    "package": "six",
+    "version": "1.17.0",
+    "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+    "pypi_verified": true
+  }
+]

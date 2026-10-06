@@ -105,7 +105,8 @@ class MainView:
                     else f"{d['total_pa']:,.1f} Pa / {d['mmAq']:.2f} mmAq"
                 )
                 self.pd_quick.config(
-                    text=self.pressure_geometry(self.selected_pd) + f"\n{self.selected_pd}：{flow:,.1f} {unit}，流速 {d['velocity_mps']:.2f} m/s\n{pressure}｜"
+                    text=self.pressure_geometry(self.selected_pd)
+                    + f"\n{self.selected_pd}：{flow:,.1f} {unit}，流速 {d['velocity_mps']:.2f} m/s\n{pressure}｜"
                     + (
                         "含輸入設備壓差"
                         if d["equipment_included"]
@@ -160,7 +161,13 @@ class MainView:
             )
         if hasattr(self, "assumption_labels"):
             for page, label in self.assumption_labels.items():
-                keys = sorted(k for k in FIELDS if FIELDS[k]["page"] == page and not self.form_rows[k].winfo_manager() and str(self.widgets[k].cget("state")) != "disabled")
+                keys = sorted(
+                    k
+                    for k in FIELDS
+                    if FIELDS[k]["page"] == page
+                    and not self.form_rows[k].winfo_manager()
+                    and str(self.widgets[k].cget("state")) != "disabled"
+                )
                 modified = [
                     FIELDS[k]["label"] + "=" + self.variables[k].get()
                     for k in keys
@@ -193,7 +200,11 @@ class MainView:
     def pressure_geometry(self, key):
         if not self.result:
             return ""
-        d = self.result["water"][key] if key in PD_KEYS[:5] else self.result["ducts"][key]
+        d = (
+            self.result["water"][key]
+            if key in PD_KEYS[:5]
+            else self.result["ducts"][key]
+        )
         manual = self.pd[key]["manual_id_mm"].get()
         source = "手填內徑" if float(manual) > 0 else "流量自動定寸"
         if key in PD_KEYS[:5]:
@@ -211,7 +222,7 @@ class MainView:
                     "標準流量先換算管內實際流量；壓力及流速可於進階模式逐路設定。PV 壓力為絕壓。",
                     "kW 是輸入電力，HP 是機械輸出；候選線徑需再核對敷設與保護條件。",
                     "名目風量先加設計餘裕，再定寸；管形與寬高比目前共用於所有排氣系統。",
-                    "連動負荷時以熱量與 ΔT 反算水量；手填水量保留但不採用。水物性共用於全部水迴路。"
+                    "連動負荷時以熱量與 ΔT 反算水量；手填水量保留但不採用。水物性共用於全部水迴路。",
                 ][page],
                 wraplength=650,
                 style="Muted.TLabel",
@@ -237,7 +248,13 @@ class MainView:
                     row=0, column=0, sticky="w", padx=(0, 12)
                 )
                 if f["options"] == ["1", "0"]:
-                    widget = ttk.Checkbutton(line, text="啟用", variable=self.variables[key], onvalue="1", offvalue="0")
+                    widget = ttk.Checkbutton(
+                        line,
+                        text="啟用",
+                        variable=self.variables[key],
+                        onvalue="1",
+                        offvalue="0",
+                    )
                 elif f["options"]:
                     widget = ttk.Combobox(
                         line,
@@ -450,7 +467,12 @@ class MainView:
             )
         )
         self.result_labels[1].config(
-            text="設備候選：" + ("；".join(f"{k} {v} 台" for k, v in r["counts"].items() if v) or "無需求") + f"\n夏季再熱 {s['reheat_kw']:.2f} kW，加濕 {s['humid_kg_h']:.2f} kg/h；冬季加熱 {w['reheat_kw']:.2f} kW，加濕 {w['humid_kg_h']:.2f} kg/h。"
+            text="設備候選："
+            + (
+                "；".join(f"{k} {v} 台" for k, v in r["counts"].items() if v)
+                or "無需求"
+            )
+            + f"\n夏季再熱 {s['reheat_kw']:.2f} kW，加濕 {s['humid_kg_h']:.2f} kg/h；冬季加熱 {w['reheat_kw']:.2f} kW，加濕 {w['humid_kg_h']:.2f} kg/h。"
         )
         self.latent_text.set(
             f"人員 {r['latent']['people_kg_h']:.2f}＋製程 {r['latent']['process_kg_h']:.2f}＝室內合計 {r['moisture'] * 3600:.2f} kg/h\n除濕負荷參考 {r['ql']:.2f} kW；外氣水氣由空調盤管另算。"
@@ -522,17 +544,16 @@ class MainView:
         if e.widget.winfo_toplevel() != self.root:
             return
         w = e.widget
-        if isinstance(w, (tk.Text, ttk.Treeview)):
+        if isinstance(w, (tk.Text, ttk.Treeview, ttk.Combobox)):
             return
         if self.current == 8:
             return
         page = self.pages[self.current]
-        if getattr(e, "num", 0) == 4:
-            step = -3
-        elif getattr(e, "num", 0) == 5:
-            step = 3
-        else:
-            step = -1 if e.delta > 0 else 1
+        from .platform_support import scroll_units
+
+        step = scroll_units(e)
+        if not step:
+            return
         page.canvas.yview_scroll(step, "units")
         return "break"
 
@@ -568,20 +589,9 @@ class MainView:
 
     def _configure_theme(self):
         families = set(tkfont.families(self.root))
-        self.ui_font = next(
-            (
-                x
-                for x in [
-                    "Microsoft JhengHei",
-                    "Noto Sans CJK TC",
-                    "Noto Sans CJK JP",
-                    "PingFang TC",
-                    "DejaVu Sans",
-                ]
-                if x in families
-            ),
-            "TkDefaultFont",
-        )
+        from .platform_support import preferred_ui_font
+
+        self.ui_font = preferred_ui_font(families)
         st = ttk.Style(self.root)
         st.theme_use("clam")
         st.configure(

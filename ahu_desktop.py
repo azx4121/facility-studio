@@ -24,7 +24,11 @@ from .field_state import error_text
 class AHUWindow(AHUView):
 
     def document(self):
-        return dict(id=self.ahu_id, inputs=self.snapshot(), source_project_id=self.source_project_id)
+        return dict(
+            id=self.ahu_id,
+            inputs=self.snapshot(),
+            source_project_id=self.source_project_id,
+        )
 
     def remember_undo(self):
         self.undo_inputs = (copy.deepcopy(self.snapshot()), self.source_project_id)
@@ -43,7 +47,11 @@ class AHUWindow(AHUView):
         self.calculate()
 
     def make_independent(self):
-        if not messagebox.askokcancel("設為本案獨立設計", "保留目前所有單機設定，解除來源主案需求快照。\n後續回傳會明列為本案獨立設計，請自行確認服務範圍。", parent=self.win):
+        if not messagebox.askokcancel(
+            "設為本案獨立設計",
+            "保留目前所有單機設定，解除來源主案需求快照。\n後續回傳會明列為本案獨立設計，請自行確認服務範圍。",
+            parent=self.win,
+        ):
             return
         self.remember_undo()
         self.source_project_id = ""
@@ -53,7 +61,14 @@ class AHUWindow(AHUView):
     def focus_issue(self):
         key = self.bad_key
         if not key and self.result:
-            key = next((x["field"] for x in self.result["quality"]["items"] if x["status"] != "通過" and x["field"] in self.widgets), None)
+            key = next(
+                (
+                    x["field"]
+                    for x in self.result["quality"]["items"]
+                    if x["status"] != "通過" and x["field"] in self.widgets
+                ),
+                None,
+            )
         if key in self.widgets:
             self.advanced.set(True)
             self.visibility()
@@ -234,7 +249,9 @@ class AHUWindow(AHUView):
         self.win.title("空調箱｜分段式單機送審校核")
         self.win.geometry("1160x850")
         self.win.minsize(850, 600)
-        initial = self._initial_document["inputs"] if self._initial_document else NM_DEFAULTS
+        initial = (
+            self._initial_document["inputs"] if self._initial_document else NM_DEFAULTS
+        )
         self.vars = {k: tk.StringVar(value=v) for k, v in initial.items()}
         self.advanced = tk.BooleanVar(value=False)
         self.season = tk.StringVar(value="冬季")
@@ -273,9 +290,15 @@ class AHUWindow(AHUView):
                 linkbar, text="預覽回傳水量／額定電力", command=self.return_utilities
             )
             self.return_button.pack(side="left", padx=4)
-            ttk.Button(linkbar, text="設為本案獨立設計", command=self.make_independent).pack(side="left", padx=4)
-        ttk.Button(linkbar, text="定位問題", command=self.focus_issue).pack(side="right")
-        self.link_info = ttk.Label(self.win, text="", wraplength=1000, style="Muted.TLabel", padding=(14, 4))
+            ttk.Button(
+                linkbar, text="設為本案獨立設計", command=self.make_independent
+            ).pack(side="left", padx=4)
+        ttk.Button(linkbar, text="定位問題", command=self.focus_issue).pack(
+            side="right"
+        )
+        self.link_info = ttk.Label(
+            self.win, text="", wraplength=1000, style="Muted.TLabel", padding=(14, 4)
+        )
         self.link_info.pack(fill="x")
         self.status = ttk.Label(
             self.win, text="", wraplength=1020, style="Muted.TLabel", padding=(14, 5)
@@ -304,7 +327,9 @@ class AHUWindow(AHUView):
                 text=f"套用送風 22°C／{rh}%",
                 command=lambda value=rh: self.target_preset(value),
             ).pack(side="left", padx=4)
-        ttk.Button(intro, text="復原帶入", command=self.undo_changes).pack(side="left", padx=4)
+        ttk.Button(intro, text="復原帶入", command=self.undo_changes).pack(
+            side="left", padx=4
+        )
         nav = ttk.Frame(self.input_body)
         nav.pack(fill="x", pady=4)
         for label, key in [
@@ -322,16 +347,28 @@ class AHUWindow(AHUView):
             wraplength=980,
             style="Muted.TLabel",
         ).pack(fill="x", pady=8)
-        self.adopted_summary = ttk.Label(self.input_body, text="", wraplength=950, style="Warn.TLabel")
+        self.adopted_summary = ttk.Label(
+            self.input_body, text="", wraplength=950, style="Warn.TLabel"
+        )
         self.adopted_summary.pack(fill="x", pady=6)
         for title, keys in NM_GROUPS:
             box = ttk.LabelFrame(self.input_body, text=title, padding=12)
             box.pack(fill="x", pady=8)
             self.boxes.append((box, keys))
             if "逐段出口" in title:
-                ttk.Label(box, text="自動：H1 依加濕需求預熱；C1 按預冷目標（需加濕時旁通）；C2 依送風含濕比／溫度反算；H2 補足送風溫度並扣除風機熱。\n指定：直接檢核本段出口條件；旁通：出口沿用入口。入口由上一段連動，結果表另列各段實際採用的需求點。", wraplength=880, style="Muted.TLabel").pack(fill="x", pady=5)
+                ttk.Label(
+                    box,
+                    text="自動：H1 依加濕需求預熱；C1 按預冷目標（需加濕時旁通）；C2 依送風含濕比／溫度反算；H2 補足送風溫度並扣除風機熱。\n指定：直接檢核本段出口條件；旁通：出口沿用入口。入口由上一段連動，結果表另列各段實際採用的需求點。",
+                    wraplength=880,
+                    style="Muted.TLabel",
+                ).pack(fill="x", pady=5)
             elif "獨立熱水" in title:
-                ttk.Label(box, text="選擇熱水＋電熱可由熱回收優先分擔、電熱補足；回收水未上線或未填能力時，不會假定有可用熱量。", wraplength=880, style="Muted.TLabel").pack(fill="x", pady=5)
+                ttk.Label(
+                    box,
+                    text="選擇熱水＋電熱可由熱回收優先分擔、電熱補足；回收水未上線或未填能力時，不會假定有可用熱量。",
+                    wraplength=880,
+                    style="Muted.TLabel",
+                ).pack(fill="x", pady=5)
             for key in keys:
                 f = NM_FIELDS[key]
                 line = ttk.Frame(box)
@@ -354,7 +391,9 @@ class AHUWindow(AHUView):
                 w.grid(row=0, column=1, sticky="ew")
                 ttk.Label(line, text=f["unit"], width=10).grid(row=0, column=2, padx=8)
                 self.widgets[key] = w
-                help_label = ttk.Label(line, text="", wraplength=850, style="Muted.TLabel")
+                help_label = ttk.Label(
+                    line, text="", wraplength=850, style="Muted.TLabel"
+                )
                 help_label.grid(row=1, column=0, columnspan=3, sticky="w")
                 self.adoption_notes[key] = help_label
         self.output_frame, self.output_body, self.output_canvas = self.scroll_tab(
@@ -449,6 +488,9 @@ class AHUWindow(AHUView):
         self.win.protocol("WM_DELETE_WINDOW", self.close)
         self.win.bind("<Control-s>", lambda e: self.save())
         self.win.bind("<F5>", lambda e: self.calculate())
+        from .platform_support import bind_mac_shortcuts
+
+        bind_mac_shortcuts(self.win, save=self.save, calculate=self.calculate)
         self.suspended = False
         self.visibility()
         self.calculate()
@@ -482,9 +524,7 @@ class AHUWindow(AHUView):
             self.result = None
             self.clear_output()
             self.bad_key = getattr(e, "field_name", None)
-            self.status.config(
-                text=error_text(e, NM_FIELDS), style="Error.TLabel"
-            )
+            self.status.config(text=error_text(e, NM_FIELDS), style="Error.TLabel")
             self.summary.config(text="條件未成立：" + error_text(e, NM_FIELDS))
             self.export_button.configure(state="disabled")
             return
@@ -514,7 +554,9 @@ class AHUWindow(AHUView):
     def refresh_link_status(self):
         linked = self.vars["linked_main_hash"].get()
         state = "獨立送風條件；未宣告主案連動，尚未帶入快照"
-        valid_owner = not self.main_app or self.owner_project_id == self.main_app.project_id
+        valid_owner = (
+            not self.main_app or self.owner_project_id == self.main_app.project_id
+        )
         fresh = linked == "尚未連動"
         if self.main_app:
             project_name = self.main_app.variables["project_name"].get()
@@ -522,16 +564,32 @@ class AHUWindow(AHUView):
             if not valid_owner:
                 state = "所屬主案不同，回傳已停止"
             elif linked != "尚未連動":
-                fresh = self.source_project_id == self.main_app.project_id and linked == self.main_app.boundary_hash()
-                state = "與目前主案工程邊界一致" if fresh else "來源快照已過期，請重新帶入主案需求"
+                fresh = (
+                    self.source_project_id == self.main_app.project_id
+                    and linked == self.main_app.boundary_hash()
+                )
+                state = (
+                    "與目前主案工程邊界一致"
+                    if fresh
+                    else "來源快照已過期，請重新帶入主案需求"
+                )
             supported = self.main_app.variables["sys_type"].get().startswith("MAU")
-            self.link_button.configure(state="normal" if valid_owner and supported else "disabled")
-            self.return_button.configure(state="normal" if valid_owner and fresh and self.result else "disabled")
+            self.link_button.configure(
+                state="normal" if valid_owner and supported else "disabled"
+            )
+            self.return_button.configure(
+                state="normal" if valid_owner and fresh and self.result else "disabled"
+            )
             suffix = "" if supported else "；混風主案不能直接當全外氣箱，請獨立指定入口"
-            self.link_info.config(text="所屬主案：" + project_name + "｜" + state + suffix)
+            self.link_info.config(
+                text="所屬主案：" + project_name + "｜" + state + suffix
+            )
         if self.result:
             self.result["link_status"] = state
-            self.status.config(text=quality_text(self.result["quality"]), style=quality_style(self.result["quality"]))
+            self.status.config(
+                text=quality_text(self.result["quality"]),
+                style=quality_style(self.result["quality"]),
+            )
             self.set_text(nm_report(self.result))
         if self.main_app:
             self.main_app.refresh_receipts()
@@ -579,14 +637,18 @@ class AHUWindow(AHUView):
 
     def link_requirements(self):
         if not self.main_app or self.owner_project_id != self.main_app.project_id:
-            return messagebox.showerror("案件不同", "此單機不屬於目前主案，不能直接帶入。", parent=self.win)
+            return messagebox.showerror(
+                "案件不同", "此單機不屬於目前主案，不能直接帶入。", parent=self.win
+            )
         if not self.main_app.ensure_result():
             return
         try:
             updates = ahu_requirement_updates(self.main_app.result)
             if not messagebox.askokcancel(
                 "主案連動",
-                "來源主案：" + self.main_app.variables["project_name"].get() + "\n帶入夏冬入口、送風目標、乾空氣流率與冰水供回水。\n逐段指定目標與設備額定保留，可能需要調整才能符合新的送風需求。",
+                "來源主案："
+                + self.main_app.variables["project_name"].get()
+                + "\n帶入夏冬入口、送風目標、乾空氣流率與冰水供回水。\n逐段指定目標與設備額定保留，可能需要調整才能符合新的送風需求。",
                 parent=self.win,
             ):
                 return
@@ -602,10 +664,19 @@ class AHUWindow(AHUView):
         if not self.ensure():
             return
         if self.owner_project_id != self.main_app.project_id:
-            return messagebox.showerror("案件不同", "此單機屬於另一主案，回傳已停止。", parent=self.win)
+            return messagebox.showerror(
+                "案件不同", "此單機屬於另一主案，回傳已停止。", parent=self.win
+            )
         linked = self.vars["linked_main_hash"].get()
-        if linked != "尚未連動" and (self.source_project_id != self.main_app.project_id or linked != self.main_app.boundary_hash()):
-            return messagebox.showerror("來源快照已過期", "請先重新帶入目前主案需求；若要使用獨立單機設計，請明確選擇「設為本案獨立設計」。", parent=self.win)
+        if linked != "尚未連動" and (
+            self.source_project_id != self.main_app.project_id
+            or linked != self.main_app.boundary_hash()
+        ):
+            return messagebox.showerror(
+                "來源快照已過期",
+                "請先重新帶入目前主案需求；若要使用獨立單機設計，請明確選擇「設為本案獨立設計」。",
+                parent=self.win,
+            )
         try:
             preview = ahu_utility_preview(self.result)
             note = (
@@ -617,7 +688,13 @@ class AHUWindow(AHUView):
                 + "\n".join(preview["notes"])
             )
             note += "\n來源狀態：" + self.result["link_status"]
-            if apply_updates(self.main_app, preview["updates"], note, self.win, source_type="來源快照"):
+            if apply_updates(
+                self.main_app,
+                preview["updates"],
+                note,
+                self.win,
+                source_type="來源快照",
+            ):
                 self.main_app.add_receipt(self, preview["updates"])
                 self.main_app.recalculate()
         except (ValueError, KeyError) as exc:

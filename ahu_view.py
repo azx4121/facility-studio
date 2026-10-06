@@ -50,33 +50,46 @@ class AHUView:
         )
         frame.bind(
             "<MouseWheel>",
-            lambda e: canvas.yview_scroll(-1 if e.delta > 0 else 1, "units"),
+            lambda e: self.wheel(e),
         )
         return (frame, body, canvas)
 
     def wheel(self, e):
-        if isinstance(e.widget, (tk.Text, ttk.Treeview)):
+        if isinstance(e.widget, (tk.Text, ttk.Treeview, ttk.Combobox)):
             return
         selected = self.nb.nametowidget(self.nb.select())
         canvas = next(
             (w for w in selected.winfo_children() if isinstance(w, tk.Canvas)), None
         )
         if canvas:
-            step = -1 if getattr(e, "num", 0) == 4 or getattr(e, "delta", 0) > 0 else 1
+            from .platform_support import scroll_units
+
+            step = scroll_units(e)
+            if not step:
+                return
             canvas.yview_scroll(step, "units")
             return "break"
 
     def visibility(self):
         from .field_state import ahu_inactive
         from .ahu_schema import NM_DEFAULTS, NM_CONTROL_NOTES
+
         inputs = self.snapshot()
         inactive = ahu_inactive(inputs)
         seasonal = inputs["target_mode"] == "主案分季需求"
         needed = set()
         if seasonal:
-            needed.update(s + suffix for s in ["summer", "winter"] for suffix in ["_sa_t", "_sa_rh", "_flow"])
+            needed.update(
+                s + suffix
+                for s in ["summer", "winter"]
+                for suffix in ["_sa_t", "_sa_rh", "_flow"]
+            )
         for key in inputs:
-            if key.startswith(("summer_", "winter_")) and key.endswith(("_t", "_rh")) and key not in inactive:
+            if (
+                key.startswith(("summer_", "winter_"))
+                and key.endswith(("_t", "_rh"))
+                and key not in inactive
+            ):
                 needed.add(key)
         if "蒸汽" in inputs["humidifier"]:
             needed.update(["steam_capacity", "steam_kw", "steam_water"])
@@ -85,13 +98,31 @@ class AHUView:
         for tag in ["h1", "h2"]:
             if tag + "_water_mode" not in inactive:
                 needed.add(tag + "_water_mode")
-                needed.update(tag + "_hw_" + x for x in ["in", "out", "approach"] if tag + "_hw_" + x not in inactive)
+                needed.update(
+                    tag + "_hw_" + x
+                    for x in ["in", "out", "approach"]
+                    if tag + "_hw_" + x not in inactive
+                )
         for key, widget in self.widgets.items():
-            state = "disabled" if key in inactive else "readonly" if isinstance(NM_FIELDS[key]["limit"], list) else "normal"
+            state = (
+                "disabled"
+                if key in inactive
+                else (
+                    "readonly"
+                    if isinstance(NM_FIELDS[key]["limit"], list)
+                    else "normal"
+                )
+            )
             widget.configure(state=state)
             if hasattr(self, "adoption_notes"):
                 note = self.adoption_notes[key]
-                note.configure(text=("保留設定，未採用：" + inactive[key]) if key in inactive else "")
+                note.configure(
+                    text=(
+                        ("保留設定，未採用：" + inactive[key])
+                        if key in inactive
+                        else ""
+                    )
+                )
                 if key in inactive:
                     note.grid()
                 else:
@@ -105,24 +136,43 @@ class AHUView:
             self.widgets["flow_basis"].configure(textvariable=self.vars["flow_basis"])
         for box, keys in self.boxes:
             for key in reversed(keys):
-                visible = self.advanced.get() or ((key in NM_BASIC or key in needed) and key not in inactive) or key == "flow_basis"
+                visible = (
+                    self.advanced.get()
+                    or ((key in NM_BASIC or key in needed) and key not in inactive)
+                    or key == "flow_basis"
+                )
                 row = self.rows[key]
                 if not visible:
                     row.pack_forget()
                 elif not row.winfo_manager():
-                    later = keys[keys.index(key) + 1:]
-                    anchor = next((self.rows[k] for k in later if self.rows[k].winfo_manager()), None)
+                    later = keys[keys.index(key) + 1 :]
+                    anchor = next(
+                        (self.rows[k] for k in later if self.rows[k].winfo_manager()),
+                        None,
+                    )
                     opts = {"fill": "x", "pady": 4}
                     if anchor:
                         opts["before"] = anchor
                     row.pack(**opts)
-        modified = [NM_FIELDS[k]["label"] + "=" + inputs[k] for k in inputs
-                    if k not in inactive and not self.rows[k].winfo_manager() and inputs[k] != NM_DEFAULTS[k]]
+        modified = [
+            NM_FIELDS[k]["label"] + "=" + inputs[k]
+            for k in inputs
+            if k not in inactive
+            and not self.rows[k].winfo_manager()
+            and inputs[k] != NM_DEFAULTS[k]
+        ]
         if hasattr(self, "adopted_summary"):
-            self.adopted_summary.config(text=("基本畫面外仍採用：" + "；".join(modified)) if modified else "進階初估值已帶入；停用欄位只保留草稿，不參與該功能的驗證。")
+            self.adopted_summary.config(
+                text=(
+                    ("基本畫面外仍採用：" + "；".join(modified))
+                    if modified
+                    else "進階初估值已帶入；停用欄位只保留草稿，不參與該功能的驗證。"
+                )
+            )
         if hasattr(self, "control_notes"):
-            self.control_notes.config(text=NM_CONTROL_NOTES.replace("8 台 EC", inputs["fan_qty"] + " 台 EC"))
-
+            self.control_notes.config(
+                text=NM_CONTROL_NOTES.replace("8 台 EC", inputs["fan_qty"] + " 台 EC")
+            )
 
     def set_text(self, s):
         self.text.configure(state="normal")
