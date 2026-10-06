@@ -1,0 +1,114 @@
+[
+  {
+    "platform": "windows",
+    "test": "regression.py",
+    "passed": true,
+    "summary": "52 scenarios / 1247 independent checks passed; 7 expected rejections; B08 now adopts zero closed-loop static head",
+    "error": "",
+    "seconds": 0.617
+  },
+  {
+    "platform": "windows",
+    "test": "v55_features.py",
+    "passed": true,
+    "summary": "20 new numerical conditions / 93 feature checks passed",
+    "error": "",
+    "seconds": 0.323
+  },
+  {
+    "platform": "windows",
+    "test": "v552_core.py",
+    "passed": true,
+    "summary": "{\n  \"checks\": 305,\n  \"failed\": []\n}",
+    "error": "",
+    "seconds": 2.824
+  },
+  {
+    "platform": "windows",
+    "test": "simple_features.py",
+    "passed": true,
+    "summary": "42 independent-tool scenarios, 375 numerical/report checks passed",
+    "error": "",
+    "seconds": 0.052
+  },
+  {
+    "platform": "windows",
+    "test": "v554_features.py",
+    "passed": true,
+    "summary": "49 scenarios; 646 independent calculation/import/report/chart checks passed",
+    "error": "",
+    "seconds": 0.91
+  },
+  {
+    "platform": "windows",
+    "test": "maintenance_checks.py",
+    "passed": true,
+    "summary": "90 air/report conditions; 1129 maintenance checks passed",
+    "error": "",
+    "seconds": 3.704
+  },
+  {
+    "platform": "windows",
+    "test": "security_checks.py",
+    "passed": true,
+    "summary": "{\"source\": \"windows\", \"cases\": 55, \"passed\": 55, \"failed\": []}",
+    "error": "",
+    "seconds": 0.53
+  },
+  {
+    "platform": "macos",
+    "test": "regression.py",
+    "passed": true,
+    "summary": "52 scenarios / 1247 independent checks passed; 7 expected rejections; B08 now adopts zero closed-loop static head",
+    "error": "",
+    "seconds": 0.571
+  },
+  {
+    "platform": "macos",
+    "test": "v55_features.py",
+    "passed": true,
+    "summary": "20 new numerical conditions / 93 feature checks passed",
+    "error": "",
+    "seconds": 0.33
+  },
+  {
+    "platform": "macos",
+    "test": "v552_core.py",
+    "passed": true,
+    "summary": "{\n  \"checks\": 305,\n  \"failed\": []\n}",
+    "error": "",
+    "seconds": 2.341
+  },
+  {
+    "platform": "macos",
+    "test": "simple_features.py",
+    "passed": true,
+    "summary": "42 independent-tool scenarios, 375 numerical/report checks passed",
+    "error": "",
+    "seconds": 0.051
+  },
+  {
+    "platform": "macos",
+    "test": "v554_features.py",
+    "passed": true,
+    "summary": "49 scenarios; 646 independent calculation/import/report/chart checks passed",
+    "error": "",
+    "seconds": 0.807
+  },
+  {
+    "platform": "macos",
+    "test": "maintenance_checks.py",
+    "passed": true,
+    "summary": "90 air/report conditions; 1129 maintenance checks passed",
+    "error": "",
+    "seconds": 3.682
+  },
+  {
+    "platform": "macos",
+    "test": "security_checks.py",
+    "passed": true,
+    "summary": "{\"source\": \"macos\", \"cases\": 55, \"passed\": 55, \"failed\": []}",
+    "error": "",
+    "seconds": 0.507
+  }
+]

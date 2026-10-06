@@ -21,6 +21,7 @@ UninstallIcon "facility_studio/resources/app.ico"
 !define MUI_WELCOMEPAGE_TITLE "廠務簡易工具 V5.5.4"
 !define MUI_WELCOMEPAGE_TEXT "通用版・線上安裝程式$\r$\n$\r$\n安裝時會下載官方 Python 與繪圖套件，並在您的電腦建立程式及桌面捷徑。首次需連網，可能需數分鐘。$\r$\n$\r$\n支援 Windows 10/11 Intel/AMD 64 位元。$\r$\n本工具供工程初估；請依檢核結果補齊設計與原廠選型資料。"
 !insertmacro MUI_PAGE_WELCOME
+!insertmacro MUI_PAGE_LICENSE "installer/payload/LICENSE"
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
 !insertmacro MUI_UNPAGE_CONFIRM

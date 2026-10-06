@@ -1,0 +1,18 @@
+[
+  {
+    "platform": "windows",
+    "passed": true,
+    "stdout": "42 real Tk checks passed\n31 V5.5.1 targeted checks passed\n44 V5.5.2 real Tk checks passed\n58 real Tk simple-tool interaction checks passed\n69 actual Tk keyboard/chart/lighting/equipment interaction checks passed\n14 maintenance real Tk interaction checks passed\nAll desktop suites and packaged GUI smoke contract passed",
+    "stderr": "",
+    "native_windows_or_macos": false,
+    "host": "Linux with Tk 8.6 and Xvfb"
+  },
+  {
+    "platform": "macos",
+    "passed": true,
+    "stdout": "42 real Tk checks passed\n31 V5.5.1 targeted checks passed\n44 V5.5.2 real Tk checks passed\n58 real Tk simple-tool interaction checks passed\n69 actual Tk keyboard/chart/lighting/equipment interaction checks passed\n14 maintenance real Tk interaction checks passed\nAll desktop suites and packaged GUI smoke contract passed",
+    "stderr": "",
+    "native_windows_or_macos": false,
+    "host": "Linux with Tk 8.6 and Xvfb"
+  }
+]

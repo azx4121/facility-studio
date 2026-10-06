@@ -82,7 +82,7 @@ def main():
             build / "Facility Studio.app", stage / "Facility Studio.app", symlinks=True
         )
         shutil.copy2(ROOT / "README_macOS.txt", stage / "README_macOS.txt")
-        for name in ("LICENSE", "THIRD_PARTY_NOTICES.md"):
+        for name in ("LICENSE", "LICENSE_GUIDE.md", "LICENSE_LEGACY_MIT", "THIRD_PARTY_NOTICES.md"):
             shutil.copy2(ROOT / name, stage / name)
         shutil.copy2(
             ROOT / "facility_studio/resources/Equipment_Template.xlsx",

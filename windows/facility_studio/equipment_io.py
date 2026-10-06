@@ -17,6 +17,8 @@ from .utils import atomic_text
 MAX_FILE_BYTES = 20 * 1024 * 1024
 MAX_XML_BYTES = 40 * 1024 * 1024
 MAX_ROWS = 10000
+MAX_XML_DEPTH = 64
+MAX_XML_NODES = 1_000_000
 NS = {"s": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
 REL = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id"
 
@@ -39,16 +41,45 @@ class EquipmentImportError(ValidationError):
         self.system, self.row, self.column = system, row, column
 
 
+class _BoundedXMLBuilder(ET.TreeBuilder):
+    """Reject DTDs before expansion, independently of the XML byte encoding."""
+
+    def __init__(self):
+        super().__init__()
+        self.depth = 0
+        self.nodes = 0
+
+    def doctype(self, name, public_id, system_id):
+        raise EquipmentImportError("Excel XML 不接受 DTD 或實體宣告")
+
+    def start(self, tag, attrs):
+        self.depth += 1
+        self.nodes += 1
+        if self.depth > MAX_XML_DEPTH or self.nodes > MAX_XML_NODES:
+            raise EquipmentImportError("Excel XML 結構過深或節點過多")
+        return super().start(tag, attrs)
+
+    def end(self, tag):
+        result = super().end(tag)
+        self.depth -= 1
+        return result
+
+
 def _xml(archive, path):
     try:
-        data = archive.read(path)
+        with archive.open(path) as member:
+            data = member.read(MAX_XML_BYTES + 1)
     except KeyError:
         raise EquipmentImportError(f"Excel缺少必要內容：{path}") from None
-    if len(data) > MAX_XML_BYTES or b"<!DOCTYPE" in data or b"<!ENTITY" in data:
-        raise EquipmentImportError("XML內容過大或含外部實體宣告")
+    except (zipfile.BadZipFile, RuntimeError, NotImplementedError) as error:
+        raise EquipmentImportError("Excel封存內容損壞、加密或壓縮方式不支援") from error
+    if len(data) > MAX_XML_BYTES:
+        raise EquipmentImportError("Excel XML 內容過大")
     try:
-        return ET.fromstring(data)
-    except ET.ParseError:
+        return ET.fromstring(data, parser=ET.XMLParser(target=_BoundedXMLBuilder()))
+    except EquipmentImportError:
+        raise
+    except (ET.ParseError, ValueError, LookupError):
         raise EquipmentImportError("Excel XML內容損壞") from None
 
 
@@ -75,7 +106,7 @@ def _xlsx_sheets(path):
             raise EquipmentImportError("Excel解壓內容過大")
         if len({r.filename for r in records}) != len(records):
             raise EquipmentImportError("Excel含重複封存項目")
-        if any("vbaProject" in r.filename for r in records):
+        if any("vbaproject" in r.filename.casefold() for r in records):
             raise EquipmentImportError("不接受含巨集的活頁簿，請另存無巨集.xlsx")
         strings = []
         if "xl/sharedStrings.xml" in archive.namelist():

@@ -56,6 +56,8 @@ for path in modules.glob("*.py"):
 check("03_all_local_module_dependencies_present", not missing)
 required = (
     "LICENSE",
+    "LICENSE_GUIDE.md",
+    "LICENSE_LEGACY_MIT",
     "THIRD_PARTY_NOTICES.md",
     "Facility_Studio_V5_5.py",
     "facility_studio/ahu_schema.py",
@@ -64,6 +66,7 @@ required = (
     "facility_studio/air_chart.py",
     "facility_studio/equipment_schema.py",
     "facility_studio/equipment_io.py",
+    "facility_studio/json_io.py",
     "facility_studio/equipment_analysis.py",
     "facility_studio/equipment_view.py",
     "facility_studio/resources/Equipment_Template.xlsx",
@@ -102,6 +105,15 @@ with tempfile.TemporaryDirectory(prefix="facility_payload_test_") as directory:
     template.unlink()
     rejected("14_missing_template_blocked", lambda: bootstrap.verify_payload(root))
     template.write_bytes(b"fixture")
+    for index, relative in enumerate(
+        ("LICENSE", "LICENSE_GUIDE.md", "LICENSE_LEGACY_MIT", "facility_studio/json_io.py"),
+        start=16,
+    ):
+        member = root / "payload" / relative
+        member.unlink()
+        rejected(f"{index}_missing_license_or_security_member_blocked",
+                 lambda: bootstrap.verify_payload(root))
+        member.write_bytes(b"fixture")
     extra = root / "payload/facility_studio/obsolete.py"
     extra.write_bytes(b"fixture")
     rejected("06_unexpected_module_blocked", lambda: bootstrap.verify_payload(root))

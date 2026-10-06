@@ -79,7 +79,7 @@ def main():
     app_source.mkdir()
     for name in (
         "Facility_Studio_V5_5.py", "facility_studio", "Default_Project.json",
-        "LICENSE", "THIRD_PARTY_NOTICES.md",
+        "LICENSE", "LICENSE_GUIDE.md", "LICENSE_LEGACY_MIT", "THIRD_PARTY_NOTICES.md",
     ):
         source = ROOT / name
         if source.is_dir():

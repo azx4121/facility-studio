@@ -3,6 +3,7 @@ from pathlib import Path
 import copy
 import json
 import math
+from .json_io import read_json_file
 from .data import VOLTAGE_MAP
 from .quality import assess_main
 from .schema import (
@@ -237,10 +238,9 @@ def read_project(path):
     if Path(path).stat().st_size > 15000000:
         raise InputError("專案檔案超過 15 MB")
 
-    def reject(x):
-        raise InputError(f"專案不得包含 NaN 或 Infinity")
-
-    p = json.loads(Path(path).read_text(encoding="utf-8-sig"), parse_constant=reject)
+    p = read_json_file(path)
+    if not isinstance(p, dict):
+        raise InputError("專案 JSON 必須為物件")
     if p.get("kind") == "facility_workspace":
         from .workspace_store import validate_workspace
         p = validate_workspace(p)["main"]

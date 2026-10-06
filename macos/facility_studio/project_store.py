@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 import json, os, uuid
 from .errors import ValidationError
 from .utils import atomic_text
+from .json_io import read_json_file
 from .platform_support import app_data_root
 
 SOURCE_TYPES = [
@@ -85,7 +86,7 @@ def read_recovery(path):
     path = Path(path)
     if path.stat().st_size > 15_000_000:
         raise ValidationError("復原檔案過大")
-    doc = json.loads(path.read_text(encoding="utf-8-sig"))
+    doc = read_json_file(path)
     if (
         not isinstance(doc, dict)
         or doc.get("kind") != "recovery"

@@ -1,6 +1,7 @@
 import argparse
 import json
 import sys
+from .json_io import read_json_file
 from .engine import calculate, read_project
 from .reports import report
 from .schema import default_project
@@ -69,7 +70,7 @@ def main():
             if args.tool_input:
                 from pathlib import Path
 
-                raw = json.loads(Path(args.tool_input).read_text(encoding="utf-8"))
+                raw = read_json_file(args.tool_input)
                 if not isinstance(raw, dict) or set(raw) - set(inputs):
                     raise ValueError("簡易工具輸入含未知欄位或不是JSON物件")
                 inputs.update({key: str(value) for key, value in raw.items()})

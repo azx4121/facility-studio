@@ -1,6 +1,6 @@
 # Facility Studio｜廠務工程初估工具
 
-繁體中文的通用廠務工具，適合快速估算、方案比較及設備需求彙整。目前發布版本為 **V5.5.4 公開測試版**。
+繁體中文的通用廠務工具，適合快速估算、方案比較及設備需求彙整。目前發布版本為 **V5.5.4 公開測試版**。主分支另包含 2026-10-06 的安全與授權維護修訂；既有 Release 安裝包尚未更新到此修訂。
 
 ## 下載
 
@@ -73,7 +73,10 @@ Windows 原始碼位於 [windows](windows/)；macOS 原始碼位於 [macos](maco
 各平台的啟動檔為 `Facility_Studio_V5_5.py`，請保留同層的 `facility_studio` 資料夾與資源檔。
 測試與驗證紀錄分別保留於各平台的 `tests/` 與 `evidence/`；Windows 安裝器位於 `windows/installer/`，macOS 封裝腳本位於 `macos/macos/`。
 
-本專案採 [MIT 授權](LICENSE)，保留 Andy Huang 及貢獻者版權標示。允許使用、修改、散布及商用，包含閉源衍生版本；散布時須保留版權與授權聲明。
+目前原始碼採 [PolyForm Noncommercial 1.0.0＋公司內部使用附加許可](LICENSE)，保留 Andy Huang 及貢獻者版權標示。
+**允許公司用於正常工程工作、收費案件及交付計算書；軟體轉售、付費包裝、綁售及付費線上軟體服務須另行取得書面授權。**
+非商業測試與免費分享仍可進行；完整範圍及案例見 [授權說明](LICENSE_GUIDE.md)。此為公開原始碼的限制性授權，不能稱為 MIT 或 OSI 開源授權。
+先前已按 MIT 發布的版本（含 `f8e92ea`）仍保有原授權；歷史條文見 [LICENSE_LEGACY_MIT](LICENSE_LEGACY_MIT)。
 第三方執行環境及套件保留各自的原有授權文件，詳 [第三方元件說明](THIRD_PARTY_NOTICES.md)。
 
 本次維護修正低溫露點反算、大氣壓防呆與工程資料表驗證，詳 [測試與修正紀錄](docs/2026-10-06-review.md)。既有 Release 與標籤保留；下載區的既有安裝包尚未替換成本次維護版。
@@ -89,7 +92,10 @@ python windows/tests/v552_core.py
 python windows/tests/simple_features.py
 python windows/tests/v554_features.py
 python windows/tests/maintenance_checks.py
+python windows/tests/security_checks.py
 ```
 
 macOS 原始碼測試將路徑中的 `windows/` 改為 `macos/`；若系統指令名稱為 `python3`，請使用 `python3`。
 測試會更新各平台 `evidence/` 內的驗證紀錄。介面回歸另需可用的 Tk 顯示服務及測試用 Pillow／Matplotlib；數值測試無需先開啟 GUI。
+
+安全與授權維護：XML 於解析器層阻擋 DTD／實體；JSON 限制檔案大小、64 層深度，拒絕重複欄位與非有限數值。測試記錄見 [維護紀錄](docs/2026-10-06-security-license.md)。
