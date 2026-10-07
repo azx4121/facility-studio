@@ -270,10 +270,59 @@ def run(root, app, workbench, check, pump, output=None):
     root.deiconify()
     root.lift()
     pump()
-    check("English action buttons fit the visible desktop", lambda: require(
-        app.export_button.winfo_rootx() + app.export_button.winfo_width() <= root.winfo_screenwidth()
-        and app.export_button.winfo_rooty() + app.export_button.winfo_height() <= root.winfo_screenheight() - 30,
-        "Action buttons extend beyond the usable display"))
+    check(
+        "English action buttons fit the visible desktop",
+        lambda: require(
+            app.export_button.winfo_rootx() + app.export_button.winfo_width()
+            <= root.winfo_screenwidth()
+            and app.export_button.winfo_rooty() + app.export_button.winfo_height()
+            <= root.winfo_screenheight() - 30,
+            "Action buttons extend beyond the usable display",
+        ),
+    )
+
+    def readable_navigation():
+        from .localized_tk import ttk
+
+        style = ttk.Style(root)
+        aqua = root.tk.call("tk", "windowingsystem") == "aqua"
+        for button in app.nav.values():
+            if button.winfo_class() == "TButton":
+                name = button.cget("style")
+                foreground = style.lookup(name, "foreground")
+                background = style.lookup(name, "background")
+            else:
+                require(not aqua, "Aqua classic buttons ignore the dark background")
+                foreground, background = button.cget("fg"), button.cget("bg")
+
+            def luminance(color):
+                components = [value / 65535 for value in root.winfo_rgb(color)]
+                linear = [
+                    (
+                        value / 12.92
+                        if value <= 0.04045
+                        else ((value + 0.055) / 1.055) ** 2.4
+                    )
+                    for value in components
+                ]
+                return sum(
+                    value * weight
+                    for value, weight in zip(linear, (0.2126, 0.7152, 0.0722))
+                )
+
+            light, dark = sorted(
+                (luminance(foreground), luminance(background)), reverse=True
+            )
+            require(
+                (light + 0.05) / (dark + 0.05) >= 4.5,
+                "Navigation text contrast is too low",
+            )
+        return True
+
+    check(
+        "Navigation labels have readable native foreground/background contrast",
+        readable_navigation,
+    )
     if output is not None:
         from PIL import ImageGrab
 

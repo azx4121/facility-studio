@@ -410,19 +410,13 @@ class SimpleToolsApp:
         )
         self.nav = {}
         for key in ("electrical", "duct", "gas", "lighting"):
-            button = tk.Button(
+            # Aqua ignores the classic Button background, leaving white text
+            # on a pale native surface. The clam ttk style owns both colors.
+            button = ttk.Button(
                 side,
                 text=TOOLS[key]["title"],
                 command=lambda k=key: self.show_tool(k),
-                relief="flat",
-                anchor="w",
-                padx=16,
-                pady=11,
-                bg="#142c43",
-                fg="white",
-                activebackground="#087d85",
-                activeforeground="white",
-                font=(self.family, 11),
+                style="Simple.Nav.TButton",
             )
             button.pack(fill="x", padx=8, pady=3)
             self.nav[key] = button
@@ -593,6 +587,26 @@ class SimpleToolsApp:
             ".", font=(self.family, 10), background="#f1f5f9", foreground="#18334d"
         )
         style.configure("TButton", padding=(12, 8))
+        style.configure(
+            "Simple.Nav.TButton",
+            background="#142c43",
+            foreground="white",
+            anchor="w",
+            padding=(16, 11),
+            font=(self.family, 11),
+            borderwidth=0,
+            relief="flat",
+        )
+        style.map(
+            "Simple.Nav.TButton",
+            background=[("active", "#087d85")],
+            foreground=[("active", "white")],
+        )
+        style.configure(
+            "Selected.Simple.Nav.TButton",
+            background="#087d85",
+            font=(self.family, 11, "bold"),
+        )
         style.configure("TEntry", padding=6)
         style.configure("TCombobox", padding=5)
         style.configure("Simple.Title.TLabel", font=(self.family, 21, "bold"))
@@ -640,7 +654,13 @@ class SimpleToolsApp:
         page = self.pages[tool]
         page.grid(row=0, column=0, sticky="nsew")
         for key, button in self.nav.items():
-            button.configure(bg="#087d85" if key == tool else "#142c43")
+            button.configure(
+                style=(
+                    "Selected.Simple.Nav.TButton"
+                    if key == tool
+                    else "Simple.Nav.TButton"
+                )
+            )
         self.more_choice.set(
             TOOLS[tool]["title"] if tool in ("water", "air", "units") else "更多工具…"
         )

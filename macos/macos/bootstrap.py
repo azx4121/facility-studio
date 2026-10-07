@@ -102,15 +102,37 @@ def main():
             log.write(details)
         else:
             print(details, file=sys.stderr)
+        # Automated diagnostics must finish with a nonzero exit code rather
+        # than wait indefinitely for a person to close a modal error dialog.
+        if "--self-test" in sys.argv:
+            return 2
         try:
             import tkinter as tk
             from tkinter import messagebox
 
+            try:
+                from facility_studio import i18n
+
+                i18n.initialize()
+                english = i18n.language() == "en"
+                error_text = i18n.translate(error)
+            except ImportError:
+                english, error_text = True, str(error)
+            title = (
+                "Facility Studio — Startup error"
+                if english
+                else "Facility Studio 啟動未完成"
+            )
+            guidance = (
+                "Keep the complete app together and extract the original package again.\nError log: "
+                if english
+                else "請將完整 App 保持在同一位置，並重新解壓縮懶人包。\n錯誤記錄："
+            )
             root = tk.Tk()
             root.withdraw()
             messagebox.showerror(
-                "Facility Studio 啟動未完成",
-                f"{error}\n\n請將完整 App 保持在同一位置，並重新解壓縮懶人包。\n錯誤記錄：{logs / 'startup-error.log'}",
+                title,
+                f"{error_text}\n\n{guidance}{logs / 'startup-error.log'}",
                 parent=root,
             )
             root.destroy()
