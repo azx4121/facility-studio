@@ -1,6 +1,6 @@
 # 電力計算器：設備 kW 換算電流、NFB 候選與線徑
 
-[回到工具指南](README.md) · [下載 Facility Studio](../../README.md#下載)
+[English](electrical.en.md) · [回到工具指南](README.md) · [下載 Facility Studio](../../README.md#下載)
 
 **Electrical load, breaker and cable calculator.** 可獨立計算單相／三相設備的負載電流、NFB AT、每相銅線候選及壓降。kW 填「電氣輸入功率」；馬達軸功率或 HP 須先依效率換算，不能直接當成用電。
 
@@ -33,3 +33,4 @@
 此需求**不在本工具的完整求解範圍**。負載電流與 NFB AT 不等於故障電流，也不等於分斷能力 Icu／Ics。需取得供電短路容量、變壓器阻抗、電纜阻抗及保護曲線，再使用具相應模型的工具與工程覆核。
 
 案例輸入：[01](../examples/01-electrical.json)、[02](../examples/02-electrical.json)。[完整反算記錄](../examples/calculation-results-windows.json)。
+

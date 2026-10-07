@@ -1,5 +1,7 @@
 # V5.5.5｜繁體中文 / English
 
+[English](2026-10-07-bilingual.en.md) · [文件中心](README.md) · [目前下載](../README.md#下載)
+
 主畫面右上角選擇 **English** 或 **繁體中文**。已開啟的完整工程工作台、單台空調箱與設備表視窗會同步更新；不需重新輸入數字或重開軟體，下次啟動會記住語言。
 
 Select **English** in the top-right language selector. Open workbench, AHU and equipment windows update together; your inputs stay in place. The choice is remembered on restart.
@@ -84,3 +86,4 @@ Hosted acceptance confirms the tested machines and delivered files. It does not 
 Windows 尚無商用 Authenticode 簽章；macOS 使用 ad-hoc 完整性簽章，未使用 Developer ID／Apple 公證。下載與首次開啟方式見 [中文首頁](../README.md) 或 [English quick start](../README.en.md)。
 
 本版延續既有安全、macOS 執行環境及離線 Windows 修正；歷史提交、Release 和資產保留，授權保持不變。
+

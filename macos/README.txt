@@ -1,100 +1,103 @@
-Facility Studio V5.5.4｜macOS 離線懶人包｜mac.1
+Facility Studio V5.5.5｜macOS 中英雙語版 mac.1
 
-先這樣開啟
-1. 在 Mac 完整解壓縮 Facility_Studio_V5_5_4_macOS_OneClick.zip。
-2. 雙擊其中的「Facility Studio.app」。
-3. 若想安裝到使用者應用程式資料夾，雙擊 Install_on_Mac.command。
-   安裝位置：~/Applications/Facility Studio V5.5.4.app。
-   也可以自行把 App 拖進「應用程式」，或從解壓縮資料夾直接開啟。
+建議使用 DMG：三個步驟
+1. 打開 Facility_Studio_V5_5_5_macOS_mac1.dmg。
+2. 把「Facility Studio」拖到旁邊的「Applications／應用程式」。
+3. 從「應用程式」打開 Facility Studio。安裝完成後可退出磁碟映像檔。
 
-不用另外安裝 Python，不用 Homebrew，不必輸入終端機指令。
-程式所需的 Python、Tk、Matplotlib、NumPy、Pillow 已包含於 App。
-計算、圖形、Excel／CSV 匯入與報告匯出均可離線使用。
-目標：macOS 11.0 以上，Apple Silicon（M 系列）與 Intel x86_64。
-同一份 App 包含兩種原生架構；這是封裝目標，尚未完成 Mac 實機驗收。
+不需要另外安裝 Python、Homebrew 或套件；日常使用可離線操作。
+請先關閉舊版 App。專案與復原資料不會因更換 App 被刪除。
+DMG 的程式已包含完整授權及第三方元件文件。
 
-首次開啟可能需要系統允許
-這份 App 使用 ad-hoc 完整性簽章，尚未取得 Apple Developer ID 與 Apple 公證。
-若系統說無法驗證開發者，先嘗試開啟一次，再到：
-「系統設定 → 隱私權與安全性 → 仍要打開」，確認開啟此 App。
-公司管制的 Mac 可能需要 IT 允許。
-若顯示檔案損毀或驗證失敗，請重新下載並執行 Verify_on_Mac.command 檢查。
-本包不會自動關閉 Gatekeeper，也不會移除系統安全標記。
-Apple 開啟指引：https://support.apple.com/en-us/102445
+首次開啟：若 macOS 提示開發者無法驗證
+本包已使用 Apple codesign 進行 ad-hoc 完整性簽署，但沒有 Apple Developer ID
+與 Apple 公證。第一次先嘗試開啟 App，再到：
+「系統設定 → 隱私權與安全性 → 仍要打開」，依畫面完成確認。
+公司管理的 Mac 可能需要 IT 允許。
+Apple 官方操作：https://support.apple.com/en-us/102445
+若顯示「已損毀」、架構不相容或開啟後無視窗，請下載本修正版 ZIP，
+執行下述 Verify_on_Mac.command，保留錯誤記錄。
+本包不關閉 Gatekeeper，不移除隔離標記，不改動全域安全設定。
 
-已保留 V5.5.4 的功能
-• 首頁獨立工具：電力／NFB／線徑、方圓風管、CDA／特氣、照明照度。
-• 更多工具：冷熱水、空氣狀態與即時空氣線圖、單位換算。
-• Excel／CSV 設備表匯入：電力、PCW、CDA、N2、EXHAUST、DI、PV。
-• 完整工程工作台、空調箱各段條件、預冷／預熱／再冷／再熱／加濕。
-• 專案儲存／讀取／復原、進階參數、互鎖與資料檢核、報告及圖形匯出。
-• 原 FY 圖示與通用版名稱。
-• 已包含公開設備範本；也能在「設備表匯入」視窗直接匯出新範本。
+完整 ZIP 懶人包：選用
+1. 用 Mac Finder 完整解壓縮 Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip。
+2. 可直接開啟資料夾中的 Facility Studio.app。
+3. 或雙擊 Install_on_Mac.command，安裝至：
+   ~/Applications/Facility Studio V5.5.5.app。
+   原同名安裝會保留為 Backup；安裝過程不需管理員密碼。
+ZIP 另含 Source_and_Verification.zip、設備表範本、簽章及原生驗證記錄。
+若 command 被系統攔下，也可直接把 App 拖到「應用程式」，再按上述允許流程。
 
-本次 Mac 調整
-• App 原生啟動器在主程序載入內含 Python，維持 Mac 的 Dock 與主執行緒。
-• Python 與第三方套件依 CPU 選擇；不使用電腦原本的 Python 環境。
-• 修正觸控板捲動幅度；零幅度事件不會讓頁面自行移動。
-• 下拉選單的滾動不會帶動外面的表單。
-• 中文介面優先使用 Mac 的 PingFang TC／Heiti TC 字體。
-• 主案與單機支援 Command-S；主案支援 Command-O；Command-Return 執行計算。
-• Mac 的「結束」選單走原有未儲存專案的處理流程。
-• 專案復原與記錄改用 Mac 的使用者資料位置，不寫入 App 內。
-• 計算公式、工程資料表、既有輸入與報告內容沿用 V5.5.4。
+本次新增
+• 主畫面右上選繁體中文／English；欄位、選項、說明、驗證提示與報告同步切換。
+• 英文模式可匯出七系統英文 Excel／CSV 範本；舊中文版設備表仍可讀取。
+• 切換時保留數值、計算與舊專案；下次開啟沿用語言偏好。
+
+保留的 macOS 修復
+• 修正 Tcl/Tk 設定腳本未納入資源封印，導致 Apple 原生檢查及安裝失敗。
+• 所有 Mach-O、內層 framework、外層 framework 及 App 由 Apple 原生工具簽署。
+• Matplotlib 查詢系統字型的外部指令加上 5 秒時限，逾時改用原有目錄搜尋。
+• 安裝及診斷失敗時清楚顯示記錄位置，保留完整錯誤訊息。
+• 包含主分支的 XML／JSON 匯入安全檢查、工程資料表與低溫露點修訂。
+詳細執行環境修改及雜湊見 MAC_RUNTIME_PATCHES.md、Verification/。
+
+保留的功能
+• 獨立工具：電力／NFB／線徑、方圓風管、CDA／特氣、照明照度。
+• 冷熱水、空氣狀態與即時空氣線圖、單位換算。
+• Excel／CSV 設備表：電力、PCW、CDA、N2、EXHAUST、DI、PV。
+• 工程工作台、多台空調箱各段條件、預冷／預熱／再冷／再熱／加濕與熱源配置。
+• 專案儲存／讀取／復原、進階條件、互鎖檢核、報告及圖形匯出。
+• FY 圖示、通用版名稱、Mac 中文字型及 Command-S／Command-O 等快捷鍵。
 
 設備表範本
-Facility_Studio_V5_5_4_Equipment_Template.xlsx 有說明與七個系統工作表。
-黃色欄位填設備資料；第一列範例預設未啟用，不會算入總量。
-完成後在「設備表匯入」選 Excel 或 CSV，查看總需求及各群組分析。
-插座數是點位數；不要把設備 kW 再重複乘以插座數。
-不同電壓與相別、不同排氣種類會分開分析。
-這是初估與方案比較工具；既有報告會列出需要現場／原廠資料覆核的項目。
+Facility_Studio_Equipment_Template.xlsx 含七個系統工作表與填寫說明。
+黃色欄位填設備資料；範例預設未啟用，要計算請將「啟用(1/0)」設為 1。
+不同電壓、相別及排氣種類會分開彙整；插座數是點位數，設備 kW 不再乘插座數。
+本程式不會自動上傳您的專案或診斷資料。
 
-驗證範圍
-已執行：52 組原工程情境／1247 項獨立檢查；20 組延伸數值條件／93 項；
-305 項互鎖核心檢查；42 組簡易工具情境／375 項；49 組設備匯入等條件／646 項；
-244 項實際 Tk 介面操作；37 項 Mac 介面與路徑相容性檢查。
-Tk 介面測試在 Linux/Xvfb 執行；Mac 平台選擇條件以模擬方式測試。
-封裝另檢查官方 CPython 與 PyPI 檔案 SHA256、Mach-O 架構、動態函式庫路徑、
-程式簽章頁雜湊與資源封條、ZIP 內容／執行權限／相對連結。
-所有可執行相依檔案均包含於 App，系統函式庫由 macOS 提供。
+驗證與支援範圍
+App 為 Universal：Apple Silicon（M 系列）及 Intel x86_64；封裝最低版本為 macOS 11。
+發布流程先在 Apple Silicon 執行七種命令列工具，再於兩種 CPU 的 macOS 15
+原生環境檢查 Apple 深度簽章、Tk Aqua、七種工具介面、Matplotlib 繪圖、
+設備匯入及完整工程工作台。
+實際交付 ZIP 重新解壓縮後、DMG 掛載後也會再次簽章檢查與介面驗證。
+只有兩種 CPU 的交付驗證皆通過，才會建立本修訂的新 Release。
+macOS 11～14、macOS 27 Beta、Finder 下載隔離提示、企業管理政策、實體數字
+鍵盤／觸控板、Retina 視覺與 Excel for Mac 填表未納入這次雲端驗收。
+不能以雲端測試通過取代使用者電腦的確認。
 
-仍待完成：Apple 原生 codesign 驗證、Mac Finder 首次開啟、實體數字鍵盤、
-觸控板、Retina 顯示，以及 Mac 版 Excel 實際填表／儲存／匯入的驗收。
-無法把上述 Linux 及靜態檢查視為已在 Mac 執行成功。
-
-選用的 Mac 實機驗證
-雙擊 Verify_on_Mac.command：
-先使用 Apple codesign 深度檢查 App，再執行原生 CPU、Tk Aqua、Matplotlib 線圖、
-七種簡易工具、完整工作台、Excel 範本與設備匯入等測試。
+本機診斷：有問題才執行
+從完整 ZIP 解壓縮資料夾雙擊 Verify_on_Mac.command。
 結果存於 ~/Library/Logs/Facility_Studio_V5_5/：
 Mac_Acceptance.json、Mac_Signature_Check.txt、Mac_SelfTest_Console.txt。
-只有該 Mac 實際跑過，才會產生實機驗收紀錄。
-驗證工具不會上傳您的資料，也不會更動您既有的工程專案。
+若驗證失敗，提供上述記錄及 macOS 版本、CPU 類型即可繼續定位。
+診斷使用暫存測試資料，不更動既有工程專案。
 
-資料與錯誤記錄
+使用者資料
 專案復原：~/Library/Application Support/Facility_Studio_V5_5/Recovery/
 介面錯誤：~/Library/Application Support/Facility_Studio_V5_5/error.log
 啟動記錄：~/Library/Logs/Facility_Studio_V5_5/startup.log
 啟動失敗：~/Library/Logs/Facility_Studio_V5_5/startup-error.log
+安裝記錄：~/Library/Logs/Facility_Studio_V5_5/Install_on_Mac.log
 繪圖快取：~/Library/Caches/Facility_Studio_V5_5/matplotlib/
-移動或更新 App 不會刪除這些使用者資料。
-再次安裝時，原 App 會保留為 Backup；請先關閉正在執行的舊版。
 
-給維護者
-Source_and_Verification.zip 包含 Python 原始碼、C 啟動器、封裝／檢查程式與證據。
-Python 入口為 Facility_Studio_V5_5.py，需與 facility_studio 資料夾一起使用。
-macos/prepare_runtime.py 會依官方雜湊抓取並抽出 CPython framework 與指定架構套件，
-並以 Zig 編譯雙架構啟動器；建置用途需 Python、Zig 0.16.0、Pillow 及 rcodesign 0.29.0。
-macos/build_bundle.py 建立 App；macos/verify_bundle.py 重建頁面與資源雜湊。
-詳細建置方法見 macos/BUILDING.md。一般使用者不用執行建置。
-rcodesign 0.29.0 的 verify 指令對 ad-hoc 空 CMS 有已知解析警告；本次另以獨立
-頁面／資源雜湊核對，Apple codesign 的真正驗證仍由 Mac 實機工具執行。
+授權
+允許公司內部正常工程工作、收費工程案件及計算書交付；軟體轉售、付費包裝、
+綁售或付費線上軟體服務需另行取得書面授權。完整條款以 LICENSE 為準。
+已按 MIT 發布的歷史版本權利保留；第三方元件沿用各自原授權。
+工程結果用於初估與方案比較，依現場／原廠資料完成正式設計覆核。
 
-第三方授權與來源
-CPython、Tcl／Tk 與各套件的原始授權文件保留在 App 相應位置。
-CPython：https://www.python.org/downloads/release/python-31315/
-Mac Python 說明：https://docs.python.org/3/using/mac.html
-Py_BytesMain：https://docs.python.org/3.13/c-api/init.html#c.Py_BytesMain
-Apple Gatekeeper：https://support.apple.com/en-us/102445
-rcodesign：https://gregoryszorc.com/docs/apple-codesign/stable/apple_codesign_rcodesign_signing.html
+維護者：建置方式見 macos/BUILDING.md。
+版本與問題回報：https://github.com/azx4121/facility-studio
+
+V5.5.5: Select Traditional Chinese / English at the top right. Inputs and results remain unchanged; your language preference is saved.
+No separate Python installation is needed. Open the DMG and drag Facility Studio into Applications.
+English mode also exports English equipment templates. Both languages remain compatible.
+
+English quick start
+1. Open the DMG and drag Facility Studio to Applications.
+2. Launch Facility Studio, then choose English in the top-right selector.
+3. Use each calculator independently; no Python installation or internet is needed.
+4. In Equipment schedules, export the English template, enter actual equipment and set Enabled (1/0) to 1 before importing.
+If macOS blocks the first launch, follow Apple Settings > Privacy & Security > Open Anyway. The app is ad-hoc signed; it is not Developer ID notarized.
+

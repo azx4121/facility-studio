@@ -1,16 +1,22 @@
-廠務簡易工具 V5.5.4｜通用版｜Windows 離線修訂 win.1｜2026-10-07
+廠務簡易工具 V5.5.5｜通用版｜Windows 中英雙語離線修訂 win.1｜2026-10-07
 
-本版更新
+V5.5.5 語言切換
+主畫面右上可選繁體中文／English，欄位、選項、提示、圖表、TXT／HTML 報告與新匯出的設備範本會同步切換；既有數字、專案與公式保持一致。
+English: choose English at the top right. Newly exported templates use English; Chinese schedules remain accepted. The preference is saved.
+目前下載與英文安裝說明：https://github.com/azx4121/facility-studio/blob/main/README.en.md
+雙語原生驗收：https://github.com/azx4121/facility-studio/blob/main/docs/2026-10-07-bilingual.md
+
+保留的 V5.5.4 功能更新
 • 右側數字鍵盤小數點統一輸入「.」，支援選取文字取代；一般Delete及左側小數點保留正常行為。
 • 溫度差與溫度分開說明；Kv／Cv明列為閥門通流係數，不是管徑。
 • 空氣狀態工具直接顯示即時線圖、RH曲線及目前點位；無效輸入會清除舊點位。
 • 照明體積模式明列「m³ ÷ 同一空間淨高＝地板面積m²」；切換面積／坪／長寬／體積保持同一面積。
 • 新增設備表範本與Excel／CSV匯入：電力、PCW、CDA、N2、EXHAUST、DI、PV。
-首頁四項工具及完整工程工作台保留。新版驗證詳Changes_and_Verification.html與evidence。
+首頁四項工具及完整工程工作台保留。V5.5.5 最新驗證詳根目錄 docs/2026-10-07-bilingual.md；Changes_and_Verification.html 與原 evidence 保留 V5.5.4 歷史驗證。
 
 安裝與開啟
-1. 完整解壓縮 Facility_Studio_V5_5_4_Windows_Offline_OneClick.zip。
-2. 雙擊 Facility_Studio_V5_5_4_Windows_Offline.exe。
+1. 完整解壓縮 Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip。
+2. 雙擊 Facility_Studio_V5_5_5_Windows_Offline.exe。
 3. 已內含Python、Tk與繪圖套件；不需另裝Python，不需連網，無須管理員。
 4. 也可單獨下載EXE直接使用；初次開啟請等候內建套件展開。
 
@@ -98,7 +104,7 @@ PV：支援Torr(abs)／kPa(abs)／mbar(abs)，模型限1~760Torr；列標準量�
 測試通過不表示正式廠房設計已核准。
 
 原始碼與驗證
-Source_and_Verification.zip包含全部程式、工程表、FY圖示、測試、數值JSON、案例報告及截圖。
+目前 Windows 完整 ZIP 的 Source 資料夾包含應用原始碼、工程表、FY圖示與測試；舊 Source_and_Verification.zip 是歷史交付方式。
 入口Facility_Studio_V5_5.py與facility_studio資料夾必須放在一起。
 CMD（已有Python 3.13 x64）：
   cd /d "你的解壓縮資料夾"
@@ -113,7 +119,9 @@ CMD（已有Python 3.13 x64）：
 獨立電力工具：
   py -3.13 Facility_Studio_V5_5.py --tool electrical --report power.txt --result power.json
 測試：tests\simple_features.py、tests\simple_gui.py，以及既有regression.py、v55_features.py、v552_core.py、gui_features.py、v551_fixes.py、v552_interactions.py、packaging_checks.py。
-自動建立Windows應用EXE：雙擊installer\START.cmd。外層Setup.exe重建另需NSIS 3.x，再執行build_release.py。
+目前離線發行的維護者建置：winrelease/BUILDING.md 使用原生 Windows 與鎖定套件，產出 EXE、ZIP、SHA256SUMS，並需完成原生驗收。
+下列為舊線上安裝器與自訂 EXE 的開發方式，非一般使用者安裝步驟。
+歷史自動建立Windows應用EXE：雙擊installer\START.cmd。外層Setup.exe重建另需NSIS 3.x，再執行build_release.py。
 手動建立Windows EXE：
   py -3.13 -m pip install "pyinstaller>=6,<7" "matplotlib>=3.8,<4"
   py -3.13 -m PyInstaller --noconfirm --clean --onefile --windowed --name Facility_Studio_V5_5_4 --icon facility_studio\resources\app.ico --add-data "facility_studio\resources:facility_studio/resources" --hidden-import matplotlib.backends.backend_tkagg --collect-submodules facility_studio Facility_Studio_V5_5.py
@@ -128,5 +136,6 @@ PyInstaller：https://pyinstaller.org/en/stable/usage.html
 溫度差／NIST：https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-8
 Kv／Cv／Spirax Sarco：https://www.spiraxsarco.com/learn-about-steam/control-hardware-electric-pneumatic-actuation/control-valve-sizing-for-water-systems
 標準與實際壓縮空氣流量／NRCan：https://natural-resources.canada.ca/energy-efficiency/energy-star/energy-efficiency-reference-guide-compressed-air
-各項實際結果見Changes_and_Verification.html與evidence。安裝器無商業程式碼簽章。
+V5.5.4 各項原始結果見 Changes_and_Verification.html 與 evidence；V5.5.5 驗收另見上述最新文件。安裝器無商業程式碼簽章。
 DESIGNED BY ANDY HUANG ©
+

@@ -1,6 +1,6 @@
 # Facility Studio — HVAC & MEP Engineering Calculators
 
-[繁體中文](README.md) · [Worked examples](docs/guides/README.md) · [Downloads](https://github.com/azx4121/facility-studio/releases) · [Report a problem](https://github.com/azx4121/facility-studio/issues)
+[繁體中文](README.md) · [Documentation](docs/README.en.md) · [Worked examples](docs/guides/README.en.md) · [Downloads](https://github.com/azx4121/facility-studio/releases) · [Report a problem](https://github.com/azx4121/facility-studio/issues)
 
 Facility Studio by **azx4121 / Andy Huang** is a Traditional Chinese / English desktop application for preliminary HVAC, electrical and facility utility calculations. The calculators can be used independently; a complete workbench supports project comparisons and seasonal AHU stage calculations. This repository is unrelated to other products or businesses with the same name.
 
@@ -15,26 +15,51 @@ Facility Studio by **azx4121 / Andy Huang** is a Traditional Chinese / English d
 | macOS | [V5.5.5 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.1/Facility_Studio_V5_5_5_macOS_mac1.dmg) | Drag Facility Studio into Applications; Apple Silicon and Intel |
 | macOS complete package | [V5.5.5 ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.1/Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip) | Includes application, source, equipment templates and diagnostics |
 
-Select **English** in the top-right language selector. Open windows, field labels, choices, guidance, charts and TXT/HTML reports switch immediately; the choice is remembered on restart. Engineering inputs and formulas stay unchanged. User-entered names and notes retain their original text. Newly exported Excel/CSV templates use the selected language; both Chinese and English templates can be imported. See the [bilingual guide and verification](docs/2026-10-07-bilingual.md). See the [Chinese installation guide](README.md#安裝與開啟) for startup and security prompts. The Windows executable has no commercial Authenticode signature; the macOS app uses ad-hoc integrity signing, without Developer ID or notarization.
+Select **English** in the top-right language selector. Open windows, field labels, choices, guidance, charts and TXT/HTML reports switch immediately; the choice is remembered on restart. Engineering inputs and formulas stay unchanged. User-entered names and notes retain their original text. Newly exported Excel/CSV templates use the selected language; both Chinese and English templates can be imported. See the [bilingual guide and verification](docs/2026-10-07-bilingual.en.md). See [installation and first launch](#installation-and-first-launch) for startup and security prompts. The Windows executable has no commercial Authenticode signature; the macOS app uses ad-hoc integrity signing, without Developer ID or notarization.
 
 Actual native English interface:
 
 ![Facility Studio English electrical sizing on macOS](docs/images/macos-electrical-en.png)
 
+## Installation and first launch
+
+### Windows
+
+1. Download the standalone EXE, or extract the complete ZIP fully before running it.
+2. Double-click `Facility_Studio_V5_5_5_Windows_Offline.exe`. First launch may take time while embedded libraries unpack.
+3. Choose **English** at the top right. Python, pip, compilation and internet access are not required for normal use.
+
+Windows 10/11 on Intel/AMD x64 are support targets; native release acceptance used Windows Server 2022/2025 x64. Windows ARM and 32-bit Windows were not accepted. Administrator permission is not required for ordinary use. The old V5.5.4 beta `Setup.exe` is a historical online installer, not the current startup method.
+
+If startup fails, the complete ZIP includes `Verify_on_Windows.cmd`. Logs are under `%LOCALAPPDATA%\Facility_Studio_V5_5\Logs`. Diagnostics do not upload data or overwrite engineering projects. Check the official release and `SHA256SUMS.txt` if security software blocks an unsigned download; keep antivirus enabled and follow your organization's policy.
+
+### macOS
+
+1. Open `Facility_Studio_V5_5_5_macOS_mac1.dmg`.
+2. Drag **Facility Studio** into **Applications**.
+3. Launch from Applications, then choose **English** at the top right. Python and Homebrew are not needed; normal use is offline.
+4. If the first launch is blocked because the developer cannot be verified, try launching once, then follow **System Settings → Privacy & Security → Open Anyway**, as described in [Apple's official guidance](https://support.apple.com/en-us/102445).
+
+The app is Universal for Apple Silicon and Intel. Native acceptance used macOS 15 on both architectures; macOS 11+ is the packaging target, not evidence that every version/device was tested. It is ad-hoc integrity signed without Developer ID/notarization. Managed Macs may need IT approval.
+
+The complete ZIP can also be extracted in Finder and its App opened directly. `Install_on_Mac.command` installs to `~/Applications/Facility Studio V5.5.5.app` and preserves an existing installation as Backup. Close the old app first; replacing the app does not delete saved projects or recovery data.
+
+For startup/signature errors, run `Verify_on_Mac.command` from the complete ZIP and retain the logs under `~/Library/Logs/Facility_Studio_V5_5/`. It uses temporary test data without modifying existing engineering projects. Do not change signed files inside the App.
+
 ## What it calculates
 
 | Need | Inputs and outputs | Example |
 | --- | --- | --- |
-| Electrical load and cable candidates | Input kW, single/three-phase supply, PF and operating conditions → current, NFB AT, conductor candidate and voltage drop | [10 kW, 380 V](docs/guides/electrical.md#case-01) |
-| Rectangular and round duct sizing | Airflow and maximum velocity → both sizes and actual velocities; a known route permits a static-pressure budget check | [3,000 CMH](docs/guides/duct.md#case-03) |
-| CDA / nitrogen pipe sizing | Standard flow, gauge pressure and velocity limit → actual volume flow and reference inner diameter | [800 SLPM, 6 bar(g)](docs/guides/gas-vacuum.md#case-05) |
-| Process vacuum | Standard flow and absolute pressure → actual volume flow and a velocity-based cross section | [150 Torr(abs)](docs/guides/gas-vacuum.md#case-07) |
-| Average illuminance and lamp count | Area or volume plus height, fixture lumens, utilization and maintenance factors → average lux or number of fixtures | [90 m³ room](docs/guides/lighting.md#case-08) |
-| Cooling/heating water | Flow or kW and supply/return ΔT → capacity, flow and velocity-based pipe candidate | [100 kW, ΔT 5 K](docs/guides/water.md#case-11) |
-| Psychrometrics and live chart | Dry-bulb temperature, RH and atmospheric pressure → humidity ratio, enthalpy, dew point, wet bulb and plotted point | [35°C, 70% RH](docs/guides/psychrometrics.md#case-12) |
-| Engineering unit conversion | Airflow, liquid flow, pressure, thermal power, length, temperature, temperature difference and Kv/Cv | [CFM / CMH](docs/guides/units.md#case-14) |
-| Equipment schedules | Excel/CSV input for electricity, PCW, CDA, N2, EXHAUST, DI and PV → separate demand groups | [Batch analysis](docs/guides/equipment.md) |
-| AHU / MAU stages | Seasonal preheat, precool, water-wash humidification, recool and reheat; hot-water/electric heating and separate steam humidification options | [Capacity comparison](docs/guides/ahu.md#case-18) |
+| Electrical load and cable candidates | Input kW, single/three-phase supply, PF and operating conditions → current, NFB AT, conductor candidate and voltage drop | [10 kW, 380 V](docs/guides/electrical.en.md#case-01) |
+| Rectangular and round duct sizing | Airflow and maximum velocity → both sizes and actual velocities; a known route permits a static-pressure budget check | [3,000 CMH](docs/guides/duct.en.md#case-03) |
+| CDA / nitrogen pipe sizing | Standard flow, gauge pressure and velocity limit → actual volume flow and reference inner diameter | [800 SLPM, 6 bar(g)](docs/guides/gas-vacuum.en.md#case-05) |
+| Process vacuum | Standard flow and absolute pressure → actual volume flow and a velocity-based cross section | [150 Torr(abs)](docs/guides/gas-vacuum.en.md#case-07) |
+| Average illuminance and lamp count | Area or volume plus height, fixture lumens, utilization and maintenance factors → average lux or number of fixtures | [90 m³ room](docs/guides/lighting.en.md#case-08) |
+| Cooling/heating water | Flow or kW and supply/return ΔT → capacity, flow and velocity-based pipe candidate | [100 kW, ΔT 5 K](docs/guides/water.en.md#case-11) |
+| Psychrometrics and live chart | Dry-bulb temperature, RH and atmospheric pressure → humidity ratio, enthalpy, dew point, wet bulb and plotted point | [35°C, 70% RH](docs/guides/psychrometrics.en.md#case-12) |
+| Engineering unit conversion | Airflow, liquid flow, pressure, thermal power, length, temperature, temperature difference and Kv/Cv | [CFM / CMH](docs/guides/units.en.md#case-14) |
+| Equipment schedules | Excel/CSV input for electricity, PCW, CDA, N2, EXHAUST, DI and PV → separate demand groups | [Batch analysis](docs/guides/equipment.en.md) |
+| AHU / MAU stages | Seasonal preheat, precool, water-wash humidification, recool and reheat; hot-water/electric heating and separate steam humidification options | [Capacity comparison](docs/guides/ahu.en.md#case-18) |
 
 Static pressure alone does not uniquely size a duct. Pipe pressure and velocity alone do not size a gas line without flow. Electrical kW means **electrical input**, not motor shaft output. The worked examples state the adopted defaults and distinguish calculation requirements from verified installed equipment performance.
 
@@ -42,14 +67,19 @@ This is not a BIM/CAD authoring package, a complete pipe-network solver, or shor
 
 ## Verification and source
 
-The repository retains numerical and report regression evidence. V5.5.5 Windows was tested natively on Windows Server 2022 and 2025; V5.5.5 macOS was tested on Apple Silicon and Intel macOS 15. These hosted checks do not establish compatibility with every end-user device or enterprise policy. See the [V5.5.5 bilingual verification](docs/2026-10-07-bilingual.md), [original Windows offline evidence](docs/2026-10-07-windows-offline.md) and [macOS launch repair evidence](docs/2026-10-06-macos-repair.md).
+The repository retains numerical and report regression evidence. V5.5.5 Windows was tested natively on Windows Server 2022 and 2025; V5.5.5 macOS was tested on Apple Silicon and Intel macOS 15. These hosted checks do not establish compatibility with every end-user device or enterprise policy. See the [V5.5.5 bilingual verification](docs/2026-10-07-bilingual.en.md), [original Windows offline evidence](docs/2026-10-07-windows-offline.md) and [macOS launch repair evidence](docs/2026-10-06-macos-repair.md).
 
-The [20 worked scenarios](docs/guides/README.md) include 18 applicable calculations and two out-of-scope controls. The example verifier runs both source distributions on the current test host; it is distinct from native OS acceptance and from search discoverability tests.
+The [20 worked scenarios](docs/guides/README.en.md) include 18 applicable calculations and two out-of-scope controls. The example verifier runs both source distributions on the current test host; it is distinct from native OS acceptance and from search discoverability tests.
 
 Application source is in [windows](windows/) and [macos](macos/). Launch `Facility_Studio_V5_5.py` with its sibling package and resource files. Python is needed only for source development, not for running the bundled downloads.
 
+## Report a problem
+
+Use [GitHub Issues](https://github.com/azx4121/facility-studio/issues). Include software version, OS version and CPU, tool name, reproduction steps, every input value/unit, expected/actual result, and relevant screenshots or diagnostic logs. Use synthetic equipment data and remove client secrets.
+
 ## License
 
-This is **source-available**, licensed under [PolyForm Noncommercial 1.0.0 plus the Internal Business Use Additional Permission](LICENSE). Normal internal company engineering work and paid engineering projects with delivered reports are permitted. Selling, renting, paid bundling or paid hosted access to the software requires separate written permission. See [LICENSE_GUIDE.md](LICENSE_GUIDE.md) for examples and the exact English license for terms.
+This is **source-available**, licensed under [PolyForm Noncommercial 1.0.0 plus the Internal Business Use Additional Permission](LICENSE). Normal internal company engineering work and paid engineering projects with delivered reports are permitted. Selling, renting, paid bundling or paid hosted access to the software requires separate written permission. See the [English licensing guide](LICENSE_GUIDE.en.md) for examples and the exact English license for terms.
 
 This is not MIT or an OSI-approved open-source license. Historical MIT releases retain their original rights, documented in [LICENSE_LEGACY_MIT](LICENSE_LEGACY_MIT). Third-party packages keep their own licenses.
+

@@ -1,6 +1,6 @@
 # 照明照度計算器：空間 m²／m³、燈具流明、Lux 與盞數
 
-[回到工具指南](README.md) · [下載](../../README.md#下載)
+[English](lighting.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
 **Average illuminance and fixture-count calculator.** 開啟「照明照度」，選「估算照度」或「反算燈數」，再選面積m²、坪、長×寬或體積m³。體積需要同一空間淨高，才能得到 `照明面積=體積/淨高`；不是要求把體積欄填面積。
 
@@ -24,3 +24,4 @@
 U、M及100 lm/W都是案例假設；應依燈具、反射率、安裝高度、清潔及老化條件確認。本工具估平均照度，不提供配光檔模擬、眩光、工作面各點照度或均勻度保證。
 
 案例輸入：[08](../examples/08-lighting.json)、[09](../examples/09-lighting.json)。[反算記錄](../examples/calculation-results-windows.json)。
+

@@ -1,6 +1,6 @@
 # 空氣線圖計算機：乾球、RH、濕球、露點、焓與含濕比
 
-[回到工具指南](README.md) · [下載](../../README.md#下載)
+[English](psychrometrics.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
 **Psychrometric calculator with a live humidity-ratio chart.** 開啟「其他常用快算 → 空氣狀態／線圖」，填乾球°C與相對濕度%RH，數值與對應點位即時更新。進階大氣壓預設101.325 kPa(abs)，可依當地壓力調整；曲線跟隨目前壓力。快算入口是乾球＋RH；完整工作台另有其他空氣狀態組合。
 
@@ -29,3 +29,4 @@ RH=0%時不存在有限露點，軟體不以假數值代替。冬夏盤管容量
 ![Windows 空氣線圖快算，25°C及50%RH](../images/windows-air.png)
 
 案例輸入：[12](../examples/12-air.json)、[13](../examples/13-air.json)。反算另以Buck飽和水蒸氣壓關聯式核對含濕比／焓，容許0.3%近似差異，見[記錄](../examples/calculation-results-windows.json)。
+

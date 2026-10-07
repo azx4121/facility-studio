@@ -1,6 +1,6 @@
 # 工程單位換算：CFM／CMH、溫度與溫差、壓力、Kv／Cv
 
-[回到工具指南](README.md) · [下載](../../README.md#下載)
+[English](units.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
 **Offline engineering unit converter.** 「其他常用快算 → 單位換算」選物理量、數值及原單位，就顯示等值結果。可換算風量、水量、壓力、冷熱功率、長度、溫度、溫度差及閥門流量係數。
 
@@ -24,3 +24,4 @@ Kv／Cv是閥門通流係數：Kv以水在壓差1 bar下的m³/h表示，Cv(US)�
 單次基本換算可以直接解答；需要重複比較、離線使用或把結果連到工程計算時，這個入口更有用。
 
 案例輸入：[14](../examples/14-units.json)、[15](../examples/15-units.json)。[反算記錄](../examples/calculation-results-windows.json)。
+

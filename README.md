@@ -1,6 +1,6 @@
 # Facility Studio｜HVAC／MEP 廠務工程計算工具
 
-[English](README.en.md) · [20個操作情境與公式](docs/guides/README.md) · [下載](#下載) · [問題回報](https://github.com/azx4121/facility-studio/issues)
+[English](README.en.md) · [文件中心](docs/README.md) · [20個操作情境與公式](docs/guides/README.md) · [下載](#下載) · [問題回報](https://github.com/azx4121/facility-studio/issues)
 
 **azx4121／Andy Huang 維護的繁體中文／英文桌面工具**，可獨立使用電力配線、風管尺寸、CDA／N2管徑、照明Lux、冷熱水、空氣線圖及工程單位換算，也能匯入Excel／CSV彙整七種設備需求。Windows／macOS下載後可離線運算，內含Python執行環境。此倉庫與其他同名產品／工作室無關。
 
@@ -44,7 +44,7 @@
 
 **先確認資料基準：**電力kW是電氣輸入；風管靜壓不是尺寸公式；CDA／N2須有流量，表壓與絕壓分開；照明Lux不是燈具流明；m³須除淨高才能得到m²。每篇案例列出條件、公式、結果及適用範圍。
 
-以下為Windows原生驗收的真實10 kW快算畫面，非示意介面：
+以下為 Windows 原生驗收的真實 10 kW 中文快算畫面；英文及 macOS 原生畫面見[雙語驗證](docs/2026-10-07-bilingual.md)，非示意介面：
 
 ![Facility Studio 電力配線：10 kW三相380 V、NFB20 AT、每相5.5 mm²](docs/images/windows-electrical.png)
 
@@ -71,7 +71,7 @@
 
 本版通過 Apple 原生完整性簽章檢查，但使用 ad-hoc 簽章，沒有 Developer ID／Apple 公證。企業管理的 Mac 可能需要 IT 允許。
 ZIP 也可完整解壓縮後直接開啟 App，或執行 `Install_on_Mac.command` 安裝到使用者應用程式資料夾。請先關閉舊版；更新不會刪除專案與復原資料。
-舊 `v5.5.4-mac.1` 原始包在 Apple 原生檢查中失敗；本版保留 `v5.5.4-mac.2` 的修正。[修正與驗證紀錄](docs/2026-10-06-macos-repair.md) 保留重現證據。
+早期 V5.5.4 mac.1 封裝在 Apple 原生檢查中失敗；本版保留 `v5.5.4-mac.2` 的修正。[修正與驗證紀錄](docs/2026-10-06-macos-repair.md) 保留重現證據。
 
 ## 可以做什麼
 
@@ -92,11 +92,11 @@ ZIP 也可完整解壓縮後直接開啟 App，或執行 `Install_on_Mac.command
 
 ## 測試狀態與適用範圍
 
-已完成數值情境、報告反算及 Linux 的實際 Tk 介面回歸測試，以及 Windows 安裝器檔案檢查。
+已完成數值情境、報告反算及實際 Tk 介面回歸；V5.5.5 另有中英資料一致性檢查、兩平台原生交付驗收與公開下載檔雜湊核對。歷史 Windows 安裝器檢查另行保留。
 
-V5.5.5 macOS 發布須通過 **Apple Silicon 與 Intel macOS 15 原生雲端驗證**：Apple 深度簽章、Tk Aqua、七種獨立工具、設備表匯入、完整工作台與 Matplotlib 繪圖。實際交付 ZIP 重新解壓縮、DMG 掛載後再次驗證。
+V5.5.5 macOS 已通過 **Apple Silicon 與 Intel macOS 15 原生雲端驗證**：Apple 深度簽章、Tk Aqua、七種獨立工具、設備表匯入、完整工作台與 Matplotlib 繪圖。實際交付 ZIP 重新解壓縮、DMG 掛載後再次驗證。
 
-V5.5.5 Windows 發布須通過 Windows Server 2022／2025 x64 原生雲端驗證：同一份 EXE 與解壓縮 ZIP，外部 Python 移出 PATH、EXE 對外連線被防火牆封鎖後，仍完成七種工具、設備表、原生 Tk 與完整工作台驗收。Windows10／11 為支援目標，使用者實機、企業政策與實體數字鍵盤仍須個別確認。
+V5.5.5 Windows 已通過 Windows Server 2022／2025 x64 原生雲端驗證：同一份 EXE 與解壓縮 ZIP，外部 Python 移出 PATH、EXE 對外連線被防火牆封鎖後，仍完成七種工具、設備表、原生 Tk 與完整工作台驗收。Windows10／11 為支援目標，使用者實機、企業政策與實體數字鍵盤仍須個別確認。
 
 封裝目標為 macOS 11 以上；macOS 11～14、macOS 27 Beta、Finder 下載隔離提示、企業管理政策、實體鍵盤／觸控板及 Retina 視覺仍須使用者電腦確認。
 macOS ZIP 包含 `Verify_on_Mac.command`，可產生本機驗收與錯誤記錄；不會上傳資料或更動既有工程專案。
@@ -152,3 +152,4 @@ macOS 原始碼測試將路徑中的 `windows/` 改為 `macos/`；若系統指�
 測試會更新各平台 `evidence/` 內的驗證紀錄。介面回歸另需可用的 Tk 顯示服務及測試用 Pillow／Matplotlib；數值測試無需先開啟 GUI。
 
 安全與授權維護：XML 於解析器層阻擋 DTD／實體；JSON 限制檔案大小、64 層深度，拒絕重複欄位與非有限數值。測試記錄見 [維護紀錄](docs/2026-10-06-security-license.md)。
+

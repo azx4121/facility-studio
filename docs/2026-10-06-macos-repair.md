@@ -1,5 +1,8 @@
 # macOS 啟動修復與原生交付驗證｜2026-10-06
 
+> **歷史紀錄：**以下保留當時版本與提交的測試、限制及雜湊，不代表目前下載狀態。現行版本為 **V5.5.5 中英雙語版**，見[最新下載](../README.md#下載)、[雙語原生驗收](2026-10-07-bilingual.md)及[目前授權](../LICENSE_GUIDE.md)。
+> Historical record; see [current English downloads](../README.en.md#download-and-run) and [V5.5.5 verification](2026-10-07-bilingual.en.md).
+
 適用版本：V5.5.4 mac.2。保留 V5.5.4 功能、FY 圖示、專案格式、提交紀錄及歷史 Release。
 新的下載採用當前安全與授權維護原始碼。mac.1 原始資產未替換。
 
@@ -56,3 +59,4 @@ Tcl/Tk 的 tclConfig.sh、tclooConfig.sh、tkConfig.sh 位於框架的版本根�
 macOS 11～14、macOS 27 Beta、實體數字鍵盤／觸控板、Retina 視覺、公司管理政策、
 Finder 隔離提示及 Excel for Mac 填表流程未包含在本次驗收。
 若使用者仍無法開啟，需提供實際錯誤與 ZIP 內 Verify_on_Mac.command 的本機記錄。
+

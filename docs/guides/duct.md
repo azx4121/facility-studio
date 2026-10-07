@@ -1,6 +1,6 @@
 # 風管尺寸計算器：風量、方管、圓管與靜壓預算
 
-[回到工具指南](README.md) · [下載](../../README.md#下載)
+[English](duct.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
 **Rectangular / round duct sizing and static-pressure budget.** 「風管尺寸」輸入 CMH／CFM／L/s 和可用管路靜壓；進階可調風速、寬高比與最不利路徑。基本風速上限8 m/s、方管寬高比上限2；這是初估參考，並非所有送風、酸鹼排氣或噪音條件的適用值。
 
@@ -36,3 +36,4 @@
 這個快算路徑假設尺寸與流量沿線不變；完整多支路、各段尺寸、污染物處理、風機曲線與濾網終阻力另核。不得把設備端要求靜壓的最大值當成全管網 ESP。
 
 案例輸入：[03](../examples/03-duct.json)、[04](../examples/04-duct.json)。[反算記錄](../examples/calculation-results-windows.json)。
+

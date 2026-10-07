@@ -1,15 +1,15 @@
-# Native macOS release building (mac.2)
+# Native macOS release building (V5.5.5 mac.1)
 
-The mac.1 download passed byte-level checks but failed Apple's native deep
+The original V5.5.4 mac.1 package passed byte-level checks but failed Apple's native deep
 signature validation on both macOS 15 architectures. Static verification must
-not be treated as native release acceptance. The original release is retained.
+not be treated as native release acceptance. Historical assets are retained. V5.5.5 includes the repaired runtime and bilingual presentation; [current verification](../../docs/2026-10-07-bilingual.en.md) records the actual public files. These commands are for developers; normal users use the [bundled downloads](../../README.en.md#download-and-run).
 
 ## Shipping build
 
 On a native Mac, from the repository root:
 
 ```sh
-python3 macos/macos/build_native_release.py --output /absolute/path/fresh-mac2-build
+python3 macos/macos/build_native_release.py --output /absolute/path/fresh-mac555-build
 ```
 
 No Zig or third-party signing tool is needed for this rebuild. The builder:
@@ -21,7 +21,9 @@ No Zig or third-party signing tool is needed for this rebuild. The builder:
    documented five-second Matplotlib discovery limits, and updates RECORD.
 4. Signs Mach-O files, nested frameworks, the outer framework and app with Apple
    `codesign`; requires `--verify --deep --strict` to pass.
-5. Executes all seven CLI tools and native GUI/Excel/equipment acceptance.
+5. Executes all seven CLI tools and native GUI/Excel/equipment acceptance,
+   including language changes, readonly choices and invalid-input export blocking.
+   The workflow also runs bilingual parity and worked-example checks.
 6. Creates the delivery ZIP with `ditto`, extracts it again, checks its native
    signature and executes the extracted app. Creates a DMG, mounts it read-only,
    verifies its app and repeats native acceptance before detaching.
@@ -31,8 +33,8 @@ To validate those exact delivery files on a second Mac architecture:
 
 ```sh
 python3 macos/macos/verify_native_release.py \
-  --package /absolute/path/Facility_Studio_V5_5_4_macOS_mac2_OneClick.zip \
-  --dmg /absolute/path/Facility_Studio_V5_5_4_macOS_mac2.dmg \
+  --package /absolute/path/Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip \
+  --dmg /absolute/path/Facility_Studio_V5_5_5_macOS_mac1.dmg \
   --checksums /absolute/path/SHA256SUMS.txt \
   --output /absolute/path/second-mac-evidence
 ```
@@ -40,7 +42,10 @@ python3 macos/macos/verify_native_release.py \
 The workflow `.github/workflows/macos-native-release.yml` uses Apple Silicon
 macOS 15 to build and Intel macOS 15 to execute the same ZIP and DMG. On the
 repair branch it only tests. On main, publication runs only after both jobs pass;
-it creates a new `v5.5.4-mac.2` release without modifying old release assets or tags.
+the publisher targets `v5.5.5-mac.1` without replacing existing public assets or moving tags.
+For a future release, update version and output names in the builder, verifier,
+publisher and workflow together; do not try to overwrite the already published
+v5.5.5 files after a source change.
 GitHub upload sizes and SHA-256 digests must match before the draft is published.
 
 These are ad-hoc integrity signatures, not Developer ID or notarization.
@@ -109,3 +114,4 @@ ZIP delivery must retain Unix executable permissions and symlink entries.
 The historical ZIP builder is `macos/make_package.py`; ordinary Python ZIP
 extraction may turn symlinks into text files, so its byte-verification routine
 recreates them using their stored Unix file types.
+

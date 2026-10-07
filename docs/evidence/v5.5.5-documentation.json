@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "base_commit": "769b779d1553c28065fbfc2566b015cb4c10b39d",
+  "markdown_files": 46,
+  "links_checked": 435,
+  "relative_links_checked": 374,
+  "current_asset_links_checked": 8,
+  "errors": [],
+  "checked_at_utc": "2026-10-07T09:00:33.239378+00:00",
+  "scope": "Documentation paths/anchors/images/tables/language links and current asset names; current host numerical/report checks, not new native OS acceptance.",
+  "source_and_example_git_blobs_matched": 228,
+  "source_cases": {
+    "windows": {
+      "applicable_cases": 18,
+      "negative_controls": 2,
+      "checks_passed": 121
+    },
+    "macos": {
+      "applicable_cases": 18,
+      "negative_controls": 2,
+      "checks_passed": 121
+    }
+  },
+  "english_cli_examples": [
+    "01-electrical",
+    "12-air"
+  ],
+  "license_terms_changed": false,
+  "release_asset_bytes_changed": false,
+  "github_pages_enabled": false
+}

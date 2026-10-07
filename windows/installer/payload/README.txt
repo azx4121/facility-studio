@@ -1,3 +1,8 @@
+歷史線上安裝器 payload 說明｜非目前 V5.5.5 離線安裝步驟
+目前請下載 V5.5.5 EXE／ZIP；不需另裝 Python 或連網。
+Current bilingual offline downloads: https://github.com/azx4121/facility-studio/blob/main/README.en.md
+以下保留舊版流程，供歷史重現；既有功能說明與原始驗收範圍保持原文。
+
 廠務簡易工具 V5.5.4｜通用版｜2026-10-05
 
 本版更新

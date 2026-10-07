@@ -1,5 +1,8 @@
 # Windows win.1：離線直接執行版
 
+> **歷史紀錄：**以下保留當時版本與提交的測試、限制及雜湊，不代表目前下載狀態。現行版本為 **V5.5.5 中英雙語版**，見[最新下載](../README.md#下載)、[雙語原生驗收](2026-10-07-bilingual.md)及[目前授權](../LICENSE_GUIDE.md)。
+> Historical record; see [current English downloads](../README.en.md#download-and-run) and [V5.5.5 verification](2026-10-07-bilingual.en.md).
+
 舊 Windows 懶人包是在使用者電腦下載 Python、pip 套件後編譯 EXE。
 本版改由原生 Windows 建置並事先驗收，交付的 EXE 已包含 CPython 3.13.15、
 Tk、Matplotlib、NumPy、Pillow 與全部應用程式資源。下載後可直接執行，
@@ -66,3 +69,4 @@ Windows10／11實體電腦、Windows ARM或32位元完成驗收。
 商用程式碼簽章、SmartScreen、企業管理政策及實體輸入裝置仍須現場確認。
 `Verify_on_Windows.cmd`可在本機離線診斷，不設定防火牆、不上傳資料、不覆寫專案。
 一鍵 EXE 首次展開內建套件可能稍需等候。
+

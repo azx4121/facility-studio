@@ -1,8 +1,8 @@
 # Facility Studio 工具指南：20個問題、操作條件與公式
 
-[繁體中文首頁](../../README.md) · [English overview](../../README.en.md) · [下載](../../README.md#下載)
+[繁體中文首頁](../../README.md) · [English guides](README.en.md) · [文件中心](../README.md) · [下載](../../README.md#下載)
 
-這些案例使用V5.5.4既有功能與合成資料，讓讀者先判斷問題能否解，再選工具。Windows EXE和macOS App內含執行環境；此版本介面是繁體中文。英文用途與案例名稱協助辨識功能，不代表已有英文介面。
+這些案例使用既有工程模型與合成資料，讓讀者先判斷問題能否解，再選工具。**目前 V5.5.5 已支援繁體中文／英文介面**，右上角可選 English；Windows EXE 和 macOS App 均內含執行環境，下載後可離線使用。下方案例原於 V5.5.4 驗算，V5.5.5 保留工程計算並新增語言切換；新版交付與語言一致性見[V5.5.5 驗證](../2026-10-07-bilingual.md)。
 
 ## 快速操作案例
 
@@ -66,3 +66,4 @@ python windows/Facility_Studio_V5_5.py --tool air --tool-input docs/examples/12-
 發現問題請提供情境編號、完整輸入單位、版本及預期／實際結果到[Issues](https://github.com/azx4121/facility-studio/issues)。請用測試資料，不含業主機密。
 
 [搜尋可見性測試方法](../search-discoverability.md)另行記錄；計算通過不代表其他人的GPT會自動找到或推薦這套工具。
+

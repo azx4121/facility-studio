@@ -1,6 +1,6 @@
 # CDA／N2 與 PV 管徑初估：標準流量、實際流量與絕對壓
 
-[回到工具指南](README.md) · [下載](../../README.md#下載)
+[English](gas-vacuum.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
 **Compressed air / nitrogen / process vacuum flow and pipe calculators.** 管徑需要「流量＋壓力＋允許流速」，只有壓力與流速不能決定管徑。「CDA／特氣管徑」快算接受CDA、N2及Ar；其他氣體與PV使用完整工程工作台。快算是理想氣體、指定流速的截面初估，沒有完整可壓縮管路壓降模型。
 
@@ -36,3 +36,4 @@
 此為**製程真空體積流量初估**，不是高真空、導通率、抽空時間或幫浦性能選型。需另外取得泵曲線、管路導通率、漏氣／放氣量及外壓屈曲資料；Torr／kPa／mbar切換不會把絕壓變成表壓。完整工作台的本路壓力與遠端最低壓力須符合供氣上下限。
 
 案例輸入：[05](../examples/05-gas.json)、[06](../examples/06-gas.json)；PV完整條件保留在[情境07](../examples/scenarios.json)。[反算記錄](../examples/calculation-results-windows.json)。
+

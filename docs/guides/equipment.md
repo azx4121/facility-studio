@@ -1,8 +1,8 @@
 # Excel／CSV 設備需求分析：電力、PCW、CDA、N2、EXHAUST、DI、PV
 
-[回到工具指南](README.md) · [下載](../../README.md#下載)
+[English](equipment.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
-**Equipment-schedule demand analysis.** 開啟主畫面右上「設備表匯入」，先「匯出公檔範本」，依設備填值，再匯入分析。完整懶人包也有範本；[原始範本](../../windows/facility_studio/resources/Equipment_Template.xlsx)可下載。Excel內有七個系統；CSV依所選系統分析。
+**Equipment-schedule demand analysis.** 開啟主畫面右上「設備表匯入」，先「匯出公檔範本」，依設備填值，再匯入分析。完整懶人包也有範本；[原始範本](../../windows/facility_studio/resources/Equipment_Template.xlsx)可下載。先選 English 再匯出即可取得英文欄位／說明的範本；包內與原始範本可能仍為中文，兩種語言均可匯入。Excel內有七個系統；CSV依所選系統分析。
 
 1. 每台設備填編號、名稱、供應群組、台數、同時使用率及系統數據。
 2. 要計算的設備設「啟用(1/0)」為1；範本示例預設0，避免無意納入。
@@ -43,3 +43,4 @@ DI額外循環不乘同時率；水質與供回水路徑另核。完整工作台
 公用系統按供應群組分開；酸、鹼、有機及一般排氣依類型彙總，不能因分析表加總而自行混接。氣體標準流量會先統一到25°C／101.325 kPa(abs)，再以群組最低已填絕壓、最高溫度及最低速度上限定寸。
 
 完整案例資料：[16與17](../examples/scenarios.json)。[解析、分組及反算記錄](../examples/calculation-results-windows.json)。
+

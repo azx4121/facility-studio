@@ -1,5 +1,7 @@
 # Facility Studio 使用與分享範圍
 
+[English](LICENSE_GUIDE.en.md) · [專案首頁](README.md)
+
 目前授權是 **PolyForm Noncommercial 1.0.0，加上 Facility Studio 公司內部使用附加許可 1.0**。
 完整英文條款在 [LICENSE](LICENSE)；這份中文說明協助理解，不能取代條款。
 這是公開原始碼、允許公司工作使用、限制軟體商品化的授權，不是 MIT，也不是 OSI 認定的開源授權。
@@ -28,7 +30,7 @@
 
 Python、Matplotlib、NumPy 與其他第三方元件維持各自授權，不能改成此專案的限制。
 公司使用自己的工程資料和計算結果，不會因本授權而被要求公開業主資料。
-既有 `v5.5.4-beta.1` Release 與標籤保留；Windows `v5.5.4-win.1` 與 macOS `v5.5.4-mac.2` 已包含目前安全與授權維護。舊發布資產沒有覆寫。
+既有 `v5.5.4-beta.1` Release 與標籤保留；目前 Windows **v5.5.5-win.1** 與 macOS **v5.5.5-mac.1** 已包含安全、授權維護與中英雙語功能。舊發布資產沒有覆寫。
 授權與簽署是不同事項；本次修正沒有提供 Windows 發行者簽章或 Apple Developer ID／公證。
 
 ## 法律範圍
@@ -38,3 +40,4 @@ Python、Matplotlib、NumPy 與其他第三方元件維持各自授權，不能�
 
 參考原文：[PolyForm Noncommercial](https://polyformproject.org/licenses/noncommercial/1.0.0)、
 [OSI 定義](https://opensource.org/osd)、[變更授權須考量既有權利](https://opensource.guide/legal/)。
+

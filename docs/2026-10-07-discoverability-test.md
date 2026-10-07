@@ -1,5 +1,8 @@
 # 2026-10-07｜20個自然查詢的搜尋與解題驗證
 
+> **歷史紀錄：**以下保留當時版本與提交的測試、限制及雜湊，不代表目前下載狀態。現行版本為 **V5.5.5 中英雙語版**，見[最新下載](../README.md#下載)、[雙語原生驗收](2026-10-07-bilingual.md)及[目前授權](../LICENSE_GUIDE.md)。
+> Historical record; see [current English downloads](../README.en.md#download-and-run) and [V5.5.5 verification](2026-10-07-bilingual.en.md).
+
 公開內容更新已完成：[PR #4](https://github.com/azx4121/facility-studio/pull/4)，測試時main為`9a0a3e9a7b6dec1dc5955b74cee76586027f19bc`。本次沒有改工程引擎、LICENSE條文、下載資產或既有歷史。
 
 **結果：18個情境適合用軟體初估／分析，2個不在功能範圍；20個自然查詢在兩個搜尋引擎中都沒有回傳本倉庫。4個帶名稱／帳號的對照查詢也未命中。** 這只能描述本次回傳結果，不能證明索引狀態，也不能推論其他人的GPT一定會或不會推薦。
@@ -67,3 +70,4 @@ AHU案例確認冬季H1需求約573 kW、已配置400 kW不足；熱濕守恆通
 優先判斷需求是否吻合與公式／限制是否可靠，而不是追求每題都導向本工具。一次穩定公式或單位換算可以直接答；工具下載、重複比較與設備批次分析才比較需要查產品用途與目前版本。
 
 參考：[OpenAI網路搜尋](https://learn.chatgpt.com/docs/web-search)、[搜尋爬蟲](https://developers.openai.com/api/docs/bots)。官方說明不提供本倉庫推薦保證；更改公開README也不會更改所有ChatGPT的行為。
+

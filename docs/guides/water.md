@@ -1,6 +1,6 @@
 # 冷熱水計算器：PCW／CHW 水量、kW、RT、ΔT 與管徑
 
-[回到工具指南](README.md) · [下載](../../README.md#下載)
+[English](water.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
 **Cooling-water / chilled-water flow and heat calculator.** 開啟「其他常用快算 → 冷熱水快算」，選「已知水量」或「已知熱量」。基本採清水密度1,000 kg/m³、比熱4.1868 kJ/(kg·K)、水速上限1.5 m/s；流量可用LPM、US GPM或m³/h。
 
@@ -23,3 +23,4 @@
 候選僅符合指定水速；沒有代表整個水系統已合格。水泵揚程、換熱器／盤管壓降、完整供回水路徑、膨脹槽、靜壓及NPSH另核。
 
 案例輸入：[10](../examples/10-water.json)、[11](../examples/11-water.json)。[反算記錄](../examples/calculation-results-windows.json)。
+
