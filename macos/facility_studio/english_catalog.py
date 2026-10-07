@@ -1991,3 +1991,8 @@ TEXT[
 TEXT[
     "台 EC 各自故障／運轉回訊及適當保護；一台停機後能否維持風量，需 N−1 工況風機曲線，不能由台數自動保證。"
 ] = "EC fans each need run / fault feedback and protection. Airflow after one fan fails requires an N−1 fan-curve check; installed count alone does not guarantee it."
+
+# Runtime captions after optional-zero fields were migrated to blank values.
+TEXT["廠商噴頭壓力水頭，留空待提供"] = "Manufacturer nozzle pressure head; leave blank if unknown"
+TEXT["水面至噴頭高差，留空待提供"] = "Water-surface-to-nozzle elevation; leave blank if unknown"
+TEXT["循環管路／濾網損失，留空待提供"] = "Circulation pipe / filter head loss; leave blank if unknown"

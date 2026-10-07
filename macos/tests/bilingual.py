@@ -19,9 +19,9 @@ from facility_studio import i18n
 from facility_studio.simple_schema import defaults, TOOLS
 from facility_studio.simple_engines import calculate_tool
 from facility_studio.simple_reports import tool_report
-from facility_studio.schema import default_project
+from facility_studio.schema import default_project, FIELDS
 from facility_studio.engine import calculate
-from facility_studio.ahu_schema import NM_DEFAULTS
+from facility_studio.ahu_schema import NM_DEFAULTS, NM_FIELDS
 from facility_studio.ahu_engine import nm_calculate
 from facility_studio.reports import report, nm_report
 from facility_studio.html_report import summary_html
@@ -61,6 +61,13 @@ for path in (Path(__file__).resolve().parents[1] / "facility_studio").glob("*.py
             and re.search(r"[\u3400-\u9fff]", node.value)
         ):
             english(i18n.translate(node.value, "en"))
+
+# Inspect the resulting field definitions, including captions changed at runtime.
+for fields in (NM_FIELDS, FIELDS):
+    for spec in fields.values():
+        for key in ("label", "unit", "help", "note"):
+            if isinstance(spec.get(key), str):
+                english(i18n.translate(spec[key], "en"))
 
 cases = [
     ("electrical", {}),
