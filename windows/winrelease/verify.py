@@ -29,7 +29,7 @@ def launch(exe, arguments, cwd, env):
         raise RuntimeError("Delivered EXE failed with exit code " + str(result.returncode))
 
 
-def check_exe(exe, output, label):
+def check_exe(exe, output, label, block_firewall=True):
     evidence = output / label
     evidence.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="FacilityStudioWindows-") as directory:
@@ -46,7 +46,8 @@ def check_exe(exe, output, label):
         cwd = temporary / "空白 工作資料夾"
         cwd.mkdir()
         rule = "FacilityStudioOfflineAcceptance-" + uuid.uuid4().hex
-        firewall(exe, rule, True)
+        if block_firewall:
+            firewall(exe, rule, True)
         try:
             report = evidence / "Windows_Acceptance.json"
             launch(exe, ["--self-test", "--self-test-result", report], cwd, env)
@@ -70,7 +71,8 @@ def check_exe(exe, output, label):
             if not isinstance(json.loads(full_result.read_text(encoding="utf-8")), dict):
                 raise RuntimeError("Frozen full engineering CLI failed")
             summary = {"label": label, "gui_checks": len(data["checks"]), "cli_tools": 7,
-                       "firewall_outbound_blocked": True, "python_on_path": False,
+                       "firewall_outbound_blocked": block_firewall, "network_audit_blocked": True,
+                       "python_on_path": False,
                        "empty_working_directory": True, "exe_sha256": sha(exe), "passed": True}
             (evidence / "Delivery_Check.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
             print(json.dumps(summary), flush=True)
@@ -78,7 +80,8 @@ def check_exe(exe, output, label):
             runtime_log = user_data / "Facility_Studio_V5_5/Logs/Windows_Runtime.log"
             if runtime_log.is_file():
                 shutil.copy2(runtime_log, evidence / "Windows_Runtime.txt")
-            firewall(exe, rule, False)
+            if block_firewall:
+                firewall(exe, rule, False)
 
 
 def main():
@@ -93,7 +96,9 @@ def main():
         if sums.get(name) != sha(assets / name):
             raise RuntimeError("Delivered file SHA256 mismatch: " + name)
     check_exe(assets / EXE_NAME, output, "standalone")
-    with tempfile.TemporaryDirectory(prefix="FacilityStudio完整離線包 ") as directory:
+    # Windows Firewall's program-path rule rejects some non-ASCII temporary
+    # locations. Test the firewall and Unicode executable path independently.
+    with tempfile.TemporaryDirectory(prefix="FacilityStudioZip-") as directory:
         extraction = Path(directory)
         with zipfile.ZipFile(assets / ZIP_NAME) as archive:
             # Only our freshly built, verified distribution is extracted.
@@ -106,6 +111,11 @@ def main():
         if sha(exe) != sums[EXE_NAME]:
             raise RuntimeError("ZIP contains a different executable")
         check_exe(exe, output, "zip-extracted")
+        unicode_directory = extraction / "中文 解壓縮目錄"
+        unicode_directory.mkdir()
+        unicode_exe = unicode_directory / EXE_NAME
+        shutil.copy2(exe, unicode_exe)
+        check_exe(unicode_exe, output, "unicode-executable-path", block_firewall=False)
     print("Both standalone EXE and extracted ZIP passed native offline Windows acceptance.")
 
 

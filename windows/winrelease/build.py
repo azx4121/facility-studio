@@ -41,6 +41,10 @@ def collect_notices(destination):
     if not python_license.is_file():
         raise RuntimeError("Official Python license is missing")
     notices.insert(0, "CPython " + platform.python_version() + "\n" + python_license.read_text(encoding="utf-8"))
+    # Include Tcl/Tk's own notices as well as Python's and wheel metadata.
+    for path in sorted((Path(sys.base_prefix) / "tcl").rglob("*")):
+        if path.is_file() and path.name.lower() in ("license.terms", "license", "license.txt"):
+            notices.append(str(path.relative_to(sys.base_prefix)) + "\n" + path.read_text(encoding="utf-8"))
     destination.write_text("Third-party components retain their original licenses.\n\n" + "\n\n".join(notices), encoding="utf-8")
 
 
