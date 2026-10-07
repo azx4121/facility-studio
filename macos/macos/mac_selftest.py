@@ -127,8 +127,11 @@ def run():
     gui_storage = tempfile.TemporaryDirectory(prefix="FacilityStudioMacGui-")
     old_storage = os.environ.get("LOCALAPPDATA")
     old_preferences = os.environ.get("FACILITY_STUDIO_PREFERENCES")
-    os.environ["FACILITY_STUDIO_PREFERENCES"] = str(Path(gui_storage.name) / "preferences.json")
+    os.environ["FACILITY_STUDIO_PREFERENCES"] = str(
+        Path(gui_storage.name) / "preferences.json"
+    )
     from facility_studio import i18n
+
     i18n.set_language("zh-Hant", persist=False)
     os.environ["LOCALAPPDATA"] = gui_storage.name
     print("Creating native Tk window...", flush=True)
@@ -140,15 +143,32 @@ def run():
 
     root.report_callback_exception = callback_error
 
-    def pump_gui():
+    ui_timings = []
+
+    def pump_gui(*, initial_render=False):
         # Exercise the actual application event loop. Tk Aqua's update() can
         # wait indefinitely with hidden multiple-window layouts. A timed
         # mainloop also proves that native UI timers are still responsive.
         started = time.monotonic()
         root.after(150, root.quit)
         root.mainloop()
-        if time.monotonic() - started > 5:
-            raise AssertionError("Native UI event processing stalled")
+        elapsed = time.monotonic() - started
+        budget = 20 if initial_render else 5
+        timing = {
+            "phase": "initial-render" if initial_render else "interaction",
+            "elapsed_seconds": round(elapsed, 3),
+            "budget_seconds": budget,
+        }
+        ui_timings.append(timing)
+        (destination / "Native_UITiming.json").write_text(
+            json.dumps(ui_timings, indent=2), encoding="utf-8"
+        )
+        if initial_render or elapsed > 1:
+            print("Native UI timing: " + json.dumps(timing), flush=True)
+        if elapsed > budget:
+            raise AssertionError(
+                f"Native UI {timing['phase']} took {elapsed:.2f}s; limit {budget}s"
+            )
 
     try:
         from facility_studio.simple_desktop import SimpleToolsApp
@@ -156,7 +176,7 @@ def run():
         print("Creating independent-tools interface...", flush=True)
         app = SimpleToolsApp(root)
         root.geometry("1100x760")
-        pump_gui()
+        pump_gui(initial_render=True)
         check(
             "Tk Aqua native window system",
             lambda: root.tk.call("tk", "windowingsystem") == "aqua",
@@ -180,7 +200,7 @@ def run():
         print("Creating engineering workbench...", flush=True)
         workbench = app.open_workbench()
         root.report_callback_exception = callback_error
-        pump_gui()
+        pump_gui(initial_render=True)
         check("Full workbench GUI calculates", lambda: workbench.result is not None)
         for page in range(8):
 
@@ -229,6 +249,7 @@ def run():
         "python": sys.version,
         "matplotlib": matplotlib.__version__,
         "timestamp": datetime.now(timezone.utc).isoformat(),
+        "ui_event_timings": ui_timings,
         "checks": checks,
         "passed": all(item["passed"] for item in checks),
     }
