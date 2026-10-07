@@ -1,0 +1,96 @@
+"""Publish only verified win.1 assets; preserve every existing published release."""
+
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import urllib.error
+import urllib.parse
+import urllib.request
+
+REPOSITORY = "azx4121/facility-studio"
+TAG = "v5.5.4-win.1"
+FILENAMES = (
+    "Facility_Studio_V5_5_4_Windows_Offline.exe",
+    "Facility_Studio_V5_5_4_Windows_Offline_OneClick.zip",
+    "SHA256SUMS.txt",
+)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--assets", type=Path, required=True)
+    args = parser.parse_args()
+    if os.environ.get("GITHUB_REF") != "refs/heads/main":
+        raise RuntimeError("Only the tested main-branch workflow may publish")
+    commit = os.environ["FACILITY_RELEASE_COMMIT"]
+    headers = {
+        "Authorization": "Bearer " + os.environ["FACILITY_GITHUB_TOKEN"],
+        "User-Agent": "FacilityStudio-Windows-offline-release",
+        "Accept": "application/vnd.github+json",
+    }
+
+    def request(url, data=None, method="GET", content_type="application/json", timeout=30):
+        call = urllib.request.Request(url, data=data, method=method,
+                                      headers={**headers, "Content-Type": content_type})
+        with urllib.request.urlopen(call, timeout=timeout) as response:
+            return json.load(response)
+
+    folder = args.assets.resolve()
+    digests = {}
+    for name in FILENAMES:
+        path = folder / name
+        if not path.is_file():
+            raise ValueError("Missing native-tested distribution file: " + name)
+        digests[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    expected = {line.split()[1]: line.split()[0]
+                for line in (folder / "SHA256SUMS.txt").read_text().splitlines()}
+    if any(expected.get(name) != digests[name] for name in FILENAMES[:2]):
+        raise ValueError("Distribution changed after native testing")
+    base = "https://api.github.com/repos/" + REPOSITORY + "/releases"
+    try:
+        release = request(base + "/tags/" + TAG)
+        if not release["draft"]:
+            print("Existing published release retained: " + release["html_url"])
+            return
+        if release["target_commitish"] != commit:
+            raise ValueError("Existing draft from another commit retained")
+    except urllib.error.HTTPError as error:
+        if error.code != 404:
+            raise
+        release = None
+    if release is None:
+        body = (
+            "Windows 離線直接執行版 win.1；已含 Python、Tk、Matplotlib、NumPy 與 Pillow。\n\n"
+            "下載 EXE 可直接開啟，或完整解壓縮 ZIP 後雙擊 EXE；不需安裝 Python、pip，也不需連網。"
+            "保留 FY 圖示、七種簡易工具、設備表匯入與完整工程工作台。ZIP 另含設備範本、原始碼、授權及本機診斷腳本。\n\n"
+            "同一份交付 EXE 和 ZIP 已在 Windows Server 2022／2025 x64 原生雲端環境驗證："
+            "外部 Python 從 PATH 移除、EXE 對外連線由防火牆封鎖，仍通過原生 Tk 與工程計算驗收。"
+            "Windows 10／11 為支援目標，使用者實機、實體數字鍵盤、企業政策仍須個別確認。\n\n"
+            "本版尚無商用程式碼簽章，可能出現 Windows 安全性提示；請核對官方來源與 SHA256，勿關閉防毒。"
+            "包含目前安全與授權修正；公司內部正常工程使用許可詳 LICENSE_GUIDE.md。"
+            "既有 Release、標籤、提交紀錄及歷史 MIT 權利完整保留。"
+        )
+        payload = {"tag_name": TAG, "target_commitish": commit,
+                   "name": "Facility Studio V5.5.4｜Windows 離線直接執行版 win.1",
+                   "body": body, "draft": True, "prerelease": True}
+        release = request(base, json.dumps(payload).encode(), "POST")
+    upload = release["upload_url"].split("{", 1)[0]
+    if urllib.parse.urlparse(upload).hostname != "uploads.github.com":
+        raise ValueError("Unexpected GitHub upload host")
+    uploaded = {asset["name"]: asset for asset in release.get("assets", [])}
+    for name in FILENAMES:
+        path = folder / name
+        asset = uploaded.get(name)
+        if asset is None:
+            asset = request(upload + "?" + urllib.parse.urlencode({"name": name}),
+                            path.read_bytes(), "POST", "application/octet-stream", 180)
+        if asset["size"] != path.stat().st_size or asset.get("digest") != "sha256:" + digests[name]:
+            raise ValueError("Uploaded file SHA256 or size mismatch: " + name)
+    release = request(release["url"], b'{"draft":false}', "PATCH")
+    print("Published native-tested offline revision: " + release["html_url"])
+
+
+if __name__ == "__main__":
+    main()

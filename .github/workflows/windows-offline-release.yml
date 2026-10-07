@@ -1,0 +1,107 @@
+name: Build and verify offline Windows EXE
+
+on:
+  push:
+    branches: [main, maintenance/windows-offline]
+    paths:
+      - .github/workflows/windows-offline-release.yml
+      - windows/winrelease/**
+      - windows/facility_studio/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2022
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.13.15'
+          architecture: x64
+      - name: Install hash-locked build dependencies on the builder only
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r windows/winrelease/requirements.lock.txt
+      - name: Engineering and import security regressions
+        run: |
+          python windows/tests/regression.py
+          python windows/tests/v55_features.py
+          python windows/tests/v552_core.py
+          python windows/tests/simple_features.py
+          python windows/tests/v554_features.py
+          python windows/tests/maintenance_checks.py
+          python windows/tests/security_checks.py
+      - name: Build the standalone windowed EXE and complete offline ZIP
+        run: python -m winrelease.build --output "$env:RUNNER_TEMP/windows-offline"
+        working-directory: windows
+      - name: Native execution with external Python hidden and outbound traffic blocked
+        run: python -m winrelease.verify --assets "$env:RUNNER_TEMP/windows-offline" --output "$env:RUNNER_TEMP/windows-offline/evidence/native"
+        working-directory: windows
+      - name: Retain build and native acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: win1-build-evidence
+          path: |
+            ${{ runner.temp }}/windows-offline/evidence
+            windows/evidence/*.json
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Retain native-tested distribution files
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: win1-delivery
+          path: |
+            ${{ runner.temp }}/windows-offline/Facility_Studio_V5_5_4_Windows_Offline.exe
+            ${{ runner.temp }}/windows-offline/Facility_Studio_V5_5_4_Windows_Offline_OneClick.zip
+            ${{ runner.temp }}/windows-offline/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14
+  verify:
+    needs: build
+    runs-on: windows-2025
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: win1-delivery
+          path: ${{ runner.temp }}/windows-offline
+      - name: Execute identical delivered files on a second native Windows environment
+        run: python -m winrelease.verify --assets "$env:RUNNER_TEMP/windows-offline" --output "$env:RUNNER_TEMP/win1-clean-evidence"
+        working-directory: windows
+      - name: Retain second native Windows evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: win1-second-windows-evidence
+          path: ${{ runner.temp }}/win1-clean-evidence
+          if-no-files-found: warn
+          retention-days: 14
+  publish:
+    needs: [build, verify]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: win1-delivery
+          path: ${{ runner.temp }}/windows-offline
+      - name: Publish a new revision only after both Windows checks pass
+        env:
+          FACILITY_GITHUB_TOKEN: ${{ github.token }}
+          FACILITY_RELEASE_COMMIT: ${{ github.sha }}
+        run: python windows/winrelease/publish.py --assets "$RUNNER_TEMP/windows-offline"
