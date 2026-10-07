@@ -10,7 +10,7 @@ import urllib.parse
 import urllib.request
 
 REPOSITORY = "azx4121/facility-studio"
-TAG = "v5.5.5-mac.1"
+TAG = "v5.5.5-mac.2"
 
 
 def main():
@@ -25,8 +25,8 @@ def main():
         )
     folder = args.assets.resolve()
     filenames = (
-        "Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip",
-        "Facility_Studio_V5_5_5_macOS_mac1.dmg",
+        "Facility_Studio_V5_5_5_macOS_mac2_OneClick.zip",
+        "Facility_Studio_V5_5_5_macOS_mac2.dmg",
         "SHA256SUMS.txt",
     )
     for filename in filenames:
@@ -66,7 +66,10 @@ def main():
             raise
         release = None
     body = (
-        "V5.5.5 中英雙語版 mac.1，保留全部工程功能、macOS 啟動修復與 FY 圖示。\n\n"
+        "本修訂補上簡易工具左下角 DESIGNED BY ANDY HUANG ©，七種工具共用並持續顯示。\n\n"
+        "新增離線中英新手教學入口：簡易工具、完整工作台及單台空調箱可直接開啟逐步教學；另含兩份可開啟的合成練習專案與對照報告。\n\n"
+        "Revision 2 adds persistent author credit to simple tools and bundled offline beginner tutorials, practice projects and reference reports. Native acceptance checks the credit at minimum window size, local tutorial buttons and actual practice loading. Existing engineering formulas and projects are retained.\n\n"
+        "V5.5.5 中英雙語版 mac.2，保留全部工程功能、macOS 啟動修復與 FY 圖示。\n\n"
         "主畫面右上角選擇 English／繁體中文，欄位、提示、圖表、報告及設備範本同步切換；已填數字與舊專案保留。語言偏好會保存。\n\n"
         "Bilingual interface: select English in the top-right language selector. Forms, guidance, charts, reports and exported equipment templates are translated. Stored engineering data remains unchanged.\n\n"
         "修正 Tcl/Tk 資源封印不符合 Apple 原生檢查，以及第一次字型快取建立時的無時限外部查詢。"
@@ -81,7 +84,7 @@ def main():
             dict(
                 tag_name=TAG,
                 target_commitish=commit,
-                name="Facility Studio V5.5.5｜macOS 中英雙語離線版 mac.1",
+                name="Facility Studio V5.5.5｜macOS 中英雙語離線版 mac.2",
                 body=body,
                 draft=True,
                 prerelease=True,

@@ -1,4 +1,4 @@
-Facility Studio V5.5.5｜Windows 離線直接執行版 win.1
+Facility Studio V5.5.5｜Windows 離線直接執行版 win.2
 
 1. 完整解壓縮 ZIP 到桌面或您自己的資料夾。
 2. 雙擊 Facility_Studio_V5_5_5_Windows_Offline.exe。
@@ -31,3 +31,12 @@ Source 為本版完整應用程式原始碼。執行 EXE 不會使用 Source，�
 V5.5.5：主畫面右上可選繁體中文 / English；切換保留輸入與結果，語言偏好會保存。
 Language: choose Traditional Chinese / English at the top right. Inputs and calculations stay unchanged. Your language preference is saved.
 English Excel / CSV templates are exported when English is selected; both template languages can be imported.
+
+
+V5.5.5 revision 2 / 署名與新手教學修訂
+簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
+簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
+完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
+先複製改名練習 JSON，再由完整工作台「開啟」；原廠選型與設備阻力等待補資料仍需補。
+Revision 2 adds persistent author credit, bundled offline walkthroughs, two practice workspaces and reference reports.
+No additional Python installation or internet is needed for the tutorial.

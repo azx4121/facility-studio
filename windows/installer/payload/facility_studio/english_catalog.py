@@ -1996,3 +1996,10 @@ TEXT[
 TEXT["廠商噴頭壓力水頭，留空待提供"] = "Manufacturer nozzle pressure head; leave blank if unknown"
 TEXT["水面至噴頭高差，留空待提供"] = "Water-surface-to-nozzle elevation; leave blank if unknown"
 TEXT["循環管路／濾網損失，留空待提供"] = "Circulation pipe / filter head loss; leave blank if unknown"
+
+# Offline beginner walkthrough entry (delivery revision 2).
+TEXT.update({
+    "新手教學": "Beginner tutorial",
+    "教學檔案位置：\n": "Tutorial file location:\n",
+    "無法開啟離線教學：\n": "Cannot open the offline tutorial:\n",
+})

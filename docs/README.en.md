@@ -14,6 +14,10 @@ Current public test release: **V5.5.5 bilingual**, Windows `v5.5.5-win.1` and ma
 | Understand the search experiment and its limits | [Search visibility](search-discoverability.en.md) |
 | Build from source | [Windows developer guide](../windows/winrelease/BUILDING.md) / [macOS developer guide](../macos/macos/BUILDING.md) |
 
+## Start with a practice project
+
+[Full-workbench beginner walkthrough](guides/workbench.en.md) · [繁體中文](guides/workbench.md) · [Offline tutorial package](tutorial/Facility_Studio_Beginner_Tutorial.zip). Open `START_HERE.html` after extraction and complete the first six sections.
+
 ## Historical evidence
 
 Earlier Chinese maintenance records remain available with original versions, counts, hashes and screenshots. They describe the files tested at the time, not current download acceptance:

@@ -1,4 +1,5 @@
 from .design_workflow import ahu_requirement_updates, ahu_utility_preview
+from .tutorial_help import open_tutorial
 from .workspace_view import apply_updates
 from .project_store import save_project_file
 from .errors import InputError
@@ -283,6 +284,10 @@ class AHUWindow(AHUView):
                 self.export_button = b
         language_bar = ttk.Frame(self.win, padding=(12, 2))
         language_bar.pack(fill="x")
+        self.tutorial_button = ttk.Button(
+            language_bar, text="新手教學", command=lambda: open_tutorial(self.win, "ahu")
+        )
+        self.tutorial_button.pack(side="left")
         self.language_picker = LanguagePicker(language_bar)
         self.language_picker.pack(side="right")
         ttk.Label(language_bar, text="Language / 語言").pack(side="right", padx=8)

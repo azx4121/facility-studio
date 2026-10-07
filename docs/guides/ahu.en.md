@@ -6,6 +6,8 @@ In **Full workbench**, open the individual AHU window. Set summer/winter conditi
 
 Water-wash/wetted-media evaporation, electrode steam and electric steam are different devices. Evaporative media cool the air; do not assume all humidification is isothermal. Electrode steam needs the manufacturer's conductivity range; DI/UPW is not automatically suitable.
 
+Start with [section 8 of the beginner walkthrough](workbench.en.md#ahu) to practice on a small MAU before the larger capacity case below.
+
 <a id="case-18"></a>
 ## Case 18: 58,000 CMH with insufficient winter preheat
 

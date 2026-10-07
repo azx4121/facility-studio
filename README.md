@@ -17,6 +17,12 @@
 
 也可以到 [Releases 發布頁](https://github.com/azx4121/facility-studio/releases) 選擇版本。
 
+## 新手操作教學
+
+第一次使用完整工作台，先看[一步步跟做教學](docs/guides/workbench.md)。**先完成前六步，就能輸出第一份練習報告**；其他系統需要時再學。
+
+[下載離線教學懶人包](docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)：解壓縮後開啟 `START_HERE.html`，內含中英逐步教學、兩份可直接開啟的練習專案及對照報告，不需安裝 Python。原生修訂 win.2／mac.2 新增程式內「新手教學」按鈕及簡易工具署名，交付狀態見[修訂紀錄](docs/2026-10-07-beginner-tutorial.md)。既有 V5.5.5 可先用離線 HTML。
+
 ## 中英文切換
 
 主畫面右上角的語言選單可選 **繁體中文／English**，不需重開軟體。完整工程工作台、單台空調箱及設備表視窗也有語言選單，所有已開視窗會同步切換；下次啟動會記住選擇。

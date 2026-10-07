@@ -1,0 +1,1492 @@
+{
+  "kind": "facility_workspace",
+  "workspace_version": 1,
+  "app_version": "5.5.5",
+  "project_id": "tutorial-b-mau-v555",
+  "main": {
+    "schema_version": 9,
+    "inputs": {
+      "project_name": "Tutorial B - MAU and DCC",
+      "atm_kpa": "101.325",
+      "oa_t": "35",
+      "oa_rh": "70",
+      "ra_t": "22",
+      "ra_rh": "50",
+      "ow_t": "8",
+      "ow_rh": "70",
+      "sys_type": "MAU+FFU+DCC (全外氣/無塵室)",
+      "rt_type": "US RT (美制 3024 kcal/hr)",
+      "mau_supply_t": "22",
+      "en_dcc_rt": "3.4",
+      "en_rcu_rt": "30",
+      "en_fcu_cmh": "1200",
+      "fcu_rt": "10",
+      "ffu_cmh": "1000",
+      "ffu_w": "0",
+      "sf": "10",
+      "c_a": "無 (None)",
+      "mode_A": "ACH",
+      "en_L_A": "12",
+      "en_W_A": "8",
+      "en_H_A": "3",
+      "en_ach_A": "20",
+      "face_A": ".35",
+      "coverage_A": "1",
+      "en_p_A": "0",
+      "ppl_A": "8",
+      "c_b": "無 (None)",
+      "mode_B": "ACH",
+      "en_L_B": "0",
+      "en_W_B": "0",
+      "en_H_B": "3.5",
+      "en_ach_B": "0",
+      "face_B": ".35",
+      "coverage_B": "1",
+      "en_p_B": "0",
+      "ppl_B": "0",
+      "en_gap_L": "0",
+      "en_gap_W": "0.01",
+      "en_door_A": "5.04",
+      "en_door_F": "0",
+      "gap_B_L": "0",
+      "gap_B_W": "0.01",
+      "door_B_A": "0",
+      "door_B_F": "0",
+      "door_open_seconds": "10",
+      "leak_cd": "0.65",
+      "prd_q": "0",
+      "oa_per_person": "24",
+      "en_manual_oa": "0",
+      "pv_room_fraction": "1",
+      "pre_mode": "自動旁通因子估算",
+      "chw1_in": "12.0",
+      "adp_approach": "1.0",
+      "pre_t": "26.0",
+      "pre_rh": "80",
+      "chw2_in": "7.0",
+      "coil_approach": "1",
+      "allow_reheat": "1",
+      "allow_humidify": "1",
+      "dccw_in": "14.0",
+      "dccw_dp_margin": "1",
+      "light_lux": "500",
+      "light_lm": "4000",
+      "light_w": "40",
+      "light_u": "0.6",
+      "light_m": "0.8",
+      "eq_kw": "5",
+      "eq_rt": "100",
+      "exh_ratio": "0",
+      "pcw_n": "0",
+      "pcw_lpm": "30",
+      "pcw_dt": "5.0",
+      "oven_kw": "0",
+      "process_latent_kw": "5.0",
+      "people_sensible_w": "75",
+      "people_latent_w": "55",
+      "en_wall": "60",
+      "wall_u": "1.4",
+      "en_floor": "96",
+      "floor_u": "3.25",
+      "u_unit": "kcal/(h·m²·K)",
+      "floor_adj_t": "22",
+      "solar_kw": "0",
+      "fan_room_kw": "0",
+      "gas1_type": "N2",
+      "gas1_q": "0",
+      "u_gas1": "SLPM",
+      "gas2_type": "CDA",
+      "gas2_q": "0",
+      "u_gas2": "SLPM",
+      "gas3_type": "O2",
+      "gas3_q": "0",
+      "u_gas3": "SLPM",
+      "gas_barg": "6.0",
+      "gas_min_barg": "5",
+      "gas_std_t": "25",
+      "gas_std_kpa": "101.325",
+      "gas_temp": "25",
+      "gas_z_ratio": "1",
+      "pv_q": "0",
+      "u_pv": "SLPM",
+      "pv_torr": "150",
+      "v_pv_mat": "SUS白鐵管",
+      "e_volt": "3Φ4W 380/220V",
+      "e_pf": "0.85",
+      "e_eff": "0.90",
+      "e_wire": "XLPE 絕緣電纜 (90°C)",
+      "e_temp": "35℃ 以下 (標準)",
+      "e_pipe": "3根以下 (標準)",
+      "e_terminal_c": "60",
+      "e_length_m": "30",
+      "e_drop_limit_pct": "3",
+      "e_sort": "最少並聯組數",
+      "e_up_type": "一般負載",
+      "e_up_eq": "5",
+      "u_e_up_eq": "kW",
+      "e_up_oven": "0",
+      "u_e_up_oven": "kW",
+      "e_up_largest_hp": "0",
+      "e_up_ground": "待核",
+      "e_np_type": "連續負載",
+      "e_np_fan": "1",
+      "u_e_np_fan": "kW",
+      "e_np_heat": "0",
+      "u_e_np_heat": "kW",
+      "e_np_humid": "0",
+      "u_e_np_humid": "kW",
+      "e_np_exh": "0",
+      "u_e_np_exh": "kW",
+      "e_np_pump": "0",
+      "u_e_np_pump": "kW",
+      "e_np_largest_hp": "0",
+      "e_np_ground": "待核",
+      "gex_q": "0",
+      "u_gex": "CMH",
+      "v_gex": "12.0",
+      "sex_q": "0",
+      "u_sex": "CMH",
+      "v_sex": "10.0",
+      "aex_q": "0",
+      "u_aex": "CMH",
+      "v_aex": "10",
+      "vex_q": "0",
+      "u_vex": "CMH",
+      "v_vex": "12.0",
+      "hex_q": "0",
+      "u_hex": "CMH",
+      "v_hex": "12",
+      "duct_shape": "方管",
+      "duct_ratio": "1.5",
+      "exhaust_margin_pct": "5",
+      "air_rho": "1.2",
+      "air_mu": "0.0000181",
+      "duct_roughness_mm": "0.09",
+      "mchw_link": "連動負荷",
+      "mchw_q": "160",
+      "u_mchw": "LPM",
+      "chw1_dt": "5",
+      "chw_link": "連動負荷",
+      "chw_q": "400",
+      "u_chw": "LPM",
+      "dt_chw": "5.0",
+      "dccw_link": "連動負荷",
+      "dccw_q": "250",
+      "u_dccw": "LPM",
+      "dt_dccw": "4.0",
+      "pcw_link": "連動負荷",
+      "pcw_tot": "380",
+      "u_pcw_tot": "LPM",
+      "dt_pcw_sys": "5.0",
+      "hw_link": "連動負荷",
+      "hw_q": "100",
+      "u_hw": "LPM",
+      "dt_hw": "10.0",
+      "water_rho": "1000",
+      "water_cp": "4.1868",
+      "water_mu": "0.001",
+      "water_velocity_max": "2.0",
+      "water_roughness_mm": "0.045",
+      "upw_type": "UPW (超純水)",
+      "upw_q": "0",
+      "upw_v": "1.2",
+      "upw_v_mode": "最低維持流速",
+      "upw_mat": "PVDF (超純水專用)",
+      "upw_res": "18.2 MΩ·cm @25°C（參考目標）",
+      "upw_toc": "依製程確認",
+      "upw_do": "依製程確認",
+      "upw_temp": "25 ± 0.1",
+      "latent_mode": "沒有額外產濕",
+      "process_moisture_kg_h": "0",
+      "pv_pressure_unit": "Torr(abs)",
+      "upw_quality_mode": "自動參考值",
+      "gas1_pressure_mode": "共用最低壓力",
+      "gas1_barg": "5",
+      "gas1_v_mode": "依氣體參考",
+      "gas1_velocity": "12",
+      "gas2_pressure_mode": "共用最低壓力",
+      "gas2_barg": "5",
+      "gas2_v_mode": "依氣體參考",
+      "gas2_velocity": "12",
+      "gas3_pressure_mode": "共用最低壓力",
+      "gas3_barg": "5",
+      "gas3_v_mode": "依氣體參考",
+      "gas3_velocity": "12",
+      "pv_velocity": "18",
+      "dcc_airflow_mode": "沿用 FFU 循環",
+      "dcc_airflow_cmh": "0",
+      "dcc_air_approach": "1",
+      "winter_model": "室內熱濕平衡（定風量）",
+      "winter_floor_adj_t": "22",
+      "winter_gain_ratio": "100",
+      "winter_moisture_ratio": "100",
+      "winter_solar_kw": "0"
+    },
+    "pressure_drop": {
+      "MCHW": {
+        "length_m": "30",
+        "elbows": "10",
+        "tees": "4",
+        "reducers": "2",
+        "valves": "6",
+        "equipment_drop": "",
+        "rate": "0.03",
+        "unit": "mH2O",
+        "mode": "Darcy 自動",
+        "manual_id_mm": "0",
+        "fitting_mode": "等效長 L/D",
+        "sum_k": "0",
+        "elbow_ld": "30",
+        "tee_ld": "60",
+        "reducer_ld": "15",
+        "valve_ld": "40",
+        "boundary": "閉式循環",
+        "static_m": "0",
+        "efficiency": "0.70",
+        "estimate_mode": "簡易估算",
+        "allowance_pct": "30",
+        "equipment_known": "尚無資料（不含設備）"
+      },
+      "CHW": {
+        "length_m": "30",
+        "elbows": "10",
+        "tees": "4",
+        "reducers": "2",
+        "valves": "6",
+        "equipment_drop": "",
+        "rate": "0.03",
+        "unit": "mH2O",
+        "mode": "Darcy 自動",
+        "manual_id_mm": "0",
+        "fitting_mode": "等效長 L/D",
+        "sum_k": "0",
+        "elbow_ld": "30",
+        "tee_ld": "60",
+        "reducer_ld": "15",
+        "valve_ld": "40",
+        "boundary": "閉式循環",
+        "static_m": "0",
+        "efficiency": "0.70",
+        "estimate_mode": "簡易估算",
+        "allowance_pct": "30",
+        "equipment_known": "尚無資料（不含設備）"
+      },
+      "DCCW": {
+        "length_m": "30",
+        "elbows": "10",
+        "tees": "4",
+        "reducers": "2",
+        "valves": "6",
+        "equipment_drop": "",
+        "rate": "0.03",
+        "unit": "mH2O",
+        "mode": "Darcy 自動",
+        "manual_id_mm": "0",
+        "fitting_mode": "等效長 L/D",
+        "sum_k": "0",
+        "elbow_ld": "30",
+        "tee_ld": "60",
+        "reducer_ld": "15",
+        "valve_ld": "40",
+        "boundary": "閉式循環",
+        "static_m": "0",
+        "efficiency": "0.70",
+        "estimate_mode": "簡易估算",
+        "allowance_pct": "30",
+        "equipment_known": "尚無資料（不含設備）"
+      },
+      "PCW": {
+        "length_m": "30",
+        "elbows": "10",
+        "tees": "4",
+        "reducers": "2",
+        "valves": "6",
+        "equipment_drop": "",
+        "rate": "0.03",
+        "unit": "mH2O",
+        "mode": "Darcy 自動",
+        "manual_id_mm": "0",
+        "fitting_mode": "等效長 L/D",
+        "sum_k": "0",
+        "elbow_ld": "30",
+        "tee_ld": "60",
+        "reducer_ld": "15",
+        "valve_ld": "40",
+        "boundary": "閉式循環",
+        "static_m": "0",
+        "efficiency": "0.70",
+        "estimate_mode": "簡易估算",
+        "allowance_pct": "30",
+        "equipment_known": "尚無資料（不含設備）"
+      },
+      "HW": {
+        "length_m": "30",
+        "elbows": "10",
+        "tees": "4",
+        "reducers": "2",
+        "valves": "6",
+        "equipment_drop": "",
+        "rate": "0.03",
+        "unit": "mH2O",
+        "mode": "Darcy 自動",
+        "manual_id_mm": "0",
+        "fitting_mode": "等效長 L/D",
+        "sum_k": "0",
+        "elbow_ld": "30",
+        "tee_ld": "60",
+        "reducer_ld": "15",
+        "valve_ld": "40",
+        "boundary": "閉式循環",
+        "static_m": "0",
+        "efficiency": "0.70",
+        "estimate_mode": "簡易估算",
+        "allowance_pct": "30",
+        "equipment_known": "尚無資料（不含設備）"
+      },
+      "GEX": {
+        "length_m": "30",
+        "elbows": "10",
+        "tees": "4",
+        "reducers": "2",
+        "valves": "6",
+        "equipment_drop": "",
+        "rate": "0.03",
+        "unit": "Pa",
+        "mode": "Darcy 自動",
+        "manual_id_mm": "0",
+        "fitting_mode": "等效長 L/D",
+        "sum_k": "0",
+        "elbow_ld": "30",
+        "tee_ld": "60",
+        "reducer_ld": "15",
+        "valve_ld": "40",
+        "boundary": "開式系統",
+        "static_m": "0",
+        "efficiency": "0.70",
+        "estimate_mode": "簡易估算",
+        "allowance_pct": "30",
+        "equipment_known": "尚無資料（不含設備）"
+      },
+      "SEX": {
+        "length_m": "30",
+        "elbows": "10",
+        "tees": "4",
+        "reducers": "2",
+        "valves": "6",
+        "equipment_drop": "",
+        "rate": "0.03",
+        "unit": "Pa",
+        "mode": "Darcy 自動",
+        "manual_id_mm": "0",
+        "fitting_mode": "等效長 L/D",
+        "sum_k": "0",
+        "elbow_ld": "30",
+        "tee_ld": "60",
+        "reducer_ld": "15",
+        "valve_ld": "40",
+        "boundary": "開式系統",
+        "static_m": "0",
+        "efficiency": "0.70",
+        "estimate_mode": "簡易估算",
+        "allowance_pct": "30",
+        "equipment_known": "尚無資料（不含設備）"
+      },
+      "AEX": {
+        "length_m": "30",
+        "elbows": "10",
+        "tees": "4",
+        "reducers": "2",
+        "valves": "6",
+        "equipment_drop": "",
+        "rate": "0.03",
+        "unit": "Pa",
+        "mode": "Darcy 自動",
+        "manual_id_mm": "0",
+        "fitting_mode": "等效長 L/D",
+        "sum_k": "0",
+        "elbow_ld": "30",
+        "tee_ld": "60",
+        "reducer_ld": "15",
+        "valve_ld": "40",
+        "boundary": "開式系統",
+        "static_m": "0",
+        "efficiency": "0.70",
+        "estimate_mode": "簡易估算",
+        "allowance_pct": "30",
+        "equipment_known": "尚無資料（不含設備）"
+      },
+      "VEX": {
+        "length_m": "30",
+        "elbows": "10",
+        "tees": "4",
+        "reducers": "2",
+        "valves": "6",
+        "equipment_drop": "",
+        "rate": "0.03",
+        "unit": "Pa",
+        "mode": "Darcy 自動",
+        "manual_id_mm": "0",
+        "fitting_mode": "等效長 L/D",
+        "sum_k": "0",
+        "elbow_ld": "30",
+        "tee_ld": "60",
+        "reducer_ld": "15",
+        "valve_ld": "40",
+        "boundary": "開式系統",
+        "static_m": "0",
+        "efficiency": "0.70",
+        "estimate_mode": "簡易估算",
+        "allowance_pct": "30",
+        "equipment_known": "尚無資料（不含設備）"
+      },
+      "HEX": {
+        "length_m": "30",
+        "elbows": "10",
+        "tees": "4",
+        "reducers": "2",
+        "valves": "6",
+        "equipment_drop": "",
+        "rate": "0.03",
+        "unit": "Pa",
+        "mode": "Darcy 自動",
+        "manual_id_mm": "0",
+        "fitting_mode": "等效長 L/D",
+        "sum_k": "0",
+        "elbow_ld": "30",
+        "tee_ld": "60",
+        "reducer_ld": "15",
+        "valve_ld": "40",
+        "boundary": "開式系統",
+        "static_m": "0",
+        "efficiency": "0.70",
+        "estimate_mode": "簡易估算",
+        "allowance_pct": "30",
+        "equipment_known": "尚無資料（不含設備）"
+      }
+    },
+    "provenance": {
+      "project_name": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "Tutorial B - MAU and DCC",
+        "recorded_at": "2026-10-07T09:41:26.661093+00:00"
+      },
+      "atm_kpa": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "oa_t": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "oa_rh": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "ra_t": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "ra_rh": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "ow_t": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "ow_rh": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "sys_type": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "MAU+FFU+DCC (全外氣/無塵室)",
+        "recorded_at": "2026-10-07T09:41:26.661097+00:00"
+      },
+      "rt_type": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "mau_supply_t": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_dcc_rt": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_rcu_rt": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_fcu_cmh": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "fcu_rt": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "ffu_cmh": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "ffu_w": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "sf": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "c_a": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "mode_A": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_L_A": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "12",
+        "recorded_at": "2026-10-07T09:41:26.659948+00:00"
+      },
+      "en_W_A": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "8",
+        "recorded_at": "2026-10-07T09:41:26.659951+00:00"
+      },
+      "en_H_A": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "3",
+        "recorded_at": "2026-10-07T09:41:26.659953+00:00"
+      },
+      "en_ach_A": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "20",
+        "recorded_at": "2026-10-07T09:41:26.661099+00:00"
+      },
+      "face_A": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "coverage_A": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_p_A": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "ppl_A": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "8",
+        "recorded_at": "2026-10-07T09:41:26.659955+00:00"
+      },
+      "c_b": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "mode_B": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_L_B": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_W_B": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_H_B": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_ach_B": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "face_B": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "coverage_B": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_p_B": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "ppl_B": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_gap_L": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_gap_W": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_door_A": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_door_F": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gap_B_L": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gap_B_W": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "door_B_A": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "door_B_F": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "door_open_seconds": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "leak_cd": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "prd_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "oa_per_person": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_manual_oa": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "pv_room_fraction": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "pre_mode": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "chw1_in": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "adp_approach": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "pre_t": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "pre_rh": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "chw2_in": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "coil_approach": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "allow_reheat": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "allow_humidify": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "dccw_in": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "dccw_dp_margin": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "light_lux": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "500",
+        "recorded_at": "2026-10-07T09:41:26.659959+00:00"
+      },
+      "light_lm": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "4000",
+        "recorded_at": "2026-10-07T09:41:26.659961+00:00"
+      },
+      "light_w": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "40",
+        "recorded_at": "2026-10-07T09:41:26.659962+00:00"
+      },
+      "light_u": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "light_m": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "eq_kw": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "5",
+        "recorded_at": "2026-10-07T09:41:26.659957+00:00"
+      },
+      "eq_rt": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "100",
+        "recorded_at": "2026-10-07T09:41:26.659958+00:00"
+      },
+      "exh_ratio": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "pcw_n": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "pcw_lpm": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "pcw_dt": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "oven_kw": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "process_latent_kw": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "people_sensible_w": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "people_latent_w": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_wall": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "60",
+        "recorded_at": "2026-10-07T09:41:26.659963+00:00"
+      },
+      "wall_u": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "en_floor": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "96",
+        "recorded_at": "2026-10-07T09:41:26.659964+00:00"
+      },
+      "floor_u": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_unit": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "floor_adj_t": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "22",
+        "recorded_at": "2026-10-07T09:41:26.659965+00:00"
+      },
+      "solar_kw": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "fan_room_kw": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas1_type": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas1_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_gas1": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas2_type": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas2_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_gas2": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas3_type": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas3_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_gas3": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas_barg": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas_min_barg": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas_std_t": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas_std_kpa": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas_temp": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas_z_ratio": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "pv_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_pv": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "pv_torr": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "v_pv_mat": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_volt": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_pf": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_eff": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_wire": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_temp": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_pipe": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_terminal_c": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_length_m": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_drop_limit_pct": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_sort": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_up_type": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_up_eq": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "5",
+        "recorded_at": "2026-10-07T09:41:26.659968+00:00"
+      },
+      "u_e_up_eq": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_up_oven": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "0",
+        "recorded_at": "2026-10-07T09:41:26.659969+00:00"
+      },
+      "u_e_up_oven": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_up_largest_hp": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_up_ground": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_np_type": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_np_fan": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "1",
+        "recorded_at": "2026-10-07T09:41:26.659970+00:00"
+      },
+      "u_e_np_fan": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_np_heat": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "0",
+        "recorded_at": "2026-10-07T09:41:26.659971+00:00"
+      },
+      "u_e_np_heat": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_np_humid": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "0",
+        "recorded_at": "2026-10-07T09:41:26.659972+00:00"
+      },
+      "u_e_np_humid": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_np_exh": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "0",
+        "recorded_at": "2026-10-07T09:41:26.659973+00:00"
+      },
+      "u_e_np_exh": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_np_pump": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "0",
+        "recorded_at": "2026-10-07T09:41:26.659975+00:00"
+      },
+      "u_e_np_pump": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_np_largest_hp": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "e_np_ground": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gex_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_gex": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "v_gex": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "sex_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_sex": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "v_sex": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "aex_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_aex": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "v_aex": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "vex_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_vex": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "v_vex": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "hex_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_hex": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "v_hex": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "duct_shape": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "duct_ratio": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "exhaust_margin_pct": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "air_rho": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "air_mu": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "duct_roughness_mm": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "mchw_link": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "mchw_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_mchw": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "chw1_dt": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "chw_link": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "chw_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_chw": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "dt_chw": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "dccw_link": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "dccw_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_dccw": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "dt_dccw": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "pcw_link": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "pcw_tot": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_pcw_tot": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "dt_pcw_sys": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "hw_link": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "hw_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "u_hw": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "dt_hw": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "water_rho": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "water_cp": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "water_mu": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "water_velocity_max": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "water_roughness_mm": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "upw_type": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "upw_q": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "upw_v": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "upw_v_mode": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "upw_mat": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "upw_res": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "upw_toc": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "upw_do": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "upw_temp": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "latent_mode": {
+        "source": "使用者輸入",
+        "note": "Synthetic tutorial assumption; not site or manufacturer data.",
+        "value": "沒有額外產濕",
+        "recorded_at": "2026-10-07T09:41:26.659967+00:00"
+      },
+      "process_moisture_kg_h": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "pv_pressure_unit": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "upw_quality_mode": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas1_pressure_mode": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas1_barg": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas1_v_mode": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas1_velocity": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas2_pressure_mode": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas2_barg": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas2_v_mode": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas2_velocity": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas3_pressure_mode": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas3_barg": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas3_v_mode": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "gas3_velocity": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "pv_velocity": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "dcc_airflow_mode": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "dcc_airflow_cmh": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "dcc_air_approach": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "winter_model": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "winter_floor_adj_t": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "winter_gain_ratio": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "winter_moisture_ratio": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      },
+      "winter_solar_kw": {
+        "source": "系統預設",
+        "note": "初估起點；依現場確認"
+      }
+    }
+  },
+  "ahus": [
+    {
+      "id": "tutorial-mau-01",
+      "source_project_id": "tutorial-b-mau-v555",
+      "inputs": {
+        "name": "Tutorial MAU-01",
+        "flow": "58000",
+        "flow_basis": "送風狀態（待核對）",
+        "p": "101.325",
+        "summer_t": "35.0",
+        "summer_rh": "70.0",
+        "winter_t": "8.0",
+        "winter_rh": "70.0",
+        "sa_t": "22",
+        "sa_rh": "55",
+        "sequence": "H1 → C1",
+        "h1_order": "電熱 → 熱水",
+        "h2_order": "熱水 → 電熱",
+        "h1_kw": "8",
+        "h2_kw": "8",
+        "heat_eta": "1",
+        "recovery": "一期未上線",
+        "hw_in": "30",
+        "hw_out": "24",
+        "hw_approach": "2",
+        "h1_hw_kw": "0",
+        "h2_hw_kw": "0",
+        "c1_in": "12.0",
+        "c1_out": "17.0",
+        "c1_adp": "1",
+        "c1_t": "22",
+        "c1_rt": "3",
+        "c2_in": "7.0",
+        "c2_out": "12.0",
+        "c2_adp": "1",
+        "c2_rt": "3",
+        "sf": "0",
+        "wash_mode": "只在需要加濕時",
+        "wash_eff": "0.85",
+        "wash_rating": "10",
+        "media_area": "0",
+        "wetting_rate": "0",
+        "spray_head": "",
+        "spray_rise": "",
+        "loop_loss": "",
+        "drift_lph": "0",
+        "fan_qty": "1",
+        "fan_unit_kw": "0.37",
+        "fan_air_kw": "0",
+        "dp_status": "尚未完整提供",
+        "dp_filter": "",
+        "dp_h1": "",
+        "dp_c1": "",
+        "dp_wash": "",
+        "dp_c2": "",
+        "dp_h2": "",
+        "dp_hepa": "",
+        "dp_external": "",
+        "fan_eff": "0.65",
+        "h1_source": "電熱",
+        "h2_source": "電熱",
+        "h1_water_mode": "共用回收水",
+        "h1_hw_in": "30",
+        "h1_hw_out": "24",
+        "h1_hw_approach": "2",
+        "h1_eta": "0",
+        "h2_water_mode": "共用回收水",
+        "h2_hw_in": "30",
+        "h2_hw_out": "24",
+        "h2_hw_approach": "2",
+        "h2_eta": "0",
+        "summer_h1_mode": "自動需求",
+        "summer_h1_t": "35",
+        "summer_c1_mode": "自動需求",
+        "summer_c1_t": "22",
+        "summer_c1_rh": "95",
+        "summer_c2_mode": "自動需求",
+        "summer_c2_t": "12.55",
+        "summer_c2_rh": "95",
+        "summer_h2_mode": "自動需求",
+        "summer_h2_t": "22",
+        "winter_h1_mode": "自動需求",
+        "winter_h1_t": "35",
+        "winter_c1_mode": "自動需求",
+        "winter_c1_t": "22",
+        "winter_c1_rh": "95",
+        "winter_c2_mode": "自動需求",
+        "winter_c2_t": "12.55",
+        "winter_c2_rh": "95",
+        "winter_h2_mode": "自動需求",
+        "winter_h2_t": "22",
+        "humidifier": "循環水洗濕膜",
+        "steam_capacity": "0",
+        "steam_kw": "0",
+        "steam_h": "2676.125",
+        "steam_feed_t": "20",
+        "steam_eta": "0.95",
+        "steam_water": "尚未確認",
+        "steam_conductivity": "0",
+        "steam_cond_min": "0",
+        "steam_cond_max": "0",
+        "target_mode": "主案分季需求",
+        "summer_sa_t": "22.0",
+        "summer_sa_rh": "41.01522224098197",
+        "winter_sa_t": "22.0",
+        "winter_sa_rh": "41.01522224098197",
+        "summer_flow": "358.32741149943365",
+        "winter_flow": "358.32741149943365",
+        "pump_input_kw": "0.1",
+        "linked_main_hash": "1813a0bcf9cd7e880a43d13c40f48544642944fb285c12889c734232c0a9301c"
+      }
+    }
+  ],
+  "comparisons": {},
+  "receipts": [],
+  "drafts": {}
+}

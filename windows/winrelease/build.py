@@ -161,7 +161,7 @@ def main():
     (evidence / "Build_Manifest.json").write_text(
         json.dumps(
             {
-                "revision": "5.5.5-win.1",
+                "revision": "5.5.5-win.2",
                 "source_commit": os.environ.get("GITHUB_SHA"),
                 "python": sys.version,
                 "platform": platform.platform(),
@@ -190,6 +190,8 @@ def main():
     for name in NOTICE_NAMES:
         shutil.copy2(REPOSITORY / name, package / name)
     shutil.copy2(notices, package / notices.name)
+    with zipfile.ZipFile(ROOT / "facility_studio/resources/beginner_tutorial.zip") as guide:
+        guide.extractall(package / "Beginner_Tutorial")
     source = package / "Source"
     shutil.copytree(
         ROOT / "facility_studio",

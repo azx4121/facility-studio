@@ -32,6 +32,7 @@ from .services import UNIT_VALUES, converted_units, independent_domains
 from .localized_tk import LanguagePicker
 from . import i18n
 from .ui_common import app_icon, quality_style, quality_text
+from .tutorial_help import open_tutorial
 from .utils import G, atomic_text, number, project_hash
 from .session_controller import SessionController
 from .field_state import main_inactive, error_text
@@ -454,6 +455,10 @@ class DesktopApp(SessionController, MainView):
             ttk.Button(utilities, text=label, command=command).pack(
                 side="left", padx=(0, 8)
             )
+        self.tutorial_button = ttk.Button(
+            utilities, text="新手教學", command=lambda: open_tutorial(root, "first-case")
+        )
+        self.tutorial_button.pack(side="left", padx=(0, 8))
         self.host = ttk.Frame(root)
         self.host.grid(row=1, column=1, sticky="nsew")
         self.host.columnconfigure(0, weight=1)

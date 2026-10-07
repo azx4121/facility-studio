@@ -27,23 +27,23 @@ jobs:
           python3 macos/tests/bilingual.py
           python3 tools/verify_use_cases.py --platform macos --output "$RUNNER_TEMP/mac-use-cases.json"
       - name: Build, sign and execute Universal App on Apple Silicon
-        run: python3 macos/macos/build_native_release.py --output "$RUNNER_TEMP/mac1-build"
+        run: python3 macos/macos/build_native_release.py --output "$RUNNER_TEMP/mac2-build"
       - name: Retain Apple Silicon evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: mac1-arm64-evidence
-          path: ${{ runner.temp }}/mac1-build/evidence
+          name: mac2-arm64-evidence
+          path: ${{ runner.temp }}/mac2-build/evidence
           if-no-files-found: warn
           retention-days: 14
       - name: Retain tested delivery files
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: mac1-delivery
+          name: mac2-delivery
           path: |
-            ${{ runner.temp }}/mac1-build/Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip
-            ${{ runner.temp }}/mac1-build/Facility_Studio_V5_5_5_macOS_mac1.dmg
-            ${{ runner.temp }}/mac1-build/SHA256SUMS.txt
+            ${{ runner.temp }}/mac2-build/Facility_Studio_V5_5_5_macOS_mac2_OneClick.zip
+            ${{ runner.temp }}/mac2-build/Facility_Studio_V5_5_5_macOS_mac2.dmg
+            ${{ runner.temp }}/mac2-build/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 14
   verify-intel:
@@ -56,24 +56,24 @@ jobs:
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
-          name: mac1-delivery
-          path: ${{ runner.temp }}/mac1-delivery
+          name: mac2-delivery
+          path: ${{ runner.temp }}/mac2-delivery
       - name: Execute the same delivered ZIP and DMG on Intel
         run: >-
           python3 macos/macos/verify_native_release.py
-          --package "$RUNNER_TEMP/mac1-delivery/Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip"
-          --checksums "$RUNNER_TEMP/mac1-delivery/SHA256SUMS.txt"
-          --dmg "$RUNNER_TEMP/mac1-delivery/Facility_Studio_V5_5_5_macOS_mac1.dmg"
-          --output "$RUNNER_TEMP/mac1-intel"
+          --package "$RUNNER_TEMP/mac2-delivery/Facility_Studio_V5_5_5_macOS_mac2_OneClick.zip"
+          --checksums "$RUNNER_TEMP/mac2-delivery/SHA256SUMS.txt"
+          --dmg "$RUNNER_TEMP/mac2-delivery/Facility_Studio_V5_5_5_macOS_mac2.dmg"
+          --output "$RUNNER_TEMP/mac2-intel"
       - name: Retain Intel evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: mac1-intel-evidence
+          name: mac2-intel-evidence
           path: |
-            ${{ runner.temp }}/mac1-intel/*.txt
-            ${{ runner.temp }}/mac1-intel/*.json
-            ${{ runner.temp }}/mac1-intel/*.png
+            ${{ runner.temp }}/mac2-intel/*.txt
+            ${{ runner.temp }}/mac2-intel/*.json
+            ${{ runner.temp }}/mac2-intel/*.png
           if-no-files-found: warn
           retention-days: 14
   publish:
@@ -89,10 +89,10 @@ jobs:
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
-          name: mac1-delivery
-          path: ${{ runner.temp }}/mac1-delivery
+          name: mac2-delivery
+          path: ${{ runner.temp }}/mac2-delivery
       - name: Publish a new revision after both native checks pass
         env:
           FACILITY_GITHUB_TOKEN: ${{ github.token }}
           FACILITY_RELEASE_COMMIT: ${{ github.sha }}
-        run: python3 macos/macos/publish_mac_release.py --assets "$RUNNER_TEMP/mac1-delivery"
+        run: python3 macos/macos/publish_mac_release.py --assets "$RUNNER_TEMP/mac2-delivery"

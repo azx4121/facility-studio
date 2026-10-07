@@ -1,7 +1,7 @@
-Facility Studio V5.5.5｜macOS 中英雙語版 mac.1
+Facility Studio V5.5.5｜macOS 中英雙語版 mac.2
 
 建議使用 DMG：三個步驟
-1. 打開 Facility_Studio_V5_5_5_macOS_mac1.dmg。
+1. 打開 Facility_Studio_V5_5_5_macOS_mac2.dmg。
 2. 把「Facility Studio」拖到旁邊的「Applications／應用程式」。
 3. 從「應用程式」打開 Facility Studio。安裝完成後可退出磁碟映像檔。
 
@@ -20,7 +20,7 @@ Apple 官方操作：https://support.apple.com/en-us/102445
 本包不關閉 Gatekeeper，不移除隔離標記，不改動全域安全設定。
 
 完整 ZIP 懶人包：選用
-1. 用 Mac Finder 完整解壓縮 Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip。
+1. 用 Mac Finder 完整解壓縮 Facility_Studio_V5_5_5_macOS_mac2_OneClick.zip。
 2. 可直接開啟資料夾中的 Facility Studio.app。
 3. 或雙擊 Install_on_Mac.command，安裝至：
    ~/Applications/Facility Studio V5.5.5.app。
@@ -100,3 +100,12 @@ English quick start
 3. Use each calculator independently; no Python installation or internet is needed.
 4. In Equipment schedules, export the English template, enter actual equipment and set Enabled (1/0) to 1 before importing.
 If macOS blocks the first launch, follow Apple Settings > Privacy & Security > Open Anyway. The app is ad-hoc signed; it is not Developer ID notarized.
+
+
+V5.5.5 revision 2 / 署名與新手教學修訂
+簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
+簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
+完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
+先複製改名練習 JSON，再由完整工作台「開啟」；原廠選型與設備阻力等待補資料仍需補。
+Revision 2 adds persistent author credit, bundled offline walkthroughs, two practice workspaces and reference reports.
+No additional Python installation or internet is needed for the tutorial.

@@ -21,6 +21,12 @@ Actual native English interface:
 
 ![Facility Studio English electrical sizing on macOS](docs/images/macos-electrical-en.png)
 
+## Beginner walkthrough
+
+New to the full workbench? Follow the [step-by-step beginner guide](docs/guides/workbench.en.md). **The first six sections produce a practice report**; additional systems are optional.
+
+[Download the offline tutorial](docs/tutorial/Facility_Studio_Beginner_Tutorial.zip), extract it, and open `START_HERE.html`. It includes a bilingual walkthrough, two reopenable practice workspaces and reference reports. No Python installation is needed. Native revisions win.2 / mac.2 add the in-app tutorial entry and persistent simple-tool author credit; see the [revision record](docs/2026-10-07-beginner-tutorial.md). Existing V5.5.5 binaries can use the HTML directly.
+
 ## Installation and first launch
 
 ### Windows

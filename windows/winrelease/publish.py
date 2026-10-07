@@ -1,4 +1,4 @@
-"""Publish only verified win.1 assets; preserve every existing published release."""
+"""Publish only verified win.2 assets; preserve every existing published release."""
 
 import argparse
 import hashlib
@@ -10,7 +10,7 @@ import urllib.parse
 import urllib.request
 
 REPOSITORY = "azx4121/facility-studio"
-TAG = "v5.5.5-win.1"
+TAG = "v5.5.5-win.2"
 FILENAMES = (
     "Facility_Studio_V5_5_5_Windows_Offline.exe",
     "Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip",
@@ -70,9 +70,12 @@ def main():
         release = None
     if release is None:
         body = (
+            "本修訂補上簡易工具左下角 DESIGNED BY ANDY HUANG ©，七種工具共用並持續顯示。\n\n"
+            "新增離線中英新手教學入口：簡易工具、完整工作台及單台空調箱可直接開啟逐步教學；另含兩份可開啟的合成練習專案與對照報告。\n\n"
+            "Revision 2 adds persistent author credit to simple tools and bundled offline beginner tutorials, practice projects and reference reports. Native acceptance checks the credit at minimum window size, local tutorial buttons and actual practice loading. Existing engineering formulas and projects are retained.\n\n"
             "V5.5.5 中英雙語版：主畫面右上角選擇 English／繁體中文，欄位、提示、圖表、報告及設備範本同步切換。已填數值與舊專案保留，語言偏好會保存。\n\n"
             "Bilingual interface: select English in the top-right language selector. Forms, guidance, charts, reports and exported equipment templates are translated. Stored engineering data remains unchanged.\n\n"
-            "Windows 離線直接執行版 win.1；已含 Python、Tk、Matplotlib、NumPy 與 Pillow。\n\n"
+            "Windows 離線直接執行版 win.2；已含 Python、Tk、Matplotlib、NumPy 與 Pillow。\n\n"
             "下載 EXE 可直接開啟，或完整解壓縮 ZIP 後雙擊 EXE；不需安裝 Python、pip，也不需連網。"
             "保留 FY 圖示、七種簡易工具、設備表匯入與完整工程工作台。ZIP 另含設備範本、原始碼、授權及本機診斷腳本。\n\n"
             "同一份交付 EXE 和 ZIP 已在 Windows Server 2022／2025 x64 原生雲端環境驗證："
@@ -85,7 +88,7 @@ def main():
         payload = {
             "tag_name": TAG,
             "target_commitish": commit,
-            "name": "Facility Studio V5.5.5｜Windows 離線直接執行版 win.1",
+            "name": "Facility Studio V5.5.5｜Windows 離線直接執行版 win.2",
             "body": body,
             "draft": True,
             "prerelease": True,

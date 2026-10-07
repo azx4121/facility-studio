@@ -1,0 +1,52 @@
+{
+  "app_version": "5.5.5",
+  "baseline": {
+    "area_m2": 96.0,
+    "volume_m3": 288.0,
+    "light_count": 25,
+    "light_kw": 1.0,
+    "sensible_kw": 7.8699959999999995,
+    "latent_kw": 0.44,
+    "moisture_kg_h": 0.6333466613354658,
+    "minimum_oa_room_cmh": 192.0,
+    "circulation_room_cmh": 1728.0,
+    "treated_room_cmh": 2400.235496650782,
+    "chw_lpm": 41.11527481974617,
+    "up_current_a": 8.93731066857006,
+    "quality": "待補資料"
+  },
+  "ahu_transfer": {
+    "updates": {
+      "mchw_q": "12.443068772362539",
+      "u_mchw": "LPM",
+      "mchw_link": "獨立輸入",
+      "chw1_dt": "5.0",
+      "chw1_in": "12.0",
+      "chw_q": "12.34847007002057",
+      "u_chw": "LPM",
+      "chw_link": "獨立輸入",
+      "dt_chw": "5.0",
+      "chw2_in": "7.0",
+      "e_np_fan": "0.37",
+      "u_e_np_fan": "kW",
+      "e_np_heat": "16.0",
+      "u_e_np_heat": "kW",
+      "e_np_humid": "0.0",
+      "u_e_np_humid": "kW",
+      "e_np_pump": "0.1",
+      "u_e_np_pump": "kW",
+      "water_rho": "1000",
+      "water_cp": "4.1868",
+      "water_mu": "0.001"
+    },
+    "notes": [
+      "本空調箱未採用回收熱水；主案 HW 保持原值，避免清除其他服務負荷。",
+      "回傳值為取代所列欄位，不是疊加；其他廠務設備須另列。",
+      "水側採純水 1000 kg/m³、4.1868 kJ/(kg·K)、黏度 0.001 Pa·s 初估；回傳會影響主案全部水迴路，應確認水溫與水質。",
+      "電力採已填額定值，不是由冷量直接換成耗電；仍需確認 PF、同時使用及馬達保護。",
+      "空調箱與主案保留各自計算邊界；回傳水量後需重新確認主案服務範圍。"
+    ],
+    "quality": "待補資料"
+  },
+  "scope": "Synthetic calculation examples, not installed-equipment certification."
+}

@@ -48,7 +48,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: win1-build-evidence
+          name: win2-build-evidence
           path: |
             ${{ runner.temp }}/windows-offline/evidence
             windows/evidence/*.json
@@ -57,7 +57,7 @@ jobs:
       - name: Retain native-tested distribution files
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: win1-delivery
+          name: win2-delivery
           path: |
             ${{ runner.temp }}/windows-offline/Facility_Studio_V5_5_5_Windows_Offline.exe
             ${{ runner.temp }}/windows-offline/Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip
@@ -74,17 +74,17 @@ jobs:
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
-          name: win1-delivery
+          name: win2-delivery
           path: ${{ runner.temp }}/windows-offline
       - name: Execute identical delivered files on a second native Windows environment
-        run: python -m winrelease.verify --assets "$env:RUNNER_TEMP/windows-offline" --output "$env:RUNNER_TEMP/win1-clean-evidence"
+        run: python -m winrelease.verify --assets "$env:RUNNER_TEMP/windows-offline" --output "$env:RUNNER_TEMP/win2-clean-evidence"
         working-directory: windows
       - name: Retain second native Windows evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: win1-second-windows-evidence
-          path: ${{ runner.temp }}/win1-clean-evidence
+          name: win2-second-windows-evidence
+          path: ${{ runner.temp }}/win2-clean-evidence
           if-no-files-found: warn
           retention-days: 14
   publish:
@@ -100,7 +100,7 @@ jobs:
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
-          name: win1-delivery
+          name: win2-delivery
           path: ${{ runner.temp }}/windows-offline
       - name: Publish a new revision only after both Windows checks pass
         env:

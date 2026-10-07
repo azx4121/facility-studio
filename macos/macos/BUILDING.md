@@ -1,4 +1,4 @@
-# Native macOS release building (V5.5.5 mac.1)
+# Native macOS release building (V5.5.5 mac.2)
 
 The original V5.5.4 mac.1 package passed byte-level checks but failed Apple's native deep
 signature validation on both macOS 15 architectures. Static verification must
@@ -33,8 +33,8 @@ To validate those exact delivery files on a second Mac architecture:
 
 ```sh
 python3 macos/macos/verify_native_release.py \
-  --package /absolute/path/Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip \
-  --dmg /absolute/path/Facility_Studio_V5_5_5_macOS_mac1.dmg \
+  --package /absolute/path/Facility_Studio_V5_5_5_macOS_mac2_OneClick.zip \
+  --dmg /absolute/path/Facility_Studio_V5_5_5_macOS_mac2.dmg \
   --checksums /absolute/path/SHA256SUMS.txt \
   --output /absolute/path/second-mac-evidence
 ```
@@ -42,7 +42,7 @@ python3 macos/macos/verify_native_release.py \
 The workflow `.github/workflows/macos-native-release.yml` uses Apple Silicon
 macOS 15 to build and Intel macOS 15 to execute the same ZIP and DMG. On the
 repair branch it only tests. On main, publication runs only after both jobs pass;
-the publisher targets `v5.5.5-mac.1` without replacing existing public assets or moving tags.
+the publisher targets `v5.5.5-mac.2` without replacing existing public assets or moving tags.
 For a future release, update version and output names in the builder, verifier,
 publisher and workflow together; do not try to overwrite the already published
 v5.5.5 files after a source change.
@@ -115,3 +115,12 @@ The historical ZIP builder is `macos/make_package.py`; ordinary Python ZIP
 extraction may turn symlinks into text files, so its byte-verification routine
 recreates them using their stored Unix file types.
 
+
+
+V5.5.5 revision 2 / 署名與新手教學修訂
+簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
+簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
+完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
+先複製改名練習 JSON，再由完整工作台「開啟」；原廠選型與設備阻力等待補資料仍需補。
+Revision 2 adds persistent author credit, bundled offline walkthroughs, two practice workspaces and reference reports.
+No additional Python installation or internet is needed for the tutorial.

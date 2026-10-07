@@ -1,0 +1,265 @@
+{
+  "app_version": "5.5.5",
+  "source_platform": "windows",
+  "execution": "Headless calculation and report checks on the current host; native GUI checks are separate.",
+  "cases": [
+    {
+      "case": 1,
+      "name": "01 Baseline workspace and room heat/moisture balance",
+      "passed": true,
+      "values": {
+        "qs_kw": 7.8699959999999995,
+        "qty": 25,
+        "quality": "待補資料"
+      }
+    },
+    {
+      "case": 2,
+      "name": "02 Double room length",
+      "passed": true,
+      "values": {
+        "area_m2": 192,
+        "qty": 50
+      }
+    },
+    {
+      "case": 3,
+      "name": "03 Change height without changing lighting area",
+      "passed": true,
+      "values": {
+        "volume_m3": 384,
+        "circulation_cmh": 2304
+      }
+    },
+    {
+      "case": 4,
+      "name": "04 Eight to twelve people",
+      "passed": true,
+      "values": {
+        "sensible_delta_kw": 0.3,
+        "latent_delta_kw": 0.22
+      }
+    },
+    {
+      "case": 5,
+      "name": "05 Equipment heat 5 to 10 kW",
+      "passed": true,
+      "values": {
+        "qs_kw": 12.869996
+      }
+    },
+    {
+      "case": 6,
+      "name": "06 Lighting target 500 to 300 lux",
+      "passed": true,
+      "values": {
+        "qty": 15,
+        "kw": 0.6
+      }
+    },
+    {
+      "case": 7,
+      "name": "07 One kg/h of room process moisture",
+      "passed": true,
+      "values": {
+        "process_kw": 0.6947222222222222
+      }
+    },
+    {
+      "case": 8,
+      "name": "08 Known latent kW does not also add inactive kg/h",
+      "passed": true,
+      "values": {
+        "total_latent_kw": 1.44
+      }
+    },
+    {
+      "case": 9,
+      "name": "09 No-additional-moisture excludes retained drafts",
+      "passed": true,
+      "values": {
+        "total_latent_kw": 0.44
+      }
+    },
+    {
+      "case": 10,
+      "name": "10 CDA sizing uses minimum rather than supply gauge pressure",
+      "passed": true,
+      "values": {
+        "gas_result": {
+          "1": {
+            "type": "N2",
+            "standard_lpm": 0.0,
+            "actual_lpm": 0.0,
+            "pressure_abs_pa": 601325.0,
+            "minimum_id_mm": 0,
+            "selected_id_mm": 0,
+            "size": "無需求",
+            "velocity_mps": 0,
+            "velocity_limit_mps": 12.0
+          },
+          "2": {
+            "type": "CDA",
+            "standard_lpm": 800.0,
+            "actual_lpm": 134.80231156196731,
+            "pressure_abs_pa": 601325.0,
+            "minimum_id_mm": 13.809643723878326,
+            "selected_id_mm": 16.1,
+            "size": "1/2\" (15A)",
+            "velocity_mps": 11.035816120931987,
+            "velocity_limit_mps": 15.0
+          },
+          "3": {
+            "type": "O2",
+            "standard_lpm": 0.0,
+            "actual_lpm": 0.0,
+            "pressure_abs_pa": 601325.0,
+            "minimum_id_mm": 0,
+            "selected_id_mm": 0,
+            "size": "無需求",
+            "velocity_mps": 0,
+            "velocity_limit_mps": 8.0
+          },
+          "4": {
+            "type": "PV",
+            "standard_lpm": 0.0,
+            "actual_lpm": 0.0,
+            "pressure_abs_pa": 19998.35526315,
+            "minimum_id_mm": 0,
+            "selected_id_mm": 0,
+            "size": "無需求",
+            "velocity_mps": 0,
+            "velocity_limit_mps": 18.0
+          }
+        },
+        "expected_alpm": 134.80231156196731
+      }
+    },
+    {
+      "case": 11,
+      "name": "11 PV Torr, kPa and mbar absolute-pressure equivalence",
+      "passed": true,
+      "values": {
+        "torr": 150,
+        "kpa": 19.998355263157894,
+        "mbar": 199.98355263157896
+      }
+    },
+    {
+      "case": 12,
+      "name": "12 Unused gas and vacuum demand is zero",
+      "passed": true,
+      "values": {
+        "active_gas_rows": 0
+      }
+    },
+    {
+      "case": 13,
+      "name": "13 Linked CHW ignores retained manual flow",
+      "passed": true,
+      "values": {
+        "chw_lpm": 41.11527481974617
+      }
+    },
+    {
+      "case": 14,
+      "name": "14 Independent CHW uses measured 100 LPM",
+      "passed": true,
+      "values": {
+        "chw_lpm": 100,
+        "capacity_kw": 34.89
+      }
+    },
+    {
+      "case": 15,
+      "name": "15 Water delta-T 5 to 4 K increases flow",
+      "passed": true,
+      "values": {
+        "chw_lpm": 51.39409352468271
+      }
+    },
+    {
+      "case": 16,
+      "name": "16 Pipe-only pressure subtotal doubles with route length",
+      "passed": true,
+      "values": {
+        "pa": 203492.834544939
+      }
+    },
+    {
+      "case": 17,
+      "name": "17 Known equipment pressure adds exactly 10 kPa",
+      "passed": true,
+      "values": {
+        "pa": 111746.4172724695
+      }
+    },
+    {
+      "case": 18,
+      "name": "18 MAU link, stage balance and replacement transfer",
+      "passed": true,
+      "values": {
+        "transfer": {
+          "mchw_q": "12.443068772362539",
+          "u_mchw": "LPM",
+          "mchw_link": "獨立輸入",
+          "chw1_dt": "5.0",
+          "chw1_in": "12.0",
+          "chw_q": "12.34847007002057",
+          "u_chw": "LPM",
+          "chw_link": "獨立輸入",
+          "dt_chw": "5.0",
+          "chw2_in": "7.0",
+          "e_np_fan": "0.37",
+          "u_e_np_fan": "kW",
+          "e_np_heat": "16.0",
+          "u_e_np_heat": "kW",
+          "e_np_humid": "0.0",
+          "u_e_np_humid": "kW",
+          "e_np_pump": "0.1",
+          "u_e_np_pump": "kW",
+          "water_rho": "1000",
+          "water_cp": "4.1868",
+          "water_mu": "0.001"
+        },
+        "quality": "待補資料"
+      }
+    },
+    {
+      "case": 19,
+      "name": "19 Undersized H1 is reported as insufficient",
+      "passed": true,
+      "values": {
+        "quality": "未達條件",
+        "winter_required_kw": 0.8409081229385649
+      }
+    },
+    {
+      "case": 20,
+      "name": "20 Invalid/boundary inputs are rejected and reference reports match",
+      "passed": true,
+      "values": {
+        "rejected": [
+          {
+            "reason": "Mixed AHU must not link as a full-OA MAU",
+            "field": "sys_type"
+          },
+          {
+            "reason": "Manual outside air cannot undercut minimum",
+            "field": "en_manual_oa"
+          },
+          {
+            "reason": "Zero PF cannot produce a usable design report",
+            "field": "e_pf"
+          }
+        ]
+      }
+    }
+  ],
+  "checks": 85,
+  "passed": true,
+  "input_sha256": {
+    "01_Practice_AHU.json": "d7a488f6810987e0aeb77a42071f3687a13eca353aeb2136a99f48020983ad65",
+    "02_Practice_MAU_and_AHU.json": "f663d2242f5a135d3fe41c37731929ec32b011232a3aef2b872e805be8864902"
+  }
+}

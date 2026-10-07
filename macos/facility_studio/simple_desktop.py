@@ -5,6 +5,7 @@ from tkinter import font
 from .localized_tk import ttk, filedialog, messagebox
 
 from .errors import ValidationError
+from .tutorial_help import open_tutorial
 from .main_view import ScrollPage
 from .quick_tools import UNITS, UNIT_HELP
 from .air_chart import AirChart
@@ -442,6 +443,15 @@ class SimpleToolsApp:
                 )
             ),
         )
+        self.author_credit = tk.Label(
+            side, text="DESIGNED BY\nANDY HUANG ©", bg="#142c43",
+            fg="#a6bdcc", justify="left", font=(self.family, 9),
+        )
+        self.author_credit.pack(side="bottom", anchor="w", padx=18, pady=(8, 16))
+        self.tutorial_button = ttk.Button(
+            side, text="新手教學", command=lambda: open_tutorial(root),
+        )
+        self.tutorial_button.pack(side="bottom", fill="x", padx=12, pady=(8, 0))
         header = ttk.Frame(root, padding=(18, 12))
         header.grid(row=0, column=1, sticky="ew")
         header.columnconfigure(0, weight=1)

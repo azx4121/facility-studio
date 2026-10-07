@@ -6,6 +6,7 @@
 
 | 想做的事 | 文件 |
 | --- | --- |
+| 完整工作台初學：一步步做出第一份報告 | [中文跟做教學](guides/workbench.md)／[English walkthrough](guides/workbench.en.md)／[離線教學包](tutorial/Facility_Studio_Beginner_Tutorial.zip) |
 | 下載、安裝與首次開啟 | [中文首頁](../README.md#安裝與開啟)／[English installation](../README.en.md#installation-and-first-launch) |
 | 找計算入口、設計條件、公式及結果 | [20 個操作情境](guides/README.md)／[English worked examples](guides/README.en.md) |
 | 電力、風管、氣體、照明、水、空氣線圖、換算、設備表與空調箱 | [工具指南](guides/README.md)；每篇可切換中英文 |

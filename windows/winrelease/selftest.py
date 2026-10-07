@@ -200,7 +200,7 @@ def run(destination):
                 "Full engineering workbench calculates",
                 lambda: workbench.result is not None,
             )
-            for index in range(8):
+            for index in range(9):
 
                 def open_page(page=index):
                     workbench.show_page(page)
@@ -211,6 +211,9 @@ def run(destination):
             from facility_studio.language_acceptance import run as check_languages
 
             check_languages(root, app, workbench, check, pump, destination)
+            from facility_studio.tutorial_acceptance import run as check_tutorial
+
+            check_tutorial(root, app, workbench, check, pump)
             check("Native GUI heartbeat", lambda: (pump(), True)[1])
             from matplotlib.figure import Figure
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg

@@ -202,7 +202,7 @@ def run():
         root.report_callback_exception = callback_error
         pump_gui(initial_render=True)
         check("Full workbench GUI calculates", lambda: workbench.result is not None)
-        for page in range(8):
+        for page in range(9):
 
             def open_page(index=page):
                 workbench.show_page(index)
@@ -215,6 +215,9 @@ def run():
         check_languages(
             root, app, workbench, check, pump_gui, destination / "Mac_Acceptance.json"
         )
+        from facility_studio.tutorial_acceptance import run as check_tutorial
+
+        check_tutorial(root, app, workbench, check, pump_gui)
         check("Native UI heartbeat", lambda: (pump_gui(), True)[1])
         check("No native GUI callback exceptions", lambda: not callback_errors)
         from matplotlib.figure import Figure

@@ -4,6 +4,10 @@
 
 These worked examples use synthetic data and the existing engineering models. **V5.5.5 supports Traditional Chinese and English**: select **English** at the top right. Windows EXE and macOS App downloads include their runtime and run offline without installing Python. The numerical examples were originally verified for V5.5.4; V5.5.5 adds presentation localization while retaining the calculations. Current delivery and language checks are recorded in the [V5.5.5 verification](../2026-10-07-bilingual.en.md).
 
+## Start with the full-workbench walkthrough
+
+The [beginner guide](workbench.en.md) starts with two reopenable practice projects and explains essential inputs, reports, latent load, water flow, pressure losses and AHU links. The [offline tutorial](../tutorial/Facility_Studio_Beginner_Tutorial.zip) works in a browser on Windows or macOS.
+
 ## Choose your calculation
 
 | Case | Question and tool | Scope |
