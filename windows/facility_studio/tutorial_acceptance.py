@@ -44,10 +44,12 @@ def run(root, app, workbench, check, pump):
                   "?language=" + i18n.language() + "#" in launch.call_args.args[0])
         previous = copy.deepcopy(workbench.session_snapshot())
         previous_path = workbench.path
+        previous_window_state = workbench.root.state()
         previous_saved_hash = workbench.saved_hash
         previous_workspace_hash = workbench.saved_workspace_hash
         previous_dirty = workbench.session_dirty()
         try:
+            workbench.root.deiconify()
             workbench.apply_workspace(read_workspace(folder / "01_Practice_AHU.json"))
             workbench.recalculate()
             pump()
@@ -66,6 +68,10 @@ def run(root, app, workbench, check, pump):
             workbench.saved_workspace_hash = previous_workspace_hash
             workbench.recalculate()
             workbench.show_page(0)
+            if previous_window_state == "withdrawn":
+                workbench.root.withdraw()
+            elif previous_window_state == "iconic":
+                workbench.root.iconify()
             pump()
         check("Tutorial restores the original unsaved state", lambda:
               workbench.session_dirty() == previous_dirty)
