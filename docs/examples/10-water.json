@@ -1,0 +1,7 @@
+{
+  "mode": "已知水量",
+  "flow": "100",
+  "flow_unit": "LPM",
+  "delta": "5",
+  "velocity": "1.5"
+}

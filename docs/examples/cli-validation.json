@@ -1,0 +1,203 @@
+{
+  "scope": "14 minimal CLI examples executed for both source distributions on this test host; not native EXE/App execution",
+  "relative_links_checked": 126,
+  "platform_results_identical": true,
+  "runs": [
+    {
+      "platform_source": "windows",
+      "scenario_id": "01",
+      "input_path": "docs/examples/01-electrical.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "windows",
+      "scenario_id": "02",
+      "input_path": "docs/examples/02-electrical.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "windows",
+      "scenario_id": "03",
+      "input_path": "docs/examples/03-duct.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "windows",
+      "scenario_id": "04",
+      "input_path": "docs/examples/04-duct.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "windows",
+      "scenario_id": "05",
+      "input_path": "docs/examples/05-gas.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "windows",
+      "scenario_id": "06",
+      "input_path": "docs/examples/06-gas.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "windows",
+      "scenario_id": "08",
+      "input_path": "docs/examples/08-lighting.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "windows",
+      "scenario_id": "09",
+      "input_path": "docs/examples/09-lighting.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "windows",
+      "scenario_id": "10",
+      "input_path": "docs/examples/10-water.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "windows",
+      "scenario_id": "11",
+      "input_path": "docs/examples/11-water.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "windows",
+      "scenario_id": "12",
+      "input_path": "docs/examples/12-air.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "windows",
+      "scenario_id": "13",
+      "input_path": "docs/examples/13-air.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "windows",
+      "scenario_id": "14",
+      "input_path": "docs/examples/14-units.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "windows",
+      "scenario_id": "15",
+      "input_path": "docs/examples/15-units.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "01",
+      "input_path": "docs/examples/01-electrical.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "02",
+      "input_path": "docs/examples/02-electrical.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "03",
+      "input_path": "docs/examples/03-duct.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "04",
+      "input_path": "docs/examples/04-duct.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "05",
+      "input_path": "docs/examples/05-gas.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "06",
+      "input_path": "docs/examples/06-gas.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "08",
+      "input_path": "docs/examples/08-lighting.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "09",
+      "input_path": "docs/examples/09-lighting.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "10",
+      "input_path": "docs/examples/10-water.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "11",
+      "input_path": "docs/examples/11-water.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "12",
+      "input_path": "docs/examples/12-air.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "13",
+      "input_path": "docs/examples/13-air.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "14",
+      "input_path": "docs/examples/14-units.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    },
+    {
+      "platform_source": "macos",
+      "scenario_id": "15",
+      "input_path": "docs/examples/15-units.json",
+      "cli_json_matches": true,
+      "text_report_created": true
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "mode": "估算照度",
+  "area_mode": "體積 m³",
+  "area": "90",
+  "height": "3",
+  "watts": "40",
+  "quantity": "10",
+  "efficacy": "100",
+  "utilization": "0.6",
+  "maintenance": "0.8"
+}

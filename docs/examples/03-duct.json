@@ -1,0 +1,9 @@
+{
+  "flow": "3000",
+  "flow_unit": "CMH",
+  "pressure": "200",
+  "pressure_unit": "Pa",
+  "velocity": "8",
+  "ratio": "2",
+  "check_path": "0"
+}

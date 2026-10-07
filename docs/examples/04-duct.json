@@ -1,0 +1,11 @@
+{
+  "flow": "2000",
+  "flow_unit": "CFM",
+  "pressure": "300",
+  "pressure_unit": "Pa",
+  "velocity": "8",
+  "check_path": "1",
+  "length": "20",
+  "k_sum": "4",
+  "equipment": "100"
+}
