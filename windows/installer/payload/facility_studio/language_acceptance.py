@@ -270,16 +270,39 @@ def run(root, app, workbench, check, pump, output=None):
     root.deiconify()
     root.lift()
     pump()
-    check(
-        "English action buttons fit the visible desktop",
-        lambda: require(
-            app.export_button.winfo_rootx() + app.export_button.winfo_width()
-            <= root.winfo_screenwidth()
-            and app.export_button.winfo_rooty() + app.export_button.winfo_height()
-            <= root.winfo_screenheight() - 30,
-            "Action buttons extend beyond the usable display",
-        ),
-    )
+
+    def action_buttons_fit():
+        # Windows applies geometry changes asynchronously. Read the final
+        # native bounds after the window manager has processed the resize;
+        # retain the same visible-desktop constraint and a bounded deadline.
+        bounds = None
+        for _ in range(6):
+            pump()
+            button = app.export_button
+            bounds = (
+                button.winfo_rootx(),
+                button.winfo_rooty(),
+                button.winfo_width(),
+                button.winfo_height(),
+            )
+            x, y, width, height = bounds
+            if (
+                button.winfo_ismapped()
+                and x >= 0
+                and y >= 0
+                and x + width <= root.winfo_screenwidth()
+                and y + height <= root.winfo_screenheight() - 30
+            ):
+                return True
+        return require(
+            False,
+            "Action buttons exceed the usable display: "
+            + repr(bounds)
+            + " on "
+            + repr((root.winfo_screenwidth(), root.winfo_screenheight())),
+        )
+
+    check("English action buttons fit the visible desktop", action_buttons_fit)
 
     def readable_navigation():
         from .localized_tk import ttk
