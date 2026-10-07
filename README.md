@@ -25,6 +25,7 @@
 不需管理員權限。若啟動失敗，可執行 `Verify_on_Windows.cmd`，記錄位於 `%LOCALAPPDATA%\Facility_Studio_V5_5\Logs`。
 本版尚無商用程式碼簽章，Windows 安全性或公司政策可能攔下；請確認官方下載來源與 SHA256，勿關閉防毒。
 舊 `v5.5.4-beta.1` 的 `Setup.exe` 線上安裝方式完整保留，新版不使用它。
+詳細封裝與原生驗收記錄見 [Windows 離線版驗證](docs/2026-10-07-windows-offline.md)。
 
 ### macOS
 
