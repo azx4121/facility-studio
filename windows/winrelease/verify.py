@@ -15,7 +15,10 @@ from winrelease.build import EXE_NAME, ZIP_NAME, sha
 
 
 def firewall(exe, rule, add):
-    env = dict(os.environ, FACILITY_TEST_EXE=str(exe), FACILITY_TEST_RULE=rule)
+    # Windows temporary paths can contain 8.3 aliases. WFP rules require a
+    # canonical application path; do not pass the unresolved temp alias.
+    application_path = exe.resolve(strict=True)
+    env = dict(os.environ, FACILITY_TEST_EXE=str(application_path), FACILITY_TEST_RULE=rule)
     if add:
         command = "$ErrorActionPreference='Stop'; New-NetFirewallRule -Name $env:FACILITY_TEST_RULE -DisplayName $env:FACILITY_TEST_RULE -Direction Outbound -Action Block -Program $env:FACILITY_TEST_EXE -Profile Any | Out-Null"
     else:
@@ -96,9 +99,9 @@ def main():
         if sums.get(name) != sha(assets / name):
             raise RuntimeError("Delivered file SHA256 mismatch: " + name)
     check_exe(assets / EXE_NAME, output, "standalone")
-    # Windows Firewall's program-path rule rejects some non-ASCII temporary
-    # locations. Test the firewall and Unicode executable path independently.
-    with tempfile.TemporaryDirectory(prefix="FacilityStudioZip-") as directory:
+    # Stage beneath the runner's canonical work directory. Keep a separate
+    # Unicode-path execution check, independent of firewall path parsing.
+    with tempfile.TemporaryDirectory(prefix="FacilityStudioZip-", dir=output) as directory:
         extraction = Path(directory)
         with zipfile.ZipFile(assets / ZIP_NAME) as archive:
             # Only our freshly built, verified distribution is extracted.

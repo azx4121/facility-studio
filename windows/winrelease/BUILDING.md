@@ -23,7 +23,7 @@ python -m winrelease.verify --assets C:\FacilityStudioBuild --output C:\Facility
 七種工具、七種設備分析、完整工作台八頁、原生繪圖、CLI報告與模板輸出。
 相同檔案另在第二個 Windows runner 重複驗證，成功才允許 main 發布新 Release。
 另在中文與空格的 EXE 路徑驗收；該額外路徑測試使用 socket audit hook，
-不與 Windows 防火牆對 Unicode 程式路徑的限制混為一談。
+不與 Windows 防火牆的程式路徑正規化混為一談。防火牆規則使用展開短路徑別名後的完整路徑。
 
 本機一般使用者診斷 `Verify_on_Windows.cmd` 不需系統管理員、不更動防火牆、
 不會上傳資料、不覆寫原有專案。CI防火牆設定只是開發者驗收。
