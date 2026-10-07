@@ -4,16 +4,16 @@
 
 **azx4121／Andy Huang 維護的繁體中文／英文桌面工具**，可獨立使用電力配線、風管尺寸、CDA／N2管徑、照明Lux、冷熱水、空氣線圖及工程單位換算，也能匯入Excel／CSV彙整七種設備需求。Windows／macOS下載後可離線運算，內含Python執行環境。此倉庫與其他同名產品／工作室無關。
 
-通用廠務工具，適合快速估算、方案比較及設備需求彙整。目前為 **V5.5.5 中英雙語公開測試版**；Windows 請下載 **v5.5.5-win.1 離線直接執行版**，macOS 請下載 **v5.5.5-mac.1**。兩者皆包含既有安全、授權與 macOS 修正；既有 Release 與歷史提交保留。
+通用廠務工具，適合快速估算、方案比較及設備需求彙整。目前為 **V5.5.5 中英雙語公開測試版**；Windows 請下載 **v5.5.5-win.2 離線直接執行版**，macOS 請下載 **v5.5.5-mac.2**。兩者皆包含既有安全、授權與 macOS 修正；既有 Release 與歷史提交保留。
 
 ## 下載
 
 | 平台 | 懶人包 | 使用條件 |
 | --- | --- | --- |
-| Windows（完整包） | [下載 win.1 離線懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.1/Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip) | 目標 Windows 10／11、Intel／AMD x64；解壓縮後直接開啟 EXE，不需另裝 Python／套件、不需連網 |
-| Windows（單檔） | [直接下載 win.1 EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.1/Facility_Studio_V5_5_5_Windows_Offline.exe) | 已內含執行環境；可單獨執行，不需安裝流程 |
-| macOS（建議） | [下載 V5.5.5 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.1/Facility_Studio_V5_5_5_macOS_mac1.dmg) | 拖到「應用程式」安裝；已含執行環境，Apple Silicon／Intel 原生驗證 |
-| macOS（完整包） | [下載 V5.5.5 ZIP 懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.1/Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip) | 另含原始碼、設備表範本與診斷腳本 |
+| Windows（完整包） | [下載 win.2 離線懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.2/Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip) | 目標 Windows 10／11、Intel／AMD x64；解壓縮後直接開啟 EXE，不需另裝 Python／套件、不需連網 |
+| Windows（單檔） | [直接下載 win.2 EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.2/Facility_Studio_V5_5_5_Windows_Offline.exe) | 已內含執行環境；可單獨執行，不需安裝流程 |
+| macOS（建議） | [下載 mac.2 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.2/Facility_Studio_V5_5_5_macOS_mac2.dmg) | 拖到「應用程式」安裝；已含執行環境，Apple Silicon／Intel 原生驗證 |
+| macOS（完整包） | [下載 mac.2 ZIP 懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.2/Facility_Studio_V5_5_5_macOS_mac2_OneClick.zip) | 另含原始碼、設備表範本與診斷腳本 |
 
 也可以到 [Releases 發布頁](https://github.com/azx4121/facility-studio/releases) 選擇版本。
 
@@ -21,7 +21,7 @@
 
 第一次使用完整工作台，先看[一步步跟做教學](docs/guides/workbench.md)。**先完成前六步，就能輸出第一份練習報告**；其他系統需要時再學。
 
-[下載離線教學懶人包](docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)：解壓縮後開啟 `START_HERE.html`，內含中英逐步教學、兩份可直接開啟的練習專案及對照報告，不需安裝 Python。原生修訂 win.2／mac.2 新增程式內「新手教學」按鈕及簡易工具署名，交付狀態見[修訂紀錄](docs/2026-10-07-beginner-tutorial.md)。既有 V5.5.5 可先用離線 HTML。
+[下載離線教學懶人包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)：解壓縮後開啟 `START_HERE.html`，內含中英逐步教學、兩份可直接開啟的練習專案及對照報告，不需安裝 Python。**修訂 win.2／mac.2 已附上程式內「新手教學」按鈕及簡易工具署名**，交付驗證見[修訂紀錄](docs/2026-10-07-beginner-tutorial.md)。既有 V5.5.5 可先用離線 HTML。
 
 ## 中英文切換
 
@@ -50,7 +50,7 @@
 
 **先確認資料基準：**電力kW是電氣輸入；風管靜壓不是尺寸公式；CDA／N2須有流量，表壓與絕壓分開；照明Lux不是燈具流明；m³須除淨高才能得到m²。每篇案例列出條件、公式、結果及適用範圍。
 
-以下為 Windows 原生驗收的真實 10 kW 中文快算畫面；英文及 macOS 原生畫面見[雙語驗證](docs/2026-10-07-bilingual.md)，非示意介面：
+以下為較早 Windows 原生驗收的真實 10 kW 中文快算畫面（修訂 2 另補上左下角署名及教學入口）；英文及 macOS 原生畫面見[雙語驗證](docs/2026-10-07-bilingual.md)，非示意介面：
 
 ![Facility Studio 電力配線：10 kW三相380 V、NFB20 AT、每相5.5 mm²](docs/images/windows-electrical.png)
 
@@ -58,7 +58,7 @@
 
 ### Windows
 
-1. 完整解壓縮 **win.1 離線懶人包**。
+1. 完整解壓縮 **win.2 離線懶人包**。
 2. 雙擊 `Facility_Studio_V5_5_5_Windows_Offline.exe`。
 3. 不需另裝 Python、不需安裝套件、不需連網；首次啟動請等候內建套件展開。
 

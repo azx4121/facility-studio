@@ -6,7 +6,7 @@ These worked examples use synthetic data and the existing engineering models. **
 
 ## Start with the full-workbench walkthrough
 
-The [beginner guide](workbench.en.md) starts with two reopenable practice projects and explains essential inputs, reports, latent load, water flow, pressure losses and AHU links. The [offline tutorial](../tutorial/Facility_Studio_Beginner_Tutorial.zip) works in a browser on Windows or macOS.
+The [beginner guide](workbench.en.md) starts with two reopenable practice projects and explains essential inputs, reports, latent load, water flow, pressure losses and AHU links. The [offline tutorial](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip) works in a browser on Windows or macOS.
 
 ## Choose your calculation
 

@@ -4,20 +4,20 @@
 
 Facility Studio by **azx4121 / Andy Huang** is a Traditional Chinese / English desktop application for preliminary HVAC, electrical and facility utility calculations. The calculators can be used independently; a complete workbench supports project comparisons and seasonal AHU stage calculations. This repository is unrelated to other products or businesses with the same name.
 
-**V5.5.5 bilingual public test release.** Windows **v5.5.5-win.1** and macOS **v5.5.5-mac.1** bundle their runtime. After downloading, normal calculations require neither a separately installed Python nor an internet connection.
+**V5.5.5 bilingual public test release.** Windows **v5.5.5-win.2** and macOS **v5.5.5-mac.2** bundle their runtime. After downloading, normal calculations require neither a separately installed Python nor an internet connection.
 
 ## Download and run
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows standalone | [Offline EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.1/Facility_Studio_V5_5_5_Windows_Offline.exe) | Double-click; target: Windows 10/11 on Intel/AMD x64 |
-| Windows complete package | [Offline ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.1/Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip) | Extract completely, then run the EXE; includes source, templates and diagnostics |
-| macOS | [V5.5.5 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.1/Facility_Studio_V5_5_5_macOS_mac1.dmg) | Drag Facility Studio into Applications; Apple Silicon and Intel |
-| macOS complete package | [V5.5.5 ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.1/Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip) | Includes application, source, equipment templates and diagnostics |
+| Windows standalone | [Offline EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.2/Facility_Studio_V5_5_5_Windows_Offline.exe) | Double-click; target: Windows 10/11 on Intel/AMD x64 |
+| Windows complete package | [Offline ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.2/Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip) | Extract completely, then run the EXE; includes source, templates and diagnostics |
+| macOS | [mac.2 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.2/Facility_Studio_V5_5_5_macOS_mac2.dmg) | Drag Facility Studio into Applications; Apple Silicon and Intel |
+| macOS complete package | [mac.2 ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.2/Facility_Studio_V5_5_5_macOS_mac2_OneClick.zip) | Includes application, source, equipment templates and diagnostics |
 
 Select **English** in the top-right language selector. Open windows, field labels, choices, guidance, charts and TXT/HTML reports switch immediately; the choice is remembered on restart. Engineering inputs and formulas stay unchanged. User-entered names and notes retain their original text. Newly exported Excel/CSV templates use the selected language; both Chinese and English templates can be imported. See the [bilingual guide and verification](docs/2026-10-07-bilingual.en.md). See [installation and first launch](#installation-and-first-launch) for startup and security prompts. The Windows executable has no commercial Authenticode signature; the macOS app uses ad-hoc integrity signing, without Developer ID or notarization.
 
-Actual native English interface:
+Earlier native English interface (revision 2 adds the persistent author credit and tutorial entry at the bottom left):
 
 ![Facility Studio English electrical sizing on macOS](docs/images/macos-electrical-en.png)
 
@@ -25,7 +25,7 @@ Actual native English interface:
 
 New to the full workbench? Follow the [step-by-step beginner guide](docs/guides/workbench.en.md). **The first six sections produce a practice report**; additional systems are optional.
 
-[Download the offline tutorial](docs/tutorial/Facility_Studio_Beginner_Tutorial.zip), extract it, and open `START_HERE.html`. It includes a bilingual walkthrough, two reopenable practice workspaces and reference reports. No Python installation is needed. Native revisions win.2 / mac.2 add the in-app tutorial entry and persistent simple-tool author credit; see the [revision record](docs/2026-10-07-beginner-tutorial.md). Existing V5.5.5 binaries can use the HTML directly.
+[Download the offline tutorial](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip), extract it, and open `START_HERE.html`. It includes a bilingual walkthrough, two reopenable practice workspaces and reference reports. No Python installation is needed. **Revisions win.2 / mac.2 include the in-app tutorial entry and persistent simple-tool author credit**; see the [revision record](docs/2026-10-07-beginner-tutorial.md). Existing V5.5.5 binaries can use the HTML directly.
 
 ## Installation and first launch
 
@@ -41,7 +41,7 @@ If startup fails, the complete ZIP includes `Verify_on_Windows.cmd`. Logs are un
 
 ### macOS
 
-1. Open `Facility_Studio_V5_5_5_macOS_mac1.dmg`.
+1. Open `Facility_Studio_V5_5_5_macOS_mac2.dmg`.
 2. Drag **Facility Studio** into **Applications**.
 3. Launch from Applications, then choose **English** at the top right. Python and Homebrew are not needed; normal use is offline.
 4. If the first launch is blocked because the developer cannot be verified, try launching once, then follow **System Settings → Privacy & Security → Open Anyway**, as described in [Apple's official guidance](https://support.apple.com/en-us/102445).

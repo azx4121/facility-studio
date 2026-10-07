@@ -2,11 +2,11 @@
 
 [English](README.en.md) · [專案首頁與下載](../README.md) · [問題回報](https://github.com/azx4121/facility-studio/issues)
 
-目前版本為 **V5.5.5 中英雙語公開測試版**：Windows `v5.5.5-win.1`、macOS `v5.5.5-mac.1`。軟體右上角可切換繁體中文／English，兩平台皆內含執行環境，下載後可離線使用。
+目前版本為 **V5.5.5 中英雙語公開測試版**：Windows `v5.5.5-win.2`、macOS `v5.5.5-mac.2`。軟體右上角可切換繁體中文／English，兩平台皆內含執行環境，下載後可離線使用。
 
 | 想做的事 | 文件 |
 | --- | --- |
-| 完整工作台初學：一步步做出第一份報告 | [中文跟做教學](guides/workbench.md)／[English walkthrough](guides/workbench.en.md)／[離線教學包](tutorial/Facility_Studio_Beginner_Tutorial.zip) |
+| 完整工作台初學：一步步做出第一份報告 | [中文跟做教學](guides/workbench.md)／[English walkthrough](guides/workbench.en.md)／[離線教學包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip) |
 | 下載、安裝與首次開啟 | [中文首頁](../README.md#安裝與開啟)／[English installation](../README.en.md#installation-and-first-launch) |
 | 找計算入口、設計條件、公式及結果 | [20 個操作情境](guides/README.md)／[English worked examples](guides/README.en.md) |
 | 電力、風管、氣體、照明、水、空氣線圖、換算、設備表與空調箱 | [工具指南](guides/README.md)；每篇可切換中英文 |

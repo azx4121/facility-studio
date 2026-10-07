@@ -1,6 +1,6 @@
 # 離線新手教學與可開啟練習案
 
-[中文跟做教學](../guides/workbench.md) · [English walkthrough](../guides/workbench.en.md) · [離線包](Facility_Studio_Beginner_Tutorial.zip)
+[中文跟做教學](../guides/workbench.md) · [English walkthrough](../guides/workbench.en.md) · [離線包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)
 
 一般使用者只需下載 ZIP、完整解壓縮、雙擊 `START_HERE.html`。教學不需 Python、套件或連網。HTML 可中英切換、逐步導覽、勾選學習進度或列印；讀取外部 GitHub 連結時才需網路。進度儲存在瀏覽器本機，未提供回傳或分析服務。
 

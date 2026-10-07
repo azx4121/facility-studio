@@ -1,6 +1,6 @@
 # Full workbench: a beginner walkthrough
 
-[繁體中文](workbench.md) · [Download the app](../../README.en.md#download-and-run) · [Tool guides](README.en.md) · [Offline tutorial package](../tutorial/Facility_Studio_Beginner_Tutorial.zip)
+[繁體中文](workbench.md) · [Download the app](../../README.en.md#download-and-run) · [Tool guides](README.en.md) · [Offline tutorial package](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)
 
 For **V5.5.5 on Windows and macOS**. Finish sections 1–6 to produce your first practice report. Sections 7–9 are optional extensions. All examples use synthetic data, with no client or company project information.
 
@@ -38,7 +38,7 @@ This is a **location diagram based on actual controls, not a GUI screenshot**.
 <a id="first-case"></a>
 ## 3. Open the first practice project
 
-1. Download and completely extract the [tutorial package](../tutorial/Facility_Studio_Beginner_Tutorial.zip). Do not operate inside a ZIP preview.
+1. Download and completely extract the [tutorial package](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip). Do not operate inside a ZIP preview.
 2. **Copy** `01_Practice_AHU.json` to your Desktop and rename it `My_First_Project.json`. Keep the original for restarting.
 3. Open Facility Studio → **Full workbench** → **Open** at the top.
 4. Select your copied `My_First_Project.json`. Save an existing modified project before switching.

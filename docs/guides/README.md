@@ -6,7 +6,7 @@
 
 ## 完整工作台先從這裡開始
 
-[新手跟做教學](workbench.md)以兩份可開啟的專案，教您從基本條件到報告，並說明潛熱、水量、壓損及空調箱連動。[離線教學懶人包](../tutorial/Facility_Studio_Beginner_Tutorial.zip)可在 Windows／macOS 瀏覽器閱讀。
+[新手跟做教學](workbench.md)以兩份可開啟的專案，教您從基本條件到報告，並說明潛熱、水量、壓損及空調箱連動。[離線教學懶人包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)可在 Windows／macOS 瀏覽器閱讀。
 
 ## 快速操作案例
 

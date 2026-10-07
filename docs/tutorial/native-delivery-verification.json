@@ -1,0 +1,266 @@
+{
+  "record_kind": "Native delivery summary and published asset verification",
+  "verified_on": "2026-10-07",
+  "application_version": "5.5.5",
+  "current_revision": "2",
+  "tutorial_inputs_sha256": {
+    "01_Practice_AHU.json": "ab8aa94791228ccba6b95d4c1bb3bcfdac816af0dfa4c7e069fa43f05c27a47c",
+    "02_Practice_MAU_and_AHU.json": "6512ba9392bd430b9cd9363922e1662680c749ccf2d398abd156f54ae3cee3b1"
+  },
+  "tutorial_numerical_checks": {
+    "windows": {
+      "conditions": 20,
+      "checks": 85,
+      "passed": true,
+      "report": "verification-windows.json"
+    },
+    "macos": {
+      "conditions": 20,
+      "checks": 85,
+      "passed": true,
+      "report": "verification-macos.json"
+    }
+  },
+  "html_controls": {
+    "method": "JavaScript parse and event execution using a minimal DOM mock, not a rendered browser acceptance",
+    "checks": 14,
+    "passed": true,
+    "results": [
+      {
+        "name": "Software language and AHU entry are honored",
+        "passed": true
+      },
+      {
+        "name": "Previous lesson navigates",
+        "passed": true
+      },
+      {
+        "name": "Next lesson navigates",
+        "passed": true
+      },
+      {
+        "name": "Progress persists current lesson",
+        "passed": true
+      },
+      {
+        "name": "Language changes preserve lesson and progress",
+        "passed": true
+      },
+      {
+        "name": "All lessons are available together",
+        "passed": true
+      },
+      {
+        "name": "Guided view restores one current lesson",
+        "passed": true
+      },
+      {
+        "name": "Reset clears completion only",
+        "passed": true
+      },
+      {
+        "name": "Print entry calls browser print",
+        "passed": true
+      },
+      {
+        "name": "Deep links can open the practice chapter",
+        "passed": true
+      },
+      {
+        "name": "Invalid language and section fall back safely",
+        "passed": true
+      },
+      {
+        "name": "File-origin storage denial does not break lessons",
+        "passed": true
+      },
+      {
+        "name": "Progress still works for current session without storage",
+        "passed": true
+      },
+      {
+        "name": "Malformed saved progress is ignored",
+        "passed": true
+      }
+    ]
+  },
+  "windows": {
+    "tag": "v5.5.5-win.2",
+    "commit": "d3824c66157081d0e159342e55f82aee85ffbdc4",
+    "run_id": 37608078452,
+    "native_checks": 92,
+    "build_summaries": [
+      {
+        "label": "standalone",
+        "gui_checks": 92,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "df8fbab8ddc7a7f1b482e554376453e2ca37d989ffb7fea8e4a2b30da8cf6384",
+        "passed": true
+      },
+      {
+        "label": "zip-extracted",
+        "gui_checks": 92,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "df8fbab8ddc7a7f1b482e554376453e2ca37d989ffb7fea8e4a2b30da8cf6384",
+        "passed": true
+      },
+      {
+        "label": "unicode-executable-path",
+        "gui_checks": 92,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": false,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "df8fbab8ddc7a7f1b482e554376453e2ca37d989ffb7fea8e4a2b30da8cf6384",
+        "passed": true
+      }
+    ],
+    "second_environment_summaries": [
+      {
+        "label": "standalone",
+        "gui_checks": 92,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "df8fbab8ddc7a7f1b482e554376453e2ca37d989ffb7fea8e4a2b30da8cf6384",
+        "passed": true
+      },
+      {
+        "label": "zip-extracted",
+        "gui_checks": 92,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "df8fbab8ddc7a7f1b482e554376453e2ca37d989ffb7fea8e4a2b30da8cf6384",
+        "passed": true
+      },
+      {
+        "label": "unicode-executable-path",
+        "gui_checks": 92,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": false,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "df8fbab8ddc7a7f1b482e554376453e2ca37d989ffb7fea8e4a2b30da8cf6384",
+        "passed": true
+      }
+    ],
+    "assets": [
+      {
+        "name": "Facility_Studio_V5_5_5_Windows_Offline.exe",
+        "size": 40408194,
+        "digest": "sha256:df8fbab8ddc7a7f1b482e554376453e2ca37d989ffb7fea8e4a2b30da8cf6384",
+        "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.2/Facility_Studio_V5_5_5_Windows_Offline.exe"
+      },
+      {
+        "name": "Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip",
+        "size": 40605913,
+        "digest": "sha256:cb700470602ef7eaeb02e3a83fd6469d6c1c9397c9255314db81f996ccb04d0b",
+        "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.2/Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 229,
+        "digest": "sha256:149abc628c0293be5ffc890216ba7651810341ffdf34b3d5580ed6dca536e01b",
+        "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.2/SHA256SUMS.txt"
+      }
+    ],
+    "workflow_url": "https://github.com/azx4121/facility-studio/actions/runs/37608078452",
+    "native_environments": [
+      "Windows Server 2022 x64",
+      "Windows Server 2025 x64"
+    ],
+    "all_jobs_passed": true,
+    "zip_hash_verification": "Both native verify jobs checked SHA256SUMS; publish compared uploaded asset size and SHA256 before making the release public."
+  },
+  "macos": {
+    "tag": "v5.5.5-mac.2",
+    "commit": "dc508ec6d48c4343ebd613b5c62fe1b29a863c02",
+    "run_id": 37607419210,
+    "native_checks": 84,
+    "assets": [
+      {
+        "name": "Facility_Studio_V5_5_5_macOS_mac2.dmg",
+        "size": 146875182,
+        "digest": "sha256:c70c8c55492c5911ef925d2293f814fe206b88ee541307bc9b0467201cbb3c52",
+        "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.2/Facility_Studio_V5_5_5_macOS_mac2.dmg"
+      },
+      {
+        "name": "Facility_Studio_V5_5_5_macOS_mac2_OneClick.zip",
+        "size": 94617627,
+        "digest": "sha256:0a8e20471697d6e831883f23c0e5ba6542be7e030e0cec20514cceacf6a03e98",
+        "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.2/Facility_Studio_V5_5_5_macOS_mac2_OneClick.zip"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 217,
+        "digest": "sha256:9abbb114193c71ca26509c7526d1d01725a5c9ec1b0aa9736c29fc09ec18896d",
+        "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.2/SHA256SUMS.txt"
+      }
+    ],
+    "workflow_url": "https://github.com/azx4121/facility-studio/actions/runs/37607419210",
+    "native_environments": [
+      "macOS 15 Apple Silicon",
+      "macOS 15 Intel"
+    ],
+    "all_jobs_passed": true,
+    "build_summary": {
+      "version": "5.5.5-mac.2",
+      "files": {
+        "Facility_Studio_V5_5_5_macOS_mac2_OneClick.zip": "0a8e20471697d6e831883f23c0e5ba6542be7e030e0cec20514cceacf6a03e98",
+        "Facility_Studio_V5_5_5_macOS_mac2.dmg": "c70c8c55492c5911ef925d2293f814fe206b88ee541307bc9b0467201cbb3c52"
+      },
+      "native_gui_checks": 84
+    },
+    "zip_and_dmg_sha256_matched_build": true
+  },
+  "formula_scope": {
+    "changed": false,
+    "baseline_commit": "c48df8fcc51ffeae950aa7201ea61a754a58bfe3",
+    "compared_core_files": [
+      "macos/facility_studio/ahu_engine.py",
+      "macos/facility_studio/database.py",
+      "macos/facility_studio/engine.py",
+      "windows/facility_studio/ahu_engine.py",
+      "windows/facility_studio/database.py",
+      "windows/facility_studio/engine.py",
+      "windows/installer/payload/facility_studio/ahu_engine.py",
+      "windows/installer/payload/facility_studio/database.py",
+      "windows/installer/payload/facility_studio/engine.py"
+    ]
+  },
+  "historic_releases_preserved": [
+    "v5.5.5-win.1",
+    "v5.5.5-mac.1",
+    "v5.5.4-win.1",
+    "v5.5.4-mac.2",
+    "v5.5.4-beta.1"
+  ],
+  "limitations": [
+    "This record summarizes native job results; complete GUI checklists and screenshots are in the linked workflow artifacts.",
+    "Tutorial JavaScript event checks use a minimal DOM mock, not browser rendering acceptance.",
+    "No claim of acceptance on every Windows 10/11 device, macOS release, managed-device policy or physical input device.",
+    "Windows lacks commercial Authenticode; macOS is ad-hoc signed without Developer ID or notarization."
+  ],
+  "documentation_links": {
+    "markdownFiles": 50,
+    "totalLinks": 488,
+    "relativeLinks": 407,
+    "releaseReferences": 8,
+    "invalid": []
+  }
+}

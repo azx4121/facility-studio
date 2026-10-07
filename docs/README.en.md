@@ -2,7 +2,7 @@
 
 [繁體中文](README.md) · [Project home and downloads](../README.en.md) · [Report a problem](https://github.com/azx4121/facility-studio/issues)
 
-Current public test release: **V5.5.5 bilingual**, Windows `v5.5.5-win.1` and macOS `v5.5.5-mac.1`. Choose **English** at the top right. Both platform downloads include their runtime and run offline without installing Python.
+Current public test release: **V5.5.5 bilingual**, Windows `v5.5.5-win.2` and macOS `v5.5.5-mac.2`. Choose **English** at the top right. Both platform downloads include their runtime and run offline without installing Python.
 
 | Task | Documentation |
 | --- | --- |
@@ -16,7 +16,7 @@ Current public test release: **V5.5.5 bilingual**, Windows `v5.5.5-win.1` and ma
 
 ## Start with a practice project
 
-[Full-workbench beginner walkthrough](guides/workbench.en.md) · [繁體中文](guides/workbench.md) · [Offline tutorial package](tutorial/Facility_Studio_Beginner_Tutorial.zip). Open `START_HERE.html` after extraction and complete the first six sections.
+[Full-workbench beginner walkthrough](guides/workbench.en.md) · [繁體中文](guides/workbench.md) · [Offline tutorial package](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip). Open `START_HERE.html` after extraction and complete the first six sections.
 
 ## Historical evidence
 
