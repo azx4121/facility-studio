@@ -374,19 +374,11 @@ class DesktopApp(SessionController, MainView):
             font=(self.ui_font, 10),
         ).pack(anchor="w", padx=18, pady=(0, 24))
         for j, name in enumerate(PAGES):
-            b = tk.Button(
+            b = ttk.Button(
                 side,
                 text=f"{j + 1:02d}   {name}",
                 command=lambda n=j: self.show_page(n),
-                bg="#11253b",
-                fg="#d7e5f4",
-                activebackground="#24445f",
-                activeforeground="white",
-                relief="flat",
-                anchor="w",
-                padx=14,
-                pady=7,
-                font=(self.ui_font, 10),
+                style="Workbench.Nav.TButton",
                 cursor="hand2",
             )
             b.pack(fill="x", padx=8, pady=2)

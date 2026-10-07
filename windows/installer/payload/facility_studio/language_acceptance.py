@@ -286,7 +286,7 @@ def run(root, app, workbench, check, pump, output=None):
 
         style = ttk.Style(root)
         aqua = root.tk.call("tk", "windowingsystem") == "aqua"
-        for button in app.nav.values():
+        for button in [*app.nav.values(), *workbench.nav]:
             if button.winfo_class() == "TButton":
                 name = button.cget("style")
                 foreground = style.lookup(name, "foreground")

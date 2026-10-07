@@ -546,8 +546,11 @@ class MainView:
         self.update_visibility()
         for j, b in enumerate(self.nav):
             b.config(
-                bg="#265270" if n == j else "#11253b",
-                fg="white" if n == j else "#d7e5f4",
+                style=(
+                    "Selected.Workbench.Nav.TButton"
+                    if n == j
+                    else "Workbench.Nav.TButton"
+                )
             )
 
     def wheel(self, e):
@@ -618,6 +621,27 @@ class MainView:
         st.configure("TEntry", fieldbackground="white", padding=5)
         st.configure("TCombobox", padding=5)
         st.configure("TButton", padding=(8, 6))
+        st.configure(
+            "Workbench.Nav.TButton",
+            background="#11253b",
+            foreground="#d7e5f4",
+            anchor="w",
+            padding=(14, 7),
+            font=(self.ui_font, 10),
+            borderwidth=0,
+            relief="flat",
+        )
+        st.map(
+            "Workbench.Nav.TButton",
+            background=[("active", "#24445f")],
+            foreground=[("active", "white")],
+        )
+        st.configure(
+            "Selected.Workbench.Nav.TButton",
+            background="#265270",
+            foreground="white",
+            font=(self.ui_font, 10, "bold"),
+        )
         st.configure("Title.TLabel", font=(self.ui_font, 18, "bold"))
         st.configure("Muted.TLabel", foreground="#5d7083")
         st.configure("Error.TLabel", foreground="#b63437")
