@@ -7,12 +7,12 @@ import uuid
 from .project_store import save_project_file
 from .errors import InputError
 from pathlib import Path
-from tkinter import filedialog
+from .localized_tk import filedialog
 import json
-from tkinter import messagebox
+from .localized_tk import messagebox
 import os
-import tkinter as tk
-from tkinter import ttk
+from .localized_tk import tk
+from .localized_tk import ttk
 from .ahu_desktop import AHUWindow
 from .data import CLEANROOM_DB
 from .engine import calculate, pv_to_torr, read_project, validate_project
@@ -29,6 +29,8 @@ from .schema import (
     default_project,
 )
 from .services import UNIT_VALUES, converted_units, independent_domains
+from .localized_tk import LanguagePicker
+from . import i18n
 from .ui_common import app_icon, quality_style, quality_text
 from .utils import G, atomic_text, number, project_hash
 from .session_controller import SessionController
@@ -309,9 +311,14 @@ class DesktopApp(SessionController, MainView):
             pass
         messagebox.showerror("操作未完成", str(exc_value), parent=self.root)
 
+    def refresh_language(self):
+        if self.root.winfo_exists() and self.result:
+            self.set_report(report(self.result))
+            self.draw()
+
     def _build_window(self, root):
         self.root = root
-        root.title("廠務工程工作台 V5.5.4")
+        root.title("廠務工程工作台 V5.5.5")
         root.geometry(
             f"{min(1240, root.winfo_screenwidth() - 60)}x{min(840, root.winfo_screenheight() - 80)}"
         )
@@ -361,7 +368,7 @@ class DesktopApp(SessionController, MainView):
         ).pack(anchor="w", padx=18, pady=(25, 6))
         tk.Label(
             side,
-            text="廠務工程工作台  V5.5.4",
+            text="廠務工程工作台  V5.5.5",
             bg="#11253b",
             fg="#6edac7",
             font=(self.ui_font, 10),
@@ -412,14 +419,19 @@ class DesktopApp(SessionController, MainView):
         ttk.Label(
             head, textvariable=self.receipt_status, wraplength=860, style="Muted.TLabel"
         ).grid(row=5, column=0, columnspan=2, sticky="w")
+        language_bar = ttk.Frame(head)
+        language_bar.grid(row=1, column=1, sticky="e", pady=(6, 0))
+        ttk.Label(language_bar, text="Language / 語言").pack(side="left", padx=(0, 6))
+        self.language_picker = LanguagePicker(language_bar)
+        self.language_picker.pack(side="right")
         bar = ttk.Frame(head)
-        bar.grid(row=0, column=1, rowspan=2, sticky="e")
+        bar.grid(row=0, column=1, sticky="e")
         for txt, cmd in [
             ("新專案", self.new),
             ("開啟", self.load),
             ("儲存整案", self.save),
         ]:
-            ttk.Button(bar, text=txt, command=cmd, width=8).pack(side="left", padx=3)
+            ttk.Button(bar, text=txt, command=cmd).pack(side="left", padx=3)
         modebar = ttk.Frame(head)
         modebar.grid(row=2, column=0, columnspan=2, sticky="w", pady=(8, 0))
         ttk.Combobox(
@@ -470,6 +482,7 @@ class DesktopApp(SessionController, MainView):
             foot, text="啟動檢核中…", wraplength=470, style="Muted.TLabel"
         )
         self.status.grid(row=0, column=0, sticky="w")
+
         def wrap_status(event):
             width = max(120, event.width - 340)
             if str(self.status.cget("wraplength")) != str(width):
@@ -531,9 +544,13 @@ class DesktopApp(SessionController, MainView):
         self.saved_workspace_hash = ""
         self.unit_previous = {}
         self.partial_hvac = None
+        from .localized_tk import attach_window
+
+        attach_window(root)
         self._build_window(root)
-        root.title("廠務工程工作台 V5.5.4")
+        root.title("廠務工程工作台 V5.5.5")
         app_icon(root)
+        i18n.subscribe(self)
         self.unit_previous = {
             k: self.variables[k].get() for k in list(UNIT_VALUES) + ["u_unit"]
         }

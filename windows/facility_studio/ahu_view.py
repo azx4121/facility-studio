@@ -1,5 +1,6 @@
-import tkinter as tk
-from tkinter import ttk
+from .localized_plot import translated_axes
+from .localized_tk import tk
+from .localized_tk import ttk
 from .ahu_schema import NM_BASIC, NM_FIELDS
 from .ui_common import quality_style
 from .utils import state_trh
@@ -69,14 +70,23 @@ class AHUView:
     def visibility(self):
         from .field_state import ahu_inactive
         from .ahu_schema import NM_DEFAULTS, NM_CONTROL_NOTES
+
         inputs = self.snapshot()
         inactive = ahu_inactive(inputs)
         seasonal = inputs["target_mode"] == "主案分季需求"
         needed = set()
         if seasonal:
-            needed.update(s + suffix for s in ["summer", "winter"] for suffix in ["_sa_t", "_sa_rh", "_flow"])
+            needed.update(
+                s + suffix
+                for s in ["summer", "winter"]
+                for suffix in ["_sa_t", "_sa_rh", "_flow"]
+            )
         for key in inputs:
-            if key.startswith(("summer_", "winter_")) and key.endswith(("_t", "_rh")) and key not in inactive:
+            if (
+                key.startswith(("summer_", "winter_"))
+                and key.endswith(("_t", "_rh"))
+                and key not in inactive
+            ):
                 needed.add(key)
         if "蒸汽" in inputs["humidifier"]:
             needed.update(["steam_capacity", "steam_kw", "steam_water"])
@@ -85,13 +95,31 @@ class AHUView:
         for tag in ["h1", "h2"]:
             if tag + "_water_mode" not in inactive:
                 needed.add(tag + "_water_mode")
-                needed.update(tag + "_hw_" + x for x in ["in", "out", "approach"] if tag + "_hw_" + x not in inactive)
+                needed.update(
+                    tag + "_hw_" + x
+                    for x in ["in", "out", "approach"]
+                    if tag + "_hw_" + x not in inactive
+                )
         for key, widget in self.widgets.items():
-            state = "disabled" if key in inactive else "readonly" if isinstance(NM_FIELDS[key]["limit"], list) else "normal"
+            state = (
+                "disabled"
+                if key in inactive
+                else (
+                    "readonly"
+                    if isinstance(NM_FIELDS[key]["limit"], list)
+                    else "normal"
+                )
+            )
             widget.configure(state=state)
             if hasattr(self, "adoption_notes"):
                 note = self.adoption_notes[key]
-                note.configure(text=("保留設定，未採用：" + inactive[key]) if key in inactive else "")
+                note.configure(
+                    text=(
+                        ("保留設定，未採用：" + inactive[key])
+                        if key in inactive
+                        else ""
+                    )
+                )
                 if key in inactive:
                     note.grid()
                 else:
@@ -105,24 +133,43 @@ class AHUView:
             self.widgets["flow_basis"].configure(textvariable=self.vars["flow_basis"])
         for box, keys in self.boxes:
             for key in reversed(keys):
-                visible = self.advanced.get() or ((key in NM_BASIC or key in needed) and key not in inactive) or key == "flow_basis"
+                visible = (
+                    self.advanced.get()
+                    or ((key in NM_BASIC or key in needed) and key not in inactive)
+                    or key == "flow_basis"
+                )
                 row = self.rows[key]
                 if not visible:
                     row.pack_forget()
                 elif not row.winfo_manager():
-                    later = keys[keys.index(key) + 1:]
-                    anchor = next((self.rows[k] for k in later if self.rows[k].winfo_manager()), None)
+                    later = keys[keys.index(key) + 1 :]
+                    anchor = next(
+                        (self.rows[k] for k in later if self.rows[k].winfo_manager()),
+                        None,
+                    )
                     opts = {"fill": "x", "pady": 4}
                     if anchor:
                         opts["before"] = anchor
                     row.pack(**opts)
-        modified = [NM_FIELDS[k]["label"] + "=" + inputs[k] for k in inputs
-                    if k not in inactive and not self.rows[k].winfo_manager() and inputs[k] != NM_DEFAULTS[k]]
+        modified = [
+            NM_FIELDS[k]["label"] + "=" + inputs[k]
+            for k in inputs
+            if k not in inactive
+            and not self.rows[k].winfo_manager()
+            and inputs[k] != NM_DEFAULTS[k]
+        ]
         if hasattr(self, "adopted_summary"):
-            self.adopted_summary.config(text=("基本畫面外仍採用：" + "；".join(modified)) if modified else "進階初估值已帶入；停用欄位只保留草稿，不參與該功能的驗證。")
+            self.adopted_summary.config(
+                text=(
+                    ("基本畫面外仍採用：" + "；".join(modified))
+                    if modified
+                    else "進階初估值已帶入；停用欄位只保留草稿，不參與該功能的驗證。"
+                )
+            )
         if hasattr(self, "control_notes"):
-            self.control_notes.config(text=NM_CONTROL_NOTES.replace("8 台 EC", inputs["fan_qty"] + " 台 EC"))
-
+            self.control_notes.config(
+                text=NM_CONTROL_NOTES.replace("8 台 EC", inputs["fan_qty"] + " 台 EC")
+            )
 
     def set_text(self, s):
         self.text.configure(state="normal")
@@ -135,7 +182,7 @@ class AHUView:
             self.table.delete(item)
         self.set_text("輸入已變更；不沿用舊計算書。")
         if NM_HAS_PLOT:
-            self.ax.clear()
+            translated_axes(self.ax).clear()
             self.plot.draw_idle()
 
     def _render_stage_results(self):
@@ -168,7 +215,7 @@ class AHUView:
             )
         if not NM_HAS_PLOT:
             return
-        self.ax.clear()
+        translated_axes(self.ax).clear()
         states = [st for _, st in s["nodes"]]
         lo = min((st["t"] for st in states)) - 4
         hi = max((st["t"] for st in states)) + 5
@@ -176,7 +223,7 @@ class AHUView:
         p = float(r["inputs"]["p"])
         temps = [lo + (hi - lo) * j / 119 for j in range(120)]
         for rh in [10, 30, 50, 70, 90, 100]:
-            self.ax.plot(
+            translated_axes(self.ax).plot(
                 temps,
                 [state_trh(t, rh, p)["w"] * 1000 for t in temps],
                 color="#9cb4c5",
@@ -189,7 +236,7 @@ class AHUView:
                 f"P{j}"
             )
         for (t, w), names in groups.items():
-            self.ax.scatter(t, w, color="#134b70", zorder=4, s=25)
+            translated_axes(self.ax).scatter(t, w, color="#134b70", zorder=4, s=25)
         for a, b in zip(states, states[1:]):
             if abs(a["t"] - b["t"]) + abs(a["w"] - b["w"]) * 1000 < 1e-06:
                 continue
@@ -198,29 +245,29 @@ class AHUView:
                 if b["w"] > a["w"] + 1e-08
                 else "#d47925" if b["h"] > a["h"] + 1e-08 else "#176e9e"
             )
-            self.ax.annotate(
+            translated_axes(self.ax).annotate(
                 "",
                 (b["t"], b["w"] * 1000),
                 (a["t"], a["w"] * 1000),
                 arrowprops={"arrowstyle": "-|>", "color": color, "lw": 2},
             )
-        self.ax.text(
+        translated_axes(self.ax).text(
             0.01,
             0.98,
             "灰線 RH 10 / 30 / 50 / 70 / 90 / 100%｜橘：加熱；藍：冷卻；綠：加濕",
-            transform=self.ax.transAxes,
+            transform=translated_axes(self.ax).transAxes,
             va="top",
             fontsize=8,
             color="#456273",
         )
-        self.ax.set(
+        translated_axes(self.ax).set(
             xlim=(lo, hi),
             ylim=(0, ymax),
             xlabel="乾球 °C",
             ylabel="含濕比 g/kg 乾空氣",
             title=self.season.get() + f"需求流程｜{p:g} kPa｜P0 外氣；其餘點號對應上表",
         )
-        self.ax.grid(alpha=0.15)
+        translated_axes(self.ax).grid(alpha=0.15)
         self.fig.tight_layout()
         annotate_states(self.ax, groups, fontsize=8)
         self.plot.draw_idle()

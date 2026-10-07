@@ -1,7 +1,7 @@
-Facility Studio V5.5.4｜macOS 修正版 mac.2
+Facility Studio V5.5.5｜macOS 中英雙語版 mac.1
 
 建議使用 DMG：三個步驟
-1. 打開 Facility_Studio_V5_5_4_macOS_mac2.dmg。
+1. 打開 Facility_Studio_V5_5_5_macOS_mac1.dmg。
 2. 把「Facility Studio」拖到旁邊的「Applications／應用程式」。
 3. 從「應用程式」打開 Facility Studio。安裝完成後可退出磁碟映像檔。
 
@@ -20,15 +20,20 @@ Apple 官方操作：https://support.apple.com/en-us/102445
 本包不關閉 Gatekeeper，不移除隔離標記，不改動全域安全設定。
 
 完整 ZIP 懶人包：選用
-1. 用 Mac Finder 完整解壓縮 Facility_Studio_V5_5_4_macOS_mac2_OneClick.zip。
+1. 用 Mac Finder 完整解壓縮 Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip。
 2. 可直接開啟資料夾中的 Facility Studio.app。
 3. 或雙擊 Install_on_Mac.command，安裝至：
-   ~/Applications/Facility Studio V5.5.4.app。
+   ~/Applications/Facility Studio V5.5.5.app。
    原同名安裝會保留為 Backup；安裝過程不需管理員密碼。
 ZIP 另含 Source_and_Verification.zip、設備表範本、簽章及原生驗證記錄。
 若 command 被系統攔下，也可直接把 App 拖到「應用程式」，再按上述允許流程。
 
-本次修正
+本次新增
+• 主畫面右上選繁體中文／English；欄位、選項、說明、驗證提示與報告同步切換。
+• 英文模式可匯出七系統英文 Excel／CSV 範本；舊中文版設備表仍可讀取。
+• 切換時保留數值、計算與舊專案；下次開啟沿用語言偏好。
+
+保留的 macOS 修復
 • 修正 Tcl/Tk 設定腳本未納入資源封印，導致 Apple 原生檢查及安裝失敗。
 • 所有 Mach-O、內層 framework、外層 framework 及 App 由 Apple 原生工具簽署。
 • Matplotlib 查詢系統字型的外部指令加上 5 秒時限，逾時改用原有目錄搜尋。
@@ -84,3 +89,14 @@ Mac_Acceptance.json、Mac_Signature_Check.txt、Mac_SelfTest_Console.txt。
 
 維護者：建置方式見 macos/BUILDING.md。
 版本與問題回報：https://github.com/azx4121/facility-studio
+
+V5.5.5: Select Traditional Chinese / English at the top right. Inputs and results remain unchanged; your language preference is saved.
+No separate Python installation is needed. Open the DMG and drag Facility Studio into Applications.
+English mode also exports English equipment templates. Both languages remain compatible.
+
+English quick start
+1. Open the DMG and drag Facility Studio to Applications.
+2. Launch Facility Studio, then choose English in the top-right selector.
+3. Use each calculator independently; no Python installation or internet is needed.
+4. In Equipment schedules, export the English template, enter actual equipment and set Enabled (1/0) to 1 before importing.
+If macOS blocks the first launch, follow Apple Settings > Privacy & Security > Open Anyway. The app is ad-hoc signed; it is not Developer ID notarized.

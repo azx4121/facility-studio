@@ -1,7 +1,8 @@
 """Independent short forms are the default entry; the full workbench is optional."""
 
-import tkinter as tk
-from tkinter import ttk, filedialog, messagebox, font
+from .localized_tk import tk
+from tkinter import font
+from .localized_tk import ttk, filedialog, messagebox
 
 from .errors import ValidationError
 from .main_view import ScrollPage
@@ -12,6 +13,7 @@ from .simple_engines import AIR_PRESSURE_FACTORS, GAS_PRESSURE_FACTORS
 from .simple_reports import presentation, tool_report
 from .simple_schema import TOOLS, active_field, adopted_summary, defaults
 from .ui_common import app_icon
+from .localized_tk import LanguagePicker
 from .utils import atomic_text, number
 
 
@@ -390,18 +392,18 @@ class SimpleToolsApp:
         self.pages = {}
         self.workbench = None
         self.equipment_window = None
-        root.title("廠務簡易工具 V5.5.4")
+        root.title("廠務簡易工具 V5.5.5")
         root.geometry("1120x830")
         root.minsize(780, 560)
         app_icon(root)
         self.configure_style()
         root.columnconfigure(1, weight=1)
         root.rowconfigure(1, weight=1)
-        side = tk.Frame(root, bg="#142c43", width=176)
+        side = tk.Frame(root, bg="#142c43", width=205)
         side.grid(row=0, column=0, rowspan=3, sticky="ns")
         side.grid_propagate(False)
         self.sidebar = side
-        ttk.Label(side, text="廠務簡易工具\nV5.5.4", style="Simple.Brand.TLabel").pack(
+        ttk.Label(side, text="廠務簡易工具\nV5.5.5", style="Simple.Brand.TLabel").pack(
             anchor="w", padx=18, pady=(22, 24)
         )
         self.nav = {}
@@ -433,7 +435,7 @@ class SimpleToolsApp:
             state="readonly",
             width=17,
         )
-        self.more.pack(padx=10, pady=3)
+        self.more.pack(fill="x", padx=10, pady=3)
         self.more.bind(
             "<<ComboboxSelected>>",
             lambda event: self.show_tool(
@@ -449,13 +451,18 @@ class SimpleToolsApp:
         header.columnconfigure(0, weight=1)
         ttk.Label(
             header, text="選工具 → 填條件 → 看結果", style="Simple.Header.TLabel"
-        ).grid(row=0, column=0, sticky="w")
+        ).grid(row=0, column=0, columnspan=3, sticky="w")
         ttk.Button(header, text="完整工程工作台", command=self.open_workbench).grid(
-            row=0, column=1, padx=(6, 0)
+            row=1, column=0, sticky="w", pady=(8, 0)
         )
         ttk.Button(header, text="設備表匯入", command=self.open_equipment).grid(
-            row=0, column=2, padx=(6, 0)
+            row=1, column=1, padx=(6, 0), pady=(8, 0)
         )
+        ttk.Label(header, text="Language / 語言").grid(
+            row=2, column=2, sticky="e", pady=(3, 0)
+        )
+        self.language_picker = LanguagePicker(header)
+        self.language_picker.grid(row=1, column=2, padx=(6, 0), pady=(8, 0), sticky="e")
         self.container = ttk.Frame(root)
         self.container.grid(row=1, column=1, sticky="nsew")
         self.container.columnconfigure(0, weight=1)

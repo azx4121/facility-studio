@@ -1,3 +1,5 @@
+from .i18n import localized_report
+
 """Short results shared by the independent forms and their exports."""
 
 from .simple_schema import TOOLS
@@ -115,11 +117,12 @@ def presentation(result):
     return cards, details
 
 
+@localized_report
 def tool_report(result, inputs):
     cards, details = presentation(result)
     from .simple_schema import active_field
 
-    lines = [f"廠務簡易工具 5.5.4｜{TOOLS[result['tool']]['title']}", "", "輸入條件"]
+    lines = [f"廠務簡易工具 5.5.5｜{TOOLS[result['tool']]['title']}", "", "輸入條件"]
     for row in TOOLS[result["tool"]]["fields"]:
         key = row["key"]
         if active_field(result["tool"], key, inputs):

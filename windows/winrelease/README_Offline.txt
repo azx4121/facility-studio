@@ -1,7 +1,7 @@
-Facility Studio V5.5.4｜Windows 離線直接執行版 win.1
+Facility Studio V5.5.5｜Windows 離線直接執行版 win.1
 
 1. 完整解壓縮 ZIP 到桌面或您自己的資料夾。
-2. 雙擊 Facility_Studio_V5_5_4_Windows_Offline.exe。
+2. 雙擊 Facility_Studio_V5_5_5_Windows_Offline.exe。
 3. 開啟後即可使用；不需另裝 Python、不需安裝套件、不需連網。
 
 也可單獨下載 EXE 直接執行。首次啟動需在暫存資料夾展開內建套件，請等候。
@@ -27,3 +27,7 @@ Source 為本版完整應用程式原始碼。執行 EXE 不會使用 Source，�
 授權詳 LICENSE 與 LICENSE_GUIDE.md；第三方元件各自授權保留於 THIRD_PARTY_LICENSES.txt。
 初估工具的工程適用範圍與參數假設詳程式報告，正式設計須依現場與設備資料覆核。
 更新、問題回報：https://github.com/azx4121/facility-studio
+
+V5.5.5：主畫面右上可選繁體中文 / English；切換保留輸入與結果，語言偏好會保存。
+Language: choose Traditional Chinese / English at the top right. Inputs and calculations stay unchanged. Your language preference is saved.
+English Excel / CSV templates are exported when English is selected; both template languages can be imported.

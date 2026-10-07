@@ -1,5 +1,6 @@
-import tkinter as tk
-from tkinter import ttk
+from .localized_plot import translated_axes
+from .localized_tk import tk
+from .localized_tk import ttk
 from .ahu_schema import NM_BASIC, NM_FIELDS
 from .ui_common import quality_style
 from .utils import state_trh
@@ -185,7 +186,7 @@ class AHUView:
             self.table.delete(item)
         self.set_text("輸入已變更；不沿用舊計算書。")
         if NM_HAS_PLOT:
-            self.ax.clear()
+            translated_axes(self.ax).clear()
             self.plot.draw_idle()
 
     def _render_stage_results(self):
@@ -218,7 +219,7 @@ class AHUView:
             )
         if not NM_HAS_PLOT:
             return
-        self.ax.clear()
+        translated_axes(self.ax).clear()
         states = [st for _, st in s["nodes"]]
         lo = min((st["t"] for st in states)) - 4
         hi = max((st["t"] for st in states)) + 5
@@ -226,7 +227,7 @@ class AHUView:
         p = float(r["inputs"]["p"])
         temps = [lo + (hi - lo) * j / 119 for j in range(120)]
         for rh in [10, 30, 50, 70, 90, 100]:
-            self.ax.plot(
+            translated_axes(self.ax).plot(
                 temps,
                 [state_trh(t, rh, p)["w"] * 1000 for t in temps],
                 color="#9cb4c5",
@@ -239,7 +240,7 @@ class AHUView:
                 f"P{j}"
             )
         for (t, w), names in groups.items():
-            self.ax.scatter(t, w, color="#134b70", zorder=4, s=25)
+            translated_axes(self.ax).scatter(t, w, color="#134b70", zorder=4, s=25)
         for a, b in zip(states, states[1:]):
             if abs(a["t"] - b["t"]) + abs(a["w"] - b["w"]) * 1000 < 1e-06:
                 continue
@@ -248,29 +249,29 @@ class AHUView:
                 if b["w"] > a["w"] + 1e-08
                 else "#d47925" if b["h"] > a["h"] + 1e-08 else "#176e9e"
             )
-            self.ax.annotate(
+            translated_axes(self.ax).annotate(
                 "",
                 (b["t"], b["w"] * 1000),
                 (a["t"], a["w"] * 1000),
                 arrowprops={"arrowstyle": "-|>", "color": color, "lw": 2},
             )
-        self.ax.text(
+        translated_axes(self.ax).text(
             0.01,
             0.98,
             "灰線 RH 10 / 30 / 50 / 70 / 90 / 100%｜橘：加熱；藍：冷卻；綠：加濕",
-            transform=self.ax.transAxes,
+            transform=translated_axes(self.ax).transAxes,
             va="top",
             fontsize=8,
             color="#456273",
         )
-        self.ax.set(
+        translated_axes(self.ax).set(
             xlim=(lo, hi),
             ylim=(0, ymax),
             xlabel="乾球 °C",
             ylabel="含濕比 g/kg 乾空氣",
             title=self.season.get() + f"需求流程｜{p:g} kPa｜P0 外氣；其餘點號對應上表",
         )
-        self.ax.grid(alpha=0.15)
+        translated_axes(self.ax).grid(alpha=0.15)
         self.fig.tight_layout()
         annotate_states(self.ax, groups, fontsize=8)
         self.plot.draw_idle()

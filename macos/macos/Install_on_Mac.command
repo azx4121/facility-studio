@@ -5,7 +5,7 @@ set -euo pipefail
 TASK_PACKAGE_DIR="$(cd "$(/usr/bin/dirname "$0")" && pwd -P)"
 TASK_APP_SOURCE="$TASK_PACKAGE_DIR/Facility Studio.app"
 TASK_APP_FOLDER="$HOME/Applications"
-TASK_DESTINATION="$TASK_APP_FOLDER/Facility Studio V5.5.4.app"
+TASK_DESTINATION="$TASK_APP_FOLDER/Facility Studio V5.5.5.app"
 TASK_STAGE=""
 TASK_BACKUP=""
 TASK_LOG_FOLDER="$HOME/Library/Logs/Facility_Studio_V5_5"
@@ -32,7 +32,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-printf '\nFacility Studio V5.5.4 mac.2 — macOS 安裝\n\n'
+printf '\nFacility Studio V5.5.5 mac.2 — macOS 安裝\n\n'
 if [[ ! -d "$TASK_APP_SOURCE" ]]; then
     printf '請先完整解壓縮懶人包，讓此檔案與 Facility Studio.app 放在同一個資料夾。\n'
     exit 2
@@ -58,7 +58,7 @@ TASK_STAGE="$(/usr/bin/mktemp -d "$TASK_APP_FOLDER/.FacilityStudio554.XXXXXX")"
 /usr/bin/ditto "$TASK_APP_SOURCE" "$TASK_STAGE/Facility Studio.app"
 /usr/bin/codesign --verify --deep --strict "$TASK_STAGE/Facility Studio.app"
 if [[ -e "$TASK_DESTINATION" ]]; then
-    TASK_BACKUP="$TASK_APP_FOLDER/Facility Studio V5.5.4 Backup $(/bin/date +%Y%m%d-%H%M%S).app"
+    TASK_BACKUP="$TASK_APP_FOLDER/Facility Studio V5.5.5 Backup $(/bin/date +%Y%m%d-%H%M%S).app"
     if [[ -e "$TASK_BACKUP" ]]; then
         printf '備份檔名已存在，已停止以保留原安裝。\n'
         exit 2

@@ -4,8 +4,8 @@ import copy
 import json
 from .database import load_tables
 from pathlib import Path
-import tkinter as tk
-from tkinter import ttk, filedialog, messagebox
+from .localized_tk import tk
+from .localized_tk import ttk, filedialog, messagebox
 from .schema import FIELDS
 from .project_store import SOURCE_TYPES, app_data, read_recovery
 from .design_workflow import compare_results
@@ -30,27 +30,48 @@ def apply_updates(main, updates, note, parent=None, source_type="來源快照"):
     try:
         result = calculate(candidate)
     except (ValueError, TypeError, KeyError) as exc:
-        messagebox.showerror("帶入前檢核未通過", error_text(exc) + "\n原主案已保留，請修正目的欄位條件後再帶入。", parent=parent or main.root)
+        messagebox.showerror(
+            "帶入前檢核未通過",
+            error_text(exc) + "\n原主案已保留，請修正目的欄位條件後再帶入。",
+            parent=parent or main.root,
+        )
         return False
     groups = {k: title for _, title, keys in GROUPS for k in keys}
-    lines = [f"{groups[k]} / {FIELDS[k]['label']}：{main.variables[k].get()} → {v} {FIELDS[k]['unit']}" for k, v in updates.items()]
+    lines = [
+        f"{groups[k]} / {FIELDS[k]['label']}：{main.variables[k].get()} → {v} {FIELDS[k]['unit']}"
+        for k, v in updates.items()
+    ]
     affected = []
     if set(updates) & {"water_rho", "water_cp", "water_mu"}:
-        affected.append("共用水物性會同時影響 MCHW、CHW、DCCW、PCW、HW；請確認所有迴路為相同介質及工況。")
-        affected.append("套用後物性：ρ=" + candidate["inputs"]["water_rho"] + " kg/m³，cp=" + candidate["inputs"]["water_cp"] + " kJ/(kg·K)，μ=" + candidate["inputs"]["water_mu"] + " Pa·s。")
+        affected.append(
+            "共用水物性會同時影響 MCHW、CHW、DCCW、PCW、HW；請確認所有迴路為相同介質及工況。"
+        )
+        affected.append(
+            "套用後物性：ρ="
+            + candidate["inputs"]["water_rho"]
+            + " kg/m³，cp="
+            + candidate["inputs"]["water_cp"]
+            + " kJ/(kg·K)，μ="
+            + candidate["inputs"]["water_mu"]
+            + " Pa·s。"
+        )
     if set(updates) & {"duct_shape", "duct_ratio"}:
         affected.append("共用形狀／寬高比會同時影響 GEX、SEX、AEX、VEX、HEX。")
     for key in ["GEX", "SEX", "AEX", "VEX", "HEX"]:
         if key.lower() + "_q" in updates:
             d = result["ducts"][key]
-            affected.append(f"{key}：名目 {d['nominal_cmh']:.2f} → 設計 {d['flow_cmh']:.2f} CMH（含主案風量餘裕）。")
+            affected.append(
+                f"{key}：名目 {d['nominal_cmh']:.2f} → 設計 {d['flow_cmh']:.2f} CMH（含主案風量餘裕）。"
+            )
     pending = [x["name"] for x in result["quality"]["items"] if x["status"] != "通過"]
     preview = "目的主案：" + main.variables["project_name"].get() + "\n" + note
     preview += "\n\n" + "\n".join(lines + affected)
     preview += "\n\n帶入後：" + result["quality"]["status"]
     if pending:
         preview += "（估算草稿）\n待確認：" + "、".join(pending)
-    if not messagebox.askokcancel("確認帶入此主案", preview, parent=parent or main.root):
+    if not messagebox.askokcancel(
+        "確認帶入此主案", preview, parent=parent or main.root
+    ):
         return False
     main.remember_main_undo()
     main.suspended = True
@@ -180,12 +201,12 @@ class WorkspaceWindow:
         for key, f in FIELDS.items():
             p = self.main.provenance[key]
             values = (
-                    f["label"],
-                    self.main.variables[key].get(),
-                    p["source"],
-                    p["note"],
-                    p.get("recorded_at", "舊資料未記時間"),
-                )
+                f["label"],
+                self.main.variables[key].get(),
+                p["source"],
+                p["note"],
+                p.get("recorded_at", "舊資料未記時間"),
+            )
             if self.tree.exists(key):
                 self.tree.item(key, values=values)
             else:
@@ -202,7 +223,11 @@ class WorkspaceWindow:
             p = self.main.provenance[key]
             self.origin.set(p["source"])
             self.note.set(p["note"])
-            self.mark_token = (self.main.project_id, key, self.main.variables[key].get())
+            self.mark_token = (
+                self.main.project_id,
+                key,
+                self.main.variables[key].get(),
+            )
 
     def mark(self):
         if not self.tree.selection():
@@ -210,11 +235,22 @@ class WorkspaceWindow:
         key = self.tree.selection()[0]
         current = (self.main.project_id, key, self.main.variables[key].get())
         if self.mark_token != current:
-            messagebox.showerror("數值已改變", "請重新選取目前值並核對文件後再標記來源。", parent=self.win)
+            messagebox.showerror(
+                "數值已改變",
+                "請重新選取目前值並核對文件後再標記來源。",
+                parent=self.win,
+            )
             self.refresh()
             return
-        if key == "upw_res" and self.main.variables["upw_quality_mode"].get() == "自動參考值":
-            messagebox.showerror("自動參考值", "請先改為自訂水質規格，再將同工況數值標記為原廠資料。", parent=self.win)
+        if (
+            key == "upw_res"
+            and self.main.variables["upw_quality_mode"].get() == "自動參考值"
+        ):
+            messagebox.showerror(
+                "自動參考值",
+                "請先改為自訂水質規格，再將同工況數值標記為原廠資料。",
+                parent=self.win,
+            )
             return
         if self.origin.get() == "原廠資料" and not self.note.get().strip():
             messagebox.showerror(
@@ -224,7 +260,9 @@ class WorkspaceWindow:
         if len(self.note.get()) > 1000:
             return
         key = self.tree.selection()[0]
-        self.main.provenance[key] = provenance_record(self.origin.get(), self.note.get(), self.main.variables[key].get())
+        self.main.provenance[key] = provenance_record(
+            self.origin.get(), self.note.get(), self.main.variables[key].get()
+        )
         self.main.changed()
         self.main.recalculate()
         self.refresh()
@@ -235,7 +273,9 @@ class WorkspaceWindow:
         if not hasattr(self.main, "comparisons"):
             self.main.comparisons = {}
         self.main.comparisons[tag] = copy.deepcopy(self.main.result)
-        self.main.comparisons[tag]["captured_at"] = datetime.now(timezone.utc).isoformat()
+        self.main.comparisons[tag]["captured_at"] = datetime.now(
+            timezone.utc
+        ).isoformat()
         self.main.comparisons[tag]["owner_project_id"] = self.main.project_id
         self.show_comparison()
         self.main.refresh_session_status()

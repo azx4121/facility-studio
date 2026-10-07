@@ -7,12 +7,12 @@ import uuid
 from .project_store import save_project_file
 from .errors import InputError
 from pathlib import Path
-from tkinter import filedialog
+from .localized_tk import filedialog
 import json
-from tkinter import messagebox
+from .localized_tk import messagebox
 import os
-import tkinter as tk
-from tkinter import ttk
+from .localized_tk import tk
+from .localized_tk import ttk
 from .ahu_desktop import AHUWindow
 from .data import CLEANROOM_DB
 from .engine import calculate, pv_to_torr, read_project, validate_project
@@ -29,6 +29,8 @@ from .schema import (
     default_project,
 )
 from .services import UNIT_VALUES, converted_units, independent_domains
+from .localized_tk import LanguagePicker
+from . import i18n
 from .ui_common import app_icon, quality_style, quality_text
 from .utils import G, atomic_text, number, project_hash
 from .session_controller import SessionController
@@ -40,7 +42,10 @@ class DesktopApp(SessionController, MainView):
 
     def remember_main_undo(self):
         self.undo_project = self.snapshot()
-        self.undo_aux = (copy.deepcopy(self.transfer_receipts), copy.deepcopy(self.field_drafts))
+        self.undo_aux = (
+            copy.deepcopy(self.transfer_receipts),
+            copy.deepcopy(self.field_drafts),
+        )
 
     def normalize_auto_values(self):
         if self.variables["upw_quality_mode"].get() != "自動參考值":
@@ -51,7 +56,9 @@ class DesktopApp(SessionController, MainView):
         if source["source"] != "系統預設" or old != value:
             if source["source"] != "系統預設":
                 self.field_drafts["upw_res"] = {**source, "value": old}
-            self.provenance["upw_res"] = provenance_record("系統預設", "依水型帶入參考值，非原廠保證值", value)
+            self.provenance["upw_res"] = provenance_record(
+                "系統預設", "依水型帶入參考值，非原廠保證值", value
+            )
             suspended = self.suspended
             self.suspended = True
             try:
@@ -305,9 +312,14 @@ class DesktopApp(SessionController, MainView):
             pass
         messagebox.showerror("操作未完成", str(exc_value), parent=self.root)
 
+    def refresh_language(self):
+        if self.root.winfo_exists() and self.result:
+            self.set_report(report(self.result))
+            self.draw()
+
     def _build_window(self, root):
         self.root = root
-        root.title("廠務工程工作台 V5.5.4")
+        root.title("廠務工程工作台 V5.5.5")
         root.geometry(
             f"{min(1240, root.winfo_screenwidth() - 60)}x{min(840, root.winfo_screenheight() - 80)}"
         )
@@ -357,7 +369,7 @@ class DesktopApp(SessionController, MainView):
         ).pack(anchor="w", padx=18, pady=(25, 6))
         tk.Label(
             side,
-            text="廠務工程工作台  V5.5.4",
+            text="廠務工程工作台  V5.5.5",
             bg="#11253b",
             fg="#6edac7",
             font=(self.ui_font, 10),
@@ -399,16 +411,28 @@ class DesktopApp(SessionController, MainView):
         self.subtitle.grid(row=1, column=0, sticky="w", pady=(4, 0))
         self.document_status = tk.StringVar()
         self.receipt_status = tk.StringVar()
-        ttk.Label(head, textvariable=self.document_status, wraplength=860, style="Muted.TLabel").grid(row=4, column=0, columnspan=2, sticky="w", pady=(6, 0))
-        ttk.Label(head, textvariable=self.receipt_status, wraplength=860, style="Muted.TLabel").grid(row=5, column=0, columnspan=2, sticky="w")
+        ttk.Label(
+            head,
+            textvariable=self.document_status,
+            wraplength=860,
+            style="Muted.TLabel",
+        ).grid(row=4, column=0, columnspan=2, sticky="w", pady=(6, 0))
+        ttk.Label(
+            head, textvariable=self.receipt_status, wraplength=860, style="Muted.TLabel"
+        ).grid(row=5, column=0, columnspan=2, sticky="w")
+        language_bar = ttk.Frame(head)
+        language_bar.grid(row=1, column=1, sticky="e", pady=(6, 0))
+        ttk.Label(language_bar, text="Language / 語言").pack(side="left", padx=(0, 6))
+        self.language_picker = LanguagePicker(language_bar)
+        self.language_picker.pack(side="right")
         bar = ttk.Frame(head)
-        bar.grid(row=0, column=1, rowspan=2, sticky="e")
+        bar.grid(row=0, column=1, sticky="e")
         for txt, cmd in [
             ("新專案", self.new),
             ("開啟", self.load),
             ("儲存整案", self.save),
         ]:
-            ttk.Button(bar, text=txt, command=cmd, width=8).pack(side="left", padx=3)
+            ttk.Button(bar, text=txt, command=cmd).pack(side="left", padx=3)
         modebar = ttk.Frame(head)
         modebar.grid(row=2, column=0, columnspan=2, sticky="w", pady=(8, 0))
         ttk.Combobox(
@@ -426,9 +450,9 @@ class DesktopApp(SessionController, MainView):
             modebar, text="復原帶入", command=self.undo_preset
         )
         self.undo_button.pack(side="left")
-        ttk.Button(
-            modebar, text="空調箱管理", command=self.open_ahu_manager
-        ).pack(side="left", padx=8)
+        ttk.Button(modebar, text="空調箱管理", command=self.open_ahu_manager).pack(
+            side="left", padx=8
+        )
         utilities = ttk.Frame(head)
         utilities.grid(row=3, column=0, columnspan=2, sticky="w", pady=(6, 0))
         for label, command in [
@@ -507,9 +531,13 @@ class DesktopApp(SessionController, MainView):
         self.saved_workspace_hash = ""
         self.unit_previous = {}
         self.partial_hvac = None
+        from .localized_tk import attach_window
+
+        attach_window(root)
         self._build_window(root)
-        root.title("廠務工程工作台 V5.5.4")
+        root.title("廠務工程工作台 V5.5.5")
         app_icon(root)
+        i18n.subscribe(self)
         self.unit_previous = {
             k: self.variables[k].get() for k in list(UNIT_VALUES) + ["u_unit"]
         }
@@ -552,8 +580,14 @@ class DesktopApp(SessionController, MainView):
             finally:
                 self.suspended = False
         if key == "upw_quality_mode" and self.upw_mode_previous == "自訂規格":
-            self.field_drafts["upw_res"] = dict(self.provenance["upw_res"], value=self.variables["upw_res"].get())
-        if key == "upw_quality_mode" and self.variables[key].get() == "自訂規格" and "upw_res" in self.field_drafts:
+            self.field_drafts["upw_res"] = dict(
+                self.provenance["upw_res"], value=self.variables["upw_res"].get()
+            )
+        if (
+            key == "upw_quality_mode"
+            and self.variables[key].get() == "自訂規格"
+            and "upw_res" in self.field_drafts
+        ):
             self.suspended = True
             self.variables["upw_res"].set(self.field_drafts["upw_res"]["value"])
             self.provenance["upw_res"] = copy.deepcopy(self.field_drafts["upw_res"])
@@ -566,7 +600,11 @@ class DesktopApp(SessionController, MainView):
             self.variables["upw_res"].set(
                 QUALITY_PRESETS[self.variables["upw_type"].get()]
             )
-            self.provenance["upw_res"] = provenance_record("系統預設", self.variables["upw_type"].get() + " 的 25°C 初估參考；非原廠保證", self.variables["upw_res"].get())
+            self.provenance["upw_res"] = provenance_record(
+                "系統預設",
+                self.variables["upw_type"].get() + " 的 25°C 初估參考；非原廠保證",
+                self.variables["upw_res"].get(),
+            )
             self.suspended = False
         self.upw_mode_previous = self.variables["upw_quality_mode"].get()
         self.latent_text.set("輸入更新中，等待產濕檢核…")
@@ -602,7 +640,9 @@ class DesktopApp(SessionController, MainView):
         self.partial_hvac = None
         self.sync_latent_input(key)
         if key in self.variables:
-            self.provenance[key] = provenance_record("使用者輸入", "介面修改", self.variables[key].get())
+            self.provenance[key] = provenance_record(
+                "使用者輸入", "介面修改", self.variables[key].get()
+            )
         if hasattr(self, "quality_label"):
             self.quality_label.config(text="等待目前條件檢核")
         if key in self.unit_previous:
@@ -613,7 +653,9 @@ class DesktopApp(SessionController, MainView):
                 self.suspended = True
                 for k, v in updates.items():
                     self.variables[k].set(format(v, ".15g"))
-                    self.provenance[k] = provenance_record("單位等值換算", old + " → " + new, self.variables[k].get())
+                    self.provenance[k] = provenance_record(
+                        "單位等值換算", old + " → " + new, self.variables[k].get()
+                    )
                 self.unit_previous[key] = new
             except (ValueError, KeyError):
                 self.suspended = True
@@ -624,12 +666,20 @@ class DesktopApp(SessionController, MainView):
         self.notify_children()
 
     def sync_latent_input(self, key):
-        modes = {"已知潛熱 kW": ("process_latent_kw", 3600 / 2501),
-                 "已知產濕量 kg/h": ("process_moisture_kg_h", 1.0)}
+        modes = {
+            "已知潛熱 kW": ("process_latent_kw", 3600 / 2501),
+            "已知產濕量 kg/h": ("process_moisture_kg_h", 1.0),
+        }
         current = self.variables["latent_mode"].get()
         previous = getattr(self, "latent_mode_previous", current)
-        source_mode = previous if key == "latent_mode" and previous in modes else current
-        if current in modes and source_mode in modes and key in ["latent_mode", modes[source_mode][0]]:
+        source_mode = (
+            previous if key == "latent_mode" and previous in modes else current
+        )
+        if (
+            current in modes
+            and source_mode in modes
+            and key in ["latent_mode", modes[source_mode][0]]
+        ):
             source, to_kg = modes[source_mode]
             try:
                 kg_h = number(self.variables[source].get(), source, 0) * to_kg
@@ -639,11 +689,19 @@ class DesktopApp(SessionController, MainView):
                     self.variables[key].set(previous)
                     self.suspended = False
                 return
-            other = "process_moisture_kg_h" if source == "process_latent_kw" else "process_latent_kw"
+            other = (
+                "process_moisture_kg_h"
+                if source == "process_latent_kw"
+                else "process_latent_kw"
+            )
             value = kg_h if other.endswith("kg_h") else kg_h * 2501 / 3600
             self.suspended = True
             self.variables[other].set(format(value, ".15g"))
-            self.provenance[other] = provenance_record("單位等值換算", "與同一筆製程產濕量同步（2501 kJ/kg 初估）", self.variables[other].get())
+            self.provenance[other] = provenance_record(
+                "單位等值換算",
+                "與同一筆製程產濕量同步（2501 kJ/kg 初估）",
+                self.variables[other].get(),
+            )
             self.suspended = False
         self.latent_mode_previous = self.variables["latent_mode"].get()
 
@@ -669,7 +727,11 @@ class DesktopApp(SessionController, MainView):
             if self.provenance["upw_res"]["source"] == "原廠資料":
                 self.field_drafts["upw_res"] = copy.deepcopy(self.provenance["upw_res"])
                 self.field_drafts["upw_res"].setdefault("value", p["inputs"]["upw_res"])
-                self.provenance["upw_res"] = provenance_record("系統預設", "目前為自動水型參考；原自訂證據已保留", self.variables["upw_res"].get())
+                self.provenance["upw_res"] = provenance_record(
+                    "系統預設",
+                    "目前為自動水型參考；原自訂證據已保留",
+                    self.variables["upw_res"].get(),
+                )
             self.suspended = False
         self.latent_mode_previous = self.variables["latent_mode"].get()
         self.upw_mode_previous = self.variables["upw_quality_mode"].get()
@@ -736,7 +798,12 @@ class DesktopApp(SessionController, MainView):
             )
             self.widgets[k].configure(
                 state=(
-                    ("readonly" if FIELDS[k]["options"] and not isinstance(self.widgets[k], ttk.Checkbutton) else "normal")
+                    (
+                        "readonly"
+                        if FIELDS[k]["options"]
+                        and not isinstance(self.widgets[k], ttk.Checkbutton)
+                        else "normal"
+                    )
                     if on
                     else "disabled"
                 )
@@ -876,7 +943,8 @@ class DesktopApp(SessionController, MainView):
             text="整體尚未完成；保留有效分頁：" + valid, style="Error.TLabel"
         )
         self.status.config(
-            text="部分結果可用；" + getattr(self, "last_error", "請修正輸入"), style="Error.TLabel"
+            text="部分結果可用；" + getattr(self, "last_error", "請修正輸入"),
+            style="Error.TLabel",
         )
 
     def _legacy_close(self):

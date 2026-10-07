@@ -10,10 +10,10 @@ import urllib.parse
 import urllib.request
 
 REPOSITORY = "azx4121/facility-studio"
-TAG = "v5.5.4-win.1"
+TAG = "v5.5.5-win.1"
 FILENAMES = (
-    "Facility_Studio_V5_5_4_Windows_Offline.exe",
-    "Facility_Studio_V5_5_4_Windows_Offline_OneClick.zip",
+    "Facility_Studio_V5_5_5_Windows_Offline.exe",
+    "Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip",
     "SHA256SUMS.txt",
 )
 
@@ -31,9 +31,15 @@ def main():
         "Accept": "application/vnd.github+json",
     }
 
-    def request(url, data=None, method="GET", content_type="application/json", timeout=30):
-        call = urllib.request.Request(url, data=data, method=method,
-                                      headers={**headers, "Content-Type": content_type})
+    def request(
+        url, data=None, method="GET", content_type="application/json", timeout=30
+    ):
+        call = urllib.request.Request(
+            url,
+            data=data,
+            method=method,
+            headers={**headers, "Content-Type": content_type},
+        )
         with urllib.request.urlopen(call, timeout=timeout) as response:
             return json.load(response)
 
@@ -44,8 +50,10 @@ def main():
         if not path.is_file():
             raise ValueError("Missing native-tested distribution file: " + name)
         digests[name] = hashlib.sha256(path.read_bytes()).hexdigest()
-    expected = {line.split()[1]: line.split()[0]
-                for line in (folder / "SHA256SUMS.txt").read_text().splitlines()}
+    expected = {
+        line.split()[1]: line.split()[0]
+        for line in (folder / "SHA256SUMS.txt").read_text().splitlines()
+    }
     if any(expected.get(name) != digests[name] for name in FILENAMES[:2]):
         raise ValueError("Distribution changed after native testing")
     base = "https://api.github.com/repos/" + REPOSITORY + "/releases"
@@ -62,6 +70,8 @@ def main():
         release = None
     if release is None:
         body = (
+            "V5.5.5 中英雙語版：主畫面右上角選擇 English／繁體中文，欄位、提示、圖表、報告及設備範本同步切換。已填數值與舊專案保留，語言偏好會保存。\n\n"
+            "Bilingual interface: select English in the top-right language selector. Forms, guidance, charts, reports and exported equipment templates are translated. Stored engineering data remains unchanged.\n\n"
             "Windows 離線直接執行版 win.1；已含 Python、Tk、Matplotlib、NumPy 與 Pillow。\n\n"
             "下載 EXE 可直接開啟，或完整解壓縮 ZIP 後雙擊 EXE；不需安裝 Python、pip，也不需連網。"
             "保留 FY 圖示、七種簡易工具、設備表匯入與完整工程工作台。ZIP 另含設備範本、原始碼、授權及本機診斷腳本。\n\n"
@@ -72,9 +82,14 @@ def main():
             "包含目前安全與授權修正；公司內部正常工程使用許可詳 LICENSE_GUIDE.md。"
             "既有 Release、標籤、提交紀錄及歷史 MIT 權利完整保留。"
         )
-        payload = {"tag_name": TAG, "target_commitish": commit,
-                   "name": "Facility Studio V5.5.4｜Windows 離線直接執行版 win.1",
-                   "body": body, "draft": True, "prerelease": True}
+        payload = {
+            "tag_name": TAG,
+            "target_commitish": commit,
+            "name": "Facility Studio V5.5.5｜Windows 離線直接執行版 win.1",
+            "body": body,
+            "draft": True,
+            "prerelease": True,
+        }
         release = request(base, json.dumps(payload).encode(), "POST")
     upload = release["upload_url"].split("{", 1)[0]
     if urllib.parse.urlparse(upload).hostname != "uploads.github.com":
@@ -84,9 +99,17 @@ def main():
         path = folder / name
         asset = uploaded.get(name)
         if asset is None:
-            asset = request(upload + "?" + urllib.parse.urlencode({"name": name}),
-                            path.read_bytes(), "POST", "application/octet-stream", 180)
-        if asset["size"] != path.stat().st_size or asset.get("digest") != "sha256:" + digests[name]:
+            asset = request(
+                upload + "?" + urllib.parse.urlencode({"name": name}),
+                path.read_bytes(),
+                "POST",
+                "application/octet-stream",
+                180,
+            )
+        if (
+            asset["size"] != path.stat().st_size
+            or asset.get("digest") != "sha256:" + digests[name]
+        ):
             raise ValueError("Uploaded file SHA256 or size mismatch: " + name)
     release = request(release["url"], b'{"draft":false}', "PATCH")
     print("Published native-tested offline revision: " + release["html_url"])

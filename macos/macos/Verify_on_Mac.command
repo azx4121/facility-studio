@@ -15,7 +15,7 @@ finish() {
     exit "$TASK_STATUS"
 }
 trap finish EXIT
-printf '\nFacility Studio V5.5.4 — Mac 實機驗證\n\n'
+printf '\nFacility Studio V5.5.5 — Mac 實機驗證\n\n'
 if [[ ! -d "$TASK_APP" ]]; then
     printf '找不到 Facility Studio.app；請先完整解壓縮懶人包。\n'
     exit 2

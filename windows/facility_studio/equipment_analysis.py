@@ -1,3 +1,5 @@
+from .i18n import localized_report, canonical_choice, verbatim
+
 """Validated demand schedules; grouping never mixes incompatible supplies."""
 
 from collections import defaultdict
@@ -69,6 +71,7 @@ def validate_rows(imported):
                     result[key] = text
                 elif kind == "choice":
                     text = str(value).strip()
+                    text = canonical_choice(text, spec["options"])
                     if key == "phases":
                         text = str(integer(value, key, 1, 3))
                     if text not in spec["options"]:
@@ -568,10 +571,16 @@ def group_conditions(group):
     return f"流速上限{group['velocity_limit']:g}m/s；{pressure_text}；{'設備資料完整' if group['pressure_complete'] else '部分資料待補'}，未核風機總ESP。"
 
 
+@localized_report
 def equipment_report(result):
+    from .equipment_schema import example
+
+    def name(value, system, key):
+        return verbatim(value, example(system).get(key))
+
     lines = [
-        "設備需求分析 V5.5.4",
-        f"來源：{result['source_name']}",
+        "設備需求分析 V5.5.5",
+        f"來源：{verbatim(result['source_name'])}",
         f"全檔啟用{result['active_records']}筆；略過{result['skipped_records']}筆",
         "",
     ]
@@ -582,12 +591,12 @@ def equipment_report(result):
         "",
     ]
     for group in result["groups"]:
-        name = group["system"] + "／" + group["group"]
+        title = group["system"] + "／" + name(group["group"], group["system"], "group")
         if group["system"] == "電力":
-            name += f"／{group['phases']}相{group['voltage']:g}V"
+            title += f"／{group['phases']}相{group['voltage']:g}V"
         if group["system"] == "EXHAUST":
-            name += "／" + group["exhaust_type"]
-        lines.append(name)
+            title += "／" + group["exhaust_type"]
+        lines.append(title)
         lines.extend("  " + text for text in group_metrics(group))
         lines.append("  條件：" + group_conditions(group))
         if group["system"] == "電力":
@@ -609,7 +618,7 @@ def equipment_report(result):
         lines.append("")
     lines += ["設備列別明細"]
     for row in result["rows"]:
-        line = f"  {row['system']}／{row['id']} {row['name']} → {row['group']}"
+        line = f"  {row['system']}／{verbatim(row['id'])} {name(row['name'], row['system'], 'name')} → {name(row['group'], row['system'], 'group')}"
         if row["system"] == "電力":
             candidate = (row["per_device_branch"] or {}).get("selected")
             line += f"，連接{row['connected_kw']:.3f}kW／同時{row['demand_kw']:.3f}kW"
@@ -652,6 +661,6 @@ def equipment_report(result):
                 )
             )
         if row["notes"]:
-            lines.append("    備註：" + row["notes"])
+            lines.append("    備註：" + verbatim(row["notes"]))
     lines += ["", *result["warnings"], result["pending"]]
     return "\n".join(lines) + "\n"
