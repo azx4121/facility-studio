@@ -198,7 +198,7 @@ def main():
     for language in ("zh-Hant","en"):
         i18n.set_language(language,persist=False)
         text=str(report(base))
-        check(text==(directory/f'01_Expected_Report{".en" if language=="en" else ""}.txt').read_text())
+        check(text==(directory/f'01_Expected_Report{".en" if language=="en" else ""}.txt').read_text(encoding="utf-8"))
     record("20 Invalid/boundary inputs are rejected and reference reports match",dict(rejected=rejected))
 
     check(len(records)==20)

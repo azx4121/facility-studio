@@ -29,17 +29,23 @@ jobs:
           python -m pip install --require-hashes --only-binary=:all: -r windows/winrelease/requirements.lock.txt
       - name: Engineering and import security regressions
         run: |
-          python windows/tests/regression.py
-          python windows/tests/v55_features.py
-          python windows/tests/v552_core.py
-          python windows/tests/simple_features.py
-          python windows/tests/v554_features.py
-          python windows/tests/v556_features.py
-          python docs/tutorial/verify_tutorial.py --platform windows --output "$env:RUNNER_TEMP/tutorial-windows.json"
-          python windows/tests/maintenance_checks.py
-          python windows/tests/security_checks.py
-          python windows/tests/bilingual.py
-          python tools/verify_use_cases.py --platform windows --output "$env:RUNNER_TEMP/win-use-cases.json"
+          function Invoke-CheckedPython {
+            & python @args
+            if ($LASTEXITCODE -ne 0) {
+              throw "Validation failed (exit $LASTEXITCODE): $($args -join ' ')"
+            }
+          }
+          Invoke-CheckedPython windows/tests/regression.py
+          Invoke-CheckedPython windows/tests/v55_features.py
+          Invoke-CheckedPython windows/tests/v552_core.py
+          Invoke-CheckedPython windows/tests/simple_features.py
+          Invoke-CheckedPython windows/tests/v554_features.py
+          Invoke-CheckedPython windows/tests/v556_features.py
+          Invoke-CheckedPython docs/tutorial/verify_tutorial.py --platform windows --output "$env:RUNNER_TEMP/tutorial-windows.json"
+          Invoke-CheckedPython windows/tests/maintenance_checks.py
+          Invoke-CheckedPython windows/tests/security_checks.py
+          Invoke-CheckedPython windows/tests/bilingual.py
+          Invoke-CheckedPython tools/verify_use_cases.py --platform windows --output "$env:RUNNER_TEMP/win-use-cases.json"
       - name: Build the standalone windowed EXE and complete offline ZIP
         run: python -m winrelease.build --output "$env:RUNNER_TEMP/windows-offline"
         working-directory: windows

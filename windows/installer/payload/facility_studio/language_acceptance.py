@@ -217,7 +217,7 @@ def run(root, app, workbench, check, pump, output=None):
         choose("zh-Hant")
         choose("en")
         require(ahu.snapshot() == before and ahu.result == result, "AHU state changed")
-        require("Staged AHU" in ahu.win.title(), ahu.win.title())
+        require("AHU Stage Design" in ahu.win.title(), ahu.win.title())
         # All mode/source combos remain canonical throughout switching.
         for widget in ahu.widgets.values():
             if isinstance(widget, Combobox):
