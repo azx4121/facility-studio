@@ -2,20 +2,28 @@
 
 [English](README.en.md) · [20個操作情境與公式](docs/guides/README.md) · [下載](#下載) · [問題回報](https://github.com/azx4121/facility-studio/issues)
 
-**azx4121／Andy Huang 維護的繁體中文桌面工具**，可獨立使用電力配線、風管尺寸、CDA／N2管徑、照明Lux、冷熱水、空氣線圖及工程單位換算，也能匯入Excel／CSV彙整七種設備需求。Windows／macOS下載後可離線運算，內含Python執行環境。此倉庫與其他同名產品／工作室無關。
+**azx4121／Andy Huang 維護的繁體中文／英文桌面工具**，可獨立使用電力配線、風管尺寸、CDA／N2管徑、照明Lux、冷熱水、空氣線圖及工程單位換算，也能匯入Excel／CSV彙整七種設備需求。Windows／macOS下載後可離線運算，內含Python執行環境。此倉庫與其他同名產品／工作室無關。
 
-繁體中文的通用廠務工具，適合快速估算、方案比較及設備需求彙整。目前為 **V5.5.4 公開測試版**；Windows 請下載 **win.1 離線直接執行版**，macOS 請下載 **mac.2 修正版**。兩者皆包含目前安全與授權維護；既有 Release 與歷史提交保留。
+通用廠務工具，適合快速估算、方案比較及設備需求彙整。目前為 **V5.5.5 中英雙語公開測試版**；Windows 請下載 **v5.5.5-win.1 離線直接執行版**，macOS 請下載 **v5.5.5-mac.1**。兩者皆包含既有安全、授權與 macOS 修正；既有 Release 與歷史提交保留。
 
 ## 下載
 
 | 平台 | 懶人包 | 使用條件 |
 | --- | --- | --- |
-| Windows（完整包） | [下載 win.1 離線懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.4-win.1/Facility_Studio_V5_5_4_Windows_Offline_OneClick.zip) | 目標 Windows 10／11、Intel／AMD x64；解壓縮後直接開啟 EXE，不需另裝 Python／套件、不需連網 |
-| Windows（單檔） | [直接下載 win.1 EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.4-win.1/Facility_Studio_V5_5_4_Windows_Offline.exe) | 已內含執行環境；可單獨執行，不需安裝流程 |
-| macOS（建議） | [下載 mac.2 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.4-mac.2/Facility_Studio_V5_5_4_macOS_mac2.dmg) | 拖到「應用程式」安裝；已含執行環境，Apple Silicon／Intel 原生驗證 |
-| macOS（完整包） | [下載 mac.2 ZIP 懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.4-mac.2/Facility_Studio_V5_5_4_macOS_mac2_OneClick.zip) | 另含原始碼、設備表範本與診斷腳本 |
+| Windows（完整包） | [下載 win.1 離線懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.1/Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip) | 目標 Windows 10／11、Intel／AMD x64；解壓縮後直接開啟 EXE，不需另裝 Python／套件、不需連網 |
+| Windows（單檔） | [直接下載 win.1 EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.1/Facility_Studio_V5_5_5_Windows_Offline.exe) | 已內含執行環境；可單獨執行，不需安裝流程 |
+| macOS（建議） | [下載 V5.5.5 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.1/Facility_Studio_V5_5_5_macOS_mac1.dmg) | 拖到「應用程式」安裝；已含執行環境，Apple Silicon／Intel 原生驗證 |
+| macOS（完整包） | [下載 V5.5.5 ZIP 懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.1/Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip) | 另含原始碼、設備表範本與診斷腳本 |
 
 也可以到 [Releases 發布頁](https://github.com/azx4121/facility-studio/releases) 選擇版本。
+
+## 中英文切換
+
+主畫面右上角的語言選單可選 **繁體中文／English**，不需重開軟體。完整工程工作台、單台空調箱及設備表視窗也有語言選單，所有已開視窗會同步切換；下次啟動會記住選擇。
+
+欄位、下拉選項、操作提示、錯誤訊息、空氣線圖、TXT／HTML 報告及新匯出的設備範本會採用所選語言。切換不會改變已填數值、公式或專案資料；自填設備名稱與備註保持原文。既有中文 Excel／CSV 與專案檔可繼續使用，英文範本也能重新匯入。
+
+[中英文操作與驗證記錄](docs/2026-10-07-bilingual.md)包含原生驗收、20 種數值一致性情境及限制。
 
 ## 先選你要解的問題
 
@@ -45,7 +53,7 @@
 ### Windows
 
 1. 完整解壓縮 **win.1 離線懶人包**。
-2. 雙擊 `Facility_Studio_V5_5_4_Windows_Offline.exe`。
+2. 雙擊 `Facility_Studio_V5_5_5_Windows_Offline.exe`。
 3. 不需另裝 Python、不需安裝套件、不需連網；首次啟動請等候內建套件展開。
 
 也可直接下載單檔 EXE 使用；ZIP 另含原始碼、設備需求範本、授權與診斷腳本。
@@ -56,14 +64,14 @@
 
 ### macOS
 
-1. 下載並打開 **mac.2 DMG**。
+1. 下載並打開 **V5.5.5 DMG**。
 2. 把 `Facility Studio` 拖到旁邊的 `Applications／應用程式`。
 3. 從「應用程式」開啟；不需另裝 Python 或 Homebrew。
 4. 首次若提示開發者無法驗證，先嘗試開啟，再到「系統設定 → 隱私權與安全性 → 仍要打開」，依 [Apple 官方指引](https://support.apple.com/en-us/102445) 確認。
 
 本版通過 Apple 原生完整性簽章檢查，但使用 ad-hoc 簽章，沒有 Developer ID／Apple 公證。企業管理的 Mac 可能需要 IT 允許。
 ZIP 也可完整解壓縮後直接開啟 App，或執行 `Install_on_Mac.command` 安裝到使用者應用程式資料夾。請先關閉舊版；更新不會刪除專案與復原資料。
-舊 mac.1 原始包在 Apple 原生檢查中失敗，請改用 mac.2；[修正與驗證紀錄](docs/2026-10-06-macos-repair.md) 保留重現證據。
+舊 `v5.5.4-mac.1` 原始包在 Apple 原生檢查中失敗；本版保留 `v5.5.4-mac.2` 的修正。[修正與驗證紀錄](docs/2026-10-06-macos-repair.md) 保留重現證據。
 
 ## 可以做什麼
 
@@ -86,9 +94,9 @@ ZIP 也可完整解壓縮後直接開啟 App，或執行 `Install_on_Mac.command
 
 已完成數值情境、報告反算及 Linux 的實際 Tk 介面回歸測試，以及 Windows 安裝器檔案檢查。
 
-mac.2 發布須通過 **Apple Silicon 與 Intel macOS 15 原生雲端驗證**：Apple 深度簽章、Tk Aqua、七種獨立工具、設備表匯入、完整工作台與 Matplotlib 繪圖。實際交付 ZIP 重新解壓縮、DMG 掛載後再次驗證。
+V5.5.5 macOS 發布須通過 **Apple Silicon 與 Intel macOS 15 原生雲端驗證**：Apple 深度簽章、Tk Aqua、七種獨立工具、設備表匯入、完整工作台與 Matplotlib 繪圖。實際交付 ZIP 重新解壓縮、DMG 掛載後再次驗證。
 
-Windows win.1 發布須通過 Windows Server 2022／2025 x64 原生雲端驗證：同一份 EXE 與解壓縮 ZIP，外部 Python 移出 PATH、EXE 對外連線被防火牆封鎖後，仍完成七種工具、設備表、原生 Tk 與完整工作台驗收。Windows10／11 為支援目標，使用者實機、企業政策與實體數字鍵盤仍須個別確認。
+V5.5.5 Windows 發布須通過 Windows Server 2022／2025 x64 原生雲端驗證：同一份 EXE 與解壓縮 ZIP，外部 Python 移出 PATH、EXE 對外連線被防火牆封鎖後，仍完成七種工具、設備表、原生 Tk 與完整工作台驗收。Windows10／11 為支援目標，使用者實機、企業政策與實體數字鍵盤仍須個別確認。
 
 封裝目標為 macOS 11 以上；macOS 11～14、macOS 27 Beta、Finder 下載隔離提示、企業管理政策、實體鍵盤／觸控板及 Retina 視覺仍須使用者電腦確認。
 macOS ZIP 包含 `Verify_on_Mac.command`，可產生本機驗收與錯誤記錄；不會上傳資料或更動既有工程專案。
@@ -123,7 +131,7 @@ Windows 原始碼位於 [windows](windows/)；macOS 原始碼位於 [macos](maco
 先前已按 MIT 發布的版本（含 `f8e92ea`）仍保有原授權；歷史條文見 [LICENSE_LEGACY_MIT](LICENSE_LEGACY_MIT)。
 第三方執行環境及套件保留各自的原有授權文件，詳 [第三方元件說明](THIRD_PARTY_NOTICES.md)。
 
-本次維護修正低溫露點反算、大氣壓防呆與工程資料表驗證，詳 [測試與修正紀錄](docs/2026-10-06-review.md)。mac.2 與 Windows win.1 包含這些修正。歷史 Release、資產與標籤保留。
+本次維護修正低溫露點反算、大氣壓防呆與工程資料表驗證，詳 [測試與修正紀錄](docs/2026-10-06-review.md)。V5.5.5 的 macOS 與 Windows 包含這些修正。歷史 Release、資產與標籤保留。
 
 ### 執行數值回歸測試
 
@@ -137,6 +145,7 @@ python windows/tests/simple_features.py
 python windows/tests/v554_features.py
 python windows/tests/maintenance_checks.py
 python windows/tests/security_checks.py
+python windows/tests/bilingual.py
 ```
 
 macOS 原始碼測試將路徑中的 `windows/` 改為 `macos/`；若系統指令名稱為 `python3`，請使用 `python3`。

@@ -1,0 +1,594 @@
+{
+  "version": "5.5.5",
+  "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+  "architecture": "arm64",
+  "python": "3.13.15 (v3.13.15:4061bc4c35f, Aug  5 2026, 09:08:51) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "matplotlib": "3.10.8",
+  "timestamp": "2026-10-07T06:54:52.420767+00:00",
+  "ui_event_timings": [
+    {
+      "phase": "initial-render",
+      "elapsed_seconds": 0.3,
+      "budget_seconds": 20
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.164,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.161,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.159,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.15,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.162,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.154,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.171,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "initial-render",
+      "elapsed_seconds": 0.582,
+      "budget_seconds": 20
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.162,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.154,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.156,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.151,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.16,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.152,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.16,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.155,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.153,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.155,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.187,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.153,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.163,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.157,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.162,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.16,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.157,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.244,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.157,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.151,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.159,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.159,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.153,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.169,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.169,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.189,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.163,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.164,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.157,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.165,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.152,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.171,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.152,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.158,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.165,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.191,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.162,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.167,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.231,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.219,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.152,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.15,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.159,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.163,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.158,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.16,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.167,
+      "budget_seconds": 5
+    },
+    {
+      "phase": "interaction",
+      "elapsed_seconds": 0.156,
+      "budget_seconds": 5
+    }
+  ],
+  "checks": [
+    {
+      "name": "Apple native deep signature verification",
+      "passed": true
+    },
+    {
+      "name": "Bundled CPython 3.13",
+      "passed": true
+    },
+    {
+      "name": "Native CPU supported",
+      "passed": true
+    },
+    {
+      "name": "NumPy native extension",
+      "passed": true
+    },
+    {
+      "name": "Pillow native extension",
+      "passed": true
+    },
+    {
+      "name": "Full engineering calculation",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: electrical",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: duct",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: gas",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: lighting",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: water",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: air",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: units",
+      "passed": true
+    },
+    {
+      "name": "Export Excel template with Unicode path",
+      "passed": true
+    },
+    {
+      "name": "Read all seven system worksheets",
+      "passed": true
+    },
+    {
+      "name": "Disabled template does not fabricate demand totals",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: 電力",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: PCW",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: CDA",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: N2",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: EXHAUST",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: DI",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: PV",
+      "passed": true
+    },
+    {
+      "name": "Tk Aqua native window system",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: electrical",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: duct",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: gas",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: lighting",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: water",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: air",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: units",
+      "passed": true
+    },
+    {
+      "name": "Equipment import window",
+      "passed": true
+    },
+    {
+      "name": "Mac application Quit uses the document workflow",
+      "passed": true
+    },
+    {
+      "name": "Full workbench GUI calculates",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 0",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 1",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 2",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 3",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 4",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 5",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 6",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 7",
+      "passed": true
+    },
+    {
+      "name": "English selector uses a native selection event",
+      "passed": true
+    },
+    {
+      "name": "English main-window title",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: electrical",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: duct",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: gas",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: lighting",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: water",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: air",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: units",
+      "passed": true
+    },
+    {
+      "name": "English choice maps to canonical electrical enum and actual factor",
+      "passed": true
+    },
+    {
+      "name": "Localized validation, blocked export and invalid-input round trip",
+      "passed": true
+    },
+    {
+      "name": "English volume-based lighting labels and live link",
+      "passed": true
+    },
+    {
+      "name": "English gas unit changes preserve actual flow",
+      "passed": true
+    },
+    {
+      "name": "Full workbench language sync, project hash and result parity",
+      "passed": true
+    },
+    {
+      "name": "Full workbench English labels and action captions",
+      "passed": true
+    },
+    {
+      "name": "Engineering quick tools, plot redraw and language round trip",
+      "passed": true
+    },
+    {
+      "name": "AHU stage controls, heat-source enums and balance parity",
+      "passed": true
+    },
+    {
+      "name": "AHU English guidance and visible captions",
+      "passed": true
+    },
+    {
+      "name": "Closed child windows do not break subsequent switching",
+      "passed": true
+    },
+    {
+      "name": "English Excel template loads all seven systems",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: Electrical",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: PCW",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: CDA",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: N2",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: EXHAUST",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: DI",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: PV",
+      "passed": true
+    },
+    {
+      "name": "English action buttons fit the visible desktop",
+      "passed": true
+    },
+    {
+      "name": "Navigation labels have readable native foreground/background contrast",
+      "passed": true
+    },
+    {
+      "name": "Native UI heartbeat",
+      "passed": true
+    },
+    {
+      "name": "No native GUI callback exceptions",
+      "passed": true
+    },
+    {
+      "name": "Matplotlib TkAgg drawing",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

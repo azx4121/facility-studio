@@ -2,20 +2,24 @@
 
 [繁體中文](README.md) · [Worked examples](docs/guides/README.md) · [Downloads](https://github.com/azx4121/facility-studio/releases) · [Report a problem](https://github.com/azx4121/facility-studio/issues)
 
-Facility Studio by **azx4121 / Andy Huang** is a Traditional Chinese desktop application for preliminary HVAC, electrical and facility utility calculations. The calculators can be used independently; a complete workbench supports project comparisons and seasonal AHU stage calculations. This repository is unrelated to other products or businesses with the same name.
+Facility Studio by **azx4121 / Andy Huang** is a Traditional Chinese / English desktop application for preliminary HVAC, electrical and facility utility calculations. The calculators can be used independently; a complete workbench supports project comparisons and seasonal AHU stage calculations. This repository is unrelated to other products or businesses with the same name.
 
-**V5.5.4 public test release.** Windows **win.1** and macOS **mac.2** bundle their runtime. After downloading, normal calculations require neither a separately installed Python nor an internet connection.
+**V5.5.5 bilingual public test release.** Windows **v5.5.5-win.1** and macOS **v5.5.5-mac.1** bundle their runtime. After downloading, normal calculations require neither a separately installed Python nor an internet connection.
 
 ## Download and run
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows standalone | [Offline EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.4-win.1/Facility_Studio_V5_5_4_Windows_Offline.exe) | Double-click; target: Windows 10/11 on Intel/AMD x64 |
-| Windows complete package | [Offline ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.4-win.1/Facility_Studio_V5_5_4_Windows_Offline_OneClick.zip) | Extract completely, then run the EXE; includes source, templates and diagnostics |
-| macOS | [mac.2 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.4-mac.2/Facility_Studio_V5_5_4_macOS_mac2.dmg) | Drag Facility Studio into Applications; Apple Silicon and Intel |
-| macOS complete package | [mac.2 ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.4-mac.2/Facility_Studio_V5_5_4_macOS_mac2_OneClick.zip) | Includes application, source, equipment templates and diagnostics |
+| Windows standalone | [Offline EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.1/Facility_Studio_V5_5_5_Windows_Offline.exe) | Double-click; target: Windows 10/11 on Intel/AMD x64 |
+| Windows complete package | [Offline ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.1/Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip) | Extract completely, then run the EXE; includes source, templates and diagnostics |
+| macOS | [V5.5.5 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.1/Facility_Studio_V5_5_5_macOS_mac1.dmg) | Drag Facility Studio into Applications; Apple Silicon and Intel |
+| macOS complete package | [V5.5.5 ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.1/Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip) | Includes application, source, equipment templates and diagnostics |
 
-The interface and exported reports currently use Traditional Chinese. An English interface is not included. See the [Chinese installation guide](README.md#安裝與開啟) for startup and security prompts. The Windows executable has no commercial Authenticode signature; the macOS app uses ad-hoc integrity signing, without Developer ID or notarization.
+Select **English** in the top-right language selector. Open windows, field labels, choices, guidance, charts and TXT/HTML reports switch immediately; the choice is remembered on restart. Engineering inputs and formulas stay unchanged. User-entered names and notes retain their original text. Newly exported Excel/CSV templates use the selected language; both Chinese and English templates can be imported. See the [bilingual guide and verification](docs/2026-10-07-bilingual.md). See the [Chinese installation guide](README.md#安裝與開啟) for startup and security prompts. The Windows executable has no commercial Authenticode signature; the macOS app uses ad-hoc integrity signing, without Developer ID or notarization.
+
+Actual native English interface:
+
+![Facility Studio English electrical sizing on macOS](docs/images/macos-electrical-en.png)
 
 ## What it calculates
 
@@ -38,7 +42,7 @@ This is not a BIM/CAD authoring package, a complete pipe-network solver, or shor
 
 ## Verification and source
 
-The repository retains numerical and report regression evidence. Windows win.1 was also tested natively on Windows Server 2022 and 2025; mac.2 was tested on Apple Silicon and Intel macOS 15. These hosted checks do not establish compatibility with every end-user device or enterprise policy. See [Windows evidence](docs/2026-10-07-windows-offline.md) and [macOS evidence](docs/2026-10-06-macos-repair.md).
+The repository retains numerical and report regression evidence. V5.5.5 Windows was tested natively on Windows Server 2022 and 2025; V5.5.5 macOS was tested on Apple Silicon and Intel macOS 15. These hosted checks do not establish compatibility with every end-user device or enterprise policy. See the [V5.5.5 bilingual verification](docs/2026-10-07-bilingual.md), [original Windows offline evidence](docs/2026-10-07-windows-offline.md) and [macOS launch repair evidence](docs/2026-10-06-macos-repair.md).
 
 The [20 worked scenarios](docs/guides/README.md) include 18 applicable calculations and two out-of-scope controls. The example verifier runs both source distributions on the current test host; it is distinct from native OS acceptance and from search discoverability tests.
 

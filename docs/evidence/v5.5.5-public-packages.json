@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "files": [
+    {
+      "file": "Facility_Studio_V5_5_5_Windows_Offline.exe",
+      "sha256": "746e967e0889295e7638bd11649f40d753873f19e43923c0a664e49a4d72dff3",
+      "bytes": 40295337,
+      "tag": "v5.5.5-win.1"
+    },
+    {
+      "file": "Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip",
+      "sha256": "d1fe13a1adb3d6e228209dd83c90735d4ce11e5262baa1ba1dc261d6f5378645",
+      "bytes": 40387369,
+      "tag": "v5.5.5-win.1"
+    },
+    {
+      "file": "Facility_Studio_V5_5_5_macOS_mac1.dmg",
+      "sha256": "b249b8272928fa35d092a634e6d4d06a17725d765a3fe46c7f5aba53d72acfd3",
+      "bytes": 146655219,
+      "tag": "v5.5.5-mac.1"
+    },
+    {
+      "file": "Facility_Studio_V5_5_5_macOS_mac1_OneClick.zip",
+      "sha256": "9b3f66d5fe937fea7457ebc963c48ce87a5f21ac540371436cc4c887c4308796",
+      "bytes": 94446381,
+      "tag": "v5.5.5-mac.1"
+    }
+  ],
+  "checks": [
+    "public download bytes / release SHA256SUMS",
+    "Windows AMD64 PE header",
+    "ZIP CRC for both packages",
+    "Windows embedded EXE matches standalone",
+    "bilingual source and guidance present",
+    "Mac application bundle versions / launcher / source ZIP"
+  ]
+}
