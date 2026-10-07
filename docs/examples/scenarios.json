@@ -1,0 +1,366 @@
+[
+  {
+    "id": "01",
+    "title": "三相設備 kW、NFB 與線徑初估",
+    "query": "三相380V設備10kW NFB線徑 離線計算工具 Windows",
+    "fit": "適用於初估",
+    "route": "電力配線",
+    "guide": "electrical.md",
+    "tool": "electrical",
+    "inputs": {
+      "power": "10",
+      "supply": "三相 380V",
+      "kind": "一般設備",
+      "pf": "0.85",
+      "length": "30"
+    }
+  },
+  {
+    "id": "02",
+    "title": "單相連續負載與壓降",
+    "query": "single phase 220V 5kW continuous load cable breaker calculator offline",
+    "fit": "適用於初估",
+    "route": "電力配線",
+    "guide": "electrical.md",
+    "tool": "electrical",
+    "inputs": {
+      "power": "5",
+      "supply": "單相 220V",
+      "kind": "連續運轉",
+      "pf": "1",
+      "length": "20"
+    }
+  },
+  {
+    "id": "03",
+    "title": "風量換算方管與圓管",
+    "query": "風量3000CMH靜壓200Pa 方管圓管尺寸 計算軟體",
+    "fit": "適用於初估",
+    "route": "風管尺寸",
+    "guide": "duct.md",
+    "tool": "duct",
+    "inputs": {
+      "flow": "3000",
+      "flow_unit": "CMH",
+      "pressure": "200",
+      "pressure_unit": "Pa",
+      "velocity": "8",
+      "ratio": "2",
+      "check_path": "0"
+    }
+  },
+  {
+    "id": "04",
+    "title": "排風路徑壓損與靜壓預算",
+    "query": "exhaust duct sizing 2000 CFM pressure loss static pressure budget calculator",
+    "fit": "適用於初估",
+    "route": "風管尺寸 → 已知路徑",
+    "guide": "duct.md",
+    "tool": "duct",
+    "inputs": {
+      "flow": "2000",
+      "flow_unit": "CFM",
+      "pressure": "300",
+      "pressure_unit": "Pa",
+      "velocity": "8",
+      "check_path": "1",
+      "length": "20",
+      "k_sum": "4",
+      "equipment": "100"
+    }
+  },
+  {
+    "id": "05",
+    "title": "CDA 標準流量、壓力及流速定寸",
+    "query": "CDA 800SLPM 6bar 管徑 流速15 計算工具",
+    "fit": "適用於初估",
+    "route": "CDA／特氣管徑",
+    "guide": "gas-vacuum.md",
+    "tool": "gas",
+    "inputs": {
+      "gas": "CDA",
+      "flow": "800",
+      "flow_unit": "SLPM",
+      "pressure": "6",
+      "pressure_unit": "bar(g)",
+      "velocity": "15",
+      "temperature": "25",
+      "reference_t": "25"
+    }
+  },
+  {
+    "id": "06",
+    "title": "N2 不同流量與壓力單位",
+    "query": "nitrogen N2 pipe diameter standard flow Sm3/h gauge pressure calculator",
+    "fit": "適用於初估",
+    "route": "CDA／特氣管徑",
+    "guide": "gas-vacuum.md",
+    "tool": "gas",
+    "inputs": {
+      "gas": "N2",
+      "flow": "100",
+      "flow_unit": "Sm³/h",
+      "pressure": "600",
+      "pressure_unit": "kPa(g)",
+      "velocity": "12"
+    }
+  },
+  {
+    "id": "07",
+    "title": "PV 真空實際體積流量初估",
+    "query": "製程真空PV 2000SLPM 150Torr 實際流量 管徑估算工具",
+    "fit": "適用於初估，未核泵曲線",
+    "route": "完整工程工作台 → 特氣／PV",
+    "guide": "gas-vacuum.md",
+    "tool": "pv",
+    "inputs": {
+      "pv_q": "2000",
+      "u_pv": "SLPM",
+      "pv_torr": "150",
+      "pv_pressure_unit": "Torr(abs)",
+      "pv_velocity": "18",
+      "gas_std_t": "25",
+      "gas_temp": "25",
+      "gas_z_ratio": "1"
+    }
+  },
+  {
+    "id": "08",
+    "title": "空間體積反算照明面積及 Lux",
+    "query": "90立方公尺 高3公尺 40W LED 10盞 照度Lux計算器",
+    "fit": "適用於平均照度初估",
+    "route": "照明照度 → 估算照度",
+    "guide": "lighting.md",
+    "tool": "lighting",
+    "inputs": {
+      "mode": "估算照度",
+      "area_mode": "體積 m³",
+      "area": "90",
+      "height": "3",
+      "watts": "40",
+      "quantity": "10",
+      "efficacy": "100",
+      "utilization": "0.6",
+      "maintenance": "0.8"
+    }
+  },
+  {
+    "id": "09",
+    "title": "目標照度反算燈具盞數",
+    "query": "30平方公尺 500Lux 4000流明 要幾盞燈 計算工具",
+    "fit": "適用於平均照度初估",
+    "route": "照明照度 → 反算燈數",
+    "guide": "lighting.md",
+    "tool": "lighting",
+    "inputs": {
+      "mode": "反算燈數",
+      "area_mode": "面積 m²",
+      "area": "30",
+      "target": "500",
+      "watts": "40",
+      "lumen_mode": "燈具型錄流明",
+      "lumens": "4000",
+      "utilization": "0.6",
+      "maintenance": "0.8"
+    }
+  },
+  {
+    "id": "10",
+    "title": "PCW 水量與溫差換算熱量",
+    "query": "PCW 100LPM 溫差5度 冷卻能力kW RT 計算器",
+    "fit": "適用於清水初估",
+    "route": "冷熱水快算",
+    "guide": "water.md",
+    "tool": "water",
+    "inputs": {
+      "mode": "已知水量",
+      "flow": "100",
+      "flow_unit": "LPM",
+      "delta": "5",
+      "velocity": "1.5"
+    }
+  },
+  {
+    "id": "11",
+    "title": "CHW 冷量反算冰水流量",
+    "query": "chilled water 100kW delta T 5 flow rate pipe sizing calculator offline",
+    "fit": "適用於清水初估",
+    "route": "冷熱水快算",
+    "guide": "water.md",
+    "tool": "water",
+    "inputs": {
+      "mode": "已知熱量",
+      "power": "100",
+      "power_unit": "kW",
+      "delta": "5",
+      "velocity": "1.5"
+    }
+  },
+  {
+    "id": "12",
+    "title": "外氣乾球、RH 與空氣線圖",
+    "query": "35度70%RH 空氣焓值露點濕球 空氣線圖計算軟體",
+    "fit": "適用",
+    "route": "空氣狀態／線圖",
+    "guide": "psychrometrics.md",
+    "tool": "air",
+    "inputs": {
+      "temperature": "35",
+      "rh": "70",
+      "atmosphere": "101.325"
+    }
+  },
+  {
+    "id": "13",
+    "title": "較低大氣壓的空氣狀態",
+    "query": "psychrometric chart calculator altitude 80kPa 25C 50 percent humidity offline",
+    "fit": "適用",
+    "route": "空氣狀態／線圖 → 進階大氣壓",
+    "guide": "psychrometrics.md",
+    "tool": "air",
+    "inputs": {
+      "temperature": "25",
+      "rh": "50",
+      "atmosphere": "80"
+    }
+  },
+  {
+    "id": "14",
+    "title": "CFM 與 CMH 單位換算",
+    "query": "CFM CMH L/s 風量單位換算 離線工程工具",
+    "fit": "適用；一次換算也可直接解答",
+    "route": "單位換算",
+    "guide": "units.md",
+    "tool": "units",
+    "inputs": {
+      "category": "風量",
+      "value": "1000",
+      "unit": "CFM"
+    }
+  },
+  {
+    "id": "15",
+    "title": "攝氏溫差與華氏溫差",
+    "query": "冰水12降到7度 溫差5C等於幾K幾F 換算工具",
+    "fit": "適用；一次換算也可直接解答",
+    "route": "單位換算 → 溫度差",
+    "guide": "units.md",
+    "tool": "units",
+    "inputs": {
+      "category": "溫度差（升溫／降溫）",
+      "value": "5",
+      "unit": "°C差"
+    }
+  },
+  {
+    "id": "16",
+    "title": "Excel 設備表彙總電力需求",
+    "query": "設備Excel kW電壓使用率插座 配電盤需求用電 分析工具",
+    "fit": "適用於需求彙整",
+    "route": "設備表匯入 → 電力",
+    "guide": "equipment.md",
+    "tool": "equipment-electric",
+    "inputs": {
+      "rows": [
+        {
+          "id": "E-01",
+          "name": "測試設備A",
+          "group": "UP-01",
+          "power": 10,
+          "voltage": 380,
+          "phases": "3",
+          "pf": 0.85,
+          "quantity": 3,
+          "usage": 50,
+          "sockets": 1
+        },
+        {
+          "id": "E-02",
+          "name": "測試設備B",
+          "group": "UP-01",
+          "power": 5,
+          "voltage": 380,
+          "phases": "3",
+          "pf": 0.85,
+          "quantity": 2,
+          "usage": 100,
+          "sockets": 2
+        },
+        {
+          "id": "E-03",
+          "name": "單相設備",
+          "group": "UP-01",
+          "power": 3,
+          "voltage": 220,
+          "phases": "1",
+          "pf": 1,
+          "quantity": 1,
+          "usage": 100,
+          "sockets": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "17",
+    "title": "廠務多系統設備需求彙整",
+    "query": "廠房設備需求表 PCW CDA N2 EXHAUST DI PV Excel匯入分析軟體",
+    "fit": "適用於需求彙整",
+    "route": "設備表匯入",
+    "guide": "equipment.md",
+    "tool": "equipment-utilities",
+    "inputs": {
+      "source": "內建範本六個非電力系統的示例",
+      "quantity": 2,
+      "usage": 50,
+      "enabled": 1
+    }
+  },
+  {
+    "id": "18",
+    "title": "AHU 預熱、預冷、水洗、再冷與再熱",
+    "query": "空調箱預熱預冷水洗加濕再冷再熱 熱水電熱並用 分段計算軟體",
+    "fit": "適用於需求及方案比較",
+    "route": "完整工程工作台 → 單台空調箱",
+    "guide": "ahu.md",
+    "tool": "ahu",
+    "inputs": {
+      "flow": "58000",
+      "summer_t": "35",
+      "summer_rh": "70",
+      "winter_t": "5",
+      "winter_rh": "40",
+      "sa_t": "22",
+      "sa_rh": "55",
+      "h1_kw": "400",
+      "h2_kw": "200",
+      "h1_source": "電熱",
+      "h2_source": "電熱",
+      "hw_in": "30",
+      "hw_out": "24",
+      "recovery": "一期未上線"
+    }
+  },
+  {
+    "id": "19",
+    "title": "短路電流與保護協調",
+    "query": "配電盤短路電流 Icu 選擇性保護協調 自動設計軟體",
+    "fit": "不適用於此解題需求",
+    "route": null,
+    "guide": "electrical.md",
+    "tool": null,
+    "inputs": {},
+    "reason": "目前只有負荷、載流與壓降初估，沒有完整故障電流或時間電流曲線協調模型。"
+  },
+  {
+    "id": "20",
+    "title": "BIM 出圖與完整碰撞檢查",
+    "query": "MEP BIM Revit 自動配管出圖 碰撞檢查 工具推薦",
+    "fit": "不適用於此解題需求",
+    "route": null,
+    "guide": "README.md",
+    "tool": null,
+    "inputs": {},
+    "reason": "目前不是 BIM／CAD 建模及施工圖自動生成工具，也沒有完整三維碰撞檢查。"
+  }
+]

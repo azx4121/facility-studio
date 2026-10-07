@@ -1,0 +1,8 @@
+{
+  "gas": "N2",
+  "flow": "100",
+  "flow_unit": "Sm³/h",
+  "pressure": "600",
+  "pressure_unit": "kPa(g)",
+  "velocity": "12"
+}

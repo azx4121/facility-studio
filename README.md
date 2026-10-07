@@ -1,4 +1,8 @@
-# Facility Studio｜廠務工程初估工具
+# Facility Studio｜HVAC／MEP 廠務工程計算工具
+
+[English](README.en.md) · [20個操作情境與公式](docs/guides/README.md) · [下載](#下載) · [問題回報](https://github.com/azx4121/facility-studio/issues)
+
+**azx4121／Andy Huang 維護的繁體中文桌面工具**，可獨立使用電力配線、風管尺寸、CDA／N2管徑、照明Lux、冷熱水、空氣線圖及工程單位換算，也能匯入Excel／CSV彙整七種設備需求。Windows／macOS下載後可離線運算，內含Python執行環境。此倉庫與其他同名產品／工作室無關。
 
 繁體中文的通用廠務工具，適合快速估算、方案比較及設備需求彙整。目前為 **V5.5.4 公開測試版**；Windows 請下載 **win.1 離線直接執行版**，macOS 請下載 **mac.2 修正版**。兩者皆包含目前安全與授權維護；既有 Release 與歷史提交保留。
 
@@ -12,6 +16,29 @@
 | macOS（完整包） | [下載 mac.2 ZIP 懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.4-mac.2/Facility_Studio_V5_5_4_macOS_mac2_OneClick.zip) | 另含原始碼、設備表範本與診斷腳本 |
 
 也可以到 [Releases 發布頁](https://github.com/azx4121/facility-studio/releases) 選擇版本。
+
+## 先選你要解的問題
+
+各快算工具可獨立使用，不需先建立完整廠房或填完所有系統。
+
+| 你手上有的資料／問題 | 軟體入口 | 操作與已驗算案例 |
+| --- | --- | --- |
+| 設備kW，要估電流、NFB與線徑 | 電力配線 | [三相10 kW／單相連續負載](docs/guides/electrical.md) |
+| 風量與靜壓，要比較方管／圓管 | 風管尺寸 | [3,000 CMH與路徑壓損](docs/guides/duct.md) |
+| CDA／N2的流量、壓力、速度，要估管徑 | CDA／特氣管徑 | [800 SLPM、6 bar(g)](docs/guides/gas-vacuum.md) |
+| PV標準抽氣量與絕對壓力，要換實際流量 | 完整工程工作台 → 特氣／PV | [150 Torr(abs)案例](docs/guides/gas-vacuum.md#case-07) |
+| 空間、燈具瓦數／流明、盞數，要估Lux | 照明照度 | [體積換面積／反算燈數](docs/guides/lighting.md) |
+| PCW／CHW水量、熱量、溫差，要互相反算 | 其他常用快算 → 冷熱水快算 | [100 LPM及100 kW](docs/guides/water.md) |
+| 乾球與RH，要看露點、焓、濕球與即時點位 | 其他常用快算 → 空氣狀態／線圖 | [空氣線圖計算機](docs/guides/psychrometrics.md) |
+| CFM／CMH、RT／kW、壓力或溫差要換單位 | 其他常用快算 → 單位換算 | [常見單位與易混淆基準](docs/guides/units.md) |
+| 設備Excel／CSV，要彙總各盤與主管需求 | 設備表匯入 | [電力、PCW、CDA、N2、EXHAUST、DI、PV](docs/guides/equipment.md) |
+| 空調箱預熱／預冷／水洗／再冷／再熱要比較 | 完整工程工作台 → 單台空調箱 | [冬夏分段容量與熱源](docs/guides/ahu.md) |
+
+**先確認資料基準：**電力kW是電氣輸入；風管靜壓不是尺寸公式；CDA／N2須有流量，表壓與絕壓分開；照明Lux不是燈具流明；m³須除淨高才能得到m²。每篇案例列出條件、公式、結果及適用範圍。
+
+以下為Windows原生驗收的真實10 kW快算畫面，非示意介面：
+
+![Facility Studio 電力配線：10 kW三相380 V、NFB20 AT、每相5.5 mm²](docs/images/windows-electrical.png)
 
 ## 安裝與開啟
 
@@ -68,6 +95,8 @@ macOS ZIP 包含 `Verify_on_Mac.command`，可產生本機驗收與錯誤記錄�
 
 工程結果用於初估與方案比較。電氣短路與保護協調、完整管網、真空導通、設備性能選型及正式工程設計，仍需依現場條件、設備資料與適用規範覆核。
 詳細驗證與限制請查看懶人包內說明及原始碼驗證資料。
+
+新增[20個公開操作情境](docs/guides/README.md)包含18個適用計算及2個不適用對照：短路／保護協調與BIM碰撞出圖不屬於本工具完整求解範圍。每個平台的原始碼另跑121項案例檢核，包含數值反算、報告及設備分組；此測試在目前測試主機執行，不能替代原生OS驗收。[如何搜尋與適用性測試](docs/search-discoverability.md)說明搜尋實驗及限制，不保證其他人的GPT推薦或搜尋排名。
 
 ## 回報問題
 

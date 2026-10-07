@@ -1,0 +1,2317 @@
+{
+  "platform": "windows",
+  "scope": "18個適用情境的計算／報告核對，2個不適用對照；不是20個獨立GPT帳號測試",
+  "check_count": 121,
+  "scenarios": [
+    {
+      "id": "01",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "由功率、電壓及 PF 獨立反算電流",
+        "連續負載餘裕基準",
+        "電流 ≤ NFB AT ≤ 有效載流",
+        "候選符合設定壓降上限",
+        "報告 NFB 與結構化結果一致"
+      ],
+      "result": {
+        "tool": "electrical",
+        "power_kw": 10.0,
+        "supply": "三相 380V",
+        "phases": 3,
+        "voltage": 380.0,
+        "pf": 0.85,
+        "current_a": 17.87462133714012,
+        "design_a": 17.87462133714012,
+        "kind": "一般設備",
+        "selected": {
+          "runs": 1,
+          "size_mm2": 5.5,
+          "ampacity_a": 25,
+          "nfb_a": 20,
+          "drop_v": 2.90296258979388,
+          "drop_pct": 0.7639375236299684
+        },
+        "length_m": 30.0,
+        "dt": 1,
+        "dp": 1,
+        "terminal_c": 60,
+        "drop_basis": "運轉電流及輸入PF",
+        "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+        "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+      }
+    },
+    {
+      "id": "02",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "由功率、電壓及 PF 獨立反算電流",
+        "連續負載餘裕基準",
+        "電流 ≤ NFB AT ≤ 有效載流",
+        "候選符合設定壓降上限",
+        "報告 NFB 與結構化結果一致"
+      ],
+      "result": {
+        "tool": "electrical",
+        "power_kw": 5.0,
+        "supply": "單相 220V",
+        "phases": 1,
+        "voltage": 220.0,
+        "pf": 1.0,
+        "current_a": 22.727272727272727,
+        "design_a": 28.409090909090907,
+        "kind": "連續運轉",
+        "selected": {
+          "runs": 1,
+          "size_mm2": 8.0,
+          "ampacity_a": 33,
+          "nfb_a": 30,
+          "drop_v": 2.2671914999999996,
+          "drop_pct": 1.0305415909090907
+        },
+        "length_m": 20.0,
+        "dt": 1,
+        "dp": 1,
+        "terminal_c": 60,
+        "drop_basis": "運轉電流及輸入PF",
+        "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+        "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+      }
+    },
+    {
+      "id": "03",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "CFM／CMH 基準獨立換算",
+        "rectangle 實際截面與速度反算",
+        "rectangle 未超設定風速",
+        "round 實際截面與速度反算",
+        "round 未超設定風速",
+        "未知路徑不虛構壓損"
+      ],
+      "result": {
+        "tool": "duct",
+        "flow_cmh": 3000.0,
+        "pressure_pa": 200.0,
+        "velocity_limit": 8.0,
+        "ratio": 2.0,
+        "rectangle": {
+          "flow_cmh": 3000.0,
+          "shape": "方管",
+          "area_m2": 0.105,
+          "diameter_m": 0.3230769230769231,
+          "velocity_mps": 7.936507936507937,
+          "w_mm": 350,
+          "h_mm": 300,
+          "round_in": 16,
+          "ratio_actual": 1.1666666666666667,
+          "velocity_limit_mps": 8.0
+        },
+        "round": {
+          "flow_cmh": 3000.0,
+          "shape": "圓管",
+          "area_m2": 0.1297171146489594,
+          "diameter_m": 0.4064,
+          "velocity_mps": 6.4242358118163585,
+          "w_mm": 350,
+          "h_mm": 300,
+          "round_in": 16,
+          "ratio_actual": 1.1666666666666667,
+          "velocity_limit_mps": 8.0
+        },
+        "path_checked": false,
+        "length_m": null,
+        "formula": "A=風量/3600/風速；圓管D=√(4A/π)。路徑阻力=f×L/Dh×ρv²/2＋ΣK×ρv²/2＋設備壓降。",
+        "note": "靜壓是可用於管路的壓力預算，不能單獨決定尺寸。未勾選已知路徑時不判定壓力是否足夠；圓管依2英吋級距選取。"
+      }
+    },
+    {
+      "id": "04",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "CFM／CMH 基準獨立換算",
+        "rectangle 實際截面與速度反算",
+        "rectangle 未超設定風速",
+        "rectangle 總壓損量綱及組成",
+        "rectangle 可用靜壓餘裕",
+        "rectangle 壓力預算判定",
+        "round 實際截面與速度反算",
+        "round 未超設定風速",
+        "round 總壓損量綱及組成",
+        "round 可用靜壓餘裕",
+        "round 壓力預算判定"
+      ],
+      "result": {
+        "tool": "duct",
+        "flow_cmh": 3398.02159104,
+        "pressure_pa": 300.0,
+        "velocity_limit": 8.0,
+        "ratio": 2.0,
+        "rectangle": {
+          "flow_cmh": 3398.02159104,
+          "shape": "方管",
+          "area_m2": 0.12,
+          "diameter_m": 0.34285714285714286,
+          "velocity_mps": 7.865790720000001,
+          "w_mm": 400,
+          "h_mm": 300,
+          "round_in": 16,
+          "ratio_actual": 1.3333333333333333,
+          "velocity_limit_mps": 8.0,
+          "loss_pa": 286.9118853120252,
+          "friction_pa": 38.42229255001368,
+          "k": 4.0,
+          "equipment_pa": 100.0,
+          "pressure_margin_pa": 13.08811468797478,
+          "budget_sufficient": true
+        },
+        "round": {
+          "flow_cmh": 3398.02159104,
+          "shape": "圓管",
+          "area_m2": 0.1297171146489594,
+          "diameter_m": 0.4064,
+          "velocity_mps": 7.276563998161456,
+          "w_mm": 400,
+          "h_mm": 300,
+          "round_in": 16,
+          "ratio_actual": 1.3333333333333333,
+          "velocity_limit_mps": 8.0,
+          "loss_pa": 254.09500503660888,
+          "friction_pa": 27.018884350194234,
+          "k": 4.0,
+          "equipment_pa": 100.0,
+          "pressure_margin_pa": 45.90499496339112,
+          "budget_sufficient": true
+        },
+        "path_checked": true,
+        "length_m": 20.0,
+        "formula": "A=風量/3600/風速；圓管D=√(4A/π)。路徑阻力=f×L/Dh×ρv²/2＋ΣK×ρv²/2＋設備壓降。",
+        "note": "靜壓是可用於管路的壓力預算，不能單獨決定尺寸。未勾選已知路徑時不判定壓力是否足夠；圓管依2英吋級距選取。"
+      }
+    },
+    {
+      "id": "05",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "標準流量基準",
+        "表壓加大氣壓後換算實際流量",
+        "流量與流速反算最小內徑",
+        "採用參考內徑符合速度上限"
+      ],
+      "result": {
+        "tool": "gas",
+        "gas": "CDA",
+        "standard_lpm": 800.0,
+        "actual_lpm": 115.58122125975831,
+        "absolute_kpa": 701.325,
+        "gauge_kpa": 600.0,
+        "minimum_id_mm": 12.787258481990266,
+        "pipe": {
+          "name": "1/2\" (15A)",
+          "id": 16.1
+        },
+        "velocity_mps": 9.46224949762154,
+        "velocity_limit": 15.0,
+        "temperature_c": 25.0,
+        "reference_t": 25.0,
+        "reference_p": 101.325,
+        "formula": "實際流量=標準流量×P標準/P絕對×T管內(K)/T標準(K)；D內=√(4Q實際/πv)。",
+        "note": "壓力採管內表壓，另加所在地大氣壓。理想氣體Z=1，僅流速定寸；參考內徑需依實供管材核對，長管路另算壓降。"
+      }
+    },
+    {
+      "id": "06",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "標準流量基準",
+        "表壓加大氣壓後換算實際流量",
+        "流量與流速反算最小內徑",
+        "採用參考內徑符合速度上限"
+      ],
+      "result": {
+        "tool": "gas",
+        "gas": "N2",
+        "standard_lpm": 1666.6666666666667,
+        "actual_lpm": 240.79421095782982,
+        "absolute_kpa": 701.325,
+        "gauge_kpa": 600.0,
+        "minimum_id_mm": 20.635349643499097,
+        "pipe": {
+          "name": "3/4\" (20A)",
+          "id": 21.4
+        },
+        "velocity_mps": 11.157768929411958,
+        "velocity_limit": 12.0,
+        "temperature_c": 25.0,
+        "reference_t": 25.0,
+        "reference_p": 101.325,
+        "formula": "實際流量=標準流量×P標準/P絕對×T管內(K)/T標準(K)；D內=√(4Q實際/πv)。",
+        "note": "壓力採管內表壓，另加所在地大氣壓。理想氣體Z=1，僅流速定寸；參考內徑需依實供管材核對，長管路另算壓降。"
+      }
+    },
+    {
+      "id": "07",
+      "status": "計算與反算通過",
+      "checks": [
+        "150 Torr 絕壓下的實際體積流量",
+        "PV 流速截面反算",
+        "候選內徑足夠"
+      ],
+      "result": {
+        "type": "PV",
+        "standard_lpm": 2000.0,
+        "actual_lpm": 10133.333333337334,
+        "pressure_abs_pa": 19998.35526315,
+        "minimum_id_mm": 109.29979465259791,
+        "selected_id_mm": 160.3,
+        "size": "6\" (150A)",
+        "velocity_mps": 8.36843317406661,
+        "velocity_limit_mps": 18.0
+      }
+    },
+    {
+      "id": "08",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "體積除同空間淨高，沒有把 m³ 當 m²",
+        "流明法平均照度反算"
+      ],
+      "result": {
+        "tool": "lighting",
+        "area_m2": 30.0,
+        "quantity": 10,
+        "watts": 40.0,
+        "lumens_per_lamp": 4000.0,
+        "lumen_mode": "LED功率初估",
+        "utilization": 0.6,
+        "maintenance": 0.8,
+        "illuminance_lux": 640.0,
+        "total_kw": 0.4,
+        "target_lux": null,
+        "formula": "平均照度Lux=盞數×每盞流明lm×利用率U×維護係數M/面積m²；所需盞數向上取整。",
+        "note": "Lux是空間照度，燈具光通量使用lm。體積須除以淨高換算面積；LED功率初估使用假設光效，不能代替型錄流明或照度均勻度模擬。"
+      }
+    },
+    {
+      "id": "09",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "體積除同空間淨高，沒有把 m³ 當 m²",
+        "流明法平均照度反算",
+        "取整盞數達目標平均照度",
+        "少一盞無法達設定目標"
+      ],
+      "result": {
+        "tool": "lighting",
+        "area_m2": 30.0,
+        "quantity": 8,
+        "watts": 40.0,
+        "lumens_per_lamp": 4000.0,
+        "lumen_mode": "燈具型錄流明",
+        "utilization": 0.6,
+        "maintenance": 0.8,
+        "illuminance_lux": 512.0,
+        "total_kw": 0.32,
+        "target_lux": 500.0,
+        "formula": "平均照度Lux=盞數×每盞流明lm×利用率U×維護係數M/面積m²；所需盞數向上取整。",
+        "note": "Lux是空間照度，燈具光通量使用lm。體積須除以淨高換算面積；LED功率初估使用假設光效，不能代替型錄流明或照度均勻度模擬。"
+      }
+    },
+    {
+      "id": "10",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "清水熱量與水量反算",
+        "100 LPM × 5 K = 34.89 kW",
+        "管徑候選符合水速上限"
+      ],
+      "result": {
+        "tool": "water",
+        "thermal": {
+          "kw": 34.89000000000001,
+          "lpm": 100.0,
+          "delta_t": 5.0,
+          "us_rt": 9.920801798319399,
+          "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]"
+        },
+        "pipe": {
+          "lpm": 100.0,
+          "id_mm": 40.9,
+          "runs": 1,
+          "velocity_mps": 1.268563619234664,
+          "area_m2": 0.0013138219017128853,
+          "size": "40A (1-1/2\")"
+        },
+        "velocity_limit": 1.5,
+        "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]",
+        "note": "水物性採ρ=1000 kg/m³、cp=4.1868 kJ/(kg·K)；管徑按流速上限初估。未計水泵揚程與設備壓降。"
+      }
+    },
+    {
+      "id": "11",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "清水熱量與水量反算",
+        "100 kW、5 K 反算水量",
+        "管徑候選符合水速上限"
+      ],
+      "result": {
+        "tool": "water",
+        "thermal": {
+          "kw": 100.0,
+          "lpm": 286.6150759529951,
+          "delta_t": 5.0,
+          "us_rt": 28.434513609399247,
+          "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]"
+        },
+        "pipe": {
+          "lpm": 286.6150759529951,
+          "id_mm": 67.9,
+          "runs": 1,
+          "velocity_mps": 1.3192234125982485,
+          "area_m2": 0.00362100754650923,
+          "size": "65A (2-1/2\")"
+        },
+        "velocity_limit": 1.5,
+        "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]",
+        "note": "水物性採ρ=1000 kg/m³、cp=4.1868 kJ/(kg·K)；管徑按流速上限初估。未計水泵揚程與設備壓降。"
+      }
+    },
+    {
+      "id": "12",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "含濕比與 Buck 獨立關聯式對照",
+        "焓值乾空氣基準對照",
+        "露點 ≤ 濕球 ≤ 乾球",
+        "比容及當地壓力基準反算"
+      ],
+      "result": {
+        "tool": "air",
+        "state": {
+          "t": 35.0,
+          "w": 0.025159138188848906,
+          "x": 0.025159138188848906,
+          "rh": 70.0,
+          "h": 99.77086450640519,
+          "v_da": 0.9082663058996859,
+          "rho_moist": 1.1286988535519595,
+          "dewpoint_c": 28.700939273048704,
+          "wetbulb_c": 30.05899227029343,
+          "pressure_kpa": 101.325
+        },
+        "formula": "w=0.621945×Pw/(P−Pw)；h=1.006T＋w(2501＋1.86T)，以kg乾空氣為基準。",
+        "note": "濕度0%時露點無有限值；顯示為無有限露點，不以假數值代替。"
+      }
+    },
+    {
+      "id": "13",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "含濕比與 Buck 獨立關聯式對照",
+        "焓值乾空氣基準對照",
+        "露點 ≤ 濕球 ≤ 乾球",
+        "比容及當地壓力基準反算"
+      ],
+      "result": {
+        "tool": "air",
+        "state": {
+          "t": 25.0,
+          "w": 0.012568185232258553,
+          "x": 0.012568185232258553,
+          "rh": 50.000000000000014,
+          "h": 57.167451879178664,
+          "v_da": 1.0913874224661713,
+          "rho_moist": 0.9277806985755731,
+          "dewpoint_c": 13.863973269509785,
+          "wetbulb_c": 17.331535340100658,
+          "pressure_kpa": 80.0
+        },
+        "formula": "w=0.621945×Pw/(P−Pw)；h=1.006T＋w(2501＋1.86T)，以kg乾空氣為基準。",
+        "note": "濕度0%時露點無有限值；顯示為無有限露點，不以假數值代替。"
+      }
+    },
+    {
+      "id": "14",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "1000 CFM 換算 CMH",
+        "CMH 換算 L/s"
+      ],
+      "result": {
+        "tool": "units",
+        "category": "風量",
+        "values": {
+          "CMH": 1699.01079552,
+          "CFM": 1000.0,
+          "L/s": 471.9474432,
+          "m³/s": 0.47194744320000004
+        },
+        "formula": "依所選物理量進行等值換算；溫度本身包含零點位移。",
+        "note": "依所選單位等值換算。"
+      }
+    },
+    {
+      "id": "15",
+      "status": "計算與反算通過",
+      "checks": [
+        "產生可閱讀的文字報告",
+        "計算結果包含公式",
+        "5°C 溫差 = 5 K",
+        "5°C 溫差 = 9°F差，沒有加32"
+      ],
+      "result": {
+        "tool": "units",
+        "category": "溫度差（升溫／降溫）",
+        "values": {
+          "K": 5.0,
+          "°C差": 5.0,
+          "°F差": 9.0
+        },
+        "formula": "ΔT(K)=ΔT(°C)=ΔT(°F)×5/9。",
+        "note": "換算升溫／降溫的幅度。例如冰水12→7°C，溫差5°C＝5K＝9°F差；不加32或273.15。若要換算某個溫度，請選『溫度』。"
+      }
+    },
+    {
+      "id": "16",
+      "status": "計算與反算通過",
+      "checks": [
+        "實際 XLSX 範本可解析七個系統",
+        "設備結果可匯出文字報告",
+        "同盤名稱、不同相數及電壓仍分組",
+        "三相全開功率40 kW",
+        "使用率後三相需求25 kW",
+        "插座僅統計點位，不重複乘 kW",
+        "單相需求3 kW保持獨立"
+      ],
+      "result": {
+        "version": "5.5.4",
+        "schema_id": "FacilityStudioEquipment/1",
+        "source_name": "Equipment_Template.xlsx",
+        "active_records": 3,
+        "skipped_records": 0,
+        "groups": [
+          {
+            "system": "電力",
+            "group": "UP-01",
+            "equipment_rows": 1,
+            "equipment_count": 1,
+            "warnings": [
+              "單相分組未指派A/B/C相；不可把這個電流當三相總盤電流。"
+            ],
+            "phases": 1,
+            "voltage": 220.0,
+            "connected_kw": 3.0,
+            "connected_kva": 3.0,
+            "demand_kw": 3.0,
+            "demand_kvar": 0.0,
+            "demand_kva": 3.0,
+            "equivalent_pf": 1.0,
+            "current_a": 13.636363636363637,
+            "design_current_a": 13.636363636363637,
+            "minimum_active_branch_design_a": 13.636363636363637,
+            "candidate": {
+              "tool": "electrical",
+              "power_kw": 3.0,
+              "supply": "單相 220V",
+              "phases": 1,
+              "voltage": 220.0,
+              "pf": 1.0,
+              "current_a": 13.636363636363637,
+              "design_a": 13.636363636363637,
+              "kind": "一般設備",
+              "selected": {
+                "runs": 1,
+                "size_mm2": 3.5,
+                "ampacity_a": 19,
+                "nfb_a": 15,
+                "drop_v": 4.664396077941377,
+                "drop_pct": 2.120180035427899
+              },
+              "length_m": 30.0,
+              "dt": 1,
+              "dp": 1,
+              "terminal_c": 60,
+              "drop_basis": "設計電流與R/X阻抗上界",
+              "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+              "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+            },
+            "pending": null,
+            "sockets": 1,
+            "feeder_length_m": 30.0,
+            "formula": "P=Σ台數×單台kW×同時率；Q=ΣP×tan(arccosPF)，S=√(P²+Q²)。連續負載125%，馬達群加最大單台25%。進線不低於同時率>0的最大單台支路設計電流。",
+            "basis": "銅XLPE、端子60°C、環溫35°C、同管3根、壓降≤3%；參考表初估。PF採落後、正弦及平衡負載。進線壓降採設計電流與R/X上界；長度暫採群組已填最大配線距離，實際進線路徑另核。"
+          },
+          {
+            "system": "電力",
+            "group": "UP-01",
+            "equipment_rows": 2,
+            "equipment_count": 5,
+            "warnings": [
+              "同時率為輸入的初估係數；全開需求另列。常時排氣、吹掃及安全需求不得只用平均運轉率折減。"
+            ],
+            "phases": 3,
+            "voltage": 380.0,
+            "connected_kw": 40.0,
+            "connected_kva": 47.05882352941177,
+            "demand_kw": 25.0,
+            "demand_kvar": 15.493608460077557,
+            "demand_kva": 29.41176470588235,
+            "equivalent_pf": 0.8500000000000001,
+            "current_a": 44.686553342850296,
+            "design_current_a": 44.686553342850296,
+            "minimum_active_branch_design_a": 17.87462133714012,
+            "candidate": {
+              "tool": "electrical",
+              "power_kw": 25.0,
+              "supply": "三相 380V",
+              "phases": 3,
+              "voltage": 380.0,
+              "pf": 0.8500000000000001,
+              "current_a": 44.68655334285029,
+              "design_a": 44.686553342850296,
+              "kind": "一般設備",
+              "selected": {
+                "runs": 1,
+                "size_mm2": 14.0,
+                "ampacity_a": 50,
+                "nfb_a": 45,
+                "drop_v": 3.314246524240249,
+                "drop_pct": 0.8721701379579602
+              },
+              "length_m": 30.0,
+              "dt": 1,
+              "dp": 1,
+              "terminal_c": 60,
+              "drop_basis": "設計電流與R/X阻抗上界",
+              "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+              "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+            },
+            "pending": null,
+            "sockets": 7,
+            "feeder_length_m": 30.0,
+            "formula": "P=Σ台數×單台kW×同時率；Q=ΣP×tan(arccosPF)，S=√(P²+Q²)。連續負載125%，馬達群加最大單台25%。進線不低於同時率>0的最大單台支路設計電流。",
+            "basis": "銅XLPE、端子60°C、環溫35°C、同管3根、壓降≤3%；參考表初估。PF採落後、正弦及平衡負載。進線壓降採設計電流與R/X上界；長度暫採群組已填最大配線距離，實際進線路徑另核。"
+          }
+        ],
+        "rows": [
+          {
+            "system": "電力",
+            "id": "E-03",
+            "name": "單相設備",
+            "group": "UP-01",
+            "phases": 1,
+            "voltage": 220.0,
+            "quantity": 1,
+            "connected_kw": 3.0,
+            "demand_kw": 3.0,
+            "per_device_branch": {
+              "tool": "electrical",
+              "power_kw": 3.0,
+              "supply": "單相 220V",
+              "phases": 1,
+              "voltage": 220.0,
+              "pf": 1.0,
+              "current_a": 13.636363636363637,
+              "design_a": 13.636363636363637,
+              "kind": "一般設備",
+              "selected": {
+                "runs": 1,
+                "size_mm2": 3.5,
+                "ampacity_a": 19,
+                "nfb_a": 15,
+                "drop_v": 4.6639368,
+                "drop_pct": 2.119971272727273
+              },
+              "length_m": 30.0,
+              "dt": 1,
+              "dp": 1,
+              "terminal_c": 60,
+              "drop_basis": "運轉電流及輸入PF",
+              "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+              "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+            },
+            "pending": null,
+            "adopted_defaults": {},
+            "inputs": {
+              "供應群組": "UP-01",
+              "設備台數": 1,
+              "同時使用率(%)": 100.0,
+              "每台輸入功率(kW)": 3.0,
+              "供電電壓(V)": 220.0,
+              "供電相數(1/3)": "1",
+              "功率因數(PF)": 1.0,
+              "負載類型": "一般設備",
+              "每台所需插座數": 1,
+              "單程配線長度(m)": 30.0
+            },
+            "notes": ""
+          },
+          {
+            "system": "電力",
+            "id": "E-01",
+            "name": "測試設備A",
+            "group": "UP-01",
+            "phases": 3,
+            "voltage": 380.0,
+            "quantity": 3,
+            "connected_kw": 30.0,
+            "demand_kw": 15.0,
+            "per_device_branch": {
+              "tool": "electrical",
+              "power_kw": 10.0,
+              "supply": "三相 380V",
+              "phases": 3,
+              "voltage": 380.0,
+              "pf": 0.85,
+              "current_a": 17.87462133714012,
+              "design_a": 17.87462133714012,
+              "kind": "一般設備",
+              "selected": {
+                "runs": 1,
+                "size_mm2": 5.5,
+                "ampacity_a": 25,
+                "nfb_a": 20,
+                "drop_v": 2.90296258979388,
+                "drop_pct": 0.7639375236299684
+              },
+              "length_m": 30.0,
+              "dt": 1,
+              "dp": 1,
+              "terminal_c": 60,
+              "drop_basis": "運轉電流及輸入PF",
+              "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+              "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+            },
+            "pending": null,
+            "adopted_defaults": {},
+            "inputs": {
+              "供應群組": "UP-01",
+              "設備台數": 3,
+              "同時使用率(%)": 50.0,
+              "每台輸入功率(kW)": 10.0,
+              "供電電壓(V)": 380.0,
+              "供電相數(1/3)": "3",
+              "功率因數(PF)": 0.85,
+              "負載類型": "一般設備",
+              "每台所需插座數": 1,
+              "單程配線長度(m)": 30.0
+            },
+            "notes": ""
+          },
+          {
+            "system": "電力",
+            "id": "E-02",
+            "name": "測試設備B",
+            "group": "UP-01",
+            "phases": 3,
+            "voltage": 380.0,
+            "quantity": 2,
+            "connected_kw": 10.0,
+            "demand_kw": 10.0,
+            "per_device_branch": {
+              "tool": "electrical",
+              "power_kw": 5.0,
+              "supply": "三相 380V",
+              "phases": 3,
+              "voltage": 380.0,
+              "pf": 0.85,
+              "current_a": 8.93731066857006,
+              "design_a": 8.93731066857006,
+              "kind": "一般設備",
+              "selected": {
+                "runs": 1,
+                "size_mm2": 3.5,
+                "ampacity_a": 19,
+                "nfb_a": 15,
+                "drop_v": 2.2697158212127295,
+                "drop_pct": 0.5972936371612446
+              },
+              "length_m": 30.0,
+              "dt": 1,
+              "dp": 1,
+              "terminal_c": 60,
+              "drop_basis": "運轉電流及輸入PF",
+              "formula": "三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
+              "note": "kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+            },
+            "pending": null,
+            "adopted_defaults": {},
+            "inputs": {
+              "供應群組": "UP-01",
+              "設備台數": 2,
+              "同時使用率(%)": 100.0,
+              "每台輸入功率(kW)": 5.0,
+              "供電電壓(V)": 380.0,
+              "供電相數(1/3)": "3",
+              "功率因數(PF)": 0.85,
+              "負載類型": "一般設備",
+              "每台所需插座數": 2,
+              "單程配線長度(m)": 30.0
+            },
+            "notes": ""
+          }
+        ],
+        "totals": {
+          "connected_kw": 43.0,
+          "demand_kw": 28.0,
+          "demand_kva_sum": 32.41176470588235,
+          "sockets": 8
+        },
+        "warnings": [
+          "UP-01含多種供電方式，已分開列候選；總盤進線需單線圖、變壓器及相別分配，未合併電流。"
+        ],
+        "electrical_basis": "銅XLPE、端子60°C、環溫35°C、同管3根、壓降≤3%；參考表初估。",
+        "pending": "未自動產出正式盤體尺寸、遮斷容量、相別平衡、接地或管路壓損結論；需補單線圖／短路資料／配線及管路路徑／原廠性能。"
+      }
+    },
+    {
+      "id": "17",
+      "status": "計算與反算通過",
+      "checks": [
+        "實際 XLSX 範本可解析七個系統",
+        "設備結果可匯出文字報告",
+        "六個公用系統分開彙總",
+        "PCW 台數及同時率",
+        "PCW 流量、溫差與熱量",
+        "DI 10 LPM製程＋4 LPM持續循環",
+        "CDA 同時標準流量",
+        "N2 同時標準流量",
+        "PV 同時實際流量",
+        "排氣需求與風量基準"
+      ],
+      "result": {
+        "version": "5.5.4",
+        "schema_id": "FacilityStudioEquipment/1",
+        "source_name": "Equipment_Template.xlsx",
+        "active_records": 6,
+        "skipped_records": 0,
+        "groups": [
+          {
+            "system": "PCW",
+            "group": "PCW-01",
+            "equipment_rows": 1,
+            "equipment_count": 2,
+            "warnings": [
+              "同時率為輸入的初估係數；全開需求另列。常時排氣、吹掃及安全需求不得只用平均運轉率折減。"
+            ],
+            "connected_lpm": 60.0,
+            "process_demand_lpm": 30.0,
+            "demand_lpm": 30.0,
+            "circulation_lpm": 0.0,
+            "velocity_limit": 1.5,
+            "minimum_id_mm": 20.60129077457011,
+            "pipe": {
+              "lpm": 30.0,
+              "id_mm": 20.9,
+              "runs": 1,
+              "velocity_mps": 1.4574294827672936,
+              "area_m2": 0.00034306977175363934,
+              "size": "20A (3/4\")"
+            },
+            "thermal_kw": 10.466999999999999,
+            "connected_thermal_kw": 20.933999999999997,
+            "formula": "主管量=Σ台數×每台LPM×同時率＋持續循環量；Q熱=ΣLPM×ρcp×ΔT/60000。",
+            "basis": "PCW採清水ρ=1000、cp=4.1868；未核泵揚程／換熱器。"
+          },
+          {
+            "system": "CDA",
+            "group": "CDA-01",
+            "equipment_rows": 1,
+            "equipment_count": 2,
+            "warnings": [
+              "同時率為輸入的初估係數；全開需求另列。常時排氣、吹掃及安全需求不得只用平均運轉率折減。"
+            ],
+            "connected_standard_lpm": 200.0,
+            "demand_standard_lpm": 100.0,
+            "reference_t": 25.0,
+            "reference_p": 101.325,
+            "absolute_kpa": 701.325,
+            "temperature_c": 25.0,
+            "velocity_limit": 15.0,
+            "actual_lpm": 14.447652657469789,
+            "minimum_id_mm": 4.520978592700257,
+            "pipe": {
+              "name": "1/2\" (15A)",
+              "id": 16.1
+            },
+            "velocity_mps": 1.1827811872026925,
+            "size": "1/2\" (15A)",
+            "within_table": true,
+            "formula": "標準量按參考溫壓統一後加總；實際量=SLPM×P標準/P絕對×T管內(K)/T標準(K)；D內=√(4Q實際/πv)。",
+            "basis": "流量統一至25°C／101.325kPa(abs)。同一群組採最低已填絕壓、最高溫度、最低流速上限定寸；僅流速初估，Z=1。"
+          },
+          {
+            "system": "N2",
+            "group": "N2-01",
+            "equipment_rows": 1,
+            "equipment_count": 2,
+            "warnings": [
+              "同時率為輸入的初估係數；全開需求另列。常時排氣、吹掃及安全需求不得只用平均運轉率折減。"
+            ],
+            "connected_standard_lpm": 100.0,
+            "demand_standard_lpm": 50.0,
+            "reference_t": 25.0,
+            "reference_p": 101.325,
+            "absolute_kpa": 601.325,
+            "temperature_c": 25.0,
+            "velocity_limit": 12.0,
+            "actual_lpm": 8.425144472622957,
+            "minimum_id_mm": 3.8599127639556587,
+            "pipe": {
+              "name": "1/2\" (15A)",
+              "id": 16.1
+            },
+            "velocity_mps": 0.6897385075582492,
+            "size": "1/2\" (15A)",
+            "within_table": true,
+            "formula": "標準量按參考溫壓統一後加總；實際量=SLPM×P標準/P絕對×T管內(K)/T標準(K)；D內=√(4Q實際/πv)。",
+            "basis": "流量統一至25°C／101.325kPa(abs)。同一群組採最低已填絕壓、最高溫度、最低流速上限定寸；僅流速初估，Z=1。"
+          },
+          {
+            "system": "EXHAUST",
+            "group": "EX-01",
+            "equipment_rows": 1,
+            "equipment_count": 2,
+            "warnings": [
+              "同時率為輸入的初估係數；全開需求另列。常時排氣、吹掃及安全需求不得只用平均運轉率折減。"
+            ],
+            "exhaust_type": "GEX",
+            "connected_cmh": 1000.0,
+            "demand_cmh": 500.0,
+            "velocity_limit": 8.0,
+            "rectangle": {
+              "flow_cmh": 500.0,
+              "shape": "方管",
+              "area_m2": 0.02,
+              "diameter_m": 0.13333333333333333,
+              "velocity_mps": 6.944444444444445,
+              "w_mm": 200,
+              "h_mm": 100,
+              "round_in": 6,
+              "ratio_actual": 2.0,
+              "velocity_limit_mps": 8.0
+            },
+            "round": {
+              "flow_cmh": 500.0,
+              "shape": "圓管",
+              "area_m2": 0.018241469247509915,
+              "diameter_m": 0.15239999999999998,
+              "velocity_mps": 7.61390911030087,
+              "w_mm": 200,
+              "h_mm": 100,
+              "round_in": 6,
+              "ratio_actual": 2.0,
+              "velocity_limit_mps": 8.0
+            },
+            "known_terminal_pressure_pa": 200.0,
+            "pressure_complete": true,
+            "formula": "風量=Σ台數×單台CMH×同時率；A=CMH/3600/v。不同排氣類型分開彙總。",
+            "basis": "靜壓只列已知設備端最大要求，沒有相加為風機ESP；全路徑阻力、洗滌塔及末端另核。"
+          },
+          {
+            "system": "DI",
+            "group": "DI-01",
+            "equipment_rows": 1,
+            "equipment_count": 2,
+            "warnings": [
+              "同時率為輸入的初估係數；全開需求另列。常時排氣、吹掃及安全需求不得只用平均運轉率折減。"
+            ],
+            "connected_lpm": 24.0,
+            "process_demand_lpm": 10.0,
+            "demand_lpm": 14.0,
+            "circulation_lpm": 4.0,
+            "velocity_limit": 1.2,
+            "minimum_id_mm": 15.73449573137716,
+            "pipe": null,
+            "thermal_kw": null,
+            "connected_thermal_kw": null,
+            "formula": "主管量=Σ台數×每台LPM×同時率＋Σ台數×額外循環LPM；D內=√(4Q/πv)。",
+            "basis": "DI按實際內徑定寸；未套用碳鋼名目管徑。循環量不乘同時率，水質與供回水路徑另核。"
+          },
+          {
+            "system": "PV",
+            "group": "PV-01",
+            "equipment_rows": 1,
+            "equipment_count": 2,
+            "warnings": [
+              "列出的抽速是製程端所需有效抽速；未核真空管導通、氣體種類、洩漏、放氣及泵曲線，不能當泵銘牌選型。",
+              "同時率為輸入的初估係數；全開需求另列。常時排氣、吹掃及安全需求不得只用平均運轉率折減。"
+            ],
+            "connected_standard_lpm": 200.0,
+            "demand_standard_lpm": 100.0,
+            "reference_t": 25.0,
+            "reference_p": 101.325,
+            "absolute_kpa": 19.998355263157894,
+            "temperature_c": 25.0,
+            "velocity_limit": 18.0,
+            "actual_lpm": 506.6666666666667,
+            "minimum_id_mm": 24.44017707699287,
+            "pipe": {
+              "name": "1\" (25A)",
+              "id": 27.6
+            },
+            "velocity_mps": 14.11442002728657,
+            "size": "1\" (25A)",
+            "within_table": true,
+            "formula": "標準量按參考溫壓統一後加總；實際量=SLPM×P標準/P絕對×T管內(K)/T標準(K)；D內=√(4Q實際/πv)。",
+            "basis": "流量統一至25°C／101.325kPa(abs)。同一群組採最低已填絕壓、最高溫度、最低流速上限定寸；僅流速初估，Z=1。",
+            "pressure_torr": 150.0,
+            "effective_pumping_m3h": 30.4,
+            "throughput_pa_m3s": 168.875
+          }
+        ],
+        "rows": [
+          {
+            "system": "PCW",
+            "id": "EQ-001",
+            "name": "水冷機台範例",
+            "group": "PCW-01",
+            "connected_lpm": 60.0,
+            "demand_lpm": 30.0,
+            "circulation_lpm": 0,
+            "thermal_kw": 10.466999999999999,
+            "adopted_defaults": {},
+            "inputs": {
+              "供應群組": "PCW-01",
+              "設備台數": 2,
+              "同時使用率(%)": 50.0,
+              "每台需求流量": 30.0,
+              "流量單位": "LPM",
+              "供回水溫差(K)": 5.0,
+              "定寸流速上限(m/s)": 1.5
+            },
+            "notes": ""
+          },
+          {
+            "system": "CDA",
+            "id": "EQ-001",
+            "name": "氣動設備範例",
+            "group": "CDA-01",
+            "connected_standard_lpm": 200.0,
+            "demand_standard_lpm": 100.0,
+            "absolute_kpa": 701.325,
+            "per_device_pipe": {
+              "actual_lpm": 14.447652657469789,
+              "minimum_id_mm": 4.520978592700257,
+              "pipe": {
+                "name": "1/2\" (15A)",
+                "id": 16.1
+              },
+              "velocity_mps": 1.1827811872026925,
+              "size": "1/2\" (15A)",
+              "within_table": true
+            },
+            "adopted_defaults": {},
+            "inputs": {
+              "供應群組": "CDA-01",
+              "設備台數": 2,
+              "同時使用率(%)": 50.0,
+              "每台需求流量": 100.0,
+              "流量單位": "SLPM",
+              "管內表壓": 6.0,
+              "壓力單位": "bar(g)",
+              "管內溫度(°C)": 25.0,
+              "當地大氣壓(kPa絕壓)": 101.325,
+              "定寸流速上限(m/s)": 15.0,
+              "標準流量溫度(°C)": 25.0,
+              "標準流量絕壓(kPa)": 101.325
+            },
+            "notes": ""
+          },
+          {
+            "system": "N2",
+            "id": "EQ-001",
+            "name": "氮氣設備範例",
+            "group": "N2-01",
+            "connected_standard_lpm": 100.0,
+            "demand_standard_lpm": 50.0,
+            "absolute_kpa": 601.325,
+            "per_device_pipe": {
+              "actual_lpm": 8.425144472622957,
+              "minimum_id_mm": 3.8599127639556587,
+              "pipe": {
+                "name": "1/2\" (15A)",
+                "id": 16.1
+              },
+              "velocity_mps": 0.6897385075582492,
+              "size": "1/2\" (15A)",
+              "within_table": true
+            },
+            "adopted_defaults": {},
+            "inputs": {
+              "供應群組": "N2-01",
+              "設備台數": 2,
+              "同時使用率(%)": 50.0,
+              "每台需求流量": 50.0,
+              "流量單位": "SLPM",
+              "管內表壓": 5.0,
+              "壓力單位": "bar(g)",
+              "管內溫度(°C)": 25.0,
+              "當地大氣壓(kPa絕壓)": 101.325,
+              "定寸流速上限(m/s)": 12.0,
+              "標準流量溫度(°C)": 25.0,
+              "標準流量絕壓(kPa)": 101.325
+            },
+            "notes": ""
+          },
+          {
+            "system": "EXHAUST",
+            "id": "EQ-001",
+            "name": "排氣設備範例",
+            "group": "EX-01",
+            "exhaust_type": "GEX",
+            "connected_cmh": 1000.0,
+            "demand_cmh": 500.0,
+            "adopted_defaults": {},
+            "inputs": {
+              "供應群組": "EX-01",
+              "設備台數": 2,
+              "同時使用率(%)": 50.0,
+              "排氣類型": "GEX",
+              "每台需求流量": 500.0,
+              "流量單位": "CMH",
+              "設備要求靜壓(Pa)": 200.0,
+              "定寸流速上限(m/s)": 8.0
+            },
+            "notes": ""
+          },
+          {
+            "system": "DI",
+            "id": "EQ-001",
+            "name": "洗滌設備範例",
+            "group": "DI-01",
+            "connected_lpm": 20.0,
+            "demand_lpm": 10.0,
+            "circulation_lpm": 4.0,
+            "thermal_kw": null,
+            "adopted_defaults": {},
+            "inputs": {
+              "供應群組": "DI-01",
+              "設備台數": 2,
+              "同時使用率(%)": 50.0,
+              "每台需求流量": 10.0,
+              "流量單位": "LPM",
+              "每台額外循環量(LPM)": 2.0,
+              "定寸流速上限(m/s)": 1.2
+            },
+            "notes": ""
+          },
+          {
+            "system": "PV",
+            "id": "EQ-001",
+            "name": "真空設備範例",
+            "group": "PV-01",
+            "connected_standard_lpm": 200.0,
+            "demand_standard_lpm": 100.0,
+            "absolute_kpa": 19.998355263157894,
+            "per_device_pipe": {
+              "actual_lpm": 506.6666666666667,
+              "minimum_id_mm": 24.44017707699287,
+              "pipe": {
+                "name": "1\" (25A)",
+                "id": 27.6
+              },
+              "velocity_mps": 14.11442002728657,
+              "size": "1\" (25A)",
+              "within_table": true
+            },
+            "adopted_defaults": {},
+            "inputs": {
+              "供應群組": "PV-01",
+              "設備台數": 2,
+              "同時使用率(%)": 50.0,
+              "每台需求流量": 100.0,
+              "流量單位": "SLPM",
+              "管內絕對壓力": 150.0,
+              "壓力單位": "Torr(abs)",
+              "管內溫度(°C)": 25.0,
+              "定寸流速上限(m/s)": 18.0,
+              "標準流量溫度(°C)": 25.0,
+              "標準流量絕壓(kPa)": 101.325
+            },
+            "notes": ""
+          }
+        ],
+        "totals": {
+          "connected_kw": 0,
+          "demand_kw": 0,
+          "demand_kva_sum": 0,
+          "sockets": 0
+        },
+        "warnings": [],
+        "electrical_basis": "銅XLPE、端子60°C、環溫35°C、同管3根、壓降≤3%；參考表初估。",
+        "pending": "未自動產出正式盤體尺寸、遮斷容量、相別平衡、接地或管路壓損結論；需補單線圖／短路資料／配線及管路路徑／原廠性能。"
+      }
+    },
+    {
+      "id": "18",
+      "status": "計算與反算通過",
+      "checks": [
+        "summer 逐段能量加總與進出風焓差",
+        "summer 加濕／除濕與含濕比守恆",
+        "summer 設備容量判定與需求點分開保留",
+        "summer H1 熱源選擇有效",
+        "winter 逐段能量加總與進出風焓差",
+        "winter 加濕／除濕與含濕比守恆",
+        "winter 設備容量判定與需求點分開保留",
+        "winter H1 熱源選擇有效",
+        "冬季H1需求大於已配置400 kW",
+        "保留容量不足，未把需求點當成實際性能"
+      ],
+      "result": {
+        "inputs": {
+          "name": "分段空調箱設計範例",
+          "flow": "58000",
+          "flow_basis": "送風狀態（待核對）",
+          "p": "101.325",
+          "summer_t": "35",
+          "summer_rh": "70",
+          "winter_t": "5",
+          "winter_rh": "40",
+          "sa_t": "22",
+          "sa_rh": "55",
+          "sequence": "H1 → C1",
+          "h1_order": "電熱 → 熱水",
+          "h2_order": "熱水 → 電熱",
+          "h1_kw": "400",
+          "h2_kw": "200",
+          "heat_eta": "1",
+          "recovery": "一期未上線",
+          "hw_in": "30",
+          "hw_out": "24",
+          "hw_approach": "2",
+          "h1_hw_kw": "0",
+          "h2_hw_kw": "0",
+          "c1_in": "14",
+          "c1_out": "19",
+          "c1_adp": "1",
+          "c1_t": "22",
+          "c1_rt": "250",
+          "c2_in": "7",
+          "c2_out": "12",
+          "c2_adp": "1",
+          "c2_rt": "160",
+          "sf": "0",
+          "wash_mode": "AMC 需求持續水洗",
+          "wash_eff": "0.85",
+          "wash_rating": "619.4",
+          "media_area": "0",
+          "wetting_rate": "0",
+          "spray_head": "",
+          "spray_rise": "",
+          "loop_loss": "",
+          "drift_lph": "0",
+          "fan_qty": "8",
+          "fan_unit_kw": "7.8",
+          "fan_air_kw": "0",
+          "dp_status": "尚未完整提供",
+          "dp_filter": "",
+          "dp_h1": "",
+          "dp_c1": "",
+          "dp_wash": "",
+          "dp_c2": "",
+          "dp_h2": "",
+          "dp_hepa": "",
+          "dp_external": "",
+          "fan_eff": "0.65",
+          "h1_source": "電熱",
+          "h2_source": "電熱",
+          "h1_water_mode": "共用回收水",
+          "h1_hw_in": "30",
+          "h1_hw_out": "24",
+          "h1_hw_approach": "2",
+          "h1_eta": "0",
+          "h2_water_mode": "共用回收水",
+          "h2_hw_in": "30",
+          "h2_hw_out": "24",
+          "h2_hw_approach": "2",
+          "h2_eta": "0",
+          "summer_h1_mode": "自動需求",
+          "summer_h1_t": "35",
+          "summer_c1_mode": "自動需求",
+          "summer_c1_t": "22",
+          "summer_c1_rh": "95",
+          "summer_c2_mode": "自動需求",
+          "summer_c2_t": "12.55",
+          "summer_c2_rh": "95",
+          "summer_h2_mode": "自動需求",
+          "summer_h2_t": "22",
+          "winter_h1_mode": "自動需求",
+          "winter_h1_t": "35",
+          "winter_c1_mode": "自動需求",
+          "winter_c1_t": "22",
+          "winter_c1_rh": "95",
+          "winter_c2_mode": "自動需求",
+          "winter_c2_t": "12.55",
+          "winter_c2_rh": "95",
+          "winter_h2_mode": "自動需求",
+          "winter_h2_t": "22",
+          "humidifier": "循環水洗濕膜",
+          "steam_capacity": "0",
+          "steam_kw": "0",
+          "steam_h": "2676.125",
+          "steam_feed_t": "20",
+          "steam_eta": "0.95",
+          "steam_water": "尚未確認",
+          "steam_conductivity": "0",
+          "steam_cond_min": "0",
+          "steam_cond_max": "0",
+          "target_mode": "共用送風目標",
+          "summer_sa_t": "22",
+          "summer_sa_rh": "55",
+          "winter_sa_t": "22",
+          "winter_sa_rh": "55",
+          "summer_flow": "58000",
+          "winter_flow": "58000",
+          "pump_input_kw": "",
+          "linked_main_hash": "尚未連動"
+        },
+        "raw_inputs": {
+          "name": "分段空調箱設計範例",
+          "flow": "58000",
+          "flow_basis": "送風狀態（待核對）",
+          "p": "101.325",
+          "summer_t": "35",
+          "summer_rh": "70",
+          "winter_t": "5",
+          "winter_rh": "40",
+          "sa_t": "22",
+          "sa_rh": "55",
+          "sequence": "H1 → C1",
+          "h1_order": "電熱 → 熱水",
+          "h2_order": "熱水 → 電熱",
+          "h1_kw": "400",
+          "h2_kw": "200",
+          "heat_eta": "1",
+          "recovery": "一期未上線",
+          "hw_in": "30",
+          "hw_out": "24",
+          "hw_approach": "2",
+          "h1_hw_kw": "0",
+          "h2_hw_kw": "0",
+          "c1_in": "14",
+          "c1_out": "19",
+          "c1_adp": "1",
+          "c1_t": "22",
+          "c1_rt": "250",
+          "c2_in": "7",
+          "c2_out": "12",
+          "c2_adp": "1",
+          "c2_rt": "160",
+          "sf": "0",
+          "wash_mode": "AMC 需求持續水洗",
+          "wash_eff": "0.85",
+          "wash_rating": "619.4",
+          "media_area": "0",
+          "wetting_rate": "0",
+          "spray_head": "",
+          "spray_rise": "",
+          "loop_loss": "",
+          "drift_lph": "0",
+          "fan_qty": "8",
+          "fan_unit_kw": "7.8",
+          "fan_air_kw": "0",
+          "dp_status": "尚未完整提供",
+          "dp_filter": "",
+          "dp_h1": "",
+          "dp_c1": "",
+          "dp_wash": "",
+          "dp_c2": "",
+          "dp_h2": "",
+          "dp_hepa": "",
+          "dp_external": "",
+          "fan_eff": "0.65",
+          "h1_source": "電熱",
+          "h2_source": "電熱",
+          "h1_water_mode": "共用回收水",
+          "h1_hw_in": "30",
+          "h1_hw_out": "24",
+          "h1_hw_approach": "2",
+          "h1_eta": "0",
+          "h2_water_mode": "共用回收水",
+          "h2_hw_in": "30",
+          "h2_hw_out": "24",
+          "h2_hw_approach": "2",
+          "h2_eta": "0",
+          "summer_h1_mode": "自動需求",
+          "summer_h1_t": "35",
+          "summer_c1_mode": "自動需求",
+          "summer_c1_t": "22",
+          "summer_c1_rh": "95",
+          "summer_c2_mode": "自動需求",
+          "summer_c2_t": "12.55",
+          "summer_c2_rh": "95",
+          "summer_h2_mode": "自動需求",
+          "summer_h2_t": "22",
+          "winter_h1_mode": "自動需求",
+          "winter_h1_t": "35",
+          "winter_c1_mode": "自動需求",
+          "winter_c1_t": "22",
+          "winter_c1_rh": "95",
+          "winter_c2_mode": "自動需求",
+          "winter_c2_t": "12.55",
+          "winter_c2_rh": "95",
+          "winter_h2_mode": "自動需求",
+          "winter_h2_t": "22",
+          "humidifier": "循環水洗濕膜",
+          "steam_capacity": "0",
+          "steam_kw": "0",
+          "steam_h": "2676.125",
+          "steam_feed_t": "20",
+          "steam_eta": "0.95",
+          "steam_water": "尚未確認",
+          "steam_conductivity": "0",
+          "steam_cond_min": "0",
+          "steam_cond_max": "0",
+          "target_mode": "共用送風目標",
+          "summer_sa_t": "22",
+          "summer_sa_rh": "55",
+          "winter_sa_t": "22",
+          "winter_sa_rh": "55",
+          "summer_flow": "58000",
+          "winter_flow": "58000",
+          "pump_input_kw": "",
+          "linked_main_hash": "尚未連動"
+        },
+        "inactive_fields": {
+          "summer_sa_t": "使用共用送風目標",
+          "summer_sa_rh": "使用共用送風目標",
+          "summer_flow": "使用共用送風目標",
+          "winter_sa_t": "使用共用送風目標",
+          "winter_sa_rh": "使用共用送風目標",
+          "winter_flow": "使用共用送風目標",
+          "linked_main_hash": "來源快照識別，不能手動修改",
+          "summer_h1_t": "出口由自動需求或旁通決定",
+          "summer_c1_t": "出口由自動需求或旁通決定",
+          "summer_c1_rh": "濕度由盤管物理過程決定",
+          "summer_c2_t": "出口由自動需求或旁通決定",
+          "summer_c2_rh": "濕度由盤管物理過程決定",
+          "summer_h2_t": "出口由自動需求或旁通決定",
+          "winter_h1_t": "出口由自動需求或旁通決定",
+          "winter_c1_t": "出口由自動需求或旁通決定",
+          "winter_c1_rh": "濕度由盤管物理過程決定",
+          "winter_c2_t": "出口由自動需求或旁通決定",
+          "winter_c2_rh": "濕度由盤管物理過程決定",
+          "winter_h2_t": "出口由自動需求或旁通決定",
+          "steam_capacity": "目前未使用蒸汽加濕",
+          "steam_kw": "目前未使用蒸汽加濕",
+          "steam_h": "目前未使用蒸汽加濕",
+          "steam_feed_t": "目前未使用蒸汽加濕",
+          "steam_eta": "目前未使用蒸汽加濕",
+          "steam_water": "目前未使用蒸汽加濕",
+          "steam_conductivity": "目前未使用蒸汽加濕",
+          "steam_cond_min": "目前未使用蒸汽加濕",
+          "steam_cond_max": "目前未使用蒸汽加濕",
+          "h1_hw_kw": "本段目前不採用熱回收水",
+          "h1_water_mode": "本段目前不採用熱回收水",
+          "h1_hw_in": "本段不採用独立熱水條件",
+          "h1_hw_out": "本段不採用独立熱水條件",
+          "h1_hw_approach": "本段不採用独立熱水條件",
+          "h2_hw_kw": "本段目前不採用熱回收水",
+          "h2_water_mode": "本段目前不採用熱回收水",
+          "h2_hw_in": "本段不採用独立熱水條件",
+          "h2_hw_out": "本段不採用独立熱水條件",
+          "h2_hw_approach": "本段不採用独立熱水條件",
+          "hw_in": "沒有啟用共用回收熱水的段落",
+          "hw_out": "沒有啟用共用回收熱水的段落",
+          "hw_approach": "沒有啟用共用回收熱水的段落"
+        },
+        "summer": {
+          "season": "summer",
+          "oa": {
+            "t": 35.0,
+            "w": 0.025159138188848906,
+            "x": 0.025159138188848906,
+            "rh": 70.0,
+            "h": 99.77086450640519,
+            "v_da": 0.9082663058996859,
+            "rho_moist": 1.1286988535519595
+          },
+          "target": {
+            "t": 22.0,
+            "w": 0.009058641902334517,
+            "x": 0.009058641902334517,
+            "rh": 55.00000000000001,
+            "h": 45.15834302438216,
+            "v_da": 0.848303985868376,
+            "rho_moist": 1.1895012386030464
+          },
+          "mass": 18.992143594160755,
+          "h1": {
+            "tag": "H1",
+            "inlet": {
+              "t": 35.0,
+              "w": 0.025159138188848906,
+              "x": 0.025159138188848906,
+              "rh": 70.0,
+              "h": 99.77086450640519,
+              "v_da": 0.9082663058996859,
+              "rho_moist": 1.1286988535519595
+            },
+            "middle": {
+              "t": 35.0,
+              "w": 0.025159138188848906,
+              "x": 0.025159138188848906,
+              "rh": 70.0,
+              "h": 99.77086450640519,
+              "v_da": 0.9082663058996859,
+              "rho_moist": 1.1286988535519595
+            },
+            "outlet": {
+              "t": 35.0,
+              "w": 0.025159138188848906,
+              "x": 0.025159138188848906,
+              "rh": 70.0,
+              "h": 99.77086450640519,
+              "v_da": 0.9082663058996859,
+              "rho_moist": 1.1286988535519595
+            },
+            "air_kw": 0.0,
+            "hw_kw": 0.0,
+            "electric_air_kw": 0.0,
+            "electric_kw": 0.0,
+            "backup_electric_kw": 0.0,
+            "installed_kw": 400.0,
+            "water_lpm": 0.0,
+            "order": "電熱 → 熱水",
+            "note": "",
+            "source": "電熱",
+            "unserved_kw": 0.0,
+            "source_pass": true,
+            "effective_water": {
+              "hw_in": 30.0,
+              "hw_out": 24.0,
+              "hw_approach": 2.0,
+              "heat_eta": 1.0
+            }
+          },
+          "c1": {
+            "name": "C1 預冷",
+            "inlet": {
+              "t": 35.0,
+              "w": 0.025159138188848906,
+              "x": 0.025159138188848906,
+              "rh": 70.0,
+              "h": 99.77086450640519,
+              "v_da": 0.9082663058996859,
+              "rho_moist": 1.1286988535519595
+            },
+            "outlet": {
+              "t": 21.999999999999993,
+              "w": 0.015641135954442408,
+              "x": 0.015641135954442408,
+              "rh": 93.9855072027207,
+              "h": 61.89051630531624,
+              "v_da": 0.8571533102946561,
+              "rho_moist": 1.1849002083481475
+            },
+            "air_kw": 719.4290124318903,
+            "water_kw": 702.7786119444122,
+            "condensate_kg_s": 0.18076726516539113,
+            "liquid_kw": 16.650400487478105
+          },
+          "wash_in": {
+            "t": 21.999999999999993,
+            "w": 0.015641135954442408,
+            "x": 0.015641135954442408,
+            "rh": 93.9855072027207,
+            "h": 61.89051630531624,
+            "v_da": 0.8571533102946561,
+            "rho_moist": 1.1849002083481475
+          },
+          "wash_out": {
+            "t": 21.389292971901835,
+            "w": 0.01588993248780179,
+            "x": 0.01588993248780179,
+            "rh": 99.0743783884515,
+            "h": 61.89051630531625,
+            "v_da": 0.8557135222148636,
+            "rho_moist": 1.1871846197525893
+          },
+          "wash_on": true,
+          "evap_kg_h": 17.010646154246942,
+          "c2": {
+            "name": "C2 再冷",
+            "inlet": {
+              "t": 21.389292971901835,
+              "w": 0.01588993248780179,
+              "x": 0.01588993248780179,
+              "rh": 99.0743783884515,
+              "h": 61.89051630531625,
+              "v_da": 0.8557135222148636,
+              "rho_moist": 1.1871846197525893
+            },
+            "outlet": {
+              "t": 12.553493449745787,
+              "w": 0.009058641902334517,
+              "x": 0.009058641902334517,
+              "rh": 99.99999999999976,
+              "h": 35.49599254750215,
+              "v_da": 0.8211533534471922,
+              "rho_moist": 1.2288309335476961
+            },
+            "air_kw": 501.2885853078929,
+            "water_kw": 494.46954024416226,
+            "condensate_kg_s": 0.12974085173263294,
+            "liquid_kw": 6.819045063730648
+          },
+          "h2": {
+            "tag": "H2",
+            "inlet": {
+              "t": 12.553493449745787,
+              "w": 0.009058641902334517,
+              "x": 0.009058641902334517,
+              "rh": 99.99999999999976,
+              "h": 35.49599254750215,
+              "v_da": 0.8211533534471922,
+              "rho_moist": 1.2288309335476961
+            },
+            "middle": {
+              "t": 12.553493449745787,
+              "w": 0.009058641902334517,
+              "x": 0.009058641902334517,
+              "rh": 99.99999999999976,
+              "h": 35.49599254750215,
+              "v_da": 0.8211533534471922,
+              "rho_moist": 1.2288309335476961
+            },
+            "outlet": {
+              "t": 22.0,
+              "w": 0.009058641902334517,
+              "x": 0.009058641902334517,
+              "rh": 55.00000000000001,
+              "h": 45.15834302438216,
+              "v_da": 0.848303985868376,
+              "rho_moist": 1.1895012386030464
+            },
+            "air_kw": 183.50874771401288,
+            "hw_kw": 0.0,
+            "electric_air_kw": 183.50874771401288,
+            "electric_kw": 183.50874771401288,
+            "backup_electric_kw": 183.50874771401288,
+            "installed_kw": 200.0,
+            "water_lpm": 0.0,
+            "order": "熱水 → 電熱",
+            "note": "",
+            "source": "電熱",
+            "unserved_kw": 0.0,
+            "source_pass": true,
+            "effective_water": {
+              "hw_in": 30.0,
+              "hw_out": 24.0,
+              "hw_approach": 2.0,
+              "heat_eta": 1.0
+            }
+          },
+          "sa": {
+            "t": 22.0,
+            "w": 0.009058641902334517,
+            "x": 0.009058641902334517,
+            "rh": 55.00000000000001,
+            "h": 45.15834302438216,
+            "v_da": 0.848303985868376,
+            "rho_moist": 1.1895012386030464
+          },
+          "nodes": [
+            [
+              "OA 外氣",
+              {
+                "t": 35.0,
+                "w": 0.025159138188848906,
+                "x": 0.025159138188848906,
+                "rh": 70.0,
+                "h": 99.77086450640519,
+                "v_da": 0.9082663058996859,
+                "rho_moist": 1.1286988535519595
+              }
+            ],
+            [
+              "初／中效濾網",
+              {
+                "t": 35.0,
+                "w": 0.025159138188848906,
+                "x": 0.025159138188848906,
+                "rh": 70.0,
+                "h": 99.77086450640519,
+                "v_da": 0.9082663058996859,
+                "rho_moist": 1.1286988535519595
+              }
+            ],
+            [
+              "H1 電熱（需求）",
+              {
+                "t": 35.0,
+                "w": 0.025159138188848906,
+                "x": 0.025159138188848906,
+                "rh": 70.0,
+                "h": 99.77086450640519,
+                "v_da": 0.9082663058996859,
+                "rho_moist": 1.1286988535519595
+              }
+            ],
+            [
+              "C1 預冷",
+              {
+                "t": 21.999999999999993,
+                "w": 0.015641135954442408,
+                "x": 0.015641135954442408,
+                "rh": 93.9855072027207,
+                "h": 61.89051630531624,
+                "v_da": 0.8571533102946561,
+                "rho_moist": 1.1849002083481475
+              }
+            ],
+            [
+              "水洗濕膜",
+              {
+                "t": 21.389292971901835,
+                "w": 0.01588993248780179,
+                "x": 0.01588993248780179,
+                "rh": 99.0743783884515,
+                "h": 61.89051630531625,
+                "v_da": 0.8557135222148636,
+                "rho_moist": 1.1871846197525893
+              }
+            ],
+            [
+              "C2 再冷",
+              {
+                "t": 12.553493449745787,
+                "w": 0.009058641902334517,
+                "x": 0.009058641902334517,
+                "rh": 99.99999999999976,
+                "h": 35.49599254750215,
+                "v_da": 0.8211533534471922,
+                "rho_moist": 1.2288309335476961
+              }
+            ],
+            [
+              "H2 電熱（需求）",
+              {
+                "t": 22.0,
+                "w": 0.009058641902334517,
+                "x": 0.009058641902334517,
+                "rh": 55.00000000000001,
+                "h": 45.15834302438216,
+                "v_da": 0.848303985868376,
+                "rho_moist": 1.1895012386030464
+              }
+            ],
+            [
+              "EC 風機",
+              {
+                "t": 22.0,
+                "w": 0.009058641902334517,
+                "x": 0.009058641902334517,
+                "rh": 55.00000000000001,
+                "h": 45.15834302438216,
+                "v_da": 0.848303985868376,
+                "rho_moist": 1.1895012386030464
+              }
+            ],
+            [
+              "PTFE HEPA／送風",
+              {
+                "t": 22.0,
+                "w": 0.009058641902334517,
+                "x": 0.009058641902334517,
+                "rh": 55.00000000000001,
+                "h": 45.15834302438216,
+                "v_da": 0.848303985868376,
+                "rho_moist": 1.1895012386030464
+              }
+            ]
+          ],
+          "checks": {
+            "H1 電熱全載備援": true,
+            "H1 當前熱源情境": true,
+            "H2 電熱全載備援": true,
+            "H2 當前熱源情境": true,
+            "C1 總表候選容量": true,
+            "C1 可達 ADP": true,
+            "C2 總表候選容量": true,
+            "C2 可達 ADP": true,
+            "送風乾球目標": true,
+            "送風含濕量目標": true,
+            "濕膜總表候選能力": true
+          },
+          "energy_residual_kw": 2.2737367544323206e-13,
+          "moisture_residual_kg_h": -2.2737367544323206e-13,
+          "fan_inlet_cmh": 58000.0,
+          "steam": {
+            "kg_h": 0.0,
+            "air_kw": 0.0,
+            "electric_kw": 0.0
+          },
+          "control_basis": "逐段指定／自動混合需求"
+        },
+        "winter": {
+          "season": "winter",
+          "oa": {
+            "t": 5.0,
+            "w": 0.0021495748831349354,
+            "x": 0.0021495748831349354,
+            "rh": 39.99999999999999,
+            "h": 10.426077829133629,
+            "v_da": 0.7906901449756698,
+            "rho_moist": 1.2674365315555713
+          },
+          "target": {
+            "t": 22.0,
+            "w": 0.009058641902334517,
+            "x": 0.009058641902334517,
+            "rh": 55.00000000000001,
+            "h": 45.15834302438216,
+            "v_da": 0.848303985868376,
+            "rho_moist": 1.1895012386030464
+          },
+          "mass": 18.992143594160755,
+          "h1": {
+            "tag": "H1",
+            "inlet": {
+              "t": 5.0,
+              "w": 0.0021495748831349354,
+              "x": 0.0021495748831349354,
+              "rh": 39.99999999999999,
+              "h": 10.426077829133629,
+              "v_da": 0.7906901449756698,
+              "rho_moist": 1.2674365315555713
+            },
+            "middle": {
+              "t": 34.87908217925414,
+              "w": 0.0021495748831349354,
+              "x": 0.0021495748831349354,
+              "rh": 6.242871236899437,
+              "h": 40.60389732518888,
+              "v_da": 0.8756266749776631,
+              "rho_moist": 1.144494113211774
+            },
+            "outlet": {
+              "t": 34.87908217925414,
+              "w": 0.0021495748831349354,
+              "x": 0.0021495748831349354,
+              "rh": 6.242871236899437,
+              "h": 40.60389732518888,
+              "v_da": 0.8756266749776631,
+              "rho_moist": 1.144494113211774
+            },
+            "air_kw": 573.1414812277453,
+            "hw_kw": 0.0,
+            "electric_air_kw": 573.1414812277453,
+            "electric_kw": 573.1414812277453,
+            "backup_electric_kw": 573.1414812277453,
+            "installed_kw": 400.0,
+            "water_lpm": 0.0,
+            "order": "電熱 → 熱水",
+            "note": "",
+            "source": "電熱",
+            "unserved_kw": 0.0,
+            "source_pass": false,
+            "effective_water": {
+              "hw_in": 30.0,
+              "hw_out": 24.0,
+              "hw_approach": 2.0,
+              "heat_eta": 1.0
+            }
+          },
+          "c1": {
+            "name": "C1 預冷",
+            "inlet": {
+              "t": 34.87908217925414,
+              "w": 0.0021495748831349354,
+              "x": 0.0021495748831349354,
+              "rh": 6.242871236899437,
+              "h": 40.60389732518888,
+              "v_da": 0.8756266749776631,
+              "rho_moist": 1.144494113211774
+            },
+            "outlet": {
+              "t": 34.87908217925414,
+              "w": 0.0021495748831349354,
+              "x": 0.0021495748831349354,
+              "rh": 6.242871236899437,
+              "h": 40.60389732518888,
+              "v_da": 0.8756266749776631,
+              "rho_moist": 1.144494113211774
+            },
+            "air_kw": 0,
+            "water_kw": 0,
+            "condensate_kg_s": 0,
+            "liquid_kw": 0.0
+          },
+          "wash_in": {
+            "t": 34.87908217925414,
+            "w": 0.0021495748831349354,
+            "x": 0.0021495748831349354,
+            "rh": 6.242871236899437,
+            "h": 40.60389732518888,
+            "v_da": 0.8756266749776631,
+            "rho_moist": 1.144494113211774
+          },
+          "wash_out": {
+            "t": 17.547294498046522,
+            "w": 0.009058641902334517,
+            "x": 0.009058641902334517,
+            "rh": 72.50492183619644,
+            "h": 40.60389732518888,
+            "v_da": 0.8355062632690022,
+            "rho_moist": 1.2077212179766206
+          },
+          "wash_on": true,
+          "evap_kg_h": 472.38477454914727,
+          "c2": {
+            "name": "C2 再冷",
+            "inlet": {
+              "t": 17.547294498046522,
+              "w": 0.009058641902334517,
+              "x": 0.009058641902334517,
+              "rh": 72.50492183619644,
+              "h": 40.60389732518888,
+              "v_da": 0.8355062632690022,
+              "rho_moist": 1.2077212179766206
+            },
+            "outlet": {
+              "t": 17.547294498046522,
+              "w": 0.009058641902334517,
+              "x": 0.009058641902334517,
+              "rh": 72.50492183619644,
+              "h": 40.60389732518888,
+              "v_da": 0.8355062632690022,
+              "rho_moist": 1.2077212179766206
+            },
+            "air_kw": 0,
+            "water_kw": 0,
+            "condensate_kg_s": 0,
+            "liquid_kw": 0.0
+          },
+          "h2": {
+            "tag": "H2",
+            "inlet": {
+              "t": 17.547294498046522,
+              "w": 0.009058641902334517,
+              "x": 0.009058641902334517,
+              "rh": 72.50492183619644,
+              "h": 40.60389732518888,
+              "v_da": 0.8355062632690022,
+              "rho_moist": 1.2077212179766206
+            },
+            "middle": {
+              "t": 17.547294498046522,
+              "w": 0.009058641902334517,
+              "x": 0.009058641902334517,
+              "rh": 72.50492183619644,
+              "h": 40.60389732518888,
+              "v_da": 0.8355062632690022,
+              "rho_moist": 1.2077212179766206
+            },
+            "outlet": {
+              "t": 22.0,
+              "w": 0.009058641902334517,
+              "x": 0.009058641902334517,
+              "rh": 55.00000000000001,
+              "h": 45.15834302438216,
+              "v_da": 0.848303985868376,
+              "rho_moist": 1.1895012386030464
+            },
+            "air_kw": 86.49868671088666,
+            "hw_kw": 0.0,
+            "electric_air_kw": 86.49868671088666,
+            "electric_kw": 86.49868671088666,
+            "backup_electric_kw": 86.49868671088666,
+            "installed_kw": 200.0,
+            "water_lpm": 0.0,
+            "order": "熱水 → 電熱",
+            "note": "",
+            "source": "電熱",
+            "unserved_kw": 0.0,
+            "source_pass": true,
+            "effective_water": {
+              "hw_in": 30.0,
+              "hw_out": 24.0,
+              "hw_approach": 2.0,
+              "heat_eta": 1.0
+            }
+          },
+          "sa": {
+            "t": 22.0,
+            "w": 0.009058641902334517,
+            "x": 0.009058641902334517,
+            "rh": 55.00000000000001,
+            "h": 45.15834302438216,
+            "v_da": 0.848303985868376,
+            "rho_moist": 1.1895012386030464
+          },
+          "nodes": [
+            [
+              "OA 外氣",
+              {
+                "t": 5.0,
+                "w": 0.0021495748831349354,
+                "x": 0.0021495748831349354,
+                "rh": 39.99999999999999,
+                "h": 10.426077829133629,
+                "v_da": 0.7906901449756698,
+                "rho_moist": 1.2674365315555713
+              }
+            ],
+            [
+              "初／中效濾網",
+              {
+                "t": 5.0,
+                "w": 0.0021495748831349354,
+                "x": 0.0021495748831349354,
+                "rh": 39.99999999999999,
+                "h": 10.426077829133629,
+                "v_da": 0.7906901449756698,
+                "rho_moist": 1.2674365315555713
+              }
+            ],
+            [
+              "H1 電熱（需求）",
+              {
+                "t": 34.87908217925414,
+                "w": 0.0021495748831349354,
+                "x": 0.0021495748831349354,
+                "rh": 6.242871236899437,
+                "h": 40.60389732518888,
+                "v_da": 0.8756266749776631,
+                "rho_moist": 1.144494113211774
+              }
+            ],
+            [
+              "C1 預冷",
+              {
+                "t": 34.87908217925414,
+                "w": 0.0021495748831349354,
+                "x": 0.0021495748831349354,
+                "rh": 6.242871236899437,
+                "h": 40.60389732518888,
+                "v_da": 0.8756266749776631,
+                "rho_moist": 1.144494113211774
+              }
+            ],
+            [
+              "水洗濕膜",
+              {
+                "t": 17.547294498046522,
+                "w": 0.009058641902334517,
+                "x": 0.009058641902334517,
+                "rh": 72.50492183619644,
+                "h": 40.60389732518888,
+                "v_da": 0.8355062632690022,
+                "rho_moist": 1.2077212179766206
+              }
+            ],
+            [
+              "C2 再冷",
+              {
+                "t": 17.547294498046522,
+                "w": 0.009058641902334517,
+                "x": 0.009058641902334517,
+                "rh": 72.50492183619644,
+                "h": 40.60389732518888,
+                "v_da": 0.8355062632690022,
+                "rho_moist": 1.2077212179766206
+              }
+            ],
+            [
+              "H2 電熱（需求）",
+              {
+                "t": 22.0,
+                "w": 0.009058641902334517,
+                "x": 0.009058641902334517,
+                "rh": 55.00000000000001,
+                "h": 45.15834302438216,
+                "v_da": 0.848303985868376,
+                "rho_moist": 1.1895012386030464
+              }
+            ],
+            [
+              "EC 風機",
+              {
+                "t": 22.0,
+                "w": 0.009058641902334517,
+                "x": 0.009058641902334517,
+                "rh": 55.00000000000001,
+                "h": 45.15834302438216,
+                "v_da": 0.848303985868376,
+                "rho_moist": 1.1895012386030464
+              }
+            ],
+            [
+              "PTFE HEPA／送風",
+              {
+                "t": 22.0,
+                "w": 0.009058641902334517,
+                "x": 0.009058641902334517,
+                "rh": 55.00000000000001,
+                "h": 45.15834302438216,
+                "v_da": 0.848303985868376,
+                "rho_moist": 1.1895012386030464
+              }
+            ]
+          ],
+          "checks": {
+            "H1 電熱全載備援": false,
+            "H1 當前熱源情境": false,
+            "H2 電熱全載備援": true,
+            "H2 當前熱源情境": true,
+            "C1 總表候選容量": true,
+            "C1 可達 ADP": true,
+            "C2 總表候選容量": true,
+            "C2 可達 ADP": true,
+            "送風乾球目標": true,
+            "送風含濕量目標": true,
+            "濕膜總表候選能力": true
+          },
+          "energy_residual_kw": -1.1368683772161603e-13,
+          "moisture_residual_kg_h": 0.0,
+          "fan_inlet_cmh": 58000.0,
+          "steam": {
+            "kg_h": 0.0,
+            "air_kw": 0.0,
+            "electric_kw": 0.0
+          },
+          "control_basis": "逐段指定／自動混合需求"
+        },
+        "circulation_lpm": null,
+        "pump_head_m": null,
+        "evap_makeup_lph": 472.38477454914727,
+        "makeup_plus_allowance_lph": 472.38477454914727,
+        "air_dp_pa": 0,
+        "pressure_complete": false,
+        "fan_required_kw": 0.0,
+        "fan_installed_kw": 62.4,
+        "installed_electric_kw": 662.4,
+        "fan_capacity_pass": true,
+        "hash": "92db7053a6f00fdcb577fae4657626acdb65c9f6089f975308b81703fa7a926e",
+        "active_installed_electric_kw": 662.4,
+        "quality": {
+          "status": "未達條件",
+          "items": [
+            {
+              "name": "夏季 H1 電熱全載備援",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "夏季 H1 當前熱源情境",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "夏季 H2 電熱全載備援",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "夏季 H2 當前熱源情境",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "夏季 C1 總表候選容量",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "夏季 C1 可達 ADP",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "夏季 C2 總表候選容量",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "夏季 C2 可達 ADP",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "夏季 送風乾球目標",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "夏季 送風含濕量目標",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "夏季 濕膜總表候選能力",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "夏季 C1 回水必要條件",
+              "status": "通過",
+              "detail": "回水 19°C；入口空氣 35.00°C。",
+              "field": "c1_out"
+            },
+            {
+              "name": "夏季 C2 回水必要條件",
+              "status": "通過",
+              "detail": "回水 12°C；入口空氣 21.39°C。",
+              "field": "c2_out"
+            },
+            {
+              "name": "冬季 H1 電熱全載備援",
+              "status": "未達",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "冬季 H1 當前熱源情境",
+              "status": "未達",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "冬季 H2 電熱全載備援",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "冬季 H2 當前熱源情境",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "冬季 C1 總表候選容量",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "冬季 C1 可達 ADP",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "冬季 C2 總表候選容量",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "冬季 C2 可達 ADP",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "冬季 送風乾球目標",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "冬季 送風含濕量目標",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "冬季 濕膜總表候選能力",
+              "status": "通過",
+              "detail": "依本季需求與已填資料檢核；表列狀態為需求點。",
+              "field": null
+            },
+            {
+              "name": "風機壓差完整度",
+              "status": "待資料",
+              "detail": "尚缺同風量各段終阻力。留空代表未知，明確 0 代表已知無此阻力。",
+              "field": "dp_status"
+            },
+            {
+              "name": "風機入氣流熱",
+              "status": "待資料",
+              "detail": "目前採 0 kW 試算；需實際運轉電力、馬達位置及入氣流熱。",
+              "field": "fan_air_kw"
+            },
+            {
+              "name": "水洗循環水量",
+              "status": "待資料",
+              "detail": "需有效淋水面積與原廠淋水密度。",
+              "field": "media_area"
+            },
+            {
+              "name": "水洗循環泵揚程",
+              "status": "待資料",
+              "detail": "需噴頭水頭、高差與管路損失；可填合法的 0m 高差。",
+              "field": "spray_rise"
+            },
+            {
+              "name": "原廠同工況性能",
+              "status": "待資料",
+              "detail": "名目 RT／kW 與必要條件檢核不能替代同工況盤管、風機與加濕設備性能。",
+              "field": null
+            }
+          ],
+          "failed": 2,
+          "pending": 5
+        }
+      }
+    },
+    {
+      "id": "19",
+      "status": "不適用",
+      "checks": [
+        "不把不適用情境指定給軟體工具",
+        "保留不適用理由"
+      ],
+      "result": null
+    },
+    {
+      "id": "20",
+      "status": "不適用",
+      "checks": [
+        "不把不適用情境指定給軟體工具",
+        "保留不適用理由"
+      ],
+      "result": null
+    }
+  ]
+}

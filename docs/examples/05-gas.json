@@ -1,0 +1,10 @@
+{
+  "gas": "CDA",
+  "flow": "800",
+  "flow_unit": "SLPM",
+  "pressure": "6",
+  "pressure_unit": "bar(g)",
+  "velocity": "15",
+  "temperature": "25",
+  "reference_t": "25"
+}

@@ -1,0 +1,11 @@
+{
+  "mode": "反算燈數",
+  "area_mode": "面積 m²",
+  "area": "30",
+  "target": "500",
+  "watts": "40",
+  "lumen_mode": "燈具型錄流明",
+  "lumens": "4000",
+  "utilization": "0.6",
+  "maintenance": "0.8"
+}
