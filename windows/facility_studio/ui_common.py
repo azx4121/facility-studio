@@ -54,6 +54,9 @@ def install_numeric_keyboard(window):
 
 
 def app_icon(window):
+    from .localized_tk import attach_window
+
+    attach_window(window)
     install_numeric_keyboard(window)
     base = Path(__file__).with_name("resources")
     try:

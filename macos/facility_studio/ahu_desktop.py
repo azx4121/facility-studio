@@ -2,13 +2,13 @@ from .design_workflow import ahu_requirement_updates, ahu_utility_preview
 from .workspace_view import apply_updates
 from .project_store import save_project_file
 from .errors import InputError
-from tkinter import filedialog
+from .localized_tk import filedialog
 import json
 import copy
 import uuid
-from tkinter import messagebox
-import tkinter as tk
-from tkinter import ttk
+from .localized_tk import messagebox
+from .localized_tk import tk
+from .localized_tk import ttk
 from .ahu_engine import nm_calculate, nm_read_project, nm_validate
 from .ahu_schema import NM_CONTROL_NOTES, NM_DEFAULTS, NM_FIELDS, NM_GROUPS
 from .ahu_view import AHUView, NM_HAS_PLOT
@@ -16,6 +16,8 @@ from .ahu_view import AHUView, NM_HAS_PLOT
 if NM_HAS_PLOT:
     from .ahu_view import Figure, FigureCanvasTkAgg
 from .reports import nm_report
+from .localized_tk import LanguagePicker
+from . import i18n
 from .ui_common import app_icon, quality_style, quality_text
 from .utils import atomic_text, project_hash
 from .field_state import error_text
@@ -279,6 +281,11 @@ class AHUWindow(AHUView):
             b.pack(side="right", padx=3)
             if text == "匯出校核書":
                 self.export_button = b
+        language_bar = ttk.Frame(self.win, padding=(12, 2))
+        language_bar.pack(fill="x")
+        self.language_picker = LanguagePicker(language_bar)
+        self.language_picker.pack(side="right")
+        ttk.Label(language_bar, text="Language / 語言").pack(side="right", padx=8)
         linkbar = ttk.Frame(self.win, padding=(12, 0))
         linkbar.pack(fill="x")
         if main_app:
@@ -504,14 +511,20 @@ class AHUWindow(AHUView):
         self.undo_inputs = None
         self.bad_key = None
         self._build_window(parent, main_app)
-        self.win.title("分段空調箱設計｜V5.5.4")
+        self.win.title("分段空調箱設計｜V5.5.5")
         app_icon(self.win)
+        i18n.subscribe(self)
         if main_app:
             main_app.children.append(self)
             main_app.refresh_session_status()
         if document:
             self.saved_hash = project_hash(self.snapshot())
         self.refresh_link_status()
+
+    def refresh_language(self):
+        if self.win.winfo_exists() and self.result:
+            self.set_text(nm_report(self.result))
+            self.render()
 
     def _calculate_stage_project(self):
         if self.job:

@@ -10,6 +10,11 @@ from .utils import atomic_text
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--language",
+        choices=("zh-Hant", "en"),
+        help="UI / text-report language; stored engineering data stays canonical",
+    )
     parser.add_argument("--project")
     parser.add_argument("--report")
     parser.add_argument("--result")
@@ -31,12 +36,21 @@ def main():
         "--equipment", help="Analyze a public Excel/CSV equipment schedule"
     )
     parser.add_argument(
-        "--equipment-system", default="電力", help="System for a CSV schedule"
+        "--equipment-system",
+        default="電力",
+        help="System for a CSV schedule (Electrical / 電力, PCW, CDA, N2, EXHAUST, DI, PV)",
     )
     parser.add_argument(
         "--export-equipment-template", help="Write the public equipment Excel template"
     )
     args = parser.parse_args()
+    from . import i18n
+
+    if args.language:
+        i18n.set_language(args.language, persist=False)
+    args.equipment_system = i18n.canonical_choice(
+        args.equipment_system, ("電力", "PCW", "CDA", "N2", "EXHAUST", "DI", "PV")
+    )
     if args.export_equipment_template:
         from .equipment_io import export_template
 
@@ -58,7 +72,7 @@ def main():
                 print(equipment_report(result))
             return 0
         except Exception as error:
-            print(str(error), file=sys.stderr)
+            print(i18n.translate(error), file=sys.stderr)
             return 2
     if args.tool:
         from .simple_engines import calculate_tool
@@ -86,7 +100,7 @@ def main():
                 print(tool_report(result, inputs))
             return 0
         except Exception as error:
-            print(str(error), file=sys.stderr)
+            print(i18n.translate(error), file=sys.stderr)
             return 2
     if args.write_default:
         atomic_text(
@@ -108,7 +122,7 @@ def main():
                 print(report(r))
             return 0
         except Exception as e:
-            print(str(e), file=sys.stderr)
+            print(i18n.translate(e), file=sys.stderr)
             return 2
     import tkinter as tk
 

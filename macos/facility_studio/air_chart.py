@@ -1,7 +1,7 @@
 """Pressure-aware dry-bulb / humidity-ratio chart using native Tk Canvas."""
 
 import math
-import tkinter as tk
+from .localized_tk import tk
 
 from .utils import MW_RATIO, sat_pa
 

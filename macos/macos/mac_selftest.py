@@ -17,6 +17,8 @@ import traceback
 
 def run():
     checks = []
+    destination = Path.home() / "Library/Logs/Facility_Studio_V5_5"
+    destination.mkdir(parents=True, exist_ok=True)
     if sys.platform == "darwin":
         faulthandler.dump_traceback_later(25, repeat=True)
 
@@ -124,6 +126,10 @@ def run():
 
     gui_storage = tempfile.TemporaryDirectory(prefix="FacilityStudioMacGui-")
     old_storage = os.environ.get("LOCALAPPDATA")
+    old_preferences = os.environ.get("FACILITY_STUDIO_PREFERENCES")
+    os.environ["FACILITY_STUDIO_PREFERENCES"] = str(Path(gui_storage.name) / "preferences.json")
+    from facility_studio import i18n
+    i18n.set_language("zh-Hant", persist=False)
     os.environ["LOCALAPPDATA"] = gui_storage.name
     print("Creating native Tk window...", flush=True)
     root = tk.Tk()
@@ -184,6 +190,11 @@ def run():
                 return workbench.pages[index].winfo_ismapped() == 1
 
             check(f"Workbench live page: {page}", open_page)
+        from facility_studio.language_acceptance import run as check_languages
+
+        check_languages(
+            root, app, workbench, check, pump_gui, destination / "Mac_Acceptance.json"
+        )
         check("Native UI heartbeat", lambda: (pump_gui(), True)[1])
         check("No native GUI callback exceptions", lambda: not callback_errors)
         from matplotlib.figure import Figure
@@ -200,6 +211,10 @@ def run():
                 root.destroy()
         except tk.TclError:
             pass
+        if old_preferences is None:
+            os.environ.pop("FACILITY_STUDIO_PREFERENCES", None)
+        else:
+            os.environ["FACILITY_STUDIO_PREFERENCES"] = old_preferences
         if old_storage is None:
             os.environ.pop("LOCALAPPDATA", None)
         else:

@@ -1,7 +1,10 @@
+from .localized_plot import translated_axes
+
 """Small, standalone calculators usable without a valid factory project."""
 
-import tkinter as tk
-from tkinter import ttk, messagebox
+from .localized_tk import tk
+from .localized_tk import ttk, messagebox
+from . import i18n
 import json, math
 from .json_io import read_json_file
 from . import quick_tools as q
@@ -136,7 +139,7 @@ class QuickToolsWindow:
     def __init__(self, parent, main_app):
         self.main_app = main_app
         self.win = tk.Toplevel(parent)
-        self.win.title("工程快算｜V5.5.4")
+        self.win.title("工程快算｜V5.5.5")
         self.win.geometry("1020x850")
         self.win.minsize(840, 650)
         app_icon(self.win)
@@ -264,6 +267,11 @@ class QuickToolsWindow:
         self.win.protocol("WM_DELETE_WINDOW", self.close)
         self.build()
         self.calculate()
+        i18n.subscribe(self)
+
+    def refresh_language(self):
+        if self.win.winfo_exists():
+            self.draw()
 
     def ordered_tools(self):
         return self.favorites + [x for x in TOOLS if x not in self.favorites]
@@ -394,7 +402,7 @@ class QuickToolsWindow:
         self.result = None
         self.set_text("條件已變更，按「計算」更新結果。")
         if self.plot:
-            self.ax.clear()
+            translated_axes(self.ax).clear()
             self.plot.draw_idle()
         tool = self.tool.get()
         hint = "所有工具可離線獨立計算；不必先完成廠房專案。"
@@ -514,13 +522,13 @@ class QuickToolsWindow:
     def draw(self):
         if not self.plot:
             return
-        self.ax.clear()
+        translated_axes(self.ax).clear()
         r = self.result
         tool = self.tool.get()
         states = []
-        if tool == "濕空氣計算":
+        if r is not None and tool == "濕空氣計算":
             states = [("P1", r)]
-        elif tool == "兩股混風":
+        elif r is not None and tool == "兩股混風":
             p = float(self.values["pressure"].get())
             states = [
                 (
@@ -541,7 +549,7 @@ class QuickToolsWindow:
                 ),
                 ("MIX", r["state"]),
             ]
-        elif tool == "兩點空氣過程":
+        elif r is not None and tool == "兩點空氣過程":
             states = [("IN", r["inlet"]), ("OUT", r["outlet"])]
         if states:
             p = float(self.values["pressure"].get())
@@ -555,49 +563,51 @@ class QuickToolsWindow:
                         values.append(state_trh(t, rh, p)["w"] * 1000)
                     except ValueError:
                         values.append(math.nan)
-                self.ax.plot(temps, values, color="#a7bac8", lw=0.8, label=f"{rh}% RH")
+                translated_axes(self.ax).plot(
+                    temps, values, color="#a7bac8", lw=0.8, label=f"{rh}% RH"
+                )
             for name, s in states:
-                self.ax.scatter(s["t"], s["w"] * 1000, color="#176c85")
-                self.ax.annotate(
+                translated_axes(self.ax).scatter(s["t"], s["w"] * 1000, color="#176c85")
+                translated_axes(self.ax).annotate(
                     name,
                     (s["t"], s["w"] * 1000),
                     xytext=(7, 7),
                     textcoords="offset points",
                 )
             if len(states) == 3:
-                self.ax.plot(
+                translated_axes(self.ax).plot(
                     [states[0][1]["t"], states[1][1]["t"]],
                     [states[0][1]["w"] * 1000, states[1][1]["w"] * 1000],
                     "--",
                     color="#176c85",
                     label="Mixing reference",
                 )
-                self.ax.legend()
+                translated_axes(self.ax).legend()
             if len(states) == 2:
-                self.ax.annotate(
+                translated_axes(self.ax).annotate(
                     "",
                     (states[1][1]["t"], states[1][1]["w"] * 1000),
                     (states[0][1]["t"], states[0][1]["w"] * 1000),
                     arrowprops={"arrowstyle": "->", "color": "#176c85"},
                 )
-            self.ax.set(
+            translated_axes(self.ax).set(
                 xlabel="Dry bulb °C",
                 ylabel="g/kg dry air",
                 xlim=(lo, hi),
                 ylim=(0, max(s["w"] for _, s in states) * 1300 + 1),
                 title=f"{p:g} kPa｜空氣狀態／兩點淨變化",
             )
-            self.ax.legend(loc="upper left", fontsize=7, ncol=3)
-            self.ax.grid(alpha=0.15)
+            translated_axes(self.ax).legend(loc="upper left", fontsize=7, ncol=3)
+            translated_axes(self.ax).grid(alpha=0.15)
         else:
-            self.ax.text(
+            translated_axes(self.ax).text(
                 0.5,
                 0.5,
                 "結果可複製；進階設計可帶入主專案",
                 ha="center",
-                transform=self.ax.transAxes,
+                transform=translated_axes(self.ax).transAxes,
             )
-            self.ax.set_axis_off()
+            translated_axes(self.ax).set_axis_off()
         self.fig.tight_layout()
         self.plot.draw_idle()
 

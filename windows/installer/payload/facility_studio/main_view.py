@@ -1,7 +1,8 @@
+from .localized_plot import translated_axes
 from pathlib import Path
-import tkinter as tk
+from .localized_tk import tk
 from tkinter import font as tkfont
-from tkinter import ttk
+from .localized_tk import ttk
 from .engine import wetbulb
 from .display_helpers import duct_dimensions, annotate_states
 from .schema import (
@@ -105,7 +106,8 @@ class MainView:
                     else f"{d['total_pa']:,.1f} Pa / {d['mmAq']:.2f} mmAq"
                 )
                 self.pd_quick.config(
-                    text=self.pressure_geometry(self.selected_pd) + f"\n{self.selected_pd}：{flow:,.1f} {unit}，流速 {d['velocity_mps']:.2f} m/s\n{pressure}｜"
+                    text=self.pressure_geometry(self.selected_pd)
+                    + f"\n{self.selected_pd}：{flow:,.1f} {unit}，流速 {d['velocity_mps']:.2f} m/s\n{pressure}｜"
                     + (
                         "含輸入設備壓差"
                         if d["equipment_included"]
@@ -160,7 +162,13 @@ class MainView:
             )
         if hasattr(self, "assumption_labels"):
             for page, label in self.assumption_labels.items():
-                keys = sorted(k for k in FIELDS if FIELDS[k]["page"] == page and not self.form_rows[k].winfo_manager() and str(self.widgets[k].cget("state")) != "disabled")
+                keys = sorted(
+                    k
+                    for k in FIELDS
+                    if FIELDS[k]["page"] == page
+                    and not self.form_rows[k].winfo_manager()
+                    and str(self.widgets[k].cget("state")) != "disabled"
+                )
                 modified = [
                     FIELDS[k]["label"] + "=" + self.variables[k].get()
                     for k in keys
@@ -193,7 +201,11 @@ class MainView:
     def pressure_geometry(self, key):
         if not self.result:
             return ""
-        d = self.result["water"][key] if key in PD_KEYS[:5] else self.result["ducts"][key]
+        d = (
+            self.result["water"][key]
+            if key in PD_KEYS[:5]
+            else self.result["ducts"][key]
+        )
         manual = self.pd[key]["manual_id_mm"].get()
         source = "手填內徑" if float(manual) > 0 else "流量自動定寸"
         if key in PD_KEYS[:5]:
@@ -211,7 +223,7 @@ class MainView:
                     "標準流量先換算管內實際流量；壓力及流速可於進階模式逐路設定。PV 壓力為絕壓。",
                     "kW 是輸入電力，HP 是機械輸出；候選線徑需再核對敷設與保護條件。",
                     "名目風量先加設計餘裕，再定寸；管形與寬高比目前共用於所有排氣系統。",
-                    "連動負荷時以熱量與 ΔT 反算水量；手填水量保留但不採用。水物性共用於全部水迴路。"
+                    "連動負荷時以熱量與 ΔT 反算水量；手填水量保留但不採用。水物性共用於全部水迴路。",
                 ][page],
                 wraplength=650,
                 style="Muted.TLabel",
@@ -237,7 +249,13 @@ class MainView:
                     row=0, column=0, sticky="w", padx=(0, 12)
                 )
                 if f["options"] == ["1", "0"]:
-                    widget = ttk.Checkbutton(line, text="啟用", variable=self.variables[key], onvalue="1", offvalue="0")
+                    widget = ttk.Checkbutton(
+                        line,
+                        text="啟用",
+                        variable=self.variables[key],
+                        onvalue="1",
+                        offvalue="0",
+                    )
                 elif f["options"]:
                     widget = ttk.Combobox(
                         line,
@@ -450,7 +468,12 @@ class MainView:
             )
         )
         self.result_labels[1].config(
-            text="設備候選：" + ("；".join(f"{k} {v} 台" for k, v in r["counts"].items() if v) or "無需求") + f"\n夏季再熱 {s['reheat_kw']:.2f} kW，加濕 {s['humid_kg_h']:.2f} kg/h；冬季加熱 {w['reheat_kw']:.2f} kW，加濕 {w['humid_kg_h']:.2f} kg/h。"
+            text="設備候選："
+            + (
+                "；".join(f"{k} {v} 台" for k, v in r["counts"].items() if v)
+                or "無需求"
+            )
+            + f"\n夏季再熱 {s['reheat_kw']:.2f} kW，加濕 {s['humid_kg_h']:.2f} kg/h；冬季加熱 {w['reheat_kw']:.2f} kW，加濕 {w['humid_kg_h']:.2f} kg/h。"
         )
         self.latent_text.set(
             f"人員 {r['latent']['people_kg_h']:.2f}＋製程 {r['latent']['process_kg_h']:.2f}＝室內合計 {r['moisture'] * 3600:.2f} kg/h\n除濕負荷參考 {r['ql']:.2f} kW；外氣水氣由空調盤管另算。"
@@ -726,17 +749,17 @@ class MainView:
         lo = min((x["t"] for _, x in nodes)) - 5
         hi = max((x["t"] for _, x in nodes)) + 5
         ymax = max((x["w"] * 1000 for _, x in nodes)) * 1.22 + 1
-        self.ax.clear()
+        translated_axes(self.ax).clear()
         temps = [lo + (hi - lo) * j / 149 for j in range(150)]
         for rh in [10, 30, 50, 70, 90, 100]:
-            self.ax.plot(
+            translated_axes(self.ax).plot(
                 temps,
                 [state_trh(t, rh, p)["w"] * 1000 for t in temps],
                 color="#8aa4b7",
                 alpha=0.35,
                 lw=1 if rh < 100 else 1.7,
             )
-        self.ax.plot(
+        translated_axes(self.ax).plot(
             [outside["t"], r["room"]["t"]],
             [outside["w"] * 1000, r["room"]["w"] * 1000],
             ls="--",
@@ -754,7 +777,7 @@ class MainView:
         for j, (a, b) in enumerate(zip(seq, seq[1:])):
             if abs(a["t"] - b["t"]) + abs(a["w"] - b["w"]) * 1000 < 1e-07:
                 continue
-            self.ax.annotate(
+            translated_axes(self.ax).annotate(
                 "",
                 xy=(b["t"], b["w"] * 1000),
                 xytext=(a["t"], a["w"] * 1000),
@@ -770,24 +793,24 @@ class MainView:
                 name
             )
         for j, ((t, w), names) in enumerate(clusters.items()):
-            self.ax.scatter(t, w, s=35, color="#183e58", zorder=4)
-        self.ax.set(
+            translated_axes(self.ax).scatter(t, w, s=35, color="#183e58", zorder=4)
+        translated_axes(self.ax).set(
             xlim=(lo, hi),
             ylim=(0, ymax),
             xlabel="乾球溫度 °C",
             ylabel="含濕比 g/kg乾空氣",
             title=self.season.get() + f"｜{p:g} kPa｜IN入口 C1/C2盤管 HT加熱 SA送風",
         )
-        self.ax.text(
+        translated_axes(self.ax).text(
             0.01,
             0.98,
             "藍：冷卻  橘：加熱  綠：加濕\n灰線：10 / 30 / 50 / 70 / 90 / 100% RH",
-            transform=self.ax.transAxes,
+            transform=translated_axes(self.ax).transAxes,
             va="top",
             fontsize=8,
             color="#506878",
         )
-        self.ax.grid(alpha=0.15)
+        translated_axes(self.ax).grid(alpha=0.15)
         self.fig.tight_layout()
         annotate_states(self.ax, clusters)
         self.plot.draw_idle()

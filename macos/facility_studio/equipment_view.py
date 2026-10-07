@@ -2,8 +2,8 @@
 
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-import tkinter as tk
-from tkinter import ttk, filedialog
+from .localized_tk import tk
+from .localized_tk import ttk, filedialog
 from .equipment_io import (
     export_template,
     export_csv_templates,
@@ -13,16 +13,23 @@ from .equipment_io import (
 from .equipment_analysis import analyze_equipment, equipment_report, group_metrics
 from .equipment_schema import SYSTEMS
 from .ui_common import app_icon
+from .localized_tk import LanguagePicker
+from . import i18n
 from .utils import atomic_text
 
 
 class EquipmentWindow:
+    def refresh_language(self):
+        if self.win.winfo_exists() and self.result:
+            self.show_group()
+
     def __init__(self, parent, family="Microsoft JhengHei"):
         self.win = tk.Toplevel(parent)
-        self.win.title("設備表匯入與需求分析 V5.5.4")
+        self.win.title("設備表匯入與需求分析 V5.5.5")
         self.win.geometry("1150x800")
         self.win.minsize(830, 560)
         app_icon(self.win)
+        i18n.subscribe(self)
         self.result = self.future = self.poll_id = None
         self.executor = ThreadPoolExecutor(max_workers=1)
         self.win.columnconfigure(0, weight=1)
@@ -38,6 +45,9 @@ class EquipmentWindow:
             style="Simple.Muted.TLabel",
             wraplength=780,
         ).grid(row=1, column=0, sticky="w", pady=(5, 0))
+        self.language_picker = LanguagePicker(header)
+        self.language_picker.grid(row=0, column=1, padx=12, sticky="e")
+        header.columnconfigure(0, weight=1)
         toolbar = ttk.Frame(self.win, padding=(18, 3))
         toolbar.grid(row=1, column=0, sticky="ew")
         ttk.Button(toolbar, text="1 匯出Excel範本", command=self.export_template).grid(

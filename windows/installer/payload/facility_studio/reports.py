@@ -1,10 +1,15 @@
+from .i18n import localized_report, verbatim
 from .engine import pv_to_torr
 from .schema import VERSION
 from .utils import US_RT_KW, dewpoint
 
 
+@localized_report
 def report(r):
     i = dict(r["project"]["inputs"])
+    from .schema import DEFAULTS
+
+    i["project_name"] = verbatim(i["project_name"], DEFAULTS["project_name"])
     i.update({k: r["effective_inputs"][k] for k in r.get("inactive_fields", {})})
     lines = []
     a = lines.append
@@ -23,7 +28,14 @@ def report(r):
             a("[" + q["status"] + "] " + q["name"] + "：" + q["detail"])
     for rec in r.get("source_receipts", []):
         if rec["status"] != "已由手動或其他來源取代":
-            a("來源：" + rec["source_name"] + "；帶入 " + rec["captured_at"] + "；" + rec["status"])
+            a(
+                "來源："
+                + verbatim(rec["source_name"])
+                + "；帶入 "
+                + rec["captured_at"]
+                + "；"
+                + rec["status"]
+            )
     a("\n一、設計條件")
     a(
         f"大氣壓 {i['atm_kpa']} kPa；夏季 {i['oa_t']}°C / {i['oa_rh']}%RH；冬季 {i['ow_t']}°C / {i['ow_rh']}%RH；室內 {i['ra_t']}°C / {i['ra_rh']}%RH（精確目標）。"
@@ -177,7 +189,10 @@ def report(r):
 
 
 def _nm_report_base(r):
-    i = r["inputs"]
+    from .ahu_schema import NM_DEFAULTS
+
+    i = dict(r["inputs"])
+    i["name"] = verbatim(i["name"], NM_DEFAULTS["name"])
     lines = [
         i["name"] + "｜MAU 分段需求與額定容量校核",
         "此表為需求反算；未達額定檢核時，表列目標狀態不代表已配置設備實際可達。",
@@ -280,13 +295,14 @@ def _nm_report_base(r):
     return "\n".join(lines).replace("热", "熱").replace("侧", "側") + "\n"
 
 
+@localized_report
 def nm_report(r):
     s = _nm_report_base(r)
     i = r["inputs"]
     if r.get("link_status"):
         s = "主案連動：" + r["link_status"] + "\n" + s
     extra = [
-        "\n逐段控制與選用熱源（V5.5.4）",
+        "\n逐段控制與選用熱源（V5.5.5）",
         f"H1：{i['h1_source']}；H2：{i['h2_source']}；加濕：{i['humidifier']}。保留的名目電熱欄位不代表停用熱源仍在供熱。",
     ]
     for season, title in [("summer", "夏季"), ("winter", "冬季")]:

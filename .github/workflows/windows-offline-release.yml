@@ -2,7 +2,7 @@ name: Build and verify offline Windows EXE
 
 on:
   push:
-    branches: [main, maintenance/windows-offline]
+    branches: [main, feature/bilingual-ui, maintenance/windows-offline]
     paths:
       - .github/workflows/windows-offline-release.yml
       - windows/winrelease/**
@@ -36,6 +36,8 @@ jobs:
           python windows/tests/v554_features.py
           python windows/tests/maintenance_checks.py
           python windows/tests/security_checks.py
+          python windows/tests/bilingual.py
+          python tools/verify_use_cases.py --platform windows --output "$env:RUNNER_TEMP/win-use-cases.json"
       - name: Build the standalone windowed EXE and complete offline ZIP
         run: python -m winrelease.build --output "$env:RUNNER_TEMP/windows-offline"
         working-directory: windows
@@ -57,8 +59,8 @@ jobs:
         with:
           name: win1-delivery
           path: |
-            ${{ runner.temp }}/windows-offline/Facility_Studio_V5_5_4_Windows_Offline.exe
-            ${{ runner.temp }}/windows-offline/Facility_Studio_V5_5_4_Windows_Offline_OneClick.zip
+            ${{ runner.temp }}/windows-offline/Facility_Studio_V5_5_5_Windows_Offline.exe
+            ${{ runner.temp }}/windows-offline/Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip
             ${{ runner.temp }}/windows-offline/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 14

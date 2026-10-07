@@ -13,6 +13,7 @@ import zipfile
 from .equipment_schema import HEADER_ROW, SCHEMAS, SCHEMA_ID, SYSTEMS, DERIVED_HEADERS
 from .errors import ValidationError
 from .utils import atomic_text
+from .i18n import translate, language, canonical_choice
 
 MAX_FILE_BYTES = 20 * 1024 * 1024
 MAX_XML_BYTES = 40 * 1024 * 1024
@@ -129,7 +130,7 @@ def _xlsx_sheets(path):
             )
         result = {}
         for sheet in book.findall("s:sheets/s:sheet", NS):
-            name = sheet.get("name")
+            name = canonical_choice(sheet.get("name"), SYSTEMS)
             if name not in SYSTEMS:
                 continue
             if name in result:
@@ -192,7 +193,11 @@ def _xlsx_sheets(path):
 
 def _mapped_rows(system, rows, header_row):
     schema = SCHEMAS[system]
-    labels = {c["label"]: c["key"] for c in schema}
+    labels = {
+        label: c["key"]
+        for c in schema
+        for label in (c["label"], translate(c["label"], "en"))
+    }
     headers = rows.get(header_row, {})
     mapping = {}
     derived_indices = set()
@@ -201,7 +206,10 @@ def _mapped_rows(system, rows, header_row):
         label = str(cell.value or "").strip()
         if not label:
             continue
-        if label in DERIVED_HEADERS and not cell.formula:
+        if (
+            label in DERIVED_HEADERS | {translate(h, "en") for h in DERIVED_HEADERS}
+            and not cell.formula
+        ):
             derived_indices.add(index)
             continue
         if cell.formula or label not in labels:
@@ -222,9 +230,9 @@ def _mapped_rows(system, rows, header_row):
     for row_number, values in sorted(rows.items()):
         if row_number <= header_row:
             continue
-        if (values.get(0, Cell()).value, values.get(1, Cell()).value) == (
-            "欄位",
-            "填寫提示",
+        if (values.get(0, Cell()).value, values.get(1, Cell()).value) in (
+            ("欄位", "填寫提示"),
+            ("Field", "Instructions"),
         ):
             break
         mapped = {key: values.get(index, Cell()) for index, key in mapping.items()}
@@ -247,6 +255,7 @@ def _mapped_rows(system, rows, header_row):
 
 
 def load_equipment(path, csv_system="電力"):
+    csv_system = canonical_choice(csv_system, SYSTEMS)
     path = Path(path)
     if not path.is_file() or path.stat().st_size > MAX_FILE_BYTES:
         raise EquipmentImportError("檔案不存在或超過20MB")
@@ -296,6 +305,14 @@ def export_template(destination):
     destination = Path(destination)
     if not source.is_file():
         raise EquipmentImportError("安裝缺少設備Excel範本")
+    if language() == "en":
+        from .template_language import export_english_excel
+
+        if source.resolve() == destination.resolve():
+            raise EquipmentImportError(
+                "Export destination must not overwrite the bundled template."
+            )
+        return export_english_excel(source, destination)
     destination.parent.mkdir(parents=True, exist_ok=True)
     if source.resolve() != destination.resolve():
         shutil.copyfile(source, destination)
@@ -306,6 +323,10 @@ def export_csv_templates(destination):
     source = Path(__file__).with_name("resources") / "equipment_csv"
     destination = Path(destination)
     destination.mkdir(parents=True, exist_ok=True)
+    if language() == "en":
+        from .template_language import export_english_csv
+
+        return export_english_csv(source, destination, SYSTEMS)
     for system in SYSTEMS:
         shutil.copyfile(source / (system + ".csv"), destination / (system + ".csv"))
     return destination
