@@ -19,10 +19,17 @@ PACKAGE_NAME = "Facility_Studio_V5_5_5_macOS_mac2"
 
 
 def command(args, log, timeout=180):
-    with Path(log).open("w", encoding="utf-8") as output:
-        subprocess.run(
-            args, stdout=output, stderr=subprocess.STDOUT, check=True, timeout=timeout
-        )
+    log = Path(log)
+    try:
+        with log.open("w", encoding="utf-8") as output:
+            subprocess.run(
+                args, stdout=output, stderr=subprocess.STDOUT,
+                check=True, timeout=timeout,
+            )
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
+        # Keep the artifact and surface the actual native failure in Actions.
+        print(log.read_text(encoding="utf-8", errors="replace")[-24000:], flush=True)
+        raise
 
 
 def main():

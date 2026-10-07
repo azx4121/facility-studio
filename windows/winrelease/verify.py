@@ -38,6 +38,22 @@ def launch(exe, arguments, cwd, env):
         [str(exe), *map(str, arguments)], cwd=cwd, env=env, timeout=150
     )
     if result.returncode:
+        if "--self-test-result" in arguments:
+            index = arguments.index("--self-test-result") + 1
+            report = Path(arguments[index])
+            if report.is_file():
+                data = json.loads(report.read_text(encoding="utf-8"))
+                print(json.dumps({
+                    "native_selftest_failures": [
+                        item for item in data["checks"] if not item["passed"]
+                    ],
+                    "total_checks": len(data["checks"]),
+                }, ensure_ascii=False), flush=True)
+            runtime_log = report.with_name("Windows_Runtime.txt")
+            if runtime_log.is_file():
+                print(runtime_log.read_text(
+                    encoding="utf-8", errors="replace"
+                )[-12000:], flush=True)
         raise RuntimeError(
             "Delivered EXE failed with exit code " + str(result.returncode)
         )
