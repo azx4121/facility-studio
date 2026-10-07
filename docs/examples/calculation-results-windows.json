@@ -209,6 +209,7 @@
       ],
       "result": {
         "tool": "gas",
+        "flow_basis": "標準流量",
         "gas": "CDA",
         "standard_lpm": 800.0,
         "actual_lpm": 115.58122125975831,
@@ -241,6 +242,7 @@
       ],
       "result": {
         "tool": "gas",
+        "flow_basis": "標準流量",
         "gas": "N2",
         "standard_lpm": 1666.6666666666667,
         "actual_lpm": 240.79421095782982,
@@ -510,7 +512,7 @@
         "單相需求3 kW保持獨立"
       ],
       "result": {
-        "version": "5.5.4",
+        "version": "5.5.6",
         "schema_id": "FacilityStudioEquipment/1",
         "source_name": "Equipment_Template.xlsx",
         "active_records": 3,
@@ -530,6 +532,8 @@
             "connected_kva": 3.0,
             "demand_kw": 3.0,
             "demand_kvar": 0.0,
+            "design_kw": 3.0,
+            "design_kvar": 0.0,
             "demand_kva": 3.0,
             "equivalent_pf": 1.0,
             "current_a": 13.636363636363637,
@@ -581,6 +585,8 @@
             "connected_kva": 47.05882352941177,
             "demand_kw": 25.0,
             "demand_kvar": 15.493608460077557,
+            "design_kw": 25.0,
+            "design_kvar": 15.493608460077557,
             "demand_kva": 29.41176470588235,
             "equivalent_pf": 0.8500000000000001,
             "current_a": 44.686553342850296,
@@ -658,6 +664,7 @@
             },
             "pending": null,
             "adopted_defaults": {},
+            "normalizations": {},
             "inputs": {
               "供應群組": "UP-01",
               "設備台數": 1,
@@ -710,6 +717,7 @@
             },
             "pending": null,
             "adopted_defaults": {},
+            "normalizations": {},
             "inputs": {
               "供應群組": "UP-01",
               "設備台數": 3,
@@ -762,6 +770,7 @@
             },
             "pending": null,
             "adopted_defaults": {},
+            "normalizations": {},
             "inputs": {
               "供應群組": "UP-01",
               "設備台數": 2,
@@ -806,7 +815,7 @@
         "排氣需求與風量基準"
       ],
       "result": {
-        "version": "5.5.4",
+        "version": "5.5.6",
         "schema_id": "FacilityStudioEquipment/1",
         "source_name": "Equipment_Template.xlsx",
         "active_records": 6,
@@ -997,6 +1006,7 @@
             "circulation_lpm": 0,
             "thermal_kw": 10.466999999999999,
             "adopted_defaults": {},
+            "normalizations": {},
             "inputs": {
               "供應群組": "PCW-01",
               "設備台數": 2,
@@ -1028,6 +1038,7 @@
               "within_table": true
             },
             "adopted_defaults": {},
+            "normalizations": {},
             "inputs": {
               "供應群組": "CDA-01",
               "設備台數": 2,
@@ -1064,6 +1075,7 @@
               "within_table": true
             },
             "adopted_defaults": {},
+            "normalizations": {},
             "inputs": {
               "供應群組": "N2-01",
               "設備台數": 2,
@@ -1089,6 +1101,7 @@
             "connected_cmh": 1000.0,
             "demand_cmh": 500.0,
             "adopted_defaults": {},
+            "normalizations": {},
             "inputs": {
               "供應群組": "EX-01",
               "設備台數": 2,
@@ -1111,6 +1124,7 @@
             "circulation_lpm": 4.0,
             "thermal_kw": null,
             "adopted_defaults": {},
+            "normalizations": {},
             "inputs": {
               "供應群組": "DI-01",
               "設備台數": 2,
@@ -1142,6 +1156,7 @@
               "within_table": true
             },
             "adopted_defaults": {},
+            "normalizations": {},
             "inputs": {
               "供應群組": "PV-01",
               "設備台數": 2,
@@ -1430,14 +1445,14 @@
           "steam_cond_max": "目前未使用蒸汽加濕",
           "h1_hw_kw": "本段目前不採用熱回收水",
           "h1_water_mode": "本段目前不採用熱回收水",
-          "h1_hw_in": "本段不採用独立熱水條件",
-          "h1_hw_out": "本段不採用独立熱水條件",
-          "h1_hw_approach": "本段不採用独立熱水條件",
+          "h1_hw_in": "本段不採用獨立熱水條件",
+          "h1_hw_out": "本段不採用獨立熱水條件",
+          "h1_hw_approach": "本段不採用獨立熱水條件",
           "h2_hw_kw": "本段目前不採用熱回收水",
           "h2_water_mode": "本段目前不採用熱回收水",
-          "h2_hw_in": "本段不採用独立熱水條件",
-          "h2_hw_out": "本段不採用独立熱水條件",
-          "h2_hw_approach": "本段不採用独立熱水條件",
+          "h2_hw_in": "本段不採用獨立熱水條件",
+          "h2_hw_out": "本段不採用獨立熱水條件",
+          "h2_hw_approach": "本段不採用獨立熱水條件",
           "hw_in": "沒有啟用共用回收熱水的段落",
           "hw_out": "沒有啟用共用回收熱水的段落",
           "hw_approach": "沒有啟用共用回收熱水的段落"

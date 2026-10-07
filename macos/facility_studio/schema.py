@@ -4,7 +4,7 @@ from .utils import EXTRA_DEFAULTS, PD_DEFAULTS
 from .utils import PD_DEFAULTS as BASE_PD_DEFAULTS
 
 PD_DEFAULTS = dict(BASE_PD_DEFAULTS)
-VERSION = "5.5.5"
+VERSION = "5.5.6"
 SCHEMA_VERSION = 8
 PAGES = [
     "總覽與空氣線圖",
@@ -702,3 +702,41 @@ BASIC_KEYS.add("winter_model")
 FIELD_HELP["winter_model"] = (
     "室內模式以明列得熱、外牆、樓板與產濕作穩態收支；沿用夏季設計風量。並非逐時建築負荷或多室模型。"
 )
+
+# V5.5.6: every water circuit owns its adopted fluid properties. Older projects
+# explicitly retain their former shared reference; AHU returns update only their
+# destination circuits, never PCW/DCCW or the shared reference.
+V55_INPUT_KEYS = set(FIELDS)
+SCHEMA_VERSION = 10
+for _panel in ("up", "np"):
+    DEFAULTS.update({
+        "e_" + _panel + "_pf_mode": "沿用共用 PF",
+        "e_" + _panel + "_pf": "0.85",
+        "e_" + _panel + "_design_floor": "0",
+    })
+    group(4, _panel.upper() + " 匯入設計條件", [
+        ("e_" + _panel + "_pf_mode", "盤別 PF 來源", "", ["沿用共用 PF", "本盤獨立 PF"]),
+        ("e_" + _panel + "_pf", "本盤等效功率因數", "", 0.1, 1),
+        ("e_" + _panel + "_design_floor", "匯入設計電流下限", "A", 0, 10000000),
+    ])
+    FIELD_HELP["e_" + _panel + "_design_floor"] = "設備表連續負載／馬達及最大支路的設計電流下限。主案採自身計算值與此值中較大者，避免使用率降低後選出過小進線；清除匯入時須重新檢核。"
+for loop in ("mchw", "chw", "dccw", "pcw", "hw"):
+    DEFAULTS.update({
+        loop + "_fluid_mode": "沿用共用參考",
+        loop + "_fluid_name": "清水（初估參考）",
+        loop + "_rho": "1000",
+        loop + "_cp": "4.1868",
+        loop + "_mu": "0.001",
+    })
+    group(6, loop.upper() + " 流體物性", [
+        (loop + "_fluid_mode", "本迴路物性來源", "", ["沿用共用參考", "本迴路獨立物性"]),
+        (loop + "_fluid_name", "本迴路流體／介質", "文字"),
+        (loop + "_rho", "本迴路密度", "kg/m³", 900, 1300),
+        (loop + "_cp", "本迴路比熱", "kJ/(kg·K)", 2, 5),
+        (loop + "_mu", "本迴路動力黏度", "Pa·s", 0.0001, 0.1),
+    ])
+    BASIC_KEYS.add(loop + "_fluid_mode")
+    FIELD_HELP[loop + "_fluid_mode"] = (
+        "沿用共用參考會明列採用值；獨立物性只影響本迴路。含乙二醇或不同溫度工況請採有效物性。"
+    )
+UTILITY_ONLY_KEYS.update(k for k, field in FIELDS.items() if field["page"] == 4)

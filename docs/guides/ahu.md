@@ -2,7 +2,7 @@
 
 [English](ahu.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
-**Seasonal AHU stage requirements and installed-capacity comparison.** 「完整工程工作台 → 單台空調箱」可設定冬夏工況，各段採自動需求、旁通或指定出口乾球；冷卻段另可指定T/RH。入口由上一段連動。H1／H2可分別選電熱、回收熱水、兩者並用或停用，熱水可共同或分段設定。
+**Seasonal AHU stage requirements and installed-capacity comparison.** 「完整工程工作台 → 空調箱管理 → 開啟選取單機」可設定冬夏工況，各段採自動需求、旁通或指定出口乾球；冷卻段另可指定T/RH。入口由上一段連動。H1／H2可分別選電熱、回收熱水、兩者並用或停用，熱水可共同或分段設定。
 
 循環水洗濕膜、電極式蒸汽及電熱式蒸汽加濕是不同設備。濕膜有蒸發冷卻效應，不能把所有加濕都當成等溫；電極蒸汽需核原廠導電率範圍，不能直接假設DI／UPW可用。
 

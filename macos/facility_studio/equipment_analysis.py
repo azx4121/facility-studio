@@ -7,8 +7,9 @@ import math
 import re
 
 from .data import PIPE_DB
-from .equipment_io import Cell, EquipmentImportError
+from .equipment_io import Cell, EquipmentImportError, percentage_value
 from .equipment_schema import SCHEMAS, SYSTEMS
+from .schema import VERSION
 from .errors import ValidationError
 from .simple_engines import (
     electrical,
@@ -44,7 +45,7 @@ def validate_rows(imported):
             if switch == 0:
                 skipped += 1
                 continue
-            result = dict(system=system, row=row, adopted_defaults={})
+            result = dict(system=system, row=row, adopted_defaults={}, normalizations={})
             for spec in SCHEMAS[system]:
                 key, current_column = spec["key"], spec["label"]
                 cell = cells.get(key, Cell())
@@ -78,6 +79,14 @@ def validate_rows(imported):
                         raise ValueError("可用選項：" + "、".join(spec["options"]))
                     result[key] = text
                 else:
+                    if key == "usage":
+                        normalized = percentage_value(cell) if cell.value not in (None, "") else value
+                        if str(normalized) != str(value):
+                            result["normalizations"][current_column] = dict(
+                                raw=str(value), number_format=cell.number_format,
+                                percentage_points=normalized,
+                            )
+                        value = normalized
                     parse = integer if kind == "integer" else number
                     result[key] = parse(value, key, spec["low"], spec["high"])
             identity = system, result["id"]
@@ -295,6 +304,8 @@ def analyze_equipment(imported):
                 connected_kva=math.hypot(p_full, q_full),
                 demand_kw=p,
                 demand_kvar=q,
+                design_kw=pd,
+                design_kvar=qd,
                 demand_kva=kva,
                 equivalent_pf=pf,
                 current_a=current,
@@ -474,6 +485,7 @@ def analyze_equipment(imported):
     original = {(r["system"], r["id"]): r for r in rows}
     for detail in row_results:
         row = original[detail["system"], detail["id"]]
+        detail["normalizations"] = row.get("normalizations", {})
         detail["inputs"] = {
             spec["label"]: row[spec["key"]]
             for spec in SCHEMAS[row["system"]]
@@ -497,7 +509,7 @@ def analyze_equipment(imported):
         sockets=sum(g["sockets"] for g in power_groups),
     )
     return dict(
-        version="5.5.4",
+        version=VERSION,
         schema_id=imported["schema_id"],
         source_name=imported["source_name"],
         active_records=len(rows),
@@ -579,7 +591,7 @@ def equipment_report(result):
         return verbatim(value, example(system).get(key))
 
     lines = [
-        "設備需求分析 V5.5.5",
+        "設備需求分析 V" + VERSION,
         f"來源：{verbatim(result['source_name'])}",
         f"全檔啟用{result['active_records']}筆；略過{result['skipped_records']}筆",
         "",
@@ -660,6 +672,8 @@ def equipment_report(result):
                     f"{key}={value}" for key, value in row["adopted_defaults"].items()
                 )
             )
+        for key, converted in row.get("normalizations", {}).items():
+            lines.append("百分比採用值：" + key + " 原值 " + converted["raw"] + "，數字格式 " + converted["number_format"] + " → " + str(converted["percentage_points"]) + "%")
         if row["notes"]:
             lines.append("    備註：" + verbatim(row["notes"]))
     lines += ["", *result["warnings"], result["pending"]]

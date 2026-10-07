@@ -1,10 +1,10 @@
 {
   "kind": "facility_workspace",
-  "workspace_version": 1,
-  "app_version": "5.5.5",
+  "workspace_version": 2,
+  "app_version": "5.5.6",
   "project_id": "tutorial-a-96m2-v555",
   "main": {
-    "schema_version": 9,
+    "schema_version": 10,
     "inputs": {
       "project_name": "Tutorial A - 96 m2 room",
       "atm_kpa": "101.325",
@@ -220,7 +220,38 @@
       "winter_floor_adj_t": "22",
       "winter_gain_ratio": "100",
       "winter_moisture_ratio": "100",
-      "winter_solar_kw": "0"
+      "winter_solar_kw": "0",
+      "e_np_pf_mode": "沿用共用 PF",
+      "e_np_pf": "0.85",
+      "chw_mu": "0.001",
+      "hw_fluid_mode": "沿用共用參考",
+      "pcw_fluid_name": "清水（初估參考）",
+      "chw_fluid_mode": "沿用共用參考",
+      "pcw_cp": "4.1868",
+      "pcw_rho": "1000",
+      "mchw_cp": "4.1868",
+      "mchw_fluid_name": "清水（初估參考）",
+      "dccw_cp": "4.1868",
+      "dccw_mu": "0.001",
+      "hw_cp": "4.1868",
+      "chw_cp": "4.1868",
+      "e_np_design_floor": "0",
+      "pcw_mu": "0.001",
+      "hw_rho": "1000",
+      "hw_mu": "0.001",
+      "mchw_mu": "0.001",
+      "chw_rho": "1000",
+      "chw_fluid_name": "清水（初估參考）",
+      "e_up_pf": "0.85",
+      "e_up_pf_mode": "沿用共用 PF",
+      "dccw_fluid_name": "清水（初估參考）",
+      "hw_fluid_name": "清水（初估參考）",
+      "mchw_rho": "1000",
+      "e_up_design_floor": "0",
+      "mchw_fluid_mode": "沿用共用參考",
+      "dccw_rho": "1000",
+      "pcw_fluid_mode": "沿用共用參考",
+      "dccw_fluid_mode": "沿用共用參考"
     },
     "pressure_drop": {
       "MCHW": {
@@ -1368,11 +1399,205 @@
       "winter_solar_kw": {
         "source": "系統預設",
         "note": "初估起點；依現場確認"
+      },
+      "e_np_pf_mode": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "沿用共用 PF",
+        "recorded_at": "2026-10-07T12:44:01.890053+00:00"
+      },
+      "e_np_pf": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "0.85",
+        "recorded_at": "2026-10-07T12:44:01.890072+00:00"
+      },
+      "chw_mu": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "0.001",
+        "recorded_at": "2026-10-07T12:44:01.890074+00:00"
+      },
+      "hw_fluid_mode": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "沿用共用參考",
+        "recorded_at": "2026-10-07T12:44:01.890076+00:00"
+      },
+      "pcw_fluid_name": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "清水（初估參考）",
+        "recorded_at": "2026-10-07T12:44:01.890078+00:00"
+      },
+      "chw_fluid_mode": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "沿用共用參考",
+        "recorded_at": "2026-10-07T12:44:01.890079+00:00"
+      },
+      "pcw_cp": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "4.1868",
+        "recorded_at": "2026-10-07T12:44:01.890081+00:00"
+      },
+      "pcw_rho": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "1000",
+        "recorded_at": "2026-10-07T12:44:01.890082+00:00"
+      },
+      "mchw_cp": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "4.1868",
+        "recorded_at": "2026-10-07T12:44:01.890084+00:00"
+      },
+      "mchw_fluid_name": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "清水（初估參考）",
+        "recorded_at": "2026-10-07T12:44:01.890085+00:00"
+      },
+      "dccw_cp": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "4.1868",
+        "recorded_at": "2026-10-07T12:44:01.890087+00:00"
+      },
+      "dccw_mu": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "0.001",
+        "recorded_at": "2026-10-07T12:44:01.890088+00:00"
+      },
+      "hw_cp": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "4.1868",
+        "recorded_at": "2026-10-07T12:44:01.890089+00:00"
+      },
+      "chw_cp": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "4.1868",
+        "recorded_at": "2026-10-07T12:44:01.890091+00:00"
+      },
+      "e_np_design_floor": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "0",
+        "recorded_at": "2026-10-07T12:44:01.890092+00:00"
+      },
+      "pcw_mu": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "0.001",
+        "recorded_at": "2026-10-07T12:44:01.890094+00:00"
+      },
+      "hw_rho": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "1000",
+        "recorded_at": "2026-10-07T12:44:01.890095+00:00"
+      },
+      "hw_mu": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "0.001",
+        "recorded_at": "2026-10-07T12:44:01.890097+00:00"
+      },
+      "mchw_mu": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "0.001",
+        "recorded_at": "2026-10-07T12:44:01.890098+00:00"
+      },
+      "chw_rho": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "1000",
+        "recorded_at": "2026-10-07T12:44:01.890100+00:00"
+      },
+      "chw_fluid_name": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "清水（初估參考）",
+        "recorded_at": "2026-10-07T12:44:01.890101+00:00"
+      },
+      "e_up_pf": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "0.85",
+        "recorded_at": "2026-10-07T12:44:01.890103+00:00"
+      },
+      "e_up_pf_mode": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "沿用共用 PF",
+        "recorded_at": "2026-10-07T12:44:01.890104+00:00"
+      },
+      "dccw_fluid_name": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "清水（初估參考）",
+        "recorded_at": "2026-10-07T12:44:01.890105+00:00"
+      },
+      "hw_fluid_name": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "清水（初估參考）",
+        "recorded_at": "2026-10-07T12:44:01.890106+00:00"
+      },
+      "mchw_rho": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "1000",
+        "recorded_at": "2026-10-07T12:44:01.890108+00:00"
+      },
+      "e_up_design_floor": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "0",
+        "recorded_at": "2026-10-07T12:44:01.890109+00:00"
+      },
+      "mchw_fluid_mode": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "沿用共用參考",
+        "recorded_at": "2026-10-07T12:44:01.890110+00:00"
+      },
+      "dccw_rho": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "1000",
+        "recorded_at": "2026-10-07T12:44:01.890111+00:00"
+      },
+      "pcw_fluid_mode": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "沿用共用參考",
+        "recorded_at": "2026-10-07T12:44:01.890112+00:00"
+      },
+      "dccw_fluid_mode": {
+        "source": "舊專案輸入",
+        "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
+        "value": "沿用共用參考",
+        "recorded_at": "2026-10-07T12:44:01.890114+00:00"
       }
     }
   },
   "ahus": [],
   "comparisons": {},
   "receipts": [],
-  "drafts": {}
+  "drafts": {},
+  "demand_ledger": {
+    "version": 1,
+    "entries": {},
+    "original": {},
+    "baseline": {},
+    "last_updates": {},
+    "selections": {}
+  }
 }

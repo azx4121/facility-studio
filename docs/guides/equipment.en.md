@@ -13,6 +13,26 @@ Retain sheet names and row 5 headers, and sort complete rows. Row 6 is a disable
 
 Simultaneous use estimates peak coincident demand; it is not an hourly operating-time fraction. A main's diversity factor does not automatically reduce branch ratings. Verify equipment ratings, gas reference conditions, supply voltage/phase and exhaust type.
 
+
+## Analyze, transfer and save separately
+
+Analysis does not change the main project. Select one supply group and UP/NP or a destination gas route, then use Preview transfer to main and confirm the before/after values. A main project can be created if none is open. Reimporting the same system/group/destination updates its source instead of adding again. Keep all equipment for one group in the same schedule rather than treating partial batches as separate sources.
+
+Electrical transfer supports only three-phase groups at the main line voltage. Other voltages and single-phase groups stay independent. P/Q, continuous-load allowances, the largest active branch-current floor and longest feeder run are retained. Socket counts describe connection points and cannot establish unknown socket kW. Electrical input is not transferred into room heat gain.
+
+PCW transfers flow and flow-weighted delta T. Where supply/return temperatures are absent, 25 C is only a pending placeholder; different service groups remain separate circuits. CDA/N2 transfer standard demand; compare main route pressure, temperature and velocity with imported requirements. Exhaust stays separated by type and terminal static pressure is not fan ESP. DI includes continuous circulation; reference quality is not measured quality. PV still needs pump/conductance data. Save the workspace to retain Demand ledger; an equipment-report export does not save the main workspace.
+
+## Percentage input
+
+| Input | Adopted simultaneous rate |
+| --- | --- |
+| Number `50` or text `50%` | 50% |
+| Excel percent cell stored as `0.5`, displayed as `50%` | 50%, based on the active cell number format |
+| General-format number `0.5` | 0.5%, without a magnitude guess |
+| Blank | 100% reference, disclosed in the detail |
+
+Review the adopted rate, raw value and format after import. Formula, Boolean and error cells are rejected rather than silently becoming zero. Branches retain rated-load checks.
+
 <a id="case-16"></a>
 ## Case 16: three electrical equipment types
 

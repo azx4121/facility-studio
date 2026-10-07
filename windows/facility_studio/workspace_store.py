@@ -1,6 +1,6 @@
 """Versioned whole-project documents, including editable drafts and AHU links.
 
-Calculation documents keep schema 9 for compatibility. This separate envelope
+Calculation documents migrate older schemas without losing drafts. This envelope
 owns project identity, AHU instances, saved A/B snapshots and transfer receipts.
 """
 import copy
@@ -12,6 +12,7 @@ from .schema import FIELDS, PD_DEFAULTS, PD_KEYS, SCHEMA_VERSION, VERSION
 from .ahu_schema import NM_DEFAULTS
 from .project_store import validate_provenance
 from .json_io import read_json_file
+from .contributions import empty_ledger, validate_ledger
 
 
 def raw_project(project):
@@ -38,9 +39,9 @@ def bounded_strings(values):
 
 
 def new_workspace(project):
-    return dict(kind="facility_workspace", workspace_version=1, app_version=VERSION,
+    return dict(kind="facility_workspace", workspace_version=2, app_version=VERSION,
                 project_id=uuid.uuid4().hex, main=raw_project(project),
-                ahus=[], comparisons={}, receipts=[], drafts={})
+                ahus=[], comparisons={}, receipts=[], drafts={}, demand_ledger=empty_ledger())
 
 
 def validate_workspace(doc):
@@ -49,9 +50,14 @@ def validate_workspace(doc):
     if doc.get("kind") != "facility_workspace":
         return new_workspace(doc)
     keys = {"kind", "workspace_version", "app_version", "project_id", "main", "ahus", "comparisons", "receipts", "drafts"}
-    if set(doc) != keys or doc["workspace_version"] != 1:
+    if doc.get("workspace_version") == 1 and set(doc) == keys:
+        doc = copy.deepcopy(doc)
+        doc.update(workspace_version=2, demand_ledger=empty_ledger())
+    keys.add("demand_ledger")
+    if set(doc) != keys or doc["workspace_version"] != 2:
         raise ValidationError("不支援的整案保存格式")
     d = copy.deepcopy(doc)
+    d["demand_ledger"] = validate_ledger(d["demand_ledger"])
     if not isinstance(d["project_id"], str) or not 1 <= len(d["project_id"]) <= 100:
         raise ValidationError("專案識別碼不合法")
     if not isinstance(d["app_version"], str) or len(d["app_version"]) > 30:
@@ -79,15 +85,24 @@ def validate_workspace(doc):
         bounded_strings(entry["inputs"])
     if not isinstance(d["comparisons"], dict) or set(d["comparisons"]) - {"A", "B"}:
         raise ValidationError("方案比較格式不符")
-    for result in d["comparisons"].values():
+    for tag, result in list(d["comparisons"].items()):
         if not isinstance(result, dict) or not isinstance(result.get("hash"), str):
             raise ValidationError("方案快照不完整")
-        saved_main = raw_project(result.get("project"))
         from .utils import project_hash
-        if result["hash"] != project_hash(saved_main):
+        original_main = result.get("project")
+        if result["hash"] != project_hash(original_main):
             raise ValidationError("方案快照與其輸入雜湊不一致")
+        saved_main = raw_project(original_main)
         if any(k not in result for k in ["qs", "moisture", "summer", "winter", "water", "electric", "quality"]):
             raise ValidationError("方案快照缺少計算依據")
+        if project_hash(saved_main) != result["hash"]:
+            from .engine import calculate
+            upgraded = calculate(saved_main)
+            for key in ("captured_at", "owner_project_id"):
+                if key in result:
+                    upgraded[key] = result[key]
+            upgraded["migration_note"] = "舊方案依保留輸入重新檢核；原版本 " + str(result.get("version", "?")) + "，原雜湊 " + result["hash"]
+            d["comparisons"][tag] = upgraded
     for result in d["comparisons"].values():
         from .design_workflow import compare_results
         import math

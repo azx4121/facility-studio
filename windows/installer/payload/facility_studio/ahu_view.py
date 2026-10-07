@@ -178,6 +178,13 @@ class AHUView:
         self.text.configure(state="disabled")
 
     def clear_output(self):
+        if getattr(self, "last_good_result", None):
+            from .reports import nm_report
+            self.set_text("【上次有效需求結果／待重算，不能匯出】\n\n" + nm_report(self.last_good_result))
+            if NM_HAS_PLOT and getattr(self, "stale_plot_label", None) is None:
+                self.stale_plot_label = translated_axes(self.ax).text(.5, .5, "上次有效需求結果｜待重算", transform=self.ax.transAxes, ha="center", va="center", fontsize=14, color="#b45309", bbox=dict(facecolor="white", alpha=.9))
+                self.plot.draw_idle()
+            return
         for item in self.table.get_children():
             self.table.delete(item)
         self.set_text("輸入已變更；不沿用舊計算書。")
@@ -196,6 +203,14 @@ class AHUView:
             + ("未達：" + "、".join(failed) if failed else "本季額定初估通過"),
             style="Error.TLabel" if failed else "Good.TLabel",
         )
+        factor = 1 + float(r["inputs"]["sf"]) / 100
+        from .utils import US_RT_KW
+        capacity_lines = []
+        for tag in ("c1", "c2"):
+            need = s[tag]["water_kw"] * factor / US_RT_KW
+            rating = float(r["inputs"][tag + "_rt"])
+            capacity_lines.append(tag.upper() + f" 冷量需求 {need:.1f}／配置 {rating:.1f} RT；缺口 {max(0, need - rating):.1f} RT")
+        self.summary.config(text=self.summary.cget("text") + "\n" + "；".join(capacity_lines) + "\n點位是滿足需求的目標；容量不足時，不能當成實際可達出風。")
         for item in self.table.get_children():
             self.table.delete(item)
         for j, ((_, inlet), (name, outlet)) in enumerate(

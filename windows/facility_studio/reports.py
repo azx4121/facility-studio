@@ -37,6 +37,12 @@ def report(r):
                 + rec["status"]
             )
     a("\n一、設計條件")
+    demand = r.get("demand_summary")
+    if demand and demand["sources"]:
+        a("已納入需求來源：" + "；".join(verbatim(x["name"]) for x in demand["sources"]))
+        a("水量彙整：同迴路夏／冬各自求和，設計=max(Σ夏季LPM, Σ冬季LPM)；不同供回水／介質／群組分列。")
+        for group in demand["water"]:
+            a(f"{group['loop']} {verbatim(group['circuit'])} {group['supply']:g}/{group['return']:g}°C：夏 {group['summer_lpm']:.2f}，冬 {group['winter_lpm']:.2f}，設計 {group['design_lpm']:.2f} LPM；" + ("主案採用" if group["adopted"] else "獨立迴路，未映射主案水力列"))
     a(
         f"大氣壓 {i['atm_kpa']} kPa；夏季 {i['oa_t']}°C / {i['oa_rh']}%RH；冬季 {i['ow_t']}°C / {i['ow_rh']}%RH；室內 {i['ra_t']}°C / {i['ra_rh']}%RH（精確目標）。"
     )
@@ -103,6 +109,8 @@ def report(r):
             a(
                 f"{k}：{d['lpm']:.3f} LPM，ΔT {d['delta_t']:.2f} K，{d['runs']} 支×{d['size']}／ID {d['id_mm']:.1f} mm，{d['velocity_mps']:.3f} m/s；壓差 {r['pressure'][k]['total_pa']:.3f} Pa。"
             )
+            fluid = d["fluid_properties"]
+            a(f"  採用物性：ρ {fluid['rho']:g} kg/m³；cp {fluid['cp']:g} kJ/(kg·K)；μ {fluid['mu']:g} Pa·s；來源 {fluid['source']}。")
     for k, d in r["ducts"].items():
         if d["flow_cmh"]:
             dims = (
@@ -159,6 +167,8 @@ def report(r):
         a(
             f"{k}：運轉 {e['current_a']:.3f} A，設計 {e['design_current_a']:.3f} A；NFB 候選 {c['nfb_candidate_a']} AT，{c['runs']} 組×{c['size_mm2']} mm²/相，Iz {c['iz_a']:.3f} A，壓降 {c['voltage_drop_pct']:.3f}%；接地紀錄：{i['e_' + k.lower() + '_ground']}。"
         )
+        if i.get("e_" + k.lower() + "_pf_mode") == "本盤獨立 PF":
+            a(f"  {k} 採用獨立 PF={e['pf']:.6g}；匯入設計電流下限 {i['e_' + k.lower() + '_design_floor']} A。")
     a("\n五、主要公式與簡短說明")
     a(
         f"照明 N=ceil(E×A/(Φ×U×M))=ceil({i['light_lux']}×{r['light']['area_m2']:g}/({i['light_lm']}×{i['light_u']}×{i['light_m']}))={r['light']['qty']} 盞。"

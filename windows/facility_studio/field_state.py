@@ -32,6 +32,9 @@ def main_inactive(i):
     for prefix, flow, unit in WATER_ROWS:
         if i.get(prefix + "_link") == "連動負荷":
             disable([flow, unit], "採用負荷反算水量，手填值僅保留")
+        if i.get(prefix + "_fluid_mode") != "本迴路獨立物性":
+            disable([prefix + "_" + prop for prop in ("fluid_name", "rho", "cp", "mu")],
+                    "本迴路採共用參考物性，獨立值只保留為草稿")
     if i.get("latent_mode") != "已知潛熱 kW":
         disable(["process_latent_kw"], "目前不以 kW 輸入製程水氣")
     if i.get("latent_mode") != "已知產濕量 kg/h":
@@ -44,6 +47,8 @@ def main_inactive(i):
         if i.get(f"gas{j}_v_mode") != "自訂流速":
             disable([f"gas{j}_velocity"], "採用氣體種類的流速參考")
     for panel in ["up", "np"]:
+        if i.get(f"e_{panel}_pf_mode") != "本盤獨立 PF":
+            disable([f"e_{panel}_pf"], "本盤採共用 PF，獨立值只保留為草稿")
         if i.get(f"e_{panel}_type") != "馬達負載":
             disable([f"e_{panel}_largest_hp"], "目前不是馬達群負載")
     return {k: reason for k, reason in off.items() if k in FIELDS}
@@ -148,7 +153,7 @@ def ahu_inactive(i):
             disable([tag + "_hw_kw", tag + "_water_mode"], "本段目前不採用熱回收水")
         custom = water and i.get(tag + "_water_mode") == "本段獨立設定"
         if not custom:
-            disable([tag + "_hw_" + k for k in ["in", "out", "approach"]], "本段不採用独立熱水條件")
+            disable([tag + "_hw_" + k for k in ["in", "out", "approach"]], "本段不採用獨立熱水條件")
         any_common_water |= water and not custom
     if not any_common_water:
         disable(["hw_in", "hw_out", "hw_approach"], "沒有啟用共用回收熱水的段落")

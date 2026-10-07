@@ -1,5 +1,5 @@
 {
-  "app_version": "5.5.5",
+  "app_version": "5.5.6",
   "source_platform": "macos",
   "execution": "Headless calculation and report checks on the current host; native GUI checks are separate.",
   "cases": [
@@ -89,47 +89,47 @@
         "gas_result": {
           "1": {
             "type": "N2",
-            "standard_lpm": 0,
-            "actual_lpm": 0,
-            "pressure_abs_pa": 601325,
+            "standard_lpm": 0.0,
+            "actual_lpm": 0.0,
+            "pressure_abs_pa": 601325.0,
             "minimum_id_mm": 0,
             "selected_id_mm": 0,
             "size": "無需求",
             "velocity_mps": 0,
-            "velocity_limit_mps": 12
+            "velocity_limit_mps": 12.0
           },
           "2": {
             "type": "CDA",
-            "standard_lpm": 800,
+            "standard_lpm": 800.0,
             "actual_lpm": 134.80231156196731,
-            "pressure_abs_pa": 601325,
+            "pressure_abs_pa": 601325.0,
             "minimum_id_mm": 13.809643723878326,
             "selected_id_mm": 16.1,
             "size": "1/2\" (15A)",
             "velocity_mps": 11.035816120931987,
-            "velocity_limit_mps": 15
+            "velocity_limit_mps": 15.0
           },
           "3": {
             "type": "O2",
-            "standard_lpm": 0,
-            "actual_lpm": 0,
-            "pressure_abs_pa": 601325,
+            "standard_lpm": 0.0,
+            "actual_lpm": 0.0,
+            "pressure_abs_pa": 601325.0,
             "minimum_id_mm": 0,
             "selected_id_mm": 0,
             "size": "無需求",
             "velocity_mps": 0,
-            "velocity_limit_mps": 8
+            "velocity_limit_mps": 8.0
           },
           "4": {
             "type": "PV",
-            "standard_lpm": 0,
-            "actual_lpm": 0,
+            "standard_lpm": 0.0,
+            "actual_lpm": 0.0,
             "pressure_abs_pa": 19998.35526315,
             "minimum_id_mm": 0,
             "selected_id_mm": 0,
             "size": "無需求",
             "velocity_mps": 0,
-            "velocity_limit_mps": 18
+            "velocity_limit_mps": 18.0
           }
         },
         "expected_alpm": 134.80231156196731
@@ -218,9 +218,16 @@
           "u_e_np_humid": "kW",
           "e_np_pump": "0.1",
           "u_e_np_pump": "kW",
-          "water_rho": "1000",
-          "water_cp": "4.1868",
-          "water_mu": "0.001"
+          "mchw_fluid_mode": "本迴路獨立物性",
+          "mchw_fluid_name": "清水（空調箱初估）",
+          "mchw_rho": "1000",
+          "mchw_cp": "4.1868",
+          "mchw_mu": "0.001",
+          "chw_fluid_mode": "本迴路獨立物性",
+          "chw_fluid_name": "清水（空調箱初估）",
+          "chw_rho": "1000",
+          "chw_cp": "4.1868",
+          "chw_mu": "0.001"
         },
         "quality": "待補資料"
       }
@@ -259,7 +266,7 @@
   "checks": 85,
   "passed": true,
   "input_sha256": {
-    "01_Practice_AHU.json": "ab8aa94791228ccba6b95d4c1bb3bcfdac816af0dfa4c7e069fa43f05c27a47c",
-    "02_Practice_MAU_and_AHU.json": "6512ba9392bd430b9cd9363922e1662680c749ccf2d398abd156f54ae3cee3b1"
+    "01_Practice_AHU.json": "ed7102e9d0c762f4b3c6ec0af4c8b83dcf186a974af9a0a5b2c71c9c22c60740",
+    "02_Practice_MAU_and_AHU.json": "b7663744d0d28cb25a84081afec300fbc8e3c795997cf978ee9bd82c08c56518"
   }
 }

@@ -110,7 +110,8 @@ def main():
         return 0
     if args.project:
         try:
-            r = calculate(read_project(args.project))
+            source = read_json_file(args.project)
+            r = calculate(source if source.get("kind") == "facility_workspace" else read_project(args.project))
             if args.report:
                 atomic_text(args.report, report(r))
             if args.result:

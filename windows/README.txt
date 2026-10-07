@@ -1,22 +1,38 @@
-廠務簡易工具 V5.5.5｜通用版｜Windows 中英雙語離線修訂 win.1｜2026-10-07
+廠務簡易工具 V5.5.6｜通用版｜Windows 中英雙語離線修訂 win.1｜2026-10-07
 
-V5.5.5 語言切換
+V5.5.6 操作修訂
+• 完整工作台預設聚焦空調與熱負荷；各個小工具可獨立使用。
+• 「開啟練習新案」建立可修改副本；「另存新檔」與「複製為新方案」用途分開。
+• 已採用的預設條件與隱藏的自訂值會顯示摘要；修改或錯誤時保留待重算結果，不能匯出。
+• 單機空調箱與設備表採需求清單回傳：相同來源更新，不同來源累加，移除可還原。
+• 水側按相容迴路彙整夏季／冬季需求；可用各迴路獨立物性，不能把不同水溫迴路硬加。
+• 電力按各盤功率因數彙整有功／無功需求，保留設計電流下限；不把不同供電併成同一盤。
+• Excel 百分比依儲存格格式辨識：50、50% 或顯示 50% 的數值都是 50%；一般格式的 0.5 是 0.5%。
+• CDA／特氣可切換標準與管內實際流量，維持同一物理需求；風管定寸模式不用填靜壓。
+• 離線中英教學分成六個必要步驟及選讀工具，從程式內按教學直接到目前工具。
+
+English: V5.5.6 adds a focused workbench, practice copies, explicit Save as / Duplicate actions,
+source-based demand transfers, seasonal water circuits, per-panel PF, Excel percentage-format
+handling, standard/actual gas flow switching, and clearly marked stale results with export locks.
+The built-in bilingual tutorial is offline. The FY icon and ANDY HUANG author credit are retained.
+
+V5.5.6 語言切換
 主畫面右上可選繁體中文／English，欄位、選項、提示、圖表、TXT／HTML 報告與新匯出的設備範本會同步切換；既有數字、專案與公式保持一致。
 English: choose English at the top right. Newly exported templates use English; Chinese schedules remain accepted. The preference is saved.
 目前下載與英文安裝說明：https://github.com/azx4121/facility-studio/blob/main/README.en.md
-雙語原生驗收：https://github.com/azx4121/facility-studio/blob/main/docs/2026-10-07-bilingual.md
+雙語原生驗收：https://github.com/azx4121/facility-studio/blob/main/docs/2026-10-07-v5.5.6-usability.md
 
 保留的 V5.5.4 功能更新
 • 右側數字鍵盤小數點統一輸入「.」，支援選取文字取代；一般Delete及左側小數點保留正常行為。
 • 溫度差與溫度分開說明；Kv／Cv明列為閥門通流係數，不是管徑。
-• 空氣狀態工具直接顯示即時線圖、RH曲線及目前點位；無效輸入會清除舊點位。
+• 空氣狀態工具直接顯示即時線圖、RH曲線及目前點位；無效輸入保留上次有效點位並標示「待重算」，禁止匯出舊結果。
 • 照明體積模式明列「m³ ÷ 同一空間淨高＝地板面積m²」；切換面積／坪／長寬／體積保持同一面積。
 • 新增設備表範本與Excel／CSV匯入：電力、PCW、CDA、N2、EXHAUST、DI、PV。
-首頁四項工具及完整工程工作台保留。V5.5.5 最新驗證詳根目錄 docs/2026-10-07-bilingual.md；Changes_and_Verification.html 與原 evidence 保留 V5.5.4 歷史驗證。
+首頁四項工具及完整工程工作台保留。V5.5.6 最新驗證詳根目錄 docs/2026-10-07-v5.5.6-usability.md；Changes_and_Verification.html 與原 evidence 保留 V5.5.4 歷史驗證。
 
 安裝與開啟
-1. 完整解壓縮 Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip。
-2. 雙擊 Facility_Studio_V5_5_5_Windows_Offline.exe。
+1. 完整解壓縮 Facility_Studio_V5_5_6_Windows_Offline_OneClick.zip。
+2. 雙擊 Facility_Studio_V5_5_6_Windows_Offline.exe。
 3. 已內含Python、Tk與繪圖套件；不需另裝Python，不需連網，無須管理員。
 4. 也可單獨下載EXE直接使用；初次開啟請等候內建套件展開。
 
@@ -37,7 +53,7 @@ I三相=P×1000/(√3VPF)；I單相=P×1000/(VPF)。連續／馬達初估採125%
 原專案線表僅初估，缺75°C端子表時保守採60°C表。馬達啟動、獨立過載、接地、中性線、短路及保護協調另核。
 
 風管尺寸
-填風量與可用管路靜壓，同時列方管、圓管及各自實際風速。預設風速上限8m/s、寬高比上限2，進階可改。
+先只填風量，同時列方管、圓管及各自實際風速。已知路徑時才啟用靜壓檢查。預設風速上限8m/s、寬高比上限2，進階可改。
 靜壓不能唯一決定尺寸；基本結果只定寸，不宣告壓力足夠。
 已知路徑時，可勾選進階檢查並填直管長度、ΣK及設備壓降，再比較路徑阻力與可用靜壓。各段視為同一尺寸；ΣK=4、設備100Pa是待確認的起點值。
 A=CMH/3600/v；圓D=√(4A/π)；方管Dh=2WH/(W+H)。阻力=fL/Dh×ρv²/2+ΣK×ρv²/2+設備壓降。v由實際面積計算，方管50mm、圓管2英吋級距。
@@ -136,6 +152,6 @@ PyInstaller：https://pyinstaller.org/en/stable/usage.html
 溫度差／NIST：https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-8
 Kv／Cv／Spirax Sarco：https://www.spiraxsarco.com/learn-about-steam/control-hardware-electric-pneumatic-actuation/control-valve-sizing-for-water-systems
 標準與實際壓縮空氣流量／NRCan：https://natural-resources.canada.ca/energy-efficiency/energy-star/energy-efficiency-reference-guide-compressed-air
-V5.5.4 各項原始結果見 Changes_and_Verification.html 與 evidence；V5.5.5 驗收另見上述最新文件。安裝器無商業程式碼簽章。
+V5.5.4 各項原始結果見 Changes_and_Verification.html 與 evidence；V5.5.6 驗收另見上述最新文件。安裝器無商業程式碼簽章。
 DESIGNED BY ANDY HUANG ©
 

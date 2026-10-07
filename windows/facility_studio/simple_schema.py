@@ -63,7 +63,7 @@ TOOLS = {
     ),
     "duct": dict(
         title="風管尺寸",
-        subtitle="輸入風量與可用靜壓，同時查看方管、圓管。",
+        subtitle="先用風量定寸；需要檢查靜壓時，再啟用路徑壓力檢查。",
         fields=[
             field(
                 "flow", "需要的風量", "3000", units=("flow_unit", ("CMH", "CFM", "L/s"))
@@ -84,9 +84,8 @@ TOOLS = {
             field("ratio", "方管寬高比上限", "2", advanced=True),
             field(
                 "check_path",
-                "我已知路徑，檢查壓力預算",
+                "加做路徑靜壓檢查",
                 "0",
-                advanced=True,
                 checkbox=True,
             ),
             field(
@@ -118,11 +117,13 @@ TOOLS = {
         subtitle="壓力填管內壓力表讀值；流量、壓力、流速一起決定管徑。",
         fields=[
             field("gas", "氣體", "CDA", options=("CDA", "N2", "Ar")),
+            field("flow_basis", "流量資料基準", "標準流量", options=("標準流量", "管內實際流量"), help="SLPM/SCFM是標準量；銘牌只有L/min時須先確認。切換基準按目前溫壓等量換算，不會憑數字猜測。"),
             field(
                 "flow",
                 "所需標準流量",
                 "800",
                 units=("flow_unit", ("SLPM", "SCFM", "Sm³/h")),
+                help="標準基準採25°C／101.325kPa(abs)，進階可調；實際量是目前管內溫壓下的体積量。",
             ),
             field(
                 "pressure",
@@ -267,7 +268,7 @@ def active_field(tool, key, data):
             return data["mode"] == "已知水量"
         if key == "power":
             return data["mode"] == "已知熱量"
-    if tool == "duct" and key in ("length", "k_sum", "equipment"):
+    if tool == "duct" and key in ("pressure", "length", "k_sum", "equipment"):
         return data["check_path"] == "1"
     return True
 
@@ -278,7 +279,7 @@ def adopted_summary(tool, data):
     if tool == "duct":
         return f"採用：風速≤{data['velocity']}m/s｜寬高比≤{data['ratio']}｜方管50mm、圓管2英吋級距｜{'已啟用路徑阻力檢查' if data['check_path']=='1' else '僅定寸，靜壓是否足夠待路徑資料'}"
     if tool == "gas":
-        return f"採用：管內{data['temperature']}°C｜標準流量{data['reference_t']}°C、{data['reference_p']}kPa(abs)｜理想氣體Z=1"
+        return f"採用：{data.get('flow_basis', '標準流量')}｜管內{data['temperature']}°C｜標準流量{data['reference_t']}°C、{data['reference_p']}kPa(abs)｜理想氣體Z=1"
     if tool == "lighting":
         source = (
             f"LED {data['efficacy']}lm/W初估"

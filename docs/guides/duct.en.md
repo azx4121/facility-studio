@@ -2,7 +2,7 @@
 
 [繁體中文](duct.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-Open **Duct sizing**. Enter CMH, CFM or L/s and available duct static pressure. Advanced settings include maximum velocity, aspect ratio and the critical route. Defaults are maximum 8 m/s and rectangular aspect-ratio limit 2; these do not suit every supply, corrosive exhaust or noise requirement.
+Open **Duct sizing**. Default size-only mode needs airflow in CMH, CFM or L/s and does not require static pressure. Enable the known-route check to enter available pressure, length, fittings and equipment loss. Advanced settings expose velocity, aspect ratio and properties. Defaults are maximum 8 m/s and rectangular aspect-ratio limit 2; these do not suit every supply, corrosive exhaust or noise requirement.
 
 <a id="case-03"></a>
 ## Case 03: 3,000 CMH, 200 Pa
@@ -13,7 +13,7 @@ Use maximum velocity 8 m/s, aspect-ratio limit 2 and no route input.
 | --- | --- | --- |
 | Candidate | 350 × 300 mm | Ø406.4 mm (16 in) |
 | Actual velocity | 7.937 m/s | 6.424 m/s |
-| Available static pressure | 200 Pa | 200 Pa |
+| Inactive pressure draft | 200 Pa, not assessed in size-only mode | Same |
 | Pressure sufficiency | Route not assessed | Route not assessed |
 
 `A = CMH / 3600 / v`; `D_round = √(4A / π)`. Discrete size increments reduce actual velocity below the limit. **Static pressure alone cannot determine size; without a route, 200 Pa is not declared sufficient.**

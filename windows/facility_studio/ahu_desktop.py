@@ -22,6 +22,7 @@ from . import i18n
 from .ui_common import app_icon, quality_style, quality_text
 from .utils import atomic_text, project_hash
 from .field_state import error_text
+from .schema import VERSION
 
 
 class AHUWindow(AHUView):
@@ -116,10 +117,11 @@ class AHUWindow(AHUView):
             self.suspended = False
         if self.job:
             self.win.after_cancel(self.job)
+        self.last_good_result = self.result or getattr(self, "last_good_result", None)
         self.result = None
         self.export_button.configure(state="disabled")
         self.status.config(text="輸入變更，等待單機檢核…", style="Muted.TLabel")
-        self.summary.config(text="等待目前輸入檢核")
+        self.summary.config(text="上次有效結果｜待重算，不能匯出" if self.last_good_result else "等待目前輸入檢核")
         self.clear_output()
         self.visibility()
         self.job = self.win.after(700, self.calculate)
@@ -219,6 +221,8 @@ class AHUWindow(AHUView):
         inputs["linked_main_hash"] = "尚未連動"
         self.source_project_id = ""
         self.saved_hash = project_hash(inputs)
+        self.result = None
+        self.last_good_result = None
         self.apply(inputs)
 
     def export(self):
@@ -513,7 +517,7 @@ class AHUWindow(AHUView):
         self.undo_inputs = None
         self.bad_key = None
         self._build_window(parent, main_app)
-        self.win.title("分段空調箱設計｜V5.5.5")
+        self.win.title("分段空調箱設計｜V" + VERSION)
         app_icon(self.win)
         i18n.subscribe(self)
         if main_app:
@@ -544,6 +548,8 @@ class AHUWindow(AHUView):
             self.export_button.configure(state="disabled")
             return
         self.result = r
+        self.last_good_result = r
+        self.stale_plot_label = None
         failed = [
             f"{season} {k}"
             for season in ["summer", "winter"]
@@ -659,6 +665,12 @@ class AHUWindow(AHUView):
             return
         try:
             updates = ahu_requirement_updates(self.main_app.result)
+            from tkinter import simpledialog
+            fraction = simpledialog.askfloat(i18n.translate("本台服務比例"), i18n.translate("若多台分攤同一主案，請填本台分攤的設計風量百分比。\n100% 代表單台負責整案；方案比較請勿把各方案同時回傳。"), initialvalue=100.0, minvalue=1.0, maxvalue=100.0, parent=self.win)
+            if fraction is None:
+                return
+            for season in ("summer", "winter"):
+                updates[season + "_flow"] = format(float(updates[season + "_flow"]) * fraction / 100, ".15g")
             if not messagebox.askokcancel(
                 "主案連動",
                 "來源主案："
@@ -693,24 +705,10 @@ class AHUWindow(AHUView):
                 parent=self.win,
             )
         try:
-            preview = ahu_utility_preview(self.result)
-            note = (
-                "空調箱 "
-                + self.result["inputs"]["name"]
-                + "｜"
-                + preview["quality"]
-                + "\n"
-                + "\n".join(preview["notes"])
-            )
-            note += "\n來源狀態：" + self.result["link_status"]
-            if apply_updates(
-                self.main_app,
-                preview["updates"],
-                note,
-                self.win,
-                source_type="來源快照",
-            ):
-                self.main_app.add_receipt(self, preview["updates"])
+            from .contributions import ahu_contribution
+            entry = ahu_contribution(self.result, self.ahu_id, self.main_app.snapshot()["inputs"])
+            if self.main_app.apply_contribution(entry, self.win):
+                self.main_app.add_receipt(self, self.main_app.demand_ledger["last_updates"])
                 self.main_app.recalculate()
         except (ValueError, KeyError) as exc:
             messagebox.showerror("無法回傳", str(exc), parent=self.win)

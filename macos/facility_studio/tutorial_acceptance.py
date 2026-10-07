@@ -36,7 +36,7 @@ def run(root, app, workbench, check, pump):
             app.tutorial_button.invoke()
             check("Simple tutorial entry opens a local file, not a website", lambda:
                   launch.call_args.args[0].startswith("file:")
-                  and launch.call_args.args[0].endswith("#start"))
+                  and launch.call_args.args[0].endswith("#" + app.current))
             workbench.tutorial_button.invoke()
             check("Workbench tutorial entry starts at the first project", lambda:
                   launch.call_args.args[0].endswith("#first-case"))

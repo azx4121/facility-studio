@@ -40,6 +40,7 @@ class AirChart(tk.Canvas):
     def __init__(self, parent, family="TkDefaultFont"):
         super().__init__(parent, height=310, bg="white", highlightthickness=0)
         self.family = family
+        self.stale = False
         self.state = None
         self.plot_data = None
         self.point_xy = None
@@ -47,6 +48,7 @@ class AirChart(tk.Canvas):
         self.clear()
 
     def clear(self):
+        self.stale = False
         self.state = None
         self.plot_data = None
         self.point_xy = None
@@ -61,9 +63,17 @@ class AirChart(tk.Canvas):
         )
 
     def set_state(self, state):
+        self.stale = False
         self.state = dict(state)
         self.plot_data = chart_data(state)
         self.redraw()
+
+    def mark_stale(self):
+        if self.state is None:
+            self.clear()
+        else:
+            self.stale = True
+            self.redraw()
 
     def redraw(self):
         if self.state is None:
@@ -170,7 +180,7 @@ class AirChart(tk.Canvas):
             tags="state_point",
         )
         state = self.state
-        label = f"目前 {state['t']:g}°C / {state['rh']:g}%RH\nw={state['w']*1000:.3f} g/kg，h={state['h']:.2f} kJ/kg"
+        label = ("上次有效結果" if self.stale else "目前") + f" {state['t']:g}°C / {state['rh']:g}%RH\nw={state['w']*1000:.3f} g/kg，h={state['h']:.2f} kJ/kg"
         anchor = "ne" if x > (left + right) / 2 else "nw"
         label_x = x - 10 if anchor == "ne" else x + 10
         label_y = max(top + 10, min(bottom - 36, y + 9))
@@ -183,3 +193,7 @@ class AirChart(tk.Canvas):
             fill="#a7283a",
             tags="state_label",
         )
+        if self.stale:
+            self.create_text((left + right) / 2, top + 12,
+                             text="上次有效結果｜待重算", fill="#b45309",
+                             font=(self.family, 11, "bold"), tags="stale_label")

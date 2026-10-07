@@ -1,5 +1,5 @@
 {
-  "app_version": "5.5.5",
+  "app_version": "5.5.6",
   "baseline": {
     "area_m2": 96.0,
     "volume_m3": 288.0,
@@ -15,7 +15,8 @@
     "up_current_a": 8.93731066857006,
     "quality": "待補資料"
   },
-  "ahu_transfer": {
+  "scope": "Synthetic calculation examples, not installed-equipment certification.",
+  "ahu_transfer_legacy_api": {
     "updates": {
       "mchw_q": "12.443068772362539",
       "u_mchw": "LPM",
@@ -48,5 +49,86 @@
     ],
     "quality": "待補資料"
   },
-  "scope": "Synthetic calculation examples, not installed-equipment certification."
+  "ahu_transfer": {
+    "updates": {
+      "u_e_np_fan": "kW",
+      "u_e_np_heat": "kW",
+      "u_e_np_humid": "kW",
+      "u_e_np_pump": "kW",
+      "e_np_fan": "0.37",
+      "e_np_heat": "16",
+      "e_np_humid": "0",
+      "e_np_pump": "0.1",
+      "mchw_q": "12.4430687723625",
+      "u_mchw": "LPM",
+      "chw1_dt": "5",
+      "mchw_link": "獨立輸入",
+      "chw1_in": "12",
+      "mchw_fluid_mode": "本迴路獨立物性",
+      "mchw_fluid_name": "來源迴路：MCHW",
+      "mchw_rho": "1000",
+      "mchw_cp": "4.1868",
+      "mchw_mu": "0.001",
+      "chw_q": "12.3484700700206",
+      "u_chw": "LPM",
+      "dt_chw": "5",
+      "chw_link": "獨立輸入",
+      "chw2_in": "7",
+      "chw_fluid_mode": "本迴路獨立物性",
+      "chw_fluid_name": "來源迴路：CHW",
+      "chw_rho": "1000",
+      "chw_cp": "4.1868",
+      "chw_mu": "0.001",
+      "e_np_pf_mode": "本盤獨立 PF",
+      "e_np_pf": "0.85",
+      "e_np_design_floor": "36.7993766778372",
+      "e_np_type": "一般負載",
+      "e_length_m": "30"
+    },
+    "notes": [
+      "Tutorial MAU-01 額定電力採回傳時共用 PF=0.85；風機／電熱／加濕／水洗泵為不同設備，不由冷量換算耗電。",
+      "只納入明確回傳的單機；同 ID 再回傳會更新原台，不能把方案 A/B 當成同時運轉的兩台。",
+      "NP 彙整運轉 P/Q 與來源設計電流；各來源設計餘裕相加，較只加全群最大馬達保守。支路候選仍保留在設備明細。"
+    ],
+    "pending": [
+      "Tutorial MAU-01 單機狀態：待補資料；容量為需求草稿。"
+    ],
+    "water": [
+      {
+        "loop": "MCHW",
+        "circuit": "MCHW",
+        "supply": 12.0,
+        "return": 17.0,
+        "rho": 1000.0,
+        "cp": 4.1868,
+        "mu": 0.001,
+        "summer_lpm": 12.443068772362539,
+        "winter_lpm": 0.0,
+        "id": "d6d093b915f969e42f559734",
+        "sources": [
+          "Tutorial MAU-01"
+        ],
+        "design_lpm": 12.443068772362539,
+        "adopted": true
+      },
+      {
+        "loop": "CHW",
+        "circuit": "CHW",
+        "supply": 7.0,
+        "return": 12.0,
+        "rho": 1000.0,
+        "cp": 4.1868,
+        "mu": 0.001,
+        "summer_lpm": 12.34847007002057,
+        "winter_lpm": 0.0,
+        "id": "630cc333eaa1c20bd05dad50",
+        "sources": [
+          "Tutorial MAU-01"
+        ],
+        "design_lpm": 12.34847007002057,
+        "adopted": true
+      }
+    ],
+    "scope": "One explicitly included AHU; same ID updates, distinct units add. Baseline equipment is a separate operator choice."
+  }
 }

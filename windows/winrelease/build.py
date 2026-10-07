@@ -14,8 +14,8 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY = ROOT.parent
-EXE_NAME = "Facility_Studio_V5_5_5_Windows_Offline.exe"
-ZIP_NAME = "Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip"
+EXE_NAME = "Facility_Studio_V5_5_6_Windows_Offline.exe"
+ZIP_NAME = "Facility_Studio_V5_5_6_Windows_Offline_OneClick.zip"
 NOTICE_NAMES = (
     "LICENSE",
     "LICENSE_GUIDE.md",
@@ -161,7 +161,7 @@ def main():
     (evidence / "Build_Manifest.json").write_text(
         json.dumps(
             {
-                "revision": "5.5.5-win.2",
+                "revision": "5.5.6-win.1",
                 "source_commit": os.environ.get("GITHUB_SHA"),
                 "python": sys.version,
                 "platform": platform.platform(),
@@ -176,7 +176,7 @@ def main():
         ),
         encoding="utf-8",
     )
-    package = output / "Facility_Studio_V5_5_5_Windows_Offline"
+    package = output / "Facility_Studio_V5_5_6_Windows_Offline"
     package.mkdir(exist_ok=True)
     shutil.copy2(exe, package / EXE_NAME)
     shutil.copy2(ROOT / "winrelease/README_Offline.txt", package / "README_先看我.txt")

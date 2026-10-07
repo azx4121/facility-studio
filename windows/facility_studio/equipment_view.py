@@ -3,7 +3,8 @@
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from .localized_tk import tk
-from .localized_tk import ttk, filedialog
+from .localized_tk import ttk, filedialog, messagebox
+from .schema import VERSION
 from .equipment_io import (
     export_template,
     export_csv_templates,
@@ -23,9 +24,15 @@ class EquipmentWindow:
         if self.win.winfo_exists() and self.result:
             self.show_group()
 
-    def __init__(self, parent, family="Microsoft JhengHei"):
+    def __init__(self, parent, family="Microsoft JhengHei", main_app=None):
+        self.main_app = main_app
+        self.parent = parent
+        self.owner_project_id = main_app.project_id if main_app else None
+        self.project_bound = bool(main_app)
+        if main_app:
+            main_app.children.append(self)
         self.win = tk.Toplevel(parent)
-        self.win.title("設備表匯入與需求分析 V5.5.5")
+        self.win.title("設備表匯入與需求分析 V" + VERSION)
         self.win.geometry("1150x800")
         self.win.minsize(830, 560)
         app_icon(self.win)
@@ -157,6 +164,17 @@ class EquipmentWindow:
             footer, text="匯出明細JSON", command=self.export_json, state="disabled"
         )
         self.json_button.grid(row=0, column=2, padx=3)
+        transfer = ttk.Frame(footer)
+        transfer.grid(row=1, column=0, columnspan=3, sticky="ew", pady=(8, 0))
+        ttk.Label(transfer, text="目的盤／特氣路：").pack(side="left")
+        self.target = tk.StringVar(value="UP")
+        self.target_selector = ttk.Combobox(transfer, textvariable=self.target, values=("UP", "NP"), state="readonly", width=6)
+        self.target_selector.pack(side="left", padx=6)
+        from .tutorial_help import open_tutorial
+        ttk.Button(transfer, text="本工具教學", command=lambda: open_tutorial(self.win, "equipment")).pack(side="right")
+        self.transfer_button = ttk.Button(transfer, text="3 預覽帶入主案", command=self.transfer_group, state="disabled")
+        self.transfer_button.pack(side="left", padx=6)
+        ttk.Label(transfer, text="先選上方一個供應群組；分析本身不會修改主案。", style="Simple.Muted.TLabel").pack(side="left")
         self.win.protocol("WM_DELETE_WINDOW", self.close)
         self.win.bind("<Configure>", self.resize, add="+")
 
@@ -199,6 +217,7 @@ class EquipmentWindow:
         self.set_details("")
         self.report_button.state(["disabled"])
         self.json_button.state(["disabled"])
+        self.transfer_button.state(["disabled"])
 
     def export_template(self, path=None):
         path = path or filedialog.asksaveasfilename(
@@ -303,7 +322,7 @@ class EquipmentWindow:
             text=f"{result['active_records']}筆設備，{len(result['groups'])}個分組｜連接{totals['connected_kw']:,.2f}kW，同時{totals['demand_kw']:,.2f}kW｜插座{totals['sockets']}個"
         )
         self.status.configure(
-            text=f"已分析 {result['source_name']}；略過{result['skipped_records']}筆未啟用列。尺寸為候選，明細列出採用條件與待資料。",
+            text=f"已分析 {result['source_name']}；略過{result['skipped_records']}筆未啟用列。百分比正規化 {sum(len(row.get('normalizations', {})) for row in result['rows'])} 欄；採用值已列明細。分析尚未帶入主案。",
             style="Simple.Good.TLabel",
         )
         self.report_button.state(["!disabled"])
@@ -315,6 +334,16 @@ class EquipmentWindow:
         if not selection or self.result is None:
             return
         group = self.result["groups"][int(selection[0])]
+        if group["system"] == "電力":
+            choices = ("UP", "NP")
+        elif group["system"] in ("CDA", "N2"):
+            choices = ("1", "2", "3")
+        else:
+            choices = (group["system"],)
+        self.target_selector.config(values=choices)
+        if self.target.get() not in choices:
+            self.target.set(choices[0])
+        self.transfer_button.state(["!disabled"])
         rows = [
             r
             for r in self.result["rows"]
@@ -329,6 +358,26 @@ class EquipmentWindow:
         elif group["system"] == "EXHAUST":
             rows = [r for r in rows if r["exhaust_type"] == group["exhaust_type"]]
         self.set_details(equipment_report(dict(self.result, groups=[group], rows=rows)))
+
+    def transfer_group(self):
+        if self.result is None or not self.tree.selection():
+            return
+        try:
+            if self.main_app is None:
+                if not messagebox.askokcancel("建立目的主案", "將開啟新的完整工程工作台；接著會預覽目的欄位，確認後才帶入。", parent=self.win):
+                    return
+                from .desktop import DesktopApp
+                self.main_app = DesktopApp(tk.Toplevel(self.parent))
+                self.owner_project_id = self.main_app.project_id
+            if not self.main_app.root.winfo_exists() or self.owner_project_id != self.main_app.project_id:
+                raise ValueError("目的主案已關閉或切換；請由目前主案重新開啟設備表匯入。")
+            from .contributions import equipment_contribution
+            group = self.result["groups"][int(self.tree.selection()[0])]
+            entry = equipment_contribution(self.result, group, self.main_app.snapshot()["inputs"], self.target.get())
+            if self.main_app.apply_contribution(entry, self.win):
+                self.status.config(text="選取群組已帶入；同群組重匯會更新原來源。請在主案「需求彙整」確認採用範圍。", style="Simple.Good.TLabel")
+        except (ValueError, KeyError, TypeError) as exc:
+            messagebox.showerror("尚未帶入", str(exc), parent=self.win)
 
     def export_report(self, path=None):
         if self.result is None:
@@ -372,7 +421,9 @@ class EquipmentWindow:
             self.status.configure(text=str(error), style="Simple.Error.TLabel")
             return False
 
-    def close(self):
+    def close(self, force=False):
+        if self.main_app and self in self.main_app.children:
+            self.main_app.children.remove(self)
         if self.pane_job:
             self.win.after_cancel(self.pane_job)
         if self.poll_id:

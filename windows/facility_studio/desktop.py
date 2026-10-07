@@ -26,6 +26,7 @@ from .schema import (
     QUALITY_PRESETS,
     REFERENCE_KEYS,
     SCHEMA_VERSION,
+    VERSION,
     default_project,
 )
 from .services import UNIT_VALUES, converted_units, independent_domains
@@ -46,6 +47,7 @@ class DesktopApp(SessionController, MainView):
         self.undo_aux = (
             copy.deepcopy(self.transfer_receipts),
             copy.deepcopy(self.field_drafts),
+            copy.deepcopy(self.demand_ledger),
         )
 
     def normalize_auto_values(self):
@@ -88,7 +90,7 @@ class DesktopApp(SessionController, MainView):
             project = self.undo_project
             self.undo_project = None
             if getattr(self, "undo_aux", None):
-                self.transfer_receipts, self.field_drafts = copy.deepcopy(self.undo_aux)
+                self.transfer_receipts, self.field_drafts, self.demand_ledger = copy.deepcopy(self.undo_aux)
                 self.undo_aux = None
             self.restore_snapshot(project)
 
@@ -320,7 +322,7 @@ class DesktopApp(SessionController, MainView):
 
     def _build_window(self, root):
         self.root = root
-        root.title("廠務工程工作台 V5.5.5")
+        root.title("廠務工程工作台 V" + VERSION)
         root.geometry(
             f"{min(1240, root.winfo_screenwidth() - 60)}x{min(840, root.winfo_screenheight() - 80)}"
         )
@@ -348,6 +350,7 @@ class DesktopApp(SessionController, MainView):
         self.bad_pd = None
         self.pd_widgets = {}
         self.view_mode = tk.StringVar(value="基本模式")
+        self.task_scope = tk.StringVar(value="空調與熱負荷")
         self.form_rows = {}
         self.form_boxes = []
         self.pd_rows = {}
@@ -370,7 +373,7 @@ class DesktopApp(SessionController, MainView):
         ).pack(anchor="w", padx=18, pady=(25, 6))
         tk.Label(
             side,
-            text="廠務工程工作台  V5.5.5",
+            text="廠務工程工作台  V" + VERSION,
             bg="#11253b",
             fg="#6edac7",
             font=(self.ui_font, 10),
@@ -432,6 +435,7 @@ class DesktopApp(SessionController, MainView):
             ("新專案", self.new),
             ("開啟", self.load),
             ("儲存整案", self.save),
+            ("另存新檔", self.save_workspace_as),
         ]:
             ttk.Button(bar, text=txt, command=cmd).pack(side="left", padx=3)
         modebar = ttk.Frame(head)
@@ -451,6 +455,9 @@ class DesktopApp(SessionController, MainView):
             modebar, text="復原帶入", command=self.undo_preset
         )
         self.undo_button.pack(side="left")
+        scope = ttk.Combobox(modebar, textvariable=self.task_scope, values=("空調與熱負荷", "全部工程分頁"), state="readonly", width=14)
+        scope.pack(side="left", padx=8)
+        scope.bind("<<ComboboxSelected>>", lambda event: self.update_visibility())
         ttk.Button(modebar, text="空調箱管理", command=self.open_ahu_manager).pack(
             side="left", padx=8
         )
@@ -468,6 +475,10 @@ class DesktopApp(SessionController, MainView):
             utilities, text="新手教學", command=lambda: open_tutorial(root, "first-case")
         )
         self.tutorial_button.pack(side="left", padx=(0, 8))
+        actions = ttk.Frame(head)
+        actions.grid(row=6, column=0, columnspan=2, sticky="w", pady=(6, 0))
+        for label, command in [("複製為新方案", self.duplicate_workspace), ("設備表匯入", self.open_equipment), ("需求彙整", self.open_demand_ledger), ("開啟練習新案", self.open_practice)]:
+            ttk.Button(actions, text=label, command=command).pack(side="left", padx=(0, 8))
         self.host = ttk.Frame(root)
         self.host.grid(row=1, column=1, sticky="nsew")
         self.host.columnconfigure(0, weight=1)
@@ -533,6 +544,8 @@ class DesktopApp(SessionController, MainView):
         self.comparisons = {}
         self.transfer_receipts = []
         self.field_drafts = {}
+        from .contributions import empty_ledger
+        self.demand_ledger = empty_ledger()
         self.saved_workspace_hash = ""
         self.unit_previous = {}
         self.partial_hvac = None
@@ -540,7 +553,7 @@ class DesktopApp(SessionController, MainView):
 
         attach_window(root)
         self._build_window(root)
-        root.title("廠務工程工作台 V5.5.5")
+        root.title("廠務工程工作台 V" + VERSION)
         app_icon(root)
         i18n.subscribe(self)
         self.unit_previous = {
@@ -615,9 +628,22 @@ class DesktopApp(SessionController, MainView):
         self.latent_text.set("輸入更新中，等待產濕檢核…")
         if self.after_id:
             self.root.after_cancel(self.after_id)
+        self.last_good_result = self.result or getattr(self, "last_good_result", None)
         self.result = None
         self.status.config(text="輸入已變更，等待檢核…", style="Muted.TLabel")
         self.export_button.state(["disabled"])
+        if self.last_good_result:
+            self.summary.config(text="上次有效結果｜輸入更新中，尚不可匯出", style="Warn.TLabel")
+            self.set_report("【上次有效結果／待重算，不能作為目前輸入結果】\n\n" + report(self.last_good_result))
+            if HAS_PLOT:
+                old = getattr(self, "stale_plot_label", None)
+                if old is not None and old in self.ax.texts:
+                    old.remove()
+                self.stale_plot_label = self.ax.text(.5, .5, "上次有效結果｜待重算", transform=self.ax.transAxes, ha="center", va="center", fontsize=15, color="#b45309", bbox=dict(facecolor="white", alpha=.9))
+                self.plot.draw_idle()
+            self.interlocks()
+            self.after_id = self.root.after(650, self.recalculate)
+            return
         self.set_report("輸入已變更；檢核完成後更新報告。")
         self.summary.config(text="輸入更新中…")
         self.psy_label.config(text="")
@@ -837,7 +863,7 @@ class DesktopApp(SessionController, MainView):
                 label.config(text="條件未通過檢核")
             for key in PD_KEYS:
                 self.grid.item(key, values=("—", "—", "—", "—"))
-            if HAS_PLOT:
+            if HAS_PLOT and not getattr(self, "last_good_result", None):
                 self.ax.clear()
                 self.ax.text(
                     0.5,
@@ -855,12 +881,14 @@ class DesktopApp(SessionController, MainView):
             self.status.config(text=msg[:160], style="Error.TLabel")
             self.summary.config(text="待修正：" + msg)
             self.export_button.state(["disabled"])
-            self.set_report("目前條件未通過檢核，未產生可用報告。\n\n" + msg)
+            self.set_report("目前條件未通過檢核，不能匯出。\n" + msg + ("\n\n【上次有效結果／待重算】\n" + report(self.last_good_result) if getattr(self, "last_good_result", None) else ""))
             if explicit:
                 self.focus_issue()
             return
         self.decorate_receipts(r)
         self.result = r
+        self.last_good_result = r
+        self.stale_plot_label = None
         self.update_visibility()
         self.status.config(
             text="檢核完成｜"
@@ -887,7 +915,7 @@ class DesktopApp(SessionController, MainView):
             q = self.result["quality"]
             self.quality_label.config(text=quality_text(q), style=quality_style(q))
             self.status.config(
-                text=q["status"] + "｜結果與報告已同步", style=quality_style(q)
+                text="計算完成｜工程評估：" + q["status"] + "｜待資料請補依據；未達請調整設備／條件", style=quality_style(q)
             )
             first = next(
                 (

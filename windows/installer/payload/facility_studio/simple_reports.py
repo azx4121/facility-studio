@@ -45,7 +45,7 @@ def presentation(result):
         ]
         details = [
             f"方管實際風速 {rect['velocity_mps']:.2f}m/s｜圓管 {round_duct['velocity_mps']:.2f}m/s｜上限 {result['velocity_limit']:g}m/s",
-            f"可用管路靜壓 {result['pressure_pa']:,.1f}Pa",
+            f"可用管路靜壓 {result['pressure_pa']:,.1f}Pa" if result["path_checked"] else "只計尺寸；未檢查靜壓，靜壓草稿未採用。",
         ]
         if result["path_checked"] and result["flow_cmh"]:
             for label, row in [("方管", rect), ("圓管", round_duct)]:

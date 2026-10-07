@@ -2,7 +2,7 @@ name: Build and verify offline Windows EXE
 
 on:
   push:
-    branches: [main, feature/bilingual-ui, maintenance/windows-offline]
+    branches: [main, feature/bilingual-ui, maintenance/windows-offline, codex/v5.5.6-usability-sync]
     paths:
       - .github/workflows/windows-offline-release.yml
       - windows/winrelease/**
@@ -15,7 +15,7 @@ permissions:
 jobs:
   build:
     runs-on: windows-2022
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -34,6 +34,8 @@ jobs:
           python windows/tests/v552_core.py
           python windows/tests/simple_features.py
           python windows/tests/v554_features.py
+          python windows/tests/v556_features.py
+          python docs/tutorial/verify_tutorial.py --platform windows --output "$env:RUNNER_TEMP/tutorial-windows.json"
           python windows/tests/maintenance_checks.py
           python windows/tests/security_checks.py
           python windows/tests/bilingual.py
@@ -48,7 +50,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: win2-build-evidence
+          name: win556-build-evidence
           path: |
             ${{ runner.temp }}/windows-offline/evidence
             windows/evidence/*.json
@@ -57,41 +59,41 @@ jobs:
       - name: Retain native-tested distribution files
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: win2-delivery
+          name: win556-delivery
           path: |
-            ${{ runner.temp }}/windows-offline/Facility_Studio_V5_5_5_Windows_Offline.exe
-            ${{ runner.temp }}/windows-offline/Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip
+            ${{ runner.temp }}/windows-offline/Facility_Studio_V5_5_6_Windows_Offline.exe
+            ${{ runner.temp }}/windows-offline/Facility_Studio_V5_5_6_Windows_Offline_OneClick.zip
             ${{ runner.temp }}/windows-offline/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 14
   verify:
     needs: build
     runs-on: windows-2025
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
-          name: win2-delivery
+          name: win556-delivery
           path: ${{ runner.temp }}/windows-offline
       - name: Execute identical delivered files on a second native Windows environment
-        run: python -m winrelease.verify --assets "$env:RUNNER_TEMP/windows-offline" --output "$env:RUNNER_TEMP/win2-clean-evidence"
+        run: python -m winrelease.verify --assets "$env:RUNNER_TEMP/windows-offline" --output "$env:RUNNER_TEMP/win556-clean-evidence"
         working-directory: windows
       - name: Retain second native Windows evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: win2-second-windows-evidence
-          path: ${{ runner.temp }}/win2-clean-evidence
+          name: win556-second-windows-evidence
+          path: ${{ runner.temp }}/win556-clean-evidence
           if-no-files-found: warn
           retention-days: 14
   publish:
     needs: [build, verify]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 20
     permissions:
       contents: write
     steps:
@@ -100,7 +102,7 @@ jobs:
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
-          name: win2-delivery
+          name: win556-delivery
           path: ${{ runner.temp }}/windows-offline
       - name: Publish a new revision only after both Windows checks pass
         env:

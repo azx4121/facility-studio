@@ -68,6 +68,24 @@ class MainView:
 
     def update_visibility(self):
         advanced = self.view_mode.get() == "進階模式"
+        all_pages = advanced or not hasattr(self, "task_scope") or self.task_scope.get() == "全部工程分頁"
+        for page, button in enumerate(self.nav):
+            if all_pages or page in (0, 1, 2, 8):
+                if not button.winfo_manager():
+                    following = next((w for w in self.nav[page + 1:] if w.winfo_manager()), None)
+                    opts = dict(fill="x", padx=8, pady=2)
+                    if following:
+                        opts["before"] = following
+                    else:
+                        labels = button.master.pack_slaves()
+                        credit = next((w for w in labels if isinstance(w, tk.Label) and "DESIGNED" in str(w.cget("text"))), None)
+                        if credit:
+                            opts["before"] = credit
+                    button.pack(**opts)
+            else:
+                button.pack_forget()
+        if not all_pages and self.current not in (0, 1, 2, 8):
+            self.show_page(0)
         for key, line in self.form_rows.items():
             visible = advanced or key in BASIC_KEYS
             if (
@@ -179,7 +197,7 @@ class MainView:
                         (
                             "畫面外仍採用的自訂條件：" + "；".join(modified)
                             if modified
-                            else "本頁初估係數已帶入；可按「進階模式」查看數值。"
+                            else "目前採用的參考條件：" + "；".join(FIELDS[k]["label"] + "=" + self.variables[k].get() + " " + FIELDS[k]["unit"] + "（" + self.provenance[k]["source"] + "）" for k in keys[:6]) + ("；其餘見進階模式／來源" if len(keys) > 6 else "")
                         )
                         if keys
                         else ""
@@ -223,7 +241,7 @@ class MainView:
                     "標準流量先換算管內實際流量；壓力及流速可於進階模式逐路設定。PV 壓力為絕壓。",
                     "kW 是輸入電力，HP 是機械輸出；候選線徑需再核對敷設與保護條件。",
                     "名目風量先加設計餘裕，再定寸；管形與寬高比目前共用於所有排氣系統。",
-                    "連動負荷時以熱量與 ΔT 反算水量；手填水量保留但不採用。水物性共用於全部水迴路。",
+                    "連動負荷時以熱量與 ΔT 反算水量；手填水量保留但不採用。每個水迴路可獨立設定物性，或明確沿用共用參考。",
                 ][page],
                 wraplength=650,
                 style="Muted.TLabel",
@@ -530,6 +548,8 @@ class MainView:
             )
 
     def show_page(self, n):
+        if n not in (0, 1, 2, 8) and hasattr(self, "task_scope"):
+            self.task_scope.set("全部工程分頁")
         self.current = n
         self.pages[n].tkraise()
         self.title.config(text=PAGES[n])
@@ -642,6 +662,8 @@ class MainView:
         condition_boxes = list(b.winfo_children())
         for box in condition_boxes:
             box.pack_forget()
+        for box in condition_boxes:
+            box.pack(fill="x", pady=(0, 12))
         self.summary = ttk.Label(
             b,
             text="啟動中",
@@ -718,10 +740,9 @@ class MainView:
                 text="未安裝 matplotlib：數值及報告仍可使用；安裝後可開啟流程圖。",
                 style="Muted.TLabel",
             ).pack(pady=20)
+        ttk.Label(b, text="主案仍採用已保存的廠務條件；收起分頁不代表停用系統。選「全部工程分頁」可檢查氣體、電力、水量及壓損。", wraplength=650, style="Muted.TLabel").pack(fill="x", pady=8)
         self.topology = ttk.Label(b, text="", wraplength=650, style="Muted.TLabel")
         self.topology.pack(fill="x", pady=10)
-        for box in condition_boxes:
-            box.pack(fill="x", pady=(12, 16))
 
     def build_overview(self):
         self._build_dashboard()

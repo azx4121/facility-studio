@@ -1,5 +1,5 @@
 Tutorial A - 96 m2 room | Design conditions / calculation summary 
- System :  AHU (OA + RA mixing)  | V5.5.5 |  Preliminary demand estimate 
+ System :  AHU (OA + RA mixing)  | V5.5.6 |  Preliminary demand estimate 
  Overall status:  Data required  ; equipment counts are demand candidates. Do not select directly when checks fail. 
 [ Data required ] CHW  Equipment resistance :  Piping subtotal only. Neither Simple nor Detailed mode treats unknown resistance as zero. 
 [ Data required ] HW  Equipment resistance :  Piping subtotal only. Neither Simple nor Detailed mode treats unknown resistance as zero. 
@@ -30,7 +30,9 @@ DCC  Sensible heat  0.000 kW;  Summer  Reheat  1.208 kW;  Humidification  0.000 
  DCC maximum summer / winter demand 0.000 kW; winter is a steady-state estimate of specified loads, not hourly building simulation. 
  3. Piping / velocity / pressure drop 
 CHW: 41.115 LPM, ΔT 5.00 K, 1  runs × 20A (3/4") / ID 20.9 mm, 1.997 m/s;  Pressure drop  101746.417 Pa.
+   Adopted  Fluid properties : ρ 1000 kg/m³; cp 4.1868 kJ/(kg·K); μ 0.001 Pa·s;  Source   Use shared reference .
 HW: 1.904 LPM, ΔT 10.00 K, 1  runs × 15A (1/2") / ID 15.8 mm, 0.162 m/s;  Pressure drop  972.512 Pa.
+   Adopted  Fluid properties : ρ 1000 kg/m³; cp 4.1868 kJ/(kg·K); μ 0.001 Pa·s;  Source   Use shared reference .
 PV  Maximum design velocity  18.000 m/s.
  Gas standard-volume reference: 25°C / 101.325 kPa;  in pipe  25 °C, Z ratio 1 ; velocity-based estimate only. 
  Simple pressure-loss estimate: CHW 30% / HW 30% fitting equivalent-length allowance; Δp = straight friction×(1+allowance) + known equipment pressure drop + applicable static head. 

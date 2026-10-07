@@ -164,19 +164,26 @@ def electrical(
 def ducts(data):
     unit = selected(data["flow_unit"], FLOW_FACTORS, "flow_unit")
     cmh = number(data["flow"], "flow", 0, 10000000) * FLOW_FACTORS[unit]
+    check_path = selected(str(data.get("check_path", "0")), ("0", "1"), "check_path")
     pressure_unit = selected(
         data["pressure_unit"], AIR_PRESSURE_FACTORS, "pressure_unit"
-    )
+    ) if check_path == "1" else "Pa"
     pressure = (
-        number(data["pressure"], "pressure", 0, 1000000)
+        (number(data["pressure"], "pressure", 0, 1000000) if check_path == "1" else 0)
         * AIR_PRESSURE_FACTORS[pressure_unit]
     )
+    if check_path == "0":
+        try:
+            # Preserve a valid draft for unit switching; it is not a sizing
+            # condition and must never make dimensions-only mode fail.
+            pressure = number(data["pressure"], "pressure", 0, 1000000) * AIR_PRESSURE_FACTORS[data["pressure_unit"]]
+        except (ValueError, KeyError):
+            pressure = 0.0
     velocity = number(data["velocity"], "velocity", 0.1, 40)
     ratio = number(data["ratio"], "ratio", 1, 4)
     rectangle = duct_selection(cmh, velocity, ratio, "方管")
     round_duct = duct_selection(cmh, velocity, ratio, "圓管")
     length = None
-    check_path = selected(str(data.get("check_path", "0")), ("0", "1"), "check_path")
     if check_path == "1":
         length = number(data["length"], "length", 0, 100000)
         k = number(data["k_sum"], "k_sum", 0, 10000)
@@ -217,8 +224,10 @@ def ducts(data):
 
 def compressed_air(data):
     gas = selected(data["gas"], ("CDA", "N2", "Ar"), "gas")
-    unit = selected(data["flow_unit"], GAS_FLOW_FACTORS, "flow_unit")
-    standard = number(data["flow"], "flow", 0, 100000000) * GAS_FLOW_FACTORS[unit]
+    flow_basis = selected(data.get("flow_basis", "標準流量"), ("標準流量", "管內實際流量"), "flow_basis")
+    flow_factors = GAS_FLOW_FACTORS if flow_basis == "標準流量" else {"ALPM": 1, "ACFM": 28.316846592, "Am³/h": 1000 / 60}
+    unit = selected(data["flow_unit"], flow_factors, "flow_unit")
+    amount = number(data["flow"], "flow", 0, 100000000) * flow_factors[unit]
     pressure_unit = selected(
         data["pressure_unit"], GAS_PRESSURE_FACTORS, "pressure_unit"
     )
@@ -234,6 +243,7 @@ def compressed_air(data):
     reference_t = number(data["reference_t"], "reference_t", -60, 60)
     reference_p = number(data["reference_p"], "reference_p", 60, 120)
     absolute = atm + gauge_kpa
+    standard = amount if flow_basis == "標準流量" else amount * absolute / reference_p * (reference_t + 273.15) / (temperature + 273.15)
     actual = (
         standard
         * reference_p
@@ -254,6 +264,7 @@ def compressed_air(data):
     speed = actual / 60000 / (math.pi * (pipe["id"] / 1000) ** 2 / 4) if pipe else 0.0
     return dict(
         tool="gas",
+        flow_basis=flow_basis,
         gas=gas,
         standard_lpm=standard,
         actual_lpm=actual,

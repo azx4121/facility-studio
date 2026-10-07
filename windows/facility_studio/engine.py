@@ -8,6 +8,7 @@ from .data import VOLTAGE_MAP
 from .quality import assess_main
 from .schema import (
     V54_INPUT_KEYS,
+    V55_INPUT_KEYS,
     PD_DEFAULTS,
     DEFAULTS,
     FIELDS,
@@ -99,13 +100,44 @@ def migrate_project(p):
             raise InputError("V5.4 欄位不完整，無法移轉")
         p = copy.deepcopy(p)
         p["schema_version"] = 9
-        p["inputs"].update({k: DEFAULTS[k] for k in set(FIELDS) - V54_INPUT_KEYS})
+        p["inputs"].update({k: DEFAULTS[k] for k in V55_INPUT_KEYS - V54_INPUT_KEYS})
         p["inputs"]["winter_model"] = "外氣處理基準（舊版）"
         p["provenance"] = {
             k: {"source": "舊專案輸入", "note": "V5.4 或更早版本移轉；未推定原廠來源"}
-            for k in FIELDS
+            for k in V55_INPUT_KEYS
         }
+    if isinstance(p, dict) and p.get("schema_version") == 9:
+        if set(p.get("inputs", {})) != V55_INPUT_KEYS:
+            raise InputError("V5.5 專案欄位不完整，不能自動移轉")
+        from .project_store import provenance_record
+        p = copy.deepcopy(p)
+        p["schema_version"] = 10
+        new_keys = set(FIELDS) - V55_INPUT_KEYS
+        p["inputs"].update({k: DEFAULTS[k] for k in new_keys})
+        for loop in ("mchw", "chw", "dccw", "pcw", "hw"):
+            for prop in ("rho", "cp", "mu"):
+                p["inputs"][loop + "_" + prop] = p["inputs"]["water_" + prop]
+        if not isinstance(p.get("provenance"), dict) or set(p["provenance"]) != V55_INPUT_KEYS:
+            raise InputError("V5.5 參數來源不完整，不能自動移轉")
+        for k in new_keys:
+            p["provenance"][k] = provenance_record(
+                "舊專案輸入", "V5.5.6 移轉：保留原共用物性與計算範圍", p["inputs"][k]
+            )
     return p
+
+
+def water_properties(inputs, loop):
+    """Resolve fluid properties for one circuit without touching another circuit."""
+    loop = loop.lower()
+    independent = inputs[loop + "_fluid_mode"] == "本迴路獨立物性"
+    prefix = loop + "_" if independent else "water_"
+    return dict(
+        rho=float(inputs[prefix + "rho"]),
+        cp=float(inputs[prefix + "cp"]),
+        mu=float(inputs[prefix + "mu"]),
+        source=inputs[loop + "_fluid_mode"],
+        fluid=inputs[loop + "_fluid_name"] if independent else "共用流體參考",
+    )
 
 
 def pv_to_torr(value, unit):
@@ -397,6 +429,11 @@ def condition_air(i, enter, m, ts, ws, pre=True):
 
 
 def calculate(p, isolate_utilities=False):
+    workspace = None
+    if isinstance(p, dict) and p.get("kind") == "facility_workspace":
+        from .workspace_store import validate_workspace
+        workspace = validate_workspace(p)
+        p = workspace["main"]
     from .field_state import effective_main, main_inactive
 
     p = copy.deepcopy(
@@ -446,12 +483,13 @@ def calculate(p, isolate_utilities=False):
     is_mau = i["sys_type"].startswith("MAU")
     ffu_count = math.ceil(circ / n("ffu_cmh") - 1e-12) if is_mau else 0
     gross = n("eq_kw") * n("eq_rt") / 100
+    pcw_properties = water_properties(i, "pcw")
     pcw = (
         integer(i["pcw_n"], "pcw_n")
         * n("pcw_lpm")
         / 60000
-        * n("water_rho")
-        * n("water_cp")
+        * pcw_properties["rho"]
+        * pcw_properties["cp"]
         * n("pcw_dt")
     )
     exheat = gross * n("exh_ratio") / 100
@@ -642,9 +680,10 @@ def calculate(p, isolate_utilities=False):
         ("HW", "hw_q", "u_hw", "dt_hw"),
     ]:
         conf = p["pressure_drop"][key]
+        fluid = water_properties(i, key)
         linked = i[key.lower() + "_link"] == "連動負荷"
         flow = (
-            loads[key] * 60000 / (n("water_rho") * n("water_cp") * n(delta))
+            loads[key] * 60000 / (fluid["rho"] * fluid["cp"] * n(delta))
             if linked
             else to_lpm_strict(i[q], i[u], key)
         )
@@ -653,9 +692,10 @@ def calculate(p, isolate_utilities=False):
         )
         w.update(
             load_kw=loads[key],
-            capacity_kw=flow / 60000 * n("water_rho") * n("water_cp") * n(delta),
+            capacity_kw=flow / 60000 * fluid["rho"] * fluid["cp"] * n(delta),
             delta_t=n(delta),
             linked=linked,
+            fluid_properties=fluid,
         )
         water[key] = w
         if not linked and w["capacity_kw"] + 1e-06 < loads[key]:
@@ -668,8 +708,8 @@ def calculate(p, isolate_utilities=False):
             w["id_mm"] / 1000,
             w["area_m2"],
             w["runs"],
-            n("water_rho"),
-            n("water_mu"),
+            fluid["rho"],
+            fluid["mu"],
             n("water_roughness_mm"),
         )
     for key, d in ducts.items():
@@ -786,6 +826,28 @@ def calculate(p, isolate_utilities=False):
     r["winter_room"] = winter_room
     r["dcc_design_kw"] = dcc_design
     r["quality"] = assess_main(r)
+    if workspace:
+        from .contributions import aggregate_ledger
+        from .quality import assessment, finding
+        ledger = workspace["demand_ledger"]
+        try:
+            summary = aggregate_ledger(ledger, r["effective_inputs"])
+        except (ValueError, KeyError, TypeError) as exc:
+            summary = {"sources": list(ledger["entries"].values()), "water": [], "pending": [str(exc)], "updates": {}}
+        r["demand_summary"] = summary
+        issues = copy.deepcopy(r["quality"]["items"])
+        for detail in summary["pending"]:
+            finding(issues, "需求彙整待確認", "待資料", detail, None)
+        if any(r["project"]["inputs"][k] != v for k, v in ledger["last_updates"].items()):
+            finding(issues, "需求彙整目的值已修改", "待資料", "來源明細保留，但主案已有手動修改；請重新預覽帶入或移除來源，彙整表不能當成目前主案採用值。", None)
+        documents = {d["id"]: d for d in workspace["ahus"]}
+        from .design_workflow import ahu_source_hash
+        for source in ledger["entries"].values():
+            if source["kind"] == "AHU":
+                document = documents.get(source["id"])
+                if document is None or ahu_source_hash(document["inputs"]) != source["source_hash"]:
+                    finding(issues, "來源快照：" + source["name"], "待資料", "來源未保存或已修改；需求仍採上次帶入值，請重新檢核。", None)
+        r["quality"] = assessment(issues)
     return r
 
 
@@ -798,13 +860,16 @@ def electrical_from_inputs(i):
     def load_kw(key):
         v = n(key)
         unit = i["u_" + key]
+        pan = key.split("_")[1]
+        pf_key = "e_" + pan + "_pf"
+        pf = n(pf_key) if i.get("e_" + pan + "_pf_mode") == "本盤獨立 PF" else n("e_pf")
         return (
             v
             if unit == "kW"
             else (
                 v * 0.745699871582 / n("e_eff")
                 if unit == "HP"
-                else v * math.sqrt(3) * VOLTAGE_MAP[i["e_volt"]] * n("e_pf") / 1000
+                else v * math.sqrt(3) * VOLTAGE_MAP[i["e_volt"]] * pf / 1000
             )
         )
 

@@ -214,6 +214,8 @@ def run(destination):
             from facility_studio.tutorial_acceptance import run as check_tutorial
 
             check_tutorial(root, app, workbench, check, pump)
+            from facility_studio.usability_acceptance import run as check_usability
+            check_usability(root, app, workbench, check, pump, destination)
             check("Native GUI heartbeat", lambda: (pump(), True)[1])
             from matplotlib.figure import Figure
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -257,7 +259,7 @@ def run(destination):
 
     result = {
         "version": __version__,
-        "revision": "win.2",
+        "revision": "win.1",
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,

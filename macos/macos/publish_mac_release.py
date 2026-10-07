@@ -10,7 +10,7 @@ import urllib.parse
 import urllib.request
 
 REPOSITORY = "azx4121/facility-studio"
-TAG = "v5.5.5-mac.2"
+TAG = "v5.5.6-mac.1"
 
 
 def main():
@@ -25,8 +25,8 @@ def main():
         )
     folder = args.assets.resolve()
     filenames = (
-        "Facility_Studio_V5_5_5_macOS_mac2_OneClick.zip",
-        "Facility_Studio_V5_5_5_macOS_mac2.dmg",
+        "Facility_Studio_V5_5_6_macOS_mac1_OneClick.zip",
+        "Facility_Studio_V5_5_6_macOS_mac1.dmg",
         "SHA256SUMS.txt",
     )
     for filename in filenames:
@@ -66,10 +66,8 @@ def main():
             raise
         release = None
     body = (
-        "本修訂補上簡易工具左下角 DESIGNED BY ANDY HUANG ©，七種工具共用並持續顯示。\n\n"
-        "新增離線中英新手教學入口：簡易工具、完整工作台及單台空調箱可直接開啟逐步教學；另含兩份可開啟的合成練習專案與對照報告。\n\n"
-        "Revision 2 adds persistent author credit to simple tools and bundled offline beginner tutorials, practice projects and reference reports. Native acceptance checks the credit at minimum window size, local tutorial buttons and actual practice loading. Existing engineering formulas and projects are retained.\n\n"
-        "V5.5.5 中英雙語版 mac.2，保留全部工程功能、macOS 啟動修復與 FY 圖示。\n\n"
+        'V5.5.6 修正新手操作與需求範圍：基本模式依任務收合分頁，共同氣候放在圖前，另存／複製方案不覆蓋原案。設備表支援百分比格式辨識及選取群組預覽帶入；多台空調箱依來源彙整，同台更新不重算一次，水路依季節與供回水／流體分開，各迴路物性獨立。改輸入後保留已標示過期的圖表作對照，匯出及回傳停用至重新檢核。離線繁中／英文教學同步 18 個章節，前六步進度為手動閱讀記錄。\n\nV5.5.6 clarifies beginner navigation, project saving and source ownership. Equipment imports normalize explicit Excel percentages and offer scoped preview transfers. Repeated AHU IDs replace their contribution; separate included units add, with seasonal and incompatible water circuits kept distinct. Stale plots/reports remain marked for comparison while export and transfer are disabled. Bilingual offline help covers 18 chapters and six required reading steps.\n\n'
+        "V5.5.6 中英雙語版 mac.1，保留全部工程功能、macOS 啟動修復與 FY 圖示。\n\n"
         "主畫面右上角選擇 English／繁體中文，欄位、提示、圖表、報告及設備範本同步切換；已填數字與舊專案保留。語言偏好會保存。\n\n"
         "Bilingual interface: select English in the top-right language selector. Forms, guidance, charts, reports and exported equipment templates are translated. Stored engineering data remains unchanged.\n\n"
         "修正 Tcl/Tk 資源封印不符合 Apple 原生檢查，以及第一次字型快取建立時的無時限外部查詢。"
@@ -84,7 +82,7 @@ def main():
             dict(
                 tag_name=TAG,
                 target_commitish=commit,
-                name="Facility Studio V5.5.5｜macOS 中英雙語離線版 mac.2",
+                name="Facility Studio V5.5.6｜macOS 中英雙語離線版 mac.1",
                 body=body,
                 draft=True,
                 prerelease=True,

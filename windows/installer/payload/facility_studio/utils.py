@@ -571,6 +571,8 @@ def electrical_result(i, warnings):
             nphp += value
     panels["NP"] = {"kw": npkw, "hp": nphp, "kind": i["e_np_type"]}
     for key, pan in panels.items():
+        prefix = "e_" + key.lower()
+        pf = n(prefix + "_pf", 0.1, 1) if i.get(prefix + "_pf_mode") == "本盤獨立 PF" else n("e_pf", 0.1, 1)
         kind = choice(
             pan["kind"], ("一般負載", "連續負載", "馬達負載"), key + " 負載類型"
         )
@@ -590,6 +592,7 @@ def electrical_result(i, warnings):
             design = current * 1.25
         else:
             design = current
+        design = max(design, number(i.get(prefix + "_design_floor", "0"), prefix + "_design_floor", 0, 10000000))
         candidates = []
         for runs in range(1, 9):
             for row in WIRE_DB:

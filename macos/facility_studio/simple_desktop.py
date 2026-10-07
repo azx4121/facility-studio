@@ -177,7 +177,7 @@ class SimplePage(ScrollPage):
     def clear(self, text="輸入已變更，等待計算…"):
         self.result = None
         if self.air_chart is not None:
-            self.air_chart.clear()
+            self.air_chart.mark_stale()
         for title, value in self.cards:
             title.config(text="")
             value.config(text="—")
@@ -193,13 +193,20 @@ class SimplePage(ScrollPage):
             return
         self.suspended = True
         try:
+            if self.tool == "gas" and key == "flow_basis":
+                from .simple_engines import compressed_air
+                previous_result = compressed_air(self.previous)
+                is_standard = self.variables[key].get() == "標準流量"
+                self.variables["flow"].set(format(previous_result["standard_lpm" if is_standard else "actual_lpm"], ".15g"))
+                self.variables["flow_unit"].set("SLPM" if is_standard else "ALPM")
+            gas_factors = GAS_FLOW_FACTORS if self.variables.get("flow_basis") is None or self.variables["flow_basis"].get() == "標準流量" else {"ALPM": 1, "ACFM": 28.316846592, "Am³/h": 1000 / 60}
             rules = {
                 "duct": {
                     "flow_unit": ("flow", FLOW_FACTORS),
                     "pressure_unit": ("pressure", AIR_PRESSURE_FACTORS),
                 },
                 "gas": {
-                    "flow_unit": ("flow", GAS_FLOW_FACTORS),
+                    "flow_unit": ("flow", gas_factors),
                     "pressure_unit": ("pressure", GAS_PRESSURE_FACTORS),
                 },
                 "water": {
@@ -274,7 +281,7 @@ class SimplePage(ScrollPage):
         data = self.data()
         for spec in TOOLS[self.tool]["fields"]:
             visible = active_field(self.tool, spec["key"], data) and (
-                not spec["advanced"] or self.advanced.get()
+                not spec["advanced"] or self.advanced.get() or (self.tool == "duct" and data["check_path"] == "1" and spec["key"] in ("length", "k_sum", "equipment"))
             )
             if visible:
                 self.rows[spec["key"]].grid()
@@ -296,6 +303,10 @@ class SimplePage(ScrollPage):
                     "長×寬": "",
                 }[data["area_mode"]]
             )
+        if self.tool == "gas":
+            is_standard = data["flow_basis"] == "標準流量"
+            self.labels["flow"].config(text="所需標準流量" if is_standard else "管內實際流量")
+            self.widgets["flow_unit"].config(values=("SLPM", "SCFM", "Sm³/h") if is_standard else ("ALPM", "ACFM", "Am³/h"))
         if self.tool == "units":
             self.subtitle.configure(
                 text=UNIT_HELP.get(data["category"], TOOLS["units"]["subtitle"])
@@ -449,7 +460,7 @@ class SimpleToolsApp:
         )
         self.author_credit.pack(side="bottom", anchor="w", padx=18, pady=(8, 16))
         self.tutorial_button = ttk.Button(
-            side, text="新手教學", command=lambda: open_tutorial(root),
+            side, text="本工具教學", command=lambda: open_tutorial(root, self.current),
         )
         self.tutorial_button.pack(side="bottom", fill="x", padx=12, pady=(8, 0))
         header = ttk.Frame(root, padding=(18, 12))

@@ -29,6 +29,109 @@ class Cell:
     value: object = None
     formula: bool = False
     excel_error: bool = False
+    number_format: str = "General"
+    numeric: bool = False
+
+
+def _format_sections(code):
+    """Split an Excel format without treating quoted/escaped ';' as separators."""
+    sections, part, quoted, bracketed, escaped = [], [], False, False, False
+    for char in code:
+        if escaped:
+            part.append(char)
+            escaped = False
+            continue
+        if char == "\\":
+            escaped = True
+        elif char == '"' and not bracketed:
+            quoted = not quoted
+        elif not quoted and char == "[":
+            bracketed = True
+        elif not quoted and char == "]":
+            bracketed = False
+        elif char == ";" and not quoted and not bracketed:
+            sections.append("".join(part))
+            part = []
+            continue
+        part.append(char)
+    sections.append("".join(part))
+    return sections
+
+
+def _active_percent_format(code, value):
+    """Recognize only a real percentage token in the applicable numeric section."""
+    sections = _format_sections(code)[:3]
+    condition = re.compile(r"\[(<=|>=|<>|=|<|>)([-+]?\d+(?:\.\d*)?(?:[Ee][-+]?\d+)?)\]")
+    predicates = {
+        "<=": lambda a, b: a <= b, ">=": lambda a, b: a >= b,
+        "<>": lambda a, b: a != b, "=": lambda a, b: a == b,
+        "<": lambda a, b: a < b, ">": lambda a, b: a > b,
+    }
+    if any(condition.search(section) for section in sections):
+        active = ""
+        for section in sections:
+            match = condition.search(section)
+            if not match or predicates[match[1]](value, float(match[2])):
+                active = section
+                break
+    else:
+        index = 1 if value < 0 and len(sections) > 1 else 2 if value == 0 and len(sections) > 2 else 0
+        active = sections[index]
+    quoted, bracketed, escaped = False, False, False
+    for char in active:
+        if escaped:
+            escaped = False
+            continue
+        if char in ("\\", "_", "*") and not quoted:
+            escaped = True
+        elif char == '"' and not bracketed:
+            quoted = not quoted
+        elif not quoted and char == "[":
+            bracketed = True
+        elif not quoted and char == "]":
+            bracketed = False
+        elif char == "%" and not quoted and not bracketed:
+            return True
+    return False
+
+
+def percentage_value(cell):
+    """Return percentage points; 50, text '50%', and numeric Excel 50% agree.
+
+    General-format 0.5 intentionally stays 0.5%. Never infer scale from magnitude.
+    Formula/error/boolean rejection remains the validator's responsibility.
+    """
+    value = cell.value
+    text = str(value).strip()
+    if text.endswith(("%", "％")):
+        return float(text[:-1].strip())
+    if cell.numeric and _active_percent_format(cell.number_format, float(text)):
+        return float(text) * 100
+    return value
+
+
+def _xlsx_formats(archive):
+    if "xl/styles.xml" not in archive.namelist():
+        return ["General"]
+    styles = _xml(archive, "xl/styles.xml")
+    custom = {9: "0%", 10: "0.00%"}
+    for node in styles.findall("s:numFmts/s:numFmt", NS):
+        try:
+            key = int(node.get("numFmtId", ""))
+        except ValueError:
+            raise EquipmentImportError("Excel數字格式識別碼損壞") from None
+        code = node.get("formatCode", "")
+        if len(code) > 1024 or key in custom:
+            raise EquipmentImportError("Excel數字格式重複或過長")
+        custom[key] = code
+    formats = []
+    for node in styles.findall("s:cellXfs/s:xf", NS):
+        try:
+            key = int(node.get("numFmtId", "0"))
+        except ValueError:
+            raise EquipmentImportError("Excel儲存格數字格式損壞") from None
+        formats.append(custom.get(key, "General"))
+    return formats or ["General"]
 
 
 class EquipmentImportError(ValidationError):
@@ -109,6 +212,7 @@ def _xlsx_sheets(path):
             raise EquipmentImportError("Excel含重複封存項目")
         if any("vbaproject" in r.filename.casefold() for r in records):
             raise EquipmentImportError("不接受含巨集的活頁簿，請另存無巨集.xlsx")
+        formats = _xlsx_formats(archive)
         strings = []
         if "xl/sharedStrings.xml" in archive.namelist():
             for entry in _xml(archive, "xl/sharedStrings.xml").findall("s:si", NS):
@@ -162,6 +266,13 @@ def _xlsx_sheets(path):
                             "同一列的儲存格位置重複", name, row_number
                         )
                     kind = cell.get("t")
+                    try:
+                        style_index = int(cell.get("s", "0"))
+                        if style_index < 0:
+                            raise IndexError
+                        number_format = formats[style_index]
+                    except (ValueError, IndexError):
+                        raise EquipmentImportError("Excel儲存格數字格式索引損壞", name, row_number) from None
                     value = cell.findtext("s:v", default=None, namespaces=NS)
                     if kind == "s":
                         try:
@@ -180,7 +291,8 @@ def _xlsx_sheets(path):
                     elif kind == "b":
                         value = value == "1"
                     cells[index] = Cell(
-                        value, cell.find("s:f", NS) is not None, kind == "e"
+                        value, cell.find("s:f", NS) is not None, kind == "e",
+                        number_format, kind in (None, "n") and value is not None,
                     )
                 rows[row_number] = cells
             result[name] = rows

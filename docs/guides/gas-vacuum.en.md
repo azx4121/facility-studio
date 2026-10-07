@@ -12,6 +12,9 @@ SLPM, SCFM and Sm³/h are standard-volume units; ALPM is actual pipe volume flow
 
 The examples use ideal-gas Z ratio 1. Nominal size is not actual inner diameter; material and wall thickness require confirmation.
 
+
+Choose Standard flow for SLPM/SCFM/Sm³/h or Actual pipe flow for ALPM/ACFM/Am³/h. Switching basis converts equivalent demand using current pressure and temperature; 800 SLPM is not renamed 800 ALPM. If a nameplate states only L/min, establish its temperature/pressure basis before sizing.
+
 <a id="case-05"></a>
 ## Case 05: CDA 800 SLPM, 6 bar(g), maximum 15 m/s
 

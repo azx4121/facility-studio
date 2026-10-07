@@ -17,7 +17,7 @@ TUTORIAL_FILES = {
     "LICENSE", "LICENSE_GUIDE.md", "LICENSE_GUIDE.en.md", "LICENSE_LEGACY_MIT",
 }
 SECTIONS = {"start", "interface", "first-case", "inputs", "results", "export",
-            "utilities", "ahu", "recovery", "faq"}
+            "utilities", "ahu", "recovery", "faq", "electrical", "duct", "gas", "lighting", "water", "air", "units", "equipment"}
 
 
 def prepare_tutorial(destination=None):
@@ -25,7 +25,7 @@ def prepare_tutorial(destination=None):
     source = Path(__file__).with_name("resources") / "beginner_tutorial.zip"
     content = source.read_bytes()
     folder = (Path(destination) if destination is not None else app_data() / "Tutorial")
-    folder = folder / ("V5_5_5_r2_" + sha256(content).hexdigest()[:16])
+    folder = folder / ("V5_5_6_" + sha256(content).hexdigest()[:16])
     folder.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(source) as archive:
         entries = archive.infolist()

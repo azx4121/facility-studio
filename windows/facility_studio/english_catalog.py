@@ -972,7 +972,7 @@ S表示標準狀態流量；ALPM是下方管內溫壓的實際L/min。	S denotes
 本段不採用直接電熱，配置資料保留	This stage does not use direct electric heat; installed data retained.
 二期	Phase 2
 本段目前不採用熱回收水	This stage does not currently use recovered hot water.
-本段不採用独立熱水條件	This stage does not use independent hot-water conditions.
+本段不採用獨立熱水條件	This stage does not use independent hot-water conditions.
 出口由自動需求或旁通決定	Leaving state determined by automatic demand or bypass.
 濕度由盤管物理過程決定	Humidity determined by the coil's physical process.
 一段盤管	First-stage coil
@@ -1999,7 +1999,185 @@ TEXT["循環管路／濾網損失，留空待提供"] = "Circulation pipe / filt
 
 # Offline beginner walkthrough entry (delivery revision 2).
 TEXT.update({
+    "上次有效結果": "Last valid result",
+    "目前": "Current",
+    "50 或 50% 都表示 50%；一般格式數值 0.5 表示 0.5%。Excel 百分比格式依顯示比例換算，明細會列採用值。空白採 100%。": "50 or 50% means 50%. A General-format value of 0.5 means 0.5%. Excel percent formats follow the displayed rate; details disclose adopted values. Blank defaults to 100%.",
+    "50 或 50% 表示 50%；一般數值 0.5 表示 0.5%。Excel 百分比格式依顯示比例換算；不是每小時運轉比例。支路仍核全載。": "50 or 50% means 50%. A General-format value of 0.5 means 0.5%. Excel percent formats follow the displayed rate. This is not hourly operating time; branches retain rated-load checks.",
     "新手教學": "Beginner tutorial",
     "教學檔案位置：\n": "Tutorial file location:\n",
     "無法開啟離線教學：\n": "Cannot open the offline tutorial:\n",
+})
+
+# V5.5.6 explicit scope, demand ledger, fluid ownership and stale-result states.
+_add("""
+本盤獨立 PF	Independent panel PF
+沿用共用 PF	Use shared PF
+盤別 PF 來源	Panel PF source
+本盤等效功率因數	Equivalent panel power factor
+本盤採共用 PF，獨立值只保留為草稿	This panel uses shared PF; the independent value is retained as a draft.
+匯入設計電流下限	Imported design-current floor
+設備表連續負載／馬達及最大支路的設計電流下限。主案採自身計算值與此值中較大者，避免使用率降低後選出過小進線；清除匯入時須重新檢核。	Design-current floor from continuous loads, motors and the largest active branch. The workbench adopts the greater of its calculation and this floor; recheck when clearing imports.
+沿用共用參考	Use shared reference
+本迴路獨立物性	Independent circuit properties
+本迴路物性來源	Circuit property source
+本迴路流體／介質	Circuit fluid / medium
+本迴路密度	Circuit density
+本迴路比熱	Circuit specific heat
+本迴路動力黏度	Circuit dynamic viscosity
+本迴路採共用參考物性，獨立值只保留為草稿	This circuit uses shared reference properties; independent values are retained as drafts.
+共用流體參考	Shared fluid reference
+清水（初估參考）	Water (preliminary reference)
+清水（空調箱初估）	Water (AHU preliminary basis)
+流體物性	Fluid properties
+沿用共用參考會明列採用值；獨立物性只影響本迴路。含乙二醇或不同溫度工況請採有效物性。	Shared adopted values are shown explicitly. Independent properties affect only this circuit. Use valid operating properties for glycol mixtures or different temperatures.
+連動負荷時以熱量與 ΔT 反算水量；手填水量保留但不採用。每個水迴路可獨立設定物性，或明確沿用共用參考。	Load-linked flow is derived from heat load and delta T; manual flow remains a draft. Each water circuit can own its fluid properties or explicitly use the shared reference.
+水側採清水 1000 kg/m³、4.1868 kJ/(kg·K)、黏度 0.001 Pa·s 初估；只設定本箱對應 MCHW／CHW 及採用的 HW 迴路。	Water sizing assumes density 1000 kg/m3, specific heat 4.1868 kJ/(kg K), and viscosity 0.001 Pa s. Only this AHU's MCHW, CHW and applicable HW circuits are set.
+V5.5.6 移轉：保留原共用物性與計算範圍	V5.5.6 migration: preserve former shared properties and scope
+V5.5 專案欄位不完整，不能自動移轉	Incomplete V5.5 project fields; automatic migration is unavailable
+V5.5 參數來源不完整，不能自動移轉	Incomplete V5.5 parameter provenance; automatic migration is unavailable
+另存新檔	Save as
+複製為新方案	Duplicate as new scheme
+可編輯完整專案	Editable complete workspace
+新方案未保存	New scheme was not saved
+新方案請使用不同檔名，避免覆蓋原案。	Use a different filename for the new scheme to preserve the original.
+需另存路徑	Choose a different path
+這是計算稽核／设备分析結果，不能作為可編輯專案。請開啟「儲存整案」或「另存新檔」的檔案。	This is an audit or equipment-analysis result, not an editable workspace. Open a file created by Save workspace or Save as.
+舊方案依保留輸入重新檢核；原版本 	Legacy scheme recalculated from preserved inputs; former version\x20
+，原雜湊 	, former hash\x20
+開啟練習新案	Open practice copy
+練習新案（假設值，非現場設備）	Practice project (assumed values, not site equipment)
+空調與熱負荷	HVAC and room loads
+全部工程分頁	All engineering pages
+主案仍採用已保存的廠務條件；收起分頁不代表停用系統。選「全部工程分頁」可檢查氣體、電力、水量及壓損。	Saved utility conditions still apply. Collapsing pages does not disable systems. Select All engineering pages to inspect gas, electrical, water and pressure-loss settings.
+目前採用的參考條件：	Adopted reference conditions:\x20
+；其餘見進階模式／來源	; see Advanced mode / Sources for the remaining settings
+計算完成｜工程評估：	Calculation complete | Engineering assessment:\x20
+｜待資料請補依據；未達請調整設備／條件	 | Pending: provide data. Failed: revise equipment or conditions.
+【上次有效結果／待重算，不能作為目前輸入結果】\\n\\n	[LAST VALID RESULT / RECALCULATION PENDING; NOT THE CURRENT RESULT]\\n\\n
+【上次有效結果／待重算】	[LAST VALID RESULT / RECALCULATION PENDING]
+【上次有效需求結果／待重算，不能匯出】\\n\\n	[LAST VALID DEMAND RESULT / RECALCULATION PENDING; EXPORT DISABLED]\\n\\n
+上次有效結果｜待重算	Last valid result | Recalculation pending
+上次有效結果｜待重算，不能匯出	Last valid result | Recalculation pending; export disabled
+上次有效結果｜輸入更新中，尚不可匯出	Last valid result | Updating inputs; export disabled
+上次有效需求結果｜待重算	Last valid demand result | Recalculation pending
+目前條件未通過檢核，不能匯出。\\n	Current inputs failed validation; export is disabled.\\n
+點位是滿足需求的目標；容量不足時，不能當成實際可達出風。	Points are demand targets. Insufficient capacity means they are not predicted actual leaving states.
+ 冷量需求 	 Cooling demand\x20
+ RT；缺口 	 RT; shortfall\x20
+／配置 	 / installed\x20
+本台服務比例	This unit's service share
+若多台分攤同一主案，請填本台分攤的設計風量百分比。\\n100% 代表單台負責整案；方案比較請勿把各方案同時回傳。	For multiple units serving one project, enter this unit's share of design airflow.\\n100% means one unit serves the whole project. Do not return design alternatives as simultaneous units.
+先用風量定寸；需要檢查靜壓時，再啟用路徑壓力檢查。	Size from airflow first. Enable path-pressure checking when a static-pressure assessment is needed.
+加做路徑靜壓檢查	Check path static pressure
+只計尺寸；未檢查靜壓，靜壓草稿未採用。	Dimensions only; static pressure is not assessed and its draft is not adopted.
+流量資料基準	Flow-data basis
+SLPM/SCFM是標準量；銘牌只有L/min時須先確認。切換基準按目前溫壓等量換算，不會憑數字猜測。	SLPM/SCFM are standard volumes. Confirm the basis when a nameplate only says L/min. Basis switching preserves the equivalent flow using current temperature and pressure.
+標準基準採25°C／101.325kPa(abs)，進階可調；實際量是目前管內溫壓下的体積量。	The standard basis is 25 C / 101.325 kPa(abs), adjustable in Advanced mode. Actual volume is measured at pipe operating temperature and pressure.
+填50或50%均代表50%；Excel百分比格式可辨識，一般數值0.5代表0.5%。這是最大同時需求比例，不是每小時運轉分鐘；支路仍按額定負載。	50 and 50% both mean 50 percent. Excel percentage formatting is recognized; General-format 0.5 means 0.5 percent. This is maximum coincident demand, not minutes per hour; branches use rated load.
+Excel數字格式識別碼損壞	Invalid Excel number-format identifier
+Excel數字格式重複或過長	Duplicate or oversized Excel number format
+Excel儲存格數字格式損壞	Invalid Excel cell number format
+Excel儲存格數字格式索引損壞	Invalid Excel cell format index
+百分比採用值：	Adopted percentage:\x20
+ 原值 	 raw value\x20
+，數字格式 	, number format\x20
+筆未啟用列。百分比正規化 	 inactive rows. Percentage normalization:\x20
+ 欄；採用值已列明細。分析尚未帶入主案。	 fields; adopted values are listed in details. Analysis has not been transferred to the main project.
+3 預覽帶入主案	3 Preview transfer to main
+目的盤／特氣路：	Target panel / gas route:\x20
+本工具教學	This tool's guide
+先選上方一個供應群組；分析本身不會修改主案。	Select one supply group above. Analysis alone does not change the main project.
+尚未帶入	Not transferred
+建立目的主案	Create a destination project
+將開啟新的完整工程工作台；接著會預覽目的欄位，確認後才帶入。	A new workbench will open. Destination fields are previewed before you confirm the transfer.
+目的主案已關閉或切換；請由目前主案重新開啟設備表匯入。	The destination project was closed or switched. Reopen Equipment import from the current project.
+選取群組已帶入；同群組重匯會更新原來源。請在主案「需求彙整」確認採用範圍。	The selected group was transferred. Reimporting the same group updates its source. Inspect adopted scope in the main project's Demand ledger.
+需求彙整	Demand ledger
+已納入需求的設備／迴路	Included equipment / circuits
+已納入需求來源：	Included demand sources:\x20
+已納入來源	Included sources
+來源種類	Source type
+主案採用	Adopted by main
+未映射	Unmapped
+迴路	Circuit
+供回水°C／服務群組	Supply/return C / service group
+夏 LPM	Summer LPM
+冬 LPM	Winter LPM
+設計 LPM	Design LPM
+其他設備基數：	Other-equipment baseline:\x20
+主案採用選取水迴路	Adopt selected water circuit
+移除選取來源的需求	Remove selected demand source
+只有明確回傳的來源才納入；同一台更新，多台才累加。下列不同水迴路不合併為一條總管。	Only explicitly transferred sources are included. The same unit is updated; different units are added. Different water circuits remain separate.
+只移除此來源的需求；單機設計文件仍保留。原採用值會在無其他來源且未手改時復原。	Remove only this source's demand; retain its design document. Restore original adopted values when no other source remains and the target has not been edited manually.
+水力列改採選取迴路；其餘迴路仍分列於彙整報告。	The hydraulic row adopts the selected circuit; other circuits remain separate in the demand report.
+其他設備的原有需求	Existing demand from other equipment
+目前目的欄位已有數值。這些是本次來源以外的其他設備嗎？\\n是：作為其他服務基數保留並累加。\\n否：改採來源彙整，原值保留供移除來源時復原。\\n取消：不帶入。\\n水迴路原負荷不自動相加，避免同一盤管重複計入。	Target fields already have values. Are they equipment outside this new source?\\nYes: retain them as an additional baseline.\\nNo: adopt source totals; preserve original values for restoration on removal.\\nCancel: no transfer.\\nExisting water loads are not added automatically, to avoid counting the same coil twice.
+同一識別碼更新，多個已回傳來源彙整。夏／冬分季求和後取較大水量。	Update the same ID; aggregate different transferred sources. Sum each season separately, then adopt the larger water flow.
+水量彙整：同迴路夏／冬各自求和，設計=max(Σ夏季LPM, Σ冬季LPM)；不同供回水／介質／群組分列。	Water aggregation: sum each circuit by season, design=max(sum summer LPM, sum winter LPM). Different temperatures, fluids or groups remain separate.
+來源迴路：	Source circuit:\x20
+獨立迴路，未映射主案水力列	Independent circuit; not mapped to a main hydraulic row
+ 有不同供回水／介質／供應迴路，分開列示；主案水力列只能選其中一組，不能代表全廠總管。	 has different temperatures, fluids or supply circuits and is listed separately. A main hydraulic row adopts one group, not a plant-wide combined header.
+需求彙整待確認	Demand-ledger items pending
+需求彙整目的值已修改	Demand-ledger target values were edited
+來源明細保留，但主案已有手動修改；請重新預覽帶入或移除來源，彙整表不能當成目前主案採用值。	Source details remain but main values were edited manually. Preview a new transfer or remove the source. Ledger totals are not necessarily the currently adopted main values.
+彙整未套用：	Ledger totals not adopted:\x20
+來源條件不同，不能合併到同一主案欄位：	Different source conditions cannot be combined in this main field:\x20
+來源盤電壓與主案三相線電壓不同，請另案計算	Source voltage differs from the main three-phase line voltage; calculate separately
+ 彙整運轉 P/Q 與來源設計電流；各來源設計餘裕相加，較只加全群最大馬達保守。支路候選仍保留在設備明細。	 aggregates operating P/Q and source design currents. Source allowances add conservatively; branch candidates remain in equipment details.
+ 額定電力採回傳時共用 PF=	 rated electrical power uses the shared PF at transfer =\x20
+；風機／電熱／加濕／水洗泵為不同設備，不由冷量換算耗電。	; fans, heaters, humidifiers and washer pumps are separate equipment. Cooling capacity is not electrical power.
+只納入明確回傳的單機；同 ID 再回傳會更新原台，不能把方案 A/B 當成同時運轉的兩台。	Include only explicitly transferred units. The same ID updates that unit. A/B alternatives must not be counted as two simultaneous units.
+ 水洗泵額定耗電未知；彙整只列已知電力，請補原廠資料。	 washer pump input is unknown; totals include only known power. Provide manufacturer data.
+ 蒸汽設備額定耗電未知；彙整只列已知電力，不可作為完整 NP 需求。	 steam-unit rated input is unknown; known-power subtotals are not complete NP demand.
+ 單機狀態：	 unit status:\x20
+；容量為需求草稿。	; capacities are demand drafts.
+設備表進線候選需另核短路、啟動、相別與支路保護；用電不等於室內發熱。	Imported feeder candidates still require short-circuit, starting, phase and branch-protection checks. Electrical input is not room heat gain.
+同系統／供應群組／目的欄位再帶入會更新原來源；一個群組的所有設備請集中在同一份表。	Reimporting the same system, supply group and destination updates the source. Keep all equipment for one group in the same schedule.
+只可帶入與主案相同線電壓的三相群組；單相與不同電壓請保留獨立分析。	Transfer only three-phase groups at the main line voltage. Keep single-phase or different-voltage analyses separate.
+PCW 需有效設備溫差才能帶入；請補設備水溫差。	PCW transfer needs a valid equipment water delta T.
+PCW 25°C 僅作供水條件占位，水溫差為流量加權等效值；原表未提供供回水工況，不代表原廠供水設計。	PCW 25 C is a placeholder; delta T is flow-weighted. The schedule lacks operating supply/return temperatures and does not establish a manufacturer design.
+PCW 實際供回水、季節同時率與最不利路徑待補；未改寫室內機台散熱。	PCW operating temperatures, seasonal coincidence and critical path remain pending. Room equipment heat is unchanged.
+特氣需求已換到主案標準狀態；管內溫度、壓力與流速採主案該路條件，請核對後定寸。	Gas demand is converted to the main standard reference. Sizing uses the main route's temperature, pressure and velocity; verify them first.
+特氣來源最低絕壓 	Minimum source gas absolute pressure\x20
+ m/s，尚需對照主案路別設定。	 m/s; compare against main-route settings.
+排氣設備端最低靜壓不等於風機總 ESP；主案另計路徑壓損及一次風量餘裕。	Equipment terminal static pressure is not fan ESP. Main sizing separately applies path losses and one airflow allowance.
+DI 帶入總流量含維持循環；水質參考值不是實測或原廠保證。	DI transferred flow includes circulation. Quality reference values are not measurements or manufacturer guarantees.
+PV 只作連續介質流速初估；幫浦／管路导通率待確認，來源流量是否從室內抽取仍依主案設定。	PV uses a continuum velocity estimate only; pump/conductance checks remain pending. Room withdrawal follows the main-project setting.
+此群組尚無主案目的欄位	This group has no main destination field
+請選特氣目的路別	Choose the destination gas route
+需求來源名稱或雜湊不符	Invalid demand-source name or hash
+需求來源欄位不符	Invalid demand-source fields
+需求來源種類不符	Invalid demand-source type
+需求來源說明不符	Invalid demand-source notes
+需求來源識別不符	Invalid demand-source identity
+需求來源過多或格式不符	Too many demand sources or invalid format
+需求彙整數值不合法	Invalid demand-ledger number
+需求彙整格式不符	Invalid demand-ledger format
+需求彙整目標欄位不符	Invalid demand-ledger destination fields
+採用迴路記錄不符	Invalid adopted-circuit record
+其他服務負荷欄位不符	Invalid other-service baseline fields
+水迴路來源格式不符	Invalid water-source format
+水迴路供回水溫差必須大於零	Water supply/return temperature difference must exceed zero
+水迴路條件不完整	Incomplete water-circuit conditions
+水迴路識別不符	Invalid water-circuit identity
+盤別來源格式不符	Invalid panel-source format
+盤別設計需求不完整	Incomplete panel design demand
+廠務工程工作台 V	Facility Engineering Workbench V
+廠務工程工作台  V	Facility Engineering Workbench V
+分段空調箱設計｜V	AHU Stage Design | V
+設備表匯入與需求分析 V	Equipment Schedule Import and Demand Analysis V
+°C：夏 	 C: summer\x20
+，冬 	, winter\x20
+，設計 	, design\x20
+主案 	Main project\x20
+採用	Adopted
+""")
+
+TEXT.update({
+    " 採用獨立 PF=": " Adopted panel PF=",
+    "不能匯出": "Export unavailable",
+    "來源未保存或已修改；需求仍採上次帶入值，請重新檢核。": "The source is missing or changed; demand retains the last transferred values. Recheck the source.",
+    "待重算": "Recalculation required",
+    "缺口": "Shortfall",
+    "設備需求分析 V": "Equipment Demand Analysis V",
 })

@@ -112,12 +112,17 @@ def ahu_utility_preview(ahu_result):
     notes.extend(
         [
             "回傳值為取代所列欄位，不是疊加；其他廠務設備須另列。",
-            "水側採純水 1000 kg/m³、4.1868 kJ/(kg·K)、黏度 0.001 Pa·s 初估；回傳會影響主案全部水迴路，應確認水溫與水質。",
+            "水側採清水 1000 kg/m³、4.1868 kJ/(kg·K)、黏度 0.001 Pa·s 初估；只設定本箱對應 MCHW／CHW 及採用的 HW 迴路。",
             "電力採已填額定值，不是由冷量直接換成耗電；仍需確認 PF、同時使用及馬達保護。",
             "空調箱與主案保留各自計算邊界；回傳水量後需重新確認主案服務範圍。",
         ]
     )
-    updates.update(water_rho="1000", water_cp="4.1868", water_mu="0.001")
+    for loop in ["mchw", "chw"] + (["hw"] if "hw_q" in updates else []):
+        updates.update({
+            loop + "_fluid_mode": "本迴路獨立物性",
+            loop + "_fluid_name": "清水（空調箱初估）",
+            loop + "_rho": "1000", loop + "_cp": "4.1868", loop + "_mu": "0.001",
+        })
     return dict(updates=updates, notes=notes, quality=r["quality"]["status"])
 
 
