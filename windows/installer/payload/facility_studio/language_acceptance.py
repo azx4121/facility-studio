@@ -263,8 +263,17 @@ def run(root, app, workbench, check, pump, output=None):
         )
 
     app.show_tool("electrical")
+    width = min(1100, max(780, root.winfo_screenwidth() - 60))
+    height = min(760, max(560, root.winfo_screenheight() - 100))
+    root.geometry(f"{width}x{height}+20+20")
     workbench.root.withdraw()
     root.deiconify()
+    root.lift()
+    pump()
+    check("English action buttons fit the visible desktop", lambda: require(
+        app.export_button.winfo_rootx() + app.export_button.winfo_width() <= root.winfo_screenwidth()
+        and app.export_button.winfo_rooty() + app.export_button.winfo_height() <= root.winfo_screenheight() - 30,
+        "Action buttons extend beyond the usable display"))
     if output is not None:
         from PIL import ImageGrab
 

@@ -393,7 +393,9 @@ class SimpleToolsApp:
         self.workbench = None
         self.equipment_window = None
         root.title("廠務簡易工具 V5.5.5")
-        root.geometry("1120x830")
+        width = min(1120, max(780, root.winfo_screenwidth() - 60))
+        height = min(830, max(560, root.winfo_screenheight() - 100))
+        root.geometry(f"{width}x{height}+20+20")
         root.minsize(780, 560)
         app_icon(root)
         self.configure_style()
@@ -401,7 +403,7 @@ class SimpleToolsApp:
         root.rowconfigure(1, weight=1)
         side = tk.Frame(root, bg="#142c43", width=205)
         side.grid(row=0, column=0, rowspan=3, sticky="ns")
-        side.grid_propagate(False)
+        side.pack_propagate(False)
         self.sidebar = side
         ttk.Label(side, text="廠務簡易工具\nV5.5.5", style="Simple.Brand.TLabel").pack(
             anchor="w", padx=18, pady=(22, 24)
