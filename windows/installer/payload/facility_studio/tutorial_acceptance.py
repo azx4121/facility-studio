@@ -4,6 +4,7 @@ import copy
 import tempfile
 from unittest.mock import patch
 
+from . import i18n
 from .tutorial_help import prepare_tutorial
 from .workspace_store import read_workspace
 
@@ -39,8 +40,13 @@ def run(root, app, workbench, check, pump):
             workbench.tutorial_button.invoke()
             check("Workbench tutorial entry starts at the first project", lambda:
                   launch.call_args.args[0].endswith("#first-case"))
+            check("Tutorial follows the selected UI language", lambda:
+                  "?language=" + i18n.language() + "#" in launch.call_args.args[0])
         previous = copy.deepcopy(workbench.session_snapshot())
         previous_path = workbench.path
+        previous_saved_hash = workbench.saved_hash
+        previous_workspace_hash = workbench.saved_workspace_hash
+        previous_dirty = workbench.session_dirty()
         try:
             workbench.apply_workspace(read_workspace(folder / "01_Practice_AHU.json"))
             workbench.recalculate()
@@ -56,6 +62,10 @@ def run(root, app, workbench, check, pump):
                   workbench.pages[8].winfo_ismapped() == 1)
         finally:
             workbench.apply_workspace(previous, previous_path)
+            workbench.saved_hash = previous_saved_hash
+            workbench.saved_workspace_hash = previous_workspace_hash
             workbench.recalculate()
             workbench.show_page(0)
             pump()
+        check("Tutorial restores the original unsaved state", lambda:
+              workbench.session_dirty() == previous_dirty)

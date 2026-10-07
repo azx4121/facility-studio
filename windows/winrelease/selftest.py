@@ -237,7 +237,10 @@ def run(destination):
                 ImageGrab.grab().save(destination.with_name("Windows_Air.png"))
             except Exception:
                 print("Screenshot capture unavailable: " + traceback.format_exc())
-            app.close()
+            from unittest.mock import patch
+
+            with patch("tkinter.messagebox.askyesnocancel", return_value=False):
+                app.close()
         finally:
             try:
                 root.destroy()
@@ -254,7 +257,7 @@ def run(destination):
 
     result = {
         "version": __version__,
-        "revision": "win.1",
+        "revision": "win.2",
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,

@@ -5,6 +5,7 @@ from pathlib import Path
 import webbrowser
 import zipfile
 
+from . import i18n
 from .localized_tk import messagebox
 from .project_store import app_data
 
@@ -49,7 +50,8 @@ def open_tutorial(parent=None, section="start"):
         folder = prepare_tutorial()
         anchor = section if section in SECTIONS else "start"
         page = folder / "START_HERE.html"
-        if not webbrowser.open(page.resolve().as_uri() + "#" + anchor):
+        language = i18n.language()
+        if not webbrowser.open(page.resolve().as_uri() + "?language=" + language + "#" + anchor):
             messagebox.showinfo("新手教學", "教學檔案位置：\n" + str(page), parent=parent)
         return folder
     except (OSError, ValueError, zipfile.BadZipFile, RuntimeError) as error:

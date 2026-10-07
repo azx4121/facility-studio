@@ -89,47 +89,47 @@
         "gas_result": {
           "1": {
             "type": "N2",
-            "standard_lpm": 0.0,
-            "actual_lpm": 0.0,
-            "pressure_abs_pa": 601325.0,
+            "standard_lpm": 0,
+            "actual_lpm": 0,
+            "pressure_abs_pa": 601325,
             "minimum_id_mm": 0,
             "selected_id_mm": 0,
             "size": "無需求",
             "velocity_mps": 0,
-            "velocity_limit_mps": 12.0
+            "velocity_limit_mps": 12
           },
           "2": {
             "type": "CDA",
-            "standard_lpm": 800.0,
+            "standard_lpm": 800,
             "actual_lpm": 134.80231156196731,
-            "pressure_abs_pa": 601325.0,
+            "pressure_abs_pa": 601325,
             "minimum_id_mm": 13.809643723878326,
             "selected_id_mm": 16.1,
             "size": "1/2\" (15A)",
             "velocity_mps": 11.035816120931987,
-            "velocity_limit_mps": 15.0
+            "velocity_limit_mps": 15
           },
           "3": {
             "type": "O2",
-            "standard_lpm": 0.0,
-            "actual_lpm": 0.0,
-            "pressure_abs_pa": 601325.0,
+            "standard_lpm": 0,
+            "actual_lpm": 0,
+            "pressure_abs_pa": 601325,
             "minimum_id_mm": 0,
             "selected_id_mm": 0,
             "size": "無需求",
             "velocity_mps": 0,
-            "velocity_limit_mps": 8.0
+            "velocity_limit_mps": 8
           },
           "4": {
             "type": "PV",
-            "standard_lpm": 0.0,
-            "actual_lpm": 0.0,
+            "standard_lpm": 0,
+            "actual_lpm": 0,
             "pressure_abs_pa": 19998.35526315,
             "minimum_id_mm": 0,
             "selected_id_mm": 0,
             "size": "無需求",
             "velocity_mps": 0,
-            "velocity_limit_mps": 18.0
+            "velocity_limit_mps": 18
           }
         },
         "expected_alpm": 134.80231156196731
@@ -259,7 +259,7 @@
   "checks": 85,
   "passed": true,
   "input_sha256": {
-    "01_Practice_AHU.json": "d7a488f6810987e0aeb77a42071f3687a13eca353aeb2136a99f48020983ad65",
-    "02_Practice_MAU_and_AHU.json": "f663d2242f5a135d3fe41c37731929ec32b011232a3aef2b872e805be8864902"
+    "01_Practice_AHU.json": "ab8aa94791228ccba6b95d4c1bb3bcfdac816af0dfa4c7e069fa43f05c27a47c",
+    "02_Practice_MAU_and_AHU.json": "6512ba9392bd430b9cd9363922e1662680c749ccf2d398abd156f54ae3cee3b1"
   }
 }

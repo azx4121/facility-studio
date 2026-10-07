@@ -469,7 +469,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "Tutorial B - MAU and DCC",
-        "recorded_at": "2026-10-07T09:41:26.661093+00:00"
+        "recorded_at": "2026-10-07T10:04:57.484169+00:00"
       },
       "atm_kpa": {
         "source": "系統預設",
@@ -503,7 +503,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "MAU+FFU+DCC (全外氣/無塵室)",
-        "recorded_at": "2026-10-07T09:41:26.661097+00:00"
+        "recorded_at": "2026-10-07T10:04:57.484175+00:00"
       },
       "rt_type": {
         "source": "系統預設",
@@ -553,25 +553,25 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "12",
-        "recorded_at": "2026-10-07T09:41:26.659948+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482914+00:00"
       },
       "en_W_A": {
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "8",
-        "recorded_at": "2026-10-07T09:41:26.659951+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482917+00:00"
       },
       "en_H_A": {
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "3",
-        "recorded_at": "2026-10-07T09:41:26.659953+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482919+00:00"
       },
       "en_ach_A": {
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "20",
-        "recorded_at": "2026-10-07T09:41:26.661099+00:00"
+        "recorded_at": "2026-10-07T10:04:57.484178+00:00"
       },
       "face_A": {
         "source": "系統預設",
@@ -589,7 +589,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "8",
-        "recorded_at": "2026-10-07T09:41:26.659955+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482921+00:00"
       },
       "c_b": {
         "source": "系統預設",
@@ -735,19 +735,19 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "500",
-        "recorded_at": "2026-10-07T09:41:26.659959+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482925+00:00"
       },
       "light_lm": {
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "4000",
-        "recorded_at": "2026-10-07T09:41:26.659961+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482926+00:00"
       },
       "light_w": {
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "40",
-        "recorded_at": "2026-10-07T09:41:26.659962+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482928+00:00"
       },
       "light_u": {
         "source": "系統預設",
@@ -761,13 +761,13 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "5",
-        "recorded_at": "2026-10-07T09:41:26.659957+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482922+00:00"
       },
       "eq_rt": {
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "100",
-        "recorded_at": "2026-10-07T09:41:26.659958+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482924+00:00"
       },
       "exh_ratio": {
         "source": "系統預設",
@@ -805,7 +805,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "60",
-        "recorded_at": "2026-10-07T09:41:26.659963+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482929+00:00"
       },
       "wall_u": {
         "source": "系統預設",
@@ -815,7 +815,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "96",
-        "recorded_at": "2026-10-07T09:41:26.659964+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482931+00:00"
       },
       "floor_u": {
         "source": "系統預設",
@@ -829,7 +829,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "22",
-        "recorded_at": "2026-10-07T09:41:26.659965+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482932+00:00"
       },
       "solar_kw": {
         "source": "系統預設",
@@ -963,7 +963,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "5",
-        "recorded_at": "2026-10-07T09:41:26.659968+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482934+00:00"
       },
       "u_e_up_eq": {
         "source": "系統預設",
@@ -973,7 +973,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "0",
-        "recorded_at": "2026-10-07T09:41:26.659969+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482936+00:00"
       },
       "u_e_up_oven": {
         "source": "系統預設",
@@ -995,7 +995,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "1",
-        "recorded_at": "2026-10-07T09:41:26.659970+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482938+00:00"
       },
       "u_e_np_fan": {
         "source": "系統預設",
@@ -1005,7 +1005,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "0",
-        "recorded_at": "2026-10-07T09:41:26.659971+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482942+00:00"
       },
       "u_e_np_heat": {
         "source": "系統預設",
@@ -1015,7 +1015,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "0",
-        "recorded_at": "2026-10-07T09:41:26.659972+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482944+00:00"
       },
       "u_e_np_humid": {
         "source": "系統預設",
@@ -1025,7 +1025,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "0",
-        "recorded_at": "2026-10-07T09:41:26.659973+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482946+00:00"
       },
       "u_e_np_exh": {
         "source": "系統預設",
@@ -1035,7 +1035,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "0",
-        "recorded_at": "2026-10-07T09:41:26.659975+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482948+00:00"
       },
       "u_e_np_pump": {
         "source": "系統預設",
@@ -1273,7 +1273,7 @@
         "source": "使用者輸入",
         "note": "Synthetic tutorial assumption; not site or manufacturer data.",
         "value": "沒有額外產濕",
-        "recorded_at": "2026-10-07T09:41:26.659967+00:00"
+        "recorded_at": "2026-10-07T10:04:57.482933+00:00"
       },
       "process_moisture_kg_h": {
         "source": "系統預設",

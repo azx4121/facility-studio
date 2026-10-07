@@ -227,7 +227,10 @@ def run():
         figure.add_subplot().plot([0, 1], [0, 1])
         canvas = FigureCanvasTkAgg(figure, master=root)
         check("Matplotlib TkAgg drawing", lambda: (canvas.draw(), True)[1])
-        app.close()
+        from unittest.mock import patch
+
+        with patch("tkinter.messagebox.askyesnocancel", return_value=False):
+            app.close()
     finally:
         try:
             if root.winfo_exists():
