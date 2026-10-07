@@ -1,6 +1,6 @@
 {
   "scope": "14 minimal CLI examples executed for both source distributions on this test host; not native EXE/App execution",
-  "relative_links_checked": 126,
+  "relative_links_checked": 136,
   "platform_results_identical": true,
   "runs": [
     {

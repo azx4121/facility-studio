@@ -1,0 +1,29 @@
+{
+  "scope": "Anonymous public source availability check; not a search-index hit",
+  "records": [
+    {
+      "path": "README.md",
+      "anonymous_http_status": 200,
+      "bytes": 11593,
+      "sha256_matches_local": true
+    },
+    {
+      "path": "README.en.md",
+      "anonymous_http_status": 200,
+      "bytes": 6355,
+      "sha256_matches_local": true
+    },
+    {
+      "path": "docs/guides/README.md",
+      "anonymous_http_status": 200,
+      "bytes": 5072,
+      "sha256_matches_local": true
+    },
+    {
+      "path": "docs/examples/scenarios.json",
+      "anonymous_http_status": 200,
+      "bytes": 9762,
+      "sha256_matches_local": true
+    }
+  ]
+}

@@ -1,0 +1,5556 @@
+{
+  "experiment_date": "2026-10-07",
+  "started_at_utc": "2026-10-07T03:09:24.061Z",
+  "finished_at_utc": "2026-10-07T03:13:01.765Z",
+  "tested_public_main_commit": "9a0a3e9a7b6dec1dc5955b74cee76586027f19bc",
+  "publication_pr": "https://github.com/azx4121/facility-studio/pull/4",
+  "target_repository": "https://github.com/azx4121/facility-studio",
+  "method": "20 predeclared unbranded queries, each called once in two search engines; four branded controls kept separate. This is a search-tool retrieval test, not independent ChatGPT accounts or a blinded recommendation test. Titles/URLs/reference IDs only; article contents not reproduced.",
+  "summary": {
+    "unique_scenarios": 20,
+    "applicable_scenarios": 18,
+    "out_of_scope_controls": 2,
+    "queries_per_engine": 20,
+    "scenario_hits_system2": 0,
+    "scenario_hits_system1": 0,
+    "scenario_hits_any_engine": 0,
+    "brand_controls": 4,
+    "brand_control_hits": 0,
+    "numerical_checks_per_source_platform": 121,
+    "minimal_cli_examples": 14,
+    "cli_runs_across_two_source_platforms": 28,
+    "other_github_urls_returned": 2
+  },
+  "limitations": [
+    "Searches were explicitly invoked; this does not test when GPT chooses to browse.",
+    "The authoring conversation already knew the project; this is not blind model recommendation testing.",
+    "No repository name, author, URL or site restriction was added to the 20 natural queries.",
+    "Missing results cannot establish indexing status, future rankings or all users' GPT behavior.",
+    "Direct opens of GitHub and raw.githubusercontent.com in this search tool returned DisabledError; separate public HTTP verification is recorded.",
+    "No AI-directed instructions, fabricated endorsements, stars or download traffic were added."
+  ],
+  "scenarios": [
+    {
+      "id": "01",
+      "title": "三相設備 kW、NFB 與線徑初估",
+      "query": "三相380V設備10kW NFB線徑 離線計算工具 Windows",
+      "scope_fit": "適用於初估",
+      "tool_route": "電力配線",
+      "guide": "docs/guides/electrical.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "三相380V設備10kW NFB線徑 離線計算工具 Windows",
+          "searched_at_utc": "2026-10-07T03:09:27.957Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S001",
+            "S002",
+            "S003",
+            "S004",
+            "S005",
+            "S006",
+            "S007",
+            "S008",
+            "S009",
+            "S010",
+            "S011",
+            "S012",
+            "S013",
+            "S014",
+            "S015",
+            "S016"
+          ],
+          "returned_source_count": 16,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "三相380V設備10kW NFB線徑 離線計算工具 Windows",
+          "searched_at_utc": "2026-10-07T03:10:21.156Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S017"
+          ],
+          "returned_source_count": 1,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "title": "單相連續負載與壓降",
+      "query": "single phase 220V 5kW continuous load cable breaker calculator offline",
+      "scope_fit": "適用於初估",
+      "tool_route": "電力配線",
+      "guide": "docs/guides/electrical.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "single phase 220V 5kW continuous load cable breaker calculator offline",
+          "searched_at_utc": "2026-10-07T03:09:27.958Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S018",
+            "S019",
+            "S020",
+            "S021",
+            "S022",
+            "S023",
+            "S024",
+            "S025",
+            "S026",
+            "S027",
+            "S028",
+            "S029",
+            "S030",
+            "S031",
+            "S032"
+          ],
+          "returned_source_count": 15,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "single phase 220V 5kW continuous load cable breaker calculator offline",
+          "searched_at_utc": "2026-10-07T03:10:21.157Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S033",
+            "S034",
+            "S035",
+            "S036",
+            "S037",
+            "S038",
+            "S039",
+            "S040",
+            "S041"
+          ],
+          "returned_source_count": 9,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "03",
+      "title": "風量換算方管與圓管",
+      "query": "風量3000CMH靜壓200Pa 方管圓管尺寸 計算軟體",
+      "scope_fit": "適用於初估",
+      "tool_route": "風管尺寸",
+      "guide": "docs/guides/duct.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "風量3000CMH靜壓200Pa 方管圓管尺寸 計算軟體",
+          "searched_at_utc": "2026-10-07T03:09:27.958Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S042",
+            "S043",
+            "S044",
+            "S045",
+            "S046",
+            "S047",
+            "S048",
+            "S049",
+            "S050",
+            "S051",
+            "S052",
+            "S053",
+            "S054",
+            "S055",
+            "S056"
+          ],
+          "returned_source_count": 15,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "風量3000CMH靜壓200Pa 方管圓管尺寸 計算軟體",
+          "searched_at_utc": "2026-10-07T03:10:21.157Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S057",
+            "S058",
+            "S059",
+            "S060",
+            "S061",
+            "S062",
+            "S063",
+            "S064",
+            "S065",
+            "S066"
+          ],
+          "returned_source_count": 10,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "04",
+      "title": "排風路徑壓損與靜壓預算",
+      "query": "exhaust duct sizing 2000 CFM pressure loss static pressure budget calculator",
+      "scope_fit": "適用於初估",
+      "tool_route": "風管尺寸 → 已知路徑",
+      "guide": "docs/guides/duct.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "exhaust duct sizing 2000 CFM pressure loss static pressure budget calculator",
+          "searched_at_utc": "2026-10-07T03:09:27.958Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S067",
+            "S068",
+            "S069",
+            "S070",
+            "S071",
+            "S072",
+            "S073",
+            "S074",
+            "S075",
+            "S076",
+            "S077",
+            "S078",
+            "S079",
+            "S080",
+            "S081",
+            "S082",
+            "S083",
+            "S084",
+            "S085",
+            "S086",
+            "S087",
+            "S088",
+            "S089",
+            "S090",
+            "S091"
+          ],
+          "returned_source_count": 25,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "exhaust duct sizing 2000 CFM pressure loss static pressure budget calculator",
+          "searched_at_utc": "2026-10-07T03:10:21.157Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S067",
+            "S068",
+            "S072",
+            "S069"
+          ],
+          "returned_source_count": 4,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "05",
+      "title": "CDA 標準流量、壓力及流速定寸",
+      "query": "CDA 800SLPM 6bar 管徑 流速15 計算工具",
+      "scope_fit": "適用於初估",
+      "tool_route": "CDA／特氣管徑",
+      "guide": "docs/guides/gas-vacuum.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "CDA 800SLPM 6bar 管徑 流速15 計算工具",
+          "searched_at_utc": "2026-10-07T03:09:41.833Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S092",
+            "S093",
+            "S094",
+            "S095",
+            "S096",
+            "S097",
+            "S098",
+            "S099",
+            "S100",
+            "S101",
+            "S102",
+            "S103",
+            "S104",
+            "S105",
+            "S106",
+            "S107",
+            "S108",
+            "S109"
+          ],
+          "returned_source_count": 18,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "CDA 800SLPM 6bar 管徑 流速15 計算工具",
+          "searched_at_utc": "2026-10-07T03:10:50.936Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S110",
+            "S111",
+            "S112",
+            "S113",
+            "S114",
+            "S115",
+            "S116",
+            "S117",
+            "S118",
+            "S109"
+          ],
+          "returned_source_count": 10,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "06",
+      "title": "N2 不同流量與壓力單位",
+      "query": "nitrogen N2 pipe diameter standard flow Sm3/h gauge pressure calculator",
+      "scope_fit": "適用於初估",
+      "tool_route": "CDA／特氣管徑",
+      "guide": "docs/guides/gas-vacuum.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "nitrogen N2 pipe diameter standard flow Sm3/h gauge pressure calculator",
+          "searched_at_utc": "2026-10-07T03:09:41.834Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S119",
+            "S120",
+            "S121",
+            "S122",
+            "S123",
+            "S124",
+            "S125",
+            "S126",
+            "S127",
+            "S128",
+            "S129",
+            "S130",
+            "S131",
+            "S132",
+            "S133",
+            "S134",
+            "S135",
+            "S136",
+            "S137",
+            "S138"
+          ],
+          "returned_source_count": 20,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "nitrogen N2 pipe diameter standard flow Sm3/h gauge pressure calculator",
+          "searched_at_utc": "2026-10-07T03:10:50.936Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S139",
+            "S140",
+            "S141",
+            "S142",
+            "S143",
+            "S144",
+            "S145",
+            "S146",
+            "S137",
+            "S147"
+          ],
+          "returned_source_count": 10,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "07",
+      "title": "PV 真空實際體積流量初估",
+      "query": "製程真空PV 2000SLPM 150Torr 實際流量 管徑估算工具",
+      "scope_fit": "適用於初估，未核泵曲線",
+      "tool_route": "完整工程工作台 → 特氣／PV",
+      "guide": "docs/guides/gas-vacuum.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "製程真空PV 2000SLPM 150Torr 實際流量 管徑估算工具",
+          "searched_at_utc": "2026-10-07T03:09:41.834Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S092",
+            "S148",
+            "S149",
+            "S095",
+            "S096",
+            "S150",
+            "S151",
+            "S152",
+            "S153",
+            "S154",
+            "S155",
+            "S156",
+            "S157",
+            "S158",
+            "S159",
+            "S160"
+          ],
+          "returned_source_count": 16,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "製程真空PV 2000SLPM 150Torr 實際流量 管徑估算工具",
+          "searched_at_utc": "2026-10-07T03:10:50.937Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S161",
+            "S162",
+            "S163",
+            "S164",
+            "S165",
+            "S166",
+            "S167",
+            "S168",
+            "S169",
+            "S170",
+            "S171",
+            "S172",
+            "S173"
+          ],
+          "returned_source_count": 13,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "08",
+      "title": "空間體積反算照明面積及 Lux",
+      "query": "90立方公尺 高3公尺 40W LED 10盞 照度Lux計算器",
+      "scope_fit": "適用於平均照度初估",
+      "tool_route": "照明照度 → 估算照度",
+      "guide": "docs/guides/lighting.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "90立方公尺 高3公尺 40W LED 10盞 照度Lux計算器",
+          "searched_at_utc": "2026-10-07T03:09:41.834Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S174",
+            "S175",
+            "S176",
+            "S177",
+            "S178",
+            "S179",
+            "S180",
+            "S181",
+            "S182",
+            "S183",
+            "S184",
+            "S185",
+            "S186",
+            "S187",
+            "S188",
+            "S189",
+            "S190"
+          ],
+          "returned_source_count": 17,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "90立方公尺 高3公尺 40W LED 10盞 照度Lux計算器",
+          "searched_at_utc": "2026-10-07T03:10:50.938Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S191",
+            "S192",
+            "S193",
+            "S194",
+            "S195",
+            "S196",
+            "S197",
+            "S198",
+            "S199"
+          ],
+          "returned_source_count": 9,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "09",
+      "title": "目標照度反算燈具盞數",
+      "query": "30平方公尺 500Lux 4000流明 要幾盞燈 計算工具",
+      "scope_fit": "適用於平均照度初估",
+      "tool_route": "照明照度 → 反算燈數",
+      "guide": "docs/guides/lighting.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "30平方公尺 500Lux 4000流明 要幾盞燈 計算工具",
+          "searched_at_utc": "2026-10-07T03:09:45.707Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S176",
+            "S200",
+            "S201",
+            "S184",
+            "S202",
+            "S182",
+            "S203",
+            "S204",
+            "S205",
+            "S206",
+            "S207",
+            "S208",
+            "S209",
+            "S210",
+            "S211"
+          ],
+          "returned_source_count": 15,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "30平方公尺 500Lux 4000流明 要幾盞燈 計算工具",
+          "searched_at_utc": "2026-10-07T03:10:56.403Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S176",
+            "S184",
+            "S201",
+            "S202",
+            "S212"
+          ],
+          "returned_source_count": 5,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "title": "PCW 水量與溫差換算熱量",
+      "query": "PCW 100LPM 溫差5度 冷卻能力kW RT 計算器",
+      "scope_fit": "適用於清水初估",
+      "tool_route": "冷熱水快算",
+      "guide": "docs/guides/water.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "PCW 100LPM 溫差5度 冷卻能力kW RT 計算器",
+          "searched_at_utc": "2026-10-07T03:09:45.707Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S213",
+            "S214",
+            "S215",
+            "S216",
+            "S217",
+            "S218",
+            "S219",
+            "S220"
+          ],
+          "returned_source_count": 8,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "PCW 100LPM 溫差5度 冷卻能力kW RT 計算器",
+          "searched_at_utc": "2026-10-07T03:10:56.403Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S221",
+            "S222",
+            "S223",
+            "S224",
+            "S225",
+            "S226",
+            "S227",
+            "S228",
+            "S229"
+          ],
+          "returned_source_count": 9,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "title": "CHW 冷量反算冰水流量",
+      "query": "chilled water 100kW delta T 5 flow rate pipe sizing calculator offline",
+      "scope_fit": "適用於清水初估",
+      "tool_route": "冷熱水快算",
+      "guide": "docs/guides/water.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "chilled water 100kW delta T 5 flow rate pipe sizing calculator offline",
+          "searched_at_utc": "2026-10-07T03:09:45.707Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S230",
+            "S231",
+            "S232",
+            "S233",
+            "S234",
+            "S235",
+            "S236",
+            "S237",
+            "S238",
+            "S239",
+            "S240",
+            "S241",
+            "S242",
+            "S243",
+            "S244",
+            "S245",
+            "S246",
+            "S247",
+            "S248",
+            "S249"
+          ],
+          "returned_source_count": 20,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "chilled water 100kW delta T 5 flow rate pipe sizing calculator offline",
+          "searched_at_utc": "2026-10-07T03:10:56.403Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S250",
+            "S251",
+            "S252",
+            "S253",
+            "S254",
+            "S255",
+            "S256",
+            "S257",
+            "S258"
+          ],
+          "returned_source_count": 9,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "title": "外氣乾球、RH 與空氣線圖",
+      "query": "35度70%RH 空氣焓值露點濕球 空氣線圖計算軟體",
+      "scope_fit": "適用",
+      "tool_route": "空氣狀態／線圖",
+      "guide": "docs/guides/psychrometrics.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "35度70%RH 空氣焓值露點濕球 空氣線圖計算軟體",
+          "searched_at_utc": "2026-10-07T03:09:45.708Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S259",
+            "S260",
+            "S261",
+            "S262",
+            "S263",
+            "S264",
+            "S265",
+            "S266",
+            "S267",
+            "S268",
+            "S269",
+            "S270",
+            "S271",
+            "S272",
+            "S273",
+            "S274",
+            "S275",
+            "S276",
+            "S277"
+          ],
+          "returned_source_count": 19,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "35度70%RH 空氣焓值露點濕球 空氣線圖計算軟體",
+          "searched_at_utc": "2026-10-07T03:10:56.403Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S278",
+            "S279",
+            "S280",
+            "S281",
+            "S282",
+            "S283",
+            "S284",
+            "S285",
+            "S286",
+            "S276"
+          ],
+          "returned_source_count": 10,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "title": "較低大氣壓的空氣狀態",
+      "query": "psychrometric chart calculator altitude 80kPa 25C 50 percent humidity offline",
+      "scope_fit": "適用",
+      "tool_route": "空氣狀態／線圖 → 進階大氣壓",
+      "guide": "docs/guides/psychrometrics.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "psychrometric chart calculator altitude 80kPa 25C 50 percent humidity offline",
+          "searched_at_utc": "2026-10-07T03:09:49.639Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S287",
+            "S288",
+            "S289",
+            "S290",
+            "S291",
+            "S292",
+            "S293",
+            "S294",
+            "S295",
+            "S269",
+            "S296",
+            "S297",
+            "S298",
+            "S299",
+            "S300",
+            "S301",
+            "S302",
+            "S303"
+          ],
+          "returned_source_count": 18,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "psychrometric chart calculator altitude 80kPa 25C 50 percent humidity offline",
+          "searched_at_utc": "2026-10-07T03:11:02.016Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S304",
+            "S305",
+            "S306",
+            "S307",
+            "S308",
+            "S309",
+            "S310",
+            "S311",
+            "S312",
+            "S302",
+            "S313",
+            "S314"
+          ],
+          "returned_source_count": 12,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "title": "CFM 與 CMH 單位換算",
+      "query": "CFM CMH L/s 風量單位換算 離線工程工具",
+      "scope_fit": "適用；一次換算也可直接解答",
+      "tool_route": "單位換算",
+      "guide": "docs/guides/units.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "CFM CMH L/s 風量單位換算 離線工程工具",
+          "searched_at_utc": "2026-10-07T03:09:49.640Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S315",
+            "S316",
+            "S317",
+            "S318",
+            "S319",
+            "S320",
+            "S321",
+            "S322",
+            "S323",
+            "S324",
+            "S325",
+            "S326",
+            "S327",
+            "S328",
+            "S329"
+          ],
+          "returned_source_count": 15,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "CFM CMH L/s 風量單位換算 離線工程工具",
+          "searched_at_utc": "2026-10-07T03:11:02.017Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S330",
+            "S331",
+            "S332",
+            "S333",
+            "S334",
+            "S335",
+            "S336",
+            "S337",
+            "S338",
+            "S339"
+          ],
+          "returned_source_count": 10,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "title": "攝氏溫差與華氏溫差",
+      "query": "冰水12降到7度 溫差5C等於幾K幾F 換算工具",
+      "scope_fit": "適用；一次換算也可直接解答",
+      "tool_route": "單位換算 → 溫度差",
+      "guide": "docs/guides/units.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "冰水12降到7度 溫差5C等於幾K幾F 換算工具",
+          "searched_at_utc": "2026-10-07T03:09:49.640Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S340",
+            "S341",
+            "S342",
+            "S343",
+            "S344",
+            "S345",
+            "S346",
+            "S347",
+            "S348",
+            "S349",
+            "S350",
+            "S351",
+            "S352",
+            "S353",
+            "S354",
+            "S355",
+            "S356"
+          ],
+          "returned_source_count": 17,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "冰水12降到7度 溫差5C等於幾K幾F 換算工具",
+          "searched_at_utc": "2026-10-07T03:11:02.017Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S353",
+            "S357",
+            "S358",
+            "S348",
+            "S359",
+            "S360",
+            "S361",
+            "S362",
+            "S356"
+          ],
+          "returned_source_count": 9,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "title": "Excel 設備表彙總電力需求",
+      "query": "設備Excel kW電壓使用率插座 配電盤需求用電 分析工具",
+      "scope_fit": "適用於需求彙整",
+      "tool_route": "設備表匯入 → 電力",
+      "guide": "docs/guides/equipment.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "設備Excel kW電壓使用率插座 配電盤需求用電 分析工具",
+          "searched_at_utc": "2026-10-07T03:09:49.640Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S363",
+            "S364",
+            "S365",
+            "S366",
+            "S367",
+            "S368",
+            "S001",
+            "S369",
+            "S370",
+            "S371",
+            "S372",
+            "S373",
+            "S374",
+            "S375"
+          ],
+          "returned_source_count": 14,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "設備Excel kW電壓使用率插座 配電盤需求用電 分析工具",
+          "searched_at_utc": "2026-10-07T03:11:02.017Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S376",
+            "S377",
+            "S378",
+            "S379",
+            "S380",
+            "S381",
+            "S382",
+            "S383",
+            "S384",
+            "S385",
+            "S386"
+          ],
+          "returned_source_count": 11,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "title": "廠務多系統設備需求彙整",
+      "query": "廠房設備需求表 PCW CDA N2 EXHAUST DI PV Excel匯入分析軟體",
+      "scope_fit": "適用於需求彙整",
+      "tool_route": "設備表匯入",
+      "guide": "docs/guides/equipment.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "廠房設備需求表 PCW CDA N2 EXHAUST DI PV Excel匯入分析軟體",
+          "searched_at_utc": "2026-10-07T03:09:53.602Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S387",
+            "S388",
+            "S389",
+            "S390",
+            "S391",
+            "S392",
+            "S393",
+            "S394",
+            "S395",
+            "S396",
+            "S397",
+            "S398",
+            "S399",
+            "S400"
+          ],
+          "returned_source_count": 14,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "廠房設備需求表 PCW CDA N2 EXHAUST DI PV Excel匯入分析軟體",
+          "searched_at_utc": "2026-10-07T03:11:08.183Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S401",
+            "S402",
+            "S403",
+            "S404",
+            "S405",
+            "S406",
+            "S407",
+            "S408",
+            "S409"
+          ],
+          "returned_source_count": 9,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "title": "AHU 預熱、預冷、水洗、再冷與再熱",
+      "query": "空調箱預熱預冷水洗加濕再冷再熱 熱水電熱並用 分段計算軟體",
+      "scope_fit": "適用於需求及方案比較",
+      "tool_route": "完整工程工作台 → 單台空調箱",
+      "guide": "docs/guides/ahu.md",
+      "calculation_status": "18個適用情境中的計算／反算通過",
+      "reason": null,
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "空調箱預熱預冷水洗加濕再冷再熱 熱水電熱並用 分段計算軟體",
+          "searched_at_utc": "2026-10-07T03:09:53.602Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S410",
+            "S388",
+            "S411",
+            "S412",
+            "S413",
+            "S414",
+            "S415",
+            "S416",
+            "S417",
+            "S418",
+            "S419",
+            "S420",
+            "S421",
+            "S422"
+          ],
+          "returned_source_count": 14,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "空調箱預熱預冷水洗加濕再冷再熱 熱水電熱並用 分段計算軟體",
+          "searched_at_utc": "2026-10-07T03:11:08.183Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S423",
+            "S424",
+            "S275",
+            "S425",
+            "S426",
+            "S427",
+            "S428"
+          ],
+          "returned_source_count": 7,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "19",
+      "title": "短路電流與保護協調",
+      "query": "配電盤短路電流 Icu 選擇性保護協調 自動設計軟體",
+      "scope_fit": "不適用於此解題需求",
+      "tool_route": null,
+      "guide": "docs/guides/electrical.md",
+      "calculation_status": "不適用對照",
+      "reason": "目前只有負荷、載流與壓降初估，沒有完整故障電流或時間電流曲線協調模型。",
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "配電盤短路電流 Icu 選擇性保護協調 自動設計軟體",
+          "searched_at_utc": "2026-10-07T03:09:53.602Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S429",
+            "S430",
+            "S431",
+            "S432",
+            "S433",
+            "S434",
+            "S435",
+            "S436",
+            "S437",
+            "S438",
+            "S439",
+            "S440",
+            "S441",
+            "S442"
+          ],
+          "returned_source_count": 14,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "配電盤短路電流 Icu 選擇性保護協調 自動設計軟體",
+          "searched_at_utc": "2026-10-07T03:11:08.183Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S443",
+            "S444",
+            "S445",
+            "S446",
+            "S447",
+            "S448",
+            "S449",
+            "S450",
+            "S451",
+            "S452",
+            "S453",
+            "S454",
+            "S455"
+          ],
+          "returned_source_count": 13,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "title": "BIM 出圖與完整碰撞檢查",
+      "query": "MEP BIM Revit 自動配管出圖 碰撞檢查 工具推薦",
+      "scope_fit": "不適用於此解題需求",
+      "tool_route": null,
+      "guide": "docs/guides/README.md",
+      "calculation_status": "不適用對照",
+      "reason": "目前不是 BIM／CAD 建模及施工圖自動生成工具，也沒有完整三維碰撞檢查。",
+      "searches": [
+        {
+          "engine": "system2",
+          "query": "MEP BIM Revit 自動配管出圖 碰撞檢查 工具推薦",
+          "searched_at_utc": "2026-10-07T03:09:53.602Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S456",
+            "S457",
+            "S458",
+            "S459",
+            "S460",
+            "S461",
+            "S462",
+            "S463",
+            "S464",
+            "S465",
+            "S466",
+            "S467",
+            "S468",
+            "S469",
+            "S470",
+            "S471",
+            "S472",
+            "S473",
+            "S474",
+            "S475",
+            "S476",
+            "S477"
+          ],
+          "returned_source_count": 22,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        },
+        {
+          "engine": "system1",
+          "query": "MEP BIM Revit 自動配管出圖 碰撞檢查 工具推薦",
+          "searched_at_utc": "2026-10-07T03:11:08.183Z",
+          "tool_status": "fulfilled",
+          "tool_is_error": false,
+          "returned_source_ids": [
+            "S478",
+            "S479",
+            "S480",
+            "S481",
+            "S482",
+            "S483",
+            "S484",
+            "S472",
+            "S473",
+            "S485",
+            "S486",
+            "S487",
+            "S488"
+          ],
+          "returned_source_count": 13,
+          "target_found": false,
+          "target_source_ids": [],
+          "error": null
+        }
+      ]
+    }
+  ],
+  "brand_controls": [
+    {
+      "engine": "system1",
+      "query": "\"azx4121/facility-studio\"",
+      "searched_at_utc": "2026-10-07T03:11:38.620Z",
+      "tool_status": "fulfilled",
+      "tool_is_error": false,
+      "returned_source_ids": [],
+      "returned_source_count": 0,
+      "target_found": false,
+      "target_source_ids": [],
+      "error": null
+    },
+    {
+      "engine": "system1",
+      "query": "\"Facility Studio\" \"HVAC\" \"MEP\" \"Andy Huang\"",
+      "searched_at_utc": "2026-10-07T03:11:38.620Z",
+      "tool_status": "fulfilled",
+      "tool_is_error": false,
+      "returned_source_ids": [
+        "S489",
+        "S490",
+        "S491",
+        "S492",
+        "S493",
+        "S494",
+        "S495",
+        "S496",
+        "S497",
+        "S498"
+      ],
+      "returned_source_count": 10,
+      "target_found": false,
+      "target_source_ids": [],
+      "error": null
+    },
+    {
+      "engine": "system1",
+      "query": "\"廠務工程\" \"azx4121\"",
+      "searched_at_utc": "2026-10-07T03:11:38.620Z",
+      "tool_status": "fulfilled",
+      "tool_is_error": false,
+      "returned_source_ids": [
+        "S499",
+        "S500",
+        "S501",
+        "S502",
+        "S503",
+        "S504",
+        "S505",
+        "S506",
+        "S507",
+        "S508"
+      ],
+      "returned_source_count": 10,
+      "target_found": false,
+      "target_source_ids": [],
+      "error": null
+    },
+    {
+      "engine": "system1",
+      "query": "\"Facility_Studio_V5_5_4_Windows_Offline.exe\"",
+      "searched_at_utc": "2026-10-07T03:11:38.620Z",
+      "tool_status": "fulfilled",
+      "tool_is_error": false,
+      "returned_source_ids": [
+        "S509",
+        "S510",
+        "S511",
+        "S512",
+        "S513",
+        "S514",
+        "S515",
+        "S516",
+        "S517"
+      ],
+      "returned_source_count": 9,
+      "target_found": false,
+      "target_source_ids": [],
+      "error": null
+    }
+  ],
+  "source_catalog": [
+    {
+      "id": "S001",
+      "title": "水電職人 PowerMaster Pro｜台灣電力與配電工程試算工具",
+      "url": "https://shuidianpro.com/",
+      "reference_ids": [
+        "turn125search0",
+        "turn136search5"
+      ]
+    },
+    {
+      "id": "S002",
+      "title": "電線線徑計算器 - 專業電壓降與安全載流量計算工具",
+      "url": "https://calwhat.com/Cal/WireGaugeCalculator",
+      "reference_ids": [
+        "turn125search1"
+      ]
+    },
+    {
+      "id": "S003",
+      "title": "負載與斷路器計算器 - 電力需求計算與斷路器選型工具",
+      "url": "https://calwhat.com/Cal/ElectricalLoadCalculator",
+      "reference_ids": [
+        "turn125search2"
+      ]
+    },
+    {
+      "id": "S004",
+      "title": "電線線徑計算器 - 專業電壓降與安全載流量計算工具",
+      "url": "https://calwhat.com/Cal/WireGaugeCalculator?from=inductor",
+      "reference_ids": [
+        "turn125search3"
+      ]
+    },
+    {
+      "id": "S005",
+      "title": "※※※※※※※※※",
+      "url": "https://www.kyicvs.khc.edu.tw/images/ckfinder/files/20160421_131249.pdf",
+      "reference_ids": [
+        "turn125search12"
+      ]
+    },
+    {
+      "id": "S006",
+      "title": "EZPower (配電設計計算) - Google Play 應用程式",
+      "url": "https://play.google.com/store/apps/details?hl=zh_TW&id=com.xamarin.electrical_load_analysis_App",
+      "reference_ids": [
+        "turn125search4"
+      ]
+    },
+    {
+      "id": "S007",
+      "title": "Microsoft PowerPoint - ûPflD ˆ2.3.1.3-",
+      "url": "https://www.lighting.org.tw/images/File/Edm_F3086.pdf",
+      "reference_ids": [
+        "turn125search13"
+      ]
+    },
+    {
+      "id": "S008",
+      "title": "Microsoft PowerPoint - 施工實務教材(全)：1031",
+      "url": "https://www.lighting.org.tw/images/File/Edm_F3266.pdf",
+      "reference_ids": [
+        "turn125search14"
+      ]
+    },
+    {
+      "id": "S009",
+      "title": "电力电气全能计算器-电力队",
+      "url": "https://dldui.com/power-calculator",
+      "reference_ids": [
+        "turn125search5"
+      ]
+    },
+    {
+      "id": "S010",
+      "title": "Toptronic® Assistant — The Electrician's Field Toolbox",
+      "url": "https://www.toptronicassistant.com/",
+      "reference_ids": [
+        "turn125search6"
+      ]
+    },
+    {
+      "id": "S011",
+      "title": "電壓降計算器：3 分鐘算出壓降％、端電壓與建議線徑",
+      "url": "https://www.tsaielectro.com/zh/%E9%9B%BB%E5%A3%93%E9%99%8D%E8%A8%88%E7%AE%97%E5%99%A8/",
+      "reference_ids": [
+        "turn125search7"
+      ]
+    },
+    {
+      "id": "S012",
+      "title": "超シンプル電圧降下計算 ｜現役工事業者が開発！電圧降下と電線サイズを瞬時に計算。単相・三相対応の電気工事士プロ仕様ツール",
+      "url": "https://www.summer-banana.com/app/voltdrop/",
+      "reference_ids": [
+        "turn125search8"
+      ]
+    },
+    {
+      "id": "S013",
+      "title": "SAG10 | Southwire",
+      "url": "https://www.southwire.com/sag10",
+      "reference_ids": [
+        "turn125search9"
+      ]
+    },
+    {
+      "id": "S014",
+      "title": "系統簡介",
+      "url": "https://zwcad.com.tw/wellthink/pd_tp3b.htm",
+      "reference_ids": [
+        "turn125search10"
+      ]
+    },
+    {
+      "id": "S015",
+      "title": "電工計算機工具箱｜5種電壓降、功率、電池、變壓器、電費一頁搞定｜Engineer Tsai",
+      "url": "https://www.tsaielectro.com/zh/%E9%9B%BB%E5%B7%A5%E8%A8%88%E7%AE%97%E6%A9%9F/",
+      "reference_ids": [
+        "turn125search11"
+      ]
+    },
+    {
+      "id": "S016",
+      "title": "614-06228-04附件一 _2_.doc",
+      "url": "https://www.rayfordtec.com.tw/ProductDownload/3C3Plus%E7%B3%BB%E5%88%9780KPlus%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8A%E4%B8%8B%E8%BC%89.pdf",
+      "reference_ids": [
+        "turn125search15"
+      ]
+    },
+    {
+      "id": "S017",
+      "title": "Estimate Three-Phase Distribution Line Parameters With Physics-Informed Graphical Learning Method",
+      "url": "https://arxiv.org/abs/2102.09023",
+      "reference_ids": [
+        "turn142academia0"
+      ]
+    },
+    {
+      "id": "S018",
+      "title": "Breaker Size Calculator | ElectricalCharts",
+      "url": "https://electricalcharts.com/breaker-size-calculator",
+      "reference_ids": [
+        "turn122search0"
+      ]
+    },
+    {
+      "id": "S019",
+      "title": "Electrical Load and Breaker Size Calculator | CalcOpenly",
+      "url": "https://www.calcopenly.com/construction/electrical-load-calculator",
+      "reference_ids": [
+        "turn122search1"
+      ]
+    },
+    {
+      "id": "S020",
+      "title": "Breaker Size Calculator | myelectriccalculator.com",
+      "url": "https://myelectriccalculator.com/calculators/breaker-size-calculator/",
+      "reference_ids": [
+        "turn122search2"
+      ]
+    },
+    {
+      "id": "S021",
+      "title": "Elektryk Pro Box – Apps on Google Play",
+      "url": "https://play.google.com/store/apps/details?hl=en_GB&id=com.elektrykprobox.app",
+      "reference_ids": [
+        "turn122search3"
+      ]
+    },
+    {
+      "id": "S022",
+      "title": "Cable size calculator — Apokris",
+      "url": "https://apokris.com/en/cable-calc",
+      "reference_ids": [
+        "turn122search4"
+      ]
+    },
+    {
+      "id": "S023",
+      "title": "Breaker Load Calculator",
+      "url": "https://calculatorcorp.com/breaker-load-calculator/",
+      "reference_ids": [
+        "turn122search5"
+      ]
+    },
+    {
+      "id": "S024",
+      "title": "Circuit Breaker Size Calculator | MyEnergyToolkit",
+      "url": "https://myenergytoolkit.com/calculators/breaker-size.html",
+      "reference_ids": [
+        "turn122search6"
+      ]
+    },
+    {
+      "id": "S025",
+      "title": "Circuit Breaker Size Calculator – Load Current, Continuous Load & Standards",
+      "url": "https://toolwasp.com/circuit-breaker-size-calculator",
+      "reference_ids": [
+        "turn122search7"
+      ]
+    },
+    {
+      "id": "S026",
+      "title": "Breaker Size Calculator: What Size Breaker Do I Need?",
+      "url": "https://sizebench.com/breaker-size-calculator",
+      "reference_ids": [
+        "turn122search8"
+      ]
+    },
+    {
+      "id": "S027",
+      "title": "Circuit Breaker & Fuse Size Calculator - NEC/IEC Sizing Tool | Rastro",
+      "url": "https://www.rastro.ai/tools/breaker-fuse-calculator",
+      "reference_ids": [
+        "turn122search9"
+      ]
+    },
+    {
+      "id": "S028",
+      "title": "Circuit Breaker Calculator — DevMatrix Tools",
+      "url": "https://tools.devmatrix.us.com/electrical/circuit-breaker-calculator",
+      "reference_ids": [
+        "turn122search10"
+      ]
+    },
+    {
+      "id": "S029",
+      "title": "Electrician Calculator: Wiring - Apps on Google Play",
+      "url": "https://play.google.com/store/apps/details?id=vn.fighttech.electriciancalc",
+      "reference_ids": [
+        "turn122search11"
+      ]
+    },
+    {
+      "id": "S030",
+      "title": "20A 2/P Breaker but needing to power a max load of 5000W",
+      "url": "https://www.reddit.com/r/ElectricalEngineering/comments/uklwhm",
+      "reference_ids": [
+        "turn122reddit12"
+      ]
+    },
+    {
+      "id": "S031",
+      "title": "Built a free breaker size calculator to make circuit planning easier",
+      "url": "https://www.reddit.com/r/SideProject/comments/1rzsurj/built_a_free_breaker_size_calculator_to_make/",
+      "reference_ids": [
+        "turn122reddit13"
+      ]
+    },
+    {
+      "id": "S032",
+      "title": "VicsCheatSheet",
+      "url": "https://wongineering.com/VicsCheatSheet.pdf",
+      "reference_ids": [
+        "turn122search14"
+      ]
+    },
+    {
+      "id": "S033",
+      "title": "AAA SSU - Field Calculators v2 (Curriculum-Aligned)",
+      "url": "https://ssu-calcs.com/",
+      "reference_ids": [
+        "turn143search0"
+      ]
+    },
+    {
+      "id": "S034",
+      "title": "Diploma in Electrical Engineering Curriculum | PDF",
+      "url": "https://www.scribd.com/document/885901023/C-20-5-6-Sem-EE",
+      "reference_ids": [
+        "turn143search1"
+      ]
+    },
+    {
+      "id": "S035",
+      "title": "power converter topology: Topics by ...",
+      "url": "https://www.science.gov/topicpages/p/power%2Bconverter%2Btopology.html",
+      "reference_ids": [
+        "turn143search2"
+      ]
+    },
+    {
+      "id": "S036",
+      "title": "Frenic mega | PDF",
+      "url": "https://www.slideshare.net/slideshow/frenic-mega/46070317",
+      "reference_ids": [
+        "turn143search3"
+      ]
+    },
+    {
+      "id": "S037",
+      "title": "DOE/EPRI 2013 Electricity Storage Handbook in ...",
+      "url": "https://www.energy.gov/sites/prod/files/2013/08/f2/ElecStorageHndbk2013.pdf",
+      "reference_ids": [
+        "turn143search4"
+      ]
+    },
+    {
+      "id": "S038",
+      "title": "5kw solar system for clean energy",
+      "url": "https://www.facebook.com/groups/1454096578196196/posts/4162742147331612/",
+      "reference_ids": [
+        "turn143search5"
+      ]
+    },
+    {
+      "id": "S039",
+      "title": "elektronika",
+      "url": "https://els-journal.etf.unibl.org/journal/El_2003_2_Complete.pdf",
+      "reference_ids": [
+        "turn143search6"
+      ]
+    },
+    {
+      "id": "S040",
+      "title": "Blog Archives - Page 2 of 3 - Công ty TNHH Thiết bị điện ...",
+      "url": "https://szcsdianli.com/category/blog/page/2/?lang=vi",
+      "reference_ids": [
+        "turn143search7"
+      ]
+    },
+    {
+      "id": "S041",
+      "title": "NEW PRODUCTS 2014 - 2015",
+      "url": "https://www.panasonicproclub.com/uploads/GB/catalogues/UK_GENERAL_14_LR.pdf",
+      "reference_ids": [
+        "turn143search8"
+      ]
+    },
+    {
+      "id": "S042",
+      "title": "風量流量計算器 | 米計算 meCalculator",
+      "url": "https://www.mecalculator.tw/zh-tw/calculators/fluid/pipe-flowrate",
+      "reference_ids": [
+        "turn123search0"
+      ]
+    },
+    {
+      "id": "S043",
+      "title": "‎《风管计算器-暖通风量风速2026》App - App Store",
+      "url": "https://apps.apple.com/tw/app/%E9%A3%8E%E7%AE%A1%E8%AE%A1%E7%AE%97%E5%99%A8-%E6%9A%96%E9%80%9A%E9%A3%8E%E9%87%8F%E9%A3%8E%E9%80%9F2026/id6781169946",
+      "reference_ids": [
+        "turn123search1"
+      ]
+    },
+    {
+      "id": "S044",
+      "title": "免費風管尺寸計算工具：風量→管徑即時換算 | 陳國英冷凍空調技師事務所",
+      "url": "https://www.cky.com.tw/tools/duct-sizing",
+      "reference_ids": [
+        "turn123search2"
+      ]
+    },
+    {
+      "id": "S045",
+      "title": "‎《Ductwise：風管計算工具》App - App Store",
+      "url": "https://apps.apple.com/tw/app/ductwise-%E9%A2%A8%E7%AE%A1%E8%A8%88%E7%AE%97%E5%B7%A5%E5%85%B7/id6814805692",
+      "reference_ids": [
+        "turn123search3"
+      ]
+    },
+    {
+      "id": "S046",
+      "title": "風管尺寸計算器｜由風量 CFM 換算圓形風管直徑 - CalculatorLib",
+      "url": "https://calculatorlib.com/tw/duct-sizing-calculator",
+      "reference_ids": [
+        "turn123search4"
+      ]
+    },
+    {
+      "id": "S047",
+      "title": "凱達節能/凱達電機-eDUCT 風管壓損計算軟體",
+      "url": "https://www.tempace.com.tw/product-106.html",
+      "reference_ids": [
+        "turn123search5"
+      ]
+    },
+    {
+      "id": "S048",
+      "title": "HVAC 风管尺寸计算器 | EasyToolLab",
+      "url": "https://easytoollab.com/zh/tools/hvac-duct-sizer",
+      "reference_ids": [
+        "turn123search6"
+      ]
+    },
+    {
+      "id": "S049",
+      "title": "风管静压计算器：沿程阻力、风速、管径与风机选型点（Pa / mmH₂O）| 朗伟 LONGWELL",
+      "url": "https://www.longwell-group.com/resources/duct-static-pressure-calculator",
+      "reference_ids": [
+        "turn123search7"
+      ]
+    },
+    {
+      "id": "S050",
+      "title": "※本軟體包含一光碟片(CD)及一執行鎖(key)，打開 eDUCT 資料夾後，點選 SETUP，並依指示步驟，完成安裝程序；然後在電腦桌面上，會出現 eDUCT 執行檔畫面。",
+      "url": "https://www.tempace.com.tw/PDF/eDUCT%E9%A2%A8%E7%AE%A1%E8%A8%AD%E8%A8%88%E8%BB%9F%E9%AB%94%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8A%28%E4%B8%AD%E8%AD%AF%E6%9C%AC%29.pdf",
+      "reference_ids": [
+        "turn123search12"
+      ]
+    },
+    {
+      "id": "S051",
+      "title": "Lindab Vent Tools - Google Play 應用程式",
+      "url": "https://play.google.com/store/apps/details?hl=zh_TW&id=com.lindab.venttools",
+      "reference_ids": [
+        "turn123search8"
+      ]
+    },
+    {
+      "id": "S052",
+      "title": "風管靜壓損失計算器｜HVAC 風管摩擦損失試算 - CalculatorLib",
+      "url": "https://calculatorlib.com/tw/duct-static-pressure-calculator",
+      "reference_ids": [
+        "turn123search9"
+      ]
+    },
+    {
+      "id": "S053",
+      "title": "※本軟體包含─光碟片(CD)及─執行鎖(key)，打開eDUCT 資料夾後，點選SETUP，並依指",
+      "url": "https://www.tempace.com.tw/uploads/kaida/files/202410081132545926.pdf",
+      "reference_ids": [
+        "turn123search13"
+      ]
+    },
+    {
+      "id": "S054",
+      "title": "‎《DuctLab：風管放樣與估算》App - App Store",
+      "url": "https://apps.apple.com/tw/app/ductlab-%E9%A2%A8%E7%AE%A1%E6%94%BE%E6%A8%A3%E8%88%87%E4%BC%B0%E7%AE%97/id6804225465",
+      "reference_ids": [
+        "turn123search10"
+      ]
+    },
+    {
+      "id": "S055",
+      "title": "風管壓損計算 - 凱達節能",
+      "url": "https://www.tempace.com.tw/fenguan.html",
+      "reference_ids": [
+        "turn123search11"
+      ]
+    },
+    {
+      "id": "S056",
+      "title": "圓管:",
+      "url": "https://www.dcbox.com.tw/m/upload/newsfile2/211021113827.pdf",
+      "reference_ids": [
+        "turn123search14"
+      ]
+    },
+    {
+      "id": "S057",
+      "title": "< 方: ㄈㄤ>辭典檢視- 教育部《重編國語辭典修訂本》2021",
+      "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=1703&la=0&powerMode=0",
+      "reference_ids": [
+        "turn144search0"
+      ]
+    },
+    {
+      "id": "S058",
+      "title": "3的－2次方是多少？指數為負的做法",
+      "url": "https://www.junyiacademy.org/videos/ElBlRpNw944",
+      "reference_ids": [
+        "turn144search1"
+      ]
+    },
+    {
+      "id": "S059",
+      "title": "MD醫之方保健食品商品推薦",
+      "url": "https://www.fbshop.com.tw/v2/official/SalePageCategory/297982?lang=zh-TW&srsltid=AU7gw4V9MUXxWGczljy6tdEg2OrH-ChIbutf2Gq_DyUx9gjiJIOA6pJL",
+      "reference_ids": [
+        "turn144search2"
+      ]
+    },
+    {
+      "id": "S060",
+      "title": "為什麼任何數的0次方都等於1？ 不包含 ...",
+      "url": "https://www.junyiacademy.org/videos/ReyGG1cURzo",
+      "reference_ids": [
+        "turn144search3"
+      ]
+    },
+    {
+      "id": "S061",
+      "title": "牛奶小方磚餅乾(50g/包)",
+      "url": "https://www.chuluranch-shop.com.tw/products/milksquare",
+      "reference_ids": [
+        "turn144search4"
+      ]
+    },
+    {
+      "id": "S062",
+      "title": "國家教育研究院- 教育部國語小字典-方",
+      "url": "https://dict.mini.moe.edu.tw/SearchIndex/searchResult?dictSearchField=%E6%96%B9&searchType=one",
+      "reference_ids": [
+        "turn144search5"
+      ]
+    },
+    {
+      "id": "S063",
+      "title": "【觀念】科學記號2：負指數次方",
+      "url": "https://www.junyiacademy.org/video/SSJ-4n91B4s?parent-topic-id=mjnzs7d",
+      "reference_ids": [
+        "turn144search6"
+      ]
+    },
+    {
+      "id": "S064",
+      "title": "【大胃王挑戰】肉次方｜用最貴價格能吃幾盤！高級A5和牛吃到飽 ...",
+      "url": "https://www.youtube.com/watch?v=FpcFNrFoV4Y",
+      "reference_ids": [
+        "turn144search7"
+      ]
+    },
+    {
+      "id": "S065",
+      "title": "樂扣樂扣方方矽膠分隔便當盒/奶泡白/900ml(LSC359WHT)",
+      "url": "https://www.locknlock.tw/SalePage/Index/10966317?lang=zh-TW&srsltid=AU7gw4UftJzx7wbFPjnC7NjQLz3ldwaeGnPzyRH_9thAOCd2CDxHp9fR",
+      "reference_ids": [
+        "turn144search8"
+      ]
+    },
+    {
+      "id": "S066",
+      "title": "Building ventilation: A pressure airflow model computer generation and elements of validation",
+      "url": "https://arxiv.org/abs/1212.3924",
+      "reference_ids": [
+        "turn144academia11"
+      ]
+    },
+    {
+      "id": "S067",
+      "title": "Duct Size Calculator: Round, Rectangular & Flex | CrewCalcs",
+      "url": "https://crewcalcs.com/tools/hvac/duct-size-calculator",
+      "reference_ids": [
+        "turn124search0",
+        "turn145search0"
+      ]
+    },
+    {
+      "id": "S068",
+      "title": "Duct Static Pressure Calculator — HVAC Friction & Fitting Loss | DuctStatic",
+      "url": "https://ductstatic.com/",
+      "reference_ids": [
+        "turn124search1",
+        "turn145search1"
+      ]
+    },
+    {
+      "id": "S069",
+      "title": "Static Pressure Calculator — Free HVAC Duct Static Pressure Tool | AskHVAC.ca",
+      "url": "https://askhvac.ca/duct-design/static-pressure-calculator.html",
+      "reference_ids": [
+        "turn124search2",
+        "turn145search3"
+      ]
+    },
+    {
+      "id": "S070",
+      "title": "CFM to Static Pressure Calculator - Tool Croze",
+      "url": "https://toolcroze.com/cfm-to-static-pressure-calculator/",
+      "reference_ids": [
+        "turn124search3"
+      ]
+    },
+    {
+      "id": "S071",
+      "title": "HVAC Duct Sizing Calculator — CFM, Friction & Pressure | Calciro",
+      "url": "https://calciro.com/advanced-hvac-duct-sizing-calculator",
+      "reference_ids": [
+        "turn124search4"
+      ]
+    },
+    {
+      "id": "S072",
+      "title": "Duct Sizing Calculator — CFM & Friction Loss | GoBuildCalcs",
+      "url": "https://www.gobuildcalcs.com/duct-sizing-calculator",
+      "reference_ids": [
+        "turn124search5",
+        "turn145search2"
+      ]
+    },
+    {
+      "id": "S073",
+      "title": "HVAC Static Pressure Calculator – Static & Friction Rate",
+      "url": "https://www.mepflow.ca/calculators/hvac-static-pressure-friction-rate-calculator",
+      "reference_ids": [
+        "turn124search6"
+      ]
+    },
+    {
+      "id": "S074",
+      "title": "Ductulator - Free Online Duct Sizing Friction Loss Equivalent Diameter",
+      "url": "https://www.acacos.com/calculators/duct-sizing-calculator",
+      "reference_ids": [
+        "turn124search7"
+      ]
+    },
+    {
+      "id": "S075",
+      "title": "Duct Static Pressure Calculator | HVAC Friction Loss",
+      "url": "https://formulafactory.tools/engineering-calculators/duct-static-pressure-calculator/",
+      "reference_ids": [
+        "turn124search8"
+      ]
+    },
+    {
+      "id": "S076",
+      "title": "Duct Sizing Calculator – Verified, Code-Aware | LogicCommons",
+      "url": "https://www.logiccommons.com/calculators/duct-sizing-calculator",
+      "reference_ids": [
+        "turn124search9"
+      ]
+    },
+    {
+      "id": "S077",
+      "title": "Ductwork Sizing Calculator: CFM to Duct Size Chart (2026 Guide) | HVAC Base",
+      "url": "https://www.hvacbase.org/ductwork-sizing-calculator",
+      "reference_ids": [
+        "turn124search10"
+      ]
+    },
+    {
+      "id": "S078",
+      "title": "HVAC Duct Calculator — Duct Size, CFM & Pressure Loss | Efficienco",
+      "url": "https://efficienco.com/tools/trade/hvac-duct-calculator/",
+      "reference_ids": [
+        "turn124search11"
+      ]
+    },
+    {
+      "id": "S079",
+      "title": "TOLL FREE: 800-321-8173",
+      "url": "https://www.sviinternational.com/wp-content/uploads/2019/05/Exhaust-Blower-Selection-Checklist.pdf",
+      "reference_ids": [
+        "turn124search12"
+      ]
+    },
+    {
+      "id": "S080",
+      "title": "Friction loss",
+      "url": "https://en.wikipedia.org/wiki/Friction_loss",
+      "reference_ids": [
+        "turn124search13"
+      ]
+    },
+    {
+      "id": "S081",
+      "title": "ESTIMATED STATIC PRESSURE – 10 TO 2000 CFM",
+      "url": "https://www.cincinnatifan.com/wp-content/uploads/2025/06/CF-ENG-25.pdf",
+      "reference_ids": [
+        "turn124search14"
+      ]
+    },
+    {
+      "id": "S082",
+      "title": "ESTIMATED STATIC PRESSURE – 10 TO 2000 CFM",
+      "url": "https://www.cincinnatifan.com/wp-content/uploads/2024/05/CF-ENG-24.pdf",
+      "reference_ids": [
+        "turn124search15"
+      ]
+    },
+    {
+      "id": "S083",
+      "title": "CONSTANT AIR VOLUME CFM CALCULATOR",
+      "url": "https://kewaunee.com/pdf-calculator/",
+      "reference_ids": [
+        "turn124search16"
+      ]
+    },
+    {
+      "id": "S084",
+      "title": "Determining Static Pressure",
+      "url": "https://www.centralblower.com/pdf/central-blower-laboratory-fan-catalog.pdf",
+      "reference_ids": [
+        "turn124search17"
+      ]
+    },
+    {
+      "id": "S085",
+      "title": "LABORATORY FANS",
+      "url": "https://www.hvacquick.com/catalog_files/Central_Blower_Laboratory_Fan_Catalog.pdf",
+      "reference_ids": [
+        "turn124search18"
+      ]
+    },
+    {
+      "id": "S086",
+      "title": "Pérdida por fricción",
+      "url": "https://es.wikipedia.org/wiki/P%C3%A9rdida_por_fricci%C3%B3n",
+      "reference_ids": [
+        "turn124search19"
+      ]
+    },
+    {
+      "id": "S087",
+      "title": "Fans and blowers rule of thumb",
+      "url": "https://www.reddit.com/r/MEPEngineering/comments/1qvnzey/fans_and_blowers_rule_of_thumb/",
+      "reference_ids": [
+        "turn124reddit20"
+      ]
+    },
+    {
+      "id": "S088",
+      "title": "Duct Static Pressure Calcs",
+      "url": "https://www.reddit.com/r/MEPEngineering/comments/1gbddez/duct_static_pressure_calcs/",
+      "reference_ids": [
+        "turn124reddit21"
+      ]
+    },
+    {
+      "id": "S089",
+      "title": "Duct friction rate vs velocity",
+      "url": "https://www.reddit.com/r/MEPEngineering/comments/16is2fv",
+      "reference_ids": [
+        "turn124reddit22"
+      ]
+    },
+    {
+      "id": "S090",
+      "title": "Question about maintaining a negative pressure in a space.",
+      "url": "https://www.reddit.com/r/HVAC/comments/crq1a3",
+      "reference_ids": [
+        "turn124reddit23"
+      ]
+    },
+    {
+      "id": "S091",
+      "title": "Duct (industrial exhaust)",
+      "url": "https://en.wikipedia.org/wiki/Duct_%28industrial_exhaust%29",
+      "reference_ids": [
+        "turn124search24"
+      ]
+    },
+    {
+      "id": "S092",
+      "title": "配管管徑計算工具 — 冰水管徑流量對照，免費線上算",
+      "url": "https://www.cky.com.tw/tools/pipe-sizing",
+      "reference_ids": [
+        "turn126search0",
+        "turn129search0"
+      ]
+    },
+    {
+      "id": "S093",
+      "title": "水流量計算機（流速 × 管徑面積） - CalculatorLib",
+      "url": "https://calculatorlib.com/tw/water-flow-rate-pipe-calculator",
+      "reference_ids": [
+        "turn126search1"
+      ]
+    },
+    {
+      "id": "S094",
+      "title": "管道流量計算器｜由管徑與流速求體積流量 Q - CalculatorLib",
+      "url": "https://calculatorlib.com/tw/water-flow-rate-from-pipe-diameter-and-velocity-calculator",
+      "reference_ids": [
+        "turn126search2"
+      ]
+    },
+    {
+      "id": "S095",
+      "title": "壓縮空氣管內徑計算器 | 倍拓氣動",
+      "url": "https://rodlesspneumatic.com/zh-hant/resource-center/calculators/tube-id-calculator/",
+      "reference_ids": [
+        "turn126search3",
+        "turn129search3"
+      ]
+    },
+    {
+      "id": "S096",
+      "title": "管道管徑計算器 | 由流量與流速求管徑 - CalculatorLib",
+      "url": "https://calculatorlib.com/tw/pipe-sizing-calculator",
+      "reference_ids": [
+        "turn126search4",
+        "turn129search4"
+      ]
+    },
+    {
+      "id": "S097",
+      "title": "易工网",
+      "url": "https://www.ygong.com/tools/pipe_diameter_velocity.html",
+      "reference_ids": [
+        "turn126search5"
+      ]
+    },
+    {
+      "id": "S098",
+      "title": "水流量计算器（流速与管径）| 在线计算管道流量 - CalculatorLib",
+      "url": "https://calculatorlib.com/zh/water-flow-rate-pipe-calculator",
+      "reference_ids": [
+        "turn126search6"
+      ]
+    },
+    {
+      "id": "S099",
+      "title": "流量轉流速換算器（流量 Q 與管徑計算） - CalculatorLib",
+      "url": "https://calculatorlib.com/tw/flow-rate-to-velocity-converter",
+      "reference_ids": [
+        "turn126search7"
+      ]
+    },
+    {
+      "id": "S100",
+      "title": "流速・流量 計算ツール｜配管25Aに100L/minで流速2.79m/s。呼び径×流速×流量の早見表つき - 計算ツールズ",
+      "url": "https://ta5k.com/tools/tech/haikan-ryuryo",
+      "reference_ids": [
+        "turn126search8"
+      ]
+    },
+    {
+      "id": "S101",
+      "title": "管道内径计算器 | 流量-流速-管径计算工具",
+      "url": "https://www.irripro.com.cn/DiameterSelected.html",
+      "reference_ids": [
+        "turn126search9"
+      ]
+    },
+    {
+      "id": "S102",
+      "title": "水管壓降計算器｜管路水頭損失與摩擦損失試算工具 - CalculatorLib",
+      "url": "https://calculatorlib.com/tw/water-pressure-drop-calculator",
+      "reference_ids": [
+        "turn126search10"
+      ]
+    },
+    {
+      "id": "S103",
+      "title": "化工设计中管道流量,流速,管径在线计算器",
+      "url": "https://www.23bei.com/tool/314.html",
+      "reference_ids": [
+        "turn126search11"
+      ]
+    },
+    {
+      "id": "S104",
+      "title": "按鍵功能",
+      "url": "https://www.hansea.com.tw/upload/fs/download250917102607_1445.pdf",
+      "reference_ids": [
+        "turn126search12"
+      ]
+    },
+    {
+      "id": "S105",
+      "title": "中華民國第64 屆中小學科學展覽會",
+      "url": "https://twsf.ntsec.gov.tw/activity/race-1/64/pdf/NPHSF2024-032815.pdf",
+      "reference_ids": [
+        "turn126search13"
+      ]
+    },
+    {
+      "id": "S106",
+      "title": "設",
+      "url": "https://www.nlma.gov.tw/filesys/file/EMMA/P1101001-1b.pdf",
+      "reference_ids": [
+        "turn126search14"
+      ]
+    },
+    {
+      "id": "S107",
+      "title": "附表 1　簡易自來水工程輸水管線水力計算範例",
+      "url": "https://www.moea.gov.tw/MNS/CORD/content/wHandMenuFile.ashx?file_id=23988",
+      "reference_ids": [
+        "turn126search15"
+      ]
+    },
+    {
+      "id": "S108",
+      "title": "Mass Flow Transmitter",
+      "url": "https://www.tbt2u.com.tw/system/storage/download/TBT-FT024-C-2024-01%28%E7%86%B1%E8%B3%AA%E5%BC%8F%E6%B0%A3%E9%AB%94%E6%B5%81%E9%87%8F%E5%82%B3%E8%A8%8A%E5%99%A8%29.pdf",
+      "reference_ids": [
+        "turn126search16"
+      ]
+    },
+    {
+      "id": "S109",
+      "title": "赫茲-威廉方程式",
+      "url": "https://zh.wikipedia.org/wiki/%E8%B5%AB%E8%8C%B2-%E5%A8%81%E5%BB%89%E6%96%B9%E7%A8%8B%E5%BC%8F",
+      "reference_ids": [
+        "turn126search17",
+        "turn148search9"
+      ]
+    },
+    {
+      "id": "S110",
+      "title": "MF5612 0-200slpm 0-300slpm 0-600slpm 0-800slpm ...",
+      "url": "https://www.amazon.com/-/zh_TW/QDFCVSNUO/dp/B0HBHWKQF1",
+      "reference_ids": [
+        "turn148search0"
+      ]
+    },
+    {
+      "id": "S111",
+      "title": "Masterflex In-Line Flowmeter, Stainless Steel, 800 SLPM O₂",
+      "url": "https://www.johnmorrisgroup.com/vwr-cole-parmer-flowmeter-in-line-stainless-steel-800-slpm-o2?srsltid=AU7gw4Up1mlwThK6-gTM721oGkm_z4etjNg3sOwwXEDpREYcojVT3Wt6",
+      "reference_ids": [
+        "turn148search1"
+      ]
+    },
+    {
+      "id": "S112",
+      "title": "Low Flow Gas Meter:: DN19 , 8 - 800 SLPM",
+      "url": "https://www.bellflowsystems.co.uk/low-flow-gas-meter-dn19-8-800-slpm.html",
+      "reference_ids": [
+        "turn148search2"
+      ]
+    },
+    {
+      "id": "S113",
+      "title": "Mechanivis Flow Meter Flow Range MF5212 0-200SLPM ...",
+      "url": "https://www.amazon.com/-/zh_TW/Mechanivis/dp/B0F6D12DV1",
+      "reference_ids": [
+        "turn148search3"
+      ]
+    },
+    {
+      "id": "S114",
+      "title": "Gaszähler Mit Niedrigem Durchfluss :: DN19, 8 - 800 SLPM",
+      "url": "https://www.bellflowsystems.co.uk/de/low-flow-gas-meter-dn19-8-800-slpm.html",
+      "reference_ids": [
+        "turn148search4"
+      ]
+    },
+    {
+      "id": "S115",
+      "title": "Flow Meter MF5212 MF5219 1/2\" Flow Range 0-800SLPM",
+      "url": "https://www.amazon.com/Meter-MF5212-MF5219-Range-0-800SLPM/dp/B0GMGKBSLF",
+      "reference_ids": [
+        "turn148search5"
+      ]
+    },
+    {
+      "id": "S116",
+      "title": "MF5612 0-200slpm 0-300slpm 0-600slpm 0-800slpm ...",
+      "url": "https://www.amazon.co.uk/0-200slpm-0-300slpm-0-600slpm-0-800slpm-Detachable/dp/B0H7QGM8RB",
+      "reference_ids": [
+        "turn148search6"
+      ]
+    },
+    {
+      "id": "S117",
+      "title": "MF5619 0-600/800SLPM Detachable Display Gas Oxygen ...",
+      "url": "https://www.amazon.com/MF5619-800SLPM-Detachable-Display-Oxygen/dp/B0G4WC47C7",
+      "reference_ids": [
+        "turn148search7"
+      ]
+    },
+    {
+      "id": "S118",
+      "title": "MF5612 0-200/300SLPM Detachable Display Flow Meters ...",
+      "url": "https://www.amazon.ca/MF5612-300SLPM-Detachable-Display-0-800slpm/dp/B0D9PWN7N4",
+      "reference_ids": [
+        "turn148search8"
+      ]
+    },
+    {
+      "id": "S119",
+      "title": "NM3/hr and SM3/hr Gas flow Calculation - Instrumentation - INST TOOLS",
+      "url": "https://ask.instrumentationtools.com/t/nm3-hr-and-sm3-hr-gas-flow-calculation/2454",
+      "reference_ids": [
+        "turn128search0"
+      ]
+    },
+    {
+      "id": "S120",
+      "title": "Nitrogen Line Sizing | Ekin Endüstriyel",
+      "url": "https://en.ekinendustriyel.com/hesaplama-araclari/azot-hatti-hesabi/",
+      "reference_ids": [
+        "turn128search1"
+      ]
+    },
+    {
+      "id": "S121",
+      "title": "User Manual",
+      "url": "https://www.sino-measure.com/uploads/2511/25111804211408843.pdf",
+      "reference_ids": [
+        "turn128search12"
+      ]
+    },
+    {
+      "id": "S122",
+      "title": "管徑流量對照表｜DN15～DN300 完整工程指南 × 壓力量測選型 × B2B 採購決策｜ATLANTIS 台灣31年製造商 | 昶特ATLANTIS 壓力錶·溫度計 台灣31年製造商",
+      "url": "https://re-atlantis.tw/index.php/zh-hant/pipe-diameter-flow-rate-chart-guide",
+      "reference_ids": [
+        "turn128search2"
+      ]
+    },
+    {
+      "id": "S123",
+      "title": "Natural Gas and LNG Pressure Drop and Flow Rate Calculator – Pipe Diameter Sizing",
+      "url": "https://www.pipeflowcalculations.com/naturalgas/calculator.xhtml",
+      "reference_ids": [
+        "turn128search3"
+      ]
+    },
+    {
+      "id": "S124",
+      "title": "Nitrogen Pressure Test Calculator | Pipeline N2 Requirements",
+      "url": "https://midstreamcalculator.com/calculators/pipeline-ops/n2-test.html",
+      "reference_ids": [
+        "turn128search4"
+      ]
+    },
+    {
+      "id": "S125",
+      "title": "Measurement",
+      "url": "https://www.pneumatech.com/content/dam/brands/Pneumatech/brand-framework-2-0/products/measurement-and-monitoring/measurement-equipment/flow-sensors/flow-check-universal-w/leaflets/Pneumatech_Flow_Check_Universal_W_Leaflet_ENG_6999901210_LR.pdf.coredownload.pdf",
+      "reference_ids": [
+        "turn128search13"
+      ]
+    },
+    {
+      "id": "S126",
+      "title": "176500100 N2 NitroSource PSA User Guide.book",
+      "url": "https://www.pure-gmbh.com/userdata/filegallery/original/176500100_n2_nitrosource_psa_user_guide_en_lr.pdf",
+      "reference_ids": [
+        "turn128search14"
+      ]
+    },
+    {
+      "id": "S127",
+      "title": "Medical Gas Pipe Sizing Calculator | Oxygen, Medical Air, Vacuum Copper Pipe (NFPA 99 / HTM 02-01) | MEPBase Tools",
+      "url": "https://tools.mepbase.com/medical-gas-pipe-sizing-calculator",
+      "reference_ids": [
+        "turn128search5"
+      ]
+    },
+    {
+      "id": "S128",
+      "title": "Standard to Actual Gas Flow Calculator - Alloy Filter",
+      "url": "https://alloyfilter.com/calculate/standard-actual-gas-flow-calculator/",
+      "reference_ids": [
+        "turn128search6"
+      ]
+    },
+    {
+      "id": "S129",
+      "title": "Venturi Tube Sizing Calculator — ISO 5167-4 | EkaTools",
+      "url": "https://www.ekatools.com/tools/venturi-tube/index.html",
+      "reference_ids": [
+        "turn128search7"
+      ]
+    },
+    {
+      "id": "S130",
+      "title": "NM3/hr and SM3/hr Gas Flow Calculation | PDF | Flow Measurement | Gases",
+      "url": "https://www.scribd.com/document/204039838/Calculation-of-NM3-hr-and-SM3-hr-Gas-Flow-Enggcyclopedia",
+      "reference_ids": [
+        "turn128search8"
+      ]
+    },
+    {
+      "id": "S131",
+      "title": "GitHub - microphilosophy-R/Calculator-for-pipe-size: this is a calculator for engineer pipe size determination · GitHub",
+      "url": "https://github.com/microphilosophy-R/Calculator-for-pipe-size",
+      "reference_ids": [
+        "turn128search9"
+      ]
+    },
+    {
+      "id": "S132",
+      "title": "Flow Rate Calculator: Volumetric, Mass and Gas Flow",
+      "url": "https://calcswiftly.com/en/flow-rate-calculator/",
+      "reference_ids": [
+        "turn128search10"
+      ]
+    },
+    {
+      "id": "S133",
+      "title": "Gas Pipe Size Calculator – Size Natural Gas & Propane Pipes by Flow, Pressure Drop & Length (NFPA 54 / IFGC) Online | GetZenQuery",
+      "url": "https://www.getzenquery.com/tools/gas-pipe-size-calculator/",
+      "reference_ids": [
+        "turn128search11"
+      ]
+    },
+    {
+      "id": "S134",
+      "title": "<ta",
+      "url": "https://www.emerson.com/is/content/emerson/en/final-control/flow-controls/documents/d351798x012_02.pdf",
+      "reference_ids": [
+        "turn128search15"
+      ]
+    },
+    {
+      "id": "S135",
+      "title": "4.3 Nitrogen Flow/Purity Charts",
+      "url": "https://www.parker.com/content/dam/Parker-com/Literature/IGFG/PDF-Files/TI_N2-200.pdf",
+      "reference_ids": [
+        "turn128search16"
+      ]
+    },
+    {
+      "id": "S136",
+      "title": "To calculate the flow rate, use the following formula:",
+      "url": "https://precisionpipeline.com/wp-content/uploads/2024/12/SCN_technicalmanual_ENG_revB.pdf",
+      "reference_ids": [
+        "turn128search17"
+      ]
+    },
+    {
+      "id": "S137",
+      "title": "Nominal Pipe Size",
+      "url": "https://en.wikipedia.org/wiki/Nominal_Pipe_Size",
+      "reference_ids": [
+        "turn128search18",
+        "turn147search8"
+      ]
+    },
+    {
+      "id": "S138",
+      "title": "Knudsen equation",
+      "url": "https://en.wikipedia.org/wiki/Knudsen_equation",
+      "reference_ids": [
+        "turn128search19"
+      ]
+    },
+    {
+      "id": "S139",
+      "title": "Diameter",
+      "url": "https://en.wikipedia.org/wiki/Diameter",
+      "reference_ids": [
+        "turn147search0"
+      ]
+    },
+    {
+      "id": "S140",
+      "title": "DIAMETER Consortium | DIAgonal + DIAdemia Platforms",
+      "url": "https://www.diameter-eu.org/",
+      "reference_ids": [
+        "turn147search1"
+      ]
+    },
+    {
+      "id": "S141",
+      "title": "Bidirectional control of CNS capillary diameter by pericytes",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17036005/",
+      "reference_ids": [
+        "turn147search2"
+      ]
+    },
+    {
+      "id": "S142",
+      "title": "DIAMETER Definition & Meaning",
+      "url": "https://www.merriam-webster.com/dictionary/diameter",
+      "reference_ids": [
+        "turn147search3"
+      ]
+    },
+    {
+      "id": "S143",
+      "title": "Use of Water Equivalent Diameter for Calculating Patient ...",
+      "url": "https://www.aapm.org/pubs/reports/rpt_220.pdf",
+      "reference_ids": [
+        "turn147search4"
+      ]
+    },
+    {
+      "id": "S144",
+      "title": "What is the Diameter of a Circle? | Geometry",
+      "url": "https://www.youtube.com/watch?v=uz6ooAX2W-Q",
+      "reference_ids": [
+        "turn147search5"
+      ]
+    },
+    {
+      "id": "S145",
+      "title": "Video: Diameter of a Circle | Definition, Formula & Examples",
+      "url": "https://study.com/learn/lesson/video/what-is-diameter-formula.html",
+      "reference_ids": [
+        "turn147search6"
+      ]
+    },
+    {
+      "id": "S146",
+      "title": "RFC 6733: Diameter Base Protocol",
+      "url": "https://www.rfc-editor.org/info/rfc6733/",
+      "reference_ids": [
+        "turn147search7"
+      ]
+    },
+    {
+      "id": "S147",
+      "title": "Positive streamers in air and nitrogen of varying density: experiments on similarity laws",
+      "url": "https://arxiv.org/abs/0805.1364",
+      "reference_ids": [
+        "turn147academia14"
+      ]
+    },
+    {
+      "id": "S148",
+      "title": "流量选型工具（气体） | 艾里卡特 Alicat",
+      "url": "https://www.alicat.com.cn/type-selects-flow-gas/",
+      "reference_ids": [
+        "turn129search1"
+      ]
+    },
+    {
+      "id": "S149",
+      "title": "流量計算 | Festo TW",
+      "url": "https://www.festo.com/tw/zh/s/flowrate-calculation/",
+      "reference_ids": [
+        "turn129search2"
+      ]
+    },
+    {
+      "id": "S150",
+      "title": "流量计算 | 费斯托网站",
+      "url": "https://www.festo.com.cn/cn/zh/s/flowrate-calculation",
+      "reference_ids": [
+        "turn129search5"
+      ]
+    },
+    {
+      "id": "S151",
+      "title": "Cv值計算/流量計算工具|閥門、接頭、系統等產品技術支持信息|富士金株式會社",
+      "url": "https://www.fujikin.com.tw/cv/calculator/index.html",
+      "reference_ids": [
+        "turn129search6"
+      ]
+    },
+    {
+      "id": "S152",
+      "title": "Semiconductor Tools",
+      "url": "https://www.semiconductortools.com/",
+      "reference_ids": [
+        "turn129search7"
+      ]
+    },
+    {
+      "id": "S153",
+      "title": "配管流速・必要管径計算 | 流量・管内径・流速から計算",
+      "url": "https://chem-eng-labo.com/calcproject/calc_app/pipe_velocity_diameter/",
+      "reference_ids": [
+        "turn129search8"
+      ]
+    },
+    {
+      "id": "S154",
+      "title": "流量・流速・配管径 計算ツール｜東フロコーポレーション株式会社",
+      "url": "https://www.tofco.jp/technology/flow-calculation.html",
+      "reference_ids": [
+        "turn129search9"
+      ]
+    },
+    {
+      "id": "S155",
+      "title": "壓縮空氣流速計算器 | 倍拓氣動",
+      "url": "https://rodlesspneumatic.com/zh-hant/resource-center/calculators/air-velocity-calculator/",
+      "reference_ids": [
+        "turn129search10"
+      ]
+    },
+    {
+      "id": "S156",
+      "title": "流量計算器 - GF Industry and Infrastructure Flow Solutions",
+      "url": "https://www.gfps.com/zh-tw/downloads-tools/online-tools/flow-calculator.html",
+      "reference_ids": [
+        "turn129search11"
+      ]
+    },
+    {
+      "id": "S157",
+      "title": "ZA.pdf",
+      "url": "https://www.fastek.com.tw/_i/assets/file/product/ba459dba3cef7d0cd090a077b59d5ec1.pdf",
+      "reference_ids": [
+        "turn129search12"
+      ]
+    },
+    {
+      "id": "S158",
+      "title": "01ZQ-A-C1.eps",
+      "url": "https://www.fastek.com.tw/_i/assets/file/product/132fe0cc3c3ed26e854a2c5622ae3da1.pdf",
+      "reference_ids": [
+        "turn129search13"
+      ]
+    },
+    {
+      "id": "S159",
+      "title": "② 選擇",
+      "url": "https://www.ckdtaiwan.com.tw/kiki/public/storage/products/CC-796T-5_4%28%E7%9C%9F%E7%A9%BA%E7%94%A2%E7%94%9F%E5%99%A8%E6%A9%9F%E5%9E%8B%E9%81%B8%E5%AE%9A%29.pdf",
+      "reference_ids": [
+        "turn129search14"
+      ]
+    },
+    {
+      "id": "S160",
+      "title": "2册",
+      "url": "https://www.pfeiffer-vacuum.com/api/empolis/resource/environment/project1_p/documents/pfeifferSharepointProd/10259-vacuum-technology-book-ii-part-2-cn.pdf",
+      "reference_ids": [
+        "turn129search15"
+      ]
+    },
+    {
+      "id": "S161",
+      "title": "工具- 維基百科，自由的百科全書",
+      "url": "https://zh.wikipedia.org/zh-tw/%E5%B7%A5%E5%85%B7",
+      "reference_ids": [
+        "turn149search0"
+      ]
+    },
+    {
+      "id": "S162",
+      "title": "12伏特系統充電式工具",
+      "url": "https://www.bosch-pt.com.tw/tw/zh/12-volt-system-225588-ocs-c/",
+      "reference_ids": [
+        "turn149search1"
+      ]
+    },
+    {
+      "id": "S163",
+      "title": "德泰專業工具通路",
+      "url": "https://www.targettools.com.tw/",
+      "reference_ids": [
+        "turn149search2"
+      ]
+    },
+    {
+      "id": "S164",
+      "title": "青年AI工具補助計畫",
+      "url": "https://youth.gov.taipei/announcement/latest-announcement/e3c5cee4-b81a-4a53-aa79-6cd8c654b02e",
+      "reference_ids": [
+        "turn149search3"
+      ]
+    },
+    {
+      "id": "S165",
+      "title": "原住民族語言教學法工具書",
+      "url": "https://alilin.cip.gov.tw/Book/701",
+      "reference_ids": [
+        "turn149search4"
+      ]
+    },
+    {
+      "id": "S166",
+      "title": "Gorilla 線上商店 - Gorilla紳士質人手工具",
+      "url": "https://shop.gorillahandtool.com.tw/?srsltid=AU7gw4Vj3r64zrmyWd5dBv3U1RrzZtlErnxt88000F77iOzP8XLMkxQK",
+      "reference_ids": [
+        "turn149search5"
+      ]
+    },
+    {
+      "id": "S167",
+      "title": "第5課：支付工具- 悠遊卡、現金、信用卡",
+      "url": "https://www.junyiacademy.org/video/IXD59Y4sk5M?parent-topic-id=26-week5_one_star",
+      "reference_ids": [
+        "turn149search6"
+      ]
+    },
+    {
+      "id": "S168",
+      "title": "電動工具,電動工具行,台中電動工具行,大雅區電動工具行",
+      "url": "https://www.gongjuhun.com/products/cart.php",
+      "reference_ids": [
+        "turn149search7"
+      ]
+    },
+    {
+      "id": "S169",
+      "title": "螢宇五金工具行- 電動工具專家/板橋實體店面",
+      "url": "https://www.my5gtool.com/?srsltid=AU7gw4VffySHBriTuJ-W9Tr6rRMm3attTxe_xJKJfvDefV7D4jqm7OIE",
+      "reference_ids": [
+        "turn149search8"
+      ]
+    },
+    {
+      "id": "S170",
+      "title": "A constant pressure flowmeter for extreme-high vacuum",
+      "url": "https://arxiv.org/abs/2111.05695",
+      "reference_ids": [
+        "turn149academia9"
+      ]
+    },
+    {
+      "id": "S171",
+      "title": "A simple, reliable, and no-destructive method for the measurement of vacuum pressure",
+      "url": "https://arxiv.org/abs/1304.7064",
+      "reference_ids": [
+        "turn149academia12"
+      ]
+    },
+    {
+      "id": "S172",
+      "title": "Portable Valve-less Peristaltic Micro-pump Design and Fabrication",
+      "url": "https://arxiv.org/abs/0805.0883",
+      "reference_ids": [
+        "turn149academia13"
+      ]
+    },
+    {
+      "id": "S173",
+      "title": "The AFLOW Standard for High-Throughput Materials Science Calculations",
+      "url": "https://arxiv.org/abs/1506.00303",
+      "reference_ids": [
+        "turn149academia14"
+      ]
+    },
+    {
+      "id": "S174",
+      "title": "Watts to Lux Calculator — CalculatorCove",
+      "url": "https://calculatorcove.com/electrical/watts-to-lux-calculator/",
+      "reference_ids": [
+        "turn127search0"
+      ]
+    },
+    {
+      "id": "S175",
+      "title": "LED光通量計算器與照度計算器 | 波長轉光通量(lm)與照度(lux) | vitaLED",
+      "url": "https://vitaled.com.tw/technical_resources/lumen-logic-calc/",
+      "reference_ids": [
+        "turn127search1"
+      ]
+    },
+    {
+      "id": "S176",
+      "title": "平均照度計算機（燈具換算 Lux）｜流明法照明設計工具 - CalculatorLib",
+      "url": "https://calculatorlib.com/tw/average-illuminance-from-fixtures-calculator",
+      "reference_ids": [
+        "turn127search2",
+        "turn133search0",
+        "turn152search0"
+      ]
+    },
+    {
+      "id": "S177",
+      "title": "Watts to Lux Calculator | Lighting Power to Illuminance Converter",
+      "url": "https://www.freesmartcalculator.com/physics/watts-to-lux-calculator/",
+      "reference_ids": [
+        "turn127search3"
+      ]
+    },
+    {
+      "id": "S178",
+      "title": "Watts to Lux Calculator | CalcBee",
+      "url": "https://calcbee.com/calculators/physics/electromagnetism/watts-to-lux/",
+      "reference_ids": [
+        "turn127search4"
+      ]
+    },
+    {
+      "id": "S179",
+      "title": "勒克斯轉瓦特計算機 - 照度換算功率 - CalculatorLib",
+      "url": "https://calculatorlib.com/tw/lux-to-watts-calculator",
+      "reference_ids": [
+        "turn127search5"
+      ]
+    },
+    {
+      "id": "S180",
+      "title": "免費流明轉瓦數計算機 - CalculatorFree",
+      "url": "https://calculatorfree.net/zh-tw/tools/lux-to-watt-calculator.html",
+      "reference_ids": [
+        "turn127search6"
+      ]
+    },
+    {
+      "id": "S181",
+      "title": "照度計算シミュレーター｜光束法で平均照度・必要台数を自動計算 | Mahiro Apps",
+      "url": "https://mahiroapps.com/lux-calc",
+      "reference_ids": [
+        "turn127search7"
+      ]
+    },
+    {
+      "id": "S182",
+      "title": "在线照明计算器 - CalculatorBox",
+      "url": "https://calculatorbox.org/zh/t/lighting-calculator/",
+      "reference_ids": [
+        "turn127search8",
+        "turn133search5"
+      ]
+    },
+    {
+      "id": "S183",
+      "title": "Lumens Calculator for Room Size & Fixture Count | LightingCalculate",
+      "url": "https://lightingcalculate.com/",
+      "reference_ids": [
+        "turn127search9"
+      ]
+    },
+    {
+      "id": "S184",
+      "title": "房間照明流明計算機 | 所需流明數一鍵算出 - CalculatorLib",
+      "url": "https://calculatorlib.com/tw/room-lumens-calculator",
+      "reference_ids": [
+        "turn127search10",
+        "turn133search3",
+        "turn152search1"
+      ]
+    },
+    {
+      "id": "S185",
+      "title": "vitaLED專業照明模擬：Lux/fc換算與ESG減碳量計算工具 - 汎得光電有限公司",
+      "url": "https://vitaled.com.tw/led-lights-with-particular-wavelength-special-spectrum/lighting-esg-calculator/",
+      "reference_ids": [
+        "turn127search11"
+      ]
+    },
+    {
+      "id": "S186",
+      "title": "燈管狀態下，有效係數可能會提升到0.75，則庫房平均照度將達292.5 Lux，略高於庫房照度基準，此時可拆除各盞40W*3管型燈具中的1支燈管以為因應。",
+      "url": "https://www.archives.gov.tw/wSite/public/Attachment/0/f1716447559410.pdf",
+      "reference_ids": [
+        "turn127search12"
+      ]
+    },
+    {
+      "id": "S187",
+      "title": "2024/5/17 下午3:22",
+      "url": "https://www.archives.gov.tw/wSite/public/Attachment/0/f1718074004371.pdf",
+      "reference_ids": [
+        "turn127search13"
+      ]
+    },
+    {
+      "id": "S188",
+      "title": "TC025600",
+      "url": "https://kmweb.moa.gov.tw/redirect_files.php?id=228392&theme=knowledgebase",
+      "reference_ids": [
+        "turn127search14"
+      ]
+    },
+    {
+      "id": "S189",
+      "title": "114 年度LED 照明工程師能力鑑定考試試題",
+      "url": "https://college.lighting.org.tw/wp-content/uploads/document/ref/114-1.pdf",
+      "reference_ids": [
+        "turn127search15"
+      ]
+    },
+    {
+      "id": "S190",
+      "title": "103 年度LED 照明工程師能力鑑定考試試題",
+      "url": "https://college.lighting.org.tw/wp-content/uploads/document/ref/103-3.pdf.",
+      "reference_ids": [
+        "turn127search16"
+      ]
+    },
+    {
+      "id": "S191",
+      "title": "客廳燈幾瓦才夠？客廳照度與流明完整計算指南",
+      "url": "https://www.jslighting.com.tw/about/main.php?iid=1",
+      "reference_ids": [
+        "turn146search0"
+      ]
+    },
+    {
+      "id": "S192",
+      "title": "流明→ Lux 理論照度估算工具",
+      "url": "https://www.oshbon.com.tw/tools/OshTools/LumenToLuxEstimator",
+      "reference_ids": [
+        "turn146search1"
+      ]
+    },
+    {
+      "id": "S193",
+      "title": "照明流明估算：依面積與照度假設估算光通量",
+      "url": "https://mornihome.com/tools/lighting-lumen-calculator/",
+      "reference_ids": [
+        "turn146search2"
+      ]
+    },
+    {
+      "id": "S194",
+      "title": "照度/流明計算器：您需要多少光？",
+      "url": "https://www.bannerengineering.com/tw/zh/company/expert-insights/lux-lumens-calculator.html?srsltid=AU7gw4V745bIo9rKXPvSi_9RFWAwLn-N69GAw98g9sPCottM-WsK6ljR",
+      "reference_ids": [
+        "turn146search3"
+      ]
+    },
+    {
+      "id": "S195",
+      "title": "燈光設計的科學：教你精準計算空間亮度，空間照度vs. 總流明 ...",
+      "url": "https://tainaninteriordesign.com/indoor-lighting-design-lux-application-guide/",
+      "reference_ids": [
+        "turn146search4"
+      ]
+    },
+    {
+      "id": "S196",
+      "title": "買燈別只看瓦數！搞懂流明、照度與色溫，挑對居家好光線",
+      "url": "https://crazywoojin.com/post/whatiswklm",
+      "reference_ids": [
+        "turn146search5"
+      ]
+    },
+    {
+      "id": "S197",
+      "title": "面積的部分要把坪數單位換成平方公尺～ ✨ 1照度lux = ...",
+      "url": "https://www.threads.com/%40thewoodays.official/post/DPqJLhvkzMC/%E9%9D%A2%E7%A9%8D%E7%9A%84%E9%83%A8%E5%88%86%E8%A6%81%E6%8A%8A%E5%9D%AA%E6%95%B8%E5%96%AE%E4%BD%8D%E6%8F%9B%E6%88%90%E5%B9%B3%E6%96%B9%E5%85%AC%E5%B0%BA-1%E7%85%A7%E5%BA%A6lux-1-%E6%B5%81%E6%98%8E-1-%E5%B9%B3%E6%96%B9%E5%85%AC%E5%B0%BAm%C2%B2%E8%8B%A5%E4%BB%A5%E6%82%A8%E7%9A%84%E5%9D%AA%E6%95%B8%E7%85%A7%E5%BA%A6%E9%82%84%E6%9C%89%E4%B8%8A%E6%96%B9%E8%88%89%E4%BE%8B%E7%9A%84%E6%8A%98%E6%90%8D%E4%BF%82%E6%95%B8%E4%BE%86%E8%AA%AA%E6%9C%83%E6%98%AF7-33058-120-07-%E7%B4%84-39?hl=zh-tw",
+      "reference_ids": [
+        "turn146search6"
+      ]
+    },
+    {
+      "id": "S198",
+      "title": "照明計算 - App Store",
+      "url": "https://apps.apple.com/mo/app/%E7%85%A7%E6%98%8E%E8%A8%88%E7%AE%97/id1021580336",
+      "reference_ids": [
+        "turn146search7"
+      ]
+    },
+    {
+      "id": "S199",
+      "title": "低樓高照明攻略：2.6m 以下天花要選哪種吸頂燈？（含坪數× ...",
+      "url": "https://www.langdelight.com.tw/blogs/news/low-ceiling-lighting-guide-26m-lumen-wattage-table?srsltid=AU7gw4VEo5MhF0sWOzXG2YD9wqA_e7t6hzWTAZCG-uvrOvurHVI1jx3o",
+      "reference_ids": [
+        "turn146search8"
+      ]
+    },
+    {
+      "id": "S200",
+      "title": "辦公室燈光太亮或太暗？常見照明設計錯誤完整解析",
+      "url": "https://www.b-studio.com.tw/tw/%E8%BE%A6%E5%85%AC%E5%AE%A4%E7%87%88%E5%85%89/",
+      "reference_ids": [
+        "turn133search1"
+      ]
+    },
+    {
+      "id": "S201",
+      "title": "辦公室照明規劃",
+      "url": "https://www.qiliang2017.com/about/15",
+      "reference_ids": [
+        "turn133search2",
+        "turn152search2"
+      ]
+    },
+    {
+      "id": "S202",
+      "title": "勒克斯轉流明計算器 | lux 換算 lm - CalculatorLib",
+      "url": "https://calculatorlib.com/tw/lux-to-lumens-calculator",
+      "reference_ids": [
+        "turn133search4",
+        "turn152search3"
+      ]
+    },
+    {
+      "id": "S203",
+      "title": "每平方英尺流明計算機（呎燭光換算工具） - CalculatorLib",
+      "url": "https://calculatorlib.com/tw/lumens-per-square-foot-calculator",
+      "reference_ids": [
+        "turn133search6"
+      ]
+    },
+    {
+      "id": "S204",
+      "title": "流明需求计算器 | 房间照明换算（流明 = 面积 × 勒克斯） - CalculatorLib",
+      "url": "https://calculatorlib.com/zh/led-lumens-needed-calculator",
+      "reference_ids": [
+        "turn133search7"
+      ]
+    },
+    {
+      "id": "S205",
+      "title": "<4D6963726F736F667420506F776572506F696E74202D2030332DB971AFE0BADEB27AA874B2CEA4A7B671B4FAC5E7C3D2BD64A8D22E707074>",
+      "url": "https://www.esco.org.tw/uploads/information_download/tw/04-%E9%9B%BB%E8%83%BD%E7%AE%A1%E7%90%86%E7%B3%BB%E7%B5%B1%E4%B9%8B%E9%87%8F%E6%B8%AC%E9%A9%97%E8%AD%89%E7%AF%84%E4%BE%8B.pdf",
+      "reference_ids": [
+        "turn133search12"
+      ]
+    },
+    {
+      "id": "S206",
+      "title": "勒克斯转流明计算器 | 勒克斯(lux)换算为流明(lm) - CalculatorLib",
+      "url": "https://calculatorlib.com/zh/lux-to-lumens-calculator",
+      "reference_ids": [
+        "turn133search8"
+      ]
+    },
+    {
+      "id": "S207",
+      "title": "崁燈間距怎麼算？崁燈配置與間距計算器｜桀尚照明 JS Lighting",
+      "url": "https://www.jslighting.com.tw/about/main.php?iid=2",
+      "reference_ids": [
+        "turn133search9"
+      ]
+    },
+    {
+      "id": "S208",
+      "title": "คำนวณค่า Lux และจำนวนโคมไฟที่ต้องใช้ | Lumens Lab",
+      "url": "https://lumens-lab.com/lighting-calculator/",
+      "reference_ids": [
+        "turn133search10"
+      ]
+    },
+    {
+      "id": "S209",
+      "title": "照度与流明计算器：房间需要几盏灯？",
+      "url": "https://clickbina.com/zh/tools/lighting-lux-lumen-calculator/",
+      "reference_ids": [
+        "turn133search11"
+      ]
+    },
+    {
+      "id": "S210",
+      "title": "◆ 照度的標準是採用中央標準局所推薦之 CNS 12112，Z1044",
+      "url": "https://www.lifebook.com.tw/LinkClick.aspx?fileticket=Qr7F4oB0E10%3D&mid=7587&tabid=3037",
+      "reference_ids": [
+        "turn133search13"
+      ]
+    },
+    {
+      "id": "S211",
+      "title": "<4D6963726F736F667420576F7264202D20BEC7AED5B860ACF9AFE0B7BDA7DEB34EA4E2A5552E646F63>",
+      "url": "https://www.energypark.org.tw/upload/web/schoolenergysaving.pdf",
+      "reference_ids": [
+        "turn133search14"
+      ]
+    },
+    {
+      "id": "S212",
+      "title": "RGBD2lux: Dense light intensity estimation with an RGBD sensor",
+      "url": "https://arxiv.org/abs/1809.07558",
+      "reference_ids": [
+        "turn152academia15"
+      ]
+    },
+    {
+      "id": "S213",
+      "title": "Ashrae90.1標準之空調水側系統節能 現場初勘參考教材-非CMVP量測",
+      "url": "https://www.uberty.com.tw/upload/doc/%E7%AE%A1%E8%B7%AF%E9%98%BB%E6%8A%97%E6%9B%B2%E7%B7%9A%E7%9A%84%E6%87%89%E7%94%A8II-%E8%A8%AD%E5%82%99%E5%86%B7%E5%8D%BB%E6%B0%B4%E5%81%B4%E7%B3%BB%E7%B5%B1IPLV%E8%83%BD%E6%95%88%E8%A9%95%E4%BC%B0-2024-07-13.pdf",
+      "reference_ids": [
+        "turn130search12"
+      ]
+    },
+    {
+      "id": "S214",
+      "title": "<4D6963726F736F667420576F7264202D2031323037AAC5BDD5A7DEB34EA4E2A555AED7A8D2ADD7A5BFAAA92E646F63>",
+      "url": "https://top.energypark.org.tw/topfirm/award/101/Download/3.%E7%AF%80%E7%B4%84%E8%83%BD%E6%BA%90%E6%8A%80%E8%A1%93%E6%89%8B%E5%86%8A/%E6%8A%80%E8%A1%93%E5%88%A5%E7%AF%80%E8%83%BD%E6%8A%80%E8%A1%93%E6%89%8B%E5%86%8A/11%E7%A9%BA%E8%AA%BF%E6%8A%80%E8%A1%93%E6%89%8B%E5%86%8A%E6%A1%88%E4%BE%8B.pdf",
+      "reference_ids": [
+        "turn130search13"
+      ]
+    },
+    {
+      "id": "S215",
+      "title": "空調系統管理與節能手冊",
+      "url": "https://top.energypark.org.tw/Topfirm/award/101/Download/3.%E7%AF%80%E7%B4%84%E8%83%BD%E6%BA%90%E6%8A%80%E8%A1%93%E6%89%8B%E5%86%8A/%E6%8A%80%E8%A1%93%E5%88%A5%E7%AF%80%E8%83%BD%E6%8A%80%E8%A1%93%E6%89%8B%E5%86%8A/11%E7%A9%BA%E8%AA%BF%E6%8A%80%E8%A1%93%E6%89%8B%E5%86%8A%E6%A1%88%E4%BE%8B.pdf",
+      "reference_ids": [
+        "turn130search14"
+      ]
+    },
+    {
+      "id": "S216",
+      "title": "112.03.29",
+      "url": "https://dr.taipower.com.tw/media/5o0fgosj/%E7%A9%BA%E8%AA%BF%E7%B3%BB%E7%B5%B1%E7%AF%80%E8%83%BD%E5%8F%8A%E6%A1%88%E4%BE%8B%E5%88%86%E4%BA%AB.pdf?mediaDL=true",
+      "reference_ids": [
+        "turn130search15"
+      ]
+    },
+    {
+      "id": "S217",
+      "title": "計畫名稱：製造業能源",
+      "url": "https://www.ida.gov.tw/ctlr?PRO=filepath.DownloadFile&f=executive&id=19577&t=f",
+      "reference_ids": [
+        "turn130search16"
+      ]
+    },
+    {
+      "id": "S218",
+      "title": "如何選擇合適的工業用冷卻器 - Atlas Copco Taiwan",
+      "url": "https://www.atlascopco.com/zh-tw/compressors/air-compressor-blog/how-to-select-the-right-industrial-chiller",
+      "reference_ids": [
+        "turn130search0"
+      ]
+    },
+    {
+      "id": "S219",
+      "title": "佳化計算分析，一般以維持冷卻水溫差 4~5°C 為目標。",
+      "url": "https://top.energypark.org.tw/topfirm/award/102/Download/17.%E9%9B%BB%E4%BF%A1%E7%B6%B2%E8%B7%AF%E6%A9%9F%E6%88%BF%E7%AF%80%E8%83%BD%E6%87%89%E7%94%A8%E6%8A%80%E8%A1%93%E6%89%8B%E5%86%8A.pdf",
+      "reference_ids": [
+        "turn130search17"
+      ]
+    },
+    {
+      "id": "S220",
+      "title": "水冷散熱計算器｜冷卻迴路散熱量試算（Q = ṁcΔT） - CalculatorLib",
+      "url": "https://calculatorlib.com/tw/water-cooling-calculator",
+      "reference_ids": [
+        "turn130search1"
+      ]
+    },
+    {
+      "id": "S221",
+      "title": "冷凍噸是什麼？RT 定義、計算公式與換算對照表",
+      "url": "https://www.cky.com.tw/insights/refrigeration-ton-conversion",
+      "reference_ids": [
+        "turn153search0"
+      ]
+    },
+    {
+      "id": "S222",
+      "title": "標竿案例",
+      "url": "https://top.energypark.org.tw/topfirm/case/Detail/2c889b9f-79b6-4cc5-8a93-e3a6c3ad7a27",
+      "reference_ids": [
+        "turn153search1"
+      ]
+    },
+    {
+      "id": "S223",
+      "title": "空調系統節能及案例分享",
+      "url": "https://www.taipower.com.tw/media/jklb2c4s/%E7%A9%BA%E8%AA%BF%E7%B3%BB%E7%B5%B1%E7%AF%80%E8%83%BD%E5%8F%8A%E6%A1%88%E4%BE%8B%E5%88%86%E4%BA%AB.pdf?mediaDL=true",
+      "reference_ids": [
+        "turn153search2"
+      ]
+    },
+    {
+      "id": "S224",
+      "title": "冰水機效率計算",
+      "url": "https://cooling-tower.com.tw/solution-tw/information/chiller-efficiency-calculate",
+      "reference_ids": [
+        "turn153search3"
+      ]
+    },
+    {
+      "id": "S225",
+      "title": "校園導入智慧能源管理系統及節能措施",
+      "url": "https://tainan-saving.com/download/01.%E6%A0%A1%E5%9C%92%E5%B0%8E%E5%85%A5%E6%99%BA%E6%85%A7%E8%83%BD%E6%BA%90%E7%AE%A1%E7%90%86%E7%B3%BB%E7%B5%B1%E5%8F%8A%E7%AF%80%E8%83%BD%E6%8E%AA%E6%96%BD.pdf",
+      "reference_ids": [
+        "turn153search4"
+      ]
+    },
+    {
+      "id": "S226",
+      "title": "臺北市中山堂管理所(中正廳)",
+      "url": "https://www-ws.gov.taipei/001/Upload/public/MMO/SEC/20121224%E4%B8%AD%E5%B1%B1%E5%A0%82%E4%B8%AD%E6%AD%A3%E5%BB%B3150RT.pdf",
+      "reference_ids": [
+        "turn153search5"
+      ]
+    },
+    {
+      "id": "S227",
+      "title": "綠建築2019年版空調修正方向說明",
+      "url": "https://www.taiwangbc.org.tw/en/modules/filelist/download/get/229",
+      "reference_ids": [
+        "turn153search6"
+      ]
+    },
+    {
+      "id": "S228",
+      "title": "冷凍空調常用單位換算",
+      "url": "https://www.deryun.com.tw/%E5%86%B7%E5%87%8D%E7%A9%BA%E8%AA%BF/%E5%B8%B8%E7%94%A8%E5%96%AE%E4%BD%8D%E6%8F%9B%E7%AE%97/",
+      "reference_ids": [
+        "turn153search7"
+      ]
+    },
+    {
+      "id": "S229",
+      "title": "冰水系統最佳化的運轉參數分析",
+      "url": "https://web.sipa.gov.tw/WEInfoWeb/download/SW1060720-3.pdf",
+      "reference_ids": [
+        "turn153search8"
+      ]
+    },
+    {
+      "id": "S230",
+      "title": "‎《ChilledWater Delta》App - App Store",
+      "url": "https://apps.apple.com/tw/app/chilledwater-delta/id6761905452",
+      "reference_ids": [
+        "turn132search0"
+      ]
+    },
+    {
+      "id": "S231",
+      "title": "Pipe Sizing Calculator — Diameter by Flow Rate (Free Online)",
+      "url": "https://www.cky.com.tw/en/tools/pipe-sizing",
+      "reference_ids": [
+        "turn132search1"
+      ]
+    },
+    {
+      "id": "S232",
+      "title": "Chilled & Hot Water Flow Calculator | Reuven Engineering Tools",
+      "url": "https://reuven.tools/tools/chilled-water-flow/",
+      "reference_ids": [
+        "turn132search2"
+      ]
+    },
+    {
+      "id": "S233",
+      "title": "Pipe Size Calculator | Chilled Water & Hydronic Sizing",
+      "url": "https://buildmep.com/engineering-tools/pipe-size-calculator/",
+      "reference_ids": [
+        "turn132search3"
+      ]
+    },
+    {
+      "id": "S234",
+      "title": "Chilled Water Delta-T & GPM per Ton (Flow Sizing) | MEP Calculators",
+      "url": "https://mepcalculators.com/Blogs/chilled-water-delta-t-gpm-per-ton/",
+      "reference_ids": [
+        "turn132search4"
+      ]
+    },
+    {
+      "id": "S235",
+      "title": "Chilled Water Flow Rate Calculator – GPM Tool (Free)",
+      "url": "https://unitskit.com/chilled-water-flow-rate-calculator/",
+      "reference_ids": [
+        "turn132search5"
+      ]
+    },
+    {
+      "id": "S236",
+      "title": "‎ChilledWater Delta App - App Store",
+      "url": "https://apps.apple.com/us/app/chilledwater-delta/id6761905452",
+      "reference_ids": [
+        "turn132search6"
+      ]
+    },
+    {
+      "id": "S237",
+      "title": "Chilled Water Pipe Sizing Calculator | Flow Velocity Tool",
+      "url": "https://www.ilovemep.com/tools/chilled-water-pipe-sizing.html",
+      "reference_ids": [
+        "turn132search7"
+      ]
+    },
+    {
+      "id": "S238",
+      "title": "Chilled Water Pipe Sizing: Engineer's Guide | I Love MEP",
+      "url": "https://www.ilovemep.com/guides/chilled-water-pipe-sizing.html",
+      "reference_ids": [
+        "turn132search8"
+      ]
+    },
+    {
+      "id": "S239",
+      "title": "Chilled Water Pipe Sizing Calculator | HVAC-calcs.app",
+      "url": "https://hvac-calcs.app/tools/chilled-water-pipe-sizing",
+      "reference_ids": [
+        "turn132search9"
+      ]
+    },
+    {
+      "id": "S240",
+      "title": "Chilled Water Delta-T & Flow Rate Calculator for Coils | HVAC Engineering Tool",
+      "url": "https://www.calcpanda.com/chilled-water-delta-t-and-flow-rate-for-coil",
+      "reference_ids": [
+        "turn132search10"
+      ]
+    },
+    {
+      "id": "S241",
+      "title": "Chilled Water Pipe Sizing & CHW Pipe Diameter Calculation | HVAC",
+      "url": "https://mepcalculators.com/Blogs/chilled-water-pipe-sizing",
+      "reference_ids": [
+        "turn132search11"
+      ]
+    },
+    {
+      "id": "S242",
+      "title": "Microsoft Word - HVAC Rule of Thumb Calculator",
+      "url": "https://www.engproguides.com/ruleofthumbcalculator.pdf",
+      "reference_ids": [
+        "turn132search12"
+      ]
+    },
+    {
+      "id": "S243",
+      "title": "ChilledWaterPlantDG_Cover.indd",
+      "url": "https://datacenters.lbl.gov/sites/default/files/EDR_DesignGuidelines_CoolToolsChilledWater.pdf",
+      "reference_ids": [
+        "turn132search13"
+      ]
+    },
+    {
+      "id": "S244",
+      "title": "Comprehensive Chilled-Water",
+      "url": "https://jp.trane.com/content/dam/Trane/Commercial/global/learning-center/engineers-newsletters/APP-PRC006A-EN_02252021.pdf",
+      "reference_ids": [
+        "turn132search14"
+      ]
+    },
+    {
+      "id": "S245",
+      "title": "ChilledWaterPlantDG_Cover.indd",
+      "url": "https://kh.aquaenergyexpo.com/wp-content/uploads/2022/10/Chilled-Water-Plant-Design-Guide.pdf",
+      "reference_ids": [
+        "turn132search15"
+      ]
+    },
+    {
+      "id": "S246",
+      "title": "Master.PDF",
+      "url": "https://kh.aquaenergyexpo.com/?gh_book_download=117220",
+      "reference_ids": [
+        "turn132search16"
+      ]
+    },
+    {
+      "id": "S247",
+      "title": "Microsoft Word - Chilled Water Pump Calculator.docx",
+      "url": "https://www.engproguides.com/chilled-water-pump-design-guide.pdf",
+      "reference_ids": [
+        "turn132search17"
+      ]
+    },
+    {
+      "id": "S248",
+      "title": "I built a chiller design calculator that goes beyond “GPM × ΔT” and models the complete refrigeration cycle",
+      "url": "https://www.reddit.com/r/ChemicalEngineering/comments/1wfm45t/i_built_a_chiller_design_calculator_that_goes/",
+      "reference_ids": [
+        "turn132reddit18"
+      ]
+    },
+    {
+      "id": "S249",
+      "title": "A free practice problem for the Mechanical Engineering PE Exam (HVAC or TFS). Drop your answer in the comments!",
+      "url": "https://www.reddit.com/r/PE_Exam/comments/1h50bge",
+      "reference_ids": [
+        "turn132reddit19"
+      ]
+    },
+    {
+      "id": "S250",
+      "title": "City Charger 100kW",
+      "url": "https://www.deltaww.com/en-US/products/EV-Charging/4864",
+      "reference_ids": [
+        "turn151search0"
+      ]
+    },
+    {
+      "id": "S251",
+      "title": "What Can a 100kW Generator Power?",
+      "url": "https://generatorsource.com/what-can-a-100kw-generator-power/",
+      "reference_ids": [
+        "turn151search1"
+      ]
+    },
+    {
+      "id": "S252",
+      "title": "100kW Solar Container System with 230kWh Battery & 60kVA ...",
+      "url": "https://www.youtube.com/watch?v=IArKa8t40eQ",
+      "reference_ids": [
+        "turn151search2"
+      ]
+    },
+    {
+      "id": "S253",
+      "title": "Any experience here with large 75kw-100kw whole-house ...",
+      "url": "https://www.reddit.com/r/Generator/comments/1j4gfxc/any_experience_here_with_large_75kw100kw/",
+      "reference_ids": [
+        "turn151search3"
+      ]
+    },
+    {
+      "id": "S254",
+      "title": "Creta Electric 100 kW DC fast charging software update ...",
+      "url": "https://www.team-bhp.com/news/creta-electric-100-kw-dc-fast-charging-software-update-now-rolling-out",
+      "reference_ids": [
+        "turn151search4"
+      ]
+    },
+    {
+      "id": "S255",
+      "title": "Only getting 100kw/hr charge rate at EA Stations",
+      "url": "https://www.taycanforum.com/forum/threads/only-getting-100kw-hr-charge-rate-at-ea-stations.24090/",
+      "reference_ids": [
+        "turn151search5"
+      ]
+    },
+    {
+      "id": "S256",
+      "title": "Concerns with 2021 Hyundai Ioniq 100kw EV?",
+      "url": "https://www.facebook.com/groups/NZEVOwners/posts/4218287345105214/",
+      "reference_ids": [
+        "turn151search6"
+      ]
+    },
+    {
+      "id": "S257",
+      "title": "Solis 100KW Three Phase HV Hybrid Inverter",
+      "url": "https://nastechsolar.com/solar-inverters/solis-100kw-three-phase-hv-hybrid-inverter/",
+      "reference_ids": [
+        "turn151search7"
+      ]
+    },
+    {
+      "id": "S258",
+      "title": "Inside Japan's 100kW Laser Weapon Installed on JS Asuka ...",
+      "url": "https://www.youtube.com/watch?v=msaeVKRgaCU",
+      "reference_ids": [
+        "turn151search8"
+      ]
+    },
+    {
+      "id": "S259",
+      "title": "空氣線圖計算程式 - - 檔案詳細資訊 -元米科技有限公司(Intelligent Control Design & Technology Co., Ltd)",
+      "url": "https://www.icdt.com.tw/main/index.php/2013-07-09-05-16-50/modbus-free-software/file/99-psychrometriccharttools",
+      "reference_ids": [
+        "turn131search0"
+      ]
+    },
+    {
+      "id": "S260",
+      "title": "空氣線圖線上計算工具 -元米科技有限公司(Intelligent Control Design & Technology Co., Ltd)",
+      "url": "https://www.icdt.com.tw/Main/Article/327",
+      "reference_ids": [
+        "turn131search1"
+      ]
+    },
+    {
+      "id": "S261",
+      "title": "快適を計算 – 温湿度から露点・湿球・絶対湿度を計算する空気線図アプリ",
+      "url": "https://www7b.biglobe.ne.jp/~kanayama/PsychrometerCalc/",
+      "reference_ids": [
+        "turn131search2"
+      ]
+    },
+    {
+      "id": "S262",
+      "title": "空氣線圖工具程式",
+      "url": "https://www.icdt.com.tw/main/phocadownload/userupload/icdtpsychrometricchart.html",
+      "reference_ids": [
+        "turn131search3"
+      ]
+    },
+    {
+      "id": "S263",
+      "title": "濕氣圖(濕空氣線圖)psychrometric chart - Google Play 應用程式",
+      "url": "https://play.google.com/store/apps/details?hl=zh_TW&id=psychrometricchart.EZCompany",
+      "reference_ids": [
+        "turn131search4"
+      ]
+    },
+    {
+      "id": "S264",
+      "title": "濕氣圖(濕空氣線圖)psychrometric chart - Google Play 應用程式",
+      "url": "https://play.google.com/store/apps/details?hl=zh-TW&id=psychrometricchart.EZCompany",
+      "reference_ids": [
+        "turn131search5"
+      ]
+    },
+    {
+      "id": "S265",
+      "title": "空气焓湿图/含湿量计算器 - 建环视界",
+      "url": "https://www.buildenvi.com/gongju/psychrometrics?tmpl=component",
+      "reference_ids": [
+        "turn131search6"
+      ]
+    },
+    {
+      "id": "S266",
+      "title": "空気状態計算機 (湿球・露点・エンタルピー) | AME-Sync",
+      "url": "https://ame.anb-studio.de/psychrometric",
+      "reference_ids": [
+        "turn131search7"
+      ]
+    },
+    {
+      "id": "S267",
+      "title": "空気線図 計算サイト｜温度と湿度の2値で全状態量を一括計算 | Mahiro Apps",
+      "url": "https://mahiroapps.com/psychrometric-calc",
+      "reference_ids": [
+        "turn131search8"
+      ]
+    },
+    {
+      "id": "S268",
+      "title": "湿り空気状態値算出 | 株式会社テクノ菱和",
+      "url": "https://www.techno-ryowa.co.jp/rrlab/",
+      "reference_ids": [
+        "turn131search9"
+      ]
+    },
+    {
+      "id": "S269",
+      "title": "Mollier h-x diagram (Web App): An open-source browser-based psychrometric calculator - ScienceDirect",
+      "url": "https://www.sciencedirect.com/science/article/pii/S2352711025004340",
+      "reference_ids": [
+        "turn131search10",
+        "turn135search9"
+      ]
+    },
+    {
+      "id": "S270",
+      "title": "焓湿计算器_湿空气焓值含湿量露点温度在线计算 | 净算",
+      "url": "https://jingsuan-clean.com/tools/psychrometric-calculator",
+      "reference_ids": [
+        "turn131search11"
+      ]
+    },
+    {
+      "id": "S271",
+      "title": "1. 為使檔案完善保存，檔案庫房需控制於適當且穩定之溫濕度環境下。控制溫度與濕",
+      "url": "https://www.archives.gov.tw/wSite/public/Attachment/0/f1715584304326.pdf",
+      "reference_ids": [
+        "turn131search12"
+      ]
+    },
+    {
+      "id": "S272",
+      "title": "<4D6963726F736F667420576F7264202D20AAC5BDD5A4CEB971A44FBBB7BADDBACAB1B1A874B2CEA7DEB34EA4E2A5552E646F63>",
+      "url": "https://www.energypark.org.tw/upload/web/2018091303.pdf",
+      "reference_ids": [
+        "turn131search13"
+      ]
+    },
+    {
+      "id": "S273",
+      "title": "空調及電力遠端監控系統技術手冊",
+      "url": "https://top.energypark.org.tw/Topfirm/award/102/Download/4.%E7%A9%BA%E8%AA%BF%E5%8F%8A%E9%9B%BB%E5%8A%9B%E9%81%A0%E7%AB%AF%E7%9B%A3%E6%8E%A7%E7%B3%BB%E7%B5%B1%E6%8A%80%E8%A1%93%E6%89%8B%E5%86%8A.pdf",
+      "reference_ids": [
+        "turn131search14"
+      ]
+    },
+    {
+      "id": "S274",
+      "title": "檔 | 案庫 | 房設施 | --- | --- | --- | ---Q14：檔案庫房環境溫溼度如何達成？",
+      "url": "https://www.archives.gov.tw/wSite/public/Attachment/0/f1715584304256.pdf",
+      "reference_ids": [
+        "turn131search15"
+      ]
+    },
+    {
+      "id": "S275",
+      "title": "PowerPoint 简报",
+      "url": "https://web.sipa.gov.tw/WEInfoWeb/download/SW1040814.pdf",
+      "reference_ids": [
+        "turn131search16",
+        "turn158search2"
+      ]
+    },
+    {
+      "id": "S276",
+      "title": "測濕學",
+      "url": "https://zh.wikipedia.org/wiki/%E6%B8%AC%E6%BF%95%E5%AD%B8",
+      "reference_ids": [
+        "turn131search17",
+        "turn150search9"
+      ]
+    },
+    {
+      "id": "S277",
+      "title": "露点",
+      "url": "https://zh.wikipedia.org/wiki/%E9%9C%B2%E7%82%B9",
+      "reference_ids": [
+        "turn131search18"
+      ]
+    },
+    {
+      "id": "S278",
+      "title": "科爾莫哥洛夫長度尺度計算機",
+      "url": "https://globalcalcs.com/science/kolmogorov-length/",
+      "reference_ids": [
+        "turn150search0"
+      ]
+    },
+    {
+      "id": "S279",
+      "title": "Unruh 溫度計算機",
+      "url": "https://globalcalcs.com/science/unruh-temperature/",
+      "reference_ids": [
+        "turn150search1"
+      ]
+    },
+    {
+      "id": "S280",
+      "title": "奧內佐格數（Oh）計算機",
+      "url": "https://globalcalcs.com/science/ohnesorge-number/",
+      "reference_ids": [
+        "turn150search2"
+      ]
+    },
+    {
+      "id": "S281",
+      "title": "001003A11 | PDF",
+      "url": "https://www.scribd.com/document/947995433/001003A11",
+      "reference_ids": [
+        "turn150search3"
+      ]
+    },
+    {
+      "id": "S282",
+      "title": "CN101479020A - 气体调整系统",
+      "url": "https://patents.google.com/patent/CN101479020A/zh",
+      "reference_ids": [
+        "turn150search4"
+      ]
+    },
+    {
+      "id": "S283",
+      "title": "瑞利數（Ra）計算機",
+      "url": "https://globalcalcs.com/science/rayleigh-number/",
+      "reference_ids": [
+        "turn150search5"
+      ]
+    },
+    {
+      "id": "S284",
+      "title": "校務發展年度經費修正支用計畫書 - 中華醫事科技大學",
+      "url": "https://hwaipublic.hwai.edu.tw/static/file/22/1022/img/543/870674661.pdf",
+      "reference_ids": [
+        "turn150search6"
+      ]
+    },
+    {
+      "id": "S285",
+      "title": "搜索",
+      "url": "https://www.aolanchina.com/search/",
+      "reference_ids": [
+        "turn150search7"
+      ]
+    },
+    {
+      "id": "S286",
+      "title": "Si-CPE320",
+      "url": "https://sauermanngroup.com/sites/default/files/files/UM_Si-CPE320_ZH_24-01-25.pdf",
+      "reference_ids": [
+        "turn150search8"
+      ]
+    },
+    {
+      "id": "S287",
+      "title": "Online Psychrometric Chart Calculator — Plot HVAC Processes & Loads | MechSimulator",
+      "url": "https://mechsimulator.com/tools/psychrometric-chart/",
+      "reference_ids": [
+        "turn135search0"
+      ]
+    },
+    {
+      "id": "S288",
+      "title": "Psychrometric Calculator & Interactive Chart | EngineerHub",
+      "url": "https://engineerhub.org/psychrometric-calculator-chart",
+      "reference_ids": [
+        "turn135search1"
+      ]
+    },
+    {
+      "id": "S289",
+      "title": "AirCore — The offline air-side HVAC calculator. | AISixteen",
+      "url": "https://aisixteen.com/aircore/",
+      "reference_ids": [
+        "turn135search2"
+      ]
+    },
+    {
+      "id": "S290",
+      "title": "Psychrometric Chart Calculator: Free Online Tool to Plot & Calculate Moist Air Properties (h-x Diagram) with Interactive Visualizations | GetZenQuery",
+      "url": "https://www.getzenquery.com/tools/psychrometric-chart-calculator/",
+      "reference_ids": [
+        "turn135search3"
+      ]
+    },
+    {
+      "id": "S291",
+      "title": "Psychrometric Chart Calculator | HVAC Air Properties - Onlinetoolkit",
+      "url": "https://onlinetoolkit.co/psychrometric-chart-calculator/",
+      "reference_ids": [
+        "turn135search4"
+      ]
+    },
+    {
+      "id": "S292",
+      "title": "Interactive psychrometric chart | HVAC Info",
+      "url": "https://hvac-info.com/en/calculators/psychrometric-chart",
+      "reference_ids": [
+        "turn135search5"
+      ]
+    },
+    {
+      "id": "S293",
+      "title": "Psychrometric Chart Calculator — Interactive, SI & IP — Siazly",
+      "url": "https://siazly.com/science/psychrometric-chart/",
+      "reference_ids": [
+        "turn135search6"
+      ]
+    },
+    {
+      "id": "S294",
+      "title": "Offline HVAC Calculations: Psychrometrics & Loads | VentilatePro",
+      "url": "https://ventilatepro.com/exam/cli/calculations/",
+      "reference_ids": [
+        "turn135search7"
+      ]
+    },
+    {
+      "id": "S295",
+      "title": "Psychrometric Calculator | CCC Engineering",
+      "url": "https://cccengineering.com.au/psychrometric-calculator",
+      "reference_ids": [
+        "turn135search8"
+      ]
+    },
+    {
+      "id": "S296",
+      "title": "Psychrometric Chart Online Calculator and Sketcher",
+      "url": "https://www.psychrosim.com/",
+      "reference_ids": [
+        "turn135search10"
+      ]
+    },
+    {
+      "id": "S297",
+      "title": "Psychrometric Calculator",
+      "url": "https://people.tamu.edu/~i-choudhury/psych.html",
+      "reference_ids": [
+        "turn135search11"
+      ]
+    },
+    {
+      "id": "S298",
+      "title": "PSYCHROMETRIC CHART",
+      "url": "https://www.condair.org.nz/m/0/i0522-74-psychometric-chart-aw-web-ready-1.pdf",
+      "reference_ids": [
+        "turn135search12"
+      ]
+    },
+    {
+      "id": "S299",
+      "title": "Psychometric charts for high and low pressures",
+      "url": "https://www.govinfo.gov/content/pkg/GOVPUB-C13-daafdff74eb5bcc8e2bdbc30aa64edb3/pdf/GOVPUB-C13-daafdff74eb5bcc8e2bdbc30aa64edb3.pdf",
+      "reference_ids": [
+        "turn135search13"
+      ]
+    },
+    {
+      "id": "S300",
+      "title": "PSYCHROMETRIC CHART",
+      "url": "https://www.condair.co.za/m/0/05-psychrometric-chart-a3-laminated.pdf",
+      "reference_ids": [
+        "turn135search14"
+      ]
+    },
+    {
+      "id": "S301",
+      "title": "5 PSYCHROMETRIC CHART 750M ABOVE SEA LEVEL",
+      "url": "https://www.fao.org/4/i2433e/i2433e.pdf",
+      "reference_ids": [
+        "turn135search15"
+      ]
+    },
+    {
+      "id": "S302",
+      "title": "Psychrometrics",
+      "url": "https://en.wikipedia.org/wiki/Psychrometrics",
+      "reference_ids": [
+        "turn135search16",
+        "turn154search9"
+      ]
+    },
+    {
+      "id": "S303",
+      "title": "Psychrometrics",
+      "url": "https://www.myhvaccoach.com/wp-content/uploads/2017/10/Psychrometrics-notes.pdf",
+      "reference_ids": [
+        "turn135search17"
+      ]
+    },
+    {
+      "id": "S304",
+      "title": "Percent | Private credit investing. Simplified.",
+      "url": "https://percent.com/",
+      "reference_ids": [
+        "turn154search0"
+      ]
+    },
+    {
+      "id": "S305",
+      "title": "Percentage Calculator",
+      "url": "https://percentagecalculator.net/",
+      "reference_ids": [
+        "turn154search1"
+      ]
+    },
+    {
+      "id": "S306",
+      "title": "Percent for Art Scheme",
+      "url": "https://www.wa.gov.au/organisation/department-of-housing-and-works/percent-art-scheme",
+      "reference_ids": [
+        "turn154search2"
+      ]
+    },
+    {
+      "id": "S307",
+      "title": "PERCENT | English meaning - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/percent",
+      "reference_ids": [
+        "turn154search3"
+      ]
+    },
+    {
+      "id": "S308",
+      "title": "10% Happier with Dan Harris - Podcast",
+      "url": "https://podcasts.apple.com/us/podcast/10-happier-with-dan-harris/id1087147821",
+      "reference_ids": [
+        "turn154search4"
+      ]
+    },
+    {
+      "id": "S309",
+      "title": "More than 60 per cent of the world's employed population ...",
+      "url": "https://www.ilo.org/resource/news/more-60-cent-world%E2%80%99s-employed-population-are-informal-economy",
+      "reference_ids": [
+        "turn154search5"
+      ]
+    },
+    {
+      "id": "S310",
+      "title": "50 PERCENT：時尚、舒適、永續的服裝品牌",
+      "url": "https://www.50-shop.com/",
+      "reference_ids": [
+        "turn154search6"
+      ]
+    },
+    {
+      "id": "S311",
+      "title": "Entities Owned by Blocked Persons (50 Percent Rule)",
+      "url": "https://ofac.treasury.gov/faqs/topic/1521",
+      "reference_ids": [
+        "turn154search7"
+      ]
+    },
+    {
+      "id": "S312",
+      "title": "than 75 percent decline over 27 years in total flying insect ...",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0185809",
+      "reference_ids": [
+        "turn154search8"
+      ]
+    },
+    {
+      "id": "S313",
+      "title": "Measuring relative humidity from evaporation with a wet-bulb thermometer: the psychrometer",
+      "url": "https://arxiv.org/abs/2309.06001",
+      "reference_ids": [
+        "turn154academia13"
+      ]
+    },
+    {
+      "id": "S314",
+      "title": "Refractive Index of Humid Air in the Infrared: Model Fits",
+      "url": "https://arxiv.org/abs/physics/0610256",
+      "reference_ids": [
+        "turn154academia14"
+      ]
+    },
+    {
+      "id": "S315",
+      "title": "F2409-Common Airﬂow Conversion Table",
+      "url": "https://www.yuden.com.tw/uploadfiles/423/FAQ/Common-Airflow-Conversion-Table/eyc-tech-common-airflow-conversion-table_zh-tw_20240903.pdf",
+      "reference_ids": [
+        "turn134search12"
+      ]
+    },
+    {
+      "id": "S316",
+      "title": "規格對照與單位換算 | 達瑩淨化科技",
+      "url": "https://www.klean-tech.com.tw/tw/Service/5/%E8%A6%8F%E6%A0%BC%E5%B0%8D%E7%85%A7%E8%88%87%E5%96%AE%E4%BD%8D%E6%8F%9B%E7%AE%97",
+      "reference_ids": [
+        "turn134search0"
+      ]
+    },
+    {
+      "id": "S317",
+      "title": "‎《Engineering 單位流量換算》App - App Store",
+      "url": "https://apps.apple.com/tw/app/engineering-%E5%96%AE%E4%BD%8D%E6%B5%81%E9%87%8F%E6%8F%9B%E7%AE%97/id6758377219",
+      "reference_ids": [
+        "turn134search1"
+      ]
+    },
+    {
+      "id": "S318",
+      "title": "eyc-tech-Common-Airflow-Conversion-Table_zh-tw_20250220",
+      "url": "https://zh-tw.eyc-tech.com/uploadfiles/429/FAQ/Common-Airflow-Conversion-Table/eyc-tech-common-airflow-conversion-table_zh-tw_20250220.pdf",
+      "reference_ids": [
+        "turn134search13"
+      ]
+    },
+    {
+      "id": "S319",
+      "title": "單位換算 - 質昌風機",
+      "url": "https://www.cfb.tw/support/unit/",
+      "reference_ids": [
+        "turn134search2"
+      ]
+    },
+    {
+      "id": "S320",
+      "title": "CHC Fan and Blower Corp.",
+      "url": "https://cfb.tw/wp-content/uploads/2022/03/L.pdf",
+      "reference_ids": [
+        "turn134search14"
+      ]
+    },
+    {
+      "id": "S321",
+      "title": "NML 國家度量衡標準實驗室-首頁",
+      "url": "https://www.nml.org.tw/component/unitconversion/unitconversion/22.html",
+      "reference_ids": [
+        "turn134search3"
+      ]
+    },
+    {
+      "id": "S322",
+      "title": "Conversion List",
+      "url": "https://www.activa.com.tw/tech_Features_Conversion_List.html",
+      "reference_ids": [
+        "turn134search4"
+      ]
+    },
+    {
+      "id": "S323",
+      "title": "換氣次數計算工具 — 空間風量 CMH/CFM 免費線上算",
+      "url": "https://www.cky.com.tw/tools/air-change-rate",
+      "reference_ids": [
+        "turn134search5"
+      ]
+    },
+    {
+      "id": "S324",
+      "title": "HL系列",
+      "url": "https://cfb.tw/wp-content/uploads/2022/03/HL.pdf",
+      "reference_ids": [
+        "turn134search15"
+      ]
+    },
+    {
+      "id": "S325",
+      "title": "高壓風機",
+      "url": "https://cfb.tw/wp-content/uploads/2022/03/TS.pdf",
+      "reference_ids": [
+        "turn134search16"
+      ]
+    },
+    {
+      "id": "S326",
+      "title": "<BACFAF42C2F7A4DFBEF7ABACBFFD3837452032303233A67E20C0C9AED7A46A20AFE0A5CE706466BFC3A5FAB5A72E706466>",
+      "url": "https://www.kuenling.com.tw/upload-files/catalog/KLTW.pdf",
+      "reference_ids": [
+        "turn134search17"
+      ]
+    },
+    {
+      "id": "S327",
+      "title": "CFM Conversion Calculator – m³/h, CMH, CMM, L/s, CFH",
+      "url": "https://cfmcalculator.net/cfm-conversion-calculator",
+      "reference_ids": [
+        "turn134search6"
+      ]
+    },
+    {
+      "id": "S328",
+      "title": "單位換算",
+      "url": "https://www.nml.org.tw/unit-conversion.html?typeid=22%2F1000&view=unitconversion",
+      "reference_ids": [
+        "turn134search7"
+      ]
+    },
+    {
+      "id": "S329",
+      "title": "2.風量單位換算表 - 奕閎科技有限公司",
+      "url": "https://yihungtech.com.tw/638/",
+      "reference_ids": [
+        "turn134search8"
+      ]
+    },
+    {
+      "id": "S330",
+      "title": "單位換算表",
+      "url": "https://www.mold.net.tw/classroom/unit.htm",
+      "reference_ids": [
+        "turn156search0"
+      ]
+    },
+    {
+      "id": "S331",
+      "title": "113年度總預算附屬單位預算編製作業手冊",
+      "url": "https://www.dgbas.gov.tw/News_Content.aspx?n=1523&s=231485",
+      "reference_ids": [
+        "turn156search1"
+      ]
+    },
+    {
+      "id": "S332",
+      "title": "桃園市政府主計處-附屬單位預算及綜計表資料列表",
+      "url": "https://dbas.tycg.gov.tw/News.aspx?n=17292&sms=18574",
+      "reference_ids": [
+        "turn156search2"
+      ]
+    },
+    {
+      "id": "S333",
+      "title": "社區整合型服務中心-A單位 - 基隆市衛生局",
+      "url": "https://www.klchb.klcg.gov.tw/tw/klcltcsmo/4723-310087.html",
+      "reference_ids": [
+        "turn156search3"
+      ]
+    },
+    {
+      "id": "S334",
+      "title": "附屬單位決算",
+      "url": "https://dbas.gov.taipei/News.aspx?n=C1BCD525FB1AF81A",
+      "reference_ids": [
+        "turn156search4"
+      ]
+    },
+    {
+      "id": "S335",
+      "title": "公布中華民國114年度中央政府總預算案附屬單位預算營業及 ...",
+      "url": "https://www.president.gov.tw/Page/294/50117",
+      "reference_ids": [
+        "turn156search5"
+      ]
+    },
+    {
+      "id": "S336",
+      "title": "法規內容-教育單位協助檢警緝毒溯源通報作業要點",
+      "url": "https://edu.law.moe.gov.tw/LawContent.aspx?id=GL001705",
+      "reference_ids": [
+        "turn156search6"
+      ]
+    },
+    {
+      "id": "S337",
+      "title": "屏東縣政府長期照護處-服務提供單位",
+      "url": "https://www.pthg.gov.tw/care/cp.aspx?n=CCE059371C9F201A",
+      "reference_ids": [
+        "turn156search7"
+      ]
+    },
+    {
+      "id": "S338",
+      "title": "歡迎蒞臨僑委會全球資訊網– 保薦單位名稱",
+      "url": "https://www.ocac.gov.tw/OCAC/Pages/VDetail.aspx?nodeid=1873&pid=79423246",
+      "reference_ids": [
+        "turn156search8"
+      ]
+    },
+    {
+      "id": "S339",
+      "title": "立方英尺/分",
+      "url": "https://zh.wikipedia.org/wiki/%E7%AB%8B%E6%96%B9%E8%8B%B1%E5%B0%BA/%E5%88%86",
+      "reference_ids": [
+        "turn156search9"
+      ]
+    },
+    {
+      "id": "S340",
+      "title": "溫度單位換算工具",
+      "url": "https://www.fotools.com/zh-tw/tools/temperature-converter",
+      "reference_ids": [
+        "turn137search0"
+      ]
+    },
+    {
+      "id": "S341",
+      "title": "Temperature Difference (ΔT) Converter — Delta-T Across °C, °F, K, °R",
+      "url": "https://www.temperaturetool.com/temperature-difference/",
+      "reference_ids": [
+        "turn137search1"
+      ]
+    },
+    {
+      "id": "S342",
+      "title": "溫度換算（攝氏／華氏／開爾文）",
+      "url": "https://calcbe.com/zh-tw/calculators/temperature/",
+      "reference_ids": [
+        "turn137search2"
+      ]
+    },
+    {
+      "id": "S343",
+      "title": "單位換算器 — TOEA",
+      "url": "https://toea.com/zh-tw/unit-converters",
+      "reference_ids": [
+        "turn137search3"
+      ]
+    },
+    {
+      "id": "S344",
+      "title": "溫差換算器 - Δ°C、Δ°F、K 線上互轉 | GeekFormat",
+      "url": "https://geekformat.com/zh-TW/unit-convert/temperature-interval/",
+      "reference_ids": [
+        "turn137search4"
+      ]
+    },
+    {
+      "id": "S345",
+      "title": "第十屆海峽兩岸冷凍空調學術暨技術交流會",
+      "url": "https://erac.ntut.edu.tw/var/file/64/1064/img/260/all.pdf",
+      "reference_ids": [
+        "turn137search12"
+      ]
+    },
+    {
+      "id": "S346",
+      "title": "温度单位换算器 - SoupCalc.com",
+      "url": "https://soupcalc.com/zh/metric/temperature-converter",
+      "reference_ids": [
+        "turn137search5"
+      ]
+    },
+    {
+      "id": "S347",
+      "title": "温度单位换算器｜摄氏华氏开尔文在线互转 - 52工具",
+      "url": "https://www.52gj.com/converter/temperature",
+      "reference_ids": [
+        "turn137search6"
+      ]
+    },
+    {
+      "id": "S348",
+      "title": "溫度換算器 | 米計算 meCalculator",
+      "url": "https://www.mecalculator.tw/zh-tw/calculators/conversion/temperature",
+      "reference_ids": [
+        "turn137search7",
+        "turn157search3"
+      ]
+    },
+    {
+      "id": "S349",
+      "title": "温差换算器 - Δ°C、Δ°F、K 在线互转 | GeekFormat",
+      "url": "https://geekformat.com/zh-CN/unit-convert/temperature-interval/",
+      "reference_ids": [
+        "turn137search8"
+      ]
+    },
+    {
+      "id": "S350",
+      "title": "Felsius Conversion Tool",
+      "url": "https://felsius.com/",
+      "reference_ids": [
+        "turn137search9"
+      ]
+    },
+    {
+      "id": "S351",
+      "title": "溫度轉換器 — °C 與 °F | BroBroGo",
+      "url": "https://www.brobrogo.com/zh-tw/tools/temperature-converter/",
+      "reference_ids": [
+        "turn137search10"
+      ]
+    },
+    {
+      "id": "S352",
+      "title": "勞動力發展署北基宜花金馬分署",
+      "url": "https://ws.wda.gov.tw/Download.ashx?icon=.pdf&n=MTEzMDHnrZTmoYgucGRm&u=LzAwMS9VcGxvYWQvMzA4L2NrZmlsZS9mMWYyYjVlMy1kODgxLTRmNjctYWMwMy1jOTZlMzE5NTIwNTkucGRm",
+      "reference_ids": [
+        "turn137search13"
+      ]
+    },
+    {
+      "id": "S353",
+      "title": "攝氏華式換算器 | DigiKey",
+      "url": "https://www.digikey.tw/zh/resources/conversion-calculators/conversion-calculator-temperature",
+      "reference_ids": [
+        "turn137search11",
+        "turn157search0"
+      ]
+    },
+    {
+      "id": "S354",
+      "title": "國立高雄應用科技大學",
+      "url": "https://itechdct.ntcu.edu.tw/ntcudct_courses/aiot/resources/00_papers/10925_papers/ADT106110_%E6%9E%97%E5%AD%90%E6%B6%B5/%E8%AB%8B%E5%88%AA%E9%99%A4.pdf",
+      "reference_ids": [
+        "turn137search14"
+      ]
+    },
+    {
+      "id": "S355",
+      "title": "作為溫度計的上標參考點和下標參考點，並將中間範圍平均分成若干等分，用以量測溫度；此溫度參考點即為溫標（temperature scale）[1][2]。",
+      "url": "https://www.bsmi.gov.tw/wSite/public/Data/f1590733480271.pdf",
+      "reference_ids": [
+        "turn137search15"
+      ]
+    },
+    {
+      "id": "S356",
+      "title": "摄氏温标",
+      "url": "https://zh.wikipedia.org/wiki/%E6%91%84%E6%B0%8F%E6%B8%A9%E6%A0%87",
+      "reference_ids": [
+        "turn137search16",
+        "turn157search8"
+      ]
+    },
+    {
+      "id": "S357",
+      "title": "温度换算- 摄氏度到华氏度",
+      "url": "https://tw.element14.com/temperature-converter?srsltid=AU7gw4Xb6W_rAg33BYyN5aydUuNBJHJyjYChUJ6SZcHDyIEnQAaviqHS",
+      "reference_ids": [
+        "turn157search1"
+      ]
+    },
+    {
+      "id": "S358",
+      "title": "【觀念】溫標的換算(國教磨課師)",
+      "url": "https://www.junyiacademy.org/video/oYPjMh2YZc4?parent-topic-id=s4zwd-",
+      "reference_ids": [
+        "turn157search2"
+      ]
+    },
+    {
+      "id": "S359",
+      "title": "溫度的單位：克耳文(K)",
+      "url": "https://www.nml.org.tw/measurement/new-knowledge/3606-%E6%BA%AB%E5%BA%A6%E7%9A%84%E5%96%AE%E4%BD%8D%EF%BC%9A%E5%85%8B%E8%80%B3%E6%96%87-k.html",
+      "reference_ids": [
+        "turn157search4"
+      ]
+    },
+    {
+      "id": "S360",
+      "title": "溫度換算工具：攝氏、華氏與克耳文",
+      "url": "https://www.lorric.com/tw/Articles/industrial-unit-converters/all/temperature-units-converter",
+      "reference_ids": [
+        "turn157search5"
+      ]
+    },
+    {
+      "id": "S361",
+      "title": "溫度單位換算- 維基百科，自由的百科全書",
+      "url": "https://zh.wikipedia.org/zh-tw/%E6%B8%A9%E5%BA%A6%E5%8D%95%E4%BD%8D%E6%8D%A2%E7%AE%97",
+      "reference_ids": [
+        "turn157search6"
+      ]
+    },
+    {
+      "id": "S362",
+      "title": "溫度換算工具｜免費將攝氏、華氏轉換至克氏溫度",
+      "url": "https://rakko.tools/zh-tw/tools/temperature-converter",
+      "reference_ids": [
+        "turn157search7"
+      ]
+    },
+    {
+      "id": "S363",
+      "title": "保帆企業有限公司",
+      "url": "https://www.baufarm.com.tw/PowerSCADA.php",
+      "reference_ids": [
+        "turn136search0"
+      ]
+    },
+    {
+      "id": "S364",
+      "title": "負荷リスト・機器表サブCAD（負荷リスト・機器表を図面に）｜分電盤サブCADの案件から自動作成・相バランスと主幹・幹線の目安・複製して差分だけ直す・Excel/DXF/PDF書き出し｜セコサポ",
+      "url": "https://denkisekkei.com/fuka-subcad/",
+      "reference_ids": [
+        "turn136search1"
+      ]
+    },
+    {
+      "id": "S365",
+      "title": "需要率・契約電力計算ツール｜最大需要電力・変圧器容量・月間電力量を一括計算 | Mahiro Apps",
+      "url": "https://mahiroapps.com/demand-power-calc",
+      "reference_ids": [
+        "turn136search2"
+      ]
+    },
+    {
+      "id": "S366",
+      "title": "FrameAI Electrical — NEC Panel Schedules & Load Calculations",
+      "url": "https://www.frameai-engineering.com/electrical",
+      "reference_ids": [
+        "turn136search3"
+      ]
+    },
+    {
+      "id": "S367",
+      "title": "需求說明書（含驗收規範）",
+      "url": "https://bid.iii.org.tw/bid/upload/PP24010079_1_2_%E6%96%87%E4%BB%B62_PP24010079_%E9%9C%80%E6%B1%82%E8%AA%AA%E6%98%8E%E6%9B%B8.pdf",
+      "reference_ids": [
+        "turn136search12"
+      ]
+    },
+    {
+      "id": "S368",
+      "title": "電費預測/電費成本分析_Plant SCADA 軟體_產品介紹 | 群泰科技",
+      "url": "https://www.trendtek.com.tw/zh-tw/product.php?act=view&id=79",
+      "reference_ids": [
+        "turn136search4"
+      ]
+    },
+    {
+      "id": "S369",
+      "title": "分電盤負荷集計シミュレーター｜回路表の不平衡率・主幹容量を自動算定 | Mahiro Apps",
+      "url": "https://mahiroapps.com/panel-load-schedule",
+      "reference_ids": [
+        "turn136search6"
+      ]
+    },
+    {
+      "id": "S370",
+      "title": "關於需求率",
+      "url": "https://help.autodesk.com/cloudhelp/2026/CHT/Revit-MEPEng/files/GUID-554537D9-842A-46A0-9905-AD41C221EA10.htm",
+      "reference_ids": [
+        "turn136search7"
+      ]
+    },
+    {
+      "id": "S371",
+      "title": "BTC ePlug 智慧插座 - 英群企業股份有限公司",
+      "url": "https://www.btc.com.tw/3electricity_monitoring.php",
+      "reference_ids": [
+        "turn136search8"
+      ]
+    },
+    {
+      "id": "S372",
+      "title": "電設ポケット",
+      "url": "https://www.denkieqpt.com/",
+      "reference_ids": [
+        "turn136search9"
+      ]
+    },
+    {
+      "id": "S373",
+      "title": "GreenMaker - 凌羣電腦",
+      "url": "https://syscomgo.com/products/greenmaker/",
+      "reference_ids": [
+        "turn136search10"
+      ]
+    },
+    {
+      "id": "S374",
+      "title": "需量因數 | GridForge",
+      "url": "https://gridforge.powernest.studio/tools/demand-factor",
+      "reference_ids": [
+        "turn136search11"
+      ]
+    },
+    {
+      "id": "S375",
+      "title": "3. 插座事務設備(常態測試)",
+      "url": "https://top.energypark.org.tw/topfirm/award/102/Download/14.%E9%9B%BB%E5%A3%93%E8%AA%BF%E6%95%B4%E6%8E%A7%E5%88%B6%E5%99%A8%E7%AF%80%E8%83%BD%E6%87%89%E7%94%A8%E6%8A%80%E8%A1%93%E6%89%8B%E5%86%8A.pdf",
+      "reference_ids": [
+        "turn136search13"
+      ]
+    },
+    {
+      "id": "S376",
+      "title": "消防設備人員專業訓練機關（構）學校團體認可及管理辦法",
+      "url": "https://glrs.moi.gov.tw/LawContent.aspx?id=GL001578",
+      "reference_ids": [
+        "turn155search0"
+      ]
+    },
+    {
+      "id": "S377",
+      "title": "金融機構使用物聯網設備安全控管規範",
+      "url": "https://www.ba.org.tw/memberStandard/DownloadAll?id=71",
+      "reference_ids": [
+        "turn155search1"
+      ]
+    },
+    {
+      "id": "S378",
+      "title": "機器設備輸出(第六期)貸款(服務專線:02-3322-0541 吳小姐)",
+      "url": "https://www.df.gov.tw/Content_List.aspx?n=67A4F51A6FE8568B",
+      "reference_ids": [
+        "turn155search2"
+      ]
+    },
+    {
+      "id": "S379",
+      "title": "法規內容-再生能源發電設備免徵及分期繳納進口關稅品項及 ...",
+      "url": "https://law.moea.gov.tw/LawContent.aspx?id=FL053991",
+      "reference_ids": [
+        "turn155search3"
+      ]
+    },
+    {
+      "id": "S380",
+      "title": "發電設備查核申請｜T-REC",
+      "url": "https://www.trec.org.tw/page/zh-tw_Power%20Generation%20Equipment%20Verified%20Application",
+      "reference_ids": [
+        "turn155search4"
+      ]
+    },
+    {
+      "id": "S381",
+      "title": "公告114年度「精神復健機構改善公共安全設施設備補助計畫」 ...",
+      "url": "https://dep.mohw.gov.tw/DOMHAOH/cp-509-82391-107.html",
+      "reference_ids": [
+        "turn155search5"
+      ]
+    },
+    {
+      "id": "S382",
+      "title": "4770）：2nm 擴產帶動特化設備需求，氟素內襯迎接成長機會",
+      "url": "https://blog.fugle.tw/post/asc-analysis",
+      "reference_ids": [
+        "turn155search6"
+      ]
+    },
+    {
+      "id": "S383",
+      "title": "臺北市教保服務機構設置攝錄影音設備管理要點| 法規條文檢索",
+      "url": "https://laws.gov.taipei/law/LawSearch/LawArticleNoSearch/FL103276",
+      "reference_ids": [
+        "turn155search8"
+      ]
+    },
+    {
+      "id": "S384",
+      "title": "The UK-DALE dataset, domestic appliance-level electricity demand and whole-house demand from five UK homes",
+      "url": "https://arxiv.org/abs/1404.0284",
+      "reference_ids": [
+        "turn155academia10"
+      ]
+    },
+    {
+      "id": "S385",
+      "title": "pandapower - an Open Source Python Tool for Convenient Modeling, Analysis and Optimization of Electric Power Systems",
+      "url": "https://arxiv.org/abs/1709.06743",
+      "reference_ids": [
+        "turn155academia12"
+      ]
+    },
+    {
+      "id": "S386",
+      "title": "Modeling and Validation of Electrical Load Profiling in Residential Buildings in Singapore",
+      "url": "https://arxiv.org/abs/1508.02353",
+      "reference_ids": [
+        "turn155academia15"
+      ]
+    },
+    {
+      "id": "S387",
+      "title": "行政院公報　　　　　　　　　　　　　　　　　　　第   卷　第   期　　        　　財政經濟篇",
+      "url": "https://gazette.nat.gov.tw/EG_FileManager/eguploadpub/eg028208/ch04/type3/gov31/num7/images/Eg01.pdf",
+      "reference_ids": [
+        "turn141search12"
+      ]
+    },
+    {
+      "id": "S388",
+      "title": "PowerPoint Presentation",
+      "url": "https://www.tcta.com.tw/wp-content/uploads/2014/12/FES_demo_02.pdf",
+      "reference_ids": [
+        "turn141search13",
+        "turn140search12"
+      ]
+    },
+    {
+      "id": "S389",
+      "title": "PV Elite 壓力容器專業分析軟體 - 呈榮科技",
+      "url": "https://www.autosoft.com.tw/autosoft_product/cas-pvelite/",
+      "reference_ids": [
+        "turn141search0"
+      ]
+    },
+    {
+      "id": "S390",
+      "title": "機械估算軟體 | 暖通空調 | Exayard",
+      "url": "https://exayard.com/tw/nuantong-yusuan-ruanjian",
+      "reference_ids": [
+        "turn141search1"
+      ]
+    },
+    {
+      "id": "S391",
+      "title": "FAIRTECH ENGINEERING CO., LTD.",
+      "url": "https://www.fairtech.com.tw/productdetail_en.php?id=105",
+      "reference_ids": [
+        "turn141search2"
+      ]
+    },
+    {
+      "id": "S392",
+      "title": "能源管理系統資訊-經濟部產業發展署產業節能減碳資訊網",
+      "url": "https://sdd.nat.gov.tw/ghg/Counseling/counseling_sm8_7_2",
+      "reference_ids": [
+        "turn141search3"
+      ]
+    },
+    {
+      "id": "S393",
+      "title": "Fathom 不可壓縮流體分析軟體 - 呈榮科技",
+      "url": "https://www.autosoft.com.tw/autosoft_product/aft-fathom/",
+      "reference_ids": [
+        "turn141search4"
+      ]
+    },
+    {
+      "id": "S394",
+      "title": "如何建立設備資料？",
+      "url": "https://www.servicejdc.com/helps/faqs/equipment-management/how-to-add-equipment-data",
+      "reference_ids": [
+        "turn141search5"
+      ]
+    },
+    {
+      "id": "S395",
+      "title": "Arrow 可壓縮流體分析軟體 - 呈榮科技",
+      "url": "https://www.autosoft.com.tw/autosoft_product/aft-arrow/",
+      "reference_ids": [
+        "turn141search6"
+      ]
+    },
+    {
+      "id": "S396",
+      "title": "PowerPoint Presentation",
+      "url": "https://www.digizen.tw/FileDB/Teacher/ly0z8f62_20220629.pdf",
+      "reference_ids": [
+        "turn141search14"
+      ]
+    },
+    {
+      "id": "S397",
+      "title": "整廠管線類 設計分析軟體代理 - 呈榮科技",
+      "url": "https://www.autosoft.com.tw/solution_piping/",
+      "reference_ids": [
+        "turn141search7"
+      ]
+    },
+    {
+      "id": "S398",
+      "title": "CAESAR II 管道應力分析軟體 - 呈榮科技",
+      "url": "https://www.autosoft.com.tw/autosoft_product/cas-caesar/",
+      "reference_ids": [
+        "turn141search8"
+      ]
+    },
+    {
+      "id": "S399",
+      "title": "Free Fab Expansion Utility Bottleneck Estimator | Simulations4All",
+      "url": "https://simulations4all.com/simulations/fab-expansion-utility-bottleneck-estimator",
+      "reference_ids": [
+        "turn141search9"
+      ]
+    },
+    {
+      "id": "S400",
+      "title": "cksic.com.tw",
+      "url": "https://cksic.com.tw/zh-tw/services",
+      "reference_ids": [
+        "turn141search10"
+      ]
+    },
+    {
+      "id": "S401",
+      "title": "< 表: ㄅㄧㄠˇ >辭典檢視 - 教育部重編國語辭典",
+      "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=457&la=0&powerMode=0",
+      "reference_ids": [
+        "turn161search0"
+      ]
+    },
+    {
+      "id": "S402",
+      "title": "簡易生命表電子書",
+      "url": "https://www.moi.gov.tw/cl.aspx?n=12868",
+      "reference_ids": [
+        "turn161search1"
+      ]
+    },
+    {
+      "id": "S403",
+      "title": "新北市學前兒童發展檢核表下載專區 - 新北市衛生局",
+      "url": "https://www.health.ntpc.gov.tw/article/%E6%96%B0%E5%8C%97%E5%B8%82%E5%AD%B8%E5%89%8D%E5%85%92%E7%AB%A5%E7%99%BC%E5%B1%95%E6%AA%A2%E6%A0%B8%E8%A1%A8%E4%B8%8B%E8%BC%89%E5%B0%88%E5%8D%80",
+      "reference_ids": [
+        "turn161search2"
+      ]
+    },
+    {
+      "id": "S404",
+      "title": "請各機關依「檢核表」辦理職場霸凌及性別平等（教育） ...",
+      "url": "https://www.csptc.gov.tw/News_Content.aspx?n=3926&s=44542&sms=12390",
+      "reference_ids": [
+        "turn161search3"
+      ]
+    },
+    {
+      "id": "S405",
+      "title": "臺北市政府社會局分層負責明細表",
+      "url": "https://dosw.gov.taipei/News.aspx?n=DBDF38D40ED22067&sms=6C0F46F74E14EDDF",
+      "reference_ids": [
+        "turn161search4"
+      ]
+    },
+    {
+      "id": "S406",
+      "title": "5. 微電腦瓦斯表裝置率",
+      "url": "https://www.moeaea.gov.tw/ECW/populace/content/ContentDesc.aspx?menu_id=3065",
+      "reference_ids": [
+        "turn161search5"
+      ]
+    },
+    {
+      "id": "S407",
+      "title": "國家教育研究院- 教育部國語小字典-表",
+      "url": "https://dict.mini.moe.edu.tw/SearchIndex/searchResult?dictSearchField=%E8%A1%A8&searchType=one",
+      "reference_ids": [
+        "turn161search6"
+      ]
+    },
+    {
+      "id": "S408",
+      "title": "我國生命表",
+      "url": "https://www.moi.gov.tw/cl.aspx?n=2906",
+      "reference_ids": [
+        "turn161search7"
+      ]
+    },
+    {
+      "id": "S409",
+      "title": "分層負責明細表",
+      "url": "https://health.gov.taipei/cp.aspx?n=F3E1A3FD6383F1CD",
+      "reference_ids": [
+        "turn161search8"
+      ]
+    },
+    {
+      "id": "S410",
+      "title": "凱達節能/凱達電機-eAC Load 空調負荷計算軟體",
+      "url": "https://www.tempace.com.tw/product-108.html",
+      "reference_ids": [
+        "turn140search0"
+      ]
+    },
+    {
+      "id": "S411",
+      "title": "MECHA — HVAC and thermal engineering calculation software",
+      "url": "https://www.mechautilities.com/",
+      "reference_ids": [
+        "turn140search1"
+      ]
+    },
+    {
+      "id": "S412",
+      "title": "產品介紹 - 揚帆冷氣 | 揚帆興業股份有限公司",
+      "url": "https://www.yangfan.com.tw/products.php?index=17",
+      "reference_ids": [
+        "turn140search2"
+      ]
+    },
+    {
+      "id": "S413",
+      "title": "凱達節能/凱達電機-軟體",
+      "url": "https://www.tempace.com.tw/products-7.html",
+      "reference_ids": [
+        "turn140search3"
+      ]
+    },
+    {
+      "id": "S414",
+      "title": "綠空調負荷計算與評估軟體(eAC Load)簡介",
+      "url": "https://www.tempace.com.tw/uploads/kaida/files/202511141050377390.pdf",
+      "reference_ids": [
+        "turn140search13"
+      ]
+    },
+    {
+      "id": "S415",
+      "title": "topic_11-02 | PDF",
+      "url": "https://www.slideshare.net/slideshow/topic1102/1000077",
+      "reference_ids": [
+        "turn140search4"
+      ]
+    },
+    {
+      "id": "S416",
+      "title": "空調系統(AC) ................................ 1",
+      "url": "https://www.topwin.com.tw/energypark/downloads/2_6_05.pdf",
+      "reference_ids": [
+        "turn140search14"
+      ]
+    },
+    {
+      "id": "S417",
+      "title": "使用熱管設計外氣空調箱 - 工業節能服務網",
+      "url": "https://emis.itri.org.tw/Case/Content?ID=68",
+      "reference_ids": [
+        "turn140search5"
+      ]
+    },
+    {
+      "id": "S418",
+      "title": "恆溫恆濕空調箱控制技術-技術移轉-產業服務-工業技術研究院",
+      "url": "https://www.itri.org.tw/ListStyle.aspx?DisplayStyle=13_content&MmmID=1036233405427625204&SiteID=1&Trt_idx=5476",
+      "reference_ids": [
+        "turn140search6"
+      ]
+    },
+    {
+      "id": "S419",
+      "title": "Cool Tool-最酷的冷凍空調設計軟體-台灣總代理:一丞冷凍工業股份有限公司",
+      "url": "https://icherng.com.tw/cooltool/",
+      "reference_ids": [
+        "turn140search7"
+      ]
+    },
+    {
+      "id": "S420",
+      "title": "‎《Airkit：空調計算機》App - App Store",
+      "url": "https://apps.apple.com/tw/app/airkit-%E7%A9%BA%E8%AA%BF%E8%A8%88%E7%AE%97%E6%A9%9F/id6789883984",
+      "reference_ids": [
+        "turn140search8"
+      ]
+    },
+    {
+      "id": "S421",
+      "title": "‎空気線図Pro 湿り空気線図・空調計算 App - App Store",
+      "url": "https://apps.apple.com/cn/app/%E7%A9%BA%E6%B0%97%E7%B7%9A%E5%9B%B3pro-%E6%B9%BF%E3%82%8A%E7%A9%BA%E6%B0%97%E7%B7%9A%E5%9B%B3-%E7%A9%BA%E8%AA%BF%E8%A8%88%E7%AE%97/id6792616333",
+      "reference_ids": [
+        "turn140search9"
+      ]
+    },
+    {
+      "id": "S422",
+      "title": "RefriHVAC ™ - Neotherm Consulting",
+      "url": "https://www.neotherm-consulting.com/en/logiciels/refrihvac/",
+      "reference_ids": [
+        "turn140search10"
+      ]
+    },
+    {
+      "id": "S423",
+      "title": "空調空氣系統節能技術手冊",
+      "url": "https://top.energypark.org.tw/topfirm/award/102/Download/16.2011%E7%A9%BA%E6%B0%A3%E7%AF%80%E8%83%BD%E6%89%8B%E5%86%8Av21.pdf",
+      "reference_ids": [
+        "turn158search0"
+      ]
+    },
+    {
+      "id": "S424",
+      "title": "空調箱構造及原理｜淺談白話解說，讓您秒懂！",
+      "url": "https://www.saun-shing.com.tw/blog_0005/",
+      "reference_ids": [
+        "turn158search1"
+      ]
+    },
+    {
+      "id": "S425",
+      "title": "第一篇空調加濕技術概論",
+      "url": "https://www.bestav.com.tw/www/ele-00.pdf",
+      "reference_ids": [
+        "turn158search3"
+      ]
+    },
+    {
+      "id": "S426",
+      "title": "空調系統節能技術",
+      "url": "https://www.taipower.com.tw/media/i4ndflr3/%E7%A9%BA%E8%AA%BF%E7%B3%BB%E7%B5%B1%E7%AF%80%E8%83%BD%E6%8A%80%E8%A1%93.pdf?mediaDL=true",
+      "reference_ids": [
+        "turn158search4"
+      ]
+    },
+    {
+      "id": "S427",
+      "title": "科技廠冷凍空調節能技術",
+      "url": "https://stsp-swse.com.tw/upload/news/files/%E3%80%8E%E7%A7%91%E6%8A%80%E5%BB%A0%E5%86%B7%E5%87%8D%E7%A9%BA%E8%AA%BF%E7%AF%80%E8%83%BD%E6%8A%80%E8%A1%93%E3%80%8F%E5%9C%8B%E7%AB%8B%E9%AB%98%E9%9B%84%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%B8%20%E6%A2%81%E4%BF%8A%E5%BE%B7%20%E5%8A%A9%E7%90%86%E6%95%99%E6%8E%88.pdf",
+      "reference_ids": [
+        "turn158search5"
+      ]
+    },
+    {
+      "id": "S428",
+      "title": "Combined Cooling, Heating, and Power System in Blockchain-Enabled Energy Management",
+      "url": "https://arxiv.org/abs/2003.13416",
+      "reference_ids": [
+        "turn158academia9"
+      ]
+    },
+    {
+      "id": "S429",
+      "title": "意象科技 Power Designer 配電系統設計軟體 > 檔案下載",
+      "url": "https://www.lifebook.com.tw/download.aspx",
+      "reference_ids": [
+        "turn139search0"
+      ]
+    },
+    {
+      "id": "S430",
+      "title": "意象科技 Power Designer 配電系統設計軟體 > 檔案下載",
+      "url": "https://power.lifebook.com.tw/Download.aspx",
+      "reference_ids": [
+        "turn139search1"
+      ]
+    },
+    {
+      "id": "S431",
+      "title": "全傑科技 Softhome - ETAPSTAR ;Protection & Coordination 智慧型保護協調軟體 臺灣區代理",
+      "url": "https://www2.softhome.com.tw/?page_code=feature&page_id=6&product_id=10321",
+      "reference_ids": [
+        "turn139search2"
+      ]
+    },
+    {
+      "id": "S432",
+      "title": "保护装置的协调与选择性-ETAP-电力系统仿真软件|电力系统在线监测|电气模拟仿真软件|电能质量评估",
+      "url": "https://etapchina.com/cms/guide/225",
+      "reference_ids": [
+        "turn139search3"
+      ]
+    },
+    {
+      "id": "S433",
+      "title": "全傑科技 Softhome - ETAPSTAR ;Protection & Coordination 智慧型保護協調軟體 臺灣區代理",
+      "url": "https://www2.softhome.com.tw/?page_code=show_all_zhtw&page_id=6&product_id=10321",
+      "reference_ids": [
+        "turn139search4"
+      ]
+    },
+    {
+      "id": "S434",
+      "title": "GridForge — 電力系統設計計算平台",
+      "url": "https://gridforge.powernest.studio/",
+      "reference_ids": [
+        "turn139search5"
+      ]
+    },
+    {
+      "id": "S435",
+      "title": "Protection & Coordination | Selectivity Analysis | Relay Protection Software | ETAP",
+      "url": "https://etap.com/product/overcurrent-protection-selectivity",
+      "reference_ids": [
+        "turn139search6"
+      ]
+    },
+    {
+      "id": "S436",
+      "title": "漏電遮断器選定ツール｜感度電流・極数・保護協調を自動判定 | Mahiro Apps",
+      "url": "https://mahiroapps.com/elcb-select",
+      "reference_ids": [
+        "turn139search7"
+      ]
+    },
+    {
+      "id": "S437",
+      "title": "西馬里斯規劃工具 | Siemens",
+      "url": "https://www.siemens.com/zh-tw/products/simaris/",
+      "reference_ids": [
+        "turn139search8"
+      ]
+    },
+    {
+      "id": "S438",
+      "title": "全傑科技 Softhome - ETAPSTAR ;Protection & Coordination 智慧型保護協調軟體 臺灣區代理",
+      "url": "https://www2.softhome.com.tw/?page_id=6&product_id=10321",
+      "reference_ids": [
+        "turn139search9"
+      ]
+    },
+    {
+      "id": "S439",
+      "title": "盤設計サポートツール｜富士電機機器制御",
+      "url": "https://www.fujielectric.co.jp/fcs/support/tool.html",
+      "reference_ids": [
+        "turn139search10"
+      ]
+    },
+    {
+      "id": "S440",
+      "title": "保护配合 | 保护装置配合 | ETAP",
+      "url": "https://fde-etap-prod-c2ftc3a8cgeubmfx.z01.azurefd.net/zh/solutions/protection-coordination",
+      "reference_ids": [
+        "turn139search11"
+      ]
+    },
+    {
+      "id": "S441",
+      "title": "用戶用電設備裝置規則修正草案總說明",
+      "url": "https://gazette2.nat.gov.tw/EG_FileManager/eguploadpub/eg028166/ch04/type3/gov31/num7/images/BB.pdf",
+      "reference_ids": [
+        "turn139search12"
+      ]
+    },
+    {
+      "id": "S442",
+      "title": "術發展計畫(4",
+      "url": "https://www.nusc.gov.tw/share/file/law/SjFKEjI-8MRJsh-3~kU7CQ__.pdf?v=2025041622",
+      "reference_ids": [
+        "turn139search13"
+      ]
+    },
+    {
+      "id": "S443",
+      "title": "了解斷路器額定值：Icu、Ics、Icw 和Icm - Onccy",
+      "url": "https://onccy.com/zh-TW/understanding-circuit-breaker-ratings-icu-ics-icw-and-icm/",
+      "reference_ids": [
+        "turn160search0"
+      ]
+    },
+    {
+      "id": "S444",
+      "title": "保護協調",
+      "url": "https://www.lifebook.com.tw/Services/tabid/3099/EntryId/833/.aspx",
+      "reference_ids": [
+        "turn160search1"
+      ]
+    },
+    {
+      "id": "S445",
+      "title": "如何選擇塑殼斷路器：額定值、跳脫設定與應用",
+      "url": "https://hk.chinehow.com/id08830825.html",
+      "reference_ids": [
+        "turn160search2"
+      ]
+    },
+    {
+      "id": "S446",
+      "title": "IEC 斷路器短路額定值：Icu 與Ics 與Icw 選用指南",
+      "url": "https://industrialmonitordirect.com/zh-hant/blogs/knowledgebase/iec-circuit-breaker-short-circuit-ratings-icu-vs-ics-vs-icw-selection-guide?srsltid=AU7gw4VBkyL1Irkqb680HH3a-TzUvyfWHAQN5EZumtelS_p8Nl1c37-6",
+      "reference_ids": [
+        "turn160search3"
+      ]
+    },
+    {
+      "id": "S447",
+      "title": "電力、機器用保護機器／電量感測器",
+      "url": "https://www.omron.com.tw/solution/guideDetail/900_2/88",
+      "reference_ids": [
+        "turn160search4"
+      ]
+    },
+    {
+      "id": "S448",
+      "title": "表五八低壓用戶過電流保護裝置之額定極限短路啟斷容量表",
+      "url": "https://law.moea.gov.tw/Download.ashx?FileID=171338&id=FL011045&type=LAW",
+      "reference_ids": [
+        "turn160search5"
+      ]
+    },
+    {
+      "id": "S449",
+      "title": "MCCB斷路器的額定分斷能力Icu/Ics[kA]意義",
+      "url": "https://www.yuyou.com.tw/technology-detail.aspx?csn=1151&dsn=188",
+      "reference_ids": [
+        "turn160search6"
+      ]
+    },
+    {
+      "id": "S450",
+      "title": "故障電流計算",
+      "url": "https://sites.google.com/view/chingying201810/learn/learn_01_11",
+      "reference_ids": [
+        "turn160search7"
+      ]
+    },
+    {
+      "id": "S451",
+      "title": "Power engineering software",
+      "url": "https://en.wikipedia.org/wiki/Power_engineering_software",
+      "reference_ids": [
+        "turn160search8"
+      ]
+    },
+    {
+      "id": "S452",
+      "title": "Short Circuit Current Constrained UC in High IBG-Penetrated Power Systems",
+      "url": "https://arxiv.org/abs/2101.04918",
+      "reference_ids": [
+        "turn160academia9"
+      ]
+    },
+    {
+      "id": "S453",
+      "title": "Artificial-Intelligence-Based Design for Circuit Parameters of Power Converters",
+      "url": "https://arxiv.org/abs/2308.05751",
+      "reference_ids": [
+        "turn160academia10"
+      ]
+    },
+    {
+      "id": "S454",
+      "title": "An Adaptive Overcurrent Protection for Solar-based DC Microgrids Using IEC 61850",
+      "url": "https://arxiv.org/abs/2307.01940",
+      "reference_ids": [
+        "turn160academia11"
+      ]
+    },
+    {
+      "id": "S455",
+      "title": "Design-Oriented Transient Stability Analysis of Grid-Connected Converters with Power Synchronization Control",
+      "url": "https://arxiv.org/abs/1804.09394",
+      "reference_ids": [
+        "turn160academia12"
+      ]
+    },
+    {
+      "id": "S456",
+      "title": "品茗HiBIM机电版-品茗BIM官方服务平台（BIMVIP）",
+      "url": "https://www.pmddw.com/app/product/jidian.html",
+      "reference_ids": [
+        "turn138search0"
+      ]
+    },
+    {
+      "id": "S457",
+      "title": "PARS-BIM : MEP TOOLS",
+      "url": "https://marketplace.autodesk.com/apps/624f9391-0ee2-451a-9bc1-742c58aa9768",
+      "reference_ids": [
+        "turn138search1"
+      ]
+    },
+    {
+      "id": "S458",
+      "title": "品茗HiBIM软件-品茗BIM官方服务平台（BIMVIP）",
+      "url": "https://www.pmddw.com/product/bim/hibim.html",
+      "reference_ids": [
+        "turn138search2"
+      ]
+    },
+    {
+      "id": "S459",
+      "title": "Automatic Clash Solver for MEP and MEP Up and Down | Revit | Autodesk App Store",
+      "url": "https://apps.autodesk.com/RVT/en/Detail/HelpDoc?appId=6653526646244853582&appLang=en&os=Win64",
+      "reference_ids": [
+        "turn138search3"
+      ]
+    },
+    {
+      "id": "S460",
+      "title": "Best MEP Drawing Review Tools (2026) | Helonic",
+      "url": "https://helonic.com/compare/best-mep-drawing-review-tools",
+      "reference_ids": [
+        "turn138search4"
+      ]
+    },
+    {
+      "id": "S461",
+      "title": "How to perform MEP Coordination and Clash Detection in Revit? - Revit Forum",
+      "url": "https://www.revitforum.org/forum/revit-mechanical-electrical-plumbing-forum-mep/mep-family-creation/458768-how-to-perform-mep-coordination-and-clash-detection-in-revit?p=462128",
+      "reference_ids": [
+        "turn138search5"
+      ]
+    },
+    {
+      "id": "S462",
+      "title": "GitHub - MahmoudAllamAEC/ClashAutoFix: Revit 2024/2026 add-in that detects MEP-vs-structure clashes and automatically · GitHub",
+      "url": "https://github.com/MahmoudAllamAEC/ClashAutoFix",
+      "reference_ids": [
+        "turn138search6"
+      ]
+    },
+    {
+      "id": "S463",
+      "title": "Bimrock AI | Revit MEP自动化工具 - 标注效率提升90%",
+      "url": "https://www.deepnavi.cn/ai-design/automate-mep-design-in-revit",
+      "reference_ids": [
+        "turn138search7"
+      ]
+    },
+    {
+      "id": "S464",
+      "title": "Best MEP BIM Software 2026: What Architects Need to Know About M&E Coordination",
+      "url": "https://www.snaptrude.com/blog/best-mep-bim-software-2026",
+      "reference_ids": [
+        "turn138search8"
+      ]
+    },
+    {
+      "id": "S465",
+      "title": "Working in tight spaces with duct and pipe in Revit | Autodesk",
+      "url": "https://www.autodesk.com/learn/ondemand/module/working-in-tight-spaces-with-duct-and-pipe-in-revit",
+      "reference_ids": [
+        "turn138search9"
+      ]
+    },
+    {
+      "id": "S466",
+      "title": "Thermist | Home",
+      "url": "https://www.thermist.com/",
+      "reference_ids": [
+        "turn138search10"
+      ]
+    },
+    {
+      "id": "S467",
+      "title": "Tools 索引（192 個）· BIM_MCP",
+      "url": "https://shuotao.github.io/REVIT_MCP_study/docs/BIM_MCP/reference/tools-index.html",
+      "reference_ids": [
+        "turn138search11"
+      ]
+    },
+    {
+      "id": "S468",
+      "title": "蘇美茹_2017_Paper",
+      "url": "https://tdr.lib.ntu.edu.tw/bitstream/123456789/2421/1/ntu-106-1.pdf",
+      "reference_ids": [
+        "turn138search12"
+      ]
+    },
+    {
+      "id": "S469",
+      "title": "2015-7报",
+      "url": "https://hxss.com.cn/en/upload/2022/03/21/16478511231649hht3l.pdf",
+      "reference_ids": [
+        "turn138search13"
+      ]
+    },
+    {
+      "id": "S470",
+      "title": "投影片 1",
+      "url": "https://www.moea.gov.tw/Mns/CNC/content/wHandMenuFile.ashx?file_id=35575",
+      "reference_ids": [
+        "turn138search14"
+      ]
+    },
+    {
+      "id": "S471",
+      "title": "本章将重点介绍Revit  MEP 软件的应用优",
+      "url": "https://5615225.s21i.faimallusr.com/61/ABUIABA9GAAgurrR7AUotq-zugU.pdf",
+      "reference_ids": [
+        "turn138search15"
+      ]
+    },
+    {
+      "id": "S472",
+      "title": "Autodesk Revit",
+      "url": "https://zh.wikipedia.org/wiki/Autodesk_Revit",
+      "reference_ids": [
+        "turn138search16",
+        "turn159search7"
+      ]
+    },
+    {
+      "id": "S473",
+      "title": "Navisworks",
+      "url": "https://zh.wikipedia.org/wiki/Navisworks",
+      "reference_ids": [
+        "turn138search17",
+        "turn159search8"
+      ]
+    },
+    {
+      "id": "S474",
+      "title": "Graphisoft MEP Modeler",
+      "url": "https://en.wikipedia.org/wiki/Graphisoft_MEP_Modeler",
+      "reference_ids": [
+        "turn138search18"
+      ]
+    },
+    {
+      "id": "S475",
+      "title": "Graphisoft MEP Modeler",
+      "url": "https://ru.wikipedia.org/wiki/Graphisoft_MEP_Modeler",
+      "reference_ids": [
+        "turn138search19"
+      ]
+    },
+    {
+      "id": "S476",
+      "title": "Autodesk Revit",
+      "url": "https://en.wikipedia.org/wiki/Autodesk_Revit",
+      "reference_ids": [
+        "turn138search20"
+      ]
+    },
+    {
+      "id": "S477",
+      "title": "Revizto",
+      "url": "https://en.wikipedia.org/wiki/Revizto",
+      "reference_ids": [
+        "turn138search21"
+      ]
+    },
+    {
+      "id": "S478",
+      "title": "與「機電(助理)工程師」相似的工作",
+      "url": "https://www.104.com.tw/job/similar/82oz7?page=1",
+      "reference_ids": [
+        "turn159search0"
+      ]
+    },
+    {
+      "id": "S479",
+      "title": "與「BIM工程師」相似的工作",
+      "url": "https://www.104.com.tw/job/similar/90ph4?jobsource=job_same_b",
+      "reference_ids": [
+        "turn159search1"
+      ]
+    },
+    {
+      "id": "S480",
+      "title": "Rebro（莱铺络）你没用过？那你就out了！",
+      "url": "https://kknews.cc/zh-cn/news/ejg49qn.html",
+      "reference_ids": [
+        "turn159search2"
+      ]
+    },
+    {
+      "id": "S481",
+      "title": "「機電工程｜專案經理」職缺- 2026年10月熱門工作機會",
+      "url": "https://www.1111.com.tw/search/job?ks=%E6%A9%9F%E9%9B%BB%E5%B7%A5%E7%A8%8B%2C%E5%B0%88%E6%A1%88%E7%B6%93%E7%90%86%2F&page=3",
+      "reference_ids": [
+        "turn159search3"
+      ]
+    },
+    {
+      "id": "S482",
+      "title": "與「【機電】(總公司)施工繪圖工程師-K」相似的工作",
+      "url": "https://www.104.com.tw/job/similar/8zgbu?page=1",
+      "reference_ids": [
+        "turn159search4"
+      ]
+    },
+    {
+      "id": "S483",
+      "title": "工程设计中常用的3D设计软件全介绍，化工设计到底用什么 ...",
+      "url": "https://www.sohu.com/a/256457425_479771",
+      "reference_ids": [
+        "turn159search5"
+      ]
+    },
+    {
+      "id": "S484",
+      "title": "澳門最高瀏覽量的綜合招聘網站No.1 Macau Recruitment ...",
+      "url": "https://jobscallme.squarespace.com/job?category=%5B77AGG.+COM%5Dsusun+4d+slot+login+luck365+slot+login+mpo800+slot+microgaming+slot+ro9",
+      "reference_ids": [
+        "turn159search6"
+      ]
+    },
+    {
+      "id": "S485",
+      "title": "A-Scan2BIM: Assistive Scan to Building Information Modeling",
+      "url": "https://arxiv.org/abs/2311.18166",
+      "reference_ids": [
+        "turn159academia13"
+      ]
+    },
+    {
+      "id": "S486",
+      "title": "DesignTracking: Track and Replay BIM-based Design Process",
+      "url": "https://arxiv.org/abs/2305.10205",
+      "reference_ids": [
+        "turn159academia14"
+      ]
+    },
+    {
+      "id": "S487",
+      "title": "Generative AIBIM: An automatic and intelligent structural design pipeline integrating BIM and generative AI",
+      "url": "https://arxiv.org/abs/2311.04052",
+      "reference_ids": [
+        "turn159academia15"
+      ]
+    },
+    {
+      "id": "S488",
+      "title": "Towards commands recommender system in BIM authoring tool using transformers",
+      "url": "https://arxiv.org/abs/2406.10237",
+      "reference_ids": [
+        "turn159academia16"
+      ]
+    },
+    {
+      "id": "S489",
+      "title": "The MEP",
+      "url": "https://www.rcpharm.org/benefits/the-mep/",
+      "reference_ids": [
+        "turn163search0"
+      ]
+    },
+    {
+      "id": "S490",
+      "title": "MEP Network on Youth Rights",
+      "url": "https://www.youthforum.org/topics/mep-network-on-youth-rights",
+      "reference_ids": [
+        "turn163search1"
+      ]
+    },
+    {
+      "id": "S491",
+      "title": "多元兌換平台(MEP)",
+      "url": "https://mepweb.easycard.com.tw/mep/login",
+      "reference_ids": [
+        "turn163search2"
+      ]
+    },
+    {
+      "id": "S492",
+      "title": "MEP Water Group",
+      "url": "https://mepwatergroup.eu/",
+      "reference_ids": [
+        "turn163search3"
+      ]
+    },
+    {
+      "id": "S493",
+      "title": "Multidisciplinary Expert Panel",
+      "url": "https://www.ipbes.net/mep",
+      "reference_ids": [
+        "turn163search4"
+      ]
+    },
+    {
+      "id": "S494",
+      "title": "MEP preference tables missing",
+      "url": "https://community.graphisoft.com/t5/Modeling/MEP-preference-tables-missing/td-p/673246",
+      "reference_ids": [
+        "turn163search5"
+      ]
+    },
+    {
+      "id": "S495",
+      "title": "What is MEP engineering? | Sam Miller, PE posted on the ...",
+      "url": "https://www.linkedin.com/posts/sam-miller-pe_what-is-mep-engineering-activity-7307747656280211456-6Lpl",
+      "reference_ids": [
+        "turn163search6"
+      ]
+    },
+    {
+      "id": "S496",
+      "title": "Women in Europe deserve to feel safe! MEP Beatrice Timgren",
+      "url": "https://www.facebook.com/ECRgroupEU/videos/-women-in-europe-deserve-to-feel-safe%EF%B8%8F-mep-beatrice-timgren-mep-stresses-the-sta/4494309210792677/",
+      "reference_ids": [
+        "turn163search7"
+      ]
+    },
+    {
+      "id": "S497",
+      "title": "How do you think AI will impact the MEP industry in ...",
+      "url": "https://www.reddit.com/r/MEPEngineering/comments/1lp236d/how_do_you_think_ai_will_impact_the_mep_industry/",
+      "reference_ids": [
+        "turn163search8"
+      ]
+    },
+    {
+      "id": "S498",
+      "title": "MEP Group for Kidney Health",
+      "url": "https://ekha.eu/mep-group/",
+      "reference_ids": [
+        "turn163search9"
+      ]
+    },
+    {
+      "id": "S499",
+      "title": "法規內容-遺傳工程環境用藥微生物製劑開發試驗研究管理辦法",
+      "url": "https://oaout.moenv.gov.tw/law/LawContent.aspx?id=FL015835",
+      "reference_ids": [
+        "turn162search0"
+      ]
+    },
+    {
+      "id": "S500",
+      "title": "行政院公共工程委員會90年7月18日（90）工程企字第90027292號令",
+      "url": "https://www.moi.gov.tw/News_Content.aspx?n=20280&s=338208",
+      "reference_ids": [
+        "turn162search1"
+      ]
+    },
+    {
+      "id": "S501",
+      "title": "工程- 維基百科，自由的百科全書",
+      "url": "https://zh.wikipedia.org/zh-tw/%E5%B7%A5%E7%A8%8B",
+      "reference_ids": [
+        "turn162search2"
+      ]
+    },
+    {
+      "id": "S502",
+      "title": "臺北市政府公共工程督導會報",
+      "url": "https://pwd.gov.taipei/News.aspx?n=8BA22E976FE60EBD&sms=6897BA40F885FBE2",
+      "reference_ids": [
+        "turn162search3"
+      ]
+    },
+    {
+      "id": "S503",
+      "title": "法規內容-臺中市政府公共工程獎評選及獎勵作業要點",
+      "url": "https://law.taichung.gov.tw/LawContent.aspx?id=GL003987",
+      "reference_ids": [
+        "turn162search4"
+      ]
+    },
+    {
+      "id": "S504",
+      "title": "中華民國行政院公共工程委員會全球資訊網",
+      "url": "https://www.pcc.gov.tw/",
+      "reference_ids": [
+        "turn162search5"
+      ]
+    },
+    {
+      "id": "S505",
+      "title": "「工程師治國」：中國為何熱衷於「超級工程」？－ BBC News 中文",
+      "url": "https://www.youtube.com/watch?v=RgmQd87TQjY",
+      "reference_ids": [
+        "turn162search6"
+      ]
+    },
+    {
+      "id": "S506",
+      "title": "農業部農村發展及水土保持署工程品質抽驗補充規定",
+      "url": "https://www.ardswc.gov.tw/Home/laws/laws_more?id=b083a3de9c32435fabefe04249683888",
+      "reference_ids": [
+        "turn162search7"
+      ]
+    },
+    {
+      "id": "S507",
+      "title": "臺北市政府所屬機關辦理公共工程營建剩餘資源處理抽查作業要點",
+      "url": "https://laws.gov.taipei/Law/LawSearch/LawFileList/FL055845",
+      "reference_ids": [
+        "turn162search8"
+      ]
+    },
+    {
+      "id": "S508",
+      "title": "水土保持工程設計參考圖冊- 農業部農村發展及水土保持署全球資訊網",
+      "url": "https://www.ardswc.gov.tw/home/Download/download_more?id=8ff5a0bf9fb9456e8b883c0b9f220a5d",
+      "reference_ids": [
+        "turn162search9"
+      ]
+    },
+    {
+      "id": "S509",
+      "title": "eXe",
+      "url": "https://exelearning.org/",
+      "reference_ids": [
+        "turn165search0"
+      ]
+    },
+    {
+      "id": "S510",
+      "title": "TWINSCAN EXE:5000 - EUV lithography systems",
+      "url": "https://www.asml.com/en/products/euv-lithography-systems/twinscan-exe-5000",
+      "reference_ids": [
+        "turn165search1"
+      ]
+    },
+    {
+      "id": "S511",
+      "title": "exe.dev - ssh exe.dev",
+      "url": "https://exe.dev/",
+      "reference_ids": [
+        "turn165search2"
+      ]
+    },
+    {
+      "id": "S512",
+      "title": "David Crawshaw - Building an agent-first cloud, exe.dev",
+      "url": "https://www.linkedin.com/in/crawshaw",
+      "reference_ids": [
+        "turn165search3"
+      ]
+    },
+    {
+      "id": "S513",
+      "title": "Windows cannot find ... AcroTray.exe",
+      "url": "https://community.adobe.com/questions-9/windows-cannot-find-acrotray-exe-1302125",
+      "reference_ids": [
+        "turn165search4"
+      ]
+    },
+    {
+      "id": "S514",
+      "title": "Reserve Hotel Exe Lev in Ljubljana",
+      "url": "https://www.eurostarshotels.co.uk/exe-lev.html",
+      "reference_ids": [
+        "turn165search5"
+      ]
+    },
+    {
+      "id": "S515",
+      "title": "DevHub.exe using 13GB of memory and utilizing several ...",
+      "url": "https://developercommunity.visualstudio.com/t/DevHubexe-using-13GB-of-memory-and-util/11041281",
+      "reference_ids": [
+        "turn165search6"
+      ]
+    },
+    {
+      "id": "S516",
+      "title": "JAFFAR THE NIGHTMARE (@jaffar.exe)",
+      "url": "https://www.instagram.com/jaffar.exe/?hl=en",
+      "reference_ids": [
+        "turn165search7"
+      ]
+    },
+    {
+      "id": "S517",
+      "title": "Access violation at address 0000000008D996CC in module ...",
+      "url": "https://forums.toadworld.com/t/access-violation-at-address-0000000008d996cc-in-module-toad-exe-read-of-address-0000000000000048/47182",
+      "reference_ids": [
+        "turn165search8"
+      ]
+    }
+  ]
+}
