@@ -1,4 +1,4 @@
-廠務簡易工具 V5.5.4｜通用版｜2026-10-05
+廠務簡易工具 V5.5.4｜通用版｜Windows 離線修訂 win.1｜2026-10-07
 
 本版更新
 • 右側數字鍵盤小數點統一輸入「.」，支援選取文字取代；一般Delete及左側小數點保留正常行為。
@@ -9,13 +9,16 @@
 首頁四項工具及完整工程工作台保留。新版驗證詳Changes_and_Verification.html與evidence。
 
 安裝與開啟
-1. 解壓縮 Facility_Studio_V5_5_4_OneClick.zip。
-2. 雙擊 Facility_Studio_V5_5_4_Setup.exe。
-3. 首次安裝保持連網，等候建立程式及桌面FY圖示捷徑。
-4. 從「Facility Studio V5.5」開啟，畫面應顯示V5.5.4。日常計算可離線使用。
+1. 完整解壓縮 Facility_Studio_V5_5_4_Windows_Offline_OneClick.zip。
+2. 雙擊 Facility_Studio_V5_5_4_Windows_Offline.exe。
+3. 已內含Python、Tk與繪圖套件；不需另裝Python，不需連網，無須管理員。
+4. 也可單獨下載EXE直接使用；初次開啟請等候內建套件展開。
 
-Setup.exe是Windows線上安裝器，會下載官方Python 3.13.15 x64與套件，在您的Windows建立應用EXE。目標Windows 10/11 Intel/AMD x64。本次完成Linux數值、真實Tk視窗及Windows PE安裝器檢查；尚未完成Windows實機安裝驗收。
-原有Projects／Examples保留。安裝記錄：%LOCALAPPDATA%\Facility_Studio_V5_5\Setup.log；Python安裝記錄：bootstrap\Python_Setup.log。
+新版是事先完成的離線應用程式；不再於使用者電腦下載環境或編譯。
+目標Windows10/11 Intel/AMD x64；發行須通過Windows Server 2022/2025原生雲端離線驗收。
+本版尚無商用程式碼簽章，請由官方GitHub Release下載並保留防毒保護。
+原有專案及復原資料保留；啟動記錄：%LOCALAPPDATA%\Facility_Studio_V5_5\Logs\Windows_Runtime.log。
+舊版Setup.exe線上安裝器仍保留供歷史重現，非新版使用步驟。
 
 先選工具，不必先建立廠房
 首頁只有電力、風管、CDA／特氣、照明，各自獨立計算，預設值摘要保持可見。

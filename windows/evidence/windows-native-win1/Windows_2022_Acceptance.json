@@ -1,0 +1,756 @@
+{
+  "source_commit": "099439601bc8ea92f055f37da34f07ef531ba768",
+  "workflow_url": "https://github.com/azx4121/facility-studio/actions/runs/37561048244",
+  "build_manifest": {
+    "revision": "5.5.4-win.1",
+    "source_commit": "099439601bc8ea92f055f37da34f07ef531ba768",
+    "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-2022Server-10.0.20348-SP0",
+    "packages": {
+      "altgraph": "0.17.5",
+      "contourpy": "1.4.0",
+      "cycler": "0.12.1",
+      "fonttools": "4.66.1",
+      "kiwisolver": "1.5.1",
+      "matplotlib": "3.10.9",
+      "numpy": "2.3.3",
+      "packaging": "26.3",
+      "pefile": "2024.8.26",
+      "pillow": "12.3.0",
+      "pip": "26.2.1",
+      "pyinstaller": "6.22.3",
+      "pyinstaller-hooks-contrib": "2026.8",
+      "pyparsing": "3.3.3",
+      "python-dateutil": "2.9.0.post0",
+      "pywin32-ctypes": "0.2.3",
+      "setuptools": "84.0.0",
+      "six": "1.17.0"
+    },
+    "exe_sha256": "ecfd8bd233e59d7249dc21387db8c3d1d602c2b52b4b5cc3f0eecdc75d81f6c7",
+    "exe_bytes": 40204138,
+    "build_only_internet": true,
+    "runtime_requires_python_installation": false
+  },
+  "executions": {
+    "standalone": {
+      "acceptance": {
+        "version": "5.5.4",
+        "revision": "win.1",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "architecture": "AMD64",
+        "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy": "2.3.3",
+        "matplotlib": "3.10.9",
+        "frozen": true,
+        "offline_network_audit": true,
+        "timestamp": "2026-10-07T02:16:31.657065+00:00",
+        "checks": [
+          {
+            "name": "Frozen standalone Windows x64 executable",
+            "passed": true
+          },
+          {
+            "name": "Bundled CPython 3.13 runtime",
+            "passed": true
+          },
+          {
+            "name": "Application loaded from bundle",
+            "passed": true
+          },
+          {
+            "name": "No external Python environment",
+            "passed": true
+          },
+          {
+            "name": "NumPy native extension",
+            "passed": true
+          },
+          {
+            "name": "Pillow native extension",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: LICENSE",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: LICENSE_GUIDE.md",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: LICENSE_LEGACY_MIT",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: THIRD_PARTY_NOTICES.md",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: THIRD_PARTY_LICENSES.txt",
+            "passed": true
+          },
+          {
+            "name": "Full engineering defaults",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: electrical",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: duct",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: gas",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: lighting",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: water",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: air",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: units",
+            "passed": true
+          },
+          {
+            "name": "Windows keypad decimal recognized",
+            "passed": true
+          },
+          {
+            "name": "Normal Delete remains Delete",
+            "passed": true
+          },
+          {
+            "name": "Unicode path Excel export",
+            "passed": true
+          },
+          {
+            "name": "Seven Excel worksheets load",
+            "passed": true
+          },
+          {
+            "name": "Disabled template never fabricates demand",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: 電力",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: PCW",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: CDA",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: N2",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: EXHAUST",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: DI",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: PV",
+            "passed": true
+          },
+          {
+            "name": "Native Windows Tk window system",
+            "passed": true
+          },
+          {
+            "name": "Application icon resources",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: electrical",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: duct",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: gas",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: lighting",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: water",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: air",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: units",
+            "passed": true
+          },
+          {
+            "name": "Equipment import window",
+            "passed": true
+          },
+          {
+            "name": "Full engineering workbench calculates",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 0",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 1",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 2",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 3",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 4",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 5",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 6",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 7",
+            "passed": true
+          },
+          {
+            "name": "Native GUI heartbeat",
+            "passed": true
+          },
+          {
+            "name": "Native Matplotlib TkAgg drawing",
+            "passed": true
+          },
+          {
+            "name": "No GUI callback exceptions",
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      "delivery": {
+        "label": "standalone",
+        "gui_checks": 53,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "ecfd8bd233e59d7249dc21387db8c3d1d602c2b52b4b5cc3f0eecdc75d81f6c7",
+        "passed": true
+      }
+    },
+    "zip-extracted": {
+      "acceptance": {
+        "version": "5.5.4",
+        "revision": "win.1",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "architecture": "AMD64",
+        "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy": "2.3.3",
+        "matplotlib": "3.10.9",
+        "frozen": true,
+        "offline_network_audit": true,
+        "timestamp": "2026-10-07T02:17:03.182270+00:00",
+        "checks": [
+          {
+            "name": "Frozen standalone Windows x64 executable",
+            "passed": true
+          },
+          {
+            "name": "Bundled CPython 3.13 runtime",
+            "passed": true
+          },
+          {
+            "name": "Application loaded from bundle",
+            "passed": true
+          },
+          {
+            "name": "No external Python environment",
+            "passed": true
+          },
+          {
+            "name": "NumPy native extension",
+            "passed": true
+          },
+          {
+            "name": "Pillow native extension",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: LICENSE",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: LICENSE_GUIDE.md",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: LICENSE_LEGACY_MIT",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: THIRD_PARTY_NOTICES.md",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: THIRD_PARTY_LICENSES.txt",
+            "passed": true
+          },
+          {
+            "name": "Full engineering defaults",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: electrical",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: duct",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: gas",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: lighting",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: water",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: air",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: units",
+            "passed": true
+          },
+          {
+            "name": "Windows keypad decimal recognized",
+            "passed": true
+          },
+          {
+            "name": "Normal Delete remains Delete",
+            "passed": true
+          },
+          {
+            "name": "Unicode path Excel export",
+            "passed": true
+          },
+          {
+            "name": "Seven Excel worksheets load",
+            "passed": true
+          },
+          {
+            "name": "Disabled template never fabricates demand",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: 電力",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: PCW",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: CDA",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: N2",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: EXHAUST",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: DI",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: PV",
+            "passed": true
+          },
+          {
+            "name": "Native Windows Tk window system",
+            "passed": true
+          },
+          {
+            "name": "Application icon resources",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: electrical",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: duct",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: gas",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: lighting",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: water",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: air",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: units",
+            "passed": true
+          },
+          {
+            "name": "Equipment import window",
+            "passed": true
+          },
+          {
+            "name": "Full engineering workbench calculates",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 0",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 1",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 2",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 3",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 4",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 5",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 6",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 7",
+            "passed": true
+          },
+          {
+            "name": "Native GUI heartbeat",
+            "passed": true
+          },
+          {
+            "name": "Native Matplotlib TkAgg drawing",
+            "passed": true
+          },
+          {
+            "name": "No GUI callback exceptions",
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      "delivery": {
+        "label": "zip-extracted",
+        "gui_checks": 53,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "ecfd8bd233e59d7249dc21387db8c3d1d602c2b52b4b5cc3f0eecdc75d81f6c7",
+        "passed": true
+      }
+    },
+    "unicode-executable-path": {
+      "acceptance": {
+        "version": "5.5.4",
+        "revision": "win.1",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "architecture": "AMD64",
+        "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy": "2.3.3",
+        "matplotlib": "3.10.9",
+        "frozen": true,
+        "offline_network_audit": true,
+        "timestamp": "2026-10-07T02:17:33.911788+00:00",
+        "checks": [
+          {
+            "name": "Frozen standalone Windows x64 executable",
+            "passed": true
+          },
+          {
+            "name": "Bundled CPython 3.13 runtime",
+            "passed": true
+          },
+          {
+            "name": "Application loaded from bundle",
+            "passed": true
+          },
+          {
+            "name": "No external Python environment",
+            "passed": true
+          },
+          {
+            "name": "NumPy native extension",
+            "passed": true
+          },
+          {
+            "name": "Pillow native extension",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: LICENSE",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: LICENSE_GUIDE.md",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: LICENSE_LEGACY_MIT",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: THIRD_PARTY_NOTICES.md",
+            "passed": true
+          },
+          {
+            "name": "Bundled notice: THIRD_PARTY_LICENSES.txt",
+            "passed": true
+          },
+          {
+            "name": "Full engineering defaults",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: electrical",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: duct",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: gas",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: lighting",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: water",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: air",
+            "passed": true
+          },
+          {
+            "name": "Independent calculation: units",
+            "passed": true
+          },
+          {
+            "name": "Windows keypad decimal recognized",
+            "passed": true
+          },
+          {
+            "name": "Normal Delete remains Delete",
+            "passed": true
+          },
+          {
+            "name": "Unicode path Excel export",
+            "passed": true
+          },
+          {
+            "name": "Seven Excel worksheets load",
+            "passed": true
+          },
+          {
+            "name": "Disabled template never fabricates demand",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: 電力",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: PCW",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: CDA",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: N2",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: EXHAUST",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: DI",
+            "passed": true
+          },
+          {
+            "name": "Active equipment analysis: PV",
+            "passed": true
+          },
+          {
+            "name": "Native Windows Tk window system",
+            "passed": true
+          },
+          {
+            "name": "Application icon resources",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: electrical",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: duct",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: gas",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: lighting",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: water",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: air",
+            "passed": true
+          },
+          {
+            "name": "Live GUI: units",
+            "passed": true
+          },
+          {
+            "name": "Equipment import window",
+            "passed": true
+          },
+          {
+            "name": "Full engineering workbench calculates",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 0",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 1",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 2",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 3",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 4",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 5",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 6",
+            "passed": true
+          },
+          {
+            "name": "Workbench page: 7",
+            "passed": true
+          },
+          {
+            "name": "Native GUI heartbeat",
+            "passed": true
+          },
+          {
+            "name": "Native Matplotlib TkAgg drawing",
+            "passed": true
+          },
+          {
+            "name": "No GUI callback exceptions",
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      "delivery": {
+        "label": "unicode-executable-path",
+        "gui_checks": 53,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": false,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "ecfd8bd233e59d7249dc21387db8c3d1d602c2b52b4b5cc3f0eecdc75d81f6c7",
+        "passed": true
+      }
+    }
+  }
+}
