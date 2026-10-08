@@ -312,7 +312,7 @@ def nm_report(r):
     if r.get("link_status"):
         s = "主案連動：" + r["link_status"] + "\n" + s
     extra = [
-        "\n逐段控制與選用熱源（V5.5.5）",
+        f"\n逐段控制與選用熱源（V{VERSION}）",
         f"H1：{i['h1_source']}；H2：{i['h2_source']}；加濕：{i['humidifier']}。保留的名目電熱欄位不代表停用熱源仍在供熱。",
     ]
     for season, title in [("summer", "夏季"), ("winter", "冬季")]:

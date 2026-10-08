@@ -161,7 +161,7 @@ def main():
     (evidence / "Build_Manifest.json").write_text(
         json.dumps(
             {
-                "revision": "5.5.6-win.1",
+                "revision": "5.5.6-win.2",
                 "source_commit": os.environ.get("GITHUB_SHA"),
                 "python": sys.version,
                 "platform": platform.platform(),

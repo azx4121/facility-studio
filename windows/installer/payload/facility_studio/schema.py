@@ -4,7 +4,7 @@ from .utils import EXTRA_DEFAULTS, PD_DEFAULTS
 from .utils import PD_DEFAULTS as BASE_PD_DEFAULTS
 
 PD_DEFAULTS = dict(BASE_PD_DEFAULTS)
-VERSION = "5.5.6"
+from .version import VERSION
 SCHEMA_VERSION = 8
 PAGES = [
     "總覽與空氣線圖",

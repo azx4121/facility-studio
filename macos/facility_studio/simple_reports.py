@@ -3,6 +3,7 @@ from .i18n import localized_report
 """Short results shared by the independent forms and their exports."""
 
 from .simple_schema import TOOLS
+from .version import VERSION
 
 
 def presentation(result):
@@ -122,7 +123,7 @@ def tool_report(result, inputs):
     cards, details = presentation(result)
     from .simple_schema import active_field
 
-    lines = [f"廠務簡易工具 5.5.5｜{TOOLS[result['tool']]['title']}", "", "輸入條件"]
+    lines = [f"廠務簡易工具 {VERSION}｜{TOOLS[result['tool']]['title']}", "", "輸入條件"]
     for row in TOOLS[result["tool"]]["fields"]:
         key = row["key"]
         if active_field(result["tool"], key, inputs):

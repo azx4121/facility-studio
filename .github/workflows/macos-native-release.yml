@@ -43,8 +43,8 @@ jobs:
         with:
           name: mac556-delivery
           path: |
-            ${{ runner.temp }}/mac556-build/Facility_Studio_V5_5_6_macOS_mac1_OneClick.zip
-            ${{ runner.temp }}/mac556-build/Facility_Studio_V5_5_6_macOS_mac1.dmg
+            ${{ runner.temp }}/mac556-build/Facility_Studio_V5_5_6_macOS_mac2_OneClick.zip
+            ${{ runner.temp }}/mac556-build/Facility_Studio_V5_5_6_macOS_mac2.dmg
             ${{ runner.temp }}/mac556-build/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 14
@@ -63,9 +63,9 @@ jobs:
       - name: Execute the same delivered ZIP and DMG on Intel
         run: >-
           python3 macos/macos/verify_native_release.py
-          --package "$RUNNER_TEMP/mac556-delivery/Facility_Studio_V5_5_6_macOS_mac1_OneClick.zip"
+          --package "$RUNNER_TEMP/mac556-delivery/Facility_Studio_V5_5_6_macOS_mac2_OneClick.zip"
           --checksums "$RUNNER_TEMP/mac556-delivery/SHA256SUMS.txt"
-          --dmg "$RUNNER_TEMP/mac556-delivery/Facility_Studio_V5_5_6_macOS_mac1.dmg"
+          --dmg "$RUNNER_TEMP/mac556-delivery/Facility_Studio_V5_5_6_macOS_mac2.dmg"
           --output "$RUNNER_TEMP/mac556-intel"
       - name: Retain Intel evidence
         if: always()

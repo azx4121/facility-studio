@@ -27,6 +27,7 @@ def run(root, app, main, check, pump, output=None):
     original_hash = main.saved_hash
     original_language = i18n.language()
     original_scope = main.task_scope.get()
+    original_geometry = main.root.geometry()
     child = equipment = None
 
     def capture(window, name):
@@ -49,7 +50,9 @@ def run(root, app, main, check, pump, output=None):
             folder = prepare_tutorial(directory)
             main.apply_workspace(read_workspace(folder / "02_Practice_MAU_and_AHU.json"))
             main.root.deiconify()
-            main.root.geometry("1100x840+0+0")
+            width = min(1100, main.root.winfo_screenwidth() - 60)
+            height = min(840, main.root.winfo_screenheight() - 80)
+            main.root.geometry(f"{width}x{height}+20+20")
             main.task_scope.set("空調與熱負荷")
             main.update_visibility()
             pump()
@@ -61,6 +64,35 @@ def run(root, app, main, check, pump, output=None):
             check("V556 basic adopted references are visible", lambda: bool(main.assumption_labels[2].cget("text")) and main.snapshot()["inputs"]["light_u"] == adopted)
             main.show_page(0)
             main.recalculate()
+            from . import __version__
+            from .simple_reports import tool_report
+            from .html_report import summary_html
+            check("V556 diagnostics and model share the product version", lambda: __version__ == VERSION)
+            check("V556 quick-tool title uses the product version", lambda: VERSION in root.title())
+            check("V556 quick-tool report uses the product version", lambda: VERSION in tool_report(app.pages["electrical"].result, app.pages["electrical"].data()).splitlines()[0])
+            check("V556 printable report uses the product version", lambda: "V" + VERSION + "｜" in summary_html(main.result))
+            def toolbar_fit():
+                pump()
+                left = main.root.winfo_rootx()
+                right = left + main.root.winfo_width()
+                for toolbar in main.action_toolbars:
+                    for control in toolbar.winfo_children():
+                        if not control.winfo_ismapped() or control.winfo_rootx() < left or control.winfo_rootx() + control.winfo_width() > right:
+                            raise AssertionError("Workbench action outside client bounds: " + str(control))
+                return True
+            for lang in ("zh-Hant", "en"):
+                i18n.set_language(lang, persist=False)
+                main.root.geometry("880x560+0+0")
+                check("V556 wrapped workbench actions at minimum size: " + lang, toolbar_fit)
+                main.view_mode.set("進階模式")
+                pump()
+                credit = next(widget for widget in main.nav[0].master.winfo_children() if hasattr(widget, "cget") and widget.winfo_class() == "Label" and "DESIGNED" in str(widget.cget("text")))
+                check("V556 author remains visible in compact workbench: " + lang, lambda: credit.winfo_ismapped() == 1)
+                main.view_mode.set("基本模式")
+            i18n.set_language("zh-Hant", persist=False)
+            main.root.geometry(f"{width}x{height}+20+20")
+            main.show_page(0)
+            pump()
             capture(main.root, "V556_Workbench_Basic.png")
             last_hash = main.result["hash"]
             main.variables["oa_t"].set("invalid")
@@ -169,6 +201,7 @@ def run(root, app, main, check, pump, output=None):
             main.saved_workspace_hash = original_saved
             main.saved_hash = original_hash
             main.task_scope.set(original_scope)
+            main.root.geometry(original_geometry)
             main.show_page(0)
             i18n.set_language(original_language, persist=False)
             pump()

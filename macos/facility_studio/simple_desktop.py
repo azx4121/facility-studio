@@ -6,6 +6,7 @@ from .localized_tk import ttk, filedialog, messagebox
 
 from .errors import ValidationError
 from .tutorial_help import open_tutorial
+from .version import VERSION
 from .main_view import ScrollPage
 from .quick_tools import UNITS, UNIT_HELP
 from .air_chart import AirChart
@@ -404,7 +405,7 @@ class SimpleToolsApp:
         self.pages = {}
         self.workbench = None
         self.equipment_window = None
-        root.title("廠務簡易工具 V5.5.5")
+        root.title("廠務簡易工具 V" + VERSION)
         width = min(1120, max(780, root.winfo_screenwidth() - 60))
         height = min(830, max(560, root.winfo_screenheight() - 100))
         root.geometry(f"{width}x{height}+20+20")
@@ -417,7 +418,7 @@ class SimpleToolsApp:
         side.grid(row=0, column=0, rowspan=3, sticky="ns")
         side.pack_propagate(False)
         self.sidebar = side
-        ttk.Label(side, text="廠務簡易工具\nV5.5.5", style="Simple.Brand.TLabel").pack(
+        ttk.Label(side, text="廠務簡易工具\nV" + VERSION, style="Simple.Brand.TLabel").pack(
             anchor="w", padx=18, pady=(22, 24)
         )
         self.nav = {}

@@ -11,6 +11,7 @@ from . import quick_tools as q
 from .project_store import app_data
 from .utils import atomic_text, state_trh
 from .ui_common import app_icon
+from .version import VERSION
 
 TOOLS = {
     "單位轉換": [
@@ -139,7 +140,7 @@ class QuickToolsWindow:
     def __init__(self, parent, main_app):
         self.main_app = main_app
         self.win = tk.Toplevel(parent)
-        self.win.title("工程快算｜V5.5.5")
+        self.win.title("工程快算｜V" + VERSION)
         self.win.geometry("1020x850")
         self.win.minsize(840, 650)
         app_icon(self.win)

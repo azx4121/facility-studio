@@ -1,4 +1,4 @@
-Facility Studio V5.5.6｜Windows 離線直接執行版 win.1
+Facility Studio V5.5.6｜Windows 離線直接執行版 win.2
 
 1. 完整解壓縮 ZIP 到桌面或您自己的資料夾。
 2. 雙擊 Facility_Studio_V5_5_6_Windows_Offline.exe。

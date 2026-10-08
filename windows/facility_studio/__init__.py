@@ -1,3 +1,3 @@
 """Facility Studio: deterministic engineering models and desktop workflow."""
 
-__version__ = "5.5.5"
+from .version import VERSION as __version__

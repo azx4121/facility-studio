@@ -91,7 +91,7 @@ class MainView:
                         if credit:
                             opts["before"] = credit
                     button.pack(**opts)
-            else:
+            elif button.winfo_manager():
                 button.pack_forget()
         if not all_pages and self.current not in (0, 1, 2, 8):
             self.show_page(0)
@@ -103,7 +103,10 @@ class MainView:
                 and (key != "upw_res")
             ):
                 visible = False
-            (line.grid if visible else line.grid_remove)()
+            if visible and line.winfo_manager() != "grid":
+                line.grid()
+            elif not visible and line.winfo_manager() == "grid":
+                line.grid_remove()
         for box, keys in self.form_boxes:
             visible = any((self.form_rows[k].winfo_manager() for k in keys))
             if not visible:
@@ -178,7 +181,10 @@ class MainView:
                     )
                 ):
                     visible = False
-                (line.grid if visible else line.grid_remove)()
+                if visible and line.winfo_manager() != "grid":
+                    line.grid()
+                elif not visible and line.winfo_manager() == "grid":
+                    line.grid_remove()
             self.pd_hint.config(
                 text=(
                     "簡易初估：未提供設備壓差時，表格只列管路小計。"
@@ -607,7 +613,7 @@ class MainView:
             if not isinstance(w, tk.Label):
                 continue
             text = str(w.cget("text"))
-            hide = "FACILITY" in text or "DESIGNED" in text or bool(w.cget("image"))
+            hide = "FACILITY" in text or bool(w.cget("image"))
             if not hide:
                 continue
             if compact:

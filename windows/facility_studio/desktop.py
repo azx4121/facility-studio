@@ -17,6 +17,7 @@ from .ahu_desktop import AHUWindow
 from .data import CLEANROOM_DB
 from .engine import calculate, pv_to_torr, read_project, validate_project
 from .main_view import HAS_PLOT, MainView, ScrollPage
+from .flow_toolbar import FlowToolbar
 from .reports import report
 from .schema import (
     DEFAULTS,
@@ -412,7 +413,7 @@ class DesktopApp(SessionController, MainView):
         self.subtitle = ttk.Label(
             head, text="共同條件 → 工程檢核 → 設計摘要", style="Muted.TLabel"
         )
-        self.subtitle.grid(row=1, column=0, sticky="w", pady=(4, 0))
+        self.subtitle.grid(row=1, column=0, columnspan=2, sticky="w", pady=(4, 0))
         self.document_status = tk.StringVar()
         self.receipt_status = tk.StringVar()
         ttk.Label(
@@ -420,17 +421,17 @@ class DesktopApp(SessionController, MainView):
             textvariable=self.document_status,
             wraplength=860,
             style="Muted.TLabel",
-        ).grid(row=4, column=0, columnspan=2, sticky="w", pady=(6, 0))
+        ).grid(row=5, column=0, columnspan=2, sticky="w", pady=(6, 0))
         ttk.Label(
             head, textvariable=self.receipt_status, wraplength=860, style="Muted.TLabel"
-        ).grid(row=5, column=0, columnspan=2, sticky="w")
+        ).grid(row=6, column=0, columnspan=2, sticky="w")
         language_bar = ttk.Frame(head)
-        language_bar.grid(row=1, column=1, sticky="e", pady=(6, 0))
+        language_bar.grid(row=0, column=1, sticky="e", pady=(6, 0))
         ttk.Label(language_bar, text="Language / 語言").pack(side="left", padx=(0, 6))
         self.language_picker = LanguagePicker(language_bar)
         self.language_picker.pack(side="right")
-        bar = ttk.Frame(head)
-        bar.grid(row=0, column=1, sticky="e")
+        bar = FlowToolbar(head)
+        bar.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(6, 0))
         for txt, cmd in [
             ("新專案", self.new),
             ("開啟", self.load),
@@ -438,8 +439,8 @@ class DesktopApp(SessionController, MainView):
             ("另存新檔", self.save_workspace_as),
         ]:
             ttk.Button(bar, text=txt, command=cmd).pack(side="left", padx=3)
-        modebar = ttk.Frame(head)
-        modebar.grid(row=2, column=0, columnspan=2, sticky="w", pady=(8, 0))
+        modebar = FlowToolbar(head)
+        modebar.grid(row=3, column=0, columnspan=2, sticky="ew", pady=(4, 0))
         ttk.Combobox(
             modebar,
             textvariable=self.view_mode,
@@ -461,8 +462,8 @@ class DesktopApp(SessionController, MainView):
         ttk.Button(modebar, text="空調箱管理", command=self.open_ahu_manager).pack(
             side="left", padx=8
         )
-        utilities = ttk.Frame(head)
-        utilities.grid(row=3, column=0, columnspan=2, sticky="w", pady=(6, 0))
+        utilities = FlowToolbar(head)
+        utilities.grid(row=4, column=0, columnspan=2, sticky="ew", pady=(4, 0))
         for label, command in [
             ("快速工程工具", lambda: QuickToolsWindow(root, self)),
             ("來源／比較／復原", lambda: WorkspaceWindow(root, self)),
@@ -475,10 +476,11 @@ class DesktopApp(SessionController, MainView):
             utilities, text="新手教學", command=lambda: open_tutorial(root, "first-case")
         )
         self.tutorial_button.pack(side="left", padx=(0, 8))
-        actions = ttk.Frame(head)
-        actions.grid(row=6, column=0, columnspan=2, sticky="w", pady=(6, 0))
+        actions = FlowToolbar(head)
+        actions.grid(row=7, column=0, columnspan=2, sticky="ew", pady=(4, 0))
         for label, command in [("複製為新方案", self.duplicate_workspace), ("設備表匯入", self.open_equipment), ("需求彙整", self.open_demand_ledger), ("開啟練習新案", self.open_practice)]:
             ttk.Button(actions, text=label, command=command).pack(side="left", padx=(0, 8))
+        self.action_toolbars = (bar, modebar, utilities, actions)
         self.host = ttk.Frame(root)
         self.host.grid(row=1, column=1, sticky="nsew")
         self.host.columnconfigure(0, weight=1)

@@ -105,7 +105,7 @@ def main():
         ],
         check=True,
     )
-    app = output / "extracted/Facility_Studio_V5_5_6_macOS_mac1/Facility Studio.app"
+    app = output / "extracted/Facility_Studio_V5_5_6_macOS_mac2/Facility Studio.app"
     with (output / "Apple_Signature.txt").open("w") as file:
         subprocess.run(
             [
@@ -121,7 +121,7 @@ def main():
             check=True,
             timeout=60,
         )
-    with (output / "Native_GUI_Console.txt").open("w") as file:
+    with (output / "Native_GUI_Console.txt").open("w", encoding="utf-8") as file:
         subprocess.run(
             [str(app / "Contents/MacOS/FacilityStudio"), "--self-test"],
             stdout=file,
@@ -130,13 +130,14 @@ def main():
             timeout=180,
         )
     path = Path.home() / "Library/Logs/Facility_Studio_V5_5/Mac_Acceptance.json"
-    result = json.loads(path.read_text())
+    result = json.loads(path.read_text(encoding="utf-8"))
     assert result["passed"] and result["architecture"] == platform.machine()
     (output / "Mac_Acceptance.json").write_text(
         json.dumps(result, ensure_ascii=False, indent=2)
     )
-    for image in path.parent.glob("English_*.png"):
-        shutil.copy2(image, output / image.name)
+    for pattern in ("English_*.png", "V556_*.png", "Native_UITiming.json"):
+        for evidence in path.parent.glob(pattern):
+            shutil.copy2(evidence, output / evidence.name)
     verify_dmg(args.dmg, output)
     print(
         json.dumps(

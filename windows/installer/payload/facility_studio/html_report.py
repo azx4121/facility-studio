@@ -2,7 +2,7 @@
 
 from html import escape
 from .reports import report
-from .schema import DEFAULTS
+from .schema import DEFAULTS, VERSION
 from .i18n import localized_report, verbatim
 
 
@@ -51,7 +51,7 @@ def summary_html(result):
     return (
         '<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>設計摘要</title><style>body{font:15px/1.65 system-ui,sans-serif;color:#163047;max-width:1050px;margin:32px auto;padding:20px}h1{font-size:28px}h2{font-size:19px;border-bottom:2px solid #188b87}table{border-collapse:collapse;width:100%;margin:12px 0}td{border-bottom:1px solid #dde5eb;padding:7px;vertical-align:top}td:first-child{width:26%;font-weight:600}pre{white-space:pre-wrap;font:12px/1.7 monospace}.status{background:#edf5f7;padding:12px}small{color:#526677}@media print{body{margin:0;padding:0;font-size:11pt}.appendix{break-before:page}tr{break-inside:avoid}button{display:none}@page{size:A4;margin:17mm}}</style><button onclick="window.print()">列印／另存 PDF</button><h1>'
         + verbatim(i["project_name"], DEFAULTS["project_name"])
-        + '</h1><p class="status">V5.5.5｜'
+        + f'</h1><p class="status">V{VERSION}｜'
         + escape(r["quality"]["status"])
         + "｜需求初估，待原廠同工況及工程覆核</p><h2>設計條件</h2>"
         + table(conditions)
