@@ -1,0 +1,47 @@
+name: Simplify public Windows and macOS downloads
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/public-downloads-maintenance.yml
+      - tools/public-downloads-20261008.json
+      - tools/update_public_downloads.py
+      - tools/public_release_policy.py
+      - tools/test_public_downloads.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-downloads-maintenance
+  cancel-in-progress: false
+
+jobs:
+  update:
+    if: github.repository == 'azx4121/facility-studio' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Verify deletion scope, partial recovery and checksum publishing
+        run: python3 tools/test_public_downloads.py
+      - name: Retire only the two explicitly requested complete ZIPs
+        env:
+          FACILITY_GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          python3 tools/update_public_downloads.py --apply
+          --evidence "$RUNNER_TEMP/public-downloads-maintenance.json"
+      - name: Retain original and verified public asset metadata
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: public-downloads-maintenance-evidence
+          path: ${{ runner.temp }}/public-downloads-maintenance.json
+          if-no-files-found: warn
+          retention-days: 30
