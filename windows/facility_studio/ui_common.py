@@ -58,6 +58,9 @@ def app_icon(window):
 
     attach_window(window)
     install_numeric_keyboard(window)
+    from .native_redraw import install_native_redraw
+
+    install_native_redraw(window)
     base = Path(__file__).with_name("resources")
     try:
         window._app_icon = tk.PhotoImage(file=str(base / "app.png"))

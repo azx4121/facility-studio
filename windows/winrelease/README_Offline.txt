@@ -1,4 +1,4 @@
-Facility Studio V5.5.6｜Windows 離線直接執行版 win.2
+Facility Studio V5.5.6｜Windows 離線直接執行版 win.3
 
 1. 完整解壓縮 ZIP 到桌面或您自己的資料夾。
 2. 雙擊 Facility_Studio_V5_5_6_Windows_Offline.exe。
@@ -37,7 +37,7 @@ V5.5.6 revision 2 / 署名與新手教學修訂
 簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
 簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
 完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
-先複製改名練習 JSON，再由完整工作台「開啟」；原廠選型與設備阻力等待補資料仍需補。
+由完整工作台「開啟練習新案」建立副本；原廠選型與設備阻力等待補資料仍需補。
 Revision 2 adds persistent author credit, bundled offline walkthroughs, two practice workspaces and reference reports.
 No additional Python installation or internet is needed for the tutorial.
 
@@ -48,3 +48,5 @@ V5.5.6 使用流程
 ・設備表先分析、選群組，再「預覽帶入主案」；儲存整案保留需求來源。
 ・同台空調箱重複回傳更新原來源；不同台才加總。水路依季節及工況分組。
 ・「待重算」是上次有效結果，不能當作目前輸入結果匯出。
+
+Windows win.3：改善視窗縮放、中英切換與工具列換行後的重繪。數值與專案格式保留。

@@ -40,6 +40,10 @@ def run(root, app, main, check, pump, output=None):
         destination.mkdir(parents=True, exist_ok=True)
         window.lift()
         pump()
+        if hasattr(window, "_native_redraw"):
+            if not window._native_redraw.repaint():
+                raise AssertionError("Windows client repaint failed")
+            pump()
         try:
             ImageGrab.grab().save(destination / name)
         except (OSError, RuntimeError) as exc:

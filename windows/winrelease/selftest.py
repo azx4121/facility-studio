@@ -259,7 +259,7 @@ def run(destination):
 
     result = {
         "version": __version__,
-        "revision": "win.2",
+        "revision": "win.3",
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,
