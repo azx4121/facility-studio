@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "repository": "azx4121/facility-studio",
+  "requested_on": "2026-10-08",
+  "releases": [
+    {
+      "tag": "v5.5.6-win.3",
+      "release_id": 406283011,
+      "remove_asset": {
+        "id": 620238882,
+        "name": "Facility_Studio_V5_5_6_Windows_Offline_OneClick.zip",
+        "size": 41768158,
+        "digest": "sha256:0d80caf5e312dba3b3c0d7d49d1eb172491876372149f8d4e9dd4caebf080fbb"
+      },
+      "keep_asset": {
+        "id": 620238805,
+        "name": "Facility_Studio_V5_5_6_Windows_Offline.exe",
+        "size": 40829951,
+        "digest": "sha256:fcfa8a672095aac7cb6f2b5664c6d1124d75d678b3a1404a8d22b1fc929e0765"
+      },
+      "body_before": "win.3 修正 Windows 連續縮放與中英切換後的重繪殘影，保留既有版本與資料。\n\nV5.5.6 修正新手操作與需求範圍：基本模式依任務收合分頁，共同氣候放在圖前，另存／複製方案不覆蓋原案。設備表支援百分比格式辨識及選取群組預覽帶入；多台空調箱依來源彙整，同台更新不重算一次，水路依季節與供回水／流體分開，各迴路物性獨立。改輸入後保留已標示過期的圖表作對照，匯出及回傳停用至重新檢核。離線繁中／英文教學同步 18 個章節，前六步進度為手動閱讀記錄。\n\nV5.5.6 clarifies beginner navigation, project saving and source ownership. Equipment imports normalize explicit Excel percentages and offer scoped preview transfers. Repeated AHU IDs replace their contribution; separate included units add, with seasonal and incompatible water circuits kept distinct. Stale plots/reports remain marked for comparison while export and transfer are disabled. Bilingual offline help covers 18 chapters and six required reading steps.\n\nV5.5.6 中英雙語版：主畫面右上角選擇 English／繁體中文，欄位、提示、圖表、報告及設備範本同步切換。已填數值與舊專案保留，語言偏好會保存。\n\nBilingual interface: select English in the top-right language selector. Forms, guidance, charts, reports and exported equipment templates are translated. Stored engineering data remains unchanged.\n\nWindows 離線直接執行版 win.3；已含 Python、Tk、Matplotlib、NumPy 與 Pillow。\n\n下載 EXE 可直接開啟，或完整解壓縮 ZIP 後雙擊 EXE；不需安裝 Python、pip，也不需連網。保留 FY 圖示、七種簡易工具、設備表匯入與完整工程工作台。ZIP 另含設備範本、原始碼、授權及本機診斷腳本。\n\n同一份交付 EXE 和 ZIP 已在 Windows Server 2022／2025 x64 原生雲端環境驗證：外部 Python 從 PATH 移除、EXE 對外連線由防火牆封鎖，仍通過原生 Tk 與工程計算驗收。Windows 10／11 為支援目標，使用者實機、實體數字鍵盤、企業政策仍須個別確認。\n\n本版尚無商用程式碼簽章，可能出現 Windows 安全性提示；請核對官方來源與 SHA256，勿關閉防毒。包含目前安全與授權修正；公司內部正常工程使用許可詳 LICENSE_GUIDE.md。既有 Release、標籤、提交紀錄及歷史 MIT 權利完整保留。",
+      "replacements": [
+        [
+          "下載 EXE 可直接開啟，或完整解壓縮 ZIP 後雙擊 EXE；不需安裝 Python、pip，也不需連網。保留 FY 圖示、七種簡易工具、設備表匯入與完整工程工作台。ZIP 另含設備範本、原始碼、授權及本機診斷腳本。",
+          "下載 EXE 後直接開啟；不需安裝 Python、pip，也不需連網。保留 FY 圖示、七種簡易工具、設備表匯入、離線教學與完整工程工作台。原始碼、授權、範本與診斷腳本請至本倉庫查閱。"
+        ],
+        [
+          "同一份交付 EXE 和 ZIP 已在 Windows Server 2022／2025 x64 原生雲端環境驗證：",
+          "此 EXE 已在 Windows Server 2022／2025 x64 原生雲端環境驗證："
+        ]
+      ]
+    },
+    {
+      "tag": "v5.5.6-mac.2",
+      "release_id": 406271518,
+      "remove_asset": {
+        "id": 620205421,
+        "name": "Facility_Studio_V5_5_6_macOS_mac2_OneClick.zip",
+        "size": 95755953,
+        "digest": "sha256:fbe9a19b41bf3c450a5ba32239ca32eb8e91c2db6f168a71a47b5cb07bab4658"
+      },
+      "keep_asset": {
+        "id": 620205535,
+        "name": "Facility_Studio_V5_5_6_macOS_mac2.dmg",
+        "size": 145751807,
+        "digest": "sha256:117c38cb7700f219869b889fd1af015b291d6ec29c65f854b3cc0ab471e2fd59"
+      },
+      "body_before": "V5.5.6 修正新手操作與需求範圍：基本模式依任務收合分頁，共同氣候放在圖前，另存／複製方案不覆蓋原案。設備表支援百分比格式辨識及選取群組預覽帶入；多台空調箱依來源彙整，同台更新不重算一次，水路依季節與供回水／流體分開，各迴路物性獨立。改輸入後保留已標示過期的圖表作對照，匯出及回傳停用至重新檢核。離線繁中／英文教學同步 18 個章節，前六步進度為手動閱讀記錄。\n\nV5.5.6 clarifies beginner navigation, project saving and source ownership. Equipment imports normalize explicit Excel percentages and offer scoped preview transfers. Repeated AHU IDs replace their contribution; separate included units add, with seasonal and incompatible water circuits kept distinct. Stale plots/reports remain marked for comparison while export and transfer are disabled. Bilingual offline help covers 18 chapters and six required reading steps.\n\nV5.5.6 中英雙語版 mac.2，保留全部工程功能、macOS 啟動修復與 FY 圖示。\n\n主畫面右上角選擇 English／繁體中文，欄位、提示、圖表、報告及設備範本同步切換；已填數字與舊專案保留。語言偏好會保存。\n\nBilingual interface: select English in the top-right language selector. Forms, guidance, charts, reports and exported equipment templates are translated. Stored engineering data remains unchanged.\n\n修正 Tcl/Tk 資源封印不符合 Apple 原生檢查，以及第一次字型快取建立時的無時限外部查詢。使用 Apple codesign 重新封裝；同一份 Universal App 與 ZIP 已在 Apple Silicon、Intel macOS 15 原生環境驗證。\n\n建議下載 DMG，打開後把 Facility Studio 拖到 Applications。ZIP 則包含完整原始碼、設備範本與驗證記錄。不需另裝 Python。首次若提示開發者無法驗證，請依 Apple 官方「隱私權與安全性 → 仍要打開」流程。\n\n本版仍是 ad-hoc 簽章，沒有 Developer ID／Apple 公證；使用者 macOS 27 Beta 與企業管理政策仍須另行確認。新修訂採公司內部工程使用附加許可；完整條款隨包提供。原 MIT 版本權利、v5.5.4-beta.1 與 Windows 舊包保持原樣。",
+      "replacements": [
+        [
+          "建議下載 DMG，打開後把 Facility Studio 拖到 Applications。ZIP 則包含完整原始碼、設備範本與驗證記錄。",
+          "下載 DMG，打開後把 Facility Studio 拖到 Applications。原始碼、設備範本與驗證記錄請至本倉庫查閱。"
+        ]
+      ]
+    }
+  ]
+}

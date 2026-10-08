@@ -8,6 +8,7 @@
 | --- | --- |
 | 完整工作台初學：一步步做出第一份報告 | [中文跟做教學](guides/workbench.md)／[English walkthrough](guides/workbench.en.md)／[離線教學包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip) |
 | 下載、安裝與首次開啟 | [中文首頁](../README.md#安裝與開啟)／[English installation](../README.en.md#installation-and-first-launch) |
+| Windows 警告、Mac 開發者驗證與正式認證 | [安全提示及簽章說明](signing.md)／[English signing guide](signing.en.md) |
 | 找計算入口、設計條件、公式及結果 | [20 個操作情境](guides/README.md)／[English worked examples](guides/README.en.md) |
 | 電力、風管、氣體、照明、水、空氣線圖、換算、設備表與空調箱 | [工具指南](guides/README.md)；每篇可切換中英文 |
 | 確認翻譯範圍與下載檔實際驗證 | [V5.5.6 操作修訂及原生驗收](2026-10-07-v5.5.6-usability.md) |

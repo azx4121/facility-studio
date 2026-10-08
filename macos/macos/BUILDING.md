@@ -6,6 +6,8 @@ not be treated as native release acceptance. Historical assets are retained. V5.
 
 ## Shipping build
 
+The public publisher now offers only the tested DMG and its public SHA256SUMS. The developer ZIP below is retained in build artifacts for cross-architecture acceptance; the two currently recommended releases do not offer their complete ZIPs. Internal checksum files remain intact for verification. See [download changes](../../docs/2026-10-08-downloads.md) and [Developer ID/notarization requirements](../../docs/signing.en.md).
+
 On a native Mac, from the repository root:
 
 ```sh

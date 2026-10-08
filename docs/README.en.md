@@ -7,6 +7,7 @@ Current public test release: **V5.5.6 bilingual**, Windows `v5.5.6-win.3` and ma
 | Task | Documentation |
 | --- | --- |
 | Download, install and first launch | [English installation](../README.en.md#installation-and-first-launch) |
+| Windows security prompts and Mac developer verification | [Distribution signing](signing.en.md) / [繁體中文](signing.md) |
 | Find inputs, defaults, formulas and worked results | [20 worked scenarios](guides/README.en.md) |
 | Electrical, duct, gas, lighting, water, psychrometric and unit tools; equipment schedules and AHUs | [Tool guides](guides/README.en.md), with links to Chinese counterparts |
 | Check translation and tested delivery files | [V5.5.6 usability and native-delivery verification](2026-10-07-v5.5.6-usability.md) |

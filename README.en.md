@@ -11,9 +11,9 @@ Facility Studio by **azx4121 / Andy Huang** is a Traditional Chinese / English d
 | Platform | Download | Start |
 | --- | --- | --- |
 | Windows standalone | [Offline EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-win.3/Facility_Studio_V5_5_6_Windows_Offline.exe) | Double-click; target: Windows 10/11 on Intel/AMD x64 |
-| Windows complete package | [Offline ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-win.3/Facility_Studio_V5_5_6_Windows_Offline_OneClick.zip) | Extract completely, then run the EXE; includes source, templates and diagnostics |
 | macOS | [mac.2 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-mac.2/Facility_Studio_V5_5_6_macOS_mac2.dmg) | Drag Facility Studio into Applications; Apple Silicon and Intel |
-| macOS complete package | [mac.2 ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-mac.2/Facility_Studio_V5_5_6_macOS_mac2_OneClick.zip) | Includes application, source, equipment templates and diagnostics |
+
+Download just one file for your platform. Source, templates and diagnostic scripts remain in this repository for developers. The current EXE is unsigned, and the Mac app has ad-hoc integrity signing without Developer ID or Apple notarization. See [security prompts and distribution signing](docs/signing.en.md) before first launch.
 
 Select **English** in the top-right language selector. Open windows, field labels, choices, guidance, charts and TXT/HTML reports switch immediately; the choice is remembered on restart. Engineering inputs and formulas stay unchanged. User-entered names and notes retain their original text. Newly exported Excel/CSV templates use the selected language; both Chinese and English templates can be imported. See the [bilingual guide and verification](docs/2026-10-07-bilingual.en.md). See [installation and first launch](#installation-and-first-launch) for startup and security prompts. The Windows executable has no commercial Authenticode signature; the macOS app uses ad-hoc integrity signing, without Developer ID or notarization.
 
@@ -33,13 +33,13 @@ V5.5.6 groups demand by source, circuit and season, combines panel P/Q with expl
 
 ### Windows
 
-1. Download the standalone EXE, or extract the complete ZIP fully before running it.
+1. Download the standalone Windows EXE above and save it in a convenient folder.
 2. Double-click `Facility_Studio_V5_5_6_Windows_Offline.exe`. First launch may take time while embedded libraries unpack.
 3. Choose **English** at the top right. Python, pip, compilation and internet access are not required for normal use.
 
 Windows 10/11 on Intel/AMD x64 are support targets; native release acceptance used Windows Server 2022/2025 x64. Windows ARM and 32-bit Windows were not accepted. Administrator permission is not required for ordinary use. The old V5.5.4 beta `Setup.exe` is a historical online installer, not the current startup method.
 
-If startup fails, the complete ZIP includes `Verify_on_Windows.cmd`. Logs are under `%LOCALAPPDATA%\Facility_Studio_V5_5\Logs`. Diagnostics do not upload data or overwrite engineering projects. Check the official release and `SHA256SUMS.txt` if security software blocks an unsigned download; keep antivirus enabled and follow your organization's policy.
+Templates can be exported from the application, and the tutorial is bundled. If startup fails, retain the complete warning and logs under `%LOCALAPPDATA%\Facility_Studio_V5_5\Logs` when reporting an issue. Developer diagnostics remain in [windows/winrelease](windows/winrelease/). A SmartScreen unknown-publisher prompt differs from an antivirus detection naming a threat; stop and report an explicit threat detection. Keep antivirus and SmartScreen enabled; see [distribution signing](docs/signing.en.md).
 
 ### macOS
 
@@ -50,9 +50,9 @@ If startup fails, the complete ZIP includes `Verify_on_Windows.cmd`. Logs are un
 
 The app is Universal for Apple Silicon and Intel. Native acceptance used macOS 15 on both architectures; macOS 11+ is the packaging target, not evidence that every version/device was tested. It is ad-hoc integrity signed without Developer ID/notarization. Managed Macs may need IT approval.
 
-The complete ZIP can also be extracted in Finder and its App opened directly. `Install_on_Mac.command` installs to `~/Applications/Facility Studio V5.5.6.app` and preserves an existing installation as Backup. Close the old app first; replacing the app does not delete saved projects or recovery data.
+Close the old app before replacing it; saved projects and recovery data are preserved. Templates and offline help are available in the application.
 
-For startup/signature errors, run `Verify_on_Mac.command` from the complete ZIP and retain the logs under `~/Library/Logs/Facility_Studio_V5_5/`. It uses temporary test data without modifying existing engineering projects. Do not change signed files inside the App.
+For startup/signature errors, retain the complete warning and logs under `~/Library/Logs/Facility_Studio_V5_5/` when reporting an issue. Developer diagnostics remain in [macos/macos](macos/macos/). Do not change signed files inside the App. Historical ZIP acceptance evidence remains available; complete ZIPs for the two recommended releases are no longer offered. See the [download change record](docs/2026-10-08-downloads.md).
 
 ## What it calculates
 

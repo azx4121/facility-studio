@@ -10,12 +10,12 @@
 
 | 平台 | 懶人包 | 使用條件 |
 | --- | --- | --- |
-| Windows（完整包） | [下載 win.3 離線懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-win.3/Facility_Studio_V5_5_6_Windows_Offline_OneClick.zip) | 目標 Windows 10／11、Intel／AMD x64；解壓縮後直接開啟 EXE，不需另裝 Python／套件、不需連網 |
-| Windows（單檔） | [直接下載 win.3 EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-win.3/Facility_Studio_V5_5_6_Windows_Offline.exe) | 已內含執行環境；可單獨執行，不需安裝流程 |
-| macOS（建議） | [下載 mac.2 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-mac.2/Facility_Studio_V5_5_6_macOS_mac2.dmg) | 拖到「應用程式」安裝；已含執行環境，Apple Silicon／Intel 原生驗證 |
-| macOS（完整包） | [下載 mac.2 ZIP 懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-mac.2/Facility_Studio_V5_5_6_macOS_mac2_OneClick.zip) | 另含原始碼、設備表範本與診斷腳本 |
+| Windows | [下載 EXE，直接執行](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-win.3/Facility_Studio_V5_5_6_Windows_Offline.exe) | Windows 10／11、Intel／AMD x64；內含執行環境，不需安裝 Python／套件，下載後可離線使用 |
+| macOS | [下載 DMG，拖曳安裝](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-mac.2/Facility_Studio_V5_5_6_macOS_mac2.dmg) | 拖到「應用程式」；內含執行環境，Apple Silicon／Intel 原生驗證 |
 
 也可以到 [Releases 發布頁](https://github.com/azx4121/facility-studio/releases) 選擇版本。
+
+每個平台只需下載上表的一個檔案。原始碼、範本與測試紀錄留在倉庫中，日常使用不需另外下載。現版尚未完成正式發行者簽章／Apple 公證；首次開啟可能有系統提示，請先閱讀[安全提示與正式認證說明](docs/signing.md)。
 
 ## 新手操作教學
 
@@ -60,13 +60,13 @@ V5.5.6 另修正重複回傳、不同水迴路及電力 PF 的彙整；改輸入
 
 ### Windows
 
-1. 完整解壓縮 **win.3 離線懶人包**。
+1. 下載上方的 **Windows EXE**，存到你方便找到的資料夾。
 2. 雙擊 `Facility_Studio_V5_5_6_Windows_Offline.exe`。
 3. 不需另裝 Python、不需安裝套件、不需連網；首次啟動請等候內建套件展開。
 
-也可直接下載單檔 EXE 使用；ZIP 另含原始碼、設備需求範本、授權與診斷腳本。
-不需管理員權限。若啟動失敗，可執行 `Verify_on_Windows.cmd`，記錄位於 `%LOCALAPPDATA%\Facility_Studio_V5_5\Logs`。
-本版尚無商用程式碼簽章，Windows 安全性或公司政策可能攔下；請確認官方下載來源與 SHA256，勿關閉防毒。
+不需管理員權限。設備需求範本可在軟體內匯出；教學也已內建。
+若啟動失敗，請保留警告文字或截圖，以及 `%LOCALAPPDATA%\Facility_Studio_V5_5\Logs` 中的記錄，至 Issues 回報。開發者診斷腳本保留在 [windows/winrelease](windows/winrelease/)。
+本版尚無正式 Authenticode 簽章。若提示「Windows 已保護您的電腦」，可能是 SmartScreen 對新檔案／未知發行者的提示；若防毒明確列出惡意程式名稱，請停止執行並回報，不能視為同一種問題。[說明與認證規劃](docs/signing.md)列出差別；請勿關閉防毒或 SmartScreen。
 舊 `v5.5.4-beta.1` 的 `Setup.exe` 線上安裝方式完整保留，新版不使用它。
 詳細封裝與原生驗收記錄見 [Windows 離線版驗證](docs/2026-10-07-windows-offline.md)。
 
@@ -78,7 +78,7 @@ V5.5.6 另修正重複回傳、不同水迴路及電力 PF 的彙整；改輸入
 4. 首次若提示開發者無法驗證，先嘗試開啟，再到「系統設定 → 隱私權與安全性 → 仍要打開」，依 [Apple 官方指引](https://support.apple.com/en-us/102445) 確認。
 
 本版通過 Apple 原生完整性簽章檢查，但使用 ad-hoc 簽章，沒有 Developer ID／Apple 公證。企業管理的 Mac 可能需要 IT 允許。
-ZIP 也可完整解壓縮後直接開啟 App，或執行 `Install_on_Mac.command` 安裝到使用者應用程式資料夾。請先關閉舊版；更新不會刪除專案與復原資料。
+請先關閉舊版再替換 App；更新不會刪除已儲存的專案與復原資料。設備範本與教學已可在軟體內開啟。
 早期 V5.5.4 mac.1 封裝在 Apple 原生檢查中失敗；本版保留 `v5.5.4-mac.2` 的修正。[修正與驗證紀錄](docs/2026-10-06-macos-repair.md) 保留重現證據。
 
 ## 可以做什麼
@@ -107,10 +107,10 @@ V5.5.6 macOS 已通過 **Apple Silicon 與 Intel macOS 15 原生雲端驗證**�
 V5.5.6 Windows 已通過 Windows Server 2022／2025 x64 原生雲端驗證：同一份 EXE 與解壓縮 ZIP，外部 Python 移出 PATH、EXE 對外連線被防火牆封鎖後，仍完成七種工具、設備表、原生 Tk 與完整工作台驗收。Windows10／11 為支援目標，使用者實機、企業政策與實體數字鍵盤仍須個別確認。
 
 封裝目標為 macOS 11 以上；macOS 11～14、其他未驗收的 macOS 版本、Finder 下載隔離提示、企業管理政策、實體鍵盤／觸控板及 Retina 視覺仍須使用者電腦確認。
-macOS ZIP 包含 `Verify_on_Mac.command`，可產生本機驗收與錯誤記錄；不會上傳資料或更動既有工程專案。
+macOS 開發者診斷腳本 `Verify_on_Mac.command` 保留在 [macos/macos](macos/macos/)；一般使用者只需下載 DMG。歷史 ZIP 驗收結果仍保留，但目前推薦版本的完整 ZIP 已停止提供。
 
 工程結果用於初估與方案比較。電氣短路與保護協調、完整管網、真空導通、設備性能選型及正式工程設計，仍需依現場條件、設備資料與適用規範覆核。
-詳細驗證與限制請查看懶人包內說明及原始碼驗證資料。
+詳細驗證與限制請查看本倉庫的說明及原始碼驗證資料。
 
 新增[20個公開操作情境](docs/guides/README.md)包含18個適用計算及2個不適用對照：短路／保護協調與BIM碰撞出圖不屬於本工具完整求解範圍。每個平台的原始碼另跑121項案例檢核，包含數值反算、報告及設備分組；此測試在目前測試主機執行，不能替代原生OS驗收。[如何搜尋與適用性測試](docs/search-discoverability.md)說明搜尋實驗及限制，不保證其他人的GPT推薦或搜尋排名。
 
@@ -139,7 +139,7 @@ Windows 原始碼位於 [windows](windows/)；macOS 原始碼位於 [macos](maco
 先前已按 MIT 發布的版本（含 `f8e92ea`）仍保有原授權；歷史條文見 [LICENSE_LEGACY_MIT](LICENSE_LEGACY_MIT)。
 第三方執行環境及套件保留各自的原有授權文件，詳 [第三方元件說明](THIRD_PARTY_NOTICES.md)。
 
-本次維護修正低溫露點反算、大氣壓防呆與工程資料表驗證，詳 [測試與修正紀錄](docs/2026-10-06-review.md)。V5.5.6 的 macOS 與 Windows 包含這些修正。歷史 Release、資產與標籤保留。
+本次維護修正低溫露點反算、大氣壓防呆與工程資料表驗證，詳 [測試與修正紀錄](docs/2026-10-06-review.md)。V5.5.6 的 macOS 與 Windows 包含這些修正。歷史 Release 與標籤保留；2026-10-08 僅移除目前推薦版兩個完整 ZIP，EXE／DMG 原檔維持不變，詳[下載調整紀錄](docs/2026-10-08-downloads.md)。
 
 ### 執行數值回歸測試
 
