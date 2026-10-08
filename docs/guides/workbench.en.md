@@ -17,7 +17,7 @@ For **V5.5.6 on Windows and macOS**. Finish sections 1–6 to produce your first
 
 **Do not start by filling every tab in an empty project.** Open a practice project, change one condition, observe the result, then replace the example with your site data.
 
-Extract the tutorial ZIP, then open `START_HERE.html` in a normal browser. It supports Chinese/English, step-by-step navigation, progress checkboxes and printing. The tutorial and practice files require neither Python nor an internet connection; external GitHub links need internet. Checkmarks record reading, not software acceptance. Progress counts only the first six required steps; extensions are optional. Read-all mode disables the single-step checkbox to avoid recording the wrong chapter. The application's **Beginner tutorial** button is available from the **win.2 / mac.2 revision**. Earlier V5.5.5 binaries can use the HTML directly.
+Extract the tutorial ZIP, then open `START_HERE.html` in a normal browser. It supports Chinese/English, step-by-step navigation, progress checkboxes and printing. The tutorial and practice files require neither Python nor an internet connection; external GitHub links need internet. Checkmarks record reading, not software acceptance. Progress counts only the first six required steps; extensions are optional. Read-all mode disables the single-step checkbox to avoid recording the wrong chapter. V5.5.6 includes in-app offline help: **This tool's guide** follows a simple calculator, and **Beginner tutorial** guides the full workbench. Older binaries can use the HTML directly.
 
 <a id="interface"></a>
 ## 2. Learn four locations on the screen

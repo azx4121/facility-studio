@@ -1,0 +1,180 @@
+{
+  "schema": "facility-studio.native-delivery.v1",
+  "product_version": "5.5.6",
+  "release_status": "public_test",
+  "verified_at_utc": "2026-10-08T00:40:06.036Z",
+  "releases": [
+    {
+      "tag": "v5.5.6-win.3",
+      "url": "https://github.com/azx4121/facility-studio/releases/tag/v5.5.6-win.3",
+      "source_commit": "05b67d356b11dc3aa84f87d56c7fa0c73771a4a1",
+      "published_at": "2026-10-08T00:38:49Z",
+      "prerelease": true,
+      "assets": [
+        {
+          "file": "Facility_Studio_V5_5_6_Windows_Offline.exe",
+          "size_bytes": 40829951,
+          "sha256": "fcfa8a672095aac7cb6f2b5664c6d1124d75d678b3a1404a8d22b1fc929e0765",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.6-win.3/Facility_Studio_V5_5_6_Windows_Offline.exe"
+        },
+        {
+          "file": "Facility_Studio_V5_5_6_Windows_Offline_OneClick.zip",
+          "size_bytes": 41768158,
+          "sha256": "0d80caf5e312dba3b3c0d7d49d1eb172491876372149f8d4e9dd4caebf080fbb",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.6-win.3/Facility_Studio_V5_5_6_Windows_Offline_OneClick.zip"
+        },
+        {
+          "file": "SHA256SUMS.txt",
+          "size_bytes": 229,
+          "sha256": "d4f55003d2dd8a31763eaf677e5bd416a60987846b9a40adee3d1810e68c7e8a",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.6-win.3/SHA256SUMS.txt"
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.6-mac.2",
+      "url": "https://github.com/azx4121/facility-studio/releases/tag/v5.5.6-mac.2",
+      "source_commit": "b3585460bc34d0a1f761cb3a02918062c3d9d0bf",
+      "published_at": "2026-10-08T00:20:58Z",
+      "prerelease": true,
+      "assets": [
+        {
+          "file": "Facility_Studio_V5_5_6_macOS_mac2.dmg",
+          "size_bytes": 145751807,
+          "sha256": "117c38cb7700f219869b889fd1af015b291d6ec29c65f854b3cc0ab471e2fd59",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.6-mac.2/Facility_Studio_V5_5_6_macOS_mac2.dmg"
+        },
+        {
+          "file": "Facility_Studio_V5_5_6_macOS_mac2_OneClick.zip",
+          "size_bytes": 95755953,
+          "sha256": "fbe9a19b41bf3c450a5ba32239ca32eb8e91c2db6f168a71a47b5cb07bab4658",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.6-mac.2/Facility_Studio_V5_5_6_macOS_mac2_OneClick.zip"
+        },
+        {
+          "file": "SHA256SUMS.txt",
+          "size_bytes": 217,
+          "sha256": "421adc9cadb63dc22e052f1fbe3c59333ebf86538161122024d065151637265e",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.6-mac.2/SHA256SUMS.txt"
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "platform": "Windows x64",
+      "run_id": 37707993298,
+      "url": "https://github.com/azx4121/facility-studio/actions/runs/37707993298"
+    },
+    {
+      "platform": "macOS Universal",
+      "run_id": 37706653520,
+      "url": "https://github.com/azx4121/facility-studio/actions/runs/37706653520"
+    }
+  ],
+  "source_checks": {
+    "new_distinct_conditions": 54,
+    "bilingual_scenarios": 20,
+    "bilingual_checks_per_distribution": 3805,
+    "tutorial_conditions": 20,
+    "tutorial_checks_per_distribution": 85
+  },
+  "limits": [
+    "Windows 10/11 are support targets; native hosts were Server 2022 and 2025 x64.",
+    "macOS 11+ is a packaging target; native hosts were macOS 15.7.9 on arm64 and x86_64.",
+    "Windows is unsigned; macOS is ad-hoc signed without Developer ID or notarization.",
+    "win.3 improves hosted Windows repaint artifacts, but local canvas screenshot artifacts remain; geometry and functional checks are not complete visual acceptance.",
+    "Native results do not certify an engineering design or all end-user hardware, DPI, download quarantine, input devices or enterprise policy."
+  ],
+  "native_executions": [
+    {
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "revision": "win.3",
+      "test_execution": "zip-extracted",
+      "checks": 125,
+      "all_passed": true,
+      "external_python_on_path": false,
+      "firewall_outbound_blocked": true,
+      "network_audit_blocked": true,
+      "exe_sha256_matches_public_asset": true
+    },
+    {
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "revision": "win.3",
+      "test_execution": "unicode-executable-path",
+      "checks": 125,
+      "all_passed": true,
+      "external_python_on_path": false,
+      "firewall_outbound_blocked": false,
+      "network_audit_blocked": true,
+      "exe_sha256_matches_public_asset": true
+    },
+    {
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "revision": "win.3",
+      "test_execution": "standalone",
+      "checks": 125,
+      "all_passed": true,
+      "external_python_on_path": false,
+      "firewall_outbound_blocked": true,
+      "network_audit_blocked": true,
+      "exe_sha256_matches_public_asset": true
+    },
+    {
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "revision": "win.3",
+      "test_execution": "zip-extracted",
+      "checks": 125,
+      "all_passed": true,
+      "external_python_on_path": false,
+      "firewall_outbound_blocked": true,
+      "network_audit_blocked": true,
+      "exe_sha256_matches_public_asset": true
+    },
+    {
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "revision": "win.3",
+      "test_execution": "unicode-executable-path",
+      "checks": 125,
+      "all_passed": true,
+      "external_python_on_path": false,
+      "firewall_outbound_blocked": false,
+      "network_audit_blocked": true,
+      "exe_sha256_matches_public_asset": true
+    },
+    {
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "revision": "win.3",
+      "test_execution": "standalone",
+      "checks": 125,
+      "all_passed": true,
+      "external_python_on_path": false,
+      "firewall_outbound_blocked": true,
+      "network_audit_blocked": true,
+      "exe_sha256_matches_public_asset": true
+    },
+    {
+      "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+      "architecture": "arm64",
+      "checks": 117,
+      "all_passed": true,
+      "evidence_file": "Mac_Acceptance.json",
+      "ui_max_interaction_seconds": 0.963
+    },
+    {
+      "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+      "architecture": "arm64",
+      "checks": 117,
+      "all_passed": true,
+      "evidence_file": "Launch_Services_Acceptance.json",
+      "ui_max_interaction_seconds": 0.685
+    },
+    {
+      "platform": "macOS-15.7.9-x86_64-i386-64bit-Mach-O",
+      "architecture": "x86_64",
+      "checks": 117,
+      "all_passed": true,
+      "evidence_file": "Mac_Acceptance.json",
+      "ui_max_interaction_seconds": 1.989
+    }
+  ]
+}

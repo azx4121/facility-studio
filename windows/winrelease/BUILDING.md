@@ -1,8 +1,8 @@
 # Windows V5.5.6 離線發行
 
-[目前下載與英文安裝](../../README.en.md#download-and-run) · [雙語原生驗收](../../docs/2026-10-07-bilingual.en.md)
+[目前下載與英文安裝](../../README.en.md#download-and-run) · [雙語原生驗收](../../docs/2026-10-07-v5.5.6-usability.md)
 
-Developer build only: the shipping V5.5.6 EXE/ZIP already contains Python. Normal users do not run pip or these build commands. The current publisher targets v5.5.6-win.1 and must not overwrite its existing public assets. For a future release, update the builder, verifier, publisher and workflow version/output names together.
+Developer build only: the shipping V5.5.6 EXE/ZIP already contains Python. Normal users do not run pip or these build commands. The current publisher targets v5.5.6-win.3 and must not overwrite its existing public assets. For a future release, update the builder, verifier, publisher and workflow version/output names together.
 
 `entry.py` 為單檔 EXE 的視窗模式入口；日常使用不執行 pip、不尋找外部 Python、不下載元件。
 主應用程式與完整計算邏輯仍使用 `windows/facility_studio`；不是另一套精簡計算版本。
@@ -38,10 +38,10 @@ python -m winrelease.verify --assets C:\FacilityStudioBuild --output C:\Facility
 
 
 
-V5.5.6 revision 2 / 署名與新手教學修訂
+V5.5.6 win.3 / 操作與畫面重繪修訂
 簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
 簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
 完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
-先複製改名練習 JSON，再由完整工作台「開啟」；原廠選型與設備阻力等待补資料仍需補。
-Revision 2 adds persistent author credit, bundled offline walkthroughs, two practice workspaces and reference reports.
+V5.5.6 可由完整工作台「開啟練習新案」建立副本；原廠選型與設備阻力等待補資料仍需補。
+V5.5.6 retains author credit and offline walkthroughs. win.3 refreshes native Windows pixels after resizing and language/layout changes.
 No additional Python installation or internet is needed for the tutorial.

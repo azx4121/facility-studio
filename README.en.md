@@ -4,20 +4,20 @@
 
 Facility Studio by **azx4121 / Andy Huang** is a Traditional Chinese / English desktop application for preliminary HVAC, electrical and facility utility calculations. The calculators can be used independently; a complete workbench supports project comparisons and seasonal AHU stage calculations. This repository is unrelated to other products or businesses with the same name.
 
-**V5.5.5 bilingual public test release.** Windows **v5.5.5-win.2** and macOS **v5.5.5-mac.2** bundle their runtime. After downloading, normal calculations require neither a separately installed Python nor an internet connection.
+**V5.5.6 bilingual public test release.** Windows **v5.5.6-win.3** and macOS **v5.5.6-mac.2** bundle their runtime. After downloading, normal calculations require neither a separately installed Python nor an internet connection.
 
 ## Download and run
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows standalone | [Offline EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.2/Facility_Studio_V5_5_5_Windows_Offline.exe) | Double-click; target: Windows 10/11 on Intel/AMD x64 |
-| Windows complete package | [Offline ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.2/Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip) | Extract completely, then run the EXE; includes source, templates and diagnostics |
-| macOS | [mac.2 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.2/Facility_Studio_V5_5_5_macOS_mac2.dmg) | Drag Facility Studio into Applications; Apple Silicon and Intel |
-| macOS complete package | [mac.2 ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.2/Facility_Studio_V5_5_5_macOS_mac2_OneClick.zip) | Includes application, source, equipment templates and diagnostics |
+| Windows standalone | [Offline EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-win.3/Facility_Studio_V5_5_6_Windows_Offline.exe) | Double-click; target: Windows 10/11 on Intel/AMD x64 |
+| Windows complete package | [Offline ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-win.3/Facility_Studio_V5_5_6_Windows_Offline_OneClick.zip) | Extract completely, then run the EXE; includes source, templates and diagnostics |
+| macOS | [mac.2 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-mac.2/Facility_Studio_V5_5_6_macOS_mac2.dmg) | Drag Facility Studio into Applications; Apple Silicon and Intel |
+| macOS complete package | [mac.2 ZIP](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-mac.2/Facility_Studio_V5_5_6_macOS_mac2_OneClick.zip) | Includes application, source, equipment templates and diagnostics |
 
 Select **English** in the top-right language selector. Open windows, field labels, choices, guidance, charts and TXT/HTML reports switch immediately; the choice is remembered on restart. Engineering inputs and formulas stay unchanged. User-entered names and notes retain their original text. Newly exported Excel/CSV templates use the selected language; both Chinese and English templates can be imported. See the [bilingual guide and verification](docs/2026-10-07-bilingual.en.md). See [installation and first launch](#installation-and-first-launch) for startup and security prompts. The Windows executable has no commercial Authenticode signature; the macOS app uses ad-hoc integrity signing, without Developer ID or notarization.
 
-Earlier native English interface (revision 2 adds the persistent author credit and tutorial entry at the bottom left):
+Earlier native English interface (the current release retains the author credit and tutorial entry at the bottom left):
 
 ![Facility Studio English electrical sizing on macOS](docs/images/macos-electrical-en.png)
 
@@ -25,14 +25,16 @@ Earlier native English interface (revision 2 adds the persistent author credit a
 
 New to the full workbench? Follow the [step-by-step beginner guide](docs/guides/workbench.en.md). **The first six sections produce a practice report**; additional systems are optional.
 
-[Download the offline tutorial](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip), extract it, and open `START_HERE.html`. It includes a bilingual walkthrough, two reopenable practice workspaces and reference reports. No Python installation is needed. **Revisions win.2 / mac.2 include the in-app tutorial entry and persistent simple-tool author credit**; see the [revision record](docs/2026-10-07-beginner-tutorial.md). Existing V5.5.5 binaries can use the HTML directly.
+[Download the offline tutorial](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip), extract it, and open `START_HERE.html`. It includes a bilingual walkthrough, two reopenable practice workspaces and reference reports. No Python installation is needed. **V5.5.6 win.3 / mac.2 include in-app offline help and author credit**. Full workbench → Open practice copy creates a new project; only six tutorial steps are required. See the [usability and native-delivery record](docs/2026-10-07-v5.5.6-usability.md). Older binaries can read the HTML separately.
+
+V5.5.6 groups demand by source, circuit and season, combines panel P/Q with explicit design-current floors, and marks retained results stale while disabling export/transfer. Basic workbench navigation starts with HVAC and heat loads. Workbench actions wrap at small window widths and retain the author credit.
 
 ## Installation and first launch
 
 ### Windows
 
 1. Download the standalone EXE, or extract the complete ZIP fully before running it.
-2. Double-click `Facility_Studio_V5_5_5_Windows_Offline.exe`. First launch may take time while embedded libraries unpack.
+2. Double-click `Facility_Studio_V5_5_6_Windows_Offline.exe`. First launch may take time while embedded libraries unpack.
 3. Choose **English** at the top right. Python, pip, compilation and internet access are not required for normal use.
 
 Windows 10/11 on Intel/AMD x64 are support targets; native release acceptance used Windows Server 2022/2025 x64. Windows ARM and 32-bit Windows were not accepted. Administrator permission is not required for ordinary use. The old V5.5.4 beta `Setup.exe` is a historical online installer, not the current startup method.
@@ -41,14 +43,14 @@ If startup fails, the complete ZIP includes `Verify_on_Windows.cmd`. Logs are un
 
 ### macOS
 
-1. Open `Facility_Studio_V5_5_5_macOS_mac2.dmg`.
+1. Open `Facility_Studio_V5_5_6_macOS_mac2.dmg`.
 2. Drag **Facility Studio** into **Applications**.
 3. Launch from Applications, then choose **English** at the top right. Python and Homebrew are not needed; normal use is offline.
 4. If the first launch is blocked because the developer cannot be verified, try launching once, then follow **System Settings → Privacy & Security → Open Anyway**, as described in [Apple's official guidance](https://support.apple.com/en-us/102445).
 
 The app is Universal for Apple Silicon and Intel. Native acceptance used macOS 15 on both architectures; macOS 11+ is the packaging target, not evidence that every version/device was tested. It is ad-hoc integrity signed without Developer ID/notarization. Managed Macs may need IT approval.
 
-The complete ZIP can also be extracted in Finder and its App opened directly. `Install_on_Mac.command` installs to `~/Applications/Facility Studio V5.5.5.app` and preserves an existing installation as Backup. Close the old app first; replacing the app does not delete saved projects or recovery data.
+The complete ZIP can also be extracted in Finder and its App opened directly. `Install_on_Mac.command` installs to `~/Applications/Facility Studio V5.5.6.app` and preserves an existing installation as Backup. Close the old app first; replacing the app does not delete saved projects or recovery data.
 
 For startup/signature errors, run `Verify_on_Mac.command` from the complete ZIP and retain the logs under `~/Library/Logs/Facility_Studio_V5_5/`. It uses temporary test data without modifying existing engineering projects. Do not change signed files inside the App.
 
@@ -73,7 +75,7 @@ This is not a BIM/CAD authoring package, a complete pipe-network solver, or shor
 
 ## Verification and source
 
-The repository retains numerical and report regression evidence. V5.5.5 Windows was tested natively on Windows Server 2022 and 2025; V5.5.5 macOS was tested on Apple Silicon and Intel macOS 15. These hosted checks do not establish compatibility with every end-user device or enterprise policy. See the [V5.5.5 bilingual verification](docs/2026-10-07-bilingual.en.md), [original Windows offline evidence](docs/2026-10-07-windows-offline.md) and [macOS launch repair evidence](docs/2026-10-06-macos-repair.md).
+The repository retains numerical and report regression evidence. V5.5.6 Windows was tested natively on Windows Server 2022 and 2025; V5.5.6 macOS was tested on Apple Silicon and Intel macOS 15. These hosted checks do not establish compatibility with every end-user device or enterprise policy. See the [V5.5.6 usability and native-delivery record](docs/2026-10-07-v5.5.6-usability.md), [original Windows offline evidence](docs/2026-10-07-windows-offline.md) and [macOS launch repair evidence](docs/2026-10-06-macos-repair.md).
 
 The [20 worked scenarios](docs/guides/README.en.md) include 18 applicable calculations and two out-of-scope controls. The example verifier runs both source distributions on the current test host; it is distinct from native OS acceptance and from search discoverability tests.
 

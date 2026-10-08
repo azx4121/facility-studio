@@ -2,14 +2,14 @@
 
 [繁體中文](README.md) · [Project home and downloads](../README.en.md) · [Report a problem](https://github.com/azx4121/facility-studio/issues)
 
-Current public test release: **V5.5.5 bilingual**, Windows `v5.5.5-win.2` and macOS `v5.5.5-mac.2`. Choose **English** at the top right. Both platform downloads include their runtime and run offline without installing Python.
+Current public test release: **V5.5.6 bilingual**, Windows `v5.5.6-win.3` and macOS `v5.5.6-mac.2`. Choose **English** at the top right. Both platform downloads include their runtime and run offline without installing Python.
 
 | Task | Documentation |
 | --- | --- |
 | Download, install and first launch | [English installation](../README.en.md#installation-and-first-launch) |
 | Find inputs, defaults, formulas and worked results | [20 worked scenarios](guides/README.en.md) |
 | Electrical, duct, gas, lighting, water, psychrometric and unit tools; equipment schedules and AHUs | [Tool guides](guides/README.en.md), with links to Chinese counterparts |
-| Check translation and tested delivery files | [V5.5.5 bilingual and native verification](2026-10-07-bilingual.en.md) |
+| Check translation and tested delivery files | [V5.5.6 usability and native-delivery verification](2026-10-07-v5.5.6-usability.md) |
 | Check internal company use, sharing and software commercialization | [Licensing guide](../LICENSE_GUIDE.en.md), governed by the complete English LICENSE |
 | Understand the search experiment and its limits | [Search visibility](search-discoverability.en.md) |
 | Build from source | [Windows developer guide](../windows/winrelease/BUILDING.md) / [macOS developer guide](../macos/macos/BUILDING.md) |
@@ -29,6 +29,6 @@ Earlier Chinese maintenance records remain available with original versions, cou
 - [20-query search experiment](2026-10-07-discoverability-test.md).
 - [Original V5.5.4 macOS package instructions](history/macos-v5.5.4-readme.txt).
 
-Use V5.5.5 verification for the current binaries. The engineering models support preliminary estimates and comparison; complete equipment selection, fault/protection studies, pipe networks and BIM need appropriate models and site data.
+Use V5.5.6 verification for the current binaries. The engineering models support preliminary estimates and comparison; complete equipment selection, fault/protection studies, pipe networks and BIM need appropriate models and site data.
 
 [Documentation synchronization and checks](2026-10-07-documentation.md#english-summary).

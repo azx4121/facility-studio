@@ -4,16 +4,16 @@
 
 **azx4121／Andy Huang 維護的繁體中文／英文桌面工具**，可獨立使用電力配線、風管尺寸、CDA／N2管徑、照明Lux、冷熱水、空氣線圖及工程單位換算，也能匯入Excel／CSV彙整七種設備需求。Windows／macOS下載後可離線運算，內含Python執行環境。此倉庫與其他同名產品／工作室無關。
 
-通用廠務工具，適合快速估算、方案比較及設備需求彙整。目前為 **V5.5.5 中英雙語公開測試版**；Windows 請下載 **v5.5.5-win.2 離線直接執行版**，macOS 請下載 **v5.5.5-mac.2**。兩者皆包含既有安全、授權與 macOS 修正；既有 Release 與歷史提交保留。
+通用廠務工具，適合快速估算、方案比較及設備需求彙整。目前為 **V5.5.6 中英雙語公開測試版**；Windows 請下載 **v5.5.6-win.3 離線直接執行版**，macOS 請下載 **v5.5.6-mac.2**。兩者皆包含既有安全、授權與 macOS 修正；既有 Release 與歷史提交保留。
 
 ## 下載
 
 | 平台 | 懶人包 | 使用條件 |
 | --- | --- | --- |
-| Windows（完整包） | [下載 win.2 離線懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.2/Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip) | 目標 Windows 10／11、Intel／AMD x64；解壓縮後直接開啟 EXE，不需另裝 Python／套件、不需連網 |
-| Windows（單檔） | [直接下載 win.2 EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-win.2/Facility_Studio_V5_5_5_Windows_Offline.exe) | 已內含執行環境；可單獨執行，不需安裝流程 |
-| macOS（建議） | [下載 mac.2 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.2/Facility_Studio_V5_5_5_macOS_mac2.dmg) | 拖到「應用程式」安裝；已含執行環境，Apple Silicon／Intel 原生驗證 |
-| macOS（完整包） | [下載 mac.2 ZIP 懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.5-mac.2/Facility_Studio_V5_5_5_macOS_mac2_OneClick.zip) | 另含原始碼、設備表範本與診斷腳本 |
+| Windows（完整包） | [下載 win.3 離線懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-win.3/Facility_Studio_V5_5_6_Windows_Offline_OneClick.zip) | 目標 Windows 10／11、Intel／AMD x64；解壓縮後直接開啟 EXE，不需另裝 Python／套件、不需連網 |
+| Windows（單檔） | [直接下載 win.3 EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-win.3/Facility_Studio_V5_5_6_Windows_Offline.exe) | 已內含執行環境；可單獨執行，不需安裝流程 |
+| macOS（建議） | [下載 mac.2 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-mac.2/Facility_Studio_V5_5_6_macOS_mac2.dmg) | 拖到「應用程式」安裝；已含執行環境，Apple Silicon／Intel 原生驗證 |
+| macOS（完整包） | [下載 mac.2 ZIP 懶人包](https://github.com/azx4121/facility-studio/releases/download/v5.5.6-mac.2/Facility_Studio_V5_5_6_macOS_mac2_OneClick.zip) | 另含原始碼、設備表範本與診斷腳本 |
 
 也可以到 [Releases 發布頁](https://github.com/azx4121/facility-studio/releases) 選擇版本。
 
@@ -21,7 +21,9 @@
 
 第一次使用完整工作台，先看[一步步跟做教學](docs/guides/workbench.md)。**先完成前六步，就能輸出第一份練習報告**；其他系統需要時再學。
 
-[下載離線教學懶人包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)：解壓縮後開啟 `START_HERE.html`，內含中英逐步教學、兩份可直接開啟的練習專案及對照報告，不需安裝 Python。**修訂 win.2／mac.2 已附上程式內「新手教學」按鈕及簡易工具署名**，交付驗證見[修訂紀錄](docs/2026-10-07-beginner-tutorial.md)。既有 V5.5.5 可先用離線 HTML。
+[下載離線教學懶人包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)：解壓縮後開啟 `START_HERE.html`，內含中英逐步教學、兩份可直接開啟的練習專案及對照報告，不需安裝 Python。**V5.5.6 win.3／mac.2 已附上「新手教學」與署名**；工作台可直接「開啟練習新案」建立副本。教學只有六個必要步驟，其餘內容選讀。互鎖、需求彙整及原生交付見[修訂紀錄](docs/2026-10-07-v5.5.6-usability.md)。舊版也可單獨閱讀離線 HTML。
+
+V5.5.6 另修正重複回傳、不同水迴路及電力 PF 的彙整；改輸入後保留標明「待重算」的舊結果，鎖住匯出及回傳。基本工作台只先顯示空調與熱負荷；可切換全部工程分頁。小視窗的操作列會自動換行，縮小後仍保留署名。
 
 ## 中英文切換
 
@@ -50,7 +52,7 @@
 
 **先確認資料基準：**電力kW是電氣輸入；風管靜壓不是尺寸公式；CDA／N2須有流量，表壓與絕壓分開；照明Lux不是燈具流明；m³須除淨高才能得到m²。每篇案例列出條件、公式、結果及適用範圍。
 
-以下為較早 Windows 原生驗收的真實 10 kW 中文快算畫面（修訂 2 另補上左下角署名及教學入口）；英文及 macOS 原生畫面見[雙語驗證](docs/2026-10-07-bilingual.md)，非示意介面：
+以下為較早 Windows 原生驗收的真實 10 kW 中文快算畫面（現版已保留左下角署名及教學入口）；英文及 macOS 原生畫面見[雙語驗證](docs/2026-10-07-bilingual.md)，非示意介面：
 
 ![Facility Studio 電力配線：10 kW三相380 V、NFB20 AT、每相5.5 mm²](docs/images/windows-electrical.png)
 
@@ -58,8 +60,8 @@
 
 ### Windows
 
-1. 完整解壓縮 **win.2 離線懶人包**。
-2. 雙擊 `Facility_Studio_V5_5_5_Windows_Offline.exe`。
+1. 完整解壓縮 **win.3 離線懶人包**。
+2. 雙擊 `Facility_Studio_V5_5_6_Windows_Offline.exe`。
 3. 不需另裝 Python、不需安裝套件、不需連網；首次啟動請等候內建套件展開。
 
 也可直接下載單檔 EXE 使用；ZIP 另含原始碼、設備需求範本、授權與診斷腳本。
@@ -70,7 +72,7 @@
 
 ### macOS
 
-1. 下載並打開 **V5.5.5 DMG**。
+1. 下載並打開 **V5.5.6 DMG**。
 2. 把 `Facility Studio` 拖到旁邊的 `Applications／應用程式`。
 3. 從「應用程式」開啟；不需另裝 Python 或 Homebrew。
 4. 首次若提示開發者無法驗證，先嘗試開啟，再到「系統設定 → 隱私權與安全性 → 仍要打開」，依 [Apple 官方指引](https://support.apple.com/en-us/102445) 確認。
@@ -98,13 +100,13 @@ ZIP 也可完整解壓縮後直接開啟 App，或執行 `Install_on_Mac.command
 
 ## 測試狀態與適用範圍
 
-已完成數值情境、報告反算及實際 Tk 介面回歸；V5.5.5 另有中英資料一致性檢查、兩平台原生交付驗收與公開下載檔雜湊核對。歷史 Windows 安裝器檢查另行保留。
+V5.5.6 新增 54 種不同條件，兩平台各通過 20 種雙語情境／3,805 項檢查、20 種教學條件／85 項檢查；既有公式與報告反算也持續驗證。原生交付與公開下載檔 SHA256 另見[本版驗收紀錄](docs/2026-10-07-v5.5.6-usability.md)。歷史 Windows 安裝器檢查保留。
 
-V5.5.5 macOS 已通過 **Apple Silicon 與 Intel macOS 15 原生雲端驗證**：Apple 深度簽章、Tk Aqua、七種獨立工具、設備表匯入、完整工作台與 Matplotlib 繪圖。實際交付 ZIP 重新解壓縮、DMG 掛載後再次驗證。
+V5.5.6 macOS 已通過 **Apple Silicon 與 Intel macOS 15 原生雲端驗證**：Apple 深度簽章、Tk Aqua、七種獨立工具、設備表匯入、完整工作台與 Matplotlib 繪圖。實際交付 ZIP 重新解壓縮、DMG 掛載後再次驗證。
 
-V5.5.5 Windows 已通過 Windows Server 2022／2025 x64 原生雲端驗證：同一份 EXE 與解壓縮 ZIP，外部 Python 移出 PATH、EXE 對外連線被防火牆封鎖後，仍完成七種工具、設備表、原生 Tk 與完整工作台驗收。Windows10／11 為支援目標，使用者實機、企業政策與實體數字鍵盤仍須個別確認。
+V5.5.6 Windows 已通過 Windows Server 2022／2025 x64 原生雲端驗證：同一份 EXE 與解壓縮 ZIP，外部 Python 移出 PATH、EXE 對外連線被防火牆封鎖後，仍完成七種工具、設備表、原生 Tk 與完整工作台驗收。Windows10／11 為支援目標，使用者實機、企業政策與實體數字鍵盤仍須個別確認。
 
-封裝目標為 macOS 11 以上；macOS 11～14、macOS 27 Beta、Finder 下載隔離提示、企業管理政策、實體鍵盤／觸控板及 Retina 視覺仍須使用者電腦確認。
+封裝目標為 macOS 11 以上；macOS 11～14、其他未驗收的 macOS 版本、Finder 下載隔離提示、企業管理政策、實體鍵盤／觸控板及 Retina 視覺仍須使用者電腦確認。
 macOS ZIP 包含 `Verify_on_Mac.command`，可產生本機驗收與錯誤記錄；不會上傳資料或更動既有工程專案。
 
 工程結果用於初估與方案比較。電氣短路與保護協調、完整管網、真空導通、設備性能選型及正式工程設計，仍需依現場條件、設備資料與適用規範覆核。
@@ -137,7 +139,7 @@ Windows 原始碼位於 [windows](windows/)；macOS 原始碼位於 [macos](maco
 先前已按 MIT 發布的版本（含 `f8e92ea`）仍保有原授權；歷史條文見 [LICENSE_LEGACY_MIT](LICENSE_LEGACY_MIT)。
 第三方執行環境及套件保留各自的原有授權文件，詳 [第三方元件說明](THIRD_PARTY_NOTICES.md)。
 
-本次維護修正低溫露點反算、大氣壓防呆與工程資料表驗證，詳 [測試與修正紀錄](docs/2026-10-06-review.md)。V5.5.5 的 macOS 與 Windows 包含這些修正。歷史 Release、資產與標籤保留。
+本次維護修正低溫露點反算、大氣壓防呆與工程資料表驗證，詳 [測試與修正紀錄](docs/2026-10-06-review.md)。V5.5.6 的 macOS 與 Windows 包含這些修正。歷史 Release、資產與標籤保留。
 
 ### 執行數值回歸測試
 
