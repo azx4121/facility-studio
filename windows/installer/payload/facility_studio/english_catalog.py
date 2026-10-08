@@ -2182,15 +2182,20 @@ TEXT.update({
     "設備需求分析 V": "Equipment Demand Analysis V",
 })
 
-# Preserve historical text aliases while displaying the current product version.
-from .version import VERSION as _CURRENT_VERSION
-TEXT.update({
-    key.replace("5.5.5", _CURRENT_VERSION): value.replace("5.5.5", _CURRENT_VERSION)
-    for key, value in tuple(TEXT.items()) if "5.5.5" in key
-})
-
+# Historical exact aliases remain above; current titles use version-independent terms.
 TEXT.update({
     "廠務簡易工具": "Facility Studio",
     "工程快算": "Engineering quick tools",
     "逐段控制與選用熱源": "Stage controls / selected heat sources",
+})
+
+# Current window and export headings use the same version and deliberate wording.
+from .version import VERSION as _CURRENT_VERSION
+TEXT.update({
+    "分段空調箱設計｜V" + _CURRENT_VERSION: "AHU Stage Design | V" + _CURRENT_VERSION,
+    "廠務簡易工具 V" + _CURRENT_VERSION: "Facility Studio V" + _CURRENT_VERSION,
+    "廠務簡易工具\nV" + _CURRENT_VERSION: "FACILITY\nSTUDIO " + _CURRENT_VERSION,
+    "廠務簡易工具 " + _CURRENT_VERSION + "｜": "Facility Studio " + _CURRENT_VERSION + " | ",
+    "工程快算｜V" + _CURRENT_VERSION: "Engineering quick tools | V" + _CURRENT_VERSION,
+    "\n逐段控制與選用熱源（V" + _CURRENT_VERSION + "）": "\nStage controls / selected heat sources (V" + _CURRENT_VERSION + ")",
 })
