@@ -4,16 +4,16 @@
 
 Facility Studio by **azx4121 / Andy Huang** is a Traditional Chinese / English desktop application for preliminary HVAC, electrical and facility utility calculations. The calculators can be used independently; a complete workbench supports project comparisons and seasonal AHU stage calculations. This repository is unrelated to other products or businesses with the same name.
 
-**V5.5.7 bilingual public test release.** Windows **v5.5.7-win.1** and macOS **v5.5.7-mac.1** bundle their runtime. After downloading, normal calculations require neither a separately installed Python nor an internet connection.
+**V5.5.8 bilingual public test release.** Windows **v5.5.8-win.1** and macOS **v5.5.8-mac.1** bundle their runtime. After downloading, normal calculations require neither a separately installed Python nor an internet connection.
 
-V5.5.7 synchronizes largest-motor activation, ignores disabled heater efficiency and excludes inactive equipment from AHU reports/rated power. Draft inputs remain available when re-enabled. The bilingual interface and offline tutorial are synchronized.
+V5.5.8 fixes standalone AHU invalid-draft save/reopen and close-time saving. Cancellation preserves the existing file, corrected saves retain backups, and calculation/export validation stays active. Previous largest-motor, inactive-efficiency and report/power interlocks remain; inconsistent internal coil states now fail clearly. Bilingual help stays synchronized.
 
 ## Download and run
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows standalone | [Offline EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.7-win.1/Facility_Studio_V5_5_7_Windows_Offline.exe) | Double-click; target: Windows 10/11 on Intel/AMD x64 |
-| macOS | [mac.1 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.7-mac.1/Facility_Studio_V5_5_7_macOS_mac1.dmg) | Drag Facility Studio into Applications; Apple Silicon and Intel |
+| Windows standalone | [Offline EXE](https://github.com/azx4121/facility-studio/releases/download/v5.5.8-win.1/Facility_Studio_V5_5_8_Windows_Offline.exe) | Double-click; target: Windows 10/11 on Intel/AMD x64 |
+| macOS | [mac.1 DMG](https://github.com/azx4121/facility-studio/releases/download/v5.5.8-mac.1/Facility_Studio_V5_5_8_macOS_mac1.dmg) | Drag Facility Studio into Applications; Apple Silicon and Intel |
 
 Download just one file for your platform. Source, templates and diagnostic scripts remain in this repository for developers. The current EXE is unsigned, and the Mac app has ad-hoc integrity signing without Developer ID or Apple notarization. See [security prompts and distribution signing](docs/signing.en.md) before first launch.
 
@@ -27,7 +27,7 @@ Earlier native English interface (the current release retains the author credit 
 
 New to the full workbench? Follow the [step-by-step beginner guide](docs/guides/workbench.en.md). **The first six sections produce a practice report**; additional systems are optional.
 
-[Download the offline tutorial](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip), extract it, and open `START_HERE.html`. It includes a bilingual walkthrough, two reopenable practice workspaces and reference reports. No Python installation is needed. **V5.5.7 win.1 / mac.1 include in-app offline help and author credit**. Full workbench → Open practice copy creates a new project; only six tutorial steps are required. See the [current native-delivery record](docs/2026-10-10-v5.5.7-native.md). Older binaries can read the HTML separately.
+[Download the offline tutorial](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip), extract it, and open `START_HERE.html`. It includes a bilingual walkthrough, two reopenable practice workspaces and reference reports. No Python installation is needed. **V5.5.8 win.1 / mac.1 include in-app offline help and author credit**. Full workbench → Open practice copy creates a new project; only six tutorial steps are required. See the [current native-delivery record](docs/2026-10-10-v5.5.8-native.md). Older binaries can read the HTML separately.
 
 V5.5.6 groups demand by source, circuit and season, combines panel P/Q with explicit design-current floors, and marks retained results stale while disabling export/transfer. Basic workbench navigation starts with HVAC and heat loads. Workbench actions wrap at small window widths and retain the author credit.
 
@@ -36,7 +36,7 @@ V5.5.6 groups demand by source, circuit and season, combines panel P/Q with expl
 ### Windows
 
 1. Download the standalone Windows EXE above and save it in a convenient folder.
-2. Double-click `Facility_Studio_V5_5_7_Windows_Offline.exe`. First launch may take time while embedded libraries unpack.
+2. Double-click `Facility_Studio_V5_5_8_Windows_Offline.exe`. First launch may take time while embedded libraries unpack.
 3. Choose **English** at the top right. Python, pip, compilation and internet access are not required for normal use.
 
 Windows 10/11 on Intel/AMD x64 are support targets; native release acceptance used Windows Server 2022/2025 x64. Windows ARM and 32-bit Windows were not accepted. Administrator permission is not required for ordinary use. The old V5.5.4 beta `Setup.exe` is a historical online installer, not the current startup method.
@@ -45,7 +45,7 @@ Templates can be exported from the application, and the tutorial is bundled. If 
 
 ### macOS
 
-1. Open `Facility_Studio_V5_5_7_macOS_mac1.dmg`.
+1. Open `Facility_Studio_V5_5_8_macOS_mac1.dmg`.
 2. Drag **Facility Studio** into **Applications**.
 3. Launch from Applications, then choose **English** at the top right. Python and Homebrew are not needed; normal use is offline.
 4. If the first launch is blocked because the developer cannot be verified, try launching once, then follow **System Settings → Privacy & Security → Open Anyway**, as described in [Apple's official guidance](https://support.apple.com/en-us/102445).
@@ -54,7 +54,7 @@ The app is Universal for Apple Silicon and Intel. Native acceptance used macOS 1
 
 Close the old app before replacing it; saved projects and recovery data are preserved. Templates and offline help are available in the application.
 
-For startup/signature errors, retain the complete warning and logs under `~/Library/Logs/Facility_Studio_V5_5/` when reporting an issue. Developer diagnostics remain in [macos/macos](macos/macos/). Do not change signed files inside the App. Historical ZIP acceptance evidence remains available; current public V5.5.7 assets are EXE/DMG only, with complete ZIPs used for internal acceptance. See the [download change record](docs/2026-10-08-downloads.md).
+For startup/signature errors, retain the complete warning and startup logs under `~/Library/Logs/Facility_Studio_V5_5/` (Tk callback logs use `~/Library/Application Support/Facility_Studio_V5_5/`) when reporting an issue. Developer diagnostics remain in [macos/macos](macos/macos/). Do not change signed files inside the App. Historical ZIP acceptance evidence remains available; current public V5.5.8 assets are EXE/DMG only, with complete ZIPs used for internal acceptance. See the [download change record](docs/2026-10-08-downloads.md).
 
 ## What it calculates
 
@@ -77,7 +77,7 @@ This is not a BIM/CAD authoring package, a complete pipe-network solver, or shor
 
 ## Verification and source
 
-V5.5.7 passed native acceptance on Windows Server 2022/2025 x64 and Apple Silicon/Intel macOS 15. Each source distribution passed 970 inactive-output/report checks, 52 regression scenarios / 1,247 independent checks, 20 bilingual scenarios / 3,883 checks and 20 tutorial scenarios / 87 checks. All four bilingual main/AHU reference reports are compared. Hosted acceptance does not establish compatibility with every end-user device or enterprise policy. See the [V5.5.7 source, native and SHA256 evidence](docs/2026-10-10-v5.5.7-native.md); earlier evidence remains historical.
+V5.5.8 passed native acceptance on Windows Server 2022/2025 x64 and Apple Silicon/Intel macOS 15. Each source distribution passed 970 inactive-output/report checks, 52 regression scenarios / 1,247 independent checks, 20 bilingual scenarios / 3,897 checks and 20 tutorial scenarios / 87 checks. All four bilingual main/AHU reference reports are compared. Hosted acceptance does not establish compatibility with every end-user device or enterprise policy. See the [V5.5.8 source, native and SHA256 evidence](docs/2026-10-10-v5.5.8-native.md); earlier evidence remains historical.
 
 The [20 worked scenarios](docs/guides/README.en.md) include 18 applicable calculations and two out-of-scope controls. The example verifier runs both source distributions on the current test host; it is distinct from native OS acceptance and from search discoverability tests.
 

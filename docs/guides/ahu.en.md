@@ -1,5 +1,7 @@
 # AHU / MAU stages: preheat, precool, water wash, recool and reheat
 
+V5.5.8 standalone AHU windows can save invalid raw inputs as an explicitly confirmed draft. Reopening still identifies invalid fields and locks export. Correct inputs and recalculate before producing design outputs; a subsequent ordinary save keeps the draft backup. Cancellation preserves the file. This is manual draft saving, without a new standalone autosave timer.
+
 [繁體中文](ahu.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
 In **Full workbench**, open the individual AHU window. Set summer/winter conditions. Each stage supports automatic demand, bypass or specified outlet dry bulb; cooling stages also support temperature/RH targets. The preceding outlet becomes the next inlet. H1/H2 can use electric heat, recovered hot water, both or neither; hot-water conditions may be shared or separate.

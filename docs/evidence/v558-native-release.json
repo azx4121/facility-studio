@@ -1,0 +1,227 @@
+{
+  "version": "5.5.8",
+  "releases": [
+    {
+      "tag": "v5.5.8-win.1",
+      "source": "50660b26bc7d709add7f35b57ca17e8b987abadc",
+      "url": "https://github.com/azx4121/facility-studio/releases/tag/v5.5.8-win.1",
+      "draft": false,
+      "assets": [
+        {
+          "id": 627018555,
+          "name": "Facility_Studio_V5_5_8_Windows_Offline.exe",
+          "size": 40861567,
+          "sha256": "7756b22c4a1b2b4c8d23102db54a752acd4f2c3b73ec62036390f4f594807db0",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.8-win.1/Facility_Studio_V5_5_8_Windows_Offline.exe"
+        },
+        {
+          "id": 627018629,
+          "name": "SHA256SUMS.txt",
+          "size": 109,
+          "sha256": "3469fa9b430431a44f91d748b9dd542097441deb060c6ca52c328cb6c703b202",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.8-win.1/SHA256SUMS.txt"
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.8-mac.1",
+      "source": "c803bc8426a5fbb02b14244f056922943d4d237f",
+      "url": "https://github.com/azx4121/facility-studio/releases/tag/v5.5.8-mac.1",
+      "draft": false,
+      "assets": [
+        {
+          "id": 627895712,
+          "name": "Facility_Studio_V5_5_8_macOS_mac1.dmg",
+          "size": 134298099,
+          "sha256": "214ba5d68bd329ba7d06414f4f3725b7c3dfcd7d3c3924dad51f22fcdffea023",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.8-mac.1/Facility_Studio_V5_5_8_macOS_mac1.dmg"
+        },
+        {
+          "id": 627896018,
+          "name": "SHA256SUMS.txt",
+          "size": 104,
+          "sha256": "d8125dc00fb3da9627b7f212d3eab2a706e13fdb7f636faf88ae6387fab1d01c",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.8-mac.1/SHA256SUMS.txt"
+        }
+      ]
+    }
+  ],
+  "windows_run": 38024376406,
+  "macos_run": 38050889761,
+  "windows_checks": 142,
+  "macos_checks": 134,
+  "windows_source": "50660b26bc7d709add7f35b57ca17e8b987abadc",
+  "macos_source": "c803bc8426a5fbb02b14244f056922943d4d237f",
+  "mac_fix_only_changed_workflow": true,
+  "old_v557_assets_retained": [
+    {
+      "tag": "v5.5.7-win.1",
+      "assets": [
+        {
+          "id": 626888504,
+          "name": "Facility_Studio_V5_5_7_Windows_Offline.exe",
+          "digest": "sha256:4053ed6fcb5e0b0a7d5b726602635c828c2ed50602b826422b6c256f8fc3bcc8"
+        },
+        {
+          "id": 626888624,
+          "name": "SHA256SUMS.txt",
+          "digest": "sha256:e717b64911a7cb0d8a617673411cc4e8055b4cf5e1b2e416b744310b94e9c8a3"
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.7-mac.1",
+      "assets": [
+        {
+          "id": 626881656,
+          "name": "Facility_Studio_V5_5_7_macOS_mac1.dmg",
+          "digest": "sha256:5fc8097548d1ba6bfe6c3a0e5d4f4077c1e399d532f9e2e3924c5c233e56447d"
+        },
+        {
+          "id": 626881778,
+          "name": "SHA256SUMS.txt",
+          "digest": "sha256:257decd125125e25dcc2121596d88a5b7948fa047f762482705edf73ad3b9501"
+        }
+      ]
+    }
+  ],
+  "checked_at": "2026-10-10T12:19:58.829Z",
+  "native_acceptance": [
+    {
+      "path": "docs/evidence/v558-windows-2022-standalone.json",
+      "sha256": "759b3af9d9b12100c44afd291391b754c977ba941045d673b9d50904a0dd4d63",
+      "checks": 142,
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "delivery": {
+        "label": "standalone",
+        "gui_checks": 142,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "7756b22c4a1b2b4c8d23102db54a752acd4f2c3b73ec62036390f4f594807db0",
+        "passed": true
+      }
+    },
+    {
+      "path": "docs/evidence/v558-windows-2022-unicode-executable-path.json",
+      "sha256": "b489bd181218576e278d5197961b0b9118e6bf956a1397843f4360fa683e242b",
+      "checks": 142,
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "delivery": {
+        "label": "unicode-executable-path",
+        "gui_checks": 142,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": false,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "7756b22c4a1b2b4c8d23102db54a752acd4f2c3b73ec62036390f4f594807db0",
+        "passed": true
+      }
+    },
+    {
+      "path": "docs/evidence/v558-windows-2022-zip-extracted.json",
+      "sha256": "c1ba97e82b4228eb7162e2e8e9c6c7b1e5c89094fb4fd5fcfa94c6debb0424c8",
+      "checks": 142,
+      "platform": "Windows-2022Server-10.0.20348-SP0",
+      "delivery": {
+        "label": "zip-extracted",
+        "gui_checks": 142,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "7756b22c4a1b2b4c8d23102db54a752acd4f2c3b73ec62036390f4f594807db0",
+        "passed": true
+      }
+    },
+    {
+      "path": "docs/evidence/v558-windows-2025-standalone.json",
+      "sha256": "58d184d67448daf0ce5233a9c874f68446db384a60781b1098c9e4c971e392ee",
+      "checks": 142,
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "delivery": {
+        "label": "standalone",
+        "gui_checks": 142,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "7756b22c4a1b2b4c8d23102db54a752acd4f2c3b73ec62036390f4f594807db0",
+        "passed": true
+      }
+    },
+    {
+      "path": "docs/evidence/v558-windows-2025-unicode-executable-path.json",
+      "sha256": "58773780ccbd6ac43b7f24cc4d6710a321f51f72469c01b59ab2f9469f248f1b",
+      "checks": 142,
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "delivery": {
+        "label": "unicode-executable-path",
+        "gui_checks": 142,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": false,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "7756b22c4a1b2b4c8d23102db54a752acd4f2c3b73ec62036390f4f594807db0",
+        "passed": true
+      }
+    },
+    {
+      "path": "docs/evidence/v558-windows-2025-zip-extracted.json",
+      "sha256": "2649c8d7f6fc30322880d957e1f51edd9967a2e52e09295dcd4840e484ed547a",
+      "checks": 142,
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "delivery": {
+        "label": "zip-extracted",
+        "gui_checks": 142,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "7756b22c4a1b2b4c8d23102db54a752acd4f2c3b73ec62036390f4f594807db0",
+        "passed": true
+      }
+    },
+    {
+      "path": "docs/evidence/v558-mac-arm64-mac-acceptance.json",
+      "sha256": "76ce03c91d0fba684b27f090b2a655734dac6e66ed0957eb4eb9c0fcff8cdcc1",
+      "checks": 134,
+      "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O"
+    },
+    {
+      "path": "docs/evidence/v558-mac-arm64-launch-services-acceptance.json",
+      "sha256": "8c5bca5ac00730ca9abf43546c03f8384bf8cdf974da94b05e16bd79c51d7706",
+      "checks": 134,
+      "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O"
+    },
+    {
+      "path": "docs/evidence/v558-mac-intel-mac-acceptance.json",
+      "sha256": "6c1d71e8964715a58ab31204701fd3799f3f08b2993ac76a99786b9e6415dc91",
+      "checks": 134,
+      "platform": "macOS-15.7.9-x86_64-i386-64bit-Mach-O"
+    }
+  ],
+  "source_checks": {
+    "v558_review": {
+      "windows": 124,
+      "macos": 125
+    },
+    "inactive_per_platform": 970,
+    "bilingual_per_platform": 3897,
+    "tutorial_per_platform": 87,
+    "regression_scenarios_per_platform": 52,
+    "regression_checks_per_platform": 1247,
+    "expected_regression_rejections": 7,
+    "release_policy_tests": 31,
+    "valid_bypass_samples": 10720,
+    "near_boundary_condition_air_calls": 90
+  },
+  "license_sha256": "e185b75ca79cd309fee9643cfd25d61207bd64af3fe70e6323ed16e4a1ad3802"
+}

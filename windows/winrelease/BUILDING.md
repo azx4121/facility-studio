@@ -2,7 +2,7 @@
 
 [目前下載與英文安裝](../../README.en.md#download-and-run) · [雙語原生驗收](../../docs/2026-10-10-v5.5.8-review-followup.md)
 
-Developer build only: the V5.5.8 candidate EXE bundles Python; publication requires both native jobs to pass. Normal users do not run pip or these build commands. ZIPs are still built for native acceptance and developer diagnostics, but are no longer public delivery assets of the recommended releases. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.5.8-win.1 and must not overwrite its existing public assets. For a future release, update the builder, verifier, publisher and workflow version/output names together. See [distribution signing](../../docs/signing.en.md).
+Developer build only: the published V5.5.8 EXE bundles Python and passed both native jobs. Normal users do not run pip or these build commands. ZIPs are still built for native acceptance and developer diagnostics, but are no longer public delivery assets of the recommended releases. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.5.8-win.1 and must not overwrite its existing public assets. For a future release, update the builder, verifier, publisher and workflow version/output names together. See [distribution signing](../../docs/signing.en.md).
 
 `entry.py` 為單檔 EXE 的視窗模式入口；日常使用不執行 pip、不尋找外部 Python、不下載元件。
 主應用程式與完整計算邏輯仍使用 `windows/facility_studio`；不是另一套精簡計算版本。

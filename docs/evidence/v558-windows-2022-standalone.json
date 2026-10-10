@@ -1,0 +1,583 @@
+{
+  "version": "5.5.8",
+  "revision": "win.1",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "architecture": "AMD64",
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.3.3",
+  "matplotlib": "3.10.9",
+  "frozen": true,
+  "offline_network_audit": true,
+  "timestamp": "2026-10-10T04:34:23.121323+00:00",
+  "checks": [
+    {
+      "name": "Frozen standalone Windows x64 executable",
+      "passed": true
+    },
+    {
+      "name": "Bundled CPython 3.13 runtime",
+      "passed": true
+    },
+    {
+      "name": "Application loaded from bundle",
+      "passed": true
+    },
+    {
+      "name": "No external Python environment",
+      "passed": true
+    },
+    {
+      "name": "NumPy native extension",
+      "passed": true
+    },
+    {
+      "name": "Pillow native extension",
+      "passed": true
+    },
+    {
+      "name": "Bundled notice: LICENSE",
+      "passed": true
+    },
+    {
+      "name": "Bundled notice: LICENSE_GUIDE.md",
+      "passed": true
+    },
+    {
+      "name": "Bundled notice: LICENSE_LEGACY_MIT",
+      "passed": true
+    },
+    {
+      "name": "Bundled notice: THIRD_PARTY_NOTICES.md",
+      "passed": true
+    },
+    {
+      "name": "Bundled notice: THIRD_PARTY_LICENSES.txt",
+      "passed": true
+    },
+    {
+      "name": "Full engineering defaults",
+      "passed": true
+    },
+    {
+      "name": "V557 complete-output inactive-field regression",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: electrical",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: duct",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: gas",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: lighting",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: water",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: air",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: units",
+      "passed": true
+    },
+    {
+      "name": "Windows keypad decimal recognized",
+      "passed": true
+    },
+    {
+      "name": "Normal Delete remains Delete",
+      "passed": true
+    },
+    {
+      "name": "Unicode path Excel export",
+      "passed": true
+    },
+    {
+      "name": "Seven Excel worksheets load",
+      "passed": true
+    },
+    {
+      "name": "Disabled template never fabricates demand",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: 電力",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: PCW",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: CDA",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: N2",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: EXHAUST",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: DI",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: PV",
+      "passed": true
+    },
+    {
+      "name": "Native Windows Tk window system",
+      "passed": true
+    },
+    {
+      "name": "Application icon resources",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: electrical",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: duct",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: gas",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: lighting",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: water",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: air",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: units",
+      "passed": true
+    },
+    {
+      "name": "Equipment import window",
+      "passed": true
+    },
+    {
+      "name": "Full engineering workbench calculates",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 0",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 1",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 2",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 3",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 4",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 5",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 6",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 7",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 8",
+      "passed": true
+    },
+    {
+      "name": "English selector uses a native selection event",
+      "passed": true
+    },
+    {
+      "name": "English main-window title",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: electrical",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: duct",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: gas",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: lighting",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: water",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: air",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: units",
+      "passed": true
+    },
+    {
+      "name": "English choice maps to canonical electrical enum and actual factor",
+      "passed": true
+    },
+    {
+      "name": "Localized validation, blocked export and invalid-input round trip",
+      "passed": true
+    },
+    {
+      "name": "English volume-based lighting labels and live link",
+      "passed": true
+    },
+    {
+      "name": "English gas unit changes preserve actual flow",
+      "passed": true
+    },
+    {
+      "name": "Full workbench language sync, project hash and result parity",
+      "passed": true
+    },
+    {
+      "name": "Full workbench English labels and action captions",
+      "passed": true
+    },
+    {
+      "name": "Engineering quick tools, plot redraw and language round trip",
+      "passed": true
+    },
+    {
+      "name": "AHU stage controls, heat-source enums and balance parity",
+      "passed": true
+    },
+    {
+      "name": "AHU English guidance and visible captions",
+      "passed": true
+    },
+    {
+      "name": "Closed child windows do not break subsequent switching",
+      "passed": true
+    },
+    {
+      "name": "English Excel template loads all seven systems",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: Electrical",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: PCW",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: CDA",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: N2",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: EXHAUST",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: DI",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: PV",
+      "passed": true
+    },
+    {
+      "name": "English action buttons fit the visible desktop",
+      "passed": true
+    },
+    {
+      "name": "Navigation labels have readable native foreground/background contrast",
+      "passed": true
+    },
+    {
+      "name": "Simple tools retain visible Andy Huang credit",
+      "passed": true
+    },
+    {
+      "name": "Author credit and tutorial entry fit the minimum window",
+      "passed": true
+    },
+    {
+      "name": "Offline guide and both practice workspaces are bundled",
+      "passed": true
+    },
+    {
+      "name": "Simple tutorial entry opens a local file, not a website",
+      "passed": true
+    },
+    {
+      "name": "Workbench tutorial entry starts at the first project",
+      "passed": true
+    },
+    {
+      "name": "Tutorial follows the selected UI language",
+      "passed": true
+    },
+    {
+      "name": "Practice workspace loads into actual workbench and calculates",
+      "passed": true
+    },
+    {
+      "name": "Actual ninth Design report page is visible",
+      "passed": true
+    },
+    {
+      "name": "Tutorial restores the original unsaved state",
+      "passed": true
+    },
+    {
+      "name": "V556 basic task hides utility navigation but preserves inputs",
+      "passed": true
+    },
+    {
+      "name": "V556 climate inputs precede the psychrometric plot",
+      "passed": true
+    },
+    {
+      "name": "V556 basic adopted references are visible",
+      "passed": true
+    },
+    {
+      "name": "V556 diagnostics and model share the product version",
+      "passed": true
+    },
+    {
+      "name": "V556 quick-tool title uses the product version",
+      "passed": true
+    },
+    {
+      "name": "V556 quick-tool report uses the product version",
+      "passed": true
+    },
+    {
+      "name": "V556 printable report uses the product version",
+      "passed": true
+    },
+    {
+      "name": "V556 wrapped workbench actions at minimum size: zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V556 author remains visible in compact workbench: zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V556 wrapped workbench actions at minimum size: en",
+      "passed": true
+    },
+    {
+      "name": "V556 author remains visible in compact workbench: en",
+      "passed": true
+    },
+    {
+      "name": "V556 stale report retained immediately with exports disabled",
+      "passed": true
+    },
+    {
+      "name": "V556 invalid input retains only a clearly stale report",
+      "passed": true
+    },
+    {
+      "name": "V556 corrected inputs restore current result and export",
+      "passed": true
+    },
+    {
+      "name": "V556 gas basis switch preserves demand",
+      "passed": true
+    },
+    {
+      "name": "V556 gas reverse basis switch preserves input",
+      "passed": true
+    },
+    {
+      "name": "V556 dimension-only duct mode does not require pressure",
+      "passed": true
+    },
+    {
+      "name": "V556 pressure-check mode exposes required route data",
+      "passed": true
+    },
+    {
+      "name": "V556 AHU chart is a capacity-checked demand target",
+      "passed": true
+    },
+    {
+      "name": "V556 AHU stale table retained and return disabled",
+      "passed": true
+    },
+    {
+      "name": "V556 first actual AHU contribution is previewed and applied",
+      "passed": true
+    },
+    {
+      "name": "V556 repeated actual AHU return is idempotent",
+      "passed": true
+    },
+    {
+      "name": "V556 another actual AHU adds only its demand",
+      "passed": true
+    },
+    {
+      "name": "V556 editable workspace saves ledger and AHUs",
+      "passed": true
+    },
+    {
+      "name": "V556 duplicate creates a new project identity",
+      "passed": true
+    },
+    {
+      "name": "V556 duplicate retains both demand sources",
+      "passed": true
+    },
+    {
+      "name": "V556 Save-as cancellation preserves active path",
+      "passed": true
+    },
+    {
+      "name": "V556 equipment shows normalized percentage and enables explicit transfer",
+      "passed": true
+    },
+    {
+      "name": "V556 equipment transfer changes only selected supply group",
+      "passed": true
+    },
+    {
+      "name": "V556 transfer cancellation retains demand ledger",
+      "passed": true
+    },
+    {
+      "name": "V556 new transfer controls switch to English",
+      "passed": true
+    },
+    {
+      "name": "V556 invalid air input retains an explicitly stale point",
+      "passed": true
+    },
+    {
+      "name": "V556 beginner help follows selected quick tool",
+      "passed": true
+    },
+    {
+      "name": "V557 general HP load enables largest-motor field",
+      "passed": true
+    },
+    {
+      "name": "V557 continuous load ignores retained largest motor",
+      "passed": true
+    },
+    {
+      "name": "V557 reactivated invalid largest motor locates its field",
+      "passed": true
+    },
+    {
+      "name": "V557 recovery-only heater ignores inactive efficiency",
+      "passed": true
+    },
+    {
+      "name": "V557 steam-only report omits wash-pump sizing",
+      "passed": true
+    },
+    {
+      "name": "V557 closed-loop rationale is visible",
+      "passed": true
+    },
+    {
+      "name": "V558 standalone invalid flow locates field and locks export",
+      "passed": true
+    },
+    {
+      "name": "V558 actual Save writes explicitly marked draft",
+      "passed": true
+    },
+    {
+      "name": "V558 saved invalid draft satisfies standalone close guard",
+      "passed": true
+    },
+    {
+      "name": "V558 actual Load restores invalid draft without valid result",
+      "passed": true
+    },
+    {
+      "name": "V558 draft-save state is displayed in English",
+      "passed": true
+    },
+    {
+      "name": "V558 corrected standalone draft recalculates and unlocks export",
+      "passed": true
+    },
+    {
+      "name": "V558 corrected file is ordinary v4 AHU",
+      "passed": true
+    },
+    {
+      "name": "V558 overwritten draft retained as backup",
+      "passed": true
+    },
+    {
+      "name": "V558 declined draft overwrite preserves file and saved hash",
+      "passed": true
+    },
+    {
+      "name": "V558 draft workflow reports no unexpected dialog error",
+      "passed": true
+    },
+    {
+      "name": "Native GUI heartbeat",
+      "passed": true
+    },
+    {
+      "name": "Native Matplotlib TkAgg drawing",
+      "passed": true
+    },
+    {
+      "name": "No GUI callback exceptions",
+      "passed": true
+    }
+  ],
+  "passed": true
+}
