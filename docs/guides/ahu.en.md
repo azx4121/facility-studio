@@ -6,6 +6,10 @@ In **Full workbench**, open the individual AHU window. Set summer/winter conditi
 
 Water-wash/wetted-media evaporation, electrode steam and electric steam are different devices. Evaporative media cool the air; do not assume all humidification is isothermal. Electrode steam needs the manufacturer's conductivity range; DI/UPW is not automatically suitable.
 
+Inactive fields retain drafts but do not affect states, capacity, power, water or reports. Recovery-only/disabled H1 or H2 excludes direct-electric efficiency and ratings. Offline recovery excludes adopted hot-water conditions. Wash circulation, pump head and wash makeup are shown only for selected wash equipment; steam-only selection reports steam demand. Rated power consistently sums selected direct heaters, selected steam generators and EC fans, excluding circulation pumps and auxiliaries. It is not simultaneous operating consumption.
+
+The main project's summer first-stage mode applies to summer only; winter C1 is bypassed. Use this AHU window's seasonal stage controls to set winter preheat, precool, recool and reheat.
+
 Start with [section 8 of the beginner walkthrough](workbench.en.md#ahu) to practice on a small MAU before the larger capacity case below.
 
 <a id="case-18"></a>

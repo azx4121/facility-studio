@@ -85,6 +85,8 @@ def run(destination):
     ):
         check("Bundled notice: " + name, lambda item=name: (runtime / item).is_file())
     check("Full engineering defaults", lambda: bool(calculate(default_project())))
+    from facility_studio.inactive_acceptance import run_checks as check_inactive
+    check("V557 complete-output inactive-field regression", lambda: check_inactive(random_repeats=0)["passed"])
     for tool in ("electrical", "duct", "gas", "lighting", "water", "air", "units"):
         check(
             "Independent calculation: " + tool,
@@ -216,6 +218,8 @@ def run(destination):
             check_tutorial(root, app, workbench, check, pump)
             from facility_studio.usability_acceptance import run as check_usability
             check_usability(root, app, workbench, check, pump, destination)
+            from facility_studio.inactive_acceptance import run_ui as check_inactive_ui
+            check_inactive_ui(workbench, check, pump)
             check("Native GUI heartbeat", lambda: (pump(), True)[1])
             from matplotlib.figure import Figure
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -259,7 +263,7 @@ def run(destination):
 
     result = {
         "version": __version__,
-        "revision": "win.3",
+        "revision": "win.1",
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,

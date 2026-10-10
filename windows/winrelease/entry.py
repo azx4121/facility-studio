@@ -21,7 +21,7 @@ def main():
             sys.stdout = log_file
         if sys.stderr is None:
             sys.stderr = log_file
-        print("\nFacility Studio win.3 start " + datetime.now().isoformat())
+        print("\nFacility Studio win.1 start " + datetime.now().isoformat())
 
     if os.environ.get("FACILITY_TEST_BLOCK_NETWORK") == "1":
         def offline_audit(event, arguments):

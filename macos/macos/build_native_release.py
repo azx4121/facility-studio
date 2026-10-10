@@ -14,8 +14,8 @@ from native_probe import RELEASE_SHA256, RELEASE_URL
 from native_sign import sign_app
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "5.5.6-mac.2"
-PACKAGE_NAME = "Facility_Studio_V5_5_6_macOS_mac2"
+VERSION = "5.5.7-mac.1"
+PACKAGE_NAME = "Facility_Studio_V5_5_7_macOS_mac1"
 
 
 def command(args, log, timeout=180):
@@ -101,8 +101,8 @@ def main():
     plist_path = app / "Contents/Info.plist"
     with plist_path.open("rb") as file:
         info = plistlib.load(file)
-    info["CFBundleVersion"] = "5.5.6.2"
-    info["CFBundleShortVersionString"] = "5.5.6"
+    info["CFBundleVersion"] = "5.5.7.1"
+    info["CFBundleShortVersionString"] = "5.5.7"
     with plist_path.open("wb") as file:
         plistlib.dump(info, file)
     print("Applying Apple native signatures...", flush=True)
@@ -185,7 +185,7 @@ def main():
 
     source_zip = stage / "Source_and_Verification.zip"
     zip_tree(ROOT, source_zip, "Facility_Studio_macOS_Source")
-    delivered_zip = output / "Facility_Studio_V5_5_6_macOS_mac2_OneClick.zip"
+    delivered_zip = output / "Facility_Studio_V5_5_7_macOS_mac1_OneClick.zip"
     command(
         [
             "/usr/bin/ditto",
@@ -222,13 +222,13 @@ def main():
     )
     (dmg_stage / "Applications").symlink_to("/Applications")
     shutil.copy2(ROOT / "README_macOS.txt", dmg_stage / "請先閱讀.txt")
-    dmg = output / "Facility_Studio_V5_5_6_macOS_mac2.dmg"
+    dmg = output / "Facility_Studio_V5_5_7_macOS_mac1.dmg"
     command(
         [
             "/usr/bin/hdiutil",
             "create",
             "-volname",
-            "Facility Studio 5.5.6",
+            "Facility Studio 5.5.7",
             "-srcfolder",
             str(dmg_stage),
             "-format",

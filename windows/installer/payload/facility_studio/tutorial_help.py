@@ -25,7 +25,7 @@ def prepare_tutorial(destination=None):
     source = Path(__file__).with_name("resources") / "beginner_tutorial.zip"
     content = source.read_bytes()
     folder = (Path(destination) if destination is not None else app_data() / "Tutorial")
-    folder = folder / ("V5_5_6_" + sha256(content).hexdigest()[:16])
+    folder = folder / ("V5_5_7_" + sha256(content).hexdigest()[:16])
     folder.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(source) as archive:
         entries = archive.infolist()

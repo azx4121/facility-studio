@@ -77,6 +77,8 @@ def run():
         lambda: Image.new("RGB", (2, 2)).resize((4, 4)).size == (4, 4),
     )
     check("Full engineering calculation", lambda: bool(calculate(default_project())))
+    from facility_studio.inactive_acceptance import run_checks as check_inactive
+    check("V557 complete-output inactive-field regression", lambda: check_inactive(random_repeats=0)["passed"])
     for tool in ("electrical", "duct", "gas", "lighting", "water", "air", "units"):
         check(
             f"Independent tool: {tool}",
@@ -220,6 +222,8 @@ def run():
         check_tutorial(root, app, workbench, check, pump_gui)
         from facility_studio.usability_acceptance import run as check_usability
         check_usability(root, app, workbench, check, pump_gui, destination)
+        from facility_studio.inactive_acceptance import run_ui as check_inactive_ui
+        check_inactive_ui(workbench, check, pump_gui)
         check("Native UI heartbeat", lambda: (pump_gui(), True)[1])
         check("No native GUI callback exceptions", lambda: not callback_errors)
         from matplotlib.figure import Figure

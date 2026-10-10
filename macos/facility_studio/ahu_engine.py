@@ -282,14 +282,15 @@ def _nm_calculate_base(i):
         )
     )
     fan_installed = n("fan_qty") * n("fan_unit_kw")
+    wash_selected = "水洗" in i["humidifier"]
     circ = (
         n("media_area") * n("wetting_rate")
-        if n("media_area") and n("wetting_rate")
+        if wash_selected and n("media_area") and n("wetting_rate")
         else None
     )
     head = (
         sum((n(k) for k in ["spray_head", "spray_rise", "loop_loss"]))
-        if all((i[k].strip() for k in ["spray_head", "spray_rise", "loop_loss"]))
+        if wash_selected and all((i[k].strip() for k in ["spray_head", "spray_rise", "loop_loss"]))
         else None
     )
     return {
@@ -300,9 +301,11 @@ def _nm_calculate_base(i):
         "winter": winter,
         "circulation_lpm": circ,
         "pump_head_m": head,
-        "evap_makeup_lph": max(summer["evap_kg_h"], winter["evap_kg_h"]),
-        "makeup_plus_allowance_lph": max(summer["evap_kg_h"], winter["evap_kg_h"])
-        + n("drift_lph"),
+        "evap_makeup_lph": max(summer["evap_kg_h"], winter["evap_kg_h"]) if wash_selected else 0.0,
+        "makeup_plus_allowance_lph": (
+            max(summer["evap_kg_h"], winter["evap_kg_h"]) + n("drift_lph")
+            if wash_selected else 0.0
+        ),
         "air_dp_pa": dp,
         "pressure_complete": i["dp_status"] == "已填完整同風量資料"
         and all((i[k].strip() for k in i if k.startswith("dp_") and k != "dp_status")),
@@ -328,7 +331,7 @@ def nm_validate(i):
             i[tag + "_hw_in"]
         ) <= float(i[tag + "_hw_out"]):
             raise InputError(f"本段熱水供水必須高於回水", field_name=f"{tag}_hw_out")
-        if 0 < float(i[tag + "_eta"]) < 0.1:
+        if tag + "_eta" not in inactive and 0 < float(i[tag + "_eta"]) < 0.1:
             raise InputError(f"效率限 0 沿用共同或 0.1～1", field_name=f"{tag}_eta")
     return i
 
@@ -372,13 +375,18 @@ def nm_read_project(path):
 
 def nm_heater(tag, s, target_t, m, i, p):
     source = i.get(tag + "_source", "熱水＋電熱")
+    electric_enabled = source in ["電熱", "熱水＋電熱"]
+    water_enabled = source in ["回收熱水", "熱水＋電熱"] and i["recovery"].startswith("二期")
     j = dict(i)
-    if i.get(tag + "_water_mode") == "本段獨立設定":
+    if water_enabled and i.get(tag + "_water_mode") == "本段獨立設定":
         for suffix in ["in", "out", "approach"]:
             j["hw_" + suffix] = i[tag + "_hw_" + suffix]
-    if float(i.get(tag + "_eta", 0)) > 0:
+    if electric_enabled and float(i.get(tag + "_eta", 0)) > 0:
         j["heat_eta"] = i[tag + "_eta"]
-    if source in ["電熱", "停用"]:
+    if not electric_enabled:
+        j["heat_eta"] = "1"
+        j[tag + "_kw"] = "0"
+    if not water_enabled:
         j[tag + "_hw_kw"] = "0"
     h = _nm_heater_base(tag, s, target_t, m, j, p)
     h["source"] = source
@@ -386,15 +394,20 @@ def nm_heater(tag, s, target_t, m, i, p):
     if source in ["回收熱水", "停用"]:
         h["unserved_kw"] = h["electric_air_kw"]
         h["electric_air_kw"] = h["electric_kw"] = 0.0
+        h["backup_electric_kw"] = 0.0
     sf = 1 + float(i["sf"]) / 100
     h["source_pass"] = (
         h["unserved_kw"] < 1e-06
-        and h["electric_kw"] * sf <= float(i[tag + "_kw"]) + 1e-06
+        and (not electric_enabled or h["electric_kw"] * sf <= float(j[tag + "_kw"]) + 1e-06)
         and (h["hw_kw"] * sf <= float(j[tag + "_hw_kw"]) + 1e-06)
     )
-    h["effective_water"] = {
-        k: float(j[k]) for k in ["hw_in", "hw_out", "hw_approach", "heat_eta"]
-    }
+    h["water_enabled"] = water_enabled
+    h["electric_enabled"] = electric_enabled
+    h["effective_water"] = (
+        {k: float(j[k]) for k in ["hw_in", "hw_out", "hw_approach"]}
+        if water_enabled else None
+    )
+    h["effective_electric_eta"] = float(j["heat_eta"]) if electric_enabled else None
     return h
 
 
@@ -706,5 +719,7 @@ def nm_calculate(i):
         + r["fan_installed_kw"]
         + (float(i["steam_kw"]) if "蒸汽" in i["humidifier"] else 0)
     )
+    # Compatibility alias; both keys now describe the same selected equipment.
+    r["installed_electric_kw"] = r["active_installed_electric_kw"]
     r["quality"] = assess_ahu(r)
     return r

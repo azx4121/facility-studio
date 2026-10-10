@@ -514,6 +514,11 @@ def group_factor(count):
             return f
 
 
+def uses_largest_motor(kind, has_hp):
+    """Shared activation rule for both the panel form and its sizing model."""
+    return kind != "連續負載" and (kind == "馬達負載" or has_hp)
+
+
 def electrical_result(i, warnings):
     n = lambda k, lo=None, hi=None: number(i[k], k, lo, hi)
     voltage = VOLTAGE_MAP[choice(i["e_volt"], tuple(VOLTAGE_MAP), "電壓")]
@@ -578,10 +583,14 @@ def electrical_result(i, warnings):
         )
         kw = pan["kw"]
         current = kw * 1000 / (math.sqrt(3) * voltage * pf)
-        largest = n("e_" + key.lower() + "_largest_hp", 0, 10000000.0)
+        hasmotor = bool(i.get(prefix + "_has_hp", pan["hp"] > 0)) or kind == "馬達負載"
+        largest_key = prefix + "_largest_hp"
+        largest = n(largest_key, 0, 10000000.0) if uses_largest_motor(kind, hasmotor) else 0.0
         if largest > pan["hp"] + 1e-08:
-            raise InputError(f"{key} 最大馬達 HP 不得大於明列的 HP 合計")
-        hasmotor = pan["hp"] > 0 or kind == "馬達負載"
+            raise InputError(
+                f"{key} 最大馬達 HP 不得大於明列的 HP 合計；請先以 HP 列出馬達負荷",
+                field_name=largest_key,
+            )
         if kind == "連續負載":
             design = current * 1.25
         elif hasmotor and largest > 0:
@@ -687,7 +696,7 @@ def electrical_result(i, warnings):
         if hasmotor:
             warnings.append(
                 key
-                + " 含馬達：目前用 kW／HP 估算電流，最大馬達未填時保守用全負荷 125%；斷路器僅候選，須另核啟動、過載與短路保護。"
+                + " 含馬達：連續負載採總電流 125%；其他負載採總電流＋最大馬達電流 25%，最大馬達未知時採總電流 125%。斷路器僅候選，須另核啟動、過載與短路保護。"
             )
         if selected["runs"] > 1:
             warnings.append(
@@ -698,7 +707,7 @@ def electrical_result(i, warnings):
         [
             "電氣採三相平衡及同一等效 PF。kW 為電氣輸入，HP 為軸輸出並除效率；不同設備不得重複填入。",
             "原電纜表缺少安裝方式／來源，完整保留但僅作專案初估；2.0 欄位量綱可疑，保留原資料但不參與選型。",
-            "缺少 75°C 端子表時保守用原 60°C 表限制。環溫及同管設定取兩輸入中較不利值。",
+            "缺少 75°C 端子表時保守用原 60°C 表限制。完整工作台採環溫／同管下拉區間；獨立快算採實填環溫及載流導線數。",
             "一般保護候選要求設計電流 ≤ AT ≤ 有效載流／小線保護上限；未自動套用上調一級例外。",
             "尚需確認短路電流、Icu/Ics、選擇協調、接地、中性線與諧波；本報告不構成配電施工核定。",
         ]

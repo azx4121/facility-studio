@@ -212,6 +212,13 @@ def pressure_result(
         estimate_mode=mode,
         allowance_pct=allowance * 100,
         equipment_included=known == "已知設備壓差",
+        static_note=(
+            "風管不使用水側靜揚程；保留的靜揚程草稿不參與計算。"
+            if not is_water else
+            "閉式循環不把樓高加進循環泵差壓；系統靜壓另核。"
+            if config["boundary"] == "閉式循環" else
+            "開式系統靜揚程採有效高差；請核對取水與出水邊界。"
+        ),
     )
     return r
 
@@ -855,7 +862,21 @@ def electrical_from_inputs(i):
     n = lambda k: float(i[k])
     ei = dict(EXTRA_DEFAULTS)
     ei.update(i)
-    ei.update(e_ambient_c="-20", e_loaded_conductors="1", e_up_hp="0", e_up_kw="0")
+    # The workbench exposes ranges, not numeric ambient/count inputs. Represent
+    # the adopted range in the adapter instead of fabricating -20 C / 1 wire.
+    ambient_upper = {
+        "35℃ 以下 (標準)": 35, "36~40℃": 40, "41~45℃": 45,
+        "46~50℃": 50, "51~55℃": 55,
+    }
+    conductor_upper = {
+        "3根以下 (標準)": 3, "4根": 4, "5~6根": 6, "7~9根": 9,
+        "10~20根": 20, "21~30根": 30, "31~40根": 40, "41根以上": 41,
+    }
+    ei.update(
+        e_ambient_c=str(ambient_upper[i["e_temp"]]),
+        e_loaded_conductors=str(conductor_upper[i["e_pipe"]]),
+        e_up_hp="0", e_up_kw="0",
+    )
 
     def load_kw(key):
         v = n(key)
@@ -877,6 +898,7 @@ def electrical_from_inputs(i):
         ("up", ["eq", "oven"]),
         ("np", ["fan", "heat", "humid", "exh", "pump"]),
     ]:
+        ei[f"e_{pan}_has_hp"] = any(i[f"u_e_{pan}_{key}"] == "HP" for key in keys)
         hp = sum((n(f"e_{pan}_{key}") for key in keys if i[f"u_e_{pan}_{key}"] == "HP"))
         kw = sum((load_kw(f"e_{pan}_{key}") for key in keys))
         if pan == "up":

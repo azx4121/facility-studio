@@ -183,6 +183,7 @@ class MainView:
                     else "沿用詳細管件／設備設定；切換簡易不會刪除詳細設定。"
                 )
                 + f"  效率採 {self.pd[self.selected_pd]['efficiency'].get()}；流量由各系統連動。"
+                + ("\n" + self.result["pressure"][self.selected_pd]["static_note"] if self.result else "")
             )
         if hasattr(self, "assumption_labels"):
             for page, label in self.assumption_labels.items():

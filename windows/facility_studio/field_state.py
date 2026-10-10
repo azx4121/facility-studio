@@ -5,6 +5,7 @@ placeholders; mode logic must never consume an inactive engineering parameter.
 """
 from .schema import DEFAULTS, FIELDS, PD_DEFAULTS
 from .ahu_schema import NM_DEFAULTS, NM_FIELDS
+from .utils import uses_largest_motor
 
 
 def main_inactive(i):
@@ -46,11 +47,15 @@ def main_inactive(i):
             disable([f"gas{j}_barg"], "採用共用最低管內壓力")
         if i.get(f"gas{j}_v_mode") != "自訂流速":
             disable([f"gas{j}_velocity"], "採用氣體種類的流速參考")
-    for panel in ["up", "np"]:
+    for panel, loads in {
+        "up": ("eq", "oven"),
+        "np": ("fan", "heat", "humid", "exh", "pump"),
+    }.items():
         if i.get(f"e_{panel}_pf_mode") != "本盤獨立 PF":
             disable([f"e_{panel}_pf"], "本盤採共用 PF，獨立值只保留為草稿")
-        if i.get(f"e_{panel}_type") != "馬達負載":
-            disable([f"e_{panel}_largest_hp"], "目前不是馬達群負載")
+        has_hp = any(i.get(f"u_e_{panel}_{load}") == "HP" for load in loads)
+        if not uses_largest_motor(i.get(f"e_{panel}_type"), has_hp):
+            disable([f"e_{panel}_largest_hp"], "本盤不採用最大馬達加成；停用值不參與計算")
     return {k: reason for k, reason in off.items() if k in FIELDS}
 
 
@@ -61,36 +66,11 @@ WATER_ROWS = [
 ]
 
 
-def _usable(value, spec, fallback):
-    """Keep valid inactive inventory values; tolerate malformed inactive drafts."""
-    import math
-    options = spec.get("options")
-    low, high = spec.get("low"), spec.get("high")
-    if "limit" in spec:
-        limit = spec["limit"]
-        if isinstance(limit, list):
-            options = limit
-        elif isinstance(limit, tuple):
-            low, high = limit
-        else:
-            return value if str(value).strip() else fallback
-    if options:
-        return value if value in options else fallback
-    if spec.get("text"):
-        return value if str(value).strip() else fallback
-    try:
-        n = float(value)
-        if math.isfinite(n) and (low is None or n >= low) and (high is None or n <= high):
-            return value
-    except (ValueError, TypeError):
-        pass
-    return fallback
-
-
 def effective_main(i):
+    """Normalize every inactive field, including valid but stale saved values."""
     out = dict(i)
     for k in main_inactive(i):
-        out[k] = _usable(i[k], FIELDS[k], DEFAULTS[k])
+        out[k] = DEFAULTS[k]
     return out
 
 
@@ -145,9 +125,16 @@ def ahu_inactive(i):
     if "水洗" not in i.get("humidifier", ""):
         disable(["wash_mode", "wash_eff", "wash_rating", "media_area", "wetting_rate", "drift_lph", "spray_head", "spray_rise", "loop_loss", "pump_input_kw"], "目前未採用水洗加濕，設備記錄保留")
     any_common_water = False
+    any_common_electric = False
     for tag in ["h1", "h2"]:
-        if i.get(tag + "_source") not in ["電熱", "熱水＋電熱"]:
+        electric = i.get(tag + "_source") in ["電熱", "熱水＋電熱"]
+        if not electric:
             disable([tag + "_kw", tag + "_eta"], "本段不採用直接電熱，配置資料保留")
+        try:
+            inherits_efficiency = float(i.get(tag + "_eta", "0")) == 0
+        except (ValueError, TypeError):
+            inherits_efficiency = True  # Validate active drafts before adopting.
+        any_common_electric |= electric and inherits_efficiency
         water = i.get(tag + "_source") in ["回收熱水", "熱水＋電熱"] and i.get("recovery", "").startswith("二期")
         if not water:
             disable([tag + "_hw_kw", tag + "_water_mode"], "本段目前不採用熱回收水")
@@ -157,16 +144,20 @@ def ahu_inactive(i):
         any_common_water |= water and not custom
     if not any_common_water:
         disable(["hw_in", "hw_out", "hw_approach"], "沒有啟用共用回收熱水的段落")
+    if not any_common_electric:
+        disable(["heat_eta"], "沒有電熱段沿用共同效率")
     return {k: v for k, v in off.items() if k in NM_FIELDS}
 
 
 def effective_ahu(i):
     out = dict(i)
     for k in ahu_inactive(i):
+        if k == "linked_main_hash":
+            continue  # Read-only source metadata, not an engineering input.
         fallback = NM_DEFAULTS[k]
         if k.endswith("_kw"):
             fallback = "0"
-        out[k] = _usable(i[k], NM_FIELDS[k], fallback)
+        out[k] = fallback
     return out
 
 

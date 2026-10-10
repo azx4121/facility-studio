@@ -2,7 +2,7 @@
 
 [English](workbench.en.md) · [下載軟體](../../README.md#下載) · [工具指南](README.md) · [離線教學懶人包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)
 
-適用 **V5.5.6 Windows／macOS**。先完成第 1～6 節，就能做出第一份練習報告；第 7～9 節是需要時才使用的延伸操作。這份教學使用合成資料，不含任何業主或公司專案。
+適用 **V5.5.7 Windows／macOS**。先完成第 1～6 節，就能做出第一份練習報告；第 7～9 節是需要時才使用的延伸操作。這份教學使用合成資料，不含任何業主或公司專案。
 
 <a id="start"></a>
 ## 1. 先選對入口

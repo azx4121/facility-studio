@@ -2,7 +2,7 @@
 
 [繁體中文](workbench.md) · [Download the app](../../README.en.md#download-and-run) · [Tool guides](README.en.md) · [Offline tutorial package](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)
 
-For **V5.5.6 on Windows and macOS**. Finish sections 1–6 to produce your first practice report. Sections 7–9 are optional extensions. All examples use synthetic data, with no client or company project information.
+For **V5.5.7 on Windows and macOS**. Finish sections 1–6 to produce your first practice report. Sections 7–9 are optional extensions. All examples use synthetic data, with no client or company project information.
 
 <a id="start"></a>
 ## 1. Choose the right starting point

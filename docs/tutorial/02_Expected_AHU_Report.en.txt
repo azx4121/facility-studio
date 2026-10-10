@@ -1,13 +1,14 @@
-Overall status:  Data required  (passed means estimates under known conditions, not manufacturer performance certification) [ Data required ]  Fan pressure-drop data completeness :  Final stage resistances at matching airflow are missing. Blank means unknown; explicit 0 means a confirmed zero. 
-[ Data required ]  Fan heat to airflow :  Currently estimated at 0 kW. Actual operating power, motor location and heat to airflow required. 
-[ Data required ]  Air washer  Circulating water flow :  Effective wetted area and manufacturer irrigation density required. 
-[ Data required ]  Washer circulation-pump head :  Nozzle head, elevation and piping losses required. A confirmed 0 m elevation is valid. 
-[ Data required ]  Manufacturer performance at design conditions :  Nominal RT / kW and necessary-condition checks do not replace coil, fan and humidifier performance at matching conditions. 
-Tutorial MAU-01 | MAU stage demand / rated-capacity verification 
- This table calculates requirements. When rated-capacity checks fail, target states do not represent achievable installed-equipment performance. 
+Overall status:  Data required  (passed means estimates under known conditions, not manufacturer performance certification) [ Data required ]  Fan pressure-drop data completeness :  Final stage resistances at matching airflow are missing. Blank means unknown; explicit 0 means a confirmed zero.
+[ Data required ]  Fan heat to airflow :  Currently estimated at 0 kW. Actual operating power, motor location and heat to airflow required.
+[ Data required ]  Air washer  Circulating water flow :  Effective wetted area and manufacturer irrigation density required.
+[ Data required ]  Washer circulation-pump head :  Nozzle head, elevation and piping losses required. A confirmed 0 m elevation is valid.
+[ Data required ]  Manufacturer performance at design conditions :  Nominal RT / kW and necessary-condition checks do not replace coil, fan and humidifier performance at matching conditions.
+Tutorial MAU-01 | MAU stage demand / rated-capacity verification
+ This table calculates requirements. When rated-capacity checks fail, target states do not represent achievable installed-equipment performance.
  Seasonal supply targets:  Summer  358.32741149943365 CMH (supply state) / 22.0°C / 41.01522224098197%RH;  Winter  358.32741149943365 CMH (supply state) / 22.0°C / 41.01522224098197%RH ; source main project 1813a0bcf9cd7e880a43d13c40f48544642944fb285c12889c734232c0a9301c
-H1  Electric heat  8 kW / H2  Electric heat  8 kW retained in full; recovered hot water 30/24 °C, scenario:  Phase 1 unavailable .
- C1 water temperature 12.0/17.0°C; C2 7.0/12.0 °C; wetted-media effectiveness 0.85 (estimate / selection pending), capacity margin 0%.
+ H1 heat source:  Electric heat  ; H2 heat source:  Electric heat  ; recovered-hot-water scenario:  Phase 1 unavailable .
+ C1 water temperature 12.0/17.0°C; C2 7.0/12.0°C;  Capacity  Margin  0%.
+ Wetted-media effectiveness 0.85 (preliminary / manufacturer selection required).
 
  Summer :  Outdoor air  35.00°C / 70.00 %RH, dry-air mass flow 0.11777 kg/s
  Stage                      dry bulb °C      RH%       dew point °C       w g/kg      h kJ/kg
@@ -20,12 +21,14 @@ C2  Secondary cooling                    8.162   100.000      8.162    6.730387 
 H2  Electric heat  ( Demand )              22.000    41.015      8.162    6.730387    39.240106
 EC  Fan                   22.000    41.015      8.162    6.730387    39.240106
 PTFE HEPA /  Supply air            22.000    41.015      8.162    6.730387    39.240106
-H1: 35.000°C / 70.000% → 35.000°C / 70.000 %; total heat demand 0.000 kW; hot water 0.000 kW / 0.000 LPM;  Electrical  Demand  0.000 kW; electrical demand without recovery 0.000 kW.
-H2: 8.162°C / 100.000% → 22.000°C / 41.015 %; total heat demand 1.660 kW; hot water 0.000 kW / 0.000 LPM;  Electrical  Demand  1.660 kW; electrical demand without recovery 1.660 kW.
+H1: 35.000°C / 70.000% → 35.000°C / 70.000 %; total heat demand 0.000 kW; hot water 0.000 kW / 0.000 LPM;  Electrical  Demand  0.000 kW.
+  all-electric full-load backup  Demand  0.000 kW; this stage's rated electric heater 8.000 kW.
+H2: 8.162°C / 100.000% → 22.000°C / 41.015 %; total heat demand 1.660 kW; hot water 0.000 kW / 0.000 LPM;  Electrical  Demand  1.660 kW.
+  all-electric full-load backup  Demand  1.660 kW; this stage's rated electric heater 8.000 kW.
 C1  Precooling  : water-side 4.341 kW / 1.234 US RT; required water 12.443 LPM;  Condensate  4.011 kg/h.
 C2  Secondary cooling  : water-side 4.308 kW / 1.225 US RT; required water 12.348 LPM;  Condensate  3.802 kg/h.
  Washer evaporation demand 0.000 kg/h (not circulation-pump flow); seasonal washer  Bypass .
- Rated-capacity / necessary-condition checks:  H1 all-electric full-load backup :  Passed  Preliminary estimate ;  H1 current heat-source scenario :  Passed  Preliminary estimate ;  H2 all-electric full-load backup :  Passed  Preliminary estimate ;  H2 current heat-source scenario :  Passed  Preliminary estimate ;  C1 schedule candidate capacity :  Passed  Preliminary estimate ; C1 achievable ADP :  Passed  Preliminary estimate ;  C2 schedule candidate capacity :  Passed  Preliminary estimate ;  C2 achievable ADP :  Passed  Preliminary estimate ;  Supply air  dry bulb  Target :  Passed  Preliminary estimate ;  Supply humidity-ratio target :  Passed  Preliminary estimate ;  Wetted-media schedule candidate capacity :  Passed  Preliminary estimate 
+ Rated-capacity / necessary-condition checks:  H1 all-electric full-load backup :  Passed  Preliminary estimate ;  H1 current heat-source scenario :  Passed  Preliminary estimate ;  H2 all-electric full-load backup :  Passed  Preliminary estimate ;  H2 current heat-source scenario :  Passed  Preliminary estimate ;  C1 schedule candidate capacity :  Passed  Preliminary estimate ; C1 achievable ADP :  Passed  Preliminary estimate ;  C2 schedule candidate capacity :  Passed  Preliminary estimate ;  C2 achievable ADP :  Passed  Preliminary estimate ;  Supply air  dry bulb  Target :  Passed  Preliminary estimate ;  Supply humidity-ratio target :  Passed  Preliminary estimate ;  Wetted-media schedule candidate capacity :  Passed  Preliminary estimate
 
  Winter :  Outdoor air  8.00°C / 70.00 %RH, dry-air mass flow 0.11777 kg/s
  Stage                      dry bulb °C      RH%       dew point °C       w g/kg      h kJ/kg
@@ -38,36 +41,39 @@ C2  Secondary cooling                    9.857    89.186      8.162    6.730387 
 H2  Electric heat  ( Demand )              22.000    41.015      8.162    6.730387    39.240106
 EC  Fan                   22.000    41.015      8.162    6.730387    39.240106
 PTFE HEPA /  Supply air            22.000    41.015      8.162    6.730387    39.240106
-H1: 8.000°C / 70.000% → 15.037°C / 43.929 %; total heat demand 0.841 kW; hot water 0.000 kW / 0.000 LPM;  Electrical  Demand  0.841 kW; electrical demand without recovery 0.841 kW.
-H2: 9.857°C / 89.186% → 22.000°C / 41.015 %; total heat demand 1.457 kW; hot water 0.000 kW / 0.000 LPM;  Electrical  Demand  1.457 kW; electrical demand without recovery 1.457 kW.
+H1: 8.000°C / 70.000% → 15.037°C / 43.929 %; total heat demand 0.841 kW; hot water 0.000 kW / 0.000 LPM;  Electrical  Demand  0.841 kW.
+  all-electric full-load backup  Demand  0.841 kW; this stage's rated electric heater 8.000 kW.
+H2: 9.857°C / 89.186% → 22.000°C / 41.015 %; total heat demand 1.457 kW; hot water 0.000 kW / 0.000 LPM;  Electrical  Demand  1.457 kW.
+  all-electric full-load backup  Demand  1.457 kW; this stage's rated electric heater 8.000 kW.
 C1  Precooling  : water-side 0.000 kW / 0.000 US RT; required water 0.000 LPM;  Condensate  0.000 kg/h.
 C2  Secondary cooling  : water-side 0.000 kW / 0.000 US RT; required water 0.000 LPM;  Condensate  0.000 kg/h.
  Washer evaporation demand 0.885 kg/h (not circulation-pump flow); seasonal washer  Operating .
- Rated-capacity / necessary-condition checks:  H1 all-electric full-load backup :  Passed  Preliminary estimate ;  H1 current heat-source scenario :  Passed  Preliminary estimate ;  H2 all-electric full-load backup :  Passed  Preliminary estimate ;  H2 current heat-source scenario :  Passed  Preliminary estimate ;  C1 schedule candidate capacity :  Passed  Preliminary estimate ; C1 achievable ADP :  Passed  Preliminary estimate ;  C2 schedule candidate capacity :  Passed  Preliminary estimate ;  C2 achievable ADP :  Passed  Preliminary estimate ;  Supply air  dry bulb  Target :  Passed  Preliminary estimate ;  Supply humidity-ratio target :  Passed  Preliminary estimate ;  Wetted-media schedule candidate capacity :  Passed  Preliminary estimate 
- Air-washer circulation and fans 
- Circulating water flow :  Manufacturer effective wetted area and irrigation density required. No fixed evaporation multiplier is assumed. 
- Circulation-pump head:  Nozzle operating pressure, elevation and piping / filter losses required. Head is not automatically assumed to be 20 m. 
- Maximum evaporative makeup approximately 0.885 L/h; including entered carryover / blowdown: 0.885 L/h, excluding unspecified blowdown or startup tank fill. 
+ Rated-capacity / necessary-condition checks:  H1 all-electric full-load backup :  Passed  Preliminary estimate ;  H1 current heat-source scenario :  Passed  Preliminary estimate ;  H2 all-electric full-load backup :  Passed  Preliminary estimate ;  H2 current heat-source scenario :  Passed  Preliminary estimate ;  C1 schedule candidate capacity :  Passed  Preliminary estimate ; C1 achievable ADP :  Passed  Preliminary estimate ;  C2 schedule candidate capacity :  Passed  Preliminary estimate ;  C2 achievable ADP :  Passed  Preliminary estimate ;  Supply air  dry bulb  Target :  Passed  Preliminary estimate ;  Supply humidity-ratio target :  Passed  Preliminary estimate ;  Wetted-media schedule candidate capacity :  Passed  Preliminary estimate
+ Air-washer circulation
+ Circulating water flow :  Manufacturer effective wetted area and irrigation density required. No fixed evaporation multiplier is assumed.
+ Circulation-pump head:  Nozzle operating pressure, elevation and piping / filter losses required. Head is not automatically assumed to be 20 m.
+ Maximum evaporative makeup approximately 0.885 L/h; including entered carryover / blowdown: 0.885 L/h, excluding unspecified blowdown or startup tank fill.
+ Fan / selected electrical ratings
  Entered air-side pressure drop 0.0 Pa ( Data incomplete; equipment selection cannot be finalized  ); installed EC fans 1×0.37 kW.
- Fan input power required at entered pressure / efficiency 0.000 kW; installed nominal electric-heater + EC power 16.370 kW, excluding circulation pump and auxiliaries. 
- Key formulas: m_da = V(CMH)/(3600×v_da); Q = m_da Δh; sensible heating keeps w constant. Washer h_out ≈ h_in, T_out = T_in−ε(T_in−T_as); evaporation G = m_da Δw×3600. Coil water-side duty deducts condensate liquid enthalpy. 
- Limits: the recirculating wetted-media model is approximately adiabatic, excluding makeup-water sensible heat, pump heat to water and water-temperature control. Saturation / AMC removal is not guaranteed. Manufacturer recovery-coil capacity at design conditions is required; approach only screens necessary conditions. 
- Supply T/RH defines this AHU boundary. If these are room setpoints, first account for room moisture to calculate required supply humidity ratio. Verify airflow reference, media effectiveness, C1 outlet, fan heat and ratings against original submittals. 
- Stage controls / selected heat sources (V5.5.5) 
-H1:  Electric heat ; H2:  Electric heat ;  Humidification :  Recirculating wetted-media air washer  . A retained nominal heater rating does not mean a disabled source is supplying heat. 
- Summer :  Mixed specified / automatic stage demand 
-H1  Automatic demand 
-C1  Automatic demand 
-C2  Automatic demand 
-H2  Automatic demand 
-H1 adopted hot water 30/24 °C, approach 2 K, electric-heater efficiency 1.
-H2 adopted hot water 30/24 °C, approach 2 K, electric-heater efficiency 1.
- Winter :  Mixed specified / automatic stage demand 
-H1  Automatic demand 
-C1  Automatic demand 
-C2  Automatic demand 
-H2  Automatic demand 
-H1 adopted hot water 30/24 °C, approach 2 K, electric-heater efficiency 1.
-H2 adopted hot water 30/24 °C, approach 2 K, electric-heater efficiency 1.
- Selected equipment nominal electrical power 16.370 kW (excluding washer pump / auxiliaries); not automatically added to plant NP to avoid duplication. 
+ Fan input power required at entered pressure / efficiency 0.000 kW; selected heater + steam + EC rated power 16.370 kW, excluding circulation pump and auxiliaries.
+ Key formulas: m_da = V(CMH)/(3600×v_da); Q = m_da Δh; sensible heating keeps w constant. Washer h_out ≈ h_in, T_out = T_in−ε(T_in−T_as); evaporation G = m_da Δw×3600. Coil water-side duty deducts condensate liquid enthalpy.
+ Limits: the recirculating wetted-media model is approximately adiabatic, excluding makeup-water sensible heat, pump heat to water and water-temperature control. Saturation / AMC removal is not guaranteed. Manufacturer recovery-coil capacity at design conditions is required; approach only screens necessary conditions.
+ Supply T/RH defines this AHU boundary. If these are room setpoints, first account for room moisture to calculate required supply humidity ratio. Verify airflow reference, media effectiveness, C1 outlet, fan heat and ratings against original submittals.
+ Stage controls / selected heat sources (V5.5.7)
+H1:  Electric heat ; H2:  Electric heat ;  Humidification :  Recirculating wetted-media air washer  . A retained nominal heater rating does not mean a disabled source is supplying heat.
+ Summer :  Mixed specified / automatic stage demand
+H1  Automatic demand
+C1  Automatic demand
+C2  Automatic demand
+H2  Automatic demand
+H1 adopted electric-heating efficiency 1.
+H2 adopted electric-heating efficiency 1.
+ Winter :  Mixed specified / automatic stage demand
+H1  Automatic demand
+C1  Automatic demand
+C2  Automatic demand
+H2  Automatic demand
+H1 adopted electric-heating efficiency 1.
+H2 adopted electric-heating efficiency 1.
+ Rated power is not automatically added to the main NP panel; preview the transfer to avoid duplication.
  Steam is separate from washing: Δh_air = ṁsteam×hsteam/ṁda; Psteam = ṁsteam(hsteam−cp_water×T_feedwater)/η. Electrode humidifiers require conductive water. Compliance is not assumed without confirmed feedwater and manufacturer conductivity limits.

@@ -111,6 +111,7 @@ def report(r):
             )
             fluid = d["fluid_properties"]
             a(f"  採用物性：ρ {fluid['rho']:g} kg/m³；cp {fluid['cp']:g} kJ/(kg·K)；μ {fluid['mu']:g} Pa·s；來源 {fluid['source']}。")
+            a("  " + r["pressure"][k]["static_note"])
     for k, d in r["ducts"].items():
         if d["flow_cmh"]:
             dims = (
@@ -162,13 +163,23 @@ def report(r):
     a(
         f"{i['e_volt']}；PF {i['e_pf']}；HP 換算效率 {i['e_eff']}；{i['e_wire']}；端子 {i['e_terminal_c']}°C；單程 {i['e_length_m']} m；排序 {i['e_sort']}。"
     )
+    a(f"本工作台降載採下拉區間：環溫 {i['e_temp']}；同管載流導線 {i['e_pipe']}。")
     for k, e in r["electric"].items():
         c = e["selected"]
+        a(f"  {k} 採用環溫 {e['ambient_c']:g}°C，溫度係數 {e['dt']:g}，同管係數 {e['dp']:g}。")
         a(
             f"{k}：運轉 {e['current_a']:.3f} A，設計 {e['design_current_a']:.3f} A；NFB 候選 {c['nfb_candidate_a']} AT，{c['runs']} 組×{c['size_mm2']} mm²/相，Iz {c['iz_a']:.3f} A，壓降 {c['voltage_drop_pct']:.3f}%；接地紀錄：{i['e_' + k.lower() + '_ground']}。"
         )
         if i.get("e_" + k.lower() + "_pf_mode") == "本盤獨立 PF":
             a(f"  {k} 採用獨立 PF={e['pf']:.6g}；匯入設計電流下限 {i['e_' + k.lower() + '_design_floor']} A。")
+        if e["kind"] == "連續負載":
+            a("  連續負載採總運轉電流×1.25；最大馬達草稿不參與計算。")
+        elif e["has_motor"]:
+            a(
+                f"  最大馬達 {e['largest_hp']:g} HP：設計電流採總電流＋最大馬達估算電流×0.25。"
+                if e["largest_hp"] > 0 else
+                "  最大馬達未知：保守採總運轉電流×1.25。"
+            )
     a("\n五、主要公式與簡短說明")
     a(
         f"照明 N=ceil(E×A/(Φ×U×M))=ceil({i['light_lux']}×{r['light']['area_m2']:g}/({i['light_lm']}×{i['light_u']}×{i['light_m']}))={r['light']['qty']} 盞。"
@@ -207,8 +218,8 @@ def _nm_report_base(r):
         i["name"] + "｜MAU 分段需求與額定容量校核",
         "此表為需求反算；未達額定檢核時，表列目標狀態不代表已配置設備實際可達。",
         f"風量 {i['flow']} CMH，基準：{i['flow_basis']}；大氣 {i['p']} kPa；送風目標 {i['sa_t']}°C／{i['sa_rh']}%RH。",
-        f"H1 電熱 {i['h1_kw']} kW、H2 電熱 {i['h2_kw']} kW 完整保留；回收熱水 {i['hw_in']}/{i['hw_out']}°C，情境：{i['recovery']}。",
-        f"C1 水溫 {i['c1_in']}/{i['c1_out']}°C；C2 {i['c2_in']}/{i['c2_out']}°C；濕膜有效度 {i['wash_eff']}（初估／待選型），容量餘裕 {i['sf']}%。",
+        f"H1 熱源：{i['h1_source']}；H2 熱源：{i['h2_source']}；回收熱水情境：{i['recovery']}。",
+        f"C1 水溫 {i['c1_in']}/{i['c1_out']}°C；C2 {i['c2_in']}/{i['c2_out']}°C；容量餘裕 {i['sf']}%。",
     ]
     if i.get("target_mode") == "主案分季需求":
         lines[2] = (
@@ -221,6 +232,8 @@ def _nm_report_base(r):
             + i["linked_main_hash"]
         )
     a = lines.append
+    if "水洗" in i["humidifier"]:
+        a(f"濕膜有效度 {i['wash_eff']}（初估／待選型）。")
     for key, title in [("summer", "夏季"), ("winter", "冬季")]:
         s = r[key]
         a(
@@ -235,8 +248,10 @@ def _nm_report_base(r):
             )
         for h in [s["h1"], s["h2"]]:
             a(
-                f"{h['tag']}：{h['inlet']['t']:.3f}°C／{h['inlet']['rh']:.3f}% → {h['outlet']['t']:.3f}°C／{h['outlet']['rh']:.3f}%；總熱需求 {h['air_kw']:.3f} kW；热水 {h['hw_kw']:.3f} kW／{h['water_lpm']:.3f} LPM；電力需求 {h['electric_kw']:.3f} kW；無回收時電力需求 {h['backup_electric_kw']:.3f} kW。"
+                f"{h['tag']}：{h['inlet']['t']:.3f}°C／{h['inlet']['rh']:.3f}% → {h['outlet']['t']:.3f}°C／{h['outlet']['rh']:.3f}%；總熱需求 {h['air_kw']:.3f} kW；熱水 {h['hw_kw']:.3f} kW／{h['water_lpm']:.3f} LPM；電力需求 {h['electric_kw']:.3f} kW。"
             )
+            if h["electric_enabled"]:
+                a(f"  電熱全載備援需求 {h['backup_electric_kw']:.3f} kW；本段額定電熱 {h['installed_kw']:.3f} kW。")
             if h["note"]:
                 a(h["tag"] + "：" + h["note"])
         for c, delta in [
@@ -246,9 +261,10 @@ def _nm_report_base(r):
             a(
                 f"{c['name']}：水側 {c['water_kw']:.3f} kW／{c['water_kw'] / US_RT_KW:.3f} US RT；需水 {c['water_kw'] * 60000 / (1000 * 4.1868 * delta):.3f} LPM；凝結水 {c['condensate_kg_s'] * 3600:.3f} kg/h。"
             )
-        a(
-            f"水洗蒸發需求 {s['evap_kg_h']:.3f} kg/h（非循環泵流量）；本季水洗{('運轉' if s['wash_on'] else '旁通')}。"
-        )
+        if "水洗" in i["humidifier"]:
+            a(
+                f"水洗蒸發需求 {s['evap_kg_h']:.3f} kg/h（非循環泵流量）；本季水洗{('運轉' if s['wash_on'] else '旁通')}。"
+            )
         a(
             "額定／必要條件檢核："
             + "；".join(
@@ -258,31 +274,33 @@ def _nm_report_base(r):
                 )
             )
         )
-    a("\n水洗循環與風機")
-    a(
-        "循環水量："
-        + (
-            f"{r['circulation_lpm']:.3f} LPM＝有效淋水面積×原廠單位面積水量"
-            if r["circulation_lpm"] is not None
-            else "待廠商提供有效淋水面積及淋水密度，不套用蒸發量固定倍數。"
+    if "水洗" in i["humidifier"]:
+        a("\n水洗循環")
+        a(
+            "循環水量："
+            + (
+                f"{r['circulation_lpm']:.3f} LPM＝有效淋水面積×原廠單位面積水量"
+                if r["circulation_lpm"] is not None
+                else "待廠商提供有效淋水面積及淋水密度，不套用蒸發量固定倍數。"
+            )
         )
-    )
-    a(
-        "循環泵揚程："
-        + (
-            f"{r['pump_head_m']:.3f} m＝噴頭水頭＋高差＋管路／濾網損失"
-            if r["pump_head_m"] is not None
-            else "待噴頭工作壓力、高差及管路／濾網阻力，不自動定為 20 m。"
+        a(
+            "循環泵揚程："
+            + (
+                f"{r['pump_head_m']:.3f} m＝噴頭水頭＋高差＋管路／濾網損失"
+                if r["pump_head_m"] is not None
+                else "待噴頭工作壓力、高差及管路／濾網阻力，不自動定為 20 m。"
+            )
         )
-    )
-    a(
-        f"最大蒸發補水約 {r['evap_makeup_lph']:.3f} L/h；另加輸入的飛水／排污後 {r['makeup_plus_allowance_lph']:.3f} L/h，未包含未提供的排污或啟動補槽量。"
-    )
+        a(
+            f"最大蒸發補水約 {r['evap_makeup_lph']:.3f} L/h；另加輸入的飛水／排污後 {r['makeup_plus_allowance_lph']:.3f} L/h，未包含未提供的排污或啟動補槽量。"
+        )
+    a("\n風機與選用電力")
     a(
         f"已填空氣側壓差 {r['air_dp_pa']:.1f} Pa（{('資料已標記完整，仍需風機曲線' if r['pressure_complete'] else '資料未完整，不可據以完成選機')}）；EC 配置 {i['fan_qty']}×{i['fan_unit_kw']} kW。"
     )
     a(
-        f"按所填壓差／效率的風機電力需求 {r['fan_required_kw']:.3f} kW；電熱＋EC 已配置名目電力 {r['installed_electric_kw']:.3f} kW，未含循環泵與附屬設備。"
+        f"按所填壓差／效率的風機電力需求 {r['fan_required_kw']:.3f} kW；選用電熱＋蒸汽＋EC 名目電力 {r['active_installed_electric_kw']:.3f} kW，未含循環泵與附屬設備。"
     )
     if r["pressure_complete"]:
         a(
@@ -332,8 +350,10 @@ def nm_report(r):
             effective = sr[tag].get("effective_water")
             if effective:
                 extra.append(
-                    f"{tag.upper()} 採用熱水 {effective['hw_in']:g}/{effective['hw_out']:g}°C，端差 {effective['hw_approach']:g} K，電熱效率 {effective['heat_eta']:g}。"
+                    f"{tag.upper()} 啟用熱水條件 {effective['hw_in']:g}/{effective['hw_out']:g}°C，端差 {effective['hw_approach']:g} K；本季採計熱量 {sr[tag]['hw_kw']:.3f} kW。"
                 )
+            if sr[tag]["electric_enabled"]:
+                extra.append(f"{tag.upper()} 採用電熱效率 {sr[tag]['effective_electric_eta']:g}。")
             if sr[tag].get("unserved_kw", 0) > 1e-06:
                 extra.append(
                     f"{tag.upper()} 尚無已選熱源供應的熱需求：{sr[tag]['unserved_kw']:.3f} kW；圖表該點為未供應的需求點。"
@@ -343,9 +363,7 @@ def nm_report(r):
             extra.append(
                 f"蒸汽需求 {st['kg_h']:.3f} kg/h；入空氣熱 {st['air_kw']:.3f} kW；發生器電力 {st['electric_kw']:.3f} kW。"
             )
-    extra.append(
-        f"本案選用設備名目電力 {r['active_installed_electric_kw']:.3f} kW（未含水洗泵／附屬設備）；未自動加進整廠 NP，避免重複。"
-    )
+    extra.append("名目電力未自動加進整廠 NP；需預覽帶入，避免重複。")
     extra.append(
         "蒸汽與水洗分開：Δh_air=ṁsteam×hsteam/ṁda；Psteam=ṁsteam(hsteam−cp水×T補水)/η。電極式需導電水，給水及原廠電導率範圍未確認時不判定合格。"
     )

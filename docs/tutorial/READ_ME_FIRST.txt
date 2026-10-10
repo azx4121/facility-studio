@@ -1,4 +1,4 @@
-Facility Studio V5.5.6 新手教學 / Beginner tutorial
+Facility Studio V5.5.7 新手教學 / Beginner tutorial
 
 完整解壓縮後，雙擊 START_HERE.html。切換繁體中文／English，先完成前六步。
 教學、練習 JSON 與報告不需 Python，也不需網路。GitHub 外部連結需要網路。

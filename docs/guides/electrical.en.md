@@ -34,3 +34,9 @@ Resistance heaters may be near PF 1. Motors and drives need their actual data. M
 This request is **outside this tool's complete scope**. Load current and breaker AT are not fault current or interrupting capacity Icu/Ics. Obtain source fault level, transformer impedance, cable impedance and protection curves, then use a suitable model and engineering review.
 
 Inputs: [01](../examples/01-electrical.json), [02](../examples/02-electrical.json). [Original inverse-check results](../examples/calculation-results-windows.json).
+
+## Workbench largest-motor input and derating
+
+For general loads containing listed HP motors, or the motor-load category, enter the largest motor within the listed HP total. The preliminary rule is `I_design = I_total + 0.25 × I_largest_motor`; 0 means unknown and conservatively uses `1.25 × I_total`. Continuous loads always use `1.25 × I_total`; the largest-motor draft is inactive and excluded. If loads are only kW/A, list the corresponding motor in HP before entering its largest HP. Validation identifies the relevant field.
+
+This estimate uses shared PF/efficiency and does not replace required motor FLC tables, separate mixed continuous-load calculations or motor protection selection. Workbench ambient/grouping derating follows dropdown ranges, using the ambient upper bound. Independent tools use entered ambient and conductor counts. Reports show the adopted factors.

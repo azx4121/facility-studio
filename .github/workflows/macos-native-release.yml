@@ -2,7 +2,7 @@ name: Build and verify macOS revision
 
 on:
   push:
-    branches: [main, feature/bilingual-ui, maintenance/macos-launch-repair, codex/v5.5.6-usability-sync]
+    branches: [main, feature/bilingual-ui, maintenance/macos-launch-repair, codex/v5.5.7-usability-sync]
     paths:
       - .github/workflows/macos-native-release.yml
       - macos/macos/**
@@ -26,26 +26,29 @@ jobs:
         run: |
           python3 macos/tests/bilingual.py
           python3 macos/tests/v556_features.py
+          python3 macos/tests/v557_inactive.py
+          python3 macos/tests/regression.py
+          python3 macos/tests/security_checks.py
           python3 docs/tutorial/verify_tutorial.py --platform macos --output "$RUNNER_TEMP/tutorial-macos.json"
           python3 tools/verify_use_cases.py --platform macos --output "$RUNNER_TEMP/mac-use-cases.json"
       - name: Build, sign and execute Universal App on Apple Silicon
-        run: python3 macos/macos/build_native_release.py --output "$RUNNER_TEMP/mac556-build"
+        run: python3 macos/macos/build_native_release.py --output "$RUNNER_TEMP/mac557-build"
       - name: Retain Apple Silicon evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: mac556-arm64-evidence
-          path: ${{ runner.temp }}/mac556-build/evidence
+          name: mac557-arm64-evidence
+          path: ${{ runner.temp }}/mac557-build/evidence
           if-no-files-found: warn
           retention-days: 14
       - name: Retain tested delivery files
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: mac556-delivery
+          name: mac557-delivery
           path: |
-            ${{ runner.temp }}/mac556-build/Facility_Studio_V5_5_6_macOS_mac2_OneClick.zip
-            ${{ runner.temp }}/mac556-build/Facility_Studio_V5_5_6_macOS_mac2.dmg
-            ${{ runner.temp }}/mac556-build/SHA256SUMS.txt
+            ${{ runner.temp }}/mac557-build/Facility_Studio_V5_5_7_macOS_mac1_OneClick.zip
+            ${{ runner.temp }}/mac557-build/Facility_Studio_V5_5_7_macOS_mac1.dmg
+            ${{ runner.temp }}/mac557-build/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 14
   verify-intel:
@@ -58,24 +61,24 @@ jobs:
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
-          name: mac556-delivery
-          path: ${{ runner.temp }}/mac556-delivery
+          name: mac557-delivery
+          path: ${{ runner.temp }}/mac557-delivery
       - name: Execute the same delivered ZIP and DMG on Intel
         run: >-
           python3 macos/macos/verify_native_release.py
-          --package "$RUNNER_TEMP/mac556-delivery/Facility_Studio_V5_5_6_macOS_mac2_OneClick.zip"
-          --checksums "$RUNNER_TEMP/mac556-delivery/SHA256SUMS.txt"
-          --dmg "$RUNNER_TEMP/mac556-delivery/Facility_Studio_V5_5_6_macOS_mac2.dmg"
-          --output "$RUNNER_TEMP/mac556-intel"
+          --package "$RUNNER_TEMP/mac557-delivery/Facility_Studio_V5_5_7_macOS_mac1_OneClick.zip"
+          --checksums "$RUNNER_TEMP/mac557-delivery/SHA256SUMS.txt"
+          --dmg "$RUNNER_TEMP/mac557-delivery/Facility_Studio_V5_5_7_macOS_mac1.dmg"
+          --output "$RUNNER_TEMP/mac557-intel"
       - name: Retain Intel evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: mac556-intel-evidence
+          name: mac557-intel-evidence
           path: |
-            ${{ runner.temp }}/mac556-intel/*.txt
-            ${{ runner.temp }}/mac556-intel/*.json
-            ${{ runner.temp }}/mac556-intel/*.png
+            ${{ runner.temp }}/mac557-intel/*.txt
+            ${{ runner.temp }}/mac557-intel/*.json
+            ${{ runner.temp }}/mac557-intel/*.png
           if-no-files-found: warn
           retention-days: 14
   publish:
@@ -91,10 +94,10 @@ jobs:
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
-          name: mac556-delivery
-          path: ${{ runner.temp }}/mac556-delivery
+          name: mac557-delivery
+          path: ${{ runner.temp }}/mac557-delivery
       - name: Publish a new revision after both native checks pass
         env:
           FACILITY_GITHUB_TOKEN: ${{ github.token }}
           FACILITY_RELEASE_COMMIT: ${{ github.sha }}
-        run: python3 macos/macos/publish_mac_release.py --assets "$RUNNER_TEMP/mac556-delivery"
+        run: python3 macos/macos/publish_mac_release.py --assets "$RUNNER_TEMP/mac557-delivery"

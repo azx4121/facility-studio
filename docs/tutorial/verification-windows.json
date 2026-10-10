@@ -1,5 +1,5 @@
 {
-  "app_version": "5.5.6",
+  "app_version": "5.5.7",
   "source_platform": "windows",
   "execution": "Headless calculation and report checks on the current host; native GUI checks are separate.",
   "cases": [
