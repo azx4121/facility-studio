@@ -10,7 +10,7 @@ import uuid
 from .localized_tk import messagebox
 from .localized_tk import tk
 from .localized_tk import ttk
-from .ahu_engine import nm_calculate, nm_read_project, nm_validate
+from .ahu_engine import nm_calculate, nm_draft_inputs, nm_read_project, nm_validate
 from .ahu_schema import NM_CONTROL_NOTES, NM_DEFAULTS, NM_FIELDS, NM_GROUPS
 from .ahu_view import AHUView, NM_HAS_PLOT
 
@@ -179,17 +179,29 @@ class AHUWindow(AHUView):
         if not path:
             return
         try:
-            inputs = nm_validate(self.snapshot())
-            save_project_file(
-                path, {"kind": "ahu_stage", "schema_version": 4, "inputs": inputs}
-            )
+            inputs = nm_draft_inputs(self.snapshot())
+            doc = {"kind": "ahu_stage", "schema_version": 4, "inputs": inputs}
+            try:
+                nm_validate(inputs)
+            except InputError as error:
+                if not messagebox.askyesno(
+                    "儲存單機草稿",
+                    "目前含無效輸入，只保存原始草稿，不能匯出設計結果。\n是否仍要儲存？\n"
+                    + error_text(error, NM_FIELDS),
+                    parent=self.win,
+                ):
+                    return
+                doc.update(schema_version=5, draft=True)
+            save_project_file(path, doc)
             self.path = path
             self.saved_hash = project_hash(inputs)
+            if doc.get("draft"):
+                self.status.config(text="已儲存單機草稿；請修正條件後重新計算。", style="Warn.TLabel")
         except (OSError, ValueError) as e:
             messagebox.showerror("儲存失敗", str(e), parent=self.win)
 
-    def apply(self, inputs):
-        inputs = nm_validate(inputs)
+    def apply(self, inputs, *, allow_draft=False):
+        inputs = nm_draft_inputs(inputs) if allow_draft else nm_validate(inputs)
         self.suspended = True
         try:
             for k, v in inputs.items():
@@ -223,7 +235,7 @@ class AHUWindow(AHUView):
         self.saved_hash = project_hash(inputs)
         self.result = None
         self.last_good_result = None
-        self.apply(inputs)
+        self.apply(inputs, allow_draft=doc.get("draft") is True)
 
     def export(self):
         if not self.ensure():

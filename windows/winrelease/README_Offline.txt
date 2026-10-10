@@ -1,7 +1,7 @@
-Facility Studio V5.5.7｜Windows 離線直接執行版 win.1
+Facility Studio V5.5.8｜Windows 離線直接執行版 win.1
 
 1. 完整解壓縮 ZIP 到桌面或您自己的資料夾。
-2. 雙擊 Facility_Studio_V5_5_7_Windows_Offline.exe。
+2. 雙擊 Facility_Studio_V5_5_8_Windows_Offline.exe。
 3. 開啟後即可使用；不需另裝 Python、不需安裝套件、不需連網。
 
 也可單獨下載 EXE 直接執行。首次啟動需在暫存資料夾展開內建套件，請等候。
@@ -28,12 +28,12 @@ Source 為本版完整應用程式原始碼。執行 EXE 不會使用 Source，�
 初估工具的工程適用範圍與參數假設詳程式報告，正式設計須依現場與設備資料覆核。
 更新、問題回報：https://github.com/azx4121/facility-studio
 
-V5.5.7：主畫面右上可選繁體中文 / English；切換保留輸入與結果，語言偏好會保存。
+V5.5.8：主畫面右上可選繁體中文 / English；切換保留輸入與結果，語言偏好會保存。
 Language: choose Traditional Chinese / English at the top right. Inputs and calculations stay unchanged. Your language preference is saved.
 English Excel / CSV templates are exported when English is selected; both template languages can be imported.
 
 
-V5.5.7 revision 2 / 署名與新手教學修訂
+V5.5.8 revision 2 / 署名與新手教學修訂
 簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
 簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
 完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
@@ -41,7 +41,7 @@ V5.5.7 revision 2 / 署名與新手教學修訂
 Revision 2 adds persistent author credit, bundled offline walkthroughs, two practice workspaces and reference reports.
 No additional Python installation or internet is needed for the tutorial.
 
-V5.5.7 使用流程
+V5.5.8 使用流程
 ・簡易工具的「本工具教學」直接開啟對應離線章節。
 ・完整工作台先用基本模式與「空調與熱負荷」；其他分頁可展開。
 ・「另存新檔」保留案件身分換檔；「複製為新方案」建立新案，原案保留。

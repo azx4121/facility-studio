@@ -1,8 +1,8 @@
-# Windows V5.5.7 離線發行
+# Windows V5.5.8 離線發行
 
-[目前下載與英文安裝](../../README.en.md#download-and-run) · [雙語原生驗收](../../docs/2026-10-07-v5.5.7-usability.md)
+[目前下載與英文安裝](../../README.en.md#download-and-run) · [雙語原生驗收](../../docs/2026-10-10-v5.5.8-review-followup.md)
 
-Developer build only: the shipping V5.5.7 EXE already contains Python. Normal users do not run pip or these build commands. ZIPs are still built for native acceptance and developer diagnostics, but are no longer public delivery assets of the recommended releases. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.5.7-win.1 and must not overwrite its existing public assets. For a future release, update the builder, verifier, publisher and workflow version/output names together. See [distribution signing](../../docs/signing.en.md).
+Developer build only: the V5.5.8 candidate EXE bundles Python; publication requires both native jobs to pass. Normal users do not run pip or these build commands. ZIPs are still built for native acceptance and developer diagnostics, but are no longer public delivery assets of the recommended releases. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.5.8-win.1 and must not overwrite its existing public assets. For a future release, update the builder, verifier, publisher and workflow version/output names together. See [distribution signing](../../docs/signing.en.md).
 
 `entry.py` 為單檔 EXE 的視窗模式入口；日常使用不執行 pip、不尋找外部 Python、不下載元件。
 主應用程式與完整計算邏輯仍使用 `windows/facility_studio`；不是另一套精簡計算版本。
@@ -38,10 +38,10 @@ python -m winrelease.verify --assets C:\FacilityStudioBuild --output C:\Facility
 
 
 
-V5.5.7 win.1 / 操作與畫面重繪修訂
+V5.5.8 win.1 / 獨立空調箱草稿保存修訂
 簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
 簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
 完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
-V5.5.7 可由完整工作台「開啟練習新案」建立副本；原廠選型與設備阻力等待補資料仍需補。
-V5.5.7 retains author credit and offline walkthroughs. win.1 refreshes native Windows pixels after resizing and language/layout changes.
+V5.5.8 可由完整工作台「開啟練習新案」建立副本；原廠選型與設備阻力等待補資料仍需補。
+V5.5.8 retains author credit and offline walkthroughs. win.1 refreshes native Windows pixels after resizing and language/layout changes.
 No additional Python installation or internet is needed for the tutorial.

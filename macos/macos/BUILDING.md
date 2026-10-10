@@ -1,8 +1,8 @@
-# Native macOS release building (V5.5.7 mac.1)
+# Native macOS release building (V5.5.8 mac.1)
 
 The original V5.5.4 mac.1 package passed byte-level checks but failed Apple's native deep
 signature validation on both macOS 15 architectures. Static verification must
-not be treated as native release acceptance. Historical assets are retained. V5.5.7 includes the repaired runtime and bilingual presentation; [current verification](../../docs/2026-10-07-v5.5.7-usability.md) records the actual public files. These commands are for developers; normal users use the [bundled downloads](../../README.en.md#download-and-run).
+not be treated as native release acceptance. Historical assets are retained. V5.5.8 includes the repaired runtime and bilingual presentation; [current verification](../../docs/2026-10-10-v5.5.8-review-followup.md) records the review follow-up; its status remains pending until both native jobs pass. These commands are for developers; normal users use the [bundled downloads](../../README.en.md#download-and-run).
 
 ## Shipping build
 
@@ -35,8 +35,8 @@ To validate those exact delivery files on a second Mac architecture:
 
 ```sh
 python3 macos/macos/verify_native_release.py \
-  --package /absolute/path/Facility_Studio_V5_5_7_macOS_mac1_OneClick.zip \
-  --dmg /absolute/path/Facility_Studio_V5_5_7_macOS_mac1.dmg \
+  --package /absolute/path/Facility_Studio_V5_5_8_macOS_mac1_OneClick.zip \
+  --dmg /absolute/path/Facility_Studio_V5_5_8_macOS_mac1.dmg \
   --checksums /absolute/path/SHA256SUMS.txt \
   --output /absolute/path/second-mac-evidence
 ```
@@ -44,10 +44,10 @@ python3 macos/macos/verify_native_release.py \
 The workflow `.github/workflows/macos-native-release.yml` uses Apple Silicon
 macOS 15 to build and Intel macOS 15 to execute the same ZIP and DMG. On the
 repair branch it only tests. On main, publication runs only after both jobs pass;
-the publisher targets `v5.5.7-mac.1` without replacing existing public assets or moving tags.
+the publisher targets `v5.5.8-mac.1` without replacing existing public assets or moving tags.
 For a future release, update version and output names in the builder, verifier,
 publisher and workflow together; do not try to overwrite the already published
-v5.5.7 files after a source change.
+v5.5.8 files after a source change.
 GitHub upload sizes and SHA-256 digests must match before the draft is published.
 
 These are ad-hoc integrity signatures, not Developer ID or notarization.
@@ -119,10 +119,10 @@ recreates them using their stored Unix file types.
 
 
 
-V5.5.7 mac.1 / 版號與小視窗操作修訂
+V5.5.8 mac.1 / 獨立空調箱草稿保存修訂
 簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
 簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
 完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
-V5.5.7 可由完整工作台「開啟練習新案」建立副本；原廠選型與設備阻力等待補資料仍需補。
-V5.5.7 retains author credit and offline walkthroughs. mac.1 unifies displayed versions and wraps compact workbench actions.
+V5.5.8 可由完整工作台「開啟練習新案」建立副本；原廠選型與設備阻力等待補資料仍需補。
+V5.5.8 retains author credit and offline walkthroughs. mac.1 unifies displayed versions and wraps compact workbench actions.
 No additional Python installation or internet is needed for the tutorial.

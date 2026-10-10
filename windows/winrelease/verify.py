@@ -196,7 +196,7 @@ def main():
                 if not target.is_relative_to(extraction.resolve()):
                     raise RuntimeError("Unexpected unsafe package member")
             archive.extractall(extraction)
-        exe = extraction / "Facility_Studio_V5_5_7_Windows_Offline" / EXE_NAME
+        exe = extraction / "Facility_Studio_V5_5_8_Windows_Offline" / EXE_NAME
         if sha(exe) != sums[EXE_NAME]:
             raise RuntimeError("ZIP contains a different executable")
         check_exe(exe, output, "zip-extracted")

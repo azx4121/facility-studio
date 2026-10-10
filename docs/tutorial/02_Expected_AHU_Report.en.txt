@@ -59,7 +59,7 @@ C2  Secondary cooling  : water-side 0.000 kW / 0.000 US RT; required water 0.000
  Key formulas: m_da = V(CMH)/(3600×v_da); Q = m_da Δh; sensible heating keeps w constant. Washer h_out ≈ h_in, T_out = T_in−ε(T_in−T_as); evaporation G = m_da Δw×3600. Coil water-side duty deducts condensate liquid enthalpy.
  Limits: the recirculating wetted-media model is approximately adiabatic, excluding makeup-water sensible heat, pump heat to water and water-temperature control. Saturation / AMC removal is not guaranteed. Manufacturer recovery-coil capacity at design conditions is required; approach only screens necessary conditions.
  Supply T/RH defines this AHU boundary. If these are room setpoints, first account for room moisture to calculate required supply humidity ratio. Verify airflow reference, media effectiveness, C1 outlet, fan heat and ratings against original submittals.
- Stage controls / selected heat sources (V5.5.7)
+ Stage controls / selected heat sources (V5.5.8)
 H1:  Electric heat ; H2:  Electric heat ;  Humidification :  Recirculating wetted-media air washer  . A retained nominal heater rating does not mean a disabled source is supplying heat.
  Summer :  Mixed specified / automatic stage demand
 H1  Automatic demand

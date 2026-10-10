@@ -226,7 +226,7 @@ class PublisherChecks(unittest.TestCase):
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
             if index == 0:
-                self.assertEqual(module.FILENAMES, ("Facility_Studio_V5_5_7_Windows_Offline.exe", "SHA256SUMS.txt"))
+                self.assertEqual(module.FILENAMES, ("Facility_Studio_V5_5_8_Windows_Offline.exe", "SHA256SUMS.txt"))
             else:
                 source = (ROOT / path).read_text()
                 self.assertNotIn("_OneClick.zip", source)

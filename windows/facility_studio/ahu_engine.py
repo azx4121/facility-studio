@@ -317,6 +317,16 @@ def _nm_calculate_base(i):
     }
 
 
+def nm_draft_inputs(i):
+    """Check storage shape and bounds while retaining unfinished field text."""
+    if not isinstance(i, dict) or set(i) != set(NM_DEFAULTS):
+        raise InputError("單機草稿欄位缺漏或含未知欄位")
+    for key, value in i.items():
+        if not isinstance(value, str) or len(value) > 1000:
+            raise InputError("草稿必須為有長度限制的文字，不能包含執行物件", field_name=key)
+    return dict(i)
+
+
 def nm_validate(i):
     from .field_state import ahu_inactive
 
@@ -342,10 +352,19 @@ def nm_read_project(path):
     doc = read_json_file(path, max_bytes=2_000_000)
     if (
         not isinstance(doc, dict)
-        or set(doc) != {"kind", "schema_version", "inputs"}
+        or not {"kind", "schema_version", "inputs"}.issubset(doc)
         or doc["kind"] not in ["nammao_mau", "ahu_stage"]
+        or type(doc["schema_version"]) is not int
     ):
         raise InputError(f"請使用通用單機專案格式")
+    if doc["schema_version"] == 5:
+        if set(doc) != {"kind", "schema_version", "inputs", "draft"} or doc["draft"] is not True:
+            raise InputError("單機草稿標記或格式不符")
+        doc["inputs"] = nm_draft_inputs(doc["inputs"])
+        doc["kind"] = "ahu_stage"
+        return doc
+    if set(doc) != {"kind", "schema_version", "inputs"}:
+        raise InputError("請使用通用單機專案格式")
     if doc["schema_version"] == 1:
         if not isinstance(doc["inputs"], dict) or set(doc["inputs"]) != NM_V1_KEYS:
             raise InputError(f"舊單機專案欄位不完整")

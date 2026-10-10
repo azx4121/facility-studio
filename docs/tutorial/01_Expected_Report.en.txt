@@ -1,5 +1,5 @@
 Tutorial A - 96 m2 room | Design conditions / calculation summary
- System :  AHU (OA + RA mixing)  | V5.5.7 |  Preliminary demand estimate
+ System :  AHU (OA + RA mixing)  | V5.5.8 |  Preliminary demand estimate
  Overall status:  Data required  ; equipment counts are demand candidates. Do not select directly when checks fail.
 [ Data required ] CHW  Equipment resistance :  Piping subtotal only. Neither Simple nor Detailed mode treats unknown resistance as zero.
 [ Data required ] HW  Equipment resistance :  Piping subtotal only. Neither Simple nor Detailed mode treats unknown resistance as zero.

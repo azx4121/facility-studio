@@ -1,3 +1,11 @@
+Facility Studio V5.5.8 source revision
+
+This source fixes standalone AHU draft save/reopen and adds defensive bypass-state validation.
+Public binaries remain V5.5.7 until V5.5.8 native Actions and publication succeed.
+Use the root README for currently published downloads; older notes below are retained as history.
+
+--- Historical notes ---
+
 廠務簡易工具 V5.5.6｜通用版｜Windows 中英雙語離線修訂 win.1｜2026-10-07
 
 V5.5.6 操作修訂

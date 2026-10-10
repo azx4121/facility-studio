@@ -1,7 +1,7 @@
-Facility Studio V5.5.7｜macOS 中英雙語版 mac.1
+Facility Studio V5.5.8｜macOS 中英雙語版 mac.1
 
 建議使用 DMG：三個步驟
-1. 打開 Facility_Studio_V5_5_7_macOS_mac1.dmg。
+1. 打開 Facility_Studio_V5_5_8_macOS_mac1.dmg。
 2. 把「Facility Studio」拖到旁邊的「Applications／應用程式」。
 3. 從「應用程式」打開 Facility Studio。安裝完成後可退出磁碟映像檔。
 
@@ -20,10 +20,10 @@ Apple 官方操作：https://support.apple.com/en-us/102445
 本包不關閉 Gatekeeper，不移除隔離標記，不改動全域安全設定。
 
 完整 ZIP 懶人包：選用
-1. 用 Mac Finder 完整解壓縮 Facility_Studio_V5_5_7_macOS_mac1_OneClick.zip。
+1. 用 Mac Finder 完整解壓縮 Facility_Studio_V5_5_8_macOS_mac1_OneClick.zip。
 2. 可直接開啟資料夾中的 Facility Studio.app。
 3. 或雙擊 Install_on_Mac.command，安裝至：
-   ~/Applications/Facility Studio V5.5.7.app。
+   ~/Applications/Facility Studio V5.5.8.app。
    原同名安裝會保留為 Backup；安裝過程不需管理員密碼。
 ZIP 另含 Source_and_Verification.zip、設備表範本、簽章及原生驗證記錄。
 若 command 被系統攔下，也可直接把 App 拖到「應用程式」，再按上述允許流程。
@@ -90,7 +90,7 @@ Mac_Acceptance.json、Mac_Signature_Check.txt、Mac_SelfTest_Console.txt。
 維護者：建置方式見 macos/BUILDING.md。
 版本與問題回報：https://github.com/azx4121/facility-studio
 
-V5.5.7: Select Traditional Chinese / English at the top right. Inputs and results remain unchanged; your language preference is saved.
+V5.5.8: Select Traditional Chinese / English at the top right. Inputs and results remain unchanged; your language preference is saved.
 No separate Python installation is needed. Open the DMG and drag Facility Studio into Applications.
 English mode also exports English equipment templates. Both languages remain compatible.
 
@@ -102,7 +102,7 @@ English quick start
 If macOS blocks the first launch, follow Apple Settings > Privacy & Security > Open Anyway. The app is ad-hoc signed; it is not Developer ID notarized.
 
 
-V5.5.7 revision 2 / 署名與新手教學修訂
+V5.5.8 revision 2 / 署名與新手教學修訂
 簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
 簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
 完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
@@ -110,7 +110,7 @@ V5.5.7 revision 2 / 署名與新手教學修訂
 Revision 2 adds persistent author credit, bundled offline walkthroughs, two practice workspaces and reference reports.
 No additional Python installation or internet is needed for the tutorial.
 
-V5.5.7 使用流程
+V5.5.8 使用流程
 ・簡易工具的「本工具教學」直接開啟對應離線章節。
 ・完整工作台先用基本模式與「空調與熱負荷」；其他分頁可展開。
 ・「另存新檔」保留案件身分換檔；「複製為新方案」建立新案，原案保留。

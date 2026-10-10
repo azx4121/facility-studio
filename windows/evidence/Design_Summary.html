@@ -1,5 +1,5 @@
-<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>設計摘要</title><style>body{font:15px/1.65 system-ui,sans-serif;color:#163047;max-width:1050px;margin:32px auto;padding:20px}h1{font-size:28px}h2{font-size:19px;border-bottom:2px solid #188b87}table{border-collapse:collapse;width:100%;margin:12px 0}td{border-bottom:1px solid #dde5eb;padding:7px;vertical-align:top}td:first-child{width:26%;font-weight:600}pre{white-space:pre-wrap;font:12px/1.7 monospace}.status{background:#edf5f7;padding:12px}small{color:#526677}@media print{body{margin:0;padding:0;font-size:11pt}.appendix{break-before:page}tr{break-inside:avoid}button{display:none}@page{size:A4;margin:17mm}}</style><button onclick="window.print()">列印／另存 PDF</button><h1>一般廠房初估範例</h1><p class="status">V5.5.4｜未達條件｜需求初估，待原廠同工況及工程覆核</p><h2>設計條件</h2><table><tr><td>系統</td><td>MAU+FFU+DCC (全外氣/無塵室)</td></tr><tr><td>夏季外氣</td><td>35 °C／70 %RH</td></tr><tr><td>冬季外氣</td><td>8 °C／70 %RH</td></tr><tr><td>室內</td><td>22 °C／50 %RH</td></tr><tr><td>冬季邊界</td><td>室內熱濕平衡（定風量）</td></tr><tr><td>容量餘裕</td><td>10 %</td></tr></table><h2>容量與分工</h2><table><tr><td>室內顯熱</td><td>60.45 kW</td></tr><tr><td>室內產濕</td><td>1.58 kg/h</td></tr><tr><td>補償外氣</td><td>897.9 CMH（室內基準）</td></tr><tr><td>處理風量</td><td>897.9 CMH（室內基準）</td></tr><tr><td>夏季兩段水側冷量</td><td>21.64 kW（未加餘裕）</td></tr><tr><td>DCC 設計顯熱</td><td>60.45 kW（未加餘裕）</td></tr></table><h2>主要公式</h2><p>Qs = m_da(1.006 + 1.86ws)(Tr − Ts) + QDCC<br>產濕 G = 3600 m_da(wr − ws)<br>盤管空氣側 Q = m_da(hin − hout)；水側扣除凝結水液態焓<br>LPM = 60000Q / (ρcpΔT)</p><h2>需確認的條件</h2><table><tr><td>未達</td><td>DCC 循環風量與能力</td><td>採 9,600 CMH；按最小端差的空氣側上限 22.50 kW，需求 60.45 kW。仍需原廠同工況性能。</td></tr><tr><td>待資料</td><td>MCHW 設備阻力</td><td>僅列管路小計；詳細與簡易模式皆未將未知阻力當成零。</td></tr><tr><td>待資料</td><td>CHW 設備阻力</td><td>僅列管路小計；詳細與簡易模式皆未將未知阻力當成零。</td></tr><tr><td>待資料</td><td>DCCW 設備阻力</td><td>僅列管路小計；詳細與簡易模式皆未將未知阻力當成零。</td></tr><tr><td>待資料</td><td>HW 設備阻力</td><td>僅列管路小計；詳細與簡易模式皆未將未知阻力當成零。</td></tr><tr><td>待資料</td><td>設備同工況選型</td><td>本工具計算需求，仍需盤管／末端原廠選型與實際風機曲線。</td></tr><tr><td>待資料</td><td>配電候選覆核</td><td>原表僅供初估；需敷設方式、短路、接地及馬達保護資料。</td></tr><tr><td>待資料</td><td>冬季室內與電力範圍</td><td>依明列負荷完成穩態室內熱濕收支；NP 仍須實際設備電力。</td></tr></table><small>專案雜湊：599c23071114aeb7da922ed8ddf4080b50a915ac778cc6228a0b1fd7d08265ac</small><section class="appendix"><h2>計算附錄</h2><pre>一般廠房初估範例｜設計條件與計算摘要
-系統：MAU+FFU+DCC (全外氣/無塵室)｜V5.5.4｜需求初估
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>設計摘要</title><style>body{font:15px/1.65 system-ui,sans-serif;color:#163047;max-width:1050px;margin:32px auto;padding:20px}h1{font-size:28px}h2{font-size:19px;border-bottom:2px solid #188b87}table{border-collapse:collapse;width:100%;margin:12px 0}td{border-bottom:1px solid #dde5eb;padding:7px;vertical-align:top}td:first-child{width:26%;font-weight:600}pre{white-space:pre-wrap;font:12px/1.7 monospace}.status{background:#edf5f7;padding:12px}small{color:#526677}@media print{body{margin:0;padding:0;font-size:11pt}.appendix{break-before:page}tr{break-inside:avoid}button{display:none}@page{size:A4;margin:17mm}}</style><button onclick="window.print()">列印／另存 PDF</button><h1>一般廠房初估範例</h1><p class="status">V5.5.8｜未達條件｜需求初估，待原廠同工況及工程覆核</p><h2>設計條件</h2><table><tr><td>系統</td><td>MAU+FFU+DCC (全外氣/無塵室)</td></tr><tr><td>夏季外氣</td><td>35 °C／70 %RH</td></tr><tr><td>冬季外氣</td><td>8 °C／70 %RH</td></tr><tr><td>室內</td><td>22 °C／50 %RH</td></tr><tr><td>冬季邊界</td><td>室內熱濕平衡（定風量）</td></tr><tr><td>容量餘裕</td><td>10 %</td></tr></table><h2>容量與分工</h2><table><tr><td>室內顯熱</td><td>60.45 kW</td></tr><tr><td>室內產濕</td><td>1.58 kg/h</td></tr><tr><td>補償外氣</td><td>897.9 CMH（室內基準）</td></tr><tr><td>處理風量</td><td>897.9 CMH（室內基準）</td></tr><tr><td>夏季兩段水側冷量</td><td>21.64 kW（未加餘裕）</td></tr><tr><td>DCC 設計顯熱</td><td>60.45 kW（未加餘裕）</td></tr></table><h2>主要公式</h2><p>Qs = m_da(1.006 + 1.86ws)(Tr − Ts) + QDCC<br>產濕 G = 3600 m_da(wr − ws)<br>盤管空氣側 Q = m_da(hin − hout)；水側扣除凝結水液態焓<br>LPM = 60000Q / (ρcpΔT)</p><h2>需確認的條件</h2><table><tr><td>未達</td><td>DCC 循環風量與能力</td><td>採 9,600 CMH；按最小端差的空氣側上限 22.50 kW，需求 60.45 kW。仍需原廠同工況性能。</td></tr><tr><td>待資料</td><td>MCHW 設備阻力</td><td>僅列管路小計；詳細與簡易模式皆未將未知阻力當成零。</td></tr><tr><td>待資料</td><td>CHW 設備阻力</td><td>僅列管路小計；詳細與簡易模式皆未將未知阻力當成零。</td></tr><tr><td>待資料</td><td>DCCW 設備阻力</td><td>僅列管路小計；詳細與簡易模式皆未將未知阻力當成零。</td></tr><tr><td>待資料</td><td>HW 設備阻力</td><td>僅列管路小計；詳細與簡易模式皆未將未知阻力當成零。</td></tr><tr><td>待資料</td><td>設備同工況選型</td><td>本工具計算需求，仍需盤管／末端原廠選型與實際風機曲線。</td></tr><tr><td>待資料</td><td>配電候選覆核</td><td>原表僅供初估；需敷設方式、短路、接地及馬達保護資料。</td></tr><tr><td>待資料</td><td>冬季室內與電力範圍</td><td>依明列負荷完成穩態室內熱濕收支；NP 仍須實際設備電力。</td></tr></table><small>專案雜湊：50e57ef268567857bdd1ac299c87d36a1102e2f3e451af85d9975a0bec335016</small><section class="appendix"><h2>計算附錄</h2><pre>一般廠房初估範例｜設計條件與計算摘要
+系統：MAU+FFU+DCC (全外氣/無塵室)｜V5.5.8｜需求初估
 整體狀態：未達條件；設備台數為需求候選，未達條件不可直接選用。
 [未達] DCC 循環風量與能力：採 9,600 CMH；按最小端差的空氣側上限 22.50 kW，需求 60.45 kW。仍需原廠同工況性能。
 [待資料] MCHW 設備阻力：僅列管路小計；詳細與簡易模式皆未將未知阻力當成零。
@@ -36,17 +36,29 @@ DCC 夏冬較大需求 60.448 kW；冬季為明列負荷的穩態估算，非逐
 
 三、管路／流速／壓差
 MCHW：23.710 LPM，ΔT 5.00 K，1 支×20A (3/4&quot;)／ID 20.9 mm，1.152 m/s；壓差 120665.362 Pa。
+  採用物性：ρ 1000 kg/m³；cp 4.1868 kJ/(kg·K)；μ 0.001 Pa·s；來源 沿用共用參考。
+  閉式循環不把樓高加進循環泵差壓；系統靜壓另核。
 CHW：44.519 LPM，ΔT 5.00 K，1 支×25A (1&quot;)／ID 26.6 mm，1.335 m/s；壓差 116971.372 Pa。
+  採用物性：ρ 1000 kg/m³；cp 4.1868 kJ/(kg·K)；μ 0.001 Pa·s；來源 沿用共用參考。
+  閉式循環不把樓高加進循環泵差壓；系統靜壓另核。
 DCCW：238.222 LPM，ΔT 4.00 K，1 支×50A (2&quot;)／ID 52.5 mm，1.834 m/s；壓差 90656.761 Pa。
+  採用物性：ρ 1000 kg/m³；cp 4.1868 kJ/(kg·K)；μ 0.001 Pa·s；來源 沿用共用參考。
+  閉式循環不把樓高加進循環泵差壓；系統靜壓另核。
 HW：6.593 LPM，ΔT 10.00 K，1 支×15A (1/2&quot;)／ID 15.8 mm，0.560 m/s；壓差 46200.056 Pa。
+  採用物性：ρ 1000 kg/m³；cp 4.1868 kJ/(kg·K)；μ 0.001 Pa·s；來源 沿用共用參考。
+  閉式循環不把樓高加進循環泵差壓；系統靜壓另核。
 PV 設計流速上限 18.000 m/s。
 氣體標準體積：25°C／101.325 kPa；管內 25°C，Z 比 1；僅流速初估。
 壓損簡易初估：MCHW 30%、CHW 30%、DCCW 30%、HW 30% 管件等效長度餘裕；Δp＝直管摩擦×(1＋餘裕)＋已知設備壓差＋適用靜揚程。
 
 四、配電候選
 3Φ4W 380/220V；PF 0.85；HP 換算效率 0.90；XLPE 絕緣電纜 (90°C)；端子 60°C；單程 30 m；排序 最少並聯組數。
+本工作台降載採下拉區間：環溫 35℃ 以下 (標準)；同管載流導線 3根以下 (標準)。
+  UP 採用環溫 35°C，溫度係數 1，同管係數 1。
 UP：運轉 277.057 A，設計 277.057 A；NFB 候選 300 AT，1 組×250.0 mm²/相，Iz 300.000 A，壓降 0.417%；接地紀錄：待核。
+  NP 採用環溫 35°C，溫度係數 1，同管係數 1。
 NP：運轉 98.310 A，設計 122.888 A；NFB 候選 125 AT，1 組×100.0 mm²/相，Iz 164.000 A，壓降 0.285%；接地紀錄：待核。
+  連續負載採總運轉電流×1.25；最大馬達草稿不參與計算。
 
 五、主要公式與簡短說明
 照明 N=ceil(E×A/(Φ×U×M))=ceil(500×300/(2000×0.6×0.8))=157 盞。

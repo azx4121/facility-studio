@@ -796,6 +796,7 @@
       "tool": "gas",
       "inputs": {
         "gas": "CDA",
+        "flow_basis": "標準流量",
         "flow": "800",
         "pressure": "6",
         "velocity": "15",
@@ -808,6 +809,7 @@
       },
       "result": {
         "tool": "gas",
+        "flow_basis": "標準流量",
         "gas": "CDA",
         "standard_lpm": 800.0,
         "actual_lpm": 115.58122125975831,
@@ -832,6 +834,7 @@
       "tool": "gas",
       "inputs": {
         "gas": "CDA",
+        "flow_basis": "標準流量",
         "flow": "1000",
         "pressure": "0",
         "velocity": "15",
@@ -844,6 +847,7 @@
       },
       "result": {
         "tool": "gas",
+        "flow_basis": "標準流量",
         "gas": "CDA",
         "standard_lpm": 1000.0,
         "actual_lpm": 1000.0000000000001,
@@ -868,6 +872,7 @@
       "tool": "gas",
       "inputs": {
         "gas": "CDA",
+        "flow_basis": "標準流量",
         "flow": "800",
         "pressure": "6",
         "velocity": "15",
@@ -880,6 +885,7 @@
       },
       "result": {
         "tool": "gas",
+        "flow_basis": "標準流量",
         "gas": "CDA",
         "standard_lpm": 800.0,
         "actual_lpm": 126.15976979167834,
@@ -904,6 +910,7 @@
       "tool": "gas",
       "inputs": {
         "gas": "CDA",
+        "flow_basis": "標準流量",
         "flow": "100",
         "pressure": "6",
         "velocity": "15",
@@ -916,6 +923,7 @@
       },
       "result": {
         "tool": "gas",
+        "flow_basis": "標準流量",
         "gas": "CDA",
         "standard_lpm": 2831.6846592,
         "actual_lpm": 409.1119639160732,
@@ -940,6 +948,7 @@
       "tool": "gas",
       "inputs": {
         "gas": "CDA",
+        "flow_basis": "標準流量",
         "flow": "800",
         "pressure": "600",
         "velocity": "15",
@@ -952,6 +961,7 @@
       },
       "result": {
         "tool": "gas",
+        "flow_basis": "標準流量",
         "gas": "CDA",
         "standard_lpm": 800.0,
         "actual_lpm": 115.58122125975831,
@@ -976,6 +986,7 @@
       "tool": "gas",
       "inputs": {
         "gas": "CDA",
+        "flow_basis": "標準流量",
         "flow": "0",
         "pressure": "6",
         "velocity": "15",
@@ -988,6 +999,7 @@
       },
       "result": {
         "tool": "gas",
+        "flow_basis": "標準流量",
         "gas": "CDA",
         "standard_lpm": 0.0,
         "actual_lpm": 0.0,

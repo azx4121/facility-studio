@@ -1,0 +1,506 @@
+{
+  "version": "5.5.8",
+  "checks": [
+    {
+      "name": "AHU draft save/read retains invalid flow ''",
+      "passed": true
+    },
+    {
+      "name": "AHU draft save/read retains invalid flow 'abc'",
+      "passed": true
+    },
+    {
+      "name": "AHU draft save/read retains invalid flow 'NaN'",
+      "passed": true
+    },
+    {
+      "name": "AHU draft save/read retains invalid flow '-1'",
+      "passed": true
+    },
+    {
+      "name": "AHU draft save/read retains invalid flow '1e999'",
+      "passed": true
+    },
+    {
+      "name": "Declined draft save leaves existing file and saved state unchanged",
+      "passed": true
+    },
+    {
+      "name": "Accepted draft overwrite preserves prior valid backup",
+      "passed": true
+    },
+    {
+      "name": "Corrected draft saves as ordinary v4 project",
+      "passed": true
+    },
+    {
+      "name": "Corrected draft retains invalid draft in backup",
+      "passed": true
+    },
+    {
+      "name": "I/O failure does not mark draft saved",
+      "passed": true
+    },
+    {
+      "name": "Actual AHU load/apply restores invalid text and clears prior results",
+      "passed": true
+    },
+    {
+      "name": "Legacy ordinary documents still require valid inputs",
+      "passed": true
+    },
+    {
+      "name": "Malformed draft rejected 00",
+      "passed": true
+    },
+    {
+      "name": "Malformed draft rejected 01",
+      "passed": true
+    },
+    {
+      "name": "Malformed draft rejected 02",
+      "passed": true
+    },
+    {
+      "name": "Malformed draft rejected 03",
+      "passed": true
+    },
+    {
+      "name": "Malformed draft rejected 04",
+      "passed": true
+    },
+    {
+      "name": "Malformed draft rejected 05",
+      "passed": true
+    },
+    {
+      "name": "Malformed draft rejected 06",
+      "passed": true
+    },
+    {
+      "name": "Malformed draft rejected 07",
+      "passed": true
+    },
+    {
+      "name": "Malformed draft rejected 08",
+      "passed": true
+    },
+    {
+      "name": "Malformed draft rejected 09",
+      "passed": true
+    },
+    {
+      "name": "Malformed draft rejected 10",
+      "passed": true
+    },
+    {
+      "name": "Malformed draft rejected 11",
+      "passed": true
+    },
+    {
+      "name": "Malformed draft rejected 12",
+      "passed": true
+    },
+    {
+      "name": "Physical bypass denominator agrees with expanded positive expression",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/60.000/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/60.000/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/60.000/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/60.000/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/60.000/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/60.000/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/101.325/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/101.325/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/101.325/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/101.325/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/101.325/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/101.325/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/120.000/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/120.000/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/120.000/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/120.000/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/120.000/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 0.1/120.000/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/60.000/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/60.000/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/60.000/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/60.000/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/60.000/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/60.000/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/101.325/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/101.325/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/101.325/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/101.325/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/101.325/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/101.325/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/120.000/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/120.000/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/120.000/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/120.000/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/120.000/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 5.0/120.000/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/60.000/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/60.000/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/60.000/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/60.000/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/60.000/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/60.000/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/101.325/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/101.325/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/101.325/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/101.325/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/101.325/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/101.325/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/120.000/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/120.000/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/120.000/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/120.000/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/120.000/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 14.0/120.000/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/60.000/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/60.000/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/60.000/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/60.000/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/60.000/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/60.000/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/101.325/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/101.325/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/101.325/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/101.325/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/101.325/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/101.325/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/120.000/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/120.000/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/120.000/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/120.000/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/120.000/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 30.0/120.000/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/60.000/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/60.000/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/60.000/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/60.000/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/60.000/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/60.000/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/101.325/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/101.325/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/101.325/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/101.325/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/101.325/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/101.325/0.001",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/120.000/1.0001e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/120.000/1.1e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/120.000/2e-08",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/120.000/1e-07",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/120.000/1e-06",
+      "passed": true
+    },
+    {
+      "name": "Near-boundary real coil 45.0/120.000/0.001",
+      "passed": true
+    },
+    {
+      "name": "Inconsistent internal inlet state rejected: zero",
+      "passed": true
+    },
+    {
+      "name": "Inconsistent internal inlet state rejected: negative",
+      "passed": true
+    },
+    {
+      "name": "Inconsistent internal inlet state rejected: NaN",
+      "passed": true
+    },
+    {
+      "name": "Inconsistent internal inlet state rejected: infinite",
+      "passed": true
+    },
+    {
+      "name": "Current version translated: '廠務簡易工具\\nV5.5.8'",
+      "passed": true
+    },
+    {
+      "name": "Current version translated: '分段空調箱設計｜V5.5.8'",
+      "passed": true
+    },
+    {
+      "name": "Current version translated: '工程快算｜V5.5.8'",
+      "passed": true
+    },
+    {
+      "name": "Draft warning translated to English",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "bypass_samples": 10720,
+  "minimum_sample_denominator": 0.23887570487863685,
+  "maximum_expression_roundoff": 1.7053025658242404e-13,
+  "mac_app_data_check": "not applicable to Windows-only source tree"
+}

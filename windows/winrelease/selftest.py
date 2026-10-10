@@ -220,6 +220,8 @@ def run(destination):
             check_usability(root, app, workbench, check, pump, destination)
             from facility_studio.inactive_acceptance import run_ui as check_inactive_ui
             check_inactive_ui(workbench, check, pump)
+            from facility_studio.review_acceptance import run_ui as check_review_ui
+            check_review_ui(workbench, check, pump)
             check("Native GUI heartbeat", lambda: (pump(), True)[1])
             from matplotlib.figure import Figure
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg

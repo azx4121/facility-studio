@@ -376,9 +376,14 @@ def condition_air(i, enter, m, ts, ws, pre=True):
                 s1 = state_tw(t1, enter["w"], p)
             else:
                 hv = 2501 + 1.86 * t1
-                beta = (1.006 * t1 + adp["w"] * hv - adp["h"]) / (
+                denominator = (
                     enter["h"] - adp["h"] - (enter["w"] - adp["w"]) * hv
                 )
+                if not math.isfinite(denominator) or denominator <= 1e-9:
+                    raise InputError(
+                        "一段盤管旁通因子無法求解，請核對入口與 ADP 狀態。", field_name="pre_t"
+                    )
+                beta = (1.006 * t1 + adp["w"] * hv - adp["h"]) / denominator
                 beta = max(0, min(1, beta))
                 s1 = blend(enter, adp, beta, p)
     elif mode == "指定出口（需求檢核）":

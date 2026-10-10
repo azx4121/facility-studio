@@ -1,3 +1,11 @@
+Facility Studio V5.5.8 source revision
+
+This source fixes standalone AHU draft save/reopen and adds defensive bypass-state validation.
+Public binaries remain V5.5.7 until V5.5.8 native Actions and publication succeed.
+Use the root README for currently published downloads; older notes below are retained as history.
+
+--- Historical notes ---
+
 Facility Studio V5.5.6｜macOS 中英雙語版 mac.1
 
 V5.5.6 操作修訂
