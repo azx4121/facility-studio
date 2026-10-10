@@ -2,7 +2,7 @@
 
 [繁體中文首頁](../../README.md) · [English guides](README.en.md) · [文件中心](../README.md) · [下載](../../README.md#下載)
 
-這些案例使用合成資料，先判斷問題能否解，再選工具。**目前 V5.5.8 支援繁體中文／英文**，右上角可選 English；兩平台內含執行環境，可離線運作。原 V5.5.4 案例已用目前模型再驗算；V5.5.6 另釐清來源回傳、迴路分組及待重算互鎖。詳[本版操作與交付驗證](../2026-10-10-v5.5.8-native.md)。
+依手上的問題選工具，再查看輸入條件、公式與結果。以下是 **18 個計算案例與 2 個範圍對照**，全部使用合成資料；可照數值在 V5.5.8 中文或英文介面操作。
 
 ## 完整工作台先從這裡開始
 
@@ -45,6 +45,9 @@
 
 ## 可重現的輸入與結果
 
+<details>
+<summary>開發者：命令列與原始測試結果</summary>
+
 數值情境與自然搜尋問題事先保留在[scenarios.json](../examples/scenarios.json)。14個快算案例另有最小JSON輸入，可用原始碼CLI重算：
 
 ```sh
@@ -56,6 +59,8 @@ python windows/Facility_Studio_V5_5.py --tool air --tool-input docs/examples/12-
 
 每個來源平台通過121項情境檢核，包括電流、截面流速、氣體溫壓、照度、冷熱量、空氣狀態、設備分組、AHU熱濕守恆及容量不足判定。兩份原始結果：[Windows](../examples/calculation-results-windows.json)、[macOS](../examples/calculation-results-macos.json)。這是同一組18個計算情境與2個不適用對照，沒有把重複平台檢查宣稱為40個不同問題。
 
+</details>
+
 <a id="case-20"></a>
 ## 情境20：BIM／Revit自動出圖與碰撞檢查
 
@@ -63,11 +68,8 @@ python windows/Facility_Studio_V5_5.py --tool air --tool-input docs/examples/12-
 
 另外，[情境19](electrical.md#case-19)的短路電流／Icu／選擇性保護協調也需要其他模型。
 
-## 使用、分享與問題回報
+## 使用與問題回報
 
-可用於學習、公司正常工程工作及收費工程案的計算書；軟體商品化另需授權，見[目前授權](../../LICENSE_GUIDE.md)。這是公開原始碼的限制性授權，不稱為MIT或OSI開源。
+使用範圍見[授權案例](../../LICENSE_GUIDE.md)。遇到問題，請附情境編號、版本、完整輸入與單位、預期／實際結果到 [Issues](https://github.com/azx4121/facility-studio/issues)；移除業主機密。
 
-發現問題請提供情境編號、完整輸入單位、版本及預期／實際結果到[Issues](https://github.com/azx4121/facility-studio/issues)。請用測試資料，不含業主機密。
-
-[搜尋可見性測試方法](../search-discoverability.md)另行記錄；計算通過不代表其他人的GPT會自動找到或推薦這套工具。
-
+[常見問題](../faq.md) · [原生驗收](../2026-10-10-v5.5.8-native.md) · [歷史紀錄](../history/README.md)

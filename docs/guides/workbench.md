@@ -2,7 +2,7 @@
 
 [English](workbench.en.md) · [下載軟體](../../README.md#下載) · [工具指南](README.md) · [離線教學懶人包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)
 
-適用 **V5.5.7 Windows／macOS**。先完成第 1～6 節，就能做出第一份練習報告；第 7～9 節是需要時才使用的延伸操作。這份教學使用合成資料，不含任何業主或公司專案。
+適用 **V5.5.8 Windows／macOS**。先完成第 1～6 節，就能做出第一份練習報告；第 7～9 節是需要時才使用的延伸操作。這份教學使用合成資料，不含任何業主或公司專案。
 
 <a id="start"></a>
 ## 1. 先選對入口
@@ -15,9 +15,9 @@
 | 比較單台箱的預熱、預冷、加濕、再冷、再熱 | 工作台上方「空調箱管理」 | 看第 8 節 |
 | 整批設備 Excel／CSV 彙總 | 「設備表匯入」 | 可獨立使用；分析結果不會默默填入主案 |
 
-**第一次不要從空白案件填完所有分頁。** 先開練習案、只改一個條件、觀察結果，再換成自己的現場資料。
+**先從練習案開始。** 只改一個條件、觀察結果，再換成自己的現場資料。
 
-離線包解壓縮後，雙擊 `START_HERE.html`：用一般瀏覽器閱讀，可切換中英文、逐步跟做、勾選進度或列印。教學及練習不需要 Python，也不需要連網；GitHub 外部連結需要網路。勾選只記錄「我已閱讀」，不是軟體驗收。進度只計前六個必要步驟，延伸章節選讀；「閱讀全文」時不勾選單步，以免記錯章節。V5.5.6 已內建離線入口：簡易工具的「本工具教學」開啟對應章節，完整工作台的「新手教學」引導第一份報告；較早版本可直接開啟離線 HTML。
+程式已內建離線教學：簡易工具按「本工具教學」，完整工作台按「新手教學」。也可完整解壓縮教學包後，用瀏覽器開啟 `START_HERE.html`。教學可切換語言、逐步閱讀或列印；前六步的勾選只記錄閱讀進度，延伸章節選讀。進度存在本機瀏覽器，外部 GitHub 連結才需網路。
 
 <a id="interface"></a>
 ## 2. 工作台只要先認識四個位置
@@ -38,11 +38,12 @@
 <a id="first-case"></a>
 ## 3. 開啟第一個練習案
 
-1. 下載並完整解壓縮 [教學懶人包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)。請不要在 ZIP 預覽視窗內操作。
-2. 找到 `01_Practice_AHU.json`。不用先在桌面改名；開啟後可用軟體內的「另存新檔」。
-3. 開啟 Facility Studio →「完整工程工作台」→ 上方「開啟」。
-4. 選擇 `01_Practice_AHU.json`。若現有案件未保存，先保存再切換。按「另存新檔」，存為 `My_First_Project.json`，之後「儲存整案」只存回這個新檔。
-5. 上方選「基本模式」，按下方「重新計算」，或按 F5。
+1. 開啟 Facility Studio →「完整工程工作台」→「新手教學」。
+2. 在瀏覽器教學左側「練習檔案」下載 `01_Practice_AHU.json`，保存到自己的資料夾。也可完整解壓縮[教學包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)取得同一份檔案。
+3. 回工作台按上方「開啟」，選擇 `01_Practice_AHU.json`。現有案件若有修改，先保存再切換。
+4. 按「另存新檔」存成 `My_First_Project.json`，選「基本模式」，再按下方「重新計算」或 F5。
+
+「開啟練習新案」會直接載入**第二個 MAU／分段空調箱範例**。本節先用第一個混風 AHU 案例，第 8 節再練習第二案。
 
 本例是 **12 × 8 × 3 m 的一般作業區，8 人，AHU 外氣／回風混合**。不是無塵室認證案例，也不是任何產品的選型書。其他無需求的氣體、PV、排氣、PCW、純水設為 0；已有設備與冰水等初估資料供練習。
 

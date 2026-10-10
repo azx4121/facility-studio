@@ -60,21 +60,10 @@ def main():
         if error.code != 404:
             raise
         release = None
+    # Visitor-facing notes are maintained with the documentation.
     body = (
-        'V5.5.8 修正獨立空調箱無效草稿的保存、重新開啟與關閉前保存；確認後保留原始輸入，計算與報告匯出仍受驗證限制。取消不覆存，修正後回復普通專案並保留備份。旁通因子對不一致內部狀態增加明確錯誤，不採任意 beta=0。\n\nV5.5.8 fixes standalone AHU invalid-draft save/reopen while retaining calculation and export validation. Source regressions cover draft structure, backups and cancellation, with ten additional real native Tk workflow checks.\n\n'
-        'V5.5.8 修正停用欄位洩漏：最大馬達與負載類型同步互鎖，停用效率不阻擋計算，單機報告只列啟用熱水／水洗設備，選用名目電力統一。新增 970 項完整輸出、報告、獨立公式與壓損檢核；安裝檔內另含原生控制項驗收。\n\n'
-        'V5.5.8 fixes inactive-input leakage, largest-motor activation, disabled heater efficiency, selected-power totals and AHU report scope. 970 reproducible checks compare complete outputs and reports, with independent current/pressure balances and native GUI interlocks.\n\n'
-        'V5.5.8 修正新手操作與需求範圍：基本模式依任務收合分頁，共同氣候放在圖前，另存／複製方案不覆蓋原案。設備表支援百分比格式辨識及選取群組預覽帶入；多台空調箱依來源彙整，同台更新不重算一次，水路依季節與供回水／流體分開，各迴路物性獨立。改輸入後保留已標示過期的圖表作對照，匯出及回傳停用至重新檢核。離線繁中／英文教學同步 18 個章節，前六步進度為手動閱讀記錄。\n\nV5.5.8 clarifies beginner navigation, project saving and source ownership. Equipment imports normalize explicit Excel percentages and offer scoped preview transfers. Repeated AHU IDs replace their contribution; separate included units add, with seasonal and incompatible water circuits kept distinct. Stale plots/reports remain marked for comparison while export and transfer are disabled. Bilingual offline help covers 18 chapters and six required reading steps.\n\n'
-        "V5.5.8 中英雙語版 mac.1，保留全部工程功能、macOS 啟動修復與 FY 圖示。\n\n"
-        "主畫面右上角選擇 English／繁體中文，欄位、提示、圖表、報告及設備範本同步切換；已填數字與舊專案保留。語言偏好會保存。\n\n"
-        "Bilingual interface: select English in the top-right language selector. Forms, guidance, charts, reports and exported equipment templates are translated. Stored engineering data remains unchanged.\n\n"
-        "修正 Tcl/Tk 資源封印不符合 Apple 原生檢查，以及第一次字型快取建立時的無時限外部查詢。"
-        "使用 Apple codesign 重新封裝；同一份 Universal App 與 ZIP 已在 Apple Silicon、Intel macOS 15 原生環境驗證。\n\n"
-        "下載 DMG，打開後把 Facility Studio 拖到 Applications。原始碼、設備範本與驗證記錄請至本倉庫查閱。"
-        "不需另裝 Python。首次若提示開發者無法驗證，請依 Apple 官方「隱私權與安全性 → 仍要打開」流程。\n\n"
-        "本版仍是 ad-hoc 簽章，沒有 Developer ID／Apple 公證；使用者 macOS 27 Beta 與企業管理政策仍須另行確認。"
-        "新修訂採公司內部工程使用附加許可；完整條款隨包提供。原 MIT 版本權利、v5.5.4-beta.1 與 Windows 舊包保持原樣。"
-    )
+        Path(__file__).resolve().parents[2] / "docs/releases" / (TAG + ".md")
+    ).read_text(encoding="utf-8")
     if release is None:
         data = json.dumps(
             dict(

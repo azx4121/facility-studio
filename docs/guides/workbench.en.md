@@ -2,7 +2,7 @@
 
 [繁體中文](workbench.md) · [Download the app](../../README.en.md#download-and-run) · [Tool guides](README.en.md) · [Offline tutorial package](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)
 
-For **V5.5.7 on Windows and macOS**. Finish sections 1–6 to produce your first practice report. Sections 7–9 are optional extensions. All examples use synthetic data, with no client or company project information.
+For **V5.5.8 on Windows and macOS**. Finish sections 1–6 to produce your first practice report. Sections 7–9 are optional extensions. All examples use synthetic data, with no client or company project information.
 
 <a id="start"></a>
 ## 1. Choose the right starting point
@@ -15,9 +15,9 @@ For **V5.5.7 on Windows and macOS**. Finish sections 1–6 to produce your first
 | One unit's preheat, precool, humidification, recool and reheat | AHU management inside the workbench | See section 8 |
 | Batch Excel/CSV equipment demand | Import equipment schedule | Independent analysis; results do not silently populate the main project |
 
-**Do not start by filling every tab in an empty project.** Open a practice project, change one condition, observe the result, then replace the example with your site data.
+**Start with a practice project.** Change one condition, observe the result, then replace the example with your site data.
 
-Extract the tutorial ZIP, then open `START_HERE.html` in a normal browser. It supports Chinese/English, step-by-step navigation, progress checkboxes and printing. The tutorial and practice files require neither Python nor an internet connection; external GitHub links need internet. Checkmarks record reading, not software acceptance. Progress counts only the first six required steps; extensions are optional. Read-all mode disables the single-step checkbox to avoid recording the wrong chapter. V5.5.6 includes in-app offline help: **This tool's guide** follows a simple calculator, and **Beginner tutorial** guides the full workbench. Older binaries can use the HTML directly.
+Help is bundled: use **This tool's guide** in a quick calculator or **Beginner tutorial** in the full workbench. Alternatively extract the tutorial package and open `START_HERE.html` in a browser. It offers language switching, guided reading and printing. Checkmarks record reading of the first six sections; extensions are optional. Progress stays in local browser storage, and only external GitHub links need internet.
 
 <a id="interface"></a>
 ## 2. Learn four locations on the screen
@@ -38,11 +38,12 @@ This is a **location diagram based on actual controls, not a GUI screenshot**.
 <a id="first-case"></a>
 ## 3. Open the first practice project
 
-1. Download and completely extract the [tutorial package](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip). Do not operate inside a ZIP preview.
-2. Locate `01_Practice_AHU.json`. You can rename the working copy with the in-app Save as action after opening it.
-3. Open Facility Studio → **Full workbench** → **Open** at the top.
-4. Select `01_Practice_AHU.json`. Save an existing modified project before switching. Use Save as to write `My_First_Project.json`; subsequent Save workspace actions use that new path.
-5. Select **Basic mode**, then click **Recalculate** at the bottom, or press F5.
+1. Open Facility Studio → **Full workbench → Beginner tutorial**.
+2. Download `01_Practice_AHU.json` from **Practice files** in the browser's left sidebar and save it to your folder. Alternatively extract the [tutorial package](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip) for the same file.
+3. Return to the workbench, click **Open**, and select that JSON. Save an existing modified project before switching.
+4. Use **Save as** to write `My_First_Project.json`, choose **Basic mode**, then click **Recalculate** or press F5.
+
+**Open practice copy** directly loads the **second MAU / staged-AHU example**. This section starts with the first mixed-air AHU; section 8 uses the second example.
 
 This example is a **12 × 8 × 3 m general work area, 8 people, AHU outside/return-air mixing**. It is not a cleanroom certification case or a product selection. Unused gases, PV, exhaust, PCW and pure-water demand are zero; other equipment and chilled-water assumptions are provided for practice.
 

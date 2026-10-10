@@ -2,7 +2,7 @@
 
 [繁體中文](README.md) · [English home](../../README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-These worked examples use synthetic data. **V5.5.8 supports Traditional Chinese and English**; select English at the top right. Both platform downloads bundle the runtime and run offline. The V5.5.4 examples have been checked again with the current models; V5.5.6 clarifies source transfers, circuit groups and stale-result locks. See [current fixes and delivery verification](../2026-10-10-v5.5.8-native.md).
+Choose a tool for your question, then review its inputs, formulas and result. These **18 calculation cases and two scope controls** use synthetic data and can be followed in the V5.5.8 Chinese or English interface.
 
 ## Start with the full-workbench walkthrough
 
@@ -45,6 +45,9 @@ Read the relevant guide for defaults, units and limitations. A candidate size is
 
 ## Reproducible inputs and results
 
+<details>
+<summary>Developers: command-line examples and original test results</summary>
+
 [scenarios.json](../examples/scenarios.json) contains the 20 scenarios. Fourteen quick-tool cases also have minimal JSON inputs. Developers can reproduce them from the repository root:
 
 ```sh
@@ -56,15 +59,15 @@ For macOS source, replace `windows/` with `macos/` and use `python3` if required
 
 Each source distribution originally passed 121 example checks: numerical inverses, reports, equipment groups, AHU heat/moisture conservation and insufficient-capacity detection. Original results: [Windows](../examples/calculation-results-windows.json), [macOS](../examples/calculation-results-macos.json). They are the same 18 applicable cases and two out-of-scope controls, not 40 different questions. Native release acceptance and the separate 20 bilingual parity cases are documented independently.
 
+</details>
+
 <a id="case-20"></a>
 ## Case 20: BIM / Revit drawings and clash detection
 
 Facility Studio does not provide BIM modeling, full 3D clash detection or automatic construction drawings. It is not a complete solution to this request. [Case 19](electrical.en.md#case-19) likewise requires a fault-current and protection-curve model.
 
-## Use and report problems
+## Use and feedback
 
-Learning, normal internal engineering work and paid engineering projects with delivered calculations are permitted under the [current license](../../LICENSE_GUIDE.en.md). Software commercialization requires separate permission. The project is source-available, not MIT or OSI-approved open source.
+See the [licensing examples](../../LICENSE_GUIDE.en.md) for permitted use. Report a case number, version, every value/unit and expected/actual result in [Issues](https://github.com/azx4121/facility-studio/issues). Remove client secrets.
 
-Report the case number, software/OS version, all values and units, expected result and actual result in [Issues](https://github.com/azx4121/facility-studio/issues). Use synthetic data and remove client secrets.
-
-The [search visibility experiment](../search-discoverability.md) is separate: passing calculations does not mean another person's GPT will find or recommend the tool.
+[FAQ](../faq.en.md) · [Native acceptance](../2026-10-10-v5.5.8-native.md) · [Historical records](../history/README.md#english)
