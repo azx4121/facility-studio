@@ -7,6 +7,8 @@ on:
       - .github/workflows/windows-offline-release.yml
       - windows/winrelease/**
       - windows/facility_studio/**
+      - windows/tests/**
+      - docs/tutorial/**
   workflow_dispatch:
 
 permissions:
@@ -61,6 +63,8 @@ jobs:
           path: |
             ${{ runner.temp }}/windows-offline/evidence
             windows/evidence/*.json
+            ${{ runner.temp }}/tutorial-windows.json
+            ${{ runner.temp }}/win-use-cases.json
           if-no-files-found: warn
           retention-days: 14
       - name: Retain native-tested distribution files

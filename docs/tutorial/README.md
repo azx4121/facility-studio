@@ -29,7 +29,7 @@ python docs/tutorial/verify_tutorial.py --platform windows --output tutorial-win
 python3 docs/tutorial/verify_tutorial.py --platform macos --output tutorial-macos.json
 ```
 
-Windows 與 macOS 原始碼各通過 20 種條件、85 項檢查，包括面積／淨高／人數、照明、顯熱、三種製程水氣模式、CDA 最低壓力、PV 三單位、停用需求、連動／獨立水量、ΔT、水側路徑及設備壓差、MAU 主案連動、單機守恆、容量不足與結構化錯誤欄位。中文／英文對照報告也重新比對。
+Windows 與 macOS 原始碼各通過 20 種條件、87 項檢查，包括面積／淨高／人數、照明、顯熱、三種製程水氣模式、CDA 最低壓力、PV 三單位、停用需求、連動／獨立水量、ΔT、水側路徑及設備壓差、MAU 主案連動、單機守恆、容量不足與結構化錯誤欄位。中文／英文對照報告也重新比對。
 
 [Windows 驗證](verification-windows.json) · [macOS 驗證](verification-macos.json)。數值檢查在目前主機執行；新增入口、最小視窗署名及實際練習案載入另在兩平台原生交付流程驗收，本版見[V5.5.7 修訂與驗收](../2026-10-07-v5.5.6-usability.md)，舊版見[教學入口修訂記錄](../2026-10-07-beginner-tutorial.md)。本例「待補資料」是刻意保留未知設備條件，不是正式設計合格證明。
 
@@ -37,4 +37,4 @@ Windows 與 macOS 原始碼各通過 20 種條件、85 項檢查，包括面積�
 
 Extract the ZIP and open `START_HERE.html` in a browser. In V5.5.7 use Full workbench → Open practice copy, then Save workspace under your own file name. On older versions, copy and rename the practice workspace before opening it. The guide is offline; only external GitHub links need internet. Progress stays in local browser storage.
 
-The source-platform verifier checks 20 operation-related conditions and 85 assertions per platform. Native delivery checks separately exercise the tutorial buttons, visible author credit at minimum window size and actual workbench practice loading. Synthetic examples leave missing manufacturer/site data pending.
+The source-platform verifier checks 20 operation-related conditions and 87 assertions per platform. Native delivery checks separately exercise the tutorial buttons, visible author credit at minimum window size and actual workbench practice loading. Synthetic examples leave missing manufacturer/site data pending.

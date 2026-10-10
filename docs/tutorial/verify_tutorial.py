@@ -7,6 +7,7 @@ Run from a repository checkout: python docs/tutorial/verify_tutorial.py
 
 import argparse
 import copy
+import difflib
 from hashlib import sha256
 import json
 import math
@@ -27,7 +28,7 @@ def main():
     from facility_studio.ahu_engine import nm_calculate
     from facility_studio.design_workflow import ahu_requirement_updates, ahu_utility_preview
     from facility_studio.errors import ValidationError
-    from facility_studio.reports import report
+    from facility_studio.reports import report, nm_report
     from facility_studio import i18n
 
     directory = Path(__file__).parent
@@ -43,6 +44,22 @@ def main():
 
     def close(actual, expected):
         check(math.isclose(actual, expected, abs_tol=1e-8, rel_tol=1e-9))
+
+    def check_reference_report(actual, filename):
+        # Match refresh_tutorial.py: preserve all report content and internal
+        # spacing, canonicalizing only line endings and trailing whitespace.
+        def canonical(text):
+            return "\n".join(line.rstrip() for line in text.splitlines()) + "\n"
+
+        actual = canonical(str(actual))
+        expected = canonical((directory / filename).read_text(encoding="utf-8"))
+        if actual != expected:
+            difference = "".join(difflib.unified_diff(
+                expected.splitlines(keepends=True), actual.splitlines(keepends=True),
+                fromfile=filename, tofile="calculated report",
+            ))
+            raise AssertionError("Tutorial reference report differs:\n" + difference)
+        check(True)
 
     def changed(**values):
         project = copy.deepcopy(a["main"])
@@ -197,8 +214,9 @@ def main():
         else:raise AssertionError(label)
     for language in ("zh-Hant","en"):
         i18n.set_language(language,persist=False)
-        text=str(report(base))
-        check(text==(directory/f'01_Expected_Report{".en" if language=="en" else ""}.txt').read_text(encoding="utf-8"))
+        suffix = ".en" if language == "en" else ""
+        check_reference_report(report(base), f"01_Expected_Report{suffix}.txt")
+        check_reference_report(nm_report(ra), f"02_Expected_AHU_Report{suffix}.txt")
     record("20 Invalid/boundary inputs are rejected and reference reports match",dict(rejected=rejected))
 
     check(len(records)==20)

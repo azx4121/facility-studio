@@ -9,6 +9,8 @@ on:
       - macos/facility_studio/**
       - macos/README_macOS.txt
       - macos/MAC_RUNTIME_PATCHES.md
+      - macos/tests/**
+      - docs/tutorial/**
   workflow_dispatch:
 
 permissions:
@@ -38,7 +40,11 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: mac557-arm64-evidence
-          path: ${{ runner.temp }}/mac557-build/evidence
+          path: |
+            ${{ runner.temp }}/mac557-build/evidence
+            macos/evidence/*.json
+            ${{ runner.temp }}/tutorial-macos.json
+            ${{ runner.temp }}/mac-use-cases.json
           if-no-files-found: warn
           retention-days: 14
       - name: Retain tested delivery files
