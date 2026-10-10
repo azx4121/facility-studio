@@ -1,0 +1,301 @@
+{
+  "source_commit": "a80a570a86f9edc43253ea99f24f9963ce769943",
+  "source_tree": "e9420ec0b98a66e270a4921dfa0e82a489224f26",
+  "runs": {
+    "windows": {
+      "id": 38019795504,
+      "url": "https://github.com/azx4121/facility-studio/actions/runs/38019795504",
+      "head_sha": "a80a570a86f9edc43253ea99f24f9963ce769943",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-10T03:13:21Z",
+      "updated_at": "2026-10-10T03:25:59Z",
+      "jobs": [
+        {
+          "id": 114118036794,
+          "name": "build",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114119320627,
+          "name": "verify",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114120272581,
+          "name": "publish",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "macos": {
+      "id": 38019795478,
+      "url": "https://github.com/azx4121/facility-studio/actions/runs/38019795478",
+      "head_sha": "a80a570a86f9edc43253ea99f24f9963ce769943",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-10T03:13:21Z",
+      "updated_at": "2026-10-10T03:22:14Z",
+      "jobs": [
+        {
+          "id": 114118036574,
+          "name": "build",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114118710132,
+          "name": "verify-intel",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114119596739,
+          "name": "publish",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  },
+  "releases": [
+    {
+      "tag": "v5.5.7-win.1",
+      "url": "https://github.com/azx4121/facility-studio/releases/tag/v5.5.7-win.1",
+      "draft": false,
+      "prerelease": true,
+      "target_commitish": "a80a570a86f9edc43253ea99f24f9963ce769943",
+      "published_at": "2026-10-10T03:25:56Z",
+      "assets": [
+        {
+          "name": "Facility_Studio_V5_5_7_Windows_Offline.exe",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.7-win.1/Facility_Studio_V5_5_7_Windows_Offline.exe",
+          "id": 626888504,
+          "digest": "sha256:4053ed6fcb5e0b0a7d5b726602635c828c2ed50602b826422b6c256f8fc3bcc8",
+          "state": "uploaded",
+          "size": 40848103
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.7-win.1/SHA256SUMS.txt",
+          "id": 626888624,
+          "digest": "sha256:e717b64911a7cb0d8a617673411cc4e8055b4cf5e1b2e416b744310b94e9c8a3",
+          "state": "uploaded",
+          "size": 109
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.7-mac.1",
+      "url": "https://github.com/azx4121/facility-studio/releases/tag/v5.5.7-mac.1",
+      "draft": false,
+      "prerelease": true,
+      "target_commitish": "a80a570a86f9edc43253ea99f24f9963ce769943",
+      "published_at": "2026-10-10T03:22:11Z",
+      "assets": [
+        {
+          "name": "Facility_Studio_V5_5_7_macOS_mac1.dmg",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.7-mac.1/Facility_Studio_V5_5_7_macOS_mac1.dmg",
+          "id": 626881656,
+          "digest": "sha256:5fc8097548d1ba6bfe6c3a0e5d4f4077c1e399d532f9e2e3924c5c233e56447d",
+          "state": "uploaded",
+          "size": 146189476
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.7-mac.1/SHA256SUMS.txt",
+          "id": 626881778,
+          "digest": "sha256:257decd125125e25dcc2121596d88a5b7948fa047f762482705edf73ad3b9501",
+          "state": "uploaded",
+          "size": 104
+        }
+      ]
+    }
+  ],
+  "checked_at": "2026-10-10T11:28:30.709889+08:00",
+  "native_acceptance": {
+    "mac_arm64": [
+      {
+        "sha256": "49f9411fd051c466e942d6d7bcd6177f10b58c61b7b7b34d23027c2703410733",
+        "checks": 124,
+        "passed": true,
+        "architecture": "arm64",
+        "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+        "timestamp": "2026-10-10T03:14:42.555308+00:00",
+        "repository_filename": "v557-mac-arm64-mac-acceptance.json"
+      },
+      {
+        "sha256": "aca01174dc34f1db5e5764e3db74bfbb04a90ef8d11b64b1169b4539bca23143",
+        "checks": 124,
+        "passed": true,
+        "architecture": "arm64",
+        "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+        "timestamp": "2026-10-10T03:15:15.685923+00:00",
+        "repository_filename": "v557-mac-arm64-launch-services-acceptance.json"
+      }
+    ],
+    "windows_2022": [
+      {
+        "sha256": "9c70f565ba2de68b5fc9439b05eb38a4be962f0cbc6e0c947e12dce47461fdc5",
+        "checks": 132,
+        "passed": true,
+        "architecture": "AMD64",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "timestamp": "2026-10-10T03:17:02.494171+00:00",
+        "repository_filename": "v557-windows-2022-standalone.json",
+        "delivery_checks": {
+          "label": "standalone",
+          "gui_checks": 132,
+          "cli_tools": 7,
+          "firewall_outbound_blocked": true,
+          "network_audit_blocked": true,
+          "python_on_path": false,
+          "empty_working_directory": true,
+          "exe_sha256": "4053ed6fcb5e0b0a7d5b726602635c828c2ed50602b826422b6c256f8fc3bcc8",
+          "passed": true
+        },
+        "delivery_record_sha256": "4ba700184f2d601aac9f6f3a42f764f9c44d09fcc498df6a2a68149243869d8e"
+      },
+      {
+        "sha256": "bac74e86a54089f231b54d301e31ea1e4f9bbf2c00853b8dfc46ad635451a021",
+        "checks": 132,
+        "passed": true,
+        "architecture": "AMD64",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "timestamp": "2026-10-10T03:19:53.073424+00:00",
+        "repository_filename": "v557-windows-2022-unicode-executable-path.json",
+        "delivery_checks": {
+          "label": "unicode-executable-path",
+          "gui_checks": 132,
+          "cli_tools": 7,
+          "firewall_outbound_blocked": false,
+          "network_audit_blocked": true,
+          "python_on_path": false,
+          "empty_working_directory": true,
+          "exe_sha256": "4053ed6fcb5e0b0a7d5b726602635c828c2ed50602b826422b6c256f8fc3bcc8",
+          "passed": true
+        },
+        "delivery_record_sha256": "f41c0ba9ca69b9a959e509ee8c762233d9f071a46be98608198ef0ae65bc2d04"
+      },
+      {
+        "sha256": "a45ed28e344d1a78ef74c35ef30fd4815e5fe3d3cfc8565e18f0d3903e4092fc",
+        "checks": 132,
+        "passed": true,
+        "architecture": "AMD64",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "timestamp": "2026-10-10T03:18:27.200411+00:00",
+        "repository_filename": "v557-windows-2022-zip-extracted.json",
+        "delivery_checks": {
+          "label": "zip-extracted",
+          "gui_checks": 132,
+          "cli_tools": 7,
+          "firewall_outbound_blocked": true,
+          "network_audit_blocked": true,
+          "python_on_path": false,
+          "empty_working_directory": true,
+          "exe_sha256": "4053ed6fcb5e0b0a7d5b726602635c828c2ed50602b826422b6c256f8fc3bcc8",
+          "passed": true
+        },
+        "delivery_record_sha256": "950c8d83c7ba5d22bb34adec4de527259af281b92172e7bd2e9f3a66a85ac4af"
+      }
+    ],
+    "mac_intel": [
+      {
+        "sha256": "cf68edd6ac24064ecda0f1f967ccc6bc85dc52247b91ef31ef53f7b82826258a",
+        "checks": 124,
+        "passed": true,
+        "architecture": "x86_64",
+        "platform": "macOS-15.7.9-x86_64-i386-64bit-Mach-O",
+        "timestamp": "2026-10-10T03:19:59.718126+00:00",
+        "repository_filename": "v557-mac-intel-mac-acceptance.json"
+      }
+    ],
+    "windows_2025": [
+      {
+        "sha256": "75ac47e3bbbda6958613980ec3f2dfe18ac01ca4e69b9ec872109c1c97dd4170",
+        "checks": 132,
+        "passed": true,
+        "architecture": "AMD64",
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "timestamp": "2026-10-10T03:21:55.589701+00:00",
+        "repository_filename": "v557-windows-2025-standalone.json",
+        "delivery_checks": {
+          "label": "standalone",
+          "gui_checks": 132,
+          "cli_tools": 7,
+          "firewall_outbound_blocked": true,
+          "network_audit_blocked": true,
+          "python_on_path": false,
+          "empty_working_directory": true,
+          "exe_sha256": "4053ed6fcb5e0b0a7d5b726602635c828c2ed50602b826422b6c256f8fc3bcc8",
+          "passed": true
+        },
+        "delivery_record_sha256": "4ba700184f2d601aac9f6f3a42f764f9c44d09fcc498df6a2a68149243869d8e"
+      },
+      {
+        "sha256": "3e34b037ede892d09e2661ff9a51383c2be2be8f8023177bdd8475fb766f6c7b",
+        "checks": 132,
+        "passed": true,
+        "architecture": "AMD64",
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "timestamp": "2026-10-10T03:25:08.748211+00:00",
+        "repository_filename": "v557-windows-2025-unicode-executable-path.json",
+        "delivery_checks": {
+          "label": "unicode-executable-path",
+          "gui_checks": 132,
+          "cli_tools": 7,
+          "firewall_outbound_blocked": false,
+          "network_audit_blocked": true,
+          "python_on_path": false,
+          "empty_working_directory": true,
+          "exe_sha256": "4053ed6fcb5e0b0a7d5b726602635c828c2ed50602b826422b6c256f8fc3bcc8",
+          "passed": true
+        },
+        "delivery_record_sha256": "f41c0ba9ca69b9a959e509ee8c762233d9f071a46be98608198ef0ae65bc2d04"
+      },
+      {
+        "sha256": "057232406b3d8f4d78e4317c2fed1551e990f6d74660d3abd93636b209f4fb52",
+        "checks": 132,
+        "passed": true,
+        "architecture": "AMD64",
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "timestamp": "2026-10-10T03:23:33.885441+00:00",
+        "repository_filename": "v557-windows-2025-zip-extracted.json",
+        "delivery_checks": {
+          "label": "zip-extracted",
+          "gui_checks": 132,
+          "cli_tools": 7,
+          "firewall_outbound_blocked": true,
+          "network_audit_blocked": true,
+          "python_on_path": false,
+          "empty_working_directory": true,
+          "exe_sha256": "4053ed6fcb5e0b0a7d5b726602635c828c2ed50602b826422b6c256f8fc3bcc8",
+          "passed": true
+        },
+        "delivery_record_sha256": "950c8d83c7ba5d22bb34adec4de527259af281b92172e7bd2e9f3a66a85ac4af"
+      }
+    ]
+  },
+  "source_checks": {
+    "inactive": 970,
+    "regression_scenarios": 52,
+    "regression_checks": 1247,
+    "bilingual_scenarios": 20,
+    "bilingual_checks": 3883,
+    "tutorial_scenarios": 20,
+    "tutorial_checks": 87
+  },
+  "license_sha256": "e185b75ca79cd309fee9643cfd25d61207bd64af3fe70e6323ed16e4a1ad3802",
+  "initial_failed_runs": {
+    "windows": 38019434504,
+    "macos": 38019434512,
+    "cause": "Reference report line-ending/trailing-whitespace mismatch; corrected before native delivery."
+  },
+  "distribution_digest_matches_native_build": {
+    "windows_exe": true,
+    "macos_dmg": true
+  }
+}

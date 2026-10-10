@@ -2,7 +2,7 @@
 
 [繁體中文](README.md) · [English home](../../README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-These worked examples use synthetic data. **V5.5.6 supports Traditional Chinese and English**; select English at the top right. Both platform downloads bundle the runtime and run offline. The V5.5.4 examples have been checked again with the current models; V5.5.6 clarifies source transfers, circuit groups and stale-result locks. See [current usability and delivery verification](../2026-10-07-v5.5.6-usability.md).
+These worked examples use synthetic data. **V5.5.7 supports Traditional Chinese and English**; select English at the top right. Both platform downloads bundle the runtime and run offline. The V5.5.4 examples have been checked again with the current models; V5.5.6 clarifies source transfers, circuit groups and stale-result locks. See [current fixes and delivery verification](../2026-10-10-v5.5.7-native.md).
 
 ## Start with the full-workbench walkthrough
 
