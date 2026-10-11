@@ -94,6 +94,7 @@ def run_ui(root, app, main, check, pump):
     from tkinter import ttk
     from . import i18n
     from .ahu_desktop import AHUWindow
+    from .main_view import ScrollPage
     from .tools_view import QuickToolsWindow
     from .ui_common import install_numeric_keyboard
 
@@ -114,6 +115,15 @@ def run_ui(root, app, main, check, pump):
         entry.icursor(cursor)
         # Tool changes can map the new page after this callback returns.
         # A native focus request made before Map is discarded on Windows.
+        pump()
+        # Existing tools retain their canvas scroll position. Bring the target
+        # into the viewport, as a user must do before focusing an entry.
+        ancestor = entry.master
+        while ancestor is not None:
+            if isinstance(ancestor, ScrollPage):
+                ancestor.reveal(entry)
+                break
+            ancestor = getattr(ancestor, "master", None)
         pump()
         entry.winfo_toplevel().lift()
         entry.focus_force()
