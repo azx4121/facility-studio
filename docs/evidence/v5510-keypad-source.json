@@ -783,5 +783,27 @@
     "count": 76,
     "passed": true
   },
-  "physical_keyboard_tested": false
+  "physical_keyboard_tested": false,
+  "source_validation_commit": "0ca9dc224ffd3946f2b556ffdc06896cfba50100",
+  "native_harness_followups": [
+    {
+      "commit": "f25d6edfa2147d9da27c1b2af052c96227bd6d84",
+      "change": "Pump the native event loop before requesting focus, lift the entry window, and retain detailed mapped/focus diagnostics.",
+      "source_keypad_checks": {
+        "windows": 64,
+        "macos": 64
+      },
+      "python_syntax_passed": true,
+      "installer_payload_hashes_verified": 76
+    },
+    {
+      "commit": "910449d7ffe5b5776ce3dc79b15dbf627848cf0d",
+      "change": "Reveal the Windows target field in its ScrollPage viewport before focusing; all native acceptance predicates are retained.",
+      "source_keypad_checks": {
+        "windows": 64
+      },
+      "python_syntax_passed": true,
+      "installer_payload_hashes_verified": 76
+    }
+  ]
 }

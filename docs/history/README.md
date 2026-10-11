@@ -2,10 +2,12 @@
 
 [目前下載](../../README.md#下載) · [文件中心](../README.md) · [English](#english)
 
-以下文件保存**當時版本**的修訂、數字、雜湊及截圖。請以 [V5.5.9 原生交付](../2026-10-11-v5.5.9-native.md)及目前 Release 核對現行下載；歷史文件中的檔名或步驟不一定適用新版。
+以下文件保存**當時版本**的修訂、數字、雜湊及截圖。請以 [V5.5.10 原生交付](../2026-10-11-v5.5.10-native.md)及目前 Release 核對現行下載；歷史文件中的檔名或步驟不一定適用新版。
 
 | 紀錄 | 內容 |
 | --- | --- |
+| [V5.5.9 原生交付與 100 案修正](../2026-10-11-v5.5.9-native.md) | 報告防護、季節 C1 定位與當時來源／原生證據 |
+| [V5.5.8 審閱修正](../2026-10-10-v5.5.8-native.md) | 草稿保存、計算邊界及雙語原生驗收 |
 | [V5.5.7 互鎖修正](../2026-10-09-v5.5.7-inactive-fields.md) | 最大馬達、停用效率、有效資料及報告範圍 |
 | [V5.5.7 原生交付](../2026-10-10-v5.5.7-native.md) | 前版原生驗收、提交與發布雜湊 |
 | [V5.5.6 操作修訂](../2026-10-07-v5.5.6-usability.md) | 基本模式、需求來源、分組與待重算 |
@@ -27,6 +29,6 @@
 <a id="english"></a>
 ## English
 
-These records describe the versions tested at the time. Use [V5.5.9 native delivery evidence](../2026-10-11-v5.5.9-native.md) and current Releases for today's downloads. Historical filenames and startup steps may differ.
+These records describe the versions tested at the time. Use [V5.5.10 native delivery evidence](../2026-10-11-v5.5.10-native.md) and current Releases for today's downloads. Historical filenames and startup steps may differ.
 
 Previous commits, tags, Releases, evidence and [MIT grants](../../LICENSE_LEGACY_MIT) are retained. Search experiments document their method and limits; they do not guarantee rankings or recommendations.

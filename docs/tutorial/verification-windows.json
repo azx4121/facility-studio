@@ -1,7 +1,7 @@
 {
-  "app_version": "5.5.7",
+  "app_version": "5.5.10",
   "source_platform": "windows",
-  "execution": "Headless calculation and report checks on the current host; native GUI checks are separate.",
+  "execution": "Headless calculation and report checks on Linux with Python 3.12.14; native GUI acceptance is recorded separately.",
   "cases": [
     {
       "case": 1,
@@ -268,5 +268,7 @@
   "input_sha256": {
     "01_Practice_AHU.json": "ed7102e9d0c762f4b3c6ec0af4c8b83dcf186a974af9a0a5b2c71c9c22c60740",
     "02_Practice_MAU_and_AHU.json": "b7663744d0d28cb25a84081afec300fbc8e3c795997cf978ee9bd82c08c56518"
-  }
+  },
+  "tested_source_commit": "0ca9dc224ffd3946f2b556ffdc06896cfba50100",
+  "validated_on": "2026-10-11"
 }
