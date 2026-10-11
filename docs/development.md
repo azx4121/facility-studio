@@ -23,6 +23,7 @@ python windows/tests/v554_features.py
 python windows/tests/v556_features.py
 python windows/tests/v557_inactive.py
 python windows/tests/v558_review.py
+python windows/tests/v559_resilience.py
 python windows/tests/maintenance_checks.py
 python windows/tests/security_checks.py
 python windows/tests/bilingual.py
@@ -34,9 +35,19 @@ macOS 來源把 `windows/` 改為 `macos/`，兩個 `--platform` 改為 `macos`�
 
 案例輸入及命令列例子見[工具指南的重現段落](guides/README.md#可重現的輸入與結果)。來源通過不能代替 EXE／App 的原生驗收。
 
+完整報告 `report()` 需要完整主案結果；部分空調結果會回傳 `ValidationError(code="incomplete_result")`。C1 超飽和使用 `code="supersaturated_air"` 與對應的 `field_name`，可供介面定位。
+
+要重現 100 組無塵室的物理輸入與夏冬壓力測試，可使用下列命令。產生器已核對能重建原來 100 組物理條件；新產生文件的版本資訊與錯誤欄位預期會依 V5.5.9 更新，所以整份 JSON 雜湊與保留的 V5.5.8 文件不同。測試主體仍用原始文件重跑，見[修正與證據](2026-10-11-v5.5.9-resilience.md)。
+
+```sh
+python tools/cleanroom100_stress.py --source . --platform windows --manifest cleanroom100.json --generate
+python tools/cleanroom100_stress.py --source . --platform windows --manifest cleanroom100.json --output cleanroom100-windows.json --repeat 20
+python tools/cleanroom100_stress.py --source . --platform macos --manifest cleanroom100.json --output cleanroom100-macos.json --repeat 20
+```
+
 ## 維護與發布原則
 
-以[本版交付紀錄](2026-10-10-v5.5.8-native.md)核對測試的提交、公開檔名與 SHA256。新程式修訂必須通過原生流程再發布；不要覆寫已發布的二進位檔、移動既有 tag 或強制推送覆蓋歷史。
+以[本版交付紀錄](2026-10-11-v5.5.9-native.md)核對測試的提交、公開檔名與 SHA256。新程式修訂必須通過原生流程再發布；不要覆寫已發布的二進位檔、移動既有 tag 或強制推送覆蓋歷史。
 
 文件與 Release 敘述可以獨立修正。Release 文案維護只更新文字，不重新打包，並核對原有 tag、版本狀態與資產身分。歷史數字及截圖仍按原版本保存。
 
@@ -51,6 +62,8 @@ Source lives in `windows/` and `macos/`, with platform-specific navigation, scro
 
 Run the commands above from the repository root. For macOS source, change `windows/` to `macos/` and both `--platform windows` options to `--platform macos`; use `python3` if required. Tests can update evidence files. GUI tests additionally require a display and the documented dependencies.
 
-Current [delivery evidence](2026-10-10-v5.5.8-native.md) identifies tested commits and binary SHA256. Source checks are separate from native acceptance. Publish a new tested revision without replacing released binaries, moving tags or rewriting history. Documentation and release-body edits preserve binary identity and release status.
+The full-report API requires a complete main-project result and rejects isolated HVAC results with `incomplete_result`. C1 supersaturation uses `supersaturated_air` and the relevant input field. The cleanroom generator reproduces all 100 original physical inputs; generated metadata and expected error fields reflect the new version. The recorded regression used the retained original input document.
+
+Current [delivery evidence](2026-10-11-v5.5.9-native.md) identifies tested commits and binary SHA256. Source checks are separate from native acceptance. Publish a new tested revision without replacing released binaries, moving tags or rewriting history. Documentation and release-body edits preserve binary identity and release status.
 
 Retain **DESIGNED BY ANDY HUANG ©**, current licensing and third-party notices. Earlier MIT grants remain valid for those historical editions.

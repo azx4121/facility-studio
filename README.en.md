@@ -11,12 +11,12 @@ Facility Studio is a desktop tool for facility, electrical and HVAC engineers. U
 <a id="installation-and-first-launch"></a>
 ## Download and run
 
-Current version: **V5.5.8 public test release**.
+Current version: **V5.5.9 public test release**.
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows 10/11, Intel/AMD x64 | [**Download Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.5.8-win.1/Facility_Studio_V5_5_8_Windows_Offline.exe) | Save and double-click; allow time for the bundled environment to unpack on first launch |
-| macOS, Apple Silicon / Intel | [**Download macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.5.8-mac.1/Facility_Studio_V5_5_8_macOS_mac1.dmg) | Open the DMG, drag Facility Studio into Applications, then launch it there |
+| Windows 10/11, Intel/AMD x64 | [**Download Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.5.9-win.1/Facility_Studio_V5_5_9_Windows_Offline.exe) | Save and double-click; allow time for the bundled environment to unpack on first launch |
+| macOS, Apple Silicon / Intel | [**Download macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.5.9-mac.1/Facility_Studio_V5_5_9_macOS_mac1.dmg) | Open the DMG, drag Facility Studio into Applications, then launch it there |
 
 Download one file for your platform. Help and equipment templates are bundled. [Versions and SHA256](https://github.com/azx4121/facility-studio/releases) · [Compatibility and first launch](docs/faq.en.md#compatibility)
 
@@ -55,7 +55,7 @@ For a project report, open **Full workbench → Beginner tutorial** and follow t
 - **Data:** calculations, saved projects and schedule imports are processed locally. User-entered names and notes retain their original language.
 - **License:** internal company engineering work, paid engineering projects and delivered calculation reports are permitted. Software resale, paid bundling or paid hosted software services require separate written permission. [Full terms](LICENSE) · [License examples](LICENSE_GUIDE.en.md)
 
-The published files passed native acceptance on Windows Server 2022/2025 x64 and Apple Silicon/Intel macOS 15. Windows 10/11 and macOS 11+ are support/packaging targets; other OS versions, devices and enterprise policies need individual confirmation. [Current fixes and verification](docs/2026-10-10-v5.5.8-native.md)
+The published files passed native acceptance on Windows Server 2022/2025 x64 and Apple Silicon/Intel macOS 15. Windows 10/11 and macOS 11+ are support/packaging targets; other OS versions, devices and enterprise policies need individual confirmation. [Current fixes and verification](docs/2026-10-11-v5.5.9-native.md)
 
 ## Help and feedback
 

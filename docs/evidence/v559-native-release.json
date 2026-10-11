@@ -1,0 +1,715 @@
+{
+  "version": "5.5.9",
+  "source_commit": "bc8584ecba902a95210fe3b308a6ed9135adddf8",
+  "repair_tree": "c19f491c35ea9e38c9d06017d416de871e8fbae0",
+  "releases": [
+    {
+      "tag": "v5.5.9-win.1",
+      "source": "bc8584ecba902a95210fe3b308a6ed9135adddf8",
+      "url": "https://github.com/azx4121/facility-studio/releases/tag/v5.5.9-win.1",
+      "draft": false,
+      "prerelease": true,
+      "assets": [
+        {
+          "id": 629660981,
+          "name": "Facility_Studio_V5_5_9_Windows_Offline.exe",
+          "size": 40870527,
+          "sha256": "54ad72baeaea1243e69518874cc7f4ddfdbe1ee220a63236800bdc98d9029b41",
+          "state": "uploaded",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.9-win.1/Facility_Studio_V5_5_9_Windows_Offline.exe"
+        },
+        {
+          "id": 629661045,
+          "name": "SHA256SUMS.txt",
+          "size": 109,
+          "sha256": "885cfc14d33e4057d441df62b7d9c8cf001b0319c2994ecdefaf07d996784103",
+          "state": "uploaded",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.9-win.1/SHA256SUMS.txt"
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.9-mac.1",
+      "source": "bc8584ecba902a95210fe3b308a6ed9135adddf8",
+      "url": "https://github.com/azx4121/facility-studio/releases/tag/v5.5.9-mac.1",
+      "draft": false,
+      "prerelease": true,
+      "assets": [
+        {
+          "id": 629657143,
+          "name": "Facility_Studio_V5_5_9_macOS_mac1.dmg",
+          "size": 145971648,
+          "sha256": "cf9e98448b6e663bcde182d4caff1dec716f139e8fe4766b0e4e7bdb545364b9",
+          "state": "uploaded",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.9-mac.1/Facility_Studio_V5_5_9_macOS_mac1.dmg"
+        },
+        {
+          "id": 629657309,
+          "name": "SHA256SUMS.txt",
+          "size": 104,
+          "sha256": "47ff50651059da7887bccdde923fe2acab4a07d63230baefbd2d15078505f624",
+          "state": "uploaded",
+          "url": "https://github.com/azx4121/facility-studio/releases/download/v5.5.9-mac.1/SHA256SUMS.txt"
+        }
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "id": 38107758980,
+      "name": "Build and verify offline Windows EXE",
+      "head_sha": "bc8584ecba902a95210fe3b308a6ed9135adddf8",
+      "url": "https://github.com/azx4121/facility-studio/actions/runs/38107758980",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 38107758978,
+      "name": "Build and verify macOS revision",
+      "head_sha": "bc8584ecba902a95210fe3b308a6ed9135adddf8",
+      "url": "https://github.com/azx4121/facility-studio/actions/runs/38107758978",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "jobs": {
+    "windows": [
+      {
+        "id": 114376780475,
+        "name": "build",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 38107758980,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Install hash-locked build dependencies on the builder only",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Engineering and import security regressions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Build the standalone windowed EXE and complete offline ZIP",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Native execution with external Python hidden and outbound traffic blocked",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Retain build and native acceptance evidence",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Retain native-tested distribution files",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17
+          },
+          {
+            "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19
+          }
+        ]
+      },
+      {
+        "id": 114377976158,
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 38107758980,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Execute identical delivered files on a second native Windows environment",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Retain second native Windows evidence",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          }
+        ]
+      },
+      {
+        "id": 114378759533,
+        "name": "publish",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 38107758980,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Publish a new revision only after both Windows checks pass",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          }
+        ]
+      }
+    ],
+    "macos": [
+      {
+        "id": 114376780307,
+        "name": "build",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 38107758978,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Select a pinned Python with Tk for source storage regressions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Language and engineering checks",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Build, sign and execute Universal App on Apple Silicon",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Retain Apple Silicon evidence",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Retain tested delivery files",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Post Select a pinned Python with Tk for source storage regressions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15
+          }
+        ]
+      },
+      {
+        "id": 114377574274,
+        "name": "verify-intel",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 38107758978,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Execute the same delivered ZIP and DMG on Intel",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Retain Intel evidence",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          }
+        ]
+      },
+      {
+        "id": 114378436287,
+        "name": "publish",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 38107758978,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Publish a new revision after both native checks pass",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          }
+        ]
+      }
+    ]
+  },
+  "historical_assets_unchanged": [
+    {
+      "tag": "v5.5.8-win.1",
+      "assets": [
+        {
+          "id": 627018555,
+          "name": "Facility_Studio_V5_5_8_Windows_Offline.exe",
+          "sha256": "7756b22c4a1b2b4c8d23102db54a752acd4f2c3b73ec62036390f4f594807db0",
+          "size": 40861567
+        },
+        {
+          "id": 627018629,
+          "name": "SHA256SUMS.txt",
+          "sha256": "3469fa9b430431a44f91d748b9dd542097441deb060c6ca52c328cb6c703b202",
+          "size": 109
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.8-mac.1",
+      "assets": [
+        {
+          "id": 627895712,
+          "name": "Facility_Studio_V5_5_8_macOS_mac1.dmg",
+          "sha256": "214ba5d68bd329ba7d06414f4f3725b7c3dfcd7d3c3924dad51f22fcdffea023",
+          "size": 134298099
+        },
+        {
+          "id": 627896018,
+          "name": "SHA256SUMS.txt",
+          "sha256": "d8125dc00fb3da9627b7f212d3eab2a706e13fdb7f636faf88ae6387fab1d01c",
+          "size": 104
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.7-win.1",
+      "assets": [
+        {
+          "id": 626888504,
+          "name": "Facility_Studio_V5_5_7_Windows_Offline.exe",
+          "sha256": "4053ed6fcb5e0b0a7d5b726602635c828c2ed50602b826422b6c256f8fc3bcc8",
+          "size": 40848103
+        },
+        {
+          "id": 626888624,
+          "name": "SHA256SUMS.txt",
+          "sha256": "e717b64911a7cb0d8a617673411cc4e8055b4cf5e1b2e416b744310b94e9c8a3",
+          "size": 109
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.7-mac.1",
+      "assets": [
+        {
+          "id": 626881656,
+          "name": "Facility_Studio_V5_5_7_macOS_mac1.dmg",
+          "sha256": "5fc8097548d1ba6bfe6c3a0e5d4f4077c1e399d532f9e2e3924c5c233e56447d",
+          "size": 146189476
+        },
+        {
+          "id": 626881778,
+          "name": "SHA256SUMS.txt",
+          "sha256": "257decd125125e25dcc2121596d88a5b7948fa047f762482705edf73ad3b9501",
+          "size": 104
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.6-win.3",
+      "assets": [
+        {
+          "id": 620238805,
+          "name": "Facility_Studio_V5_5_6_Windows_Offline.exe",
+          "sha256": "fcfa8a672095aac7cb6f2b5664c6d1124d75d678b3a1404a8d22b1fc929e0765",
+          "size": 40829951
+        },
+        {
+          "id": 620385273,
+          "name": "SHA256SUMS.txt",
+          "sha256": "c904e3ff0969fa737731e97eb6bc9445a92fae48c4e9a72265a684eba2164c94",
+          "size": 109
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.6-win.2",
+      "assets": [
+        {
+          "id": 620210813,
+          "name": "Facility_Studio_V5_5_6_Windows_Offline.exe",
+          "sha256": "f7f3300028ce3a0a572ef16470651845d99eca4af6faa29a31c5206117b3c0b5",
+          "size": 40828536
+        },
+        {
+          "id": 620210862,
+          "name": "Facility_Studio_V5_5_6_Windows_Offline_OneClick.zip",
+          "sha256": "4a2219f543a5f120c545d0bd9c2cacee0e62adcfe6b69abe0730e48c7bc43b4c",
+          "size": 41765394
+        },
+        {
+          "id": 620210914,
+          "name": "SHA256SUMS.txt",
+          "sha256": "26e61a71a43e96bae85ec86dd80ccec0d2d59f5540faba95513844ab3391ef69",
+          "size": 229
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.6-mac.2",
+      "assets": [
+        {
+          "id": 620205535,
+          "name": "Facility_Studio_V5_5_6_macOS_mac2.dmg",
+          "sha256": "117c38cb7700f219869b889fd1af015b291d6ec29c65f854b3cc0ab471e2fd59",
+          "size": 145751807
+        },
+        {
+          "id": 620385712,
+          "name": "SHA256SUMS.txt",
+          "sha256": "dcd3d29994cd040ade0ef28bded0f1fa03a8630bbb808a7dd0805c159487855b",
+          "size": 104
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.6-win.1",
+      "assets": [
+        {
+          "id": 619136647,
+          "name": "Facility_Studio_V5_5_6_Windows_Offline.exe",
+          "sha256": "e16aaf0f3adaa6bee398d4e924ee8919c9d17662937703286a583230fc92be08",
+          "size": 40823352
+        },
+        {
+          "id": 619136712,
+          "name": "Facility_Studio_V5_5_6_Windows_Offline_OneClick.zip",
+          "sha256": "8740f2ebb0e7327b4bfb0380936a9468cb014580ff81920493bfaff63a7b3d2a",
+          "size": 41757768
+        },
+        {
+          "id": 619136788,
+          "name": "SHA256SUMS.txt",
+          "sha256": "56b3884df08f0240c7aea3a7fa3ed4c3aa8b668cd45424f4897c383a77b717d5",
+          "size": 229
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.6-mac.1",
+      "assets": [
+        {
+          "id": 619157882,
+          "name": "Facility_Studio_V5_5_6_macOS_mac1.dmg",
+          "sha256": "5a6ded3549b7751565655d732810a88aa2ca00b775e735fd6e9349ed9ee093b6",
+          "size": 145823666
+        },
+        {
+          "id": 619157710,
+          "name": "Facility_Studio_V5_5_6_macOS_mac1_OneClick.zip",
+          "sha256": "ed8a6b8da1055519ee3ea428eb98ee240fab192b522f2e7de61168fee5bb1748",
+          "size": 95749904
+        },
+        {
+          "id": 619158045,
+          "name": "SHA256SUMS.txt",
+          "sha256": "82d8bf6abc229acfa6de63b3c99cec2d069c478260b1efc3805da4aed4e3d8cb",
+          "size": 217
+        }
+      ]
+    },
+    {
+      "tag": "v5.5.5-win.2",
+      "assets": [
+        {
+          "id": 618380573,
+          "name": "Facility_Studio_V5_5_5_Windows_Offline.exe",
+          "sha256": "df8fbab8ddc7a7f1b482e554376453e2ca37d989ffb7fea8e4a2b30da8cf6384",
+          "size": 40408194
+        },
+        {
+          "id": 618380633,
+          "name": "Facility_Studio_V5_5_5_Windows_Offline_OneClick.zip",
+          "sha256": "cb700470602ef7eaeb02e3a83fd6469d6c1c9397c9255314db81f996ccb04d0b",
+          "size": 40605913
+        },
+        {
+          "id": 618380694,
+          "name": "SHA256SUMS.txt",
+          "sha256": "149abc628c0293be5ffc890216ba7651810341ffdf34b3d5580ed6dca536e01b",
+          "size": 229
+        }
+      ]
+    }
+  ],
+  "license_sha256": "e185b75ca79cd309fee9643cfd25d61207bd64af3fe70e6323ed16e4a1ad3802",
+  "native_results": {
+    "windows_2022": [
+      {
+        "label": "standalone",
+        "gui_checks": 150,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "54ad72baeaea1243e69518874cc7f4ddfdbe1ee220a63236800bdc98d9029b41",
+        "passed": true
+      },
+      {
+        "label": "zip-extracted",
+        "gui_checks": 150,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "54ad72baeaea1243e69518874cc7f4ddfdbe1ee220a63236800bdc98d9029b41",
+        "passed": true
+      },
+      {
+        "label": "unicode-executable-path",
+        "gui_checks": 150,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": false,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "54ad72baeaea1243e69518874cc7f4ddfdbe1ee220a63236800bdc98d9029b41",
+        "passed": true
+      }
+    ],
+    "windows_2025": [
+      {
+        "label": "standalone",
+        "gui_checks": 150,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "54ad72baeaea1243e69518874cc7f4ddfdbe1ee220a63236800bdc98d9029b41",
+        "passed": true
+      },
+      {
+        "label": "zip-extracted",
+        "gui_checks": 150,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "54ad72baeaea1243e69518874cc7f4ddfdbe1ee220a63236800bdc98d9029b41",
+        "passed": true
+      },
+      {
+        "label": "unicode-executable-path",
+        "gui_checks": 150,
+        "cli_tools": 7,
+        "firewall_outbound_blocked": false,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "54ad72baeaea1243e69518874cc7f4ddfdbe1ee220a63236800bdc98d9029b41",
+        "passed": true
+      }
+    ],
+    "mac_arm64": {
+      "native_gui_checks": 142,
+      "passed": true,
+      "job_id": 114376780307,
+      "log_lines": [
+        "2026-10-11T03:19:37.3374780Z {\"version\": \"5.5.9-mac.1\", \"files\": {\"Facility_Studio_V5_5_9_macOS_mac1_OneClick.zip\": \"ef4006a356d631e4ab1b2fff703993a31a6e9a94e55128911939d7b71688d350\", \"Facility_Studio_V5_5_9_macOS_mac1.dmg\": \"cf9e98448b6e663bcde182d4caff1dec716f139e8fe4766b0e4e7bdb545364b9\"}, \"native_gui_checks\": 142}"
+      ]
+    },
+    "mac_intel": {
+      "native_gui_checks": 142,
+      "passed": true,
+      "job_id": 114377574274,
+      "log_lines": [
+        "2026-10-11T03:25:10.4507220Z {\"passed\": true, \"architecture\": \"x86_64\", \"package_sha256\": \"ef4006a356d631e4ab1b2fff703993a31a6e9a94e55128911939d7b71688d350\", \"native_checks\": 142}"
+      ]
+    }
+  },
+  "scope": "Linux 100-case source stress is recorded separately; native results derive from successful release jobs and their actual verifier output. Full per-check acceptance JSONs are retained in the workflow artifacts."
+}

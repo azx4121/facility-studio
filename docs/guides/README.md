@@ -2,7 +2,7 @@
 
 [繁體中文首頁](../../README.md) · [English guides](README.en.md) · [文件中心](../README.md) · [下載](../../README.md#下載)
 
-依手上的問題選工具，再查看輸入條件、公式與結果。以下是 **18 個計算案例與 2 個範圍對照**，全部使用合成資料；可照數值在 V5.5.8 中文或英文介面操作。
+依手上的問題選工具，再查看輸入條件、公式與結果。以下是 **18 個計算案例與 2 個範圍對照**，全部使用合成資料；可照數值在 V5.5.9 中文或英文介面操作。
 
 ## 完整工作台先從這裡開始
 
@@ -72,4 +72,4 @@ python windows/Facility_Studio_V5_5.py --tool air --tool-input docs/examples/12-
 
 使用範圍見[授權案例](../../LICENSE_GUIDE.md)。遇到問題，請附情境編號、版本、完整輸入與單位、預期／實際結果到 [Issues](https://github.com/azx4121/facility-studio/issues)；移除業主機密。
 
-[常見問題](../faq.md) · [原生驗收](../2026-10-10-v5.5.8-native.md) · [歷史紀錄](../history/README.md)
+[常見問題](../faq.md) · [原生驗收](../2026-10-11-v5.5.9-native.md) · [歷史紀錄](../history/README.md)

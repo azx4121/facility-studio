@@ -2,7 +2,7 @@
 
 [繁體中文](README.md) · [Home and downloads](../README.en.md) · [Report a problem](https://github.com/azx4121/facility-studio/issues)
 
-Current version: **V5.5.8 public test release**. Choose documentation for your task; use the practice walkthrough when you need a full project.
+Current version: **V5.5.9 public test release**. Choose documentation for your task; use the practice walkthrough when you need a full project.
 
 ## Start here
 
@@ -23,8 +23,8 @@ Help is bundled: use **This tool's guide** in a quick calculator or **Beginner t
 | Your task | Documentation |
 | --- | --- |
 | Check inputs, formulas and worked results | [20 scenarios: 18 calculations and two scope controls](guides/README.en.md) |
-| Check the fixes introduced in V5.5.8 | [Review follow-up record](2026-10-10-v5.5.8-review-followup.md) |
-| Verify native tests, commits and SHA256 of the published EXE/DMG | [Current delivery acceptance](2026-10-10-v5.5.8-native.md) |
+| Check the fixes introduced in V5.5.9 | [Report and C1 resilience record](2026-10-11-v5.5.9-resilience.md) |
+| Verify native tests, commits and SHA256 of the published EXE/DMG | [Current delivery acceptance](2026-10-11-v5.5.9-native.md) |
 | Run, build or test source | [Developer entry](development.md#english) |
 | Review previous fixes, tests and search experiments | [Historical records](history/README.md#english) |
 

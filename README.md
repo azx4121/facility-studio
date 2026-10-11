@@ -10,12 +10,12 @@ Facility Studio 是供廠務、機電與空調工程人員使用的桌面工具�
 
 ## 下載
 
-目前版本：**V5.5.8 公開測試版**。
+目前版本：**V5.5.9 公開測試版**。
 
 | 平台 | 下載 | 開始使用 |
 | --- | --- | --- |
-| Windows 10／11，Intel／AMD x64 | [**下載 Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.5.8-win.1/Facility_Studio_V5_5_8_Windows_Offline.exe) | 儲存後雙擊開啟；首次啟動請等候內建環境展開 |
-| macOS，Apple Silicon／Intel | [**下載 macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.5.8-mac.1/Facility_Studio_V5_5_8_macOS_mac1.dmg) | 開啟 DMG，將 Facility Studio 拖到「應用程式」，再從那裡開啟 |
+| Windows 10／11，Intel／AMD x64 | [**下載 Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.5.9-win.1/Facility_Studio_V5_5_9_Windows_Offline.exe) | 儲存後雙擊開啟；首次啟動請等候內建環境展開 |
+| macOS，Apple Silicon／Intel | [**下載 macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.5.9-mac.1/Facility_Studio_V5_5_9_macOS_mac1.dmg) | 開啟 DMG，將 Facility Studio 拖到「應用程式」，再從那裡開啟 |
 
 每個平台下載上表的一個檔案即可，教學與設備範本已內建。[版本與 SHA256](https://github.com/azx4121/facility-studio/releases) · [相容性與首次開啟](docs/faq.md#compatibility)
 
@@ -54,7 +54,7 @@ Windows 尚無正式發行者簽章；Mac 尚未取得 Developer ID／Apple 公�
 - **資料：**計算、專案保存與設備表匯入在本機完成；自己的設備名稱與備註保留原文。
 - **授權：**允許公司內部工程工作、收費工程案件及計算書交付；軟體轉售、付費綁售或付費線上軟體服務需另行書面授權。[完整條款](LICENSE) · [授權案例](LICENSE_GUIDE.md)
 
-目前發布檔已通過 Windows Server 2022／2025 x64，以及 Apple Silicon／Intel macOS 15 原生驗收。Windows 10／11 與 macOS 11+ 為支援／封裝目標，其他版本、實機與企業政策仍需個別確認。[本版修正與驗證](docs/2026-10-10-v5.5.8-native.md)
+目前發布檔已通過 Windows Server 2022／2025 x64，以及 Apple Silicon／Intel macOS 15 原生驗收。Windows 10／11 與 macOS 11+ 為支援／封裝目標，其他版本、實機與企業政策仍需個別確認。[本版修正與驗證](docs/2026-10-11-v5.5.9-native.md)
 
 ## 文件與問題回報
 

@@ -2,7 +2,7 @@
 
 [首頁與下載](../../README.md) · [中文跟做教學](../guides/workbench.md) · [English](#english)
 
-**V5.5.8 已內建教學，日常使用不必另外下載教學包。**
+**V5.5.9 已內建教學，日常使用不必另外下載教學包。**
 
 簡易工具按「本工具教學」可看目前工具；完整工作台按「新手教學」可跟做第一份報告。教學左側附練習檔案，先完成前六步，其餘章節按需要閱讀。
 
@@ -29,7 +29,7 @@
 
 ## 驗證與原始資料
 
-[Windows 教學檢查](verification-windows.json) · [macOS 教學檢查](verification-macos.json) · [V5.5.8 原生交付](../2026-10-10-v5.5.8-native.md)
+[Windows 教學檢查](verification-windows.json) · [macOS 教學檢查](verification-macos.json) · [V5.5.9 原生交付](../2026-10-11-v5.5.9-native.md)
 
 <details>
 <summary>開發者：重現教學數值與報告</summary>
@@ -46,7 +46,7 @@ python3 docs/tutorial/verify_tutorial.py --platform macos --output tutorial-maco
 <a id="english"></a>
 ## English
 
-V5.5.8 includes offline help. Use **This tool's guide** in a calculator or **Full workbench → Beginner tutorial** for a first report. Complete the first six sections; additional chapters are optional.
+V5.5.9 includes offline help. Use **This tool's guide** in a calculator or **Full workbench → Beginner tutorial** for a first report. Complete the first six sections; additional chapters are optional.
 
 To read without launching the app, download the tutorial package above, extract it, and open `START_HERE.html` in a browser. No Python is needed. Progress records reading in local browser storage; only external links need internet.
 

@@ -2916,5 +2916,8 @@
         }
       ]
     }
-  }
+  },
+  "matched_release_source_commit": "bc8584ecba902a95210fe3b308a6ed9135adddf8",
+  "match_basis": "Remote repair tree matched local staged tree; both tested application module hash manifests identify the code built by native Actions.",
+  "generator_physical_input_parity": 100
 }

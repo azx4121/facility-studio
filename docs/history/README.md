@@ -2,7 +2,7 @@
 
 [目前下載](../../README.md#下載) · [文件中心](../README.md) · [English](#english)
 
-以下文件保存**當時版本**的修訂、數字、雜湊及截圖。請以 [V5.5.8 原生交付](../2026-10-10-v5.5.8-native.md)及目前 Release 核對現行下載；歷史文件中的檔名或步驟不一定適用新版。
+以下文件保存**當時版本**的修訂、數字、雜湊及截圖。請以 [V5.5.9 原生交付](../2026-10-11-v5.5.9-native.md)及目前 Release 核對現行下載；歷史文件中的檔名或步驟不一定適用新版。
 
 | 紀錄 | 內容 |
 | --- | --- |
@@ -27,6 +27,6 @@
 <a id="english"></a>
 ## English
 
-These records describe the versions tested at the time. Use [V5.5.8 native delivery evidence](../2026-10-10-v5.5.8-native.md) and current Releases for today's downloads. Historical filenames and startup steps may differ.
+These records describe the versions tested at the time. Use [V5.5.9 native delivery evidence](../2026-10-11-v5.5.9-native.md) and current Releases for today's downloads. Historical filenames and startup steps may differ.
 
 Previous commits, tags, Releases, evidence and [MIT grants](../../LICENSE_LEGACY_MIT) are retained. Search experiments document their method and limits; they do not guarantee rankings or recommendations.
