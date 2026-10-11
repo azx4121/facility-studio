@@ -112,9 +112,15 @@ def run_ui(root, app, main, check, pump):
         entry.insert(0, text)
         entry.selection_clear()
         entry.icursor(cursor)
+        # Tool changes can map the new page after this callback returns.
+        # A native focus request made before Map is discarded on Windows.
+        pump()
+        entry.winfo_toplevel().lift()
         entry.focus_force()
         pump()
-        require(root.focus_get() is entry, "Test entry did not receive focus")
+        require(root.focus_get() is entry,
+                "Test entry did not receive focus: mapped=%s focus=%s target=%s" %
+                (entry.winfo_ismapped(), root.focus_get(), entry))
 
     def event(entry, kind="keypad"):
         if sys.platform == "win32":

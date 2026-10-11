@@ -33,7 +33,7 @@
   "facility_studio/i18n.py": "8a8b24f71fd0dca4e4937186c0418afd7102338ef8c774b996f4465a8e68a7d8",
   "facility_studio/inactive_acceptance.py": "283d75dde46f9fbc632d194a751f02aebddc5da7fa2edba3376db4bb13bce271",
   "facility_studio/json_io.py": "3d214c49a83f468dec8dfe6d80f03881854321bb9c6e422c48f1f1c8ee4864ea",
-  "facility_studio/keypad_acceptance.py": "150794db7d26c3f4b8dc3a4920e26d9796fc6d35f7a02a8dd69afa35eabd2627",
+  "facility_studio/keypad_acceptance.py": "005e758163d04272f3803edc9104c3c6927aac9693a246df294f7e20afb44433",
   "facility_studio/language_acceptance.py": "920678e9dd1ac9eb120ab3e5650c67677a665688c6a71aa5b1c3322070a0aa21",
   "facility_studio/localized_plot.py": "59f89d77fc2308345100d2d7ea97a9e45632ee272bd444e0519e7aba2dd17432",
   "facility_studio/localized_tk.py": "ae5c4fae11c93af1abeba63f713ee11c1dfcdde827fcc5d85bbf4779de74a40a",
