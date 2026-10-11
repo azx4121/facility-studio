@@ -1,4 +1,4 @@
-Facility Studio V5.5.8｜macOS 廠務工程初估工具
+Facility Studio V5.5.9｜macOS 廠務工程初估工具
 DESIGNED BY ANDY HUANG ©
 
 用途
@@ -8,7 +8,7 @@ DESIGNED BY ANDY HUANG ©
 
 下載與安裝
 目前公開下載為 DMG：
-https://github.com/azx4121/facility-studio/releases/download/v5.5.8-mac.1/Facility_Studio_V5_5_8_macOS_mac1.dmg
+https://github.com/azx4121/facility-studio/releases/download/v5.5.9-mac.1/Facility_Studio_V5_5_9_macOS_mac1.dmg
 1. 打開 DMG。
 2. 把 Facility Studio 拖到「Applications／應用程式」。
 3. 從「應用程式」開啟。安裝完成後可退出 DMG。
@@ -29,7 +29,7 @@ https://github.com/azx4121/facility-studio/blob/main/docs/signing.md
 
 保存與更新
 整案 JSON 可接續編輯；TXT／HTML 是供閱讀與分享的報告。
-V5.5.8 獨立空調箱可確認保存無效草稿，修正後才能計算或匯出。
+V5.5.9 獨立空調箱可確認保存無效草稿，修正後才能計算或匯出。
 更新前先關閉舊 App 再替換；已儲存的專案與復原資料保留。
 啟動記錄：~/Library/Logs/Facility_Studio_V5_5/
 介面錯誤：~/Library/Application Support/Facility_Studio_V5_5/error.log
@@ -44,7 +44,7 @@ English
 Independent calculators, equipment schedules and a full HVAC/AHU workbench are available.
 Open the DMG, drag Facility Studio to Applications, then launch it there.
 The runtime and help are bundled. Select English at the top right.
-Apple Silicon/Intel macOS 15 passed native acceptance; macOS 11+ is the packaging target.
+Native acceptance environments are Apple Silicon/Intel macOS 15; macOS 11+ is the packaging target.
 The app has ad-hoc integrity signing without Developer ID or notarization.
 Results are preliminary estimates. See LICENSE for internal company use and paid engineering reports.
 

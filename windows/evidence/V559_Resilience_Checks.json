@@ -1,0 +1,278 @@
+{
+  "version": "5.5.9",
+  "passed": true,
+  "checks": [
+    {
+      "name": "Complete report remains available in zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "Complete report remains available in en",
+      "passed": true
+    },
+    {
+      "name": "Isolated HVAC cannot emit a complete project report",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: project",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: effective_inputs",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: room",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: light",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: zones",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: qs",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: ql",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: latent",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: moisture",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: minimum_oa_cmh",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: oa_room_cmh",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: extra_relief_cmh",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: circulation_cmh",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: supply_room_cmh",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: summer",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: winter",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: dcc_kw",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: counts",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: water",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: pressure",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: ducts",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: electric",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: gas",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: upw",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: rt_kw",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: sf",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: warnings",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: dcc_design_kw",
+      "passed": true
+    },
+    {
+      "name": "Missing report section rejected: quality",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: gas/1/None",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: gas/1/{}",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: gas/1/'invalid'",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: gas/2/None",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: gas/2/{}",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: gas/2/'invalid'",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: gas/3/None",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: gas/3/{}",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: gas/3/'invalid'",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: gas/4/None",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: gas/4/{}",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: gas/4/'invalid'",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: electric/UP/None",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: electric/UP/{}",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: electric/UP/'invalid'",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: electric/NP/None",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: electric/NP/{}",
+      "passed": true
+    },
+    {
+      "name": "Incomplete utility record rejected: electric/NP/'invalid'",
+      "passed": true
+    },
+    {
+      "name": "Incomplete result object rejected: None",
+      "passed": true
+    },
+    {
+      "name": "Incomplete result object rejected: []",
+      "passed": true
+    },
+    {
+      "name": "Incomplete result object rejected: {}",
+      "passed": true
+    },
+    {
+      "name": "Incomplete result object rejected: {'gas': {}, 'electric': {}}",
+      "passed": true
+    },
+    {
+      "name": "Rejected reports do not mutate isolated result",
+      "passed": true
+    },
+    {
+      "name": "Main project C1 supersaturation identifies pre_t",
+      "passed": true
+    },
+    {
+      "name": "Main C1 diagnostic context summer/22.35",
+      "passed": true
+    },
+    {
+      "name": "Main C1 diagnostic context winter/22.35",
+      "passed": true
+    },
+    {
+      "name": "Main C1 diagnostic context summer/22.7",
+      "passed": true
+    },
+    {
+      "name": "Main C1 diagnostic context winter/22.7",
+      "passed": true
+    },
+    {
+      "name": "Main C1 diagnostic context summer/23.05",
+      "passed": true
+    },
+    {
+      "name": "Main C1 diagnostic context winter/23.05",
+      "passed": true
+    },
+    {
+      "name": "Standalone automatic C1 field summer",
+      "passed": true
+    },
+    {
+      "name": "Standalone explicit seasonal C1 field summer",
+      "passed": true
+    },
+    {
+      "name": "Standalone inconsistent internal denominator summer",
+      "passed": true
+    },
+    {
+      "name": "Standalone automatic C1 field winter",
+      "passed": true
+    },
+    {
+      "name": "Standalone explicit seasonal C1 field winter",
+      "passed": true
+    },
+    {
+      "name": "Standalone inconsistent internal denominator winter",
+      "passed": true
+    }
+  ]
+}

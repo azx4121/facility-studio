@@ -2,10 +2,28 @@ from .i18n import localized_report, verbatim
 from .engine import pv_to_torr
 from .schema import VERSION
 from .utils import US_RT_KW, dewpoint
+from .errors import InputError
 
 
 @localized_report
 def report(r):
+    # Independent-domain results are useful in the UI, but cannot be exported
+    # as a complete project report. Zero-demand rows still have result records.
+    required = {"gas": ("1", "2", "3", "4"), "electric": ("UP", "NP")}
+    report_keys = set("project effective_inputs quality sf summer winter zones light "
+                      "minimum_oa_cmh oa_room_cmh extra_relief_cmh qs ql moisture latent "
+                      "supply_room_cmh circulation_cmh room rt_kw dcc_kw counts water "
+                      "pressure ducts gas electric upw warnings dcc_design_kw".split())
+    if not isinstance(r, dict) or not report_keys <= r.keys() or any(
+        not isinstance(r.get(domain), dict)
+        or any(not isinstance(r[domain].get(key), dict) or not r[domain][key]
+               for key in keys)
+        for domain, keys in required.items()
+    ):
+        raise InputError(
+            "完整報告需要空調、氣體與電氣的完整計算結果；目前結果不完整，請修正未通過的項目並重新計算。",
+            code="incomplete_result",
+        )
     i = dict(r["project"]["inputs"])
     from .schema import DEFAULTS
 

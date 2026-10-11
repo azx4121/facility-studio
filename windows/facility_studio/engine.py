@@ -359,7 +359,24 @@ def coil_record(name, a, b, m, cp):
     }
 
 
-def condition_air(i, enter, m, ts, ws, pre=True):
+def c1_blend(enter, adp, beta, p, *, season, target_t, field_name):
+    """Retain the physical rejection and identify the C1 control that caused it."""
+    try:
+        return blend(enter, adp, beta, p)
+    except InputError as error:
+        if error.code != "supersaturated_air":
+            raise
+        label = {"summer": "夏季", "winter": "冬季"}[season]
+        raise InputError(
+            f"{error}；{label} C1；入口 {enter['t']:.4f}°C / {enter['rh']:.4f}%RH"
+            f"；ADP {adp['t']:.4f}°C；出口乾球需求 {target_t:.4f}°C"
+            "；請核對 C1 出口需求、入口與供水＋ADP 裕度。",
+            field_name=field_name,
+            code=error.code,
+        ) from error
+
+
+def condition_air(i, enter, m, ts, ws, pre=True, *, season="summer"):
     p = float(i["atm_kpa"])
     cp = float(i["water_cp"])
     a1 = float(i["chw1_in"]) + float(i["adp_approach"])
@@ -385,7 +402,8 @@ def condition_air(i, enter, m, ts, ws, pre=True):
                     )
                 beta = (1.006 * t1 + adp["w"] * hv - adp["h"]) / denominator
                 beta = max(0, min(1, beta))
-                s1 = blend(enter, adp, beta, p)
+                s1 = c1_blend(enter, adp, beta, p, season=season,
+                              target_t=t1, field_name="pre_t")
     elif mode == "指定出口（需求檢核）":
         s1 = state_trh(float(i["pre_t"]), float(i["pre_rh"]), p)
         if s1["t"] < a1 - 1e-08:
@@ -634,6 +652,7 @@ def calculate(p, isolate_utilities=False):
             winter_room["supply_t"],
             winter_room["supply_w"],
             pre=False,
+            season="winter",
         )
         winter_room["sensible_residual_kw"] = (
             m
@@ -651,7 +670,8 @@ def calculate(p, isolate_utilities=False):
         ):
             raise InputError("冬季室內守恆檢核失敗", field_name="winter_model")
     else:
-        winter = condition_air(i, winter_enter, m, room["t"], room["w"], pre=False)
+        winter = condition_air(i, winter_enter, m, room["t"], room["w"], pre=False,
+                               season="winter")
     dcc_design = max(dcc, winter_room["dcc_kw"] if winter_room else 0.0)
     if dcc_design > 1e-06 and n("dccw_in") < dewpoint(room["w"], n("atm_kpa")) + n(
         "dccw_dp_margin"

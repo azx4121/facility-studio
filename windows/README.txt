@@ -1,4 +1,4 @@
-Facility Studio V5.5.8｜Windows 廠務工程初估工具
+Facility Studio V5.5.9｜Windows 廠務工程初估工具
 DESIGNED BY ANDY HUANG ©
 
 用途
@@ -9,7 +9,7 @@ DESIGNED BY ANDY HUANG ©
 
 下載與開啟
 目前公開下載為 EXE：
-https://github.com/azx4121/facility-studio/releases/download/v5.5.8-win.1/Facility_Studio_V5_5_8_Windows_Offline.exe
+https://github.com/azx4121/facility-studio/releases/download/v5.5.9-win.1/Facility_Studio_V5_5_9_Windows_Offline.exe
 儲存後雙擊開啟，第一次請等候內建環境展開。不需另裝 Python 或管理員權限。
 Windows 10／11 Intel／AMD x64 為支援目標；原生驗收為 Windows Server 2022／2025 x64。
 本版尚無正式發行者簽章。首次安全提示說明：
@@ -24,7 +24,7 @@ https://github.com/azx4121/facility-studio/blob/main/docs/signing.md
 
 保存與回報
 整案 JSON 可接續編輯；TXT／HTML 是供閱讀與分享的報告。
-V5.5.8 獨立空調箱可確認保存無效草稿，修正後才能計算或匯出。
+V5.5.9 獨立空調箱可確認保存無效草稿，修正後才能計算或匯出。
 啟動記錄：%LOCALAPPDATA%\Facility_Studio_V5_5\Logs。
 更新前先關閉舊程式，替換 EXE 即可；已儲存的專案與復原資料保留。
 回報問題請附版本、作業系統、輸入單位、步驟與完整錯誤，移除業主機密：

@@ -234,7 +234,7 @@ def state_tw(t, w, p):
     pw = p * 1000 * w / (MW_RATIO + w)
     rh = 100 * pw / sat_pa(t)
     if rh > 100 + 1e-06:
-        raise InputError(f"空氣狀態超飽和：{t:.4f}°C、{rh:.4f}%RH")
+        raise InputError(f"空氣狀態超飽和：{t:.4f}°C、{rh:.4f}%RH", code="supersaturated_air")
     vol = 0.287042 * (t + 273.15) * (1 + w / MW_RATIO) / p
     return {
         "t": t,

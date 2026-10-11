@@ -226,6 +226,8 @@ def run():
         check_inactive_ui(workbench, check, pump_gui)
         from facility_studio.review_acceptance import run_ui as check_review_ui
         check_review_ui(workbench, check, pump_gui)
+        from facility_studio.resilience_acceptance import run_ui as check_resilience_ui
+        check_resilience_ui(workbench, check, pump_gui)
         check("Native UI heartbeat", lambda: (pump_gui(), True)[1])
         check("No native GUI callback exceptions", lambda: not callback_errors)
         from matplotlib.figure import Figure

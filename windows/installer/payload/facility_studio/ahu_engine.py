@@ -5,7 +5,8 @@ import copy
 import json
 from .json_io import read_json_file
 from .ahu_schema import AHU_OPTIONAL_NUMBERS, NM_DEFAULTS, NM_FIELDS, NM_V1_KEYS
-from .engine import blend, coil_record
+from .engine import blend, c1_blend, coil_record
+import math
 from .quality import assess_ahu
 from .utils import (
     US_RT_KW,
@@ -69,21 +70,26 @@ def nm_wash(s, eff, p):
     return state_tw(t, max(s["w"], w), p)
 
 
-def nm_precoil(s, i, p):
+def nm_precoil(s, i, p, *, season="summer", field_name="c1_t"):
     adp = float(i["c1_in"]) + float(i["c1_adp"])
     t = min(s["t"], float(i["c1_t"]))
     if t >= s["t"] - 1e-09:
         return s
     if t < adp:
-        raise InputError(f"C1 出口需求低於供水＋ADP 裕度", field_name=f"c1_t")
+        raise InputError(f"C1 出口需求低於供水＋ADP 裕度", field_name=field_name)
     a = state_trh(adp, 100, p)
     if s["w"] <= a["w"]:
         return state_tw(t, s["w"], p)
     hv = 2501 + 1.86 * t
-    b = (1.006 * t + a["w"] * hv - a["h"]) / (s["h"] - a["h"] - (s["w"] - a["w"]) * hv)
+    denominator = s["h"] - a["h"] - (s["w"] - a["w"]) * hv
+    if not math.isfinite(denominator) or denominator <= 1e-9:
+        raise InputError("一段盤管旁通因子無法求解，請核對入口與 ADP 狀態。",
+                         field_name=field_name)
+    b = (1.006 * t + a["w"] * hv - a["h"]) / denominator
     if not -1e-09 <= b <= 1 + 1e-09:
-        raise InputError(f"C1 需求的旁通因子超出物理範圍")
-    return blend(s, a, max(0, min(1, b)), p)
+        raise InputError(f"C1 需求的旁通因子超出物理範圍", field_name=field_name)
+    return c1_blend(s, a, max(0, min(1, b)), p, season=season,
+                    target_t=t, field_name=field_name)
 
 
 def _nm_heater_base(tag, s, target_t, m, i, p):
@@ -150,7 +156,7 @@ def _nm_season_base(i, season):
     c1out = oa
     pre = oa
     if not need and i["sequence"].startswith("C1"):
-        c1out = nm_precoil(oa, i, p)
+        c1out = nm_precoil(oa, i, p, season=season)
         pre = c1out
     h1target = pre["t"]
     wash_on = i["wash_mode"] == "AMC 需求持續水洗" or (
@@ -177,7 +183,7 @@ def _nm_season_base(i, season):
     h1 = nm_heater("h1", pre, h1target, m, i, p)
     if i["sequence"].startswith("H1"):
         c1in = h1["outlet"]
-        c1out = c1in if need else nm_precoil(c1in, i, p)
+        c1out = c1in if need else nm_precoil(c1in, i, p, season=season)
     else:
         c1in = oa
     wash_in = c1out if i["sequence"].startswith("H1") else h1["outlet"]
@@ -440,7 +446,7 @@ def nm_explicit_coil(s, tag, season, i, p):
         out = state_trh(t, float(i[prefix + "_rh"]), p)
     elif tag == "c1":
         j = dict(i, c1_t=str(t))
-        out = nm_precoil(s, j, p)
+        out = nm_precoil(s, j, p, season=season, field_name=prefix + "_t")
     else:
         if t > s["t"] + 1e-08:
             raise InputError(f"冷卻段不可把空氣加熱", field_name=f"{prefix}_t")
@@ -528,7 +534,7 @@ def nm_season(i, season):
     def cooling1(s):
         mode = i[season + "_c1_mode"]
         return (
-            (s if need else nm_precoil(s, i, p))
+            (s if need else nm_precoil(s, i, p, season=season))
             if mode == "自動需求"
             else nm_explicit_coil(s, "c1", season, i, p)
         )

@@ -2241,3 +2241,12 @@ TEXT.update({
     "工程快算｜V" + _CURRENT_VERSION: "Engineering quick tools | V" + _CURRENT_VERSION,
     "\n逐段控制與選用熱源（V" + _CURRENT_VERSION + "）": "\nStage controls / selected heat sources (V" + _CURRENT_VERSION + ")",
 })
+
+# V5.5.9 full-report guard and seasonal C1 diagnostics.
+TEXT.update({
+    "完整報告需要空調、氣體與電氣的完整計算結果；目前結果不完整，請修正未通過的項目並重新計算。":
+        "A complete report requires complete HVAC, gas and electrical results. The current result is incomplete; correct the failed items and recalculate.",
+    "；出口乾球需求 ": "; requested leaving dry bulb ",
+    "；請核對 C1 出口需求、入口與供水＋ADP 裕度。":
+        "; check the C1 leaving demand, entering state and water supply plus ADP approach.",
+})
