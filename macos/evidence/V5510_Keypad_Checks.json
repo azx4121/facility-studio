@@ -1,0 +1,263 @@
+{
+  "version": "5.5.10",
+  "passed": true,
+  "checks": [
+    {
+      "name": "Key identity win32/Delete/46/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity win32/Delete/46/8",
+      "passed": true
+    },
+    {
+      "name": "Key identity win32/Delete/46/262144",
+      "passed": true
+    },
+    {
+      "name": "Key identity win32/Delete/46/262152",
+      "passed": true
+    },
+    {
+      "name": "Key identity win32/period/110/8",
+      "passed": true
+    },
+    {
+      "name": "Key identity win32/comma/110/8",
+      "passed": true
+    },
+    {
+      "name": "Key identity win32/period/190/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity darwin/period/47/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity win32/KP_Decimal/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity win32/KP_Separator/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity win32/KP_Delete/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity win32/decimal/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity win32/separator/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity darwin/KP_Decimal/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity darwin/KP_Separator/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity darwin/KP_Delete/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity darwin/decimal/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity darwin/separator/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity linux/KP_Decimal/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity linux/KP_Separator/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity linux/KP_Delete/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity linux/decimal/91/0",
+      "passed": true
+    },
+    {
+      "name": "Key identity linux/separator/91/0",
+      "passed": true
+    },
+    {
+      "name": "Missing Windows extended metadata preserves ambiguous Delete",
+      "passed": true
+    },
+    {
+      "name": "Actual handler win32/Delete/46/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler win32/Delete/46/8",
+      "passed": true
+    },
+    {
+      "name": "Actual handler win32/Delete/46/262144",
+      "passed": true
+    },
+    {
+      "name": "Actual handler win32/Delete/46/262152",
+      "passed": true
+    },
+    {
+      "name": "Actual handler win32/period/110/8",
+      "passed": true
+    },
+    {
+      "name": "Actual handler win32/comma/110/8",
+      "passed": true
+    },
+    {
+      "name": "Actual handler win32/period/190/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler darwin/period/47/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler win32/KP_Decimal/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler win32/KP_Separator/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler win32/KP_Delete/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler win32/decimal/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler win32/separator/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler darwin/KP_Decimal/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler darwin/KP_Separator/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler darwin/KP_Delete/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler darwin/decimal/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler darwin/separator/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler linux/KP_Decimal/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler linux/KP_Separator/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler linux/KP_Delete/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler linux/decimal/91/0",
+      "passed": true
+    },
+    {
+      "name": "Actual handler linux/separator/91/0",
+      "passed": true
+    },
+    {
+      "name": "Selection replacement at its start, original cursor 0",
+      "passed": true
+    },
+    {
+      "name": "Selection replacement at its start, original cursor 1",
+      "passed": true
+    },
+    {
+      "name": "Selection replacement at its start, original cursor 3",
+      "passed": true
+    },
+    {
+      "name": "Selection replacement at its start, original cursor 4",
+      "passed": true
+    },
+    {
+      "name": "Inactive entry disabled/()",
+      "passed": true
+    },
+    {
+      "name": "Inactive entry readonly/()",
+      "passed": true
+    },
+    {
+      "name": "Inactive entry normal/('disabled',)",
+      "passed": true
+    },
+    {
+      "name": "Inactive entry normal/('readonly',)",
+      "passed": true
+    },
+    {
+      "name": "Shortcut remains native win32/4",
+      "passed": true
+    },
+    {
+      "name": "Shortcut remains native win32/32",
+      "passed": true
+    },
+    {
+      "name": "Shortcut remains native win32/131072",
+      "passed": true
+    },
+    {
+      "name": "Shortcut remains native darwin/4",
+      "passed": true
+    },
+    {
+      "name": "Shortcut remains native darwin/8",
+      "passed": true
+    },
+    {
+      "name": "Shortcut remains native darwin/16",
+      "passed": true
+    },
+    {
+      "name": "Shortcut remains native linux/4",
+      "passed": true
+    },
+    {
+      "name": "Shortcut remains native linux/8",
+      "passed": true
+    },
+    {
+      "name": "Shortcut remains native linux/64",
+      "passed": true
+    }
+  ],
+  "physical_keyboard_tested": false
+}

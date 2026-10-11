@@ -562,7 +562,7 @@ for key, code, platform, expected in (
     ("Delete", 110, "win32", True),
     ("Delete", 46, "win32", False),
     ("period", 190, "win32", False),
-    ("KP_Delete", 91, "linux", False),
+    ("KP_Delete", 91, "linux", True),
 ):
     check(
         f"keypad_{key}_{platform}_{code}",

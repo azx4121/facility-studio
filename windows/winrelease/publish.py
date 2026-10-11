@@ -14,9 +14,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from tools.public_release_policy import prepare_public_assets
 
 REPOSITORY = "azx4121/facility-studio"
-TAG = "v5.5.9-win.1"
+TAG = "v5.5.10-win.1"
 FILENAMES = (
-    "Facility_Studio_V5_5_9_Windows_Offline.exe",
+    "Facility_Studio_V5_5_10_Windows_Offline.exe",
     "SHA256SUMS.txt",
 )
 
@@ -71,7 +71,7 @@ def main():
         payload = {
             "tag_name": TAG,
             "target_commitish": commit,
-            "name": "Facility Studio V5.5.9｜Windows 離線直接執行版 win.1",
+            "name": "Facility Studio V5.5.10｜Windows 離線直接執行版 win.1",
             "body": body,
             "draft": True,
             "prerelease": True,

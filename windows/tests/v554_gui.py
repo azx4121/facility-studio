@@ -97,7 +97,7 @@ with tempfile.TemporaryDirectory(prefix="facility554_gui_") as folder:
     values(power, power=123)
     entry.selection_clear()
     entry.icursor(1)
-    entry.event_generate("<KeyPress-Delete>")
+    entry.event_generate("<KeyPress-Delete>", state=0x40000 if sys.platform == "win32" else 0)
     root.update()
     check("06_regular_delete_unchanged", entry.get() == "13")
     entry.state(["disabled"])

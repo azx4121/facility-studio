@@ -1,4 +1,4 @@
-"""100 distinct synthetic cleanrooms, both seasons, Facility Studio V5.5.9.
+"""100 distinct synthetic cleanrooms, both seasons, Facility Studio V5.5.10.
 
 Run Windows/macOS source in separate processes. No EXE/DMG/Tk GUI is executed.
 Generate and freeze the manifest before calculating; all original cases remain.
@@ -40,7 +40,7 @@ from types import SimpleNamespace
 SEED = 55820261011
 MAIN_COMMIT = None  # Local test before the GitHub commit; module hashes are recorded separately.
 TREE = None
-assert api.VERSION == '5.5.9', api.VERSION
+assert api.VERSION == '5.5.10', api.VERSION
 
 def digest(x):
     return hashlib.sha256(json.dumps(x, sort_keys=True, ensure_ascii=False,

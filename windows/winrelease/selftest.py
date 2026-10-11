@@ -224,6 +224,8 @@ def run(destination):
             check_review_ui(workbench, check, pump)
             from facility_studio.resilience_acceptance import run_ui as check_resilience_ui
             check_resilience_ui(workbench, check, pump)
+            from facility_studio.keypad_acceptance import run_ui as check_keypad_ui
+            check_keypad_ui(root, app, workbench, check, pump)
             check("Native GUI heartbeat", lambda: (pump(), True)[1])
             from matplotlib.figure import Figure
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg

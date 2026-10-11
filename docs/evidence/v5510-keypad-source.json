@@ -1,0 +1,787 @@
+{
+  "version": "5.5.10",
+  "baseline_commit": "9ffe97efd4af34cd6aaeb029a52ff9b24f3e4c66",
+  "recorded_at": "2026-10-11T03:47:14.209120+00:00",
+  "scope": "Linux source validation; native GUI and physical-keyboard acceptance are separate",
+  "original_handler_probes": [
+    {
+      "platform": "win32",
+      "keysym": "Delete",
+      "keycode": 46,
+      "state": 0,
+      "actual": "12",
+      "expected": "12.",
+      "handler_result": null
+    },
+    {
+      "platform": "win32",
+      "keysym": "Delete",
+      "keycode": 46,
+      "state": 8,
+      "actual": "12",
+      "expected": "12.",
+      "handler_result": null
+    },
+    {
+      "platform": "linux",
+      "keysym": "KP_Delete",
+      "keycode": 91,
+      "state": 0,
+      "actual": "12",
+      "expected": "12.",
+      "handler_result": null
+    }
+  ],
+  "regressions": {
+    "windows": [
+      {
+        "name": "v5510_keypad",
+        "exit_code": 0,
+        "seconds": 0.08600665199992363,
+        "stdout": "V5510 keypad checks passed: 64\n",
+        "stderr": ""
+      },
+      {
+        "name": "v559_resilience",
+        "exit_code": 0,
+        "seconds": 0.15386475099967356,
+        "stdout": "V559 resilience checks passed: 68\n",
+        "stderr": ""
+      },
+      {
+        "name": "regression",
+        "exit_code": 0,
+        "seconds": 0.6142698450003081,
+        "stdout": "52 scenarios / 1247 independent checks passed; 7 expected rejections; B08 now adopts zero closed-loop static head\n",
+        "stderr": ""
+      },
+      {
+        "name": "v55_features",
+        "exit_code": 0,
+        "seconds": 0.309166651999476,
+        "stdout": "20 new numerical conditions / 93 feature checks passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "v552_core",
+        "exit_code": 0,
+        "seconds": 2.6728988139993817,
+        "stdout": "{\n  \"checks\": 393,\n  \"failed\": []\n}\n",
+        "stderr": ""
+      },
+      {
+        "name": "simple_features",
+        "exit_code": 0,
+        "seconds": 0.05199181099942507,
+        "stdout": "42 independent-tool scenarios, 375 numerical/report checks passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "v554_features",
+        "exit_code": 0,
+        "seconds": 0.9332112510001025,
+        "stdout": "49 scenarios; 646 independent calculation/import/report/chart checks passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "v556_features",
+        "exit_code": 0,
+        "seconds": 0.5427717550001034,
+        "stdout": "54 distinct new scenarios; /workspace/scratch/8a15c33ca3b5/facility-studio-v5510/windows/evidence/v556-features.json\n",
+        "stderr": "test_ahu_repeat_and_persistence (__main__.Regression.test_ahu_repeat_and_persistence) ... ok\ntest_coincident_water_and_duplicate (__main__.Regression.test_coincident_water_and_duplicate) ... ok\ntest_existing_amp_panel_pf (__main__.Regression.test_existing_amp_panel_pf) ... ok\ntest_percentage_records (__main__.Regression.test_percentage_records) ... ok\ntest_real_xlsx_percentage (__main__.Regression.test_real_xlsx_percentage) ... ok\ntest_schedule_transfer (__main__.Regression.test_schedule_transfer) ... ok\ntest_simple_scope_and_gas_basis (__main__.Regression.test_simple_scope_and_gas_basis) ... ok\ntest_water_groups_and_selection (__main__.Regression.test_water_groups_and_selection) ... ok\ntest_water_scope_and_old_project (__main__.Regression.test_water_scope_and_old_project) ... ok\ntest_workspace_report_ledger (__main__.Regression.test_workspace_report_ledger) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.487s\n\nOK\n"
+      },
+      {
+        "name": "v557_inactive",
+        "exit_code": 0,
+        "seconds": 11.38163690500005,
+        "stdout": "{\"main_scenarios\": 24, \"ahu_scenarios\": 48, \"pressure_scenarios\": 256, \"passed\": true, \"seed\": 55720261009, \"version\": \"5.5.10\"}\nComplete-output and report comparisons passed: 970\n",
+        "stderr": ""
+      },
+      {
+        "name": "v558_review",
+        "exit_code": 0,
+        "seconds": 0.7532496599997103,
+        "stdout": "{\"version\": \"5.5.10\", \"passed\": true, \"bypass_samples\": 10720, \"minimum_sample_denominator\": 0.23887570487863685, \"maximum_expression_roundoff\": 1.7053025658242404e-13, \"mac_app_data_check\": \"not applicable to Windows-only source tree\"}\nReview follow-up checks passed: 124\n",
+        "stderr": ""
+      },
+      {
+        "name": "maintenance_checks",
+        "exit_code": 0,
+        "seconds": 3.4010054989994387,
+        "stdout": "90 air/report conditions; 1129 maintenance checks passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "security_checks",
+        "exit_code": 0,
+        "seconds": 0.5981006359997991,
+        "stdout": "{\"source\": \"windows\", \"cases\": 55, \"passed\": 55, \"failed\": []}\n",
+        "stderr": ""
+      },
+      {
+        "name": "bilingual",
+        "exit_code": 0,
+        "seconds": 0.7245768769998904,
+        "stdout": "20 language-parity scenarios, 3918 localization / import / persistence checks passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "docs/tutorial/verify_tutorial.py",
+        "exit_code": 0,
+        "stdout": "{\"platform\": \"windows\", \"cases\": 20, \"checks\": 87, \"passed\": true}\n",
+        "stderr": ""
+      },
+      {
+        "name": "tools/verify_use_cases.py",
+        "exit_code": 0,
+        "stdout": "windows: 18 numerical cases + 2 negative controls; 121 checks passed\n",
+        "stderr": ""
+      }
+    ],
+    "macos": [
+      {
+        "name": "v5510_keypad",
+        "exit_code": 0,
+        "seconds": 0.08369452700026159,
+        "stdout": "V5510 keypad checks passed: 64\n",
+        "stderr": ""
+      },
+      {
+        "name": "v559_resilience",
+        "exit_code": 0,
+        "seconds": 0.16069401599997946,
+        "stdout": "V559 resilience checks passed: 68\n",
+        "stderr": ""
+      },
+      {
+        "name": "regression",
+        "exit_code": 0,
+        "seconds": 0.5947777999999744,
+        "stdout": "52 scenarios / 1247 independent checks passed; 7 expected rejections; B08 now adopts zero closed-loop static head\n",
+        "stderr": ""
+      },
+      {
+        "name": "v55_features",
+        "exit_code": 0,
+        "seconds": 0.32516907200079004,
+        "stdout": "20 new numerical conditions / 93 feature checks passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "v552_core",
+        "exit_code": 0,
+        "seconds": 2.6233014039999034,
+        "stdout": "{\n  \"checks\": 393,\n  \"failed\": []\n}\n",
+        "stderr": ""
+      },
+      {
+        "name": "simple_features",
+        "exit_code": 0,
+        "seconds": 0.051039044999924954,
+        "stdout": "42 independent-tool scenarios, 375 numerical/report checks passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "v554_features",
+        "exit_code": 0,
+        "seconds": 0.9569941859999744,
+        "stdout": "49 scenarios; 646 independent calculation/import/report/chart checks passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "v556_features",
+        "exit_code": 0,
+        "seconds": 0.5694169239995972,
+        "stdout": "54 distinct new scenarios; /workspace/scratch/8a15c33ca3b5/facility-studio-v5510/macos/evidence/v556-features.json\n",
+        "stderr": "test_ahu_repeat_and_persistence (__main__.Regression.test_ahu_repeat_and_persistence) ... ok\ntest_coincident_water_and_duplicate (__main__.Regression.test_coincident_water_and_duplicate) ... ok\ntest_existing_amp_panel_pf (__main__.Regression.test_existing_amp_panel_pf) ... ok\ntest_percentage_records (__main__.Regression.test_percentage_records) ... ok\ntest_real_xlsx_percentage (__main__.Regression.test_real_xlsx_percentage) ... ok\ntest_schedule_transfer (__main__.Regression.test_schedule_transfer) ... ok\ntest_simple_scope_and_gas_basis (__main__.Regression.test_simple_scope_and_gas_basis) ... ok\ntest_water_groups_and_selection (__main__.Regression.test_water_groups_and_selection) ... ok\ntest_water_scope_and_old_project (__main__.Regression.test_water_scope_and_old_project) ... ok\ntest_workspace_report_ledger (__main__.Regression.test_workspace_report_ledger) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.500s\n\nOK\n"
+      },
+      {
+        "name": "v557_inactive",
+        "exit_code": 0,
+        "seconds": 11.658995630999925,
+        "stdout": "{\"main_scenarios\": 24, \"ahu_scenarios\": 48, \"pressure_scenarios\": 256, \"passed\": true, \"seed\": 55720261009, \"version\": \"5.5.10\"}\nComplete-output and report comparisons passed: 970\n",
+        "stderr": ""
+      },
+      {
+        "name": "v558_review",
+        "exit_code": 0,
+        "seconds": 0.6842467050000778,
+        "stdout": "{\"version\": \"5.5.10\", \"passed\": true, \"bypass_samples\": 10720, \"minimum_sample_denominator\": 0.23887570487863685, \"maximum_expression_roundoff\": 1.7053025658242404e-13, \"mac_app_data_check\": \"/Users/reviewer/Library/Application Support/Facility_Studio_V5_5\"}\nReview follow-up checks passed: 125\n",
+        "stderr": ""
+      },
+      {
+        "name": "maintenance_checks",
+        "exit_code": 0,
+        "seconds": 3.4744077989998914,
+        "stdout": "90 air/report conditions; 1129 maintenance checks passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "security_checks",
+        "exit_code": 0,
+        "seconds": 0.513160174999939,
+        "stdout": "{\"source\": \"macos\", \"cases\": 55, \"passed\": 55, \"failed\": []}\n",
+        "stderr": ""
+      },
+      {
+        "name": "bilingual",
+        "exit_code": 0,
+        "seconds": 0.7015696909993494,
+        "stdout": "20 language-parity scenarios, 3918 localization / import / persistence checks passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "docs/tutorial/verify_tutorial.py",
+        "exit_code": 0,
+        "stdout": "{\"platform\": \"macos\", \"cases\": 20, \"checks\": 87, \"passed\": true}\n",
+        "stderr": ""
+      },
+      {
+        "name": "tools/verify_use_cases.py",
+        "exit_code": 0,
+        "stdout": "macos: 18 numerical cases + 2 negative controls; 121 checks passed\n",
+        "stderr": ""
+      }
+    ]
+  },
+  "keypad": {
+    "windows": {
+      "version": "5.5.10",
+      "passed": true,
+      "checks": [
+        {
+          "name": "Key identity win32/Delete/46/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/Delete/46/8",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/Delete/46/262144",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/Delete/46/262152",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/period/110/8",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/comma/110/8",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/period/190/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity darwin/period/47/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/KP_Decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/KP_Separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/KP_Delete/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity darwin/KP_Decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity darwin/KP_Separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity darwin/KP_Delete/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity darwin/decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity darwin/separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity linux/KP_Decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity linux/KP_Separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity linux/KP_Delete/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity linux/decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity linux/separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Missing Windows extended metadata preserves ambiguous Delete",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/Delete/46/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/Delete/46/8",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/Delete/46/262144",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/Delete/46/262152",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/period/110/8",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/comma/110/8",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/period/190/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler darwin/period/47/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/KP_Decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/KP_Separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/KP_Delete/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler darwin/KP_Decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler darwin/KP_Separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler darwin/KP_Delete/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler darwin/decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler darwin/separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler linux/KP_Decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler linux/KP_Separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler linux/KP_Delete/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler linux/decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler linux/separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Selection replacement at its start, original cursor 0",
+          "passed": true
+        },
+        {
+          "name": "Selection replacement at its start, original cursor 1",
+          "passed": true
+        },
+        {
+          "name": "Selection replacement at its start, original cursor 3",
+          "passed": true
+        },
+        {
+          "name": "Selection replacement at its start, original cursor 4",
+          "passed": true
+        },
+        {
+          "name": "Inactive entry disabled/()",
+          "passed": true
+        },
+        {
+          "name": "Inactive entry readonly/()",
+          "passed": true
+        },
+        {
+          "name": "Inactive entry normal/('disabled',)",
+          "passed": true
+        },
+        {
+          "name": "Inactive entry normal/('readonly',)",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native win32/4",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native win32/32",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native win32/131072",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native darwin/4",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native darwin/8",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native darwin/16",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native linux/4",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native linux/8",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native linux/64",
+          "passed": true
+        }
+      ],
+      "physical_keyboard_tested": false
+    },
+    "macos": {
+      "version": "5.5.10",
+      "passed": true,
+      "checks": [
+        {
+          "name": "Key identity win32/Delete/46/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/Delete/46/8",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/Delete/46/262144",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/Delete/46/262152",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/period/110/8",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/comma/110/8",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/period/190/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity darwin/period/47/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/KP_Decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/KP_Separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/KP_Delete/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity win32/separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity darwin/KP_Decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity darwin/KP_Separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity darwin/KP_Delete/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity darwin/decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity darwin/separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity linux/KP_Decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity linux/KP_Separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity linux/KP_Delete/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity linux/decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Key identity linux/separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Missing Windows extended metadata preserves ambiguous Delete",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/Delete/46/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/Delete/46/8",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/Delete/46/262144",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/Delete/46/262152",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/period/110/8",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/comma/110/8",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/period/190/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler darwin/period/47/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/KP_Decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/KP_Separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/KP_Delete/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler win32/separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler darwin/KP_Decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler darwin/KP_Separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler darwin/KP_Delete/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler darwin/decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler darwin/separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler linux/KP_Decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler linux/KP_Separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler linux/KP_Delete/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler linux/decimal/91/0",
+          "passed": true
+        },
+        {
+          "name": "Actual handler linux/separator/91/0",
+          "passed": true
+        },
+        {
+          "name": "Selection replacement at its start, original cursor 0",
+          "passed": true
+        },
+        {
+          "name": "Selection replacement at its start, original cursor 1",
+          "passed": true
+        },
+        {
+          "name": "Selection replacement at its start, original cursor 3",
+          "passed": true
+        },
+        {
+          "name": "Selection replacement at its start, original cursor 4",
+          "passed": true
+        },
+        {
+          "name": "Inactive entry disabled/()",
+          "passed": true
+        },
+        {
+          "name": "Inactive entry readonly/()",
+          "passed": true
+        },
+        {
+          "name": "Inactive entry normal/('disabled',)",
+          "passed": true
+        },
+        {
+          "name": "Inactive entry normal/('readonly',)",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native win32/4",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native win32/32",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native win32/131072",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native darwin/4",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native darwin/8",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native darwin/16",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native linux/4",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native linux/8",
+          "passed": true
+        },
+        {
+          "name": "Shortcut remains native linux/64",
+          "passed": true
+        }
+      ],
+      "physical_keyboard_tested": false
+    }
+  },
+  "publisher_tests": {
+    "count": 31,
+    "passed": true
+  },
+  "python_syntax": {
+    "passed": true
+  },
+  "installer_payload_hashes": {
+    "count": 76,
+    "passed": true
+  },
+  "physical_keyboard_tested": false
+}
