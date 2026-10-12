@@ -153,7 +153,9 @@ def run_checks(scenarios=100, repeat=20):
                           float(inp['gas1_q']))
                     for repetition in range(1, repeat):
                         check(case_id+'/repeat-%d' % (repetition+1), snapshot(calculate(p)) == baseline)
-                    file_path = Path(directory) / ('廠務 '+case_id+'.json')
+                    # Use an existing localized label while retaining a Unicode
+                    # filename in the actual persistence exercise.
+                    file_path = Path(directory) / ('設備'+' '+case_id+'.json')
                     save_project_file(file_path, p)
                     check(case_id+'/atomic save and reopen', snapshot(calculate(api.read_project(file_path))) == baseline)
                     changed = copy.deepcopy(p)
