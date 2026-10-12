@@ -9,6 +9,7 @@ on:
       - windows/facility_studio/**
       - windows/tests/**
       - tools/cleanroom100_stress.py
+      - tools/verify_stress_io.py
       - docs/tutorial/START_HERE.html
       - docs/tutorial/verify_tutorial.py
   workflow_dispatch:
@@ -24,6 +25,8 @@ jobs:
   build:
     runs-on: windows-2022
     timeout-minutes: 35
+    env:
+      PYTHONUTF8: "1"
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -55,6 +58,7 @@ jobs:
           Invoke-CheckedPython windows/tests/v5510_keypad.py
           Invoke-CheckedPython windows/tests/v560_features.py
           Invoke-CheckedPython windows/tests/stress100.py --output "$env:RUNNER_TEMP/win-native-stress-source.json"
+          Invoke-CheckedPython tools/verify_stress_io.py
           Invoke-CheckedPython tools/cleanroom100_stress.py --source . --platform windows --manifest "$env:RUNNER_TEMP/cleanroom100.json" --generate --seed 20261013
           Invoke-CheckedPython tools/cleanroom100_stress.py --source . --platform windows --manifest "$env:RUNNER_TEMP/cleanroom100.json" --output "$env:RUNNER_TEMP/cleanroom100-windows.json" --repeat 20
           Invoke-CheckedPython docs/tutorial/verify_tutorial.py --platform windows --output "$env:RUNNER_TEMP/tutorial-windows.json"

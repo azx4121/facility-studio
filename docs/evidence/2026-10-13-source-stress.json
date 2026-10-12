@@ -1,8 +1,8 @@
 {
   "version": "5.6.0",
   "local_date": "2026-10-13",
-  "generated_utc": "2026-10-12T17:29:07.046888+00:00",
-  "base_main_commit": "1e7c471355c0b491ab94d1fec82b728012783ce6",
+  "generated_utc": "2026-10-12T17:50:51.812305+00:00",
+  "base_main_commit": "d18dfb2fe7fb19be7a61d763828bf75257648e02",
   "seed": 20261013,
   "manifest_sha256": "983f54324e4aa5cc3a77fe56d8bbed407a3ae77dfe35f05edf3185091050eb77",
   "scope": "Windows and macOS source executed on one macOS arm64 host; no delivered EXE/App binary or native GUI executed by these tests.",
@@ -14,6 +14,7 @@
       "cleanroom100": {
         "command": [
           "python3",
+          "<scratch>/stress-2026-10-13/windows_disk_codec.py",
           "tools/cleanroom100_stress.py",
           "--source",
           ".",
@@ -96,7 +97,7 @@
           "source_platform": "windows",
           "host": "macOS-27.2-arm64-arm-64bit",
           "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
-          "finished_utc": "2026-10-12T17:28:33.898688+00:00",
+          "finished_utc": "2026-10-12T17:42:56.529552+00:00",
           "scenario_count": 100,
           "original_manifest_sha256": "983f54324e4aa5cc3a77fe56d8bbed407a3ae77dfe35f05edf3185091050eb77",
           "distinct_physical_input_count": 100,
@@ -119,13 +120,13 @@
           },
           "partial_report_api_probe_count": 11,
           "partial_report_api_guard_failures": 0,
-          "seconds": 7.352190417004749,
+          "seconds": 7.295343375008088,
           "latency_ms": {
-            "median": 1.8797919910866767,
-            "p95": 2.8647499857470393,
-            "max": 7.358666975051165
+            "median": 1.8756454810500145,
+            "p95": 2.8377919807098806,
+            "max": 5.000417004339397
           },
-          "rss_peak_mib": 101.59375,
+          "rss_peak_mib": 102.140625,
           "scope": "Darwin headless windows source stress test; both seasons; no native binary or GUI execution"
         },
         "cases": [
@@ -134,7 +135,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07818729197606444,
+            "seconds": 0.07740745798218995,
             "input_sha256": "39ca08e6f3f90d10e7d6ecc030e7758626a4a8f8cb593451a5637c227fc99cac",
             "outcome_sha256": "4758fab0ab98b2ffe0047560a3b8073f5bfb95dfca127ce3a6df22a1b25d1e36",
             "quality_status": "未達條件",
@@ -155,7 +156,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07485762500436977,
+            "seconds": 0.07483579200925305,
             "input_sha256": "5f47c1214f77f15421d1244174149c04f152906dfbd10bd423b21ba9f23c6ba2",
             "outcome_sha256": "ef7371f913251e91cdcc2eeae2115933de0816adf818b5a53d86c4633a332bef",
             "quality_status": "未達條件",
@@ -176,7 +177,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07460550003452227,
+            "seconds": 0.07374266703845933,
             "input_sha256": "f9d01dabeddeaad8930efd054c6b2b44639b7e078b078449ebc72b086a592cc7",
             "outcome_sha256": "ee938dd085decaf4343cfb2ce36742376dfdc8691f36da38baee3302b351a5a7",
             "quality_status": "未達條件",
@@ -197,7 +198,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.0744665419915691,
+            "seconds": 0.07662137498846278,
             "input_sha256": "b3adb4977a8157ef8850efcda8eb3664bdb25542fb4465925a2402942f9d7dc9",
             "outcome_sha256": "e3251fbb5889d8e041d510f5a91534366409579a248dbebb84fdc99c568a81b4",
             "quality_status": "待補資料",
@@ -218,7 +219,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07618299999739975,
+            "seconds": 0.07574433402623981,
             "input_sha256": "a71e31520390b6957a8820822e573d90186c8806a8f579c5658f9ee2ecf7b8b8",
             "outcome_sha256": "08b682d611818ef66b6c73e1220d6a49d98d2c32501975a8990ef8ff6bbad10c",
             "quality_status": "未達條件",
@@ -239,7 +240,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.074754707980901,
+            "seconds": 0.0744213750003837,
             "input_sha256": "74c0ef2cf8a3b223f8fcd8f31a06b741a881413bb2aa28438cdebf0290ff885f",
             "outcome_sha256": "6b3e46871409e627054c4ca55c1054bcc33cb03c83c765ede77fa5bbd831b6cb",
             "quality_status": "未達條件",
@@ -260,7 +261,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07771212502848357,
+            "seconds": 0.07559916703030467,
             "input_sha256": "0b45c077ec7a1a25dc108ae5228d7c6df96d28569f8e6a717bf49d3b5ffb44dd",
             "outcome_sha256": "d9b76baac81613fe0f083f19db26fd43d7d20a5c6b05e14cfb18defed7e08c6f",
             "quality_status": "未達條件",
@@ -281,7 +282,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07667229196522385,
+            "seconds": 0.07437012501759455,
             "input_sha256": "6d326391c5422c448f5b087380dab715032fcd4545d0eff3ebc9fbac4e5774b0",
             "outcome_sha256": "25e6150d57180a5034a654ba8f606940cf4a7cae0ad1da6c863666062830ed97",
             "quality_status": "待補資料",
@@ -302,7 +303,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07538066699635237,
+            "seconds": 0.07524208398535848,
             "input_sha256": "b039e9336293edeeaf37b15a34726b360eeff9f74869bee14f85b8b36bc3cb78",
             "outcome_sha256": "5e1c947dbf194309320042435cc81e49bb97d0a48cd842eaffa148c2893438ec",
             "quality_status": "未達條件",
@@ -323,7 +324,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 211,
-            "seconds": 0.07508162502199411,
+            "seconds": 0.07549529103562236,
             "input_sha256": "91eb61ec92320fcbd0f886dd187e1ef8717bc1669f49e86f7786b51d3f30215a",
             "outcome_sha256": "58178667f8f0d8eb3fbb81d890da49a40f9e1a44b858850381deeea25924377a",
             "quality_status": "未達條件",
@@ -344,7 +345,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.073682792019099,
+            "seconds": 0.07632891600951552,
             "input_sha256": "ec7d608c734e81841286784147571ffb98343379d3073dedac5936cf2a47759d",
             "outcome_sha256": "a512955351de3e90315816feea56db36e931df348dffae5763da60a02a5d0e6a",
             "quality_status": "待補資料",
@@ -365,7 +366,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07477483304683119,
+            "seconds": 0.07654654199723154,
             "input_sha256": "5a973936aa59bca0642d72c70bdcda41306157ebf9ca7ddddde8bcedf345df90",
             "outcome_sha256": "fdb7746a5123032da4f02b15d4a7ddc00c49b4685f58b4fc506b0bc51e72890d",
             "quality_status": "待補資料",
@@ -386,7 +387,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.08745249995263293,
+            "seconds": 0.07649283297359943,
             "input_sha256": "4885b49eaaf9836325f46c7cc39af1b0fefc731220865a875480b70e0a189bfd",
             "outcome_sha256": "fff4a57058419e221d0a8178164ade9f5cf3557a82554eeae35d101038b2f3f9",
             "quality_status": "待補資料",
@@ -407,7 +408,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07905137503985316,
+            "seconds": 0.07560587499756366,
             "input_sha256": "64606e54c3252f6f16d64fe57d8d7c1492f7a08a3c41e1353f1eb72592fa6824",
             "outcome_sha256": "6c17966f04f1ccce6a78e15eb965d6dfd4f9614a871d60d937d094b1d28ee7db",
             "quality_status": "待補資料",
@@ -428,7 +429,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07555195799795911,
+            "seconds": 0.0755587499588728,
             "input_sha256": "e18794d55db913fc7a2ef02c2af88505f92e6ecbaf44fef7417773f65767acb7",
             "outcome_sha256": "dbf5f7cde7c7518bcac798efc13d12a8dd0fa964b00a1090f5b56aeb3b41be64",
             "quality_status": "待補資料",
@@ -449,7 +450,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07486166700255126,
+            "seconds": 0.07355491700582206,
             "input_sha256": "9f3d99b7c546fe78c6837d0a3811bc84891a2941309bdd120306fc8c8f6b5245",
             "outcome_sha256": "1f19315a00b457b481c2b304fef6ea4348e5672d164fba157d490c415dc902dd",
             "quality_status": "待補資料",
@@ -470,7 +471,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07487962499726564,
+            "seconds": 0.07790366699919105,
             "input_sha256": "30dc5d1dd23aa2ee5aa35fc20ec24f5b5dc1e1ea2588d2f8f2ca72e7dbeb5b29",
             "outcome_sha256": "1011e2094a75ae7941602b8c28b68c487dac641b1ea6297ee72aa4b153a03a14",
             "quality_status": "待補資料",
@@ -491,7 +492,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.0751217920333147,
+            "seconds": 0.07598554197466001,
             "input_sha256": "f46111d12606f7e726c55065bd957e36f9d3091285c4fe21aa69d0169982c164",
             "outcome_sha256": "306c350871d027de23455df6ddb31c4a180a7c3bb9ffb7fb8a9f0e30c2200ef0",
             "quality_status": "待補資料",
@@ -512,7 +513,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07389449997572228,
+            "seconds": 0.0765250829863362,
             "input_sha256": "e2a5d6aac89a3f156023635fbfc992f84c31d95d80c81ebd03a95513ae708d86",
             "outcome_sha256": "f6125cbde80dfc31b1a470c52f5964c16b7489b297b6594061beba6d745dd60f",
             "quality_status": "待補資料",
@@ -533,7 +534,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 210,
-            "seconds": 0.07639883295632899,
+            "seconds": 0.07639174995711073,
             "input_sha256": "94199030daa72a1aa7b5b7b7287a6540fc8059a42bde2a4e7eeb57eb642e6f14",
             "outcome_sha256": "6cb96f6b114b21de9b095ba0355ab2839bd63a5d57da71d5942a02a28352365c",
             "quality_status": "待補資料",
@@ -554,7 +555,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07537849998334423,
+            "seconds": 0.07478129200171679,
             "input_sha256": "30f5bff7482880f62cb91e0d28ff5fac84fc9a7cab8c0694450c3f0f59c58f23",
             "outcome_sha256": "d742ad2abd10f0eced40a6195607678352aefb80c46f21951bc766eafc10a55c",
             "quality_status": "待補資料",
@@ -575,7 +576,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07483070896705613,
+            "seconds": 0.0761843750369735,
             "input_sha256": "42beff1aa79a82970a2bf99bd6cfff8eb48bcb96a6c77e3e445c9c3874569846",
             "outcome_sha256": "5eb1ec5b8adcfd15df7baf96b3d3d8596c9b9e979ac791250924beb091beca9d",
             "quality_status": "待補資料",
@@ -596,7 +597,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.0738233330193907,
+            "seconds": 0.07537116698222235,
             "input_sha256": "770d633089decbcff9d39bcc05e5336b919909f183cb9c4df4a8abb9f3e8229b",
             "outcome_sha256": "b7a6e289df52e3572fd21ce5a30792350dae125f9ba5780105ed948a7abe68c4",
             "quality_status": "待補資料",
@@ -617,7 +618,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.0742337079718709,
+            "seconds": 0.0765105839818716,
             "input_sha256": "1befc3709b2378e1f99a7ff89d7aa63f0460a45070f2e7120219b79d9d0b596f",
             "outcome_sha256": "b42b593d3809874ab6a84b74fe97b56b9eca1ec3f48cfd713678502808591a5a",
             "quality_status": "待補資料",
@@ -638,7 +639,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07476833398686722,
+            "seconds": 0.07620895898435265,
             "input_sha256": "4b200a683c6b513752373e6d9a6ee11f5ffc85b59f30de5b5825420818c4ff41",
             "outcome_sha256": "7e7ab3ad6b89d1127b986efaf5c2adfa2c5deaaeac9460bb0975f2fa3c27eb3a",
             "quality_status": "待補資料",
@@ -659,7 +660,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07557166600599885,
+            "seconds": 0.07475895795505494,
             "input_sha256": "a8b8a99ead46e6eb0fadca89be202577cd2a094d16e20d043372f9f4af49f3f5",
             "outcome_sha256": "55aaea076a26138935a38646eeaacce1299b4a36f08be7052b7122cc113f1736",
             "quality_status": "待補資料",
@@ -680,7 +681,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07560929196188226,
+            "seconds": 0.07503570901462808,
             "input_sha256": "f97cb45aad61fd1468df58665a4d8ba516f51e0580dc186626b49ddd695e225c",
             "outcome_sha256": "34063f8fc65a5a1e43a725c9f758c34f200b6bb06e1d3045a79b62a63dfc4857",
             "quality_status": "待補資料",
@@ -701,7 +702,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07637983304448426,
+            "seconds": 0.07553658302640542,
             "input_sha256": "8cf21cbd1f989094901681ee0f928173ce4f0594d559200124a3fe1b93104c04",
             "outcome_sha256": "0b913ab06e0908970925f8a090bb19e23f3e21462dde1cf544edb2e9bbb4be14",
             "quality_status": "待補資料",
@@ -722,7 +723,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07402145903324708,
+            "seconds": 0.07487420900724828,
             "input_sha256": "3e71c1b3bb3b3a6059ef9a293a137c7dc4427c52c76647085fdb16aebaedd2de",
             "outcome_sha256": "f692cfe19b577c4054d88fa1a564e37b75550f087713aa5a7691ca3906c93f90",
             "quality_status": "待補資料",
@@ -743,7 +744,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 210,
-            "seconds": 0.07932283403351903,
+            "seconds": 0.07671266602119431,
             "input_sha256": "9cb09f5350cbd6924570b92887c236243cc3cc8bcdad3d8f8c9cb49fb0e9eb0a",
             "outcome_sha256": "6c3a80581670b11dd220027506560f67b2dfcab576078f18682eda63f421ec75",
             "quality_status": "待補資料",
@@ -764,7 +765,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07841949997236952,
+            "seconds": 0.07689791603479534,
             "input_sha256": "4350cefaa9b5c59ee8a08f4fa59d5c29eaf0e9af608bf64b7dcae08635353ea6",
             "outcome_sha256": "e212cfa236acf33b46b3c4cad3a842a32b70e7894d3bf26ae0e7704945a8d36a",
             "quality_status": "未達條件",
@@ -785,7 +786,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07511333300499246,
+            "seconds": 0.07716041599633172,
             "input_sha256": "10d3146fa9cf1918f48d784ce44f32ce4fc254d061bf79da16cc9e70a651cf25",
             "outcome_sha256": "a3f9c07385bead1faa45c0cf7c5dfc03ce86ad63dd494515472b91776259cfca",
             "quality_status": "未達條件",
@@ -806,7 +807,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07611549994908273,
+            "seconds": 0.07534662500256673,
             "input_sha256": "5d7bec042581b6ca13a5c5acaeb0412859c33c1ebdde415cf82f7ed3844ba613",
             "outcome_sha256": "dd98ae396cfab152514a381409c731b5f75b8ec553373a87387445e41b9193e5",
             "quality_status": "未達條件",
@@ -827,7 +828,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07533158303704113,
+            "seconds": 0.07514295796863735,
             "input_sha256": "51e134066d074f6d48f2e6b7b22280f925b25b51266034fd6284948e71c93564",
             "outcome_sha256": "3259a1fb8c76e67b05c6bc7058efc1bdd59738c6bb11fc591e874c4530f23f03",
             "quality_status": "未達條件",
@@ -848,7 +849,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07630712498212233,
+            "seconds": 0.07638545800000429,
             "input_sha256": "e2fc9d295911ef1787e93f3ef838f7c45bbaee9972e75dfdb41136d89bf95098",
             "outcome_sha256": "04bc01d06a570024cd3b34ac4fe7d28bf2dabf43bfc4a91ba545d9176a9df936",
             "quality_status": "未達條件",
@@ -869,7 +870,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07388666603947058,
+            "seconds": 0.07489841600181535,
             "input_sha256": "1aaf912efcaadf4839b4fd4b48e5587f44518f700f7bac555090958e50fa06f8",
             "outcome_sha256": "d5059f7010f1cbd2d46ce1acbdeadc3ca3476e2227d9fcd757b42905761a4ba1",
             "quality_status": "未達條件",
@@ -890,7 +891,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.09486320900032297,
+            "seconds": 0.07750224997289479,
             "input_sha256": "3d98ecae4e4711f9007809fca8f9da1292d92ff17d3be6e0c5cf38bd2655462a",
             "outcome_sha256": "6de3cdd143e2c93de93b671ed864a0f7cd9c0d12538360c0a3e67fd74b49d64d",
             "quality_status": "未達條件",
@@ -911,7 +912,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.14663583296351135,
+            "seconds": 0.12000975001137704,
             "input_sha256": "7601b1e265c9d293f0e96f1e7502081d1f437f24db7e8bb1bd7169b2ae1b7469",
             "outcome_sha256": "26361ccb36fce3c1b6753e3d8e195c686d4c53cad05f9163a334bc47fbdc92ca",
             "quality_status": "未達條件",
@@ -932,7 +933,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 199,
-            "seconds": 0.10521912499098107,
+            "seconds": 0.09994008397916332,
             "input_sha256": "ccfe656d39fa452c984ac8039953d06c0f0d1715b8aaf45ff43806a07b2ca541",
             "outcome_sha256": "ea8f28b30ef2669e688008ce47af208894b8e3843a15873c9e7eb7026312e237",
             "quality_status": "未達條件",
@@ -953,7 +954,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 207,
-            "seconds": 0.10492966696619987,
+            "seconds": 0.10422783298417926,
             "input_sha256": "b5c6eaccd9a6a2ab1a4d6ff1ad519a8dd4140127dbfb09f077dab2426ee71934",
             "outcome_sha256": "08cbe1d2f386c50c587e2ac8441d2e05847ae68b239cce8b030a6b10aaf92bad",
             "quality_status": "未達條件",
@@ -974,7 +975,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 208,
-            "seconds": 0.07602691696956754,
+            "seconds": 0.08326745801605284,
             "input_sha256": "53c98f264246a65996f791cfec2943c127dc97a0fb9412e45b449acc432ccf0b",
             "outcome_sha256": "579b3ee0d716a640b721d82033317a98803508dd24c40d3d4048ebb842a46123",
             "quality_status": "待補資料",
@@ -995,7 +996,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 208,
-            "seconds": 0.08092166698770598,
+            "seconds": 0.07762829202692956,
             "input_sha256": "329f7e79a67e27918d06396c4bff0afac0da71f05bba2814efc2d2a62e03a9bf",
             "outcome_sha256": "926e3be0d58cb0e895e49f08594ea52b2fcc3ee9aa453208694dfd714fe1748b",
             "quality_status": "待補資料",
@@ -1016,7 +1017,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07633816602174193,
+            "seconds": 0.07776233396725729,
             "input_sha256": "a3b0520e6b7752d717bf3a2ef7f21746ed67454f702dd68dd37b9e091ace4647",
             "outcome_sha256": "efc4d96b85c5db44a01d33db7934b21d02576edfaac84e44ebf204af1997a052",
             "quality_status": "待補資料",
@@ -1037,7 +1038,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 208,
-            "seconds": 0.07754104095511138,
+            "seconds": 0.07887337496504188,
             "input_sha256": "9c6de50e03f2676467a4a437f1e8eafaeaa3e99126960c9f5bd259ead2e057c0",
             "outcome_sha256": "97b1e46461fe721596bbb53e6ca51275f12ea2c311279439f9be372eaf227889",
             "quality_status": "待補資料",
@@ -1058,7 +1059,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 208,
-            "seconds": 0.08039866597391665,
+            "seconds": 0.07769075001124293,
             "input_sha256": "5167875cf2740f60af6d066b1ac26d041d8c84b5a6c0478a9ea135730a5aeef5",
             "outcome_sha256": "9d40e671aab19beb12890ca86e05538aa8f5d2c638083ccbf2e89855f0373f2e",
             "quality_status": "待補資料",
@@ -1079,7 +1080,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07717158301966265,
+            "seconds": 0.07607029099017382,
             "input_sha256": "7b33fb0e93d81d388a38829bdf4ed2da524409320651ebdf8b48476cdeb336b9",
             "outcome_sha256": "a5f9329878983447f20d051d8a75947a84dc328e390ced4c7d775e7889274b70",
             "quality_status": "待補資料",
@@ -1100,7 +1101,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 208,
-            "seconds": 0.07763279200298712,
+            "seconds": 0.07845204201294109,
             "input_sha256": "586cfc67af4420517af4c1716d97ecf1e40e47399a7afc4e641f0650cc9c684d",
             "outcome_sha256": "1361c504547b4aaa80ddbb751b4f2ef6b7708e9b443b5492f1e470c11c9b2398",
             "quality_status": "待補資料",
@@ -1121,7 +1122,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 208,
-            "seconds": 0.07769895798992366,
+            "seconds": 0.07782341697020456,
             "input_sha256": "04b53c0d2339d1d0d94d9217277feaec258f575f10db6a34ad2632e6ae8ef8ca",
             "outcome_sha256": "2acde3e79f8775fa2a51f5db5cead436b223abcc7004bb76d9ad711993177b62",
             "quality_status": "待補資料",
@@ -1142,7 +1143,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07685791701078415,
+            "seconds": 0.07743937498889863,
             "input_sha256": "2b525dcb3e2b95386e5a3d9d613f5fd0d9053605702e6709c86b43ef8b9ac689",
             "outcome_sha256": "df202efeb8504c5716274c603df6fa649f6ec0e038522d8df5a0ab616c1ee668",
             "quality_status": "待補資料",
@@ -1163,7 +1164,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 216,
-            "seconds": 0.07835741696180776,
+            "seconds": 0.0784599170438014,
             "input_sha256": "2b54a4c0bfc1b3613c843ad2a65cb86c431325b01621e94df6eda6cc89a2dd21",
             "outcome_sha256": "ebe8fabb7af0bcb5d0d4b2d62e3a0ce5a0b584ed93b1f61c5eb74f48f47ed22e",
             "quality_status": "待補資料",
@@ -1184,7 +1185,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.02007404202595353,
+            "seconds": 0.01986337499693036,
             "input_sha256": "0bcee0002f787fa39b0ca11af1fbba635aff0e86bd998dc517c9d10d72ef2526",
             "outcome_sha256": "4214786fbf9751b791e380448abec64f909f1209f33b9a4da87ee2b6086bb037",
             "quality_status": null,
@@ -1210,7 +1211,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.019342083018273115,
+            "seconds": 0.019288916955702007,
             "input_sha256": "352f4ae67389b02f015921572a74c08e42413c53c52068cd473a635b6d690c6f",
             "outcome_sha256": "4214786fbf9751b791e380448abec64f909f1209f33b9a4da87ee2b6086bb037",
             "quality_status": null,
@@ -1236,7 +1237,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07579775003250688,
+            "seconds": 0.07461245800368488,
             "input_sha256": "34191aea2520d16ca9ac5bafc363c38ff23e06e3ad3d6283ac3b1a1ca6461ec5",
             "outcome_sha256": "c159e154b7f745144e1932e5b6817fe1c85a8c1239722d53d513a2be718a2644",
             "quality_status": "待補資料",
@@ -1257,7 +1258,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07762937503866851,
+            "seconds": 0.07722133299103007,
             "input_sha256": "0b2e2fdf61f7d32d5fb7e8a9357325055ceba0eea2d2d8c1c0680a809b692f3c",
             "outcome_sha256": "2539e3f7d2bcabaf6b2f62ceafa8539d43b60c13fbff77379ea602aad06c1cfc",
             "quality_status": "待補資料",
@@ -1278,7 +1279,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07572095800423995,
+            "seconds": 0.07506249996367842,
             "input_sha256": "943e69e3f1dcc7ec356fa99485da1aa553edc55cf38bce51143d748cbd33b33a",
             "outcome_sha256": "7f6a8cfcbfda95ae651afdc6794f719501118b768c9d9a9a01d90102f7372f68",
             "quality_status": "待補資料",
@@ -1299,7 +1300,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07505345903337002,
+            "seconds": 0.07455783401383087,
             "input_sha256": "449c074cfbbba47db9f4c277dff31739d04b261a1e04f5d240ee9188dcb592c6",
             "outcome_sha256": "cacacf279602112a8f79378265c23a3cd1cc9339250db36d76587fc831441ab2",
             "quality_status": "待補資料",
@@ -1320,7 +1321,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.0761837909813039,
+            "seconds": 0.07678187504643574,
             "input_sha256": "37a85b2049c689669f4b891ca2de6f82ef0e380207372accfa5efc4e87468aab",
             "outcome_sha256": "e99f30dfeeb3d2278f1ae401f735a9f4efb9131d13f6999e459b83dd2235de26",
             "quality_status": "待補資料",
@@ -1341,7 +1342,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.0794754580128938,
+            "seconds": 0.07685512496391311,
             "input_sha256": "e4a75db0f4d9460cced118b628cb1211a2ff89a79eecc9e1988aeeeb51591afd",
             "outcome_sha256": "c3d4c90767e7259ef3110ff4e110fc3682594bef89135c65a0c01303d462fbb6",
             "quality_status": "待補資料",
@@ -1362,7 +1363,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07683608296792954,
+            "seconds": 0.07542862498667091,
             "input_sha256": "ffe591a86156e96aa00a8ab784664269080b5364a6f8643571e4a706511da8a4",
             "outcome_sha256": "a68d2982ec69dbd818405d517da31814be2559b3a33868b72fcce0b7a1dbedde",
             "quality_status": "待補資料",
@@ -1383,7 +1384,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07594183296896517,
+            "seconds": 0.07458754198160022,
             "input_sha256": "5683148564036d0961d077ba0f2765cefe7f14e6ddce33ebd7eebb290f7f4c59",
             "outcome_sha256": "5e11277a109b22844342a1a8388e8ed9d0ef97710231ab0ddba938b58910ca74",
             "quality_status": "待補資料",
@@ -1404,7 +1405,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07665262499358505,
+            "seconds": 0.07461204199353233,
             "input_sha256": "370ebe5e8e3f05b045890da102d25e1723b9f9c3020ad0e09d5fd4c54ff81b4b",
             "outcome_sha256": "c54b7040784761defb2a072d5916c18bdf8856e656c671ce156bbfc481141b33",
             "quality_status": "待補資料",
@@ -1425,7 +1426,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.019576042017433792,
+            "seconds": 0.019726499973330647,
             "input_sha256": "58209d5ef86650ae9d26d701159c52116066a2789e534a33c56dfa69fa225a7d",
             "outcome_sha256": "d608eb9e2a6660c70d39905fa262b665d00f9d1b5cd7773e94503bcc322f10d5",
             "quality_status": null,
@@ -1452,7 +1453,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.01988212502328679,
+            "seconds": 0.019869791984092444,
             "input_sha256": "2993b6b4747c966ab34dd1480cb96d55d2bd643d271ac3b4ce499bc7832cce95",
             "outcome_sha256": "1a7b0925e67ec60c716be5d3fa13783ccf0d26e1dc0a6d5692104adcd5e11b54",
             "quality_status": null,
@@ -1479,7 +1480,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.019451499974820763,
+            "seconds": 0.019169375009369105,
             "input_sha256": "4ad7f4d34fcd9c493fa4fc81b3208535d0db7f4fcadd683a8f739fda9e2f00a4",
             "outcome_sha256": "32a2b5253bea326c867ae9a75a2b251a6bcc539f3b4ec426575b67d6ee163f41",
             "quality_status": null,
@@ -1506,7 +1507,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07650395896052942,
+            "seconds": 0.07550229097250849,
             "input_sha256": "a3707658fd20fd3a00fcfe511da8f7cd8aa2df11fbc313be29c4e10120713e93",
             "outcome_sha256": "b7ea0c1b32031af98abb5561fca13b06437532dc36d07a62664ac2f3b234b024",
             "quality_status": "待補資料",
@@ -1527,7 +1528,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07526316703297198,
+            "seconds": 0.07568912504939362,
             "input_sha256": "460f83b342f597ff2361e787550aed9504a396924c637fd30ee8dbbb48792c58",
             "outcome_sha256": "0c5770cb6867d6337cbf26c27c9c0f412927cd1a275afa0fd9735f265e559808",
             "quality_status": "待補資料",
@@ -1548,7 +1549,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.08088962500914931,
+            "seconds": 0.0758610829943791,
             "input_sha256": "a14004551ee03ee94e461da3cbb3a1dbc119d7d727b927b4c5da1cb0cfc6c1d1",
             "outcome_sha256": "50228feed92cdc1e0babfd64153f6724ac34f07c2d6f0661d39b17fbc2af8dda",
             "quality_status": "待補資料",
@@ -1569,7 +1570,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07459516602102667,
+            "seconds": 0.07476816698908806,
             "input_sha256": "66671e9ff482a2c228dcc260490536533bfb4aa5e25d45318ee5af6314674e1d",
             "outcome_sha256": "2ca65ad15f6bebc5cec8b05d7e89fbea17930ea22a7c6bd1c7b30d339913d37d",
             "quality_status": "待補資料",
@@ -1590,7 +1591,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07687545800581574,
+            "seconds": 0.07480333297280595,
             "input_sha256": "54cac9a9c4473da8c0d33aaae45ef5390f26f760ea8592c8e7455b137e4eeb80",
             "outcome_sha256": "7176322ffc7797394794fea842efa086a05eeccd601ead37959d64a80c092ffb",
             "quality_status": "待補資料",
@@ -1611,7 +1612,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07726608403027058,
+            "seconds": 0.07478920801077038,
             "input_sha256": "195d7b651e83b4b84b22cc99a6be4b4713d12077314de45c15f3fd2f605a2867",
             "outcome_sha256": "635fead7344bcf809ef627d9c76410c4c879c6cd69a564833e9e6872d81de40a",
             "quality_status": "待補資料",
@@ -1632,7 +1633,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07584187504835427,
+            "seconds": 0.0749685830087401,
             "input_sha256": "d3480a7848d07af3cf09840f2b34b706e80a9ed8404028fb8ac669ba779b8941",
             "outcome_sha256": "940007ae7cf081f96f2555ceeb4373a2a359adaaed028c7f48b1d4618ed67e63",
             "quality_status": "待補資料",
@@ -1653,7 +1654,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07586562499636784,
+            "seconds": 0.07781412499025464,
             "input_sha256": "df3f561612f17c934b2d3ac33287b95119e5450fb2eec631dde82965b7a5b417",
             "outcome_sha256": "f28db35a5faade8598fa6a54c142b6727d7cddc261484dab33dd36d66604f5c7",
             "quality_status": "待補資料",
@@ -1674,7 +1675,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.0756567080388777,
+            "seconds": 0.07569024997064844,
             "input_sha256": "542ad19dd7e0fc7136a85931c094b26cad8a0c8a2cefee59ea51f7d2e01542d3",
             "outcome_sha256": "a25ed9f6ba1823fdf90562422f2deaaa27bbea95a068f9fd4fc91c9811e70844",
             "quality_status": "待補資料",
@@ -1695,7 +1696,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.0770470830029808,
+            "seconds": 0.07869508297881112,
             "input_sha256": "143fe051c6583b963374b11627dbe674227dce182d94e722029a352f3f58aa93",
             "outcome_sha256": "0e9f4b2d4b1961c181c0e3722d3b5888c059e917957ed4e3906f0b4336432542",
             "quality_status": "待補資料",
@@ -1716,7 +1717,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.0757911250111647,
+            "seconds": 0.07603645895142108,
             "input_sha256": "124d3b9fc06e95e7c63892db371d64b503e0996ad378aec5af81bf517e16a489",
             "outcome_sha256": "76820d7592b69e9cb1f1f37321402475c00c5414626a284e1997acac0e4e2221",
             "quality_status": "待補資料",
@@ -1737,7 +1738,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07510979200014845,
+            "seconds": 0.07424429099773988,
             "input_sha256": "e64c03a91e6d408aa6b99e740fe11b1d9bb6d61337d9b4b5f76c4542aadf3d4d",
             "outcome_sha256": "c8a9faea4df07b64c7d78b7e07a60ba9a4d4f5e9d3ef900a0a2654208a62813d",
             "quality_status": "未達條件",
@@ -1758,7 +1759,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07665441697463393,
+            "seconds": 0.075971209036652,
             "input_sha256": "6fadbfa63cf87f75fc387275d7efe20e261928493712047b3782a27b91506b5e",
             "outcome_sha256": "4a4a63f7f841b794a80171c6facaa43accd30abc24a12c2a27644886a09a2b2c",
             "quality_status": "待補資料",
@@ -1779,7 +1780,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.021539250039495528,
+            "seconds": 0.02109570801258087,
             "input_sha256": "533e0e561687b937610fb0bf1acac0e6146997db8b16815e315241728305cf0e",
             "outcome_sha256": "4065205147b696882efd61022aecb51dd5f71e3f6c7763bf7d9bedfebb6d9e14",
             "quality_status": null,
@@ -1805,7 +1806,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.020808583998586982,
+            "seconds": 0.021235625026747584,
             "input_sha256": "dfc651f934f80ce3756fca05a388ebb80ab7fb7516170d9325ae60dfdbf1e14e",
             "outcome_sha256": "77a5ce25afe18da5e97350a2e1be2b9e41ad93089b90c88fe1059fa9940c0925",
             "quality_status": null,
@@ -1831,7 +1832,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.02083474997198209,
+            "seconds": 0.022081499977502972,
             "input_sha256": "15d154c193f613c7ad9b98980cbf29d8bfc5f3ffc2c60904d4994e6b85c8ba03",
             "outcome_sha256": "77a5ce25afe18da5e97350a2e1be2b9e41ad93089b90c88fe1059fa9940c0925",
             "quality_status": null,
@@ -1857,7 +1858,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.019643499981611967,
+            "seconds": 0.01967966603115201,
             "input_sha256": "f78206393ed7b065d8622a02b0bf55fa713dd50eb948dac272486f39147bf6e7",
             "outcome_sha256": "bb132d549f07b7804223d2ac68888666c77987ba4a5dba0a8b2ad1ab85dcbe06",
             "quality_status": null,
@@ -1883,7 +1884,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.019355666998308152,
+            "seconds": 0.019510957994498312,
             "input_sha256": "6210f04d70a1c1b9d09c8c34c1b7311e22b0e08f8b89cfb90726a712f07fafb2",
             "outcome_sha256": "dc9e40d9262aaae9ba804c2ad36e2c4676d4a45a6337c0584f89ebd9517ab84b",
             "quality_status": null,
@@ -1909,7 +1910,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.019422750046942383,
+            "seconds": 0.02114174998132512,
             "input_sha256": "a6ac2341285dead6f01a48ee11dca35e05da00ab6a081607e30804e42a146c9c",
             "outcome_sha256": "478e88d63db96d6df2b6081e3960030bc9441f29b397bb97e3e7f71596d6dfdb",
             "quality_status": null,
@@ -1935,7 +1936,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07658220798475668,
+            "seconds": 0.07669349998468533,
             "input_sha256": "7129476ddd5f4ab209a7fab48d464b7ba79c591a722d20d7f1610617b6d4c719",
             "outcome_sha256": "d4cb334fe6a6ae7fc2f0e1d5171d8de2a7c97236fc5e6775e0bc12f0dab9e50d",
             "quality_status": "待補資料",
@@ -1956,7 +1957,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07715120899956673,
+            "seconds": 0.0772119159810245,
             "input_sha256": "3270cba0c8b66e564532b2b1388259103ecd4245cd66d358236a15c74fae06ee",
             "outcome_sha256": "861715cca87d456718ce46dec19b194a929c9d2b3a5c56961b7a3e32d2c4b717",
             "quality_status": "未達條件",
@@ -1977,7 +1978,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07687337504466996,
+            "seconds": 0.0757782919681631,
             "input_sha256": "fce1a9a5332d8bb13566ffa33f19a14aa1a6b02fc077f9d977ecbaba362a5af0",
             "outcome_sha256": "a9098a0333b8b0cad846da466b11866e67bd4067cb96ad8d85b6fbd53aac1f1f",
             "quality_status": "未達條件",
@@ -1998,7 +1999,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07602124998811632,
+            "seconds": 0.0770468749688007,
             "input_sha256": "7942fc8e6a4f797bc87c90a776527d77808079038e4673764b5c48acafdadf3c",
             "outcome_sha256": "41187bb6312fa6c336460a3dcfac43613b17d1befe895d70e26c3ca113f430d9",
             "quality_status": "未達條件",
@@ -2019,7 +2020,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07549804198788479,
+            "seconds": 0.07601437502307817,
             "input_sha256": "90fffff824fbaeadac8bb2d0916f5f2734b7b7b69503c199927c8467872bdb84",
             "outcome_sha256": "26f418d8f0879fb7dc1a037b6483334034fbe58025a3e610a38cf1e644036b59",
             "quality_status": "未達條件",
@@ -2040,7 +2041,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07560770795680583,
+            "seconds": 0.07766012503998354,
             "input_sha256": "8c5678d8c0abd008eeb87a79ee5aeddee37351dfd858f4472559501d5616b245",
             "outcome_sha256": "30761d4b5ff8d89f75a9e99e4ad6d898b292ef74c8aebb19465abaaf97458019",
             "quality_status": "未達條件",
@@ -2061,7 +2062,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.10176699998555705,
+            "seconds": 0.10346179199405015,
             "input_sha256": "4d7bf767c12d6fabfd71565f7d5dd5d3ec0c633ecc38dccb73c8bb9400f76b72",
             "outcome_sha256": "cf9e165e846cdccd6e6cb08c0ae052f5ddfa4b09ac77d90d851cc3742acf5b13",
             "quality_status": "未達條件",
@@ -2082,7 +2083,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.0759904170408845,
+            "seconds": 0.0752237499691546,
             "input_sha256": "91ca8ded5c970e5ba72bcb90b7c47aca1419105fcdabec5dec765b705c89daf3",
             "outcome_sha256": "de9a174baac46d12882eccf16a8cd6e7a1525f8904bb3a428b832285d7f1af16",
             "quality_status": "待補資料",
@@ -2103,7 +2104,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.0750305830151774,
+            "seconds": 0.07536974997492507,
             "input_sha256": "00f381c0c2ad0a62ea302d063733d5a6ea896d772b75da044593e86f3aec8306",
             "outcome_sha256": "9b038c54065bbb125b042dce05fddea73eac3af62454eddfdd86f4f9f397fcde",
             "quality_status": "待補資料",
@@ -2124,7 +2125,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07533658301690593,
+            "seconds": 0.07466145796934143,
             "input_sha256": "e76e4b6f8eea694cc534aeb252e8a761b5197f5938a2eba9e1f1e450158d6bbf",
             "outcome_sha256": "b038e740b12910070ecd3cca261bc88f5849450654ae19eadf39b53909482a7b",
             "quality_status": "待補資料",
@@ -2145,7 +2146,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 198,
-            "seconds": 0.09911595802986994,
+            "seconds": 0.09981966594932601,
             "input_sha256": "c003fba78f394a8ab1abfa337d150b7bf3078dd7d9622aeb7cffb0dac8c9a9e9",
             "outcome_sha256": "0c4a4f74fdea7bf90b6280a3febcb8f1f035b49c294fd967d0053d417f82c5b5",
             "quality_status": "待補資料",
@@ -2166,7 +2167,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 198,
-            "seconds": 0.10121904197148979,
+            "seconds": 0.10271595901576802,
             "input_sha256": "490cd1284cd439d49d2e224b8ad3d9ba5887e56b130355207a8bccf7039edc95",
             "outcome_sha256": "5c393e27ac509684ba060fc314a2a881dcf201a6e36ac1b7e61dcb72db0ac36b",
             "quality_status": "待補資料",
@@ -2187,7 +2188,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 199,
-            "seconds": 0.0957352080149576,
+            "seconds": 0.09699616703437641,
             "input_sha256": "bf4cd7632445c991cce79439a8bb11646f15a3f366aed2e6da7ca8d8bf2de8bd",
             "outcome_sha256": "0853908d7d24a3eea76c217fef9f1612753c4fa139e1dde3d333d828d3773489",
             "quality_status": "未達條件",
@@ -2208,7 +2209,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 198,
-            "seconds": 0.09508150001056492,
+            "seconds": 0.09560395800508559,
             "input_sha256": "eb1d3a49c7cb81cbf7c7986bdf59c19743373bad7814a5e30c5749736bdb11a5",
             "outcome_sha256": "719a21e264211429672ce3f91369eae7e42a73c25e2b2c6412c801d36728b4c5",
             "quality_status": "待補資料",
@@ -2229,7 +2230,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 198,
-            "seconds": 0.09427216701442376,
+            "seconds": 0.09553104097722098,
             "input_sha256": "329991c5d3c82f86b0c8568ab1371ffc9cdcdde5c1f2796fdde8afb92415226c",
             "outcome_sha256": "ff4b2531ecbe51d15f502d1d63d0f402705221bc5c5b3bdc29550f7a740a7cd8",
             "quality_status": "待補資料",
@@ -2250,7 +2251,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 199,
-            "seconds": 0.10204283299390227,
+            "seconds": 0.09540120797464624,
             "input_sha256": "672214416aa442137d985598b6817b61a3e6dfc2ea2a6dfa755f0b124fc7e1a7",
             "outcome_sha256": "04f94332d9cfe1e496a29fa0e37c8f7049ed9990464b987164d417959ae54676",
             "quality_status": "未達條件",
@@ -2271,7 +2272,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.09556654101470485,
+            "seconds": 0.09591291699325666,
             "input_sha256": "87ac3d49bb079854e2dbb522cf158d5bf789791ef5b3dea4f76e2f55cf12bbd8",
             "outcome_sha256": "3750e11abec1cbce90f97522fcea3f3e01c8129cdff9b66c1d21166ff967a389",
             "quality_status": "未達條件",
@@ -2290,11 +2291,18 @@
         ],
         "execution_environment": {
           "PYTHONIOENCODING": "cp1252"
+        },
+        "filesystem_codec_fixture": {
+          "simulated_implicit_filesystem_codec": "cp1252",
+          "explicit_utf8_writes_verified": 190,
+          "unicode_utf8_writes_verified": 90,
+          "exit_code": 0
         }
       },
       "app_owned100_source": {
         "command": [
           "python3",
+          "<scratch>/stress-2026-10-13/windows_disk_codec.py",
           "windows/tests/stress100.py",
           "--output",
           "<scratch>/stress-2026-10-13/bundled-recipes-windows.json"
@@ -2320,7 +2328,7 @@
           "check_count": 3902,
           "host": "macOS-27.2-arm64-arm-64bit",
           "frozen": false,
-          "seconds": 6.955841707997024,
+          "seconds": 6.880206583009567,
           "scope": "100 varied full-project calculation/report/persistence recipes; water and all factory gases; no GUI launch claim"
         },
         "cases": [
@@ -2336,7 +2344,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.08170041698031127,
+            "seconds": 0.07375504198716953,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2351,7 +2359,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06926033302443102,
+            "seconds": 0.06983179098460823,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2366,7 +2374,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06974354200065136,
+            "seconds": 0.06724125001346692,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2381,7 +2389,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0681948330020532,
+            "seconds": 0.06719841598533094,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2396,7 +2404,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06808324996381998,
+            "seconds": 0.06766700005391613,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2411,7 +2419,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06840458296937868,
+            "seconds": 0.06885795801645145,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2426,7 +2434,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06988887500483543,
+            "seconds": 0.06891849997919053,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2441,7 +2449,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0693897909950465,
+            "seconds": 0.06996558397077024,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2456,7 +2464,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06971437501488253,
+            "seconds": 0.06712129100924358,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2471,7 +2479,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06787200004328042,
+            "seconds": 0.0677207910339348,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2486,7 +2494,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0679561669821851,
+            "seconds": 0.06734633399173617,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2501,7 +2509,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0672224999871105,
+            "seconds": 0.06852020905353129,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2516,7 +2524,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06798129103844985,
+            "seconds": 0.06916841602651402,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2531,7 +2539,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06862949999049306,
+            "seconds": 0.0699096669559367,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2546,7 +2554,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07410033297492191,
+            "seconds": 0.0690956250182353,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2561,7 +2569,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07463670801371336,
+            "seconds": 0.0704062909935601,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2576,7 +2584,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06958866701461375,
+            "seconds": 0.06806691602105275,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2591,7 +2599,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06793704099254683,
+            "seconds": 0.0680135419825092,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2606,7 +2614,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06694391701603308,
+            "seconds": 0.06889862503157929,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2621,7 +2629,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06722799997078255,
+            "seconds": 0.06888262502616271,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2636,7 +2644,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06801391602493823,
+            "seconds": 0.06927254103356972,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2651,7 +2659,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06715395796345547,
+            "seconds": 0.06926683394704014,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2666,7 +2674,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0693980409996584,
+            "seconds": 0.06814470898825675,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2681,7 +2689,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06871133402455598,
+            "seconds": 0.06781191698973998,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2696,7 +2704,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06838800001423806,
+            "seconds": 0.06765754200750962,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2711,7 +2719,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06764929200289771,
+            "seconds": 0.06891762500163168,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2726,7 +2734,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06759012496331707,
+            "seconds": 0.06861795799341053,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2741,7 +2749,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0671939579769969,
+            "seconds": 0.06850516702979803,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2756,7 +2764,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06759408302605152,
+            "seconds": 0.06884429097408429,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2771,7 +2779,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06837129197083414,
+            "seconds": 0.0680001659784466,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2786,7 +2794,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06826145795639604,
+            "seconds": 0.06856716598849744,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2801,7 +2809,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06858458300121129,
+            "seconds": 0.06801016599638388,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2816,7 +2824,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06733520800480619,
+            "seconds": 0.06823974999133497,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2831,7 +2839,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06732933298917487,
+            "seconds": 0.0682004580157809,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2846,7 +2854,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07874570798594505,
+            "seconds": 0.07086170901311561,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2861,7 +2869,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06814691598992795,
+            "seconds": 0.06852212501689792,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2876,7 +2884,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0681205420405604,
+            "seconds": 0.06832916603889316,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2891,7 +2899,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06810379197122529,
+            "seconds": 0.06747637502849102,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2906,7 +2914,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06808012502733618,
+            "seconds": 0.0682963749859482,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2921,7 +2929,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06857516698073596,
+            "seconds": 0.06757583399303257,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2936,7 +2944,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07347437500720844,
+            "seconds": 0.06795816600788385,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2951,7 +2959,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0842201670166105,
+            "seconds": 0.06881783396238461,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2966,7 +2974,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07757937500718981,
+            "seconds": 0.06905554101103917,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2981,7 +2989,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.079216499987524,
+            "seconds": 0.0679899999522604,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -2996,7 +3004,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.070567500020843,
+            "seconds": 0.06721229100367054,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3011,7 +3019,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06816608301596716,
+            "seconds": 0.0689899169956334,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3026,7 +3034,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06757508299779147,
+            "seconds": 0.06832412496441975,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3041,7 +3049,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06765362498117611,
+            "seconds": 0.06850229197880253,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3056,7 +3064,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06823874998372048,
+            "seconds": 0.07230733300093561,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3071,7 +3079,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07029300002614036,
+            "seconds": 0.06827229203190655,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3086,7 +3094,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06930116598960012,
+            "seconds": 0.07082283403724432,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3101,7 +3109,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06906583299860358,
+            "seconds": 0.06802887498633936,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3116,7 +3124,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07012783299433067,
+            "seconds": 0.06762529199477285,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3131,7 +3139,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06869387498591095,
+            "seconds": 0.06804220902267843,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3146,7 +3154,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06830404105130583,
+            "seconds": 0.06974287499906495,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3161,7 +3169,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06953670899383724,
+            "seconds": 0.06858249998185784,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3176,7 +3184,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0681719160056673,
+            "seconds": 0.06863870896631852,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3191,7 +3199,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0700389999547042,
+            "seconds": 0.06906141596846282,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3206,7 +3214,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06895591696957126,
+            "seconds": 0.0691797089530155,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3221,7 +3229,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07089662499492988,
+            "seconds": 0.06744162499671802,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3236,7 +3244,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06888758298009634,
+            "seconds": 0.0689679579809308,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3251,7 +3259,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0685148750199005,
+            "seconds": 0.06709062500158325,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3266,7 +3274,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06860320799751207,
+            "seconds": 0.06846729095559567,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3281,7 +3289,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06906862498726696,
+            "seconds": 0.06862929201452062,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3296,7 +3304,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06915224995464087,
+            "seconds": 0.06860391597729176,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3311,7 +3319,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0692449999623932,
+            "seconds": 0.06871075002709404,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3326,7 +3334,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0691834160243161,
+            "seconds": 0.06795916700502858,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3341,7 +3349,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0684393749688752,
+            "seconds": 0.06770608300575987,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3356,7 +3364,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0675597499939613,
+            "seconds": 0.06733608298236504,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3371,7 +3379,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0691320410114713,
+            "seconds": 0.0691942079574801,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3386,7 +3394,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06909937498858199,
+            "seconds": 0.0685513750067912,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3401,7 +3409,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06815974996425211,
+            "seconds": 0.07237933401484042,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3416,7 +3424,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07135799998650327,
+            "seconds": 0.06837795797036961,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3431,7 +3439,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06924704101402313,
+            "seconds": 0.06749329203739762,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3446,7 +3454,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06919841695344076,
+            "seconds": 0.06803095899522305,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3461,7 +3469,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06977529102005064,
+            "seconds": 0.06709775002673268,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3476,7 +3484,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06878237496130168,
+            "seconds": 0.06898270797682926,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3491,7 +3499,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07097645802423358,
+            "seconds": 0.0690895410371013,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3506,7 +3514,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06903612503083423,
+            "seconds": 0.0681779999868013,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3521,7 +3529,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06928737502312288,
+            "seconds": 0.07146883400855586,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3536,7 +3544,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06859899999108166,
+            "seconds": 0.06743229198036715,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3551,7 +3559,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06920774996979162,
+            "seconds": 0.0671339170075953,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3566,7 +3574,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0677810839843005,
+            "seconds": 0.06719679100206122,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3581,7 +3589,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06987508304882795,
+            "seconds": 0.0682626249617897,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3596,7 +3604,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06746004201704636,
+            "seconds": 0.06769862497458234,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3611,7 +3619,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06721570802619681,
+            "seconds": 0.06858020799700171,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3626,7 +3634,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06887950003147125,
+            "seconds": 0.06832562497584149,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3641,7 +3649,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07010112499119714,
+            "seconds": 0.06884420901769772,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3656,7 +3664,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06837954098591581,
+            "seconds": 0.0677902500028722,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3671,7 +3679,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06808404199546203,
+            "seconds": 0.06793037499301136,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3686,7 +3694,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06770025001605973,
+            "seconds": 0.06773762503871694,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3701,7 +3709,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06776766700204462,
+            "seconds": 0.06786504102637991,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3716,7 +3724,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06791941705159843,
+            "seconds": 0.06863558298209682,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3731,7 +3739,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06787654204526916,
+            "seconds": 0.06890791701152921,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3746,7 +3754,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.068106250022538,
+            "seconds": 0.07014366699149832,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3761,7 +3769,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06801741704111919,
+            "seconds": 0.06841141602490097,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3776,7 +3784,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06951012503122911,
+            "seconds": 0.0676138749695383,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3791,7 +3799,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06754241598537192,
+            "seconds": 0.0689735000487417,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3806,7 +3814,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06760220800060779,
+            "seconds": 0.06826358300168067,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -3821,13 +3829,19 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06966733396984637,
+            "seconds": 0.06926495797233656,
             "expected_outcome": "full_project_calculation"
           }
         ],
         "failed_checks": [],
         "execution_environment": {
           "PYTHONIOENCODING": "cp1252"
+        },
+        "filesystem_codec_fixture": {
+          "simulated_implicit_filesystem_codec": "cp1252",
+          "explicit_utf8_writes_verified": 1,
+          "unicode_utf8_writes_verified": 1,
+          "exit_code": 0
         }
       },
       "v560_regression": {
@@ -3862,6 +3876,7 @@
       "cleanroom100": {
         "command": [
           "python3",
+          "<scratch>/stress-2026-10-13/windows_disk_codec.py",
           "tools/cleanroom100_stress.py",
           "--source",
           ".",
@@ -3944,7 +3959,7 @@
           "source_platform": "macos",
           "host": "macOS-27.2-arm64-arm-64bit",
           "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
-          "finished_utc": "2026-10-12T17:28:33.872754+00:00",
+          "finished_utc": "2026-10-12T17:42:56.558652+00:00",
           "scenario_count": 100,
           "original_manifest_sha256": "983f54324e4aa5cc3a77fe56d8bbed407a3ae77dfe35f05edf3185091050eb77",
           "distinct_physical_input_count": 100,
@@ -3967,13 +3982,13 @@
           },
           "partial_report_api_probe_count": 11,
           "partial_report_api_guard_failures": 0,
-          "seconds": 7.3267599159735255,
+          "seconds": 7.322949666006025,
           "latency_ms": {
-            "median": 1.8774170021060854,
-            "p95": 2.839999971911311,
-            "max": 7.841167040169239
+            "median": 1.8856249807868153,
+            "p95": 2.8574999887496233,
+            "max": 4.340624960605055
           },
-          "rss_peak_mib": 101.4375,
+          "rss_peak_mib": 102.21875,
           "scope": "Darwin headless macos source stress test; both seasons; no native binary or GUI execution"
         },
         "cases": [
@@ -3982,7 +3997,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07800379098625854,
+            "seconds": 0.07855449995258823,
             "input_sha256": "39ca08e6f3f90d10e7d6ecc030e7758626a4a8f8cb593451a5637c227fc99cac",
             "outcome_sha256": "4758fab0ab98b2ffe0047560a3b8073f5bfb95dfca127ce3a6df22a1b25d1e36",
             "quality_status": "未達條件",
@@ -4003,7 +4018,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07529737503500655,
+            "seconds": 0.07533208298264071,
             "input_sha256": "5f47c1214f77f15421d1244174149c04f152906dfbd10bd423b21ba9f23c6ba2",
             "outcome_sha256": "ef7371f913251e91cdcc2eeae2115933de0816adf818b5a53d86c4633a332bef",
             "quality_status": "未達條件",
@@ -4024,7 +4039,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07445737498346716,
+            "seconds": 0.07378195796627551,
             "input_sha256": "f9d01dabeddeaad8930efd054c6b2b44639b7e078b078449ebc72b086a592cc7",
             "outcome_sha256": "ee938dd085decaf4343cfb2ce36742376dfdc8691f36da38baee3302b351a5a7",
             "quality_status": "未達條件",
@@ -4045,7 +4060,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07439404196338728,
+            "seconds": 0.07551045902073383,
             "input_sha256": "b3adb4977a8157ef8850efcda8eb3664bdb25542fb4465925a2402942f9d7dc9",
             "outcome_sha256": "e3251fbb5889d8e041d510f5a91534366409579a248dbebb84fdc99c568a81b4",
             "quality_status": "待補資料",
@@ -4066,7 +4081,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07664337503956631,
+            "seconds": 0.07554395898478106,
             "input_sha256": "a71e31520390b6957a8820822e573d90186c8806a8f579c5658f9ee2ecf7b8b8",
             "outcome_sha256": "08b682d611818ef66b6c73e1220d6a49d98d2c32501975a8990ef8ff6bbad10c",
             "quality_status": "未達條件",
@@ -4087,7 +4102,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07417516695568338,
+            "seconds": 0.07621329196263105,
             "input_sha256": "74c0ef2cf8a3b223f8fcd8f31a06b741a881413bb2aa28438cdebf0290ff885f",
             "outcome_sha256": "6b3e46871409e627054c4ca55c1054bcc33cb03c83c765ede77fa5bbd831b6cb",
             "quality_status": "未達條件",
@@ -4108,7 +4123,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07605224999133497,
+            "seconds": 0.07603545801248401,
             "input_sha256": "0b45c077ec7a1a25dc108ae5228d7c6df96d28569f8e6a717bf49d3b5ffb44dd",
             "outcome_sha256": "d9b76baac81613fe0f083f19db26fd43d7d20a5c6b05e14cfb18defed7e08c6f",
             "quality_status": "未達條件",
@@ -4129,7 +4144,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07525041699409485,
+            "seconds": 0.07454162498470396,
             "input_sha256": "6d326391c5422c448f5b087380dab715032fcd4545d0eff3ebc9fbac4e5774b0",
             "outcome_sha256": "25e6150d57180a5034a654ba8f606940cf4a7cae0ad1da6c863666062830ed97",
             "quality_status": "待補資料",
@@ -4150,7 +4165,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07560820900835097,
+            "seconds": 0.07457091700052842,
             "input_sha256": "b039e9336293edeeaf37b15a34726b360eeff9f74869bee14f85b8b36bc3cb78",
             "outcome_sha256": "5e1c947dbf194309320042435cc81e49bb97d0a48cd842eaffa148c2893438ec",
             "quality_status": "未達條件",
@@ -4171,7 +4186,7 @@
             "family": "一般潔淨區",
             "software_pass": true,
             "check_count": 211,
-            "seconds": 0.0754498330061324,
+            "seconds": 0.0753642920171842,
             "input_sha256": "91eb61ec92320fcbd0f886dd187e1ef8717bc1669f49e86f7786b51d3f30215a",
             "outcome_sha256": "58178667f8f0d8eb3fbb81d890da49a40f9e1a44b858850381deeea25924377a",
             "quality_status": "未達條件",
@@ -4192,7 +4207,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07483045902336016,
+            "seconds": 0.07723062497097999,
             "input_sha256": "ec7d608c734e81841286784147571ffb98343379d3073dedac5936cf2a47759d",
             "outcome_sha256": "a512955351de3e90315816feea56db36e931df348dffae5763da60a02a5d0e6a",
             "quality_status": "待補資料",
@@ -4213,7 +4228,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07417499995790422,
+            "seconds": 0.07587025000248104,
             "input_sha256": "5a973936aa59bca0642d72c70bdcda41306157ebf9ca7ddddde8bcedf345df90",
             "outcome_sha256": "fdb7746a5123032da4f02b15d4a7ddc00c49b4685f58b4fc506b0bc51e72890d",
             "quality_status": "待補資料",
@@ -4234,7 +4249,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.08791979099623859,
+            "seconds": 0.0790874999947846,
             "input_sha256": "4885b49eaaf9836325f46c7cc39af1b0fefc731220865a875480b70e0a189bfd",
             "outcome_sha256": "fff4a57058419e221d0a8178164ade9f5cf3557a82554eeae35d101038b2f3f9",
             "quality_status": "待補資料",
@@ -4255,7 +4270,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07701858301879838,
+            "seconds": 0.07575662498129532,
             "input_sha256": "64606e54c3252f6f16d64fe57d8d7c1492f7a08a3c41e1353f1eb72592fa6824",
             "outcome_sha256": "6c17966f04f1ccce6a78e15eb965d6dfd4f9614a871d60d937d094b1d28ee7db",
             "quality_status": "待補資料",
@@ -4276,7 +4291,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07691462495131418,
+            "seconds": 0.0768076250096783,
             "input_sha256": "e18794d55db913fc7a2ef02c2af88505f92e6ecbaf44fef7417773f65767acb7",
             "outcome_sha256": "dbf5f7cde7c7518bcac798efc13d12a8dd0fa964b00a1090f5b56aeb3b41be64",
             "quality_status": "待補資料",
@@ -4297,7 +4312,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07335354201495647,
+            "seconds": 0.07557870802702382,
             "input_sha256": "9f3d99b7c546fe78c6837d0a3811bc84891a2941309bdd120306fc8c8f6b5245",
             "outcome_sha256": "1f19315a00b457b481c2b304fef6ea4348e5672d164fba157d490c415dc902dd",
             "quality_status": "待補資料",
@@ -4318,7 +4333,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07513487502001226,
+            "seconds": 0.07696887501515448,
             "input_sha256": "30dc5d1dd23aa2ee5aa35fc20ec24f5b5dc1e1ea2588d2f8f2ca72e7dbeb5b29",
             "outcome_sha256": "1011e2094a75ae7941602b8c28b68c487dac641b1ea6297ee72aa4b153a03a14",
             "quality_status": "待補資料",
@@ -4339,7 +4354,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.0747473330120556,
+            "seconds": 0.0768543750164099,
             "input_sha256": "f46111d12606f7e726c55065bd957e36f9d3091285c4fe21aa69d0169982c164",
             "outcome_sha256": "306c350871d027de23455df6ddb31c4a180a7c3bb9ffb7fb8a9f0e30c2200ef0",
             "quality_status": "待補資料",
@@ -4360,7 +4375,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07400979200610891,
+            "seconds": 0.0784868749906309,
             "input_sha256": "e2a5d6aac89a3f156023635fbfc992f84c31d95d80c81ebd03a95513ae708d86",
             "outcome_sha256": "f6125cbde80dfc31b1a470c52f5964c16b7489b297b6594061beba6d745dd60f",
             "quality_status": "待補資料",
@@ -4381,7 +4396,7 @@
             "family": "高潔淨循環",
             "software_pass": true,
             "check_count": 210,
-            "seconds": 0.07604166603414342,
+            "seconds": 0.07650266698328778,
             "input_sha256": "94199030daa72a1aa7b5b7b7287a6540fc8059a42bde2a4e7eeb57eb642e6f14",
             "outcome_sha256": "6cb96f6b114b21de9b095ba0355ab2839bd63a5d57da71d5942a02a28352365c",
             "quality_status": "待補資料",
@@ -4402,7 +4417,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07516150001902133,
+            "seconds": 0.07626712502678856,
             "input_sha256": "30f5bff7482880f62cb91e0d28ff5fac84fc9a7cab8c0694450c3f0f59c58f23",
             "outcome_sha256": "d742ad2abd10f0eced40a6195607678352aefb80c46f21951bc766eafc10a55c",
             "quality_status": "待補資料",
@@ -4423,7 +4438,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07465133297955617,
+            "seconds": 0.07609504199353978,
             "input_sha256": "42beff1aa79a82970a2bf99bd6cfff8eb48bcb96a6c77e3e445c9c3874569846",
             "outcome_sha256": "5eb1ec5b8adcfd15df7baf96b3d3d8596c9b9e979ac791250924beb091beca9d",
             "quality_status": "待補資料",
@@ -4444,7 +4459,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07303083298029378,
+            "seconds": 0.0757187909912318,
             "input_sha256": "770d633089decbcff9d39bcc05e5336b919909f183cb9c4df4a8abb9f3e8229b",
             "outcome_sha256": "b7a6e289df52e3572fd21ce5a30792350dae125f9ba5780105ed948a7abe68c4",
             "quality_status": "待補資料",
@@ -4465,7 +4480,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.0742154170293361,
+            "seconds": 0.07710508396849036,
             "input_sha256": "1befc3709b2378e1f99a7ff89d7aa63f0460a45070f2e7120219b79d9d0b596f",
             "outcome_sha256": "b42b593d3809874ab6a84b74fe97b56b9eca1ec3f48cfd713678502808591a5a",
             "quality_status": "待補資料",
@@ -4486,7 +4501,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.0741730000008829,
+            "seconds": 0.07674470904748887,
             "input_sha256": "4b200a683c6b513752373e6d9a6ee11f5ffc85b59f30de5b5825420818c4ff41",
             "outcome_sha256": "7e7ab3ad6b89d1127b986efaf5c2adfa2c5deaaeac9460bb0975f2fa3c27eb3a",
             "quality_status": "待補資料",
@@ -4507,7 +4522,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.0733136250055395,
+            "seconds": 0.0760524999932386,
             "input_sha256": "a8b8a99ead46e6eb0fadca89be202577cd2a094d16e20d043372f9f4af49f3f5",
             "outcome_sha256": "55aaea076a26138935a38646eeaacce1299b4a36f08be7052b7122cc113f1736",
             "quality_status": "待補資料",
@@ -4528,7 +4543,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07632179197389632,
+            "seconds": 0.07575108297169209,
             "input_sha256": "f97cb45aad61fd1468df58665a4d8ba516f51e0580dc186626b49ddd695e225c",
             "outcome_sha256": "34063f8fc65a5a1e43a725c9f758c34f200b6bb06e1d3045a79b62a63dfc4857",
             "quality_status": "待補資料",
@@ -4549,7 +4564,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07646204199409112,
+            "seconds": 0.07684054097626358,
             "input_sha256": "8cf21cbd1f989094901681ee0f928173ce4f0594d559200124a3fe1b93104c04",
             "outcome_sha256": "0b913ab06e0908970925f8a090bb19e23f3e21462dde1cf544edb2e9bbb4be14",
             "quality_status": "待補資料",
@@ -4570,7 +4585,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07413158402778208,
+            "seconds": 0.07531804201425985,
             "input_sha256": "3e71c1b3bb3b3a6059ef9a293a137c7dc4427c52c76647085fdb16aebaedd2de",
             "outcome_sha256": "f692cfe19b577c4054d88fa1a564e37b75550f087713aa5a7691ca3906c93f90",
             "quality_status": "待補資料",
@@ -4591,7 +4606,7 @@
             "family": "高覆蓋送風",
             "software_pass": true,
             "check_count": 210,
-            "seconds": 0.07573045900790021,
+            "seconds": 0.07704770797863603,
             "input_sha256": "9cb09f5350cbd6924570b92887c236243cc3cc8bcdad3d8f8c9cb49fb0e9eb0a",
             "outcome_sha256": "6c3a80581670b11dd220027506560f67b2dfcab576078f18682eda63f421ec75",
             "quality_status": "待補資料",
@@ -4612,7 +4627,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07754241704242304,
+            "seconds": 0.07695004198467359,
             "input_sha256": "4350cefaa9b5c59ee8a08f4fa59d5c29eaf0e9af608bf64b7dcae08635353ea6",
             "outcome_sha256": "e212cfa236acf33b46b3c4cad3a842a32b70e7894d3bf26ae0e7704945a8d36a",
             "quality_status": "未達條件",
@@ -4633,7 +4648,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07496991596417502,
+            "seconds": 0.07630000001518056,
             "input_sha256": "10d3146fa9cf1918f48d784ce44f32ce4fc254d061bf79da16cc9e70a651cf25",
             "outcome_sha256": "a3f9c07385bead1faa45c0cf7c5dfc03ce86ad63dd494515472b91776259cfca",
             "quality_status": "未達條件",
@@ -4654,7 +4669,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.0743803340010345,
+            "seconds": 0.07925374998012558,
             "input_sha256": "5d7bec042581b6ca13a5c5acaeb0412859c33c1ebdde415cf82f7ed3844ba613",
             "outcome_sha256": "dd98ae396cfab152514a381409c731b5f75b8ec553373a87387445e41b9193e5",
             "quality_status": "未達條件",
@@ -4675,7 +4690,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07517625001491979,
+            "seconds": 0.07546850002836436,
             "input_sha256": "51e134066d074f6d48f2e6b7b22280f925b25b51266034fd6284948e71c93564",
             "outcome_sha256": "3259a1fb8c76e67b05c6bc7058efc1bdd59738c6bb11fc591e874c4530f23f03",
             "quality_status": "未達條件",
@@ -4696,7 +4711,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07638579100603238,
+            "seconds": 0.07674083398887888,
             "input_sha256": "e2fc9d295911ef1787e93f3ef838f7c45bbaee9972e75dfdb41136d89bf95098",
             "outcome_sha256": "04bc01d06a570024cd3b34ac4fe7d28bf2dabf43bfc4a91ba545d9176a9df936",
             "quality_status": "未達條件",
@@ -4717,7 +4732,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07499274995643646,
+            "seconds": 0.07739737501833588,
             "input_sha256": "1aaf912efcaadf4839b4fd4b48e5587f44518f700f7bac555090958e50fa06f8",
             "outcome_sha256": "d5059f7010f1cbd2d46ce1acbdeadc3ca3476e2227d9fcd757b42905761a4ba1",
             "quality_status": "未達條件",
@@ -4738,7 +4753,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.08297245798166841,
+            "seconds": 0.07734516594791785,
             "input_sha256": "3d98ecae4e4711f9007809fca8f9da1292d92ff17d3be6e0c5cf38bd2655462a",
             "outcome_sha256": "6de3cdd143e2c93de93b671ed864a0f7cd9c0d12538360c0a3e67fd74b49d64d",
             "quality_status": "未達條件",
@@ -4759,7 +4774,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.13990762497996911,
+            "seconds": 0.11109966697404161,
             "input_sha256": "7601b1e265c9d293f0e96f1e7502081d1f437f24db7e8bb1bd7169b2ae1b7469",
             "outcome_sha256": "26361ccb36fce3c1b6753e3d8e195c686d4c53cad05f9163a334bc47fbdc92ca",
             "quality_status": "未達條件",
@@ -4780,7 +4795,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 199,
-            "seconds": 0.12096420797752216,
+            "seconds": 0.1005767080350779,
             "input_sha256": "ccfe656d39fa452c984ac8039953d06c0f0d1715b8aaf45ff43806a07b2ca541",
             "outcome_sha256": "ea8f28b30ef2669e688008ce47af208894b8e3843a15873c9e7eb7026312e237",
             "quality_status": "未達條件",
@@ -4801,7 +4816,7 @@
             "family": "高製程顯熱",
             "software_pass": true,
             "check_count": 207,
-            "seconds": 0.10391566599719226,
+            "seconds": 0.10430545802228153,
             "input_sha256": "b5c6eaccd9a6a2ab1a4d6ff1ad519a8dd4140127dbfb09f077dab2426ee71934",
             "outcome_sha256": "08cbe1d2f386c50c587e2ac8441d2e05847ae68b239cce8b030a6b10aaf92bad",
             "quality_status": "未達條件",
@@ -4822,7 +4837,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 208,
-            "seconds": 0.07578041695524007,
+            "seconds": 0.08195649995468557,
             "input_sha256": "53c98f264246a65996f791cfec2943c127dc97a0fb9412e45b449acc432ccf0b",
             "outcome_sha256": "579b3ee0d716a640b721d82033317a98803508dd24c40d3d4048ebb842a46123",
             "quality_status": "待補資料",
@@ -4843,7 +4858,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 208,
-            "seconds": 0.08116820798022673,
+            "seconds": 0.0777153330272995,
             "input_sha256": "329f7e79a67e27918d06396c4bff0afac0da71f05bba2814efc2d2a62e03a9bf",
             "outcome_sha256": "926e3be0d58cb0e895e49f08594ea52b2fcc3ee9aa453208694dfd714fe1748b",
             "quality_status": "待補資料",
@@ -4864,7 +4879,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07620541600044817,
+            "seconds": 0.07824583299225196,
             "input_sha256": "a3b0520e6b7752d717bf3a2ef7f21746ed67454f702dd68dd37b9e091ace4647",
             "outcome_sha256": "efc4d96b85c5db44a01d33db7934b21d02576edfaac84e44ebf204af1997a052",
             "quality_status": "待補資料",
@@ -4885,7 +4900,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 208,
-            "seconds": 0.07658070896286517,
+            "seconds": 0.07833108300110325,
             "input_sha256": "9c6de50e03f2676467a4a437f1e8eafaeaa3e99126960c9f5bd259ead2e057c0",
             "outcome_sha256": "97b1e46461fe721596bbb53e6ca51275f12ea2c311279439f9be372eaf227889",
             "quality_status": "待補資料",
@@ -4906,7 +4921,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 208,
-            "seconds": 0.07909783296054229,
+            "seconds": 0.07840491598471999,
             "input_sha256": "5167875cf2740f60af6d066b1ac26d041d8c84b5a6c0478a9ea135730a5aeef5",
             "outcome_sha256": "9d40e671aab19beb12890ca86e05538aa8f5d2c638083ccbf2e89855f0373f2e",
             "quality_status": "待補資料",
@@ -4927,7 +4942,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07888212497346103,
+            "seconds": 0.07681062497431412,
             "input_sha256": "7b33fb0e93d81d388a38829bdf4ed2da524409320651ebdf8b48476cdeb336b9",
             "outcome_sha256": "a5f9329878983447f20d051d8a75947a84dc328e390ced4c7d775e7889274b70",
             "quality_status": "待補資料",
@@ -4948,7 +4963,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 208,
-            "seconds": 0.077738624997437,
+            "seconds": 0.07940266700461507,
             "input_sha256": "586cfc67af4420517af4c1716d97ecf1e40e47399a7afc4e641f0650cc9c684d",
             "outcome_sha256": "1361c504547b4aaa80ddbb751b4f2ef6b7708e9b443b5492f1e470c11c9b2398",
             "quality_status": "待補資料",
@@ -4969,7 +4984,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 208,
-            "seconds": 0.07732125004986301,
+            "seconds": 0.07933645800221711,
             "input_sha256": "04b53c0d2339d1d0d94d9217277feaec258f575f10db6a34ad2632e6ae8ef8ca",
             "outcome_sha256": "2acde3e79f8775fa2a51f5db5cead436b223abcc7004bb76d9ad711993177b62",
             "quality_status": "待補資料",
@@ -4990,7 +5005,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07774000003701076,
+            "seconds": 0.07800554198911414,
             "input_sha256": "2b525dcb3e2b95386e5a3d9d613f5fd0d9053605702e6709c86b43ef8b9ac689",
             "outcome_sha256": "df202efeb8504c5716274c603df6fa649f6ec0e038522d8df5a0ab616c1ee668",
             "quality_status": "待補資料",
@@ -5011,7 +5026,7 @@
             "family": "濕製程產濕",
             "software_pass": true,
             "check_count": 216,
-            "seconds": 0.0795451250160113,
+            "seconds": 0.08072575001278892,
             "input_sha256": "2b54a4c0bfc1b3613c843ad2a65cb86c431325b01621e94df6eda6cc89a2dd21",
             "outcome_sha256": "ebe8fabb7af0bcb5d0d4b2d62e3a0ce5a0b584ed93b1f61c5eb74f48f47ed22e",
             "quality_status": "待補資料",
@@ -5032,7 +5047,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.01965866598766297,
+            "seconds": 0.01981895900098607,
             "input_sha256": "0bcee0002f787fa39b0ca11af1fbba635aff0e86bd998dc517c9d10d72ef2526",
             "outcome_sha256": "4214786fbf9751b791e380448abec64f909f1209f33b9a4da87ee2b6086bb037",
             "quality_status": null,
@@ -5058,7 +5073,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.019879958010278642,
+            "seconds": 0.019188041042070836,
             "input_sha256": "352f4ae67389b02f015921572a74c08e42413c53c52068cd473a635b6d690c6f",
             "outcome_sha256": "4214786fbf9751b791e380448abec64f909f1209f33b9a4da87ee2b6086bb037",
             "quality_status": null,
@@ -5084,7 +5099,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07532666600309312,
+            "seconds": 0.07575137499952689,
             "input_sha256": "34191aea2520d16ca9ac5bafc363c38ff23e06e3ad3d6283ac3b1a1ca6461ec5",
             "outcome_sha256": "c159e154b7f745144e1932e5b6817fe1c85a8c1239722d53d513a2be718a2644",
             "quality_status": "待補資料",
@@ -5105,7 +5120,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07662408397300169,
+            "seconds": 0.07752025005174801,
             "input_sha256": "0b2e2fdf61f7d32d5fb7e8a9357325055ceba0eea2d2d8c1c0680a809b692f3c",
             "outcome_sha256": "2539e3f7d2bcabaf6b2f62ceafa8539d43b60c13fbff77379ea602aad06c1cfc",
             "quality_status": "待補資料",
@@ -5126,7 +5141,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07568545901449397,
+            "seconds": 0.07421445898944512,
             "input_sha256": "943e69e3f1dcc7ec356fa99485da1aa553edc55cf38bce51143d748cbd33b33a",
             "outcome_sha256": "7f6a8cfcbfda95ae651afdc6794f719501118b768c9d9a9a01d90102f7372f68",
             "quality_status": "待補資料",
@@ -5147,7 +5162,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.0749417080078274,
+            "seconds": 0.07508974999655038,
             "input_sha256": "449c074cfbbba47db9f4c277dff31739d04b261a1e04f5d240ee9188dcb592c6",
             "outcome_sha256": "cacacf279602112a8f79378265c23a3cd1cc9339250db36d76587fc831441ab2",
             "quality_status": "待補資料",
@@ -5168,7 +5183,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07612858305219561,
+            "seconds": 0.07654370903037488,
             "input_sha256": "37a85b2049c689669f4b891ca2de6f82ef0e380207372accfa5efc4e87468aab",
             "outcome_sha256": "e99f30dfeeb3d2278f1ae401f735a9f4efb9131d13f6999e459b83dd2235de26",
             "quality_status": "待補資料",
@@ -5189,7 +5204,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07682737498544157,
+            "seconds": 0.07684691599570215,
             "input_sha256": "e4a75db0f4d9460cced118b628cb1211a2ff89a79eecc9e1988aeeeb51591afd",
             "outcome_sha256": "c3d4c90767e7259ef3110ff4e110fc3682594bef89135c65a0c01303d462fbb6",
             "quality_status": "待補資料",
@@ -5210,7 +5225,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07667375000892207,
+            "seconds": 0.07486250001238659,
             "input_sha256": "ffe591a86156e96aa00a8ab784664269080b5364a6f8643571e4a706511da8a4",
             "outcome_sha256": "a68d2982ec69dbd818405d517da31814be2559b3a33868b72fcce0b7a1dbedde",
             "quality_status": "待補資料",
@@ -5231,7 +5246,7 @@
             "family": "低濕度控制",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07642395899165422,
+            "seconds": 0.07492216699756682,
             "input_sha256": "5683148564036d0961d077ba0f2765cefe7f14e6ddce33ebd7eebb290f7f4c59",
             "outcome_sha256": "5e11277a109b22844342a1a8388e8ed9d0ef97710231ab0ddba938b58910ca74",
             "quality_status": "待補資料",
@@ -5252,7 +5267,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07534758403198794,
+            "seconds": 0.07562700001290068,
             "input_sha256": "370ebe5e8e3f05b045890da102d25e1723b9f9c3020ad0e09d5fd4c54ff81b4b",
             "outcome_sha256": "c54b7040784761defb2a072d5916c18bdf8856e656c671ce156bbfc481141b33",
             "quality_status": "待補資料",
@@ -5273,7 +5288,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.019645916996523738,
+            "seconds": 0.020126332994550467,
             "input_sha256": "58209d5ef86650ae9d26d701159c52116066a2789e534a33c56dfa69fa225a7d",
             "outcome_sha256": "d608eb9e2a6660c70d39905fa262b665d00f9d1b5cd7773e94503bcc322f10d5",
             "quality_status": null,
@@ -5300,7 +5315,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.019729208026546985,
+            "seconds": 0.019849165983032435,
             "input_sha256": "2993b6b4747c966ab34dd1480cb96d55d2bd643d271ac3b4ce499bc7832cce95",
             "outcome_sha256": "1a7b0925e67ec60c716be5d3fa13783ccf0d26e1dc0a6d5692104adcd5e11b54",
             "quality_status": null,
@@ -5327,7 +5342,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.020013208966702223,
+            "seconds": 0.020031292049679905,
             "input_sha256": "4ad7f4d34fcd9c493fa4fc81b3208535d0db7f4fcadd683a8f739fda9e2f00a4",
             "outcome_sha256": "32a2b5253bea326c867ae9a75a2b251a6bcc539f3b4ec426575b67d6ee163f41",
             "quality_status": null,
@@ -5354,7 +5369,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07543916697613895,
+            "seconds": 0.07799041602993384,
             "input_sha256": "a3707658fd20fd3a00fcfe511da8f7cd8aa2df11fbc313be29c4e10120713e93",
             "outcome_sha256": "b7ea0c1b32031af98abb5561fca13b06437532dc36d07a62664ac2f3b234b024",
             "quality_status": "待補資料",
@@ -5375,7 +5390,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07484800001839176,
+            "seconds": 0.07576266600517556,
             "input_sha256": "460f83b342f597ff2361e787550aed9504a396924c637fd30ee8dbbb48792c58",
             "outcome_sha256": "0c5770cb6867d6337cbf26c27c9c0f412927cd1a275afa0fd9735f265e559808",
             "quality_status": "待補資料",
@@ -5396,7 +5411,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07774883299134672,
+            "seconds": 0.07687858399003744,
             "input_sha256": "a14004551ee03ee94e461da3cbb3a1dbc119d7d727b927b4c5da1cb0cfc6c1d1",
             "outcome_sha256": "50228feed92cdc1e0babfd64153f6724ac34f07c2d6f0661d39b17fbc2af8dda",
             "quality_status": "待補資料",
@@ -5417,7 +5432,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07521945802727714,
+            "seconds": 0.07477175001986325,
             "input_sha256": "66671e9ff482a2c228dcc260490536533bfb4aa5e25d45318ee5af6314674e1d",
             "outcome_sha256": "2ca65ad15f6bebc5cec8b05d7e89fbea17930ea22a7c6bd1c7b30d339913d37d",
             "quality_status": "待補資料",
@@ -5438,7 +5453,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07679495797492564,
+            "seconds": 0.07500383397564292,
             "input_sha256": "54cac9a9c4473da8c0d33aaae45ef5390f26f760ea8592c8e7455b137e4eeb80",
             "outcome_sha256": "7176322ffc7797394794fea842efa086a05eeccd601ead37959d64a80c092ffb",
             "quality_status": "待補資料",
@@ -5459,7 +5474,7 @@
             "family": "高溫高濕外氣",
             "software_pass": true,
             "check_count": 206,
-            "seconds": 0.07640566700138152,
+            "seconds": 0.07454254099866375,
             "input_sha256": "195d7b651e83b4b84b22cc99a6be4b4713d12077314de45c15f3fd2f605a2867",
             "outcome_sha256": "635fead7344bcf809ef627d9c76410c4c879c6cd69a564833e9e6872d81de40a",
             "quality_status": "待補資料",
@@ -5480,7 +5495,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07772804197156802,
+            "seconds": 0.077075999986846,
             "input_sha256": "d3480a7848d07af3cf09840f2b34b706e80a9ed8404028fb8ac669ba779b8941",
             "outcome_sha256": "940007ae7cf081f96f2555ceeb4373a2a359adaaed028c7f48b1d4618ed67e63",
             "quality_status": "待補資料",
@@ -5501,7 +5516,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.0754515829612501,
+            "seconds": 0.07821254199370742,
             "input_sha256": "df3f561612f17c934b2d3ac33287b95119e5450fb2eec631dde82965b7a5b417",
             "outcome_sha256": "f28db35a5faade8598fa6a54c142b6727d7cddc261484dab33dd36d66604f5c7",
             "quality_status": "待補資料",
@@ -5522,7 +5537,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07566745899384841,
+            "seconds": 0.07707645802292973,
             "input_sha256": "542ad19dd7e0fc7136a85931c094b26cad8a0c8a2cefee59ea51f7d2e01542d3",
             "outcome_sha256": "a25ed9f6ba1823fdf90562422f2deaaa27bbea95a068f9fd4fc91c9811e70844",
             "quality_status": "待補資料",
@@ -5543,7 +5558,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07706129102734849,
+            "seconds": 0.0762189170345664,
             "input_sha256": "143fe051c6583b963374b11627dbe674227dce182d94e722029a352f3f58aa93",
             "outcome_sha256": "0e9f4b2d4b1961c181c0e3722d3b5888c059e917957ed4e3906f0b4336432542",
             "quality_status": "待補資料",
@@ -5564,7 +5579,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07617654104251415,
+            "seconds": 0.07544029096607119,
             "input_sha256": "124d3b9fc06e95e7c63892db371d64b503e0996ad378aec5af81bf517e16a489",
             "outcome_sha256": "76820d7592b69e9cb1f1f37321402475c00c5414626a284e1997acac0e4e2221",
             "quality_status": "待補資料",
@@ -5585,7 +5600,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07516920799389482,
+            "seconds": 0.07431233301758766,
             "input_sha256": "e64c03a91e6d408aa6b99e740fe11b1d9bb6d61337d9b4b5f76c4542aadf3d4d",
             "outcome_sha256": "c8a9faea4df07b64c7d78b7e07a60ba9a4d4f5e9d3ef900a0a2654208a62813d",
             "quality_status": "未達條件",
@@ -5606,7 +5621,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.07615208404604346,
+            "seconds": 0.07686808297876269,
             "input_sha256": "6fadbfa63cf87f75fc387275d7efe20e261928493712047b3782a27b91506b5e",
             "outcome_sha256": "4a4a63f7f841b794a80171c6facaa43accd30abc24a12c2a27644886a09a2b2c",
             "quality_status": "待補資料",
@@ -5627,7 +5642,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.022240249963942915,
+            "seconds": 0.021181292016990483,
             "input_sha256": "533e0e561687b937610fb0bf1acac0e6146997db8b16815e315241728305cf0e",
             "outcome_sha256": "4065205147b696882efd61022aecb51dd5f71e3f6c7763bf7d9bedfebb6d9e14",
             "quality_status": null,
@@ -5653,7 +5668,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.02078924997476861,
+            "seconds": 0.021870791038963944,
             "input_sha256": "dfc651f934f80ce3756fca05a388ebb80ab7fb7516170d9325ae60dfdbf1e14e",
             "outcome_sha256": "77a5ce25afe18da5e97350a2e1be2b9e41ad93089b90c88fe1059fa9940c0925",
             "quality_status": null,
@@ -5679,7 +5694,7 @@
             "family": "寒冷冬季控制",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.020877250004559755,
+            "seconds": 0.021766332967672497,
             "input_sha256": "15d154c193f613c7ad9b98980cbf29d8bfc5f3ffc2c60904d4994e6b85c8ba03",
             "outcome_sha256": "77a5ce25afe18da5e97350a2e1be2b9e41ad93089b90c88fe1059fa9940c0925",
             "quality_status": null,
@@ -5705,7 +5720,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.01942995801800862,
+            "seconds": 0.020065334043465555,
             "input_sha256": "f78206393ed7b065d8622a02b0bf55fa713dd50eb948dac272486f39147bf6e7",
             "outcome_sha256": "bb132d549f07b7804223d2ac68888666c77987ba4a5dba0a8b2ad1ab85dcbe06",
             "quality_status": null,
@@ -5731,7 +5746,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.019241124973632395,
+            "seconds": 0.019887792004738003,
             "input_sha256": "6210f04d70a1c1b9d09c8c34c1b7311e22b0e08f8b89cfb90726a712f07fafb2",
             "outcome_sha256": "dc9e40d9262aaae9ba804c2ad36e2c4676d4a45a6337c0584f89ebd9517ab84b",
             "quality_status": null,
@@ -5757,7 +5772,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 26,
-            "seconds": 0.019407125015277416,
+            "seconds": 0.01956416596658528,
             "input_sha256": "a6ac2341285dead6f01a48ee11dca35e05da00ab6a081607e30804e42a146c9c",
             "outcome_sha256": "478e88d63db96d6df2b6081e3960030bc9441f29b397bb97e3e7f71596d6dfdb",
             "quality_status": null,
@@ -5783,7 +5798,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07437504100380465,
+            "seconds": 0.07771329098613933,
             "input_sha256": "7129476ddd5f4ab209a7fab48d464b7ba79c591a722d20d7f1610617b6d4c719",
             "outcome_sha256": "d4cb334fe6a6ae7fc2f0e1d5171d8de2a7c97236fc5e6775e0bc12f0dab9e50d",
             "quality_status": "待補資料",
@@ -5804,7 +5819,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07754520798334852,
+            "seconds": 0.07692045898875222,
             "input_sha256": "3270cba0c8b66e564532b2b1388259103ecd4245cd66d358236a15c74fae06ee",
             "outcome_sha256": "861715cca87d456718ce46dec19b194a929c9d2b3a5c56961b7a3e32d2c4b717",
             "quality_status": "未達條件",
@@ -5825,7 +5840,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07589362497674301,
+            "seconds": 0.07616979203885421,
             "input_sha256": "fce1a9a5332d8bb13566ffa33f19a14aa1a6b02fc077f9d977ecbaba362a5af0",
             "outcome_sha256": "a9098a0333b8b0cad846da466b11866e67bd4067cb96ad8d85b6fbd53aac1f1f",
             "quality_status": "未達條件",
@@ -5846,7 +5861,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.0764494999893941,
+            "seconds": 0.07644474995322526,
             "input_sha256": "7942fc8e6a4f797bc87c90a776527d77808079038e4673764b5c48acafdadf3c",
             "outcome_sha256": "41187bb6312fa6c336460a3dcfac43613b17d1befe895d70e26c3ca113f430d9",
             "quality_status": "未達條件",
@@ -5867,7 +5882,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07470395800191909,
+            "seconds": 0.0754243329865858,
             "input_sha256": "90fffff824fbaeadac8bb2d0916f5f2734b7b7b69503c199927c8467872bdb84",
             "outcome_sha256": "26f418d8f0879fb7dc1a037b6483334034fbe58025a3e610a38cf1e644036b59",
             "quality_status": "未達條件",
@@ -5888,7 +5903,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.07566958398092538,
+            "seconds": 0.0783904169802554,
             "input_sha256": "8c5678d8c0abd008eeb87a79ee5aeddee37351dfd858f4472559501d5616b245",
             "outcome_sha256": "30761d4b5ff8d89f75a9e99e4ad6d898b292ef74c8aebb19465abaaf97458019",
             "quality_status": "未達條件",
@@ -5909,7 +5924,7 @@
             "family": "強排氣與頻繁開門",
             "software_pass": true,
             "check_count": 205,
-            "seconds": 0.10137820901582018,
+            "seconds": 0.10329662502044812,
             "input_sha256": "4d7bf767c12d6fabfd71565f7d5dd5d3ec0c633ecc38dccb73c8bb9400f76b72",
             "outcome_sha256": "cf9e165e846cdccd6e6cb08c0ae052f5ddfa4b09ac77d90d851cc3742acf5b13",
             "quality_status": "未達條件",
@@ -5930,7 +5945,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07617137505440041,
+            "seconds": 0.0763276670477353,
             "input_sha256": "91ca8ded5c970e5ba72bcb90b7c47aca1419105fcdabec5dec765b705c89daf3",
             "outcome_sha256": "de9a174baac46d12882eccf16a8cd6e7a1525f8904bb3a428b832285d7f1af16",
             "quality_status": "待補資料",
@@ -5951,7 +5966,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.0749868749990128,
+            "seconds": 0.07536729198182002,
             "input_sha256": "00f381c0c2ad0a62ea302d063733d5a6ea896d772b75da044593e86f3aec8306",
             "outcome_sha256": "9b038c54065bbb125b042dce05fddea73eac3af62454eddfdd86f4f9f397fcde",
             "quality_status": "待補資料",
@@ -5972,7 +5987,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 202,
-            "seconds": 0.07565783301834017,
+            "seconds": 0.0748007909860462,
             "input_sha256": "e76e4b6f8eea694cc534aeb252e8a761b5197f5938a2eba9e1f1e450158d6bbf",
             "outcome_sha256": "b038e740b12910070ecd3cca261bc88f5849450654ae19eadf39b53909482a7b",
             "quality_status": "待補資料",
@@ -5993,7 +6008,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 198,
-            "seconds": 0.09888545802095905,
+            "seconds": 0.09964329202193767,
             "input_sha256": "c003fba78f394a8ab1abfa337d150b7bf3078dd7d9622aeb7cffb0dac8c9a9e9",
             "outcome_sha256": "0c4a4f74fdea7bf90b6280a3febcb8f1f035b49c294fd967d0053d417f82c5b5",
             "quality_status": "待補資料",
@@ -6014,7 +6029,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 198,
-            "seconds": 0.10069537500385195,
+            "seconds": 0.10368479200406,
             "input_sha256": "490cd1284cd439d49d2e224b8ad3d9ba5887e56b130355207a8bccf7039edc95",
             "outcome_sha256": "5c393e27ac509684ba060fc314a2a881dcf201a6e36ac1b7e61dcb72db0ac36b",
             "quality_status": "待補資料",
@@ -6035,7 +6050,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 199,
-            "seconds": 0.0968370420159772,
+            "seconds": 0.09590625000419095,
             "input_sha256": "bf4cd7632445c991cce79439a8bb11646f15a3f366aed2e6da7ca8d8bf2de8bd",
             "outcome_sha256": "0853908d7d24a3eea76c217fef9f1612753c4fa139e1dde3d333d828d3773489",
             "quality_status": "未達條件",
@@ -6056,7 +6071,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 198,
-            "seconds": 0.09518766601104289,
+            "seconds": 0.09486287494655699,
             "input_sha256": "eb1d3a49c7cb81cbf7c7986bdf59c19743373bad7814a5e30c5749736bdb11a5",
             "outcome_sha256": "719a21e264211429672ce3f91369eae7e42a73c25e2b2c6412c801d36728b4c5",
             "quality_status": "待補資料",
@@ -6077,7 +6092,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 198,
-            "seconds": 0.0942236669943668,
+            "seconds": 0.09610641602193937,
             "input_sha256": "329991c5d3c82f86b0c8568ab1371ffc9cdcdde5c1f2796fdde8afb92415226c",
             "outcome_sha256": "ff4b2531ecbe51d15f502d1d63d0f402705221bc5c5b3bdc29550f7a740a7cd8",
             "quality_status": "待補資料",
@@ -6098,7 +6113,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 199,
-            "seconds": 0.10093387501547113,
+            "seconds": 0.09604808402946219,
             "input_sha256": "672214416aa442137d985598b6817b61a3e6dfc2ea2a6dfa755f0b124fc7e1a7",
             "outcome_sha256": "04f94332d9cfe1e496a29fa0e37c8f7049ed9990464b987164d417959ae54676",
             "quality_status": "未達條件",
@@ -6119,7 +6134,7 @@
             "family": "大型無塵室",
             "software_pass": true,
             "check_count": 203,
-            "seconds": 0.09417237498564646,
+            "seconds": 0.09729020803933963,
             "input_sha256": "87ac3d49bb079854e2dbb522cf158d5bf789791ef5b3dea4f76e2f55cf12bbd8",
             "outcome_sha256": "3750e11abec1cbce90f97522fcea3f3e01c8129cdff9b66c1d21166ff967a389",
             "quality_status": "未達條件",
@@ -6138,11 +6153,18 @@
         ],
         "execution_environment": {
           "PYTHONIOENCODING": "cp1252"
+        },
+        "filesystem_codec_fixture": {
+          "simulated_implicit_filesystem_codec": "cp1252",
+          "explicit_utf8_writes_verified": 190,
+          "unicode_utf8_writes_verified": 90,
+          "exit_code": 0
         }
       },
       "app_owned100_source": {
         "command": [
           "python3",
+          "<scratch>/stress-2026-10-13/windows_disk_codec.py",
           "macos/tests/stress100.py",
           "--output",
           "<scratch>/stress-2026-10-13/bundled-recipes-macos.json"
@@ -6168,7 +6190,7 @@
           "check_count": 3902,
           "host": "macOS-27.2-arm64-arm-64bit",
           "frozen": false,
-          "seconds": 6.915258791996166,
+          "seconds": 6.880089415994007,
           "scope": "100 varied full-project calculation/report/persistence recipes; water and all factory gases; no GUI launch claim"
         },
         "cases": [
@@ -6184,7 +6206,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0810734590049833,
+            "seconds": 0.07712199998786673,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6199,7 +6221,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06831233302364126,
+            "seconds": 0.06736454198835418,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6214,7 +6236,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06987729202955961,
+            "seconds": 0.0682050830218941,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6229,7 +6251,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06724258401663974,
+            "seconds": 0.06752675003372133,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6244,7 +6266,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06777504098135978,
+            "seconds": 0.0678556669736281,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6259,7 +6281,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0679852080065757,
+            "seconds": 0.06816095905378461,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6274,7 +6296,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06839179195230827,
+            "seconds": 0.06773616600548849,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6289,7 +6311,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06876191700575873,
+            "seconds": 0.07043266604887322,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6304,7 +6326,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.068423124961555,
+            "seconds": 0.06743566697696224,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6319,7 +6341,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0692147919908166,
+            "seconds": 0.06693608401110396,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6334,7 +6356,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06777770898770541,
+            "seconds": 0.0685573749942705,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6349,7 +6371,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06726974999764934,
+            "seconds": 0.06801870802883059,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6364,7 +6386,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06728158297482878,
+            "seconds": 0.06834362499648705,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6379,7 +6401,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06840487499721348,
+            "seconds": 0.06975408404832706,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6394,7 +6416,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07346437498927116,
+            "seconds": 0.06771416700212285,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6409,7 +6431,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07574291701894253,
+            "seconds": 0.07206704199779779,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6424,7 +6446,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06796424998901784,
+            "seconds": 0.06937591702444479,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6439,7 +6461,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0675369169912301,
+            "seconds": 0.06811208295403048,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6454,7 +6476,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06676404096651822,
+            "seconds": 0.06842358398716897,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6469,7 +6491,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06706741702510044,
+            "seconds": 0.06916608399478719,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6484,7 +6506,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06744845799403265,
+            "seconds": 0.06875570799456909,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6499,7 +6521,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06777712504845113,
+            "seconds": 0.06842337502166629,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6514,7 +6536,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06891337496927008,
+            "seconds": 0.06822174997068942,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6529,7 +6551,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06784204096766189,
+            "seconds": 0.06766895804321393,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6544,7 +6566,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0679062909912318,
+            "seconds": 0.06750916701275855,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6559,7 +6581,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06686883303336799,
+            "seconds": 0.06880020798416808,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6574,7 +6596,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06699879100779071,
+            "seconds": 0.06908550002845004,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6589,7 +6611,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06717062502866611,
+            "seconds": 0.06956058304058388,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6604,7 +6626,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06698170799063519,
+            "seconds": 0.0687428749515675,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6619,7 +6641,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0676874999771826,
+            "seconds": 0.06793149997247383,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6634,7 +6656,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06796720798593014,
+            "seconds": 0.06806058302754536,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6649,7 +6671,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06851879204623401,
+            "seconds": 0.06746145902434364,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6664,7 +6686,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06701674999203533,
+            "seconds": 0.06769350002286956,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6679,7 +6701,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06744579202495515,
+            "seconds": 0.0684063330409117,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6694,7 +6716,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07417166704544798,
+            "seconds": 0.06990750000113621,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6709,7 +6731,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06910370796686038,
+            "seconds": 0.06916133302729577,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6724,7 +6746,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06880770897259936,
+            "seconds": 0.0685601249570027,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6739,7 +6761,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06890791701152921,
+            "seconds": 0.06780137500027195,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6754,7 +6776,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0677575419540517,
+            "seconds": 0.06772804202046245,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6769,7 +6791,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06859545898623765,
+            "seconds": 0.06822529097553343,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6784,7 +6806,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06833404203644022,
+            "seconds": 0.06765687494771555,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6799,7 +6821,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07407541602151468,
+            "seconds": 0.06908087502233684,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6814,7 +6836,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.08087183395400643,
+            "seconds": 0.06953758304007351,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6829,7 +6851,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07531612500315532,
+            "seconds": 0.06841737497597933,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6844,7 +6866,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07607270800508559,
+            "seconds": 0.0675082920351997,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6859,7 +6881,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06803149997722358,
+            "seconds": 0.06845408398658037,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6874,7 +6896,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06733599997824058,
+            "seconds": 0.0693334590177983,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6889,7 +6911,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06758745800470933,
+            "seconds": 0.0681242499849759,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6904,7 +6926,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06832141696941108,
+            "seconds": 0.06883204105542973,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6919,7 +6941,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06747912499122322,
+            "seconds": 0.06889195903204381,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6934,7 +6956,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06671783298952505,
+            "seconds": 0.06891674996586516,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6949,7 +6971,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07070941699203104,
+            "seconds": 0.068914917006623,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6964,7 +6986,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07049679203191772,
+            "seconds": 0.06699691596440971,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6979,7 +7001,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06812549999449402,
+            "seconds": 0.06847945903427899,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -6994,7 +7016,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0675803340272978,
+            "seconds": 0.06835487502394244,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7009,7 +7031,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06868883298011497,
+            "seconds": 0.06924187496770173,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7024,7 +7046,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06875404197489843,
+            "seconds": 0.06827487499685958,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7039,7 +7061,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0690519170020707,
+            "seconds": 0.06853049999335781,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7054,7 +7076,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07000204100040719,
+            "seconds": 0.06909312505740672,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7069,7 +7091,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06819033296778798,
+            "seconds": 0.06953583302674815,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7084,7 +7106,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06928045902168378,
+            "seconds": 0.06836287502665073,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7099,7 +7121,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06794562499271706,
+            "seconds": 0.06724429101450369,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7114,7 +7136,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06902395799988881,
+            "seconds": 0.06710450001992285,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7129,7 +7151,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06795983295887709,
+            "seconds": 0.06864945898996666,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7144,7 +7166,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06803541601402685,
+            "seconds": 0.06828254199353978,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7159,7 +7181,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06919187499443069,
+            "seconds": 0.07018825004342943,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7174,7 +7196,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.07012554199900478,
+            "seconds": 0.06802283396245912,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7189,7 +7211,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06988195900339633,
+            "seconds": 0.06744691700441763,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7204,7 +7226,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06820333300856873,
+            "seconds": 0.06757729197852314,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7219,7 +7241,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06952058296883479,
+            "seconds": 0.06960416701622307,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7234,7 +7256,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06805058300960809,
+            "seconds": 0.06832895800471306,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7249,7 +7271,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06755233299918473,
+            "seconds": 0.0697840410284698,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7264,7 +7286,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0726957080187276,
+            "seconds": 0.06860616599442437,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7279,7 +7301,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06942687497939914,
+            "seconds": 0.06745004199910909,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7294,7 +7316,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0695420409901999,
+            "seconds": 0.06731179199414328,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7309,7 +7331,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06856758397771046,
+            "seconds": 0.06736662500770763,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7324,7 +7346,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06921425001928583,
+            "seconds": 0.07024841697420925,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7339,7 +7361,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06766712496755645,
+            "seconds": 0.06768812495283782,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7354,7 +7376,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06821920798392966,
+            "seconds": 0.06905804201960564,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7369,7 +7391,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06869841698789969,
+            "seconds": 0.07427300000563264,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7384,7 +7406,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0686237919726409,
+            "seconds": 0.06795633299043402,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7399,7 +7421,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.068467834033072,
+            "seconds": 0.06676808302290738,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7414,7 +7436,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0678492920123972,
+            "seconds": 0.0671004579635337,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7429,7 +7451,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06858637498226017,
+            "seconds": 0.06889029097510502,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7444,7 +7466,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06794016598723829,
+            "seconds": 0.06805033300770447,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7459,7 +7481,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06729758396977559,
+            "seconds": 0.0691905000130646,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7474,7 +7496,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06719687499571592,
+            "seconds": 0.06822654197458178,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7489,7 +7511,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06858495797496289,
+            "seconds": 0.06893983396003023,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7504,7 +7526,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06796970899449661,
+            "seconds": 0.06767795898485929,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7519,7 +7541,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06908329098951072,
+            "seconds": 0.067514916008804,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7534,7 +7556,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0678794999839738,
+            "seconds": 0.06791062495904043,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7549,7 +7571,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06745574995875359,
+            "seconds": 0.0676771670114249,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7564,7 +7586,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06710754102095962,
+            "seconds": 0.0692842920543626,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7579,7 +7601,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06868912500794977,
+            "seconds": 0.06848279101541266,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7594,7 +7616,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06792929203948006,
+            "seconds": 0.06933933298569173,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7609,7 +7631,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06813808402512223,
+            "seconds": 0.06863591697765514,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7624,7 +7646,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06898012501187623,
+            "seconds": 0.06709291599690914,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7639,7 +7661,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.0680277090286836,
+            "seconds": 0.06827349995728582,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7654,7 +7676,7 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06706475000828505,
+            "seconds": 0.06850024999585003,
             "expected_outcome": "full_project_calculation"
           },
           {
@@ -7669,13 +7691,19 @@
             "engineering_failed": 0,
             "engineering_pending": 6,
             "check_count": 39,
-            "seconds": 0.06644516601227224,
+            "seconds": 0.06886358297197148,
             "expected_outcome": "full_project_calculation"
           }
         ],
         "failed_checks": [],
         "execution_environment": {
           "PYTHONIOENCODING": "cp1252"
+        },
+        "filesystem_codec_fixture": {
+          "simulated_implicit_filesystem_codec": "cp1252",
+          "explicit_utf8_writes_verified": 1,
+          "unicode_utf8_writes_verified": 1,
+          "exit_code": 0
         }
       },
       "v560_regression": {
@@ -7708,7 +7736,8 @@
     }
   },
   "cli_sha256": {
-    "tools/cleanroom100_stress.py": "1c2ca4421ca3d2c1b1381853c6c20348fbe8d84e2f95539dda38f59c3f61cf66",
+    "tools/cleanroom100_stress.py": "074e70d860e7696ddc25dc959d390b68781704ef4e528539b43a5976fa724b7e",
+    "tools/verify_stress_io.py": "1942a67e898f6913dc4ce1c44d1096752f34ae49136e475c4df681e5ee2a4c29",
     "windows/tests/stress100.py": "174a0b5e20ff7e88224ae1bf40709ced1e8fc0bfe27e5b13fa8500aae519e55d",
     "macos/tests/stress100.py": "174a0b5e20ff7e88224ae1bf40709ced1e8fc0bfe27e5b13fa8500aae519e55d"
   },
@@ -7735,6 +7764,57 @@
     },
     "app_stress_module_unchanged": true,
     "scope": "CLI logging encoding regression; mathematical checks and persisted JSON retain Unicode."
+  },
+  "filesystem_encoding_regression": {
+    "scope": "Separate from console encoding: scratch wrapper forced implicit Path.open codecs (None/locale) to cp1252 on macOS.",
+    "before_fix": {
+      "generator_exit_code": 1,
+      "error_type": "UnicodeEncodeError",
+      "location": "manifest.write_text"
+    },
+    "after_fix": {
+      "generator_exit_code": 0,
+      "generator_utf8_lf_write_verified": true,
+      "generator_manifest_sha256": "8e9db2f04ed6a5398659c9c2c56f5c18d2914c399e431b7d602c6415f56d66bd",
+      "ast_command": [
+        "python3",
+        "tools/verify_stress_io.py"
+      ],
+      "ast_exit_code": 0,
+      "ast_text_writes": 4,
+      "explicit_utf8_lf_writes": 4
+    },
+    "app_stress_module_unchanged": true,
+    "behavioral_verifier": {
+      "command": [
+        "python3",
+        "tools/verify_stress_io.py"
+      ],
+      "exit_code": 0,
+      "execution_environment": {
+        "PYTHONIOENCODING": "cp1252"
+      },
+      "result": {
+        "passed": true,
+        "source_platform": "macos",
+        "scenario_count": 100,
+        "distinct_physical_input_count": 100,
+        "generations": 2,
+        "stable_recipe_sha256": "f340d41368913de90aeeed568590c92a19f14ee388bc6c9c6c04ef8ea1e928df",
+        "simulated_implicit_filesystem_codec": "cp1252",
+        "inherited_console_codec": "cp1252",
+        "utf8_manifest_verified": true,
+        "lf_manifest_verified": true,
+        "saved_project_utf8_roundtrip": true,
+        "static_audit": {
+          "text_io_calls": 4,
+          "explicit_utf8_lf_writes": 4,
+          "failures": []
+        },
+        "seconds": 0.4883429170004092
+      },
+      "scope": "Actual generator executed twice under forced legacy file codec; decoded Unicode JSON, LF, physical recipe uniqueness/determinism and saved-project reopen determine pass. AST inventory is diagnostic only."
+    }
   },
   "manifest_generation_command": [
     "python3",

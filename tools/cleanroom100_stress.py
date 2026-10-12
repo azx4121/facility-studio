@@ -341,7 +341,8 @@ if args.generate:
               scope='100 synthetic MAU+FFU+DCC cleanroom projects; summer and winter',
               generated_utc=datetime.now(timezone.utc).isoformat(),cases=cases)
     args.manifest.parent.mkdir(parents=True,exist_ok=True)
-    args.manifest.write_text(json.dumps(data,ensure_ascii=False,indent=2,allow_nan=False))
+    args.manifest.write_text(json.dumps(data,ensure_ascii=False,indent=2,allow_nan=False),
+                             encoding='utf-8', newline='\n')
     print(json.dumps(dict(scenarios=100,families=Counter(c['family'] for c in cases),
                           expected=Counter(c['expectation']['kind'] for c in cases),
                           manifest_sha256=hashlib.sha256(args.manifest.read_bytes()).hexdigest()),ensure_ascii=False))
@@ -579,7 +580,9 @@ for case in cases:
                       other['report']==outcome['report'])
                 check(case['id']+'/draft preserved '+str(index),all(mutated['inputs'][key]==value for key in main_inactive(mutated['inputs'])))
             with tempfile.TemporaryDirectory() as td:
-                fn=Path(td)/'cleanroom.json'; fn.write_text(json.dumps(case['project'],ensure_ascii=False))
+                fn=Path(td)/'cleanroom.json'
+                fn.write_text(json.dumps(case['project'],ensure_ascii=False),
+                              encoding='utf-8', newline='\n')
                 reopened=api.read_project(fn)
                 other=execute(reopened)
                 check(case['id']+'/save reopen',digest(other)==digest(outcome))
@@ -597,7 +600,8 @@ for case in cases:
     # Durable checkpoint after each original room; never wait without progress.
     args.output.parent.mkdir(parents=True,exist_ok=True)
     checkpoint=args.output.with_suffix('.checkpoint.json')
-    checkpoint.write_text(json.dumps(dict(completed=len(results),failed=sum(not x['software_pass'] for x in results),last=row['id']),ensure_ascii=False))
+    checkpoint.write_text(json.dumps(dict(completed=len(results),failed=sum(not x['software_pass'] for x in results),last=row['id']),ensure_ascii=False),
+                          encoding='utf-8', newline='\n')
     if len(results)%10==0: print(json.dumps(dict(completed=len(results),failed=sum(not x['software_pass'] for x in results)),ensure_ascii=False),flush=True)
 
 elapsed=time.perf_counter()-start_all
@@ -623,6 +627,7 @@ summary=dict(version=api.VERSION,main_commit=MAIN_COMMIT,tree=TREE,
     p95=sorted(timings)[min(len(timings)-1,int(len(timings)*.95))]*1000,max=max(timings)*1000),
     rss_peak_mib=peak_memory_mib(),
     scope=f'{platform.system()} headless {args.platform} source stress test; both seasons; no native binary or GUI execution')
-args.output.write_text(json.dumps(dict(summary=summary,cases=results,checks=checks),ensure_ascii=False,indent=2,allow_nan=False))
+args.output.write_text(json.dumps(dict(summary=summary,cases=results,checks=checks),ensure_ascii=False,indent=2,allow_nan=False),
+                       encoding='utf-8', newline='\n')
 print(json.dumps(summary,ensure_ascii=False),flush=True)
 sys.exit(0 if summary['software_failed']==0 and summary['failed_checks']==0 and summary['partial_report_api_guard_failures']==0 else 1)

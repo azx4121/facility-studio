@@ -11,6 +11,7 @@ on:
       - macos/MAC_RUNTIME_PATCHES.md
       - macos/tests/**
       - tools/cleanroom100_stress.py
+      - tools/verify_stress_io.py
       - docs/tutorial/START_HERE.html
       - docs/tutorial/verify_tutorial.py
   workflow_dispatch:
@@ -45,6 +46,7 @@ jobs:
           python3 macos/tests/v5510_keypad.py
           python3 macos/tests/v560_features.py
           python3 macos/tests/stress100.py --output "$RUNNER_TEMP/mac-native-stress-source.json"
+          python3 tools/verify_stress_io.py
           python3 tools/cleanroom100_stress.py --source . --platform macos --manifest "$RUNNER_TEMP/cleanroom100.json" --generate --seed 20261013
           python3 tools/cleanroom100_stress.py --source . --platform macos --manifest "$RUNNER_TEMP/cleanroom100.json" --output "$RUNNER_TEMP/cleanroom100-macos.json" --repeat 20
           python3 macos/tests/regression.py
