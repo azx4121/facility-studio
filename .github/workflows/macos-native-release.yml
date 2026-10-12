@@ -48,7 +48,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: mac560-arm64-evidence
+          name: mac560-arm64-evidence-attempt-${{ github.run_attempt }}
           path: |
             ${{ runner.temp }}/mac560-build/evidence
             macos/evidence/*.json
@@ -89,7 +89,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: mac560-intel-evidence
+          name: mac560-intel-evidence-attempt-${{ github.run_attempt }}
           path: |
             ${{ runner.temp }}/mac560-intel/*.txt
             ${{ runner.temp }}/mac560-intel/*.json

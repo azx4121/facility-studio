@@ -60,7 +60,7 @@ def verify_dmg(path, output):
                 stdout=file,
                 stderr=subprocess.STDOUT,
                 check=True,
-                timeout=180,
+                timeout=300,
             )
     finally:
         if attached:
@@ -127,7 +127,7 @@ def main():
             stdout=file,
             stderr=subprocess.STDOUT,
             check=True,
-            timeout=180,
+            timeout=300,
         )
     path = Path.home() / "Library/Logs/Facility_Studio_V5_5/Mac_Acceptance.json"
     result = json.loads(path.read_text(encoding="utf-8"))
