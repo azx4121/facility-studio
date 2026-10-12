@@ -10,6 +10,7 @@ on:
       - macos/README_macOS.txt
       - macos/MAC_RUNTIME_PATCHES.md
       - macos/tests/**
+      - tools/cleanroom100_stress.py
       - docs/tutorial/**
   workflow_dispatch:
 
@@ -38,6 +39,9 @@ jobs:
           python3 macos/tests/v559_resilience.py
           python3 macos/tests/v5510_keypad.py
           python3 macos/tests/v560_features.py
+          python3 macos/tests/stress100.py --output "$RUNNER_TEMP/mac-native-stress-source.json"
+          python3 tools/cleanroom100_stress.py --source . --platform macos --manifest "$RUNNER_TEMP/cleanroom100.json" --generate --seed 20261013
+          python3 tools/cleanroom100_stress.py --source . --platform macos --manifest "$RUNNER_TEMP/cleanroom100.json" --output "$RUNNER_TEMP/cleanroom100-macos.json" --repeat 20
           python3 macos/tests/regression.py
           python3 macos/tests/security_checks.py
           python3 docs/tutorial/verify_tutorial.py --platform macos --output "$RUNNER_TEMP/tutorial-macos.json"
@@ -54,6 +58,8 @@ jobs:
             macos/evidence/*.json
             ${{ runner.temp }}/tutorial-macos.json
             ${{ runner.temp }}/mac-use-cases.json
+            ${{ runner.temp }}/mac-native-stress-source.json
+            ${{ runner.temp }}/cleanroom100*.json
           if-no-files-found: warn
           retention-days: 14
       - name: Retain tested delivery files
@@ -61,8 +67,8 @@ jobs:
         with:
           name: mac560-delivery
           path: |
-            ${{ runner.temp }}/mac560-build/Facility_Studio_V5_6_0_macOS_mac2_OneClick.zip
-            ${{ runner.temp }}/mac560-build/Facility_Studio_V5_6_0_macOS_mac2.dmg
+            ${{ runner.temp }}/mac560-build/Facility_Studio_V5_6_0_macOS_mac3_OneClick.zip
+            ${{ runner.temp }}/mac560-build/Facility_Studio_V5_6_0_macOS_mac3.dmg
             ${{ runner.temp }}/mac560-build/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 14
@@ -81,9 +87,9 @@ jobs:
       - name: Execute the same delivered ZIP and DMG on Intel
         run: >-
           python3 macos/macos/verify_native_release.py
-          --package "$RUNNER_TEMP/mac560-delivery/Facility_Studio_V5_6_0_macOS_mac2_OneClick.zip"
+          --package "$RUNNER_TEMP/mac560-delivery/Facility_Studio_V5_6_0_macOS_mac3_OneClick.zip"
           --checksums "$RUNNER_TEMP/mac560-delivery/SHA256SUMS.txt"
-          --dmg "$RUNNER_TEMP/mac560-delivery/Facility_Studio_V5_6_0_macOS_mac2.dmg"
+          --dmg "$RUNNER_TEMP/mac560-delivery/Facility_Studio_V5_6_0_macOS_mac3.dmg"
           --output "$RUNNER_TEMP/mac560-intel"
       - name: Retain Intel evidence
         if: always()

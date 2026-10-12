@@ -25,6 +25,7 @@ python windows/tests/v557_inactive.py
 python windows/tests/v558_review.py
 python windows/tests/v559_resilience.py
 python windows/tests/v5510_keypad.py
+python windows/tests/v560_features.py
 python windows/tests/maintenance_checks.py
 python windows/tests/security_checks.py
 python windows/tests/bilingual.py
@@ -38,7 +39,7 @@ macOS 來源把 `windows/` 改為 `macos/`，兩個 `--platform` 改為 `macos`�
 
 完整報告 `report()` 需要完整主案結果；部分空調結果會回傳 `ValidationError(code="incomplete_result")`。C1 超飽和使用 `code="supersaturated_air"` 與對應的 `field_name`，可供介面定位。
 
-要重現 100 組無塵室的物理輸入與夏冬壓力測試，可使用下列命令。產生器已核對能重建原來 100 組物理條件；新產生文件的版本資訊依 V5.5.10 更新，錯誤欄位預期沿用 V5.5.9 修正，所以整份 JSON 雜湊與保留的 V5.5.8 文件不同。已記錄的 V5.5.9 壓力測試使用原始文件重跑；V5.5.10 鍵盤修訂未重跑此 100 案。見[修正與證據](2026-10-11-v5.5.9-resilience.md)。
+要重現 100 組無塵室的物理輸入與夏冬壓力測試，可使用下列命令。保留的原始案例與重新產生的文件需分開識別：產生器沿用原來 100 組物理條件，版本資訊及預期錯誤欄位按目前來源更新，所以整份 JSON 雜湊不等於歷史文件。V5.6 來源紀錄使用保留的原始案例，移轉後再進行停用欄位突變與重複計算；見[本版擴充與來源證據](2026-10-12-v5.6-expansion.md#驗證紀錄)。這些來源紀錄不能代替已發布 EXE／DMG 的原生驗收，也不能代表本次重新執行的結果。
 
 ```sh
 python tools/cleanroom100_stress.py --source . --platform windows --manifest cleanroom100.json --generate
@@ -48,7 +49,7 @@ python tools/cleanroom100_stress.py --source . --platform macos --manifest clean
 
 ## 維護與發布原則
 
-以[本版交付紀錄](2026-10-11-v5.5.10-native.md)核對測試的提交、公開檔名與 SHA256。新程式修訂必須通過原生流程再發布；不要覆寫已發布的二進位檔、移動既有 tag 或強制推送覆蓋歷史。
+以[本版交付紀錄](2026-10-12-v5.6-native.md)核對測試的提交、公開檔名與 SHA256。新程式修訂必須通過原生流程再發布；不要覆寫已發布的二進位檔、移動既有 tag 或強制推送覆蓋歷史。
 
 文件與 Release 敘述可以獨立修正。Release 文案維護只更新文字，不重新打包，並核對原有 tag、版本狀態與資產身分。歷史數字及截圖仍按原版本保存。
 
@@ -63,8 +64,8 @@ Source lives in `windows/` and `macos/`, with platform-specific navigation, scro
 
 Run the commands above from the repository root. For macOS source, change `windows/` to `macos/` and both `--platform windows` options to `--platform macos`; use `python3` if required. Tests can update evidence files. GUI tests additionally require a display and the documented dependencies.
 
-The full-report API requires a complete main-project result and rejects isolated HVAC results with `incomplete_result`. C1 supersaturation uses `supersaturated_air` and the relevant input field. The cleanroom generator reproduces all 100 original physical inputs; generated metadata and expected error fields reflect the new version. The recorded V5.5.9 regression used the retained original input document. This keypad revision does not repeat that 100-case run. Run v5510_keypad.py for key identity and insertion behavior; native self-tests additionally exercise delivered widgets and Windows OS messages.
+The full-report API requires a complete main-project result and rejects isolated HVAC results with `incomplete_result`. C1 supersaturation uses `supersaturated_air` and the relevant input field. The cleanroom generator retains the 100 original physical inputs; generated metadata and expected error fields reflect the current source, so its complete JSON hash differs from historical input files. The recorded V5.6 source stress checks migrate the retained original projects before inactive-field mutations and repeated calculations; see the [feature and source evidence](2026-10-12-v5.6-expansion.md#english). Historical source evidence is separate from a fresh rerun and from native acceptance of published binaries. Run v5510_keypad.py for key identity and insertion behavior, and v560_features.py for large pipes, gas choices and direct navigation; native self-tests additionally exercise delivered widgets and Windows OS messages.
 
-Current [delivery evidence](2026-10-11-v5.5.10-native.md) identifies tested commits and binary SHA256. Source checks are separate from native acceptance. Publish a new tested revision without replacing released binaries, moving tags or rewriting history. Documentation and release-body edits preserve binary identity and release status.
+Current [delivery evidence](2026-10-12-v5.6-native.md) identifies tested commits and binary SHA256. Source checks are separate from native acceptance. Publish a new tested revision without replacing released binaries, moving tags or rewriting history. Documentation and release-body edits preserve binary identity and release status.
 
 Retain **DESIGNED BY ANDY HUANG ©**, current licensing and third-party notices. Earlier MIT grants remain valid for those historical editions.

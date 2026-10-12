@@ -14,16 +14,25 @@ No. The Windows EXE and macOS DMG include their runtime. Calculations, saved pro
 | Windows | Windows 10/11 on Intel/AMD x64 are support targets. Download and double-click the EXE; allow time for the bundled environment to unpack on first launch. | Windows Server 2022/2025 x64 |
 | macOS | Universal App for Apple Silicon / Intel, packaging target macOS 11+. Open the DMG, drag into Applications, then launch there. Eject the DMG after installation. | Apple Silicon / Intel macOS 15 |
 
-Windows ARM, 32-bit Windows, and other Mac OS versions/devices were not included in this acceptance. Enterprise policies may also restrict execution. [Full acceptance and download hashes](2026-10-11-v5.5.10-native.md)
+Windows ARM, 32-bit Windows, and other Mac OS versions/devices were not included in this acceptance. Enterprise policies may also restrict execution. [Full acceptance and download hashes](2026-10-12-v5.6-native.md)
 
 Close the old app before replacing the EXE/App. Saved projects and recovery data are retained.
 
 <a id="decimal"></a>
 ## Why can I not enter a decimal with the numeric keypad?
 
-Close the old app, download V5.5.10 and check the window version. Recognized keypad decimal/Del events insert a single period, including identifiable keypad Del with Num Lock off. Dedicated Delete and Backspace still delete. Enable an inactive/read-only field before entering a value.
+Close the old app, download V5.6.0 and check the window version. Recognized keypad decimal/Del events insert a single period, including identifiable keypad Del with Num Lock off. Dedicated Delete and Backspace still delete. Enable an inactive/read-only field before entering a value.
 
-If it persists, report OS, keyboard model, Num Lock, input method, window/field and whether the key inserts nothing or deletes a digit. [Fix and verification scope](2026-10-11-v5.5.10-keypad.md)
+If it persists, report OS, keyboard model, Num Lock, input method, window/field and whether the key inserts nothing or deletes a digit. [Original keypad fix and verification scope](2026-10-11-v5.5.10-keypad.md)
+
+<a id="v560-tools"></a>
+## Where are water, psychrometrics and units? Have pipe and gas choices changed?
+
+All seven V5.6.0 calculators are direct sidebar buttons: electrical, duct, CDA/gas, lighting, water, air states/psychrometrics and units.
+
+Automatic water references extend to 24 inches. The tool selects a single pipe within the adopted velocity before adding parallel circuits. Added 14–24 inch references use STD walls; check actual ID when supplied dimensions differ. [Water and pipe guide](guides/water.en.md)
+
+The calculator and workbench share 50 named gases plus custom mixtures. Added gases have no preset design velocity: enter a design value, using custom velocity in the workbench. win.2 / mac.2 preserves entered velocity when the same gas is selected again; switching to a different added gas requires a new value. Mixtures need a name and composition. T/P/Z conversion covers single-gas-phase volume and velocity estimates only. [Gas and vacuum guide](guides/gas-vacuum.en.md)
 
 <a id="security"></a>
 ## Why does Windows or macOS show an unknown-publisher prompt?
@@ -57,7 +66,7 @@ These states do not certify a design. Fault/protection studies, complete pipe ne
 ## How do I save projects, drafts and reports?
 
 - **Workspace JSON:** saves the main project, AHUs, schemes and demand sources for reopening. **Save as** changes the path; **Duplicate as new scheme** creates a new project identity.
-- **Standalone AHU JSON:** use **Save AHU as**. V5.5.10 can save invalid raw drafts after confirmation; correction is still required before calculation/export. Standalone AHUs have no background autosave, so save manually before leaving.
+- **Standalone AHU JSON:** use **Save AHU as**. The app can save invalid raw drafts after confirmation; correction is still required before calculation/export. Standalone AHUs have no background autosave, so save manually before leaving.
 - **TXT/HTML reports:** for reading, printing or sharing. Print HTML to PDF with a browser. A report cannot be reopened as a workspace.
 
 <a id="equipment"></a>

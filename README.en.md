@@ -11,12 +11,14 @@ Facility Studio is a desktop tool for facility, electrical and HVAC engineers. U
 <a id="installation-and-first-launch"></a>
 ## Download and run
 
-Current version: **V5.5.10 public test release**.
+Current version: **V5.6.0 public test release**, Windows **win.2** / macOS **mac.2**, published 2026-10-12.
+
+Automatic water sizing extends to **24 inches**; **all seven calculators are direct sidebar buttons**; the gas calculator and workbench share **50 factory gases plus custom mixtures**. Added gases require an entered design velocity. This revision preserves it when the same gas is selected again. [Features, dimension sources and scope](docs/2026-10-12-v5.6-expansion.md#english) · [Current delivery and SHA256](docs/2026-10-12-v5.6-native.md#english)
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows 10/11, Intel/AMD x64 | [**Download Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.5.10-win.1/Facility_Studio_V5_5_10_Windows_Offline.exe) | Save and double-click; allow time for the bundled environment to unpack on first launch |
-| macOS, Apple Silicon / Intel | [**Download macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.5.10-mac.1/Facility_Studio_V5_5_10_macOS_mac1.dmg) | Open the DMG, drag Facility Studio into Applications, then launch it there |
+| Windows 10/11, Intel/AMD x64 | [**Download Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.2/Facility_Studio_V5_6_0_Windows_Offline.exe) | Save and double-click; allow time for the bundled environment to unpack on first launch |
+| macOS, Apple Silicon / Intel | [**Download macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.2/Facility_Studio_V5_6_0_macOS_mac2.dmg) | Open the DMG, drag Facility Studio into Applications, then launch it there |
 
 Download one file for your platform. Help and equipment templates are bundled. [Versions and SHA256](https://github.com/azx4121/facility-studio/releases) · [Compatibility and first launch](docs/faq.en.md#compatibility)
 
@@ -28,7 +30,7 @@ The Windows EXE has no official publisher signature; the Mac app has no Develope
 | --- | --- | --- |
 | Estimate supply requirements for new equipment | Current, circuit-breaker and conductor candidates, preliminary voltage drop | [Electrical sizing](docs/guides/electrical.en.md) |
 | Compare round and rectangular ducts for a known airflow | Dimensions and actual velocity; preliminary pressure loss when a route is supplied | [Duct sizing](docs/guides/duct.en.md) |
-| Estimate CDA / nitrogen piping from flow and pressure | Actual volume flow and reference pipe diameter | [CDA / gas piping](docs/guides/gas-vacuum.en.md) |
+| Estimate CDA / nitrogen / process-gas piping from flow and pressure | Actual volume flow and reference pipe diameter | [CDA / gas piping](docs/guides/gas-vacuum.en.md) |
 | Check room and thermal requirements | Average lux / lamp count, water flow / capacity, air states and unit conversions | [Lighting](docs/guides/lighting.en.md) / [Water](docs/guides/water.en.md) / [Psychrometrics](docs/guides/psychrometrics.en.md) / [Units](docs/guides/units.en.md) |
 | Consolidate an Excel/CSV equipment schedule | Grouped electricity, PCW, CDA, N2, EXHAUST, DI and PV demand | [Equipment schedules](docs/guides/equipment.en.md) |
 | Compare HVAC schemes and AHU stage configurations | Summer/winter heat and moisture demand, preheat / precool / humidification / recool / reheat, capacity checks and reports | [Full workbench](docs/guides/workbench.en.md) / [Standalone AHU](docs/guides/ahu.en.md) |
@@ -55,7 +57,7 @@ For a project report, open **Full workbench → Beginner tutorial** and follow t
 - **Data:** calculations, saved projects and schedule imports are processed locally. User-entered names and notes retain their original language.
 - **License:** internal company engineering work, paid engineering projects and delivered calculation reports are permitted. Software resale, paid bundling or paid hosted software services require separate written permission. [Full terms](LICENSE) · [License examples](LICENSE_GUIDE.en.md)
 
-The published files passed native acceptance on Windows Server 2022/2025 x64 and Apple Silicon/Intel macOS 15. Windows 10/11 and macOS 11+ are support/packaging targets; other OS versions, devices and enterprise policies need individual confirmation. [Current fixes and verification](docs/2026-10-11-v5.5.10-native.md)
+The published files passed native acceptance on Windows Server 2022/2025 x64 and Apple Silicon/Intel macOS 15. Windows 10/11 and macOS 11+ are support/packaging targets; other OS versions, devices and enterprise policies need individual confirmation. [Current fixes and verification](docs/2026-10-12-v5.6-native.md)
 
 ## Help and feedback
 

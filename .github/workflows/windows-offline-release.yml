@@ -8,6 +8,7 @@ on:
       - windows/winrelease/**
       - windows/facility_studio/**
       - windows/tests/**
+      - tools/cleanroom100_stress.py
       - docs/tutorial/**
   workflow_dispatch:
 
@@ -48,6 +49,9 @@ jobs:
           Invoke-CheckedPython windows/tests/v559_resilience.py
           Invoke-CheckedPython windows/tests/v5510_keypad.py
           Invoke-CheckedPython windows/tests/v560_features.py
+          Invoke-CheckedPython windows/tests/stress100.py --output "$env:RUNNER_TEMP/win-native-stress-source.json"
+          Invoke-CheckedPython tools/cleanroom100_stress.py --source . --platform windows --manifest "$env:RUNNER_TEMP/cleanroom100.json" --generate --seed 20261013
+          Invoke-CheckedPython tools/cleanroom100_stress.py --source . --platform windows --manifest "$env:RUNNER_TEMP/cleanroom100.json" --output "$env:RUNNER_TEMP/cleanroom100-windows.json" --repeat 20
           Invoke-CheckedPython docs/tutorial/verify_tutorial.py --platform windows --output "$env:RUNNER_TEMP/tutorial-windows.json"
           Invoke-CheckedPython windows/tests/maintenance_checks.py
           Invoke-CheckedPython windows/tests/security_checks.py
@@ -69,6 +73,8 @@ jobs:
             windows/evidence/*.json
             ${{ runner.temp }}/tutorial-windows.json
             ${{ runner.temp }}/win-use-cases.json
+            ${{ runner.temp }}/win-native-stress-source.json
+            ${{ runner.temp }}/cleanroom100*.json
           if-no-files-found: warn
           retention-days: 14
       - name: Retain native-tested distribution files

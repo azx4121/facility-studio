@@ -106,6 +106,58 @@ def run_checks():
                     check('Gas report English coverage ' + gas, not re.search(r'[\u3400-\u9fff]', text))
     finally:
         i18n.set_language(old_language, persist=False)
+    # Exercise the public validators, not only the already-normalized gas
+    # backend. A zero-demand draft must also work in the workbench/domain path.
+    from . import api
+    from .field_state import main_inactive
+    from .inactive_acceptance import assert_equal, payload
+    for gas in ('N2', 'NF3', CUSTOM_GAS):
+        for index in (1, 2, 3):
+            prefix = 'gas' + str(index)
+            velocity_key = prefix + '_velocity'
+            flow_key = prefix + '_q'
+            idle = default_project()
+            idle['inputs'].update({
+                prefix + '_type': gas, flow_key: '0',
+                prefix + '_v_mode': '自訂流速', velocity_key: '7',
+                prefix + '_name': '5% H2 / 95% N2',
+            })
+            baseline = api.calculate(idle)
+            check('Zero-demand velocity is inactive %s/%s' % (gas,index),
+                  velocity_key in main_inactive(idle['inputs']))
+            for zero in ('0', '0.00', '-0.0', '0e0'):
+                for draft in ('', 'bad', 'NaN', '-1', '1000', '5'):
+                    candidate = copy.deepcopy(idle)
+                    candidate['inputs'].update({flow_key: zero, velocity_key: draft})
+                    result = api.calculate(candidate)
+                    assert_equal(payload(result), payload(baseline))
+                    check('Zero-demand full output unchanged %s/%s/%s/%s' % (gas,index,zero,draft), True)
+                    check('Zero-demand draft retained %s/%s/%s/%s' % (gas,index,zero,draft),
+                          result['project']['inputs'][velocity_key] == draft)
+                    check('Zero-demand report unchanged %s/%s/%s/%s' % (gas,index,zero,draft),
+                          str(report(result)) == str(report(baseline)))
+                    domains = api.independent_domains(candidate)
+                    check('Zero-demand independent gas matches public API %s/%s/%s/%s' % (gas,index,zero,draft),
+                          domains['gas']['error'] is None and domains['gas']['result'] == result['gas'])
+            for draft in ('', 'bad', 'NaN', '-1', '1000'):
+                active = copy.deepcopy(idle)
+                active['inputs'].update({flow_key: '84', velocity_key: draft})
+                check('Positive-demand velocity reactivates %s/%s/%s' % (gas,index,draft),
+                      velocity_key not in main_inactive(active['inputs']))
+                error('Positive-demand invalid draft rejected %s/%s/%s' % (gas,index,draft),
+                      lambda value=active: api.calculate(value), velocity_key)
+                check('Independent domain revalidates positive demand %s/%s/%s' % (gas,index,draft),
+                      api.independent_domains(active)['gas']['error'] is not None)
+            idle['inputs'].update({flow_key: '84', velocity_key: '7'})
+            check('Positive-demand valid velocity calculates %s/%s' % (gas,index),
+                  api.calculate(idle)['gas'][str(index)]['velocity_mps'] <= 7 + 1e-10)
+    i18n.set_language('en', persist=False)
+    try:
+        check('Zero-demand velocity reason translates',
+              not re.search(r'[\u3400-\u9fff]', i18n.translate(
+                  '目前無氣體流量需求，流速只保留為草稿')))
+    finally:
+        i18n.set_language(old_language, persist=False)
     inactive = defaults('gas')
     inactive['gas_name'] = 'bad\nname'
     check('Inactive custom name ignored', compressed_air(inactive)['custom_name'] is None and not active_field('gas', 'gas_name', inactive))
@@ -185,6 +237,26 @@ def run_ui(root, app, main, check, pump):
             check('V560 native large single water pipe ' + lang, lambda: water_page.result is not None and water_page.result['pipe']['runs'] == 1 and water_page.result['pipe']['id_mm'] == 590.6)
             main.apply_project(default_project()); pump()
             check('V560 workbench gas choices ' + lang, lambda: tuple(main.widgets['gas1_type'].cget('values')) == GAS_OPTIONS)
+            for index in (1, 2, 3):
+                prefix = 'gas' + str(index)
+                velocity_key, flow_key = prefix + '_velocity', prefix + '_q'
+                idle = default_project()
+                idle['inputs'].update({
+                    prefix + '_type': 'NF3', flow_key: '0',
+                    prefix + '_v_mode': '自訂流速', velocity_key: 'bad',
+                })
+                main.apply_project(idle); main.recalculate(); pump()
+                check('Zero-demand native velocity draft disabled %s/%s' % (lang,index),
+                      lambda key=velocity_key: main.widgets[key].instate(['disabled'])
+                      and main.variables[key].get() == 'bad' and main.result is not None)
+                main.variables[flow_key].set('84'); main.recalculate(); pump()
+                check('Positive-demand native velocity draft revalidated %s/%s' % (lang,index),
+                      lambda key=velocity_key: main.widgets[key].instate(['!disabled'])
+                      and main.result is None and main.bad_key == key)
+                main.variables[velocity_key].set('7'); main.recalculate(); pump()
+                check('Positive-demand native valid velocity calculates %s/%s' % (lang,index),
+                      lambda row=str(index): main.result is not None
+                      and main.result['gas'][row]['velocity_mps'] <= 7 + 1e-10)
     finally:
         main.apply_project(original_main)
         for key, values in saved.items():

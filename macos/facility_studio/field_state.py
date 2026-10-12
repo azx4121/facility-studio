@@ -48,7 +48,9 @@ def main_inactive(i):
             disable([f"gas{j}_name"], "目前未採用自訂／混合氣名稱")
         if i.get(f"gas{j}_pressure_mode") != "本路管內壓力":
             disable([f"gas{j}_barg"], "採用共用最低管內壓力")
-        if i.get(f"gas{j}_v_mode") != "自訂流速":
+        if not has_demand(i.get(f"gas{j}_q", "0")):
+            disable([f"gas{j}_velocity"], "目前無氣體流量需求，流速只保留為草稿")
+        elif i.get(f"gas{j}_v_mode") != "自訂流速":
             disable([f"gas{j}_velocity"], "採用氣體種類的流速參考")
     for panel, loads in {
         "up": ("eq", "oven"),

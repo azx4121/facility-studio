@@ -11,7 +11,6 @@ import json
 import math
 import platform
 import random
-import resource
 import statistics
 import sys
 import tempfile
@@ -28,6 +27,8 @@ parser.add_argument('--manifest', type=Path, required=True)
 parser.add_argument('--generate', action='store_true')
 parser.add_argument('--output', type=Path)
 parser.add_argument('--repeat', type=int, default=20)
+parser.add_argument('--seed', type=int, default=55820261011,
+                    help='Synthetic input seed; default reproduces the original recipes')
 args = parser.parse_args()
 sys.path.insert(0, str(args.source / args.platform))
 from facility_studio import api as api
@@ -37,10 +38,44 @@ from facility_studio.services import independent_domains
 from facility_studio.data import WIRE_DB, NFB_SIZES
 from types import SimpleNamespace
 
-SEED = 55820261011
+SEED = args.seed
 MAIN_COMMIT = None  # Local test before the GitHub commit; module hashes are recorded separately.
 TREE = None
 assert api.VERSION == '5.6.0', api.VERSION
+
+def peak_memory_mib():
+    """Peak resident process memory; platform APIs report different units."""
+    if sys.platform == 'win32':
+        import ctypes
+        from ctypes import wintypes
+
+        class ProcessMemoryCounters(ctypes.Structure):
+            _fields_ = [('cb', wintypes.DWORD), ('PageFaultCount', wintypes.DWORD),
+                        ('PeakWorkingSetSize', ctypes.c_size_t),
+                        ('WorkingSetSize', ctypes.c_size_t),
+                        ('QuotaPeakPagedPoolUsage', ctypes.c_size_t),
+                        ('QuotaPagedPoolUsage', ctypes.c_size_t),
+                        ('QuotaPeakNonPagedPoolUsage', ctypes.c_size_t),
+                        ('QuotaNonPagedPoolUsage', ctypes.c_size_t),
+                        ('PagefileUsage', ctypes.c_size_t),
+                        ('PeakPagefileUsage', ctypes.c_size_t)]
+
+        kernel32 = ctypes.WinDLL('kernel32', use_last_error=True)
+        psapi = ctypes.WinDLL('psapi', use_last_error=True)
+        kernel32.GetCurrentProcess.restype = wintypes.HANDLE
+        psapi.GetProcessMemoryInfo.argtypes = [wintypes.HANDLE,
+                                               ctypes.POINTER(ProcessMemoryCounters),
+                                               wintypes.DWORD]
+        psapi.GetProcessMemoryInfo.restype = wintypes.BOOL
+        counters = ProcessMemoryCounters()
+        counters.cb = ctypes.sizeof(counters)
+        if not psapi.GetProcessMemoryInfo(kernel32.GetCurrentProcess(),
+                                         ctypes.byref(counters), counters.cb):
+            raise ctypes.WinError(ctypes.get_last_error())
+        return counters.PeakWorkingSetSize / (1024 * 1024)
+    import resource
+    maximum = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    return maximum / (1024 * 1024 if sys.platform == 'darwin' else 1024)
 
 def digest(x):
     return hashlib.sha256(json.dumps(x, sort_keys=True, ensure_ascii=False,
@@ -582,8 +617,8 @@ summary=dict(version=api.VERSION,main_commit=MAIN_COMMIT,tree=TREE,
     partial_report_api_guard_failures=sum(not x['partial_report_api_probe']['defensive_api_pass'] for x in results if 'partial_report_api_probe' in x),
     seconds=elapsed,latency_ms=dict(median=statistics.median(timings)*1000,
     p95=sorted(timings)[min(len(timings)-1,int(len(timings)*.95))]*1000,max=max(timings)*1000),
-    rss_peak_mib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024,
-    scope='Linux headless source stress test; both seasons; no native GUI execution')
+    rss_peak_mib=peak_memory_mib(),
+    scope=f'{platform.system()} headless {args.platform} source stress test; both seasons; no native binary or GUI execution')
 args.output.write_text(json.dumps(dict(summary=summary,cases=results,checks=checks),ensure_ascii=False,indent=2,allow_nan=False))
 print(json.dumps(summary,ensure_ascii=False),flush=True)
 sys.exit(0 if summary['software_failed']==0 and summary['failed_checks']==0 and summary['partial_report_api_guard_failures']==0 else 1)

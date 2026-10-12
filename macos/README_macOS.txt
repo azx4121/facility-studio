@@ -5,10 +5,13 @@ DESIGNED BY ANDY HUANG ©
 獨立快算電力、風管、CDA／特氣、照明、冷熱水、空氣線圖與單位；
 匯入 Excel／CSV 彙整設備需求；以完整工作台比較空調方案與夏冬空調箱各段需求。
 繁體中文／English 可即時切換；計算、專案保存與內建教學可離線使用。
+七個快算直接列於左側；水管自動選型至24吋，先選符合水速的單管。
+氣體快算與工作台共同提供50種廠務氣體及自訂／混合氣，新增氣體需填設計流速。
+本修訂保留重選同種製程氣體的已填流速；切換到不同新增氣體須重新填寫。
 
 下載與安裝
 目前公開下載為 DMG：
-https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.2/Facility_Studio_V5_6_0_macOS_mac2.dmg
+https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.3/Facility_Studio_V5_6_0_macOS_mac3.dmg
 1. 打開 DMG。
 2. 把 Facility Studio 拖到「Applications／應用程式」。
 3. 從「應用程式」開啟。安裝完成後可退出 DMG。
@@ -30,7 +33,7 @@ https://github.com/azx4121/facility-studio/blob/main/docs/signing.md
 保存與更新
 整案 JSON 可接續編輯；TXT／HTML 是供閱讀與分享的報告。
 獨立空調箱可確認保存無效草稿，修正後才能計算或匯出。
-V5.6.0 補上數字鍵盤 Del／小數點辨識；一般 Delete 保留刪除功能。
+V5.6.0 保留數字鍵盤 Del／小數點辨識；一般 Delete 保留刪除功能。
 更新前先關閉舊 App 再替換；已儲存的專案與復原資料保留。
 啟動記錄：~/Library/Logs/Facility_Studio_V5_5/
 介面錯誤：~/Library/Application Support/Facility_Studio_V5_5/error.log
@@ -43,6 +46,9 @@ V5.6.0 補上數字鍵盤 Del／小數點辨識；一般 Delete 保留刪除功�
 
 English
 Independent calculators, equipment schedules and a full HVAC/AHU workbench are available.
+All seven calculators are direct sidebar buttons; automatic water sizing extends to 24 inches.
+The calculator and workbench share 50 factory gases plus custom mixtures.
+Added gases require an entered design velocity; reselecting the same gas preserves it.
 Open the DMG, drag Facility Studio to Applications, then launch it there.
 The runtime and help are bundled. Select English at the top right.
 V5.6.0 accepts the keypad decimal/Del key; dedicated Delete still deletes.

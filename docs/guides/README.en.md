@@ -70,4 +70,4 @@ Facility Studio does not provide BIM modeling, full 3D clash detection or automa
 
 See the [licensing examples](../../LICENSE_GUIDE.en.md) for permitted use. Report a case number, version, every value/unit and expected/actual result in [Issues](https://github.com/azx4121/facility-studio/issues). Remove client secrets.
 
-[FAQ](../faq.en.md) · [Native acceptance](../2026-10-11-v5.5.10-native.md) · [Historical records](../history/README.md#english)
+[FAQ](../faq.en.md) · [Native acceptance](../2026-10-12-v5.6-native.md) · [Historical records](../history/README.md#english)

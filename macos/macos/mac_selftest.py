@@ -77,6 +77,17 @@ def run():
         lambda: Image.new("RGB", (2, 2)).resize((4, 4)).size == (4, 4),
     )
     check("Full engineering calculation", lambda: bool(calculate(default_project())))
+    native_stress = {}
+
+    def stress100():
+        nonlocal native_stress
+        from facility_studio.stress_acceptance import run_checks
+        native_stress = run_checks(scenarios=100, repeat=20)
+        return (native_stress["passed"]
+                and native_stress["software_passed"] == 100
+                and native_stress["distinct_physical_input_count"] == 100)
+
+    check("100 distinct delivered-runtime stress scenarios, 20 repetitions", stress100)
     from facility_studio.inactive_acceptance import run_checks as check_inactive
     check("V557 complete-output inactive-field regression", lambda: check_inactive(random_repeats=0)["passed"])
     for tool in ("electrical", "duct", "gas", "lighting", "water", "air", "units"):
@@ -264,12 +275,14 @@ def run():
     destination.mkdir(parents=True, exist_ok=True)
     report = {
         "version": __version__,
+        "revision": "mac.3",
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,
         "matplotlib": matplotlib.__version__,
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "ui_event_timings": ui_timings,
+        "stress100": native_stress,
         "checks": checks,
         "passed": all(item["passed"] for item in checks),
     }

@@ -32,7 +32,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-printf '\nFacility Studio V5.6.0 mac.2 — macOS 安裝\n\n'
+printf '\nFacility Studio V5.6.0 mac.3 — macOS 安裝\n\n'
 if [[ ! -d "$TASK_APP_SOURCE" ]]; then
     printf '請先完整解壓縮懶人包，讓此檔案與 Facility Studio.app 放在同一個資料夾。\n'
     exit 2

@@ -57,7 +57,7 @@ python windows/Facility_Studio_V5_5.py --tool air --tool-input docs/examples/12-
 
 其餘快算把`--tool`與輸入檔換成對應類型。macOS來源將`windows/`改為`macos/`，必要時用`python3`。已下載EXE／App者可直接照教學填GUI，不必執行這些開發指令。
 
-每個來源平台通過121項情境檢核，包括電流、截面流速、氣體溫壓、照度、冷熱量、空氣狀態、設備分組、AHU熱濕守恆及容量不足判定。兩份原始結果：[Windows](../examples/calculation-results-windows.json)、[macOS](../examples/calculation-results-macos.json)。這是同一組18個計算情境與2個不適用對照，沒有把重複平台檢查宣稱為40個不同問題。
+每個來源平台原始紀錄通過121項情境檢核，包括電流、截面流速、氣體溫壓、照度、冷熱量、空氣狀態、設備分組、AHU熱濕守恆及容量不足判定。兩份原始結果：[Windows](../examples/calculation-results-windows.json)、[macOS](../examples/calculation-results-macos.json)。這是同一組18個計算情境與2個不適用對照，沒有把重複平台檢查宣稱為40個不同問題。
 
 </details>
 
@@ -72,4 +72,4 @@ python windows/Facility_Studio_V5_5.py --tool air --tool-input docs/examples/12-
 
 使用範圍見[授權案例](../../LICENSE_GUIDE.md)。遇到問題，請附情境編號、版本、完整輸入與單位、預期／實際結果到 [Issues](https://github.com/azx4121/facility-studio/issues)；移除業主機密。
 
-[常見問題](../faq.md) · [原生驗收](../2026-10-11-v5.5.10-native.md) · [歷史紀錄](../history/README.md)
+[常見問題](../faq.md) · [原生驗收](../2026-10-12-v5.6-native.md) · [歷史紀錄](../history/README.md)

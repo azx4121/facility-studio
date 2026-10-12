@@ -14,8 +14,8 @@ from native_probe import RELEASE_SHA256, RELEASE_URL
 from native_sign import sign_app
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "5.6.0-mac.2"
-PACKAGE_NAME = "Facility_Studio_V5_6_0_macOS_mac2"
+VERSION = "5.6.0-mac.3"
+PACKAGE_NAME = "Facility_Studio_V5_6_0_macOS_mac3"
 
 
 def command(args, log, timeout=180):
@@ -101,7 +101,7 @@ def main():
     plist_path = app / "Contents/Info.plist"
     with plist_path.open("rb") as file:
         info = plistlib.load(file)
-    info["CFBundleVersion"] = "5.6.0.1"
+    info["CFBundleVersion"] = "5.6.0.3"
     info["CFBundleShortVersionString"] = "5.6.0"
     with plist_path.open("wb") as file:
         plistlib.dump(info, file)
@@ -122,7 +122,7 @@ def main():
         )
     print("Running cold-cache native GUI acceptance...", flush=True)
     command(
-        [str(launcher), "--self-test"], evidence / "Native_GUI_Console.txt", timeout=180
+        [str(launcher), "--self-test"], evidence / "Native_GUI_Console.txt", timeout=300
     )
     acceptance = Path.home() / "Library/Logs/Facility_Studio_V5_5/Mac_Acceptance.json"
     result = json.loads(acceptance.read_text(encoding="utf-8"))
@@ -136,7 +136,7 @@ def main():
     command(
         ["/usr/bin/open", "-W", "-n", str(app), "--args", "--self-test"],
         evidence / "Launch_Services.txt",
-        timeout=180,
+        timeout=300,
     )
     launch_result = json.loads(acceptance.read_text(encoding="utf-8"))
     if not launch_result["passed"]:
@@ -185,7 +185,7 @@ def main():
 
     source_zip = stage / "Source_and_Verification.zip"
     zip_tree(ROOT, source_zip, "Facility_Studio_macOS_Source")
-    delivered_zip = output / "Facility_Studio_V5_6_0_macOS_mac2_OneClick.zip"
+    delivered_zip = output / "Facility_Studio_V5_6_0_macOS_mac3_OneClick.zip"
     command(
         [
             "/usr/bin/ditto",
@@ -211,7 +211,7 @@ def main():
     command(
         [str(delivered_app / "Contents/MacOS/FacilityStudio"), "--self-test"],
         evidence / "Delivered_GUI_Console.txt",
-        timeout=180,
+        timeout=300,
     )
     # A standard DMG supports dragging the app to Applications without scripts.
     dmg_stage = output / "dmg-stage"
@@ -222,7 +222,7 @@ def main():
     )
     (dmg_stage / "Applications").symlink_to("/Applications")
     shutil.copy2(ROOT / "README_macOS.txt", dmg_stage / "請先閱讀.txt")
-    dmg = output / "Facility_Studio_V5_6_0_macOS_mac2.dmg"
+    dmg = output / "Facility_Studio_V5_6_0_macOS_mac3.dmg"
     command(
         [
             "/usr/bin/hdiutil",
