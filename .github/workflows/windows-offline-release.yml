@@ -9,8 +9,13 @@ on:
       - windows/facility_studio/**
       - windows/tests/**
       - tools/cleanroom100_stress.py
-      - docs/tutorial/**
+      - docs/tutorial/START_HERE.html
+      - docs/tutorial/verify_tutorial.py
   workflow_dispatch:
+
+concurrency:
+  group: facility-release-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

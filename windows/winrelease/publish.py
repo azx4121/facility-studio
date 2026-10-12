@@ -46,6 +46,11 @@ def main():
         with urllib.request.urlopen(call, timeout=timeout) as response:
             return json.load(response)
 
+    head = request("https://api.github.com/repos/" + REPOSITORY + "/git/ref/heads/main")
+    if head["object"]["sha"] != commit:
+        print("Superseded tested commit retained as evidence; no new release published")
+        return
+
     folder = args.assets.resolve()
     asset_data = prepare_public_assets(folder, FILENAMES[:-1])
     digests = {

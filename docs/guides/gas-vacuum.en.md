@@ -6,6 +6,8 @@ Pipe size needs **flow, pressure and a velocity limit**. Pressure and velocity w
 
 Added process gases have no preset design velocity; enter a design value (choose custom velocity in the workbench). Reselecting the same gas preserves entered velocity; switching to a different added gas requires a new value. Identify mixtures by name and composition. Advanced Zactual/Zstandard defaults to 1; reverse actual-to-standard conversion divides by this ratio. Single gas phase only. [50-gas catalog and scope](../2026-10-12-v5.6-expansion.md)
 
+In the full workbench, a route with zero flow retains custom velocity and custom/mixture names as drafts without validating or including them in calculations or reports. Added gases with nonzero demand still require custom velocity and an entered design value; mixtures also require a name and composition. The independent gas calculator still requires valid velocity even when its flow is zero.
+
 SLPM, SCFM and Sm³/h are standard-volume units; ALPM is actual pipe volume flow. Default reference: 25°C and 101.325 kPa absolute. Default pipe temperature and local atmospheric pressure are also 25°C and 101.325 kPa. Check the equipment's reference conditions and adjust them if needed.
 
 `P_absolute = P_gauge + P_local_atmosphere`

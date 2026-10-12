@@ -275,7 +275,7 @@ def run():
     destination.mkdir(parents=True, exist_ok=True)
     report = {
         "version": __version__,
-        "revision": "mac.3",
+        "revision": "mac.4",
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,

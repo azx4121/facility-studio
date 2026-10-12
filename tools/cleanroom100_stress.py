@@ -20,6 +20,10 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
+for stream in (sys.stdout, sys.stderr):
+    if hasattr(stream, 'reconfigure'):
+        stream.reconfigure(encoding='utf-8')
+
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--source', type=Path, required=True)
 parser.add_argument('--platform', choices=['windows', 'macos'], required=True)

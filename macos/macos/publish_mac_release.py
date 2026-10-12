@@ -14,7 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from tools.public_release_policy import prepare_public_assets
 
 REPOSITORY = "azx4121/facility-studio"
-TAG = "v5.6.0-mac.3"
+TAG = "v5.6.0-mac.4"
 
 
 def main():
@@ -29,7 +29,7 @@ def main():
         )
     folder = args.assets.resolve()
     filenames = (
-        "Facility_Studio_V5_6_0_macOS_mac3.dmg",
+        "Facility_Studio_V5_6_0_macOS_mac4.dmg",
         "SHA256SUMS.txt",
     )
     asset_data = prepare_public_assets(folder, filenames[:-1])
@@ -42,6 +42,16 @@ def main():
         "User-Agent": "FacilityStudio-native-release",
         "Accept": "application/vnd.github+json",
     }
+    current = urllib.request.Request(
+        "https://api.github.com/repos/" + REPOSITORY + "/git/ref/heads/main",
+        headers=headers,
+    )
+    with urllib.request.urlopen(current, timeout=30) as response:
+        head = json.load(response)
+    if head["object"]["sha"] != commit:
+        print("Superseded tested commit retained as evidence; no new release published")
+        return
+
     existing = urllib.request.Request(
         "https://api.github.com/repos/" + REPOSITORY + "/releases/tags/" + TAG,
         headers=headers,
@@ -69,7 +79,7 @@ def main():
             dict(
                 tag_name=TAG,
                 target_commitish=commit,
-                name="Facility Studio V5.6.0｜macOS 中英雙語離線版 mac.3",
+                name="Facility Studio V5.6.0｜macOS 中英雙語離線版 mac.4",
                 body=body,
                 draft=True,
                 prerelease=True,

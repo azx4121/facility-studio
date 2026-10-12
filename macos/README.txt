@@ -11,7 +11,7 @@ DESIGNED BY ANDY HUANG ©
 
 下載與安裝
 目前公開下載為 DMG：
-https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.3/Facility_Studio_V5_6_0_macOS_mac3.dmg
+https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.4/Facility_Studio_V5_6_0_macOS_mac4.dmg
 1. 打開 DMG。
 2. 把 Facility Studio 拖到「Applications／應用程式」。
 3. 從「應用程式」開啟。安裝完成後可退出 DMG。
