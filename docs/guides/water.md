@@ -2,7 +2,9 @@
 
 [English](water.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
-**Cooling-water / chilled-water flow and heat calculator.** 開啟「其他常用快算 → 冷熱水快算」，選「已知水量」或「已知熱量」。基本採清水密度1,000 kg/m³、比熱4.1868 kJ/(kg·K)、水速上限1.5 m/s；流量可用LPM、US GPM或m³/h。
+**Cooling-water / chilled-water flow and heat calculator.** 開啟左側「冷熱水快算」，選「已知水量」或「已知熱量」。基本採清水密度1,000 kg/m³、比熱4.1868 kJ/(kg·K)、水速上限1.5 m/s；流量可用LPM、US GPM或m³/h。
+
+V5.6自動表擴充至24吋，先選符合水速的單管，仍不足才並聯。新增14–24吋採碳鋼STD壁厚9.5mm參考內徑，實供壁厚不同請在工作台填實際內徑。例：7,000 LPM／1 m/s → 單支16吋、ID387.4mm；30,000 LPM／2 m/s → 單支24吋、ID590.6mm。[尺寸來源與驗證](../2026-10-12-v5.6-expansion.md)
 
 公式：`Q[kW]=LPM/60000×ρ×cp×ΔT[K]`。US RT採3.51685284 kW/RT；ΔT是供回水溫差，不是其中一個水溫。乙二醇或其他液體應改用適用物性；快算清水值不能直接套用。
 

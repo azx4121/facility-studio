@@ -1,6 +1,6 @@
 # AHU / MAU stages: preheat, precool, water wash, recool and reheat
 
-V5.5.10 standalone AHU windows can save invalid raw inputs as an explicitly confirmed draft. Reopening still identifies invalid fields and locks export. Correct inputs and recalculate before producing design outputs; a subsequent ordinary save keeps the draft backup. Cancellation preserves the file. This is manual draft saving, without a new standalone autosave timer.
+V5.6.0 standalone AHU windows can save invalid raw inputs as an explicitly confirmed draft. Reopening still identifies invalid fields and locks export. Correct inputs and recalculate before producing design outputs; a subsequent ordinary save keeps the draft backup. Cancellation preserves the file. This is manual draft saving, without a new standalone autosave timer.
 
 C1 supersaturation messages identify the season, entering state, ADP and leaving demand. Use **Locate issue** to inspect the automatic target or the seasonal specified outlet. Correct the conditions and recalculate before exporting the report.
 

@@ -1,3 +1,4 @@
+from .gas_catalog import gas_label, CUSTOM_GAS
 from .i18n import localized_report, verbatim
 from .engine import pv_to_torr
 from .schema import VERSION
@@ -127,6 +128,9 @@ def report(r):
             a(
                 f"{k}：{d['lpm']:.3f} LPM，ΔT {d['delta_t']:.2f} K，{d['runs']} 支×{d['size']}／ID {d['id_mm']:.1f} mm，{d['velocity_mps']:.3f} m/s；壓差 {r['pressure'][k]['total_pa']:.3f} Pa。"
             )
+            if d.get("reference"):
+                ref = d["reference"]
+                a(f"  採用碳鋼STD參考：外徑 {ref['outside_mm']:g}mm／壁厚 {ref['wall_mm']:g}mm；依實供管材核對。")
             fluid = d["fluid_properties"]
             a(f"  採用物性：ρ {fluid['rho']:g} kg/m³；cp {fluid['cp']:g} kJ/(kg·K)；μ {fluid['mu']:g} Pa·s；來源 {fluid['source']}。")
             a("  " + r["pressure"][k]["static_note"])
@@ -143,7 +147,7 @@ def report(r):
     for k, g in r["gas"].items():
         if g["standard_lpm"]:
             a(
-                f"{g['type']}：{g['standard_lpm']:.2f} SLPM→{g['actual_lpm']:.2f} ALPM（{g['pressure_abs_pa'] / 1000:.3f} kPa abs），{g['size']}／ID {g['selected_id_mm']:.1f} mm；{g['velocity_mps']:.3f} m/s。"
+                f"{verbatim(g['custom_name']) if g['type'] == CUSTOM_GAS else gas_label(g['type']) if g['type'] != 'PV' else 'PV'}：{g['standard_lpm']:.2f} SLPM→{g['actual_lpm']:.2f} ALPM（{g['pressure_abs_pa'] / 1000:.3f} kPa abs），{g['size']}／ID {g['selected_id_mm']:.1f} mm；{g['velocity_mps']:.3f} m/s。"
             )
     for j in (1, 2, 3):
         g = r["gas"][str(j)]

@@ -1,4 +1,5 @@
 import copy
+from .gas_catalog import GAS_OPTIONS
 from .data import CLEANROOM_DB, V31_DEFAULTS, VOLTAGE_MAP
 from .utils import EXTRA_DEFAULTS, PD_DEFAULTS
 from .utils import PD_DEFAULTS as BASE_PD_DEFAULTS
@@ -233,7 +234,7 @@ for j in (1, 2, 3):
                 f"gas{j}_type",
                 "氣體種類",
                 "",
-                ["N2", "CDA", "O2", "Ar", "He", "H2", "CO2", "GN2", "PN2"],
+                list(GAS_OPTIONS),
             ),
             (f"gas{j}_q", "標準體積流量", "", 0, 100000000.0),
             (f"u_gas{j}", "流量單位", "", ["SLPM", "SCFM", "CMH"]),
@@ -482,7 +483,7 @@ for z in "AB":
 for z in "AB":
     BASIC_KEYS.update(["mode_" + z, "face_" + z, "coverage_" + z])
 for j in (1, 2, 3):
-    BASIC_KEYS.update([f"gas{j}_type", f"gas{j}_q", f"u_gas{j}"])
+    BASIC_KEYS.update([f"gas{j}_type", f"gas{j}_name", f"gas{j}_q", f"u_gas{j}"])
 for pan, keys in [
     ("up", ["eq", "oven"]),
     ("np", ["fan", "heat", "humid", "exh", "pump"]),
@@ -746,3 +747,14 @@ for loop in ("mchw", "chw", "dccw", "pcw", "hw"):
         "沿用共用參考會明列採用值；獨立物性只影響本迴路。含乙二醇或不同溫度工況請採有效物性。"
     )
 UTILITY_ONLY_KEYS.update(k for k, field in FIELDS.items() if field["page"] == 4)
+
+# V5.6 preserves the exact historical schemas and migrates v10 to v11.
+V556_INPUT_KEYS = set(FIELDS)
+SCHEMA_VERSION = 11
+for j in (1, 2, 3):
+    DEFAULTS[f"gas{j}_name"] = ""
+    group(3, f"特氣 {j}｜自訂／混合氣名稱", [(f"gas{j}_name", "自訂氣體名稱／混合比例", "文字")])
+    FIELD_HELP[f"gas{j}_type"] = "新增製程氣體請在進階選自訂流速；氣體名稱不代表已核定配管安全。"
+    FIELD_HELP[f"gas{j}_name"] = "自訂／混合氣需填名稱與比例，例如5% H2／95% N2；物性與Z比依供應商資料。"
+
+UTILITY_ONLY_KEYS.update({f"gas{j}_name" for j in (1, 2, 3)})

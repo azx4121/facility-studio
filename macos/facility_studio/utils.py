@@ -8,11 +8,14 @@ import tempfile
 from .data import (
     GAS_DESIGN_VELOCITY_MPS,
     HVAC_PIPES,
+    HVAC_PIPE_REFERENCES,
     NFB_SIZES,
     PIPE_DB,
     VOLTAGE_MAP,
     WIRE_DB,
 )
+
+from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, custom_name, reference_velocity
 
 VERSION = "1.1.1"
 CFM_TO_CMH = 1.69901079552
@@ -352,6 +355,7 @@ def water_selection(lpm, vmax, mode="流速上限", manual_id=0):
             "area_m2": 0,
             "size": "無需求",
         }
+    reference = None
     if manual_id > 0:
         d = number(manual_id, "實際內徑 mm", 1, 3000)
         runs = 1
@@ -373,6 +377,7 @@ def water_selection(lpm, vmax, mode="流速上限", manual_id=0):
         runs, pipe = selected
         d = pipe["id_mm"]
         size = pipe["size"]
+        reference = HVAC_PIPE_REFERENCES.get(size)
     area = math.pi * (d / 1000) ** 2 / 4
     if q / runs / area > vmax + 1e-10:
         raise InputError(f"指定實際內徑超過水流速上限")
@@ -383,6 +388,7 @@ def water_selection(lpm, vmax, mode="流速上限", manual_id=0):
         "velocity_mps": q / runs / area,
         "area_m2": area,
         "size": size,
+        **({"reference": dict(reference)} if reference else {}),
     }
 
 
@@ -744,7 +750,7 @@ def gas_result(i, warnings):
     for index in (1, 2, 3, 4):
         typ = (
             choice(
-                i[f"gas{index}_type"], tuple(GAS_DESIGN_VELOCITY_MPS), f"氣體 {index}"
+                i[f"gas{index}_type"], GAS_OPTIONS + ("PV",), f"氣體 {index}"
             )
             if index < 4
             else "PV"
@@ -761,15 +767,16 @@ def gas_result(i, warnings):
             raise InputError(f"本路管內表壓高於供氣表壓", field_name=f"gas{index}_barg")
         pa = (p + localbar * 100) * 1000 if typ != "PV" else pv * 133.322368421
         qactual = qstd * sp * 1000 / pa * (temp + 273.15) / (st + 273.15) * z
-        vmax = (
-            n("pv_velocity", 0.1, 100)
-            if index == 4 and "pv_velocity" in i
-            else (
-                n(f"gas{index}_velocity", 0.1, 100)
-                if index < 4 and i.get(f"gas{index}_v_mode") == "自訂流速"
-                else GAS_DESIGN_VELOCITY_MPS[typ]
-            )
-        )
+        preset = reference_velocity(typ) if index < 4 else GAS_DESIGN_VELOCITY_MPS["PV"]
+        if index < 4 and preset is None and qstd > 0 and i.get(f"gas{index}_v_mode") != "自訂流速":
+            raise InputError("此氣體沒有預設流速，請選自訂流速並填設計值。", field_name=f"gas{index}_v_mode")
+        if index == 4:
+            vmax = n("pv_velocity", 0.1, 100) if "pv_velocity" in i else preset
+        elif i.get(f"gas{index}_v_mode") == "自訂流速" and (qstd > 0 or preset is not None):
+            vmax = n(f"gas{index}_velocity", 0.1, 100)
+        else:
+            vmax = preset or 0.0
+        name = custom_name(i.get(f"gas{index}_name"), f"gas{index}_name") if typ == CUSTOM_GAS and qstd > 0 else None
         needed = math.sqrt(4 * (qactual / 60000) / math.pi / vmax) * 1000 if qstd else 0
         pipes = sorted(PIPE_DB, key=lambda r: r["id"])
         row = next((r for r in pipes if r["id"] >= needed), None) if qstd else None
@@ -777,6 +784,7 @@ def gas_result(i, warnings):
             raise InputError(f"{typ} 超過原始管材表範圍；不可把最大管徑當作符合")
         result[str(index)] = {
             "type": typ,
+            **({"custom_name": name} if name else {}),
             "standard_lpm": qstd,
             "actual_lpm": qactual,
             "pressure_abs_pa": pa,

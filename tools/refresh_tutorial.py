@@ -66,7 +66,7 @@ def main():
     page = page[:match.start(2)] + encoded + page[match.end(2):]
     page_path.write_text(page, encoding="utf-8")
     readme = tutorial / "READ_ME_FIRST.txt"
-    readme.write_text(re.sub(r"V5\.5\.\d+", "V" + VERSION, readme.read_text(encoding="utf-8")), encoding="utf-8")
+    readme.write_text(re.sub(r"V5\.\d+(?:\.\d+)?", "V" + VERSION, readme.read_text(encoding="utf-8")), encoding="utf-8")
 
     archive_path = tutorial / "Facility_Studio_Beginner_Tutorial.zip"
     with zipfile.ZipFile(archive_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:

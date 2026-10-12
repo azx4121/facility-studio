@@ -144,8 +144,7 @@ with tempfile.TemporaryDirectory(prefix="facility553_gui_") as directory:
     output = Path(directory) / "照明.txt"
     check("36_export_current_formula", app.export_result(output) and "公式" in output.read_text(encoding="utf-8"))
 
-    app.more_choice.set("冷熱水快算")
-    app.more.event_generate("<<ComboboxSelected>>")
+    app.nav["water"].invoke()
     root.update()
     water = app.active_page()
     check("37_more_tool_navigation", app.current == "water")

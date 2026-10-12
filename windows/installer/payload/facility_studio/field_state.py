@@ -6,6 +6,7 @@ placeholders; mode logic must never consume an inactive engineering parameter.
 from .schema import DEFAULTS, FIELDS, PD_DEFAULTS
 from .ahu_schema import NM_DEFAULTS, NM_FIELDS
 from .utils import uses_largest_motor
+from .gas_catalog import CUSTOM_GAS, has_demand
 
 
 def main_inactive(i):
@@ -43,6 +44,8 @@ def main_inactive(i):
     if i.get("upw_quality_mode") == "自動參考值":
         disable(["upw_res"], "採用水型的初估電阻率參考")
     for j in (1, 2, 3):
+        if i.get(f"gas{j}_type") != CUSTOM_GAS or not has_demand(i.get(f"gas{j}_q", "0")):
+            disable([f"gas{j}_name"], "目前未採用自訂／混合氣名稱")
         if i.get(f"gas{j}_pressure_mode") != "本路管內壓力":
             disable([f"gas{j}_barg"], "採用共用最低管內壓力")
         if i.get(f"gas{j}_v_mode") != "自訂流速":

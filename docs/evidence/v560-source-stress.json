@@ -1,0 +1,3980 @@
+{
+  "version": "5.6.0",
+  "base_main_commit": "62287438b51a7ca699cc5ef57b2657f2a13e001b",
+  "manifest_sha256": "d3209ae321f2c8ef5c8946de89f0adbec0006f6a48deec130f9c91fa11c0d759",
+  "scope": "Windows and macOS source on Linux; native delivery is recorded separately",
+  "platforms": {
+    "windows": {
+      "summary": {
+        "version": "5.6.0",
+        "main_commit": null,
+        "tree": null,
+        "source_sha256": {
+          "__init__.py": "3fa7a5a86c167f210b4f331f5ffd36e6ce9bfa4f7c9443fee6e8d3e7c64be223",
+          "ahu_desktop.py": "ac2d99786c85d94101a32659db6f47af273b43e382532d6ae255498b43f37313",
+          "ahu_engine.py": "8988263dbe03d2e2a2b65c7f7699daec1cbece30cb3363c917872bd3741b66f6",
+          "ahu_schema.py": "d240fbd622fe72a9b17512d7b3a5c366308236808022a61ef53556c8e79d0e0b",
+          "ahu_view.py": "dc20491c3bdc25c1063302bf3eee4a0d6fb7bd5a25e4f6b5cb41f84b5a83ba6c",
+          "air_chart.py": "b7f98a337bf1e428c03f5de70c49f3b68d94915b59138b4f4615cf8a426b94d4",
+          "api.py": "1005baefa9956de78e6e52749a6404667876776e4811f38596fbde3f5af25975",
+          "cli.py": "af64370b895b9733674a3f85d07a2bac1ecc5f02119c8d6945946e3448ce7840",
+          "contributions.py": "5130aa9a3a7b86eba2c826d8ad100cb8d18aa223bea99102365a869f6bd4638f",
+          "data.py": "d70122ee5af9522e46d79e5bbffcdd6fef2e70ec8ea765c399b777da0d66d006",
+          "database.py": "dfa23d0cb0e42c8e120be6092e427f65b5d27e2de0d567cb6b8b1f3eeca3b203",
+          "design_workflow.py": "e085b1a80915878d722e755e5a0f00c28577b75e55cb5480a9641b9541374f64",
+          "desktop.py": "6ab547b2b1e3c972b935209454680dbd3d49f264c4ecdd4f40c46f6b56878e07",
+          "display_helpers.py": "0c88d7d63ba0431325613fb75932f3d54896f0fa90394aa469bb67949e10119a",
+          "engine.py": "486ac5d63b871d7ec535e512690292f1d8f1933a1eb6b4914b4a8c4c08f94367",
+          "english_catalog.py": "1b6b6e9cc22bf0e6c252a598b0eac1f4b945550f0d5e26aaaaf8ce01afa703a8",
+          "equipment_analysis.py": "edf55334d108ec8523028602a76ecab9ce04f24f4c5790e31a47c6f43cfb735b",
+          "equipment_io.py": "e1d4a37aed422a1f7d02871473a59720b0a5ff88d4e7abefecfa31cc48342714",
+          "equipment_schema.py": "e9b95806ee2e68fcdf46f7b31431d2fcd25c65c151b97dc662e51ae781957e74",
+          "equipment_view.py": "837aa7dc9385e5e32904ac1b1acf39f1ef98dbd291f74c8ceb59cdaa9c94ea9c",
+          "errors.py": "3b8ac31ea84ed8b44b48a4d719ccceb3b62f698264fba78df95e8d1ff1f703d3",
+          "field_state.py": "d6777a65793a5ddfce17097b205cd98b07470e77adf59042c7a2a2f5696562af",
+          "flow_toolbar.py": "2cf31a5f962c58603ddc72e40dcd72dae5f2b012ef7d77347e79c3586a498f98",
+          "gas_catalog.py": "14c155c03912f6e1cbe6db30fb31f4a43e942088998742a20e03ef0daba044c7",
+          "html_report.py": "eb26d56f9eccf6f123c312cc322e714f3a62648ade682416e6e9c76552cb4fe2",
+          "i18n.py": "8a8b24f71fd0dca4e4937186c0418afd7102338ef8c774b996f4465a8e68a7d8",
+          "inactive_acceptance.py": "283d75dde46f9fbc632d194a751f02aebddc5da7fa2edba3376db4bb13bce271",
+          "json_io.py": "3d214c49a83f468dec8dfe6d80f03881854321bb9c6e422c48f1f1c8ee4864ea",
+          "keypad_acceptance.py": "762dc7de3391edc72c904a610352d7a0873c735366590f470be18acecef8d2c0",
+          "language_acceptance.py": "920678e9dd1ac9eb120ab3e5650c67677a665688c6a71aa5b1c3322070a0aa21",
+          "localized_plot.py": "59f89d77fc2308345100d2d7ea97a9e45632ee272bd444e0519e7aba2dd17432",
+          "localized_tk.py": "ae5c4fae11c93af1abeba63f713ee11c1dfcdde827fcc5d85bbf4779de74a40a",
+          "main_view.py": "b65e2de7592a33263fd5349983ee04c7b6ac5772dc7cf134f349682eab787157",
+          "native_redraw.py": "e67bd7653bb12551932d1c97a4b40082bf02699f2569d5e968513ad0ca7cacef",
+          "project_store.py": "74a51aea521a59e4500afbd0920c29125740b3e55f3f7f625f037479178f19aa",
+          "quality.py": "489a28917791ef2ae51dd0dc345cd28443d2d5852db91cc8837b9e4061760253",
+          "quick_tools.py": "72ebec3c209bd386604f20b769213abf1b80683673a1dc54b58c64339c05b228",
+          "reports.py": "f87ab5b979ce7ed010bada1745caf9bc3836b81561d452f8d90f893c813e2a2f",
+          "resilience_acceptance.py": "1537b91bc0e92a4b62f31fb8dcee448f37b3e63745435130cfd731cb34f50541",
+          "review_acceptance.py": "26dd509c508c14969a9729b7ea086a0e0c45cf237c8705ab19bcbe13a0e4d200",
+          "schema.py": "15d98e60b0b66f743441d9250cf51df311bf0707aa597429a37fca78e835fb76",
+          "services.py": "4e53b984e3027125232b051cb98f81aad87c6dced2cf2b8e1fd11cd1597a3b23",
+          "session_controller.py": "3718ea31760e45d83f57877c2642460d89b5cb8269afc59f270524527ca395c4",
+          "simple_desktop.py": "3366f961941a72ebf7f5badf952fe2f90112b531db2c8749f0eda45a0202361d",
+          "simple_engines.py": "fded22c8a2e80e3ec5c2dc75c6ba1fc21a03177c727976a91be65e533fd63f41",
+          "simple_reports.py": "d834fd5d7fab7168001df736659e3da62d10f18314cb072cd67a59ee42b8d322",
+          "simple_schema.py": "2ffda6c4a97ed08c5d5fc9f8630ae508066786bb29ad06fe43c616634f06738d",
+          "template_language.py": "f7177bad498059d1fef7bf5cc9038d0b117e595bd730e19fb6e1a74980efd6e5",
+          "tools_view.py": "82a52c7d772a31c1b7d6e59bb9c2f16c200b3a7117502d5f788fdf3446ef58bb",
+          "tutorial_acceptance.py": "4a7d287f1e0288498620cac72ac67b0e0cdfa915c159182fa117b35bdb5f944f",
+          "tutorial_help.py": "0dab7cecbe03625c87a5268bed4e9b65c89ea831a2e8a8cb33e258e30065ce30",
+          "ui_common.py": "92b67626c261edfa05b1d109c6835dafbb28ba41f236db8b7a04df88c63a4a9a",
+          "usability_acceptance.py": "69d2842f6113488fd7240a854fd1cb7a5ae03b0d09dea6ca7cc84ba4158dd8ee",
+          "utils.py": "5586fbe79f66c5d74bb71abaa3225d3335ce4e5e611ce0653c7692e2c2fb075f",
+          "v560_acceptance.py": "8606f57d8c335b40d20ebe611219aa5e7cad6b9a460a621014f965a63da50679",
+          "version.py": "93cb4db3fb07f4136cd2b6b9c324b65d3b036efaf182c2b803c2fd1004ceab93",
+          "winter.py": "e93461af4d72c055febb85a27669f9881d4e7f9e91b8fadf4519b32a068297d0",
+          "workspace_store.py": "8b55ef58affaf12c8fcc5269a6953724f7c50f9134c7079a6aabd37cadd5649f",
+          "workspace_view.py": "3f897e4240beaf9e66e6895898c76372fbaf8dfe405cc54d7668606f3f765e5c"
+        },
+        "source_platform": "windows",
+        "host": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "finished_utc": "2026-10-12T08:35:12.040019+00:00",
+        "scenario_count": 100,
+        "original_manifest_sha256": "d3209ae321f2c8ef5c8946de89f0adbec0006f6a48deec130f9c91fa11c0d759",
+        "distinct_physical_input_count": 100,
+        "repeat_per_scenario": 20,
+        "calculation_calls": 2534,
+        "isolated_hvac_calls": 286,
+        "desktop_domain_checks": 100,
+        "total_main_calculate_calls": 2920,
+        "full_project_calculation_scenarios": 78,
+        "partial_hvac_electrical_limit_scenarios": 11,
+        "successful_calculation_scenarios": 89,
+        "expected_engineering_rejections": 11,
+        "software_passed": 100,
+        "software_failed": 0,
+        "checks": 18450,
+        "failed_checks": 0,
+        "quality_status_counts": {
+          "未達條件": 28,
+          "待補資料": 61
+        },
+        "partial_report_api_probe_count": 11,
+        "partial_report_api_guard_failures": 0,
+        "seconds": 22.934197700999903,
+        "latency_ms": {
+          "median": 4.746578999856865,
+          "p95": 13.824443999965297,
+          "max": 113.55084299975715
+        },
+        "rss_peak_mib": 111.71875,
+        "scope": "Linux headless source stress test; both seasons; no native GUI execution"
+      },
+      "raw_evidence_sha256": "f28a98327ba0e5e24c1799090c104e246aeb34c4523f63a4c1480dfc06982096",
+      "cases": [
+        {
+          "id": "CR001",
+          "family": "一般潔淨區",
+          "input_sha256": "359a7e923c4a11883d83b8589dce7967295d5dec562c52904dab682db0173521",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.24272954200023378,
+          "outcome_sha256": "6e781df0dcb96a487c649c01a2596dae3f207fecae4d93e89416fd869c11d784",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR002",
+          "family": "一般潔淨區",
+          "input_sha256": "aa7a6da44944a0f5970bcdaa31b3cee9865f8417a29dac1ebc6460e9b3dd2f2f",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.2178290880001441,
+          "outcome_sha256": "77f0be9a1748bd0780461f5cda09c3eab6af99460bd358df3fb87b4475446ac9",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR003",
+          "family": "一般潔淨區",
+          "input_sha256": "f18c6027410b674b2cced493144bf21fdc7c7b8de64cc050a67ad9a2dae96a10",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.30237653299991507,
+          "outcome_sha256": "07a9130ab7bbe06c2c62a6ea0f9081eaac3e6c09e532b7df4aea7f55eb8e1d4d",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR004",
+          "family": "一般潔淨區",
+          "input_sha256": "b08e8774699a176bd8e8ab379dfa18171665f4001ff43e27348f0c6c8daf3c66",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.18792402100007166,
+          "outcome_sha256": "222fe22066c94e7c35e4e8ebe5cdc6feb087a79981eafce5007f9d23f868253a",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR005",
+          "family": "一般潔淨區",
+          "input_sha256": "0fe2cb0c6f1fb122a35c1d5ba2136de2eee59bb3b9c9a233e56b1471e02ff6d7",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.25311162999969383,
+          "outcome_sha256": "948894090d08cb71b7920b4c145a119691a24081dd6e48bb36bcf2995b0b025c",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR006",
+          "family": "一般潔淨區",
+          "input_sha256": "8e4b4551a99e70434eb55c1cf09841604b7e6d1c7681fce31e9ca99f80fd169d",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.16309437800009619,
+          "outcome_sha256": "078f6e452bbf112b0244116b038f90eeff50a237c280009ea956b87029ad8838",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR007",
+          "family": "一般潔淨區",
+          "input_sha256": "f92d03973668887c996624ca68fa01abc9e9a035833dc6c07592b2c14a0d11f3",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.15688714599991727,
+          "outcome_sha256": "a019f2b7a5b5235c63d2f191e0ebd3c965dc261084b54c3cdd17fc69590a8376",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR008",
+          "family": "一般潔淨區",
+          "input_sha256": "5ead2f04e8131f3d6fb8a8a02df37b535ea2dbda3cbd25243080f3b8e14ee189",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.25733544500008065,
+          "outcome_sha256": "88b341c9fe3c5e3cfd0cc171872504c265ce1bf6bfc4d2aae029731e4c7f3e4f",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR009",
+          "family": "一般潔淨區",
+          "input_sha256": "db7102e7e047493b9322bb9416f808a0eaf1bde484c828fcb2d3b10cd8dd567f",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.15452529200001663,
+          "outcome_sha256": "5ceec020bc390606792cc9f6e473cd7468b3cd88f71d874c45a380a3c7bbdbe7",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR010",
+          "family": "一般潔淨區",
+          "input_sha256": "245ff9b585cc6cfffe81ba0c0a4fa20c311730a92bb35c445569c324a123489c",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 211,
+          "seconds": 0.15772787400010202,
+          "outcome_sha256": "9973ebc1db0a8c9c008b3d9be046b6f81e94658446a4de5857bb1f0bc83720f2",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR011",
+          "family": "高潔淨循環",
+          "input_sha256": "9564e3d16bc17d69a7297ddc97fc662b843244733a12e2aa0e8cb6b29c87a160",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.16836335999960284,
+          "outcome_sha256": "58a2bb669234f7a8774c2c775b89ba233c412c7b98c95d40255a8fbcf3ba0c10",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR012",
+          "family": "高潔淨循環",
+          "input_sha256": "bba536bd97c20bc365e2e12fb85cedcac16814cd06e3e3e344c927386a3a8bdd",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.17567653999958566,
+          "outcome_sha256": "867ce865bf78c3d660dbbc9dc36852db914c17bfe465908dc39cf1086d33d5a1",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR013",
+          "family": "高潔淨循環",
+          "input_sha256": "c29429d099a0d776b829a4fb13c3a99142d9e28a4624621010c5ba7caaf816e4",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.29534056900001815,
+          "outcome_sha256": "07f244e1822b0f5d0084f4fbb6f663e0c2aff50c5f259ef1faf8a7c56b598cea",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR014",
+          "family": "高潔淨循環",
+          "input_sha256": "c0ce79575b02493d5b38d2d59fad270f39e2b35803b6ea87c104e2e08907fe40",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.29712065000012444,
+          "outcome_sha256": "922d0b94af802b1279d06cfdfad267ba417b1aaa9f38243e17d9a628cdd94c80",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR015",
+          "family": "高潔淨循環",
+          "input_sha256": "6e30ff6ab94d76593e314666590c6f7b0aa8f59995e375796422cf4813636d53",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.20260908599993854,
+          "outcome_sha256": "5340def665bfd5fb4553b3bc605b3932b4f22692e8d743d86ed53d5b1c2a0e60",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR016",
+          "family": "高潔淨循環",
+          "input_sha256": "cf2ca32db54640e3d2c7386b1b016aac50b4a7403baf803f40c6cf4a6663627c",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16455453199978365,
+          "outcome_sha256": "def12b407a36710d4c7749ee544d24689ea83de793e1f4dea2c2f8f5b0741b68",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR017",
+          "family": "高潔淨循環",
+          "input_sha256": "815730f845a022dbebfd087e352942b03c24ae84e465d8df1698b5ea96cba4cd",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.15428257499979736,
+          "outcome_sha256": "2906d4b8cbd75c6c8ff3c8895f56ad134546bcd21f1a3fc66f3ebf97ed41a43a",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR018",
+          "family": "高潔淨循環",
+          "input_sha256": "caf9a8e4d55045b6ce6f36e76065bbf2de938d50ef1eace42dd2787c09274309",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.16819489299996349,
+          "outcome_sha256": "040786aacf59b224c31a0f01cc116a191a82010aa04be27f9edee42df345abcc",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR019",
+          "family": "高潔淨循環",
+          "input_sha256": "991d7f5fd723787071b53f517e1d69b06a01a319df7d87b4717c9558e72fcd0b",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.18138420700006463,
+          "outcome_sha256": "f922aa6a3f50e573e820468ca23701015512c2b381b22f208a3fbdf16911ecd8",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR020",
+          "family": "高潔淨循環",
+          "input_sha256": "e496e97d0c95d0bc15fdcedaae3635d7ca24a0205580e9dac77d8cd2e0e56cac",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 210,
+          "seconds": 0.15585490100011157,
+          "outcome_sha256": "3a0689467c0be1a74df176b2bf952ad26c1f23aaf03ef6b1ee781e41b6ab1179",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR021",
+          "family": "高覆蓋送風",
+          "input_sha256": "f7c2146369ed5bba2290dd2da5766af24f823650776616d5ba435c6aeef7a71a",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.1608382869999332,
+          "outcome_sha256": "ec919d0dc8b47119cff45c5d0074f69ea6f9c4a0e68fab84ad0b5803f7c9825c",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR022",
+          "family": "高覆蓋送風",
+          "input_sha256": "68f9d7163b2cb51fa51157602aa627b6d0e0e21ee26d55f04294ccef8796c217",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.16420457300000635,
+          "outcome_sha256": "fe9b703d6bb1648d76395c754dc0baf7841107f9b2c8491457563023d97da615",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR023",
+          "family": "高覆蓋送風",
+          "input_sha256": "cfd6616893bea3320b97c6053948d756ca964feae92fb8390511deaa47ebd1ce",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.14597448799986523,
+          "outcome_sha256": "ee46bf87dbef92dffe28aae9a5f4e3550a6c189c0781cacea29a76adb9f80352",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR024",
+          "family": "高覆蓋送風",
+          "input_sha256": "5c80f314985771c11e2031232f6eb57105f5ded8110f6d35d34a84611f5d1f91",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.16103316899989295,
+          "outcome_sha256": "f18f1f918f24903f8f0bf4cd2f8dc89f770edb1e301fa88ed6cd3e2a7df944cc",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR025",
+          "family": "高覆蓋送風",
+          "input_sha256": "7a91512449c416493fd12a00e3d218f61f4a8c0f3f8fffc2244ab131ffb0288b",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.16419905200018547,
+          "outcome_sha256": "a3bc0117da746c07fd1f76823731c9e5d9269aea753ac34d9d67f5bebd9ba124",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR026",
+          "family": "高覆蓋送風",
+          "input_sha256": "2174e0a14afd8d99aefd43e413ac75a73a574986f73f337398fe3b3e7152c117",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.15748098099993513,
+          "outcome_sha256": "1965dfca30736c9efb4ff12b90b0675110a7e91fc559d5744986c9c38ae87fcc",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR027",
+          "family": "高覆蓋送風",
+          "input_sha256": "13f5545bbc002b256a22e5e116ed345fdaf9c368ab7e681246b9cef36a87e2af",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.15587304100017718,
+          "outcome_sha256": "18d49b61b292f41108c947779427020a4c0c3364c09b41784a3ca7013fea237b",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR028",
+          "family": "高覆蓋送風",
+          "input_sha256": "048302209da0babfe97bcf22ff219256ce1f59d33116b69448694ee4a63703dc",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.22382053399996948,
+          "outcome_sha256": "7c52fc5fdcd8f771f9b28f1aa6a42029fe9b8dfc48f0b4c4b12e81b7720b9752",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR029",
+          "family": "高覆蓋送風",
+          "input_sha256": "d9430dd1f4661fd673780905427559d083275e59cb01f3cadcd5e46d4b67a446",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.15185457899997346,
+          "outcome_sha256": "7c75579a1e3e65646c654303a1b636695fc7e26f22ae6ebc2300bd8af83c6d2f",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR030",
+          "family": "高覆蓋送風",
+          "input_sha256": "2d00138800c7abe3858279de8a674d6c0dbfb1085500634cdac8fc88511ed252",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 210,
+          "seconds": 0.17247400000042035,
+          "outcome_sha256": "a7e2cb5176331286781c376c682f9256365d5bab576a0bc859e2efd06440d22c",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR031",
+          "family": "高製程顯熱",
+          "input_sha256": "fb978d01c31202a30cc25399c1cbb4ef168a0c0a697d435630c4e65ff79b0c97",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.16977807800003575,
+          "outcome_sha256": "8828f76fefb0c164764415534632274b0d8272cfa3dadf73bee37e90eb872037",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR032",
+          "family": "高製程顯熱",
+          "input_sha256": "792832cf6b73f64ff4cc6ab0f310d79dc00d6c54b93d20a647b1884458470de8",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.15364372900012313,
+          "outcome_sha256": "939b2bd7dcd7013e7d8159a783d6bc20a1f2fb2f2fe717675ee3817e92134397",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR033",
+          "family": "高製程顯熱",
+          "input_sha256": "8e1e16654ba81c90de65d4d3d5fda9320b39c5771f81f5ee2b2d6af4e1d9a880",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.20134432699978788,
+          "outcome_sha256": "20596446b84742da0ea15bb2a1dd57a79736114ff31b504ba8d35c1dbfd90cdc",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR034",
+          "family": "高製程顯熱",
+          "input_sha256": "1b0c50117f258c2cdf587509ee67bb9d64c4830b8b980d163bfca891e986f64b",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.18385966400001053,
+          "outcome_sha256": "ccade07e0cedb4bcfa57854ecdae62d207064c228657e19ab730e4eddef7a9b6",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR035",
+          "family": "高製程顯熱",
+          "input_sha256": "0d3500a33d6b3770e3ad46cfc6da143c82c7ffa671abd9dfa38152c309563b1e",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.15514607599970986,
+          "outcome_sha256": "dd2718cc2223dca28c20aba932da01cf6561649f864819b5047cd54b437d4519",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR036",
+          "family": "高製程顯熱",
+          "input_sha256": "89f0de69ae4df589cbbe323738c2dccb9749d0e2fd4317445939e05822c57a53",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.15474565700014864,
+          "outcome_sha256": "df7eb185e00f3b5515f8e03f621c6432edbef2609185d3f5f325df75f911fa07",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR037",
+          "family": "高製程顯熱",
+          "input_sha256": "1a6e452558bf04e065bc4ddcf827d83070f992d0f887b2617fa344e1104bd89f",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.16333933399982925,
+          "outcome_sha256": "661d84332967d7b6275dc386150caa16b09302291bebff30bc3536addac3b0f7",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR038",
+          "family": "高製程顯熱",
+          "input_sha256": "52d27b61c5a802de38252d306c8acc7a3b0eabdc6aa8c4531b8cd83a2b689894",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.7320620240002427,
+          "outcome_sha256": "f970639193a388a334597d5dfa36a0798b4e0cb8a55a27d1dc2e36e9b09533fc",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR039",
+          "family": "高製程顯熱",
+          "input_sha256": "208a27d6f538d1fa6ee7510eb35c7528b8435103ef09ff5a35e5631a04ca728e",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 199,
+          "seconds": 0.21844639699975232,
+          "outcome_sha256": "f6864ca5958dc6b99ecc5424e478fcdf74b34df5141b894673f5563f5bcb0107",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR040",
+          "family": "高製程顯熱",
+          "input_sha256": "40d3d0aebcf7692b46c3b45fcaa91072d2d266ff3c56b491200d83a90750eb67",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 207,
+          "seconds": 0.24412080199999764,
+          "outcome_sha256": "0cd4e02be303d7f46bbc4ac7105e3e48e0bff1c986f0b1dc0e8d76cdb7540a28",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR041",
+          "family": "濕製程產濕",
+          "input_sha256": "09212c541769ad44a0b57c66c6bae9d9a311bac8da7d378bade3b4b940363b2c",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 208,
+          "seconds": 0.15797040799998285,
+          "outcome_sha256": "7965006d35c047db02c650ae65666b122c24fa2fca302740d18f990ce40fd856",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR042",
+          "family": "濕製程產濕",
+          "input_sha256": "772cf89f9b82764ef474f3090986cb0cab427c5ef48383cb221c9d5116c38e36",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 208,
+          "seconds": 0.16273848899982113,
+          "outcome_sha256": "f5ebc16656d1cc8fdb4dca48236a2a9505716504ac8972299d4c3f20737bb375",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR043",
+          "family": "濕製程產濕",
+          "input_sha256": "0c6087ea46cd85877807e773fc306059db4ef4abd01d9badd91c5f7971063be3",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.1547038080002494,
+          "outcome_sha256": "f4d2a9fbc7ec96316875e096553f4a4a7fc4b4d196be94b733e776bfd1646551",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR044",
+          "family": "濕製程產濕",
+          "input_sha256": "ce089c85a6197d0f4de9a61edf395e876842743aee3d441918442ae346d2c6a2",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 208,
+          "seconds": 0.16154120999999577,
+          "outcome_sha256": "fca6a305c6e4d6aeed1d221074f55c6bf77721ff737a4f2d23f373ed578929dd",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR045",
+          "family": "濕製程產濕",
+          "input_sha256": "1d96175e6746ec8d283626145a1654712374047efc06b903c4499326627620de",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 208,
+          "seconds": 0.20946846400011054,
+          "outcome_sha256": "7f91fd61ebb903d76cfd693704db147b87d42a67d904b12f024d9bc93047e9b7",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR046",
+          "family": "濕製程產濕",
+          "input_sha256": "83c500cd476dce9b9221a6f634dee0d13bf24765121febc3df50eb79e9fd5952",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.1943841990000692,
+          "outcome_sha256": "1146ed5f27281fd534cf81cb55cdd8ca0987f1c753d21b17d456a9e638d9e420",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR047",
+          "family": "濕製程產濕",
+          "input_sha256": "856ccfd7f79e07caaf2e707fca76b6ccea650dcb1048b07f5e80f607ce459d14",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 208,
+          "seconds": 0.2924977319999016,
+          "outcome_sha256": "59c2f255fb1fcff5629bba0966e8a731c14d337d80f032baa36b57041149e7e1",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR048",
+          "family": "濕製程產濕",
+          "input_sha256": "6c043ca6cf68af197348cb6e5d9b0397878f63b62ed258fcf6ffdd45f4719943",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 208,
+          "seconds": 0.412829112000054,
+          "outcome_sha256": "5fa99494fe66fdf7d47d67bf819df5ff677af39682da9b1e6465b75e8b683f2d",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR049",
+          "family": "濕製程產濕",
+          "input_sha256": "fb02fca0a1c56b79b00ef8ea4609cb3ff5124d3271168054e4ec6a346dc2222b",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.5136850109997795,
+          "outcome_sha256": "0d05903a15e78bdfaa2f966fa05a1c55b538d134d010698daa68010466f7ee3b",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR050",
+          "family": "濕製程產濕",
+          "input_sha256": "2ef8b24d0c9b1c4d5464b51dfff529cb848189c6d41818018dd265990c117e84",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 216,
+          "seconds": 0.4931809429999703,
+          "outcome_sha256": "a14b16cb92ffa6025c4d7938fd40a883a9ad50a5c0d2000be9624a68dd9cc063",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR051",
+          "family": "低濕度控制",
+          "input_sha256": "7683d45dafdb590e57d2e2fe57d8f402304ebde5cd775fc64827e16510bbdf3d",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "可達含濕量不足以處理室內產濕",
+            "field": "chw2_in",
+            "witness": {
+              "minimum_w": 0.004270328987975659,
+              "room_w": 0.0032638005768017542
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.054475563000323746,
+          "outcome_sha256": "4214786fbf9751b791e380448abec64f909f1209f33b9a4da87ee2b6086bb037",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "chw2_in",
+            "message": "可達含濕量不足以處理室內產濕，請降低二段 ADP"
+          }
+        },
+        {
+          "id": "CR052",
+          "family": "低濕度控制",
+          "input_sha256": "420cbb066d9e5791a9ce7f2a9df3551da5bde737a53ed41e82296da845f2cd56",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "可達含濕量不足以處理室內產濕",
+            "field": "chw2_in",
+            "witness": {
+              "minimum_w": 0.004327304526467183,
+              "room_w": 0.00426842402178465
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.05246183099961854,
+          "outcome_sha256": "4214786fbf9751b791e380448abec64f909f1209f33b9a4da87ee2b6086bb037",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "chw2_in",
+            "message": "可達含濕量不足以處理室內產濕，請降低二段 ADP"
+          }
+        },
+        {
+          "id": "CR053",
+          "family": "低濕度控制",
+          "input_sha256": "ca07e8a634922a925cece1d6c9f23438f2395e3a156b544d47b0216ee82241ac",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16362176300026476,
+          "outcome_sha256": "f8700b992f3dec5b41e513d5628b706826277b72905186279ce51fea042d4322",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR054",
+          "family": "低濕度控制",
+          "input_sha256": "d9c6cb048903458e8d3ac747c2060a87f1267596b787ecfabc98ff8b22cb4325",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16754900500018266,
+          "outcome_sha256": "ac5ba1c1fabef51662e4306ed3f782373b7009bbeae05e1bb9be25e54d2eafd9",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR055",
+          "family": "低濕度控制",
+          "input_sha256": "7a0431cb447885b6a725fa9cf30225ca44a0017cd970679c9a9956b7ef99847b",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.17437541299977966,
+          "outcome_sha256": "2ec18a04ccba601baf861e5d2a223e426ff91f6abcff39beb1ca2aa86ec335fa",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR056",
+          "family": "低濕度控制",
+          "input_sha256": "3d2347688cd715e6081d187eea8bccb2bbff2f4f6c123eb0675c8db46796f1a1",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16837096900007964,
+          "outcome_sha256": "37d076f49d5ee515f70998c85d2765929be51655feac6b1061358023ee031374",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR057",
+          "family": "低濕度控制",
+          "input_sha256": "70663633c04972f38c2e529aabf5b29852629f9e169987d8536c6ae60ace40fb",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16820472499966854,
+          "outcome_sha256": "422c268552a2d0895aeced19e3c1b9b72699877c282ac57f44a96c51d9d46198",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR058",
+          "family": "低濕度控制",
+          "input_sha256": "0f5195a45addb0a570d4027fae27df0544e0108055013103c4c8e5b45f6940c6",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16650379299971974,
+          "outcome_sha256": "21c7154672ae33c048efc2efcb145cc7194ef564457758dfbf84f867618083ee",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR059",
+          "family": "低濕度控制",
+          "input_sha256": "824b271b512584a754cb0c6b53415b5e7e9800f0869137f0d730381b8e7fd134",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.1548249540001052,
+          "outcome_sha256": "37440afc21c80e8bad9d17defc996be1fb583363df519ab60fca3bef6a9a7a5b",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR060",
+          "family": "低濕度控制",
+          "input_sha256": "982924e7c52e8efcbf2915c23f7346491ea18fdf2a11868517ef7182ed3ab17e",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.16392158700000437,
+          "outcome_sha256": "dd90608f894e91737fa2bc459bba49f30b15f4d4cbb204b2b2ca2bec7f7c7c94",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR061",
+          "family": "高溫高濕外氣",
+          "input_sha256": "ed72959d6f0a747dbbfbfb5978a494be1105f7c351212cdba926ca6429bea405",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.17572466899991923,
+          "outcome_sha256": "063973a0d48519066a3a87cd91d789227199e44516a2b1fcc27f2e0201b7a3bd",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR062",
+          "family": "高溫高濕外氣",
+          "input_sha256": "fb47161b7197962563a763c678f7df021c1c2f8f816ccb09be6700c57a076792",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "空氣狀態超飽和：",
+            "field": "pre_t",
+            "witness": {
+              "stage": "summer C1",
+              "temperature": 22.35,
+              "rh": 101.95050531344751
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.054496673999892664,
+          "outcome_sha256": "d608eb9e2a6660c70d39905fa262b665d00f9d1b5cd7773e94503bcc322f10d5",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "pre_t",
+            "message": "空氣狀態超飽和：22.3500°C、101.9505%RH；夏季 C1；入口 35.6000°C / 80.0000%RH；ADP 15.0000°C；出口乾球需求 22.3500°C；請核對 C1 出口需求、入口與供水＋ADP 裕度。"
+          }
+        },
+        {
+          "id": "CR063",
+          "family": "高溫高濕外氣",
+          "input_sha256": "d8e8a7f026b2a8c42f16a614d5e58bb83c52366937bd7a6c5779173ac5740c4e",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "空氣狀態超飽和：",
+            "field": "pre_t",
+            "witness": {
+              "stage": "summer C1",
+              "temperature": 22.700000000000003,
+              "rh": 106.4594926068651
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.0547296859999733,
+          "outcome_sha256": "1a7b0925e67ec60c716be5d3fa13783ccf0d26e1dc0a6d5692104adcd5e11b54",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "pre_t",
+            "message": "空氣狀態超飽和：22.7000°C、106.4595%RH；夏季 C1；入口 36.2000°C / 85.0000%RH；ADP 15.0000°C；出口乾球需求 22.7000°C；請核對 C1 出口需求、入口與供水＋ADP 裕度。"
+          }
+        },
+        {
+          "id": "CR064",
+          "family": "高溫高濕外氣",
+          "input_sha256": "4c35d758399a0ceda69fe3fa841ec755156eb4090559e7f3b1059937adb1e1f3",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "空氣狀態超飽和：",
+            "field": "pre_t",
+            "witness": {
+              "stage": "summer C1",
+              "temperature": 23.050000000000008,
+              "rh": 111.20716755523212
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.05127230400012195,
+          "outcome_sha256": "32a2b5253bea326c867ae9a75a2b251a6bcc539f3b4ec426575b67d6ee163f41",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "pre_t",
+            "message": "空氣狀態超飽和：23.0500°C、111.2072%RH；夏季 C1；入口 36.8000°C / 90.0000%RH；ADP 15.0000°C；出口乾球需求 23.0500°C；請核對 C1 出口需求、入口與供水＋ADP 裕度。"
+          }
+        },
+        {
+          "id": "CR065",
+          "family": "高溫高濕外氣",
+          "input_sha256": "9273d9112638a868136aa24428d52eb754d4bde1c0a61113f1ad9d6e044f1fe6",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.17288656400023683,
+          "outcome_sha256": "fea59bdd6c58062c32312875c5c0bca89be6e936ec6aef4660d412eb99baee12",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR066",
+          "family": "高溫高濕外氣",
+          "input_sha256": "7f829bf7b07c5f45dfda9984793cbaf9009fc4f95b23d66942833e86e3898dc5",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.1737242649996915,
+          "outcome_sha256": "d8b3541b7fb5f7e97892dcfe5ef7c3bce88e7c0c66366a78e3b520ceb651a89e",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR067",
+          "family": "高溫高濕外氣",
+          "input_sha256": "4221597168a8d7458570ffae6a27f99c48d9e3683703347310650ec1086e65e9",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.15454262799994467,
+          "outcome_sha256": "401747dab68be127d82364b16ff215e716c3dc178746b482b7950208e352a364",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR068",
+          "family": "高溫高濕外氣",
+          "input_sha256": "17d49b05d2043ed49004acf925d79eda5381cab50a87a6f3c7def9567027940f",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.15789033000010022,
+          "outcome_sha256": "36149f9c546366da39ca8884b8eaaf3fdc4f9eec28ea7487c5704ff5831c0b32",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR069",
+          "family": "高溫高濕外氣",
+          "input_sha256": "58832758f4bc8d336eacde66e8eaa02d436b465baf168ac1cf36819128761fa1",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.20931685999994443,
+          "outcome_sha256": "af5a3ea69c3bb6d33236886aeb55d6a3b2f31e1abd32a3e7dbb8689cb3fb4df9",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR070",
+          "family": "高溫高濕外氣",
+          "input_sha256": "ae8485ae9bbe03948acaa92d0f938211620bd25d5dee40066292373d22578bad",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.20948214200006987,
+          "outcome_sha256": "ff167a5e9f9e768710d7a9ed6f1a931715baae9415ed228cb3260cdcd506f6da",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR071",
+          "family": "寒冷冬季控制",
+          "input_sha256": "569d3c1f9906031090b4ae5afc64cb5f52f071226c61c89f083ba9f00b552f74",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.23732382200023494,
+          "outcome_sha256": "247ae2303b80d79ecf3513d5a15f73d4c2a4601e61c60a3b9295c6451eb630f8",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR072",
+          "family": "寒冷冬季控制",
+          "input_sha256": "607d8bd2425f5048223320bd1a26c6a3d9258b15b8301507b96d8abd411ba537",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.3101374479997503,
+          "outcome_sha256": "1a955624199c0fa802d63557baaf427d84beb3458fbd1516c160cca64ef19031",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR073",
+          "family": "寒冷冬季控制",
+          "input_sha256": "5a5b2373dfc2df528b2e90f5aea48c16a6158c4fba5f21ce87d43b47e2387c7e",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.4262264710000636,
+          "outcome_sha256": "45b2fd2372926d80bfc287bd1055f2f893930dc9a265cce0d85f0907bca796d8",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR074",
+          "family": "寒冷冬季控制",
+          "input_sha256": "4ea8b0211e632aaf9696a33cd329e3c20c08626e7fe0467ed4f7ad7cd7b3dc61",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.29703551200009315,
+          "outcome_sha256": "52262d02d4a21822bd4c5c6913d102b71778d3ec843040f53090d224dd8072c8",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR075",
+          "family": "寒冷冬季控制",
+          "input_sha256": "8ff724a906d9305e3bd9b9de90bdfa89034dfa9c2f57c481291153ef7271db23",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.29358870599980946,
+          "outcome_sha256": "14d8ada60672833a3ae0b7c9f42a8d9a61ef6e4916a761aebd50fc64ffadaf88",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR076",
+          "family": "寒冷冬季控制",
+          "input_sha256": "85666bd45be2688e2a88c4e6d90102327c280db9654c2e9fefa2cf2e5505a409",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.3014093000001594,
+          "outcome_sha256": "0a89d9f746f300b4b7ebbf47d698ceac13a55a63b80901e4a9a7fb39407be536",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR077",
+          "family": "寒冷冬季控制",
+          "input_sha256": "d011180f599a2e4db11190bdff7dc464091297db0ec97f4b2009ccf4956bc36f",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.4201587389998167,
+          "outcome_sha256": "8a9ab56cefdbc3785e2886d94ac1aaf27cf1325778b48b0dafb586bc45db9661",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR078",
+          "family": "寒冷冬季控制",
+          "input_sha256": "26db3a25a56b15bb7233f33adc400c652a7ed7dd4f47a67735812a6d60b903b0",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "此工況需要加濕",
+            "field": "allow_humidify",
+            "witness": {
+              "season": "winter",
+              "humid_kg_s": 0.00986506162225927
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.10958542000025773,
+          "outcome_sha256": "4065205147b696882efd61022aecb51dd5f71e3f6c7763bf7d9bedfebb6d9e14",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "allow_humidify",
+            "message": "此工況需要加濕，請啟用或調整設計條件"
+          }
+        },
+        {
+          "id": "CR079",
+          "family": "寒冷冬季控制",
+          "input_sha256": "098146363918b032d073c1b2a113bb76aa712b4e267ac03af8f420a58838f938",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "此工況需要加熱／再熱",
+            "field": "allow_reheat",
+            "witness": {
+              "season": "summer",
+              "heat_kw": 21.706239426337373
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.11261874399997396,
+          "outcome_sha256": "77a5ce25afe18da5e97350a2e1be2b9e41ad93089b90c88fe1059fa9940c0925",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "allow_reheat",
+            "message": "此工況需要加熱／再熱，請啟用或調整設計條件"
+          }
+        },
+        {
+          "id": "CR080",
+          "family": "寒冷冬季控制",
+          "input_sha256": "b7baa4fe2c128c83793dc61446806cc1b343598f2201400e7d9746b5231911a3",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "此工況需要加熱／再熱",
+            "field": "allow_reheat",
+            "witness": {
+              "season": "summer",
+              "heat_kw": 17.621910135133724
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.10863025799972092,
+          "outcome_sha256": "77a5ce25afe18da5e97350a2e1be2b9e41ad93089b90c88fe1059fa9940c0925",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "allow_reheat",
+            "message": "此工況需要加熱／再熱，請啟用或調整設計條件"
+          }
+        },
+        {
+          "id": "CR081",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "47efbdd83920931d5c579d5accbf5b157f10f7310324fc9bf2b8cbafe72d9e59",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "指定外氣 ",
+            "field": "en_manual_oa",
+            "witness": {
+              "specified_cmh": 50.0,
+              "minimum_cmh": 7477.154430713115
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.10990769,
+          "outcome_sha256": "760ea39b92225ea7b5b50ebe36f65db9fb392e1aef2f2086703d120eefde2831",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "en_manual_oa",
+            "message": "指定外氣 50 低於補償下限 7477.2 CMH"
+          }
+        },
+        {
+          "id": "CR082",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "37091f94ac8af7a7f57861639290c8fe112b352eafeab5167255ec2cc6b45a46",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "指定外氣 ",
+            "field": "en_manual_oa",
+            "witness": {
+              "specified_cmh": 200.0,
+              "minimum_cmh": 9459.17435410514
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.10806490699997084,
+          "outcome_sha256": "2454792ac8e823ab0e660f978c9be4b8f5b66c0d17ff5ac33d5ab499a5d402ed",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "en_manual_oa",
+            "message": "指定外氣 200 低於補償下限 9459.2 CMH"
+          }
+        },
+        {
+          "id": "CR083",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "edea60c2c0fc9bac0c4a472aae06a666080a1f2b6a4260e787971622199de0c0",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "指定外氣 ",
+            "field": "en_manual_oa",
+            "witness": {
+              "specified_cmh": 500.0,
+              "minimum_cmh": 11738.360295185554
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.10502739799994742,
+          "outcome_sha256": "e1c0ad5793b5504edd786b9e0a426d8b418865399e9605be6e2c9d636d842f80",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "en_manual_oa",
+            "message": "指定外氣 500 低於補償下限 11738.4 CMH"
+          }
+        },
+        {
+          "id": "CR084",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "c6420e830249a16ec5195af62871b3801d061152a484c796638690d684a0969d",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.30298381399961727,
+          "outcome_sha256": "95928c747379006f18fa8db280a64ad287aee73d42c7371632e63cd848d19344",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR085",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "4a2e367b497f595583db388882d946a60c43c8eb1ef731374f07e27b250d7689",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.291525922999881,
+          "outcome_sha256": "2bab252942cc5718f0de42a4bcf95d03f582bd977419fe4375a52a2aa9dfa8a3",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR086",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "20b9b78694b36b444e8ac5aa888891735efc42b359cf58d80d552ac188b22f8d",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.2929077320000033,
+          "outcome_sha256": "e47997e5649ae57e77438c262b77be121f697a175a0c8f47cdd650d6c928e05b",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR087",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "ccc5fa59bf9cd5c354a1c2c79244247bc17e0d48ce88734f06ec25676a419000",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.30774266399976113,
+          "outcome_sha256": "19a52b7588f7dfd6e0e4604b19adbd23d1013de3bb1dcb6da40c0d99a59498ef",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR088",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "903a9b5e33f634d07720c078e0265a642f255ad00ff18dfe9e8b820c2e371769",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.2965032369997971,
+          "outcome_sha256": "ec486150afc8b369ecbada27d6b45fba1a9766653325112cdaaab35408b44b94",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR089",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "0e4580d797a8f67812d21fb2b028398ab2bab10ad806f1ac0913dcee62e59558",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.3212540720001016,
+          "outcome_sha256": "c3565f27f985e34c29e6900daf3c736db0c658948ac2123df080622bfaf7d5ff",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR090",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "b2e7fda227a327366482d860847611cbd247f28726fb86d1ab9da675e5d66096",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.4582948059996852,
+          "outcome_sha256": "57864a46c1676c2af3f5df7a1d19f0b17e92949eafb4929ed8a81b0857613283",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR091",
+          "family": "大型無塵室",
+          "input_sha256": "067597971107b983599834ecc8035212c0d94b84bb3849645b5e550b20be272f",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.3018869459997404,
+          "outcome_sha256": "e8eef9477ac6d09921238c0a444eb5f19f7e40ad20396d440c3de9423d20c1e8",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR092",
+          "family": "大型無塵室",
+          "input_sha256": "b5b0665a524af9f3ce6a8a004e52f0c0560ef3f24c5bc24c987e6d04760de5a6",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.29302950100009184,
+          "outcome_sha256": "92e233b7be0709dc2e91fad09fdb171ad4a2cd8dcdd518dedcc2fab4c983d0e2",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR093",
+          "family": "大型無塵室",
+          "input_sha256": "8b4b80cdad6e8972f694222e0f2a383650e3eb3716c70a6cd80f4cb5466bf275",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.2971396689999892,
+          "outcome_sha256": "1de1ac485fa677455932f5c72e44089dacbdc9139bbb964aa12f5a887857a11f",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR094",
+          "family": "大型無塵室",
+          "input_sha256": "ff6aaf261779185a3ec99d7d6b80b5c9e7e8d39b1431b72a28e9614e62ea7e07",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 198,
+          "seconds": 0.4511042379999708,
+          "outcome_sha256": "26f683a00d1ff39fa2e60ee3e5891ef9a1b843ade9961804b7d187d07db1aa05",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR095",
+          "family": "大型無塵室",
+          "input_sha256": "5d03cdc9b571ee5fe30837b04bdc85f191853a8cb1a674e7b29eb5c9d09978cc",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 198,
+          "seconds": 0.4617705850000675,
+          "outcome_sha256": "0c62460f1c2bdb910a05fbbdcbc3ad101d405f88192c64d41757645e66a4dd14",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR096",
+          "family": "大型無塵室",
+          "input_sha256": "8c3c08e183d771861f9a297b10374eff889178ccc87a16446080cd1379284c61",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 199,
+          "seconds": 0.42664170299985926,
+          "outcome_sha256": "8ee582e648d1dd4e22f21e5bc82e40cacc30d0b8220e276b2408ee23f5108f85",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR097",
+          "family": "大型無塵室",
+          "input_sha256": "70ea2c680a4df3632ab07d7b783a8d58d6fa7491e0329fa5449f46b0e10fff0d",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 198,
+          "seconds": 0.4482979729996259,
+          "outcome_sha256": "ff847a8d2315d0621b9358babb5f87684b2272e6ecf376b8fba70923d3e75eb4",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR098",
+          "family": "大型無塵室",
+          "input_sha256": "97f46acfbe61363e489112c90e78c6f3c4443ed3dffb9b3eb3cf4b9f89235b20",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 198,
+          "seconds": 0.43490660499992373,
+          "outcome_sha256": "4db653f6375dc187cb0a65bfdf9cd61c9dc4a2c618b38423bc58bf5ddcfd60bc",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR099",
+          "family": "大型無塵室",
+          "input_sha256": "7c4610c627a055ea057ab97245d8f04334221e203b16982c17fa56c4ae92d1df",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 199,
+          "seconds": 0.4571756320001441,
+          "outcome_sha256": "90c1895fb07e3e0cd05c4cdea54258d5195c69a438a8180def80718c79196b07",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR100",
+          "family": "大型無塵室",
+          "input_sha256": "b2712722a130ee1698ac9aa2343be36afe274d53d6745fac6bbd66f367da377b",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.4203621669998938,
+          "outcome_sha256": "17ae86bd251ee5cb8931a8f4d5b603fff3c3d66833374e9c7034344ea6d49f5d",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        }
+      ],
+      "source_regression_commands": [
+        {
+          "name": "v560_features",
+          "exit_code": 0,
+          "seconds": 0.4399956679999377,
+          "stdout": "V560 engineering checks passed: 1358\n",
+          "stderr": ""
+        },
+        {
+          "name": "v5510_keypad",
+          "exit_code": 0,
+          "seconds": 0.12843152200002805,
+          "stdout": "V5510 keypad checks passed: 64\n",
+          "stderr": ""
+        },
+        {
+          "name": "v559_resilience",
+          "exit_code": 0,
+          "seconds": 0.3683020419998684,
+          "stdout": "V559 resilience checks passed: 68\n",
+          "stderr": ""
+        },
+        {
+          "name": "regression",
+          "exit_code": 0,
+          "seconds": 1.7204299390000415,
+          "stdout": "52 scenarios / 1247 independent checks passed; 7 expected rejections; B08 now adopts zero closed-loop static head\n",
+          "stderr": ""
+        },
+        {
+          "name": "v55_features",
+          "exit_code": 0,
+          "seconds": 1.2001492310000685,
+          "stdout": "20 new numerical conditions / 93 feature checks passed\n",
+          "stderr": ""
+        },
+        {
+          "name": "v552_core",
+          "exit_code": 0,
+          "seconds": 17.930133578000095,
+          "stdout": "{\n  \"checks\": 405,\n  \"failed\": []\n}\n",
+          "stderr": ""
+        },
+        {
+          "name": "simple_features",
+          "exit_code": 0,
+          "seconds": 0.28106936200038035,
+          "stdout": "42 independent-tool scenarios, 375 numerical/report checks passed\n",
+          "stderr": ""
+        },
+        {
+          "name": "v554_features",
+          "exit_code": 0,
+          "seconds": 3.492919255000288,
+          "stdout": "49 scenarios; 646 independent calculation/import/report/chart checks passed\n",
+          "stderr": ""
+        },
+        {
+          "name": "v556_features",
+          "exit_code": 0,
+          "seconds": 2.8656571409997014,
+          "stdout": "54 distinct new scenarios; /workspace/scratch/8a15c33ca3b5/facility-studio-v560/windows/evidence/v556-features.json\n",
+          "stderr": "test_ahu_repeat_and_persistence (__main__.Regression.test_ahu_repeat_and_persistence) ... ok\ntest_coincident_water_and_duplicate (__main__.Regression.test_coincident_water_and_duplicate) ... ok\ntest_existing_amp_panel_pf (__main__.Regression.test_existing_amp_panel_pf) ... ok\ntest_percentage_records (__main__.Regression.test_percentage_records) ... ok\ntest_real_xlsx_percentage (__main__.Regression.test_real_xlsx_percentage) ... ok\ntest_schedule_transfer (__main__.Regression.test_schedule_transfer) ... ok\ntest_simple_scope_and_gas_basis (__main__.Regression.test_simple_scope_and_gas_basis) ... ok\ntest_water_groups_and_selection (__main__.Regression.test_water_groups_and_selection) ... ok\ntest_water_scope_and_old_project (__main__.Regression.test_water_scope_and_old_project) ... ok\ntest_workspace_report_ledger (__main__.Regression.test_workspace_report_ledger) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 2.436s\n\nOK\n"
+        },
+        {
+          "name": "v557_inactive",
+          "exit_code": 0,
+          "seconds": 36.88367666699969,
+          "stdout": "{\"main_scenarios\": 24, \"ahu_scenarios\": 48, \"pressure_scenarios\": 256, \"passed\": true, \"seed\": 55720261009, \"version\": \"5.6.0\"}\nComplete-output and report comparisons passed: 970\n",
+          "stderr": ""
+        },
+        {
+          "name": "v558_review",
+          "exit_code": 0,
+          "seconds": 1.1462059209998188,
+          "stdout": "{\"version\": \"5.6.0\", \"passed\": true, \"bypass_samples\": 10720, \"minimum_sample_denominator\": 0.23887570487863685, \"maximum_expression_roundoff\": 1.7053025658242404e-13, \"mac_app_data_check\": \"not applicable to Windows-only source tree\"}\nReview follow-up checks passed: 124\n",
+          "stderr": ""
+        },
+        {
+          "name": "maintenance_checks",
+          "exit_code": 0,
+          "seconds": 4.768132498999876,
+          "stdout": "90 air/report conditions; 1129 maintenance checks passed\n",
+          "stderr": ""
+        },
+        {
+          "name": "security_checks",
+          "exit_code": 0,
+          "seconds": 1.4946502799998598,
+          "stdout": "{\"source\": \"windows\", \"cases\": 55, \"passed\": 55, \"failed\": []}\n",
+          "stderr": ""
+        },
+        {
+          "name": "bilingual",
+          "exit_code": 0,
+          "seconds": 1.1678979050002454,
+          "stdout": "20 language-parity scenarios, 4012 localization / import / persistence checks passed\n",
+          "stderr": ""
+        },
+        {
+          "name": "docs/tutorial/verify_tutorial.py",
+          "exit_code": 0,
+          "stdout": "{\"platform\": \"windows\", \"cases\": 20, \"checks\": 87, \"passed\": true}\n",
+          "stderr": ""
+        },
+        {
+          "name": "tools/verify_use_cases.py",
+          "exit_code": 0,
+          "stdout": "windows: 18 numerical cases + 2 negative controls; 121 checks passed\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "macos": {
+      "summary": {
+        "version": "5.6.0",
+        "main_commit": null,
+        "tree": null,
+        "source_sha256": {
+          "__init__.py": "3fa7a5a86c167f210b4f331f5ffd36e6ce9bfa4f7c9443fee6e8d3e7c64be223",
+          "ahu_desktop.py": "974a55f3b971f30ccc62046e761af8a841dc1d2b84d5f5fc8abdee5b97ba4218",
+          "ahu_engine.py": "8988263dbe03d2e2a2b65c7f7699daec1cbece30cb3363c917872bd3741b66f6",
+          "ahu_schema.py": "d240fbd622fe72a9b17512d7b3a5c366308236808022a61ef53556c8e79d0e0b",
+          "ahu_view.py": "5b5b92ffab59e83f42e74f9745afe946ef164dca1fee588826186f5413a39682",
+          "air_chart.py": "b7f98a337bf1e428c03f5de70c49f3b68d94915b59138b4f4615cf8a426b94d4",
+          "api.py": "1005baefa9956de78e6e52749a6404667876776e4811f38596fbde3f5af25975",
+          "cli.py": "af64370b895b9733674a3f85d07a2bac1ecc5f02119c8d6945946e3448ce7840",
+          "contributions.py": "5130aa9a3a7b86eba2c826d8ad100cb8d18aa223bea99102365a869f6bd4638f",
+          "data.py": "d70122ee5af9522e46d79e5bbffcdd6fef2e70ec8ea765c399b777da0d66d006",
+          "database.py": "dfa23d0cb0e42c8e120be6092e427f65b5d27e2de0d567cb6b8b1f3eeca3b203",
+          "design_workflow.py": "e085b1a80915878d722e755e5a0f00c28577b75e55cb5480a9641b9541374f64",
+          "desktop.py": "d20bc398d2d3f97a407d480ef77873e2abb85b7d59562eb935684d52fdb109b4",
+          "display_helpers.py": "0c88d7d63ba0431325613fb75932f3d54896f0fa90394aa469bb67949e10119a",
+          "engine.py": "486ac5d63b871d7ec535e512690292f1d8f1933a1eb6b4914b4a8c4c08f94367",
+          "english_catalog.py": "1b6b6e9cc22bf0e6c252a598b0eac1f4b945550f0d5e26aaaaf8ce01afa703a8",
+          "equipment_analysis.py": "edf55334d108ec8523028602a76ecab9ce04f24f4c5790e31a47c6f43cfb735b",
+          "equipment_io.py": "e1d4a37aed422a1f7d02871473a59720b0a5ff88d4e7abefecfa31cc48342714",
+          "equipment_schema.py": "e9b95806ee2e68fcdf46f7b31431d2fcd25c65c151b97dc662e51ae781957e74",
+          "equipment_view.py": "837aa7dc9385e5e32904ac1b1acf39f1ef98dbd291f74c8ceb59cdaa9c94ea9c",
+          "errors.py": "3b8ac31ea84ed8b44b48a4d719ccceb3b62f698264fba78df95e8d1ff1f703d3",
+          "field_state.py": "d6777a65793a5ddfce17097b205cd98b07470e77adf59042c7a2a2f5696562af",
+          "flow_toolbar.py": "2cf31a5f962c58603ddc72e40dcd72dae5f2b012ef7d77347e79c3586a498f98",
+          "gas_catalog.py": "14c155c03912f6e1cbe6db30fb31f4a43e942088998742a20e03ef0daba044c7",
+          "html_report.py": "eb26d56f9eccf6f123c312cc322e714f3a62648ade682416e6e9c76552cb4fe2",
+          "i18n.py": "8a8b24f71fd0dca4e4937186c0418afd7102338ef8c774b996f4465a8e68a7d8",
+          "inactive_acceptance.py": "283d75dde46f9fbc632d194a751f02aebddc5da7fa2edba3376db4bb13bce271",
+          "json_io.py": "3d214c49a83f468dec8dfe6d80f03881854321bb9c6e422c48f1f1c8ee4864ea",
+          "keypad_acceptance.py": "005e758163d04272f3803edc9104c3c6927aac9693a246df294f7e20afb44433",
+          "language_acceptance.py": "920678e9dd1ac9eb120ab3e5650c67677a665688c6a71aa5b1c3322070a0aa21",
+          "localized_plot.py": "59f89d77fc2308345100d2d7ea97a9e45632ee272bd444e0519e7aba2dd17432",
+          "localized_tk.py": "ae5c4fae11c93af1abeba63f713ee11c1dfcdde827fcc5d85bbf4779de74a40a",
+          "main_view.py": "5968dd32131ac13abf9f88851be3a081e3d86af2a1da419adb83ac223550fa54",
+          "platform_support.py": "44c1bcfae23869773d767bcb076f9be3fd972700d21805113150eaef1d8c07f4",
+          "project_store.py": "61f4189b8c7834100250da8d5065efd9ecb5b70932485d968c3c8885ab959817",
+          "quality.py": "489a28917791ef2ae51dd0dc345cd28443d2d5852db91cc8837b9e4061760253",
+          "quick_tools.py": "72ebec3c209bd386604f20b769213abf1b80683673a1dc54b58c64339c05b228",
+          "reports.py": "f87ab5b979ce7ed010bada1745caf9bc3836b81561d452f8d90f893c813e2a2f",
+          "resilience_acceptance.py": "1537b91bc0e92a4b62f31fb8dcee448f37b3e63745435130cfd731cb34f50541",
+          "review_acceptance.py": "26dd509c508c14969a9729b7ea086a0e0c45cf237c8705ab19bcbe13a0e4d200",
+          "schema.py": "15d98e60b0b66f743441d9250cf51df311bf0707aa597429a37fca78e835fb76",
+          "services.py": "4e53b984e3027125232b051cb98f81aad87c6dced2cf2b8e1fd11cd1597a3b23",
+          "session_controller.py": "3718ea31760e45d83f57877c2642460d89b5cb8269afc59f270524527ca395c4",
+          "simple_desktop.py": "45b24024f9cf87ed3be0c8bcdf59aafc64a0577ba7efd4f4c6044c90b2104e08",
+          "simple_engines.py": "fded22c8a2e80e3ec5c2dc75c6ba1fc21a03177c727976a91be65e533fd63f41",
+          "simple_reports.py": "d834fd5d7fab7168001df736659e3da62d10f18314cb072cd67a59ee42b8d322",
+          "simple_schema.py": "2ffda6c4a97ed08c5d5fc9f8630ae508066786bb29ad06fe43c616634f06738d",
+          "template_language.py": "f7177bad498059d1fef7bf5cc9038d0b117e595bd730e19fb6e1a74980efd6e5",
+          "tools_view.py": "82a52c7d772a31c1b7d6e59bb9c2f16c200b3a7117502d5f788fdf3446ef58bb",
+          "tutorial_acceptance.py": "15db867ed9decfab6a6b6d17b8d80d4ee69e78ead22ed89a960eca3702da7817",
+          "tutorial_help.py": "0dab7cecbe03625c87a5268bed4e9b65c89ea831a2e8a8cb33e258e30065ce30",
+          "ui_common.py": "c9745fd98740837b73e4b20776a80d440e3629572930f4442591f2f3dab99fb6",
+          "usability_acceptance.py": "4dcf28d241e3694c315cbd5010928c985ec7b6f7e5569d36b06ca9d6fde3bade",
+          "utils.py": "5586fbe79f66c5d74bb71abaa3225d3335ce4e5e611ce0653c7692e2c2fb075f",
+          "v560_acceptance.py": "8606f57d8c335b40d20ebe611219aa5e7cad6b9a460a621014f965a63da50679",
+          "version.py": "93cb4db3fb07f4136cd2b6b9c324b65d3b036efaf182c2b803c2fd1004ceab93",
+          "winter.py": "e93461af4d72c055febb85a27669f9881d4e7f9e91b8fadf4519b32a068297d0",
+          "workspace_store.py": "8b55ef58affaf12c8fcc5269a6953724f7c50f9134c7079a6aabd37cadd5649f",
+          "workspace_view.py": "3f897e4240beaf9e66e6895898c76372fbaf8dfe405cc54d7668606f3f765e5c"
+        },
+        "source_platform": "macos",
+        "host": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "finished_utc": "2026-10-12T08:35:06.983670+00:00",
+        "scenario_count": 100,
+        "original_manifest_sha256": "d3209ae321f2c8ef5c8946de89f0adbec0006f6a48deec130f9c91fa11c0d759",
+        "distinct_physical_input_count": 100,
+        "repeat_per_scenario": 20,
+        "calculation_calls": 2534,
+        "isolated_hvac_calls": 286,
+        "desktop_domain_checks": 100,
+        "total_main_calculate_calls": 2920,
+        "full_project_calculation_scenarios": 78,
+        "partial_hvac_electrical_limit_scenarios": 11,
+        "successful_calculation_scenarios": 89,
+        "expected_engineering_rejections": 11,
+        "software_passed": 100,
+        "software_failed": 0,
+        "checks": 18450,
+        "failed_checks": 0,
+        "quality_status_counts": {
+          "未達條件": 28,
+          "待補資料": 61
+        },
+        "partial_report_api_probe_count": 11,
+        "partial_report_api_guard_failures": 0,
+        "seconds": 17.954322952999973,
+        "latency_ms": {
+          "median": 4.233231500165857,
+          "p95": 8.155448000252363,
+          "max": 110.51502600003005
+        },
+        "rss_peak_mib": 111.55078125,
+        "scope": "Linux headless source stress test; both seasons; no native GUI execution"
+      },
+      "raw_evidence_sha256": "e3a1b948c999ad8273fe2a82e00d3b53b3cdd4025941f8595049b45367dda5c0",
+      "cases": [
+        {
+          "id": "CR001",
+          "family": "一般潔淨區",
+          "input_sha256": "359a7e923c4a11883d83b8589dce7967295d5dec562c52904dab682db0173521",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.16840122199982943,
+          "outcome_sha256": "6e781df0dcb96a487c649c01a2596dae3f207fecae4d93e89416fd869c11d784",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR002",
+          "family": "一般潔淨區",
+          "input_sha256": "aa7a6da44944a0f5970bcdaa31b3cee9865f8417a29dac1ebc6460e9b3dd2f2f",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.15789941699995325,
+          "outcome_sha256": "77f0be9a1748bd0780461f5cda09c3eab6af99460bd358df3fb87b4475446ac9",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR003",
+          "family": "一般潔淨區",
+          "input_sha256": "f18c6027410b674b2cced493144bf21fdc7c7b8de64cc050a67ad9a2dae96a10",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.1546384449998186,
+          "outcome_sha256": "07a9130ab7bbe06c2c62a6ea0f9081eaac3e6c09e532b7df4aea7f55eb8e1d4d",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR004",
+          "family": "一般潔淨區",
+          "input_sha256": "b08e8774699a176bd8e8ab379dfa18171665f4001ff43e27348f0c6c8daf3c66",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.15601774100014154,
+          "outcome_sha256": "222fe22066c94e7c35e4e8ebe5cdc6feb087a79981eafce5007f9d23f868253a",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR005",
+          "family": "一般潔淨區",
+          "input_sha256": "0fe2cb0c6f1fb122a35c1d5ba2136de2eee59bb3b9c9a233e56b1471e02ff6d7",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.23877348900032302,
+          "outcome_sha256": "948894090d08cb71b7920b4c145a119691a24081dd6e48bb36bcf2995b0b025c",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR006",
+          "family": "一般潔淨區",
+          "input_sha256": "8e4b4551a99e70434eb55c1cf09841604b7e6d1c7681fce31e9ca99f80fd169d",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.33129540600020846,
+          "outcome_sha256": "078f6e452bbf112b0244116b038f90eeff50a237c280009ea956b87029ad8838",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR007",
+          "family": "一般潔淨區",
+          "input_sha256": "f92d03973668887c996624ca68fa01abc9e9a035833dc6c07592b2c14a0d11f3",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.3058595669999704,
+          "outcome_sha256": "a019f2b7a5b5235c63d2f191e0ebd3c965dc261084b54c3cdd17fc69590a8376",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR008",
+          "family": "一般潔淨區",
+          "input_sha256": "5ead2f04e8131f3d6fb8a8a02df37b535ea2dbda3cbd25243080f3b8e14ee189",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.303275532999578,
+          "outcome_sha256": "88b341c9fe3c5e3cfd0cc171872504c265ce1bf6bfc4d2aae029731e4c7f3e4f",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR009",
+          "family": "一般潔淨區",
+          "input_sha256": "db7102e7e047493b9322bb9416f808a0eaf1bde484c828fcb2d3b10cd8dd567f",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.2996880640002928,
+          "outcome_sha256": "5ceec020bc390606792cc9f6e473cd7468b3cd88f71d874c45a380a3c7bbdbe7",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR010",
+          "family": "一般潔淨區",
+          "input_sha256": "245ff9b585cc6cfffe81ba0c0a4fa20c311730a92bb35c445569c324a123489c",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 211,
+          "seconds": 0.30571171999963553,
+          "outcome_sha256": "9973ebc1db0a8c9c008b3d9be046b6f81e94658446a4de5857bb1f0bc83720f2",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR011",
+          "family": "高潔淨循環",
+          "input_sha256": "9564e3d16bc17d69a7297ddc97fc662b843244733a12e2aa0e8cb6b29c87a160",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.18127552099986133,
+          "outcome_sha256": "58a2bb669234f7a8774c2c775b89ba233c412c7b98c95d40255a8fbcf3ba0c10",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR012",
+          "family": "高潔淨循環",
+          "input_sha256": "bba536bd97c20bc365e2e12fb85cedcac16814cd06e3e3e344c927386a3a8bdd",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.15482855900017967,
+          "outcome_sha256": "867ce865bf78c3d660dbbc9dc36852db914c17bfe465908dc39cf1086d33d5a1",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR013",
+          "family": "高潔淨循環",
+          "input_sha256": "c29429d099a0d776b829a4fb13c3a99142d9e28a4624621010c5ba7caaf816e4",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.1684307609998541,
+          "outcome_sha256": "07f244e1822b0f5d0084f4fbb6f663e0c2aff50c5f259ef1faf8a7c56b598cea",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR014",
+          "family": "高潔淨循環",
+          "input_sha256": "c0ce79575b02493d5b38d2d59fad270f39e2b35803b6ea87c104e2e08907fe40",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.172591261999969,
+          "outcome_sha256": "922d0b94af802b1279d06cfdfad267ba417b1aaa9f38243e17d9a628cdd94c80",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR015",
+          "family": "高潔淨循環",
+          "input_sha256": "6e30ff6ab94d76593e314666590c6f7b0aa8f59995e375796422cf4813636d53",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.17470048099994528,
+          "outcome_sha256": "5340def665bfd5fb4553b3bc605b3932b4f22692e8d743d86ed53d5b1c2a0e60",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR016",
+          "family": "高潔淨循環",
+          "input_sha256": "cf2ca32db54640e3d2c7386b1b016aac50b4a7403baf803f40c6cf4a6663627c",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.20029474500006472,
+          "outcome_sha256": "def12b407a36710d4c7749ee544d24689ea83de793e1f4dea2c2f8f5b0741b68",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR017",
+          "family": "高潔淨循環",
+          "input_sha256": "815730f845a022dbebfd087e352942b03c24ae84e465d8df1698b5ea96cba4cd",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.18989737099991544,
+          "outcome_sha256": "2906d4b8cbd75c6c8ff3c8895f56ad134546bcd21f1a3fc66f3ebf97ed41a43a",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR018",
+          "family": "高潔淨循環",
+          "input_sha256": "caf9a8e4d55045b6ce6f36e76065bbf2de938d50ef1eace42dd2787c09274309",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.2180077330003769,
+          "outcome_sha256": "040786aacf59b224c31a0f01cc116a191a82010aa04be27f9edee42df345abcc",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR019",
+          "family": "高潔淨循環",
+          "input_sha256": "991d7f5fd723787071b53f517e1d69b06a01a319df7d87b4717c9558e72fcd0b",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.1493812710000384,
+          "outcome_sha256": "f922aa6a3f50e573e820468ca23701015512c2b381b22f208a3fbdf16911ecd8",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR020",
+          "family": "高潔淨循環",
+          "input_sha256": "e496e97d0c95d0bc15fdcedaae3635d7ca24a0205580e9dac77d8cd2e0e56cac",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 210,
+          "seconds": 0.160531643000013,
+          "outcome_sha256": "3a0689467c0be1a74df176b2bf952ad26c1f23aaf03ef6b1ee781e41b6ab1179",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR021",
+          "family": "高覆蓋送風",
+          "input_sha256": "f7c2146369ed5bba2290dd2da5766af24f823650776616d5ba435c6aeef7a71a",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.15617356000029758,
+          "outcome_sha256": "ec919d0dc8b47119cff45c5d0074f69ea6f9c4a0e68fab84ad0b5803f7c9825c",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR022",
+          "family": "高覆蓋送風",
+          "input_sha256": "68f9d7163b2cb51fa51157602aa627b6d0e0e21ee26d55f04294ccef8796c217",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.1558120559998315,
+          "outcome_sha256": "fe9b703d6bb1648d76395c754dc0baf7841107f9b2c8491457563023d97da615",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR023",
+          "family": "高覆蓋送風",
+          "input_sha256": "cfd6616893bea3320b97c6053948d756ca964feae92fb8390511deaa47ebd1ce",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.1501836780003032,
+          "outcome_sha256": "ee46bf87dbef92dffe28aae9a5f4e3550a6c189c0781cacea29a76adb9f80352",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR024",
+          "family": "高覆蓋送風",
+          "input_sha256": "5c80f314985771c11e2031232f6eb57105f5ded8110f6d35d34a84611f5d1f91",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.15264022300016222,
+          "outcome_sha256": "f18f1f918f24903f8f0bf4cd2f8dc89f770edb1e301fa88ed6cd3e2a7df944cc",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR025",
+          "family": "高覆蓋送風",
+          "input_sha256": "7a91512449c416493fd12a00e3d218f61f4a8c0f3f8fffc2244ab131ffb0288b",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.15937125699974786,
+          "outcome_sha256": "a3bc0117da746c07fd1f76823731c9e5d9269aea753ac34d9d67f5bebd9ba124",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR026",
+          "family": "高覆蓋送風",
+          "input_sha256": "2174e0a14afd8d99aefd43e413ac75a73a574986f73f337398fe3b3e7152c117",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16282625399981043,
+          "outcome_sha256": "1965dfca30736c9efb4ff12b90b0675110a7e91fc559d5744986c9c38ae87fcc",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR027",
+          "family": "高覆蓋送風",
+          "input_sha256": "13f5545bbc002b256a22e5e116ed345fdaf9c368ab7e681246b9cef36a87e2af",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.15304321900021023,
+          "outcome_sha256": "18d49b61b292f41108c947779427020a4c0c3364c09b41784a3ca7013fea237b",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR028",
+          "family": "高覆蓋送風",
+          "input_sha256": "048302209da0babfe97bcf22ff219256ce1f59d33116b69448694ee4a63703dc",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.15807483099979436,
+          "outcome_sha256": "7c52fc5fdcd8f771f9b28f1aa6a42029fe9b8dfc48f0b4c4b12e81b7720b9752",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR029",
+          "family": "高覆蓋送風",
+          "input_sha256": "d9430dd1f4661fd673780905427559d083275e59cb01f3cadcd5e46d4b67a446",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.17391860100042322,
+          "outcome_sha256": "7c75579a1e3e65646c654303a1b636695fc7e26f22ae6ebc2300bd8af83c6d2f",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR030",
+          "family": "高覆蓋送風",
+          "input_sha256": "2d00138800c7abe3858279de8a674d6c0dbfb1085500634cdac8fc88511ed252",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 210,
+          "seconds": 0.15615461500010497,
+          "outcome_sha256": "a7e2cb5176331286781c376c682f9256365d5bab576a0bc859e2efd06440d22c",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR031",
+          "family": "高製程顯熱",
+          "input_sha256": "fb978d01c31202a30cc25399c1cbb4ef168a0c0a697d435630c4e65ff79b0c97",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.17168706099982955,
+          "outcome_sha256": "8828f76fefb0c164764415534632274b0d8272cfa3dadf73bee37e90eb872037",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR032",
+          "family": "高製程顯熱",
+          "input_sha256": "792832cf6b73f64ff4cc6ab0f310d79dc00d6c54b93d20a647b1884458470de8",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.20622841500016875,
+          "outcome_sha256": "939b2bd7dcd7013e7d8159a783d6bc20a1f2fb2f2fe717675ee3817e92134397",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR033",
+          "family": "高製程顯熱",
+          "input_sha256": "8e1e16654ba81c90de65d4d3d5fda9320b39c5771f81f5ee2b2d6af4e1d9a880",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.16544159799968838,
+          "outcome_sha256": "20596446b84742da0ea15bb2a1dd57a79736114ff31b504ba8d35c1dbfd90cdc",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR034",
+          "family": "高製程顯熱",
+          "input_sha256": "1b0c50117f258c2cdf587509ee67bb9d64c4830b8b980d163bfca891e986f64b",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.15507704399988143,
+          "outcome_sha256": "ccade07e0cedb4bcfa57854ecdae62d207064c228657e19ab730e4eddef7a9b6",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR035",
+          "family": "高製程顯熱",
+          "input_sha256": "0d3500a33d6b3770e3ad46cfc6da143c82c7ffa671abd9dfa38152c309563b1e",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.17799857499994687,
+          "outcome_sha256": "dd2718cc2223dca28c20aba932da01cf6561649f864819b5047cd54b437d4519",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR036",
+          "family": "高製程顯熱",
+          "input_sha256": "89f0de69ae4df589cbbe323738c2dccb9749d0e2fd4317445939e05822c57a53",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.19332031199974153,
+          "outcome_sha256": "df7eb185e00f3b5515f8e03f621c6432edbef2609185d3f5f325df75f911fa07",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR037",
+          "family": "高製程顯熱",
+          "input_sha256": "1a6e452558bf04e065bc4ddcf827d83070f992d0f887b2617fa344e1104bd89f",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.15284588399981658,
+          "outcome_sha256": "661d84332967d7b6275dc386150caa16b09302291bebff30bc3536addac3b0f7",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR038",
+          "family": "高製程顯熱",
+          "input_sha256": "52d27b61c5a802de38252d306c8acc7a3b0eabdc6aa8c4531b8cd83a2b689894",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.8340329339998789,
+          "outcome_sha256": "f970639193a388a334597d5dfa36a0798b4e0cb8a55a27d1dc2e36e9b09533fc",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR039",
+          "family": "高製程顯熱",
+          "input_sha256": "208a27d6f538d1fa6ee7510eb35c7528b8435103ef09ff5a35e5631a04ca728e",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 199,
+          "seconds": 0.2188010010004291,
+          "outcome_sha256": "f6864ca5958dc6b99ecc5424e478fcdf74b34df5141b894673f5563f5bcb0107",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR040",
+          "family": "高製程顯熱",
+          "input_sha256": "40d3d0aebcf7692b46c3b45fcaa91072d2d266ff3c56b491200d83a90750eb67",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 207,
+          "seconds": 0.22127130500030034,
+          "outcome_sha256": "0cd4e02be303d7f46bbc4ac7105e3e48e0bff1c986f0b1dc0e8d76cdb7540a28",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR041",
+          "family": "濕製程產濕",
+          "input_sha256": "09212c541769ad44a0b57c66c6bae9d9a311bac8da7d378bade3b4b940363b2c",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 208,
+          "seconds": 0.16277383899978304,
+          "outcome_sha256": "7965006d35c047db02c650ae65666b122c24fa2fca302740d18f990ce40fd856",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR042",
+          "family": "濕製程產濕",
+          "input_sha256": "772cf89f9b82764ef474f3090986cb0cab427c5ef48383cb221c9d5116c38e36",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 208,
+          "seconds": 0.1616365299996687,
+          "outcome_sha256": "f5ebc16656d1cc8fdb4dca48236a2a9505716504ac8972299d4c3f20737bb375",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR043",
+          "family": "濕製程產濕",
+          "input_sha256": "0c6087ea46cd85877807e773fc306059db4ef4abd01d9badd91c5f7971063be3",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.16049077500019848,
+          "outcome_sha256": "f4d2a9fbc7ec96316875e096553f4a4a7fc4b4d196be94b733e776bfd1646551",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR044",
+          "family": "濕製程產濕",
+          "input_sha256": "ce089c85a6197d0f4de9a61edf395e876842743aee3d441918442ae346d2c6a2",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 208,
+          "seconds": 0.16514910300020347,
+          "outcome_sha256": "fca6a305c6e4d6aeed1d221074f55c6bf77721ff737a4f2d23f373ed578929dd",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR045",
+          "family": "濕製程產濕",
+          "input_sha256": "1d96175e6746ec8d283626145a1654712374047efc06b903c4499326627620de",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 208,
+          "seconds": 0.1648837360003199,
+          "outcome_sha256": "7f91fd61ebb903d76cfd693704db147b87d42a67d904b12f024d9bc93047e9b7",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR046",
+          "family": "濕製程產濕",
+          "input_sha256": "83c500cd476dce9b9221a6f634dee0d13bf24765121febc3df50eb79e9fd5952",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.16165135199980796,
+          "outcome_sha256": "1146ed5f27281fd534cf81cb55cdd8ca0987f1c753d21b17d456a9e638d9e420",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR047",
+          "family": "濕製程產濕",
+          "input_sha256": "856ccfd7f79e07caaf2e707fca76b6ccea650dcb1048b07f5e80f607ce459d14",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 208,
+          "seconds": 0.22332457399988925,
+          "outcome_sha256": "59c2f255fb1fcff5629bba0966e8a731c14d337d80f032baa36b57041149e7e1",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR048",
+          "family": "濕製程產濕",
+          "input_sha256": "6c043ca6cf68af197348cb6e5d9b0397878f63b62ed258fcf6ffdd45f4719943",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 208,
+          "seconds": 0.17324944100028006,
+          "outcome_sha256": "5fa99494fe66fdf7d47d67bf819df5ff677af39682da9b1e6465b75e8b683f2d",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR049",
+          "family": "濕製程產濕",
+          "input_sha256": "fb02fca0a1c56b79b00ef8ea4609cb3ff5124d3271168054e4ec6a346dc2222b",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.15587700900005075,
+          "outcome_sha256": "0d05903a15e78bdfaa2f966fa05a1c55b538d134d010698daa68010466f7ee3b",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR050",
+          "family": "濕製程產濕",
+          "input_sha256": "2ef8b24d0c9b1c4d5464b51dfff529cb848189c6d41818018dd265990c117e84",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 216,
+          "seconds": 0.17459226899973146,
+          "outcome_sha256": "a14b16cb92ffa6025c4d7938fd40a883a9ad50a5c0d2000be9624a68dd9cc063",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR051",
+          "family": "低濕度控制",
+          "input_sha256": "7683d45dafdb590e57d2e2fe57d8f402304ebde5cd775fc64827e16510bbdf3d",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "可達含濕量不足以處理室內產濕",
+            "field": "chw2_in",
+            "witness": {
+              "minimum_w": 0.004270328987975659,
+              "room_w": 0.0032638005768017542
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.05997610199983683,
+          "outcome_sha256": "4214786fbf9751b791e380448abec64f909f1209f33b9a4da87ee2b6086bb037",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "chw2_in",
+            "message": "可達含濕量不足以處理室內產濕，請降低二段 ADP"
+          }
+        },
+        {
+          "id": "CR052",
+          "family": "低濕度控制",
+          "input_sha256": "420cbb066d9e5791a9ce7f2a9df3551da5bde737a53ed41e82296da845f2cd56",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "可達含濕量不足以處理室內產濕",
+            "field": "chw2_in",
+            "witness": {
+              "minimum_w": 0.004327304526467183,
+              "room_w": 0.00426842402178465
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.05939745599971502,
+          "outcome_sha256": "4214786fbf9751b791e380448abec64f909f1209f33b9a4da87ee2b6086bb037",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "chw2_in",
+            "message": "可達含濕量不足以處理室內產濕，請降低二段 ADP"
+          }
+        },
+        {
+          "id": "CR053",
+          "family": "低濕度控制",
+          "input_sha256": "ca07e8a634922a925cece1d6c9f23438f2395e3a156b544d47b0216ee82241ac",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.161439400999825,
+          "outcome_sha256": "f8700b992f3dec5b41e513d5628b706826277b72905186279ce51fea042d4322",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR054",
+          "family": "低濕度控制",
+          "input_sha256": "d9c6cb048903458e8d3ac747c2060a87f1267596b787ecfabc98ff8b22cb4325",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.1631330759996672,
+          "outcome_sha256": "ac5ba1c1fabef51662e4306ed3f782373b7009bbeae05e1bb9be25e54d2eafd9",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR055",
+          "family": "低濕度控制",
+          "input_sha256": "7a0431cb447885b6a725fa9cf30225ca44a0017cd970679c9a9956b7ef99847b",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16192760600006295,
+          "outcome_sha256": "2ec18a04ccba601baf861e5d2a223e426ff91f6abcff39beb1ca2aa86ec335fa",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR056",
+          "family": "低濕度控制",
+          "input_sha256": "3d2347688cd715e6081d187eea8bccb2bbff2f4f6c123eb0675c8db46796f1a1",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16194605000009688,
+          "outcome_sha256": "37d076f49d5ee515f70998c85d2765929be51655feac6b1061358023ee031374",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR057",
+          "family": "低濕度控制",
+          "input_sha256": "70663633c04972f38c2e529aabf5b29852629f9e169987d8536c6ae60ace40fb",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16338685099981376,
+          "outcome_sha256": "422c268552a2d0895aeced19e3c1b9b72699877c282ac57f44a96c51d9d46198",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR058",
+          "family": "低濕度控制",
+          "input_sha256": "0f5195a45addb0a570d4027fae27df0544e0108055013103c4c8e5b45f6940c6",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.195562117999998,
+          "outcome_sha256": "21c7154672ae33c048efc2efcb145cc7194ef564457758dfbf84f867618083ee",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR059",
+          "family": "低濕度控制",
+          "input_sha256": "824b271b512584a754cb0c6b53415b5e7e9800f0869137f0d730381b8e7fd134",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16555597599972316,
+          "outcome_sha256": "37440afc21c80e8bad9d17defc996be1fb583363df519ab60fca3bef6a9a7a5b",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR060",
+          "family": "低濕度控制",
+          "input_sha256": "982924e7c52e8efcbf2915c23f7346491ea18fdf2a11868517ef7182ed3ab17e",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.21458000699976765,
+          "outcome_sha256": "dd90608f894e91737fa2bc459bba49f30b15f4d4cbb204b2b2ca2bec7f7c7c94",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR061",
+          "family": "高溫高濕外氣",
+          "input_sha256": "ed72959d6f0a747dbbfbfb5978a494be1105f7c351212cdba926ca6429bea405",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.18227761199977977,
+          "outcome_sha256": "063973a0d48519066a3a87cd91d789227199e44516a2b1fcc27f2e0201b7a3bd",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR062",
+          "family": "高溫高濕外氣",
+          "input_sha256": "fb47161b7197962563a763c678f7df021c1c2f8f816ccb09be6700c57a076792",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "空氣狀態超飽和：",
+            "field": "pre_t",
+            "witness": {
+              "stage": "summer C1",
+              "temperature": 22.35,
+              "rh": 101.95050531344751
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.0663481189999402,
+          "outcome_sha256": "d608eb9e2a6660c70d39905fa262b665d00f9d1b5cd7773e94503bcc322f10d5",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "pre_t",
+            "message": "空氣狀態超飽和：22.3500°C、101.9505%RH；夏季 C1；入口 35.6000°C / 80.0000%RH；ADP 15.0000°C；出口乾球需求 22.3500°C；請核對 C1 出口需求、入口與供水＋ADP 裕度。"
+          }
+        },
+        {
+          "id": "CR063",
+          "family": "高溫高濕外氣",
+          "input_sha256": "d8e8a7f026b2a8c42f16a614d5e58bb83c52366937bd7a6c5779173ac5740c4e",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "空氣狀態超飽和：",
+            "field": "pre_t",
+            "witness": {
+              "stage": "summer C1",
+              "temperature": 22.700000000000003,
+              "rh": 106.4594926068651
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.05471080500001335,
+          "outcome_sha256": "1a7b0925e67ec60c716be5d3fa13783ccf0d26e1dc0a6d5692104adcd5e11b54",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "pre_t",
+            "message": "空氣狀態超飽和：22.7000°C、106.4595%RH；夏季 C1；入口 36.2000°C / 85.0000%RH；ADP 15.0000°C；出口乾球需求 22.7000°C；請核對 C1 出口需求、入口與供水＋ADP 裕度。"
+          }
+        },
+        {
+          "id": "CR064",
+          "family": "高溫高濕外氣",
+          "input_sha256": "4c35d758399a0ceda69fe3fa841ec755156eb4090559e7f3b1059937adb1e1f3",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "空氣狀態超飽和：",
+            "field": "pre_t",
+            "witness": {
+              "stage": "summer C1",
+              "temperature": 23.050000000000008,
+              "rh": 111.20716755523212
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.05972136700029296,
+          "outcome_sha256": "32a2b5253bea326c867ae9a75a2b251a6bcc539f3b4ec426575b67d6ee163f41",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "pre_t",
+            "message": "空氣狀態超飽和：23.0500°C、111.2072%RH；夏季 C1；入口 36.8000°C / 90.0000%RH；ADP 15.0000°C；出口乾球需求 23.0500°C；請核對 C1 出口需求、入口與供水＋ADP 裕度。"
+          }
+        },
+        {
+          "id": "CR065",
+          "family": "高溫高濕外氣",
+          "input_sha256": "9273d9112638a868136aa24428d52eb754d4bde1c0a61113f1ad9d6e044f1fe6",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.20085857599997325,
+          "outcome_sha256": "fea59bdd6c58062c32312875c5c0bca89be6e936ec6aef4660d412eb99baee12",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR066",
+          "family": "高溫高濕外氣",
+          "input_sha256": "7f829bf7b07c5f45dfda9984793cbaf9009fc4f95b23d66942833e86e3898dc5",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16637490099992647,
+          "outcome_sha256": "d8b3541b7fb5f7e97892dcfe5ef7c3bce88e7c0c66366a78e3b520ceb651a89e",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR067",
+          "family": "高溫高濕外氣",
+          "input_sha256": "4221597168a8d7458570ffae6a27f99c48d9e3683703347310650ec1086e65e9",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.19024333600009413,
+          "outcome_sha256": "401747dab68be127d82364b16ff215e716c3dc178746b482b7950208e352a364",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR068",
+          "family": "高溫高濕外氣",
+          "input_sha256": "17d49b05d2043ed49004acf925d79eda5381cab50a87a6f3c7def9567027940f",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16568836300029943,
+          "outcome_sha256": "36149f9c546366da39ca8884b8eaaf3fdc4f9eec28ea7487c5704ff5831c0b32",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR069",
+          "family": "高溫高濕外氣",
+          "input_sha256": "58832758f4bc8d336eacde66e8eaa02d436b465baf168ac1cf36819128761fa1",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16167258600034984,
+          "outcome_sha256": "af5a3ea69c3bb6d33236886aeb55d6a3b2f31e1abd32a3e7dbb8689cb3fb4df9",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR070",
+          "family": "高溫高濕外氣",
+          "input_sha256": "ae8485ae9bbe03948acaa92d0f938211620bd25d5dee40066292373d22578bad",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 206,
+          "seconds": 0.19838723500015476,
+          "outcome_sha256": "ff167a5e9f9e768710d7a9ed6f1a931715baae9415ed228cb3260cdcd506f6da",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR071",
+          "family": "寒冷冬季控制",
+          "input_sha256": "569d3c1f9906031090b4ae5afc64cb5f52f071226c61c89f083ba9f00b552f74",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.17972025600010966,
+          "outcome_sha256": "247ae2303b80d79ecf3513d5a15f73d4c2a4601e61c60a3b9295c6451eb630f8",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR072",
+          "family": "寒冷冬季控制",
+          "input_sha256": "607d8bd2425f5048223320bd1a26c6a3d9258b15b8301507b96d8abd411ba537",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.1615221649999512,
+          "outcome_sha256": "1a955624199c0fa802d63557baaf427d84beb3458fbd1516c160cca64ef19031",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR073",
+          "family": "寒冷冬季控制",
+          "input_sha256": "5a5b2373dfc2df528b2e90f5aea48c16a6158c4fba5f21ce87d43b47e2387c7e",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.16377899500002968,
+          "outcome_sha256": "45b2fd2372926d80bfc287bd1055f2f893930dc9a265cce0d85f0907bca796d8",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR074",
+          "family": "寒冷冬季控制",
+          "input_sha256": "4ea8b0211e632aaf9696a33cd329e3c20c08626e7fe0467ed4f7ad7cd7b3dc61",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.1749534720001975,
+          "outcome_sha256": "52262d02d4a21822bd4c5c6913d102b71778d3ec843040f53090d224dd8072c8",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR075",
+          "family": "寒冷冬季控制",
+          "input_sha256": "8ff724a906d9305e3bd9b9de90bdfa89034dfa9c2f57c481291153ef7271db23",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.18194712600006824,
+          "outcome_sha256": "14d8ada60672833a3ae0b7c9f42a8d9a61ef6e4916a761aebd50fc64ffadaf88",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR076",
+          "family": "寒冷冬季控制",
+          "input_sha256": "85666bd45be2688e2a88c4e6d90102327c280db9654c2e9fefa2cf2e5505a409",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.17312889999993786,
+          "outcome_sha256": "0a89d9f746f300b4b7ebbf47d698ceac13a55a63b80901e4a9a7fb39407be536",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR077",
+          "family": "寒冷冬季控制",
+          "input_sha256": "d011180f599a2e4db11190bdff7dc464091297db0ec97f4b2009ccf4956bc36f",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.17027606900001047,
+          "outcome_sha256": "8a9ab56cefdbc3785e2886d94ac1aaf27cf1325778b48b0dafb586bc45db9661",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR078",
+          "family": "寒冷冬季控制",
+          "input_sha256": "26db3a25a56b15bb7233f33adc400c652a7ed7dd4f47a67735812a6d60b903b0",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "此工況需要加濕",
+            "field": "allow_humidify",
+            "witness": {
+              "season": "winter",
+              "humid_kg_s": 0.00986506162225927
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.05802990799975305,
+          "outcome_sha256": "4065205147b696882efd61022aecb51dd5f71e3f6c7763bf7d9bedfebb6d9e14",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "allow_humidify",
+            "message": "此工況需要加濕，請啟用或調整設計條件"
+          }
+        },
+        {
+          "id": "CR079",
+          "family": "寒冷冬季控制",
+          "input_sha256": "098146363918b032d073c1b2a113bb76aa712b4e267ac03af8f420a58838f938",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "此工況需要加熱／再熱",
+            "field": "allow_reheat",
+            "witness": {
+              "season": "summer",
+              "heat_kw": 21.706239426337373
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.05498440299970753,
+          "outcome_sha256": "77a5ce25afe18da5e97350a2e1be2b9e41ad93089b90c88fe1059fa9940c0925",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "allow_reheat",
+            "message": "此工況需要加熱／再熱，請啟用或調整設計條件"
+          }
+        },
+        {
+          "id": "CR080",
+          "family": "寒冷冬季控制",
+          "input_sha256": "b7baa4fe2c128c83793dc61446806cc1b343598f2201400e7d9746b5231911a3",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "此工況需要加熱／再熱",
+            "field": "allow_reheat",
+            "witness": {
+              "season": "summer",
+              "heat_kw": 17.621910135133724
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.06768888200031142,
+          "outcome_sha256": "77a5ce25afe18da5e97350a2e1be2b9e41ad93089b90c88fe1059fa9940c0925",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "allow_reheat",
+            "message": "此工況需要加熱／再熱，請啟用或調整設計條件"
+          }
+        },
+        {
+          "id": "CR081",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "47efbdd83920931d5c579d5accbf5b157f10f7310324fc9bf2b8cbafe72d9e59",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "指定外氣 ",
+            "field": "en_manual_oa",
+            "witness": {
+              "specified_cmh": 50.0,
+              "minimum_cmh": 7477.154430713115
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.054020207000121445,
+          "outcome_sha256": "760ea39b92225ea7b5b50ebe36f65db9fb392e1aef2f2086703d120eefde2831",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "en_manual_oa",
+            "message": "指定外氣 50 低於補償下限 7477.2 CMH"
+          }
+        },
+        {
+          "id": "CR082",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "37091f94ac8af7a7f57861639290c8fe112b352eafeab5167255ec2cc6b45a46",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "指定外氣 ",
+            "field": "en_manual_oa",
+            "witness": {
+              "specified_cmh": 200.0,
+              "minimum_cmh": 9459.17435410514
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.05718130300010671,
+          "outcome_sha256": "2454792ac8e823ab0e660f978c9be4b8f5b66c0d17ff5ac33d5ab499a5d402ed",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "en_manual_oa",
+            "message": "指定外氣 200 低於補償下限 9459.2 CMH"
+          }
+        },
+        {
+          "id": "CR083",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "edea60c2c0fc9bac0c4a472aae06a666080a1f2b6a4260e787971622199de0c0",
+          "expectation": {
+            "kind": "engineering_rejection",
+            "prefix": "指定外氣 ",
+            "field": "en_manual_oa",
+            "witness": {
+              "specified_cmh": 500.0,
+              "minimum_cmh": 11738.360295185554
+            }
+          },
+          "software_pass": true,
+          "check_count": 26,
+          "seconds": 0.05388658299989402,
+          "outcome_sha256": "e1c0ad5793b5504edd786b9e0a426d8b418865399e9605be6e2c9d636d842f80",
+          "outcome": {
+            "kind": "engineering_rejection",
+            "field_name": "en_manual_oa",
+            "message": "指定外氣 500 低於補償下限 11738.4 CMH"
+          }
+        },
+        {
+          "id": "CR084",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "c6420e830249a16ec5195af62871b3801d061152a484c796638690d684a0969d",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.2684338980002394,
+          "outcome_sha256": "95928c747379006f18fa8db280a64ad287aee73d42c7371632e63cd848d19344",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR085",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "4a2e367b497f595583db388882d946a60c43c8eb1ef731374f07e27b250d7689",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.15980551800021203,
+          "outcome_sha256": "2bab252942cc5718f0de42a4bcf95d03f582bd977419fe4375a52a2aa9dfa8a3",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR086",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "20b9b78694b36b444e8ac5aa888891735efc42b359cf58d80d552ac188b22f8d",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.15402775999973528,
+          "outcome_sha256": "e47997e5649ae57e77438c262b77be121f697a175a0c8f47cdd650d6c928e05b",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR087",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "ccc5fa59bf9cd5c354a1c2c79244247bc17e0d48ce88734f06ec25676a419000",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.16143005200001426,
+          "outcome_sha256": "19a52b7588f7dfd6e0e4604b19adbd23d1013de3bb1dcb6da40c0d99a59498ef",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR088",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "903a9b5e33f634d07720c078e0265a642f255ad00ff18dfe9e8b820c2e371769",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.1619847359997948,
+          "outcome_sha256": "ec486150afc8b369ecbada27d6b45fba1a9766653325112cdaaab35408b44b94",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR089",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "0e4580d797a8f67812d21fb2b028398ab2bab10ad806f1ac0913dcee62e59558",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.16659648299992114,
+          "outcome_sha256": "c3565f27f985e34c29e6900daf3c736db0c658948ac2123df080622bfaf7d5ff",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR090",
+          "family": "強排氣與頻繁開門",
+          "input_sha256": "b2e7fda227a327366482d860847611cbd247f28726fb86d1ab9da675e5d66096",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 205,
+          "seconds": 0.23926687899984245,
+          "outcome_sha256": "57864a46c1676c2af3f5df7a1d19f0b17e92949eafb4929ed8a81b0857613283",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR091",
+          "family": "大型無塵室",
+          "input_sha256": "067597971107b983599834ecc8035212c0d94b84bb3849645b5e550b20be272f",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.2725306049997016,
+          "outcome_sha256": "e8eef9477ac6d09921238c0a444eb5f19f7e40ad20396d440c3de9423d20c1e8",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR092",
+          "family": "大型無塵室",
+          "input_sha256": "b5b0665a524af9f3ce6a8a004e52f0c0560ef3f24c5bc24c987e6d04760de5a6",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.1564589699996759,
+          "outcome_sha256": "92e233b7be0709dc2e91fad09fdb171ad4a2cd8dcdd518dedcc2fab4c983d0e2",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR093",
+          "family": "大型無塵室",
+          "input_sha256": "8b4b80cdad6e8972f694222e0f2a383650e3eb3716c70a6cd80f4cb5466bf275",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 202,
+          "seconds": 0.1689064120000694,
+          "outcome_sha256": "1de1ac485fa677455932f5c72e44089dacbdc9139bbb964aa12f5a887857a11f",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "calculated"
+          }
+        },
+        {
+          "id": "CR094",
+          "family": "大型無塵室",
+          "input_sha256": "ff6aaf261779185a3ec99d7d6b80b5c9e7e8d39b1431b72a28e9614e62ea7e07",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 198,
+          "seconds": 0.22261646799961454,
+          "outcome_sha256": "26f683a00d1ff39fa2e60ee3e5891ef9a1b843ade9961804b7d187d07db1aa05",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR095",
+          "family": "大型無塵室",
+          "input_sha256": "5d03cdc9b571ee5fe30837b04bdc85f191853a8cb1a674e7b29eb5c9d09978cc",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 198,
+          "seconds": 0.2250512760001584,
+          "outcome_sha256": "0c62460f1c2bdb910a05fbbdcbc3ad101d405f88192c64d41757645e66a4dd14",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR096",
+          "family": "大型無塵室",
+          "input_sha256": "8c3c08e183d771861f9a297b10374eff889178ccc87a16446080cd1379284c61",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 199,
+          "seconds": 0.21712099899968962,
+          "outcome_sha256": "8ee582e648d1dd4e22f21e5bc82e40cacc30d0b8220e276b2408ee23f5108f85",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR097",
+          "family": "大型無塵室",
+          "input_sha256": "70ea2c680a4df3632ab07d7b783a8d58d6fa7491e0329fa5449f46b0e10fff0d",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 198,
+          "seconds": 0.21889414500037674,
+          "outcome_sha256": "ff847a8d2315d0621b9358babb5f87684b2272e6ecf376b8fba70923d3e75eb4",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR098",
+          "family": "大型無塵室",
+          "input_sha256": "97f46acfbe61363e489112c90e78c6f3c4443ed3dffb9b3eb3cf4b9f89235b20",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 198,
+          "seconds": 0.2122033890000239,
+          "outcome_sha256": "4db653f6375dc187cb0a65bfdf9cd61c9dc4a2c618b38423bc58bf5ddcfd60bc",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR099",
+          "family": "大型無塵室",
+          "input_sha256": "7c4610c627a055ea057ab97245d8f04334221e203b16982c17fa56c4ae92d1df",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 199,
+          "seconds": 0.22187108800017086,
+          "outcome_sha256": "90c1895fb07e3e0cd05c4cdea54258d5195c69a438a8180def80718c79196b07",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        },
+        {
+          "id": "CR100",
+          "family": "大型無塵室",
+          "input_sha256": "b2712722a130ee1698ac9aa2343be36afe274d53d6745fac6bbd66f367da377b",
+          "expectation": {
+            "kind": "calculation",
+            "witness": "No independently identified input incompatibility"
+          },
+          "software_pass": true,
+          "check_count": 203,
+          "seconds": 0.21768248000034873,
+          "outcome_sha256": "17ae86bd251ee5cb8931a8f4d5b603fff3c3d66833374e9c7034344ea6d49f5d",
+          "outcome": {
+            "kind": "calculation",
+            "full_project_status": "partial_hvac_only"
+          }
+        }
+      ],
+      "source_regression_commands": [
+        {
+          "name": "v560_features",
+          "exit_code": 0,
+          "seconds": 1.7942889999999352,
+          "stdout": "V560 engineering checks passed: 1358\n",
+          "stderr": ""
+        },
+        {
+          "name": "v5510_keypad",
+          "exit_code": 0,
+          "seconds": 0.19905258199969467,
+          "stdout": "V5510 keypad checks passed: 64\n",
+          "stderr": ""
+        },
+        {
+          "name": "v559_resilience",
+          "exit_code": 0,
+          "seconds": 0.6862172580003971,
+          "stdout": "V559 resilience checks passed: 68\n",
+          "stderr": ""
+        },
+        {
+          "name": "regression",
+          "exit_code": 0,
+          "seconds": 0.859212438999748,
+          "stdout": "52 scenarios / 1247 independent checks passed; 7 expected rejections; B08 now adopts zero closed-loop static head\n",
+          "stderr": ""
+        },
+        {
+          "name": "v55_features",
+          "exit_code": 0,
+          "seconds": 4.089242552000087,
+          "stdout": "20 new numerical conditions / 93 feature checks passed\n",
+          "stderr": ""
+        },
+        {
+          "name": "v552_core",
+          "exit_code": 0,
+          "seconds": 3.8580192220001663,
+          "stdout": "{\n  \"checks\": 405,\n  \"failed\": []\n}\n",
+          "stderr": ""
+        },
+        {
+          "name": "simple_features",
+          "exit_code": 0,
+          "seconds": 0.0789592599999196,
+          "stdout": "42 independent-tool scenarios, 375 numerical/report checks passed\n",
+          "stderr": ""
+        },
+        {
+          "name": "v554_features",
+          "exit_code": 0,
+          "seconds": 1.5635233610000796,
+          "stdout": "49 scenarios; 646 independent calculation/import/report/chart checks passed\n",
+          "stderr": ""
+        },
+        {
+          "name": "v556_features",
+          "exit_code": 0,
+          "seconds": 0.9514846030001536,
+          "stdout": "54 distinct new scenarios; /workspace/scratch/8a15c33ca3b5/facility-studio-v560/macos/evidence/v556-features.json\n",
+          "stderr": "test_ahu_repeat_and_persistence (__main__.Regression.test_ahu_repeat_and_persistence) ... ok\ntest_coincident_water_and_duplicate (__main__.Regression.test_coincident_water_and_duplicate) ... ok\ntest_existing_amp_panel_pf (__main__.Regression.test_existing_amp_panel_pf) ... ok\ntest_percentage_records (__main__.Regression.test_percentage_records) ... ok\ntest_real_xlsx_percentage (__main__.Regression.test_real_xlsx_percentage) ... ok\ntest_schedule_transfer (__main__.Regression.test_schedule_transfer) ... ok\ntest_simple_scope_and_gas_basis (__main__.Regression.test_simple_scope_and_gas_basis) ... ok\ntest_water_groups_and_selection (__main__.Regression.test_water_groups_and_selection) ... ok\ntest_water_scope_and_old_project (__main__.Regression.test_water_scope_and_old_project) ... ok\ntest_workspace_report_ledger (__main__.Regression.test_workspace_report_ledger) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.860s\n\nOK\n"
+        },
+        {
+          "name": "v557_inactive",
+          "exit_code": 0,
+          "seconds": 21.38303738700006,
+          "stdout": "{\"main_scenarios\": 24, \"ahu_scenarios\": 48, \"pressure_scenarios\": 256, \"passed\": true, \"seed\": 55720261009, \"version\": \"5.6.0\"}\nComplete-output and report comparisons passed: 970\n",
+          "stderr": ""
+        },
+        {
+          "name": "v558_review",
+          "exit_code": 0,
+          "seconds": 1.0983016079999288,
+          "stdout": "{\"version\": \"5.6.0\", \"passed\": true, \"bypass_samples\": 10720, \"minimum_sample_denominator\": 0.23887570487863685, \"maximum_expression_roundoff\": 1.7053025658242404e-13, \"mac_app_data_check\": \"/Users/reviewer/Library/Application Support/Facility_Studio_V5_5\"}\nReview follow-up checks passed: 125\n",
+          "stderr": ""
+        },
+        {
+          "name": "maintenance_checks",
+          "exit_code": 0,
+          "seconds": 5.033691015999921,
+          "stdout": "90 air/report conditions; 1129 maintenance checks passed\n",
+          "stderr": ""
+        },
+        {
+          "name": "security_checks",
+          "exit_code": 0,
+          "seconds": 5.690329340000062,
+          "stdout": "{\"source\": \"macos\", \"cases\": 55, \"passed\": 55, \"failed\": []}\n",
+          "stderr": ""
+        },
+        {
+          "name": "bilingual",
+          "exit_code": 0,
+          "seconds": 1.187926962000347,
+          "stdout": "20 language-parity scenarios, 4012 localization / import / persistence checks passed\n",
+          "stderr": ""
+        },
+        {
+          "name": "docs/tutorial/verify_tutorial.py",
+          "exit_code": 0,
+          "stdout": "{\"platform\": \"macos\", \"cases\": 20, \"checks\": 87, \"passed\": true}\n",
+          "stderr": ""
+        },
+        {
+          "name": "tools/verify_use_cases.py",
+          "exit_code": 0,
+          "stdout": "macos: 18 numerical cases + 2 negative controls; 121 checks passed\n",
+          "stderr": ""
+        }
+      ]
+    }
+  }
+}

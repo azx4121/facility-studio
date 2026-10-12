@@ -1,4 +1,4 @@
-Facility Studio V5.5.10｜Windows 廠務工程初估工具
+Facility Studio V5.6.0｜Windows 廠務工程初估工具
 DESIGNED BY ANDY HUANG ©
 
 用途
@@ -9,7 +9,7 @@ DESIGNED BY ANDY HUANG ©
 
 下載與開啟
 目前公開下載為 EXE：
-https://github.com/azx4121/facility-studio/releases/download/v5.5.10-win.1/Facility_Studio_V5_5_10_Windows_Offline.exe
+https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.1/Facility_Studio_V5_6_0_Windows_Offline.exe
 儲存後雙擊開啟，第一次請等候內建環境展開。不需另裝 Python 或管理員權限。
 Windows 10／11 Intel／AMD x64 為支援目標；原生驗收為 Windows Server 2022／2025 x64。
 本版尚無正式發行者簽章。首次安全提示說明：
@@ -25,7 +25,7 @@ https://github.com/azx4121/facility-studio/blob/main/docs/signing.md
 保存與回報
 整案 JSON 可接續編輯；TXT／HTML 是供閱讀與分享的報告。
 獨立空調箱可確認保存無效草稿，修正後才能計算或匯出。
-V5.5.10 補上數字鍵盤 Del／小數點辨識；一般 Delete 保留刪除功能。
+V5.6.0 補上數字鍵盤 Del／小數點辨識；一般 Delete 保留刪除功能。
 啟動記錄：%LOCALAPPDATA%\Facility_Studio_V5_5\Logs。
 更新前先關閉舊程式，替換 EXE 即可；已儲存的專案與復原資料保留。
 回報問題請附版本、作業系統、輸入單位、步驟與完整錯誤，移除業主機密：
@@ -41,7 +41,7 @@ English
 Use independent engineering calculators, import equipment schedules, or compare HVAC/AHU schemes.
 Download the EXE above and double-click. The runtime and offline help are included.
 Choose English at the top right. No separate Python installation is needed.
-V5.5.10 accepts the keypad decimal/Del key; dedicated Delete still deletes.
+V5.6.0 accepts the keypad decimal/Del key; dedicated Delete still deletes.
 The EXE is unsigned. Support targets are Windows 10/11 x64; native acceptance used Server 2022/2025.
 Results are preliminary estimates. Company use and paid engineering reports follow LICENSE;
 software commercialization requires separate permission.

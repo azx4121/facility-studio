@@ -1,5 +1,5 @@
 {
-  "schema_version": 10,
+  "schema_version": 11,
   "inputs": {
     "project_name": "一般廠房初估範例",
     "atm_kpa": "101.325",
@@ -246,7 +246,10 @@
     "hw_fluid_name": "清水（初估參考）",
     "hw_rho": "1000",
     "hw_cp": "4.1868",
-    "hw_mu": "0.001"
+    "hw_mu": "0.001",
+    "gas1_name": "",
+    "gas2_name": "",
+    "gas3_name": ""
   },
   "pressure_drop": {
     "MCHW": {
@@ -1472,6 +1475,18 @@
       "note": "初估起點；依現場確認"
     },
     "hw_mu": {
+      "source": "系統預設",
+      "note": "初估起點；依現場確認"
+    },
+    "gas1_name": {
+      "source": "系統預設",
+      "note": "初估起點；依現場確認"
+    },
+    "gas2_name": {
+      "source": "系統預設",
+      "note": "初估起點；依現場確認"
+    },
+    "gas3_name": {
       "source": "系統預設",
       "note": "初估起點；依現場確認"
     }

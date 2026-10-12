@@ -9,6 +9,7 @@ from .quality import assess_main
 from .schema import (
     V54_INPUT_KEYS,
     V55_INPUT_KEYS,
+    V556_INPUT_KEYS,
     PD_DEFAULTS,
     DEFAULTS,
     FIELDS,
@@ -112,7 +113,7 @@ def migrate_project(p):
         from .project_store import provenance_record
         p = copy.deepcopy(p)
         p["schema_version"] = 10
-        new_keys = set(FIELDS) - V55_INPUT_KEYS
+        new_keys = V556_INPUT_KEYS - V55_INPUT_KEYS
         p["inputs"].update({k: DEFAULTS[k] for k in new_keys})
         for loop in ("mchw", "chw", "dccw", "pcw", "hw"):
             for prop in ("rho", "cp", "mu"):
@@ -123,6 +124,19 @@ def migrate_project(p):
             p["provenance"][k] = provenance_record(
                 "舊專案輸入", "V5.5.6 移轉：保留原共用物性與計算範圍", p["inputs"][k]
             )
+    if isinstance(p, dict) and p.get("schema_version") == 10:
+        if set(p.get("inputs", {})) != V556_INPUT_KEYS or not isinstance(p.get("provenance"), dict) or set(p["provenance"]) != V556_INPUT_KEYS:
+            raise InputError("V5.5.6–5.5.10欄位或來源不完整，不能自動移轉")
+        p = copy.deepcopy(p)
+        p["schema_version"] = 11
+        for k in set(FIELDS) - V556_INPUT_KEYS:
+            p["inputs"][k] = DEFAULTS[k]
+            # An absent legacy field has no observed source timestamp. Keep
+            # migration deterministic so repeated calculations retain identity.
+            p["provenance"][k] = {
+                "source": "舊專案輸入",
+                "note": "V5.6移轉：新增自訂氣體名稱草稿，原氣體種類與工程條件保留",
+            }
     return p
 
 
@@ -232,7 +246,7 @@ def validate_project(p, exclude=()):
         or set(p) != {"schema_version", "inputs", "pressure_drop", "provenance"}
         or p["schema_version"] != SCHEMA_VERSION
     ):
-        raise InputError(f"專案格式需要 V5.5.4；支援完整 V5.0～5.2 自動移轉")
+        raise InputError(f"專案格式需要 V5.6；支援完整 V5.0～5.5 專案自動移轉")
     if not isinstance(p["inputs"], dict) or set(p["inputs"]) != set(FIELDS):
         raise InputError(f"專案輸入欄位缺漏或含未知欄位")
     if not isinstance(p["pressure_drop"], dict) or set(p["pressure_drop"]) != set(

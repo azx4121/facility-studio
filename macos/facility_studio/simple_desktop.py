@@ -5,6 +5,7 @@ from tkinter import font
 from .localized_tk import ttk, filedialog, messagebox
 
 from .errors import ValidationError
+from .gas_catalog import CUSTOM_GAS, gas_label, reference_velocity, switched_velocity
 from .tutorial_help import open_tutorial
 from .version import VERSION
 from .main_view import ScrollPage
@@ -223,17 +224,9 @@ class SimplePage(ScrollPage):
                     format(value * factors[old] / factors[new], ".15g")
                 )
             if self.tool == "gas" and key == "gas":
-                reference = {"CDA": 15.0, "N2": 12.0, "Ar": 12.0}
-                try:
-                    if (
-                        float(self.variables["velocity"].get())
-                        == reference[self.previous["gas"]]
-                    ):
-                        self.variables["velocity"].set(
-                            str(reference[self.variables[key].get()])
-                        )
-                except ValueError:
-                    pass
+                self.variables["velocity"].set(switched_velocity(
+                    self.previous["gas"], self.variables[key].get(),
+                    self.variables["velocity"].get()))
             if self.tool == "units" and key == "category":
                 options = tuple(UNITS[self.variables[key].get()])
                 self.widgets["unit"].configure(values=options)
@@ -305,6 +298,9 @@ class SimplePage(ScrollPage):
                 }[data["area_mode"]]
             )
         if self.tool == "gas":
+            gas = data["gas"]
+            self.hints["gas"].configure(text=gas_label(gas))
+            self.hints["velocity"].configure(text="m/s；此氣體須填設計流速，沒有預設值" if reference_velocity(gas) is None else "m/s；既有氣體初估值可依設計修改")
             is_standard = data["flow_basis"] == "標準流量"
             self.labels["flow"].config(text="所需標準流量" if is_standard else "管內實際流量")
             self.widgets["flow_unit"].config(values=("SLPM", "SCFM", "Sm³/h") if is_standard else ("ALPM", "ACFM", "Am³/h"))
@@ -422,7 +418,7 @@ class SimpleToolsApp:
             anchor="w", padx=18, pady=(22, 24)
         )
         self.nav = {}
-        for key in ("electrical", "duct", "gas", "lighting"):
+        for key in ("electrical", "duct", "gas", "lighting", "water", "air", "units"):
             # Aqua ignores the classic Button background, leaving white text
             # on a pale native surface. The clam ttk style owns both colors.
             button = ttk.Button(
@@ -431,30 +427,8 @@ class SimpleToolsApp:
                 command=lambda k=key: self.show_tool(k),
                 style="Simple.Nav.TButton",
             )
-            button.pack(fill="x", padx=8, pady=3)
+            button.pack(fill="x", padx=8, pady=2)
             self.nav[key] = button
-        ttk.Label(side, text="其他常用快算", style="Simple.SideHint.TLabel").pack(
-            anchor="w", padx=18, pady=(22, 6)
-        )
-        self.more_choice = tk.StringVar(root, "更多工具…")
-        self.more = ttk.Combobox(
-            side,
-            textvariable=self.more_choice,
-            values=[TOOLS[key]["title"] for key in ("water", "air", "units")],
-            state="readonly",
-            width=17,
-        )
-        self.more.pack(fill="x", padx=10, pady=3)
-        self.more.bind(
-            "<<ComboboxSelected>>",
-            lambda event: self.show_tool(
-                next(
-                    key
-                    for key in ("water", "air", "units")
-                    if TOOLS[key]["title"] == self.more_choice.get()
-                )
-            ),
-        )
         self.author_credit = tk.Label(
             side, text="DESIGNED BY\nANDY HUANG ©", bg="#142c43",
             fg="#a6bdcc", justify="left", font=(self.family, 9),
@@ -614,8 +588,8 @@ class SimpleToolsApp:
             background="#142c43",
             foreground="white",
             anchor="w",
-            padding=(16, 11),
-            font=(self.family, 11),
+            padding=(14, 6),
+            font=(self.family, 10),
             borderwidth=0,
             relief="flat",
         )
@@ -627,7 +601,7 @@ class SimpleToolsApp:
         style.configure(
             "Selected.Simple.Nav.TButton",
             background="#087d85",
-            font=(self.family, 11, "bold"),
+            font=(self.family, 10, "bold"),
         )
         style.configure("TEntry", padding=6)
         style.configure("TCombobox", padding=5)
@@ -683,9 +657,6 @@ class SimpleToolsApp:
                     else "Simple.Nav.TButton"
                 )
             )
-        self.more_choice.set(
-            TOOLS[tool]["title"] if tool in ("water", "air", "units") else "更多工具…"
-        )
         self.footer_text.configure(text=TOOLS[tool]["title"])
         self.sync_actions()
         self.resize()

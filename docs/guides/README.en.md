@@ -2,7 +2,7 @@
 
 [繁體中文](README.md) · [English home](../../README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-Choose a tool for your question, then review its inputs, formulas and result. These **18 calculation cases and two scope controls** use synthetic data and can be followed in the V5.5.10 Chinese or English interface.
+Choose a tool for your question, then review its inputs, formulas and result. These **18 calculation cases and two scope controls** use synthetic data and can be followed in the V5.6.0 Chinese or English interface.
 
 ## Start with the full-workbench walkthrough
 

@@ -1,6 +1,7 @@
 """Short forms and clearly labelled reference values for independent tools."""
 
 from .simple_engines import SUPPLIES
+from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, has_demand
 from .quick_tools import UNITS
 
 
@@ -116,7 +117,8 @@ TOOLS = {
         title="CDA／特氣管徑",
         subtitle="壓力填管內壓力表讀值；流量、壓力、流速一起決定管徑。",
         fields=[
-            field("gas", "氣體", "CDA", options=("CDA", "N2", "Ar")),
+            field("gas", "氣體", "CDA", options=GAS_OPTIONS, help="CDA（潔淨乾燥空氣）"),
+            field("gas_name", "自訂氣體名稱／混合比例", "", help="例：5% H2／95% N2；請依供應商確認物性"),
             field("flow_basis", "流量資料基準", "標準流量", options=("標準流量", "管內實際流量"), help="SLPM/SCFM是標準量；銘牌只有L/min時須先確認。切換基準按目前溫壓等量換算，不會憑數字猜測。"),
             field(
                 "flow",
@@ -132,8 +134,9 @@ TOOLS = {
                 units=("pressure_unit", ("bar(g)", "kPa(g)", "kgf/cm²(g)", "MPa(g)")),
             ),
             field(
-                "velocity", "設計流速上限", "15", help="m/s；CDA初估15，N2／Ar初估12"
+                "velocity", "設計流速上限", "15", help="m/s；既有氣體保留初估值；新增氣體須填設計流速"
             ),
+            field("z_ratio", "壓縮因子比 Z管內／Z標準", "1", advanced=True, help="0.1–3；1為理想氣體，請依供應商確認"),
             field("temperature", "管內氣體溫度", "25", advanced=True, help="°C"),
             field(
                 "atmosphere", "所在地大氣壓", "101.325", advanced=True, help="kPa(abs)"
@@ -251,6 +254,8 @@ def defaults(tool):
 
 
 def active_field(tool, key, data):
+    if tool == "gas" and key == "gas_name":
+        return data.get("gas") == CUSTOM_GAS and has_demand(data.get("flow", "0"))
     if tool == "lighting":
         conditions = {
             "quantity": data["mode"] == "估算照度",
@@ -279,7 +284,7 @@ def adopted_summary(tool, data):
     if tool == "duct":
         return f"採用：風速≤{data['velocity']}m/s｜寬高比≤{data['ratio']}｜方管50mm、圓管2英吋級距｜{'已啟用路徑阻力檢查' if data['check_path']=='1' else '僅定寸，靜壓是否足夠待路徑資料'}"
     if tool == "gas":
-        return f"採用：{data.get('flow_basis', '標準流量')}｜管內{data['temperature']}°C｜標準流量{data['reference_t']}°C、{data['reference_p']}kPa(abs)｜理想氣體Z=1"
+        return f"採用：{data.get('flow_basis', '標準流量')}｜管內{data['temperature']}°C｜標準流量{data['reference_t']}°C、{data['reference_p']}kPa(abs)｜Z管內／Z標準={data.get('z_ratio', '1')}"
     if tool == "lighting":
         source = (
             f"LED {data['efficacy']}lm/W初估"

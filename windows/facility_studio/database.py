@@ -116,4 +116,16 @@ def load_tables(path=None):
             )
         ):
             raise ValidationError("潔淨參考表不合法", code="invalid_database")
+    refs = doc.get("hvac_pipe_references", {})
+    pipes = {row["size"]: row for row in doc["tables"]["HVAC_PIPES"]}
+    if not isinstance(refs, dict):
+        raise ValidationError("水管尺寸來源必須為對照表", code="invalid_database")
+    for size, ref in refs.items():
+        if (size not in pipes or not isinstance(ref, dict)
+            or set(ref) != {"outside_mm", "wall_mm", "basis", "source_url"}
+            or not positive(ref["outside_mm"]) or not positive(ref["wall_mm"])
+            or ref["outside_mm"] <= 2*ref["wall_mm"]
+            or abs(pipes[size]["id_mm"] - (ref["outside_mm"]-2*ref["wall_mm"])) > 1e-6
+            or any(not isinstance(ref[key], str) or not ref[key].strip() for key in ("basis", "source_url"))):
+            raise ValidationError("水管外徑、壁厚、內徑或來源不一致", code="invalid_database")
     return doc

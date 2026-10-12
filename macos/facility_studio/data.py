@@ -4,6 +4,7 @@ _TABLES = load_tables()
 WIRE_DB = _TABLES["tables"]["WIRE_DB"]
 PIPE_DB = _TABLES["tables"]["PIPE_DB"]
 HVAC_PIPES = _TABLES["tables"]["HVAC_PIPES"]
+HVAC_PIPE_REFERENCES = _TABLES.get("hvac_pipe_references", {})
 NFB_SIZES = _TABLES["tables"]["NFB_SIZES"]
 VOLTAGE_MAP = _TABLES["tables"]["VOLTAGE_MAP"]
 GAS_DESIGN_VELOCITY_MPS = _TABLES["tables"]["GAS_DESIGN_VELOCITY_MPS"]

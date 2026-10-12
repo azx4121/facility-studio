@@ -2,7 +2,7 @@
 
 [繁體中文](units.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-Open **More quick tools → Unit converter**. Choose the physical quantity, value and source unit. Supported quantities include airflow, water flow, pressure, thermal power, length, temperature, temperature difference and valve flow coefficient.
+Open **Unit converter in the sidebar**. Choose the physical quantity, value and source unit. Supported quantities include airflow, water flow, pressure, thermal power, length, temperature, temperature difference and valve flow coefficient.
 
 <a id="case-14"></a>
 ## Case 14: 1,000 CFM

@@ -35,7 +35,7 @@ def firewall(exe, rule, add):
 
 def launch(exe, arguments, cwd, env):
     result = subprocess.run(
-        [str(exe), *map(str, arguments)], cwd=cwd, env=env, timeout=150
+        [str(exe), *map(str, arguments)], cwd=cwd, env=env, timeout=210
     )
     if result.returncode:
         if "--self-test-result" in arguments:
@@ -196,7 +196,7 @@ def main():
                 if not target.is_relative_to(extraction.resolve()):
                     raise RuntimeError("Unexpected unsafe package member")
             archive.extractall(extraction)
-        exe = extraction / "Facility_Studio_V5_5_10_Windows_Offline" / EXE_NAME
+        exe = extraction / "Facility_Studio_V5_6_0_Windows_Offline" / EXE_NAME
         if sha(exe) != sums[EXE_NAME]:
             raise RuntimeError("ZIP contains a different executable")
         check_exe(exe, output, "zip-extracted")

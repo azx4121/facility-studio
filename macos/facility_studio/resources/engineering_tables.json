@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "version": "legacy-project-tables-5.5",
+  "version": "5.6.0",
   "source": "User supplied V3.1 tables; installation conditions not independently established",
   "status": "estimate_only",
   "tables": {
@@ -188,6 +188,36 @@
         "size": "300A (12\")",
         "id_mm": 303.2,
         "max_flow_lpm": 15000.0
+      },
+      {
+        "size": "350A (14\")",
+        "id_mm": 336.6,
+        "max_flow_lpm": 18486.772
+      },
+      {
+        "size": "400A (16\")",
+        "id_mm": 387.4,
+        "max_flow_lpm": 24487.931
+      },
+      {
+        "size": "450A (18\")",
+        "id_mm": 438.2,
+        "max_flow_lpm": 31331.242
+      },
+      {
+        "size": "500A (20\")",
+        "id_mm": 489.0,
+        "max_flow_lpm": 39016.704
+      },
+      {
+        "size": "550A (22\")",
+        "id_mm": 539.8,
+        "max_flow_lpm": 47544.318
+      },
+      {
+        "size": "600A (24\")",
+        "id_mm": 590.6,
+        "max_flow_lpm": 56914.084
       }
     ],
     "NFB_SIZES": [
@@ -285,5 +315,44 @@
     "VOLTAGE_MAP": "V line-to-line",
     "GAS_DESIGN_VELOCITY_MPS": "m/s",
     "CLEANROOM_DB": "ACH/Pa reference only"
-  }
+  },
+  "hvac_pipe_references": {
+    "350A (14\")": {
+      "outside_mm": 355.6,
+      "wall_mm": 9.5,
+      "basis": "ASTM A53 STD 參考；依實供壁厚確認",
+      "source_url": "https://www.snyi.com.tw/product-femco01.html"
+    },
+    "400A (16\")": {
+      "outside_mm": 406.4,
+      "wall_mm": 9.5,
+      "basis": "ASTM A53 STD 參考；依實供壁厚確認",
+      "source_url": "https://www.snyi.com.tw/product-femco01.html"
+    },
+    "450A (18\")": {
+      "outside_mm": 457.2,
+      "wall_mm": 9.5,
+      "basis": "ASTM A53 STD 參考；依實供壁厚確認",
+      "source_url": "https://www.snyi.com.tw/product-femco01.html"
+    },
+    "500A (20\")": {
+      "outside_mm": 508.0,
+      "wall_mm": 9.5,
+      "basis": "ASTM A53 STD 參考；依實供壁厚確認",
+      "source_url": "https://www.snyi.com.tw/product-femco01.html"
+    },
+    "550A (22\")": {
+      "outside_mm": 558.8,
+      "wall_mm": 9.5,
+      "basis": "ASTM A53 STD 參考；依實供壁厚確認",
+      "source_url": "https://www.snyi.com.tw/product-femco01.html"
+    },
+    "600A (24\")": {
+      "outside_mm": 609.6,
+      "wall_mm": 9.5,
+      "basis": "ASTM A53 STD 參考；依實供壁厚確認",
+      "source_url": "https://www.snyi.com.tw/product-femco01.html"
+    }
+  },
+  "hvac_pipe_extension_note": "14–24吋採台灣供應商ASTM A53 STD尺寸（壁厚9.5mm），ID=OD−2t；舊表12吋以下保持既有參考值。新增原專案流量上限按舊12吋15000 LPM與內徑平方比例延伸，非製造商流量額定；仍必須符合所選水速。"
 }

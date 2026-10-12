@@ -2,7 +2,7 @@
 
 [English](psychrometrics.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
-**Psychrometric calculator with a live humidity-ratio chart.** 開啟「其他常用快算 → 空氣狀態／線圖」，填乾球°C與相對濕度%RH，數值與對應點位即時更新。進階大氣壓預設101.325 kPa(abs)，可依當地壓力調整；曲線跟隨目前壓力。快算入口是乾球＋RH；完整工作台另有其他空氣狀態組合。
+**Psychrometric calculator with a live humidity-ratio chart.** 開啟左側「空氣狀態／線圖」，填乾球°C與相對濕度%RH，數值與對應點位即時更新。進階大氣壓預設101.325 kPa(abs)，可依當地壓力調整；曲線跟隨目前壓力。快算入口是乾球＋RH；完整工作台另有其他空氣狀態組合。
 
 <a id="case-12"></a>
 ## 案例12：35°C、70%RH、101.325 kPa(abs)

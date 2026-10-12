@@ -1,4 +1,4 @@
-"""100 distinct synthetic cleanrooms, both seasons, Facility Studio V5.5.10.
+"""100 distinct synthetic cleanrooms, both seasons, Facility Studio V5.6.0.
 
 Run Windows/macOS source in separate processes. No EXE/DMG/Tk GUI is executed.
 Generate and freeze the manifest before calculating; all original cases remain.
@@ -40,7 +40,7 @@ from types import SimpleNamespace
 SEED = 55820261011
 MAIN_COMMIT = None  # Local test before the GitHub commit; module hashes are recorded separately.
 TREE = None
-assert api.VERSION == '5.5.10', api.VERSION
+assert api.VERSION == '5.6.0', api.VERSION
 
 def digest(x):
     return hashlib.sha256(json.dumps(x, sort_keys=True, ensure_ascii=False,
@@ -311,6 +311,7 @@ if args.generate:
 assert args.output and args.repeat>=1
 manifest_bytes=args.manifest.read_bytes(); manifest=json.loads(manifest_bytes)
 cases=copy.deepcopy(manifest['cases'])
+# Preserve the original manifest. Migrate old projects before mutating inactive fields.
 # Expectations change only for the newly structured C1 diagnostic.
 # The frozen physical inputs and original manifest bytes remain untouched.
 for case in cases:
@@ -531,7 +532,7 @@ for case in cases:
                 row['partial_report_api_probe']=partial_report_probe(outcome['result'])
                 check(case['id']+'/complete report rejects partial result', row['partial_report_api_probe']['defensive_api_pass'])
             for index,value in enumerate(['','not-a-number','NaN','-999999','1e309']):
-                mutated=copy.deepcopy(case['project'])
+                mutated=api.migrate_project(copy.deepcopy(case['project']))
                 for key in main_inactive(mutated['inputs']): mutated['inputs'][key]=value
                 other=execute(mutated)
                 check(case['id']+'/inactive batch '+str(index),other['kind']=='calculation' and

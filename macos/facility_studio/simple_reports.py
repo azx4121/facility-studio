@@ -4,6 +4,8 @@ from .i18n import localized_report
 
 from .simple_schema import TOOLS
 from .version import VERSION
+from .gas_catalog import gas_label, CUSTOM_GAS
+from .i18n import verbatim
 
 
 def presentation(result):
@@ -67,6 +69,8 @@ def presentation(result):
             f"標準流量 {result['standard_lpm']:,.2f} SLPM｜最低所需內徑 {result['minimum_id_mm']:.2f}mm",
             f"管內表壓 {result['gauge_kpa']/100:g}bar(g)｜絕對壓 {result['absolute_kpa']:.3f}kPa(abs)",
         ]
+        label = gas_label(result["gas"], result.get("custom_name"))
+        details.append("氣體：" + (verbatim(label) if result["gas"] == CUSTOM_GAS else label) + f"｜Z管內／Z標準 {result['z_ratio']:g}")
         if pipe:
             details.append(f"參考內徑 {pipe['id']:g}mm；內徑與材料依實供產品核對。")
     elif tool == "lighting":
@@ -95,6 +99,9 @@ def presentation(result):
             f"容量 {thermal['us_rt']:,.2f} US RT｜供回水溫差 {thermal['delta_t']:g}K",
             f"實際內徑 {pipe['id_mm']:g}mm｜每路水速 {pipe['velocity_mps']:.2f}m/s",
         ]
+        if pipe.get("reference"):
+            ref = pipe["reference"]
+            details.append(f"採用碳鋼STD參考：外徑 {ref['outside_mm']:g}mm／壁厚 {ref['wall_mm']:g}mm；依實供管材核對。")
     elif tool == "air":
         state = result["state"]
         dp = (
@@ -127,7 +134,7 @@ def tool_report(result, inputs):
     for row in TOOLS[result["tool"]]["fields"]:
         key = row["key"]
         if active_field(result["tool"], key, inputs):
-            value = inputs[key]
+            value = verbatim(inputs[key]) if key == "gas_name" else inputs[key]
             if row["checkbox"]:
                 value = "是" if value == "1" else "否"
             if row["units"]:

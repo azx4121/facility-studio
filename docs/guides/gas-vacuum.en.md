@@ -2,13 +2,15 @@
 
 [繁體中文](gas-vacuum.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-Pipe size needs **flow, pressure and a velocity limit**. Pressure and velocity without flow cannot determine a diameter. **CDA / gas piping** supports CDA, N2 and Ar; use the full workbench for other gases and PV. This is a velocity-based cross-section estimate, not a full compressible pipe-loss solver.
+Pipe size needs **flow, pressure and a velocity limit**. Pressure and velocity without flow cannot determine a diameter. **CDA / gas piping** and the full workbench share 50 factory gases plus custom mixtures; PV keeps its workbench vacuum entry. This is a velocity-based T/P/Z cross-section estimate, not a full compressible pipe-loss solver.
+
+Added process gases have no preset design velocity; enter a design value (choose custom velocity in the workbench). Identify mixtures by name and composition. Advanced Zactual/Zstandard defaults to 1; reverse actual-to-standard conversion divides by this ratio. Single gas phase only. [50-gas catalog and scope](../2026-10-12-v5.6-expansion.md)
 
 SLPM, SCFM and Sm³/h are standard-volume units; ALPM is actual pipe volume flow. Default reference: 25°C and 101.325 kPa absolute. Default pipe temperature and local atmospheric pressure are also 25°C and 101.325 kPa. Check the equipment's reference conditions and adjust them if needed.
 
 `P_absolute = P_gauge + P_local_atmosphere`
 
-`Q_actual = Q_standard × P_standard/P_absolute × T_pipe[K]/T_standard[K]`
+`Q_actual = Q_standard × P_standard/P_absolute × T_pipe[K]/T_standard[K] × Z_pipe/Z_standard`
 
 The examples use ideal-gas Z ratio 1. Nominal size is not actual inner diameter; material and wall thickness require confirmation.
 

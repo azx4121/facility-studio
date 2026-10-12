@@ -2,7 +2,7 @@
 
 [English](units.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
-**Offline engineering unit converter.** 「其他常用快算 → 單位換算」選物理量、數值及原單位，就顯示等值結果。可換算風量、水量、壓力、冷熱功率、長度、溫度、溫度差及閥門流量係數。
+**Offline engineering unit converter.** 左側「單位換算」選物理量、數值及原單位，就顯示等值結果。可換算風量、水量、壓力、冷熱功率、長度、溫度、溫度差及閥門流量係數。
 
 <a id="case-14"></a>
 ## 案例14：1,000 CFM

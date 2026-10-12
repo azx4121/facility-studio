@@ -2,7 +2,7 @@
 
 [繁體中文](psychrometrics.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-Open **More quick tools → Psychrometrics**. Enter dry-bulb temperature in °C and relative humidity in %RH. Properties and the chart point update live. Atmospheric pressure defaults to 101.325 kPa(abs) and can be changed in advanced settings; chart curves follow the selected pressure. This quick tool uses dry bulb plus RH; the full workbench offers additional state-input combinations.
+Open **Psychrometrics in the sidebar**. Enter dry-bulb temperature in °C and relative humidity in %RH. Properties and the chart point update live. Atmospheric pressure defaults to 101.325 kPa(abs) and can be changed in advanced settings; chart curves follow the selected pressure. This quick tool uses dry bulb plus RH; the full workbench offers additional state-input combinations.
 
 <a id="case-12"></a>
 ## Case 12: 35°C, 70% RH, 101.325 kPa(abs)

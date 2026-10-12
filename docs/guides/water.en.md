@@ -2,7 +2,9 @@
 
 [繁體中文](water.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-Open **More quick tools → Water / heat load**. Choose **Known water flow** or **Known heat load**. Example defaults: clean-water density 1,000 kg/m³, specific heat 4.1868 kJ/(kg·K), maximum water velocity 1.5 m/s. Flow units include LPM, US GPM and m³/h.
+Open **Water / heat load in the sidebar**. Choose **Known water flow** or **Known heat load**. Example defaults: clean-water density 1,000 kg/m³, specific heat 4.1868 kJ/(kg·K), maximum water velocity 1.5 m/s. Flow units include LPM, US GPM and m³/h.
+
+V5.6 extends automatic references to 24 inches, choosing one pipe within the velocity limit before parallel circuits. Added 14-24 inch carbon-steel STD references use 9.5 mm walls; enter the actual ID in the workbench when supplied dimensions differ. Examples: 7,000 LPM / 1 m/s → one 16-inch pipe, ID 387.4 mm; 30,000 LPM / 2 m/s → one 24-inch pipe, ID 590.6 mm. [Dimension sources and verification](../2026-10-12-v5.6-expansion.md)
 
 `Q[kW] = LPM/60000 × ρ × cp × ΔT[K]`
 

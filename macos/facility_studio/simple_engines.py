@@ -4,6 +4,7 @@ import math
 
 from .data import NFB_SIZES, PIPE_DB, WIRE_DB
 from .errors import ValidationError
+from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, custom_name
 from .quick_tools import (
     UNITS,
     UNIT_ALIASES,
@@ -223,7 +224,7 @@ def ducts(data):
 
 
 def compressed_air(data):
-    gas = selected(data["gas"], ("CDA", "N2", "Ar"), "gas")
+    gas = selected(data["gas"], GAS_OPTIONS, "gas")
     flow_basis = selected(data.get("flow_basis", "標準流量"), ("標準流量", "管內實際流量"), "flow_basis")
     flow_factors = GAS_FLOW_FACTORS if flow_basis == "標準流量" else {"ALPM": 1, "ACFM": 28.316846592, "Am³/h": 1000 / 60}
     unit = selected(data["flow_unit"], flow_factors, "flow_unit")
@@ -242,14 +243,17 @@ def compressed_air(data):
     atm = number(data["atmosphere"], "atmosphere", 60, 120)
     reference_t = number(data["reference_t"], "reference_t", -60, 60)
     reference_p = number(data["reference_p"], "reference_p", 60, 120)
+    z_ratio = number(data.get("z_ratio", "1"), "z_ratio", 0.1, 3)
+    name = custom_name(data.get("gas_name"), "gas_name") if gas == CUSTOM_GAS and amount > 0 else None
     absolute = atm + gauge_kpa
-    standard = amount if flow_basis == "標準流量" else amount * absolute / reference_p * (reference_t + 273.15) / (temperature + 273.15)
+    standard = amount if flow_basis == "標準流量" else amount * absolute / reference_p * (reference_t + 273.15) / (temperature + 273.15) / z_ratio
     actual = (
         standard
         * reference_p
         / absolute
         * (temperature + 273.15)
         / (reference_t + 273.15)
+        * z_ratio
     )
     required = (
         math.sqrt(4 * actual / 60000 / math.pi / velocity) * 1000 if standard else 0.0
@@ -266,6 +270,8 @@ def compressed_air(data):
         tool="gas",
         flow_basis=flow_basis,
         gas=gas,
+        custom_name=name,
+        z_ratio=z_ratio,
         standard_lpm=standard,
         actual_lpm=actual,
         absolute_kpa=absolute,
@@ -277,8 +283,8 @@ def compressed_air(data):
         temperature_c=temperature,
         reference_t=reference_t,
         reference_p=reference_p,
-        formula="實際流量=標準流量×P標準/P絕對×T管內(K)/T標準(K)；D內=√(4Q實際/πv)。",
-        note="壓力採管內表壓，另加所在地大氣壓。理想氣體Z=1，僅流速定寸；參考內徑需依實供管材核對，長管路另算壓降。",
+        formula="實際流量=標準流量×P標準/P絕對×T管內(K)/T標準(K)×Z管內/Z標準；D內=√(4Q實際/πv)。",
+        note="壓力採管內表壓，另加所在地大氣壓。Z比1為理想氣體；僅適用單一氣相流速定寸，不核定材料相容、洩漏、點火或氣體安全；參考內徑需依實供管材核對，長管路另算壓降。",
     )
 
 
@@ -357,7 +363,7 @@ def water(data):
         pipe=pipe,
         velocity_limit=limit,
         formula=thermal["formula"],
-        note="水物性採ρ=1000 kg/m³、cp=4.1868 kJ/(kg·K)；管徑按流速上限初估。未計水泵揚程與設備壓降。",
+        note="水物性採ρ=1000 kg/m³、cp=4.1868 kJ/(kg·K)；管徑按流速上限初估，單管優先選至24吋，仍不足才並聯。14–24吋採STD壁厚9.5mm參考內徑，實供壁厚另核。未計水泵揚程與設備壓降。",
     )
 
 
