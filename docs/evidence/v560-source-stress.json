@@ -1,6 +1,6 @@
 {
   "version": "5.6.0",
-  "base_main_commit": "62287438b51a7ca699cc5ef57b2657f2a13e001b",
+  "base_main_commit": "ad13ce655b204dd47a14d66394e7622bb82e1f51",
   "manifest_sha256": "d3209ae321f2c8ef5c8946de89f0adbec0006f6a48deec130f9c91fa11c0d759",
   "scope": "Windows and macOS source on Linux; native delivery is recorded separately",
   "platforms": {
@@ -33,7 +33,7 @@
           "errors.py": "3b8ac31ea84ed8b44b48a4d719ccceb3b62f698264fba78df95e8d1ff1f703d3",
           "field_state.py": "d6777a65793a5ddfce17097b205cd98b07470e77adf59042c7a2a2f5696562af",
           "flow_toolbar.py": "2cf31a5f962c58603ddc72e40dcd72dae5f2b012ef7d77347e79c3586a498f98",
-          "gas_catalog.py": "14c155c03912f6e1cbe6db30fb31f4a43e942088998742a20e03ef0daba044c7",
+          "gas_catalog.py": "703866e70f81fe8466490c537f2a325d3fdc07223598b0bb92d3918be5798a05",
           "html_report.py": "eb26d56f9eccf6f123c312cc322e714f3a62648ade682416e6e9c76552cb4fe2",
           "i18n.py": "8a8b24f71fd0dca4e4937186c0418afd7102338ef8c774b996f4465a8e68a7d8",
           "inactive_acceptance.py": "283d75dde46f9fbc632d194a751f02aebddc5da7fa2edba3376db4bb13bce271",
@@ -64,7 +64,7 @@
           "ui_common.py": "92b67626c261edfa05b1d109c6835dafbb28ba41f236db8b7a04df88c63a4a9a",
           "usability_acceptance.py": "69d2842f6113488fd7240a854fd1cb7a5ae03b0d09dea6ca7cc84ba4158dd8ee",
           "utils.py": "5586fbe79f66c5d74bb71abaa3225d3335ce4e5e611ce0653c7692e2c2fb075f",
-          "v560_acceptance.py": "8606f57d8c335b40d20ebe611219aa5e7cad6b9a460a621014f965a63da50679",
+          "v560_acceptance.py": "41b3b4138e2a93f13dc3735793eb08647a43481221d29dcdb3173a9f8a9a07b5",
           "version.py": "93cb4db3fb07f4136cd2b6b9c324b65d3b036efaf182c2b803c2fd1004ceab93",
           "winter.py": "e93461af4d72c055febb85a27669f9881d4e7f9e91b8fadf4519b32a068297d0",
           "workspace_store.py": "8b55ef58affaf12c8fcc5269a6953724f7c50f9134c7079a6aabd37cadd5649f",
@@ -73,7 +73,7 @@
         "source_platform": "windows",
         "host": "Linux-6.18.44-x86_64-with-glibc2.39",
         "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
-        "finished_utc": "2026-10-12T08:35:12.040019+00:00",
+        "finished_utc": "2026-10-12T09:08:18.686216+00:00",
         "scenario_count": 100,
         "original_manifest_sha256": "d3209ae321f2c8ef5c8946de89f0adbec0006f6a48deec130f9c91fa11c0d759",
         "distinct_physical_input_count": 100,
@@ -96,16 +96,16 @@
         },
         "partial_report_api_probe_count": 11,
         "partial_report_api_guard_failures": 0,
-        "seconds": 22.934197700999903,
+        "seconds": 16.39694979700016,
         "latency_ms": {
-          "median": 4.746578999856865,
-          "p95": 13.824443999965297,
-          "max": 113.55084299975715
+          "median": 3.9988235002965666,
+          "p95": 7.119822999811731,
+          "max": 109.77071300021635
         },
-        "rss_peak_mib": 111.71875,
+        "rss_peak_mib": 111.58203125,
         "scope": "Linux headless source stress test; both seasons; no native GUI execution"
       },
-      "raw_evidence_sha256": "f28a98327ba0e5e24c1799090c104e246aeb34c4523f63a4c1480dfc06982096",
+      "raw_evidence_sha256": "203e899fef7141073ee0cb07223865bbd3fd2af79d881d23b4aed57814166288",
       "cases": [
         {
           "id": "CR001",
@@ -117,7 +117,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.24272954200023378,
+          "seconds": 0.15872648899949127,
           "outcome_sha256": "6e781df0dcb96a487c649c01a2596dae3f207fecae4d93e89416fd869c11d784",
           "outcome": {
             "kind": "calculation",
@@ -134,7 +134,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.2178290880001441,
+          "seconds": 0.15042298099979234,
           "outcome_sha256": "77f0be9a1748bd0780461f5cda09c3eab6af99460bd358df3fb87b4475446ac9",
           "outcome": {
             "kind": "calculation",
@@ -151,7 +151,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.30237653299991507,
+          "seconds": 0.1530740030002562,
           "outcome_sha256": "07a9130ab7bbe06c2c62a6ea0f9081eaac3e6c09e532b7df4aea7f55eb8e1d4d",
           "outcome": {
             "kind": "calculation",
@@ -168,7 +168,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.18792402100007166,
+          "seconds": 0.15583603199956997,
           "outcome_sha256": "222fe22066c94e7c35e4e8ebe5cdc6feb087a79981eafce5007f9d23f868253a",
           "outcome": {
             "kind": "calculation",
@@ -185,7 +185,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.25311162999969383,
+          "seconds": 0.1513100320007652,
           "outcome_sha256": "948894090d08cb71b7920b4c145a119691a24081dd6e48bb36bcf2995b0b025c",
           "outcome": {
             "kind": "calculation",
@@ -202,7 +202,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.16309437800009619,
+          "seconds": 0.1444405709999046,
           "outcome_sha256": "078f6e452bbf112b0244116b038f90eeff50a237c280009ea956b87029ad8838",
           "outcome": {
             "kind": "calculation",
@@ -219,7 +219,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.15688714599991727,
+          "seconds": 0.1633067029997619,
           "outcome_sha256": "a019f2b7a5b5235c63d2f191e0ebd3c965dc261084b54c3cdd17fc69590a8376",
           "outcome": {
             "kind": "calculation",
@@ -236,7 +236,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.25733544500008065,
+          "seconds": 0.16628274899994722,
           "outcome_sha256": "88b341c9fe3c5e3cfd0cc171872504c265ce1bf6bfc4d2aae029731e4c7f3e4f",
           "outcome": {
             "kind": "calculation",
@@ -253,7 +253,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.15452529200001663,
+          "seconds": 0.16718881399992824,
           "outcome_sha256": "5ceec020bc390606792cc9f6e473cd7468b3cd88f71d874c45a380a3c7bbdbe7",
           "outcome": {
             "kind": "calculation",
@@ -270,7 +270,7 @@
           },
           "software_pass": true,
           "check_count": 211,
-          "seconds": 0.15772787400010202,
+          "seconds": 0.15559443499932968,
           "outcome_sha256": "9973ebc1db0a8c9c008b3d9be046b6f81e94658446a4de5857bb1f0bc83720f2",
           "outcome": {
             "kind": "calculation",
@@ -287,7 +287,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.16836335999960284,
+          "seconds": 0.15497360100016522,
           "outcome_sha256": "58a2bb669234f7a8774c2c775b89ba233c412c7b98c95d40255a8fbcf3ba0c10",
           "outcome": {
             "kind": "calculation",
@@ -304,7 +304,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.17567653999958566,
+          "seconds": 0.15096161200017377,
           "outcome_sha256": "867ce865bf78c3d660dbbc9dc36852db914c17bfe465908dc39cf1086d33d5a1",
           "outcome": {
             "kind": "calculation",
@@ -321,7 +321,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.29534056900001815,
+          "seconds": 0.15307866300008754,
           "outcome_sha256": "07f244e1822b0f5d0084f4fbb6f663e0c2aff50c5f259ef1faf8a7c56b598cea",
           "outcome": {
             "kind": "calculation",
@@ -338,7 +338,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.29712065000012444,
+          "seconds": 0.1556940870004837,
           "outcome_sha256": "922d0b94af802b1279d06cfdfad267ba417b1aaa9f38243e17d9a628cdd94c80",
           "outcome": {
             "kind": "calculation",
@@ -355,7 +355,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.20260908599993854,
+          "seconds": 0.19659906000015326,
           "outcome_sha256": "5340def665bfd5fb4553b3bc605b3932b4f22692e8d743d86ed53d5b1c2a0e60",
           "outcome": {
             "kind": "calculation",
@@ -372,7 +372,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16455453199978365,
+          "seconds": 0.15375842400044348,
           "outcome_sha256": "def12b407a36710d4c7749ee544d24689ea83de793e1f4dea2c2f8f5b0741b68",
           "outcome": {
             "kind": "calculation",
@@ -389,7 +389,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.15428257499979736,
+          "seconds": 0.1615363979999529,
           "outcome_sha256": "2906d4b8cbd75c6c8ff3c8895f56ad134546bcd21f1a3fc66f3ebf97ed41a43a",
           "outcome": {
             "kind": "calculation",
@@ -406,7 +406,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.16819489299996349,
+          "seconds": 0.15086484899984498,
           "outcome_sha256": "040786aacf59b224c31a0f01cc116a191a82010aa04be27f9edee42df345abcc",
           "outcome": {
             "kind": "calculation",
@@ -423,7 +423,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.18138420700006463,
+          "seconds": 0.1913150290001795,
           "outcome_sha256": "f922aa6a3f50e573e820468ca23701015512c2b381b22f208a3fbdf16911ecd8",
           "outcome": {
             "kind": "calculation",
@@ -440,7 +440,7 @@
           },
           "software_pass": true,
           "check_count": 210,
-          "seconds": 0.15585490100011157,
+          "seconds": 0.16944222900019668,
           "outcome_sha256": "3a0689467c0be1a74df176b2bf952ad26c1f23aaf03ef6b1ee781e41b6ab1179",
           "outcome": {
             "kind": "calculation",
@@ -457,7 +457,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.1608382869999332,
+          "seconds": 0.18120176499996887,
           "outcome_sha256": "ec919d0dc8b47119cff45c5d0074f69ea6f9c4a0e68fab84ad0b5803f7c9825c",
           "outcome": {
             "kind": "calculation",
@@ -474,7 +474,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.16420457300000635,
+          "seconds": 0.17448689699995157,
           "outcome_sha256": "fe9b703d6bb1648d76395c754dc0baf7841107f9b2c8491457563023d97da615",
           "outcome": {
             "kind": "calculation",
@@ -491,7 +491,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.14597448799986523,
+          "seconds": 0.3393533110001954,
           "outcome_sha256": "ee46bf87dbef92dffe28aae9a5f4e3550a6c189c0781cacea29a76adb9f80352",
           "outcome": {
             "kind": "calculation",
@@ -508,7 +508,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.16103316899989295,
+          "seconds": 0.15564563699990686,
           "outcome_sha256": "f18f1f918f24903f8f0bf4cd2f8dc89f770edb1e301fa88ed6cd3e2a7df944cc",
           "outcome": {
             "kind": "calculation",
@@ -525,7 +525,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.16419905200018547,
+          "seconds": 0.16531387399936648,
           "outcome_sha256": "a3bc0117da746c07fd1f76823731c9e5d9269aea753ac34d9d67f5bebd9ba124",
           "outcome": {
             "kind": "calculation",
@@ -542,7 +542,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.15748098099993513,
+          "seconds": 0.153134704999502,
           "outcome_sha256": "1965dfca30736c9efb4ff12b90b0675110a7e91fc559d5744986c9c38ae87fcc",
           "outcome": {
             "kind": "calculation",
@@ -559,7 +559,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.15587304100017718,
+          "seconds": 0.15777739199984353,
           "outcome_sha256": "18d49b61b292f41108c947779427020a4c0c3364c09b41784a3ca7013fea237b",
           "outcome": {
             "kind": "calculation",
@@ -576,7 +576,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.22382053399996948,
+          "seconds": 0.15723643000001175,
           "outcome_sha256": "7c52fc5fdcd8f771f9b28f1aa6a42029fe9b8dfc48f0b4c4b12e81b7720b9752",
           "outcome": {
             "kind": "calculation",
@@ -593,7 +593,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.15185457899997346,
+          "seconds": 0.15542793500026164,
           "outcome_sha256": "7c75579a1e3e65646c654303a1b636695fc7e26f22ae6ebc2300bd8af83c6d2f",
           "outcome": {
             "kind": "calculation",
@@ -610,7 +610,7 @@
           },
           "software_pass": true,
           "check_count": 210,
-          "seconds": 0.17247400000042035,
+          "seconds": 0.15356387999963772,
           "outcome_sha256": "a7e2cb5176331286781c376c682f9256365d5bab576a0bc859e2efd06440d22c",
           "outcome": {
             "kind": "calculation",
@@ -627,7 +627,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.16977807800003575,
+          "seconds": 0.15063062599983823,
           "outcome_sha256": "8828f76fefb0c164764415534632274b0d8272cfa3dadf73bee37e90eb872037",
           "outcome": {
             "kind": "calculation",
@@ -644,7 +644,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.15364372900012313,
+          "seconds": 0.1702831550001065,
           "outcome_sha256": "939b2bd7dcd7013e7d8159a783d6bc20a1f2fb2f2fe717675ee3817e92134397",
           "outcome": {
             "kind": "calculation",
@@ -661,7 +661,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.20134432699978788,
+          "seconds": 0.15755179200004932,
           "outcome_sha256": "20596446b84742da0ea15bb2a1dd57a79736114ff31b504ba8d35c1dbfd90cdc",
           "outcome": {
             "kind": "calculation",
@@ -678,7 +678,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.18385966400001053,
+          "seconds": 0.1546283730003779,
           "outcome_sha256": "ccade07e0cedb4bcfa57854ecdae62d207064c228657e19ab730e4eddef7a9b6",
           "outcome": {
             "kind": "calculation",
@@ -695,7 +695,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.15514607599970986,
+          "seconds": 0.16711153199958062,
           "outcome_sha256": "dd2718cc2223dca28c20aba932da01cf6561649f864819b5047cd54b437d4519",
           "outcome": {
             "kind": "calculation",
@@ -712,7 +712,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.15474565700014864,
+          "seconds": 0.16561924100005854,
           "outcome_sha256": "df7eb185e00f3b5515f8e03f621c6432edbef2609185d3f5f325df75f911fa07",
           "outcome": {
             "kind": "calculation",
@@ -729,7 +729,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.16333933399982925,
+          "seconds": 0.15400098499958403,
           "outcome_sha256": "661d84332967d7b6275dc386150caa16b09302291bebff30bc3536addac3b0f7",
           "outcome": {
             "kind": "calculation",
@@ -746,7 +746,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.7320620240002427,
+          "seconds": 0.8772524859996338,
           "outcome_sha256": "f970639193a388a334597d5dfa36a0798b4e0cb8a55a27d1dc2e36e9b09533fc",
           "outcome": {
             "kind": "calculation",
@@ -763,7 +763,7 @@
           },
           "software_pass": true,
           "check_count": 199,
-          "seconds": 0.21844639699975232,
+          "seconds": 0.2188994480002293,
           "outcome_sha256": "f6864ca5958dc6b99ecc5424e478fcdf74b34df5141b894673f5563f5bcb0107",
           "outcome": {
             "kind": "calculation",
@@ -780,7 +780,7 @@
           },
           "software_pass": true,
           "check_count": 207,
-          "seconds": 0.24412080199999764,
+          "seconds": 0.21881334299996524,
           "outcome_sha256": "0cd4e02be303d7f46bbc4ac7105e3e48e0bff1c986f0b1dc0e8d76cdb7540a28",
           "outcome": {
             "kind": "calculation",
@@ -797,7 +797,7 @@
           },
           "software_pass": true,
           "check_count": 208,
-          "seconds": 0.15797040799998285,
+          "seconds": 0.15078356000049098,
           "outcome_sha256": "7965006d35c047db02c650ae65666b122c24fa2fca302740d18f990ce40fd856",
           "outcome": {
             "kind": "calculation",
@@ -814,7 +814,7 @@
           },
           "software_pass": true,
           "check_count": 208,
-          "seconds": 0.16273848899982113,
+          "seconds": 0.15111450899985357,
           "outcome_sha256": "f5ebc16656d1cc8fdb4dca48236a2a9505716504ac8972299d4c3f20737bb375",
           "outcome": {
             "kind": "calculation",
@@ -831,7 +831,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.1547038080002494,
+          "seconds": 0.16507864100003644,
           "outcome_sha256": "f4d2a9fbc7ec96316875e096553f4a4a7fc4b4d196be94b733e776bfd1646551",
           "outcome": {
             "kind": "calculation",
@@ -848,7 +848,7 @@
           },
           "software_pass": true,
           "check_count": 208,
-          "seconds": 0.16154120999999577,
+          "seconds": 0.15820069599976705,
           "outcome_sha256": "fca6a305c6e4d6aeed1d221074f55c6bf77721ff737a4f2d23f373ed578929dd",
           "outcome": {
             "kind": "calculation",
@@ -865,7 +865,7 @@
           },
           "software_pass": true,
           "check_count": 208,
-          "seconds": 0.20946846400011054,
+          "seconds": 0.1656185550000373,
           "outcome_sha256": "7f91fd61ebb903d76cfd693704db147b87d42a67d904b12f024d9bc93047e9b7",
           "outcome": {
             "kind": "calculation",
@@ -882,7 +882,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.1943841990000692,
+          "seconds": 0.16455697199944552,
           "outcome_sha256": "1146ed5f27281fd534cf81cb55cdd8ca0987f1c753d21b17d456a9e638d9e420",
           "outcome": {
             "kind": "calculation",
@@ -899,7 +899,7 @@
           },
           "software_pass": true,
           "check_count": 208,
-          "seconds": 0.2924977319999016,
+          "seconds": 0.16275764300007722,
           "outcome_sha256": "59c2f255fb1fcff5629bba0966e8a731c14d337d80f032baa36b57041149e7e1",
           "outcome": {
             "kind": "calculation",
@@ -916,7 +916,7 @@
           },
           "software_pass": true,
           "check_count": 208,
-          "seconds": 0.412829112000054,
+          "seconds": 0.15501636600038182,
           "outcome_sha256": "5fa99494fe66fdf7d47d67bf819df5ff677af39682da9b1e6465b75e8b683f2d",
           "outcome": {
             "kind": "calculation",
@@ -933,7 +933,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.5136850109997795,
+          "seconds": 0.15260265200049616,
           "outcome_sha256": "0d05903a15e78bdfaa2f966fa05a1c55b538d134d010698daa68010466f7ee3b",
           "outcome": {
             "kind": "calculation",
@@ -950,7 +950,7 @@
           },
           "software_pass": true,
           "check_count": 216,
-          "seconds": 0.4931809429999703,
+          "seconds": 0.16186975600066944,
           "outcome_sha256": "a14b16cb92ffa6025c4d7938fd40a883a9ad50a5c0d2000be9624a68dd9cc063",
           "outcome": {
             "kind": "calculation",
@@ -972,7 +972,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.054475563000323746,
+          "seconds": 0.04762119899987738,
           "outcome_sha256": "4214786fbf9751b791e380448abec64f909f1209f33b9a4da87ee2b6086bb037",
           "outcome": {
             "kind": "engineering_rejection",
@@ -995,7 +995,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.05246183099961854,
+          "seconds": 0.052408747999834304,
           "outcome_sha256": "4214786fbf9751b791e380448abec64f909f1209f33b9a4da87ee2b6086bb037",
           "outcome": {
             "kind": "engineering_rejection",
@@ -1013,7 +1013,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16362176300026476,
+          "seconds": 0.1564420289996633,
           "outcome_sha256": "f8700b992f3dec5b41e513d5628b706826277b72905186279ce51fea042d4322",
           "outcome": {
             "kind": "calculation",
@@ -1030,7 +1030,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16754900500018266,
+          "seconds": 0.15519614099957835,
           "outcome_sha256": "ac5ba1c1fabef51662e4306ed3f782373b7009bbeae05e1bb9be25e54d2eafd9",
           "outcome": {
             "kind": "calculation",
@@ -1047,7 +1047,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.17437541299977966,
+          "seconds": 0.1483841740000571,
           "outcome_sha256": "2ec18a04ccba601baf861e5d2a223e426ff91f6abcff39beb1ca2aa86ec335fa",
           "outcome": {
             "kind": "calculation",
@@ -1064,7 +1064,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16837096900007964,
+          "seconds": 0.1496779749995767,
           "outcome_sha256": "37d076f49d5ee515f70998c85d2765929be51655feac6b1061358023ee031374",
           "outcome": {
             "kind": "calculation",
@@ -1081,7 +1081,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16820472499966854,
+          "seconds": 0.15218765500048903,
           "outcome_sha256": "422c268552a2d0895aeced19e3c1b9b72699877c282ac57f44a96c51d9d46198",
           "outcome": {
             "kind": "calculation",
@@ -1098,7 +1098,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16650379299971974,
+          "seconds": 0.15148583900008816,
           "outcome_sha256": "21c7154672ae33c048efc2efcb145cc7194ef564457758dfbf84f867618083ee",
           "outcome": {
             "kind": "calculation",
@@ -1115,7 +1115,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.1548249540001052,
+          "seconds": 0.1488257289993271,
           "outcome_sha256": "37440afc21c80e8bad9d17defc996be1fb583363df519ab60fca3bef6a9a7a5b",
           "outcome": {
             "kind": "calculation",
@@ -1132,7 +1132,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.16392158700000437,
+          "seconds": 0.1579924609995942,
           "outcome_sha256": "dd90608f894e91737fa2bc459bba49f30b15f4d4cbb204b2b2ca2bec7f7c7c94",
           "outcome": {
             "kind": "calculation",
@@ -1149,7 +1149,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.17572466899991923,
+          "seconds": 0.1610525609994511,
           "outcome_sha256": "063973a0d48519066a3a87cd91d789227199e44516a2b1fcc27f2e0201b7a3bd",
           "outcome": {
             "kind": "calculation",
@@ -1172,7 +1172,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.054496673999892664,
+          "seconds": 0.056543495999903826,
           "outcome_sha256": "d608eb9e2a6660c70d39905fa262b665d00f9d1b5cd7773e94503bcc322f10d5",
           "outcome": {
             "kind": "engineering_rejection",
@@ -1196,7 +1196,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.0547296859999733,
+          "seconds": 0.05322747900027025,
           "outcome_sha256": "1a7b0925e67ec60c716be5d3fa13783ccf0d26e1dc0a6d5692104adcd5e11b54",
           "outcome": {
             "kind": "engineering_rejection",
@@ -1220,7 +1220,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.05127230400012195,
+          "seconds": 0.052089658999648236,
           "outcome_sha256": "32a2b5253bea326c867ae9a75a2b251a6bcc539f3b4ec426575b67d6ee163f41",
           "outcome": {
             "kind": "engineering_rejection",
@@ -1238,7 +1238,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.17288656400023683,
+          "seconds": 0.1649673880001501,
           "outcome_sha256": "fea59bdd6c58062c32312875c5c0bca89be6e936ec6aef4660d412eb99baee12",
           "outcome": {
             "kind": "calculation",
@@ -1255,7 +1255,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.1737242649996915,
+          "seconds": 0.14936076699996192,
           "outcome_sha256": "d8b3541b7fb5f7e97892dcfe5ef7c3bce88e7c0c66366a78e3b520ceb651a89e",
           "outcome": {
             "kind": "calculation",
@@ -1272,7 +1272,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.15454262799994467,
+          "seconds": 0.15530485899944324,
           "outcome_sha256": "401747dab68be127d82364b16ff215e716c3dc178746b482b7950208e352a364",
           "outcome": {
             "kind": "calculation",
@@ -1289,7 +1289,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.15789033000010022,
+          "seconds": 0.1857021320001877,
           "outcome_sha256": "36149f9c546366da39ca8884b8eaaf3fdc4f9eec28ea7487c5704ff5831c0b32",
           "outcome": {
             "kind": "calculation",
@@ -1306,7 +1306,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.20931685999994443,
+          "seconds": 0.1585736099996211,
           "outcome_sha256": "af5a3ea69c3bb6d33236886aeb55d6a3b2f31e1abd32a3e7dbb8689cb3fb4df9",
           "outcome": {
             "kind": "calculation",
@@ -1323,7 +1323,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.20948214200006987,
+          "seconds": 0.18157965499995044,
           "outcome_sha256": "ff167a5e9f9e768710d7a9ed6f1a931715baae9415ed228cb3260cdcd506f6da",
           "outcome": {
             "kind": "calculation",
@@ -1340,7 +1340,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.23732382200023494,
+          "seconds": 0.17899666499943123,
           "outcome_sha256": "247ae2303b80d79ecf3513d5a15f73d4c2a4601e61c60a3b9295c6451eb630f8",
           "outcome": {
             "kind": "calculation",
@@ -1357,7 +1357,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.3101374479997503,
+          "seconds": 0.15053572300075757,
           "outcome_sha256": "1a955624199c0fa802d63557baaf427d84beb3458fbd1516c160cca64ef19031",
           "outcome": {
             "kind": "calculation",
@@ -1374,7 +1374,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.4262264710000636,
+          "seconds": 0.15191502299967397,
           "outcome_sha256": "45b2fd2372926d80bfc287bd1055f2f893930dc9a265cce0d85f0907bca796d8",
           "outcome": {
             "kind": "calculation",
@@ -1391,7 +1391,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.29703551200009315,
+          "seconds": 0.15365330900021945,
           "outcome_sha256": "52262d02d4a21822bd4c5c6913d102b71778d3ec843040f53090d224dd8072c8",
           "outcome": {
             "kind": "calculation",
@@ -1408,7 +1408,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.29358870599980946,
+          "seconds": 0.15340597399972467,
           "outcome_sha256": "14d8ada60672833a3ae0b7c9f42a8d9a61ef6e4916a761aebd50fc64ffadaf88",
           "outcome": {
             "kind": "calculation",
@@ -1425,7 +1425,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.3014093000001594,
+          "seconds": 0.15043070100000477,
           "outcome_sha256": "0a89d9f746f300b4b7ebbf47d698ceac13a55a63b80901e4a9a7fb39407be536",
           "outcome": {
             "kind": "calculation",
@@ -1442,7 +1442,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.4201587389998167,
+          "seconds": 0.1528180040004372,
           "outcome_sha256": "8a9ab56cefdbc3785e2886d94ac1aaf27cf1325778b48b0dafb586bc45db9661",
           "outcome": {
             "kind": "calculation",
@@ -1464,7 +1464,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.10958542000025773,
+          "seconds": 0.05743618500036973,
           "outcome_sha256": "4065205147b696882efd61022aecb51dd5f71e3f6c7763bf7d9bedfebb6d9e14",
           "outcome": {
             "kind": "engineering_rejection",
@@ -1487,7 +1487,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.11261874399997396,
+          "seconds": 0.05152377899958083,
           "outcome_sha256": "77a5ce25afe18da5e97350a2e1be2b9e41ad93089b90c88fe1059fa9940c0925",
           "outcome": {
             "kind": "engineering_rejection",
@@ -1510,7 +1510,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.10863025799972092,
+          "seconds": 0.05917271399994206,
           "outcome_sha256": "77a5ce25afe18da5e97350a2e1be2b9e41ad93089b90c88fe1059fa9940c0925",
           "outcome": {
             "kind": "engineering_rejection",
@@ -1533,7 +1533,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.10990769,
+          "seconds": 0.07450877200062678,
           "outcome_sha256": "760ea39b92225ea7b5b50ebe36f65db9fb392e1aef2f2086703d120eefde2831",
           "outcome": {
             "kind": "engineering_rejection",
@@ -1556,7 +1556,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.10806490699997084,
+          "seconds": 0.0521378140001616,
           "outcome_sha256": "2454792ac8e823ab0e660f978c9be4b8f5b66c0d17ff5ac33d5ab499a5d402ed",
           "outcome": {
             "kind": "engineering_rejection",
@@ -1579,7 +1579,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.10502739799994742,
+          "seconds": 0.05076075399938418,
           "outcome_sha256": "e1c0ad5793b5504edd786b9e0a426d8b418865399e9605be6e2c9d636d842f80",
           "outcome": {
             "kind": "engineering_rejection",
@@ -1597,7 +1597,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.30298381399961727,
+          "seconds": 0.15323657599947182,
           "outcome_sha256": "95928c747379006f18fa8db280a64ad287aee73d42c7371632e63cd848d19344",
           "outcome": {
             "kind": "calculation",
@@ -1614,7 +1614,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.291525922999881,
+          "seconds": 0.16111762299988186,
           "outcome_sha256": "2bab252942cc5718f0de42a4bcf95d03f582bd977419fe4375a52a2aa9dfa8a3",
           "outcome": {
             "kind": "calculation",
@@ -1631,7 +1631,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.2929077320000033,
+          "seconds": 0.15456645199992636,
           "outcome_sha256": "e47997e5649ae57e77438c262b77be121f697a175a0c8f47cdd650d6c928e05b",
           "outcome": {
             "kind": "calculation",
@@ -1648,7 +1648,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.30774266399976113,
+          "seconds": 0.16101629400054662,
           "outcome_sha256": "19a52b7588f7dfd6e0e4604b19adbd23d1013de3bb1dcb6da40c0d99a59498ef",
           "outcome": {
             "kind": "calculation",
@@ -1665,7 +1665,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.2965032369997971,
+          "seconds": 0.15149153899983503,
           "outcome_sha256": "ec486150afc8b369ecbada27d6b45fba1a9766653325112cdaaab35408b44b94",
           "outcome": {
             "kind": "calculation",
@@ -1682,7 +1682,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.3212540720001016,
+          "seconds": 0.18115384800057655,
           "outcome_sha256": "c3565f27f985e34c29e6900daf3c736db0c658948ac2123df080622bfaf7d5ff",
           "outcome": {
             "kind": "calculation",
@@ -1699,7 +1699,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.4582948059996852,
+          "seconds": 0.24114673599979142,
           "outcome_sha256": "57864a46c1676c2af3f5df7a1d19f0b17e92949eafb4929ed8a81b0857613283",
           "outcome": {
             "kind": "calculation",
@@ -1716,7 +1716,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.3018869459997404,
+          "seconds": 0.1553454029999557,
           "outcome_sha256": "e8eef9477ac6d09921238c0a444eb5f19f7e40ad20396d440c3de9423d20c1e8",
           "outcome": {
             "kind": "calculation",
@@ -1733,7 +1733,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.29302950100009184,
+          "seconds": 0.1623905319993355,
           "outcome_sha256": "92e233b7be0709dc2e91fad09fdb171ad4a2cd8dcdd518dedcc2fab4c983d0e2",
           "outcome": {
             "kind": "calculation",
@@ -1750,7 +1750,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.2971396689999892,
+          "seconds": 0.16048349700031395,
           "outcome_sha256": "1de1ac485fa677455932f5c72e44089dacbdc9139bbb964aa12f5a887857a11f",
           "outcome": {
             "kind": "calculation",
@@ -1767,7 +1767,7 @@
           },
           "software_pass": true,
           "check_count": 198,
-          "seconds": 0.4511042379999708,
+          "seconds": 0.21228941699973802,
           "outcome_sha256": "26f683a00d1ff39fa2e60ee3e5891ef9a1b843ade9961804b7d187d07db1aa05",
           "outcome": {
             "kind": "calculation",
@@ -1784,7 +1784,7 @@
           },
           "software_pass": true,
           "check_count": 198,
-          "seconds": 0.4617705850000675,
+          "seconds": 0.22094688400011364,
           "outcome_sha256": "0c62460f1c2bdb910a05fbbdcbc3ad101d405f88192c64d41757645e66a4dd14",
           "outcome": {
             "kind": "calculation",
@@ -1801,7 +1801,7 @@
           },
           "software_pass": true,
           "check_count": 199,
-          "seconds": 0.42664170299985926,
+          "seconds": 0.21360308400016947,
           "outcome_sha256": "8ee582e648d1dd4e22f21e5bc82e40cacc30d0b8220e276b2408ee23f5108f85",
           "outcome": {
             "kind": "calculation",
@@ -1818,7 +1818,7 @@
           },
           "software_pass": true,
           "check_count": 198,
-          "seconds": 0.4482979729996259,
+          "seconds": 0.21293573299954005,
           "outcome_sha256": "ff847a8d2315d0621b9358babb5f87684b2272e6ecf376b8fba70923d3e75eb4",
           "outcome": {
             "kind": "calculation",
@@ -1835,7 +1835,7 @@
           },
           "software_pass": true,
           "check_count": 198,
-          "seconds": 0.43490660499992373,
+          "seconds": 0.2156930769997416,
           "outcome_sha256": "4db653f6375dc187cb0a65bfdf9cd61c9dc4a2c618b38423bc58bf5ddcfd60bc",
           "outcome": {
             "kind": "calculation",
@@ -1852,7 +1852,7 @@
           },
           "software_pass": true,
           "check_count": 199,
-          "seconds": 0.4571756320001441,
+          "seconds": 0.2145164849998764,
           "outcome_sha256": "90c1895fb07e3e0cd05c4cdea54258d5195c69a438a8180def80718c79196b07",
           "outcome": {
             "kind": "calculation",
@@ -1869,7 +1869,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.4203621669998938,
+          "seconds": 0.2936170619996119,
           "outcome_sha256": "17ae86bd251ee5cb8931a8f4d5b603fff3c3d66833374e9c7034344ea6d49f5d",
           "outcome": {
             "kind": "calculation",
@@ -1882,8 +1882,9 @@
           "name": "v560_features",
           "exit_code": 0,
           "seconds": 0.4399956679999377,
-          "stdout": "V560 engineering checks passed: 1358\n",
-          "stderr": ""
+          "stdout": "V560 engineering checks passed: 1359\n",
+          "stderr": "",
+          "revision_note": "Repeated after same-gas selection fix."
         },
         {
           "name": "v5510_keypad",
@@ -2019,7 +2020,7 @@
           "errors.py": "3b8ac31ea84ed8b44b48a4d719ccceb3b62f698264fba78df95e8d1ff1f703d3",
           "field_state.py": "d6777a65793a5ddfce17097b205cd98b07470e77adf59042c7a2a2f5696562af",
           "flow_toolbar.py": "2cf31a5f962c58603ddc72e40dcd72dae5f2b012ef7d77347e79c3586a498f98",
-          "gas_catalog.py": "14c155c03912f6e1cbe6db30fb31f4a43e942088998742a20e03ef0daba044c7",
+          "gas_catalog.py": "703866e70f81fe8466490c537f2a325d3fdc07223598b0bb92d3918be5798a05",
           "html_report.py": "eb26d56f9eccf6f123c312cc322e714f3a62648ade682416e6e9c76552cb4fe2",
           "i18n.py": "8a8b24f71fd0dca4e4937186c0418afd7102338ef8c774b996f4465a8e68a7d8",
           "inactive_acceptance.py": "283d75dde46f9fbc632d194a751f02aebddc5da7fa2edba3376db4bb13bce271",
@@ -2050,7 +2051,7 @@
           "ui_common.py": "c9745fd98740837b73e4b20776a80d440e3629572930f4442591f2f3dab99fb6",
           "usability_acceptance.py": "4dcf28d241e3694c315cbd5010928c985ec7b6f7e5569d36b06ca9d6fde3bade",
           "utils.py": "5586fbe79f66c5d74bb71abaa3225d3335ce4e5e611ce0653c7692e2c2fb075f",
-          "v560_acceptance.py": "8606f57d8c335b40d20ebe611219aa5e7cad6b9a460a621014f965a63da50679",
+          "v560_acceptance.py": "41b3b4138e2a93f13dc3735793eb08647a43481221d29dcdb3173a9f8a9a07b5",
           "version.py": "93cb4db3fb07f4136cd2b6b9c324b65d3b036efaf182c2b803c2fd1004ceab93",
           "winter.py": "e93461af4d72c055febb85a27669f9881d4e7f9e91b8fadf4519b32a068297d0",
           "workspace_store.py": "8b55ef58affaf12c8fcc5269a6953724f7c50f9134c7079a6aabd37cadd5649f",
@@ -2059,7 +2060,7 @@
         "source_platform": "macos",
         "host": "Linux-6.18.44-x86_64-with-glibc2.39",
         "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
-        "finished_utc": "2026-10-12T08:35:06.983670+00:00",
+        "finished_utc": "2026-10-12T09:08:19.607242+00:00",
         "scenario_count": 100,
         "original_manifest_sha256": "d3209ae321f2c8ef5c8946de89f0adbec0006f6a48deec130f9c91fa11c0d759",
         "distinct_physical_input_count": 100,
@@ -2082,16 +2083,16 @@
         },
         "partial_report_api_probe_count": 11,
         "partial_report_api_guard_failures": 0,
-        "seconds": 17.954322952999973,
+        "seconds": 17.276355988999967,
         "latency_ms": {
-          "median": 4.233231500165857,
-          "p95": 8.155448000252363,
-          "max": 110.51502600003005
+          "median": 4.092596000191406,
+          "p95": 7.734273000096437,
+          "max": 75.03817199994955
         },
-        "rss_peak_mib": 111.55078125,
+        "rss_peak_mib": 111.47265625,
         "scope": "Linux headless source stress test; both seasons; no native GUI execution"
       },
-      "raw_evidence_sha256": "e3a1b948c999ad8273fe2a82e00d3b53b3cdd4025941f8595049b45367dda5c0",
+      "raw_evidence_sha256": "133ce6f5cd3333bfde45302ad7950bc79e0ac98ba72ae15328a4916ebfb51726",
       "cases": [
         {
           "id": "CR001",
@@ -2103,7 +2104,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.16840122199982943,
+          "seconds": 0.1575565369994365,
           "outcome_sha256": "6e781df0dcb96a487c649c01a2596dae3f207fecae4d93e89416fd869c11d784",
           "outcome": {
             "kind": "calculation",
@@ -2120,7 +2121,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.15789941699995325,
+          "seconds": 0.1488931389994832,
           "outcome_sha256": "77f0be9a1748bd0780461f5cda09c3eab6af99460bd358df3fb87b4475446ac9",
           "outcome": {
             "kind": "calculation",
@@ -2137,7 +2138,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.1546384449998186,
+          "seconds": 0.1571755340000891,
           "outcome_sha256": "07a9130ab7bbe06c2c62a6ea0f9081eaac3e6c09e532b7df4aea7f55eb8e1d4d",
           "outcome": {
             "kind": "calculation",
@@ -2154,7 +2155,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.15601774100014154,
+          "seconds": 0.15530400900024688,
           "outcome_sha256": "222fe22066c94e7c35e4e8ebe5cdc6feb087a79981eafce5007f9d23f868253a",
           "outcome": {
             "kind": "calculation",
@@ -2171,7 +2172,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.23877348900032302,
+          "seconds": 0.1450970910000251,
           "outcome_sha256": "948894090d08cb71b7920b4c145a119691a24081dd6e48bb36bcf2995b0b025c",
           "outcome": {
             "kind": "calculation",
@@ -2188,7 +2189,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.33129540600020846,
+          "seconds": 0.14678178099984507,
           "outcome_sha256": "078f6e452bbf112b0244116b038f90eeff50a237c280009ea956b87029ad8838",
           "outcome": {
             "kind": "calculation",
@@ -2205,7 +2206,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.3058595669999704,
+          "seconds": 0.1581991150005706,
           "outcome_sha256": "a019f2b7a5b5235c63d2f191e0ebd3c965dc261084b54c3cdd17fc69590a8376",
           "outcome": {
             "kind": "calculation",
@@ -2222,7 +2223,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.303275532999578,
+          "seconds": 0.15408938199925615,
           "outcome_sha256": "88b341c9fe3c5e3cfd0cc171872504c265ce1bf6bfc4d2aae029731e4c7f3e4f",
           "outcome": {
             "kind": "calculation",
@@ -2239,7 +2240,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.2996880640002928,
+          "seconds": 0.16173972700016748,
           "outcome_sha256": "5ceec020bc390606792cc9f6e473cd7468b3cd88f71d874c45a380a3c7bbdbe7",
           "outcome": {
             "kind": "calculation",
@@ -2256,7 +2257,7 @@
           },
           "software_pass": true,
           "check_count": 211,
-          "seconds": 0.30571171999963553,
+          "seconds": 0.1599544770006105,
           "outcome_sha256": "9973ebc1db0a8c9c008b3d9be046b6f81e94658446a4de5857bb1f0bc83720f2",
           "outcome": {
             "kind": "calculation",
@@ -2273,7 +2274,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.18127552099986133,
+          "seconds": 0.1539069259997632,
           "outcome_sha256": "58a2bb669234f7a8774c2c775b89ba233c412c7b98c95d40255a8fbcf3ba0c10",
           "outcome": {
             "kind": "calculation",
@@ -2290,7 +2291,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.15482855900017967,
+          "seconds": 0.15611453499968775,
           "outcome_sha256": "867ce865bf78c3d660dbbc9dc36852db914c17bfe465908dc39cf1086d33d5a1",
           "outcome": {
             "kind": "calculation",
@@ -2307,7 +2308,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.1684307609998541,
+          "seconds": 0.14839807099997415,
           "outcome_sha256": "07f244e1822b0f5d0084f4fbb6f663e0c2aff50c5f259ef1faf8a7c56b598cea",
           "outcome": {
             "kind": "calculation",
@@ -2324,7 +2325,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.172591261999969,
+          "seconds": 0.15878338800030178,
           "outcome_sha256": "922d0b94af802b1279d06cfdfad267ba417b1aaa9f38243e17d9a628cdd94c80",
           "outcome": {
             "kind": "calculation",
@@ -2341,7 +2342,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.17470048099994528,
+          "seconds": 0.19239545399977942,
           "outcome_sha256": "5340def665bfd5fb4553b3bc605b3932b4f22692e8d743d86ed53d5b1c2a0e60",
           "outcome": {
             "kind": "calculation",
@@ -2358,7 +2359,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.20029474500006472,
+          "seconds": 0.16443781799989665,
           "outcome_sha256": "def12b407a36710d4c7749ee544d24689ea83de793e1f4dea2c2f8f5b0741b68",
           "outcome": {
             "kind": "calculation",
@@ -2375,7 +2376,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.18989737099991544,
+          "seconds": 0.17448828699980368,
           "outcome_sha256": "2906d4b8cbd75c6c8ff3c8895f56ad134546bcd21f1a3fc66f3ebf97ed41a43a",
           "outcome": {
             "kind": "calculation",
@@ -2392,7 +2393,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.2180077330003769,
+          "seconds": 0.17759982799998397,
           "outcome_sha256": "040786aacf59b224c31a0f01cc116a191a82010aa04be27f9edee42df345abcc",
           "outcome": {
             "kind": "calculation",
@@ -2409,7 +2410,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.1493812710000384,
+          "seconds": 0.1752380580001045,
           "outcome_sha256": "f922aa6a3f50e573e820468ca23701015512c2b381b22f208a3fbdf16911ecd8",
           "outcome": {
             "kind": "calculation",
@@ -2426,7 +2427,7 @@
           },
           "software_pass": true,
           "check_count": 210,
-          "seconds": 0.160531643000013,
+          "seconds": 0.16038726699935069,
           "outcome_sha256": "3a0689467c0be1a74df176b2bf952ad26c1f23aaf03ef6b1ee781e41b6ab1179",
           "outcome": {
             "kind": "calculation",
@@ -2443,7 +2444,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.15617356000029758,
+          "seconds": 0.16017291899970587,
           "outcome_sha256": "ec919d0dc8b47119cff45c5d0074f69ea6f9c4a0e68fab84ad0b5803f7c9825c",
           "outcome": {
             "kind": "calculation",
@@ -2460,7 +2461,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.1558120559998315,
+          "seconds": 0.19509007400029077,
           "outcome_sha256": "fe9b703d6bb1648d76395c754dc0baf7841107f9b2c8491457563023d97da615",
           "outcome": {
             "kind": "calculation",
@@ -2477,7 +2478,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.1501836780003032,
+          "seconds": 0.32454446199972153,
           "outcome_sha256": "ee46bf87dbef92dffe28aae9a5f4e3550a6c189c0781cacea29a76adb9f80352",
           "outcome": {
             "kind": "calculation",
@@ -2494,7 +2495,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.15264022300016222,
+          "seconds": 0.15495515600014187,
           "outcome_sha256": "f18f1f918f24903f8f0bf4cd2f8dc89f770edb1e301fa88ed6cd3e2a7df944cc",
           "outcome": {
             "kind": "calculation",
@@ -2511,7 +2512,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.15937125699974786,
+          "seconds": 0.1564880820005783,
           "outcome_sha256": "a3bc0117da746c07fd1f76823731c9e5d9269aea753ac34d9d67f5bebd9ba124",
           "outcome": {
             "kind": "calculation",
@@ -2528,7 +2529,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16282625399981043,
+          "seconds": 0.1630913419994613,
           "outcome_sha256": "1965dfca30736c9efb4ff12b90b0675110a7e91fc559d5744986c9c38ae87fcc",
           "outcome": {
             "kind": "calculation",
@@ -2545,7 +2546,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.15304321900021023,
+          "seconds": 0.1664622190000955,
           "outcome_sha256": "18d49b61b292f41108c947779427020a4c0c3364c09b41784a3ca7013fea237b",
           "outcome": {
             "kind": "calculation",
@@ -2562,7 +2563,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.15807483099979436,
+          "seconds": 0.16487954900003388,
           "outcome_sha256": "7c52fc5fdcd8f771f9b28f1aa6a42029fe9b8dfc48f0b4c4b12e81b7720b9752",
           "outcome": {
             "kind": "calculation",
@@ -2579,7 +2580,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.17391860100042322,
+          "seconds": 0.1527607870002612,
           "outcome_sha256": "7c75579a1e3e65646c654303a1b636695fc7e26f22ae6ebc2300bd8af83c6d2f",
           "outcome": {
             "kind": "calculation",
@@ -2596,7 +2597,7 @@
           },
           "software_pass": true,
           "check_count": 210,
-          "seconds": 0.15615461500010497,
+          "seconds": 0.14912414999980683,
           "outcome_sha256": "a7e2cb5176331286781c376c682f9256365d5bab576a0bc859e2efd06440d22c",
           "outcome": {
             "kind": "calculation",
@@ -2613,7 +2614,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.17168706099982955,
+          "seconds": 0.1552062910004679,
           "outcome_sha256": "8828f76fefb0c164764415534632274b0d8272cfa3dadf73bee37e90eb872037",
           "outcome": {
             "kind": "calculation",
@@ -2630,7 +2631,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.20622841500016875,
+          "seconds": 0.15164962000017113,
           "outcome_sha256": "939b2bd7dcd7013e7d8159a783d6bc20a1f2fb2f2fe717675ee3817e92134397",
           "outcome": {
             "kind": "calculation",
@@ -2647,7 +2648,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.16544159799968838,
+          "seconds": 0.16021621799973218,
           "outcome_sha256": "20596446b84742da0ea15bb2a1dd57a79736114ff31b504ba8d35c1dbfd90cdc",
           "outcome": {
             "kind": "calculation",
@@ -2664,7 +2665,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.15507704399988143,
+          "seconds": 0.15958811000018613,
           "outcome_sha256": "ccade07e0cedb4bcfa57854ecdae62d207064c228657e19ab730e4eddef7a9b6",
           "outcome": {
             "kind": "calculation",
@@ -2681,7 +2682,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.17799857499994687,
+          "seconds": 0.16252891200019803,
           "outcome_sha256": "dd2718cc2223dca28c20aba932da01cf6561649f864819b5047cd54b437d4519",
           "outcome": {
             "kind": "calculation",
@@ -2698,7 +2699,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.19332031199974153,
+          "seconds": 0.17343782700027077,
           "outcome_sha256": "df7eb185e00f3b5515f8e03f621c6432edbef2609185d3f5f325df75f911fa07",
           "outcome": {
             "kind": "calculation",
@@ -2715,7 +2716,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.15284588399981658,
+          "seconds": 0.1537357150000389,
           "outcome_sha256": "661d84332967d7b6275dc386150caa16b09302291bebff30bc3536addac3b0f7",
           "outcome": {
             "kind": "calculation",
@@ -2732,7 +2733,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.8340329339998789,
+          "seconds": 0.9294193069999892,
           "outcome_sha256": "f970639193a388a334597d5dfa36a0798b4e0cb8a55a27d1dc2e36e9b09533fc",
           "outcome": {
             "kind": "calculation",
@@ -2749,7 +2750,7 @@
           },
           "software_pass": true,
           "check_count": 199,
-          "seconds": 0.2188010010004291,
+          "seconds": 0.2617082130000199,
           "outcome_sha256": "f6864ca5958dc6b99ecc5424e478fcdf74b34df5141b894673f5563f5bcb0107",
           "outcome": {
             "kind": "calculation",
@@ -2766,7 +2767,7 @@
           },
           "software_pass": true,
           "check_count": 207,
-          "seconds": 0.22127130500030034,
+          "seconds": 0.23310040700016543,
           "outcome_sha256": "0cd4e02be303d7f46bbc4ac7105e3e48e0bff1c986f0b1dc0e8d76cdb7540a28",
           "outcome": {
             "kind": "calculation",
@@ -2783,7 +2784,7 @@
           },
           "software_pass": true,
           "check_count": 208,
-          "seconds": 0.16277383899978304,
+          "seconds": 0.1633865779995176,
           "outcome_sha256": "7965006d35c047db02c650ae65666b122c24fa2fca302740d18f990ce40fd856",
           "outcome": {
             "kind": "calculation",
@@ -2800,7 +2801,7 @@
           },
           "software_pass": true,
           "check_count": 208,
-          "seconds": 0.1616365299996687,
+          "seconds": 0.1618577129993355,
           "outcome_sha256": "f5ebc16656d1cc8fdb4dca48236a2a9505716504ac8972299d4c3f20737bb375",
           "outcome": {
             "kind": "calculation",
@@ -2817,7 +2818,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.16049077500019848,
+          "seconds": 0.16538861599929078,
           "outcome_sha256": "f4d2a9fbc7ec96316875e096553f4a4a7fc4b4d196be94b733e776bfd1646551",
           "outcome": {
             "kind": "calculation",
@@ -2834,7 +2835,7 @@
           },
           "software_pass": true,
           "check_count": 208,
-          "seconds": 0.16514910300020347,
+          "seconds": 0.16002898199985793,
           "outcome_sha256": "fca6a305c6e4d6aeed1d221074f55c6bf77721ff737a4f2d23f373ed578929dd",
           "outcome": {
             "kind": "calculation",
@@ -2851,7 +2852,7 @@
           },
           "software_pass": true,
           "check_count": 208,
-          "seconds": 0.1648837360003199,
+          "seconds": 0.1656330900004832,
           "outcome_sha256": "7f91fd61ebb903d76cfd693704db147b87d42a67d904b12f024d9bc93047e9b7",
           "outcome": {
             "kind": "calculation",
@@ -2868,7 +2869,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.16165135199980796,
+          "seconds": 0.16970629199931864,
           "outcome_sha256": "1146ed5f27281fd534cf81cb55cdd8ca0987f1c753d21b17d456a9e638d9e420",
           "outcome": {
             "kind": "calculation",
@@ -2885,7 +2886,7 @@
           },
           "software_pass": true,
           "check_count": 208,
-          "seconds": 0.22332457399988925,
+          "seconds": 0.16519955600051617,
           "outcome_sha256": "59c2f255fb1fcff5629bba0966e8a731c14d337d80f032baa36b57041149e7e1",
           "outcome": {
             "kind": "calculation",
@@ -2902,7 +2903,7 @@
           },
           "software_pass": true,
           "check_count": 208,
-          "seconds": 0.17324944100028006,
+          "seconds": 0.1648042999995596,
           "outcome_sha256": "5fa99494fe66fdf7d47d67bf819df5ff677af39682da9b1e6465b75e8b683f2d",
           "outcome": {
             "kind": "calculation",
@@ -2919,7 +2920,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.15587700900005075,
+          "seconds": 0.1608081200001834,
           "outcome_sha256": "0d05903a15e78bdfaa2f966fa05a1c55b538d134d010698daa68010466f7ee3b",
           "outcome": {
             "kind": "calculation",
@@ -2936,7 +2937,7 @@
           },
           "software_pass": true,
           "check_count": 216,
-          "seconds": 0.17459226899973146,
+          "seconds": 0.21740216800026246,
           "outcome_sha256": "a14b16cb92ffa6025c4d7938fd40a883a9ad50a5c0d2000be9624a68dd9cc063",
           "outcome": {
             "kind": "calculation",
@@ -2958,7 +2959,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.05997610199983683,
+          "seconds": 0.058395955999912985,
           "outcome_sha256": "4214786fbf9751b791e380448abec64f909f1209f33b9a4da87ee2b6086bb037",
           "outcome": {
             "kind": "engineering_rejection",
@@ -2981,7 +2982,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.05939745599971502,
+          "seconds": 0.05058499599999777,
           "outcome_sha256": "4214786fbf9751b791e380448abec64f909f1209f33b9a4da87ee2b6086bb037",
           "outcome": {
             "kind": "engineering_rejection",
@@ -2999,7 +3000,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.161439400999825,
+          "seconds": 0.17184645700035617,
           "outcome_sha256": "f8700b992f3dec5b41e513d5628b706826277b72905186279ce51fea042d4322",
           "outcome": {
             "kind": "calculation",
@@ -3016,7 +3017,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.1631330759996672,
+          "seconds": 0.1551491199998054,
           "outcome_sha256": "ac5ba1c1fabef51662e4306ed3f782373b7009bbeae05e1bb9be25e54d2eafd9",
           "outcome": {
             "kind": "calculation",
@@ -3033,7 +3034,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16192760600006295,
+          "seconds": 0.15487490000032267,
           "outcome_sha256": "2ec18a04ccba601baf861e5d2a223e426ff91f6abcff39beb1ca2aa86ec335fa",
           "outcome": {
             "kind": "calculation",
@@ -3050,7 +3051,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16194605000009688,
+          "seconds": 0.15641296200010402,
           "outcome_sha256": "37d076f49d5ee515f70998c85d2765929be51655feac6b1061358023ee031374",
           "outcome": {
             "kind": "calculation",
@@ -3067,7 +3068,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16338685099981376,
+          "seconds": 0.16351189099987096,
           "outcome_sha256": "422c268552a2d0895aeced19e3c1b9b72699877c282ac57f44a96c51d9d46198",
           "outcome": {
             "kind": "calculation",
@@ -3084,7 +3085,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.195562117999998,
+          "seconds": 0.1726350259996252,
           "outcome_sha256": "21c7154672ae33c048efc2efcb145cc7194ef564457758dfbf84f867618083ee",
           "outcome": {
             "kind": "calculation",
@@ -3101,7 +3102,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16555597599972316,
+          "seconds": 0.210374973999933,
           "outcome_sha256": "37440afc21c80e8bad9d17defc996be1fb583363df519ab60fca3bef6a9a7a5b",
           "outcome": {
             "kind": "calculation",
@@ -3118,7 +3119,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.21458000699976765,
+          "seconds": 0.16419814099936048,
           "outcome_sha256": "dd90608f894e91737fa2bc459bba49f30b15f4d4cbb204b2b2ca2bec7f7c7c94",
           "outcome": {
             "kind": "calculation",
@@ -3135,7 +3136,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.18227761199977977,
+          "seconds": 0.1524395740007094,
           "outcome_sha256": "063973a0d48519066a3a87cd91d789227199e44516a2b1fcc27f2e0201b7a3bd",
           "outcome": {
             "kind": "calculation",
@@ -3158,7 +3159,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.0663481189999402,
+          "seconds": 0.05888055600007647,
           "outcome_sha256": "d608eb9e2a6660c70d39905fa262b665d00f9d1b5cd7773e94503bcc322f10d5",
           "outcome": {
             "kind": "engineering_rejection",
@@ -3182,7 +3183,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.05471080500001335,
+          "seconds": 0.049294540000119014,
           "outcome_sha256": "1a7b0925e67ec60c716be5d3fa13783ccf0d26e1dc0a6d5692104adcd5e11b54",
           "outcome": {
             "kind": "engineering_rejection",
@@ -3206,7 +3207,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.05972136700029296,
+          "seconds": 0.05441282999981922,
           "outcome_sha256": "32a2b5253bea326c867ae9a75a2b251a6bcc539f3b4ec426575b67d6ee163f41",
           "outcome": {
             "kind": "engineering_rejection",
@@ -3224,7 +3225,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.20085857599997325,
+          "seconds": 0.1898523549998572,
           "outcome_sha256": "fea59bdd6c58062c32312875c5c0bca89be6e936ec6aef4660d412eb99baee12",
           "outcome": {
             "kind": "calculation",
@@ -3241,7 +3242,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16637490099992647,
+          "seconds": 0.20474281099996006,
           "outcome_sha256": "d8b3541b7fb5f7e97892dcfe5ef7c3bce88e7c0c66366a78e3b520ceb651a89e",
           "outcome": {
             "kind": "calculation",
@@ -3258,7 +3259,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.19024333600009413,
+          "seconds": 0.16415073400003166,
           "outcome_sha256": "401747dab68be127d82364b16ff215e716c3dc178746b482b7950208e352a364",
           "outcome": {
             "kind": "calculation",
@@ -3275,7 +3276,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16568836300029943,
+          "seconds": 0.17314655100017262,
           "outcome_sha256": "36149f9c546366da39ca8884b8eaaf3fdc4f9eec28ea7487c5704ff5831c0b32",
           "outcome": {
             "kind": "calculation",
@@ -3292,7 +3293,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16167258600034984,
+          "seconds": 0.16847381600018707,
           "outcome_sha256": "af5a3ea69c3bb6d33236886aeb55d6a3b2f31e1abd32a3e7dbb8689cb3fb4df9",
           "outcome": {
             "kind": "calculation",
@@ -3309,7 +3310,7 @@
           },
           "software_pass": true,
           "check_count": 206,
-          "seconds": 0.19838723500015476,
+          "seconds": 0.1562751040000876,
           "outcome_sha256": "ff167a5e9f9e768710d7a9ed6f1a931715baae9415ed228cb3260cdcd506f6da",
           "outcome": {
             "kind": "calculation",
@@ -3326,7 +3327,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.17972025600010966,
+          "seconds": 0.16157522499997867,
           "outcome_sha256": "247ae2303b80d79ecf3513d5a15f73d4c2a4601e61c60a3b9295c6451eb630f8",
           "outcome": {
             "kind": "calculation",
@@ -3343,7 +3344,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.1615221649999512,
+          "seconds": 0.167165789000137,
           "outcome_sha256": "1a955624199c0fa802d63557baaf427d84beb3458fbd1516c160cca64ef19031",
           "outcome": {
             "kind": "calculation",
@@ -3360,7 +3361,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.16377899500002968,
+          "seconds": 0.15791014400019776,
           "outcome_sha256": "45b2fd2372926d80bfc287bd1055f2f893930dc9a265cce0d85f0907bca796d8",
           "outcome": {
             "kind": "calculation",
@@ -3377,7 +3378,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.1749534720001975,
+          "seconds": 0.1601008469997396,
           "outcome_sha256": "52262d02d4a21822bd4c5c6913d102b71778d3ec843040f53090d224dd8072c8",
           "outcome": {
             "kind": "calculation",
@@ -3394,7 +3395,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.18194712600006824,
+          "seconds": 0.16377736300000834,
           "outcome_sha256": "14d8ada60672833a3ae0b7c9f42a8d9a61ef6e4916a761aebd50fc64ffadaf88",
           "outcome": {
             "kind": "calculation",
@@ -3411,7 +3412,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.17312889999993786,
+          "seconds": 0.1606950200002757,
           "outcome_sha256": "0a89d9f746f300b4b7ebbf47d698ceac13a55a63b80901e4a9a7fb39407be536",
           "outcome": {
             "kind": "calculation",
@@ -3428,7 +3429,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.17027606900001047,
+          "seconds": 0.16395234799983882,
           "outcome_sha256": "8a9ab56cefdbc3785e2886d94ac1aaf27cf1325778b48b0dafb586bc45db9661",
           "outcome": {
             "kind": "calculation",
@@ -3450,7 +3451,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.05802990799975305,
+          "seconds": 0.05639182499999151,
           "outcome_sha256": "4065205147b696882efd61022aecb51dd5f71e3f6c7763bf7d9bedfebb6d9e14",
           "outcome": {
             "kind": "engineering_rejection",
@@ -3473,7 +3474,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.05498440299970753,
+          "seconds": 0.06208409899954859,
           "outcome_sha256": "77a5ce25afe18da5e97350a2e1be2b9e41ad93089b90c88fe1059fa9940c0925",
           "outcome": {
             "kind": "engineering_rejection",
@@ -3496,7 +3497,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.06768888200031142,
+          "seconds": 0.05945361199974286,
           "outcome_sha256": "77a5ce25afe18da5e97350a2e1be2b9e41ad93089b90c88fe1059fa9940c0925",
           "outcome": {
             "kind": "engineering_rejection",
@@ -3519,7 +3520,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.054020207000121445,
+          "seconds": 0.057241395999881206,
           "outcome_sha256": "760ea39b92225ea7b5b50ebe36f65db9fb392e1aef2f2086703d120eefde2831",
           "outcome": {
             "kind": "engineering_rejection",
@@ -3542,7 +3543,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.05718130300010671,
+          "seconds": 0.057698718999745324,
           "outcome_sha256": "2454792ac8e823ab0e660f978c9be4b8f5b66c0d17ff5ac33d5ab499a5d402ed",
           "outcome": {
             "kind": "engineering_rejection",
@@ -3565,7 +3566,7 @@
           },
           "software_pass": true,
           "check_count": 26,
-          "seconds": 0.05388658299989402,
+          "seconds": 0.07419093699991208,
           "outcome_sha256": "e1c0ad5793b5504edd786b9e0a426d8b418865399e9605be6e2c9d636d842f80",
           "outcome": {
             "kind": "engineering_rejection",
@@ -3583,7 +3584,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.2684338980002394,
+          "seconds": 0.22754891099975794,
           "outcome_sha256": "95928c747379006f18fa8db280a64ad287aee73d42c7371632e63cd848d19344",
           "outcome": {
             "kind": "calculation",
@@ -3600,7 +3601,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.15980551800021203,
+          "seconds": 0.18137561500043375,
           "outcome_sha256": "2bab252942cc5718f0de42a4bcf95d03f582bd977419fe4375a52a2aa9dfa8a3",
           "outcome": {
             "kind": "calculation",
@@ -3617,7 +3618,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.15402775999973528,
+          "seconds": 0.21809506699992198,
           "outcome_sha256": "e47997e5649ae57e77438c262b77be121f697a175a0c8f47cdd650d6c928e05b",
           "outcome": {
             "kind": "calculation",
@@ -3634,7 +3635,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.16143005200001426,
+          "seconds": 0.21130137000000104,
           "outcome_sha256": "19a52b7588f7dfd6e0e4604b19adbd23d1013de3bb1dcb6da40c0d99a59498ef",
           "outcome": {
             "kind": "calculation",
@@ -3651,7 +3652,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.1619847359997948,
+          "seconds": 0.20096761800050444,
           "outcome_sha256": "ec486150afc8b369ecbada27d6b45fba1a9766653325112cdaaab35408b44b94",
           "outcome": {
             "kind": "calculation",
@@ -3668,7 +3669,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.16659648299992114,
+          "seconds": 0.16024280799956614,
           "outcome_sha256": "c3565f27f985e34c29e6900daf3c736db0c658948ac2123df080622bfaf7d5ff",
           "outcome": {
             "kind": "calculation",
@@ -3685,7 +3686,7 @@
           },
           "software_pass": true,
           "check_count": 205,
-          "seconds": 0.23926687899984245,
+          "seconds": 0.23018523500013544,
           "outcome_sha256": "57864a46c1676c2af3f5df7a1d19f0b17e92949eafb4929ed8a81b0857613283",
           "outcome": {
             "kind": "calculation",
@@ -3702,7 +3703,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.2725306049997016,
+          "seconds": 0.18422638199990615,
           "outcome_sha256": "e8eef9477ac6d09921238c0a444eb5f19f7e40ad20396d440c3de9423d20c1e8",
           "outcome": {
             "kind": "calculation",
@@ -3719,7 +3720,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.1564589699996759,
+          "seconds": 0.1789133350002885,
           "outcome_sha256": "92e233b7be0709dc2e91fad09fdb171ad4a2cd8dcdd518dedcc2fab4c983d0e2",
           "outcome": {
             "kind": "calculation",
@@ -3736,7 +3737,7 @@
           },
           "software_pass": true,
           "check_count": 202,
-          "seconds": 0.1689064120000694,
+          "seconds": 0.17457974199987802,
           "outcome_sha256": "1de1ac485fa677455932f5c72e44089dacbdc9139bbb964aa12f5a887857a11f",
           "outcome": {
             "kind": "calculation",
@@ -3753,7 +3754,7 @@
           },
           "software_pass": true,
           "check_count": 198,
-          "seconds": 0.22261646799961454,
+          "seconds": 0.2226254280003559,
           "outcome_sha256": "26f683a00d1ff39fa2e60ee3e5891ef9a1b843ade9961804b7d187d07db1aa05",
           "outcome": {
             "kind": "calculation",
@@ -3770,7 +3771,7 @@
           },
           "software_pass": true,
           "check_count": 198,
-          "seconds": 0.2250512760001584,
+          "seconds": 0.2913392489999751,
           "outcome_sha256": "0c62460f1c2bdb910a05fbbdcbc3ad101d405f88192c64d41757645e66a4dd14",
           "outcome": {
             "kind": "calculation",
@@ -3787,7 +3788,7 @@
           },
           "software_pass": true,
           "check_count": 199,
-          "seconds": 0.21712099899968962,
+          "seconds": 0.23552478800047538,
           "outcome_sha256": "8ee582e648d1dd4e22f21e5bc82e40cacc30d0b8220e276b2408ee23f5108f85",
           "outcome": {
             "kind": "calculation",
@@ -3804,7 +3805,7 @@
           },
           "software_pass": true,
           "check_count": 198,
-          "seconds": 0.21889414500037674,
+          "seconds": 0.23050284300006751,
           "outcome_sha256": "ff847a8d2315d0621b9358babb5f87684b2272e6ecf376b8fba70923d3e75eb4",
           "outcome": {
             "kind": "calculation",
@@ -3821,7 +3822,7 @@
           },
           "software_pass": true,
           "check_count": 198,
-          "seconds": 0.2122033890000239,
+          "seconds": 0.2874809330005519,
           "outcome_sha256": "4db653f6375dc187cb0a65bfdf9cd61c9dc4a2c618b38423bc58bf5ddcfd60bc",
           "outcome": {
             "kind": "calculation",
@@ -3838,7 +3839,7 @@
           },
           "software_pass": true,
           "check_count": 199,
-          "seconds": 0.22187108800017086,
+          "seconds": 0.22414830200068536,
           "outcome_sha256": "90c1895fb07e3e0cd05c4cdea54258d5195c69a438a8180def80718c79196b07",
           "outcome": {
             "kind": "calculation",
@@ -3855,7 +3856,7 @@
           },
           "software_pass": true,
           "check_count": 203,
-          "seconds": 0.21768248000034873,
+          "seconds": 0.22139284200056863,
           "outcome_sha256": "17ae86bd251ee5cb8931a8f4d5b603fff3c3d66833374e9c7034344ea6d49f5d",
           "outcome": {
             "kind": "calculation",
@@ -3868,8 +3869,9 @@
           "name": "v560_features",
           "exit_code": 0,
           "seconds": 1.7942889999999352,
-          "stdout": "V560 engineering checks passed: 1358\n",
-          "stderr": ""
+          "stdout": "V560 engineering checks passed: 1359\n",
+          "stderr": "",
+          "revision_note": "Repeated after same-gas selection fix."
         },
         {
           "name": "v5510_keypad",

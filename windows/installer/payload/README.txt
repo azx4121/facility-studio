@@ -9,7 +9,7 @@ DESIGNED BY ANDY HUANG ©
 
 下載與開啟
 目前公開下載為 EXE：
-https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.1/Facility_Studio_V5_6_0_Windows_Offline.exe
+https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.2/Facility_Studio_V5_6_0_Windows_Offline.exe
 儲存後雙擊開啟，第一次請等候內建環境展開。不需另裝 Python 或管理員權限。
 Windows 10／11 Intel／AMD x64 為支援目標；原生驗收為 Windows Server 2022／2025 x64。
 本版尚無正式發行者簽章。首次安全提示說明：

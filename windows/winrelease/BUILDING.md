@@ -2,7 +2,7 @@
 
 [目前下載與英文安裝](../../README.en.md#download-and-run) · [雙語原生驗收](../../docs/2026-10-11-v5.6.0-native.md)
 
-Developer build only: the published V5.6.0 EXE bundles Python and passed both native jobs. Normal users do not run pip or these build commands. ZIPs are still built for native acceptance and developer diagnostics, but are no longer public delivery assets of the recommended releases. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.6.0-win.1 and must not overwrite its existing public assets. For a future release, update the builder, verifier, publisher and workflow version/output names together. See [distribution signing](../../docs/signing.en.md).
+Developer build only: the V5.6.0 EXE bundles Python; publication requires both native jobs to pass. Normal users do not run pip or these build commands. ZIPs are still built for native acceptance and developer diagnostics, but are no longer public delivery assets of the recommended releases. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.6.0-win.2 and must not overwrite its existing public assets. For a future release, update the builder, verifier, publisher and workflow version/output names together. See [distribution signing](../../docs/signing.en.md).
 
 `entry.py` 為單檔 EXE 的視窗模式入口；日常使用不執行 pip、不尋找外部 Python、不下載元件。
 主應用程式與完整計算邏輯仍使用 `windows/facility_studio`；不是另一套精簡計算版本。
@@ -38,10 +38,10 @@ python -m winrelease.verify --assets C:\FacilityStudioBuild --output C:\Facility
 
 
 
-V5.6.0 win.1 / 數字鍵盤小數點修訂
+V5.6.0 win.2 / 大型水管、直接快算與廠務氣體
 簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
 簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
 完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
 V5.6.0 可由完整工作台「開啟練習新案」建立副本；原廠選型與設備阻力等待補資料仍需補。
-V5.6.0 retains author credit and offline walkthroughs. win.1 verifies keypad decimal/Del and dedicated Delete through native Tk events and Windows OS messages.
+V5.6.0 retains author credit and offline walkthroughs. win.2 retains keypad checks and additionally verifies direct navigation, large water pipes, factory gas choices and retained velocity when reselecting the same process gas.
 No additional Python installation or internet is needed for the tutorial.

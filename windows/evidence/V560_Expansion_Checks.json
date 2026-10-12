@@ -1347,6 +1347,10 @@
       "passed": true
     },
     {
+      "name": "Reselecting the same process gas preserves entered velocity",
+      "passed": true
+    },
+    {
       "name": "CDA to N2 updates known preset",
       "passed": true
     },

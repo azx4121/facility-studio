@@ -88,6 +88,8 @@ def has_demand(value):
 
 
 def switched_velocity(old_gas, new_gas, raw):
+    if old_gas == new_gas:
+        return raw
     new_reference = reference_velocity(new_gas)
     if new_reference is None:
         return ""

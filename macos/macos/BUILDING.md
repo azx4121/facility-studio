@@ -1,8 +1,8 @@
-# Native macOS release building (V5.6.0 mac.1)
+# Native macOS release building (V5.6.0 mac.2)
 
 The original V5.5.4 mac.1 package passed byte-level checks but failed Apple's native deep
 signature validation on both macOS 15 architectures. Static verification must
-not be treated as native release acceptance. Historical assets are retained. V5.6.0 includes the repaired runtime and bilingual presentation; [current verification](../../docs/2026-10-11-v5.6.0-native.md) records keypad widget acceptance and native delivery. These commands are for developers; normal users use the [bundled downloads](../../README.en.md#download-and-run).
+not be treated as native release acceptance. Historical assets are retained. V5.6.0 includes the repaired runtime and bilingual presentation; [current verification](../../docs/2026-10-12-v5.6-native.md) records native delivery separately; publication requires Apple Silicon and Intel acceptance. These commands are for developers; normal users use the [bundled downloads](../../README.en.md#download-and-run).
 
 ## Shipping build
 
@@ -11,7 +11,7 @@ The public publisher now offers only the tested DMG and its public SHA256SUMS. T
 On a native Mac, from the repository root:
 
 ```sh
-python3 macos/macos/build_native_release.py --output /absolute/path/fresh-mac555-build
+python3 macos/macos/build_native_release.py --output /absolute/path/fresh-mac560-build
 ```
 
 No Zig or third-party signing tool is needed for this rebuild. The builder:
@@ -35,8 +35,8 @@ To validate those exact delivery files on a second Mac architecture:
 
 ```sh
 python3 macos/macos/verify_native_release.py \
-  --package /absolute/path/Facility_Studio_V5_6_0_macOS_mac1_OneClick.zip \
-  --dmg /absolute/path/Facility_Studio_V5_6_0_macOS_mac1.dmg \
+  --package /absolute/path/Facility_Studio_V5_6_0_macOS_mac2_OneClick.zip \
+  --dmg /absolute/path/Facility_Studio_V5_6_0_macOS_mac2.dmg \
   --checksums /absolute/path/SHA256SUMS.txt \
   --output /absolute/path/second-mac-evidence
 ```
@@ -44,7 +44,7 @@ python3 macos/macos/verify_native_release.py \
 The workflow `.github/workflows/macos-native-release.yml` uses Apple Silicon
 macOS 15 to build and Intel macOS 15 to execute the same ZIP and DMG. On the
 repair branch it only tests. On main, publication runs only after both jobs pass;
-the publisher targets `v5.6.0-mac.1` without replacing existing public assets or moving tags.
+the publisher targets `v5.6.0-mac.2` without replacing existing public assets or moving tags.
 For a future release, update version and output names in the builder, verifier,
 publisher and workflow together; do not try to overwrite the already published
 v5.6.0 files after a source change.
@@ -119,10 +119,10 @@ recreates them using their stored Unix file types.
 
 
 
-V5.6.0 mac.1 / 數字鍵盤小數點修訂
+V5.6.0 mac.2 / 數字鍵盤小數點修訂
 簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
 簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
 完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
 V5.6.0 可由完整工作台「開啟練習新案」建立副本；原廠選型與設備阻力等待補資料仍需補。
-V5.6.0 retains author credit and offline walkthroughs. mac.1 verifies keypad entry, selections and read-only protection through delivered Aqua widgets.
+V5.6.0 retains author credit and offline walkthroughs. mac.2 verifies keypad entry, selections and read-only protection through delivered Aqua widgets.
 No additional Python installation or internet is needed for the tutorial.
