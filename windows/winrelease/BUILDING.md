@@ -1,6 +1,6 @@
 # Windows V5.6.0 離線發行
 
-[目前下載與英文安裝](../../README.en.md#download-and-run) · [雙語原生驗收](../../docs/2026-10-12-v5.6-native.md)
+[目前下載與英文安裝](../../README.en.md#download-and-run) · [雙語原生驗收](../../docs/2026-10-13-v5.6-audit-stress.md)
 
 Developer build only: the V5.6.0 EXE bundles Python; publication requires both native jobs to pass. Normal users do not run pip or these build commands. ZIPs are still built for native acceptance and developer diagnostics, but are no longer public delivery assets of the recommended releases. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.6.0-win.3 and must not overwrite its existing public assets. For a future release, update the builder, verifier, publisher and workflow version/output names together. See [distribution signing](../../docs/signing.en.md).
 

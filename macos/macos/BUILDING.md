@@ -2,7 +2,7 @@
 
 The original V5.5.4 mac.1 package passed byte-level checks but failed Apple's native deep
 signature validation on both macOS 15 architectures. Static verification must
-not be treated as native release acceptance. Historical assets are retained. V5.6.0 includes the repaired runtime and bilingual presentation; [current verification](../../docs/2026-10-12-v5.6-native.md) records native delivery separately; publication requires Apple Silicon and Intel acceptance. These commands are for developers; normal users use the [bundled downloads](../../README.en.md#download-and-run).
+not be treated as native release acceptance. Historical assets are retained. V5.6.0 includes the repaired runtime and bilingual presentation; [current verification](../../docs/2026-10-13-v5.6-audit-stress.md) records native delivery separately; publication requires Apple Silicon and Intel acceptance. These commands are for developers; normal users use the [bundled downloads](../../README.en.md#download-and-run).
 
 ## Shipping build
 

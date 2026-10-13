@@ -14,7 +14,7 @@ No. The Windows EXE and macOS DMG include their runtime. Calculations, saved pro
 | Windows | Windows 10/11 on Intel/AMD x64 are support targets. Download and double-click the EXE; allow time for the bundled environment to unpack on first launch. | Windows Server 2022/2025 x64 |
 | macOS | Universal App for Apple Silicon / Intel, packaging target macOS 11+. Open the DMG, drag into Applications, then launch there. Eject the DMG after installation. | Apple Silicon / Intel macOS 15 |
 
-Windows ARM, 32-bit Windows, and other Mac OS versions/devices were not included in this acceptance. Enterprise policies may also restrict execution. [Full acceptance and download hashes](2026-10-12-v5.6-native.md)
+Windows ARM, 32-bit Windows, and other Mac OS versions/devices were not included in this acceptance. Enterprise policies may also restrict execution. [Full acceptance and download hashes](2026-10-13-v5.6-audit-stress.md)
 
 Close the old app before replacing the EXE/App. Saved projects and recovery data are retained.
 
@@ -32,7 +32,7 @@ All seven V5.6.0 calculators are direct sidebar buttons: electrical, duct, CDA/g
 
 Automatic water references extend to 24 inches. The tool selects a single pipe within the adopted velocity before adding parallel circuits. Added 14–24 inch references use STD walls; check actual ID when supplied dimensions differ. [Water and pipe guide](guides/water.en.md)
 
-The calculator and workbench share 50 named gases plus custom mixtures. Added gases have no preset design velocity: enter a design value, using custom velocity in the workbench. win.2 / mac.2 preserves entered velocity when the same gas is selected again; switching to a different added gas requires a new value. Mixtures need a name and composition. T/P/Z conversion covers single-gas-phase volume and velocity estimates only. [Gas and vacuum guide](guides/gas-vacuum.en.md)
+The calculator and workbench share 50 named gases plus custom mixtures. Added gases have no preset design velocity: enter a design value, using custom velocity in the workbench. win.3 / mac.4 preserves entered velocity when the same gas is selected again; switching to a different added gas requires a new value. Mixtures need a name and composition. T/P/Z conversion covers single-gas-phase volume and velocity estimates only. [Gas and vacuum guide](guides/gas-vacuum.en.md)
 
 In the full workbench, a route with zero flow retains custom velocity and custom/mixture names as drafts without validating or including them in calculations or reports. Added gases with nonzero demand still require custom velocity and an entered design value; mixtures also require a name and composition. The independent gas calculator still requires valid velocity even when its flow is zero.
 

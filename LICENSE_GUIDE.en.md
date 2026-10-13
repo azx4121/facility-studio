@@ -24,6 +24,6 @@ The current terms begin with the commit that first introduced this LICENSE. Prev
 
 Python, Matplotlib, NumPy and other third-party components retain their own licenses. Company engineering data is not required to be made public by these terms. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
-Windows **v5.6.0-win.2** and macOS **v5.6.0-mac.2** retain safety and license maintenance, together with bilingual presentation. Previous release assets and tags are preserved. License permission is separate from code signing: Windows has no commercial Authenticode signature, and macOS has no Developer ID/notarization.
+Windows and macOS **V5.6.0** retain safety and license maintenance, together with bilingual presentation. See the [project download page](https://github.com/azx4121/facility-studio/blob/main/README.en.md#download-and-run) for current files and revision numbers. Previous release assets and tags are preserved. License permission is separate from code signing: Windows has no commercial Authenticode signature, and macOS has no Developer ID/notarization.
 
 The additional permission is specific to this project. Contact the repository maintainer for a separate software-commercialization license. Do not submit client secrets, passwords or private keys in public issues. The exact license, rather than this guide, governs use; specific legal disputes require professional review.

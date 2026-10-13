@@ -11,14 +11,14 @@ Facility Studio is a desktop tool for facility, electrical and HVAC engineers. U
 <a id="installation-and-first-launch"></a>
 ## Download and run
 
-Current version: **V5.6.0 public test release**, Windows **win.2** / macOS **mac.2**, published 2026-10-12.
+Current version: **V5.6.0 public test release**, Windows **win.3** / macOS **mac.4**, published 2026-10-13 (Taipei time).
 
-Automatic water sizing extends to **24 inches**; **all seven calculators are direct sidebar buttons**; the gas calculator and workbench share **50 factory gases plus custom mixtures**. Added gases require an entered design velocity. This revision preserves it when the same gas is selected again. [Features, dimension sources and scope](docs/2026-10-12-v5.6-expansion.md#english) · [Current delivery and SHA256](docs/2026-10-12-v5.6-native.md#english)
+Automatic water sizing extends to **24 inches**; **all seven calculators are direct sidebar buttons**; the gas calculator and workbench share **50 factory gases plus custom mixtures**. Added gases with demand require an entered design velocity. Zero-demand workbench rows retain unused drafts without blocking the whole project. Native acceptance also runs **100 distinct scenarios, repeated 20 times each**. [Features, dimension sources and scope](docs/2026-10-12-v5.6-expansion.md#english) · [Current delivery and SHA256](docs/2026-10-13-v5.6-audit-stress.md#english)
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows 10/11, Intel/AMD x64 | [**Download Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.2/Facility_Studio_V5_6_0_Windows_Offline.exe) | Save and double-click; allow time for the bundled environment to unpack on first launch |
-| macOS, Apple Silicon / Intel | [**Download macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.2/Facility_Studio_V5_6_0_macOS_mac2.dmg) | Open the DMG, drag Facility Studio into Applications, then launch it there |
+| Windows 10/11, Intel/AMD x64 | [**Download Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.3/Facility_Studio_V5_6_0_Windows_Offline.exe) | Save and double-click; allow time for the bundled environment to unpack on first launch |
+| macOS, Apple Silicon / Intel | [**Download macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.4/Facility_Studio_V5_6_0_macOS_mac4.dmg) | Open the DMG, drag Facility Studio into Applications, then launch it there |
 
 Download one file for your platform. Help and equipment templates are bundled. [Versions and SHA256](https://github.com/azx4121/facility-studio/releases) · [Compatibility and first launch](docs/faq.en.md#compatibility)
 
@@ -37,9 +37,9 @@ The Windows EXE has no official publisher signature; the Mac app has no Develope
 
 Each quick tool works independently. Adopted conditions and defaults appear on screen and in reports, so you can review the assumptions and compare demand after a change.
 
-![Facility Studio V5.5.8 Windows electrical-sizing interface in English](docs/images/v558-windows-electrical-en.png)
+![Facility Studio V5.6.0 Windows win.3 electrical-sizing interface in English](docs/images/v560-win3-electrical-en.png)
 
-*Actual V5.5.8 Windows native-acceptance screen: choose a tool on the left, enter conditions in the middle, then calculate or export below.*
+*Actual V5.6.0 win.3 native-acceptance screen: all seven calculators are directly available on the left, with calculation and export below.*
 
 ## Try one small calculation first
 
@@ -57,7 +57,7 @@ For a project report, open **Full workbench → Beginner tutorial** and follow t
 - **Data:** calculations, saved projects and schedule imports are processed locally. User-entered names and notes retain their original language.
 - **License:** internal company engineering work, paid engineering projects and delivered calculation reports are permitted. Software resale, paid bundling or paid hosted software services require separate written permission. [Full terms](LICENSE) · [License examples](LICENSE_GUIDE.en.md)
 
-The published files passed native acceptance on Windows Server 2022/2025 x64 and Apple Silicon/Intel macOS 15. Windows 10/11 and macOS 11+ are support/packaging targets; other OS versions, devices and enterprise policies need individual confirmation. [Current fixes and verification](docs/2026-10-12-v5.6-native.md)
+The published files passed native acceptance on Windows Server 2022/2025 x64 and Apple Silicon/Intel macOS 15. Windows 10/11 and macOS 11+ are support/packaging targets; other OS versions, devices and enterprise policies need individual confirmation. [Current fixes and verification](docs/2026-10-13-v5.6-audit-stress.md)
 
 ## Help and feedback
 
