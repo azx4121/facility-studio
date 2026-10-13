@@ -2,7 +2,7 @@ name: Build and verify macOS revision
 
 on:
   push:
-    branches: [main, feature/bilingual-ui, maintenance/macos-launch-repair, codex/v5.5.7-usability-sync, fix/mac-screenshot-acceptance]
+    branches: [main, feature/bilingual-ui, maintenance/macos-launch-repair, codex/v5.5.7-usability-sync]
     paths:
       - .github/workflows/macos-native-release.yml
       - macos/macos/**

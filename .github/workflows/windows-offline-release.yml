@@ -2,12 +2,13 @@ name: Build and verify offline Windows EXE
 
 on:
   push:
-    branches: [main, feature/bilingual-ui, maintenance/windows-offline, codex/v5.5.7-usability-sync, fix/mac-screenshot-acceptance]
+    branches: [main, feature/bilingual-ui, maintenance/windows-offline, codex/v5.5.7-usability-sync]
     paths:
       - .github/workflows/windows-offline-release.yml
       - windows/winrelease/**
       - windows/facility_studio/**
       - windows/tests/**
+      - macos/tests/optional_acceptance_screenshots.py
       - tools/cleanroom100_stress.py
       - tools/verify_stress_io.py
       - docs/tutorial/START_HERE.html
