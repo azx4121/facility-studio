@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - maintenance/macos-launch-repair
+      - diagnostics/mac-language-stability
     paths:
       - .github/workflows/macos-native-probe.yml
       - macos/macos/native_probe.py
+      - macos/macos/*diagnostic*.py
+      - macos/tests/native_probe_privacy.py
   workflow_dispatch:
 
 permissions:
@@ -16,7 +19,7 @@ jobs:
   native-probe:
     name: ${{ matrix.architecture }} native macOS
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: 15
+    timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:
@@ -30,8 +33,10 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-      - name: Probe unchanged shipped application
-        run: python3 macos/macos/native_probe.py --output "$RUNNER_TEMP/native-probe"
+      - name: Probe published mac.4 and language/plot stability
+        run: |
+          python3 macos/tests/native_probe_privacy.py
+          python3 macos/macos/native_probe.py --output "$RUNNER_TEMP/native-probe"
       - name: Retain native diagnostic evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -41,5 +46,7 @@ jobs:
             ${{ runner.temp }}/native-probe/*.json
             ${{ runner.temp }}/native-probe/*.txt
             ${{ runner.temp }}/native-probe/*.log
+            ${{ runner.temp }}/native-probe/*.ips
+            ${{ runner.temp }}/native-probe/*.png
           if-no-files-found: warn
           retention-days: 14
