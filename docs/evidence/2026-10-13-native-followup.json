@@ -1,0 +1,87 @@
+{
+  "version": "5.6.0",
+  "tested_commit": "de546bc2ec561de5fa16262df88929c5daa86d6c",
+  "followup_runs": {
+    "windows": 38331023176,
+    "macos": 38331023179
+  },
+  "macos_first_attempt": {
+    "job_id": 115080533977,
+    "artifact_id": 11783160964,
+    "source_stress": {
+      "software_passed": 100,
+      "software_failed": 0,
+      "checks": 3902
+    },
+    "independent_cleanroom": {
+      "software_passed": 100,
+      "software_failed": 0,
+      "checks": 18450
+    },
+    "cold_native": {
+      "passed": true,
+      "native_checks": 221,
+      "stress_scenarios": 100
+    },
+    "launch_services_native": {
+      "passed": true,
+      "native_checks": 221,
+      "stress_scenarios": 100
+    },
+    "roundtrip_native": {
+      "completed": false,
+      "exit_signal": "SIGSEGV (11)",
+      "last_check": "Engineering quick tools, plot redraw and language round trip",
+      "python_diagnostic_frames": [
+        "tkinter.getint_event",
+        "tkinter._substitute"
+      ]
+    }
+  },
+  "interpretation": "Observed native crash. The 25-second message is a periodic whole-process diagnostic, not proof that this specific operation exceeded 25 seconds. Python frames do not establish a root cause. GUI code and pinned native environment match the previously successful public mac.4. Rerun uses the same commit and unchanged acceptance assertions. No stability fix is claimed.",
+  "final_result": {
+    "windows": {
+      "attempt": 1,
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 115080533814,
+          "name": "build",
+          "conclusion": "success"
+        },
+        {
+          "id": 115083579408,
+          "name": "verify",
+          "conclusion": "success"
+        },
+        {
+          "id": 115086015137,
+          "name": "publish",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "macos": {
+      "attempt": 2,
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 115081959843,
+          "name": "build",
+          "conclusion": "success"
+        },
+        {
+          "id": 115083982901,
+          "name": "verify-intel",
+          "conclusion": "success"
+        },
+        {
+          "id": 115085759232,
+          "name": "publish",
+          "conclusion": "success"
+        }
+      ]
+    }
+  },
+  "open_stability_finding": "The same commit passed full native acceptance when rerun. This does not establish or fix the cause of the earlier native SIGSEGV; it remains an unresolved intermittent GUI stability finding. Original failed evidence and passing rerun links are retained."
+}
