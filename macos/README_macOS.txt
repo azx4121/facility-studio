@@ -10,8 +10,8 @@ DESIGNED BY ANDY HUANG ©
 本修訂保留重選同種製程氣體的已填流速；切換到不同新增氣體須重新填寫。
 
 下載與安裝
-目前公開下載為 DMG：
-https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.4/Facility_Studio_V5_6_0_macOS_mac4.dmg
+目前公開下載為 DMG；現行修訂與下載連結請見：
+https://github.com/azx4121/facility-studio/blob/main/README.md
 1. 打開 DMG。
 2. 把 Facility Studio 拖到「Applications／應用程式」。
 3. 從「應用程式」開啟。安裝完成後可退出 DMG。
