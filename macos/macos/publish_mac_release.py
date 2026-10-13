@@ -14,7 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from tools.public_release_policy import prepare_public_assets
 
 REPOSITORY = "azx4121/facility-studio"
-TAG = "v5.6.0-mac.4"
+TAG = "v5.6.0-mac.5"
 
 
 def main():
@@ -29,7 +29,7 @@ def main():
         )
     folder = args.assets.resolve()
     filenames = (
-        "Facility_Studio_V5_6_0_macOS_mac4.dmg",
+        "Facility_Studio_V5_6_0_macOS_mac5.dmg",
         "SHA256SUMS.txt",
     )
     asset_data = prepare_public_assets(folder, filenames[:-1])
@@ -79,7 +79,7 @@ def main():
             dict(
                 tag_name=TAG,
                 target_commitish=commit,
-                name="Facility Studio V5.6.0｜macOS 中英雙語離線版 mac.4",
+                name="Facility Studio V5.6.0｜macOS 中英雙語離線版 mac.5",
                 body=body,
                 draft=True,
                 prerelease=True,

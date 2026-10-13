@@ -105,7 +105,7 @@ def main():
         ],
         check=True,
     )
-    app = output / "extracted/Facility_Studio_V5_6_0_macOS_mac4/Facility Studio.app"
+    app = output / "extracted/Facility_Studio_V5_6_0_macOS_mac5/Facility Studio.app"
     with (output / "Apple_Signature.txt").open("w") as file:
         subprocess.run(
             [

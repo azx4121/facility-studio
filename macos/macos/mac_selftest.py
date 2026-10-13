@@ -20,7 +20,7 @@ def run():
     destination = Path.home() / "Library/Logs/Facility_Studio_V5_5"
     destination.mkdir(parents=True, exist_ok=True)
     if sys.platform == "darwin":
-        faulthandler.dump_traceback_later(25, repeat=True)
+        faulthandler.enable()
 
     def check(name, action):
         print("Checking: " + name, flush=True)
@@ -156,6 +156,43 @@ def run():
 
     root.report_callback_exception = callback_error
 
+    diagnostic_after_id = None
+    diagnostic_shutdown = False
+
+    def dump_native_state():
+        nonlocal diagnostic_after_id
+        diagnostic_after_id = None
+        if diagnostic_shutdown:
+            return
+        # Run diagnostic traversal on the Tk/Python main thread. A stalled
+        # event loop cannot run this callback; the parent hard timeout remains.
+        try:
+            print("Native UI diagnostic traceback (main event loop)", flush=True)
+            faulthandler.dump_traceback(all_threads=True)
+        except (OSError, RuntimeError, ValueError) as error:
+            try:
+                print("Native UI diagnostic unavailable: " + str(error), flush=True)
+            except (OSError, RuntimeError, ValueError):
+                pass
+        if not diagnostic_shutdown:
+            try:
+                diagnostic_after_id = root.after(25000, dump_native_state)
+            except tk.TclError:
+                diagnostic_after_id = None
+
+    def stop_native_diagnostics():
+        nonlocal diagnostic_after_id, diagnostic_shutdown
+        diagnostic_shutdown = True
+        if diagnostic_after_id is not None:
+            try:
+                root.after_cancel(diagnostic_after_id)
+            except tk.TclError:
+                pass
+            diagnostic_after_id = None
+
+    if sys.platform == "darwin":
+        diagnostic_after_id = root.after(25000, dump_native_state)
+
     ui_timings = []
 
     def pump_gui(*, initial_render=False):
@@ -255,8 +292,10 @@ def run():
         from unittest.mock import patch
 
         with patch("tkinter.messagebox.askyesnocancel", return_value=False):
+            stop_native_diagnostics()
             app.close()
     finally:
+        stop_native_diagnostics()
         try:
             if root.winfo_exists():
                 root.destroy()
@@ -275,7 +314,7 @@ def run():
     destination.mkdir(parents=True, exist_ok=True)
     report = {
         "version": __version__,
-        "revision": "mac.4",
+        "revision": "mac.5",
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,
@@ -290,6 +329,4 @@ def run():
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False, indent=2))
     print(f"\nMac acceptance report: {path}")
-    if sys.platform == "darwin":
-        faulthandler.cancel_dump_traceback_later()
     return 0 if report["passed"] else 2
