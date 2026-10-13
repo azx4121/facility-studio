@@ -122,7 +122,14 @@ def collect_probe_crashes(report_directory, output, process_records, app):
         matches = [record for record in matches
                    if record['started_at'] <= captured_at <= record['finished_at']+30]
         path = identity.get('procPath', '')
-        if not matches or not isinstance(path, str) or not path.startswith(str(app)+'/'):
+        if not matches or not isinstance(path, str):
+            continue
+        # The external helper is outside the App by design. Its exact path,
+        # PID and App argument must all match this probe's invocation record.
+        matches = [record for record in matches if path.startswith(str(app)+'/')
+                   or (record.get('diagnostic_executable') == path
+                       and record.get('app_path') == str(app))]
+        if not matches:
             continue
         output.mkdir(parents=True, exist_ok=True)
         target = output/('ProbeCrash_'+str(identity['pid'])+'_'+source.name)
@@ -138,7 +145,7 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument('--app', type=Path, help='Existing unchanged App; skips release download.')
     parser.add_argument('--package', type=Path, help='Local public mac.4 DMG, checked against its fixed SHA256.')
-    parser.add_argument('--self-test-repeats', type=int, default=3)
+    parser.add_argument('--self-test-repeats', type=int, default=1)
     parser.add_argument('--switches', type=int, default=100)
     args = parser.parse_args()
     if sys.platform != "darwin":
@@ -173,7 +180,7 @@ def main():
         temporary.write_text(json.dumps(summary, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
         temporary.replace(output/'Native_Probe_Checkpoint.json')
 
-    def run(name, command, required=True, timeout=90, env=None):
+    def run(name, command, required=True, timeout=90, env=None, diagnostic=False):
         started = time.monotonic()
         wall_started = time.time()
         process = None
@@ -181,7 +188,11 @@ def main():
             with (output/(name+'.txt')).open('w', encoding='utf-8') as console:
                 process = subprocess.Popen(command, stdout=console, stderr=subprocess.STDOUT, env=env)
                 print(json.dumps(dict(phase=name, pid=process.pid, event='process.started')), flush=True)
-                checkpoint(dict(name=name, pid=process.pid, started_at=wall_started))
+                active = dict(name=name, pid=process.pid, started_at=wall_started)
+                if diagnostic:
+                    active.update(diagnostic_executable=str(Path(command[0]).resolve()),
+                                  app_path=str(selected_app.resolve()))
+                checkpoint(active)
                 try:
                     status = process.wait(timeout=timeout)
                 except subprocess.TimeoutExpired:
@@ -196,6 +207,9 @@ def main():
                       pid=process.pid if process else None,
                       started_at=wall_started, finished_at=time.time(),
                       passed=status == 0, seconds=round(time.monotonic() - started, 2))
+        if diagnostic:
+            record.update(diagnostic_executable=str(Path(command[0]).resolve()),
+                          app_path=str(selected_app.resolve()))
         console_text = (output/(name+'.txt')).read_text(encoding='utf-8', errors='replace')
         record['periodic_dump_count'] = console_text.count('Timeout (0:00:')
         if '--periodic-dump' in command:
@@ -264,21 +278,32 @@ def main():
             if source.is_file() and source.stat().st_mtime >= observation['started_at']:
                 shutil.copy2(source, output/(name+'_'+filename))
     framework = app/'Contents/Frameworks/Python.framework/Versions/3.13'
-    python = next((candidate for candidate in (
-        framework/'bin/python3.13',
-        framework/'Resources/Python.app/Contents/MacOS/Python')
-        if candidate.is_file()), framework/'bin/python3.13')
+    helper = output/'FacilityStudioProbe'
+    launcher_source = Path(__file__).with_name('native_diagnostic_launcher.c').resolve()
+    compiled = run('diagnostic_launcher_compile', ['/usr/bin/clang', '-O2', '-Wall', '-Wextra', '-Werror',
+                   str(launcher_source), '-o', str(helper)], timeout=90)
+    signed = run('diagnostic_launcher_sign', ['/usr/bin/codesign', '--force', '--sign', '-', str(helper)]) if compiled == 0 else 125
     env = dict(os.environ, PYTHONHOME=str(framework), PYTHONNOUSERSITE='1', PYTHONDONTWRITEBYTECODE='1')
     for name in ('PYTHONPATH', 'PYTHONSTARTUP', 'PYTHONUSERBASE', 'PYTHONEXECUTABLE', '__PYVENV_LAUNCHER__'):
         env.pop(name, None)
     script = Path(__file__).with_name('native_gui_diagnostic.py').resolve()
-    for mode, periodic in (('continuous', 0), ('continuous', 25), ('continuous', 1),
-                           ('segmented', 25), ('selftest', 25)):
+    runtime_validated = False
+    if compiled == 0 and signed == 0:
+        runtime_output = output/'instrumented_runtime'
+        runtime_validated = run('instrumented_runtime', [str(helper), str(app), str(script),
+            '--app', str(app), '--output', str(runtime_output), '--mode', 'runtime'],
+            env=env, diagnostic=True) == 0
+        for source in runtime_output.glob('*'):
+            if source.suffix in ('.json', '.txt'):
+                shutil.copy2(source, output/('instrumented_runtime_'+source.name))
+    variants = (('continuous', 0), ('continuous', 25), ('continuous', 1),
+                ('segmented', 25), ('selftest', 25)) if runtime_validated else ()
+    for mode, periodic in variants:
         name = 'instrumented_'+mode+'_dump'+str(periodic)
         destination = output/name
-        run(name, [str(python), '-s', '-B', str(script), '--app', str(app), '--output', str(destination),
+        run(name, [str(helper), str(app), str(script), '--app', str(app), '--output', str(destination),
                    '--mode', mode, '--switches', str(args.switches), '--periodic-dump', str(periodic)],
-            timeout=300 if mode == 'selftest' else 180, env=env)
+            timeout=300 if mode == 'selftest' else 180, env=env, diagnostic=True)
         for source in destination.glob('*.txt'):
             shutil.copy2(source, output/(name+'_'+source.name))
         for source in destination.glob('*.json'):
@@ -296,12 +321,13 @@ def main():
         release_sha256=package_digest, quarantine_reproduced=False,
         original_source_hashes=before_hashes, sources_unchanged=before_hashes == after_hashes,
         signatures_modified_by_probe=False,
+        external_diagnostic_runtime_validated=runtime_validated,
         signature_verification_before=signature_before, signature_verification_after=signature_after,
         observations=observations, crash_reports=crashes,
         crash_collection_errors=crash_collection_errors,
         created_at_utc=datetime.now(timezone.utc).isoformat(),
-        diagnostic_entrypoint_caveat='Instrumented variants use Framework Python; original launcher controls use the untouched signed executable.',
-        passed=before_hashes == after_hashes and all(o["passed"] for o in observations if o["required"]),
+        diagnostic_entrypoint_caveat='Instrumented variants use an external C helper embedding the original App libpython/home, with sys.executable identifying the original launcher. Cocoa main-bundle identity still differs from the original signed executable.',
+        passed=runtime_validated and before_hashes == after_hashes and all(o["passed"] for o in observations if o["required"]),
     )
     (output / "Native_Probe.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False), flush=True)

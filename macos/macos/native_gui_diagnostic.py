@@ -1,7 +1,7 @@
 """External tracing of an unchanged App's bundled runtime and GUI modules.
 
-The framework-Python entry has a different Cocoa main-bundle identity from the
-FacilityStudio launcher. The uninstrumented launcher self-test is the control;
+The external embedding entry has a different Cocoa main-bundle identity from
+the FacilityStudio launcher. The uninstrumented launcher self-test is the control;
 these probes are diagnostic evidence, never a replacement for its assertions.
 """
 import argparse
@@ -29,13 +29,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--app', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
-    parser.add_argument('--mode', choices=('continuous', 'segmented', 'selftest'), required=True)
+    parser.add_argument('--mode', choices=('runtime', 'continuous', 'segmented', 'selftest'), required=True)
     parser.add_argument('--switches', type=int, default=100)
     parser.add_argument('--periodic-dump', type=int, choices=(0, 1, 25), default=0)
     args = parser.parse_args()
     if sys.platform != 'darwin' or args.switches < 2:
         parser.error('Use native macOS and at least two language switches.')
     args.output.mkdir(parents=True, exist_ok=True)
+    os.environ['FACILITY_STUDIO_PREFERENCES'] = str(args.output.resolve()/'preferences.json')
     started = time.monotonic()
     trace = (args.output / 'events.txt').open('w', encoding='utf-8', buffering=1)
     sequence = 0
@@ -59,6 +60,10 @@ def main():
     bootstrap = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(bootstrap)
     bootstrap.configure_runtime(resources)
+    original_launcher = args.app.resolve()/'Contents/MacOS/FacilityStudio'
+    assert Path(sys.executable).resolve() == original_launcher, 'Embedded sys.executable does not identify the original launcher'
+    framework = args.app.resolve()/'Contents/Frameworks/Python.framework/Versions/3.13'
+    assert Path(sys.prefix).resolve() == framework, 'External helper loaded the wrong Python home'
     import tkinter as tk
     from facility_studio import i18n
     from facility_studio.localized_tk import LanguagePicker
@@ -69,15 +74,43 @@ def main():
     from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
     from matplotlib.figure import Figure
     import matplotlib
+    assert sys.version_info[:2] == (3, 13), 'External helper did not load the original CPython version'
+    assert Path(__import__('_tkinter').__file__).resolve().is_relative_to(framework.resolve()), 'Tk extension is outside the original App runtime'
+    assert Path(matplotlib.__file__).resolve().is_relative_to(resources/'python-packages'/platform.machine()), 'Matplotlib is outside the original architecture wheel set'
 
     identity = dict(executable=sys.executable, prefix=sys.prefix,
                     source=str(resources/'app'), architecture=platform.machine(),
                     python=sys.version, matplotlib=matplotlib.__version__,
-                    main_bundle_identity='Framework Python, not the original FacilityStudio launcher',
+                    actual_process_executable=os.environ.get('FACILITY_PROBE_HELPER_EXECUTABLE'),
+                    main_bundle_identity='External C embedding helper, not the original FacilityStudio Cocoa launcher',
+                    libpython=str(framework/'Python'),
+                    tkinter_extension=__import__('_tkinter').__file__,
+                    matplotlib_source=matplotlib.__file__,
                     mode=args.mode, requested_switches=args.switches)
+    identity['isolated_preferences'] = os.environ['FACILITY_STUDIO_PREFERENCES']
     identity['periodic_dump_seconds'] = args.periodic_dump
     identity['accelerated_diagnostic_stress'] = args.periodic_dump == 1
     emit('runtime.identity', **identity)
+
+    if args.mode == 'runtime':
+        phase = 'runtime-validation'
+        root = tk.Tk()
+        identity.update(tcl_patchlevel=root.tk.call('info', 'patchlevel'),
+                        tk_patchlevel=root.tk.call('package', 'provide', 'Tk'),
+                        native_window_system=root.tk.call('tk', 'windowingsystem'))
+        assert identity['native_window_system'] == 'aqua', 'The selected runtime is not native Tk Aqua'
+        from matplotlib.figure import Figure
+        canvas = FigureCanvasTkAgg(Figure(figsize=(2, 2)), master=root)
+        canvas.figure.add_subplot().plot([0, 1], [0, 1])
+        canvas.draw()
+        root.after(150, root.quit)
+        root.mainloop()
+        root.destroy()
+        emit('runtime.validation.passed', **identity)
+        (args.output/'Diagnostic_Summary.json').write_text(json.dumps(dict(identity, passed=True), indent=2)+'\n')
+        faulthandler.cancel_dump_traceback_later()
+        trace.close()
+        return 0
 
     def wrap(owner, name, label):
         original = getattr(owner, name)
@@ -161,6 +194,7 @@ def main():
     expected_result = copy.deepcopy(quick.result)
     assert expected_result is not None, 'Quick-tools setup failed to calculate'
     expected_project = digest(workbench.snapshot())
+    expected_workbench_result = copy.deepcopy(workbench.result)
     completed = 0
     failed = None
     heartbeat_count = 0
@@ -185,6 +219,7 @@ def main():
         assert i18n.language() == code, 'Language selection did not fire'
         assert quick.result == expected_result, 'Plot redraw changed engineering state'
         assert digest(workbench.snapshot()) == expected_project, 'Workbench project changed'
+        assert workbench.result == expected_workbench_result, 'Workbench calculation result changed'
         assert ('空氣' in quick.ax.get_title()) if code == 'zh-Hant' else ('空氣' not in quick.ax.get_title()), 'Plot language mismatch'
         assert not callback_errors, 'Native callback exception'
         completed += 1
@@ -202,6 +237,8 @@ def main():
     try:
         phase = 'initial-render'
         pump()
+        expected_project = digest(workbench.snapshot())
+        expected_workbench_result = copy.deepcopy(workbench.result)
         phase = args.mode+'-language-switches'
         switch_started = time.monotonic()
         if args.mode == 'segmented':

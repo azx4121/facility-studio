@@ -89,6 +89,29 @@ class CrashPrivacy(unittest.TestCase):
         self.assertEqual(summary['frames'][0]['symbol'], '_Py_DumpASCII')
         self.assertEqual(summary['frames'][0]['image'], 'Python')
 
+    def test_external_helper_requires_exact_path_pid_time_and_app_invocation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            app, helper, reports, retained = root/'Facility Studio.app', root/'FacilityStudioProbe', root/'reports', root/'out'
+            reports.mkdir()
+            now = time.time()
+            process = dict(name='external_probe', pid=234, started_at=now-2, finished_at=now,
+                           diagnostic_executable=str(helper.resolve()), app_path=str(app.resolve()))
+            def create(name, pid=234, path=None, captured=now-1):
+                source = reports/name
+                source.write_text(json.dumps(dict(pid=pid, procName='FacilityStudioProbe',
+                    procPath=path or str(helper.resolve()),
+                    captureTime=datetime.fromtimestamp(captured, timezone.utc).isoformat())))
+            create('FacilityStudioProbe_good.ips')
+            create('FacilityStudioProbe_neighbor.ips', path=str(helper.resolve())+'-neighbor')
+            create('FacilityStudioProbe_fake_name.ips', path=str(root/'other/FacilityStudioProbe'))
+            create('FacilityStudioProbe_wrong_pid.ips', pid=235)
+            create('FacilityStudioProbe_old_capture.ips', captured=now-100)
+            saved = probe.collect_probe_crashes(reports, retained, [process], app)
+            self.assertEqual([row['file'] for row in saved], ['ProbeCrash_234_FacilityStudioProbe_good.ips'])
+            wrong_app = dict(process, app_path=str(root/'unrelated.app'))
+            self.assertEqual(probe.collect_probe_crashes(reports, root/'rejected', [wrong_app], app), [])
+
 
 if __name__ == '__main__':
     unittest.main()

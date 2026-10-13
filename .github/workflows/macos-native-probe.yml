@@ -8,7 +8,7 @@ on:
     paths:
       - .github/workflows/macos-native-probe.yml
       - macos/macos/native_probe.py
-      - macos/macos/*diagnostic*.py
+      - macos/macos/*diagnostic*
       - macos/tests/native_probe_privacy.py
   workflow_dispatch:
 
