@@ -2,6 +2,8 @@
 
 import copy
 import json
+import os
+import subprocess
 import tempfile
 from pathlib import Path
 from unittest.mock import patch
@@ -11,6 +13,21 @@ from .schema import VERSION
 from .utils import project_hash
 from .workspace_store import read_workspace
 from .tutorial_help import prepare_tutorial
+
+
+def _capture_optional_screenshot(destination):
+    """Keep optional image evidence separate from acceptance failures."""
+    if os.environ.get("FACILITY_STUDIO_ACCEPTANCE_SCREENSHOTS") == "0":
+        print("Optional acceptance screenshot disabled: " + str(destination), flush=True)
+        return False
+    from PIL import ImageGrab
+
+    try:
+        ImageGrab.grab().save(destination)
+    except (OSError, RuntimeError, subprocess.CalledProcessError) as exc:
+        print("Optional acceptance screenshot unavailable: " + str(exc), flush=True)
+        return False
+    return True
 
 
 def run(root, app, main, check, pump, output=None):
@@ -33,7 +50,6 @@ def run(root, app, main, check, pump, output=None):
     def capture(window, name):
         if output is None:
             return
-        from PIL import ImageGrab
         destination = Path(output)
         if destination.suffix:
             destination = destination.parent
@@ -44,10 +60,7 @@ def run(root, app, main, check, pump, output=None):
             if not window._native_redraw.repaint():
                 raise AssertionError("Windows client repaint failed")
             pump()
-        try:
-            ImageGrab.grab().save(destination / name)
-        except (OSError, RuntimeError) as exc:
-            print("V556 screenshot unavailable: " + str(exc), flush=True)
+        _capture_optional_screenshot(destination / name)
     with tempfile.TemporaryDirectory(prefix="facility-v556-ui-") as directory:
         try:
             i18n.set_language("zh-Hant", persist=False)

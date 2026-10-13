@@ -2,7 +2,7 @@ name: Build and verify offline Windows EXE
 
 on:
   push:
-    branches: [main, feature/bilingual-ui, maintenance/windows-offline, codex/v5.5.7-usability-sync]
+    branches: [main, feature/bilingual-ui, maintenance/windows-offline, codex/v5.5.7-usability-sync, fix/mac-screenshot-acceptance]
     paths:
       - .github/workflows/windows-offline-release.yml
       - windows/winrelease/**
@@ -47,6 +47,7 @@ jobs:
             }
           }
           Invoke-CheckedPython windows/tests/regression.py
+          Invoke-CheckedPython macos/tests/optional_acceptance_screenshots.py
           Invoke-CheckedPython windows/tests/v55_features.py
           Invoke-CheckedPython windows/tests/v552_core.py
           Invoke-CheckedPython windows/tests/simple_features.py

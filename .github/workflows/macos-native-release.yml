@@ -2,7 +2,7 @@ name: Build and verify macOS revision
 
 on:
   push:
-    branches: [main, feature/bilingual-ui, maintenance/macos-launch-repair, codex/v5.5.7-usability-sync]
+    branches: [main, feature/bilingual-ui, maintenance/macos-launch-repair, codex/v5.5.7-usability-sync, fix/mac-screenshot-acceptance]
     paths:
       - .github/workflows/macos-native-release.yml
       - macos/macos/**
@@ -38,6 +38,7 @@ jobs:
       - name: Language and engineering checks
         run: |
           python3 -c "import tkinter; print('Source Tcl/Tk:', tkinter.Tcl().eval('info patchlevel'))"
+          python3 macos/tests/optional_acceptance_screenshots.py
           python3 macos/tests/bilingual.py
           python3 macos/tests/v556_features.py
           python3 macos/tests/v557_inactive.py
