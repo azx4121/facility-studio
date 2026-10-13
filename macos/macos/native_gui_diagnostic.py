@@ -52,6 +52,11 @@ def main():
         trace.write(json.dumps(row, ensure_ascii=False, default=str)+'\n')
         trace.flush()
 
+    def cancel_periodic_dump():
+        emit('watchdog.cancel.begin', periodic_seconds=args.periodic_dump)
+        faulthandler.cancel_dump_traceback_later()
+        emit('watchdog.cancel.end', periodic_seconds=args.periodic_dump)
+
     faulthandler.enable()
     if args.periodic_dump:
         faulthandler.dump_traceback_later(args.periodic_dump, repeat=True)
@@ -108,7 +113,7 @@ def main():
         root.destroy()
         emit('runtime.validation.passed', **identity)
         (args.output/'Diagnostic_Summary.json').write_text(json.dumps(dict(identity, passed=True), indent=2)+'\n')
-        faulthandler.cancel_dump_traceback_later()
+        cancel_periodic_dump()
         trace.close()
         return 0
 
@@ -164,7 +169,7 @@ def main():
         summary = dict(**identity, passed=code == 0, returncode=code,
                        scope='Original self-test assertions unchanged; external runtime tracing changes timing.')
         (args.output/'Diagnostic_Summary.json').write_text(json.dumps(summary, indent=2)+'\n')
-        faulthandler.cancel_dump_traceback_later()
+        cancel_periodic_dump()
         trace.close()
         return code
 
@@ -285,7 +290,7 @@ def main():
         emit('cleanup.begin')
         root.destroy()
         emit('cleanup.end')
-        faulthandler.cancel_dump_traceback_later()
+        cancel_periodic_dump()
     summary = dict(**identity, passed=failed is None and completed == args.switches,
                    completed_switches=completed, callback_errors=callback_errors,
                    error=failed, heartbeat_count=heartbeat_count,

@@ -7,6 +7,8 @@ from pathlib import Path
 import tempfile
 import time
 import unittest
+from unittest.mock import patch
+from types import SimpleNamespace
 
 SPEC = importlib.util.spec_from_file_location(
     'native_probe_under_test', Path(__file__).resolve().parents[1]/'macos/native_probe.py')
@@ -111,6 +113,44 @@ class CrashPrivacy(unittest.TestCase):
             self.assertEqual([row['file'] for row in saved], ['ProbeCrash_234_FacilityStudioProbe_good.ips'])
             wrong_app = dict(process, app_path=str(root/'unrelated.app'))
             self.assertEqual(probe.collect_probe_crashes(reports, root/'rejected', [wrong_app], app), [])
+
+    def test_sample_header_requires_probe_pid_and_exact_helper_path(self):
+        with tempfile.TemporaryDirectory() as directory:
+            helper = Path(directory)/'FacilityStudioProbe'
+            good = 'Process: FacilityStudioProbe [345]\nPath: '+str(helper)+'\nCall graph:\n'
+            self.assertTrue(probe.sample_matches_process(good, 345, helper))
+            self.assertFalse(probe.sample_matches_process(good, 346, helper))
+            self.assertFalse(probe.sample_matches_process(good.replace(str(helper), str(helper)+'-neighbor'), 345, helper))
+            self.assertFalse(probe.sample_matches_process('Process: FacilityStudioProbe [345]\nPath: /elsewhere/FacilityStudioProbe\n', 345, helper))
+            self.assertFalse(probe.sample_matches_process('Call graph only, no reliable process identity', 345, helper))
+
+    def test_sampler_retains_only_verified_header_and_skips_exited_process(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory); helper = output/'FacilityStudioProbe'
+            process = SimpleNamespace(pid=345, poll=lambda: None)
+            def native_sample(command, **options):
+                self.assertEqual(command[:3], ['/usr/bin/sample', '345', '3'])
+                self.assertEqual(options['timeout'], 8)
+                Path(command[command.index('-file')+1]).write_text(
+                    'Process: FacilityStudioProbe [345]\nPath: '+str(helper)+'\nCall graph:\n')
+                return SimpleNamespace(returncode=0)
+            with patch.object(probe.subprocess, 'run', side_effect=native_sample):
+                result = probe.sample_probe_process(process, helper, output, 'owned')
+            self.assertTrue(result['retained'])
+            self.assertTrue((output/'owned_native_sample.txt').is_file())
+            def wrong_sample(command, **options):
+                Path(command[command.index('-file')+1]).write_text(
+                    'Process: Unrelated [999]\nPath: /private/unrelated\nPrivate unrelated stack\n')
+                return SimpleNamespace(returncode=0)
+            with patch.object(probe.subprocess, 'run', side_effect=wrong_sample):
+                result = probe.sample_probe_process(process, helper, output, 'rejected')
+            self.assertFalse(result['retained'])
+            self.assertFalse((output/'rejected_native_sample.txt').exists())
+            self.assertFalse((output/'rejected_sample-candidate.tmp').exists())
+            with patch.object(probe.subprocess, 'run') as run:
+                result = probe.sample_probe_process(SimpleNamespace(pid=345, poll=lambda: 0), helper, output, 'exited')
+                run.assert_not_called()
+                self.assertFalse(result['attempted'])
 
 
 if __name__ == '__main__':

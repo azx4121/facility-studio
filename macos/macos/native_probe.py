@@ -11,6 +11,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -140,6 +141,46 @@ def collect_probe_crashes(report_directory, output, process_records, app):
     return retained
 
 
+def sample_matches_process(text, pid, executable):
+    """Retain a native sample only when its header identifies this helper."""
+    process = re.search(r'^Process:\s+.*\[(\d+)\]\s*$', text, re.MULTILINE)
+    path = re.search(r'^Path:\s+(.+?)\s*$', text, re.MULTILINE)
+    return bool(process and path and int(process[1]) == pid
+                and Path(path[1]).resolve() == Path(executable).resolve())
+
+
+def sample_probe_process(process, executable, output, phase):
+    """Sample only the still-running helper created by this exact probe."""
+    executable, output = Path(executable).resolve(), Path(output)
+    if process.poll() is not None:
+        return dict(attempted=False, reason='Probe process already exited')
+    if executable.name != 'FacilityStudioProbe':
+        raise ValueError('Native sampling is restricted to the external diagnostic helper')
+    candidate = output/(phase+'_sample-candidate.tmp')
+    record = dict(attempted=True, pid=process.pid, executable=str(executable),
+                  duration_seconds=3, retained=False)
+    try:
+        result = subprocess.run(['/usr/bin/sample', str(process.pid), '3', '-file', str(candidate)],
+                                capture_output=True, text=True, timeout=8, check=False)
+        record['returncode'] = result.returncode
+        if candidate.is_file() and candidate.stat().st_size <= 16*1024*1024:
+            text = candidate.read_text(encoding='utf-8', errors='replace')
+            if sample_matches_process(text, process.pid, executable):
+                target = output/(phase+'_native_sample.txt')
+                candidate.replace(target)
+                record.update(retained=True, file=target.name)
+            else:
+                record['reason'] = 'Sample header did not match the probe PID and exact helper path'
+        else:
+            record['reason'] = 'No bounded native sample file was produced'
+    except (OSError, subprocess.TimeoutExpired) as error:
+        record['reason'] = type(error).__name__
+    finally:
+        candidate.unlink(missing_ok=True)
+    (output/(phase+'_native_sample.json')).write_text(json.dumps(record, indent=2)+'\n', encoding='utf-8')
+    return record
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
@@ -147,10 +188,13 @@ def main():
     parser.add_argument('--package', type=Path, help='Local public mac.4 DMG, checked against its fixed SHA256.')
     parser.add_argument('--self-test-repeats', type=int, default=1)
     parser.add_argument('--switches', type=int, default=100)
+    parser.add_argument('--focus-watchdog', action='store_true',
+                        help='Run only the accelerated continuous watchdog probe; prior controls remain separate evidence.')
+    parser.add_argument('--focused-repeats', type=int, default=3)
     args = parser.parse_args()
     if sys.platform != "darwin":
         parser.error("Native application probing requires macOS.")
-    if args.self_test_repeats < 1 or args.switches < 2:
+    if args.self_test_repeats < 1 or args.switches < 2 or args.focused_repeats < 1:
         parser.error('Use at least one original self-test and two language switches.')
     output = args.output.resolve()
     if output.exists() and any(output.iterdir()):
@@ -184,6 +228,7 @@ def main():
         started = time.monotonic()
         wall_started = time.time()
         process = None
+        native_sample = None
         try:
             with (output/(name+'.txt')).open('w', encoding='utf-8') as console:
                 process = subprocess.Popen(command, stdout=console, stderr=subprocess.STDOUT, env=env)
@@ -194,12 +239,23 @@ def main():
                                   app_path=str(selected_app.resolve()))
                 checkpoint(active)
                 try:
-                    status = process.wait(timeout=timeout)
+                    # Reserve a bounded native sampling window before the
+                    # parent's existing hard process deadline and kill.
+                    status = process.wait(timeout=timeout-10 if diagnostic else timeout)
                 except subprocess.TimeoutExpired:
-                    process.kill()
-                    process.wait()
-                    status = 124
-                    console.write('\nNative process exceeded its time limit.\n')
+                    if diagnostic and process.poll() is None:
+                        print(json.dumps(dict(phase=name, pid=process.pid, event='native.sample.begin')), flush=True)
+                        native_sample = sample_probe_process(process, command[0], output, name)
+                        print(json.dumps(dict(phase=name, pid=process.pid, event='native.sample.end',
+                                              retained=native_sample.get('retained', False))), flush=True)
+                    remaining = max(.01, timeout-(time.monotonic()-started))
+                    try:
+                        status = process.wait(timeout=remaining)
+                    except subprocess.TimeoutExpired:
+                        process.kill()
+                        process.wait()
+                        status = 124
+                        console.write('\nNative process exceeded its time limit.\n')
         except OSError as error:
             status = 125
             (output/(name+'.txt')).write_text(str(error)+'\n', encoding='utf-8')
@@ -207,6 +263,8 @@ def main():
                       pid=process.pid if process else None,
                       started_at=wall_started, finished_at=time.time(),
                       passed=status == 0, seconds=round(time.monotonic() - started, 2))
+        if native_sample is not None:
+            record['native_sample'] = native_sample
         if diagnostic:
             record.update(diagnostic_executable=str(Path(command[0]).resolve()),
                           app_path=str(selected_app.resolve()))
@@ -265,11 +323,11 @@ def main():
     selected_app = app
     signature_before = run("apple_codesign_before", ["/usr/bin/codesign", "--verify", "--deep", "--strict", "--verbose=4", str(app)])
     run("gatekeeper_assessment", ["/usr/sbin/spctl", "--assess", "--type", "execute", "--verbose=4", str(app)], required=False)
-    for tool in ("electrical", "duct", "gas", "lighting", "water", "air", "units"):
+    for tool in (() if args.focus_watchdog else ("electrical", "duct", "gas", "lighting", "water", "air", "units")):
         run("native_tool_" + tool, [str(executable), "--tool", tool,
                                    "--report", str(output / (tool + "_report.txt"))])
     app_logs = Path.home() / "Library/Logs/Facility_Studio_V5_5"
-    for index in range(args.self_test_repeats):
+    for index in range(0 if args.focus_watchdog else args.self_test_repeats):
         name = 'original_launcher_selftest_%d' % (index+1)
         run(name, [str(executable), '--self-test'], timeout=300)
         observation = observations[-1]
@@ -296,10 +354,12 @@ def main():
         for source in runtime_output.glob('*'):
             if source.suffix in ('.json', '.txt'):
                 shutil.copy2(source, output/('instrumented_runtime_'+source.name))
-    variants = (('continuous', 0), ('continuous', 25), ('continuous', 1),
-                ('segmented', 25), ('selftest', 25)) if runtime_validated else ()
-    for mode, periodic in variants:
+    planned = [('continuous', 1)] * args.focused_repeats if args.focus_watchdog else [
+        ('continuous', 0), ('continuous', 25), ('continuous', 1), ('segmented', 25), ('selftest', 25)]
+    for attempt, (mode, periodic) in enumerate(planned if runtime_validated else (), 1):
         name = 'instrumented_'+mode+'_dump'+str(periodic)
+        if args.focus_watchdog:
+            name += '_attempt'+str(attempt)
         destination = output/name
         run(name, [str(helper), str(app), str(script), '--app', str(app), '--output', str(destination),
                    '--mode', mode, '--switches', str(args.switches), '--periodic-dump', str(periodic)],
@@ -322,6 +382,9 @@ def main():
         original_source_hashes=before_hashes, sources_unchanged=before_hashes == after_hashes,
         signatures_modified_by_probe=False,
         external_diagnostic_runtime_validated=runtime_validated,
+        focused_watchdog_probe=args.focus_watchdog,
+        original_launcher_control_runs=0 if args.focus_watchdog else args.self_test_repeats,
+        prior_control_evidence_reused=args.focus_watchdog,
         signature_verification_before=signature_before, signature_verification_after=signature_after,
         observations=observations, crash_reports=crashes,
         crash_collection_errors=crash_collection_errors,

@@ -2,7 +2,7 @@ name: Build and verify macOS revision
 
 on:
   push:
-    branches: [main, feature/bilingual-ui, maintenance/macos-launch-repair, codex/v5.5.7-usability-sync]
+    branches: [main, feature/bilingual-ui, maintenance/macos-launch-repair, codex/v5.5.7-usability-sync, diagnostics/mac-language-stability]
     paths:
       - .github/workflows/macos-native-release.yml
       - macos/macos/**
@@ -74,8 +74,8 @@ jobs:
         with:
           name: mac560-delivery
           path: |
-            ${{ runner.temp }}/mac560-build/Facility_Studio_V5_6_0_macOS_mac4_OneClick.zip
-            ${{ runner.temp }}/mac560-build/Facility_Studio_V5_6_0_macOS_mac4.dmg
+            ${{ runner.temp }}/mac560-build/Facility_Studio_V5_6_0_macOS_mac5_OneClick.zip
+            ${{ runner.temp }}/mac560-build/Facility_Studio_V5_6_0_macOS_mac5.dmg
             ${{ runner.temp }}/mac560-build/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 14
@@ -94,9 +94,9 @@ jobs:
       - name: Execute the same delivered ZIP and DMG on Intel
         run: >-
           python3 macos/macos/verify_native_release.py
-          --package "$RUNNER_TEMP/mac560-delivery/Facility_Studio_V5_6_0_macOS_mac4_OneClick.zip"
+          --package "$RUNNER_TEMP/mac560-delivery/Facility_Studio_V5_6_0_macOS_mac5_OneClick.zip"
           --checksums "$RUNNER_TEMP/mac560-delivery/SHA256SUMS.txt"
-          --dmg "$RUNNER_TEMP/mac560-delivery/Facility_Studio_V5_6_0_macOS_mac4.dmg"
+          --dmg "$RUNNER_TEMP/mac560-delivery/Facility_Studio_V5_6_0_macOS_mac5.dmg"
           --output "$RUNNER_TEMP/mac560-intel"
       - name: Retain Intel evidence
         if: always()
