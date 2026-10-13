@@ -11,14 +11,14 @@ Facility Studio is a desktop tool for facility, electrical and HVAC engineers. U
 <a id="installation-and-first-launch"></a>
 ## Download and run
 
-Current version: **V5.6.0 public test release**, Windows **win.3** / macOS **mac.4**, published 2026-10-13 (Taipei time).
+Current version: **V5.6.0 public test release**, Windows **win.3** / macOS **mac.5**, published 2026-10-13 (Taipei time).
 
-Automatic water sizing extends to **24 inches**; **all seven calculators are direct sidebar buttons**; the gas calculator and workbench share **50 factory gases plus custom mixtures**. Added gases with demand require an entered design velocity. Zero-demand workbench rows retain unused drafts without blocking the whole project. Native acceptance also runs **100 distinct scenarios, repeated 20 times each**. [Features, dimension sources and scope](docs/2026-10-12-v5.6-expansion.md#english) · [Current delivery and SHA256](docs/2026-10-13-v5.6-audit-stress.md#english)
+Automatic water sizing extends to **24 inches**; **all seven calculators are direct sidebar buttons**; the gas calculator and workbench share **50 factory gases plus custom mixtures**. Added gases with demand require an entered design velocity. Zero-demand workbench rows retain unused drafts without blocking the whole project. Native acceptance also runs **100 distinct scenarios, repeated 20 times each**. [Features, dimension sources and scope](docs/2026-10-12-v5.6-expansion.md#english) · [Windows delivery and SHA256](docs/2026-10-13-v5.6-audit-stress.md#english) · [Mac mac.5 fixes and delivery](docs/2026-10-13-mac-diagnostics.md#english)
 
 | Platform | Download | Start |
 | --- | --- | --- |
 | Windows 10/11, Intel/AMD x64 | [**Download Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.3/Facility_Studio_V5_6_0_Windows_Offline.exe) | Save and double-click; allow time for the bundled environment to unpack on first launch |
-| macOS, Apple Silicon / Intel | [**Download macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.4/Facility_Studio_V5_6_0_macOS_mac4.dmg) | Open the DMG, drag Facility Studio into Applications, then launch it there |
+| macOS, Apple Silicon / Intel | [**Download macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.5/Facility_Studio_V5_6_0_macOS_mac5.dmg) | Open the DMG, drag Facility Studio into Applications, then launch it there |
 
 Download one file for your platform. Help and equipment templates are bundled. [Versions and SHA256](https://github.com/azx4121/facility-studio/releases) · [Compatibility and first launch](docs/faq.en.md#compatibility)
 
@@ -57,7 +57,7 @@ For a project report, open **Full workbench → Beginner tutorial** and follow t
 - **Data:** calculations, saved projects and schedule imports are processed locally. User-entered names and notes retain their original language.
 - **License:** internal company engineering work, paid engineering projects and delivered calculation reports are permitted. Software resale, paid bundling or paid hosted software services require separate written permission. [Full terms](LICENSE) · [License examples](LICENSE_GUIDE.en.md)
 
-The published files passed native acceptance on Windows Server 2022/2025 x64 and Apple Silicon/Intel macOS 15. Windows 10/11 and macOS 11+ are support/packaging targets; other OS versions, devices and enterprise policies need individual confirmation. [Current fixes and verification](docs/2026-10-13-v5.6-audit-stress.md)
+The published files passed native acceptance on Windows Server 2022/2025 x64 and Apple Silicon/Intel macOS 15. Windows 10/11 and macOS 11+ are support/packaging targets; other OS versions, devices and enterprise policies need individual confirmation. [Windows verification](docs/2026-10-13-v5.6-audit-stress.md) · [Mac mac.5 verification](docs/2026-10-13-mac-diagnostics.md#english)
 
 ## Help and feedback
 

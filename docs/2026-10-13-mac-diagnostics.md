@@ -1,6 +1,16 @@
-# Mac 自動驗收診斷修正與 mac.5 候選驗證
+# Mac 自動驗收診斷修正、mac.5 發佈與驗證
 
-核對日期：2026-10-13（台灣時間）。Mac 修正候選版已完成，公開發佈待使用者確認；main 仍為 455bd02c3050e3948e657eeb178f7bf2edb21b55，現行公開下載仍為 Windows win.3／Mac mac.4。
+mac.5 已於 2026-10-13（台灣時間）發佈。使用者明確同意後，[PR #6](https://github.com/azx4121/facility-studio/pull/6)已合併；[正式原生與發佈流程](https://github.com/azx4121/facility-studio/actions/runs/38418161842)在 Apple Silicon／Intel 全部通過，再新增公開修訂。Windows win.3 及 Mac mac.4 保留原檔。
+
+公開 DMG：[Facility_Studio_V5_6_0_macOS_mac5.dmg](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.5/Facility_Studio_V5_6_0_macOS_mac5.dmg)，141,828,767 bytes；SHA256：bcd0854fa7f30b78d09ceaf0e53d285e5c75e6363800fc18a046f875eca70e9d。實際公開檔測試提交：aef83a683af66b4893d7e38d7ca910cf26831322。公開下載、GitHub asset digest、公開 SHA256SUMS.txt 與流程測試檔的位元組已獨立核對一致。
+
+正式交付包另完成 6 次原生執行：Apple Silicon 首次、Launch Services、ZIP 解包及唯讀 DMG 共 4 次，Intel 同一 ZIP／DMG 共 2 次。每次 221 項原生驗收及 100 案／3,902 項壓測全通過，每案重算 20 次。逐案物理輸入和標準化工程輸出與先前四個 Windows／Mac 原生環境一致。下列候選、對照與失敗紀錄保留原測試時的版本與校驗碼。
+
+原生取樣已確認加速背景診斷等待的原因；原始那次簽署 App 的 SIGSEGV 是否同一原因仍未證實。瀏覽器畫面驗收仍被工具拒絕，實際目視 0 頁。
+
+## 發佈前的候選與診斷紀錄
+
+候選階段核對日期：2026-10-13（台灣時間）。當時候選包完成、尚待發佈確認；發佈前 main 為 455bd02c3050e3948e657eeb178f7bf2edb21b55，公開版為 Windows win.3／Mac mac.4。
 
 ## 已定位的問題與修正
 
@@ -27,7 +37,7 @@ mac.5 將自動驗收的 25 秒背景診斷改成 Tk 主事件迴圈的同步診
 
 SHA256：0d62d01842522340f06494f01aa76809f2b78f140117ced963bc5da6c9efbbe8。
 
-測試分支的 publish 工作已跳過，既有 mac.4 資產未覆寫。[修正草稿 PR #6](https://github.com/azx4121/facility-studio/pull/6)保留程式與證據供確認。
+測試分支的 publish 工作已跳過，既有 mac.4 資產未覆寫。[修正 PR #6](https://github.com/azx4121/facility-studio/pull/6)已合併並保留程式與證據。
 
 ## 診斷對照與失敗紀錄
 
@@ -49,8 +59,8 @@ SHA256：0d62d01842522340f06494f01aa76809f2b78f140117ced963bc5da6c9efbbe8。
 
 ## English
 
-Mac revision 5 is a tested candidate, awaiting publication approval. Six native executions across Apple Silicon and Intel passed the unchanged 221 acceptance checks and the same 100 physical stress recipes, with 3,902 stress checks and 20 repetitions per recipe. All normalized physical and engineering digests match the four previously published native environments. The exact candidate DMG and its SHA256 are recorded above.
+Mac revision 5 has been published after explicit user approval and six additional native main-branch executions. Its public DMG SHA256 is bcd0854fa7f30b78d09ceaf0e53d285e5c75e6363800fc18a046f875eca70e9d. The public download, checksum file, GitHub asset digest and tested delivery bytes match. The following describes the earlier candidate stage. Six native executions across Apple Silicon and Intel passed the unchanged 221 acceptance checks and the same 100 physical stress recipes, with 3,902 stress checks and 20 repetitions per recipe. All normalized physical and engineering digests match the four previously published native environments. The exact candidate DMG and its SHA256 are recorded above.
 
 Two accelerated external-probe native samples now locate the post-cleanup hang: the main thread waits in watchdog cancellation while the watchdog remains in _PyFrame_SafeGetCode. Revision 5 replaces the background acceptance watchdog with synchronous Tk-loop diagnostics cancelled before shutdown. This removes the reproduced background-diagnostic path, without proving that the earlier signed-App SIGSEGV had the same cause. External tracing, one-second acceleration and Cocoa identity differences remain explicit. The final Intel probe failed its initial interaction time budget before any switch, rather than reproducing this hang.
 
-Publication was skipped on the test branch. Public mac.4 remains unchanged. Browser visual audit remains blocked by the tool after renewed consent, with zero pages visually inspected.
+Publication was skipped on the earlier test branch; the approved main workflow subsequently published mac.5. Public mac.4 remains unchanged. Browser visual audit remains blocked by the tool after renewed consent, with zero pages visually inspected.

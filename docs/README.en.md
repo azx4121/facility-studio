@@ -2,7 +2,7 @@
 
 [繁體中文](README.md) · [Home and downloads](../README.en.md) · [Report a problem](https://github.com/azx4121/facility-studio/issues)
 
-Current version: **V5.6.0 public test release (win.3 / mac.4)**. Choose documentation for your task; use the practice walkthrough when you need a full project.
+Current version: **V5.6.0 public test release (win.3 / mac.5)**. Choose documentation for your task; use the practice walkthrough when you need a full project.
 
 ## Start here
 
@@ -24,7 +24,7 @@ Help is bundled: use **This tool's guide** in a quick calculator or **Beginner t
 | --- | --- |
 | Check inputs, formulas and worked results | [20 scenarios: 18 calculations and two scope controls](guides/README.en.md) |
 | Check V5.6.0 water sizes, seven direct calculators and 50 gases | [Current features and sources](2026-10-12-v5.6-expansion.md#english) |
-| Verify native tests, commits and SHA256 of the published EXE/DMG | [Current delivery acceptance](2026-10-13-v5.6-audit-stress.md) |
+| Verify native tests, commits and SHA256 of the published EXE/DMG | [Windows delivery acceptance](2026-10-13-v5.6-audit-stress.md) · [Mac mac.5 fixes and delivery](2026-10-13-mac-diagnostics.md#english) |
 | Run, build or test source | [Developer entry](development.md#english) |
 | Review previous fixes, tests and search experiments | [Historical records](history/README.md#english) |
 

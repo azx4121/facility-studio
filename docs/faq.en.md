@@ -32,7 +32,7 @@ All seven V5.6.0 calculators are direct sidebar buttons: electrical, duct, CDA/g
 
 Automatic water references extend to 24 inches. The tool selects a single pipe within the adopted velocity before adding parallel circuits. Added 14–24 inch references use STD walls; check actual ID when supplied dimensions differ. [Water and pipe guide](guides/water.en.md)
 
-The calculator and workbench share 50 named gases plus custom mixtures. Added gases have no preset design velocity: enter a design value, using custom velocity in the workbench. win.3 / mac.4 preserves entered velocity when the same gas is selected again; switching to a different added gas requires a new value. Mixtures need a name and composition. T/P/Z conversion covers single-gas-phase volume and velocity estimates only. [Gas and vacuum guide](guides/gas-vacuum.en.md)
+The calculator and workbench share 50 named gases plus custom mixtures. Added gases have no preset design velocity: enter a design value, using custom velocity in the workbench. win.3 / mac.5 preserves entered velocity when the same gas is selected again; switching to a different added gas requires a new value. Mixtures need a name and composition. T/P/Z conversion covers single-gas-phase volume and velocity estimates only. [Gas and vacuum guide](guides/gas-vacuum.en.md)
 
 In the full workbench, a route with zero flow retains custom velocity and custom/mixture names as drafts without validating or including them in calculations or reports. Added gases with nonzero demand still require custom velocity and an entered design value; mixtures also require a name and composition. The independent gas calculator still requires valid velocity even when its flow is zero.
 

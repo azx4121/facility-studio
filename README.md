@@ -10,14 +10,14 @@ Facility Studio 是供廠務、機電與空調工程人員使用的桌面工具�
 
 ## 下載
 
-目前版本：**V5.6.0 公開測試版**，Windows **win.3**／macOS **mac.4**，2026-10-13（台灣時間）發布。
+目前版本：**V5.6.0 公開測試版**，Windows **win.3**／macOS **mac.5**，2026-10-13（台灣時間）發布。
 
-水管自動選型擴充至 **24 吋**；**七個快算直接放在左側**；氣體快算與工作台共同提供 **50 種廠務氣體＋自訂／混合氣**。有需求的新增氣體須填設計流速；完整工作台零需求時保留未使用草稿，避免阻擋整案計算。原生驗收另執行 **100 組不同案例，每組重算 20 次**。[功能、尺寸來源與範圍](docs/2026-10-12-v5.6-expansion.md) · [本版交付與 SHA256](docs/2026-10-13-v5.6-audit-stress.md)
+水管自動選型擴充至 **24 吋**；**七個快算直接放在左側**；氣體快算與工作台共同提供 **50 種廠務氣體＋自訂／混合氣**。有需求的新增氣體須填設計流速；完整工作台零需求時保留未使用草稿，避免阻擋整案計算。原生驗收另執行 **100 組不同案例，每組重算 20 次**。[功能、尺寸來源與範圍](docs/2026-10-12-v5.6-expansion.md) · [Windows 交付與 SHA256](docs/2026-10-13-v5.6-audit-stress.md) · [Mac mac.5 修正與交付](docs/2026-10-13-mac-diagnostics.md)
 
 | 平台 | 下載 | 開始使用 |
 | --- | --- | --- |
 | Windows 10／11，Intel／AMD x64 | [**下載 Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.3/Facility_Studio_V5_6_0_Windows_Offline.exe) | 儲存後雙擊開啟；首次啟動請等候內建環境展開 |
-| macOS，Apple Silicon／Intel | [**下載 macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.4/Facility_Studio_V5_6_0_macOS_mac4.dmg) | 開啟 DMG，將 Facility Studio 拖到「應用程式」，再從那裡開啟 |
+| macOS，Apple Silicon／Intel | [**下載 macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.5/Facility_Studio_V5_6_0_macOS_mac5.dmg) | 開啟 DMG，將 Facility Studio 拖到「應用程式」，再從那裡開啟 |
 
 每個平台下載上表的一個檔案即可，教學與設備範本已內建。[版本與 SHA256](https://github.com/azx4121/facility-studio/releases) · [相容性與首次開啟](docs/faq.md#compatibility)
 
@@ -56,7 +56,7 @@ Windows 尚無正式發行者簽章；Mac 尚未取得 Developer ID／Apple 公�
 - **資料：**計算、專案保存與設備表匯入在本機完成；自己的設備名稱與備註保留原文。
 - **授權：**允許公司內部工程工作、收費工程案件及計算書交付；軟體轉售、付費綁售或付費線上軟體服務需另行書面授權。[完整條款](LICENSE) · [授權案例](LICENSE_GUIDE.md)
 
-目前發布檔已通過 Windows Server 2022／2025 x64，以及 Apple Silicon／Intel macOS 15 原生驗收。Windows 10／11 與 macOS 11+ 為支援／封裝目標，其他版本、實機與企業政策仍需個別確認。[本版修正與驗證](docs/2026-10-13-v5.6-audit-stress.md)
+目前發布檔已通過 Windows Server 2022／2025 x64，以及 Apple Silicon／Intel macOS 15 原生驗收。Windows 10／11 與 macOS 11+ 為支援／封裝目標，其他版本、實機與企業政策仍需個別確認。[Windows 驗證](docs/2026-10-13-v5.6-audit-stress.md) · [Mac mac.5 驗證](docs/2026-10-13-mac-diagnostics.md)
 
 ## 文件與問題回報
 
