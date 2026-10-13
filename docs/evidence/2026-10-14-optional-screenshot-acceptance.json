@@ -1,6 +1,6 @@
 {
   "date": "2026-10-14 Asia/Taipei",
-  "status": "local_fix_verified_cloud_delivery_in_progress",
+  "status": "local_mac_and_windows_verified_mac_cloud_unstarted",
   "candidate_commit": "5ada0ca4acc25af7433afd5e592317aa80079ccd",
   "pr": "https://github.com/azx4121/facility-studio/pull/7",
   "public_release_unchanged": true,
@@ -3724,15 +3724,23 @@
     {
       "id": 38429660726,
       "platform": "macOS ARM/Intel",
-      "status": "retry_requested",
-      "attempt_1": "workflow failure, build cancelled before steps; no available job log",
-      "attempt_2": "rerun_failed_workflow_run_jobs accepted"
+      "status": "completed_without_native_test",
+      "attempt_1": "build cancelled after 15 minutes before any steps; job log unavailable",
+      "attempt_2": "build cancelled after 15 minutes before any steps; Intel verification skipped",
+      "conclusion": "failure",
+      "attempts": 2,
+      "native_cloud_tests_executed": 0,
+      "physical_intel_verified_for_this_fix": false,
+      "more_reruns_requested": false
     },
     {
       "id": 38429660604,
       "platform": "Windows 2022/2025",
-      "status": "verify_in_progress",
-      "build": "success"
+      "status": "completed",
+      "build": "success",
+      "conclusion": "success",
+      "verify": "success",
+      "publish": "skipped"
     }
   ],
   "browser": {
@@ -3745,5 +3753,177 @@
     "cause_confirmed": false,
     "original_native_ips_available": false,
     "this_local_failure_is_sigsegv": false
-  }
+  },
+  "windows_delivery_verified": {
+    "passed": true,
+    "workflow_run": 38429660604,
+    "tested_commit": "5ada0ca4acc25af7433afd5e592317aa80079ccd",
+    "native_executions": 6,
+    "artifacts": [
+      {
+        "id": 11831141094,
+        "size": 4737099,
+        "sha256": "fbd1e659eddc30c0c4651806125c1937e7cc6acde1dc3c6d43c54b804ab44e16"
+      },
+      {
+        "id": 11831222592,
+        "size": 1818154,
+        "sha256": "5e2b7f7d98b3e399fddb9572167d8c0ef5811bd465e8f0e7611c691a4a752946"
+      }
+    ],
+    "reports": [
+      {
+        "artifact": "win-screenshot-fix-build-evidence.zip",
+        "path": "_temp/windows-offline/evidence/native/standalone/Windows_Acceptance.json",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "passed": true,
+        "native_checks": 233,
+        "stress_software_passed": 100,
+        "stress_check_count": 3902,
+        "repeat_per_scenario": 20,
+        "canonical_inputs_and_engineering_outputs_match": true,
+        "frozen": true,
+        "offline_network_audit": true
+      },
+      {
+        "artifact": "win-screenshot-fix-build-evidence.zip",
+        "path": "_temp/windows-offline/evidence/native/unicode-executable-path/Windows_Acceptance.json",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "passed": true,
+        "native_checks": 233,
+        "stress_software_passed": 100,
+        "stress_check_count": 3902,
+        "repeat_per_scenario": 20,
+        "canonical_inputs_and_engineering_outputs_match": true,
+        "frozen": true,
+        "offline_network_audit": true
+      },
+      {
+        "artifact": "win-screenshot-fix-build-evidence.zip",
+        "path": "_temp/windows-offline/evidence/native/zip-extracted/Windows_Acceptance.json",
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "passed": true,
+        "native_checks": 233,
+        "stress_software_passed": 100,
+        "stress_check_count": 3902,
+        "repeat_per_scenario": 20,
+        "canonical_inputs_and_engineering_outputs_match": true,
+        "frozen": true,
+        "offline_network_audit": true
+      },
+      {
+        "artifact": "win-screenshot-fix-second-evidence.zip",
+        "path": "standalone/Windows_Acceptance.json",
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "passed": true,
+        "native_checks": 233,
+        "stress_software_passed": 100,
+        "stress_check_count": 3902,
+        "repeat_per_scenario": 20,
+        "canonical_inputs_and_engineering_outputs_match": true,
+        "frozen": true,
+        "offline_network_audit": true
+      },
+      {
+        "artifact": "win-screenshot-fix-second-evidence.zip",
+        "path": "unicode-executable-path/Windows_Acceptance.json",
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "passed": true,
+        "native_checks": 233,
+        "stress_software_passed": 100,
+        "stress_check_count": 3902,
+        "repeat_per_scenario": 20,
+        "canonical_inputs_and_engineering_outputs_match": true,
+        "frozen": true,
+        "offline_network_audit": true
+      },
+      {
+        "artifact": "win-screenshot-fix-second-evidence.zip",
+        "path": "zip-extracted/Windows_Acceptance.json",
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "passed": true,
+        "native_checks": 233,
+        "stress_software_passed": 100,
+        "stress_check_count": 3902,
+        "repeat_per_scenario": 20,
+        "canonical_inputs_and_engineering_outputs_match": true,
+        "frozen": true,
+        "offline_network_audit": true
+      }
+    ],
+    "publish": "skipped; fix branch only"
+  },
+  "rosetta_candidate": {
+    "host": "macOS-27.2-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64",
+    "execution_mode": "Rosetta x86_64 on Apple Silicon",
+    "expected_runtime_architecture": "x86_64",
+    "passed": true,
+    "exit_code": 0,
+    "elapsed_seconds": 101.13,
+    "acceptance": {
+      "passed": true,
+      "revision": "mac.5",
+      "architecture": "x86_64",
+      "check_count": 221,
+      "failed_checks": [],
+      "stress_passed": true,
+      "stress_software_passed": 100,
+      "stress_check_count": 3902,
+      "repeat_per_scenario": 20
+    },
+    "optional_screenshots_disabled": true
+  },
+  "rosetta_parity": {
+    "passed": true,
+    "case_count": 100,
+    "native_check_names_match_public": true,
+    "comparisons": [
+      {
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "revision": "win.3",
+        "matched_100_inputs_and_engineering_outputs": true
+      },
+      {
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "revision": "win.3",
+        "matched_100_inputs_and_engineering_outputs": true
+      },
+      {
+        "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+        "revision": "mac.4",
+        "matched_100_inputs_and_engineering_outputs": true
+      },
+      {
+        "platform": "macOS-15.7.9-x86_64-i386-64bit-Mach-O",
+        "revision": "mac.4",
+        "matched_100_inputs_and_engineering_outputs": true
+      },
+      {
+        "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+        "revision": "public mac.5",
+        "matched_100_inputs_and_engineering_outputs": true
+      },
+      {
+        "platform": "macOS-15.7.9-x86_64-i386-64bit-Mach-O",
+        "revision": "public mac.5",
+        "matched_100_inputs_and_engineering_outputs": true
+      }
+    ],
+    "screenshots_acquired": 0
+  },
+  "rosetta_report_sha256": "bf72d887c86852b27c1227ede1b5f7efd95681968cf5b1689472888e24cec607",
+  "github_status_check": {
+    "checked_utc": "2026-10-13T16:44Z",
+    "provider_report": "All Systems Operational",
+    "unresolved_incidents": [],
+    "cancellation_cause_confirmed": false,
+    "source": "https://www.githubstatus.com/api/v2/status.json"
+  },
+  "remaining": [
+    "Actual GitHub browser visual QA: saved domain block must be removed by user",
+    "Original SIGSEGV causality: original native report missing",
+    "Physical Mac ARM/Intel cloud delivery verification of this new optional screenshot fix: both attempts stopped before executing steps",
+    "This candidate is draft PR #7, not a new public release"
+  ]
 }

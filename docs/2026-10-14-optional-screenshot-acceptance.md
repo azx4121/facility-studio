@@ -12,6 +12,8 @@
 
 同一百案的物理輸入與標準化工程輸出，與先前兩個 Windows、兩個 mac.4 及正式 mac.5 Apple Silicon 原生環境逐案一致；221 項檢查名稱也和正式 mac.5 驗收一致。這是修改候選的通過，沒有把它稱為未修改公開 DMG 的本機全套通過。
 
+另在同一 Apple Silicon Mac 的 Rosetta x86_64 相容模式測試候選，101.130 秒正常退出0，221 項及100案×20／3,902項全通過；一百案輸入／工程輸出和先前兩個Windows、兩個mac.4及兩個mac.5原生環境一致。這是相容模式測試，不能替代實體 Intel Mac 雲端驗證。
+
 沒有取得任何螢幕截圖；使用者原有軟體日誌／快取已還原，唯讀映像已卸載。一般從瀏覽器下載後的隔離標记與 Gatekeeper 首次啟動路徑尚未另驗。
 
 ## 修正與回歸
@@ -20,9 +22,11 @@
 
 6 項模擬回歸通過：拒絕截圖、明確停用、正常預設、非預期 AssertionError 傳出、拒絕後恢復語言、停用後仍執行 Windows repaint 驗證。測試沒有實際取得螢幕畫面。
 
-Windows 第一個環境的三次交付驗收已核對（每次 233 項、100 案／3,902 項全通過；凍結打包、外部 Python 隱藏、對外網路封鎖），第二環境仍驗收中。Mac 雲端首輪在執行前被取消，沒有可取得的執行日誌；已重試一次，結果仍待完成：[Mac ARM／Intel](https://github.com/azx4121/facility-studio/actions/runs/38429660726) · [Windows 2022／2025](https://github.com/azx4121/facility-studio/actions/runs/38429660604)。發布步驟僅限 main，修正分支不會發布或覆蓋現行下載。
+Windows 2022／2025 兩環境均已完成，每環境分別執行 standalone、Unicode路徑、ZIP交付，共6次；每次233項、100案×20／3,902項全通過，frozen打包、外部Python隱藏與對外網路封鎖均驗證，逐案輸入／工程輸出與先前公開版一致。兩份證據ZIP的大小、GitHub artifact SHA256均已核對。Mac 雲端兩次均排隊15分鐘後取消，沒有執行任何步驟；整體工作流顯示 failure，Intel 驗證 skipped，原因没有可取得日誌確認。這不是新 App 測試失敗，也沒有取得新候選的實體 Mac ARM／Intel 雲端交付驗證，不再重複送出同一工作：[Mac ARM／Intel](https://github.com/azx4121/facility-studio/actions/runs/38429660726) · [Windows 2022／2025](https://github.com/azx4121/facility-studio/actions/runs/38429660604)。發布步驟僅限 main，修正分支不會發布或覆蓋現行下載。
 
 ## 仍未完成
+
+本次候選仍缺實體 Mac ARM／Intel 的雲端交付驗證，並仍為草稿 PR #7。後續公開修正版需建立新的獨立修訂與核對交付，不能將此候選覆蓋現行下載。
 
 GitHub 的實際網頁畫面驗收仍待使用者解除已儲存 github.com 瀏覽器封鎖；GitHub 連接器已正常可讀取與更新，兩項權限不同。沒有用其他途徑繞過瀏覽器封鎖。
 
