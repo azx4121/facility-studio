@@ -134,7 +134,8 @@ class CrashPrivacy(unittest.TestCase):
                 Path(command[command.index('-file')+1]).write_text(
                     'Process: FacilityStudioProbe [345]\nPath: '+str(helper)+'\nCall graph:\n')
                 return SimpleNamespace(returncode=0)
-            with patch.object(probe.subprocess, 'run', side_effect=native_sample):
+            with patch.object(probe, "native_process_executable", return_value=str(helper.resolve())), \
+                 patch.object(probe.subprocess, 'run', side_effect=native_sample):
                 result = probe.sample_probe_process(process, helper, output, 'owned')
             self.assertTrue(result['retained'])
             self.assertTrue((output/'owned_native_sample.txt').is_file())
@@ -142,7 +143,8 @@ class CrashPrivacy(unittest.TestCase):
                 Path(command[command.index('-file')+1]).write_text(
                     'Process: Unrelated [999]\nPath: /private/unrelated\nPrivate unrelated stack\n')
                 return SimpleNamespace(returncode=0)
-            with patch.object(probe.subprocess, 'run', side_effect=wrong_sample):
+            with patch.object(probe, "native_process_executable", return_value=str(helper.resolve())), \
+                 patch.object(probe.subprocess, 'run', side_effect=wrong_sample):
                 result = probe.sample_probe_process(process, helper, output, 'rejected')
             self.assertFalse(result['retained'])
             self.assertFalse((output/'rejected_native_sample.txt').exists())
@@ -151,6 +153,42 @@ class CrashPrivacy(unittest.TestCase):
                 result = probe.sample_probe_process(SimpleNamespace(pid=345, poll=lambda: 0), helper, output, 'exited')
                 run.assert_not_called()
                 self.assertFalse(result['attempted'])
+
+    def test_sample_alias_requires_kernel_identity_before_and_after(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output=Path(directory); helper=output/'FacilityStudioProbe'; app=output/'Facility Studio.app'
+            process=SimpleNamespace(pid=456, poll=lambda: None)
+            alias=str(app.resolve()/'Contents/MacOS/FacilityStudio')
+            def native_sample(command, **options):
+                Path(command[command.index('-file')+1]).write_text(
+                    'Process: FacilityStudio [456]\nPath: '+alias+'\nCall graph:\n')
+                return SimpleNamespace(returncode=0)
+            with patch.object(probe, "native_process_executable", return_value=str(helper.resolve())), \
+                 patch.object(probe.subprocess,'run',side_effect=native_sample):
+                result=probe.sample_probe_process(process,helper,output,'alias',app)
+            self.assertTrue(result['retained'])
+            self.assertEqual(result['header_path_category'],'original_launcher_alias')
+            for label, identities in [('wrong_before',['/elsewhere/FacilityStudioProbe']),
+                                       ('wrong_after',[str(helper.resolve()),'/elsewhere/FacilityStudioProbe'])]:
+                with patch.object(probe, "native_process_executable",side_effect=identities), \
+                     patch.object(probe.subprocess,'run',side_effect=native_sample):
+                    result=probe.sample_probe_process(process,helper,output,label,app)
+                self.assertFalse(result['retained'])
+                self.assertFalse((output/(label+'_native_sample.txt')).exists())
+            exits=iter([None,None,0])
+            process=SimpleNamespace(pid=456,poll=lambda: next(exits))
+            with patch.object(probe, "native_process_executable",return_value=str(helper.resolve())), \
+                 patch.object(probe.subprocess,'run',side_effect=native_sample):
+                result=probe.sample_probe_process(process,helper,output,'exited_after',app)
+            self.assertFalse(result['retained'])
+
+    def test_sample_redaction_categories_are_bounded(self):
+        helper=Path('/owned/FacilityStudioProbe')
+        for path in ('<redacted>','/Users/USER/*/FacilityStudioProbe'):
+            header='Process: FacilityStudioProbe [789]\nPath: '+path+'\n'
+            self.assertEqual(probe.sample_header_metadata(header,helper)['header_path_category'],'redacted')
+        self.assertEqual(probe.sample_header_metadata(
+            'Process: Other [789]\nPath: /elsewhere/Other\n',helper)['header_path_category'],'unmatched_external')
 
 
 if __name__ == '__main__':

@@ -5,6 +5,7 @@ on:
     branches:
       - maintenance/macos-launch-repair
       - diagnostics/mac-language-stability
+      - diagnostics/mac-watchdog-sample
     paths:
       - .github/workflows/macos-native-probe.yml
       - macos/macos/native_probe.py
@@ -26,8 +27,10 @@ jobs:
         include:
           - architecture: arm64
             runner: macos-15
+            repeats: 3
           - architecture: x86_64
             runner: macos-15-intel
+            repeats: 1
     steps:
       - name: Checkout probe source
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -36,7 +39,7 @@ jobs:
       - name: Focused published mac.4 watchdog cancellation probe
         run: |
           python3 macos/tests/native_probe_privacy.py
-          python3 macos/macos/native_probe.py --output "$RUNNER_TEMP/native-probe" --focus-watchdog --focused-repeats 3 --switches 100
+          python3 macos/macos/native_probe.py --output "$RUNNER_TEMP/native-probe" --focus-watchdog --focused-repeats ${{ matrix.repeats }} --switches 100
       - name: Retain native diagnostic evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

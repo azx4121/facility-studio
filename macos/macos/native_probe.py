@@ -141,15 +141,50 @@ def collect_probe_crashes(report_directory, output, process_records, app):
     return retained
 
 
+def sample_header_metadata(text, executable, app=None):
+    """Classify the header without retaining an unmatched external path."""
+    process = re.search(r'^Process:[ \t]+.*\[(\d+)\][ \t]*$', text, re.MULTILINE)
+    path = re.search(r'^Path:[ \t]+(.+?)[ \t]*$', text, re.MULTILINE)
+    reported = path[1] if path else None
+    category = 'missing'
+    if reported is not None:
+        if reported in ('<redacted>', '???', '(null)', 'unknown') or (
+                ('*' in reported or '/USER/' in reported)
+                and Path(reported).name in ('FacilityStudioProbe', 'FacilityStudio')):
+            category = 'redacted'
+        elif Path(reported).is_absolute() and Path(reported).resolve() == Path(executable).resolve():
+            category = 'exact_helper'
+        elif app is not None and Path(reported).is_absolute() and Path(reported).resolve() == Path(app).resolve()/'Contents/MacOS/FacilityStudio':
+            category = 'original_launcher_alias'
+        else:
+            category = 'unmatched_external'
+    return dict(header_pid=int(process[1]) if process else None, header_path_category=category)
+
+
 def sample_matches_process(text, pid, executable):
-    """Retain a native sample only when its header identifies this helper."""
-    process = re.search(r'^Process:\s+.*\[(\d+)\]\s*$', text, re.MULTILINE)
-    path = re.search(r'^Path:\s+(.+?)\s*$', text, re.MULTILINE)
-    return bool(process and path and int(process[1]) == pid
-                and Path(path[1]).resolve() == Path(executable).resolve())
+    """Strict legacy header check; collector additionally attests the kernel."""
+    header = sample_header_metadata(text, executable)
+    return header['header_pid'] == pid and header['header_path_category'] == 'exact_helper'
 
 
-def sample_probe_process(process, executable, output, phase):
+def native_process_executable(pid):
+    """Read the kernel executable for this PID using Darwin's fixed libproc."""
+    if sys.platform != 'darwin' or not isinstance(pid, int) or pid <= 0:
+        return None
+    import ctypes
+    try:
+        libproc = ctypes.CDLL('/usr/lib/libproc.dylib', use_errno=True)
+        libproc.proc_pidpath.argtypes = [ctypes.c_int, ctypes.c_void_p, ctypes.c_uint32]
+        libproc.proc_pidpath.restype = ctypes.c_int
+        buffer = ctypes.create_string_buffer(4096)
+        if libproc.proc_pidpath(pid, buffer, ctypes.sizeof(buffer)) <= 0:
+            return None
+        return str(Path(os.fsdecode(buffer.value)).resolve())
+    except (OSError, ValueError):
+        return None
+
+
+def sample_probe_process(process, executable, output, phase, app=None):
     """Sample only the still-running helper created by this exact probe."""
     executable, output = Path(executable).resolve(), Path(output)
     if process.poll() is not None:
@@ -160,24 +195,38 @@ def sample_probe_process(process, executable, output, phase):
     record = dict(attempted=True, pid=process.pid, executable=str(executable),
                   duration_seconds=3, retained=False)
     try:
+        before = native_process_executable(process.pid)
+        record['kernel_path_before_matches_helper'] = before == str(executable)
+        if before != str(executable) or process.poll() is not None:
+            record.update(attempted=False, reason='Pre-sample kernel path or Popen liveness did not attest this helper')
+            return record
         result = subprocess.run(['/usr/bin/sample', str(process.pid), '3', '-file', str(candidate)],
                                 capture_output=True, text=True, timeout=8, check=False)
         record['returncode'] = result.returncode
+        after = native_process_executable(process.pid)
+        still_alive = process.poll() is None
+        record.update(kernel_path_after_matches_helper=after == str(executable),
+                      popen_alive_after_sampling=still_alive)
         if candidate.is_file() and candidate.stat().st_size <= 16*1024*1024:
             text = candidate.read_text(encoding='utf-8', errors='replace')
-            if sample_matches_process(text, process.pid, executable):
+            header = sample_header_metadata(text, executable, app)
+            record.update(header)
+            if (before == str(executable) and after == str(executable) and still_alive
+                    and header['header_pid'] == process.pid
+                    and header['header_path_category'] in
+                    ('exact_helper', 'original_launcher_alias', 'redacted', 'missing')):
                 target = output/(phase+'_native_sample.txt')
                 candidate.replace(target)
                 record.update(retained=True, file=target.name)
             else:
-                record['reason'] = 'Sample header did not match the probe PID and exact helper path'
+                record['reason'] = 'Kernel/liveness attestations or allowed sample header identity did not match'
         else:
             record['reason'] = 'No bounded native sample file was produced'
     except (OSError, subprocess.TimeoutExpired) as error:
         record['reason'] = type(error).__name__
     finally:
         candidate.unlink(missing_ok=True)
-    (output/(phase+'_native_sample.json')).write_text(json.dumps(record, indent=2)+'\n', encoding='utf-8')
+        (output/(phase+'_native_sample.json')).write_text(json.dumps(record, indent=2)+'\n', encoding='utf-8')
     return record
 
 
@@ -245,7 +294,7 @@ def main():
                 except subprocess.TimeoutExpired:
                     if diagnostic and process.poll() is None:
                         print(json.dumps(dict(phase=name, pid=process.pid, event='native.sample.begin')), flush=True)
-                        native_sample = sample_probe_process(process, command[0], output, name)
+                        native_sample = sample_probe_process(process, command[0], output, name, selected_app)
                         print(json.dumps(dict(phase=name, pid=process.pid, event='native.sample.end',
                                               retained=native_sample.get('retained', False))), flush=True)
                     remaining = max(.01, timeout-(time.monotonic()-started))
