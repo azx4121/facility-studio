@@ -8,6 +8,7 @@ on:
       - windows/winrelease/**
       - windows/facility_studio/**
       - windows/tests/**
+      - macos/tests/optional_acceptance_screenshots.py
       - tools/cleanroom100_stress.py
       - tools/verify_stress_io.py
       - docs/tutorial/START_HERE.html
@@ -47,6 +48,7 @@ jobs:
             }
           }
           Invoke-CheckedPython windows/tests/regression.py
+          Invoke-CheckedPython macos/tests/optional_acceptance_screenshots.py
           Invoke-CheckedPython windows/tests/v55_features.py
           Invoke-CheckedPython windows/tests/v552_core.py
           Invoke-CheckedPython windows/tests/simple_features.py

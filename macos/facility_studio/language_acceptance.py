@@ -2,9 +2,26 @@
 
 import copy
 import json
+import os
 from pathlib import Path
 import re
+import subprocess
 import tempfile
+
+
+def _capture_optional_screenshot(destination):
+    """Keep optional image evidence separate from acceptance failures."""
+    if os.environ.get("FACILITY_STUDIO_ACCEPTANCE_SCREENSHOTS") == "0":
+        print("Optional acceptance screenshot disabled: " + str(destination), flush=True)
+        return False
+    from PIL import ImageGrab
+
+    try:
+        ImageGrab.grab().save(destination)
+    except (OSError, RuntimeError, subprocess.CalledProcessError) as exc:
+        print("Optional acceptance screenshot unavailable: " + str(exc), flush=True)
+        return False
+    return True
 
 
 def run(root, app, workbench, check, pump, output=None):
@@ -347,14 +364,9 @@ def run(root, app, workbench, check, pump, output=None):
         readable_navigation,
     )
     if output is not None:
-        from PIL import ImageGrab
-
-        try:
-            pump()
-            ImageGrab.grab().save(Path(output).with_name("English_Electrical.png"))
-            app.show_tool("air")
-            pump()
-            ImageGrab.grab().save(Path(output).with_name("English_Psychrometrics.png"))
-        except OSError:
-            pass
+        pump()
+        _capture_optional_screenshot(Path(output).with_name("English_Electrical.png"))
+        app.show_tool("air")
+        pump()
+        _capture_optional_screenshot(Path(output).with_name("English_Psychrometrics.png"))
     choose("zh-Hant")
