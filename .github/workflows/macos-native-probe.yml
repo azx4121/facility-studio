@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - maintenance/macos-launch-repair
-      - diagnostics/mac-language-stability
       - diagnostics/mac-watchdog-sample
     paths:
       - .github/workflows/macos-native-probe.yml
