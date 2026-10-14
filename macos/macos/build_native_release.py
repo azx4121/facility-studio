@@ -14,8 +14,8 @@ from native_probe import RELEASE_SHA256, RELEASE_URL
 from native_sign import sign_app
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "5.6.0-mac.5"
-PACKAGE_NAME = "Facility_Studio_V5_6_0_macOS_mac5"
+VERSION = "5.6.0-mac.6"
+PACKAGE_NAME = "Facility_Studio_V5_6_0_macOS_mac6"
 
 
 def command(args, log, timeout=180):
@@ -101,7 +101,7 @@ def main():
     plist_path = app / "Contents/Info.plist"
     with plist_path.open("rb") as file:
         info = plistlib.load(file)
-    info["CFBundleVersion"] = "5.6.0.5"
+    info["CFBundleVersion"] = "5.6.0.6"
     info["CFBundleShortVersionString"] = "5.6.0"
     with plist_path.open("wb") as file:
         plistlib.dump(info, file)
@@ -126,7 +126,14 @@ def main():
     )
     acceptance = Path.home() / "Library/Logs/Facility_Studio_V5_5/Mac_Acceptance.json"
     result = json.loads(acceptance.read_text(encoding="utf-8"))
-    if not result["passed"]:
+    if (
+        not result["passed"] or result.get("revision") != "mac.6"
+        or not result.get("airflow", {}).get("passed")
+        or result["airflow"]["tests_run"] != 19
+        or result["airflow"]["physical_cases"] != 100
+        or not any(item["name"] == "OA FFU native 2050 units zh-Hant"
+                   and item["passed"] for item in result["checks"])
+    ):
         raise ValueError("Native Mac acceptance did not pass.")
     shutil.copy2(acceptance, evidence / "Mac_Acceptance.json")
     for image in acceptance.parent.glob("English_*.png"):
@@ -185,7 +192,7 @@ def main():
 
     source_zip = stage / "Source_and_Verification.zip"
     zip_tree(ROOT, source_zip, "Facility_Studio_macOS_Source")
-    delivered_zip = output / "Facility_Studio_V5_6_0_macOS_mac5_OneClick.zip"
+    delivered_zip = output / "Facility_Studio_V5_6_0_macOS_mac6_OneClick.zip"
     command(
         [
             "/usr/bin/ditto",
@@ -222,7 +229,7 @@ def main():
     )
     (dmg_stage / "Applications").symlink_to("/Applications")
     shutil.copy2(ROOT / "README_macOS.txt", dmg_stage / "請先閱讀.txt")
-    dmg = output / "Facility_Studio_V5_6_0_macOS_mac5.dmg"
+    dmg = output / "Facility_Studio_V5_6_0_macOS_mac6.dmg"
     command(
         [
             "/usr/bin/hdiutil",

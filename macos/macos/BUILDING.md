@@ -35,8 +35,8 @@ To validate those exact delivery files on a second Mac architecture:
 
 ```sh
 python3 macos/macos/verify_native_release.py \
-  --package /absolute/path/Facility_Studio_V5_6_0_macOS_mac4_OneClick.zip \
-  --dmg /absolute/path/Facility_Studio_V5_6_0_macOS_mac4.dmg \
+  --package /absolute/path/Facility_Studio_V5_6_0_macOS_mac6_OneClick.zip \
+  --dmg /absolute/path/Facility_Studio_V5_6_0_macOS_mac6.dmg \
   --checksums /absolute/path/SHA256SUMS.txt \
   --output /absolute/path/second-mac-evidence
 ```
@@ -44,7 +44,7 @@ python3 macos/macos/verify_native_release.py \
 The workflow `.github/workflows/macos-native-release.yml` uses Apple Silicon
 macOS 15 to build and Intel macOS 15 to execute the same ZIP and DMG. On the
 repair branch it only tests. On main, publication runs only after both jobs pass;
-the publisher targets `v5.6.0-mac.4` without replacing existing public assets or moving tags.
+the publisher targets `v5.6.0-mac.6` without replacing existing public assets or moving tags.
 For a future release, update version and output names in the builder, verifier,
 publisher and workflow together; do not try to overwrite the already published
 v5.6.0 files after a source change.
@@ -129,3 +129,7 @@ No additional Python installation or internet is needed for the tutorial.
 
 
 Revision3 also treats zero-demand gas velocity as an inactive retained draft and executes100 physically distinct,20-repeat calculation/persistence stress recipes inside the delivered App. Source CI separately runs the independent100-cleanroom matrix. Publication requires Apple Silicon and Intel native environments to pass.
+
+## OA / FFU delivered-runtime acceptance
+
+mac.6 requires the delivered App to report 19 OA/FFU checks and 100 physical airflow cases, plus actual native OA widget checks. Both Apple Silicon and Intel execute the same delivered bytes; a prior revision cannot satisfy this gate.

@@ -88,6 +88,11 @@ def run():
                 and native_stress["distinct_physical_input_count"] == 100)
 
     check("100 distinct delivered-runtime stress scenarios, 20 repetitions", stress100)
+    from facility_studio.airflow_acceptance import run_checks as check_airflow
+    native_airflow = check_airflow()
+    check("19 OA FFU checks and 100 physical cases in delivered runtime",
+          lambda: native_airflow["passed"] and native_airflow["tests_run"] == 19
+          and native_airflow["physical_cases"] == 100)
     from facility_studio.inactive_acceptance import run_checks as check_inactive
     check("V557 complete-output inactive-field regression", lambda: check_inactive(random_repeats=0)["passed"])
     for tool in ("electrical", "duct", "gas", "lighting", "water", "air", "units"):
@@ -280,6 +285,8 @@ def run():
         check_keypad_ui(root, app, workbench, check, pump_gui)
         from facility_studio.v560_acceptance import run_ui as check_v560_ui
         check_v560_ui(root, app, workbench, check, pump_gui)
+        from facility_studio.airflow_acceptance import run_ui as check_airflow_ui
+        check_airflow_ui(workbench, check, pump_gui)
         check("Native UI heartbeat", lambda: (pump_gui(), True)[1])
         check("No native GUI callback exceptions", lambda: not callback_errors)
         from matplotlib.figure import Figure
@@ -314,7 +321,7 @@ def run():
     destination.mkdir(parents=True, exist_ok=True)
     report = {
         "version": __version__,
-        "revision": "mac.5",
+        "revision": "mac.6",
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,
@@ -322,6 +329,7 @@ def run():
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "ui_event_timings": ui_timings,
         "stress100": native_stress,
+        "airflow": native_airflow,
         "checks": checks,
         "passed": all(item["passed"] for item in checks),
     }
