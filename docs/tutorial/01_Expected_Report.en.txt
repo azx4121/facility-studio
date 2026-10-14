@@ -10,7 +10,10 @@ Tutorial A - 96 m2 room | Design conditions / calculation summary
  Atmospheric pressure  101.325 kPa;  Summer  35°C / 70%RH;  Winter  8°C / 70%RH;  Room  22°C / 50 %RH (exact target).
 A zone 96.0 m² / 288.0 m³; ACH  Demand  1728.0 CMH; cleanliness record  None .
 B zone 0.0 m² / 0.0 m³; ACH  Demand  0.0 CMH; cleanliness record  None .
- Makeup outdoor-air minimum 192.00 CMH;  Adopted 192.00 CMH;  Additional  Relief demand  0.00 CMH (both at room conditions).
+ Current replacement OA minimum 192.00 CMH;  Operating  OA 192.00 CMH (room reference) .
+ Current exhaust 0.00 CMH (nominal duct flows plus PV 0.00 CMH; duct allowance 5.0 %); target leakage 0.00 /  Specified  PRD 0.00 CMH.
+ Future additional exhaust / leakage allowance 0.00 CMH; OA demand safety allowance 0.0 %; design OA demand including allowance 192.00 CMH.
+ Operating OA - current exhaust = available pressurization / outward flow 192.00 CMH; additional outward / relief flow after target leakage / PRD 192.00 CMH.
  lighting  25  luminaires  / 1.000 kW;  Room  Sensible heat  7.870 kW; reference latent load 0.440 kW; moisture generation 0.633 kg/h.
  Moisture sources: occupants 0.633 + additional process 0.000 kg/h; process input method:  No additional moisture  . Outdoor moisture is calculated at the coils, not added again to the room.
  2. HVAC duties and states
