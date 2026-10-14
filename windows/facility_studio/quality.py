@@ -24,10 +24,34 @@ def assess_main(r):
     i = r.get("effective_inputs", r["project"]["inputs"])
     f = lambda k: float(i[k])
     items = []
+    balance = r.get("oa_balance")
+    if balance and i["sys_type"].startswith("MAU"):
+        capacity = balance["capacity_cmh"]
+        required = balance["design_required_cmh"]
+        finding(
+            items, "MAU 最大外氣能力",
+            ("待資料" if not capacity else "通過" if capacity + 1e-6 >= required else "未達"),
+            f"運轉 OA {balance['operating_cmh']:.2f} CMH；含預留的設計需求 {required:.2f} CMH；最大可用 {capacity:.2f} CMH（0 表示未知）。",
+            "oa_capacity_cmh",
+        )
+        pressure_target = any(
+            zone["area"] > 0 and f("en_p_" + name) > 0
+            for name, zone in r["zones"].items()
+        )
+        pressure_status = (
+            "未達" if balance["net_offset_cmh"] + 1e-6 < balance["target_outflow_cmh"]
+            else "待資料" if pressure_target and balance["target_outflow_cmh"] <= 1e-6
+            else "通過"
+        )
+        finding(
+            items, "OA 補償與正壓必要條件", pressure_status,
+            f"運轉 OA－目前排氣＝{balance['net_offset_cmh']:.2f} CMH；目標洩漏／PRD {balance['target_outflow_cmh']:.2f} CMH。僅核對風量收支，實際壓差仍需氣密、風機曲線與平衡實測。",
+            "en_manual_oa",
+        )
     dcc_kw = r.get("dcc_design_kw", r["dcc_kw"])
     if dcc_kw > 1e-08:
         flow = (
-            r["circulation_cmh"]
+            (r["ffu_airflow"]["return_cmh"] if r.get("ffu_airflow") else r["circulation_cmh"])
             if i["dcc_airflow_mode"] == "沿用 FFU 循環"
             else f("dcc_airflow_cmh")
         )
@@ -65,21 +89,31 @@ def assess_main(r):
             f"供／回水 {tw:g}/{tw + f('dt_dccw'):g}°C，回水須低於 {tin:g}°C 入風。",
             "dt_dccw",
         )
-    for season in ["summer", "winter"]:
+    seasons = [(r["summer"], "夏季"), (r["winter"], "冬季")]
+    if r.get("mau_design"):
+        seasons.extend([
+            (r["mau_design"]["summer"], "MAU 設計夏季"),
+            (r["mau_design"]["winter"], "MAU 設計冬季"),
+        ])
+        if r["mau_design"]["room_overcool_kw"] > 1e-6:
+            finding(
+                items, "MAU 設計風量室內控制", "待資料",
+                "最大外氣在目前送風溫度下超過室內顯熱需求，需提高送風溫度或另設溫度控制；設計盤管需求不代表此工況室內已達標。",
+                "mau_supply_t",
+            )
+    for season, title in seasons:
         for tag, water, delta in [
             ("c1", "chw1_in", "chw1_dt"),
             ("c2", "chw2_in", "dt_chw"),
         ]:
-            c = r[season][tag]
+            c = season[tag]
             if c["air_kw"] <= 1e-08:
                 continue
             tout = f(water) + f(delta)
             ta = c["inlet"]["t"]
             finding(
                 items,
-                ("夏季" if season == "summer" else "冬季")
-                + c["name"]
-                + " 回水必要條件",
+                title + c["name"] + " 回水必要條件",
                 "通過" if tout < ta else "未達",
                 f"回水 {tout:g}°C；入口空氣 {ta:.2f}°C。水量公式成立仍須滿足換熱溫差。",
                 delta,
@@ -257,3 +291,4 @@ def assess_ahu(r):
         "名目 RT／kW 與必要條件檢核不能替代同工況盤管、風機與加濕設備性能。",
     )
     return assessment(items)
+

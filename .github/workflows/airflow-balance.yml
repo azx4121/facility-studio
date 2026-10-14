@@ -1,0 +1,47 @@
+name: MAU OA and FFU balance checks
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/airflow-balance.yml
+      - windows/facility_studio/**
+      - macos/facility_studio/**
+      - windows/tests/airflow*
+      - macos/tests/airflow*
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  airflow:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-2022
+            source: windows
+          - runner: macos-15
+            source: macos
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 15
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.13.15'
+      - name: Airflow physics, legacy migration and existing regressions
+        shell: bash
+        run: |
+          set -e
+          python ${{ matrix.source }}/tests/airflow_balance.py
+          python ${{ matrix.source }}/tests/regression.py
+          python ${{ matrix.source }}/tests/v560_features.py
+          python ${{ matrix.source }}/tests/bilingual.py
+      - name: Native Tk OA form interaction
+        shell: bash
+        run: python ${{ matrix.source }}/tests/airflow_gui.py

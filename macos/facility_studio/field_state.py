@@ -17,7 +17,7 @@ def main_inactive(i):
 
     system = i.get("sys_type", "")
     if not system.startswith("MAU"):
-        disable("mau_supply_t en_dcc_rt ffu_cmh ffu_w dccw_in dccw_dp_margin dcc_airflow_mode dcc_airflow_cmh dcc_air_approach".split(), "本模式不使用 MAU／DCC／FFU")
+        disable("mau_supply_t en_dcc_rt ffu_cmh ffu_w ffu_flow_basis ffu_oa_route oa_capacity_cmh dccw_in dccw_dp_margin dcc_airflow_mode dcc_airflow_cmh dcc_air_approach".split(), "本模式不使用 MAU／DCC／FFU")
     elif i.get("dcc_airflow_mode") != "獨立 DCC 循環":
         disable(["dcc_airflow_cmh"], "沿用 FFU 循環風量")
     if not system.startswith("FCU"):
@@ -170,3 +170,4 @@ def error_text(error, fields=FIELDS):
     key = getattr(error, "field_name", None)
     label = fields.get(key, {}).get("label", key or "設計條件")
     return f"{label}：{error}"
+

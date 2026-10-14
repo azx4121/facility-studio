@@ -174,7 +174,8 @@ def run_checks():
     old['provenance'] = {k: v for k,v in old['provenance'].items() if k in V556_INPUT_KEYS}
     untouched = copy.deepcopy(old)
     migrated = migrate_project(old)
-    check('V5510 project migrates without mutation', old == untouched and migrated['schema_version'] == 11 and set(migrated['inputs']) == set(FIELDS))
+    from .schema import SCHEMA_VERSION
+    check('V5510 project migrates without mutation', old == untouched and migrated['schema_version'] == SCHEMA_VERSION and set(migrated['inputs']) == set(FIELDS))
     check('Migration preserves every engineering input', all(migrated['inputs'][k] == v for k,v in old['inputs'].items()))
     check('Migration full calculation', bool(calculate(old)))
     check('Repeated migration is deterministic', migrate_project(old) == migrated)
@@ -270,3 +271,4 @@ def run_ui(root, app, main, check, pump):
         root.geometry(original_geometry)
         app.show_tool(original_tool)
         pump()
+
