@@ -23,7 +23,7 @@ def ahu_requirement_updates(main_result):
         "c2_out": str(float(i["chw2_in"]) + float(i["dt_chw"])),
     }
     for season in ["summer", "winter"]:
-        ch = r[season]
+        ch = r["mau_design"][season] if r.get("mau_design") else r[season]
         sa = ch["supply"]
         enter = ch["enter"]
         updates.update(
@@ -170,3 +170,4 @@ def compare_results(a, b):
         hash_a=a["hash"],
         hash_b=b["hash"],
     )
+

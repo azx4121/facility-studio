@@ -2262,3 +2262,79 @@ TEXT.update({
     "目前無氣體流量需求，流速只保留為草稿":
         "No gas flow demand; velocity is retained as a draft.",
 })
+
+# Separate MAU capability, operating OA and FFU supply / return flows.
+TEXT.update(
+{
+    "MAU 設計夏季": "MAU design summer",
+    " kW；二段水側 ": " kW; second-stage water side ",
+    "MAU 設計冬季": "MAU design winter",
+    "MAU 設計風量室內控制": "Room control at MAU design flow",
+    "最大外氣在目前送風溫度下超過室內顯熱需求，需提高送風溫度或另設溫度控制；設計盤管需求不代表此工況室內已達標。": "Maximum OA at the current supply temperature exceeds room sensible demand. Raise supply temperature or provide temperature control; coil sizing does not establish room compliance at this duty.",
+    "MAU 另核最大／未來設計風量 ": "Separately checked maximum / future MAU design flow ",
+    " CMH；與正常運轉工況分開。": " CMH; separate from normal operating duty.",
+    "MAU 設計夏季：一段水側 ": "MAU design summer: first-stage water side ",
+    "MAU 設計冬季：加熱 ": "MAU design winter: heating ",
+    "設備設計取各工況較大需求：一段 ": "Equipment sizing takes the largest duty: first stage ",
+    " RT；二段 ": " RT; second stage ",
+    " RT（含容量餘裕）。": " RT (including capacity allowance).",
+    "最大風量工況沿用明列室內熱濕負荷與送風控制；未來新增製程熱濕負荷須另填。": "Maximum-flow duty retains entered room heat/moisture loads and supply controls. Enter additional future process heat/moisture loads separately."
+}
+)
+TEXT.update(
+{
+    " 區空間／風量需求": " zone space / airflow demand",
+    "運轉 OA（0＝自動計算）": "Operating OA (0 = calculate automatically)",
+    "MAU 最大可用 OA（0＝未知）": "Maximum available MAU OA (0 = unknown)",
+    "未來新增排氣／洩漏預留": "Future additional exhaust / leakage allowance",
+    "外氣需求安全餘裕": "OA demand safety allowance",
+    "FFU 風量需求基準": "FFU airflow demand basis",
+    "MAU 外氣送風路徑": "MAU outdoor air supply route",
+    "總送風（含外氣）": "Total supply (including OA)",
+    "回風循環（外氣另加）": "Return-air recirculation (add OA)",
+    "外氣經 FFU": "OA through FFUs",
+    "外氣獨立送入室內": "OA supplied directly to the room",
+    "外氣 OA 設計與 MAU 能力": "Outdoor air design and MAU capability",
+    "填本工況實際供入室內的外氣；不是排氣量，也不是 MAU 最大能力。0 依目前排氣、洩漏、人員及除濕需求自動求量。": "Enter operating outdoor air delivered to the room, not exhaust flow or maximum MAU capability. Zero calculates current exhaust, leakage, personnel and dehumidification demand.",
+    "填同工況可用的最大外氣；例如 58000。用於容量及 FFU 最不利外氣檢核，不會強迫 MAU 全量運轉。0 保留待補資料。": "Enter maximum OA available at this duty, e.g. 58000. Used for capacity and worst-case FFU OA sizing; does not force full-flow operation. Zero remains unknown.",
+    "只填尚未包含在目前排氣／洩漏中的新增量；用於未來容量檢核，不當成目前實際排氣。": "Enter only additional future flow not included in current exhaust or leakage. Used for future capacity checks, not as current operating exhaust.",
+    "未來設計 OA＝max(目前排氣＋目標洩漏／PRD＋未來新增量, 人員需求)×(1＋餘裕)。排氣風管已加的餘裕會先明列。": "Future OA demand = max(current exhaust + target leakage / PRD + future additional flow, personnel demand) x (1 + allowance). Existing exhaust-duct allowances are shown separately.",
+    "總送風 ACH 已含經 FFU 的外氣；回風 ACH 則需另加經 FFU 的最不利外氣。FFU 台數不再扣一次排氣。": "Total-supply ACH includes OA through FFUs. Return-air ACH adds worst-case OA through FFUs. Do not subtract exhaust again from FFU count.",
+    "外氣經 FFU：FFU 送風＝回風＋OA。獨立送入室內：FFU 僅處理自身循環，不加這股 OA；不推定獨立 OA 的潔淨送風認證。": "OA through FFUs: FFU supply = return air + OA. Direct room OA: FFUs handle their own recirculation; do not add that OA or assume certified clean-air delivery.",
+    "沿用 FFU 循環時，DCC 採回風端配置，使用扣除經 FFU 外氣後的最小回風量。混風後盤管請另填獨立風量及同工況性能。": "Shared FFU circulation assumes DCCs on the return side and uses minimum return flow after subtracting OA through FFUs. For mixed-air coils, enter independent airflow and performance at that duty.",
+    "截面風速是 FFU 送風需求，請採總送風基準；回風循環基準只適用 ACH。": "Face velocity defines FFU supply demand; select total-supply basis. Return-air recirculation basis applies only to ACH.",
+    "V5.6 OA 修正前欄位或來源不完整，不能自動移轉": "Pre-correction V5.6 inputs or provenance are incomplete; migration refused.",
+    "OA 移轉：保留指定運轉外氣；最大能力未知，FFU 原需求採總送風基準。": "OA migration: preserved specified operating OA; maximum capacity remains unknown and historical FFU demand uses total-supply basis.",
+    "MAU 最大外氣能力": "Maximum MAU outdoor air capability",
+    "OA 補償與正壓必要條件": "OA replacement and pressurization prerequisites",
+    " CMH；含預留的設計需求 ": " CMH; design demand including allowance ",
+    " CMH；最大可用 ": " CMH; maximum available ",
+    " CMH（0 表示未知）。": " CMH (0 means unknown).",
+    " CMH；目標洩漏／PRD ": " CMH; target leakage / PRD ",
+    " CMH。僅核對風量收支，實際壓差仍需氣密、風機曲線與平衡實測。": " CMH. Airflow balance only; actual pressure requires airtightness, fan curves and measured balancing.",
+    "目前補償外氣下限 ": "Current replacement OA minimum ",
+    "目前排氣 ": "Current exhaust ",
+    " CMH（風管名目量與 PV 合計 ": " CMH (nominal duct flows plus PV ",
+    " CMH，風管餘裕 ": " CMH; duct allowance ",
+    "%）；目標洩漏 ": "%); target leakage ",
+    "未來新增排氣／洩漏預留 ": "Future additional exhaust / leakage allowance ",
+    " CMH；外氣需求安全餘裕 ": " CMH; OA demand safety allowance ",
+    "%；含預留的設計 OA 需求 ": "%; design OA demand including allowance ",
+    "MAU 最大可用 OA ": "Maximum available MAU OA ",
+    " CMH（0 表示未知；容量上限不當成運轉量）。": " CMH (0 means unknown; a capacity limit is not an operating flow).",
+    "運轉 OA－目前排氣＝可用正壓／外流量 ": "Operating OA - current exhaust = available pressurization / outward flow ",
+    " CMH；扣除目標洩漏／PRD 後，額外外流或洩壓需求 ": " CMH; additional outward / relief flow after target leakage / PRD ",
+    "MAU 處理運轉外氣。": "MAU conditions operating OA.",
+    "FFU 基準：": "FFU basis: ",
+    "；空間風量需求 ": "; room airflow demand ",
+    "FFU 設計總送風 ": "FFU design total supply ",
+    " CMH；其中最不利經 FFU 外氣 ": " CMH; worst-case OA through FFUs ",
+    " CMH；回風設計下限 ": " CMH; minimum design return air ",
+    "本工況經 FFU 外氣 ": "Operating OA through FFUs ",
+    " CMH；按設計 FFU 送風的回風量 ": " CMH; return air at design FFU supply ",
+    " CMH。FFU 台數＝向上取整(設計總送風／單台同工況風量)，不再扣除排氣。": " CMH. FFU count = ceil(design supply / unit airflow at this duty); do not subtract exhaust again.",
+    "先選系統與風量需求基準；運轉 OA、MAU 最大能力與未來預留分開輸入，FFU 台數依外氣路徑計算。": "Select the system and airflow basis. Enter operating OA, maximum MAU capability and future allowance separately; size FFUs for the OA route.",
+    "自動參考：一／二段 ADP 裕度 1 K、露點裕度 1 K。MAU 最大 OA 不當成運轉量；FFU 送風與回風分列，DCC 沿用模式採回風端。正壓由 OA 與排氣／洩漏收支檢核。": "References: 1 K ADP approaches and dew-point margin. MAU maximum OA is not operating flow. FFU supply and return are separate; shared DCCs assume return-side placement. Check OA against exhaust and leakage for pressurization."
+}
+)
+

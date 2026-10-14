@@ -135,15 +135,10 @@ def reference_design(project):
         zones[z] = dict(area=area, volume=volume, cmh=circulation, leak=leak)
     area = sum(x['area'] for x in zones.values())
     circulation = sum(x['cmh'] for x in zones.values())
-    ffu = math.ceil(circulation/n('ffu_cmh')-1e-12)
     lighting_qty = math.ceil(n('light_lux')*area/(n('light_lm')*n('light_u')*n('light_m'))-1e-12)
     gross = n('eq_kw')*n('eq_rt')/100
     pcw = n('pcw_n')*n('pcw_lpm')/60000*n('water_rho')*n('water_cp')*n('pcw_dt')
     net = gross - pcw - gross*n('exh_ratio')/100
-    internal = net+people*n('people_sensible_w')/1000+lighting_qty*n('light_w')/1000+n('oven_kw')+n('fan_room_kw')+ffu*n('ffu_w')/1000
-    factor = .001 if i['u_unit']=='W/(m²·K)' else 4.1868/3600
-    summer_qs = internal+n('en_wall')*n('wall_u')*(n('oa_t')-n('ra_t'))*factor+n('en_floor')*n('floor_u')*(n('floor_adj_t')-n('ra_t'))*factor+n('solar_kw')
-    winter_qs = internal*n('winter_gain_ratio')/100+n('en_wall')*n('wall_u')*(n('ow_t')-n('ra_t'))*factor+n('en_floor')*n('floor_u')*(n('winter_floor_adj_t')-n('ra_t'))*factor+n('winter_solar_kw')
     moist = people*n('people_latent_w')/1000/2501
     if i['latent_mode']=='已知產濕量 kg/h':
         moist += n('process_moisture_kg_h')/3600
@@ -159,10 +154,29 @@ def reference_design(project):
     min_mass = (n('en_manual_oa') or minimum)/room['v_da']/3600
     need_mass = moist/(room['w']-minw) if room['w'] > minw else math.inf
     mass = min_mass if n('en_manual_oa') else max(min_mass,need_mass*1.05)
+    # Incompatible ADP cases are rejected before airflow/capacity checks;
+    # keep a finite compensation-only placeholder for their manifest witness.
+    operating_oa = (mass if math.isfinite(mass) else min_mass)*room['v_da']*3600
+    design_oa = max(sum(x['leak'] for x in zones.values())+n('prd_q')+exhaust+pv+n('oa_future_cmh'),
+                    people*n('oa_per_person'))*(1+n('oa_reserve_pct')/100)
+    oa_through_ffu = (max(operating_oa,design_oa,n('oa_capacity_cmh'))
+                      if i['ffu_oa_route']=='外氣經 FFU' else 0)
+    ffu_supply = (circulation+oa_through_ffu if i['ffu_flow_basis']=='回風循環（外氣另加）'
+                  else max(circulation,oa_through_ffu))
+    # Plenum mass balance: only returned room air crosses the return-path DCC.
+    # Derive this from independent room-basis OA, never the application's helper.
+    ffu_return = max(0,ffu_supply-oa_through_ffu)
+    ffu = math.ceil(ffu_supply/n('ffu_cmh')-1e-12)
+    internal = net+people*n('people_sensible_w')/1000+lighting_qty*n('light_w')/1000+n('oven_kw')+n('fan_room_kw')+ffu*n('ffu_w')/1000
+    factor = .001 if i['u_unit']=='W/(m²·K)' else 4.1868/3600
+    summer_qs = internal+n('en_wall')*n('wall_u')*(n('oa_t')-n('ra_t'))*factor+n('en_floor')*n('floor_u')*(n('floor_adj_t')-n('ra_t'))*factor+n('solar_kw')
+    winter_qs = internal*n('winter_gain_ratio')/100+n('en_wall')*n('wall_u')*(n('ow_t')-n('ra_t'))*factor+n('en_floor')*n('floor_u')*(n('winter_floor_adj_t')-n('ra_t'))*factor+n('winter_solar_kw')
     return dict(room=room,zones=zones,circulation=circulation,ffu=ffu,
+                ffu_supply_cmh=ffu_supply,ffu_return_cmh=ffu_return,
                 lighting_qty=lighting_qty,internal=internal,pcw_kw=pcw,
                 summer_qs=summer_qs,winter_qs=winter_qs,moisture=moist,
                 nominal_exhaust_cmh=nominal_exhaust,exhaust_cmh=exhaust,
+                extra_relief_cmh=max(0,operating_oa-exhaust-pv-sum(x['leak'] for x in zones.values())-n('prd_q')),
                 minimum_oa_cmh=minimum,min_w=minw,min_mass=min_mass,
                 necessary_mass=need_mass,mass=mass)
 
@@ -421,6 +435,8 @@ def engineering_checks(r,case,text):
         for k in ['area','volume','cmh','leak']: close(z+'/'+k,r['zones'][z][k],ref['zones'][z][k])
     close('circulation',r['circulation_cmh'],ref['circulation'])
     close('FFU minimum count',r['counts']['FFU'],ref['ffu'])
+    close('FFU design supply',r['ffu_airflow']['supply_cmh'],ref['ffu_supply_cmh'])
+    close('DCC available return',r['ffu_airflow']['return_cmh'],ref['ffu_return_cmh'])
     close('lighting minimum count',r['light']['qty'],ref['lighting_qty'])
     close('room sensible demand',r['qs'],ref['summer_qs'])
     close('room generated moisture',r['moisture'],ref['moisture'])
@@ -429,7 +445,7 @@ def engineering_checks(r,case,text):
     close('adopted dry-air mass',r['oa_mass'],ref['mass'])
     close('room referenced OA',r['oa_room_cmh'],ref['mass']*ref['room']['v_da']*3600)
     check('OA meets compensation',r['oa_room_cmh']+1e-7>=ref['minimum_oa_cmh'])
-    close('additional relief',r['extra_relief_cmh'],max(0,r['oa_room_cmh']-ref['minimum_oa_cmh']))
+    close('additional relief',r['extra_relief_cmh'],ref['extra_relief_cmh'])
     room=r['room']
     for s in [room,r['oa'],r['winter_oa']]:
         independent=reference_state(s['t'],s['rh'],p)
@@ -462,11 +478,13 @@ def engineering_checks(r,case,text):
     close('winter C1 bypass',wm['c1']['air_kw'],0)
     close('DCC both seasons design',r['dcc_design_kw'],max(r['dcc_kw'],wr['dcc_kw']))
     close('DCC minimum count',r['counts']['DCC'],math.ceil(r['dcc_design_kw']*(1+n('sf')/100)/r['rt_kw']/n('en_dcc_rt')-1e-12))
-    flow=ref['circulation'] if i['dcc_airflow_mode']=='沿用 FFU 循環' else n('dcc_airflow_cmh')
+    flow=ref['ffu_return_cmh'] if i['dcc_airflow_mode']=='沿用 FFU 循環' else n('dcc_airflow_cmh')
     dcc_limit=flow/3600/ref['room']['v_da']*(1.006+1.86*room['w'])*max(0,room['t']-n('dccw_in')-n('dcc_air_approach'))
     expected_air_pass=flow>0 and r['dcc_design_kw']<=dcc_limit+1e-6
     air_item=next(x for x in r['quality']['items'] if x['name']=='DCC 循環風量與能力')
-    check('DCC insufficient airflow retained',air_item['status']==('通過' if expected_air_pass else '未達'))
+    check('DCC insufficient airflow retained',air_item['status']==('通過' if expected_air_pass else '未達'),
+          dict(case_id=case['id'],return_cmh=flow,capacity_kw=dcc_limit,
+               demand_kw=r['dcc_design_kw'],actual=air_item['status']))
     for key,w in r['water'].items():
         fluid=w['fluid_properties']
         if w['linked']:
@@ -631,3 +649,4 @@ args.output.write_text(json.dumps(dict(summary=summary,cases=results,checks=chec
                        encoding='utf-8', newline='\n')
 print(json.dumps(summary,ensure_ascii=False),flush=True)
 sys.exit(0 if summary['software_failed']==0 and summary['failed_checks']==0 and summary['partial_report_api_guard_failures']==0 else 1)
+

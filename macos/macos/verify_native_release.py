@@ -105,7 +105,7 @@ def main():
         ],
         check=True,
     )
-    app = output / "extracted/Facility_Studio_V5_6_0_macOS_mac5/Facility Studio.app"
+    app = output / "extracted/Facility_Studio_V5_6_0_macOS_mac6/Facility Studio.app"
     with (output / "Apple_Signature.txt").open("w") as file:
         subprocess.run(
             [
@@ -131,7 +131,15 @@ def main():
         )
     path = Path.home() / "Library/Logs/Facility_Studio_V5_5/Mac_Acceptance.json"
     result = json.loads(path.read_text(encoding="utf-8"))
-    assert result["passed"] and result["architecture"] == platform.machine()
+    assert (
+        result["passed"] and result["architecture"] == platform.machine()
+        and result.get("revision") == "mac.6"
+        and result.get("airflow", {}).get("passed")
+        and result["airflow"]["tests_run"] == 19
+        and result["airflow"]["physical_cases"] == 100
+        and any(item["name"] == "OA FFU native 2050 units zh-Hant"
+                and item["passed"] for item in result["checks"])
+    )
     (output / "Mac_Acceptance.json").write_text(
         json.dumps(result, ensure_ascii=False, indent=2)
     )

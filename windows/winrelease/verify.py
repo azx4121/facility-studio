@@ -97,6 +97,12 @@ def check_exe(exe, output, label, block_firewall=True):
                 not data["passed"]
                 or not data["frozen"]
                 or not data["offline_network_audit"]
+                or data.get("revision") != "win.4"
+                or not data.get("airflow", {}).get("passed")
+                or data["airflow"]["tests_run"] != 19
+                or data["airflow"]["physical_cases"] != 100
+                or not any(item["name"] == "OA FFU native 2050 units zh-Hant"
+                           and item["passed"] for item in data["checks"])
             ):
                 raise RuntimeError("Frozen Windows acceptance did not pass")
             for name in (

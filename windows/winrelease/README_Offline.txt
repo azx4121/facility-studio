@@ -9,10 +9,13 @@ DESIGNED BY ANDY HUANG ©
 七個快算直接列於左側；水管自動選型至24吋，先選符合水速的單管。
 氣體快算與工作台共同提供50種廠務氣體及自訂／混合氣，新增氣體需填設計流速。
 本修訂保留重選同種製程氣體的已填流速；切換到不同新增氣體須重新填寫。
+win.4 分開正常運轉 OA、MAU 最大能力、未來排氣／洩漏預留與安全餘裕。
+FFU 可明選總送風 ACH 或回風 ACH＋外氣；排氣用於外氣收支，不重複扣除 FFU 送風。
+盤管、水量及空調箱連動另核最大 OA 工況；舊案指定外氣保留運轉意義，最大能力待填。
 
 下載與開啟
 目前公開下載為 EXE：
-https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.3/Facility_Studio_V5_6_0_Windows_Offline.exe
+https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.4/Facility_Studio_V5_6_0_Windows_Offline.exe
 儲存後雙擊開啟，第一次請等候內建環境展開。不需另裝 Python 或管理員權限。
 Windows 10／11 Intel／AMD x64 為支援目標；原生驗收為 Windows Server 2022／2025 x64。
 本版尚無正式發行者簽章。首次安全提示說明：

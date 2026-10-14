@@ -13,7 +13,7 @@ def report(r):
     required = {"gas": ("1", "2", "3", "4"), "electric": ("UP", "NP")}
     report_keys = set("project effective_inputs quality sf summer winter zones light "
                       "minimum_oa_cmh oa_room_cmh extra_relief_cmh qs ql moisture latent "
-                      "supply_room_cmh circulation_cmh room rt_kw dcc_kw counts water "
+                      "supply_room_cmh circulation_cmh oa_balance ffu_airflow mau_design room rt_kw dcc_kw counts water "
                       "pressure ducts gas electric upw warnings dcc_design_kw".split())
     if not isinstance(r, dict) or not report_keys <= r.keys() or any(
         not isinstance(r.get(domain), dict)
@@ -69,9 +69,13 @@ def report(r):
         a(
             f"{z} 區 {d['area']:.1f} m²、{d['volume']:.1f} m³；{i['mode_' + z]} 需求 {d['cmh']:.1f} CMH；潔淨紀錄 {i['c_' + z.lower()]}。"
         )
-    a(
-        f"補償外氣下限 {r['minimum_oa_cmh']:.2f} CMH；採用 {r['oa_room_cmh']:.2f} CMH；额外洩壓需求 {r['extra_relief_cmh']:.2f} CMH（均以室內狀態基準）。"
-    )
+    b = r["oa_balance"]
+    a(f"目前補償外氣下限 {r['minimum_oa_cmh']:.2f} CMH；運轉 OA {r['oa_room_cmh']:.2f} CMH（室內基準）。")
+    a(f"目前排氣 {b['exhaust_cmh']:.2f} CMH（風管名目量與 PV 合計 {b['nominal_exhaust_cmh']:.2f} CMH，風管餘裕 {b['exhaust_margin_pct']:.1f}%）；目標洩漏 {b['target_leakage_cmh']:.2f}、指定 PRD {b['target_relief_cmh']:.2f} CMH。")
+    a(f"未來新增排氣／洩漏預留 {b['future_cmh']:.2f} CMH；外氣需求安全餘裕 {b['reserve_pct']:.1f}%；含預留的設計 OA 需求 {b['design_required_cmh']:.2f} CMH。")
+    if i["sys_type"].startswith("MAU"):
+        a(f"MAU 最大可用 OA {b['capacity_cmh']:.2f} CMH（0 表示未知；容量上限不當成運轉量）。")
+    a(f"運轉 OA－目前排氣＝可用正壓／外流量 {b['net_offset_cmh']:.2f} CMH；扣除目標洩漏／PRD 後，額外外流或洩壓需求 {b['extra_outflow_cmh']:.2f} CMH。")
     a(
         f"照明 {r['light']['qty']} 盞／{r['light']['kw']:.3f} kW；室內顯熱 {r['qs']:.3f} kW；潛熱參考 {r['ql']:.3f} kW；產濕 {r['moisture'] * 3600:.3f} kg/h。"
     )
@@ -82,9 +86,20 @@ def report(r):
     a(
         f"一段供水 {i['chw1_in']}°C／ΔT {i['chw1_dt']} K；二段 {i['chw2_in']}°C／ΔT {i['dt_chw']} K；DCCW {i['dccw_in']}°C／ΔT {i['dt_dccw']} K；容量餘裕 {i['sf']}%。"
     )
-    a(
-        f"處理風量 {r['supply_room_cmh']:.2f} CMH（室內基準）；{('FFU 循環另計 ' + format(r['circulation_cmh'], '.2f') + ' CMH' if i['sys_type'].startswith('MAU') else '外氣於空調入口混合')}。"
-    )
+    a(f"處理風量 {r['supply_room_cmh']:.2f} CMH（室內基準）；" + ("MAU 處理運轉外氣。" if i["sys_type"].startswith("MAU") else "外氣於空調入口混合。"))
+    if r["ffu_airflow"]:
+        f = r["ffu_airflow"]
+        a(f"FFU 基準：{f['basis']}；路徑：{f['route']}；空間風量需求 {f['requested_cmh']:.2f} CMH。")
+        a(f"FFU 設計總送風 {f['supply_cmh']:.2f} CMH；其中最不利經 FFU 外氣 {f['oa_through_design_cmh']:.2f} CMH；回風設計下限 {f['return_cmh']:.2f} CMH。")
+        a(f"本工況經 FFU 外氣 {f['oa_through_operating_cmh']:.2f} CMH；按設計 FFU 送風的回風量 {f['operating_return_cmh']:.2f} CMH。FFU 台數＝向上取整(設計總送風／單台同工況風量)，不再扣除排氣。")
+    if r["mau_design"]:
+        d = r["mau_design"]
+        ds, dw = d["summer"], d["winter"]
+        a(f"MAU 另核最大／未來設計風量 {d['oa_cmh']:.2f} CMH；與正常運轉工況分開。")
+        a(f"MAU 設計夏季：一段水側 {ds['c1']['water_kw']:.3f} kW；二段水側 {ds['c2']['water_kw']:.3f} kW；再熱 {ds['reheat_kw']:.3f} kW。")
+        a(f"MAU 設計冬季：加熱 {dw['reheat_kw']:.3f} kW；加濕 {dw['humid_kg_h']:.3f} kg/h。")
+        a(f"設備設計取各工況較大需求：一段 {r['water']['MCHW']['load_kw'] / r['rt_kw']:.3f} RT；二段 {r['water']['CHW']['load_kw'] / r['rt_kw']:.3f} RT（含容量餘裕）。")
+        a("最大風量工況沿用明列室內熱濕負荷與送風控制；未來新增製程熱濕負荷須另填。")
     a("點位             乾球°C    RH%       w(g/kg乾空氣)       h(kJ/kg乾空氣)")
     for title, state in [
         ("入口", s["enter"]),
@@ -398,3 +413,4 @@ def nm_report(r):
         if q["status"] != "通過":
             header += "[" + q["status"] + "] " + q["name"] + "：" + q["detail"] + "\n"
     return header + s + "\n".join(extra).replace("需求点", "需求點") + "\n"
+

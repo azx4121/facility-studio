@@ -2,7 +2,7 @@ name: Build and verify offline Windows EXE
 
 on:
   push:
-    branches: [main, feature/bilingual-ui, maintenance/windows-offline, codex/v5.5.7-usability-sync]
+    branches: [main, feature/bilingual-ui, maintenance/windows-offline, codex/v5.5.7-usability-sync, codex/mau-oa-ffu-balance-20261014]
     paths:
       - .github/workflows/windows-offline-release.yml
       - windows/winrelease/**
@@ -57,6 +57,7 @@ jobs:
           Invoke-CheckedPython windows/tests/v559_resilience.py
           Invoke-CheckedPython windows/tests/v5510_keypad.py
           Invoke-CheckedPython windows/tests/v560_features.py
+          Invoke-CheckedPython windows/tests/airflow_balance.py
           Invoke-CheckedPython windows/tests/stress100.py --output "$env:RUNNER_TEMP/win-native-stress-source.json"
           Invoke-CheckedPython tools/verify_stress_io.py
           Invoke-CheckedPython tools/cleanroom100_stress.py --source . --platform windows --manifest "$env:RUNNER_TEMP/cleanroom100.json" --generate --seed 20261013
@@ -139,3 +140,4 @@ jobs:
           FACILITY_GITHUB_TOKEN: ${{ github.token }}
           FACILITY_RELEASE_COMMIT: ${{ github.sha }}
         run: python windows/winrelease/publish.py --assets "$RUNNER_TEMP/windows-offline"
+

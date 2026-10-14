@@ -56,7 +56,7 @@ This example is a **12 × 8 × 3 m general work area, 8 people, AHU outside/retu
 | --- | --- | --- |
 | 01 Shared climate: summer outdoor / room target | 35°C, 70% RH / 22°C, 50% RH | Actual design climate and room requirements; winter example is 8°C, 70% RH |
 | 02 HVAC/rooms: system / A-zone dimensions / people | Mixed AHU / 12, 8, 3 m / 8 people | Actual architecture, dimensions in m; unused zone B retains zero length, width and people |
-| 02 Airflow calculation / ACH / specified outside air | ACH / 6 per hour / 0 for automatic | ACH is circulation demand, **not all fresh air**; 6 is a practice assumption, not a general requirement |
+| 02 Airflow calculation / ACH / operating OA | ACH / 6 per hour / 0 for automatic | This example uses total-supply ACH, including mixed outdoor air; 6 is a practice assumption, not a general requirement |
 | 03 Equipment heat / operating rate / process moisture | 5 kW / 100% / No additional moisture | Heat for the same room boundary; use “Unknown” when moisture is not established |
 | 03 Lighting / wall and floor areas | 500 lux, 4000 lm and 40 W per fixture / 60 and 96 m² | Lux is the target; lumens belong to each fixture; areas are m², not m³ |
 
@@ -80,7 +80,19 @@ After restoring the original data, compare the summaries on pages 01/03 and the 
 | Linked CHW flow | 41.115 LPM | Water-side load including 10% allowance, ΔT 5 K; not the stored manual 400 LPM |
 | UP preliminary distribution | 8.937 A; NFB candidate 15 AT; 3.5 mm² per phase, one set | Separately entered 5 kW electrical input, 380 V, PF 0.85; electrical review remains pending |
 
-Begin with three formulas: `area=length×width`; `circulation CMH=volume×ACH`; `fixture count=ceil(target lux×area/(fixture lumens×utilization×maintenance))`. The full report also states thermal, moisture and piping formulas.
+Begin with three formulas: `area=length×width`; `airflow demand CMH=volume×ACH`; `fixture count=ceil(target lux×area/(fixture lumens×utilization×maintenance))`. For MAU projects, explicitly select whether FFU ACH means total supply or pure return-air recirculation.
+
+### Maximum MAU capability, operating OA and FFUs
+
+The basic form separates **Operating OA** (zero calculates current demand), **Maximum available MAU OA** (zero means unknown), **Future additional exhaust / leakage allowance**, **OA demand safety allowance**, **FFU airflow demand basis**, and **MAU outdoor air supply route**.
+
+Enter 58000 in the maximum-capability field when that is the MAU limit; it does not force full-flow operation. Additional future exhaust/leakage and its safety allowance size the future capability requirement without being treated as current exhaust. Existing manual OA values retain their operating-flow meaning during migration.
+
+If 24,900 m³ at 80 ACH means pure return air and 58,000 CMH OA passes through FFUs, supply is 1,992,000 + 58,000 = 2,050,000 CMH, or 2,050 units at 1,000 CMH per unit. Total-supply ACH already includes OA; do not add it twice. Face velocity is a total-supply requirement.
+
+Exhaust reduces available return air, not the FFU supply duty: `OA = current exhaust + target leakage/PRD + additional outward flow`. Direct room OA is not added to FFU recirculation or assumed to be certified clean-air delivery. Shared DCC airflow assumes return-side coils and uses minimum return air at worst-case OA; enter independent DCC airflow for mixed-air coils. Flows use the room-state basis. Actual pressure requires airtightness, fan curves and measured balancing. See [scope and validation](../2026-10-14-oa-ffu-balance.md).
+
+Coils, water flow and heating equipment are also checked at maximum/future OA for summer and winter, taking the largest duty instead of sizing only for small normal operating OA. Linking to a staged AHU also imports the maximum/future design duty. Peak calculations retain entered room heat/moisture loads; enter future process-load growth separately.
 
 The overview's **Process-chart season** switches summer/winter. Horizontal axis: dry bulb °C; vertical axis: humidity ratio g/kg dry air. OA is outside air, RA room air, IN inlet, C1/C2 cooling coils, HT heating and SA supply. Plotted points are **required or specified states**, not proof that unselected installed equipment achieves them. Bypassed stages can overlap; this is not a missing point.
 
@@ -191,3 +203,4 @@ Resaving an existing project preserves a `.json.bak`. An exported calculation re
 Practice verification runs **20 operation-related conditions per source platform**, including heat/moisture conservation, units, water ownership, pressure-loss scope, MAU linking and insufficient capacity. See [inputs, verifier and evidence](../tutorial/README.md). Control locations were checked against source. Native acceptance of the new tutorial entry and author credit is tracked separately; numerical checks are not described as manual testing of every UI control.
 
 For remaining problems, [report an issue](https://github.com/azx4121/facility-studio/issues) with version, platform, page, steps and synthetic input. Formal product/protection selection needs site conditions and manufacturer data. Use remains governed by the [current license guide](../../LICENSE_GUIDE.en.md), including the internal engineering-work permission.
+

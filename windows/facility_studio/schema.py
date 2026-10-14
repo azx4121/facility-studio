@@ -128,7 +128,7 @@ for z in ["A", "B"]:
     l = z.lower()
     group(
         1,
-        z + " 區空間／循環需求",
+        z + " 區空間／風量需求",
         [
             (f"c_{l}", "潔淨等級（紀錄）", "", list(CLEANROOM_DB)),
             (f"mode_{z}", "風量計算模式", "", ["ACH", "截面風速"]),
@@ -758,3 +758,37 @@ for j in (1, 2, 3):
     FIELD_HELP[f"gas{j}_name"] = "自訂／混合氣需填名稱與比例，例如5% H2／95% N2；物性與Z比依供應商資料。"
 
 UTILITY_ONLY_KEYS.update({f"gas{j}_name" for j in (1, 2, 3)})
+
+# Airflow v12: preserve v11 keys so migration never guesses whether an old
+# manual OA value was meant as an operating flow or an equipment capacity.
+V560_INPUT_KEYS = set(FIELDS)
+SCHEMA_VERSION = 12
+DEFAULTS.update(
+    oa_capacity_cmh="0", oa_future_cmh="0", oa_reserve_pct="0",
+    ffu_flow_basis="總送風（含外氣）", ffu_oa_route="外氣經 FFU",
+)
+for _page, _title, _keys in GROUPS:
+    if "en_manual_oa" in _keys:
+        _keys.remove("en_manual_oa")
+group(1, "外氣 OA 設計與 MAU 能力", [
+    ("en_manual_oa", "運轉 OA（0＝自動計算）", "室內基準 CMH", 0, 1e8),
+    ("oa_capacity_cmh", "MAU 最大可用 OA（0＝未知）", "室內基準 CMH", 0, 1e8),
+    ("oa_future_cmh", "未來新增排氣／洩漏預留", "室內基準 CMH", 0, 1e8),
+    ("oa_reserve_pct", "外氣需求安全餘裕", "%", 0, 100),
+    ("ffu_flow_basis", "FFU 風量需求基準", "", ["總送風（含外氣）", "回風循環（外氣另加）"]),
+    ("ffu_oa_route", "MAU 外氣送風路徑", "", ["外氣經 FFU", "外氣獨立送入室內"]),
+])
+_oa_group = GROUPS.pop()
+_oa_position = next(index for index, row in enumerate(GROUPS) if "sys_type" in row[2]) + 1
+GROUPS.insert(_oa_position, _oa_group)
+BASIC_KEYS.update(_oa_group[2])
+FIELD_HELP.update({
+    "en_manual_oa": "填本工況實際供入室內的外氣；不是排氣量，也不是 MAU 最大能力。0 依目前排氣、洩漏、人員及除濕需求自動求量。",
+    "oa_capacity_cmh": "填同工況可用的最大外氣；例如 58000。用於容量及 FFU 最不利外氣檢核，不會強迫 MAU 全量運轉。0 保留待補資料。",
+    "oa_future_cmh": "只填尚未包含在目前排氣／洩漏中的新增量；用於未來容量檢核，不當成目前實際排氣。",
+    "oa_reserve_pct": "未來設計 OA＝max(目前排氣＋目標洩漏／PRD＋未來新增量, 人員需求)×(1＋餘裕)。排氣風管已加的餘裕會先明列。",
+    "ffu_flow_basis": "總送風 ACH 已含經 FFU 的外氣；回風 ACH 則需另加經 FFU 的最不利外氣。FFU 台數不再扣一次排氣。",
+    "ffu_oa_route": "外氣經 FFU：FFU 送風＝回風＋OA。獨立送入室內：FFU 僅處理自身循環，不加這股 OA；不推定獨立 OA 的潔淨送風認證。",
+    "dcc_airflow_mode": "沿用 FFU 循環時，DCC 採回風端配置，使用扣除經 FFU 外氣後的最小回風量。混風後盤管請另填獨立風量及同工況性能。",
+})
+

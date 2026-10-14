@@ -10,6 +10,7 @@ from .schema import (
     V54_INPUT_KEYS,
     V55_INPUT_KEYS,
     V556_INPUT_KEYS,
+    V560_INPUT_KEYS,
     PD_DEFAULTS,
     DEFAULTS,
     FIELDS,
@@ -129,13 +130,28 @@ def migrate_project(p):
             raise InputError("V5.5.6–5.5.10欄位或來源不完整，不能自動移轉")
         p = copy.deepcopy(p)
         p["schema_version"] = 11
-        for k in set(FIELDS) - V556_INPUT_KEYS:
+        for k in V560_INPUT_KEYS - V556_INPUT_KEYS:
             p["inputs"][k] = DEFAULTS[k]
             # An absent legacy field has no observed source timestamp. Keep
             # migration deterministic so repeated calculations retain identity.
             p["provenance"][k] = {
                 "source": "舊專案輸入",
                 "note": "V5.6移轉：新增自訂氣體名稱草稿，原氣體種類與工程條件保留",
+            }
+    if isinstance(p, dict) and p.get("schema_version") == 11:
+        if (
+            set(p.get("inputs", {})) != V560_INPUT_KEYS
+            or not isinstance(p.get("provenance"), dict)
+            or set(p["provenance"]) != V560_INPUT_KEYS
+        ):
+            raise InputError("V5.6 OA 修正前欄位或來源不完整，不能自動移轉")
+        p = copy.deepcopy(p)
+        p["schema_version"] = 12
+        for k in set(FIELDS) - V560_INPUT_KEYS:
+            p["inputs"][k] = DEFAULTS[k]
+            p["provenance"][k] = {
+                "source": "舊專案輸入",
+                "note": "OA 移轉：保留指定運轉外氣；最大能力未知，FFU 原需求採總送風基準。",
             }
     return p
 
@@ -525,7 +541,8 @@ def calculate(p, isolate_utilities=False):
         leak += l
     circ = sum((z["cmh"] for z in zones.values()))
     is_mau = i["sys_type"].startswith("MAU")
-    ffu_count = math.ceil(circ / n("ffu_cmh") - 1e-12) if is_mau else 0
+    ffu_count = 0  # Resolve OA before FFU count and its room heat.
+    ffu_airflow = None
     gross = n("eq_kw") * n("eq_rt") / 100
     pcw_properties = water_properties(i, "pcw")
     pcw = (
@@ -585,10 +602,11 @@ def calculate(p, isolate_utilities=False):
         / (n("gas_std_t") + 273.15)
         * n("pv_room_fraction")
     )
-    minoa = max(
-        leak + n("prd_q") + sum((d["flow_cmh"] for d in ducts.values())) + pvroom,
-        ppl * n("oa_per_person"),
+    from .airflow import oa_requirements, ffu_requirements
+    oa_balance = oa_requirements(
+        i, leak, sum(d["flow_cmh"] for d in ducts.values()) + pvroom, ppl
     )
+    minoa = oa_balance["minimum_cmh"]
     manual = n("en_manual_oa")
     if manual and manual < minoa - 1e-06:
         raise InputError(
@@ -610,6 +628,13 @@ def calculate(p, isolate_utilities=False):
             )
         m = moa if manual else max(moa, needed)
         moa = m
+        operating_oa = moa * room["v_da"] * 3600
+        design_oa = max(operating_oa, oa_balance["design_minimum_cmh"])
+        ffu_airflow = ffu_requirements(i, zones, operating_oa, design_oa)
+        ffu_count = ffu_airflow["count"]
+        ffu_heat = ffu_count * n("ffu_w") / 1000
+        parts["fan"] += ffu_heat
+        qs += ffu_heat
         ts = n("mau_supply_t")
         if m == 0:
             if moist:
@@ -686,7 +711,38 @@ def calculate(p, isolate_utilities=False):
     else:
         winter = condition_air(i, winter_enter, m, room["t"], room["w"], pre=False,
                                season="winter")
-    dcc_design = max(dcc, winter_room["dcc_kw"] if winter_room else 0.0)
+    mau_design = None
+    if ffu_airflow and ffu_airflow["sizing_oa_cmh"] > moa * room["v_da"] * 3600 + 1e-6:
+        design_mass = ffu_airflow["sizing_oa_cmh"] / room["v_da"] / 3600
+        design_ws = room["w"] - moist / design_mass
+        design_summer = condition_air(i, oa, design_mass, n("mau_supply_t"), design_ws)
+        design_sensible = design_mass * (1.006 + 1.86 * design_ws) * (
+            room["t"] - n("mau_supply_t")
+        )
+        design_winter_room = None
+        if i["winter_model"] == "室內熱濕平衡（定風量）":
+            from .winter import room_targets
+            design_winter_room = room_targets(i, room, parts, design_mass, moist)
+            design_winter = condition_air(
+                i, ow, design_mass, design_winter_room["supply_t"],
+                design_winter_room["supply_w"], pre=False, season="winter",
+            )
+        else:
+            design_winter = condition_air(
+                i, ow, design_mass, room["t"], room["w"], pre=False, season="winter",
+            )
+        mau_design = dict(
+            oa_cmh=ffu_airflow["sizing_oa_cmh"], mass_da=design_mass,
+            summer=design_summer, winter=design_winter,
+            winter_room=design_winter_room, dcc_kw=max(0.0, qs - design_sensible),
+            room_overcool_kw=max(0.0, design_sensible - qs),
+        )
+    dcc_design = max(
+        dcc, winter_room["dcc_kw"] if winter_room else 0.0,
+        mau_design["dcc_kw"] if mau_design else 0.0,
+        mau_design["winter_room"]["dcc_kw"]
+        if mau_design and mau_design["winter_room"] else 0.0,
+    )
     if dcc_design > 1e-06 and n("dccw_in") < dewpoint(room["w"], n("atm_kpa")) + n(
         "dccw_dp_margin"
     ):
@@ -708,10 +764,13 @@ def calculate(p, isolate_utilities=False):
             else 0
         ),
     }
-    heat = max(summer["reheat_kw"], winter["reheat_kw"])
+    design_seasons = [summer, winter]
+    if mau_design:
+        design_seasons.extend((mau_design["summer"], mau_design["winter"]))
+    heat = max(season["reheat_kw"] for season in design_seasons)
     loads = {
-        "MCHW": max(summer["c1"]["water_kw"], winter["c1"]["water_kw"]) * sf,
-        "CHW": max(summer["c2"]["water_kw"], winter["c2"]["water_kw"]) * sf,
+        "MCHW": max(season["c1"]["water_kw"] for season in design_seasons) * sf,
+        "CHW": max(season["c2"]["water_kw"] for season in design_seasons) * sf,
         "DCCW": dcc_design * sf,
         "PCW": pcw,
         "HW": heat * sf,
@@ -831,6 +890,17 @@ def calculate(p, isolate_utilities=False):
         warn.append(
             "加熱與加濕的空氣側需求尚未自動併入 NP；請按設備型式、效率與實際輸入功率填列。"
         )
+    operating_oa = moa * room["v_da"] * 3600
+    oa_balance.update(
+        operating_cmh=operating_oa,
+        design_required_cmh=max(operating_oa, oa_balance["design_minimum_cmh"]),
+        net_offset_cmh=operating_oa - oa_balance["exhaust_cmh"],
+        extra_outflow_cmh=max(
+            0.0, operating_oa - oa_balance["exhaust_cmh"] - oa_balance["target_outflow_cmh"]
+        ),
+        nominal_exhaust_cmh=sum(d["nominal_cmh"] for d in ducts.values()) + pvroom,
+        exhaust_margin_pct=n("exhaust_margin_pct"),
+    )
     r = {
         "version": VERSION,
         "project": p,
@@ -850,7 +920,10 @@ def calculate(p, isolate_utilities=False):
         "minimum_oa_cmh": minoa,
         "oa_mass": moa,
         "oa_room_cmh": moa * room["v_da"] * 3600,
-        "extra_relief_cmh": max(0, moa * room["v_da"] * 3600 - minoa),
+        "extra_relief_cmh": oa_balance["extra_outflow_cmh"],
+        "oa_balance": oa_balance,
+        "ffu_airflow": ffu_airflow,
+        "mau_design": mau_design,
         "circulation_cmh": circ,
         "supply_room_cmh": m * room["v_da"] * 3600,
         "summer": summer,
@@ -966,3 +1039,4 @@ def gas_from_inputs(i):
     gi["pv_q"] = str(std_lpm(i["pv_q"], i["u_pv"]))
     gi["pv_torr"] = str(pv_to_torr(i["pv_torr"], i["pv_pressure_unit"]))
     return gas_result(gi, [])
+
