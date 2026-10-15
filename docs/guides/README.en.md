@@ -71,3 +71,7 @@ Facility Studio does not provide BIM modeling, full 3D clash detection or automa
 See the [licensing examples](../../LICENSE_GUIDE.en.md) for permitted use. Report a case number, version, every value/unit and expected/actual result in [Issues](https://github.com/azx4121/facility-studio/issues). Remove client secrets.
 
 [FAQ](../faq.en.md) · [Native acceptance](../2026-10-12-v5.6-native.md) · [Historical records](../history/README.md#english)
+
+## Current source revision
+
+The source tree adds cleanroom airflow, heat-load and water-pump calculators, explicit airflow topology, upstream transfers and HTML executive reports. These changes are not included in the existing binary downloads. See the [engineering audit](../2026-10-15-engineering-dashboard-audit.md) for model boundaries, compatibility and validation.

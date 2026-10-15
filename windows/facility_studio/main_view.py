@@ -64,10 +64,29 @@ class ScrollPage(ttk.Frame):
         )
 
 
+def hidden_system_equipment(system):
+    """Architecture exclusions stay hidden in both basic and advanced views.
+
+    This deliberately does not hide every inactive draft. Alternate control
+    settings remain inspectable in advanced mode and are never deleted.
+    """
+    hidden = set()
+    if not system.startswith("FCU"):
+        hidden.update(("en_fcu_cmh", "fcu_rt"))
+    if not system.startswith("RCU"):
+        hidden.add("en_rcu_rt")
+    if not system.startswith("MAU"):
+        hidden.update("mau_supply_t en_dcc_rt ffu_cmh ffu_w ffu_size ffu_topology "
+                      "ffu_airflow_basis ffu_coverage_limit_pct dccw_in dccw_dp_margin "
+                      "dcc_airflow_mode dcc_airflow_cmh dcc_air_approach".split())
+    return hidden
+
+
 class MainView:
 
     def update_visibility(self):
         advanced = self.view_mode.get() == "進階模式"
+        excluded_equipment = hidden_system_equipment(self.variables["sys_type"].get())
         all_pages = advanced or not hasattr(self, "task_scope") or self.task_scope.get() == "全部工程分頁"
         for page, button in enumerate(self.nav):
             if all_pages or page in (0, 1, 2, 8):
@@ -88,6 +107,8 @@ class MainView:
             self.show_page(0)
         for key, line in self.form_rows.items():
             visible = advanced or key in BASIC_KEYS
+            if key in excluded_equipment:
+                visible = False
             if (
                 not advanced
                 and str(self.widgets[key].cget("state")) == "disabled"

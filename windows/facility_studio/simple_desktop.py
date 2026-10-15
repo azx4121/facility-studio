@@ -1,14 +1,12 @@
 """Independent short forms are the default entry; the full workbench is optional."""
 
 from .localized_tk import tk
-from tkinter import font
 from .localized_tk import ttk, filedialog, messagebox
 
-from .errors import ValidationError
+from .errors import InputError, ValidationError
 from .gas_catalog import CUSTOM_GAS, gas_label, reference_velocity, switched_velocity
 from .tutorial_help import open_tutorial
 from .version import VERSION
-from .main_view import ScrollPage
 from .quick_tools import UNITS, UNIT_HELP
 from .air_chart import AirChart
 from .simple_engines import calculate_tool, FLOW_FACTORS, GAS_FLOW_FACTORS
@@ -18,186 +16,222 @@ from .simple_schema import TOOLS, active_field, adopted_summary, defaults
 from .ui_common import app_icon
 from .localized_tk import LanguagePicker
 from .utils import atomic_text, number
+from .industrial_theme import (Theme, ScrollableFrame, KPIFrame, ResultTable, InlineBanner,
+                               format_number, set_entry_valid)
+from .services import upstream_values
 
 
-class SimplePage(ScrollPage):
+def field_unit(spec):
+    """Keep a fixed unit column even for reference values with explanatory help."""
+    if spec.get("display_unit"):
+        return spec["display_unit"]
+    if spec["units"] or spec["options"] or spec["checkbox"]:
+        return ""
+    hint = spec["help"]
+    first = hint.split("；", 1)[0].split("，", 1)[0]
+    if len(first) <= 12 and any(unit in first for unit in
+            ("m", "W", "CMH", "Pa", "%", "°C", "LPM", "1/h", "人", "台", "K")):
+        return first
+    return {"pf": "—", "eta": "—", "efficiency": "—", "value": "",
+            "quantity": "盞", "loaded": "條", "ratio": "—"}.get(spec["key"], "")
+
+
+class SimplePage(ttk.Frame):
     def __init__(self, parent, tool, app):
         super().__init__(parent)
         self.tool, self.app = tool, app
         self.pending = None
         self.suspended = True
         self.result = None
-        self.variables = {
-            key: tk.StringVar(self, value) for key, value in defaults(tool).items()
-        }
-        self.previous = {key: var.get() for key, var in self.variables.items()}
-        self.widgets, self.rows, self.labels, self.hints = {}, {}, {}, {}
-        self.canvas.bind(
-            "<Configure>",
-            lambda event: self.canvas.itemconfigure(
-                self.win, width=max(520, event.width)
-            ),
-        )
-        self.horizontal = self.grid_slaves(row=1, column=0)[0]
-        self.canvas.configure(xscrollcommand=self.horizontal_scroll)
+        self.upstream_sources = set()
+        self.upstream_keys = set()
+        self.upstream_stale = False
+        self.variables = {key: tk.StringVar(self, value) for key, value in defaults(tool).items()}
+        self.previous = self.data()
+        self.widgets, self.rows, self.labels, self.hints, self.unit_labels = {}, {}, {}, {}, {}
+        self.columnconfigure(0, weight=2, minsize=Theme.px(365))
+        self.columnconfigure(1, weight=3)
+        self.rowconfigure(0, weight=1)
+        self.input_scroll = ScrollableFrame(self)
+        self.input_scroll.grid(row=0, column=0, sticky="nsew")
+        self.output_scroll = ScrollableFrame(self)
+        self.output_scroll.grid(row=0, column=1, sticky="nsew")
+        self.canvas, self.body, self.win = self.input_scroll.canvas, self.input_scroll.body, self.input_scroll.item
         self.advanced = tk.BooleanVar(self, False)
         self.body.columnconfigure(0, weight=1)
-        self.body.columnconfigure(1, weight=1)
-        ttk.Label(
-            self.body, text=TOOLS[tool]["title"], style="Simple.Title.TLabel"
-        ).grid(row=0, column=0, columnspan=2, sticky="w")
-        self.subtitle = ttk.Label(
-            self.body,
-            text=TOOLS[tool]["subtitle"],
-            style="Simple.Muted.TLabel",
-            wraplength=710,
-        )
-        self.subtitle.grid(row=1, column=0, columnspan=2, sticky="w", pady=(4, 16))
-        self.form = ttk.Frame(self.body, style="Simple.Card.TFrame", padding=16)
-        self.form.grid(row=2, column=0, columnspan=2, sticky="ew")
-        self.form.columnconfigure(1, weight=1)
-        if tool == "air":
-            self.form.columnconfigure(0, weight=1)
+        ttk.Label(self.body, text=TOOLS[tool]["title"], style="Simple.Title.TLabel").grid(row=0, column=0, sticky="w")
+        self.subtitle = ttk.Label(self.body, text=TOOLS[tool]["subtitle"],
+                                  style="Simple.Muted.TLabel", wraplength=360)
+        self.subtitle.grid(row=1, column=0, sticky="ew", pady=(6, 14))
+        self.form = ttk.Frame(self.body, style="Simple.Card.TFrame", padding=(16, 14))
+        self.form.grid(row=2, column=0, sticky="ew")
+        self.form.columnconfigure(0, weight=1)
         for index, spec in enumerate(TOOLS[tool]["fields"]):
             key = spec["key"]
-            row = ttk.Frame(self.form, style="Simple.Card.TFrame")
-            row.grid(row=index, column=0, columnspan=2, sticky="ew", pady=5)
-            row.columnconfigure(1, weight=1)
-            self.labels[key] = ttk.Label(
-                row,
-                text=spec["label"],
-                style="Simple.Card.TLabel",
-                width=23,
-                wraplength=185,
-            )
-            self.labels[key].grid(row=0, column=0, sticky="w")
+            row = ttk.Frame(self.form, style="Form.Row.TFrame")
+            row.grid(row=index, column=0, sticky="ew", pady=6)
+            row.columnconfigure(0, weight=1, minsize=Theme.px(120))
+            row.columnconfigure(1, weight=1, minsize=Theme.px(90))
+            row.columnconfigure(2, minsize=Theme.px(58))
+            self.labels[key] = ttk.Label(row, text=spec["label"], style="Simple.Card.TLabel",
+                                         width=16, wraplength=Theme.px(135), anchor="w")
+            self.labels[key].grid(row=0, column=0, sticky="w", padx=(0, 8))
             if spec["checkbox"]:
-                widget = ttk.Checkbutton(
-                    row,
-                    variable=self.variables[key],
-                    onvalue="1",
-                    offvalue="0",
-                    text="啟用此路徑檢查",
-                )
+                widget = ttk.Checkbutton(row, variable=self.variables[key], onvalue="1", offvalue="0", text="啟用")
             elif spec["options"]:
-                widget = ttk.Combobox(
-                    row,
-                    textvariable=self.variables[key],
-                    values=spec["options"],
-                    state="readonly",
-                    width=22,
-                )
+                widget = ttk.Combobox(row, textvariable=self.variables[key], values=spec["options"],
+                                      state="readonly", width=12, justify="right", font=(Theme.mono, 11))
             else:
-                widget = ttk.Entry(row, textvariable=self.variables[key], width=18)
-            widget.grid(row=0, column=1, sticky="ew", padx=(5, 8))
+                widget = ttk.Entry(row, textvariable=self.variables[key], width=12, justify="right", font=(Theme.mono, 11))
+            widget.grid(row=0, column=1, sticky="ew", padx=(0, 8))
+            widget.bind("<Return>", lambda event: self._enter(), add="+")
             self.widgets[key] = widget
             if spec["units"]:
                 unit_key, options = spec["units"]
-                unit = ttk.Combobox(
-                    row,
-                    textvariable=self.variables[unit_key],
-                    values=options,
-                    state="readonly",
-                    width=12,
-                )
-                unit.grid(row=0, column=2, sticky="e")
+                unit = ttk.Combobox(row, textvariable=self.variables[unit_key], values=options,
+                                    state="readonly", width=7, font=(Theme.mono, 10))
+                unit.grid(row=0, column=2, sticky="ew")
                 self.widgets[unit_key] = unit
-            if spec["help"]:
-                hint = ttk.Label(
-                    row, text=spec["help"], style="Simple.Hint.TLabel", wraplength=440
-                )
-                hint.grid(
-                    row=1, column=1, columnspan=2, sticky="w", padx=5, pady=(2, 0)
-                )
+            else:
+                unit = ttk.Label(row, text=field_unit(spec), width=7, style="Unit.TLabel", anchor="w")
+                unit.grid(row=0, column=2, sticky="w")
+                self.unit_labels[key] = unit
+            if spec["help"] or key in ("ffu_topology", "ffu_airflow_basis") or (spec["options"] and max(map(len, spec["options"])) > 18):
+                hint = ttk.Label(row, text=spec["help"], style="Simple.Hint.TLabel", wraplength=310)
+                hint.grid(row=1, column=0, columnspan=3, sticky="ew", pady=(3, 0))
                 self.hints[key] = hint
             self.rows[key] = row
-            if tool == "air" and key in ("temperature", "rh"):
-                row.grid_configure(
-                    row=0, column=0 if key == "temperature" else 1, columnspan=1, padx=5
-                )
-            elif tool == "air":
-                row.grid_configure(row=1)
-        self.assumptions = ttk.Label(
-            self.body, style="Simple.Muted.TLabel", wraplength=710
-        )
-        self.assumptions.grid(row=3, column=0, columnspan=2, sticky="ew", pady=(12, 6))
+        self.assumptions = ttk.Label(self.body, style="Simple.Muted.TLabel", wraplength=360)
+        self.assumptions.grid(row=3, column=0, sticky="ew", pady=10)
         controls = ttk.Frame(self.body)
-        controls.grid(row=4, column=0, columnspan=2, sticky="ew", pady=8)
+        controls.grid(row=4, column=0, sticky="ew", pady=6)
         if any(row["advanced"] for row in TOOLS[tool]["fields"]):
-            ttk.Checkbutton(
-                controls,
-                text="調整預設值／進階條件",
-                variable=self.advanced,
-                command=self.update_visibility,
-            ).pack(side="left")
-        ttk.Button(controls, text="恢復本工具預設", command=self.reset).pack(
-            side="right"
-        )
-        self.status = ttk.Label(self.body, style="Simple.Muted.TLabel", wraplength=710)
-        self.status.grid(row=5, column=0, columnspan=2, sticky="ew", pady=(3, 10))
-        self.result_box = ttk.Frame(self.body, style="Simple.Card.TFrame", padding=16)
-        self.result_box.grid(row=6, column=0, columnspan=2, sticky="ew")
-        self.cards = []
-        self.card_boxes = []
-        for index in range(3):
-            box = ttk.Frame(self.result_box, style="Simple.Card.TFrame")
-            box.grid(row=0, column=index, sticky="nsew", padx=6)
-            self.card_boxes.append(box)
-            self.result_box.columnconfigure(index, weight=1)
-            title = ttk.Label(box, style="Simple.Hint.TLabel")
-            value = ttk.Label(box, style="Simple.Value.TLabel", wraplength=230)
-            title.pack(anchor="w")
-            value.pack(anchor="w", pady=5)
-            self.cards.append((title, value))
-        self.details = ttk.Label(
-            self.body, style="Simple.Normal.TLabel", wraplength=710
-        )
-        self.details.grid(row=7, column=0, columnspan=2, sticky="ew", pady=12)
-        self.formula = ttk.Label(self.body, style="Simple.Muted.TLabel", wraplength=710)
-        self.formula.grid(row=8, column=0, columnspan=2, sticky="ew", pady=4)
-        self.note = ttk.Label(self.body, style="Simple.Muted.TLabel", wraplength=710)
-        self.note.grid(row=9, column=0, columnspan=2, sticky="ew", pady=(4, 16))
+            ttk.Checkbutton(controls, text="調整預設值／進階條件", variable=self.advanced,
+                            command=self.update_visibility).pack(anchor="w", pady=4)
+        action_row = ttk.Frame(controls)
+        action_row.pack(fill="x")
+        ttk.Button(action_row, text="恢復預設", command=self.reset).pack(side="left", padx=(0, 5))
+        self.upstream_button = ttk.Button(action_row, text="帶入上游結果", command=self.import_upstream)
+        self.upstream_button.pack(side="left")
+        # Retain the read-only label API for integrations; the visible status is a banner.
+        self.status = ttk.Label(self.body, style="Simple.Muted.TLabel", wraplength=360)
+        output = self.output_scroll.body
+        output.columnconfigure(0, weight=1)
+        ttk.Label(output, text="工程設計總覽", style="Simple.Title.TLabel").grid(row=0, column=0, sticky="w", pady=(0, 8))
+        self.banner = InlineBanner(output)
+        self.banner.grid(row=1, column=0, sticky="ew", pady=(0, 8))
+        self.result_box = KPIFrame(output)
+        self.result_box.grid(row=2, column=0, sticky="ew")
+        self.cards, self.card_boxes = [], []
+        self.result_table = ResultTable(output)
+        self.result_table.grid(row=3, column=0, sticky="nsew", pady=12)
+        self.details = ttk.Label(output, style="Simple.Normal.TLabel", wraplength=600)
+        self.details.grid(row=4, column=0, sticky="ew", pady=6)
+        self.formula = ttk.Label(output, style="Simple.Muted.TLabel", wraplength=600)
+        self.formula.grid(row=5, column=0, sticky="ew", pady=6)
+        self.note = ttk.Label(output, style="Simple.Muted.TLabel", wraplength=600)
+        self.note.grid(row=6, column=0, sticky="ew", pady=(4, 12))
         self.air_chart = None
         if tool == "air":
-            self.air_chart = AirChart(self.body, app.family)
-            self.air_chart.grid(row=6, column=0, columnspan=2, sticky="ew", pady=12)
-            self.result_box.grid_configure(row=7)
-            self.details.grid_configure(row=8)
-            self.formula.grid_configure(row=9)
-            self.note.grid_configure(row=10)
+            self.air_chart = AirChart(output, app.family)
+            self.air_chart.grid(row=7, column=0, sticky="ew", pady=12)
+        self._stacked = None
+        self.bind("<Configure>", self.responsive, add="+")
         for key, variable in self.variables.items():
             variable.trace_add("write", lambda *args, k=key: self.changed(k))
+        self.bind("<Destroy>", self._destroy_page, add="+")
         self.suspended = False
         self.update_visibility()
         self.calculate()
 
+    def _destroy_page(self, event):
+        if event.widget is self and self.pending:
+            self.after_cancel(self.pending)
+            self.pending = None
+
+    def _enter(self):
+        self.calculate(True)
+        return "break"
+
+    def responsive(self, event=None):
+        width = self.winfo_width()
+        stacked = width < Theme.px(900)
+        if self._stacked != stacked:
+            self._stacked = stacked
+            self.output_scroll.grid(row=1 if stacked else 0, column=0 if stacked else 1, sticky="nsew")
+            self.rowconfigure(1, weight=1 if stacked else 0)
+            self.columnconfigure(1, weight=0 if stacked else 3)
+        left_width = max(300, self.input_scroll.winfo_width() - 42)
+        for label in (self.subtitle, self.assumptions, self.status):
+            label.configure(wraplength=left_width)
+        right_width = max(300, self.output_scroll.winfo_width() - 42)
+        for label in (self.details, self.formula, self.note):
+            label.configure(wraplength=right_width)
+
+    def reveal(self, widget):
+        self.update_idletasks()
+        self.canvas.yview_moveto(max(0, (widget.winfo_rooty() - self.body.winfo_rooty() - 35)
+                                      / max(1, self.body.winfo_height())))
+
+    def import_upstream(self):
+        results = {key: page.result for key, page in self.app.pages.items() if page.result is not None}
+        try:
+            values = upstream_values(self.tool, results, self.data())
+            if not values:
+                self.banner.show("尚無可帶入的上游結果；請先完成對應工具計算。", "warning")
+                return False
+            sources = {"heat_loads": ("cleanroom", "lighting"), "water": ("heat_loads",),
+                       "pumps": ("water",), "electrical": ("cleanroom", "heat_loads", "lighting", "pumps")}
+            self.upstream_sources = {key for key in sources.get(self.tool, ()) if key in results}
+            self.upstream_keys = set(values)
+            self.upstream_stale = False
+            self.app.invalidate_dependents(self.tool)
+            self.suspended = True
+            try:
+                for key, value in values.items():
+                    if key in self.variables:
+                        self.variables[key].set(str(value))
+                self.previous = self.data()
+            finally:
+                self.suspended = False
+            self.update_visibility()
+            self.calculate(True)
+            if self.result is not None:
+                if self.tool == "electrical":
+                    self.banner.show("已帶入明列設備用電；請核對冰機、MAU、排風及製程設備是否齊全。", "warning")
+                else:
+                    self.banner.show("已帶入上游計算結果；後續修改可再次帶入更新。", "success")
+            return self.result is not None
+        except (ValidationError, ValueError, KeyError) as error:
+            self.banner.show(str(error), "warning")
+            return False
+
     def data(self):
         return {key: variable.get() for key, variable in self.variables.items()}
-
-    def horizontal_scroll(self, first, last):
-        self.horizontal.set(first, last)
-        if float(first) <= 1e-8 and float(last) >= 1 - 1e-8:
-            self.horizontal.grid_remove()
-        else:
-            self.horizontal.grid()
 
     def clear(self, text="輸入已變更，等待計算…"):
         self.result = None
         if self.air_chart is not None:
             self.air_chart.mark_stale()
-        for title, value in self.cards:
-            title.config(text="")
-            value.config(text="—")
+        self.result_box.set_cards([dict(title="等待更新", value="—", status="待重算", tone="neutral")])
+        self.result_table.set_rows([])
         self.details.config(text="")
         self.formula.config(text="")
         self.note.config(text="")
         self.status.config(text=text, style="Simple.Muted.TLabel")
+        self.banner.show(text, "neutral")
         if self.app.current == self.tool:
             self.app.sync_actions()
 
     def changed(self, key):
         if self.suspended:
             return
+        # Editing an adopted value explicitly returns this form to manual input.
+        if key in self.upstream_keys:
+            self.upstream_sources.clear()
+            self.upstream_keys.clear()
+            self.upstream_stale = False
+        self.app.invalidate_dependents(self.tool)
         self.suspended = True
         try:
             if self.tool == "gas" and key == "flow_basis":
@@ -279,6 +313,8 @@ class SimplePage(ScrollPage):
     def update_visibility(self):
         data = self.data()
         for spec in TOOLS[self.tool]["fields"]:
+            if spec["options"] and (spec["key"] in ("ffu_topology", "ffu_airflow_basis") or max(map(len, spec["options"])) > 18) and spec["key"] in self.hints:
+                self.hints[spec["key"]].configure(text=data[spec["key"]] + ("\n" + spec["help"] if spec["help"] else ""))
             visible = active_field(self.tool, spec["key"], data) and (
                 not spec["advanced"] or self.advanced.get() or (self.tool == "duct" and data["check_path"] == "1" and spec["key"] in ("length", "k_sum", "equipment"))
             )
@@ -319,19 +355,23 @@ class SimplePage(ScrollPage):
         if self.pending:
             self.after_cancel(self.pending)
             self.pending = None
+        if self.upstream_stale:
+            message = "上游條件已變更，請重新帶入；亦可修改帶入欄位改為手動輸入。"
+            self.clear(message)
+            self.banner.show(message, "warning")
+            return
         for widget in self.widgets.values():
-            if isinstance(widget, ttk.Entry) and not isinstance(widget, ttk.Combobox):
-                widget.configure(style="TEntry")
+            set_entry_valid(widget, True)
         try:
             result = calculate_tool(self.tool, self.data())
             cards, details = presentation(result)
-            for index, (title, value) in enumerate(self.cards):
-                if index < len(cards):
-                    title.config(text=cards[index][0])
-                    value.config(text=cards[index][1])
-                else:
-                    title.config(text="")
-                    value.config(text="")
+            warnings = result.get("warnings", [])
+            tone = "warning" if warnings else "success"
+            self.result_box.set_cards([dict(title=title, value=value, status="需核對" if warnings else "需求初估", tone=tone)
+                                       for title, value in cards])
+            rows = self.table_rows(result)
+            rows += [("計算說明", text, "", "") for text in details]
+            self.result_table.set_rows(rows)
             self.result = result
             if self.air_chart is not None:
                 self.air_chart.set_state(result["state"])
@@ -352,12 +392,13 @@ class SimplePage(ScrollPage):
                     for row in (result["rectangle"], result["round"])
                 )
             )
-            self.status.config(
-                text=(
+            status_message = (
                     "已計算｜路徑壓力預算不足，請核對"
                     if shortfall
                     else "已計算｜本工具可獨立使用，結果為初估"
-                ),
+                )
+            self.status.config(
+                text=status_message,
                 style="Simple.Error.TLabel" if shortfall else "Simple.Good.TLabel",
             )
         except (ValidationError, ValueError) as error:
@@ -367,24 +408,33 @@ class SimplePage(ScrollPage):
                 (row for row in TOOLS[self.tool]["fields"] if row["key"] == key), None
             )
             label = spec["label"] if spec else key or "輸入"
-            self.status.config(
-                text=f"請修正「{label}」：{error}", style="Simple.Error.TLabel"
-            )
+            message = f"請修正「{label}」：{error}"
+            self.status.config(text=message, style="Simple.Error.TLabel")
+            self.banner.show(message, "danger")
             if spec and spec["advanced"]:
                 self.advanced.set(True)
                 self.update_visibility()
             widget = self.widgets.get(key)
             if widget is not None:
-                if isinstance(widget, ttk.Entry) and not isinstance(
-                    widget, ttk.Combobox
-                ):
-                    widget.configure(style="Simple.Invalid.TEntry")
+                set_entry_valid(widget, False)
                 if focus:
                     self.reveal(widget)
                     widget.focus_set()
+        if self.result is not None:
+            issues = self.result.get("warnings", [])
+            self.banner.show("；".join(issues) if issues else status_message,
+                             "warning" if issues else "danger" if shortfall else "success")
         self.app.sync_actions()
 
+    def table_rows(self, result):
+        from .display_helpers import engineering_result_rows
+        return engineering_result_rows(result)
+
     def reset(self):
+        self.app.invalidate_dependents(self.tool)
+        self.upstream_sources.clear()
+        self.upstream_keys.clear()
+        self.upstream_stale = False
         self.suspended = True
         try:
             for key, value in defaults(self.tool).items():
@@ -407,15 +457,15 @@ class SimpleToolsApp:
         self.workbench = None
         self.equipment_window = None
         root.title("廠務簡易工具 V" + VERSION)
-        width = min(1120, max(780, root.winfo_screenwidth() - 60))
-        height = min(830, max(560, root.winfo_screenheight() - 100))
-        root.geometry(f"{width}x{height}+20+20")
-        root.minsize(780, 560)
-        app_icon(root)
         self.configure_style()
+        width = min(Theme.px(1440), max(Theme.px(980), root.winfo_screenwidth() - Theme.px(60)))
+        height = min(Theme.px(830), max(Theme.px(600), root.winfo_screenheight() - Theme.px(100)))
+        root.geometry(f"{width}x{height}+20+20")
+        root.minsize(Theme.px(900), Theme.px(600))
+        app_icon(root)
         root.columnconfigure(1, weight=1)
         root.rowconfigure(1, weight=1)
-        side = tk.Frame(root, bg="#142c43", width=205)
+        side = tk.Frame(root, bg=Theme.NAV, width=Theme.px(185))
         side.grid(row=0, column=0, rowspan=3, sticky="ns")
         side.pack_propagate(False)
         self.sidebar = side
@@ -423,26 +473,15 @@ class SimpleToolsApp:
             anchor="w", padx=18, pady=(22, 24)
         )
         self.nav = {}
-        for key in ("electrical", "duct", "gas", "lighting", "water", "air", "units"):
-            button = tk.Button(
-                side,
-                text=TOOLS[key]["title"],
-                command=lambda k=key: self.show_tool(k),
-                relief="flat",
-                anchor="w",
-                padx=14,
-                pady=6,
-                wraplength=170,
-                bg="#142c43",
-                fg="white",
-                activebackground="#087d85",
-                activeforeground="white",
-                font=(self.family, 10),
+        for key in TOOLS:
+            button = ttk.Button(
+                side, text=TOOLS[key]["title"], command=lambda k=key: self.show_tool(k),
+                style="Nav.TButton", width=20,
             )
             button.pack(fill="x", padx=8, pady=2)
             self.nav[key] = button
         self.author_credit = tk.Label(
-            side, text="DESIGNED BY\nANDY HUANG ©", bg="#142c43",
+            side, text="DESIGNED BY\nANDY HUANG ©", bg=Theme.NAV,
             fg="#a6bdcc", justify="left", font=(self.family, 9),
         )
         self.author_credit.pack(side="bottom", anchor="w", padx=18, pady=(8, 16))
@@ -491,9 +530,10 @@ class SimpleToolsApp:
             footer, text="匯出TXT", command=self.export_result
         )
         self.export_button.grid(row=0, column=3, padx=3)
+        self.summary_button = ttk.Button(footer, text="設計總覽 HTML", command=self.export_summary)
+        self.summary_button.grid(row=0, column=4, padx=3)
         root.bind("<F5>", lambda event: self.active_page().calculate(True))
-        for event in ("<MouseWheel>", "<Button-4>", "<Button-5>"):
-            root.bind(event, self.wheel, add="+")
+        root.bind("<Return>", lambda event: self.active_page()._enter())
         root.bind("<Configure>", self.resize, add="+")
         root.protocol("WM_DELETE_WINDOW", self.close)
         self.show_tool("electrical")
@@ -517,110 +557,12 @@ class SimpleToolsApp:
     def resize(self, event=None):
         if event is not None and event.widget is not self.root:
             return
-        compact = self.root.winfo_width() < 1000
-        width = max(430, min(710, self.root.winfo_width() - 235))
         for page in self.pages.values():
-            for spec in TOOLS[page.tool]["fields"]:
-                key = spec["key"]
-                stacked = compact or page.tool == "air"
-                page.labels[key].grid_configure(
-                    row=0, column=0, columnspan=3 if stacked else 1
-                )
-                page.labels[key].configure(
-                    wraplength=max(280, width - 50) if stacked else 185
-                )
-                page.widgets[key].grid_configure(
-                    row=1 if stacked else 0,
-                    column=0 if stacked else 1,
-                    columnspan=2 if stacked else 1,
-                    pady=3 if stacked else 0,
-                )
-                if spec["units"]:
-                    page.widgets[spec["units"][0]].grid_configure(
-                        row=1 if stacked else 0, column=2
-                    )
-                if key in page.hints:
-                    unit_only = len(spec["help"]) <= 10 and not spec["units"]
-                    if unit_only:
-                        page.hints[key].grid_configure(
-                            row=1 if stacked else 0, column=2, columnspan=1, pady=0
-                        )
-                    else:
-                        page.hints[key].grid_configure(
-                            row=2 if stacked else 1,
-                            column=0 if stacked else 1,
-                            columnspan=3 if stacked else 2,
-                        )
-                    page.hints[key].configure(
-                        wraplength=max(300, width - 50) if stacked else 440
-                    )
-            for index, box in enumerate(page.card_boxes):
-                box.grid_configure(
-                    row=index if compact else 0, column=0 if compact else index, pady=5
-                )
-                page.result_box.columnconfigure(
-                    index, weight=1 if not compact or index == 0 else 0
-                )
-            for label in (
-                page.subtitle,
-                page.assumptions,
-                page.status,
-                page.details,
-                page.formula,
-                page.note,
-            ):
-                label.configure(wraplength=width)
+            page.responsive()
 
     def configure_style(self):
-        families = set(font.families(self.root))
-        self.family = next(
-            (
-                name
-                for name in ("Microsoft JhengHei", "Noto Sans CJK TC", "Segoe UI")
-                if name in families
-            ),
-            "TkDefaultFont",
-        )
-        style = ttk.Style(self.root)
-        style.theme_use("clam")
-        style.configure(
-            ".", font=(self.family, 10), background="#f1f5f9", foreground="#18334d"
-        )
-        style.configure("TButton", padding=(12, 8))
-        style.configure("TEntry", padding=6)
-        style.configure("TCombobox", padding=5)
-        style.configure("Simple.Title.TLabel", font=(self.family, 21, "bold"))
-        style.configure("Simple.Header.TLabel", font=(self.family, 12, "bold"))
-        style.configure(
-            "Simple.Brand.TLabel",
-            background="#142c43",
-            foreground="#6ee7df",
-            font=(self.family, 15, "bold"),
-        )
-        style.configure(
-            "Simple.SideHint.TLabel", background="#142c43", foreground="#b9cad8"
-        )
-        style.configure("Simple.Card.TFrame", background="white")
-        style.configure("Simple.Card.TLabel", background="white")
-        style.configure(
-            "Simple.Value.TLabel",
-            background="white",
-            foreground="#087d85",
-            font=(self.family, 17, "bold"),
-        )
-        style.configure(
-            "Simple.Hint.TLabel",
-            background="white",
-            foreground="#587084",
-            font=(self.family, 9),
-        )
-        style.configure("Simple.Muted.TLabel", foreground="#587084")
-        style.configure("Simple.Good.TLabel", foreground="#087545")
-        style.configure("Simple.Error.TLabel", foreground="#b12b2b")
-        style.configure(
-            "Simple.Primary.TButton", background="#087d85", foreground="white"
-        )
-        style.configure("Simple.Invalid.TEntry", fieldbackground="#fff0ed")
+        Theme.apply(self.root)
+        self.family = Theme.family
 
     def active_page(self):
         return self.pages[self.current]
@@ -634,7 +576,8 @@ class SimpleToolsApp:
         page = self.pages[tool]
         page.grid(row=0, column=0, sticky="nsew")
         for key, button in self.nav.items():
-            button.configure(bg="#087d85" if key == tool else "#142c43")
+            button.configure(style="Nav.Active.TButton" if key == tool else "Nav.TButton",
+                             text=("▎ " if key == tool else "   ") + TOOLS[key]["title"])
         self.footer_text.configure(text=TOOLS[tool]["title"])
         self.sync_actions()
         self.resize()
@@ -646,6 +589,18 @@ class SimpleToolsApp:
         enabled = page is not None and page.result is not None
         for button in (self.copy_button, self.export_button):
             button.state(["!disabled"] if enabled else ["disabled"])
+        self.summary_button.state(["!disabled"] if any(p.result is not None for p in self.pages.values()) else ["disabled"])
+
+    def invalidate_dependents(self, source, visited=None):
+        visited = set() if visited is None else visited
+        if source in visited:
+            return
+        visited.add(source)
+        for key, page in self.pages.items():
+            if source in page.upstream_sources:
+                page.upstream_stale = True
+                page.clear("上游條件已變更，請重新帶入；亦可修改帶入欄位改為手動輸入。")
+                self.invalidate_dependents(key, visited)
 
     def copy_result(self):
         page = self.active_page()
@@ -666,16 +621,39 @@ class SimpleToolsApp:
             parent=self.root,
             defaultextension=".txt",
             initialfile=TOOLS[self.current]["title"] + ".txt",
-            filetypes=[("文字結果", "*.txt")],
+            filetypes=[("文字結果", "*.txt"), ("HTML 設計報表", "*.html")],
         )
         if not path:
             return False
         try:
-            atomic_text(path, tool_report(page.result, page.data()))
+            from pathlib import Path
+            if Path(path).suffix.lower() in (".html", ".htm"):
+                from .html_report import html_report
+                content = html_report(page.result)
+            else:
+                content = tool_report(page.result, page.data())
+            atomic_text(path, content)
             self.footer_text.configure(text="已匯出本工具結果")
             return True
         except OSError as error:
-            messagebox.showerror("未能匯出", str(error), parent=self.root)
+            page.banner.show("未能匯出：" + str(error), "danger")
+            return False
+
+    def export_summary(self, path=None):
+        results = {key: page.result for key, page in self.pages.items() if page.result is not None}
+        if not results:
+            return False
+        path = path or filedialog.asksaveasfilename(parent=self.root, defaultextension=".html",
+                         initialfile="Facility_Design_Summary.html", filetypes=[("HTML 設計報表", "*.html")])
+        if not path:
+            return False
+        try:
+            from .html_report import html_report
+            atomic_text(path, html_report({"pipeline": results}))
+            self.footer_text.configure(text="已匯出目前有效計算的設備總覽")
+            return True
+        except (OSError, InputError, ValueError) as error:
+            self.active_page().banner.show("未能匯出：" + str(error), "danger")
             return False
 
     def open_workbench(self):

@@ -372,7 +372,7 @@ def main():
     selected_app = app
     signature_before = run("apple_codesign_before", ["/usr/bin/codesign", "--verify", "--deep", "--strict", "--verbose=4", str(app)])
     run("gatekeeper_assessment", ["/usr/sbin/spctl", "--assess", "--type", "execute", "--verbose=4", str(app)], required=False)
-    for tool in (() if args.focus_watchdog else ("electrical", "duct", "gas", "lighting", "water", "air", "units")):
+    for tool in (() if args.focus_watchdog else ("electrical", "duct", "gas", "lighting", "water", "air", "units", "cleanroom", "heat_loads", "pumps")):
         run("native_tool_" + tool, [str(executable), "--tool", tool,
                                    "--report", str(output / (tool + "_report.txt"))])
     app_logs = Path.home() / "Library/Logs/Facility_Studio_V5_5"

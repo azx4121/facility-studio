@@ -11,8 +11,9 @@ from .localized_tk import messagebox
 from .localized_tk import tk
 from .localized_tk import ttk
 from .ahu_engine import nm_calculate, nm_draft_inputs, nm_read_project, nm_validate
-from .ahu_schema import NM_CONTROL_NOTES, NM_DEFAULTS, NM_FIELDS, NM_GROUPS
-from .ahu_view import AHUView, NM_HAS_PLOT
+from .ahu_schema import AHU_OPTIONAL_NUMBERS, NM_CONTROL_NOTES, NM_DEFAULTS, NM_FIELDS, NM_GROUPS
+from .ahu_view import AHUView, NM_HAS_PLOT, SCADAAirflow, prepare_ahu_plot_fonts
+from .industrial_theme import Theme, InlineBanner, enable_high_dpi, set_entry_valid
 
 if NM_HAS_PLOT:
     from .ahu_view import Figure, FigureCanvasTkAgg
@@ -20,7 +21,7 @@ from .reports import nm_report
 from .localized_tk import LanguagePicker
 from . import i18n
 from .ui_common import app_icon, quality_style, quality_text
-from .utils import atomic_text, project_hash
+from .utils import atomic_text, project_hash, number, choice, integer
 from .field_state import error_text
 from .schema import VERSION
 
@@ -85,6 +86,38 @@ class AHUWindow(AHUView):
     def snapshot(self):
         return {k: v.get() for k, v in self.vars.items()}
 
+    def validate_field(self, key, announce=True):
+        """Validate the edited active field without a blocking message box."""
+        from .field_state import ahu_inactive
+        widget = self.widgets[key]
+        if key in ahu_inactive(self.snapshot()):
+            set_entry_valid(widget, True)
+            return True
+        value, limit = self.vars[key].get(), NM_FIELDS[key]["limit"]
+        try:
+            if isinstance(limit, list):
+                choice(value, limit, key)
+            elif isinstance(limit, tuple):
+                if key not in AHU_OPTIONAL_NUMBERS or value.strip():
+                    number(value, key, *limit)
+                    if key == "fan_qty":
+                        integer(value, key, 1, 100)
+            elif not value.strip() or len(value) > 300:
+                raise InputError("專案名稱不可空白或過長", field_name=key)
+        except (InputError, ValueError) as error:
+            set_entry_valid(widget, False)
+            if announce:
+                self.banner.show(error_text(error, NM_FIELDS), "danger")
+            return False
+        set_entry_valid(widget, True)
+        return True
+
+    def calculate_from_keyboard(self, event=None):
+        if event is not None and isinstance(event.widget, tk.Text):
+            return
+        self.calculate()
+        return "break"
+
     def changed(self, key=None):
         if self.suspended:
             return
@@ -121,6 +154,9 @@ class AHUWindow(AHUView):
         self.result = None
         self.export_button.configure(state="disabled")
         self.status.config(text="輸入變更，等待單機檢核…", style="Muted.TLabel")
+        self.banner.show("輸入已變更，正在檢核目前條件。", "neutral")
+        if key in self.widgets:
+            self.validate_field(key)
         self.summary.config(text="上次有效結果｜待重算，不能匯出" if self.last_good_result else "等待目前輸入檢核")
         self.clear_output()
         self.visibility()
@@ -264,10 +300,26 @@ class AHUWindow(AHUView):
 
     def _build_window(self, parent, main_app=None):
         self.main_app = main_app
+        enable_high_dpi()
         self.win = tk.Toplevel(parent)
+        Theme.apply(self.win)
+        style = ttk.Style(self.win)
+        style.configure("Ahu.Card.TFrame", background=Theme.CARD, relief="flat", borderwidth=0)
+        style.configure("Ahu.Nav.TFrame", background=Theme.NAV)
+        style.configure("Ahu.Brand.TLabel", background=Theme.NAV, foreground="white",
+                        font=(Theme.family, 14, "bold"))
+        style.configure("Ahu.Card.TLabel", background=Theme.CARD, foreground=Theme.TEXT)
+        style.configure("Ahu.Unit.TLabel", background=Theme.CARD, foreground=Theme.MUTED, font=(Theme.family, 10))
+        style.configure("Ahu.Title.TLabel", background=Theme.CARD, foreground=Theme.TEXT,
+                        font=(Theme.family, 14, "bold"))
+        style.configure("Ahu.Section.TLabel", background=Theme.CARD, foreground=Theme.TEXT,
+                        font=(Theme.family, 11, "bold"))
+        style.configure("Ahu.Primary.TButton", foreground="white", background=Theme.PRIMARY,
+                        font=(Theme.family, 10, "bold"), padding=(14, 8))
+        style.map("Ahu.Primary.TButton", background=[("active", "#0369A1"), ("disabled", "#94A3B8")])
         self.win.title("空調箱｜分段式單機送審校核")
-        self.win.geometry("1160x850")
-        self.win.minsize(850, 600)
+        self.win.geometry("1280x900")
+        self.win.minsize(960, 640)
         initial = (
             self._initial_document["inputs"] if self._initial_document else NM_DEFAULTS
         )
@@ -283,9 +335,9 @@ class AHUWindow(AHUView):
         self.suspended = True
         self.path = None
         self.saved_hash = project_hash(NM_DEFAULTS)
-        top = ttk.Frame(self.win, padding=12)
+        top = ttk.Frame(self.win, padding=12, style="Ahu.Nav.TFrame")
         top.pack(fill="x")
-        ttk.Label(top, text="空調箱｜分段需求反算", style="Title.TLabel").pack(
+        ttk.Label(top, text="空調箱｜分段需求反算", style="Ahu.Brand.TLabel").pack(
             side="left"
         )
         for text, cmd in [
@@ -294,7 +346,8 @@ class AHUWindow(AHUView):
             ("重算", self.calculate),
             ("匯出校核書", self.export),
         ]:
-            b = ttk.Button(top, text=text, command=cmd)
+            b = ttk.Button(top, text=text, command=cmd,
+                           style="Ahu.Primary.TButton" if text in ("重算", "匯出校核書") else "TButton")
             b.pack(side="right", padx=3)
             if text == "匯出校核書":
                 self.export_button = b
@@ -331,12 +384,12 @@ class AHUWindow(AHUView):
         self.status = ttk.Label(
             self.win, text="", wraplength=1020, style="Muted.TLabel", padding=(14, 5)
         )
-        self.status.pack(fill="x")
+        # Integrations retain the status widget; the user sees a soft banner.
+        self.banner = InlineBanner(self.win)
+        self.banner.pack(fill="x", padx=12, pady=(4, 0))
         self.nb = ttk.Notebook(self.win)
         self.nb.pack(fill="both", expand=True, padx=12, pady=8)
-        self.input_frame, self.input_body, self.input_canvas = self.scroll_tab(
-            "1 設計條件"
-        )
+        self.input_frame, self.input_body, self.input_canvas = self.design_tab()
         intro = ttk.Frame(self.input_body)
         intro.pack(fill="x", pady=8)
         ttk.Checkbutton(
@@ -344,66 +397,68 @@ class AHUWindow(AHUView):
             text="顯示進階／廠商資料",
             variable=self.advanced,
             command=self.visibility,
-        ).pack(side="left")
+        ).pack(anchor="w", pady=3)
         if main_app:
             ttk.Button(intro, text="帶入主畫面外氣", command=self.import_climate).pack(
-                side="left", padx=10
+                anchor="w", pady=3
             )
         for rh in (50, 55):
             ttk.Button(
                 intro,
                 text=f"套用送風 22°C／{rh}%",
                 command=lambda value=rh: self.target_preset(value),
-            ).pack(side="left", padx=4)
+            ).pack(anchor="w", pady=3)
         ttk.Button(intro, text="復原帶入", command=self.undo_changes).pack(
-            side="left", padx=4
+            anchor="w", pady=3
         )
         nav = ttk.Frame(self.input_body)
         nav.pack(fill="x", pady=4)
-        for label, key in [
+        for nav_index, (label, key) in enumerate([
             ("夏季逐段設定", "summer_h1_mode"),
             ("冬季逐段設定", "winter_h1_mode"),
             ("H1/H2 熱源", "h1_source"),
             ("加濕設備", "humidifier"),
-        ]:
-            ttk.Button(nav, text=label, command=lambda k=key: self.reveal(k)).pack(
-                side="left", padx=3
+        ]):
+            ttk.Button(nav, text=label, command=lambda k=key: self.reveal(k)).grid(
+                row=nav_index // 2, column=nav_index % 2, sticky="ew", padx=3, pady=3
             )
         ttk.Label(
             self.input_body,
             text="單機指定風量校核：保留電熱器與熱水盤管，逐段反算需求，再比對既有容量。\n每段入口沿用前段出口；H1/H2 純加熱的 RH 自動計算。電極式蒸汽列於加濕設備，與直接電熱分開。",
-            wraplength=980,
+            wraplength=420,
             style="Muted.TLabel",
         ).pack(fill="x", pady=8)
         self.adopted_summary = ttk.Label(
-            self.input_body, text="", wraplength=950, style="Warn.TLabel"
+            self.input_body, text="", wraplength=420, style="Warn.TLabel"
         )
         self.adopted_summary.pack(fill="x", pady=6)
         for title, keys in NM_GROUPS:
-            box = ttk.LabelFrame(self.input_body, text=title, padding=12)
+            box = ttk.LabelFrame(self.input_body, text=title, padding=(16, 14))
             box.pack(fill="x", pady=8)
             self.boxes.append((box, keys))
             if "逐段出口" in title:
                 ttk.Label(
                     box,
                     text="自動：H1 依加濕需求預熱；C1 按預冷目標（需加濕時旁通）；C2 依送風含濕比／溫度反算；H2 補足送風溫度並扣除風機熱。\n指定：直接檢核本段出口條件；旁通：出口沿用入口。入口由上一段連動，結果表另列各段實際採用的需求點。",
-                    wraplength=880,
+                    wraplength=400,
                     style="Muted.TLabel",
                 ).pack(fill="x", pady=5)
             elif "獨立熱水" in title:
                 ttk.Label(
                     box,
                     text="選擇熱水＋電熱可由熱回收優先分擔、電熱補足；回收水未上線或未填能力時，不會假定有可用熱量。",
-                    wraplength=880,
+                    wraplength=400,
                     style="Muted.TLabel",
                 ).pack(fill="x", pady=5)
             for key in keys:
                 f = NM_FIELDS[key]
-                line = ttk.Frame(box)
+                line = ttk.Frame(box, style="Ahu.Card.TFrame")
                 line.pack(fill="x", pady=4)
+                line.columnconfigure(0, weight=1)
                 line.columnconfigure(1, weight=1)
+                line.columnconfigure(2, minsize=64)
                 self.rows[key] = line
-                ttk.Label(line, text=f["label"], width=44).grid(
+                ttk.Label(line, text=f["label"], width=18, wraplength=170, style="Ahu.Card.TLabel").grid(
                     row=0, column=0, sticky="w"
                 )
                 if isinstance(f["limit"], list):
@@ -412,15 +467,18 @@ class AHUWindow(AHUView):
                         textvariable=self.vars[key],
                         values=f["limit"],
                         state="readonly",
-                        width=30,
+                        width=14,
+                        font=(Theme.mono, 11),
                     )
                 else:
-                    w = ttk.Entry(line, textvariable=self.vars[key], width=30)
+                    w = ttk.Entry(line, textvariable=self.vars[key], width=14, justify="right",
+                                  font=(Theme.mono, 11))
                 w.grid(row=0, column=1, sticky="ew")
-                ttk.Label(line, text=f["unit"], width=10).grid(row=0, column=2, padx=8)
+                ttk.Label(line, text=f["unit"], width=8, wraplength=72, style="Ahu.Unit.TLabel").grid(row=0, column=2, sticky="w", padx=(8, 0))
                 self.widgets[key] = w
+                w.bind("<FocusOut>", lambda event, k=key: self.validate_field(k), add="+")
                 help_label = ttk.Label(
-                    line, text="", wraplength=850, style="Muted.TLabel"
+                    line, text="", wraplength=400, style="Muted.TLabel"
                 )
                 help_label.grid(row=1, column=0, columnspan=3, sticky="w")
                 self.adoption_notes[key] = help_label
@@ -451,11 +509,14 @@ class AHUWindow(AHUView):
             self.output_body, text="", wraplength=960, style="Good.TLabel"
         )
         self.summary.pack(fill="x", pady=8)
+        self.scada = SCADAAirflow(self.output_body)
+        self.scada.pack(fill="x", pady=(8, 16))
         self.table = ttk.Treeview(
             self.output_body,
             columns=("name", "tin", "rhin", "tout", "rhout", "kw"),
             show="headings",
             height=11,
+            style="Dashboard.Treeview",
         )
         for key, label, width in [
             ("name", "段落", 250),
@@ -467,6 +528,8 @@ class AHUWindow(AHUView):
         ]:
             self.table.heading(key, text=label)
             self.table.column(key, width=width, anchor="w" if key == "name" else "e")
+        self.table.tag_configure("even", background=Theme.CARD)
+        self.table.tag_configure("odd", background=Theme.BG)
         self.table.pack(fill="x")
         scroll = ttk.Scrollbar(
             self.output_body, orient="horizontal", command=self.table.xview
@@ -474,6 +537,7 @@ class AHUWindow(AHUView):
         scroll.pack(fill="x")
         self.table.configure(xscrollcommand=scroll.set)
         if NM_HAS_PLOT:
+            prepare_ahu_plot_fonts()
             self.fig = Figure(figsize=(9, 4.5), dpi=100)
             self.ax = self.fig.add_subplot(111)
             self.plot = FigureCanvasTkAgg(self.fig, master=self.output_body)
@@ -488,7 +552,8 @@ class AHUWindow(AHUView):
         self.text = tk.Text(
             textpage,
             wrap="word",
-            font=("TkDefaultFont", 11),
+            font=(Theme.mono, 11),
+            background=Theme.CARD, foreground=Theme.TEXT, relief="flat",
             padx=12,
             pady=12,
             state="disabled",
@@ -516,6 +581,7 @@ class AHUWindow(AHUView):
         self.win.protocol("WM_DELETE_WINDOW", self.close)
         self.win.bind("<Control-s>", lambda e: self.save())
         self.win.bind("<F5>", lambda e: self.calculate())
+        self.win.bind("<Return>", self.calculate_from_keyboard)
         from .platform_support import bind_mac_shortcuts
 
         bind_mac_shortcuts(self.win, save=self.save, calculate=self.calculate)
@@ -553,12 +619,17 @@ class AHUWindow(AHUView):
             self.job = None
         try:
             self.bad_key = None
+            for widget in self.widgets.values():
+                set_entry_valid(widget, True)
             r = nm_calculate(self.snapshot())
         except (InputError, ValueError, KeyError, TypeError) as e:
             self.result = None
             self.clear_output()
             self.bad_key = getattr(e, "field_name", None)
+            if self.bad_key in self.widgets:
+                set_entry_valid(self.widgets[self.bad_key], False)
             self.status.config(text=error_text(e, NM_FIELDS), style="Error.TLabel")
+            self.banner.show(error_text(e, NM_FIELDS), "danger")
             self.summary.config(text="條件未成立：" + error_text(e, NM_FIELDS))
             self.export_button.configure(state="disabled")
             return
@@ -579,6 +650,7 @@ class AHUWindow(AHUView):
             ),
             style="Error.TLabel" if failed else "Good.TLabel",
         )
+        self.banner.show(quality_text(r["quality"]), "danger" if failed else "success")
         self.export_button.configure(state="normal")
         self.set_text(nm_report(r))
         self.render()
@@ -626,6 +698,9 @@ class AHUWindow(AHUView):
                 text=quality_text(self.result["quality"]),
                 style=quality_style(self.result["quality"]),
             )
+            quality = self.result["quality"]
+            self.banner.show(quality_text(quality), "danger" if quality["failed"] else
+                             "warning" if quality["pending"] else "success")
             self.set_text(nm_report(self.result))
         if self.main_app:
             self.main_app.refresh_receipts()

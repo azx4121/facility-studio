@@ -11,11 +11,12 @@ import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from nsis_integrity import InstallerIntegrityError, expected_members, verify_setup
+from nsis_integrity import InstallerIntegrityError, verify_setup
+from installer_fixture import historical_installer_binary, historical_installer_members
 
 checks = []
-members = expected_members(ROOT / "installer")
-binary = (ROOT / "Facility_Studio_V5_5_4_Setup.exe").read_bytes()
+members = historical_installer_members()
+binary = historical_installer_binary(ROOT / "Facility_Studio_V5_5_4_Setup.exe")
 offset = binary.find(b"\xef\xbe\xad\xdeNullsoftInst") - 4
 
 
@@ -69,7 +70,7 @@ with tempfile.TemporaryDirectory(prefix="nsis_contents_check_") as temporary:
     check(
         "05_extracted_payload_manifest_valid",
         len(bootstrap.verify_payload(target))
-        == len(json.loads((ROOT / "installer/payload_sha256.json").read_text())),
+        == len(json.loads((target / "payload_sha256.json").read_text())),
     )
 
 # A compiler exit status or PE header alone must never approve these cases.
