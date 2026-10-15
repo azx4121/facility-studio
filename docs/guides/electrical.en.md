@@ -1,10 +1,26 @@
-# Electrical calculator: kW, current, NFB and conductor candidates
+# Electrical calculator: power, current, NFB and conductor candidates
 
 [繁體中文](electrical.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-Select **English** at the top right, then open **Electrical sizing**. Enter equipment input power, supply and use type. **kW means electrical input power**; convert motor shaft kW or HP using efficiency before using this quick tool.
+Select **English** at the top right, then open **Electrical sizing**. Enter equipment power, supply and use type. **kW/W mean electrical input power**. HP/PS mean motor shaft output, which the calculator converts to electrical input using motor efficiency.
 
 Under **Adjust defaults / advanced settings**, check PF, one-way cable length, ambient temperature, loaded conductors and terminal temperature. The example defaults are PF 0.85, copper XLPE, 30 m one-way, 35°C ambient, 60°C terminals, three conductors in conduit and 3% maximum voltage drop. These are reference assumptions, not universal installation rules.
+
+<a id="power-units"></a>
+## Power units and motor efficiency
+
+The unit dropdown offers kW, W, HP (mechanical horsepower) and PS (metric horsepower). This is a source revision. The published win.3/mac.5 downloads still accept only kW, so convert before entering power in those downloads.
+
+| Input unit | Electrical input in kW |
+| --- | --- |
+| kW | Entered value |
+| W | Entered value / 1000 |
+| HP | Entered value × 0.745699871582 / motor efficiency |
+| PS | Entered value × 0.73549875 / motor efficiency |
+
+Selecting HP/PS shows **Motor efficiency**, initially 0.90. Use the equipment nameplate or manufacturer's data; efficiency and PF are different inputs. HP/PS use the motor-load estimate of 125% of operating current. kW/W follow the selected use type. Changing units converts the entered value to preserve electrical input power; changing from HP/PS to kW/W retains the motor use type.
+
+For **10 HP, efficiency 0.90, three-phase 380 V and PF 0.85**, electrical input is approximately **8.28555 kW**, operating current **14.8101 A**, and motor design current **18.5126 A**. If electrical input kW is already known, enter kW directly without dividing by efficiency again. Reports state the unit, adopted efficiency and conversion formula. Legacy inputs without a unit remain kW.
 
 <a id="case-01"></a>
 ## Case 01: 10 kW, three-phase 380 V

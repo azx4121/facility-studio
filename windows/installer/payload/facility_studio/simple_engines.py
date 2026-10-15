@@ -34,6 +34,9 @@ GAS_PRESSURE_FACTORS = {
     "MPa(g)": 1000.0,
 }
 AIR_PRESSURE_FACTORS = {"Pa": 1.0, "mmAq": 9.80665, "kPa": 1000.0}
+# kW/W are electrical input; HP/PS are motor shaft output, as in the workbench.
+ELECTRICAL_POWER_UNITS = {"kW": 1.0, "W": 0.001, "HP": 0.745699871582, "PS": 0.73549875}
+MOTOR_POWER_UNITS = ("HP", "PS")
 
 
 def selected(value, options, key):
@@ -42,10 +45,24 @@ def selected(value, options, key):
     return value
 
 
+def electrical_power_factor(unit, motor_efficiency="0.90"):
+    """Return electrical-input kW per entered unit, validating active efficiency."""
+    selected(unit, ELECTRICAL_POWER_UNITS, "power_unit")
+    efficiency = (
+        number(motor_efficiency, "motor_efficiency", 0.1, 1)
+        if unit in MOTOR_POWER_UNITS else 1.0
+    )
+    return ELECTRICAL_POWER_UNITS[unit] / efficiency
+
+
 def electrical(
     data, *, supply_override=None, design_current_a=None, conservative_drop=False
 ):
-    kw = number(data["power"], "power", 0, 1000000)
+    unit = data.get("power_unit", "kW")
+    power = number(data["power"], "power", 0)
+    efficiency = data.get("motor_efficiency", "0.90")
+    kw = number(power * electrical_power_factor(unit, efficiency), "power", 0, 1000000)
+    has_motor = unit in MOTOR_POWER_UNITS
     if supply_override is None:
         supply = selected(data["supply"], SUPPLIES, "supply")
         phases, voltage = SUPPLIES[supply]
@@ -65,7 +82,7 @@ def electrical(
     drop_limit = number(data["drop_limit"], "drop_limit", 0.1, 20)
     factor = math.sqrt(3) if phases == 3 else 1.0
     current = kw * 1000 / (factor * voltage * pf)
-    design = current * (1.25 if kind != "一般設備" else 1.0)
+    design = current * (1.25 if kind != "一般設備" or has_motor else 1.0)
     if design_current_a is not None:
         design = number(design_current_a, "design_current_a", current - 1e-8, 100000000)
     temperature = 90 if insulation == "XLPE" else 60
@@ -144,6 +161,10 @@ def electrical(
     return dict(
         tool="electrical",
         power_kw=kw,
+        power_value=power,
+        power_unit=unit,
+        motor_efficiency=float(efficiency) if has_motor else None,
+        shaft_kw=power * ELECTRICAL_POWER_UNITS[unit] if has_motor else None,
         supply=supply,
         phases=phases,
         voltage=voltage,
@@ -157,8 +178,10 @@ def electrical(
         dp=dp,
         terminal_c=terminal,
         drop_basis="設計電流與R/X阻抗上界" if conservative_drop else "運轉電流及輸入PF",
-        formula="三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。",
-        note="kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。",
+        formula="三相 I=P×1000/(√3×V×PF)；單相 I=P×1000/(V×PF)。連續／馬達初估採125%；候選需滿足設計電流≤AT≤有效載流量。"
+        "HP：1 HP=0.745699871582 kW；PS：1 PS=0.73549875 kW（軸輸出）；輸入kW=軸輸出kW/η。",
+        note="kW 是電氣輸入。線徑使用原專案初估表；缺少75°C端子表時採60°C表。馬達NFB仍須核啟動與獨立過載保護；中性線、接地及短路容量另核。"
+        "W 也是電氣輸入；HP／PS 是馬達軸輸出，除以效率換算輸入；HP／PS 負載採馬達125%初估。",
     )
 
 

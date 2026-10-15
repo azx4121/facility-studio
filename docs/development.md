@@ -15,6 +15,7 @@ Windows 在 [windows](../windows/)，macOS 在 [macos](../macos/)。兩者各自
 在倉庫根目錄，以符合建置文件的 Python 執行：
 
 ```sh
+python windows/tests/electrical_units.py
 python windows/tests/regression.py
 python windows/tests/v55_features.py
 python windows/tests/v552_core.py
@@ -34,6 +35,8 @@ python tools/verify_use_cases.py --platform windows --output use-cases-windows.j
 ```
 
 macOS 來源把 `windows/` 改為 `macos/`，兩個 `--platform` 改為 `macos`；需要時使用 `python3`。測試會更新來源平台 `evidence/` 的紀錄。部分測試匯入 Tk；實際 GUI 測試另需可用的顯示服務與建置文件指定的套件。
+
+`electrical_units.py` 使用暫存輸出，驗證 kW／W／HP／PS、效率、舊 kW 輸入、CLI 與中英文報告；加上 `--gui` 會再驗證實際唯讀下拉選單、切換單位保留負荷及導覽後的欄位狀態。Windows／macOS 原生 CI 均執行這組 GUI 測試；Linux 可用 `xvfb-run -a python windows/tests/electrical_units.py --gui`。
 
 案例輸入及命令列例子見[工具指南的重現段落](guides/README.md#可重現的輸入與結果)。來源通過不能代替 EXE／App 的原生驗收。
 
@@ -63,6 +66,8 @@ This page is for source development, reproducible calculations and packaging. Bu
 Source lives in `windows/` and `macos/`, with platform-specific navigation, scrolling, fonts and launch behavior. Retain those differences. Launch `Facility_Studio_V5_5.py` with its sibling package/resources. Follow the linked platform BUILDING documents for Python, dependencies and native packaging.
 
 Run the commands above from the repository root. For macOS source, change `windows/` to `macos/` and both `--platform windows` options to `--platform macos`; use `python3` if required. Tests can update evidence files. GUI tests additionally require a display and the documented dependencies.
+
+`electrical_units.py` uses temporary outputs to check power conversions, efficiency, legacy kW inputs, CLI results and bilingual reports. Add `--gui` to exercise the readonly unit selector, load-preserving conversions and navigation state. Both native CI workflows run this GUI mode. On headless Linux, use `xvfb-run -a python windows/tests/electrical_units.py --gui`.
 
 The full-report API requires a complete main-project result and rejects isolated HVAC results with `incomplete_result`. C1 supersaturation uses `supersaturated_air` and the relevant input field. The cleanroom generator retains the 100 original physical inputs; generated metadata and expected error fields reflect the current source, so its complete JSON hash differs from historical input files. The recorded V5.6 source stress checks migrate the retained original projects before inactive-field mutations and repeated calculations; see the [feature and source evidence](2026-10-12-v5.6-expansion.md#english). Historical source evidence is separate from a fresh rerun and from native acceptance of published binaries. Run v5510_keypad.py for key identity and insertion behavior, and v560_features.py for large pipes, gas choices and direct navigation; native self-tests additionally exercise delivered widgets and Windows OS messages.
 

@@ -1,6 +1,6 @@
 """Short forms and clearly labelled reference values for independent tools."""
 
-from .simple_engines import SUPPLIES
+from .simple_engines import SUPPLIES, ELECTRICAL_POWER_UNITS, MOTOR_POWER_UNITS
 from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, has_demand
 from .quick_tools import UNITS
 
@@ -31,9 +31,11 @@ def field(
 TOOLS = {
     "electrical": dict(
         title="電力配線",
-        subtitle="輸入設備kW，查看NFB候選、每相線徑與電流。",
+        subtitle="輸入設備功率與單位，查看NFB候選、每相線徑與電流。",
         fields=[
-            field("power", "設備用電功率", "10", help="kW，填電氣輸入功率"),
+            field("power", "設備功率", "10", units=("power_unit", tuple(ELECTRICAL_POWER_UNITS)),
+                  help="kW／W 填電氣輸入；HP 為英制馬力、PS 為公制馬力，填馬達軸輸出並另填效率。"),
+            field("motor_efficiency", "馬達效率 η", "0.90", help="0.1–1；輸入功率＝軸輸出功率÷效率，請依馬達型錄確認。"),
             field("supply", "供電方式", "三相 380V", options=SUPPLIES),
             field(
                 "kind", "使用方式", "一般設備", options=("一般設備", "連續運轉", "馬達")
@@ -61,6 +63,7 @@ TOOLS = {
             field("loaded", "同管載流導線數", "3", advanced=True),
             field("drop_limit", "允許電壓降", "3", advanced=True, help="%"),
         ],
+        units={"power_unit": "kW"},
     ),
     "duct": dict(
         title="風管尺寸",
@@ -254,6 +257,8 @@ def defaults(tool):
 
 
 def active_field(tool, key, data):
+    if tool == "electrical" and key == "motor_efficiency":
+        return data.get("power_unit", "kW") in MOTOR_POWER_UNITS
     if tool == "gas" and key == "gas_name":
         return data.get("gas") == CUSTOM_GAS and has_demand(data.get("flow", "0"))
     if tool == "lighting":
@@ -280,7 +285,8 @@ def active_field(tool, key, data):
 
 def adopted_summary(tool, data):
     if tool == "electrical":
-        return f"採用：PF {data['pf']}｜銅線{data['insulation']}｜單程{data['length']}m｜環溫{data['ambient']}°C｜端子{data['terminal']}°C｜同管{data['loaded']}根｜壓降≤{data['drop_limit']}%"
+        motor = f"｜馬達效率 η={data.get('motor_efficiency', '0.90')}" if active_field(tool, "motor_efficiency", data) else ""
+        return f"採用：PF {data['pf']}｜銅線{data['insulation']}｜單程{data['length']}m｜環溫{data['ambient']}°C｜端子{data['terminal']}°C｜同管{data['loaded']}根｜壓降≤{data['drop_limit']}%" + motor
     if tool == "duct":
         return f"採用：風速≤{data['velocity']}m/s｜寬高比≤{data['ratio']}｜方管50mm、圓管2英吋級距｜{'已啟用路徑阻力檢查' if data['check_path']=='1' else '僅定寸，靜壓是否足夠待路徑資料'}"
     if tool == "gas":

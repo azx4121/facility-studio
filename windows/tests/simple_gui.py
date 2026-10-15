@@ -62,7 +62,7 @@ with tempfile.TemporaryDirectory(prefix="facility553_gui_") as directory:
     power.variables["power"].set("not a number")
     check("06_stale_values_cleared_immediately", power.result is None and app.export_button.instate(["disabled"]))
     power.calculate(True)
-    check("07_inline_field_error", "設備用電功率" in power.status.cget("text") and power.widgets["power"].cget("style") == "Simple.Invalid.TEntry")
+    check("07_inline_field_error", "設備功率" in power.status.cget("text") and power.widgets["power"].cget("style") == "Simple.Invalid.TEntry")
     check("08_invalid_copy_blocked", not app.copy_result())
     output = Path(directory) / "invalid.txt"
     check("09_invalid_export_blocked", not app.export_result(output) and not output.exists())

@@ -2187,6 +2187,15 @@ TEXT.update({
     "廠務簡易工具": "Facility Studio",
     "工程快算": "Engineering quick tools",
     "逐段控制與選用熱源": "Stage controls / selected heat sources",
+    "輸入設備功率與單位，查看NFB候選、每相線徑與電流。": "Enter equipment power and units to estimate a circuit breaker (NFB), conductor size per phase and current.",
+    "kW／W 填電氣輸入；HP 為英制馬力、PS 為公制馬力，填馬達軸輸出並另填效率。": "kW / W: electrical input. HP: mechanical horsepower; PS: metric horsepower. Enter motor shaft output and efficiency.",
+    "馬達效率 η": "Motor efficiency η",
+    "設備功率": "Equipment power",
+    "0.1–1；輸入功率＝軸輸出功率÷效率，請依馬達型錄確認。": "0.1–1; input power = shaft output / efficiency. Confirm the motor manufacturer's data.",
+    "HP：1 HP=0.745699871582 kW；PS：1 PS=0.73549875 kW（軸輸出）；輸入kW=軸輸出kW/η。": "HP: 1 HP = 0.745699871582 kW; PS: 1 PS = 0.73549875 kW (shaft output); input kW = shaft kW / η.",
+    "W 也是電氣輸入；HP／PS 是馬達軸輸出，除以效率換算輸入；HP／PS 負載採馬達125%初估。": "W is also electrical input. HP / PS are motor shaft output, divided by efficiency for input power. HP / PS loads use the preliminary 125% motor allowance.",
+    "電氣輸入 ": "Electrical input ",
+    "軸輸出 ": "Shaft output ",
 })
 
 # Current window and export headings use the same version and deliberate wording.

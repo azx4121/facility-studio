@@ -2,7 +2,7 @@ from .i18n import localized_report
 
 """Short results shared by the independent forms and their exports."""
 
-from .simple_schema import TOOLS
+from .simple_schema import TOOLS, defaults
 from .version import VERSION
 from .gas_catalog import gas_label, CUSTOM_GAS
 from .i18n import verbatim
@@ -25,6 +25,9 @@ def presentation(result):
             ]
         else:
             cards = [("NFB", "無需求"), ("線徑", "無需求"), ("電流", "0 A")]
+        details.append(f"電氣輸入 {result['power_kw']:,.6g} kW")
+        if result.get("shaft_kw") is not None:
+            details.append(f"軸輸出 {result['shaft_kw']:,.6g} kW｜馬達效率 η={result['motor_efficiency']:g}")
     elif tool == "duct":
         rect, round_duct = result["rectangle"], result["round"]
         cards = [
@@ -130,6 +133,9 @@ def tool_report(result, inputs):
     cards, details = presentation(result)
     from .simple_schema import active_field
 
+    if result["tool"] == "electrical":
+        # Callers that stored the original kW-only short form remain supported.
+        inputs = dict(defaults("electrical"), **inputs)
     lines = [f"廠務簡易工具 {VERSION}｜{TOOLS[result['tool']]['title']}", "", "輸入條件"]
     for row in TOOLS[result["tool"]]["fields"]:
         key = row["key"]
@@ -138,7 +144,7 @@ def tool_report(result, inputs):
             if row["checkbox"]:
                 value = "是" if value == "1" else "否"
             if row["units"]:
-                value += " " + inputs[row["units"][0]]
+                value = f"{value} {inputs[row['units'][0]]}"
             lines.append(f"  {row['label']}：{value}")
     lines += ["", "結果"] + [f"  {label}：{value}" for label, value in cards]
     if result["tool"] == "lighting" and inputs["area_mode"] == "體積 m³":

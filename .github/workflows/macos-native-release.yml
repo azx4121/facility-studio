@@ -38,6 +38,7 @@ jobs:
       - name: Language and engineering checks
         run: |
           python3 -c "import tkinter; print('Source Tcl/Tk:', tkinter.Tcl().eval('info patchlevel'))"
+          python3 macos/tests/electrical_units.py --gui
           python3 macos/tests/bilingual.py
           python3 macos/tests/v556_features.py
           python3 macos/tests/v557_inactive.py

@@ -13,6 +13,7 @@ from .quick_tools import UNITS, UNIT_HELP
 from .air_chart import AirChart
 from .simple_engines import calculate_tool, FLOW_FACTORS, GAS_FLOW_FACTORS
 from .simple_engines import AIR_PRESSURE_FACTORS, GAS_PRESSURE_FACTORS
+from .simple_engines import electrical_power_factor, MOTOR_POWER_UNITS
 from .simple_reports import presentation, tool_report
 from .simple_schema import TOOLS, active_field, adopted_summary, defaults
 from .ui_common import app_icon
@@ -195,6 +196,14 @@ class SimplePage(ScrollPage):
             return
         self.suspended = True
         try:
+            if self.tool == "electrical" and key == "power_unit":
+                old, new = self.previous[key], self.variables[key].get()
+                efficiency = self.variables["motor_efficiency"].get()
+                value = number(self.variables["power"].get(), "power", 0)
+                converted = value * electrical_power_factor(old, efficiency) / electrical_power_factor(new, efficiency)
+                self.variables["power"].set(format(converted, ".15g"))
+                if new in MOTOR_POWER_UNITS and self.variables["kind"].get() == "一般設備":
+                    self.variables["kind"].set("馬達")
             if self.tool == "gas" and key == "flow_basis":
                 from .simple_engines import compressed_air
                 previous_result = compressed_air(self.previous)

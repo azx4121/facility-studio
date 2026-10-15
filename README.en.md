@@ -24,6 +24,12 @@ Download one file for your platform. Help and equipment templates are bundled. [
 
 The Windows EXE has no official publisher signature; the Mac app has no Developer ID or Apple notarization. First launch may show a security prompt. Check the download source and follow the [security-prompt guide](docs/signing.en.md).
 
+## Electrical power-unit fix in source
+
+The current source adds **kW / W / HP / PS** choices to **Electrical sizing**. kW and W are electrical input power. HP and PS are motor shaft output; the calculator converts them using an editable motor efficiency before estimating current, breaker and conductor candidates. [Conversions and example](docs/guides/electrical.en.md#power-units)
+
+This fix is **not yet included in the win.3 / mac.5 downloads** above. Updated EXE/DMG files require native acceptance on each platform before a new release. There are still seven quick tools, and the existing project format remains schema 11.
+
 ## What can you use it for?
 
 | Your task | What you get | Tool / example |
