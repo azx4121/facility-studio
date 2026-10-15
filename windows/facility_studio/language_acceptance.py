@@ -11,6 +11,7 @@ def run(root, app, workbench, check, pump, output=None):
     from . import i18n
     from .localized_tk import Combobox
     from .simple_reports import tool_report
+    from .simple_schema import TOOLS
     from .simple_engines import calculate_tool
     from .ahu_desktop import AHUWindow
     from .equipment_io import export_template, export_csv_templates, load_equipment
@@ -33,7 +34,7 @@ def run(root, app, workbench, check, pump, output=None):
         "English main-window title",
         lambda: require("Facility" in root.title(), root.title()),
     )
-    for tool in ("electrical", "duct", "gas", "lighting", "water", "air", "units"):
+    for tool in TOOLS:
 
         def form(name=tool):
             app.show_tool(name)

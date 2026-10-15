@@ -6,6 +6,20 @@ C1 supersaturation messages identify the season, entering state, ADP and leaving
 
 [繁體中文](ahu.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
+<a id="source-revision"></a>
+## Current source: MAU, DCC, FFU and the system display
+
+This section describes the current engineering/interface revision separately from the retained published-version cases below. Source changes do not rewrite the versions or acceptance evidence of existing EXE/DMG downloads.
+
+The main MAU model explicitly selects airflow topology and ACH basis. Older projects retain **Independent FFU loop; MAU supplies the room directly**: FFU and circulation-following DCC both use the original recirculation flow, without adding OA. For **MAU enters the plenum and supplies through FFUs**, choose whether ACH denotes basic recirculation or total FFU supply including OA. These give `FFU=recirculation+OA` and `DCC=FFU-OA`, respectively. Negative return is retained as a failed condition. See the [workbench comparison](workbench.en.md#source-revision).
+
+The main model determines final OA from exhaust, leakage, occupancy and dehumidification before updating FFU count, fan-to-room heat and DCC sensible load. DCC air-side capacity uses the same flow as the report and the larger summer/winter load. The independent DCC-flow option remains supported. Existing gap-orifice leakage is already zero at 0 Pa; reference ACH is an optional alternative estimate. A 15 Pa / 1 ACH reference and 85% installation ratio are not universal cleanroom code requirements.
+
+The staged individual unit still represents outdoor-air entry, consecutive equipment stages and final supply targets; it does not include the whole FFU/DCC return loop. Convert room-reference CMH and supply-state CMH through the same dry-air mass rate before comparing them. Do not add volume flows measured at different air states directly. Main-project fields and reports distinguish DCC dry coils and FFUs rather than presenting them as FCUs.
+
+The responsive colour flow diagram uses green for OA, cyan for cooling, orange for heating/reheat, blue for supply/FFUs and amber for exhaust. State cards show temperature, RH and enthalpy; KPI cards and structured details show demand and checks. These are still target/calculated states. When installed capacity is insufficient, the target point is not a prediction of achieved leaving air.
+
+
 In **Full workbench**, open the individual AHU window. Set summer/winter conditions. Each stage supports automatic demand, bypass or specified outlet dry bulb; cooling stages also support temperature/RH targets. The preceding outlet becomes the next inlet. H1/H2 can use electric heat, recovered hot water, both or neither; hot-water conditions may be shared or separate.
 
 Water-wash/wetted-media evaporation, electrode steam and electric steam are different devices. Evaporative media cool the air; do not assume all humidification is isothermal. Electrode steam needs the manufacturer's conductivity range; DI/UPW is not automatically suitable.

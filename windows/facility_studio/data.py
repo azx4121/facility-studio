@@ -9,6 +9,17 @@ NFB_SIZES = _TABLES["tables"]["NFB_SIZES"]
 VOLTAGE_MAP = _TABLES["tables"]["VOLTAGE_MAP"]
 GAS_DESIGN_VELOCITY_MPS = _TABLES["tables"]["GAS_DESIGN_VELOCITY_MPS"]
 CLEANROOM_DB = _TABLES["tables"]["CLEANROOM_DB"]
+
+# Explicit units at the data boundary: all absolute roughness values are mm;
+# pipe bores are PIPE_DB[*]['id'] / HVAC_PIPES[*]['id_mm'], also in mm.
+# Convert BOTH epsilon and D to metres before Colebrook/Darcy calculations.
+ROUGHNESS_MM = {"commercial_steel": 0.045, "galvanized_duct": 0.09,
+                "stainless_steel": 0.015, "smooth_plastic": 0.0015}
+FFU_SIZES = {"1200x600 (0.72m²)": 0.72, "1200x1200 (1.44m²)": 1.44}
+STANDARD_MOTOR_KW = (0.75, 1.5, 2.2, 3.7, 5.5, 7.5, 11, 15, 18.5,
+                     22, 30, 37, 45, 55, 75)
+STANDARD_BREAKER_AT = (15, 20, 30, 40, 50, 60, 75, 100, 125, 150,
+                       175, 200, 225, 250, 300, 400)
 ORIGINAL_DEFAULTS = {
     "sys_type": "AHU (OA+RA 混合)",
     "rt_type": "US RT (美制 3024 kcal/hr)",

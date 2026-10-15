@@ -134,7 +134,7 @@ def main():
         extracted_source.mkdir()
         extract_unix_zip(contents / "Source_and_Verification.zip", extracted_source)
         source = extracted_source / "Facility_Studio_V5_5_4_macOS_Source"
-        for tool in ("electrical", "duct", "gas", "lighting", "water", "air", "units"):
+        for tool in ("electrical", "duct", "gas", "lighting", "water", "air", "units", "cleanroom", "heat_loads", "pumps"):
             subprocess.run(
                 [
                     sys.executable,
@@ -231,7 +231,7 @@ def main():
                 "zip_crc_checked": True,
                 "unix_symlinks_recreated_and_verified": True,
                 "delivered_app_matches_source_files": checked_source_files,
-                "extracted_source_cli_tools_executed": 7,
+                "extracted_source_cli_tools_executed": 10,
                 "extracted_source_full_report_executed": True,
                 "extracted_source_excel_export_import_executed": True,
                 "disabled_template_expected_rejection_checked": True,
@@ -250,7 +250,7 @@ def main():
             output / "Mac_Release_Verification.json",
         )
     print(
-        f"Delivered and extracted {bundle.name}: {bundle.stat().st_size:,} bytes; 7 source tools, full report, template and native bundle byte checks passed."
+        f"Delivered and extracted {bundle.name}: {bundle.stat().st_size:,} bytes; 10 source tools, full report, template and native bundle byte checks passed."
     )
 
 

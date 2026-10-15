@@ -11,7 +11,48 @@ from .i18n import verbatim
 def presentation(result):
     tool = result["tool"]
     details = []
-    if tool == "electrical":
+    if tool == "cleanroom":
+        cards = [
+            ("FFU 需求台數", f"{result['ffu_count']:,} 台"),
+            ("MAU 外氣量", f"{result['oa_cmh']:,.1f} CMH"),
+            ("天花板覆蓋率", f"{result['coverage_ratio']:,.1f} %"),
+        ]
+        details = [
+            f"FFU 總設計風量 {result['ffu_total_cmh']:,.1f} CMH｜單台 {result['ffu_unit_cmh']:,.1f} CMH｜{result['ffu_size']}",
+            f"DCC 循環回風 {result['dcc_cmh']:,.1f} CMH｜外氣 {result['oa_cmh']:,.1f} CMH",
+            f"壓差洩漏 {result['leakage_cmh']:,.1f} CMH｜排氣 {result['exhaust_cmh']:,.1f} CMH",
+            f"FFU 輸入電力／室內風機熱 {result['ffu_fan_kw']:,.2f} kW",
+            "結構空間超限，請調整 FFU 尺寸、風量或天花板配置。" if result['coverage_exceeded'] else "覆蓋率未超過本案配置上限；仍須核對格柵與設備配置。",
+        ]
+        details.extend(result.get("warnings", []))
+    elif tool == "heat_loads":
+        cards = [
+            ("主機總冷量", f"{result['q_total_rt']:,.2f} US RT"),
+            ("DCC 顯熱需求", f"{result.get('q_dcc_kw', result['q_room_sensible_kw']):,.2f} kW"),
+            ("MAU 外氣冷量", f"{result['q_mau_kw']:,.2f} kW"),
+        ]
+        details = [
+            f"系統總冷量 {result['q_total_kw']:,.2f} kW｜{result['q_total_rt']:,.2f} US RT",
+            f"照明 {result['q_lighting_kw']:,.2f} kW｜圍護 {result['q_envelope_kw']:,.2f} kW｜設備 {result['q_equipment_kw']:,.2f} kW",
+            f"FFU 風機熱 {result['q_ffu_kw']:,.2f} kW｜人員潛熱 {result['q_people_latent_kw']:,.2f} kW",
+        ]
+        if result.get("load_basis"):
+            details.append(result["load_basis"])
+        details.extend(result.get("warnings", []))
+    elif tool == "pumps":
+        motor = result.get("recommended_motor_kw")
+        cards = [
+            ("建議馬達銘牌", f"{motor:,.2f} kW" if motor is not None else "超出內建級距"),
+            ("設計揚程", f"{result['head_m']:,.2f} m"),
+            ("設計流量", f"{result['flow_lpm']:,.2f} LPM"),
+        ]
+        details = [
+            f"水功率 {result['hydraulic_power_kw']:,.3f} kW｜泵軸功率 {result['shaft_power_kw']:,.3f} kW｜馬達輸入 {result['motor_input_kw']:,.3f} kW",
+            f"泵效率 {result['eta_pump']:.1%}｜馬達效率 {result['eta_motor']:.1%}",
+            "馬達銘牌依軸功率加 15% 裕度，向上匹配內建級距；輸入電功率另計。",
+        ]
+        details.extend(result.get("warnings", []))
+    elif tool == "electrical":
         candidate = result["selected"]
         if candidate:
             cards = [
@@ -23,6 +64,10 @@ def presentation(result):
                 f"設計電流 {result['design_a']:,.2f}A ≤ NFB {candidate['nfb_a']:g}AT ≤ 有效載流 {candidate['ampacity_a']:,.2f}A",
                 f"單程 {result['length_m']:g}m｜電壓降 {candidate['drop_v']:,.2f}V / {candidate['drop_pct']:.2f}%",
             ]
+            if "design_breaker_a" in result:
+                details.append(f"1.25 倍連續負載初估 {result['design_breaker_a']:,.2f} A；馬達啟動、短路與保護協調另核。")
+            if "electrical_input_kw" in result:
+                details.append(f"有效輸入電功率 {result['electrical_input_kw']:,.3f} kW｜採用效率 {result.get('eta', 1):.3f}")
         else:
             cards = [("NFB", "無需求"), ("線徑", "無需求"), ("電流", "0 A")]
     elif tool == "duct":
@@ -125,12 +170,37 @@ def presentation(result):
     return cards, details
 
 
+def result_rows(result):
+    """Stable four-column rows for the dashboard's detail Treeview."""
+    cards, details = presentation(result)
+    rows = [(label, value, "", "計算結果") for label, value in cards]
+    rows.extend(("計算明細", value, "", "需求初估") for value in details)
+    return rows
+
+
+@localized_report
+def pipeline_report(result):
+    from .reports import executive_summary_text
+
+    lines = ["廠務跨模組設計摘要｜V" + VERSION, "", executive_summary_text(result)]
+    pipeline = result.get("pipeline", result)
+    for key, value in pipeline.items():
+        if isinstance(value, dict) and value.get("tool"):
+            cards, details = presentation(value)
+            lines += ["", key] + [label + "：" + number for label, number in cards] + details
+    if pipeline.get("warnings"):
+        lines += ["", "需確認的條件"] + list(pipeline["warnings"])
+    return "\n".join(lines) + "\n"
+
+
 @localized_report
 def tool_report(result, inputs):
     cards, details = presentation(result)
     from .simple_schema import active_field
 
-    lines = [f"廠務簡易工具 {VERSION}｜{TOOLS[result['tool']]['title']}", "", "輸入條件"]
+    lines = [f"廠務簡易工具 {VERSION}｜{TOOLS[result['tool']]['title']}", "", "核心設計量"]
+    lines += [f"  {label}：{value}" for label, value in cards]
+    lines += ["", "輸入條件"]
     for row in TOOLS[result["tool"]]["fields"]:
         key = row["key"]
         if active_field(result["tool"], key, inputs):

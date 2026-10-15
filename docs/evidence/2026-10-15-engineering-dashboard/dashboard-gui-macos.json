@@ -1,0 +1,1032 @@
+{
+  "kind": "source-tk-dashboard-smoke",
+  "source_platform": "macos",
+  "host_os": "Darwin",
+  "python": "3.13.15",
+  "tk_patchlevel": "8.6.18",
+  "native_binary_acceptance": false,
+  "passed": true,
+  "check_count": 255,
+  "checks": [
+    {
+      "name": "基本模式/MAU/en_fcu_cmh grid visibility",
+      "passed": true
+    },
+    {
+      "name": "基本模式/MAU/en_fcu_cmh architecture helper",
+      "passed": true
+    },
+    {
+      "name": "基本模式/MAU/en_fcu_cmh active input state",
+      "passed": true
+    },
+    {
+      "name": "基本模式/MAU/fcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "基本模式/MAU/fcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "基本模式/MAU/fcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "基本模式/MAU/en_rcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "基本模式/MAU/en_rcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "基本模式/MAU/en_rcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "基本模式/MAU retains drafts",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU/en_fcu_cmh grid visibility",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU/en_fcu_cmh architecture helper",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU/en_fcu_cmh active input state",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU/fcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU/fcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU/fcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU/en_rcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU/en_rcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU/en_rcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU/ffu_topology hidden",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU/ffu_airflow_basis hidden",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU/ffu_size hidden",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU/dcc_airflow_mode hidden",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FCU retains drafts",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU/en_fcu_cmh grid visibility",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU/en_fcu_cmh architecture helper",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU/en_fcu_cmh active input state",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU/fcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU/fcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU/fcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU/en_rcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU/en_rcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU/en_rcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU/ffu_topology hidden",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU/ffu_airflow_basis hidden",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU/ffu_size hidden",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU/dcc_airflow_mode hidden",
+      "passed": true
+    },
+    {
+      "name": "基本模式/RCU retains drafts",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU/en_fcu_cmh grid visibility",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU/en_fcu_cmh architecture helper",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU/en_fcu_cmh active input state",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU/fcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU/fcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU/fcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU/en_rcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU/en_rcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU/en_rcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU/ffu_topology hidden",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU/ffu_airflow_basis hidden",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU/ffu_size hidden",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU/dcc_airflow_mode hidden",
+      "passed": true
+    },
+    {
+      "name": "基本模式/AHU retains drafts",
+      "passed": true
+    },
+    {
+      "name": "進階模式/MAU/en_fcu_cmh grid visibility",
+      "passed": true
+    },
+    {
+      "name": "進階模式/MAU/en_fcu_cmh architecture helper",
+      "passed": true
+    },
+    {
+      "name": "進階模式/MAU/en_fcu_cmh active input state",
+      "passed": true
+    },
+    {
+      "name": "進階模式/MAU/fcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "進階模式/MAU/fcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "進階模式/MAU/fcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "進階模式/MAU/en_rcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "進階模式/MAU/en_rcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "進階模式/MAU/en_rcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "進階模式/MAU retains drafts",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU/en_fcu_cmh grid visibility",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU/en_fcu_cmh architecture helper",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU/en_fcu_cmh active input state",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU/fcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU/fcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU/fcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU/en_rcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU/en_rcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU/en_rcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU/ffu_topology hidden",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU/ffu_airflow_basis hidden",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU/ffu_size hidden",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU/dcc_airflow_mode hidden",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FCU retains drafts",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU/en_fcu_cmh grid visibility",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU/en_fcu_cmh architecture helper",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU/en_fcu_cmh active input state",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU/fcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU/fcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU/fcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU/en_rcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU/en_rcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU/en_rcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU/ffu_topology hidden",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU/ffu_airflow_basis hidden",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU/ffu_size hidden",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU/dcc_airflow_mode hidden",
+      "passed": true
+    },
+    {
+      "name": "進階模式/RCU retains drafts",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU/en_fcu_cmh grid visibility",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU/en_fcu_cmh architecture helper",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU/en_fcu_cmh active input state",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU/fcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU/fcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU/fcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU/en_rcu_rt grid visibility",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU/en_rcu_rt architecture helper",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU/en_rcu_rt active input state",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU/ffu_topology hidden",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU/ffu_airflow_basis hidden",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU/ffu_size hidden",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU/dcc_airflow_mode hidden",
+      "passed": true
+    },
+    {
+      "name": "進階模式/AHU retains drafts",
+      "passed": true
+    },
+    {
+      "name": "advanced inactive draft visible upw_res",
+      "passed": true
+    },
+    {
+      "name": "advanced inactive draft disabled upw_res",
+      "passed": true
+    },
+    {
+      "name": "inactive rules match upw_res",
+      "passed": true
+    },
+    {
+      "name": "advanced inactive draft visible dcc_airflow_cmh",
+      "passed": true
+    },
+    {
+      "name": "advanced inactive draft disabled dcc_airflow_cmh",
+      "passed": true
+    },
+    {
+      "name": "inactive rules match dcc_airflow_cmh",
+      "passed": true
+    },
+    {
+      "name": "advanced inactive draft visible ffu_airflow_basis",
+      "passed": true
+    },
+    {
+      "name": "advanced inactive draft disabled ffu_airflow_basis",
+      "passed": true
+    },
+    {
+      "name": "inactive rules match ffu_airflow_basis",
+      "passed": true
+    },
+    {
+      "name": "基本模式 independent topology selectable",
+      "passed": true
+    },
+    {
+      "name": "基本模式 independent basis disabled",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FFU總送風（已含OA） selectable",
+      "passed": true
+    },
+    {
+      "name": "基本模式/FFU總送風（已含OA） retained",
+      "passed": true
+    },
+    {
+      "name": "基本模式/室內基本循環（另加OA） selectable",
+      "passed": true
+    },
+    {
+      "name": "基本模式/室內基本循環（另加OA） retained",
+      "passed": true
+    },
+    {
+      "name": "基本模式 independent DCC flow enabled",
+      "passed": true
+    },
+    {
+      "name": "進階模式 independent topology selectable",
+      "passed": true
+    },
+    {
+      "name": "進階模式 independent basis disabled",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FFU總送風（已含OA） selectable",
+      "passed": true
+    },
+    {
+      "name": "進階模式/FFU總送風（已含OA） retained",
+      "passed": true
+    },
+    {
+      "name": "進階模式/室內基本循環（另加OA） selectable",
+      "passed": true
+    },
+    {
+      "name": "進階模式/室內基本循環（另加OA） retained",
+      "passed": true
+    },
+    {
+      "name": "進階模式 independent DCC flow enabled",
+      "passed": true
+    },
+    {
+      "name": "architecture switches preserve every numeric draft",
+      "passed": true
+    },
+    {
+      "name": "main callbacks complete without errors",
+      "passed": true
+    },
+    {
+      "name": "electrical computes valid defaults",
+      "passed": true
+    },
+    {
+      "name": "electrical has KPI cards",
+      "passed": true
+    },
+    {
+      "name": "electrical has structured result rows",
+      "passed": true
+    },
+    {
+      "name": "electrical/power fits its row",
+      "passed": true
+    },
+    {
+      "name": "electrical/supply fits its row",
+      "passed": true
+    },
+    {
+      "name": "electrical/kind fits its row",
+      "passed": true
+    },
+    {
+      "name": "duct computes valid defaults",
+      "passed": true
+    },
+    {
+      "name": "duct has KPI cards",
+      "passed": true
+    },
+    {
+      "name": "duct has structured result rows",
+      "passed": true
+    },
+    {
+      "name": "duct/flow fits its row",
+      "passed": true
+    },
+    {
+      "name": "duct/flow_unit fits its row",
+      "passed": true
+    },
+    {
+      "name": "duct/check_path fits its row",
+      "passed": true
+    },
+    {
+      "name": "gas computes valid defaults",
+      "passed": true
+    },
+    {
+      "name": "gas has KPI cards",
+      "passed": true
+    },
+    {
+      "name": "gas has structured result rows",
+      "passed": true
+    },
+    {
+      "name": "gas/gas fits its row",
+      "passed": true
+    },
+    {
+      "name": "gas/flow_basis fits its row",
+      "passed": true
+    },
+    {
+      "name": "gas/flow fits its row",
+      "passed": true
+    },
+    {
+      "name": "gas/flow_unit fits its row",
+      "passed": true
+    },
+    {
+      "name": "gas/pressure fits its row",
+      "passed": true
+    },
+    {
+      "name": "gas/pressure_unit fits its row",
+      "passed": true
+    },
+    {
+      "name": "gas/velocity fits its row",
+      "passed": true
+    },
+    {
+      "name": "lighting computes valid defaults",
+      "passed": true
+    },
+    {
+      "name": "lighting has KPI cards",
+      "passed": true
+    },
+    {
+      "name": "lighting has structured result rows",
+      "passed": true
+    },
+    {
+      "name": "lighting/mode fits its row",
+      "passed": true
+    },
+    {
+      "name": "lighting/area_mode fits its row",
+      "passed": true
+    },
+    {
+      "name": "lighting/area fits its row",
+      "passed": true
+    },
+    {
+      "name": "lighting/watts fits its row",
+      "passed": true
+    },
+    {
+      "name": "lighting/quantity fits its row",
+      "passed": true
+    },
+    {
+      "name": "water computes valid defaults",
+      "passed": true
+    },
+    {
+      "name": "water has KPI cards",
+      "passed": true
+    },
+    {
+      "name": "water has structured result rows",
+      "passed": true
+    },
+    {
+      "name": "water/mode fits its row",
+      "passed": true
+    },
+    {
+      "name": "water/flow fits its row",
+      "passed": true
+    },
+    {
+      "name": "water/flow_unit fits its row",
+      "passed": true
+    },
+    {
+      "name": "water/delta fits its row",
+      "passed": true
+    },
+    {
+      "name": "air computes valid defaults",
+      "passed": true
+    },
+    {
+      "name": "air has KPI cards",
+      "passed": true
+    },
+    {
+      "name": "air has structured result rows",
+      "passed": true
+    },
+    {
+      "name": "air/temperature fits its row",
+      "passed": true
+    },
+    {
+      "name": "air/rh fits its row",
+      "passed": true
+    },
+    {
+      "name": "units computes valid defaults",
+      "passed": true
+    },
+    {
+      "name": "units has KPI cards",
+      "passed": true
+    },
+    {
+      "name": "units has structured result rows",
+      "passed": true
+    },
+    {
+      "name": "units/category fits its row",
+      "passed": true
+    },
+    {
+      "name": "units/value fits its row",
+      "passed": true
+    },
+    {
+      "name": "units/unit fits its row",
+      "passed": true
+    },
+    {
+      "name": "cleanroom computes valid defaults",
+      "passed": true
+    },
+    {
+      "name": "cleanroom has KPI cards",
+      "passed": true
+    },
+    {
+      "name": "cleanroom has structured result rows",
+      "passed": true
+    },
+    {
+      "name": "cleanroom/area fits its row",
+      "passed": true
+    },
+    {
+      "name": "cleanroom/height fits its row",
+      "passed": true
+    },
+    {
+      "name": "cleanroom/ffu_topology fits its row",
+      "passed": true
+    },
+    {
+      "name": "cleanroom/ffu_airflow_basis fits its row",
+      "passed": true
+    },
+    {
+      "name": "cleanroom/ach fits its row",
+      "passed": true
+    },
+    {
+      "name": "cleanroom/persons fits its row",
+      "passed": true
+    },
+    {
+      "name": "cleanroom/exhaust_cmh fits its row",
+      "passed": true
+    },
+    {
+      "name": "cleanroom/delta_p fits its row",
+      "passed": true
+    },
+    {
+      "name": "cleanroom/ffu_unit_cmh fits its row",
+      "passed": true
+    },
+    {
+      "name": "cleanroom/ffu_size fits its row",
+      "passed": true
+    },
+    {
+      "name": "cleanroom/ffu_unit_kw fits its row",
+      "passed": true
+    },
+    {
+      "name": "heat_loads computes valid defaults",
+      "passed": true
+    },
+    {
+      "name": "heat_loads has KPI cards",
+      "passed": true
+    },
+    {
+      "name": "heat_loads has structured result rows",
+      "passed": true
+    },
+    {
+      "name": "heat_loads/area fits its row",
+      "passed": true
+    },
+    {
+      "name": "heat_loads/persons fits its row",
+      "passed": true
+    },
+    {
+      "name": "heat_loads/equipment_kw fits its row",
+      "passed": true
+    },
+    {
+      "name": "heat_loads/lighting_w_m2 fits its row",
+      "passed": true
+    },
+    {
+      "name": "heat_loads/envelope_w_m2 fits its row",
+      "passed": true
+    },
+    {
+      "name": "heat_loads/ffu_count fits its row",
+      "passed": true
+    },
+    {
+      "name": "heat_loads/ffu_unit_kw fits its row",
+      "passed": true
+    },
+    {
+      "name": "heat_loads/oa_cmh fits its row",
+      "passed": true
+    },
+    {
+      "name": "heat_loads/oa_delta_h fits its row",
+      "passed": true
+    },
+    {
+      "name": "pumps computes valid defaults",
+      "passed": true
+    },
+    {
+      "name": "pumps has KPI cards",
+      "passed": true
+    },
+    {
+      "name": "pumps has structured result rows",
+      "passed": true
+    },
+    {
+      "name": "pumps/flow fits its row",
+      "passed": true
+    },
+    {
+      "name": "pumps/flow_unit fits its row",
+      "passed": true
+    },
+    {
+      "name": "pumps/head_m fits its row",
+      "passed": true
+    },
+    {
+      "name": "pumps/eta_pump fits its row",
+      "passed": true
+    },
+    {
+      "name": "pumps/eta_motor fits its row",
+      "passed": true
+    },
+    {
+      "name": "cleanroom transfers into heat",
+      "passed": true
+    },
+    {
+      "name": "FFU count transfer",
+      "passed": true
+    },
+    {
+      "name": "heat transfers into water",
+      "passed": true
+    },
+    {
+      "name": "thermal kW become LPM through water heat balance",
+      "passed": true
+    },
+    {
+      "name": "water transfers into pump",
+      "passed": true
+    },
+    {
+      "name": "pump receives actual water flow",
+      "passed": true
+    },
+    {
+      "name": "listed devices transfer into electrical",
+      "passed": true
+    },
+    {
+      "name": "heat becomes stale after upstream edit",
+      "passed": true
+    },
+    {
+      "name": "water becomes stale after upstream edit",
+      "passed": true
+    },
+    {
+      "name": "pump becomes stale after upstream edit",
+      "passed": true
+    },
+    {
+      "name": "electrical becomes stale after upstream edit",
+      "passed": true
+    },
+    {
+      "name": "stale upstream result cannot be calculated as current",
+      "passed": true
+    },
+    {
+      "name": "edited upstream result recovers",
+      "passed": true
+    },
+    {
+      "name": "heat_loads can explicitly reimport",
+      "passed": true
+    },
+    {
+      "name": "water can explicitly reimport",
+      "passed": true
+    },
+    {
+      "name": "pumps can explicitly reimport",
+      "passed": true
+    },
+    {
+      "name": "electrical can explicitly reimport",
+      "passed": true
+    },
+    {
+      "name": "invalid input receives inline style",
+      "passed": true
+    },
+    {
+      "name": "invalid result export is blocked",
+      "passed": true
+    },
+    {
+      "name": "Return key calculates a repaired input",
+      "passed": true
+    },
+    {
+      "name": "heat_loads reimports repaired inputs",
+      "passed": true
+    },
+    {
+      "name": "water reimports repaired inputs",
+      "passed": true
+    },
+    {
+      "name": "pumps reimports repaired inputs",
+      "passed": true
+    },
+    {
+      "name": "electrical reimports repaired inputs",
+      "passed": true
+    },
+    {
+      "name": "valid current tool exports HTML",
+      "passed": true
+    },
+    {
+      "name": "current pipeline exports an executive overview",
+      "passed": true
+    },
+    {
+      "name": "overview contains seven equipment rows",
+      "passed": true
+    },
+    {
+      "name": "wide form uses two panels",
+      "passed": true
+    },
+    {
+      "name": "form labels and inputs occupy aligned columns",
+      "passed": true
+    },
+    {
+      "name": "narrow form stacks panels",
+      "passed": true
+    },
+    {
+      "name": "Tk scaling 1.25 completes without callback errors",
+      "passed": true
+    },
+    {
+      "name": "Tk scaling 1.5 completes without callback errors",
+      "passed": true
+    },
+    {
+      "name": "simple-tool callbacks complete without errors",
+      "passed": true
+    },
+    {
+      "name": "MAU default calculation is available",
+      "passed": true
+    },
+    {
+      "name": "MAU has six KPI cards",
+      "passed": true
+    },
+    {
+      "name": "MAU details use structured rows",
+      "passed": true
+    },
+    {
+      "name": "SCADA contains vector equipment and airflow",
+      "passed": true
+    },
+    {
+      "name": "single MAU leaves room and return states unspecified",
+      "passed": true
+    },
+    {
+      "name": "SCADA uses the five engineering airflow / coil colors",
+      "passed": true
+    },
+    {
+      "name": "SCADA rescales for a narrower view",
+      "passed": true
+    },
+    {
+      "name": "invalid MAU flow is identified inline",
+      "passed": true
+    },
+    {
+      "name": "MAU retains the last valid details as a prior result",
+      "passed": true
+    },
+    {
+      "name": "MAU keyboard calculation repairs the result and schematic",
+      "passed": true
+    },
+    {
+      "name": "MAU callbacks complete without errors",
+      "passed": true
+    }
+  ]
+}

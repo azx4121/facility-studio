@@ -1,6 +1,17 @@
 Facility Studio V5.6.0｜Windows 廠務工程初估工具
 DESIGNED BY ANDY HUANG ©
 
+原始碼修訂提示（尚未作為新的原生發布檔）
+目前倉庫來源有十項快算，新增潔淨室風量、熱負荷初估與冰水泵浦；支援明確氣流路徑、
+上游結果帶入及設備設計量總覽。新來源需重新封裝、原生驗收並另發修訂，
+不代表下方公開 win.3 EXE 已包含此功能；其原七工具與驗收紀錄仍按發布版本保留。
+既有 schema 11 專案由新來源移轉至 schema 12 時，保留原FFU循環路徑與已採用條件。
+
+Source revision, not a new published binary: current sources contain ten calculators, adding
+cleanroom airflow, heat load estimate and chilled-water pump, with explicit airflow topology,
+upstream import and equipment summaries. A new packaged revision requires native acceptance.
+The public win.3 EXE and its historical seven-tool evidence below remain unchanged.
+
 用途
 單項快算：電力配線、風管、CDA／特氣、照明、冷熱水、空氣線圖與單位換算。
 多設備：用 Excel／CSV 彙整電力與廠務需求。

@@ -2,6 +2,34 @@
 
 [繁體中文](water.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
+<a id="source-revision"></a>
+## Current source: heat load to chilled water and pump
+
+This section covers the repository revision. Existing V5.6.0 pipe references and worked results below are retained. New source features require separate packaging and native acceptance; existing downloads are unchanged.
+
+Heat load estimate separates lighting, envelope, occupant sensible/latent heat, equipment room heat and FFU fan heat. Envelope 20 W/m2, FFU 0.18 kW per unit and OA enthalpy difference 50 kJ/kg are editable preliminary assumptions. Keep the enthalpy endpoint and control volume consistent:
+
+| OA enthalpy basis | Preliminary total chiller cooling |
+| --- | --- |
+| Outdoor air to room reference | Room sensible + occupant latent + MAU total cooling; neutral-supply approximation assigns room sensible heat to DCC |
+| Outdoor air to actual leaving dew-point state | DCC sensible + MAU total cooling; do not add occupant latent heat again when the leaving state already removes it |
+
+Actual-dew-point mode can subtract an explicitly entered **MAU room sensible cooling credit** from DCC demand. Also enter the room-minus-MAU-supply temperature difference. Credit cannot exceed the conservative air-side bound `1.2 x OA/3600 x 1.006 x temperature difference`. No credit gives an uncredited upper-bound cooling load. Zero OA with occupant latent heat is rejected. This quick tool does not solve the full humidity, reheat and equipment-feasibility problem; use the main heat/moisture balance for final dry-coil demand.
+
+After calculating heat load, use **Import upstream** in Water / heat load, then confirm water delta T. Advanced inputs include critical route length, sum K and equipment/terminal pressure loss. Default roughness is 0.045 mm. Convert both bore and roughness to metres for dimensionless epsilon/D. Parallel pipes use flow per branch. Zero equipment loss means it has not been included, not that the equipment has no resistance.
+
+In Chilled-water pump, import flow and included route head. Enter only terminal losses absent from the piping calculation. `H=(route loss+additional terminal loss) x (1+allowance/100)+open-system static head`. Enter zero static head for closed loops; do not add building height.
+
+| Power | Clean-water definition | Use |
+| --- | --- | --- |
+| Hydraulic | Q(m3/h) x H(m) x 9.81/3600 | Power delivered to the fluid |
+| Shaft | Hydraulic / pump efficiency | Required mechanical motor output |
+| Motor electrical input | Shaft / motor efficiency | Electrical-demand import |
+| Recommended motor nameplate | Shaft x 1.15, rounded up to a standard size | Rated mechanical output kW, not electrical input |
+
+Above the 75 kW reference catalogue, select a larger rating separately. Verify the pump curve, NPSH, terminal equipment and actual circuit. Without equipment losses, pump head remains a piping subtotal. Chiller cooling is not chiller electrical input; see the [electrical import scope](electrical.en.md#source-revision).
+
+
 Open **Water / heat load in the sidebar**. Choose **Known water flow** or **Known heat load**. Example defaults: clean-water density 1,000 kg/m³, specific heat 4.1868 kJ/(kg·K), maximum water velocity 1.5 m/s. Flow units include LPM, US GPM and m³/h.
 
 V5.6 extends automatic references to 24 inches, choosing one pipe within the velocity limit before parallel circuits. Added 14-24 inch carbon-steel STD references use 9.5 mm walls; enter the actual ID in the workbench when supplied dimensions differ. Examples: 7,000 LPM / 1 m/s → one 16-inch pipe, ID 387.4 mm; 30,000 LPM / 2 m/s → one 24-inch pipe, ID 590.6 mm. [Dimension sources and verification](../2026-10-12-v5.6-expansion.md)

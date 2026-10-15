@@ -2262,3 +2262,709 @@ TEXT.update({
     "目前無氣體流量需求，流速只保留為草稿":
         "No gas flow demand; velocity is retained as a draft.",
 })
+
+# Executive design overview and industrial dashboard reports.
+TEXT.update({
+    "★ 核心工程設計量與設備選型總覽（Executive Design Summary）": "★ Executive Design Summary",
+    "尚未計算": "Not calculated",
+    "設計總覽需要計算結果。": "A design overview requires calculation results.",
+    "【計算需求值】與【建議選型規格】分列；缺值保留尚未計算。": "Calculated requirements and selection targets are separate; missing values remain not calculated.",
+    "【計算需求值】": "[Calculated requirement]",
+    "【建議選型規格】": "[Selection target]",
+    "計算需求值": "Calculated requirement",
+    "建議選型規格": "Selection target",
+    "設備／系統": "Equipment / system",
+    "FFU 循環風機濾網組": "FFU fan filter units",
+    "此系統未採用 FFU": "This system does not use FFUs",
+    "不適用": "Not applicable",
+    "總風量 ": "Total airflow ",
+    "單台 ": "Per unit ",
+    "尺寸尚未計算": "Dimensions not calculated",
+    "；覆蓋率 ": "; coverage ",
+    "（本案配置上限 ": "(project layout limit ",
+    "結構空間超限": "Ceiling layout limit exceeded",
+    "配置初估": "Preliminary layout",
+    "MAU 外氣空調箱": "MAU makeup air unit",
+    "此系統於空調入口混合外氣；未配置獨立 MAU": "Outdoor air mixes at the AHU inlet; no separate MAU",
+    "設計外氣 ": "Design outdoor air ",
+    "依風量、送風露點及盤管工況選型": "Select for airflow, supply dew point and coil operating conditions",
+    "DCC 室內乾冷盤管": "DCC room dry cooling coil",
+    "此系統未採用 DCC": "This system does not use a DCC",
+    "循環回風 ": "Recirculated return air ",
+    "盤管表面須高於室內露點；依水溫及風量選型": "Keep the coil surface above room dew point; select for water temperature and airflow",
+    "分溫度迴路容量目標 ": "Capacity target across separate temperature loops ",
+    "（含本案容量餘裕，原廠額定待確認）": "(including project capacity margin; manufacturer rating pending)",
+    "依設計冷量及實際供回水工況選型": "Select for design cooling load and actual supply / return water conditions",
+    "中央冰水主機 Chiller": "Central chiller",
+    "冷量初估": "Preliminary cooling load",
+    "冰水主管路規格": "Chilled-water main piping",
+    "各溫度迴路分列": "Separate temperature loops",
+    "冰水循環泵浦 CHWP": "CHWP chilled-water pump",
+    "馬達銘牌尚未選型；各迴路須分別選泵": "Motor nameplate not selected; size each loop pump separately",
+    "待選型": "Selection pending",
+    "設計流量 ": "Design flow ",
+    "；揚程 ": "; head ",
+    "；軸功率 ": "; shaft power ",
+    " 馬達銘牌（軸輸出額定、含 15% 裕度）": " motor nameplate (rated shaft output, with 15% margin)",
+    "需求超出內建馬達級距，須另選規格": "Demand exceeds the built-in motor sizes; select another rating",
+    "選型初估": "Preliminary selection",
+    "超出級距": "Outside built-in sizes",
+    "主配電斷路器 MCCB": "Main distribution MCCB",
+    "；主進線未計算，不將分盤 AT 相加": "; main incomer not calculated; panel AT ratings are not added",
+    "分盤候選": "Panel candidates",
+    "總有效輸入功率 ": "Total active input power ",
+    "；1.25 倍電流 ": "; 1.25-times current ",
+    " 初估；啟動、短路及配線協調另核": " preliminary; verify starting, short-circuit and wiring coordination",
+    "需求超出內建斷路器級距，須另選規格": "Demand exceeds built-in breaker sizes; select another rating",
+    "MAU 單機核心設計量": "MAU unit key design values",
+    "夏季盤管水側冷量": "Summer coil water-side cooling",
+    "夏季送風狀態": "Summer supply air state",
+    "依已填壓差與效率估算": "Estimated from entered pressure and efficiency",
+    "未含未提供的循環泵與附屬設備": "Excludes unspecified circulation pumps and auxiliaries",
+    "依加濕型式分列": "By humidifier type",
+    "MAU 報告需要完整單機計算結果。": "A MAU report requires complete unit calculation results.",
+    "核心設計量": "Key design values",
+    "廠務跨模組設計摘要｜V": "Facility calculation pipeline summary | V",
+    "FFU 需求台數": "Required FFU count",
+    "MAU 外氣量": "MAU outdoor airflow",
+    "天花板覆蓋率": "Ceiling coverage",
+    "FFU 總設計風量 ": "FFU total design airflow ",
+    "DCC 循環回風 ": "DCC recirculated return air ",
+    "壓差洩漏 ": "Pressure-driven leakage ",
+    "結構空間超限，請調整 FFU 尺寸、風量或天花板配置。": "Layout limit exceeded; adjust FFU dimensions, airflow or ceiling layout.",
+    "覆蓋率未超過本案配置上限；仍須核對格柵與設備配置。": "Coverage is within the project layout limit; verify ceiling grid and equipment layout.",
+    "計算明細": "Calculation details",
+    "主機總冷量": "Total chiller cooling load",
+    "MAU 外氣冷量": "MAU outdoor air cooling load",
+    "系統總冷量 ": "Total system cooling load ",
+    " kW｜圍護 ": " kW | envelope ",
+    " kW｜人員潛熱 ": " kW | occupant latent heat ",
+    "馬達銘牌依軸功率加 15% 裕度，向上匹配內建級距；輸入電功率另計。": "Motor nameplate uses shaft power plus 15% margin, rounded up to a built-in size; electrical input is separate.",
+    "建議馬達銘牌": "Suggested motor nameplate",
+    "設計揚程": "Design head",
+    "設計流量": "Design flow",
+    "水功率 ": "Hydraulic power ",
+    " kW｜泵軸功率 ": " kW | pump shaft power ",
+    "泵效率 ": "Pump efficiency ",
+    "｜馬達效率 ": " | motor efficiency ",
+    "超出內建級距": "Outside built-in sizes",
+    "1.25 倍連續負載初估 ": "1.25-times continuous-load estimate ",
+    " A；馬達啟動、短路與保護協調另核。": " A; verify motor starting, short-circuit and protection coordination.",
+    "有效輸入電功率 ": "Active electrical input ",
+    " kW｜採用效率 ": " kW | adopted efficiency ",
+    "獨立工具／連動管線初估；尚未計算的設備不補造數值。": "Independent tool / calculation pipeline estimates; uncalculated equipment retains missing values.",
+    "需求初估；設備額定與實際工況須由原廠及設計人員確認。": "Preliminary requirements; the manufacturer and designer must verify equipment ratings at actual operating conditions.",
+    "工程設計摘要": "Engineering design summary",
+    "跨模組計算": "Calculation pipeline",
+    "MAU 單機需求": "MAU unit requirements",
+    "目前已知條件無新增異常。": "No additional issues under the known conditions.",
+    "狀態": "Status",
+    "說明": "Description",
+})
+TEXT.update({"明列設備有效輸入功率 ": "Listed equipment active input power "})
+TEXT.update({
+    "；路徑壓差 ": "; path pressure loss ",
+    "中性供風初估，未抵扣MAU顯熱": "Neutral-supply estimate; no MAU sensible cooling credit",
+    "實際露點送風；MAU顯熱抵扣採明填值，零時為未抵扣冷量上界": "Actual dew-point supply; explicit MAU sensible credit; zero credit gives the upper cooling estimate",
+    "三相 I=P×1000/(√3×V×PF×η)；單相 I=P×1000/(V×PF×η)。連續負載斷路器預選 I×1.25；電纜保護候選依使用方式驗證。": "Three-phase I=P×1000/(√3×V×PF×η); single-phase I=P×1000/(V×PF×η). Continuous-load breaker estimate I×1.25; verify cable protection for the actual duty.",
+    "DCC=體積×循環ACH；OA=max(排氣＋洩漏,人數×30)；FFU=DCC＋OA；洩漏=體積×基準ACH×√(ΔP/15)，ΔP≤0時為0。": "DCC=volume×recirculation ACH; OA=max(exhaust+leakage,people×30); FFU=DCC+OA; leakage=volume×reference ACH×√(ΔP/15), zero when ΔP≤0.",
+    "室內顯熱=照明＋圍護＋人員顯熱＋設備＋FFU；MAU=1.2×OA/3600×Δh；RT=總kW/3.516852842。": "Room sensible=lighting+envelope+occupant sensible+equipment+FFU; MAU=1.2×OA/3600×Δh; RT=total kW/3.516852842.",
+    "清水水功率kW=Q(m³/h)×H(m)×9.81/3600；軸功率=水功率/η泵；輸入電功率=軸功率/η馬達；銘牌以軸功率×1.15向上選級。": "Water hydraulic kW=Q(m³/h)×H(m)×9.81/3600; shaft power=hydraulic power/pump η; electrical input=shaft power/motor η; round shaft power×1.15 up for the motor nameplate.",
+    "冰機未提供COP或輸入電功率，配電合計尚未含冰機；熱負荷kW未當成電氣kW。": "No chiller COP or electrical input provided; the electrical total excludes the chiller. Cooling kW is not treated as electrical kW.",
+    "製程設備、MAU及其他設備輸入電功率清單尚未提供；配電僅合計明列FFU、照明與泵浦。": "No electrical input schedule provided for process equipment, MAU and other devices; the electrical total includes only listed FFUs, lighting and pumps.",
+    "管路及泵浦尚未納入盤管與末端設備壓降，泵浦選型為管路小計。": "Coil and terminal equipment pressure drops are excluded; the pump selection covers the piping subtotal only.",
+})
+
+TEXT.update({'% 超過可安裝上限 ': '% exceeds the installation limit of ',
+ '% 超過專案安裝上限 ': '% exceeds the project installation limit of ',
+ '%，須另核實際模組及消防／照明空間。': '%; verify actual modules and fire protection / lighting clearances.',
+ '%；專案可安裝上限 ': '%; project installation limit ',
+ '%；需調整單台風量、配置或空間。': '%; adjust unit airflow, arrangement or room area.',
+ '1/h；不含OA': '1/h; excludes OA',
+ '1/h；初估假設，非潔淨規範固定值': '1/h; preliminary assumption, not a fixed cleanroom standard',
+ '15Pa基準ACH法': '15 Pa reference ACH method',
+ '15Pa基準洩漏換氣次數': 'Leakage ACH at 15 Pa',
+ '85%為專案空間預留假設，非ISO通用上限；需核對燈具、消防、格柵與維修空間。': '85% is a project space allowance, not a universal ISO limit. '
+                                            'Check lighting, fire protection, grilles and maintenance '
+                                            'access.',
+ 'ACH明確為室內回風循環量；OA先入天花板靜壓箱再全部經FFU。15Pa／1ACH、30CMH/人及85%是專案初估條件，需依實際洩漏、製程及安裝圖確認。': 'ACH denotes room return '
+                                                                                  'recirculation. OA enters '
+                                                                                  'the ceiling plenum and '
+                                                                                  'all of it passes through '
+                                                                                  'the FFUs. The 15 Pa / 1 '
+                                                                                  'ACH, 30 CMH per person '
+                                                                                  'and 85% values are '
+                                                                                  'preliminary project '
+                                                                                  'assumptions; verify '
+                                                                                  'leakage, process needs '
+                                                                                  'and installation '
+                                                                                  'drawings.',
+ 'ACH／截面風量基準': 'ACH / face-flow basis',
+ 'CMH；空氣側上限 ': 'CMH; air-side capacity limit ',
+ 'DCC=體積×循環ACH；OA=max(排氣＋洩漏,人數×30)；FFU=DCC＋OA；洩漏=體積×基準ACH×√(ΔP/15)，ΔP≤0時為0。': 'DCC=volume x recirculation '
+                                                                              'ACH; '
+                                                                              'OA=max(exhaust+leakage,persons '
+                                                                              'x 30); FFU=DCC+OA; '
+                                                                              'leakage=volume x reference '
+                                                                              'ACH x sqrt(dP/15), zero for '
+                                                                              'dP<=0.',
+ 'DCC純回風 ': 'DCC return-only airflow ',
+ 'FFU入室發熱': 'FFU heat released to room',
+ 'FFU名義尺寸': 'FFU nominal dimensions',
+ 'FFU天花板可安裝上限': 'FFU ceiling installation limit',
+ 'FFU天花板實體配置': 'FFU ceiling installation space',
+ 'FFU總送風小於OA，無法成立回風混合控制體；請增加循環需求或改用基本循環另加OA。': 'FFU total airflow is lower than OA, so the return-mixing '
+                                               'control volume is infeasible. Increase airflow or select '
+                                               'recirculation plus OA.',
+ 'FFU總送風（已含OA）': 'FFU total supply (OA included)',
+ 'FFU總風量與外氣': 'FFU total airflow and outdoor air',
+ 'FFU覆蓋率 ': 'FFU coverage ',
+ 'FFU運轉台數': 'Operating FFU count',
+ 'FFU風量基準與天花板配置': 'FFU airflow basis and ceiling arrangement',
+ 'Huebscher 等摩擦圓管': 'Huebscher equal-friction circular duct',
+ 'MAU入室顯熱供冷抵扣': 'MAU room sensible cooling credit',
+ 'MAU設計外氣量': 'MAU design outdoor airflow',
+ 'Pa；0代表尚未納入設備': 'Pa; 0 means equipment losses are not yet included',
+ 'Pa；≤0時不估正壓外洩': 'Pa; no pressure-driven outward leakage for dP<=0',
+ 'V5.6.0欄位或來源不完整，不能自動移轉': 'V5.6.0 fields or provenance are incomplete; automatic migration is unavailable',
+ 'W/m²；初估值': 'W/m2; preliminary assumption',
+ 'kJ/kg；須配合下方控制體基準': 'kJ/kg; use the control-volume basis below',
+ 'kW。須原廠同工況性能確認。': 'kW. Confirm manufacturer performance at the adopted operating point.',
+ 'kW；以原廠實際工況確認': 'kW; verify manufacturer performance at actual conditions',
+ 'kW；僅實際露點模式；未填則總冷量採未抵扣上界': 'kW; actual leaving-dew-point mode only. An omitted credit gives an upper-bound '
+                            'cooling load.',
+ 'kW；勿以室內熱負荷代替輸入電功率': 'kW; do not substitute room thermal load for electrical input',
+ 'kW；扣除密閉排氣及PCW已帶走部分': 'kW; exclude heat already removed by closed exhaust and PCW',
+ 'kW；按帶入上游才加入設備合計': 'kW; added to equipment totals when upstream values are imported',
+ 'kW；有明填時優先於COP換算': 'kW; explicit input overrides the COP estimate',
+ 'm；已在管路內計算者勿重加': 'm; do not repeat losses already included in the piping calculation',
+ 'm；閉式循環填0': 'm; enter 0 for a closed loop',
+ '三相 I=P×1000/(√3×V×PF×η)；單相 I=P×1000/(V×PF×η)。連續負載斷路器預選 I×1.25；電纜保護候選依使用方式驗證。': 'Three phase I=P x '
+                                                                                 '1000/(sqrt(3) x V x PF x '
+                                                                                 'eta); single phase I=P x '
+                                                                                 '1000/(V x PF x eta). '
+                                                                                 'Continuous-load breaker '
+                                                                                 'preselection uses I x '
+                                                                                 '1.25; verify cable '
+                                                                                 'protection for the load '
+                                                                                 'type.',
+ '中性供風初估，未抵扣MAU顯熱': 'Neutral-supply estimate; MAU room sensible cooling has not been credited',
+ '以1200mm模數估安裝面積；4英呎實際為1219.2mm，需依型錄及天花板模組核實。': 'Installation area uses a nominal 1200 mm module. Four feet '
+                                                'is 1219.2 mm; verify catalogue dimensions and ceiling '
+                                                'modules.',
+ '其他設備': 'Other equipment ',
+ '冰機未提供COP或輸入電功率，配電合計尚未含冰機；熱負荷kW未當成電氣kW。': 'No chiller COP or electrical input is provided. The feeder total '
+                                           'excludes the chiller; thermal kW has not been treated as '
+                                           'electrical kW.',
+ '冰水泵浦': 'Chilled-water pump',
+ '冷量kW/輸入kW；0表示尚未提供': 'Cooling kW / input kW; 0 means not provided',
+ '分列室內顯熱、FFU發熱與MAU全熱，檢查外氣焓差的計算邊界。': 'Separate room sensible heat, FFU heat and MAU total cooling; check the '
+                                    'outdoor-air enthalpy control volume.',
+ '原案ACH視為FFU總送風；若ACH是純室內回風量，改另加OA。只有OA先進靜壓箱再經FFU的拓樸適用。': 'Existing project ACH denotes FFU total supply. '
+                                                         'Select recirculation plus OA only if ACH excludes '
+                                                         'outdoor air. This applies to OA entering the '
+                                                         'plenum before the FFUs.',
+ '只用於15Pa基準ACH法，1ACH是初估假設，需以實測或氣密需求校正。': 'Used only by the 15 Pa reference ACH method. One ACH is an '
+                                         'estimate to calibrate against measurements or airtightness '
+                                         'requirements.',
+ '單台FFU輸入電功率': 'FFU electrical input per unit',
+ '單台FFU額定風量': 'Rated airflow per FFU',
+ '圍護20W/m²與外氣Δh=50為初估。中性供風以室內顯熱作DCC需求；實際低露點模式不重加人員潛熱，並扣明填MAU入室顯熱供冷。未填抵扣時是冷量上界；再熱及濕度可達性請用完整工作台。': 'Envelope '
+                                                                                                 '20 W/m2 '
+                                                                                                 'and OA '
+                                                                                                 'enthalpy '
+                                                                                                 'difference '
+                                                                                                 '50 are '
+                                                                                                 'preliminary '
+                                                                                                 'assumptions. '
+                                                                                                 'Neutral '
+                                                                                                 'supply '
+                                                                                                 'assigns '
+                                                                                                 'room '
+                                                                                                 'sensible '
+                                                                                                 'heat to '
+                                                                                                 'DCC. '
+                                                                                                 'Actual '
+                                                                                                 'low-dew-point '
+                                                                                                 'mode does '
+                                                                                                 'not add '
+                                                                                                 'room '
+                                                                                                 'latent '
+                                                                                                 'heat twice '
+                                                                                                 'and '
+                                                                                                 'credits '
+                                                                                                 'the '
+                                                                                                 'explicit '
+                                                                                                 'MAU room '
+                                                                                                 'sensible '
+                                                                                                 'cooling. '
+                                                                                                 'An omitted '
+                                                                                                 'credit '
+                                                                                                 'gives an '
+                                                                                                 'upper '
+                                                                                                 'bound; use '
+                                                                                                 'the full '
+                                                                                                 'model for '
+                                                                                                 'reheat and '
+                                                                                                 'humidity '
+                                                                                                 'feasibility.',
+ '圍護結構熱負荷密度': 'Envelope heat load per area',
+ '外氣冷卻焓差': 'Outdoor-air cooling enthalpy difference',
+ '外氣焓差終點': 'Outdoor-air enthalpy endpoint',
+ '外氣至室內基準': 'Outdoor air to room reference',
+ '外氣至實際露點送風': 'Outdoor air to actual leaving dew-point state',
+ '天花板可安裝比例上限': 'Available ceiling installation ratio',
+ '孔口法沿用實際門縫與開門條件；基準ACH為缺少洩漏面積時的初估，不與孔口法相加。ΔP≤0均不估正壓外洩。': 'The orifice method uses actual gaps and '
+                                                         'door-opening conditions. Reference ACH is an '
+                                                         'alternative estimate when leakage area is '
+                                                         'unavailable; the methods are not added. Neither '
+                                                         'estimates pressure-driven outward leakage at '
+                                                         'dP<=0.',
+ '室內回風循環換氣次數': 'Room return recirculation ACH',
+ '室內地板面積': 'Room floor area',
+ '室內基本循環（另加OA）': 'Room recirculation (add OA separately)',
+ '室內循環ACH、外氣與FFU設備分開計算，確認天花板可安裝量。': 'Calculate room recirculation ACH, outdoor air and FFUs separately; '
+                                    'check available ceiling installation area.',
+ '室內顯熱=照明＋圍護＋人員顯熱＋設備＋FFU；MAU=1.2×OA/3600×Δh；RT=總kW/3.516852842。': 'Room sensible=lighting+envelope+people '
+                                                                  'sensible+equipment+FFU; MAU=1.2 x OA/3600 '
+                                                                  'x dh; RT=total kW/3.516852842.',
+ '實際露點送風；MAU顯熱抵扣採明填值，零時為未抵扣冷量上界': 'Actual leaving-dew-point supply; MAU sensible credit uses the explicit '
+                                  'input. Zero credit gives an uncredited upper-bound cooling load.',
+ '實際風速＋水力直徑': 'Actual velocity + hydraulic diameter',
+ '對低壓區設計壓差': 'Design pressure difference to lower-pressure zone',
+ '工程修訂：保留原FFU總送風ACH及門縫孔口法；新增可選假設，未推定型錄值': 'Engineering revision: preserve the existing FFU total-supply ACH '
+                                          'and gap-orifice method; add optional assumptions without '
+                                          'inventing catalogue values',
+ '帶入用：MAU輸入電功率': 'For import: MAU electrical input',
+ '帶入用：冰機COP': 'For import: chiller COP',
+ '帶入用：冰機輸入電功率': 'For import: chiller electrical input',
+ '帶入用：製程設備電功率': 'For import: process equipment electrical input',
+ '所需馬達容量超過75kW參考表，須另選標準級距；未將最大規格冒充符合。': 'Required motor rating exceeds the 75 kW reference catalogue. Select '
+                                        'a larger standard size separately; the catalogue maximum is not '
+                                        'treated as adequate.',
+ '指定OA（0為自動下限）': 'Specified OA (0=automatic minimum)',
+ '指定外氣不可低於排氣、正壓洩漏及人員需求下限': 'Specified outdoor air cannot be below the exhaust, pressure-leakage and '
+                           'occupancy minimum',
+ '採用：ACH為室內回風循環｜15Pa基準洩漏': 'Assumptions: ACH is room return recirculation | Reference leakage at 15 Pa ',
+ '採用：中性供風初估｜外氣焓差': 'Assumptions: neutral-supply estimate | OA enthalpy difference ',
+ '採用：清水｜泵效率': 'Assumptions: water | Pump efficiency ',
+ '摩擦壓損換算法': 'Friction calculation basis',
+ '摩擦與設備損失裕度': 'Friction and equipment head allowance',
+ '效率 η（電氣輸入填1）': 'Efficiency eta (electrical input: 1)',
+ '正壓洩漏計算法': 'Pressure-driven leakage method',
+ '每人潛熱': 'Latent heat per person',
+ '每人顯熱': 'Sensible heat per person',
+ '水功率、軸功率與輸入電功率分列，依軸功率選馬達銘牌。': 'Separate hydraulic, shaft and electrical input power; size the motor '
+                               'nameplate from shaft power.',
+ '水物性採ρ=1000 kg/m³、cp=4.1868 kJ/(kg·K)、μ=0.001Pa·s；壓損按一條最不利路徑估算，並聯管分流。設備壓降為明填值；閉式循環不加樓高。': 'Water '
+                                                                                           'properties: '
+                                                                                           'rho=1000 kg/m3, '
+                                                                                           'cp=4.1868 kJ/(kg '
+                                                                                           'K), mu=0.001 Pa '
+                                                                                           's. Losses '
+                                                                                           'represent one '
+                                                                                           'critical path '
+                                                                                           'with '
+                                                                                           'parallel-pipe '
+                                                                                           'flow sharing. '
+                                                                                           'Equipment loss '
+                                                                                           'is explicitly '
+                                                                                           'entered; '
+                                                                                           'closed-loop head '
+                                                                                           'excludes '
+                                                                                           'building '
+                                                                                           'elevation.',
+ '水管絕對粗糙度': 'Pipe absolute roughness',
+ '泵浦效率': 'Pump efficiency',
+ '清水水功率kW=Q(m³/h)×H(m)×9.81/3600；軸功率=水功率/η泵；輸入電功率=軸功率/η馬達；銘牌以軸功率×1.15向上選級。': 'Water hydraulic kW=Q(m3/h) x '
+                                                                             'H(m) x 9.81/3600; '
+                                                                             'shaft=hydraulic/pump '
+                                                                             'efficiency; electrical '
+                                                                             'input=shaft/motor efficiency; '
+                                                                             'motor output rating is rounded '
+                                                                             'up from shaft x 1.15.',
+ '潔淨室風量': 'Cleanroom airflow',
+ '目前使用基準ACH法，門縫孔口草稿不參與計算': 'Reference ACH method selected; gap-orifice drafts do not participate',
+ '目前使用門縫孔口法，不採基準ACH假設': 'Gap-orifice method selected; reference ACH is not used',
+ '目前單台FFU入室發熱為0；若功率尚未確認，室內顯熱及DCC負荷仍待補。': 'FFU room heat is currently zero per unit. If power is unconfirmed, '
+                                         'room sensible heat and DCC load remain incomplete.',
+ '相數限 1 或 3': 'Phases must be 1 or 3',
+ '空間地板面積': 'Space floor area',
+ '管件阻力係數 ΣK': 'Fitting loss coefficient sum K',
+ '管路及已計設備損失揚程': 'Piping and included equipment loss head',
+ '管路及泵浦尚未納入盤管與末端設備壓降，泵浦選型為管路小計。': 'Coil and terminal equipment losses are absent from the piping and pump '
+                                  'calculation. Pump sizing currently covers piping losses only.',
+ '若設備kW是馬達軸輸出，填馬達效率如0.90；輸入電功率填1。': 'For motor shaft-output kW, enter motor efficiency such as 0.90. For '
+                                    'electrical input kW, enter 1.',
+ '製程及一般排氣合計': 'Total process and general exhaust',
+ '製程設備': 'Process equipment',
+ '製程設備、MAU及其他設備輸入電功率清單尚未提供；配電僅合計明列FFU、照明與泵浦。': 'Electrical inputs for process equipment, MAU and other '
+                                               'equipment are not provided. The feeder total includes only '
+                                               'the listed FFUs, lighting and pump.',
+ '設備入室顯熱': 'Equipment sensible heat to room',
+ '設備清單含重複來源，請勿再次加入FFU、照明或CHWP': 'The device list duplicates a source; do not add FFUs, lighting or CHWP a '
+                                'second time',
+ '設備用電清單需含name及power_kw': 'Device electrical loads require name and power_kw',
+ '設計循環流量': 'Design circulation flow',
+ '門縫孔口法': 'Gap-orifice method',
+ '開式系統靜揚程': 'Open-system static head',
+ '零外氣量不能提供MAU入室顯熱冷卻': 'Zero outdoor airflow cannot deliver MAU room sensible cooling',
+ '電氣輸入': 'Electrical input',
+ '電氣輸入kW用η=1；馬達軸輸出kW才除馬達效率。125%為連續負載初估，不能取代馬達啟動、過載及短路保護規則；標準AT超表回傳待選。': 'Use eta=1 for electrical input kW; '
+                                                                        'divide by motor efficiency only for '
+                                                                        'shaft-output kW. The 125% factor is '
+                                                                        'a continuous-load estimate and does '
+                                                                        'not replace motor starting, '
+                                                                        'overload and short-circuit '
+                                                                        'protection rules. Ratings beyond '
+                                                                        'the AT catalogue remain unselected.',
+ '額外末端設備損失': 'Additional terminal equipment loss',
+ '風管絕對粗糙度': 'Duct absolute roughness',
+ '馬達效率': 'Motor efficiency',
+ '馬達銘牌為額定機械輸出kW，不能以輸入電功率選級。設計揚程須含最不利回路及設備壓差；閉式循環不直接加樓高，另核NPSH與泵曲線。': 'Motor nameplate kW is rated mechanical '
+                                                                     'output, not electrical input. Design '
+                                                                     'head must include the critical loop '
+                                                                     'and equipment losses. Do not add '
+                                                                     'building elevation to a closed loop; '
+                                                                     'verify NPSH and the pump curve.',
+ '）｜FFU每台': ') | FFU input per unit ',
+ '｜安裝上限': ' | Installation limit ',
+ '｜馬達效率': ' | Motor efficiency ',
+ '｜馬達銘牌按軸功率加15%選級': ' | Motor nameplate selected from shaft power plus 15%'})
+
+TEXT.update({'單機核心設計量': 'Single-unit design summary',
+ '設備需求／容量檢核': 'Equipment demand / capacity checks',
+ '查看 SCADA 流向與逐段狀態': 'View SCADA flow and stage states',
+ '完成計算後顯示設備需求與容量檢核。': 'Calculate to display equipment demand and capacity checks.',
+ '計算需求值與已配置容量分開顯示。': 'Calculated demand and installed ratings are shown separately.',
+ '；狀態點代表需求目標。': '; state points are demand targets.',
+ 'MAU 指定風量': 'MAU specified airflow',
+ '冷卻盤管需求': 'Cooling-coil demand',
+ 'H1 加熱需求': 'H1 heating demand',
+ 'H2 再熱需求': 'H2 reheat demand',
+ 'EC 風機額定電力': 'EC fan rated input',
+ '水洗／蒸汽加濕': 'Air washer / steam humidification',
+ ' 計算冷量': ' calculated cooling demand',
+ ' 已配置容量': ' installed capacity',
+ '需求含容量餘裕': 'Demand includes capacity allowance',
+ '容量未達': 'Capacity insufficient',
+ 'EC 風機配置': 'EC fan quantity',
+ '待廠商風機曲線': 'Manufacturer fan curves required',
+ '風機需求電力': 'Required fan input',
+ '需求初估': 'Preliminary demand',
+ '壓差資料待補': 'Pressure-drop data required',
+ '總選用設備電力': 'Selected equipment rated input',
+ '額定配置': 'Installed rating',
+ '熱量守恆殘差': 'Energy balance residual',
+ '完成計算後顯示空調氣流與狀態': 'Calculate to display airflow and air states',
+ '空調系統 SCADA｜': 'HVAC SCADA | ',
+ '需求狀態｜待重算': 'Demand states | Recalculate',
+ '需求狀態｜設備能力另行校核': 'Demand states | Check equipment capacity separately',
+ 'MAU 外氣處理箱': 'MAU outdoor-air unit',
+ '外氣 OA': 'Outdoor air OA',
+ '水洗／蒸汽': 'Washer / steam',
+ '外氣入口 OA': 'Outdoor inlet OA',
+ 'MAU 出風 SA': 'MAU supply SA',
+ '室內設計狀態': 'Room design state',
+ '回風 RA（室內模型）': 'Return RA (room model)',
+ '回風 RA': 'Return RA',
+ '天花板靜壓箱／FFU': 'Ceiling plenum / FFU',
+ '潔淨室／送風區': 'Cleanroom / supply zone',
+ 'DCC 乾冷盤管': 'DCC dry cooling coil',
+ '室內回風循環': 'Room recirculation',
+ '循環回風 RA': 'Recirculated return RA',
+ '排氣 EA': 'Exhaust EA',
+ '流向色彩': 'Flow colors',
+ 'OA 外氣': 'OA outdoor air',
+ 'CC／DCC 冷卻': 'CC / DCC cooling',
+ '加熱／再熱': 'Heating / reheat',
+ 'SA／FFU 送風': 'SA / FFU supply',
+ 'EA 排氣': 'EA exhaust',
+ '下游示意，未納入單機熱濕平衡；室內／回風未連動時不填入推測值。': 'Downstream schematic is outside the single-unit balance; room / return '
+                                    'states require a linked project.',
+ '未提供｜— °C | — %RH | — kJ/kg': 'Unspecified | — °C | — %RH | — kJ/kg',
+ '輸入已變更，正在檢核目前條件。': 'Inputs changed; checking the current conditions.',
+ '專案名稱不可空白或過長': 'Project name must not be empty or too long'})
+TEXT.update({
+    "獨立FFU循環（MAU直接入室）": "Independent FFU recirculation (MAU supplies the room directly)",
+    "MAU入靜壓箱經FFU送風": "MAU enters the plenum and supplies air through FFUs",
+})
+
+TEXT.update({'設備入室顯熱': 'Equipment room sensible heat',
+ '1/h；依所選風量基準': '1/h; interpreted using the selected airflow basis',
+ 'ACH依氣流路徑與風量基準解讀，不一律加OA。15Pa／1ACH、30CMH/人及85%是專案初估條件，需依實際洩漏、製程及安裝圖確認。負DCC回風量保留為不可行結果，不截成0。': 'Interpret ACH '
+                                                                                              'using both '
+                                                                                              'airflow '
+                                                                                              'topology and '
+                                                                                              'the selected '
+                                                                                              'basis; OA is '
+                                                                                              'not always '
+                                                                                              'added. The 15 '
+                                                                                              'Pa / 1 ACH, '
+                                                                                              '30 CMH per '
+                                                                                              'person and '
+                                                                                              '85% values '
+                                                                                              'are '
+                                                                                              'preliminary '
+                                                                                              'project '
+                                                                                              'assumptions. '
+                                                                                              'Verify actual '
+                                                                                              'leakage, '
+                                                                                              'process needs '
+                                                                                              'and '
+                                                                                              'installation '
+                                                                                              'drawings. '
+                                                                                              'Negative DCC '
+                                                                                              'return is '
+                                                                                              'retained as '
+                                                                                              'infeasible '
+                                                                                              'rather than '
+                                                                                              'clamped to '
+                                                                                              'zero.',
+ 'MAU／FFU氣流路徑': 'MAU / FFU airflow path',
+ '只用於MAU入靜壓箱：總送風基準時DCC回風=FFU總風−OA；基本循環基準時FFU總風=循環＋OA。': 'For MAU-to-plenum topology only: with total-supply '
+                                                        'ACH, DCC return=FFU total-OA; with recirculation '
+                                                        'ACH, FFU total=recirculation+OA.',
+ '工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值': 'Engineering revision: preserve independent FFU circulation, '
+                                               'direct MAU room supply and the gap-orifice method. Add '
+                                               'optional assumptions without inventing catalogue values.',
+ '採用基準換氣次數': 'ACH on selected airflow basis',
+ '獨立FFU循環不將MAU外氣重複加入': 'Independent FFU circulation does not add MAU outdoor air again',
+ '獨立循環基準': 'Independent circulation basis',
+ '獨立循環：FFU=DCC=基準風量；靜壓箱路徑：FFU總風=DCC回風＋OA，依所選ACH基準分配。OA=max(排氣＋洩漏,人數×30)；洩漏=體積×基準ACH×√(ΔP/15)，ΔP≤0時為0。': 'Independent '
+                                                                                                        'loop: '
+                                                                                                        'FFU=DCC=reference '
+                                                                                                        'airflow. '
+                                                                                                        'Plenum '
+                                                                                                        'path: '
+                                                                                                        'FFU '
+                                                                                                        'total=DCC '
+                                                                                                        'return+OA, '
+                                                                                                        'allocated '
+                                                                                                        'using '
+                                                                                                        'the '
+                                                                                                        'selected '
+                                                                                                        'ACH '
+                                                                                                        'basis. '
+                                                                                                        'OA=max(exhaust+leakage,persons '
+                                                                                                        'x '
+                                                                                                        '30); '
+                                                                                                        'leakage=volume '
+                                                                                                        'x '
+                                                                                                        'reference '
+                                                                                                        'ACH '
+                                                                                                        'x '
+                                                                                                        'sqrt(dP/15), '
+                                                                                                        'zero '
+                                                                                                        'for '
+                                                                                                        'dP<=0.',
+ '舊案沿用獨立FFU循環與MAU直接入室；此時DCC與FFU均採循環量。只有外氣先入靜壓箱時才啟用OA經FFU的風量基準。': 'Existing projects retain independent FFU '
+                                                                 'circulation with MAU air delivered '
+                                                                 'directly to the room; DCC and FFU both use '
+                                                                 'the circulation flow. Enable the '
+                                                                 'OA-through-FFU airflow basis only when '
+                                                                 'outdoor air enters the ceiling plenum '
+                                                                 'first.',
+ '｜15Pa基準洩漏': ' | Reference leakage at 15 Pa ',
+ '準備計算': 'Ready to calculate',
+ '設計項目': 'Design item',
+ '尚無可帶入的上游結果；請先完成對應工具計算。': 'No valid upstream result is available. Calculate the source tool first.',
+ '工程設計總覽': 'Engineering dashboard',
+ '已帶入上游計算結果；後續修改可再次帶入更新。': 'Upstream results adopted. Import again after changing a source.',
+ '帶入上游結果': 'Import upstream',
+ '恢復預設': 'Reset defaults',
+ '條': 'conductors',
+ '等待更新': 'Awaiting update',
+ '需核對': 'Review required',
+ 'DCC 回風循環量': 'DCC return airflow',
+ 'FFU 模組尺寸': 'FFU module dimensions',
+ 'FFU 總設計風量': 'FFU total design airflow',
+ 'FFU 輸入電功率': 'FFU electrical input',
+ 'FFU 風機發熱': 'FFU fan heat',
+ 'MAU 外氣全熱': 'MAU outdoor air total load',
+ '並聯組數': 'Parallel sets',
+ '人員潛熱': 'Occupant latent heat',
+ '人員顯熱': 'Occupant sensible heat',
+ '冰機總冷凍噸': 'Total chiller cooling',
+ '冰機總冷量': 'Total chiller load',
+ '初估斷路器級距': 'Estimated breaker rating',
+ '參考內徑': 'Reference inside diameter',
+ '回循環換氣次數': 'Recirculation air changes',
+ '圍護顯熱': 'Envelope sensible heat',
+ '室內容積': 'Room volume',
+ '室內總顯熱': 'Room sensible heat',
+ '實際風速': 'Actual air velocity',
+ '建議公稱管徑': 'Suggested nominal pipe',
+ '採用外氣量': 'Adopted outdoor airflow',
+ '換算結果': 'Converted value',
+ '支': 'pipes',
+ '最不利路徑壓損': 'Critical path pressure loss',
+ '正壓洩漏': 'Positive pressure leakage',
+ '每相導線截面': 'Conductor area per phase',
+ '比焓': 'Specific enthalpy',
+ '水功率': 'Hydraulic power',
+ '泵軸功率': 'Pump shaft power',
+ '滿載運轉電流': 'Operating full load current',
+ '照明輸入電功率': 'Lighting electrical input',
+ '直管單位壓損': 'Straight pipe friction rate',
+ '等值換算': 'Equivalent conversion',
+ '等摩擦當量直徑': 'Equal friction diameter',
+ '設計循環水量': 'Design water flow',
+ '路徑壓損': 'Path pressure loss',
+ '路徑損失水頭': 'Path loss head',
+ '連續負載斷路器初估電流': 'Continuous load breaker current',
+ '配線保護候選': 'Wiring protection candidate',
+ '配線設計電流': 'Conductor design current',
+ '電壓降': 'Voltage drop',
+ '靜壓餘量': 'Static pressure margin',
+ '馬達輸入電功率': 'Motor electrical input',
+ '已帶入明列設備用電；請核對冰機、MAU、排風及製程設備是否齊全。': 'Listed electrical loads imported; verify that chillers, MAUs, exhaust '
+                                     'and process equipment are complete.',
+ '上游條件已變更，請重新帶入；亦可修改帶入欄位改為手動輸入。': 'Upstream conditions changed; import again or edit the imported fields to '
+                                  'use manual inputs.',
+ '設計總覽 HTML': 'Design overview HTML',
+ 'HTML 設計報表': 'HTML design report',
+ '已匯出目前有效計算的設備總覽。': 'Equipment overview exported from the current valid calculations.',
+ '已匯出目前有效計算的設備總覽': 'Equipment overview exported from the current valid calculations'})
+TEXT.update({"需求值": "Required value"})
+
+# Preserve numerals and superscript units when switching report languages.
+TEXT.update({'DCC=體積×循環ACH；OA=max(排氣＋洩漏,人數×30)；FFU=DCC＋OA；洩漏=體積×基準ACH×√(ΔP/15)，ΔP≤0時為0。': 'DCC=volume x recirculation '
+                                                                              'ACH; '
+                                                                              'OA=max(exhaust+leakage,persons '
+                                                                              'x 30); FFU=DCC+OA; '
+                                                                              'leakage=volume x reference '
+                                                                              'ACH x sqrt(dP/15), 0 for '
+                                                                              'dP<=0.',
+ 'W/m²；初估值': 'W/m²; preliminary assumption',
+ '獨立循環：FFU=DCC=基準風量；靜壓箱路徑：FFU總風=DCC回風＋OA，依所選ACH基準分配。OA=max(排氣＋洩漏,人數×30)；洩漏=體積×基準ACH×√(ΔP/15)，ΔP≤0時為0。': 'Independent '
+                                                                                                        'loop: '
+                                                                                                        'FFU=DCC=reference '
+                                                                                                        'airflow. '
+                                                                                                        'Plenum '
+                                                                                                        'path: '
+                                                                                                        'FFU '
+                                                                                                        'total=DCC '
+                                                                                                        'return+OA, '
+                                                                                                        'allocated '
+                                                                                                        'using '
+                                                                                                        'the '
+                                                                                                        'selected '
+                                                                                                        'ACH '
+                                                                                                        'basis. '
+                                                                                                        'OA=max(exhaust+leakage,persons '
+                                                                                                        'x '
+                                                                                                        '30); '
+                                                                                                        'leakage=volume '
+                                                                                                        'x '
+                                                                                                        'reference '
+                                                                                                        'ACH '
+                                                                                                        'x '
+                                                                                                        'sqrt(dP/15), '
+                                                                                                        '0 '
+                                                                                                        'for '
+                                                                                                        'dP<=0.',
+ '水物性採ρ=1000 kg/m³、cp=4.1868 kJ/(kg·K)、μ=0.001Pa·s；壓損按一條最不利路徑估算，並聯管分流。設備壓降為明填值；閉式循環不加樓高。': 'Water '
+                                                                                           'properties: '
+                                                                                           'rho=1000 kg/m³, '
+                                                                                           'cp=4.1868 kJ/(kg '
+                                                                                           'K), mu=0.001 Pa '
+                                                                                           's. Losses '
+                                                                                           'represent one '
+                                                                                           'critical path '
+                                                                                           'with '
+                                                                                           'parallel-pipe '
+                                                                                           'flow sharing. '
+                                                                                           'Equipment loss '
+                                                                                           'is explicitly '
+                                                                                           'entered; '
+                                                                                           'closed-loop head '
+                                                                                           'excludes '
+                                                                                           'building '
+                                                                                           'elevation.',
+ '清水水功率kW=Q(m³/h)×H(m)×9.81/3600；軸功率=水功率/η泵；輸入電功率=軸功率/η馬達；銘牌以軸功率×1.15向上選級。': 'Water hydraulic kW=Q(m³/h) x '
+                                                                             'H(m) x 9.81/3600; '
+                                                                             'shaft=hydraulic/pump '
+                                                                             'efficiency; electrical '
+                                                                             'input=shaft/motor efficiency; '
+                                                                             'motor output rating is rounded '
+                                                                             'up from shaft x 1.15.',
+ '圍護20W/m²與外氣Δh=50為初估。中性供風以室內顯熱作DCC需求；實際低露點模式不重加人員潛熱，並扣明填MAU入室顯熱供冷。未填抵扣時是冷量上界；再熱及濕度可達性請用完整工作台。': 'Envelope '
+                                                                                                 '20 W/m² '
+                                                                                                 'and OA '
+                                                                                                 'enthalpy '
+                                                                                                 'difference '
+                                                                                                 '50 are '
+                                                                                                 'preliminary '
+                                                                                                 'assumptions. '
+                                                                                                 'Neutral '
+                                                                                                 'supply '
+                                                                                                 'assigns '
+                                                                                                 'room '
+                                                                                                 'sensible '
+                                                                                                 'heat to '
+                                                                                                 'DCC. '
+                                                                                                 'Actual '
+                                                                                                 'low-dew-point '
+                                                                                                 'mode does '
+                                                                                                 'not add '
+                                                                                                 'room '
+                                                                                                 'latent '
+                                                                                                 'heat twice '
+                                                                                                 'and '
+                                                                                                 'credits '
+                                                                                                 'the '
+                                                                                                 'explicit '
+                                                                                                 'MAU room '
+                                                                                                 'sensible '
+                                                                                                 'cooling. '
+                                                                                                 'An omitted '
+                                                                                                 'credit '
+                                                                                                 'gives an '
+                                                                                                 'upper '
+                                                                                                 'bound; use '
+                                                                                                 'the full '
+                                                                                                 'model for '
+                                                                                                 'reheat and '
+                                                                                                 'humidity '
+                                                                                                 'feasibility.',
+ 'ACH依氣流路徑與風量基準解讀，不一律加OA。15Pa／1ACH、30CMH/人及85%是專案初估條件，需依實際洩漏、製程及安裝圖確認。負DCC回風量保留為不可行結果，不截成0。': 'Interpret ACH '
+                                                                                              'using both '
+                                                                                              'airflow '
+                                                                                              'topology and '
+                                                                                              'the selected '
+                                                                                              'basis; OA is '
+                                                                                              'not always '
+                                                                                              'added. The 15 '
+                                                                                              'Pa / 1 ACH, '
+                                                                                              '30 CMH per '
+                                                                                              'person and '
+                                                                                              '85% values '
+                                                                                              'are '
+                                                                                              'preliminary '
+                                                                                              'project '
+                                                                                              'assumptions. '
+                                                                                              'Verify actual '
+                                                                                              'leakage, '
+                                                                                              'process needs '
+                                                                                              'and '
+                                                                                              'installation '
+                                                                                              'drawings. '
+                                                                                              'Negative DCC '
+                                                                                              'return is '
+                                                                                              'retained as '
+                                                                                              'infeasible '
+                                                                                              'rather than '
+                                                                                              'clamped to 0.',
+ '目前單台FFU入室發熱為0；若功率尚未確認，室內顯熱及DCC負荷仍待補。': 'FFU room heat is currently 0 per unit. If power is unconfirmed, '
+                                         'room sensible heat and DCC load remain incomplete.',
+ '以1200mm模數估安裝面積；4英呎實際為1219.2mm，需依型錄及天花板模組核實。': 'Installation area uses a nominal 1200 mm module. 4 feet is '
+                                                '1219.2 mm; verify catalogue dimensions and ceiling modules.',
+ '只用於15Pa基準ACH法，1ACH是初估假設，需以實測或氣密需求校正。': 'Used only by the 15 Pa reference ACH method. 1 ACH is an estimate '
+                                         'to calibrate against measurements or airtightness requirements.'})
+
+TEXT.update({"氣流配置不可行": "Airflow configuration infeasible"})
+
+TEXT.update({'K；抵扣供冷時須明填，0代表未提供溫差': 'K; explicitly required for a sensible cooling credit. Zero means no temperature difference is provided.', 'MAU輸入電功率尚未提供，配電合計未含MAU風機及其他箱內用電設備。': 'MAU electrical input is not provided. The feeder total excludes the MAU fan and other electrical equipment inside the air handler.', 'MAU顯熱抵扣超過所填外氣量及送風溫差的空氣側上限，請確認室內減送風溫差。': 'The MAU sensible credit exceeds the air-side limit from the entered outdoor airflow and room-minus-supply temperature difference. Check that temperature difference.', '圍護20W/m²與外氣Δh=50為初估。中性供風以室內顯熱作DCC需求；實際低露點模式不重加人員潛熱，並扣明填MAU入室顯熱供冷。抵扣不得超過1.2×OA/3600×1.006×明填室內減送風溫差的保守上限；未填抵扣時是冷量上界。再熱及濕度可達性請用完整工作台。': 'Envelope 20 W/m² and OA enthalpy difference 50 are preliminary assumptions. Neutral supply assigns room sensible heat to DCC. Actual low-dew-point mode does not add room latent heat twice and credits the explicit MAU room sensible cooling. The credit must not exceed the conservative limit 1.2 x OA/3600 x 1.006 x explicitly entered room-minus-supply temperature difference. With no credit, the result is an upper bound. Use the full model for reheat and humidity feasibility.', '室內減MAU送風溫差': 'Room minus MAU supply temperature difference', '製程設備輸入電功率尚未提供，配電合計未含製程設備；室內顯熱不直接當成設備用電。': 'Process equipment electrical input is not provided. The feeder total excludes process equipment; room sensible heat is not treated as equipment electrical input.', '零外氣無法在MAU實際露點模式處理人員潛熱，請提供除濕外氣量或改用室內基準。': 'Zero outdoor air cannot remove occupant latent heat in the actual MAU leaving-dew-point mode. Provide dehumidification airflow or use the room-reference basis.'})
+
+TEXT.update({"熱負荷初估": "Heat load estimate", "潔淨室風量": "Cleanroom airflow", "泵浦水泵": "Pump sizing", "冰水泵浦": "Water pump sizing"})

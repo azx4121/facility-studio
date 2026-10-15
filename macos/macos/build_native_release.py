@@ -108,7 +108,7 @@ def main():
     print("Applying Apple native signatures...", flush=True)
     signing = sign_app(app, evidence / "Apple_Native_Signing.txt")
     launcher = app / "Contents/MacOS/FacilityStudio"
-    for tool in ("electrical", "duct", "gas", "lighting", "water", "air", "units"):
+    for tool in ("electrical", "duct", "gas", "lighting", "water", "air", "units", "cleanroom", "heat_loads", "pumps"):
         command(
             [
                 str(launcher),

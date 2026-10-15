@@ -24,6 +24,15 @@ Download one file for your platform. Help and equipment templates are bundled. [
 
 The Windows EXE has no official publisher signature; the Mac app has no Developer ID or Apple notarization. First launch may show a security prompt. Check the download source and follow the [security-prompt guide](docs/signing.en.md).
 
+<a id="current-source-revision"></a>
+## Current source revision
+
+The repository now includes an engineering/dashboard revision with **ten quick tools**, including Cleanroom airflow, Heat load estimate and Chilled-water pump. It adds explicit MAU/FFU airflow topology and ACH basis, nominal FFU module/coverage checks, separate pump shaft/electrical power, and an upstream-import chain from room airflow through heat load, water, pump and electrical demand. Imported electrical totals use explicit device inputs; chiller cooling is converted only with COP or an entered electrical input. Reports begin with calculated-demand and suggested-selection summaries, with KPI cards and HTML tables.
+
+Existing schema 11 projects migrate to schema 12 while retaining independent FFU circulation, direct MAU room supply and the original gap-orifice leakage method. A plenum path and its ACH basis must be selected explicitly; OA is not automatically added to every historical FFU calculation. Reference leakage ACH, 30 CMH per person in the quick tool and the 85% ceiling allowance are preliminary project assumptions, not universal ASHRAE/ISO requirements.
+
+These are **source changes**, separate from the published win.3 / mac.5 binaries and native-acceptance records linked above. Existing release versions, download assets and screenshots remain unchanged. A new packaged release needs its own native build and acceptance. See the [engineering and dashboard audit](docs/2026-10-15-engineering-dashboard-audit.md), and the current-source sections in the [workbench](docs/guides/workbench.en.md#source-revision), [electrical](docs/guides/electrical.en.md#source-revision), [water/pump](docs/guides/water.en.md#source-revision) and [AHU](docs/guides/ahu.en.md#source-revision) guides.
+
 ## What can you use it for?
 
 | Your task | What you get | Tool / example |

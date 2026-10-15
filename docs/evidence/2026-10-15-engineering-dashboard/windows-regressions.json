@@ -1,0 +1,45 @@
+{
+  "source_platform": "windows",
+  "legacy_suites": [
+    {
+      "suite": "simple_features",
+      "exit_code": 0,
+      "summary": "42 independent-tool scenarios, 375 numerical/report checks passed"
+    },
+    {
+      "suite": "regression",
+      "exit_code": 0,
+      "summary": "52 scenarios / 1247 independent checks passed; 7 expected rejections; B08 now adopts zero closed-loop static head"
+    },
+    {
+      "suite": "v560_features",
+      "exit_code": 0,
+      "summary": "V560 engineering checks passed: 2377"
+    },
+    {
+      "suite": "v557_inactive",
+      "exit_code": 0,
+      "summary": "{\"main_scenarios\": 24, \"ahu_scenarios\": 48, \"pressure_scenarios\": 256, \"passed\": true, \"seed\": 55720261009, \"version\": \"5.6.0\"}\nComplete-output and report comparisons passed: 970"
+    },
+    {
+      "suite": "v558_review",
+      "exit_code": 0,
+      "summary": "{\"version\": \"5.6.0\", \"passed\": true, \"bypass_samples\": 10720, \"minimum_sample_denominator\": 0.23887570487863685, \"maximum_expression_roundoff\": 1.7053025658242404e-13, \"mac_app_data_check\": \"not applicable to Windows-only source tree\"}\nReview follow-up checks passed: 124"
+    },
+    {
+      "suite": "v559_resilience",
+      "exit_code": 0,
+      "summary": "V559 resilience checks passed: 89"
+    },
+    {
+      "suite": "bilingual",
+      "exit_code": 0,
+      "summary": "20 language-parity scenarios, 4581 localization / import / persistence checks passed"
+    },
+    {
+      "suite": "security_checks",
+      "exit_code": 0,
+      "summary": "{\"source\": \"windows\", \"cases\": 55, \"passed\": 55, \"failed\": []}"
+    }
+  ]
+}

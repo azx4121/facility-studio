@@ -309,6 +309,9 @@ def duct_selection(cmh, velocity, ratio, shape="方管"):
             "w_mm": 0,
             "h_mm": 0,
             "round_in": 0,
+            "hydraulic_diameter_m": 0,
+            "equivalent_diameter_m": 0,
+            "equivalent_velocity_mps": 0,
         }
     need = q / vmax
     d_in = max(2, math.ceil(math.sqrt(4 * need / math.pi) / 0.0254 / 2 - 1e-12) * 2)
@@ -339,7 +342,36 @@ def duct_selection(cmh, velocity, ratio, shape="方管"):
         "round_in": d_in,
         "ratio_actual": w / h,
         "velocity_limit_mps": vmax,
+        # diameter_m remains Dh for existing actual-area Darcy callers.
+        "hydraulic_diameter_m": diam,
+        "equivalent_diameter_m": huebscher_diameter(w / 1000, h / 1000) if shape == "方管" else diam,
+        "equivalent_velocity_mps": 4 * q / (math.pi * (huebscher_diameter(w / 1000, h / 1000) if shape == "方管" else diam) ** 2),
     }
+
+
+def huebscher_diameter(a_m, b_m):
+    """Equal-friction circular diameter in m (rectangular sides also in m)."""
+    a = number(a_m, "a_m", 0.000001)
+    b = number(b_m, "b_m", 0.000001)
+    return 1.30 * (a * b) ** 0.625 / (a + b) ** 0.25
+
+
+def next_standard(value, ratings):
+    """Return a real catalogue rating, or None above the catalogue boundary."""
+    required = number(value, "required_rating", 0)
+    if required == 0:
+        return 0.0
+    return next((float(r) for r in ratings if r + 1e-10 >= required), None)
+
+
+def load_current(power_kw, voltage, pf=1.0, eta=1.0, phases=3):
+    """kW may be electrical input (eta=1) or shaft output (eta=motor efficiency)."""
+    power = number(power_kw, "power", 0)
+    volts = number(voltage, "voltage", 1)
+    factor = number(pf, "pf", 0.01, 1) * number(eta, "eta", 0.01, 1)
+    if phases not in (1, 3):
+        raise InputError("相數限 1 或 3", "phases")
+    return power * 1000 / ((math.sqrt(3) if phases == 3 else 1) * volts * factor)
 
 
 def water_selection(lpm, vmax, mode="流速上限", manual_id=0):
@@ -687,6 +719,7 @@ def electrical_result(i, warnings):
         pan.update(
             current_a=current,
             design_current_a=design,
+            design_breaker_a=current * 1.25,
             voltage=voltage,
             pf=pf,
             eff=eff,

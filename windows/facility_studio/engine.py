@@ -4,12 +4,13 @@ import copy
 import json
 import math
 from .json_io import read_json_file
-from .data import VOLTAGE_MAP
+from .data import VOLTAGE_MAP, FFU_SIZES
 from .quality import assess_main
 from .schema import (
     V54_INPUT_KEYS,
     V55_INPUT_KEYS,
     V556_INPUT_KEYS,
+    V560_INPUT_KEYS,
     PD_DEFAULTS,
     DEFAULTS,
     FIELDS,
@@ -129,13 +130,26 @@ def migrate_project(p):
             raise InputError("V5.5.6–5.5.10欄位或來源不完整，不能自動移轉")
         p = copy.deepcopy(p)
         p["schema_version"] = 11
-        for k in set(FIELDS) - V556_INPUT_KEYS:
+        for k in V560_INPUT_KEYS - V556_INPUT_KEYS:
             p["inputs"][k] = DEFAULTS[k]
             # An absent legacy field has no observed source timestamp. Keep
             # migration deterministic so repeated calculations retain identity.
             p["provenance"][k] = {
                 "source": "舊專案輸入",
                 "note": "V5.6移轉：新增自訂氣體名稱草稿，原氣體種類與工程條件保留",
+            }
+    if isinstance(p, dict) and p.get("schema_version") == 11:
+        if (set(p.get("inputs", {})) != V560_INPUT_KEYS
+                or not isinstance(p.get("provenance"), dict)
+                or set(p["provenance"]) != V560_INPUT_KEYS):
+            raise InputError("V5.6.0欄位或來源不完整，不能自動移轉")
+        p = copy.deepcopy(p)
+        p["schema_version"] = 12
+        for k in set(FIELDS) - V560_INPUT_KEYS:
+            p["inputs"][k] = DEFAULTS[k]
+            p["provenance"][k] = {
+                "source": "舊專案輸入",
+                "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值",
             }
     return p
 
@@ -508,24 +522,28 @@ def calculate(p, isolate_utilities=False):
             if i["mode_" + z] == "ACH"
             else area * n("coverage_" + z) * n("face_" + z) * 3600
         )
-        speed = n("leak_cd") * math.sqrt(2 * n("en_p_" + z) / room["rho_moist"])
+        dp = n("en_p_" + z)
+        speed = n("leak_cd") * math.sqrt(2 * dp / room["rho_moist"]) if dp > 0 else 0.0
         keys = (
             ("en_gap_L", "en_gap_W", "en_door_A", "en_door_F")
             if z == "A"
             else ("gap_B_L", "gap_B_W", "door_B_A", "door_B_F")
         )
         gl, gw, da, df = [n(k) for k in keys]
-        if df * n("door_open_seconds") > 3600:
+        if i["leak_method"] == "門縫孔口法" and df * n("door_open_seconds") > 3600:
             raise InputError(
                 f"開門總時間不可超過一小時", field_name=f"door_open_seconds"
             )
-        l = (gl * gw * 3600 + da * df * n("door_open_seconds")) * speed if area else 0
+        if i["leak_method"] == "15Pa基準ACH法":
+            l = vol * n("base_leak_ach") * math.sqrt(dp / 15) if dp > 0 else 0.0
+        else:
+            l = (gl * gw * 3600 + da * df * n("door_open_seconds")) * speed if area else 0
         zones[z] = {"area": area, "volume": vol, "cmh": cmh, "leak": l}
         ppl += count
         leak += l
     circ = sum((z["cmh"] for z in zones.values()))
     is_mau = i["sys_type"].startswith("MAU")
-    ffu_count = math.ceil(circ / n("ffu_cmh") - 1e-12) if is_mau else 0
+    ffu_count = 0  # Final count depends on the adopted OA and airflow basis.
     gross = n("eq_kw") * n("eq_rt") / 100
     pcw_properties = water_properties(i, "pcw")
     pcw = (
@@ -618,6 +636,18 @@ def calculate(p, isolate_utilities=False):
         else:
             ws = room["w"] - moist / m
         supply = state_tw(ts, ws, n("atm_kpa"))
+        adopted_oa = moa * room["v_da"] * 3600
+        plenum = i["ffu_topology"] == "MAU入靜壓箱經FFU送風"
+        add_oa = plenum and i["ffu_airflow_basis"] == "室內基本循環（另加OA）"
+        ffu_total = circ + adopted_oa if add_oa else circ
+        dcc_return = circ if (add_oa or not plenum) else ffu_total - adopted_oa
+        # Moisture generation and the achievable ADP determine OA analytically
+        # above; FFU motor heat is sensible only and cannot change that OA mass.
+        # Finalise FFU count AFTER that latent/OA solution, then recompute qs and
+        # the DCC balance. No unneeded numerical fixed-point loop is introduced.
+        ffu_count = math.ceil(ffu_total / n("ffu_cmh")) if ffu_total else 0
+        parts["fan"] = n("fan_room_kw") + ffu_count * n("ffu_w") / 1000
+        qs = sum(v for k, v in parts.items() if k not in ("pcw_removed", "exhaust_removed"))
         mau_qs = m * (1.006 + 1.86 * ws) * (room["t"] - ts)
         dcc = max(0, qs - mau_qs)
         room_heat = max(0, mau_qs - qs)
@@ -628,6 +658,8 @@ def calculate(p, isolate_utilities=False):
             )
         enter = oa
     else:
+        ffu_total = 0.0
+        dcc_return = 0.0
         m = max(circ / room["v_da"] / 3600, moa, abs(qs) / 10, moist / 0.002, 1e-08)
         for _ in range(160):
             ws = room["w"] - moist / m
@@ -856,6 +888,24 @@ def calculate(p, isolate_utilities=False):
         "summer": summer,
         "winter": winter,
         "dcc_kw": dcc,
+        "dcc_sensible_kw": dcc,
+        "q_room_sensible_kw": qs,
+        "dcc_cmh": (n("dcc_airflow_cmh") if i["dcc_airflow_mode"] == "獨立 DCC 循環" else dcc_return) if is_mau else 0.0,
+        "dcc_return_cmh": dcc_return,
+        "ffu_topology": i["ffu_topology"],
+        "ffu_airflow_basis": i["ffu_airflow_basis"],
+        "ffu_total_cmh": ffu_total,
+        "ffu_unit_cmh": n("ffu_cmh"),
+        "ffu_count": ffu_count,
+        "ffu_size": i["ffu_size"],
+        "ffu_area_each": FFU_SIZES[i["ffu_size"]],
+        "coverage_ratio": ffu_count * FFU_SIZES[i["ffu_size"]] / sum(z["area"] for z in zones.values()) * 100 if ffu_count else 0.0,
+        "coverage_limit_pct": n("ffu_coverage_limit_pct"),
+        "required_oa_cmh": minoa,
+        "leakage_cmh": leak,
+        "q_mau_kw": coilkw if is_mau else 0.0,
+        "q_total_kw": coilkw + dcc,
+        "q_total_rt": (coilkw + dcc) / US_RT_KW,
         "counts": counts,
         "water": water,
         "pressure": pressure,
@@ -871,7 +921,22 @@ def calculate(p, isolate_utilities=False):
     }
     r["winter_room"] = winter_room
     r["dcc_design_kw"] = dcc_design
+    r["dcc_design_season"] = "winter" if winter_room and winter_room["dcc_kw"] > dcc else "summer"
+    r["dcc_design_cmh"] = r["dcc_cmh"]
     r["quality"] = assess_main(r)
+    r["coverage_exceeded"] = r["coverage_ratio"] > r["coverage_limit_pct"]
+    if is_mau:
+        from .quality import assessment, finding
+        issues = copy.deepcopy(r["quality"]["items"])
+        finding(issues, "FFU天花板實體配置", "未達" if r["coverage_exceeded"] else "通過",
+                f"FFU覆蓋率 {r['coverage_ratio']:.1f}%；專案可安裝上限 {r['coverage_limit_pct']:g}%，須另核實際模組及消防／照明空間。", "ffu_size")
+        if r["coverage_exceeded"]:
+            warn.append(f"FFU覆蓋率 {r['coverage_ratio']:.1f}% 超過專案安裝上限 {r['coverage_limit_pct']:g}%。")
+        if ffu_count and not n("ffu_w"):
+            finding(issues, "FFU入室發熱", "待資料", "目前單台FFU入室發熱為0；若功率尚未確認，室內顯熱及DCC負荷仍待補。", "ffu_w")
+        if i["ffu_topology"] == "MAU入靜壓箱經FFU送風" and ffu_total + 1e-6 < r["oa_room_cmh"]:
+            finding(issues, "FFU總風量與外氣", "未達", "FFU總送風小於OA，無法成立回風混合控制體；請增加循環需求或改用基本循環另加OA。", "ffu_airflow_basis")
+        r["quality"] = assessment(issues)
     if workspace:
         from .contributions import aggregate_ledger
         from .quality import assessment, finding

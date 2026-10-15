@@ -10,7 +10,7 @@ from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, reference_velocity, switched_v
 from .simple_schema import defaults, active_field
 from .simple_engines import compressed_air, water
 from .simple_reports import tool_report
-from .schema import default_project, V556_INPUT_KEYS, FIELDS
+from .schema import default_project, V556_INPUT_KEYS, FIELDS, SCHEMA_VERSION
 from .engine import calculate, migrate_project, gas_from_inputs
 from .utils import gas_result, water_selection
 from .reports import report
@@ -174,7 +174,7 @@ def run_checks():
     old['provenance'] = {k: v for k,v in old['provenance'].items() if k in V556_INPUT_KEYS}
     untouched = copy.deepcopy(old)
     migrated = migrate_project(old)
-    check('V5510 project migrates without mutation', old == untouched and migrated['schema_version'] == 11 and set(migrated['inputs']) == set(FIELDS))
+    check('V5510 project migrates without mutation', old == untouched and migrated['schema_version'] == SCHEMA_VERSION and set(migrated['inputs']) == set(FIELDS))
     check('Migration preserves every engineering input', all(migrated['inputs'][k] == v for k,v in old['inputs'].items()))
     check('Migration full calculation', bool(calculate(old)))
     check('Repeated migration is deterministic', migrate_project(old) == migrated)

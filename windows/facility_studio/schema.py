@@ -1,6 +1,7 @@
 import copy
 from .gas_catalog import GAS_OPTIONS
 from .data import CLEANROOM_DB, V31_DEFAULTS, VOLTAGE_MAP
+from .data import FFU_SIZES
 from .utils import EXTRA_DEFAULTS, PD_DEFAULTS
 from .utils import PD_DEFAULTS as BASE_PD_DEFAULTS
 
@@ -758,3 +759,30 @@ for j in (1, 2, 3):
     FIELD_HELP[f"gas{j}_name"] = "自訂／混合氣需填名稱與比例，例如5% H2／95% N2；物性與Z比依供應商資料。"
 
 UTILITY_ONLY_KEYS.update({f"gas{j}_name" for j in (1, 2, 3)})
+
+# Keep historical v11 key sets exact; new design assumptions are explicit and
+# migrated instead of silently changing saved ACH / leakage interpretations.
+V560_INPUT_KEYS = set(FIELDS)
+SCHEMA_VERSION = 12
+DEFAULTS.update(ffu_size="1200x600 (0.72m²)",
+                ffu_topology="獨立FFU循環（MAU直接入室）",
+                ffu_airflow_basis="FFU總送風（已含OA）",
+                ffu_coverage_limit_pct="85", leak_method="門縫孔口法",
+                base_leak_ach="1")
+group(1, "FFU風量基準與天花板配置", [
+    ("ffu_topology", "MAU／FFU氣流路徑", "", ["獨立FFU循環（MAU直接入室）", "MAU入靜壓箱經FFU送風"]),
+    ("ffu_airflow_basis", "ACH／截面風量基準", "", ["FFU總送風（已含OA）", "室內基本循環（另加OA）"]),
+    ("ffu_size", "FFU名義尺寸", "", list(FFU_SIZES)),
+    ("ffu_coverage_limit_pct", "FFU天花板可安裝上限", "%", 1, 100),
+    ("leak_method", "正壓洩漏計算法", "", ["門縫孔口法", "15Pa基準ACH法"]),
+    ("base_leak_ach", "15Pa基準洩漏換氣次數", "1/h", 0, 100),
+])
+BASIC_KEYS.update({"ffu_topology", "ffu_airflow_basis", "ffu_size", "leak_method"})
+FIELD_HELP.update({
+    "ffu_topology": "舊案沿用獨立FFU循環與MAU直接入室；此時DCC與FFU均採循環量。只有外氣先入靜壓箱時才啟用OA經FFU的風量基準。",
+    "ffu_airflow_basis": "只用於MAU入靜壓箱：總送風基準時DCC回風=FFU總風−OA；基本循環基準時FFU總風=循環＋OA。",
+    "ffu_size": "以1200mm模數估安裝面積；4英呎實際為1219.2mm，需依型錄及天花板模組核實。",
+    "ffu_coverage_limit_pct": "85%為專案空間預留假設，非ISO通用上限；需核對燈具、消防、格柵與維修空間。",
+    "leak_method": "孔口法沿用實際門縫與開門條件；基準ACH為缺少洩漏面積時的初估，不與孔口法相加。ΔP≤0均不估正壓外洩。",
+    "base_leak_ach": "只用於15Pa基準ACH法，1ACH是初估假設，需以實測或氣密需求校正。",
+})

@@ -37,3 +37,8 @@ For a rectangle, `Dh = 2WH/(W+H)`, but velocity uses the **actual rectangular ar
 The quick route assumes constant size and flow along the route. Branch networks, changing sections, pollutant treatment, fan curves and filter final resistance need separate modeling. The maximum equipment-end static-pressure requirement is not total fan ESP.
 
 Inputs: [03](../examples/03-duct.json), [04](../examples/04-duct.json). [Original inverse-check results](../examples/calculation-results-windows.json).
+## Current source revision: equal-friction round conversion
+
+Path checks add a Huebscher equal-friction round-duct option. The existing actual rectangular velocity plus hydraulic-diameter method remains the default. With side lengths a and b in the same units, `De = 1.30 * (a*b)^0.625 / (a+b)^0.25`. Straight-duct friction uses the equivalent round velocity `Ve = 4Q/(pi*De^2)`; do not combine actual rectangular velocity with De. Fitting losses retain the actual component velocity pressure. Roughness input is mm; both roughness and diameter are converted to metres before forming dimensionless epsilon/D.
+
+This source revision is not included in the existing binary downloads. Existing numerical examples and release evidence remain unchanged. See the [engineering audit](../2026-10-15-engineering-dashboard-audit.md).

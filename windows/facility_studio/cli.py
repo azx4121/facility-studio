@@ -24,7 +24,8 @@ def main():
     )
     parser.add_argument(
         "--tool",
-        choices=("electrical", "duct", "gas", "lighting", "water", "air", "units"),
+        choices=("electrical", "duct", "gas", "lighting", "water", "air", "units",
+                 "cleanroom", "heat_loads", "pumps"),
     )
     parser.add_argument("--tool-input", help="JSON inputs for one independent tool")
     parser.add_argument(
@@ -127,6 +128,9 @@ def main():
             return 2
     import tkinter as tk
 
+    from .industrial_theme import enable_high_dpi
+
+    enable_high_dpi()
     root = tk.Tk()
     if args.full:
         from .desktop import DesktopApp
@@ -138,15 +142,8 @@ def main():
         app = SimpleToolsApp(root)
         if args.gui_smoke:
             root.withdraw()
-            for tool in (
-                "electrical",
-                "duct",
-                "gas",
-                "lighting",
-                "water",
-                "air",
-                "units",
-            ):
+            from .simple_schema import TOOLS
+            for tool in TOOLS:
                 app.show_tool(tool)
                 root.update()
                 if app.active_page().result is None:

@@ -8,6 +8,12 @@ Facility Studio 是供廠務、機電與空調工程人員使用的桌面工具�
 
 **Windows／macOS · 繁體中文／English · 離線運算 · 免另裝 Python**
 
+## 目前原始碼修訂
+
+倉庫原始碼新增**氣流路徑／ACH 基準、三項工程快算、跨工具帶入、KPI 儀表板與 HTML 設計總覽**，並修正進階模式顯示互斥 FCU／RCU 欄位的問題。舊案自動移轉為 schema 12，保留既有獨立循環結果。
+
+這些變更尚未包含在下列既有 EXE／DMG 中。公式成立條件、未採納的原問題描述與驗證界線，見[工程審核與修訂說明](docs/2026-10-15-engineering-dashboard-audit.md)；開發者可依[開發文件](docs/development.md)重現來源檢查。
+
 ## 下載
 
 目前版本：**V5.6.0 公開測試版**，Windows **win.3**／macOS **mac.5**，2026-10-13（台灣時間）發布。
