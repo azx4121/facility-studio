@@ -11,7 +11,8 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from nsis_integrity import expected_members, verify_setup
+from nsis_integrity import verify_setup
+from installer_fixture import historical_installer_binary, historical_installer_members
 
 spec = importlib.util.spec_from_file_location(
     "release_bootstrap", ROOT / "installer/oneclick_setup.py"
@@ -125,23 +126,38 @@ with tempfile.TemporaryDirectory(prefix="facility_payload_test_") as directory:
     )
     rejected("08_path_traversal_blocked", lambda: bootstrap.verify_payload(root))
 
-binary = (ROOT / "Facility_Studio_V5_5_4_Setup.exe").read_bytes()
+binary = historical_installer_binary()
+historical_members = historical_installer_members()
 offset = struct.unpack_from("<I", binary, 0x3C)[0]
 check(
     "09_setup_is_windows_PE",
     binary[:2] == b"MZ" and binary[offset : offset + 4] == b"PE\0\0",
 )
 check("10_setup_version_resource", "5.5.4".encode("utf-16-le") in binary)
-integrity = verify_setup(binary, expected_members(ROOT / "installer"))
+integrity = verify_setup(binary, historical_members)
 check("12_setup_NSIS_integrity", integrity["passed"] and integrity["forced_crc"])
 check(
     "13_setup_complete_archive_files",
-    integrity["embedded_files"] == len(expected_members(ROOT / "installer")),
+    integrity["embedded_files"] == len(historical_members),
 )
 command = (ROOT / "installer/START.cmd").read_bytes()
 check(
     "15_CMD_real_line_endings_and_version",
-    b"\r\n" in command and b"5.5.4" in command and b"5.5.3" not in command,
+    b"\r\n" in command and b"5.6.0" in command and b"5.5.4" not in command and b"5.5.3" not in command,
+)
+
+v560_setup = (ROOT / "Facility_Studio_V5_6_0_Setup.exe").read_bytes()
+v560_expected = {
+    name: (ROOT / "installer" / name).read_bytes()
+    for name in historical_members
+}
+v560_integrity = verify_setup(v560_setup, v560_expected)
+check(
+    "16_v560_setup_exe_verified",
+    "5.6.0".encode("utf-16-le") in v560_setup
+    and "5.5.4".encode("utf-16-le") not in v560_setup
+    and v560_integrity["passed"]
+    and v560_integrity["forced_crc"],
 )
 (ROOT / "evidence/Packaging_Checks.json").write_text(
     json.dumps(checks, ensure_ascii=False, indent=2), encoding="utf-8"

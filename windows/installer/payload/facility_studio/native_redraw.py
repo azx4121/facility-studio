@@ -5,7 +5,10 @@ A debounced native repaint clears them without changing layout or model state.
 """
 
 import sys
-import tkinter as tk
+try:
+    import tkinter as tk
+except ImportError:
+    tk = None
 
 
 class NativeRedraw:

@@ -34,7 +34,7 @@ def run(destination):
     from facility_studio import __version__
     from facility_studio.engine import calculate
     from facility_studio.schema import default_project
-    from facility_studio.simple_schema import defaults
+    from facility_studio.simple_schema import TOOLS, defaults
     from facility_studio.simple_engines import calculate_tool
     from facility_studio.equipment_io import (
         export_template,
@@ -98,7 +98,7 @@ def run(destination):
     check("100 distinct delivered-runtime stress scenarios, 20 repetitions", stress100)
     from facility_studio.inactive_acceptance import run_checks as check_inactive
     check("V557 complete-output inactive-field regression", lambda: check_inactive(random_repeats=0)["passed"])
-    for tool in ("electrical", "duct", "gas", "lighting", "water", "air", "units"):
+    for tool in TOOLS:
         check(
             "Independent calculation: " + tool,
             lambda name=tool: bool(calculate_tool(name, defaults(name))),
@@ -185,15 +185,7 @@ def run(destination):
                 lambda: root.tk.call("tk", "windowingsystem") == "win32",
             )
             check("Application icon resources", lambda: bool(root._app_icon))
-            for name in (
-                "electrical",
-                "duct",
-                "gas",
-                "lighting",
-                "water",
-                "air",
-                "units",
-            ):
+            for name in TOOLS:
 
                 def open_tool(tool=name):
                     app.show_tool(tool)
@@ -282,7 +274,7 @@ def run(destination):
 
     result = {
         "version": __version__,
-        "revision": "win.3",
+        "revision": "win.4",
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,

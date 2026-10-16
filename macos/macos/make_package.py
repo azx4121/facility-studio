@@ -86,7 +86,7 @@ def main():
             shutil.copy2(ROOT / name, stage / name)
         shutil.copy2(
             ROOT / "facility_studio/resources/Equipment_Template.xlsx",
-            stage / "Facility_Studio_V5_5_4_Equipment_Template.xlsx",
+            stage / "Facility_Studio_V5_6_0_Equipment_Template.xlsx",
         )
         for name in ("Install_on_Mac.command", "Verify_on_Mac.command"):
             target = stage / name
@@ -99,18 +99,18 @@ def main():
             "Mac_Bundle_Manifest.json",
         ):
             shutil.copy2(build / name, stage / name)
-        source_zip = output / "Facility_Studio_V5_5_4_macOS_Source.zip"
-        zip_tree(ROOT, source_zip, "Facility_Studio_V5_5_4_macOS_Source")
+        source_zip = output / "Facility_Studio_V5_6_0_macOS_Source.zip"
+        zip_tree(ROOT, source_zip, "Facility_Studio_V5_6_0_macOS_Source")
         shutil.copy2(source_zip, stage / "Source_and_Verification.zip")
-        bundle = output / "Facility_Studio_V5_5_4_macOS_OneClick.zip"
-        zip_tree(stage, bundle, "Facility_Studio_V5_5_4_macOS")
+        bundle = output / "Facility_Studio_V5_6_0_macOS_OneClick.zip"
+        zip_tree(stage, bundle, "Facility_Studio_V5_6_0_macOS")
 
         # Verify the delivered bytes after real extraction, including native
         # load paths and every sealed byte. No target executable is run on Linux.
         extracted = directory / "extracted"
         extracted.mkdir()
         extract_unix_zip(bundle, extracted)
-        contents = extracted / "Facility_Studio_V5_5_4_macOS"
+        contents = extracted / "Facility_Studio_V5_6_0_macOS"
         report = output / "Mac_Delivery_Integrity.json"
         subprocess.run(
             [
@@ -125,7 +125,7 @@ def main():
         for name in ("Install_on_Mac.command", "Verify_on_Mac.command"):
             assert (contents / name).stat().st_mode & 0o111
         assert (
-            contents / "Facility_Studio_V5_5_4_Equipment_Template.xlsx"
+            contents / "Facility_Studio_V5_6_0_Equipment_Template.xlsx"
         ).read_bytes() == (
             ROOT / "facility_studio/resources/Equipment_Template.xlsx"
         ).read_bytes()
@@ -133,8 +133,8 @@ def main():
         extracted_source = directory / "source"
         extracted_source.mkdir()
         extract_unix_zip(contents / "Source_and_Verification.zip", extracted_source)
-        source = extracted_source / "Facility_Studio_V5_5_4_macOS_Source"
-        for tool in ("electrical", "duct", "gas", "lighting", "water", "air", "units"):
+        source = extracted_source / "Facility_Studio_V5_6_0_macOS_Source"
+        for tool in ("electrical", "duct", "gas", "lighting", "water", "air", "units", "cleanroom", "heat_loads", "pumps"):
             subprocess.run(
                 [
                     sys.executable,
@@ -170,7 +170,7 @@ def main():
         assert (
             template.read_bytes()
             == (
-                contents / "Facility_Studio_V5_5_4_Equipment_Template.xlsx"
+                contents / "Facility_Studio_V5_6_0_Equipment_Template.xlsx"
             ).read_bytes()
         )
         empty_result = subprocess.run(
@@ -231,7 +231,7 @@ def main():
                 "zip_crc_checked": True,
                 "unix_symlinks_recreated_and_verified": True,
                 "delivered_app_matches_source_files": checked_source_files,
-                "extracted_source_cli_tools_executed": 7,
+                "extracted_source_cli_tools_executed": 10,
                 "extracted_source_full_report_executed": True,
                 "extracted_source_excel_export_import_executed": True,
                 "disabled_template_expected_rejection_checked": True,
@@ -250,7 +250,7 @@ def main():
             output / "Mac_Release_Verification.json",
         )
     print(
-        f"Delivered and extracted {bundle.name}: {bundle.stat().st_size:,} bytes; 7 source tools, full report, template and native bundle byte checks passed."
+        f"Delivered and extracted {bundle.name}: {bundle.stat().st_size:,} bytes; 10 source tools, full report, template and native bundle byte checks passed."
     )
 
 

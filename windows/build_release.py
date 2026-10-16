@@ -31,7 +31,7 @@ def stage_payload():
             "__pycache__", "*.pyc", "*.openai-download-*", ".*"
         ),
     )
-    for name in ["Facility_Studio_V5_5.py", "Default_Project.json", "README.txt"]:
+    for name in ["Facility_Studio_V5_5.py", "Default_Project.json", "README.txt", "LICENSE", "LICENSE_GUIDE.md", "LICENSE_LEGACY_MIT", "THIRD_PARTY_NOTICES.md"]:
         shutil.copy2(ROOT / name, payload / name)
     # Check the staged copy before allowing publication of an installer.
     subprocess.run(
@@ -44,13 +44,13 @@ def stage_payload():
             "from facility_studio.simple_schema import defaults; "
             "from facility_studio.equipment_io import load_equipment; "
             "assert Path(facility_studio.__file__).resolve().is_relative_to(Path.cwd()); "
-            "assert facility_studio.__version__ == api.VERSION == '5.5.4'; "
+            "assert facility_studio.__version__ == api.VERSION == '5.6.0'; "
             "api.calculate(api.default_project()); "
             "api.nm_calculate(api.NM_DEFAULTS.copy()); "
             "assert all(calculate_tool(k, defaults(k))['tool'] == k for k in ENGINES); "
             "schedule=load_equipment(Path('facility_studio/resources/Equipment_Template.xlsx')); "
             "assert len(schedule['systems']) == len(schedule['records']) == 7; "
-            "print('Staged payload imports, full defaults, seven simple tools and seven schedule tabs: PASS')",
+            "print('Staged payload imports, full defaults, ten simple tools and seven schedule tabs: PASS')",
         ],
         cwd=payload,
         check=True,
@@ -85,7 +85,7 @@ def main():
         env["NSISDIR"] = str(ROOT.parent / "installer_runtime/root/usr/share/nsis")
     log_path = ROOT / "evidence/NSIS_Build.log"
     log_path.parent.mkdir(exist_ok=True)
-    output = ROOT / "Facility_Studio_V5_5_4_Setup.exe"
+    output = ROOT / "Facility_Studio_V5_6_0_Setup.exe"
     # Keep the previous output intact until the new binary is fully verified.
     with tempfile.TemporaryDirectory(prefix=".nsis-build-", dir=ROOT) as temporary:
         candidate = Path(temporary) / output.name

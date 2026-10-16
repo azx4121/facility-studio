@@ -4,6 +4,16 @@
 
 Developer build only: the V5.6.0 EXE bundles Python; publication requires both native jobs to pass. Normal users do not run pip or these build commands. ZIPs are still built for native acceptance and developer diagnostics, but are no longer public delivery assets of the recommended releases. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.6.0-win.3 and must not overwrite its existing public assets. For a future release, update the builder, verifier, publisher and workflow version/output names together. See [distribution signing](../../docs/signing.en.md).
 
+## 未發布的原始碼修訂
+
+目前來源的獨立快算已由七項擴為十項，新增 `cleanroom`、`heat_loads`、`pumps`。本修訂的 CLI、GUI、雙語與原生 self-test 清單均應涵蓋十項；設備表仍是原有七個系統，兩者不要混改。下方 win.3 的七工具原生驗收描述是歷史範圍，不表示既有 EXE 已包含來源新功能。
+
+新封裝前應使用當前 `windows/facility_studio`、資源與 `Default_Project.json`，驗證 schema 11 專案可移轉至 schema 12 且保留原氣流路徑及採用值，再執行來源工程、雙語、GUI 及兩個 Windows 環境的原生驗收。另更新 builder、verifier、publisher 和 workflow 的新修訂識別與檔名；不要覆寫既有 win.3 資產或驗收數字。
+
+舊 `windows/installer/payload`、`payload_sha256.json` 與歷史線上安裝器 binary 是成套驗證快照。日常來源同步不應對它們執行 `windows/build_release.py` 的重新 staging；需要新版線上安裝器時應另建修訂，產生相配 manifest／binary 及新的原生驗證紀錄，保留原快照。現行離線流程直接封裝當前來源，不依賴改寫歷史 payload。
+
+Current source revision (not a published binary): ten independent tools are now covered, while equipment schedules still have seven systems. Refresh current sources/resources/defaults in a fresh build, verify schema migration and all ten tools, then complete native acceptance for a new revision. Preserve existing release assets and historical installer payload/manifests. See the [engineering audit](../../docs/2026-10-15-engineering-dashboard-audit.md).
+
 `entry.py` 為單檔 EXE 的視窗模式入口；日常使用不執行 pip、不尋找外部 Python、不下載元件。
 主應用程式與完整計算邏輯仍使用 `windows/facility_studio`；不是另一套精簡計算版本。
 

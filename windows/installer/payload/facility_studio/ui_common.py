@@ -1,6 +1,9 @@
 from pathlib import Path
 import sys
-import tkinter as tk
+try:
+    import tkinter as tk
+except ImportError:
+    tk = None
 
 # Tk's EXTENDED_MASK (AnyModifier << 3) carries the Windows extended-key bit.
 # The dedicated Delete key is extended; the keypad Del/decimal key is not.

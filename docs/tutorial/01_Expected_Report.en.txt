@@ -1,20 +1,54 @@
 Tutorial A - 96 m2 room | Design conditions / calculation summary
- System :  AHU (OA + RA mixing)  | V5.6.0 |  Preliminary demand estimate
+ System :  AHU (OA + RA mixing)  | V5.6.0 |  Preliminary demand
  Overall status:  Data required  ; equipment counts are demand candidates. Do not select directly when checks fail.
 [ Data required ] CHW  Equipment resistance :  Piping subtotal only. Neither Simple nor Detailed mode treats unknown resistance as zero.
 [ Data required ] HW  Equipment resistance :  Piping subtotal only. Neither Simple nor Detailed mode treats unknown resistance as zero.
 [ Data required ]  Equipment selection at design conditions :  This tool calculates demand. Manufacturer coil / terminal selections and actual fan curves are still required.
 [ Data required ]  Electrical-candidate review :  Tables are estimates only. Installation, fault, grounding and motor-protection data required.
 [ Data required ]  Winter room / electrical boundary :  Steady-state room heat / moisture balance uses specified loads. NP still requires actual equipment electrical power.
+
+╔══════════════════════════════════════════════════════════════════╗
+ ★ Executive Design Summary
+ Calculated requirements and selection targets are separate; missing values remain not calculated.
+
+ FFU fan filter units  |  Not applicable
+   [Calculated requirement]  This system does not use FFUs
+   [Selection target]  Not applicable
+
+ MAU makeup air unit  |  Not applicable
+   [Calculated requirement]  Outdoor air mixes at the AHU inlet; no separate MAU
+   [Selection target]  Not applicable
+
+ DCC room dry cooling coil  |  Not applicable
+   [Calculated requirement]  This system does not use a DCC
+   [Selection target]  Not applicable
+
+ Central chiller  |  Preliminary cooling load
+   [Calculated requirement]  Separate-temperature loop capacity envelope (before allowance)  13.04 kW / 3.71 US RT
+   [Selection target]  Capacity target across separate temperature loops 14.35 kW / 4.08 US RT (including project capacity margin; manufacturer rating pending)
+
+ Chilled-water main piping  |  Separate temperature loops
+   [Calculated requirement] MCHW 0 LPM | CHW 41.12 LPM | DCCW 0 LPM
+   [Selection target] MCHW  No demand ; 0 m/s; 0 Pa/m ; path pressure loss 0 Pa | CHW 20A (3/4"); 2 m/s; 2,608.88 Pa/m ; path pressure loss 101,746.42 Pa | DCCW  No demand ; 0 m/s; 0 Pa/m ; path pressure loss 0 Pa
+
+ CHWP chilled-water pump  |  Selection pending
+   [Calculated requirement] MCHW 0 LPM ; head 0 m ; shaft power 0 kW | CHW 41.12 LPM ; head 10.38 m ; shaft power 0.1 kW | DCCW 0 LPM ; head 0 m ; shaft power 0 kW
+   [Selection target]  Motor nameplate not selected; size each loop pump separately
+
+ Main distribution MCCB  |  Panel candidates
+   [Calculated requirement] UP 5 kW; 8.94 A | NP 1 kW; 1.79 A
+   [Selection target] UP 15 AT; 1  sets  × 3.5 mm²/phase  | NP 15 AT; 1  sets  × 3.5 mm²/phase  ; main incomer not calculated; panel AT ratings are not added
+╚══════════════════════════════════════════════════════════════════╝
  1. Design conditions
  Atmospheric pressure  101.325 kPa;  Summer  35°C / 70%RH;  Winter  8°C / 70%RH;  Room  22°C / 50 %RH (exact target).
-A zone 96.0 m² / 288.0 m³; ACH  Demand  1728.0 CMH; cleanliness record  None .
-B zone 0.0 m² / 0.0 m³; ACH  Demand  0.0 CMH; cleanliness record  None .
- Makeup outdoor-air minimum 192.00 CMH;  Adopted 192.00 CMH;  Additional  Relief demand  0.00 CMH (both at room conditions).
+A zone 96.0 m² / 288.0 m³; ACH 6  Demand  1728.0 CMH ; positive pressure 0  Pa; cleanliness record  None .
+B zone 0.0 m² / 0.0 m³; ACH 0  Demand  0.0 CMH ; positive pressure 0  Pa; cleanliness record  None .
+ Positive pressure leakage 0.00 CMH ( Gap-orifice method  ); minimum makeup OA 192.00 CMH;  Adopted 192.00 CMH;  Additional  Relief demand  0.00 CMH (both at room conditions).
  lighting  25  luminaires  / 1.000 kW;  Room  Sensible heat  7.870 kW; reference latent load 0.440 kW; moisture generation 0.633 kg/h.
+ Sensible breakdown: net equipment 5.000 (PCW removed 0.000 , exhaust removed 0.000 ), occupant sensible 0.600 , lighting 1.000 , wall 1.270 , floor 0.000 , oven 0.000 , solar 0.000 , fan & FFU 0.000 kW.
  Moisture sources: occupants 0.633 + additional process 0.000 kg/h; process input method:  No additional moisture  . Outdoor moisture is calculated at the coils, not added again to the room.
  2. HVAC duties and states
- First-stage supply water 12.0°C / ΔT 5 K; second stage 7.0°C / ΔT 5.0 K; DCCW 14.0°C / ΔT 4.0 K;  Capacity  Margin  10%.
+ First-stage supply water 12.0°C / ΔT 5 K ( Automatic bypass-factor estimate  , target 26.0°C) ; second stage 7.0°C / ΔT 5.0 K;  No DCC loop (standby ΔT 4.0 K);  Capacity  Margin  10% (refrigeration ton basis:  US RT (3024 kcal/hr) ).
  Treated airflow 2400.24 CMH (room reference);  Outdoor air mixed at HVAC inlet .
  Point            Dry bulb °C   RH%     w(g/kg dry air)      h(kJ/kg dry air)
  Inlet             23.069   54.456         9.578898          47.575594

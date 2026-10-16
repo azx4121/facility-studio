@@ -2,6 +2,36 @@
 
 [繁體中文](workbench.md) · [Download the app](../../README.en.md#download-and-run) · [Tool guides](README.en.md) · [Offline tutorial package](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)
 
+<a id="source-revision"></a>
+## Current source: airflow topology, upstream import and design summary
+
+This section describes the current repository revision. The existing V5.6.0 walkthrough numbers, screenshots and published EXE/DMG evidence below retain their original scope. Downloading those existing binaries does not install these source changes; a new native-tested release is required.
+
+For MAU systems, choose the **MAU / FFU airflow path** before interpreting ACH. With DCC set to follow the circulation flow, let `Q=room volume x ACH` and `OA=final design outdoor airflow`:
+
+| Airflow path / ACH basis | FFU total airflow | DCC return airflow |
+| --- | --- | --- |
+| Independent FFU loop; MAU supplies the room directly | Q | Q |
+| MAU enters ceiling plenum; ACH is FFU total supply including OA | Q | Q-OA |
+| MAU enters ceiling plenum; ACH is basic room recirculation excluding OA | Q+OA | Q |
+
+Schema 11 projects migrate to schema 12 with the original independent FFU loop, direct MAU supply and gap-orifice leakage method retained. Saved per-person OA settings and FFU room heat are retained as well. The separate DCC circulation option continues to use its explicit flow. Reported DCC flow and its air-side check use the same basis and the larger summer/winter load. Negative plenum return is retained and marked infeasible.
+
+The main model starts with `max(exhaust+leakage,persons x adopted per-person OA)`; dehumidification can raise final OA. The existing orifice method already gives zero outward leakage at zero pressure difference. The optional 15 Pa reference-ACH method is an alternative when leakage area is unavailable; do not add both estimates. Reference 1 ACH, quick-tool 30 CMH per person and 85% installation coverage are project assumptions, not universal ASHRAE/ISO requirements. FFUs offer nominal 1200x600 and 1200x1200 modules; four feet is 1219.2 mm, so verify catalogue dimensions.
+
+The source adds **Cleanroom airflow**, **Heat load estimate** and **Chilled-water pump**. To use the upstream chain:
+
+1. Calculate cleanroom topology, ACH, outdoor air and FFU demand.
+2. In Heat load estimate, click **Import upstream** to adopt area, occupancy, OA and FFU count/power. A valid lighting result supplies lighting power too. Review equipment room heat and the enthalpy basis.
+3. In Water / heat load, import total cooling kW, confirm water-side delta T, then enter the critical route and equipment losses.
+4. In Chilled-water pump, import flow and included route head; enter only additional terminal loss, open-system static head and the required allowance. Closed loops do not add building height.
+5. In Electrical sizing, enter MAU/process electrical inputs and chiller COP or electrical input, then import the listed device inputs. Thermal cooling kW is not electrical input kW.
+
+Import replaces the relevant fields and recalculates; it does not add the old total a second time. Changes upstream make dependent results stale. Reimport, or edit the imported fields to use a manual basis. This quick-tool chain does not silently write into the full project. See the [water/heat and pump scope](water.en.md#source-revision) and [electrical import scope](electrical.en.md#source-revision).
+
+The report starts with an Executive Design Summary for seven equipment groups, separating calculated demand from suggested selection. HTML adds KPI cards and a selection table. Missing, uncalculated, over-catalogue and infeasible results remain distinct. UP/NP panels are listed separately; their AT ratings are not added to invent an uncalculated main breaker. Forms scroll, Enter calculates and inline feedback identifies errors; inspect the adopted assumptions and engineering assessment as well as the KPI cards.
+
+
 For **V5.6.0 on Windows and macOS**. Finish sections 1–6 to produce your first practice report. Sections 7–9 are optional extensions. All examples use synthetic data, with no client or company project information.
 
 <a id="start"></a>

@@ -4,6 +4,12 @@ The original V5.5.4 mac.1 package passed byte-level checks but failed Apple's na
 signature validation on both macOS 15 architectures. Static verification must
 not be treated as native release acceptance. Historical assets are retained. V5.6.0 includes the repaired runtime and bilingual presentation; [current verification](../../docs/2026-10-13-v5.6-audit-stress.md) records native delivery separately; publication requires Apple Silicon and Intel acceptance. These commands are for developers; normal users use the [bundled downloads](../../README.en.md#download-and-run).
 
+## Current source revision (not yet published)
+
+The repository adds `cleanroom`, `heat_loads` and `pumps`, taking independent calculators from seven to ten. Current CLI, GUI, language and native self-tests now cover ten tools; the Excel equipment template still has seven systems. Published mac.4/mac.5 assets and their original acceptance counts remain historical evidence and are not changed by this source revision.
+
+Before a new release, refresh the app and source archive from current `macos/facility_studio`, resources and `Default_Project.json` in a fresh output directory. Verify schema 11-to-12 migration with the retained independent-FFU topology and saved assumptions, then run all ten tools, bilingual/GUI checks and native acceptance on both architectures. Update builder/verifier/publisher/workflow version and output names together instead of overwriting existing public assets. Re-sign after the final source change. The legacy Windows online-installer payload and manifest are a separate historical snapshot and must not be refreshed as a shortcut for this build. See the [engineering audit](../../docs/2026-10-15-engineering-dashboard-audit.md).
+
 ## Shipping build
 
 The public publisher now offers only the tested DMG and its public SHA256SUMS. The developer ZIP below is retained in build artifacts for cross-architecture acceptance; the two currently recommended releases do not offer their complete ZIPs. Internal checksum files remain intact for verification. See [download changes](../../docs/2026-10-08-downloads.md) and [Developer ID/notarization requirements](../../docs/signing.en.md).
@@ -23,7 +29,7 @@ No Zig or third-party signing tool is needed for this rebuild. The builder:
    documented five-second Matplotlib discovery limits, and updates RECORD.
 4. Signs Mach-O files, nested frameworks, the outer framework and app with Apple
    `codesign`; requires `--verify --deep --strict` to pass.
-5. Executes all seven CLI tools and native GUI/Excel/equipment acceptance,
+5. Executes all ten current-source CLI tools and native GUI/Excel/equipment acceptance,
    including language changes, readonly choices and invalid-input export blocking.
    The workflow also runs bilingual parity and worked-example checks.
 6. Creates the delivery ZIP with `ditto`, extracts it again, checks its native

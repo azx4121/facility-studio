@@ -40,11 +40,17 @@ UNITS = {
     },
     "冷熱功率": {
         "kW": 1.0,
+        "HP": 0.745699871582,
         "W": 0.001,
         "kcal/h": 4.1868 / 3600,
         "BTU(IT)/h": 1055.05585262 / 3600000,
         "US RT": US_RT_KW,
         "日本冷凍噸": JRT_KW,
+    },
+    "電力（固定三相380V PF0.85）": {
+        "kW": 1.0, "W": 0.001,
+        "A (三相380V PF0.85)": math.sqrt(3) * 380.0 * 0.85 / 1000.0,
+        "kVA (PF0.85)": 0.85,
     },
     "長度": {"mm": 1.0, "cm": 10.0, "m": 1000.0, "inch": 25.4, "ft": 304.8},
     "溫度差（升溫／降溫）": {"K": 1.0, "°C差": 1.0, "°F差": 5 / 9},
@@ -58,6 +64,7 @@ UNIT_HELP = {
     "閥門流量係數（Kv／Cv）": "Kv／Cv表示閥門通流能力，通常查閥門型錄。Kv：水在壓差1bar下的m³/h；Cv(US)：水在壓差1psi下的US GPM。Kv≈0.865×Cv(US)，不是管徑或壓力。",
     "溫度": "換算溫度本身，例如25°C＝77°F＝298.15K；若要換算升溫或降溫的幅度，請選『溫度差（升溫／降溫）』。",
     "壓力": "只換算單位，保持原來的表壓／絕對壓基準；表壓轉絕對壓需另外加當地大氣壓。",
+    "電力（固定三相380V PF0.85）": "此換算固定三相380V、PF=0.85，只供電力初估；其他電壓、相數與馬達效率請用電力配線。冷量另用冷熱功率換算，不代表冰機用電。",
 }
 
 
@@ -241,4 +248,37 @@ def energy_cost(power_kw, hours_per_day, days, load_fraction, rate):
         kwh=kwh,
         cost=kwh * rate,
         formula="電量=輸入kW×每日小時×天數×平均負載比例；費用=電量×自填單價，不含需量／時間電價",
+    )
+
+
+
+def electrical_quick(power, power_unit="kW", supply="三相 380V", kind="一般設備", pf=0.85, eta=1.0, length=30.0, insulation="XLPE"):
+    from .simple_schema import defaults
+    from .simple_engines import electrical
+    data = defaults("electrical")
+    data.update(
+        power=str(power),
+        power_unit=str(power_unit),
+        supply=str(supply),
+        kind=str(kind),
+        pf=str(pf),
+        motor_efficiency=str(eta),
+        length=str(length),
+        insulation=str(insulation),
+    )
+    res = electrical(data)
+    sel = res.get("selected") or {}
+    return dict(
+        electrical_input_kw=res["electrical_input_kw"],
+        equivalent_hp=res["equivalent_hp"],
+        current_a=res["current_a"],
+        apparent_kva=res["apparent_kva"],
+        power_w=res["power_w"],
+        design_a=res["design_a"],
+        nfb_a=sel.get("nfb_a", 0),
+        wire_mm2=sel.get("size_mm2", 0),
+        runs=sel.get("runs", 0),
+        ampacity_a=sel.get("ampacity_a", 0),
+        drop_pct=sel.get("drop_pct", 0),
+        formula=res["formula"],
     )

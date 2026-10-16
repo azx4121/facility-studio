@@ -222,3 +222,6 @@ __marimo__/
 # Keep the original release build verification records
 !/windows/evidence/NSIS_Build.log
 !/macos/evidence/NSIS_Build.log
+
+# Local hash-locked standalone builder
+.build-venv/

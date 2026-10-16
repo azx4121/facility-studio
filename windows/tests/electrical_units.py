@@ -90,7 +90,7 @@ class PowerUnits(unittest.TestCase):
                 self.assertEqual(error.exception.field_name, "motor_efficiency")
 
     def test_invalid_power_and_units_are_rejected(self):
-        for unit in ("", "kVA", "MW", "hp", "arbitrary"):
+        for unit in ("", "US RT", "kcal/h", "BTU/h", "MW", "hp", "arbitrary"):
             with self.subTest(unit=unit), self.assertRaises(ValidationError) as error:
                 calculate(power_unit=unit)
             self.assertEqual(error.exception.field_name, "power_unit")
@@ -188,7 +188,7 @@ class PowerUnitWidgets(unittest.TestCase):
     def test_readonly_unit_switches_preserve_load_and_motor_settings(self):
         widget = self.page.widgets["power_unit"]
         self.assertEqual(str(widget.cget("state")), "readonly")
-        self.assertEqual(tuple(widget.cget("values")), ("kW", "W", "HP", "PS"))
+        self.assertEqual(tuple(widget.cget("values")), ("kW", "W", "HP", "PS", "A", "kVA"))
         original = self.page.result["current_a"]
         self.assertFalse(self.page.rows["motor_efficiency"].winfo_manager())
         for _ in range(3):

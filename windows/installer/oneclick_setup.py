@@ -1,4 +1,4 @@
-"""V5.5.4 Windows preparation/build launcher. Does not alter calculation code."""
+"""V5.6.0 Windows preparation/build launcher. Does not alter calculation code."""
 
 from __future__ import annotations
 
@@ -161,7 +161,7 @@ def check_output(exe, project, directory, log):
             timeout=180,
         )
         schedule = json.loads(audit.read_text(encoding="utf-8"))
-        if schedule.get("version") != "5.5.4" or len(schedule.get("groups", [])) != 1:
+        if schedule.get("version") != "5.6.0" or len(schedule.get("groups", [])) != 1:
             raise RuntimeError(
                 "The generated EXE failed an equipment system check: " + system
             )
@@ -221,7 +221,7 @@ def main():
                 timeout=60,
             )
             print(
-                "[3/5] Building Facility_Studio_V5_5_4.exe. This can take several minutes...",
+                "[3/5] Building Facility_Studio_V5_6_0.exe. This can take several minutes...",
                 flush=True,
             )
             run(
@@ -236,19 +236,19 @@ def main():
                     "--icon",
                     PACKAGE / "payload/facility_studio/resources/app.ico",
                     "--add-data",
-                    str(PACKAGE / "payload/LICENSE") + ":.",
+                    str(PACKAGE / "payload/LICENSE") + os.pathsep + ".",
                     "--add-data",
-                    str(PACKAGE / "payload/LICENSE_GUIDE.md") + ":.",
+                    str(PACKAGE / "payload/LICENSE_GUIDE.md") + os.pathsep + ".",
                     "--add-data",
-                    str(PACKAGE / "payload/LICENSE_LEGACY_MIT") + ":.",
+                    str(PACKAGE / "payload/LICENSE_LEGACY_MIT") + os.pathsep + ".",
                     "--add-data",
-                    str(PACKAGE / "payload/THIRD_PARTY_NOTICES.md") + ":.",
+                    str(PACKAGE / "payload/THIRD_PARTY_NOTICES.md") + os.pathsep + ".",
                     "--add-data",
                     str(PACKAGE / "payload/facility_studio/resources")
-                    + ":"
+                    + os.pathsep
                     + "facility_studio/resources",
                     "--name",
-                    "Facility_Studio_V5_5_4",
+                    "Facility_Studio_V5_6_0",
                     "--hidden-import",
                     "matplotlib.backends.backend_tkagg",
                     "--distpath",
@@ -267,7 +267,7 @@ def main():
                 cwd=build_dir,
                 timeout=1800,
             )
-            exe = release / "Facility_Studio_V5_5_4.exe"
+            exe = release / "Facility_Studio_V5_6_0.exe"
             if not exe.is_file() or exe.stat().st_size < 100000:
                 raise RuntimeError("EXE build did not complete.")
             for name in ("LICENSE", "LICENSE_GUIDE.md", "LICENSE_LEGACY_MIT", "THIRD_PARTY_NOTICES.md"):
@@ -291,9 +291,9 @@ def main():
                 "$ErrorActionPreference='Stop'; "
                 "$w=New-Object -ComObject WScript.Shell; "
                 "$d=[Environment]::GetFolderPath('Desktop'); "
-                "$s=$w.CreateShortcut((Join-Path $d 'Facility Studio V5.5.lnk')); "
+                "$s=$w.CreateShortcut((Join-Path $d 'Facility Studio V5.6.lnk')); "
                 "$s.TargetPath=$env:HVAC_EXE; $s.WorkingDirectory=$env:HVAC_PROJECTS; "
-                "$s.IconLocation=$env:HVAC_EXE+',0'; $s.Description='Facility Studio V5.5.4'; $s.Save()"
+                "$s.IconLocation=$env:HVAC_EXE+',0'; $s.Description='Facility Studio V5.6.0'; $s.Save()"
             )
             shortcut_ok = True
             try:

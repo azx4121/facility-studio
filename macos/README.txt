@@ -2,7 +2,7 @@ Facility Studio V5.6.0｜macOS 廠務工程初估工具
 DESIGNED BY ANDY HUANG ©
 
 用途
-獨立快算電力、風管、CDA／特氣、照明、冷熱水、空氣線圖與單位；
+獨立快算電力、風管、CDA／特氣、照明（型錄 U 與室指數 K 檢核）、冷熱水、空氣線圖與單位；
 匯入 Excel／CSV 彙整設備需求；以完整工作台比較空調方案與夏冬空調箱各段需求。
 繁體中文／English 可即時切換；計算、專案保存與內建教學可離線使用。
 七個快算直接列於左側；水管自動選型至24吋，先選符合水速的單管。
@@ -46,7 +46,7 @@ V5.6.0 保留數字鍵盤 Del／小數點辨識；一般 Delete 保留刪除功�
 
 English
 Independent calculators, equipment schedules and a full HVAC/AHU workbench are available.
-All seven calculators are direct sidebar buttons; automatic water sizing extends to 24 inches.
+All ten calculators are direct sidebar buttons; automatic water sizing extends to 30 inches.
 The calculator and workbench share 50 factory gases plus custom mixtures.
 Added gases require an entered design velocity; reselecting the same gas preserves it.
 Open the DMG, drag Facility Studio to Applications, then launch it there.

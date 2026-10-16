@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "source_platform": "windows",
+  "host_os": "Linux",
+  "python": "3.12.14",
+  "scenarios": 100,
+  "checks": 4432,
+  "examples": [
+    {
+      "case": 0,
+      "input_kw": 10.048229379813817,
+      "current_a": 19.564039388955408,
+      "lighting_qty": 70,
+      "pump_input_kw": 3.8818156219071684
+    },
+    {
+      "case": 1,
+      "input_kw": 60.88086516149509,
+      "current_a": 196.32551121948975,
+      "lighting_qty": 59,
+      "pump_input_kw": 34.811947398260045
+    },
+    {
+      "case": 2,
+      "input_kw": 29.610218876994615,
+      "current_a": 240.23382083178018,
+      "lighting_qty": 67,
+      "pump_input_kw": 58.08555668484591
+    }
+  ]
+}

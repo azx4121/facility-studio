@@ -1,7 +1,10 @@
 from .localized_plot import translated_axes
 from pathlib import Path
 from .localized_tk import tk
-from tkinter import font as tkfont
+try:
+    from tkinter import font as tkfont
+except ImportError:
+    tkfont = None
 from .localized_tk import ttk
 from .engine import wetbulb
 from .display_helpers import duct_dimensions, annotate_states
@@ -73,10 +76,30 @@ class ScrollPage(ttk.Frame):
         )
 
 
+
+def hidden_system_equipment(system):
+    """Architecture exclusions stay hidden in both basic and advanced views.
+
+    This deliberately does not hide every inactive draft. Alternate control
+    settings remain inspectable in advanced mode and are never deleted.
+    """
+    hidden = set()
+    if not system.startswith("FCU"):
+        hidden.update(("en_fcu_cmh", "fcu_rt"))
+    if not system.startswith("RCU"):
+        hidden.add("en_rcu_rt")
+    if not system.startswith("MAU"):
+        hidden.update("mau_supply_t en_dcc_rt ffu_cmh ffu_w ffu_size ffu_topology "
+                      "ffu_airflow_basis ffu_coverage_limit_pct dccw_in dccw_dp_margin "
+                      "dcc_airflow_mode dcc_airflow_cmh dcc_air_approach".split())
+    return hidden
+
+
 class MainView:
 
     def update_visibility(self):
         advanced = self.view_mode.get() == "進階模式"
+        excluded_equipment = hidden_system_equipment(self.variables["sys_type"].get())
         all_pages = advanced or not hasattr(self, "task_scope") or self.task_scope.get() == "全部工程分頁"
         for page, button in enumerate(self.nav):
             if all_pages or page in (0, 1, 2, 8):
@@ -97,6 +120,8 @@ class MainView:
             self.show_page(0)
         for key, line in self.form_rows.items():
             visible = advanced or key in BASIC_KEYS
+            if key in excluded_equipment:
+                visible = False
             if (
                 not advanced
                 and str(self.widgets[key].cget("state")) == "disabled"
@@ -107,6 +132,19 @@ class MainView:
                 line.grid()
             elif not visible and line.winfo_manager() == "grid":
                 line.grid_remove()
+        if hasattr(self, "ffu_heat_mirror_row"):
+            if "ffu_w" in excluded_equipment:
+                self.ffu_heat_mirror_row.grid_remove()
+                self.ffu_heat_mirror_entry.configure(state="disabled")
+                self.dcc_rt_mirror_row.grid_remove()
+                self.dcc_rt_mirror_entry.configure(state="disabled")
+            else:
+                self.ffu_heat_mirror_entry.configure(state=str(self.widgets["ffu_w"].cget("state")))
+                self.dcc_rt_mirror_entry.configure(state=str(self.widgets["en_dcc_rt"].cget("state")))
+                if self.ffu_heat_mirror_row.winfo_manager() != "grid":
+                    self.ffu_heat_mirror_row.grid()
+                if self.dcc_rt_mirror_row.winfo_manager() != "grid":
+                    self.dcc_rt_mirror_row.grid()
         for box, keys in self.form_boxes:
             visible = any((self.form_rows[k].winfo_manager() for k in keys))
             if not visible:
@@ -319,6 +357,45 @@ class MainView:
                     text="帶入此等級 ACH／壓差參考值",
                     command=lambda zone=z: self.preset(zone),
                 ).grid(row=len(keys), column=0, sticky="w", pady=7)
+            if page == 2 and "eq_kw" in keys:
+                ffu_line = ttk.Frame(box)
+                ffu_line.grid(row=len(keys), column=0, sticky="ew", pady=4)
+                ffu_line.columnconfigure(1, weight=1)
+                ttk.Label(ffu_line, text="單台 FFU 入室發熱（自動乘 FFU 台數）").grid(
+                    row=0, column=0, sticky="w", padx=(0, 12)
+                )
+                ffu_entry = ttk.Entry(ffu_line, textvariable=self.variables["ffu_w"], width=26)
+                ffu_entry.grid(row=0, column=1, sticky="ew")
+                ttk.Label(ffu_line, text="W", foreground="#6b7c8d").grid(
+                    row=0, column=2, sticky="w", padx=(10, 0)
+                )
+                ttk.Label(
+                    ffu_line,
+                    text="與『空調與空間』頁同步；填單台 FFU 發熱 W（如 120～180 W），自動乘上 FFU 需求台數計入室內顯熱與 DCC 負荷。",
+                    wraplength=610,
+                    style="Muted.TLabel",
+                ).grid(row=1, column=0, columnspan=3, sticky="w", pady=(3, 0))
+                self.ffu_heat_mirror_row = ffu_line
+                self.ffu_heat_mirror_entry = ffu_entry
+                dcc_line = ttk.Frame(box)
+                dcc_line.grid(row=len(keys) + 1, column=0, sticky="ew", pady=4)
+                dcc_line.columnconfigure(1, weight=1)
+                ttk.Label(dcc_line, text="單台 DCC 同工況顯熱能力（計算 DCC 台數）").grid(
+                    row=0, column=0, sticky="w", padx=(0, 12)
+                )
+                dcc_entry = ttk.Entry(dcc_line, textvariable=self.variables["en_dcc_rt"], width=26)
+                dcc_entry.grid(row=0, column=1, sticky="ew")
+                ttk.Label(dcc_line, text="RT", foreground="#6b7c8d").grid(
+                    row=0, column=2, sticky="w", padx=(10, 0)
+                )
+                ttk.Label(
+                    dcc_line,
+                    text="與『空調與空間』頁同步；填單台 DCC 顯冷能力 RT（如 6 RT），計入容量安全餘裕後自動換算 DCC 需求台數。",
+                    wraplength=610,
+                    style="Muted.TLabel",
+                ).grid(row=1, column=0, columnspan=3, sticky="w", pady=(3, 0))
+                self.dcc_rt_mirror_row = dcc_line
+                self.dcc_rt_mirror_entry = dcc_entry
             if "latent_mode" in keys:
                 ttk.Label(
                     box,
@@ -513,7 +590,7 @@ class MainView:
             f"人員 {r['latent']['people_kg_h']:.2f}＋製程 {r['latent']['process_kg_h']:.2f}＝室內合計 {r['moisture'] * 3600:.2f} kg/h\n除濕負荷參考 {r['ql']:.2f} kW；外氣水氣由空調盤管另算。"
         )
         self.result_labels[2].config(
-            text=f"照明 {r['light']['qty']} 盞／{r['light']['kw']:.3f} kW；室內顯熱 {r['qs']:.3f} kW、產濕 {r['moisture'] * 3600:.3f} kg/h。"
+            text=f"照明 {r['light']['qty']} 盞／{r['light']['kw']:.3f} kW；風機與FFU顯熱 {r['parts']['fan']:.3f} kW（FFU {r['counts']['FFU']} 台 × {i['ffu_w']} W）；室內顯熱 {r['qs']:.3f} kW、產濕 {r['moisture'] * 3600:.3f} kg/h。"
         )
         self.result_labels[3].config(
             text="\n".join(

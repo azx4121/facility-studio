@@ -67,6 +67,16 @@ TOOLS = {
         ("second", "第二個值", "0.2", None),
         ("specific_gravity", "液體比重 SG", "1", None),
     ],
+    "電力與線徑快算": [
+        ("power", "已知數值", "10", None),
+        ("power_unit", "已知單位", "kW", ["kW", "W", "HP", "PS", "A", "kVA"]),
+        ("supply", "供電方式", "三相 380V", ["三相 380V", "三相 220V", "三相 208V", "三相 400V", "三相 480V", "單相 220V", "單相 110V"]),
+        ("kind", "負載類型", "一般設備", ["一般設備", "連續運轉", "馬達"]),
+        ("pf", "功率因數 PF", "0.85", None),
+        ("eta", "馬達效率 η（僅HP／PS）", "0.90", None),
+        ("length", "單程配線距離 m", "30", None),
+        ("insulation", "銅線絕緣", "XLPE", ["XLPE", "PVC"]),
+    ],
     "耗電與費用": [
         ("power_kw", "設備輸入 kW", "100", None),
         ("hours_per_day", "每日運轉時數", "12", None),
@@ -118,6 +128,19 @@ LABELS = {
     "id_mm": "實際內徑 mm",
     "shape": "風管形狀",
     "nominal": "名目尺寸",
+    "electrical_input_kw": "有效輸入電功率 kW",
+    "equivalent_hp": "換算馬力 HP",
+    "current_a": "滿載運轉電流 A",
+    "apparent_kva": "視在功率 kVA",
+    "power_w": "換算瓦特 W",
+    "equivalent_kcal_h": "熱量當量 kcal/h",
+    "equivalent_us_rt": "冷凍噸當量 US RT",
+    "equivalent_btu_h": "英熱當量 BTU/h",
+    "design_a": "配線設計電流 A",
+    "nfb_a": "NFB 斷路器候選 AT",
+    "wire_mm2": "每相銅線截面 mm²",
+    "ampacity_a": "有效容許載流 A",
+    "drop_pct": "電壓降 %",
 }
 
 
@@ -481,6 +504,7 @@ class QuickToolsWindow:
             "水量與熱量": q.water_heat,
             "水管實際流速": q.pipe_velocity,
             "Kv 與壓差": q.valve,
+            "電力與線徑快算": q.electrical_quick,
             "耗電與費用": q.energy_cost,
         }
         try:

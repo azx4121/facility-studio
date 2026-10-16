@@ -184,7 +184,7 @@ def main():
     root.report_callback_exception = callback_error
     app = SimpleToolsApp(root)
     root.geometry('1100x760')
-    for tool in ('electrical', 'duct', 'gas', 'lighting', 'water', 'air', 'units'):
+    for tool in ('electrical', 'duct', 'gas', 'lighting', 'water', 'air', 'units', 'cleanroom', 'heat_loads', 'pumps'):
         app.show_tool(tool)
     app.open_equipment()
     workbench = app.open_workbench()

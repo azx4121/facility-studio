@@ -1,18 +1,24 @@
 Facility Studio V5.6.0｜Windows 廠務工程初估工具
 DESIGNED BY ANDY HUANG ©
 
+目前來源修訂（尚未重新封裝發布）
+原始碼現在另有潔淨室風量、熱負荷及冰水泵浦，共十項快算，支援上游帶入、KPI與HTML總覽。
+舊案以schema 12移轉並保留原假設；FFU氣流路徑／ACH基準須明確選擇。
+工程審核與來源驗證：docs/2026-10-15-engineering-dashboard-audit.md、docs/development.md。
+以下公開版下載資訊仍指原有EXE／DMG，尚未包含本次來源修訂。
+
 用途
-單項快算：電力配線、風管、CDA／特氣、照明、冷熱水、空氣線圖與單位換算。
+單項快算：電力配線、風管、CDA／特氣、照明（型錄 U 與室指數 K 檢核）、冷熱水、空氣線圖與單位換算。
 多設備：用 Excel／CSV 彙整電力與廠務需求。
 完整工作台：整理空調方案、夏冬空調箱分段需求與報告。
 繁體中文／English 可即時切換；計算與專案保存可離線完成。
-七個快算直接列於左側；水管自動選型至24吋，先選符合水速的單管。
+既有公開版七個快算直接列於左側；水管自動選型至24吋，先選符合水速的單管。
 氣體快算與工作台共同提供50種廠務氣體及自訂／混合氣，新增氣體需填設計流速。
 本修訂保留重選同種製程氣體的已填流速；切換到不同新增氣體須重新填寫。
 
 下載與開啟
 目前公開下載為 EXE：
-https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.3/Facility_Studio_V5_6_0_Windows_Offline.exe
+https://github.com/azx4121/facility-studio#readme
 儲存後雙擊開啟，第一次請等候內建環境展開。不需另裝 Python 或管理員權限。
 Windows 10／11 Intel／AMD x64 為支援目標；原生驗收為 Windows Server 2022／2025 x64。
 本版尚無正式發行者簽章。首次安全提示說明：
@@ -42,7 +48,7 @@ https://github.com/azx4121/facility-studio/issues
 
 English
 Use independent engineering calculators, import equipment schedules, or compare HVAC/AHU schemes.
-All seven calculators are direct sidebar buttons; automatic water sizing extends to 24 inches.
+All ten calculators are direct sidebar buttons; automatic water sizing extends to 30 inches.
 The calculator and workbench share 50 factory gases plus custom mixtures.
 Added gases require an entered design velocity; reselecting the same gas preserves it.
 Download the EXE above and double-click. The runtime and offline help are included.

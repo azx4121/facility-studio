@@ -1,5 +1,5 @@
 {
-  "schema_version": 11,
+  "schema_version": 12,
   "inputs": {
     "project_name": "一般廠房初估範例",
     "atm_kpa": "101.325",
@@ -249,7 +249,15 @@
     "hw_mu": "0.001",
     "gas1_name": "",
     "gas2_name": "",
-    "gas3_name": ""
+    "gas3_name": "",
+    "ffu_size": "1200x600 (0.72m²)",
+    "ffu_topology": "MAU入靜壓箱經FFU送風",
+    "ffu_airflow_basis": "室內基本循環（另加OA）",
+    "ffu_coverage_limit_pct": "85",
+    "leak_method": "門縫孔口法",
+    "base_leak_ach": "1",
+    "light_u_mode": "手動固定 U",
+    "light_work_h": "0.8"
   },
   "pressure_drop": {
     "MCHW": {
@@ -1487,6 +1495,38 @@
       "note": "初估起點；依現場確認"
     },
     "gas3_name": {
+      "source": "系統預設",
+      "note": "初估起點；依現場確認"
+    },
+    "ffu_topology": {
+      "source": "系統預設",
+      "note": "初估起點；依現場確認"
+    },
+    "ffu_airflow_basis": {
+      "source": "系統預設",
+      "note": "初估起點；依現場確認"
+    },
+    "ffu_size": {
+      "source": "系統預設",
+      "note": "初估起點；依現場確認"
+    },
+    "ffu_coverage_limit_pct": {
+      "source": "系統預設",
+      "note": "初估起點；依現場確認"
+    },
+    "leak_method": {
+      "source": "系統預設",
+      "note": "初估起點；依現場確認"
+    },
+    "base_leak_ach": {
+      "source": "系統預設",
+      "note": "初估起點；依現場確認"
+    },
+    "light_u_mode": {
+      "source": "系統預設",
+      "note": "初估起點；依現場確認"
+    },
+    "light_work_h": {
       "source": "系統預設",
       "note": "初估起點；依現場確認"
     }

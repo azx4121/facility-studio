@@ -94,15 +94,157 @@ def converted_units(i, key, old, new):
             for k in ["wall_u", "floor_u"]
         }
     if key.startswith("u_e_"):
+        pan = key.split("_")[2]
+        pf_key = f"e_{pan}_pf"
+        pf = (
+            number(i[pf_key], pf_key, 0.1, 1)
+            if i.get(f"e_{pan}_pf_mode") == "本盤獨立 PF"
+            else number(i["e_pf"], "e_pf", 0.1, 1)
+        )
         scale = {
             "kW": 1.0,
             "HP": 0.745699871582 / number(i["e_eff"], "e_eff", 0.1, 1),
-            "A": math.sqrt(3)
-            * VOLTAGE_MAP[i["e_volt"]]
-            * number(i["e_pf"], "e_pf", 0.1, 1)
-            / 1000,
+            "A": math.sqrt(3) * VOLTAGE_MAP[i["e_volt"]] * pf / 1000,
+            "kVA": pf,
+            "W": 0.001,
         }
     else:
         scale = UNIT_FACTORS[key]
     value = UNIT_VALUES[key]
     return {value: number(i[value], value, 0) * scale[old] / scale[new]}
+
+
+def _result(results, tool):
+    """Accept direct engine results or desktop {result, inputs} records."""
+    value = results.get(tool)
+    if isinstance(value, dict) and "result" in value:
+        value = value["result"]
+    return value if isinstance(value, dict) else None
+
+
+def electrical_device_loads(results, inputs=None):
+    """Explicit electrical inputs only; thermal kW never become feeder kW.
+
+    The returned list has one row per distinct source. Repeated transfers replace
+    source values; they do not add another copy of the previous feeder total.
+    Chiller electrical input is included only with an explicit COP or input kW.
+    """
+    i = inputs or {}
+    loads = []
+
+    def add(name, value):
+        kw = number(value, name, 0, 1e9)
+        if kw:
+            if any(row["name"] == name for row in loads):
+                raise InputError("設備清單含重複來源，請勿再次加入FFU、照明或CHWP", "device_loads")
+            loads.append(dict(name=name, power_kw=kw, basis="電氣輸入"))
+
+    clean = _result(results, "cleanroom")
+    heat = _result(results, "heat_loads")
+    light = _result(results, "lighting")
+    pump = _result(results, "pumps")
+    if clean:
+        add("FFU", clean.get("ffu_fan_kw", 0))
+    elif heat:
+        add("FFU", heat.get("q_ffu_kw", 0))
+    if light:
+        add("照明", light["total_kw"])
+    elif heat:
+        add("照明", heat["q_lighting_kw"])
+    if pump:
+        add("CHWP", pump["motor_input_kw"])
+    add("MAU", i.get("mau_input_kw", 0))
+    add("製程設備", i.get("process_input_kw", 0))
+    # Room equipment sensible heat need not equal the equipment input power.
+    # Use only an explicitly provided electrical equipment schedule.
+    for index, load in enumerate(i.get("device_loads", [])):
+        if not isinstance(load, dict) or "power_kw" not in load:
+            raise InputError("設備用電清單需含name及power_kw", "device_loads")
+        name = str(load.get("name", f"其他設備{index + 1}"))
+        add(name, load["power_kw"])
+    explicit_chiller = number(i.get("chiller_input_kw", 0), "chiller_input_kw", 0, 1e9)
+    cop = (number(i.get("chiller_cop", 0), "chiller_cop", 0, 20)
+           if not explicit_chiller else 0.0)
+    if explicit_chiller:
+        add("Chiller", explicit_chiller)
+    elif cop and heat:
+        add("Chiller", heat["q_total_kw"] / cop)
+    return loads
+
+
+def upstream_values(tool, results, inputs=None):
+    """Build an inspectable, non-mutating patch for the user's transfer button.
+
+    results must contain current successful calculations; the UI removes a
+    source when its inputs change. No implicit saved-file writes occur here.
+    """
+    i = inputs or {}
+    clean = _result(results, "cleanroom")
+    heat = _result(results, "heat_loads")
+    water = _result(results, "water") or _result(results, "pipes")
+    light = _result(results, "lighting")
+    if tool == "heat_loads":
+        values = {}
+        if clean:
+            values.update(area=str(clean["area_m2"]), persons=str(clean["persons"]),
+                          oa_cmh=str(clean["oa_cmh"]), ffu_count=str(clean["ffu_count"]),
+                          ffu_unit_kw=str(clean["ffu_unit_kw"]))
+        if light:
+            area = clean["area_m2"] if clean else number(i.get("area", light["area_m2"]), "area", 0.01)
+            values["lighting_w_m2"] = str(light["total_kw"] * 1000 / area)
+        return values
+    if tool in ("water", "pipes") and heat:
+        return dict(mode="已知熱量", power=str(heat["q_total_kw"]), power_unit="kW")
+    if tool == "pumps" and water:
+        return dict(flow=str(water["pipe"]["lpm"]), flow_unit="LPM",
+                    head_m=str(water["pressure"]["head_m"]))
+    if tool == "electrical":
+        loads = electrical_device_loads(results, i)
+        return (dict(power=str(sum(row["power_kw"] for row in loads)),
+                     power_unit="kW", kind="連續運轉") if loads else {})
+    return {}
+
+
+def transfer_upstream(tool, results, inputs=None):
+    """Return a new input mapping with upstream values adopted once."""
+    out = dict(inputs or {})
+    out.update(upstream_values(tool, results, out))
+    return out
+
+
+def calculate_pipeline(inputs):
+    """Run the short-form design chain with each adopted input preserved.
+
+    inputs maps tool names to input dictionaries, plus optional 'electrical'
+    fields chiller_cop/chiller_input_kw/device_loads. Each output remains a
+    normal calculate_tool result. Only the explicit terminal/static allowances
+    in pumps contribute additional head.
+    """
+    from .simple_engines import calculate_tool
+    from .simple_schema import defaults
+
+    results, adopted = {}, {}
+    for tool in ("cleanroom", "lighting", "heat_loads", "water", "pumps", "electrical"):
+        if tool == "lighting" and tool not in inputs:
+            continue
+        values = defaults(tool)
+        values.update(inputs.get(tool, inputs.get("pipes", {}) if tool == "water" else {}))
+        values.update(upstream_values(tool, results, values))
+        adopted[tool] = values
+        results[tool] = calculate_tool(tool, values)
+    results["electrical_loads"] = electrical_device_loads(results, adopted["electrical"])
+    results["adopted_inputs"] = adopted
+    warnings = [message for value in results.values() if isinstance(value, dict)
+                for message in value.get("warnings", [])]
+    electrical_i = adopted["electrical"]
+    supplied = {row["name"] for row in results["electrical_loads"]}
+    if "Chiller" not in supplied:
+        warnings.append("冰機未提供COP或輸入電功率，配電合計尚未含冰機；熱負荷kW未當成電氣kW。")
+    if "MAU" not in supplied:
+        warnings.append("MAU輸入電功率尚未提供，配電合計未含MAU風機及其他箱內用電設備。")
+    if "製程設備" not in supplied:
+        warnings.append("製程設備輸入電功率尚未提供，配電合計未含製程設備；室內顯熱不直接當成設備用電。")
+    if not results["water"]["pressure"]["equipment_included"] and float(adopted["pumps"].get("terminal_head_m", 0)) == 0:
+        warnings.append("管路及泵浦尚未納入盤管與末端設備壓降，泵浦選型為管路小計。")
+    results["warnings"] = warnings
+    return results

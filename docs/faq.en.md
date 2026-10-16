@@ -30,7 +30,7 @@ If it persists, report OS, keyboard model, Num Lock, input method, window/field 
 
 All seven V5.6.0 calculators are direct sidebar buttons: electrical, duct, CDA/gas, lighting, water, air states/psychrometrics and units.
 
-Automatic water references extend to 24 inches. The tool selects a single pipe within the adopted velocity before adding parallel circuits. Added 14–24 inch references use STD walls; check actual ID when supplied dimensions differ. [Water and pipe guide](guides/water.en.md)
+Automatic water references extend to 30 inches. The tool selects a single pipe within the adopted velocity before adding parallel circuits. Added 14–30 inch references use STD walls; check actual ID when supplied dimensions differ. [Water and pipe guide](guides/water.en.md)
 
 The calculator and workbench share 50 named gases plus custom mixtures. Added gases have no preset design velocity: enter a design value, using custom velocity in the workbench. win.3 / mac.5 preserves entered velocity when the same gas is selected again; switching to a different added gas requires a new value. Mixtures need a name and composition. T/P/Z conversion covers single-gas-phase volume and velocity estimates only. [Gas and vacuum guide](guides/gas-vacuum.en.md)
 

@@ -198,7 +198,8 @@ def run_checks():
     record("Draft warning translated to English",
            lambda: _assert(i18n.translate("儲存單機草稿", "en") == "Save AHU draft"))
     try:
-        from .platform_support import app_data_root
+        import importlib
+        app_data_root = importlib.import_module(".platform_support", __package__).app_data_root
     except ImportError:
         path_check = "not applicable to Windows-only source tree"
     else:

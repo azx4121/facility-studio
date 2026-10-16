@@ -10,7 +10,7 @@ from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, reference_velocity, switched_v
 from .simple_schema import defaults, active_field
 from .simple_engines import compressed_air, water
 from .simple_reports import tool_report
-from .schema import default_project, V556_INPUT_KEYS, FIELDS
+from .schema import default_project, V556_INPUT_KEYS, FIELDS, SCHEMA_VERSION
 from .engine import calculate, migrate_project, gas_from_inputs
 from .utils import gas_result, water_selection
 from .reports import report
@@ -39,30 +39,31 @@ def run_checks():
     check('Version 5.6.0', VERSION == '5.6.0')
     check('50 named gases plus custom / mixture', len(GAS_OPTIONS) == 51 and len(set(GAS_OPTIONS)) == 51)
     check('Legacy gas order / compatibility', GAS_OPTIONS[:9] == ('N2','CDA','O2','Ar','He','H2','CO2','GN2','PN2'))
-    for size, od, expected_id in ((14,355.6,336.6), (16,406.4,387.4), (18,457.2,438.2), (20,508.0,489.0), (22,558.8,539.8), (24,609.6,590.6)):
-        row = HVAC_PIPES[-6 + (size-14)//2]
+    for size, od, expected_id in ((14,355.6,336.6), (16,406.4,387.4), (18,457.2,438.2), (20,508.0,489.0), (22,558.8,539.8), (24,609.6,590.6), (26,660.4,641.4), (28,711.2,692.2), (30,762.0,743.0)):
+        row = HVAC_PIPES[-9 + (size-14)//2]
         ref = HVAC_PIPE_REFERENCES[row['size']]
         close('Water ID %s inches' % size, row['id_mm'], expected_id)
         close('Water OD %s inches' % size, ref['outside_mm'], od)
         close('Water wall subtraction %s inches' % size, row['id_mm'], ref['outside_mm'] - 2*ref['wall_mm'])
-    for flow, velocity, expected in ((100,1.5,40.9), (7000,1,387.4), (16000,2,438.2), (20000,1.5,539.8), (30000,2,590.6)):
+    for flow, velocity, expected in ((75,1.5,35.1), (100,1.5,40.9), (1300,2,128.2), (7000,1,387.4), (16000,2,438.2), (20000,1.5,539.8), (30000,2,590.6), (36000,2,641.4), (42000,2,692.2), (50000,2,743.0)):
         row = water_selection(flow, velocity)
         check('Single water pipe %s LPM / %s m/s' % (flow,velocity), row['runs'] == 1 and row['id_mm'] == expected)
     area24 = math.pi * (590.6 / 1000)**2 / 4
-    capacity = area24 * 60000 * 2
-    close('24 inch velocity boundary', water_selection(capacity, 2)['velocity_mps'], 2)
-    check('Above 24 inch capacity requires parallel', water_selection(capacity*(1+1e-7), 2)['runs'] == 2)
+    area30 = math.pi * (743.0 / 1000)**2 / 4
+    capacity = area30 * 60000 * 2
+    close('30 inch velocity boundary', water_selection(capacity, 2)['velocity_mps'], 2)
+    check('Above 30 inch capacity requires parallel', water_selection(capacity*(1+1e-7), 2)['runs'] == 2)
     check('Zero water demand', water_selection(0, 1)['runs'] == 0)
     manual = water_selection(30000, 2, manual_id=574.6)
     close('Actual Sch40 ID is respected', manual['id_mm'], 574.6)
     check('Custom pipe keeps one run', manual['runs'] == 1 and 'reference' not in manual)
     error('Manual undersized pipe rejected', lambda: water_selection(30000, 1, manual_id=574.6))
-    error('Above 32 parallel runs rejected', lambda: water_selection(area24*60000*2*32*1.001, 2))
+    error('Above 32 parallel runs rejected', lambda: water_selection(area30*60000*2*32*1.001, 2))
     rng = random.Random(56020261012)
     for index in range(100):
         flow, velocity = rng.uniform(100, 100000), rng.uniform(.5, 3)
         row = water_selection(flow, velocity)
-        independently_required_runs = math.ceil(flow / (area24*60000*velocity) - 1e-12)
+        independently_required_runs = math.ceil(flow / (area30*60000*velocity) - 1e-12)
         check('Random water minimal run count %s' % index, row['runs'] == independently_required_runs)
         close('Random water continuity %s' % index, row['velocity_mps']*row['area_m2']*row['runs']*60000, flow)
         check('Random water velocity bound %s' % index, row['velocity_mps'] <= velocity + 1e-10)
@@ -174,7 +175,7 @@ def run_checks():
     old['provenance'] = {k: v for k,v in old['provenance'].items() if k in V556_INPUT_KEYS}
     untouched = copy.deepcopy(old)
     migrated = migrate_project(old)
-    check('V5510 project migrates without mutation', old == untouched and migrated['schema_version'] == 11 and set(migrated['inputs']) == set(FIELDS))
+    check('V5510 project migrates without mutation', old == untouched and migrated['schema_version'] == SCHEMA_VERSION and set(migrated['inputs']) == set(FIELDS))
     check('Migration preserves every engineering input', all(migrated['inputs'][k] == v for k,v in old['inputs'].items()))
     check('Migration full calculation', bool(calculate(old)))
     check('Repeated migration is deterministic', migrate_project(old) == migrated)

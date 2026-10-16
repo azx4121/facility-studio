@@ -1,6 +1,7 @@
 import copy
 from .gas_catalog import GAS_OPTIONS
 from .data import CLEANROOM_DB, V31_DEFAULTS, VOLTAGE_MAP
+from .data import FFU_SIZES
 from .utils import EXTRA_DEFAULTS, PD_DEFAULTS
 from .utils import PD_DEFAULTS as BASE_PD_DEFAULTS
 
@@ -309,7 +310,7 @@ for panel, items in [
         rows.extend(
             [
                 (f"e_{panel}_{key}", title + " 負荷", "", 0, 10000000.0),
-                (f"u_e_{panel}_{key}", title + " 單位", "", ["A", "kW", "HP"]),
+                (f"u_e_{panel}_{key}", title + " 單位", "", ["A", "kW", "HP", "kVA", "W"]),
             ]
         )
     rows.extend(
@@ -471,7 +472,7 @@ QUALITY_PRESETS = {
     "RO (逆滲透水)": "≥ 0.05 MΩ·cm @25°C（初估參考）",
 }
 BASIC_KEYS = set(
-    "project_name oa_t oa_rh ra_t ra_rh ow_t ow_rh sys_type sf en_dcc_rt en_rcu_rt en_fcu_cmh fcu_rt ffu_cmh en_manual_oa chw1_in chw2_in dccw_in light_lux light_lm light_w eq_kw eq_rt exh_ratio pcw_n pcw_lpm pcw_dt oven_kw latent_mode process_moisture_kg_h process_latent_kw en_wall en_floor e_volt e_pf e_eff e_wire e_temp e_pipe e_length_m duct_shape upw_type upw_quality_mode upw_q upw_v upw_res pv_q u_pv pv_torr pv_pressure_unit gas_barg gas_min_barg".split()
+    "project_name oa_t oa_rh ra_t ra_rh ow_t ow_rh sys_type sf en_dcc_rt en_rcu_rt en_fcu_cmh fcu_rt ffu_cmh ffu_w en_manual_oa chw1_in chw2_in dccw_in light_lux light_lm light_w eq_kw eq_rt exh_ratio pcw_n pcw_lpm pcw_dt oven_kw latent_mode process_moisture_kg_h process_latent_kw en_wall wall_u en_floor floor_u u_unit floor_adj_t solar_kw fan_room_kw e_volt e_pf e_eff e_wire e_temp e_pipe e_length_m duct_shape upw_type upw_quality_mode upw_q upw_v upw_res pv_q u_pv pv_torr pv_pressure_unit gas_barg gas_min_barg".split()
 )
 for z in "AB":
     BASIC_KEYS.update(
@@ -758,3 +759,54 @@ for j in (1, 2, 3):
     FIELD_HELP[f"gas{j}_name"] = "自訂／混合氣需填名稱與比例，例如5% H2／95% N2；物性與Z比依供應商資料。"
 
 UTILITY_ONLY_KEYS.update({f"gas{j}_name" for j in (1, 2, 3)})
+
+# Keep historical v11 key sets exact; new design assumptions are explicit and
+# migrated instead of silently changing saved ACH / leakage interpretations.
+V560_INPUT_KEYS = set(FIELDS)
+SCHEMA_VERSION = 12
+DEFAULTS.update(ffu_size="1200x600 (0.72m²)",
+                ffu_topology="MAU入靜壓箱經FFU送風",
+                ffu_airflow_basis="室內基本循環（另加OA）",
+                ffu_coverage_limit_pct="85", leak_method="門縫孔口法",
+                base_leak_ach="1")
+group(1, "FFU風量基準與天花板配置", [
+    ("ffu_topology", "MAU／FFU氣流路徑", "", ["獨立FFU循環（MAU直接入室）", "MAU入靜壓箱經FFU送風"]),
+    ("ffu_airflow_basis", "ACH／截面風量基準", "", ["FFU總送風（已含OA）", "室內基本循環（另加OA）"]),
+    ("ffu_size", "FFU名義尺寸", "", list(FFU_SIZES)),
+    ("ffu_coverage_limit_pct", "FFU天花板可安裝上限", "%", 1, 100),
+    ("leak_method", "正壓洩漏計算法", "", ["門縫孔口法", "15Pa基準ACH法"]),
+    ("base_leak_ach", "15Pa基準洩漏換氣次數", "1/h", 0, 100),
+])
+BASIC_KEYS.update({"ffu_topology", "ffu_airflow_basis", "ffu_size", "leak_method"})
+FIELD_HELP.update({
+    "ffu_topology": "舊案沿用獨立FFU循環與MAU直接入室；此時DCC與FFU均採循環量。只有外氣先入靜壓箱時才啟用OA經FFU的風量基準。",
+    "ffu_airflow_basis": "只用於MAU入靜壓箱：總送風基準時DCC回風=FFU總風−OA；基本循環基準時FFU總風=循環＋OA。",
+    "ffu_size": "以1200mm模數估安裝面積；4英呎實際為1219.2mm，需依型錄及天花板模組核實。",
+    "ffu_coverage_limit_pct": "85%為專案空間預留假設，非ISO通用上限；需核對燈具、消防、格柵與維修空間。",
+    "leak_method": "孔口法沿用實際門縫與開門條件；基準ACH為缺少洩漏面積時的初估，不與孔口法相加。ΔP≤0均不估正壓外洩。",
+    "base_leak_ach": "只用於15Pa基準ACH法，1ACH是初估假設，需以實測或氣密需求校正。",
+})
+DEFAULTS.update(
+    light_u_mode="手動固定 U",
+    light_work_h="0.8",
+)
+group(2, "照明型錄 U 與室指數 K 檢核", [
+    ("light_u_mode", "利用係數 U 來源", "", ["手動固定 U", "型錄 U＋室指數 K 檢核"]),
+    ("light_work_h", "照明工作面高度", "m", 0, 20),
+])
+BASIC_KEYS.add("light_u_mode")
+FIELD_HELP.update({
+    "light_u_mode": "U須依燈具配光、室內反射率及型錄表格填入；室指數K只供查表，不以通用曲線代替光度模擬。",
+    "light_work_h": "室指數K有效燈高＝空間淨高−工作面高度；請依實際燈具位置確認。",
+})
+
+
+BASIC_KEYS.update({
+    "rt_type", "mau_supply_t", "base_leak_ach",
+    "en_gap_L", "en_gap_W", "en_door_A", "en_door_F", "door_open_seconds",
+    "light_u", "light_work_h",
+    "gas1_v_mode", "gas1_velocity", "gas2_v_mode", "gas2_velocity", "gas3_v_mode", "gas3_velocity", "pv_velocity",
+    "e_up_largest_hp", "e_np_largest_hp", "e_terminal_c", "e_drop_limit_pct",
+})
+for _loop in ("mchw", "chw", "dccw", "pcw", "hw"):
+    BASIC_KEYS.update({_loop + "_fluid_name", _loop + "_rho", _loop + "_cp", _loop + "_mu"})

@@ -27,7 +27,7 @@ def assess_main(r):
     dcc_kw = r.get("dcc_design_kw", r["dcc_kw"])
     if dcc_kw > 1e-08:
         flow = (
-            r["circulation_cmh"]
+            r.get("dcc_design_cmh", r.get("dcc_cmh", r["circulation_cmh"]))
             if i["dcc_airflow_mode"] == "沿用 FFU 循環"
             else f("dcc_airflow_cmh")
         )
@@ -35,14 +35,15 @@ def assess_main(r):
         tin = r["room"]["t"]
         md = flow / 3600 / r["room"]["v_da"]
         cp = 1.006 + 1.86 * r["room"]["w"]
-        outlet = tin - dcc_kw / (md * cp) if md else None
-        limit = md * cp * max(0, tin - tw - f("dcc_air_approach"))
+        outlet = tin - dcc_kw / (md * cp) if md > 0 else None
+        limit = max(0, md) * cp * max(0, tin - tw - f("dcc_air_approach"))
         r["dcc_airside"] = dict(
             flow_cmh=flow,
             inlet_c=tin,
             required_outlet_c=outlet,
             max_with_approach_kw=limit,
             water_in_c=tw,
+            design_season=r.get("dcc_design_season", "summer"),
         )
         finding(
             items,

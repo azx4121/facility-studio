@@ -1,26 +1,24 @@
-# Electrical calculator: power, current, NFB and conductor candidates
+# Electrical calculator: kW, current, NFB and conductor candidates
 
 [繁體中文](electrical.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-Select **English** at the top right, then open **Electrical sizing**. Enter equipment power, supply and use type. **kW/W mean electrical input power**. HP/PS mean motor shaft output, which the calculator converts to electrical input using motor efficiency.
+<a id="source-revision"></a>
+## Current source: efficiency, continuous-load preselection and device import
+
+This section describes the repository revision. Published V5.6.0 cases below retain their original conditions and results at `eta=1`. These source changes require separate packaging and native acceptance before appearing in a new download.
+
+**Efficiency eta** defaults to 1 for electrical input kW. For motor shaft-output kW, enter the actual motor efficiency, for example 0.90; do not divide by efficiency before entry and then divide again here. Three-phase current is `I=P x 1000/(sqrt(3) x V x PF x eta)`; single phase omits sqrt(3). The full workbench retains its HP-to-electrical-input conversion.
+
+A separate continuous-load preselection shows `1.25 x operating current` and rounds up against reference AT sizes. Read this separately from the cable/protection candidate calculated for General load, Continuous load or Motor. Displaying the extra preselection does not change the original general-load case's candidate. The 125% estimate does not establish complete motor compliance or replace starting, overload, short-circuit and coordination checks. Requirements above the reference catalogue remain unselected rather than being capped at its maximum.
+
+Before **Import upstream**, enter the import-specific MAU electrical input, process electrical input, and chiller COP or input kW. The import combines current FFU, lighting and pump electrical inputs with these explicit entries. Explicit chiller input takes priority over COP; otherwise chiller electrical input is cooling kW divided by COP. Occupant heat, envelope heat, DCC cooling and equipment room sensible heat are not electrical loads. Missing MAU, process and chiller inputs are identified separately. Check exhaust fans, cooling towers and other auxiliaries too.
+
+The pipeline API also accepts a named schedule of explicit device inputs. Duplicate sources are rejected, including a scheduled `Chiller` already represented by its dedicated input or COP calculation. Reimport updates the sources without adding a previous feeder total again. The full workbench reports UP/NP panel candidates separately and does not add their AT ratings as a main-breaker selection.
+
+
+Select **English** at the top right, then open **Electrical sizing**. Enter equipment input power, supply and use type. **kW defaults to electrical input power** at eta=1. The current source also accepts shaft-output kW with the actual motor efficiency. Convert HP to mechanical kW first; do not enter HP as electrical input.
 
 Under **Adjust defaults / advanced settings**, check PF, one-way cable length, ambient temperature, loaded conductors and terminal temperature. The example defaults are PF 0.85, copper XLPE, 30 m one-way, 35°C ambient, 60°C terminals, three conductors in conduit and 3% maximum voltage drop. These are reference assumptions, not universal installation rules.
-
-<a id="power-units"></a>
-## Power units and motor efficiency
-
-The unit dropdown offers kW, W, HP (mechanical horsepower) and PS (metric horsepower). This is a source revision. The published win.3/mac.5 downloads still accept only kW, so convert before entering power in those downloads.
-
-| Input unit | Electrical input in kW |
-| --- | --- |
-| kW | Entered value |
-| W | Entered value / 1000 |
-| HP | Entered value × 0.745699871582 / motor efficiency |
-| PS | Entered value × 0.73549875 / motor efficiency |
-
-Selecting HP/PS shows **Motor efficiency**, initially 0.90. Use the equipment nameplate or manufacturer's data; efficiency and PF are different inputs. HP/PS use the motor-load estimate of 125% of operating current. kW/W follow the selected use type. Changing units converts the entered value to preserve electrical input power; changing from HP/PS to kW/W retains the motor use type.
-
-For **10 HP, efficiency 0.90, three-phase 380 V and PF 0.85**, electrical input is approximately **8.28555 kW**, operating current **14.8101 A**, and motor design current **18.5126 A**. If electrical input kW is already known, enter kW directly without dividing by efficiency again. Reports state the unit, adopted efficiency and conversion formula. Legacy inputs without a unit remain kW.
 
 <a id="case-01"></a>
 ## Case 01: 10 kW, three-phase 380 V

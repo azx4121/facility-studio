@@ -26,7 +26,7 @@ from .simple_schema import defaults
 from .utils import water_selection
 
 SEED = 20261013
-AREA_24 = math.pi * (.5906 ** 2) / 4
+AREA_24 = math.pi * ((HVAC_PIPES[-1]["id_mm"] / 1000) ** 2) / 4
 
 
 def _digest(value):

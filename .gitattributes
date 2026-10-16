@@ -1,0 +1,3 @@
+# Release manifests verify exact bytes; preserve authored line endings on every OS.
+* -text
+*.cmd whitespace=cr-at-eol

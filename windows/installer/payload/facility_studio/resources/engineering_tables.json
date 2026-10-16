@@ -145,6 +145,11 @@
         "max_flow_lpm": 46.0
       },
       {
+        "size": "32A (1-1/4\")",
+        "id_mm": 35.1,
+        "max_flow_lpm": 80.0
+      },
+      {
         "size": "40A (1-1/2\")",
         "id_mm": 40.9,
         "max_flow_lpm": 130.0
@@ -168,6 +173,11 @@
         "size": "100A (4\")",
         "id_mm": 105.3,
         "max_flow_lpm": 1250.0
+      },
+      {
+        "size": "125A (5\")",
+        "id_mm": 128.2,
+        "max_flow_lpm": 2000.0
       },
       {
         "size": "150A (6\")",
@@ -218,6 +228,21 @@
         "size": "600A (24\")",
         "id_mm": 590.6,
         "max_flow_lpm": 56914.084
+      },
+      {
+        "size": "650A (26\")",
+        "id_mm": 641.4,
+        "max_flow_lpm": 67126.002
+      },
+      {
+        "size": "700A (28\")",
+        "id_mm": 692.2,
+        "max_flow_lpm": 78180.071
+      },
+      {
+        "size": "750A (30\")",
+        "id_mm": 743.0,
+        "max_flow_lpm": 90076.292
       }
     ],
     "NFB_SIZES": [
@@ -352,7 +377,37 @@
       "wall_mm": 9.5,
       "basis": "ASTM A53 STD 參考；依實供壁厚確認",
       "source_url": "https://www.snyi.com.tw/product-femco01.html"
+    },
+    "32A (1-1/4\")": {
+      "outside_mm": 42.2,
+      "wall_mm": 3.55,
+      "basis": "ASTM A53 STD/Sch40 參考；依實供壁厚確認",
+      "source_url": "https://www.snyi.com.tw/product-femco01.html"
+    },
+    "125A (5\")": {
+      "outside_mm": 141.3,
+      "wall_mm": 6.55,
+      "basis": "ASTM A53 STD/Sch40 參考；依實供壁厚確認",
+      "source_url": "https://www.snyi.com.tw/product-femco01.html"
+    },
+    "650A (26\")": {
+      "outside_mm": 660.4,
+      "wall_mm": 9.5,
+      "basis": "ASTM A53 STD 參考；依實供壁厚確認",
+      "source_url": "https://www.snyi.com.tw/product-femco01.html"
+    },
+    "700A (28\")": {
+      "outside_mm": 711.2,
+      "wall_mm": 9.5,
+      "basis": "ASTM A53 STD 參考；依實供壁厚確認",
+      "source_url": "https://www.snyi.com.tw/product-femco01.html"
+    },
+    "750A (30\")": {
+      "outside_mm": 762.0,
+      "wall_mm": 9.5,
+      "basis": "ASTM A53 STD 參考；依實供壁厚確認",
+      "source_url": "https://www.snyi.com.tw/product-femco01.html"
     }
   },
-  "hvac_pipe_extension_note": "14–24吋採台灣供應商ASTM A53 STD尺寸（壁厚9.5mm），ID=OD−2t；舊表12吋以下保持既有參考值。新增原專案流量上限按舊12吋15000 LPM與內徑平方比例延伸，非製造商流量額定；仍必須符合所選水速。"
+  "hvac_pipe_extension_note": "14–30吋採台灣供應商ASTM A53 STD尺寸（壁厚9.5mm），ID=OD−2t；舊表12吋以下保持既有參考值。新增原專案流量上限按舊12吋15000 LPM與內徑平方比例延伸，非製造商流量額定；仍必須符合所選水速。"
 }

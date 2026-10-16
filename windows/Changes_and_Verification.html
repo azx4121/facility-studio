@@ -1,8 +1,8 @@
 <!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Facility Studio｜V5.5.4 歷史更新與現行下載</title>
+<title>Facility Studio｜V5.6.0 (win.4 / mac.6) 更新與驗證說明</title>
 <style>*{box-sizing:border-box}body{margin:0;background:#eef3f7;color:#142c43;font:16px/1.7 'Microsoft JhengHei','Noto Sans CJK TC',sans-serif}main{max-width:1080px;margin:24px auto;background:white;padding:32px;border-radius:12px}h1{margin:0;font-size:30px}h2{font-size:21px;margin-top:28px}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:10px;border-bottom:1px solid #dbe4eb;vertical-align:top}th{background:#edf5f7}.notice{background:#fff6e5;padding:16px;border-left:4px solid #bc7b19}img{max-width:100%;border:1px solid #dbe4eb}figure{margin:20px 0}figcaption{font-weight:bold}code{word-break:break-word}@media(max-width:700px){main{padding:18px;margin:0}}@media print{figure{break-inside:avoid}}</style><main>
 <div class="notice"><strong>歷史文件｜V5.5.4 線上安裝器與當時驗證。</strong><br>現行公開版本為 V5.6.0 win.2／mac.2：離線 EXE／DMG、七個左側快算、水管自動選型至24吋、50種廠務氣體與自訂／混合氣。以下舊安裝步驟與驗證數字按原版本保留，不能當成現行交付結果。<br><a href="https://github.com/azx4121/facility-studio#readme">現行下載與說明</a> · <a href="https://github.com/azx4121/facility-studio/blob/main/docs/2026-10-12-v5.6-native.md">V5.6 原生交付</a><br><strong>Historical V5.5.4 installer and evidence.</strong> Current V5.6.0 win.2 / mac.2 uses offline EXE/DMG delivery, seven direct calculators, water references up to 24 inches, and 50 factory gases plus custom mixtures. The original instructions and figures below remain historical.</div>
-<h1>廠務工具 V5.5.4</h1><p>通用版 · FY圖示 · 四項簡易工具與完整工程工作台</p>
+<h1>廠務工具 V5.6.0 (win.4 / mac.6)</h1><p>通用版 · FY圖示 · 四項簡易工具與完整工程工作台</p>
 <p>本版處理數字鍵盤輸入、單位說明與照明體積欄位，加入即時空氣線圖及七系統設備表匯入。既有分段空調箱與完整工程工作台保留。</p>
 <table><tr><th>項目</th><th>新版行為</th></tr>
 <tr><td>數字鍵盤</td><td>小數點／地區小數分隔鍵統一輸入ASCII「.」；支援取代選取文字，不影響普通Delete。套用於主要與子視窗的輸入欄。</td></tr>
@@ -11,9 +11,9 @@
 <tr><td>空氣狀態</td><td>即時畫出目前乾球／含濕比點位、RH曲線、焓與壓力。改值先清除舊點位，驗證通過後重畫。</td></tr>
 <tr><td>照明</td><td>體積格明列m³，淨高格明列m；90m³÷3m＝照明面積30m²。切換m²／坪／長寬／體積保持面積。</td></tr>
 <tr><td>設備表</td><td>Excel一檔七系統，CSV一檔一系統；按供應群組分開彙總，另列全開與同時需求。</td></tr></table>
-<h2>一鍵安裝</h2><ol><li>解壓縮<code>Facility_Studio_V5_5_4_OneClick.zip</code>。</li><li>雙擊<code>Facility_Studio_V5_5_4_Setup.exe</code>，首次保持連網。</li><li>等候建立應用EXE與桌面FY圖示捷徑，再開「Facility Studio V5.5」，確認顯示5.5.4。</li></ol>
+<h2>一鍵安裝</h2><ol><li>解壓縮<code>facility-studio-v5.6.0-win4-mac6-fixed.zip</code>。</li><li>雙擊<code>Facility_Studio_V5_6_0_Setup.exe</code>，首次保持連網。</li><li>等候建立應用EXE與桌面FY圖示捷徑，再開「Facility Studio V5.6」，確認顯示5.6.0。</li></ol>
 <div class="notice">目標Windows 10/11 Intel/AMD x64。這是線上安裝器，會下載官方Python及套件並在本機建立應用EXE。已編譯Windows PE安裝器、核對CRC、完整解壓及57個內含檔案。本次實際測試環境為Linux／Tk；Windows實機安裝與實體數字鍵盤尚未完成驗收。安裝器未具商業程式碼簽章。</div>
-<h2>設備範本怎麼填</h2><ol><li>開啟懶人包內的<code>Facility_Studio_V5_5_4_Equipment_Template.xlsx</code>；也可在軟體右上「設備表匯入」→「1 匯出Excel範本」。</li><li>保留工作表名稱及第5列欄名，在黃色欄填實際設備數據。要納入的列把啟用設1；範例啟用0。</li><li>功率、流量與插座數填每台數據，設備台數另填。各系統可用相同設備編號對應，同一系統內不可重複。</li><li>按「2 匯入設備表」，上表看需求與尺寸候選，點選一列看條件、公式與設備明細。匯出TXT／JSON保留全部資料。</li></ol>
+<h2>設備範本怎麼填</h2><ol><li>開啟懶人包內的<code>Equipment_Template.xlsx</code>；也可在軟體右上「設備表匯入」→「1 匯出Excel範本」。</li><li>保留工作表名稱及第5列欄名，在黃色欄填實際設備數據。要納入的列把啟用設1；範例啟用0。</li><li>功率、流量與插座數填每台數據，設備台數另填。各系統可用相同設備編號對應，同一系統內不可重複。</li><li>按「2 匯入設備表」，上表看需求與尺寸候選，點選一列看條件、公式與設備明細。匯出TXT／JSON保留全部資料。</li></ol>
 <p>選填參數空白會帶入預設並列出採用值；必填空白、無限數、重複編號與錯誤單位會指出系統／列號／欄位。輸入欄公式需貼上值；灰色公式欄不作為工程計算依據。預留100列，更多設備請在下方欄位提示之前插入列，最多每系統10,000筆。</p>
 <table><tr><th>系統</th><th>彙總及定寸方式</th><th>重要條件</th></tr>
 <tr><td>電力</td><td>各盤／相數／電壓分組，列kW、P/Q/S、電流、NFB與線徑候選、單台支路與插座數。</td><td>插座不再乘功率；不同供電不直接合併電流。支路按額定；進線不低於已納入最大單台支路需求。進線壓降採設計電流與阻抗上界。</td></tr>

@@ -3,6 +3,14 @@ Overall status:  Data required  (passed means estimates under known conditions, 
 [ Data required ]  Air washer  Circulating water flow :  Effective wetted area and manufacturer irrigation density required.
 [ Data required ]  Washer circulation-pump head :  Nozzle head, elevation and piping losses required. A confirmed 0 m elevation is valid.
 [ Data required ]  Manufacturer performance at design conditions :  Nominal RT / kW and necessary-condition checks do not replace coil, fan and humidifier performance at matching conditions.
+ MAU unit key design values
+MAU  Design airflow : 358.33 CMH |  Supply-air state (verification pending)
+ Summer coil water-side cooling : 8.65 kW | 2.46 US RT
+ Summer supply air state : 22 °C | 41.02 %RH
+ Fan  Demand  Input  Electrical : 0 kW |  Estimated from entered pressure and efficiency
+ Enable  Equipment  Nominal  Electrical : 16.37 kW |  Excludes unspecified circulation pumps and auxiliaries
+ Winter  Humidification  Demand : 0.88 kg/h |  By humidifier type
+
 Tutorial MAU-01 | MAU stage demand / rated-capacity verification
  This table calculates requirements. When rated-capacity checks fail, target states do not represent achievable installed-equipment performance.
  Seasonal supply targets:  Summer  358.32741149943365 CMH (supply state) / 22.0°C / 41.01522224098197%RH;  Winter  358.32741149943365 CMH (supply state) / 22.0°C / 41.01522224098197%RH ; source main project 1813a0bcf9cd7e880a43d13c40f48544642944fb285c12889c734232c0a9301c
@@ -12,7 +20,7 @@ Tutorial MAU-01 | MAU stage demand / rated-capacity verification
 
  Summer :  Outdoor air  35.00°C / 70.00 %RH, dry-air mass flow 0.11777 kg/s
  Stage                      dry bulb °C      RH%       dew point °C       w g/kg      h kJ/kg
-OA  Outdoor air                   35.000    70.000     28.701   25.159138    99.770865
+ OA outdoor air                   35.000    70.000     28.701   25.159138    99.770865
  Pre / medium filters                  35.000    70.000     28.701   25.159138    99.770865
 H1  Electric heat  ( Demand )              35.000    70.000     28.701   25.159138    99.770865
 C1  Precooling                   22.000    94.321     21.045   15.698328    62.035893
@@ -32,7 +40,7 @@ C2  Secondary cooling  : water-side 4.308 kW / 1.225 US RT; required water 12.34
 
  Winter :  Outdoor air  8.00°C / 70.00 %RH, dry-air mass flow 0.11777 kg/s
  Stage                      dry bulb °C      RH%       dew point °C       w g/kg      h kJ/kg
-OA  Outdoor air                    8.000    70.000      2.868    4.644077    19.731940
+ OA outdoor air                    8.000    70.000      2.868    4.644077    19.731940
  Pre / medium filters                   8.000    70.000      2.868    4.644077    19.731940
 H1  Electric heat  ( Demand )              15.037    43.929      2.868    4.644077    26.872251
 C1  Precooling                   15.037    43.929      2.868    4.644077    26.872251

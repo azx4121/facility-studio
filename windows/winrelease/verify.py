@@ -107,6 +107,9 @@ def check_exe(exe, output, label, block_firewall=True):
                 "water",
                 "air",
                 "units",
+                "cleanroom",
+                "heat_loads",
+                "pumps",
             ):
                 result = evidence / (name + ".json")
                 text = evidence / (name + ".txt")
@@ -148,7 +151,7 @@ def check_exe(exe, output, label, block_firewall=True):
             summary = {
                 "label": label,
                 "gui_checks": len(data["checks"]),
-                "cli_tools": 7,
+                "cli_tools": 10,
                 "firewall_outbound_blocked": block_firewall,
                 "network_audit_blocked": True,
                 "python_on_path": False,

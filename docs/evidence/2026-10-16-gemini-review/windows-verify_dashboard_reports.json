@@ -1,0 +1,299 @@
+{
+  "kind": "source-dashboard-reports",
+  "source_platform": "windows",
+  "host_os": "Linux",
+  "python": "3.12.14",
+  "schema_version": 12,
+  "passed": true,
+  "check_count": 72,
+  "checks": [
+    {
+      "name": "exactly seven equipment / system overview rows",
+      "passed": true
+    },
+    {
+      "name": "FFU overview includes rounded quantity",
+      "passed": true
+    },
+    {
+      "name": "FFU overview includes OA and thousands formatting",
+      "passed": true
+    },
+    {
+      "name": "DCC design return excludes OA",
+      "passed": true
+    },
+    {
+      "name": "motor nameplate covers shaft output plus margin",
+      "passed": true
+    },
+    {
+      "name": "reported chiller cooling matches calculated thermal load",
+      "passed": true
+    },
+    {
+      "name": "HTML5 document zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "seven top KPI cards zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "HTML language zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "UTF-8 and responsive viewport zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "industrial theme, numeric font and structural table zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "no external media / script elements zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "HTML5 document en",
+      "passed": true
+    },
+    {
+      "name": "seven top KPI cards en",
+      "passed": true
+    },
+    {
+      "name": "HTML language en",
+      "passed": true
+    },
+    {
+      "name": "UTF-8 and responsive viewport en",
+      "passed": true
+    },
+    {
+      "name": "industrial theme, numeric font and structural table en",
+      "passed": true
+    },
+    {
+      "name": "no external media / script elements en",
+      "passed": true
+    },
+    {
+      "name": "pipeline report authored text is translated",
+      "passed": true
+    },
+    {
+      "name": "language switching preserves report numerals",
+      "passed": true
+    },
+    {
+      "name": "dashboard presentation cleanroom",
+      "passed": true
+    },
+    {
+      "name": "tool report translates cleanroom",
+      "passed": true
+    },
+    {
+      "name": "tool report preserves numerals cleanroom",
+      "passed": true
+    },
+    {
+      "name": "dashboard presentation heat_loads",
+      "passed": true
+    },
+    {
+      "name": "tool report translates heat_loads",
+      "passed": true
+    },
+    {
+      "name": "tool report preserves numerals heat_loads",
+      "passed": true
+    },
+    {
+      "name": "dashboard presentation water",
+      "passed": true
+    },
+    {
+      "name": "tool report translates water",
+      "passed": true
+    },
+    {
+      "name": "tool report preserves numerals water",
+      "passed": true
+    },
+    {
+      "name": "dashboard presentation pumps",
+      "passed": true
+    },
+    {
+      "name": "tool report translates pumps",
+      "passed": true
+    },
+    {
+      "name": "tool report preserves numerals pumps",
+      "passed": true
+    },
+    {
+      "name": "dashboard presentation electrical",
+      "passed": true
+    },
+    {
+      "name": "tool report translates electrical",
+      "passed": true
+    },
+    {
+      "name": "tool report preserves numerals electrical",
+      "passed": true
+    },
+    {
+      "name": "text pipeline report translates",
+      "passed": true
+    },
+    {
+      "name": "report generation does not mutate source results",
+      "passed": true
+    },
+    {
+      "name": "missing quick-pipeline values remain visibly missing",
+      "passed": true
+    },
+    {
+      "name": "200 kW general-load current uses the declared supply",
+      "passed": true
+    },
+    {
+      "name": "continuous sizing reference exceeds the 400 AT short table",
+      "passed": true
+    },
+    {
+      "name": "ordinary-load cable candidate may still be 400 AT",
+      "passed": true
+    },
+    {
+      "name": "missing continuous breaker is not replaced with a smaller ordinary candidate",
+      "passed": true
+    },
+    {
+      "name": "above-catalogue electrical result retains a warning",
+      "passed": true
+    },
+    {
+      "name": "dynamic HTML is escaped zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "dynamic HTML is escaped en",
+      "passed": true
+    },
+    {
+      "name": "overview precedes first engineering chapter",
+      "passed": true
+    },
+    {
+      "name": "legacy sensible-load report pattern is retained",
+      "passed": true
+    },
+    {
+      "name": "separate panels do not imply a main-incomer calculation",
+      "passed": true
+    },
+    {
+      "name": "panel selection contains AT and conductor area",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: report/summer",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: summary_html/summer",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: executive_summary_html/summer",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: report/electric",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: summary_html/electric",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: executive_summary_html/electric",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: report/water",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: summary_html/water",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: executive_summary_html/water",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: report/ffu_count",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: summary_html/ffu_count",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: executive_summary_html/ffu_count",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: report/project",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: summary_html/project",
+      "passed": true
+    },
+    {
+      "name": "incomplete main rejected: executive_summary_html/project",
+      "passed": true
+    },
+    {
+      "name": "full-project reporting is nonmutating",
+      "passed": true
+    },
+    {
+      "name": "custom project titles are escaped and preserved",
+      "passed": true
+    },
+    {
+      "name": "single MAU report identifies its unit scope",
+      "passed": true
+    },
+    {
+      "name": "single MAU has six unit KPIs zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "single MAU has six unit KPIs en",
+      "passed": true
+    },
+    {
+      "name": "single MAU report translates",
+      "passed": true
+    },
+    {
+      "name": "atomic HTML export returns the real output path",
+      "passed": true
+    },
+    {
+      "name": "atomic HTML export matches the current calculation",
+      "passed": true
+    }
+  ]
+}

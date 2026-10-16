@@ -11,11 +11,12 @@ import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from nsis_integrity import InstallerIntegrityError, expected_members, verify_setup
+from nsis_integrity import InstallerIntegrityError, verify_setup, expected_members
+from installer_fixture import historical_installer_binary, historical_installer_members
 
 checks = []
-members = expected_members(ROOT / "installer")
-binary = (ROOT / "Facility_Studio_V5_5_4_Setup.exe").read_bytes()
+members = historical_installer_members()
+binary = historical_installer_binary()
 offset = binary.find(b"\xef\xbe\xad\xdeNullsoftInst") - 4
 
 
@@ -69,7 +70,7 @@ with tempfile.TemporaryDirectory(prefix="nsis_contents_check_") as temporary:
     check(
         "05_extracted_payload_manifest_valid",
         len(bootstrap.verify_payload(target))
-        == len(json.loads((ROOT / "installer/payload_sha256.json").read_text())),
+        == len(json.loads((target / "payload_sha256.json").read_text())),
     )
 
 # A compiler exit status or PE header alone must never approve these cases.
@@ -113,10 +114,25 @@ rejected(
 )
 rejected("21_empty_expected_manifest", binary, {})
 
+
+v560_binary = (ROOT / "Facility_Studio_V5_6_0_Setup.exe").read_bytes()
+v560_members = expected_members(ROOT / "installer")
+v560_manifest = json.loads((ROOT / "installer/payload_sha256.json").read_text(encoding="utf-8"))
+with tempfile.TemporaryDirectory(prefix="nsis_v560_check_") as temp_v560:
+    target_v560 = Path(temp_v560)
+    res_v560 = verify_setup(v560_binary, v560_members, extract_to=target_v560)
+    spec_v560 = importlib.util.spec_from_file_location("extracted_v560", target_v560 / "oneclick_setup.py")
+    boot_v560 = importlib.util.module_from_spec(spec_v560)
+    spec_v560.loader.exec_module(boot_v560)
+    check(
+        "22_v560_setup_extracts_every_staged_payload_file",
+        res_v560["passed"]
+        and len(boot_v560.verify_payload(target_v560)) == len(v560_manifest),
+    )
 (ROOT / "evidence/Installer_Integrity_Checks.json").write_text(
     json.dumps(dict(installer=result, checks=checks), ensure_ascii=False, indent=2),
     encoding="utf-8",
 )
 print(
-    f"{len(checks)} installer integrity checks passed; all {len(members)} embedded files extracted and compared"
+    f"{len(checks)} installer integrity checks passed; {len(members)} historical and {len(v560_members)} current embedded files extracted and compared"
 )

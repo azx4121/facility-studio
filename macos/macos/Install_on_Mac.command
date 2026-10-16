@@ -32,7 +32,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-printf '\nFacility Studio V5.6.0 mac.4 — macOS 安裝\n\n'
+printf '\nFacility Studio V5.6.0 mac.6 — macOS 安裝\n\n'
 if [[ ! -d "$TASK_APP_SOURCE" ]]; then
     printf '請先完整解壓縮懶人包，讓此檔案與 Facility Studio.app 放在同一個資料夾。\n'
     exit 2
@@ -54,7 +54,7 @@ if [[ -e "$TASK_DESTINATION" ]]; then
         exit 2
     fi
 fi
-TASK_STAGE="$(/usr/bin/mktemp -d "$TASK_APP_FOLDER/.FacilityStudio554.XXXXXX")"
+TASK_STAGE="$(/usr/bin/mktemp -d "$TASK_APP_FOLDER/.FacilityStudio560.XXXXXX")"
 /usr/bin/ditto "$TASK_APP_SOURCE" "$TASK_STAGE/Facility Studio.app"
 /usr/bin/codesign --verify --deep --strict "$TASK_STAGE/Facility Studio.app"
 if [[ -e "$TASK_DESTINATION" ]]; then

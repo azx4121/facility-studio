@@ -99,6 +99,7 @@ def main():
     work.mkdir(exist_ok=True)
     notices = output / "THIRD_PARTY_LICENSES.txt"
     collect_notices(notices)
+    sep = os.pathsep
     command = [
         sys.executable,
         "-m",
@@ -129,9 +130,9 @@ def main():
         "--copy-metadata",
         "Pillow",
         "--add-data",
-        str(ROOT / "facility_studio/resources") + ":facility_studio/resources",
+        str(ROOT / "facility_studio/resources") + sep + "facility_studio/resources",
         "--add-data",
-        str(notices) + ":.",
+        str(notices) + sep + ".",
         "--distpath",
         str(output),
         "--workpath",
@@ -140,7 +141,7 @@ def main():
         str(work),
     ]
     for name in NOTICE_NAMES:
-        command.extend(["--add-data", str(REPOSITORY / name) + ":."])
+        command.extend(["--add-data", str(REPOSITORY / name) + sep + "."])
     command.append(str(ROOT / "winrelease/entry.py"))
     with (evidence / "PyInstaller_Build.txt").open("w", encoding="utf-8") as log:
         subprocess.run(
@@ -161,7 +162,7 @@ def main():
     (evidence / "Build_Manifest.json").write_text(
         json.dumps(
             {
-                "revision": "5.6.0-win.3",
+                "revision": "5.6.0-win.4",
                 "source_commit": os.environ.get("GITHUB_SHA"),
                 "python": sys.version,
                 "platform": platform.platform(),

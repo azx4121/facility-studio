@@ -1,6 +1,6 @@
-"""Build and verify the V5.5.4 distribution."""
+"""Build and verify the V5.6.0 distribution."""
 
-from deliver_v554 import main
+from build_release import main
 
 if __name__ == "__main__":
     main()

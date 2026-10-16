@@ -11,9 +11,9 @@ Facility Studio is a desktop tool for facility, electrical and HVAC engineers. U
 <a id="installation-and-first-launch"></a>
 ## Download and run
 
-Current version: **V5.6.0 public test release**, Windows **win.3** / macOS **mac.5**, published 2026-10-13 (Taipei time).
+Published version: **V5.6.0 public test release**, Windows **win.3** / macOS **mac.5**. Reviewed source updated 2026-10-16; **win.4 / mac.6 require native acceptance before publication** (Taipei time; prior [win.3](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.3) / [mac.5](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-mac.5) releases remain available).
 
-Automatic water sizing extends to **24 inches**; **all seven calculators are direct sidebar buttons**; the gas calculator and workbench share **50 factory gases plus custom mixtures**. Added gases with demand require an entered design velocity. Zero-demand workbench rows retain unused drafts without blocking the whole project. Native acceptance also runs **100 distinct scenarios, repeated 20 times each**. [Features, dimension sources and scope](docs/2026-10-12-v5.6-expansion.md#english) · [Windows delivery and SHA256](docs/2026-10-13-v5.6-audit-stress.md#english) · [Mac mac.5 fixes and delivery](docs/2026-10-13-mac-diagnostics.md#english)
+Reviewed source water sizing extends to **30 inches**; **all ten calculators are direct sidebar buttons** (including Cleanroom airflow, Heat load estimate and Chilled-water pump); the gas calculator and workbench share **50 factory gases plus custom mixtures**. Added gases with demand require an entered design velocity. Zero-demand workbench rows retain unused drafts without blocking the whole project. The test process includes **100 distinct scenarios, repeated 20 times each**. Explicit engineering rejections are distinguished from software faults. [Engineering and dashboard audit](docs/2026-10-16-gemini-integration-review.md) · [Features, dimension sources and scope](docs/2026-10-12-v5.6-expansion.md#english) · [Windows delivery and SHA256](docs/2026-10-13-v5.6-audit-stress.md#english) · [Mac fixes and delivery](docs/2026-10-13-mac-diagnostics.md#english)
 
 | Platform | Download | Start |
 | --- | --- | --- |
@@ -24,11 +24,14 @@ Download one file for your platform. Help and equipment templates are bundled. [
 
 The Windows EXE has no official publisher signature; the Mac app has no Developer ID or Apple notarization. First launch may show a security prompt. Check the download source and follow the [security-prompt guide](docs/signing.en.md).
 
-## Electrical power-unit fix in source
+<a id="current-source-revision"></a>
+## Engineering and dashboard revision (win.4 / mac.6)
 
-The current source adds **kW / W / HP / PS** choices to **Electrical sizing**. kW and W are electrical input power. HP and PS are motor shaft output; the calculator converts them using an editable motor efficiency before estimating current, breaker and conductor candidates. [Conversions and example](docs/guides/electrical.en.md#power-units)
+This revision includes **ten quick tools**, including Cleanroom airflow, Heat load estimate and Chilled-water pump, plus **explicit catalogue utilization factor U with room-index K checks** in both the Lighting calculator and Full Workbench. It adds explicit MAU/FFU airflow topology and ACH basis, nominal FFU module/coverage checks, separate pump shaft/electrical power, and an upstream-import chain from room airflow through heat load, water, pump and electrical demand. Imported electrical totals use explicit device inputs; chiller cooling is converted only with COP or an entered electrical input. Reports begin with calculated-demand and suggested-selection summaries, with KPI cards and HTML tables.
 
-This fix is **not yet included in the win.3 / mac.5 downloads** above. Updated EXE/DMG files require native acceptance on each platform before a new release. There are still seven quick tools, and the existing project format remains schema 11.
+Existing schema 11 projects migrate to schema 12 while retaining independent FFU circulation, direct MAU room supply and the original gap-orifice leakage method. A plenum path and its ACH basis must be selected explicitly; OA is not automatically added to every historical FFU calculation. Reference leakage ACH, 30 CMH per person in the quick tool and the 85% ceiling allowance are preliminary project assumptions, not universal ASHRAE/ISO requirements.
+
+See the [engineering and dashboard audit](docs/2026-10-16-gemini-integration-review.md), and the detailed sections in the [workbench](docs/guides/workbench.en.md#source-revision), [electrical](docs/guides/electrical.en.md#source-revision), [water/pump](docs/guides/water.en.md#source-revision) and [AHU](docs/guides/ahu.en.md#source-revision) guides.
 
 ## What can you use it for?
 
@@ -43,9 +46,9 @@ This fix is **not yet included in the win.3 / mac.5 downloads** above. Updated E
 
 Each quick tool works independently. Adopted conditions and defaults appear on screen and in reports, so you can review the assumptions and compare demand after a change.
 
-![Facility Studio V5.6.0 Windows win.3 electrical-sizing interface in English](docs/images/v560-win3-electrical-en.png)
+![Facility Studio V5.6.0 cleanroom dashboard and ten direct calculators](docs/images/v560-dashboard-source-en.png)
 
-*Actual V5.6.0 win.3 native-acceptance screen: all seven calculators are directly available on the left, with calculation and export below.*
+*Actual reviewed source running on Linux/Tk. Ten calculators are directly available on the left, with TXT/HTML export below.*
 
 ## Try one small calculation first
 

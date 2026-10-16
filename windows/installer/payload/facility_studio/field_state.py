@@ -17,13 +17,19 @@ def main_inactive(i):
 
     system = i.get("sys_type", "")
     if not system.startswith("MAU"):
-        disable("mau_supply_t en_dcc_rt ffu_cmh ffu_w dccw_in dccw_dp_margin dcc_airflow_mode dcc_airflow_cmh dcc_air_approach".split(), "本模式不使用 MAU／DCC／FFU")
+        disable("mau_supply_t en_dcc_rt ffu_cmh ffu_w ffu_size ffu_topology ffu_airflow_basis ffu_coverage_limit_pct dccw_in dccw_dp_margin dcc_airflow_mode dcc_airflow_cmh dcc_air_approach".split(), "本模式不使用 MAU／DCC／FFU")
     elif i.get("dcc_airflow_mode") != "獨立 DCC 循環":
         disable(["dcc_airflow_cmh"], "沿用 FFU 循環風量")
+    if system.startswith("MAU") and i.get("ffu_topology") != "MAU入靜壓箱經FFU送風":
+        disable(["ffu_airflow_basis"], "獨立FFU循環不將MAU外氣重複加入")
     if not system.startswith("FCU"):
         disable(["en_fcu_cmh", "fcu_rt"], "本模式不使用 FCU")
     if not system.startswith("RCU"):
         disable(["en_rcu_rt"], "本模式不使用 RCU")
+    if i.get("leak_method") != "15Pa基準ACH法":
+        disable(["base_leak_ach"], "目前使用門縫孔口法，不採基準ACH假設")
+    else:
+        disable("en_gap_L en_gap_W en_door_A en_door_F gap_B_L gap_B_W door_B_A door_B_F door_open_seconds leak_cd".split(), "目前使用基準ACH法，門縫孔口草稿不參與計算")
     if i.get("pre_mode") == "停用／旁通":
         disable(["chw1_in", "adp_approach", "pre_t", "pre_rh"], "一段旁通，保留備用設定")
     elif i.get("pre_mode") != "指定出口（需求檢核）":
@@ -41,6 +47,8 @@ def main_inactive(i):
         disable(["process_latent_kw"], "目前不以 kW 輸入製程水氣")
     if i.get("latent_mode") != "已知產濕量 kg/h":
         disable(["process_moisture_kg_h"], "目前不以 kg/h 輸入製程水氣")
+    if i.get("light_u_mode") != "型錄 U＋室指數 K 檢核":
+        disable(["light_work_h"], "目前使用手動固定利用係數 U")
     if i.get("upw_quality_mode") == "自動參考值":
         disable(["upw_res"], "採用水型的初估電阻率參考")
     for j in (1, 2, 3):
@@ -52,6 +60,8 @@ def main_inactive(i):
             disable([f"gas{j}_velocity"], "目前無氣體流量需求，流速只保留為草稿")
         elif i.get(f"gas{j}_v_mode") != "自訂流速":
             disable([f"gas{j}_velocity"], "採用氣體種類的流速參考")
+    if not has_demand(i.get("pv_q", "0")):
+        disable(["pv_velocity"], "目前無氣體流量需求，流速只保留為草稿")
     for panel, loads in {
         "up": ("eq", "oven"),
         "np": ("fan", "heat", "humid", "exh", "pump"),

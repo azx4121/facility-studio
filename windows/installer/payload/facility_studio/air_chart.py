@@ -1,7 +1,12 @@
 """Pressure-aware dry-bulb / humidity-ratio chart using native Tk Canvas."""
 
 import math
-from .localized_tk import tk
+try:
+    from .localized_tk import tk
+    _Canvas = tk.Canvas
+except ImportError:
+    tk = None
+    _Canvas = object
 
 from .utils import MW_RATIO, sat_pa
 
@@ -36,7 +41,7 @@ def chart_data(state):
     }
 
 
-class AirChart(tk.Canvas):
+class AirChart(_Canvas):
     def __init__(self, parent, family="TkDefaultFont"):
         super().__init__(parent, height=310, bg="white", highlightthickness=0)
         self.family = family

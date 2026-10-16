@@ -10,6 +10,11 @@ on:
       - windows/tests/**
       - tools/cleanroom100_stress.py
       - tools/verify_stress_io.py
+      - tools/verify_gemini_review.py
+      - tools/verify_100x_all_fields_and_reports.py
+      - tools/verify_engineering_dashboard.py
+      - tools/verify_dashboard_reports.py
+      - tools/verify_dashboard_gui.py
       - docs/tutorial/START_HERE.html
       - docs/tutorial/verify_tutorial.py
   workflow_dispatch:
@@ -66,7 +71,13 @@ jobs:
           Invoke-CheckedPython windows/tests/maintenance_checks.py
           Invoke-CheckedPython windows/tests/security_checks.py
           Invoke-CheckedPython windows/tests/bilingual.py
+          Invoke-CheckedPython windows/tests/installer_integrity_checks.py
+          Invoke-CheckedPython windows/tests/packaging_checks.py
           Invoke-CheckedPython tools/verify_use_cases.py --platform windows --output "$env:RUNNER_TEMP/win-use-cases.json"
+          Invoke-CheckedPython tools/verify_engineering_dashboard.py --platform windows --output "$env:RUNNER_TEMP/win-dashboard-boundaries.json"
+          Invoke-CheckedPython tools/verify_gemini_review.py --platform windows --output "$env:RUNNER_TEMP/gemini-review-windows.json"
+          Invoke-CheckedPython tools/verify_100x_all_fields_and_reports.py --platform windows --iterations 100 --output "$env:RUNNER_TEMP/all-fields-windows.json"
+          Invoke-CheckedPython tools/verify_dashboard_reports.py --platform windows --output "$env:RUNNER_TEMP/win-dashboard-reports.json"
       - name: Build the standalone windowed EXE and complete offline ZIP
         run: python -m winrelease.build --output "$env:RUNNER_TEMP/windows-offline"
         working-directory: windows
@@ -84,6 +95,8 @@ jobs:
             ${{ runner.temp }}/tutorial-windows.json
             ${{ runner.temp }}/win-use-cases.json
             ${{ runner.temp }}/win-native-stress-source.json
+            ${{ runner.temp }}/all-fields-*.json
+            ${{ runner.temp }}/gemini-review-*.json
             ${{ runner.temp }}/cleanroom100*.json
           if-no-files-found: warn
           retention-days: 14

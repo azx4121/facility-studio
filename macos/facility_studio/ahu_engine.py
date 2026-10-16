@@ -234,14 +234,23 @@ def _nm_season_base(i, season):
     add_h(h2)
     nodes.extend([("EC 風機", sa), ("PTFE HEPA／送風", sa)])
     sf = 1 + float(i["sf"]) / 100
+    adp1 = float(i["c1_in"]) + float(i["c1_adp"])
+    adp1w = state_trh(adp1, 100, p)["w"]
+    c1_feasible = c1["air_kw"] <= 1e-08 or (
+        c1["outlet"]["t"] >= adp1 - 1e-08
+        and c1["outlet"]["w"] >= min(c1["inlet"]["w"], adp1w) - 1e-09
+    )
     checks = {
         "H1 電熱全載備援": h1["backup_electric_kw"] * sf <= float(i["h1_kw"]) + 1e-06,
         "H2 電熱全載備援": h2["backup_electric_kw"] * sf <= float(i["h2_kw"]) + 1e-06,
         "H1 當前熱源情境": h1["electric_kw"] * sf <= float(i["h1_kw"]) + 1e-06,
         "H2 當前熱源情境": h2["electric_kw"] * sf <= float(i["h2_kw"]) + 1e-06,
         "C1 總表候選容量": c1["water_kw"] * sf <= float(i["c1_rt"]) * US_RT_KW + 1e-06,
+        "C1 可達 ADP": c1_feasible,
         "C2 總表候選容量": c2["water_kw"] * sf <= float(i["c2_rt"]) * US_RT_KW + 1e-06,
         "C2 可達 ADP": c2_feasible,
+        "送風乾球目標": abs(sa["t"] - target["t"]) <= 0.05,
+        "送風含濕量目標": abs(sa["w"] - target["w"]) <= 1e-07,
         "濕膜總表候選能力": evap * sf <= float(i["wash_rating"]) + 1e-06,
     }
     return {

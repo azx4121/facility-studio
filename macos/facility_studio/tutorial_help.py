@@ -7,7 +7,6 @@ from .version import VERSION
 import zipfile
 
 from . import i18n
-from .localized_tk import messagebox
 from .project_store import app_data
 
 TUTORIAL_FILES = {
@@ -47,6 +46,7 @@ def prepare_tutorial(destination=None):
 
 def open_tutorial(parent=None, section="start"):
     """Open local HTML; show its path when no browser association is available."""
+    from .localized_tk import messagebox
     try:
         folder = prepare_tutorial()
         anchor = section if section in SECTIONS else "start"

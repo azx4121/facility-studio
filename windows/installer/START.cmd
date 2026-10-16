@@ -1,8 +1,8 @@
 @echo off
 setlocal DisableDelayedExpansion
-title Facility Studio V5.5.4 - One Click Setup
+title Facility Studio V5.6.0 - One Click Setup
 cd /d "%~dp0"
-echo Facility Studio V5.5.4 - Windows x64
+echo Facility Studio V5.6.0 - Windows x64
  echo This prepares Python, builds the EXE and creates a desktop shortcut.
 echo Internet access is required on first setup. Keep this window open.
 echo.
@@ -38,7 +38,7 @@ if errorlevel 1 goto python_missing
 "%HVAC_PY%" "%~dp0oneclick_setup.py"
 if errorlevel 1 goto failed
 echo.
-echo Ready. Next time, use the Facility Studio V5.5 desktop shortcut.
+echo Ready. Next time, use the Facility Studio V5.6 desktop shortcut.
 if /i not "%~1"=="/installer" pause
 exit /b 0
 :missing

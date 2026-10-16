@@ -8,11 +8,15 @@ Facility Studio 是供廠務、機電與空調工程人員使用的桌面工具�
 
 **Windows／macOS · 繁體中文／English · 離線運算 · 免另裝 Python**
 
+## 本版修訂重點（win.4／mac.6）
+
+本次來源新增**氣流路徑／ACH 基準、三項工程快算（共十項左側直接快算）、照明型錄 U 與室指數 K 檢核、跨工具帶入、KPI 儀表板、向量 SCADA 與 HTML／TXT 頂部「★ 核心工程設計量與設備選型總覽」**，並修正進階模式顯示互斥 FCU／RCU／MAU 欄位的問題。舊案自動移轉為 schema 12，保留既有獨立循環結果。公式成立條件與驗證界線見[工程審核與修訂說明](docs/2026-10-16-gemini-integration-review.md)；開發者可依[開發文件](docs/development.md)重現來源檢查。
+
 ## 下載
 
-目前版本：**V5.6.0 公開測試版**，Windows **win.3**／macOS **mac.5**，2026-10-13（台灣時間）發布。
+目前已發布：**V5.6.0 公開測試版**，Windows **win.3**／macOS **mac.5**。2026-10-16 修正後來源已完成本機測試，**win.4／mac.6 須通過原生驗收後才會發布**（前一版 [win.3](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.3)／[mac.5](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-mac.5) 仍保留於 Releases）。
 
-水管自動選型擴充至 **24 吋**；**七個快算直接放在左側**；氣體快算與工作台共同提供 **50 種廠務氣體＋自訂／混合氣**。有需求的新增氣體須填設計流速；完整工作台零需求時保留未使用草稿，避免阻擋整案計算。原生驗收另執行 **100 組不同案例，每組重算 20 次**。[功能、尺寸來源與範圍](docs/2026-10-12-v5.6-expansion.md) · [Windows 交付與 SHA256](docs/2026-10-13-v5.6-audit-stress.md) · [Mac mac.5 修正與交付](docs/2026-10-13-mac-diagnostics.md)
+本次來源水管自動選型擴充至 **30 吋**；**十個快算直接放在左側**（含潔淨室風量、熱負荷初估、冰水泵浦）；氣體快算與工作台共同提供 **50 種廠務氣體＋自訂／混合氣**。有需求的新增氣體須填設計流速；完整工作台零需求時保留未使用草稿，避免阻擋整案計算。測試流程包含 **100 組不同案例，每組重算 20 次**；工程條件不足會明確拒絕，不等同程式故障。[工程審核與修訂說明](docs/2026-10-16-gemini-integration-review.md) · [功能、尺寸來源與範圍](docs/2026-10-12-v5.6-expansion.md) · [Windows 交付與 SHA256](docs/2026-10-13-v5.6-audit-stress.md) · [Mac 修正與交付](docs/2026-10-13-mac-diagnostics.md)
 
 | 平台 | 下載 | 開始使用 |
 | --- | --- | --- |
@@ -22,12 +26,6 @@ Facility Studio 是供廠務、機電與空調工程人員使用的桌面工具�
 每個平台下載上表的一個檔案即可，教學與設備範本已內建。[版本與 SHA256](https://github.com/azx4121/facility-studio/releases) · [相容性與首次開啟](docs/faq.md#compatibility)
 
 Windows 尚無正式發行者簽章；Mac 尚未取得 Developer ID／Apple 公證。首次開啟可能出現安全提示，請核對下載來源並依[安全提示說明](docs/signing.md)處理。
-
-## 電力功率單位修正（原始碼）
-
-目前原始碼的「電力配線」補上 **kW／W／HP／PS** 單位選擇。kW／W 為電氣輸入功率；HP／PS 為馬達軸輸出，會依可調的馬達效率換算電氣輸入，再計算電流、NFB 與線徑候選。[換算方式與範例](docs/guides/electrical.md#power-units)
-
-這項修正尚未包含在上方的 **win.3／mac.5** 下載檔中；新的 EXE／DMG 必須完成各平台原生驗收後另行發布。目前仍為七個快算工具，既有專案格式維持 schema 11。
 
 ## 你可以用它解決哪些問題？
 
@@ -42,9 +40,9 @@ Windows 尚無正式發行者簽章；Mac 尚未取得 Developer ID／Apple 公�
 
 各快算工具可獨立使用。採用的條件與預設值會顯示在畫面及報告，方便回頭核對，也方便比較修改前後的需求。
 
-![Facility Studio V5.6.0 Windows win.3 電力配線介面](docs/images/v560-win3-electrical.png)
+![Facility Studio V5.6.0 十項快算與潔淨室風量儀表板](docs/images/v560-dashboard-source-zh.png)
 
-*V5.6.0 win.3 原生驗收實際畫面；七個快算直接顯示在左側，下方提供計算與匯出。*
+*本次原始碼於 Linux／Tk 的實際畫面；十項快算直接顯示在左側，結果可匯出 TXT／HTML。*
 
 ## 第一次使用，從一個小問題開始
 

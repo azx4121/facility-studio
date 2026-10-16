@@ -324,7 +324,7 @@ class DesktopApp(SessionController, MainView):
         self.root = root
         root.title("廠務工程工作台 V" + VERSION)
         root.geometry(
-            f"{min(1240, root.winfo_screenwidth() - 60)}x{min(840, root.winfo_screenheight() - 80)}"
+            f"{min(1240, max(880, root.winfo_screenwidth() - 60))}x{min(840, max(560, root.winfo_screenheight() - 80))}"
         )
         root.minsize(880, 560)
         self.project = default_project()

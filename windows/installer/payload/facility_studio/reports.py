@@ -4,18 +4,364 @@ from .engine import pv_to_torr
 from .schema import VERSION
 from .utils import US_RT_KW, dewpoint
 from .errors import InputError
+from html import escape
+import math
+import re
 
 
-@localized_report
-def report(r):
+SUMMARY_TITLE = "★ 核心工程設計量與設備選型總覽（Executive Design Summary）"
+NOT_CALCULATED = "尚未計算"
+
+
+def _numeric(value):
+    """Accept finite result numbers without converting absent values into zero."""
+    if value is None or isinstance(value, bool):
+        return None
+    try:
+        value = float(value)
+    except (TypeError, ValueError):
+        return None
+    return value if math.isfinite(value) else None
+
+
+def _num(row, *keys):
+    for key in keys:
+        value = _numeric(row.get(key))
+        if value is not None:
+            return value
+    return None
+
+
+def _fmt(value, unit="", digits=2):
+    value = _numeric(value)
+    if value is None:
+        return NOT_CALCULATED
+    number = f"{value:,.{digits}f}".rstrip("0").rstrip(".") if digits else f"{value:,.0f}"
+    return number + (" " + unit if unit else "")
+
+
+def _row(equipment, demand=NOT_CALCULATED, selection=NOT_CALCULATED,
+         status="待資料", tone="warning"):
+    return dict(equipment=equipment, demand=demand, selection=selection,
+                status=status, tone=tone)
+
+
+def _coil_kw(season):
+    coils = [season.get(tag, {}) for tag in ("c1", "c2")]
+    values = [_num(coil, "water_kw") for coil in coils]
+    return sum(values) if all(v is not None for v in values) else None
+
+
+def executive_summary(result):
+    """Seven procurement rows for a full project or explicit quick-tool pipeline.
+
+    A summary may describe a partial pipeline, but never invents a common water
+    header, a main breaker, motor efficiency, or an equipment nameplate rating.
+    Full-project exports still pass the strict completeness check in ``report``.
+    """
+    if not isinstance(result, dict):
+        raise InputError("設計總覽需要計算結果。", code="incomplete_result")
+    r = result
+    if any(key in r for key in ("project", "effective_inputs", "zones")):
+        _validate_full_result(r)
+    pipeline = r.get("pipeline", r)
+    if not isinstance(pipeline, dict):
+        raise InputError("設計總覽需要計算結果。", code="incomplete_result")
+    main = isinstance(r.get("project"), dict) and isinstance(r.get("summer"), dict)
+    cr = r if main else pipeline.get("cleanroom", {})
+    heat = r if main else pipeline.get("heat_loads", {})
+    if r.get("tool") in ("cleanroom", "heat_loads"):
+        cr = r if r["tool"] == "cleanroom" else cr
+        heat = r if r["tool"] == "heat_loads" else heat
+    cr = cr if isinstance(cr, dict) else {}
+    heat = heat if isinstance(heat, dict) else {}
+    inputs = r.get("effective_inputs", r.get("project", {}).get("inputs", {})) if main else cr
+    inputs = inputs if isinstance(inputs, dict) else {}
+    is_mau = not main or str(inputs.get("sys_type", "")).startswith("MAU")
+    rows = []
+
+    # FFU sizing keeps design airflow separate from installed capacity.
+    ffu_flow = _num(cr, "ffu_total_cmh")
+    count = _num(cr, "ffu_count")
+    if count is None:
+        count = _num(heat, "ffu_count")
+    if main and count is None:
+        count = _num(r.get("counts", {}), "FFU")
+    unit_flow = _num(cr, "ffu_unit_cmh")
+    if unit_flow is None and main:
+        unit_flow = _num(inputs, "ffu_cmh")
+    coverage = _num(cr, "coverage_ratio", "ffu_coverage_pct")
+    limit = _num(cr, "coverage_limit_pct")
+    size = cr.get("ffu_size", inputs.get("ffu_size"))
+    if not is_mau:
+        rows.append(_row("FFU 循環風機濾網組", "此系統未採用 FFU", "不適用", "不適用", "neutral"))
+    else:
+        ffu_demand = "總風量 " + _fmt(ffu_flow, "CMH")
+        selection = "單台 " + (_fmt(unit_flow, "CMH") if unit_flow is not None else NOT_CALCULATED)
+        selection += "；" + (str(size) if size else "尺寸尚未計算")
+        selection += "；需求 " + _fmt(count, "台", 0) + "；覆蓋率 " + _fmt(coverage, "%")
+        if main and count is not None and _num(inputs, "ffu_w") is not None:
+            _fw = _num(inputs, "ffu_w")
+            selection += "；單台發熱 " + _fmt(_fw, "W", 0) + "（FFU 顯熱 " + _fmt(count * _fw / 1000.0, "kW") + "）"
+        for key in ("ffu_topology", "ffu_airflow_basis"):
+            if key == "ffu_airflow_basis" and cr.get("ffu_topology", inputs.get("ffu_topology")) == "獨立FFU循環（MAU直接入室）":
+                continue
+            basis = cr.get(key, inputs.get(key))
+            if basis:
+                selection += "；" + str(basis)
+        exceeded = bool(cr.get("coverage_exceeded")) or (
+            coverage is not None and limit is not None and coverage > limit)
+        if limit is not None:
+            selection += "（本案配置上限 " + _fmt(limit, "%") + "）"
+        topology = cr.get("ffu_topology", inputs.get("ffu_topology"))
+        oa_value = _num(cr, "oa_cmh", "oa_room_cmh")
+        feasible = cr.get("airflow_feasible") is not False and not (
+            topology == "MAU入靜壓箱經FFU送風" and ffu_flow is not None
+            and oa_value is not None and ffu_flow < oa_value - 1e-6)
+        rows.append(_row("FFU 循環風機濾網組", ffu_demand, selection,
+                         "氣流配置不可行" if not feasible else "結構空間超限" if exceeded else "配置初估" if count is not None else "待資料",
+                         "danger" if exceeded or not feasible else "success" if count is not None else "warning"))
+
+    oa = _num(cr, "oa_cmh", "oa_room_cmh", "required_oa_cmh")
+    if oa is None:
+        oa = _num(heat, "oa_cmh")
+    mau_kw = _num(heat, "q_mau_kw")
+    if mau_kw is None and main:
+        mau_kw = _coil_kw(r["summer"])
+    mau_demand = "設計外氣 " + _fmt(oa, "CMH") + "；冷卻除濕 " + _fmt(mau_kw, "kW")
+    if mau_kw is not None:
+        mau_demand += " / " + _fmt(mau_kw / US_RT_KW, "US RT")
+    if not is_mau:
+        rows.append(_row("MAU 外氣空調箱", "此系統於空調入口混合外氣；未配置獨立 MAU",
+                         "不適用", "不適用", "neutral"))
+    else:
+        mau_sel = "依風量、送風露點及盤管工況選型" if oa is not None else NOT_CALCULATED
+        if main and mau_kw is not None and r.get("room", {}).get("v_da") and r.get("oa", {}).get("v_da"):
+            _sf_val = _num(r, "sf") or 1.0
+            _inlet_cmh = r["oa_mass"] * r["oa"]["v_da"] * 3600
+            mau_sel = (
+                "含餘裕目標 " + _fmt(mau_kw * _sf_val, "kW") + " / " + _fmt(mau_kw * _sf_val / US_RT_KW, "US RT")
+                + "；外氣入口實際風量 " + _fmt(_inlet_cmh, "CMH")
+                + "（換算風量不改變同一質量流率的冷量）；" + mau_sel
+            )
+        rows.append(_row("MAU 外氣空調箱", mau_demand, mau_sel,
+                         "需求初估" if oa is not None else "待資料"))
+
+    dcc_flow = _num(cr, "dcc_design_cmh", "dcc_cmh", "recirculation_cmh", "circulation_cmh")
+    dcc_kw = (_num(heat, "dcc_design_kw", "dcc_sensible_kw", "dcc_kw") if main else
+              _num(heat, "q_dcc_kw", "dcc_sensible_kw", "dcc_design_kw", "dcc_kw"))
+    if dcc_kw is None:
+        dcc_kw = _num(heat, "q_room_sensible_kw")
+    if not is_mau:
+        rows.append(_row("DCC 室內乾冷盤管", "此系統未採用 DCC", "不適用", "不適用", "neutral"))
+    else:
+        dcc_selection = "盤管表面須高於室內露點；依水溫及風量選型" if dcc_kw is not None else NOT_CALCULATED
+        dcc_count = _num(r.get("counts", {}), "DCC") if main else None
+        if dcc_count is not None:
+            _unit_rt = _num(inputs, "en_dcc_rt")
+            _avg_cmh = (dcc_flow / dcc_count) if (dcc_flow and dcc_flow > 0 and dcc_count > 0) else None
+            _dcc_extra = ""
+            if _unit_rt is not None:
+                _dcc_extra += "（單台 " + _fmt(_unit_rt, "RT")
+                if _avg_cmh is not None:
+                    _dcc_extra += "，平均每台風量 " + _fmt(_avg_cmh, "CMH", 0)
+                _dcc_extra += "）"
+            dcc_selection = "DCC 需求 " + _fmt(dcc_count, "台", 0) + _dcc_extra + "；" + dcc_selection
+        rows.append(_row("DCC 室內乾冷盤管", "循環回風 " + _fmt(dcc_flow, "CMH") + "；顯熱 " + _fmt(dcc_kw, "kW"),
+                         dcc_selection,
+                         "氣流配置不可行" if dcc_flow is not None and dcc_flow < 0 else "需求初估" if dcc_kw is not None else "待資料",
+                         "danger" if dcc_flow is not None and dcc_flow < 0 else "warning"))
+
+    total_kw = _num(heat, "q_total_kw")
+    if total_kw is None and main and mau_kw is not None:
+        # Actual coil water loads are already the system cooling demand.
+        actual_dcc = _num(r, "dcc_kw")
+        total_kw = mau_kw + actual_dcc if actual_dcc is not None else None
+    total_demand = _fmt(total_kw, "kW")
+    if main:
+        total_demand = "各溫度迴路容量包絡（未加餘裕） " + total_demand
+    if total_kw is not None:
+        total_demand += " / " + _fmt(total_kw / US_RT_KW, "US RT")
+    sf = _num(r, "sf") if main else None
+    design_values = [_num(r.get("water", {}).get(k, {}), "load_kw") for k in ("MCHW", "CHW", "DCCW")] if main else []
+    design_kw = sum(design_values) if design_values and all(v is not None for v in design_values) else (
+        total_kw * sf if total_kw is not None and sf is not None else None)
+    selection = ("分溫度迴路容量目標 " + _fmt(design_kw, "kW") + " / " + _fmt(design_kw / US_RT_KW, "US RT")
+                 + "（含本案容量餘裕，原廠額定待確認）") if design_kw is not None else (
+                     "依設計冷量及實際供回水工況選型" if total_kw is not None else NOT_CALCULATED)
+    rows.append(_row("中央冰水主機 Chiller", total_demand, selection,
+                     "冷量初估" if total_kw is not None else "待資料"))
+
+    water_rows = []
+    pump_rows = []
+    if main:
+        # Distinct temperature loops cannot be described as a single header.
+        for key in ("MCHW", "CHW", "DCCW"):
+            pipe = r.get("water", {}).get(key, {})
+            loss = r.get("pressure", {}).get(key, {})
+            if _num(pipe, "lpm") is None:
+                continue
+            size = str(pipe.get("size", NOT_CALCULATED))
+            size += " × " + _fmt(pipe.get("runs"), "並聯", 0) if pipe.get("runs", 1) > 1 else ""
+            rate = _num(loss, "friction_pa_m")
+            if rate is None:
+                length = _num(r.get("project", {}).get("pressure_drop", {}).get(key, {}), "length_m")
+                friction = _num(loss, "friction_pa")
+                rate = friction / length if friction is not None and length and length > 0 else None
+            water_rows.append((key + " " + _fmt(pipe.get("lpm"), "LPM"), key + " " + size
+                               + "；" + _fmt(pipe.get("velocity_mps"), "m/s") + "；" + _fmt(rate, "Pa/m")
+                               + "；路徑壓差 " + _fmt(loss.get("total_pa"), "Pa")))
+            pump_rows.append(key + " " + _fmt(pipe.get("lpm"), "LPM") + "；揚程 " + _fmt(loss.get("head_m"), "m")
+                             + "；軸功率 " + _fmt(loss.get("shaft_kw"), "kW"))
+        rows.append(_row("冰水主管路規格", "｜".join(row[0] for row in water_rows) or NOT_CALCULATED,
+                         "｜".join(row[1] for row in water_rows) or NOT_CALCULATED,
+                         "各溫度迴路分列" if water_rows else "待資料"))
+        rows.append(_row("冰水循環泵浦 CHWP", "｜".join(pump_rows) or NOT_CALCULATED,
+                         "馬達銘牌尚未選型；各迴路須分別選泵", "待選型"))
+    else:
+        water = pipeline.get("water", r if r.get("tool") == "water" else {})
+        water = water if isinstance(water, dict) else {}
+        pipe, thermal, loss = (water.get(key, {}) for key in ("pipe", "thermal", "pressure"))
+        water_flow = _num(thermal, "lpm")
+        if water_flow is None:
+            water_flow = _num(pipe, "lpm")
+        rows.append(_row("冰水主管路規格", "設計流量 " + _fmt(water_flow, "LPM"),
+                         (str(pipe.get("size", NOT_CALCULATED)) + "；" + _fmt(pipe.get("velocity_mps"), "m/s")
+                          + "；" + _fmt(loss.get("friction_pa_m"), "Pa/m")) if water else NOT_CALCULATED,
+                         "管徑初估" if water else "待資料"))
+        pump = pipeline.get("pumps", r if r.get("tool") == "pumps" else {})
+        pump = pump if isinstance(pump, dict) else {}
+        motor = _num(pump, "recommended_motor_kw")
+        demand = "設計流量 " + _fmt(pump.get("flow_lpm"), "LPM") + "；揚程 " + _fmt(pump.get("head_m"), "m")
+        demand += "；軸功率 " + _fmt(pump.get("shaft_power_kw"), "kW")
+        selection = _fmt(motor, "kW") + " 馬達銘牌（軸輸出額定、含 15% 裕度）" if motor is not None else (
+            "需求超出內建馬達級距，須另選規格" if pump else NOT_CALCULATED)
+        rows.append(_row("冰水循環泵浦 CHWP", demand, selection,
+                         "選型初估" if motor is not None else "超出級距" if pump else "待資料",
+                         "warning" if motor is not None or not pump else "danger"))
+
+    if main:
+        electric = r.get("electric", {})
+        demands, selections = [], []
+        for key in ("UP", "NP"):
+            panel = electric.get(key, {})
+            candidate = panel.get("selected", {})
+            demands.append(key + " " + _fmt(panel.get("kw"), "kW") + "；" + _fmt(panel.get("current_a"), "A"))
+            selections.append(key + " " + _fmt(candidate.get("nfb_candidate_a"), "AT", 0)
+                              + "；" + _fmt(candidate.get("runs"), "組", 0) + " × "
+                              + _fmt(candidate.get("size_mm2"), "mm²/相"))
+        rows.append(_row("主配電斷路器 MCCB", "｜".join(demands), "｜".join(selections)
+                         + "；主進線未計算，不將分盤 AT 相加", "分盤候選"))
+    else:
+        electric = pipeline.get("electrical", r if r.get("tool") == "electrical" else {})
+        electric = electric if isinstance(electric, dict) else {}
+        at = _num(electric, "recommended_breaker_at")
+        if "recommended_breaker_at" not in electric and electric.get("selected"):
+            at = _num(electric["selected"], "nfb_a")
+        power = _num(electric, "electrical_input_kw", "power_kw")
+        demand = "明列設備有效輸入功率 " + _fmt(power, "kW") + "；運轉電流 " + _fmt(electric.get("current_a"), "A")
+        demand += "；1.25 倍電流 " + _fmt(electric.get("design_breaker_a"), "A")
+        selection = (_fmt(at, "AT", 0) + " 初估；啟動、短路及配線協調另核") if at is not None else (
+            "需求超出內建斷路器級距，須另選規格" if electric else NOT_CALCULATED)
+        rows.append(_row("主配電斷路器 MCCB", demand, selection,
+                         "連續負載初估" if at is not None else "超出級距" if electric else "待資料",
+                         "warning" if at is not None or not electric else "danger"))
+    return rows
+
+
+def executive_summary_text(result):
+    lines = ["╔" + "═" * 66 + "╗", SUMMARY_TITLE,
+             "【計算需求值】與【建議選型規格】分列；缺值保留尚未計算。"]
+    for row in executive_summary(result):
+        lines.extend(["", row["equipment"] + "｜" + row["status"],
+                      "  【計算需求值】" + row["demand"],
+                      "  【建議選型規格】" + row["selection"]])
+    lines.append("╚" + "═" * 66 + "╝")
+    return "\n".join(lines)
+
+
+def executive_summary_html(result):
+    """Escaped HTML fragment; the document wrapper performs localization."""
+    rows = executive_summary(result)
+    def kpi(row, index):
+        source = row["selection"] if index == 0 else row["demand"]
+        pattern = r"[\d,]+(?:\.\d+)?\s*台" if index == 0 else r"[\d,]+(?:\.\d+)?\s*(?:CMH|kW|LPM|A)(?![A-Za-z])"
+        matched = re.search(pattern, source)
+        if index == 3:
+            matched = re.search(r"[\d,]+(?:\.\d+)?\s*US RT", source)
+        if index == 2:
+            matched = re.search(r"[\d,]+(?:\.\d+)?\s*kW", source)
+        if index == 4 and "project" in result:
+            return row["demand"]
+        if index == 5:
+            matched = re.search(r"[\d,]+(?:\.\d+)?\s*kW", row["selection"])
+        if index == 6:
+            if "project" in result:
+                return " / ".join(re.findall(r"(?:UP|NP) [\d,]+ AT", row["selection"])) or row["status"]
+            matched = re.search(r"[\d,]+(?:\.\d+)?\s*AT", row["selection"])
+        return matched.group() if matched else ("不適用" if row["status"] == "不適用" else row["status"])
+
+    cards = "".join(
+        '<article class="kpi-card"><p class="kpi-label">' + escape(row["equipment"])
+        + '</p><p class="kpi-value">' + escape(kpi(row, index))
+        + '</p><span class="badge ' + row["tone"] + '">' + escape(row["status"])
+        + '</span></article>' for index, row in enumerate(rows))
+    table = "".join(
+        "<tr><th scope=\"row\">" + escape(row["equipment"]) + "</th><td>" + escape(row["demand"])
+        + "</td><td>" + escape(row["selection"]) + '</td><td><span class="badge ' + row["tone"]
+        + '">' + escape(row["status"]) + "</span></td></tr>" for row in rows)
+    return ('<section class="executive-summary" aria-labelledby="executive-title"><h2 id="executive-title">'
+            + SUMMARY_TITLE + '</h2><div class="kpi-grid">' + cards
+            + '</div><div class="table-scroll"><table class="selection-table"><thead><tr>'
+            + '<th scope="col">設備／系統</th><th scope="col">計算需求值</th><th scope="col">建議選型規格</th>'
+            + '<th scope="col">狀態</th></tr></thead><tbody>' + table + '</tbody></table></div></section>')
+
+
+def nm_summary_rows(result):
+    """Actual single-unit boundaries, without implying a whole-facility design."""
+    i = result.get("inputs", {})
+    summer = result.get("summer", {})
+    winter = result.get("winter", {})
+    cooling = _coil_kw(summer)
+    target = summer.get("sa", {})
+    flow = i.get("summer_flow") if i.get("target_mode") == "主案分季需求" else i.get("flow")
+    humid = winter.get("steam", {}).get("kg_h") if "蒸汽" in i.get("humidifier", "") else winter.get("evap_kg_h")
+    return [
+        ("MAU 設計風量", _fmt(flow, "CMH"), str(i.get("flow_basis", ""))),
+        ("夏季盤管水側冷量", _fmt(cooling, "kW"), _fmt(cooling / US_RT_KW, "US RT") if cooling is not None else NOT_CALCULATED),
+        ("夏季送風狀態", _fmt(target.get("t"), "°C"), _fmt(target.get("rh"), "%RH")),
+        ("風機需求輸入電力", _fmt(result.get("fan_required_kw"), "kW"), "依已填壓差與效率估算"),
+        ("啟用設備名目電力", _fmt(result.get("active_installed_electric_kw"), "kW"), "未含未提供的循環泵與附屬設備"),
+        ("冬季加濕需求", _fmt(humid, "kg/h"), "依加濕型式分列"),
+    ]
+
+
+def nm_summary_html(result):
+    cards = "".join('<article class="kpi-card"><p class="kpi-label">' + escape(title)
+                    + '</p><p class="kpi-value">' + escape(value) + '</p><span class="badge warning">'
+                    + escape(note) + '</span></article>' for title, value, note in nm_summary_rows(result))
+    return '<section><h2>MAU 單機核心設計量</h2><div class="kpi-grid">' + cards + '</div></section>'
+
+
+def _validate_full_result(r):
     # Independent-domain results are useful in the UI, but cannot be exported
     # as a complete project report. Zero-demand rows still have result records.
     required = {"gas": ("1", "2", "3", "4"), "electric": ("UP", "NP")}
     report_keys = set("project effective_inputs quality sf summer winter zones light "
                       "minimum_oa_cmh oa_room_cmh extra_relief_cmh qs ql moisture latent "
                       "supply_room_cmh circulation_cmh room rt_kw dcc_kw counts water "
-                      "pressure ducts gas electric upw warnings dcc_design_kw".split())
+                      "pressure ducts gas electric upw warnings dcc_design_kw "
+                      "coverage_exceeded coverage_limit_pct coverage_ratio dcc_cmh "
+                      "dcc_sensible_kw ffu_airflow_basis ffu_area_each ffu_count ffu_size "
+                      "ffu_total_cmh ffu_unit_cmh leakage_cmh q_mau_kw "
+                      "q_room_sensible_kw q_total_kw q_total_rt required_oa_cmh "
+                      "dcc_return_cmh dcc_design_cmh dcc_design_season".split())
+    if isinstance(r, dict) and isinstance(r.get("effective_inputs"), dict) and "ffu_topology" in r["effective_inputs"]:
+        report_keys.add("ffu_topology")
+    mappings = "project effective_inputs quality summer winter zones light latent room counts water pressure ducts gas electric upw".split()
     if not isinstance(r, dict) or not report_keys <= r.keys() or any(
+        not isinstance(r.get(key), dict) or not r[key] for key in mappings
+    ) or not isinstance(r.get("warnings"), list) or any(
         not isinstance(r.get(domain), dict)
         or any(not isinstance(r[domain].get(key), dict) or not r[domain][key]
                for key in keys)
@@ -25,6 +371,23 @@ def report(r):
             "完整報告需要空調、氣體與電氣的完整計算結果；目前結果不完整，請修正未通過的項目並重新計算。",
             code="incomplete_result",
         )
+    from .schema import DEFAULTS
+
+    if (not isinstance(r["project"].get("inputs"), dict)
+            or not set(DEFAULTS) <= r["project"]["inputs"].keys()
+            or not {"status", "items"} <= r["quality"].keys()
+            or not isinstance(r["quality"]["items"], list)
+            or any(not isinstance(r[season].get(coil), dict) or not r[season][coil]
+                   for season in ("summer", "winter") for coil in ("c1", "c2"))):
+        raise InputError(
+            "完整報告需要空調、氣體與電氣的完整計算結果；目前結果不完整，請修正未通過的項目並重新計算。",
+            code="incomplete_result",
+        )
+
+
+@localized_report
+def report(r):
+    _validate_full_result(r)
     i = dict(r["project"]["inputs"])
     from .schema import DEFAULTS
 
@@ -55,6 +418,7 @@ def report(r):
                 + "；"
                 + rec["status"]
             )
+    a("\n" + executive_summary_text(r))
     a("\n一、設計條件")
     demand = r.get("demand_summary")
     if demand and demand["sources"]:
@@ -66,21 +430,41 @@ def report(r):
         f"大氣壓 {i['atm_kpa']} kPa；夏季 {i['oa_t']}°C / {i['oa_rh']}%RH；冬季 {i['ow_t']}°C / {i['ow_rh']}%RH；室內 {i['ra_t']}°C / {i['ra_rh']}%RH（精確目標）。"
     )
     for z, d in r["zones"].items():
+        mode_detail = (
+            f"截面風速 {i['face_' + z]} m/s（覆蓋率 {i['coverage_' + z]}%）"
+            if i["mode_" + z] != "ACH"
+            else f"ACH {i['en_ach_' + z]}"
+        )
         a(
-            f"{z} 區 {d['area']:.1f} m²、{d['volume']:.1f} m³；{i['mode_' + z]} 需求 {d['cmh']:.1f} CMH；潔淨紀錄 {i['c_' + z.lower()]}。"
+            f"{z} 區 {d['area']:.1f} m²、{d['volume']:.1f} m³；{mode_detail} 需求 {d['cmh']:.1f} CMH；正壓 {i['en_p_' + z]} Pa；潔淨紀錄 {i['c_' + z.lower()]}。"
         )
     a(
-        f"補償外氣下限 {r['minimum_oa_cmh']:.2f} CMH；採用 {r['oa_room_cmh']:.2f} CMH；额外洩壓需求 {r['extra_relief_cmh']:.2f} CMH（均以室內狀態基準）。"
+        f"正壓洩漏 {r['leakage_cmh']:.2f} CMH（{i['leak_method']}）；補償外氣下限 {r['minimum_oa_cmh']:.2f} CMH；採用 {r['oa_room_cmh']:.2f} CMH；额外洩壓需求 {r['extra_relief_cmh']:.2f} CMH（均以室內狀態基準）。"
     )
     a(
         f"照明 {r['light']['qty']} 盞／{r['light']['kw']:.3f} kW；室內顯熱 {r['qs']:.3f} kW；潛熱參考 {r['ql']:.3f} kW；產濕 {r['moisture'] * 3600:.3f} kg/h。"
     )
+    parts = r.get("parts", {})
+    if parts:
+        a(
+            f"顯熱組成：設備淨熱 {parts.get('equipment_net', parts.get('設備淨熱', 0)):.3f}（PCW帶走 {parts.get('pcw_removed', parts.get('PCW帶走', 0)):.3f}、排氣帶走 {parts.get('exhaust_removed', parts.get('排氣帶走', 0)):.3f}）、人員顯熱 {parts.get('people', parts.get('人員顯熱', 0)):.3f}、照明 {parts.get('lighting', parts.get('照明', 0)):.3f}、外牆 {parts.get('wall', parts.get('外牆', 0)):.3f}、樓板 {parts.get('floor', parts.get('樓板', 0)):.3f}、烤箱 {parts.get('oven', parts.get('烤箱', 0)):.3f}、日射 {parts.get('solar', parts.get('日射', 0)):.3f}、風機與FFU {parts.get('fan', parts.get('風機與FFU', 0)):.3f} kW。"
+        )
     a(
         f"產濕來源：人員 {r['latent']['people_kg_h']:.3f}＋額外製程 {r['latent']['process_kg_h']:.3f} kg/h；製程方式：{i['latent_mode']}。外氣水氣由盤管另算，不重複加進室內。"
     )
     a("\n二、空調分工與狀態")
+    c1_desc = (
+        f"一段旁通（備用ΔT {i['chw1_dt']} K）"
+        if i["pre_mode"] == "停用／旁通"
+        else f"一段供水 {i['chw1_in']}°C／ΔT {i['chw1_dt']} K（{i['pre_mode']}，目標 {i['pre_t']}°C）"
+    )
+    dcc_desc = (
+        f"DCCW {i['dccw_in']}°C／ΔT {i['dt_dccw']} K"
+        if i["sys_type"].startswith("MAU")
+        else f"無 DCC 迴路（備用ΔT {i['dt_dccw']} K）"
+    )
     a(
-        f"一段供水 {i['chw1_in']}°C／ΔT {i['chw1_dt']} K；二段 {i['chw2_in']}°C／ΔT {i['dt_chw']} K；DCCW {i['dccw_in']}°C／ΔT {i['dt_dccw']} K；容量餘裕 {i['sf']}%。"
+        f"{c1_desc}；二段 {i['chw2_in']}°C／ΔT {i['dt_chw']} K；{dcc_desc}；容量餘裕 {i['sf']}%（冷凍噸基準：{i['rt_type']}）。"
     )
     a(
         f"處理風量 {r['supply_room_cmh']:.2f} CMH（室內基準）；{('FFU 循環另計 ' + format(r['circulation_cmh'], '.2f') + ' CMH' if i['sys_type'].startswith('MAU') else '外氣於空調入口混合')}。"
@@ -203,9 +587,14 @@ def report(r):
                 "  最大馬達未知：保守採總運轉電流×1.25。"
             )
     a("\n五、主要公式與簡短說明")
-    a(
-        f"照明 N=ceil(E×A/(Φ×U×M))=ceil({i['light_lux']}×{r['light']['area_m2']:g}/({i['light_lm']}×{i['light_u']}×{i['light_m']}))={r['light']['qty']} 盞。"
-    )
+    if r["light"].get("room_index_k") is not None:
+        a(
+            f"照明 K={r['light']['room_index_k']:.2f}，U(K)={r['light']['u']:.4f}；N=ceil(E×A/(Φ×U×M))=ceil({i['light_lux']}×{r['light']['area_m2']:g}/({i['light_lm']}×{r['light']['u']:.4f}×{i['light_m']}))={r['light']['qty']} 盞。"
+        )
+    else:
+        a(
+            f"照明 N=ceil(E×A/(Φ×U×M))=ceil({i['light_lux']}×{r['light']['area_m2']:g}/({i['light_lm']}×{i['light_u']}×{i['light_m']}))={r['light']['qty']} 盞。"
+        )
     a(
         f"室內顯熱 Qs=m_da(1.006+1.86ws)(Tr−Ts)+QDCC={r['qs']:.3f} kW；產濕 G=3600×m_da(wr−ws)={r['moisture'] * 3600:.3f} kg/h。"
     )
@@ -347,6 +736,9 @@ def _nm_report_base(r):
 
 @localized_report
 def nm_report(r):
+    if not isinstance(r, dict) or not all(isinstance(r.get(key), dict) and r[key]
+                                       for key in ("inputs", "summer", "winter", "quality")):
+        raise InputError("MAU 報告需要完整單機計算結果。", code="incomplete_result")
     s = _nm_report_base(r)
     i = r["inputs"]
     if r.get("link_status"):
@@ -397,4 +789,6 @@ def nm_report(r):
     for q in r["quality"]["items"]:
         if q["status"] != "通過":
             header += "[" + q["status"] + "] " + q["name"] + "：" + q["detail"] + "\n"
-    return header + s + "\n".join(extra).replace("需求点", "需求點") + "\n"
+    summary = "MAU 單機核心設計量\n" + "\n".join(
+        title + "：" + value + "｜" + note for title, value, note in nm_summary_rows(r))
+    return header + summary + "\n\n" + s + "\n".join(extra).replace("需求点", "需求點") + "\n"

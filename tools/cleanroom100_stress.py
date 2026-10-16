@@ -7,6 +7,7 @@ Only explicitly witnessed engineering limits count as expected rejections.
 import argparse
 import copy
 import hashlib
+import gzip
 import json
 import math
 import platform
@@ -159,7 +160,24 @@ def reference_design(project):
     min_mass = (n('en_manual_oa') or minimum)/room['v_da']/3600
     need_mass = moist/(room['w']-minw) if room['w'] > minw else math.inf
     mass = min_mass if n('en_manual_oa') else max(min_mass,need_mass*1.05)
+    # Independent reference for schema-12 topology. Legacy recipes without an
+    # explicit topology retain their original independent circulation model.
+    oa_cmh = mass * room['v_da'] * 3600
+    plenum = i.get('ffu_topology') == 'MAU入靜壓箱經FFU送風'
+    add_oa = plenum and i.get('ffu_airflow_basis') == '室內基本循環（另加OA）'
+    ffu_total = circulation + oa_cmh if add_oa else circulation
+    dcc_return = circulation if (not plenum or add_oa) else circulation - oa_cmh
+    if math.isfinite(ffu_total):
+        final_ffu = math.ceil(ffu_total/n('ffu_cmh'))
+        extra_fan_kw = (final_ffu - ffu) * n('ffu_w') / 1000
+        ffu = final_ffu
+        internal += extra_fan_kw
+        summer_qs += extra_fan_kw
+        winter_qs += extra_fan_kw * n('winter_gain_ratio') / 100
+    else:
+        ffu_total = dcc_return = None  # Incompatible ADP is rejected before sizing.
     return dict(room=room,zones=zones,circulation=circulation,ffu=ffu,
+                ffu_total=ffu_total,dcc_return=dcc_return,
                 lighting_qty=lighting_qty,internal=internal,pcw_kw=pcw,
                 summer_qs=summer_qs,winter_qs=winter_qs,moisture=moist,
                 nominal_exhaust_cmh=nominal_exhaust,exhaust_cmh=exhaust,
@@ -335,6 +353,7 @@ def generate_cases():
     return cases
 
 if args.generate:
+    assert args.manifest.suffix != '.gz', 'Generate a .json manifest, then optionally gzip the frozen bytes'
     assert not args.manifest.exists(), 'Refuse to replace a frozen manifest'
     cases=generate_cases()
     data=dict(version=api.VERSION,main_commit=MAIN_COMMIT,tree=TREE,seed=SEED,
@@ -349,7 +368,10 @@ if args.generate:
     sys.exit(0)
 
 assert args.output and args.repeat>=1
-manifest_bytes=args.manifest.read_bytes(); manifest=json.loads(manifest_bytes)
+manifest_bytes=args.manifest.read_bytes()
+if args.manifest.suffix == '.gz':
+    manifest_bytes = gzip.decompress(manifest_bytes)
+manifest=json.loads(manifest_bytes)
 cases=copy.deepcopy(manifest['cases'])
 # Preserve the original manifest. Migrate old projects before mutating inactive fields.
 # Expectations change only for the newly structured C1 diagnostic.
@@ -462,8 +484,8 @@ def engineering_checks(r,case,text):
     close('winter C1 bypass',wm['c1']['air_kw'],0)
     close('DCC both seasons design',r['dcc_design_kw'],max(r['dcc_kw'],wr['dcc_kw']))
     close('DCC minimum count',r['counts']['DCC'],math.ceil(r['dcc_design_kw']*(1+n('sf')/100)/r['rt_kw']/n('en_dcc_rt')-1e-12))
-    flow=ref['circulation'] if i['dcc_airflow_mode']=='沿用 FFU 循環' else n('dcc_airflow_cmh')
-    dcc_limit=flow/3600/ref['room']['v_da']*(1.006+1.86*room['w'])*max(0,room['t']-n('dccw_in')-n('dcc_air_approach'))
+    flow=ref.get('dcc_return',ref['circulation']) if i['dcc_airflow_mode']=='沿用 FFU 循環' else n('dcc_airflow_cmh')
+    dcc_limit=max(0,flow)/3600/ref['room']['v_da']*(1.006+1.86*room['w'])*max(0,room['t']-n('dccw_in')-n('dcc_air_approach'))
     expected_air_pass=flow>0 and r['dcc_design_kw']<=dcc_limit+1e-6
     air_item=next(x for x in r['quality']['items'] if x['name']=='DCC 循環風量與能力')
     check('DCC insufficient airflow retained',air_item['status']==('通過' if expected_air_pass else '未達'))

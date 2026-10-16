@@ -1,0 +1,283 @@
+{
+  "kind": "source-engineering-boundaries",
+  "source_platform": "macos",
+  "host_os": "Linux",
+  "python": "3.12.14",
+  "schema_version": 12,
+  "passed": true,
+  "check_count": 68,
+  "checks": [
+    {
+      "name": "zero dp no leakage",
+      "passed": true
+    },
+    {
+      "name": "negative dp no outward leakage",
+      "passed": true
+    },
+    {
+      "name": "reference one ACH is explicit 300m3 per hour",
+      "passed": true
+    },
+    {
+      "name": "fourfold dp gives double leakage",
+      "passed": true
+    },
+    {
+      "name": "occupancy is alternative minimum not added twice",
+      "passed": true
+    },
+    {
+      "name": "DCC handles pure room recirculation",
+      "passed": true
+    },
+    {
+      "name": "all OA crosses plenum FFUs",
+      "passed": true
+    },
+    {
+      "name": "FFU count rounding includes OA",
+      "passed": true
+    },
+    {
+      "name": "4x4 nominal module area",
+      "passed": true
+    },
+    {
+      "name": "coverage beyond 100 is preserved as failure",
+      "passed": true
+    },
+    {
+      "name": "room load independent sum",
+      "passed": true
+    },
+    {
+      "name": "OA mass flow enthalpy load",
+      "passed": true
+    },
+    {
+      "name": "neutral reference latent counted once",
+      "passed": true
+    },
+    {
+      "name": "actual leaving MAU latent not added twice",
+      "passed": true
+    },
+    {
+      "name": "MAU room sensible credit reduces DCC",
+      "passed": true
+    },
+    {
+      "name": "pump water power",
+      "passed": true
+    },
+    {
+      "name": "shaft excludes motor losses",
+      "passed": true
+    },
+    {
+      "name": "electrical includes motor losses",
+      "passed": true
+    },
+    {
+      "name": "motor catalogue rates output and rounds up after 15pct",
+      "passed": true
+    },
+    {
+      "name": "motor over catalogue does not clamp",
+      "passed": true
+    },
+    {
+      "name": "AT over catalogue does not clamp",
+      "passed": true
+    },
+    {
+      "name": "shaft kW current uses efficiency once",
+      "passed": true
+    },
+    {
+      "name": "continuous design current is 125pct",
+      "passed": true
+    },
+    {
+      "name": "125pct breaker uses provided catalogue",
+      "passed": true
+    },
+    {
+      "name": "single phase current",
+      "passed": true
+    },
+    {
+      "name": "Huebscher diameter",
+      "passed": true
+    },
+    {
+      "name": "equal-circle velocity basis",
+      "passed": true
+    },
+    {
+      "name": "equal-circle friction without rectangular velocity mixing",
+      "passed": true
+    },
+    {
+      "name": "roughness epsilon and D both metres",
+      "passed": true
+    },
+    {
+      "name": "legacy independent DCC retains entire recirculation",
+      "passed": true
+    },
+    {
+      "name": "new main flow explicitly adds final OA",
+      "passed": true
+    },
+    {
+      "name": "main separates DCC return",
+      "passed": true
+    },
+    {
+      "name": "extra FFU fan power enters sensible balance",
+      "passed": true
+    },
+    {
+      "name": "main summer sensible conservation",
+      "passed": true
+    },
+    {
+      "name": "plenum total-flow basis separates OA from return",
+      "passed": true
+    },
+    {
+      "name": "quality consumes same DCC flow as reported",
+      "passed": true
+    },
+    {
+      "name": "negative plenum return is preserved, not clamped",
+      "passed": true
+    },
+    {
+      "name": "nonpositive DCC cannot pass capacity check",
+      "passed": true
+    },
+    {
+      "name": "independent zero FFU need does not gain OA count",
+      "passed": true
+    },
+    {
+      "name": "independent zero FFU keeps actual zero return",
+      "passed": true
+    },
+    {
+      "name": "v11 migration does not mutate original",
+      "passed": true
+    },
+    {
+      "name": "v11 migration preserves physical assumptions",
+      "passed": true
+    },
+    {
+      "name": "water capacity matches transferred heat load",
+      "passed": true
+    },
+    {
+      "name": "head transfer adds only explicit terminal allowance",
+      "passed": true
+    },
+    {
+      "name": "chiller thermal to electrical through COP only",
+      "passed": true
+    },
+    {
+      "name": "pump actual electrical input enters feeder",
+      "passed": true
+    },
+    {
+      "name": "feeder uses distinct explicit electrical sources",
+      "passed": true
+    },
+    {
+      "name": "repeat upstream transfer idempotent",
+      "passed": true
+    },
+    {
+      "name": "all structured results finite",
+      "passed": true
+    },
+    {
+      "name": "duplicate scheduled and calculated Chiller rejected {'chiller_cop': '5'}",
+      "passed": true
+    },
+    {
+      "name": "duplicate scheduled and calculated Chiller rejected {'chiller_input_kw': '8'}",
+      "passed": true
+    },
+    {
+      "name": "scheduled Chiller satisfies missing-input warning",
+      "passed": true
+    },
+    {
+      "name": "scheduled MAU satisfies its warning independently",
+      "passed": true
+    },
+    {
+      "name": "scheduled process load satisfies its warning independently",
+      "passed": true
+    },
+    {
+      "name": "process entry does not hide missing MAU",
+      "passed": true
+    },
+    {
+      "name": "provided process does not get a false missing warning",
+      "passed": true
+    },
+    {
+      "name": "explicit Chiller input wins over COP without duplication",
+      "passed": true
+    },
+    {
+      "name": "actual MAU physical boundary {'oa_cmh': 0, 'persons': 10}",
+      "passed": true
+    },
+    {
+      "name": "actual MAU physical boundary {'oa_cmh': 0, 'persons': 0, 'mau_room_sensible_kw': 1, 'mau_supply_delta_t': 10}",
+      "passed": true
+    },
+    {
+      "name": "actual MAU physical boundary {'oa_cmh': 100, 'persons': 0, 'mau_room_sensible_kw': 1, 'mau_supply_delta_t': 2}",
+      "passed": true
+    },
+    {
+      "name": "actual MAU physical boundary {'oa_cmh': 600, 'persons': 0, 'mau_room_sensible_kw': 1, 'mau_supply_delta_t': 0}",
+      "passed": true
+    },
+    {
+      "name": "zero OA with no latent or MAU credit remains valid DCC-only load",
+      "passed": true
+    },
+    {
+      "name": "sensible credit bound is explicit airflow and temperature difference",
+      "passed": true
+    },
+    {
+      "name": "room index uses actual length and width",
+      "passed": true
+    },
+    {
+      "name": "catalogue U is independent of geometry",
+      "passed": true
+    },
+    {
+      "name": "lumen method rounds up independently specified load",
+      "passed": true
+    },
+    {
+      "name": "different shape changes K without inventing new photometric U",
+      "passed": true
+    },
+    {
+      "name": "workbench uses entered U and the same room geometry",
+      "passed": true
+    }
+  ]
+}

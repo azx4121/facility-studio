@@ -129,8 +129,8 @@ def main():
         "CFBundleExecutable": "FacilityStudio",
         "CFBundlePackageType": "APPL",
         "CFBundleInfoDictionaryVersion": "6.0",
-        "CFBundleShortVersionString": "5.5.4",
-        "CFBundleVersion": "5.5.4.1",
+        "CFBundleShortVersionString": "5.6.0",
+        "CFBundleVersion": "5.6.0.6",
         "CFBundleIconFile": "FacilityStudio.icns",
         "CFBundleDevelopmentRegion": "zh_TW",
         "CFBundleLocalizations": ["zh_TW", "en"],
@@ -174,7 +174,7 @@ def main():
     if broken_after_signing:
         raise ValueError(f"Broken symlinks after signing: {broken_after_signing}")
     manifest = {
-        "version": "5.5.4-mac.1",
+        "version": "5.6.0-mac.6",
         "minimum_macos": "11.0",
         "architectures": ["arm64", "x86_64"],
         "runtime": {
