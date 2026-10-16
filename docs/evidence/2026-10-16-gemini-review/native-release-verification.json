@@ -1,0 +1,337 @@
+{
+  "schema": 1,
+  "source_commit": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91",
+  "tested_commits": {
+    "windows": "cd2fe8330aee584f948e152b4962c1a02d0c0ed3",
+    "macos": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91"
+  },
+  "workflow_runs": [
+    {
+      "id": 38910619703,
+      "name": "Build and verify offline Windows EXE",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/38910619703",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "cd2fe8330aee584f948e152b4962c1a02d0c0ed3",
+      "run_attempt": 1,
+      "created_at": "2026-10-16T13:47:43Z",
+      "updated_at": "2026-10-16T14:14:53Z"
+    },
+    {
+      "id": 38910619930,
+      "name": "Engineering dashboard source checks",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/38910619930",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "cd2fe8330aee584f948e152b4962c1a02d0c0ed3",
+      "run_attempt": 1,
+      "created_at": "2026-10-16T13:47:43Z",
+      "updated_at": "2026-10-16T13:49:19Z"
+    },
+    {
+      "id": 38922689461,
+      "name": "Build and verify macOS revision",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/38922689461",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91",
+      "run_attempt": 2,
+      "created_at": "2026-10-16T15:17:16Z",
+      "updated_at": "2026-10-16T15:45:53Z"
+    },
+    {
+      "id": 38922689468,
+      "name": "Engineering dashboard source checks",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/38922689468",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91",
+      "run_attempt": 1,
+      "created_at": "2026-10-16T15:17:16Z",
+      "updated_at": "2026-10-16T15:19:36Z"
+    }
+  ],
+  "releases": [
+    {
+      "tag": "v5.6.0-win.4",
+      "id": 415040406,
+      "draft": false,
+      "prerelease": true,
+      "target_commitish": "cd2fe8330aee584f948e152b4962c1a02d0c0ed3",
+      "html_url": "https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.4",
+      "published_at": "2026-10-16T14:14:50Z",
+      "assets": [
+        {
+          "id": 647548251,
+          "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+          "size": 41038610,
+          "digest": "sha256:49a04498b8353f4ef1f0d202de48576af925502dff202c232d2356b02a48a802",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.4/Facility_Studio_V5_6_0_Windows_Offline.exe"
+        },
+        {
+          "id": 647548343,
+          "name": "SHA256SUMS.txt",
+          "size": 109,
+          "digest": "sha256:11885f5889bf2498661ed4f9c4f4b1bf59c71d67eb4c3d3c34b331d43c9d9a44",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.4/SHA256SUMS.txt"
+        }
+      ],
+      "tag_ref_sha": "cd2fe8330aee584f948e152b4962c1a02d0c0ed3"
+    },
+    {
+      "tag": "v5.6.0-mac.6",
+      "id": 415125492,
+      "draft": false,
+      "prerelease": true,
+      "target_commitish": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91",
+      "html_url": "https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-mac.6",
+      "published_at": "2026-10-16T15:45:50Z",
+      "assets": [
+        {
+          "id": 647793779,
+          "name": "Facility_Studio_V5_6_0_macOS_mac6.dmg",
+          "size": 146283098,
+          "digest": "sha256:fb5d4cf53856dcb22d735c5f67be6aebd86a4b03e1d70218720ebee1bbc4f4d7",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.6/Facility_Studio_V5_6_0_macOS_mac6.dmg"
+        },
+        {
+          "id": 647794060,
+          "name": "SHA256SUMS.txt",
+          "size": 104,
+          "digest": "sha256:03eb67e94c439b6469d1b87f156bb6f88894858668050ad13d46fae4cb6c7a5a",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.6/SHA256SUMS.txt"
+        }
+      ],
+      "tag_ref_sha": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91"
+    }
+  ],
+  "previous_release_identities": [
+    {
+      "tag": "v5.6.0-win.3",
+      "id": 410882868,
+      "draft": false,
+      "prerelease": true,
+      "target_commitish": "73262bbe5465f2e127a5181a838a4778dc9a9824",
+      "html_url": "https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.3",
+      "published_at": "2026-10-12T18:14:28Z",
+      "assets": [
+        {
+          "id": 634580599,
+          "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+          "size": 40917171,
+          "digest": "sha256:4f92d83cdb08d65f660511ac8f1de0a889746e9386d023808baf392451b040c0",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.3/Facility_Studio_V5_6_0_Windows_Offline.exe"
+        },
+        {
+          "id": 634580731,
+          "name": "SHA256SUMS.txt",
+          "size": 109,
+          "digest": "sha256:f32fdd9d3fb36a7c9810852788c8e8e9766c3d51bb00f08d64d383b119aaebbc",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.3/SHA256SUMS.txt"
+        }
+      ],
+      "tag_ref_sha": "73262bbe5465f2e127a5181a838a4778dc9a9824",
+      "asset_identities_unchanged": true
+    },
+    {
+      "tag": "v5.6.0-mac.5",
+      "id": 411817363,
+      "draft": false,
+      "prerelease": true,
+      "target_commitish": "aef83a683af66b4893d7e38d7ca910cf26831322",
+      "html_url": "https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-mac.5",
+      "published_at": "2026-10-13T15:15:29Z",
+      "assets": [
+        {
+          "id": 637405595,
+          "name": "Facility_Studio_V5_6_0_macOS_mac5.dmg",
+          "size": 141828767,
+          "digest": "sha256:bcd0854fa7f30b78d09ceaf0e53d285e5c75e6363800fc18a046f875eca70e9d",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.5/Facility_Studio_V5_6_0_macOS_mac5.dmg"
+        },
+        {
+          "id": 637405793,
+          "name": "SHA256SUMS.txt",
+          "size": 104,
+          "digest": "sha256:5b6a5d761c468c589e277b7ca98067550dc7c3ad786f1b4e56af02ca7de56016",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.5/SHA256SUMS.txt"
+        }
+      ],
+      "tag_ref_sha": "aef83a683af66b4893d7e38d7ca910cf26831322",
+      "asset_identities_unchanged": true
+    }
+  ],
+  "earlier_blocked_runs": [
+    {
+      "id": 38888513877,
+      "name": "Build and verify offline Windows EXE",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/38888513877",
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "e9e07cc0be5c7965eb19a78348756caf0637395b",
+      "run_attempt": 1,
+      "created_at": "2026-10-16T10:38:03Z",
+      "updated_at": "2026-10-16T10:45:19Z",
+      "diagnosis": "Windows compact toolbar and keypad field reveal; source fixed before release.",
+      "published": false
+    },
+    {
+      "id": 38888513841,
+      "name": "Build and verify macOS revision",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/38888513841",
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "e9e07cc0be5c7965eb19a78348756caf0637395b",
+      "run_attempt": 1,
+      "created_at": "2026-10-16T10:38:03Z",
+      "updated_at": "2026-10-16T10:55:07Z",
+      "diagnosis": "Intel per-interaction budget exceeded (6.473 seconds > 5); source fixed before release.",
+      "published": false
+    },
+    {
+      "id": 38910619788,
+      "name": "Build and verify macOS revision",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/38910619788",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "head_sha": "cd2fe8330aee584f948e152b4962c1a02d0c0ed3",
+      "run_attempt": 2,
+      "created_at": "2026-10-16T13:47:43Z",
+      "updated_at": "2026-10-16T14:15:36Z",
+      "diagnosis": "Attempt 1 reached 300-second process limit; attempt 2 cancelled when Mac-specific fixes superseded this source.",
+      "published": false
+    },
+    {
+      "id": 38914311396,
+      "name": "Build and verify macOS revision",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/38914311396",
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "8f8ff026489f7287d37bfe12d38caf69f6e19500",
+      "run_attempt": 1,
+      "created_at": "2026-10-16T14:15:32Z",
+      "updated_at": "2026-10-16T14:32:41Z",
+      "diagnosis": "Intel 300-second process limit; redundant localization and hidden plot rendering subsequently corrected.",
+      "published": false
+    },
+    {
+      "id": 38918602487,
+      "name": "Build and verify macOS revision",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/38918602487",
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "7498867e652c670e73dea5d1ae1d3f3eddf655a1",
+      "run_attempt": 1,
+      "created_at": "2026-10-16T14:47:20Z",
+      "updated_at": "2026-10-16T15:03:18Z",
+      "diagnosis": "Intel restore-workspace interaction 5.923 seconds > 5; inactive pages were unmapped and unchanged plots reused in final source.",
+      "published": false
+    }
+  ],
+  "packaging_retry": {
+    "workflow_run": 38922689461,
+    "source_commit": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91",
+    "failed_attempt": 1,
+    "successful_attempt": 2,
+    "reason": "hdiutil create returned Resource busy after the App, Launch Services and ZIP native tests passed. A fresh hosted builder reran the same source and passed all four native paths plus the Intel re-verification; no timing or integrity gates changed."
+  },
+  "native_evidence_summaries": [
+    "native/windows-2022/summary.json",
+    "native/windows-2025/summary.json",
+    "native/macos-arm64/summary.json",
+    "native/macos-intel/summary.json"
+  ],
+  "signature_status": {
+    "windows_authenticode": false,
+    "macos_ad_hoc_integrity": true,
+    "macos_developer_id": false,
+    "macos_notarized": false
+  },
+  "mac_native_delivery": {
+    "version": "5.6.0-mac.6",
+    "files": {
+      "Facility_Studio_V5_6_0_macOS_mac6_OneClick.zip": "b873aa486b0e0463e1adc30f93eb96ffbefa3fc66d58764363ed01f78ca70eee",
+      "Facility_Studio_V5_6_0_macOS_mac6.dmg": "fb5d4cf53856dcb22d735c5f67be6aebd86a4b03e1d70218720ebee1bbc4f4d7"
+    },
+    "native_gui_checks": 241,
+    "intel_verifier": {
+      "job": 117055776762,
+      "architecture": "x86_64",
+      "passed": true,
+      "package_sha256": "b873aa486b0e0463e1adc30f93eb96ffbefa3fc66d58764363ed01f78ca70eee",
+      "native_checks": 241
+    }
+  },
+  "native_artifacts": {
+    "windows": [
+      {
+        "id": 12050607905,
+        "sha256": "251e94f31c6146051bf0fddca11f8bf72de2e8ad0bfb3b362dd55c6947a4e518"
+      },
+      {
+        "id": 12051218361,
+        "sha256": "5f57a8e9cba1aa23e648c72ad4f0374773eafc9c14bc0ebf438f5edffc5a75f9"
+      }
+    ],
+    "macos_arm64": {
+      "id": 12056432271,
+      "sha256": "e1af265bb35124db2c697796714fcdc4232e4cb060ebda5ed26663dda079be01"
+    },
+    "macos_intel": {
+      "id": 12056727291,
+      "sha256": "283c7f3c4fc0bba668bb4dafdede6586a93c9d1c0b72c53db4cf82f67dec5031"
+    },
+    "macos_delivery": {
+      "id": 12056501783,
+      "sha256": "1ae32d327dfeea825cfb3841f0be208cf12326f61319974fa3b77ae6633df429"
+    }
+  },
+  "acceptance_limits": {
+    "initial_render_seconds": 20,
+    "interaction_seconds": 5,
+    "macos_process_seconds": 300,
+    "limits_changed": false
+  },
+  "public_download_verification": {
+    "checked_at": "2026-10-16T23:48:56.105457+00:00",
+    "method": "Fresh HTTPS downloads; independently streamed SHA256 and byte counts; compared with GitHub asset digests and published SHA256SUMS.txt",
+    "files": [
+      {
+        "tag": "v5.6.0-win.4",
+        "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+        "asset_id": 647548251,
+        "bytes": 41038610,
+        "sha256": "49a04498b8353f4ef1f0d202de48576af925502dff202c232d2356b02a48a802",
+        "public_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.4/Facility_Studio_V5_6_0_Windows_Offline.exe",
+        "verified": true
+      },
+      {
+        "tag": "v5.6.0-win.4",
+        "name": "SHA256SUMS.txt",
+        "asset_id": 647548343,
+        "bytes": 109,
+        "sha256": "11885f5889bf2498661ed4f9c4f4b1bf59c71d67eb4c3d3c34b331d43c9d9a44",
+        "public_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.4/SHA256SUMS.txt",
+        "verified": true
+      },
+      {
+        "tag": "v5.6.0-mac.6",
+        "name": "Facility_Studio_V5_6_0_macOS_mac6.dmg",
+        "asset_id": 647793779,
+        "bytes": 146283098,
+        "sha256": "fb5d4cf53856dcb22d735c5f67be6aebd86a4b03e1d70218720ebee1bbc4f4d7",
+        "public_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.6/Facility_Studio_V5_6_0_macOS_mac6.dmg",
+        "verified": true
+      },
+      {
+        "tag": "v5.6.0-mac.6",
+        "name": "SHA256SUMS.txt",
+        "asset_id": 647794060,
+        "bytes": 104,
+        "sha256": "03eb67e94c439b6469d1b87f156bb6f88894858668050ad13d46fae4cb6c7a5a",
+        "public_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.6/SHA256SUMS.txt",
+        "verified": true
+      }
+    ]
+  }
+}

@@ -5,9 +5,21 @@
 - `v560-dashboard-source-zh.png`（繁體中文）：SHA256 `38c2e46f6e5684d425527b3951fbb6677ac827ef27614daa252fbb436abd06fb`。
 - `v560-dashboard-source-en.png`（English）：SHA256 `9f355848884bcb84c05dfacbfa54ec150e6c549cd7d7abbef86bbf18b09ef01a`。
 
-2026-10-16 覆核後的真實原始碼畫面，於 Linux x86_64／Tk 8.6.14／1360×960 擷取。十項快算直接列於左側，使用合成潔淨室資料。未以此圖冒充原生 Windows／Mac 交付檔；首頁圖說亦標示來源。
+2026-10-16 覆核後 Windows 來源樹的真實畫面，於 Linux x86_64／Tk 8.6.14／1360×960 擷取。十項快算直接列於左側，使用合成潔淨室資料。未以此圖冒充原生 Windows／Mac 交付檔；首頁圖說亦標示來源。
 
-These are actual reviewed-source screenshots on Linux/Tk, with ten sidebar calculators and synthetic data. Native binary acceptance is recorded separately in the [integration review](../2026-10-16-gemini-integration-review.md).
+These are actual Windows-source screenshots on Linux/Tk, with ten sidebar calculators and synthetic data. Native binary acceptance is recorded separately in the [integration review](../2026-10-16-gemini-integration-review.md).
+
+## V5.6.0 win.4 原生驗收
+
+- `v560-win4-native-en.png`：SHA256 `931e915ed4d992eb5c401ed582b6ceebd315985bc90f62d141c9e5fa816d11f8`。
+
+來自 [Windows win.4 原生驗收](https://github.com/azx4121/facility-studio/actions/runs/38910619703)第二環境（Server 2025）standalone 的 `English_Electrical.png`，直接複製、未裁切或重畫；使用合成資料。背後視窗與桌面是驗收環境的一部分。受測與公開 EXE SHA256 均為 `49a04498b8353f4ef1f0d202de48576af925502dff202c232d2356b02a48a802`。
+
+## V5.6.0 mac.6 原生驗收
+
+- `v560-mac6-native-en.png`：SHA256 `5e1970608078d24d93ee0885b49217394ca7ba6b46057b380901cd56f76cfe31`。
+
+來自 [Mac mac.6 原生驗收](https://github.com/azx4121/facility-studio/actions/runs/38922689461)Apple Silicon 建置的 `English_Electrical.png`，直接複製、未裁切或重畫；使用合成資料。受測 Mac 來源為 `4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91`，與 Windows 來源／Linux 圖分開標示。
 
 ## 歷史 V5.6.0 win.3
 

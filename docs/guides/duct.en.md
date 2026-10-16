@@ -41,4 +41,4 @@ Inputs: [03](../examples/03-duct.json), [04](../examples/04-duct.json). [Origina
 
 Path checks add a Huebscher equal-friction round-duct option. The existing actual rectangular velocity plus hydraulic-diameter method remains the default. With side lengths a and b in the same units, `De = 1.30 * (a*b)^0.625 / (a+b)^0.25`. Straight-duct friction uses the equivalent round velocity `Ve = 4Q/(pi*De^2)`; do not combine actual rectangular velocity with De. Fitting losses retain the actual component velocity pressure. Roughness input is mm; both roughness and diameter are converted to metres before forming dimensionless epsilon/D.
 
-This source revision is not included in the existing binary downloads. Existing numerical examples and release evidence remain unchanged. See the [engineering audit](../2026-10-15-engineering-dashboard-audit.md).
+This revision is included in the Windows win.4 / Mac mac.6 downloads. Existing numerical examples and historical release evidence remain available. See the [integration review and native acceptance](../2026-10-16-gemini-integration-review.md#english).

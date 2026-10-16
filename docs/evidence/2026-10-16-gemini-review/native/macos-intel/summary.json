@@ -1,0 +1,33 @@
+{
+  "workflow_run": 38922689461,
+  "job": 117055776762,
+  "source_commit": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91",
+  "artifact_id": 12056727291,
+  "artifact_sha256": "283c7f3c4fc0bba668bb4dafdede6586a93c9d1c0b72c53db4cf82f67dec5031",
+  "native_acceptances": [
+    {
+      "source_member": "Mac_Acceptance.json",
+      "source_sha256": "eb5d4c44bc17992a69dcb04395e5d05738751e335973bd9e72a35d87410d18f2",
+      "evidence": "zip-extracted.json",
+      "sha256": "3a414cb0456c7cacec83a82df6acb040be9e435d70ebb1192b447b30a6fc9568",
+      "checks": 241,
+      "passed": true,
+      "interaction_count": 298,
+      "max_interaction_seconds": 2.607,
+      "interaction_limit_seconds": 5,
+      "process_limit_seconds": 300
+    },
+    {
+      "source_member": "DMG_Native_GUI.txt",
+      "source_sha256": "b8e3adb81cba2a1e991b426282eb8c70cbf00a7ae336f29dc1bf0b478a597327",
+      "evidence": "dmg-mounted.json",
+      "sha256": "d7d3554e8bf96092a9db370bca47588124609b4c0dd76da53210da6ee83f7a15",
+      "checks": 241,
+      "passed": true,
+      "interaction_count": 298,
+      "max_interaction_seconds": 1.548,
+      "interaction_limit_seconds": 5,
+      "process_limit_seconds": 300
+    }
+  ]
+}

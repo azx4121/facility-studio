@@ -14,7 +14,7 @@ No. The Windows EXE and macOS DMG include their runtime. Calculations, saved pro
 | Windows | Windows 10/11 on Intel/AMD x64 are support targets. Download and double-click the EXE; allow time for the bundled environment to unpack on first launch. | Windows Server 2022/2025 x64 |
 | macOS | Universal App for Apple Silicon / Intel, packaging target macOS 11+. Open the DMG, drag into Applications, then launch there. Eject the DMG after installation. | Apple Silicon / Intel macOS 15 |
 
-Windows ARM, 32-bit Windows, and other Mac OS versions/devices were not included in this acceptance. Enterprise policies may also restrict execution. [Full acceptance and download hashes](2026-10-13-v5.6-audit-stress.md)
+Windows ARM, 32-bit Windows, and other Mac OS versions/devices were not included in this acceptance. Enterprise policies may also restrict execution. [Full acceptance and download hashes](2026-10-16-gemini-integration-review.md#原生發布狀態)
 
 Close the old app before replacing the EXE/App. Saved projects and recovery data are retained.
 

@@ -1,0 +1,982 @@
+{
+  "environment": "Linux real Tk/Xvfb; not native Mac acceptance",
+  "passed": true,
+  "cross_platform_acceptance_tool_checks": 237,
+  "expected_unavailable_native_checks": [
+    "Apple native deep signature verification",
+    "Bundled CPython 3.13",
+    "Mac application Quit uses the document workflow",
+    "Tk Aqua native window system"
+  ],
+  "native_acceptance_was_correctly_reported_as_failed": true,
+  "checks": [
+    {
+      "name": "Apple native deep signature verification",
+      "passed": false,
+      "detail": "Traceback (most recent call last):\n  File \"/workspace/scratch/5438c14ec8d6/facility-studio/macos/macos/mac_selftest.py\", line 28, in check\n    value = action()\n            ^^^^^^^^\n  File \"/workspace/scratch/5438c14ec8d6/facility-studio/macos/macos/mac_selftest.py\", line 58, in native_signature_check\n    result = subprocess.run(\n             ^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py\", line 548, in run\n    with Popen(*popenargs, **kwargs) as process:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py\", line 1026, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py\", line 1955, in _execute_child\n    raise child_exception_type(errno_num, err_msg, err_filename)\nFileNotFoundError: [Errno 2] No such file or directory: '/usr/bin/codesign'\n"
+    },
+    {
+      "name": "Bundled CPython 3.13",
+      "passed": false,
+      "detail": "Traceback (most recent call last):\n  File \"/workspace/scratch/5438c14ec8d6/facility-studio/macos/macos/mac_selftest.py\", line 30, in check\n    raise AssertionError(name)\nAssertionError: Bundled CPython 3.13\n"
+    },
+    {
+      "name": "Native CPU supported",
+      "passed": true
+    },
+    {
+      "name": "NumPy native extension",
+      "passed": true
+    },
+    {
+      "name": "Pillow native extension",
+      "passed": true
+    },
+    {
+      "name": "Full engineering calculation",
+      "passed": true
+    },
+    {
+      "name": "100 distinct delivered-runtime stress scenarios, 20 repetitions",
+      "passed": true
+    },
+    {
+      "name": "V557 complete-output inactive-field regression",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: electrical",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: duct",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: gas",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: lighting",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: water",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: air",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: units",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: cleanroom",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: heat_loads",
+      "passed": true
+    },
+    {
+      "name": "Independent tool: pumps",
+      "passed": true
+    },
+    {
+      "name": "Export Excel template with Unicode path",
+      "passed": true
+    },
+    {
+      "name": "Read all seven system worksheets",
+      "passed": true
+    },
+    {
+      "name": "Disabled template does not fabricate demand totals",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: 電力",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: PCW",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: CDA",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: N2",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: EXHAUST",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: DI",
+      "passed": true
+    },
+    {
+      "name": "Active CSV equipment analysis: PV",
+      "passed": true
+    },
+    {
+      "name": "Tk Aqua native window system",
+      "passed": false,
+      "detail": "Traceback (most recent call last):\n  File \"/workspace/scratch/5438c14ec8d6/facility-studio/macos/macos/mac_selftest.py\", line 30, in check\n    raise AssertionError(name)\nAssertionError: Tk Aqua native window system\n"
+    },
+    {
+      "name": "Live GUI: electrical",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: duct",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: gas",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: lighting",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: water",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: air",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: units",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: cleanroom",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: heat_loads",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: pumps",
+      "passed": true
+    },
+    {
+      "name": "Equipment import window",
+      "passed": true
+    },
+    {
+      "name": "Mac application Quit uses the document workflow",
+      "passed": false,
+      "detail": "Traceback (most recent call last):\n  File \"/workspace/scratch/5438c14ec8d6/facility-studio/macos/macos/mac_selftest.py\", line 30, in check\n    raise AssertionError(name)\nAssertionError: Mac application Quit uses the document workflow\n"
+    },
+    {
+      "name": "Full workbench GUI calculates",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 0",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 1",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 2",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 3",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 4",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 5",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 6",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 7",
+      "passed": true
+    },
+    {
+      "name": "Workbench live page: 8",
+      "passed": true
+    },
+    {
+      "name": "English selector uses a native selection event",
+      "passed": true
+    },
+    {
+      "name": "English main-window title",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: electrical",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: duct",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: gas",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: lighting",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: water",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: air",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: units",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: cleanroom",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: heat_loads",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: pumps",
+      "passed": true
+    },
+    {
+      "name": "English choice maps to canonical electrical enum and actual factor",
+      "passed": true
+    },
+    {
+      "name": "Localized validation, blocked export and invalid-input round trip",
+      "passed": true
+    },
+    {
+      "name": "English volume-based lighting labels and live link",
+      "passed": true
+    },
+    {
+      "name": "English gas unit changes preserve actual flow",
+      "passed": true
+    },
+    {
+      "name": "Full workbench language sync, project hash and result parity",
+      "passed": true
+    },
+    {
+      "name": "Full workbench English labels and action captions",
+      "passed": true
+    },
+    {
+      "name": "Engineering quick tools, plot redraw and language round trip",
+      "passed": true
+    },
+    {
+      "name": "AHU stage controls, heat-source enums and balance parity",
+      "passed": true
+    },
+    {
+      "name": "AHU English guidance and visible captions",
+      "passed": true
+    },
+    {
+      "name": "Closed child windows do not break subsequent switching",
+      "passed": true
+    },
+    {
+      "name": "English Excel template loads all seven systems",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: Electrical",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: PCW",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: CDA",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: N2",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: EXHAUST",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: DI",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: PV",
+      "passed": true
+    },
+    {
+      "name": "English action buttons fit the visible desktop",
+      "passed": true
+    },
+    {
+      "name": "Navigation labels have readable native foreground/background contrast",
+      "passed": true
+    },
+    {
+      "name": "Hidden workbench defers idle plot rendering and preserves results",
+      "passed": true
+    },
+    {
+      "name": "Hidden plot export forces the current season without changing results",
+      "passed": true
+    },
+    {
+      "name": "Reopening the overview renders the latest deferred plot",
+      "passed": true
+    },
+    {
+      "name": "Simple tools retain visible Andy Huang credit",
+      "passed": true
+    },
+    {
+      "name": "Author credit and tutorial entry fit the minimum window",
+      "passed": true
+    },
+    {
+      "name": "Offline guide and both practice workspaces are bundled",
+      "passed": true
+    },
+    {
+      "name": "Simple tutorial entry opens a local file, not a website",
+      "passed": true
+    },
+    {
+      "name": "Workbench tutorial entry starts at the first project",
+      "passed": true
+    },
+    {
+      "name": "Tutorial follows the selected UI language",
+      "passed": true
+    },
+    {
+      "name": "Practice workspace loads into actual workbench and calculates",
+      "passed": true
+    },
+    {
+      "name": "Actual ninth Design report page is visible",
+      "passed": true
+    },
+    {
+      "name": "Tutorial restores the original unsaved state",
+      "passed": true
+    },
+    {
+      "name": "V556 basic task hides utility navigation but preserves inputs",
+      "passed": true
+    },
+    {
+      "name": "V556 climate inputs precede the psychrometric plot",
+      "passed": true
+    },
+    {
+      "name": "V556 basic adopted references are visible",
+      "passed": true
+    },
+    {
+      "name": "V556 diagnostics and model share the product version",
+      "passed": true
+    },
+    {
+      "name": "V556 quick-tool title uses the product version",
+      "passed": true
+    },
+    {
+      "name": "V556 quick-tool report uses the product version",
+      "passed": true
+    },
+    {
+      "name": "V556 printable report uses the product version",
+      "passed": true
+    },
+    {
+      "name": "V556 wrapped workbench actions at minimum size: zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V556 author remains visible in compact workbench: zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V556 wrapped workbench actions at minimum size: en",
+      "passed": true
+    },
+    {
+      "name": "V556 author remains visible in compact workbench: en",
+      "passed": true
+    },
+    {
+      "name": "V556 stale report retained immediately with exports disabled",
+      "passed": true
+    },
+    {
+      "name": "V556 invalid input retains only a clearly stale report",
+      "passed": true
+    },
+    {
+      "name": "V556 invalid input visibly marks the previous plot stale",
+      "passed": true
+    },
+    {
+      "name": "V556 corrected inputs restore current result and export",
+      "passed": true
+    },
+    {
+      "name": "V556 corrected plot clears its stale marker",
+      "passed": true
+    },
+    {
+      "name": "V556 gas basis switch preserves demand",
+      "passed": true
+    },
+    {
+      "name": "V556 gas reverse basis switch preserves input",
+      "passed": true
+    },
+    {
+      "name": "V556 dimension-only duct mode does not require pressure",
+      "passed": true
+    },
+    {
+      "name": "V556 pressure-check mode exposes required route data",
+      "passed": true
+    },
+    {
+      "name": "V556 AHU chart is a capacity-checked demand target",
+      "passed": true
+    },
+    {
+      "name": "V556 AHU stale table retained and return disabled",
+      "passed": true
+    },
+    {
+      "name": "V556 first actual AHU contribution is previewed and applied",
+      "passed": true
+    },
+    {
+      "name": "V556 repeated actual AHU return is idempotent",
+      "passed": true
+    },
+    {
+      "name": "V556 another actual AHU adds only its demand",
+      "passed": true
+    },
+    {
+      "name": "V556 editable workspace saves ledger and AHUs",
+      "passed": true
+    },
+    {
+      "name": "V556 duplicate creates a new project identity",
+      "passed": true
+    },
+    {
+      "name": "V556 duplicate retains both demand sources",
+      "passed": true
+    },
+    {
+      "name": "V556 Save-as cancellation preserves active path",
+      "passed": true
+    },
+    {
+      "name": "V556 equipment shows normalized percentage and enables explicit transfer",
+      "passed": true
+    },
+    {
+      "name": "V556 equipment transfer changes only selected supply group",
+      "passed": true
+    },
+    {
+      "name": "V556 transfer cancellation retains demand ledger",
+      "passed": true
+    },
+    {
+      "name": "V556 new transfer controls switch to English",
+      "passed": true
+    },
+    {
+      "name": "V556 invalid air input retains an explicitly stale point",
+      "passed": true
+    },
+    {
+      "name": "V556 beginner help follows selected quick tool",
+      "passed": true
+    },
+    {
+      "name": "V557 general HP load enables largest-motor field",
+      "passed": true
+    },
+    {
+      "name": "V557 continuous load ignores retained largest motor",
+      "passed": true
+    },
+    {
+      "name": "V557 reactivated invalid largest motor locates its field",
+      "passed": true
+    },
+    {
+      "name": "V557 recovery-only heater ignores inactive efficiency",
+      "passed": true
+    },
+    {
+      "name": "V557 steam-only report omits wash-pump sizing",
+      "passed": true
+    },
+    {
+      "name": "V557 closed-loop rationale is visible",
+      "passed": true
+    },
+    {
+      "name": "V558 standalone invalid flow locates field and locks export",
+      "passed": true
+    },
+    {
+      "name": "V558 actual Save writes explicitly marked draft",
+      "passed": true
+    },
+    {
+      "name": "V558 saved invalid draft satisfies standalone close guard",
+      "passed": true
+    },
+    {
+      "name": "V558 actual Load restores invalid draft without valid result",
+      "passed": true
+    },
+    {
+      "name": "V558 draft-save state is displayed in English",
+      "passed": true
+    },
+    {
+      "name": "V558 corrected standalone draft recalculates and unlocks export",
+      "passed": true
+    },
+    {
+      "name": "V558 corrected file is ordinary v4 AHU",
+      "passed": true
+    },
+    {
+      "name": "V558 overwritten draft retained as backup",
+      "passed": true
+    },
+    {
+      "name": "V558 declined draft overwrite preserves file and saved hash",
+      "passed": true
+    },
+    {
+      "name": "V558 draft workflow reports no unexpected dialog error",
+      "passed": true
+    },
+    {
+      "name": "V559 native main C1 location and export lock zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V559 native main C1 location and export lock en",
+      "passed": true
+    },
+    {
+      "name": "V559 native partial HVAC remains visible with complete export locked",
+      "passed": true
+    },
+    {
+      "name": "V559 delivered report API rejects incomplete domain result",
+      "passed": true
+    },
+    {
+      "name": "V559 native standalone C1 location and export lock zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V559 native standalone C1 location and export lock en",
+      "passed": true
+    },
+    {
+      "name": "V559 native standalone explicit C1 uses seasonal field",
+      "passed": true
+    },
+    {
+      "name": "V559 corrected C1 restores calculation and export",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/electrical",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/duct",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/gas",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/lighting",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/water",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/air",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/units",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/electrical",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/duct",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/gas",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/lighting",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/water",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/air",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/units",
+      "passed": true
+    },
+    {
+      "name": "V5510 native single insertion keypad",
+      "passed": true
+    },
+    {
+      "name": "V5510 native single insertion numlock",
+      "passed": true
+    },
+    {
+      "name": "V5510 native single insertion period",
+      "passed": true
+    },
+    {
+      "name": "V5510 native partial selection replacement",
+      "passed": true
+    },
+    {
+      "name": "V5510 native dedicated Delete unchanged",
+      "passed": true
+    },
+    {
+      "name": "V5510 native ttk state prevents input disabled",
+      "passed": true
+    },
+    {
+      "name": "V5510 native ttk state prevents input readonly",
+      "passed": true
+    },
+    {
+      "name": "V5510 native incomplete decimal retains draft and blocks export",
+      "passed": true
+    },
+    {
+      "name": "V5510 native workbench keypad",
+      "passed": true
+    },
+    {
+      "name": "V5510 native standalone AHU keypad",
+      "passed": true
+    },
+    {
+      "name": "V5510 native engineering quick tool keypad",
+      "passed": true
+    },
+    {
+      "name": "V5510 native newly created window entry",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/electrical",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/duct",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/gas",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/lighting",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/water",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/air",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/units",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/cleanroom",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/heat_loads",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/pumps",
+      "passed": true
+    },
+    {
+      "name": "V560 complete direct navigation zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 author visible zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 all factory gases in native combo zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 process gas requires entered velocity zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 process gas native calculation zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 reselected gas retains entered velocity zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 custom mixture native field zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 custom draft retained while inactive zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 native large single water pipe zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 workbench gas choices zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "Zero-demand native velocity draft disabled zh-Hant/1",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native velocity draft revalidated zh-Hant/1",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native valid velocity calculates zh-Hant/1",
+      "passed": true
+    },
+    {
+      "name": "Zero-demand native velocity draft disabled zh-Hant/2",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native velocity draft revalidated zh-Hant/2",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native valid velocity calculates zh-Hant/2",
+      "passed": true
+    },
+    {
+      "name": "Zero-demand native velocity draft disabled zh-Hant/3",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native velocity draft revalidated zh-Hant/3",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native valid velocity calculates zh-Hant/3",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/electrical",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/duct",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/gas",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/lighting",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/water",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/air",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/units",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/cleanroom",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/heat_loads",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/pumps",
+      "passed": true
+    },
+    {
+      "name": "V560 complete direct navigation en",
+      "passed": true
+    },
+    {
+      "name": "V560 author visible en",
+      "passed": true
+    },
+    {
+      "name": "V560 all factory gases in native combo en",
+      "passed": true
+    },
+    {
+      "name": "V560 process gas requires entered velocity en",
+      "passed": true
+    },
+    {
+      "name": "V560 process gas native calculation en",
+      "passed": true
+    },
+    {
+      "name": "V560 reselected gas retains entered velocity en",
+      "passed": true
+    },
+    {
+      "name": "V560 custom mixture native field en",
+      "passed": true
+    },
+    {
+      "name": "V560 custom draft retained while inactive en",
+      "passed": true
+    },
+    {
+      "name": "V560 native large single water pipe en",
+      "passed": true
+    },
+    {
+      "name": "V560 workbench gas choices en",
+      "passed": true
+    },
+    {
+      "name": "Zero-demand native velocity draft disabled en/1",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native velocity draft revalidated en/1",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native valid velocity calculates en/1",
+      "passed": true
+    },
+    {
+      "name": "Zero-demand native velocity draft disabled en/2",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native velocity draft revalidated en/2",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native valid velocity calculates en/2",
+      "passed": true
+    },
+    {
+      "name": "Zero-demand native velocity draft disabled en/3",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native velocity draft revalidated en/3",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native valid velocity calculates en/3",
+      "passed": true
+    },
+    {
+      "name": "Native UI heartbeat",
+      "passed": true
+    },
+    {
+      "name": "No native GUI callback exceptions",
+      "passed": true
+    },
+    {
+      "name": "Matplotlib TkAgg drawing",
+      "passed": true
+    }
+  ]
+}

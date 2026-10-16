@@ -70,8 +70,8 @@ Facility Studio does not provide BIM modeling, full 3D clash detection or automa
 
 See the [licensing examples](../../LICENSE_GUIDE.en.md) for permitted use. Report a case number, version, every value/unit and expected/actual result in [Issues](https://github.com/azx4121/facility-studio/issues). Remove client secrets.
 
-[FAQ](../faq.en.md) · [Native acceptance](../2026-10-12-v5.6-native.md) · [Historical records](../history/README.md#english)
+[FAQ](../faq.en.md) · [Native acceptance](../2026-10-16-gemini-integration-review.md#原生發布狀態) · [Historical records](../history/README.md#english)
 
-## Current source revision
+## Current release (win.4 / mac.6)
 
-The source tree adds cleanroom airflow, heat-load and water-pump calculators, explicit airflow topology, upstream transfers and HTML executive reports. These changes are not included in the existing binary downloads. See the [engineering audit](../2026-10-15-engineering-dashboard-audit.md) for model boundaries, compatibility and validation.
+This release adds cleanroom airflow, heat-load and water-pump calculators, explicit airflow topology, upstream transfers and HTML executive reports. These changes are included in the Windows win.4 / Mac mac.6 downloads. See the [integration review](../2026-10-16-gemini-integration-review.md#english) for model boundaries, compatibility and native acceptance.

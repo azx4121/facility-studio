@@ -1,5 +1,7 @@
 # Mac 自動驗收診斷修正、mac.5 發佈與驗證
 
+> 歷史驗證紀錄。2026-10-16 最新 win.4／mac.6 交付、下載與 SHA256 見[本次整合覆核](2026-10-16-gemini-integration-review.md#原生發布狀態)；下列原版測試及資產身分保留。
+
 mac.5 已於 2026-10-13（台灣時間）發佈。使用者明確同意後，[PR #6](https://github.com/azx4121/facility-studio/pull/6)已合併；[正式原生與發佈流程](https://github.com/azx4121/facility-studio/actions/runs/38418161842)在 Apple Silicon／Intel 全部通過，再新增公開修訂。Windows win.3 及 Mac mac.4 保留原檔。
 
 公開 DMG：[Facility_Studio_V5_6_0_macOS_mac5.dmg](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.5/Facility_Studio_V5_6_0_macOS_mac5.dmg)，141,828,767 bytes；SHA256：bcd0854fa7f30b78d09ceaf0e53d285e5c75e6363800fc18a046f875eca70e9d。實際公開檔測試提交：aef83a683af66b4893d7e38d7ca910cf26831322。公開下載、GitHub asset digest、公開 SHA256SUMS.txt 與流程測試檔的位元組已獨立核對一致。

@@ -25,8 +25,8 @@ Help is bundled: use **This tool's guide** in a quick calculator or **Beginner t
 | Your task | Documentation |
 | --- | --- |
 | Check inputs, formulas and worked results | [20 scenarios: 18 calculations and two scope controls](guides/README.en.md) |
-| Check V5.6.0 water sizes, ten direct calculators and 50 gases | [Current features and sources](2026-10-12-v5.6-expansion.md#english) |
-| Verify native tests, commits and SHA256 of the published EXE/DMG | [Windows delivery acceptance](2026-10-13-v5.6-audit-stress.md) · [Mac mac.5 fixes and delivery](2026-10-13-mac-diagnostics.md#english) |
+| Check V5.6.0 water sizes, ten direct calculators and 50 gases | [Current features and sources](2026-10-16-gemini-integration-review.md#english) |
+| Verify native tests, commits and SHA256 of the published EXE/DMG | [win.4 / mac.6 native delivery and SHA256](2026-10-16-gemini-integration-review.md#原生發布狀態) |
 | Run, build or test source | [Developer entry](development.md#english) |
 | Review previous fixes, tests and search experiments | [Historical records](history/README.md#english) |
 

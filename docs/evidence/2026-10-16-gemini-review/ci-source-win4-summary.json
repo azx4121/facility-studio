@@ -1,0 +1,93 @@
+{
+  "source_commit": "cd2fe8330aee584f948e152b4962c1a02d0c0ed3",
+  "workflow_run": 38910619930,
+  "workflow_url": "https://github.com/azx4121/facility-studio/actions/runs/38910619930",
+  "native_binary_acceptance": false,
+  "host": "GitHub Actions Linux / Python 3.13.16",
+  "sources": [
+    {
+      "platform": "windows",
+      "artifact_id": 12050012510,
+      "artifact_sha256": "0d2b6a39e9478bce5dd0cbe4cb80ebed92c8736b3c5105b419688081c8e82901",
+      "checks": [
+        {
+          "name": "all-fields-100.json",
+          "passed": true,
+          "count": 6977,
+          "scenarios": null,
+          "iterations": 100
+        },
+        {
+          "name": "boundaries.json",
+          "passed": true,
+          "count": 68,
+          "scenarios": null,
+          "iterations": null
+        },
+        {
+          "name": "gui-source-smoke.json",
+          "passed": true,
+          "count": 314,
+          "scenarios": null,
+          "iterations": null
+        },
+        {
+          "name": "independent-review.json",
+          "passed": true,
+          "count": 4432,
+          "scenarios": 100,
+          "iterations": null
+        },
+        {
+          "name": "reports.json",
+          "passed": true,
+          "count": 72,
+          "scenarios": null,
+          "iterations": null
+        }
+      ]
+    },
+    {
+      "platform": "macos",
+      "artifact_id": 12049389739,
+      "artifact_sha256": "a6c8fdb21444872ce675558d9cefcf57020e650110c22766e24b5769b56f7bcd",
+      "checks": [
+        {
+          "name": "all-fields-100.json",
+          "passed": true,
+          "count": 6977,
+          "scenarios": null,
+          "iterations": 100
+        },
+        {
+          "name": "boundaries.json",
+          "passed": true,
+          "count": 68,
+          "scenarios": null,
+          "iterations": null
+        },
+        {
+          "name": "gui-source-smoke.json",
+          "passed": true,
+          "count": 314,
+          "scenarios": null,
+          "iterations": null
+        },
+        {
+          "name": "independent-review.json",
+          "passed": true,
+          "count": 4432,
+          "scenarios": 100,
+          "iterations": null
+        },
+        {
+          "name": "reports.json",
+          "passed": true,
+          "count": 72,
+          "scenarios": null,
+          "iterations": null
+        }
+      ]
+    }
+  ]
+}

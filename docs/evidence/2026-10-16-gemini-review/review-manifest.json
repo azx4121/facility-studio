@@ -3,12 +3,19 @@
   "provided_archive_sha256": "4772790c3e8044897c0451e925989e85ce939fb734b4aeaaee6c614805770fdd",
   "provided_setup_sha256": "4c69f351c7a85491b3bff25475fd486df855df2b8d102bcf74a0854f27055945",
   "rebuilt_online_setup_sha256": "996d0aad5bc2ececfd7eac1112caa8b205c7f8b482070e98374eb69b1fd29a6e",
-  "offline_native_acceptance": "pending GitHub Actions; current online Setup verification checks archive integrity only",
+  "offline_native_acceptance": "passed; Windows Server 2022/2025 and Apple Silicon/Intel macOS 15; see native-release-verification.json",
   "source_gui_host": "Linux x86_64, CPython 3.12.14, Tk 8.6.14 (also tested Tk 9.0.4)",
   "standalone_build_entry": "windows/winrelease/build.py; no installed-Python fallback",
   "ci_followup": "Required q_total_basis in complete-report validation; both platforms passed the 90 resilience guards and full 100-case / 20-repeat stress rerun.",
   "packaged_documentation": "Windows and Mac bundled readmes match ten tools, 30-inch pipe references, schema12 and explicit catalogue U; native workflows rerun after these packaging-text corrections.",
   "bundled_tutorial": "Both languages retain 18 chapters; ten-tool, 30-inch and explicit photometric U notes corrected; all three embedded copies match; 20 scenarios / 87 checks per platform pass.",
   "native_followup": "Prevent V5.5 regression from rewriting shipped Default_Project.json; assert its schema consistency. Restore Mac simple-window Quit/Command-Return registration. Darken primary blue for readable navigation; preserve >=4.5 contrast gate.",
-  "layout_followup": "Wrap actions by actual available pixels and constrain workbench status labels. Cache unchanged scroll extents, responsive widths and KPI cards. Reset returns input/output viewports to top. Keypad acceptance explicitly reveals targets in both scroll-container types; focus and decimal assertions unchanged. Native Intel5-second gate retained."
+  "layout_followup": "Wrap actions by actual available pixels and constrain workbench status labels. Cache unchanged scroll extents, responsive widths and KPI cards. Reset returns input/output viewports to top. Keypad acceptance explicitly reveals targets in both scroll-container types; focus and decimal assertions unchanged. Native Intel5-second gate retained.",
+  "macos_localization_followup": "Mac-only source commit 8f8ff026489f7287d37bfe12d38caf69f6e19500 skips redundant label, canonical-combobox and report rewrites, and clamps actions to actual top-level client bounds. Fourteen electrical/GUI tests, 314 dashboard checks, 182 sequential UI checks, 4432 formula checks, 6977 all-field checks and frozen 100x20 stress passed locally. Native 5-second interaction / 300-second process limits remain unchanged; native status recorded separately.",
+  "macos_plot_followup": "Source 7498867e652c670e73dea5d1ae1d3f3eddf655a1 defers hidden/non-overview workbench plot construction and TkAgg idle rasterization; same-language choices retain preference persistence without notifying every window. Real draw-event/PNG/season regressions added. Local full self-test: 235 cross-platform checks pass, four unavailable native checks are correctly rejected on Linux. UI sequence 185, dashboard314, unit/UI14, formulas4432, fields6977, fixed100x20 stress18451 pass. Native verification remains a separate required gate.",
+  "macos_page_followup": "Source 4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91 unmaps inactive workbench pages, strengthens all nine native page checks to require exclusive visibility, and caches unchanged air-process plot artists by every plotted coordinate, pressure, language, season and figure geometry. Stale overlays remain during invalid drafts and are removed after correction; two real-artist regressions added. Full Linux self-test: 237 cross-platform checks pass with four native-only checks correctly unavailable. The derived sequential UI subset is187; native GUI count is241. Timers unchanged.",
+  "native_tested_source_commits": {
+    "windows": "cd2fe8330aee584f948e152b4962c1a02d0c0ed3",
+    "macos": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91"
+  }
 }

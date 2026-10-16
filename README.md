@@ -10,18 +10,18 @@ Facility Studio 是供廠務、機電與空調工程人員使用的桌面工具�
 
 ## 本版修訂重點（win.4／mac.6）
 
-本次來源新增**氣流路徑／ACH 基準、三項工程快算（共十項左側直接快算）、照明型錄 U 與室指數 K 檢核、跨工具帶入、KPI 儀表板、向量 SCADA 與 HTML／TXT 頂部「★ 核心工程設計量與設備選型總覽」**，並修正進階模式顯示互斥 FCU／RCU／MAU 欄位的問題。舊案自動移轉為 schema 12，保留既有獨立循環結果。公式成立條件與驗證界線見[工程審核與修訂說明](docs/2026-10-16-gemini-integration-review.md)；開發者可依[開發文件](docs/development.md)重現來源檢查。
+本版新增**氣流路徑／ACH 基準、三項工程快算（共十項左側直接快算）、照明型錄 U 與室指數 K 檢核、跨工具帶入、KPI 儀表板、向量 SCADA 與 HTML／TXT 頂部「★ 核心工程設計量與設備選型總覽」**，並修正進階模式顯示互斥 FCU／RCU／MAU 欄位的問題。舊案自動移轉為 schema 12，保留既有獨立循環結果。公式成立條件與驗證界線見[工程審核與修訂說明](docs/2026-10-16-gemini-integration-review.md)；開發者可依[開發文件](docs/development.md)重現來源檢查。
 
 ## 下載
 
-目前已發布：**V5.6.0 公開測試版**，Windows **win.3**／macOS **mac.5**。2026-10-16 修正後來源已完成本機測試，**win.4／mac.6 須通過原生驗收後才會發布**（前一版 [win.3](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.3)／[mac.5](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-mac.5) 仍保留於 Releases）。
+目前已發布：**V5.6.0 公開測試版**，Windows **win.4**／macOS **mac.6**。2026-10-16 已通過兩平台原生驗收並發布（前一版 [win.3](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.3)／[mac.5](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-mac.5) 保留於 Releases）。
 
-本次來源水管自動選型擴充至 **30 吋**；**十個快算直接放在左側**（含潔淨室風量、熱負荷初估、冰水泵浦）；氣體快算與工作台共同提供 **50 種廠務氣體＋自訂／混合氣**。有需求的新增氣體須填設計流速；完整工作台零需求時保留未使用草稿，避免阻擋整案計算。測試流程包含 **100 組不同案例，每組重算 20 次**；工程條件不足會明確拒絕，不等同程式故障。[工程審核與修訂說明](docs/2026-10-16-gemini-integration-review.md) · [功能、尺寸來源與範圍](docs/2026-10-12-v5.6-expansion.md) · [Windows 交付與 SHA256](docs/2026-10-13-v5.6-audit-stress.md) · [Mac 修正與交付](docs/2026-10-13-mac-diagnostics.md)
+本版水管自動選型擴充至 **30 吋**；**十個快算直接放在左側**（含潔淨室風量、熱負荷初估、冰水泵浦）；氣體快算與工作台共同提供 **50 種廠務氣體＋自訂／混合氣**。有需求的新增氣體須填設計流速；完整工作台零需求時保留未使用草稿，避免阻擋整案計算。測試流程包含 **100 組不同案例，每組重算 20 次**；工程條件不足會明確拒絕，不等同程式故障。[工程審核、尺寸來源與範圍](docs/2026-10-16-gemini-integration-review.md) · [本版原生交付與 SHA256](docs/2026-10-16-gemini-integration-review.md#原生發布狀態)
 
 | 平台 | 下載 | 開始使用 |
 | --- | --- | --- |
-| Windows 10／11，Intel／AMD x64 | [**下載 Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.3/Facility_Studio_V5_6_0_Windows_Offline.exe) | 儲存後雙擊開啟；首次啟動請等候內建環境展開 |
-| macOS，Apple Silicon／Intel | [**下載 macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.5/Facility_Studio_V5_6_0_macOS_mac5.dmg) | 開啟 DMG，將 Facility Studio 拖到「應用程式」，再從那裡開啟 |
+| Windows 10／11，Intel／AMD x64 | [**下載 Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.4/Facility_Studio_V5_6_0_Windows_Offline.exe) | 儲存後雙擊開啟；首次啟動請等候內建環境展開 |
+| macOS，Apple Silicon／Intel | [**下載 macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.6/Facility_Studio_V5_6_0_macOS_mac6.dmg) | 開啟 DMG，將 Facility Studio 拖到「應用程式」，再從那裡開啟 |
 
 每個平台下載上表的一個檔案即可，教學與設備範本已內建。[版本與 SHA256](https://github.com/azx4121/facility-studio/releases) · [相容性與首次開啟](docs/faq.md#compatibility)
 
@@ -60,7 +60,7 @@ Windows 尚無正式發行者簽章；Mac 尚未取得 Developer ID／Apple 公�
 - **資料：**計算、專案保存與設備表匯入在本機完成；自己的設備名稱與備註保留原文。
 - **授權：**允許公司內部工程工作、收費工程案件及計算書交付；軟體轉售、付費綁售或付費線上軟體服務需另行書面授權。[完整條款](LICENSE) · [授權案例](LICENSE_GUIDE.md)
 
-目前發布檔已通過 Windows Server 2022／2025 x64，以及 Apple Silicon／Intel macOS 15 原生驗收。Windows 10／11 與 macOS 11+ 為支援／封裝目標，其他版本、實機與企業政策仍需個別確認。[Windows 驗證](docs/2026-10-13-v5.6-audit-stress.md) · [Mac mac.5 驗證](docs/2026-10-13-mac-diagnostics.md)
+目前發布檔已通過 Windows Server 2022／2025 x64，以及 Apple Silicon／Intel macOS 15 原生驗收。Windows 10／11 與 macOS 11+ 為支援／封裝目標，其他版本、實機與企業政策仍需個別確認。[win.4／mac.6 驗證](docs/2026-10-16-gemini-integration-review.md#原生發布狀態)
 
 ## 文件與問題回報
 

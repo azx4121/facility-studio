@@ -1,0 +1,66 @@
+{
+  "workflow_run": 38910619703,
+  "job": 117011657697,
+  "source_commit": "cd2fe8330aee584f948e152b4962c1a02d0c0ed3",
+  "artifact_id": 12051218361,
+  "artifact_sha256": "5f57a8e9cba1aa23e648c72ad4f0374773eafc9c14bc0ebf438f5edffc5a75f9",
+  "native_acceptances": [
+    {
+      "source_member": "standalone/Windows_Acceptance.json",
+      "source_sha256": "af1a8939f59052b67eef574eaf2886dccedb3113832dc72fab336c7b2c90e417",
+      "evidence": "standalone.json",
+      "sha256": "73967bd26457673f05b00f7aa7a965bed99113d827b83407025550c7699caa97",
+      "delivery": {
+        "label": "standalone",
+        "gui_checks": 248,
+        "cli_tools": 10,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "49a04498b8353f4ef1f0d202de48576af925502dff202c232d2356b02a48a802",
+        "passed": true
+      },
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "passed": true
+    },
+    {
+      "source_member": "zip-extracted/Windows_Acceptance.json",
+      "source_sha256": "31a11e8352b6893da50c8280a8922aaa98dec155404e2d27b1db504c170ffa89",
+      "evidence": "zip-extracted.json",
+      "sha256": "f39cabeb15beee4901aa97d3b53650f918028fcd1a76573200e6f6dbc564be3a",
+      "delivery": {
+        "label": "zip-extracted",
+        "gui_checks": 248,
+        "cli_tools": 10,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "49a04498b8353f4ef1f0d202de48576af925502dff202c232d2356b02a48a802",
+        "passed": true
+      },
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "passed": true
+    },
+    {
+      "source_member": "unicode-executable-path/Windows_Acceptance.json",
+      "source_sha256": "2925009f3f22e5ef478df84ac32b7d1a706755358604dc76bf22be80527509c1",
+      "evidence": "unicode-executable-path.json",
+      "sha256": "907682fabfcc9304a65390582464e3f3e477010764f1952bb16cc975440354e2",
+      "delivery": {
+        "label": "unicode-executable-path",
+        "gui_checks": 248,
+        "cli_tools": 10,
+        "firewall_outbound_blocked": false,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "49a04498b8353f4ef1f0d202de48576af925502dff202c232d2356b02a48a802",
+        "passed": true
+      },
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "workflow_run": 38922689461,
+  "job": 117050904096,
+  "source_commit": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91",
+  "artifact_id": 12056432271,
+  "artifact_sha256": "e1af265bb35124db2c697796714fcdc4232e4cb060ebda5ed26663dda079be01",
+  "native_acceptances": [
+    {
+      "source_member": "_temp/mac560-build/evidence/Mac_Acceptance.json",
+      "source_sha256": "bbd9964b5d53b7e2ea579fe023b33145fcbd883908008e1e446e1b6fe30aca9c",
+      "evidence": "direct-app.json",
+      "sha256": "1c89f3e92d976ae9d50469a46fc028db916a0ea2fb58eef5038f000f5e7f286c",
+      "checks": 241,
+      "passed": true,
+      "interaction_count": 298,
+      "max_interaction_seconds": 1.196,
+      "interaction_limit_seconds": 5,
+      "process_limit_seconds": 300
+    },
+    {
+      "source_member": "_temp/mac560-build/evidence/Launch_Services_Acceptance.json",
+      "source_sha256": "8df86b31bbc551e2aa01fafd2adee0c818e75f2c2b0dfaa211553ac2b212de8d",
+      "evidence": "launch-services.json",
+      "sha256": "75c85f477c29989ae44da80df8e44aa47e5506c4bbaac8731ef3989294609450",
+      "checks": 241,
+      "passed": true,
+      "interaction_count": 298,
+      "max_interaction_seconds": 1.139,
+      "interaction_limit_seconds": 5,
+      "process_limit_seconds": 300
+    },
+    {
+      "source_member": "_temp/mac560-build/evidence/Delivered_GUI_Console.txt",
+      "source_sha256": "652e73bc6629946a0f8362e290bf3736daf2a814aa7031cd8710eee17c850644",
+      "evidence": "zip-extracted.json",
+      "sha256": "218f7a66660ced1cd4d0102fb51d8f4a6c080ddeb987fc07f04bf03e3850a5ea",
+      "checks": 241,
+      "passed": true,
+      "interaction_count": 298,
+      "max_interaction_seconds": 1.008,
+      "interaction_limit_seconds": 5,
+      "process_limit_seconds": 300
+    },
+    {
+      "source_member": "_temp/mac560-build/evidence/DMG_Native_GUI.txt",
+      "source_sha256": "05c20a03c0e61e2e44a186b9c34c4aec5c2ec19e420f03c6b91dcbc26ef0b18f",
+      "evidence": "dmg-mounted.json",
+      "sha256": "c41ce9a88d2472bba3d6eee7479e8d428abb64c1138c2667f2321c9d5988f48c",
+      "checks": 241,
+      "passed": true,
+      "interaction_count": 298,
+      "max_interaction_seconds": 0.98,
+      "interaction_limit_seconds": 5,
+      "process_limit_seconds": 300
+    }
+  ],
+  "build": {
+    "version": "5.6.0-mac.6",
+    "source_commit": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91",
+    "runtime_source_sha256": "aef324d08815257848e4b8080023611b41a4a88eb2cdd03e6ee1a71e5a983b65",
+    "font_patches": {
+      "arm64": {
+        "file": "matplotlib/font_manager.py",
+        "timeout_seconds": 5,
+        "original_sha256": "b52a4e959aa23547489f781008537ffa738b674f165c1aa3fee9cfea8d49c88c",
+        "patched_sha256": "fc5f9d84875521fe6a1ae458f776388dcd74905f8a3c99c1f23ee09fe3117a64",
+        "record_updated": true
+      },
+      "x86_64": {
+        "file": "matplotlib/font_manager.py",
+        "timeout_seconds": 5,
+        "original_sha256": "b52a4e959aa23547489f781008537ffa738b674f165c1aa3fee9cfea8d49c88c",
+        "patched_sha256": "fc5f9d84875521fe6a1ae458f776388dcd74905f8a3c99c1f23ee09fe3117a64",
+        "record_updated": true
+      }
+    },
+    "signing": {
+      "macho_files": 220,
+      "frameworks": 3,
+      "build_configuration_resources": [
+        "Contents/Frameworks/Python.framework/Versions/3.13/Frameworks/Tcl.framework/Versions/8.6/Resources/BuildConfiguration/tclConfig.sh",
+        "Contents/Frameworks/Python.framework/Versions/3.13/Frameworks/Tcl.framework/Versions/8.6/Resources/BuildConfiguration/tclooConfig.sh",
+        "Contents/Frameworks/Python.framework/Versions/3.13/Frameworks/Tk.framework/Versions/8.6/Resources/BuildConfiguration/tkConfig.sh"
+      ],
+      "apple_native_signature_verified": true,
+      "developer_id": false,
+      "notarized": false
+    },
+    "browser_quarantine_reproduced": false
+  }
+}

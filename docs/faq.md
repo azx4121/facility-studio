@@ -14,7 +14,7 @@
 | Windows | Windows 10／11、Intel／AMD x64 為支援目標。下載 EXE，雙擊開啟；第一次請等候內建環境展開。 | Windows Server 2022／2025 x64 |
 | macOS | Apple Silicon／Intel Universal App，封裝目標 macOS 11+。打開 DMG，拖到「應用程式」後開啟；安裝完成可退出 DMG。 | Apple Silicon／Intel macOS 15 |
 
-Windows ARM、32 位元 Windows，以及其他 Mac 系統版本與實機未納入這次驗收。企業管理政策也可能限制執行。[完整驗收與下載雜湊](2026-10-13-v5.6-audit-stress.md)
+Windows ARM、32 位元 Windows，以及其他 Mac 系統版本與實機未納入這次驗收。企業管理政策也可能限制執行。[完整驗收與下載雜湊](2026-10-16-gemini-integration-review.md#原生發布狀態)
 
 更新前先關閉舊程式，再替換 EXE／App；已另存的工程專案與復原資料保留。
 
@@ -28,7 +28,7 @@ Windows ARM、32 位元 Windows，以及其他 Mac 系統版本與實機未納�
 <a id="v560-tools"></a>
 ## 冷熱水、空氣線圖與單位換算在哪裡？水管與氣體範圍有更新嗎？
 
-本次 win.4／mac.6 來源的十個快算直接放在左側：電力配線、風管尺寸、CDA／特氣管徑、照明照度、冷熱水快算、空氣狀態／線圖、單位換算、潔淨室風量、熱負荷初估及冰水泵浦。
+win.4／mac.6 的十個快算直接放在左側：電力配線、風管尺寸、CDA／特氣管徑、照明照度、冷熱水快算、空氣狀態／線圖、單位換算、潔淨室風量、熱負荷初估及冰水泵浦。
 
 水管自動表可選至 30 吋，先選符合採用水速的單管，仍不足才並聯；新增 14–30 吋使用 STD 參考壁厚，實供規格不同須核對實際內徑。[水量與管徑指南](guides/water.md)
 

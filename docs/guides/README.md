@@ -72,8 +72,8 @@ python windows/Facility_Studio_V5_5.py --tool air --tool-input docs/examples/12-
 
 使用範圍見[授權案例](../../LICENSE_GUIDE.md)。遇到問題，請附情境編號、版本、完整輸入與單位、預期／實際結果到 [Issues](https://github.com/azx4121/facility-studio/issues)；移除業主機密。
 
-[常見問題](../faq.md) · [原生驗收](../2026-10-12-v5.6-native.md) · [歷史紀錄](../history/README.md)
+[常見問題](../faq.md) · [原生驗收](../2026-10-16-gemini-integration-review.md#原生發布狀態) · [歷史紀錄](../history/README.md)
 
-## 目前來源修訂
+## 目前版本（win.4／mac.6）
 
-原始碼新增潔淨室風量、熱負荷與冰水泵浦快算，並提供明確氣流路徑、上游帶入與 HTML 設計總覽。這些變更尚未包含在既有下載檔中；模型邊界、相容性與驗證見[完整工程審核](../2026-10-15-engineering-dashboard-audit.md)。
+本版新增潔淨室風量、熱負荷與冰水泵浦快算，並提供明確氣流路徑、上游帶入與 HTML 設計總覽。這些變更已包含在 Windows win.4／Mac mac.6 下載檔中；模型邊界、相容性與原生驗收見[整合覆核](../2026-10-16-gemini-integration-review.md)。

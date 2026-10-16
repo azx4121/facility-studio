@@ -1,0 +1,93 @@
+{
+  "workflow_run": 38910619703,
+  "job": 117005229466,
+  "source_commit": "cd2fe8330aee584f948e152b4962c1a02d0c0ed3",
+  "artifact_id": 12050607905,
+  "artifact_sha256": "251e94f31c6146051bf0fddca11f8bf72de2e8ad0bfb3b362dd55c6947a4e518",
+  "build": {
+    "revision": "5.6.0-win.4",
+    "source_commit": "cd2fe8330aee584f948e152b4962c1a02d0c0ed3",
+    "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-2022Server-10.0.20348-SP0",
+    "packages": {
+      "altgraph": "0.17.5",
+      "contourpy": "1.4.0",
+      "cycler": "0.12.1",
+      "fonttools": "4.66.1",
+      "kiwisolver": "1.5.1",
+      "matplotlib": "3.10.9",
+      "numpy": "2.3.3",
+      "packaging": "26.3",
+      "pefile": "2024.8.26",
+      "pillow": "12.3.0",
+      "pip": "26.2.1",
+      "pyinstaller": "6.22.3",
+      "pyinstaller-hooks-contrib": "2026.8",
+      "pyparsing": "3.3.3",
+      "python-dateutil": "2.9.0.post0",
+      "pywin32-ctypes": "0.2.3",
+      "setuptools": "84.0.0",
+      "six": "1.17.0"
+    },
+    "exe_sha256": "49a04498b8353f4ef1f0d202de48576af925502dff202c232d2356b02a48a802",
+    "exe_bytes": 41038610,
+    "build_only_internet": true,
+    "runtime_requires_python_installation": false
+  },
+  "native_acceptances": [
+    {
+      "source_member": "_temp/windows-offline/evidence/native/standalone/Windows_Acceptance.json",
+      "source_sha256": "27da41a15f3dae5d68f6b6a94043daf82650acf1e1781c92c033f3b4393ec8a4",
+      "evidence": "standalone.json",
+      "sha256": "ee815f44ed97d2adcaa93e93f5fae73d23622b15db59e881c95e34793e555d6f",
+      "delivery": {
+        "label": "standalone",
+        "gui_checks": 248,
+        "cli_tools": 10,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "49a04498b8353f4ef1f0d202de48576af925502dff202c232d2356b02a48a802",
+        "passed": true
+      },
+      "passed": true
+    },
+    {
+      "source_member": "_temp/windows-offline/evidence/native/zip-extracted/Windows_Acceptance.json",
+      "source_sha256": "38c39a0f22d186b9f3e1bbc6e48a75024335bbb55458d3af9292d07b5862790c",
+      "evidence": "zip-extracted.json",
+      "sha256": "60ab783bc06e9d15f20e1941591480aa74a713cdd13da8336d3152b4bbd37bef",
+      "delivery": {
+        "label": "zip-extracted",
+        "gui_checks": 248,
+        "cli_tools": 10,
+        "firewall_outbound_blocked": true,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "49a04498b8353f4ef1f0d202de48576af925502dff202c232d2356b02a48a802",
+        "passed": true
+      },
+      "passed": true
+    },
+    {
+      "source_member": "_temp/windows-offline/evidence/native/unicode-executable-path/Windows_Acceptance.json",
+      "source_sha256": "95c723f0c709b0543ddad32eff6aa3e8f529ac816beddaee822fb075310dd253",
+      "evidence": "unicode-executable-path.json",
+      "sha256": "52ec251345a9641ebc7f88b1f25b1fdd70b8c75706b767767583ec9f695bd2a9",
+      "delivery": {
+        "label": "unicode-executable-path",
+        "gui_checks": 248,
+        "cli_tools": 10,
+        "firewall_outbound_blocked": false,
+        "network_audit_blocked": true,
+        "python_on_path": false,
+        "empty_working_directory": true,
+        "exe_sha256": "49a04498b8353f4ef1f0d202de48576af925502dff202c232d2356b02a48a802",
+        "passed": true
+      },
+      "passed": true
+    }
+  ]
+}

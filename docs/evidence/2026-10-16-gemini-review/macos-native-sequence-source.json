@@ -3,6 +3,9 @@
   "host": "Linux/Tk8.6.14",
   "native_binary_acceptance": false,
   "source_platform": "macos",
+  "source_commit": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91",
+  "derived_from": "macos-host-selftest-source.json",
+  "check_count": 187,
   "checks": [
     {
       "name": "English selector uses a native selection event",
@@ -133,6 +136,18 @@
       "passed": true
     },
     {
+      "name": "Hidden workbench defers idle plot rendering and preserves results",
+      "passed": true
+    },
+    {
+      "name": "Hidden plot export forces the current season without changing results",
+      "passed": true
+    },
+    {
+      "name": "Reopening the overview renders the latest deferred plot",
+      "passed": true
+    },
+    {
       "name": "Simple tools retain visible Andy Huang credit",
       "passed": true
     },
@@ -221,7 +236,15 @@
       "passed": true
     },
     {
+      "name": "V556 invalid input visibly marks the previous plot stale",
+      "passed": true
+    },
+    {
       "name": "V556 corrected inputs restore current result and export",
+      "passed": true
+    },
+    {
+      "name": "V556 corrected plot clears its stale marker",
       "passed": true
     },
     {
@@ -732,7 +755,5 @@
       "name": "Positive-demand native valid velocity calculates en/3",
       "passed": true
     }
-  ],
-  "callback_errors": [],
-  "max_event_seconds": 0.8270834700000478
+  ]
 }

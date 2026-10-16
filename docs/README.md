@@ -26,7 +26,7 @@
 | --- | --- |
 | 查看操作條件、公式與對照結果 | [20 個情境：18 個計算案例與 2 個範圍對照](guides/README.md) |
 | 了解目前 30 吋水管、十個直接快算與 50 種氣體 | [本版功能與覆核](2026-10-16-gemini-integration-review.md) |
-| 核對公開 EXE／DMG 的原生測試、提交與 SHA256 | [Windows 交付驗收](2026-10-13-v5.6-audit-stress.md) · [Mac mac.5 修正與交付](2026-10-13-mac-diagnostics.md) |
+| 核對公開 EXE／DMG 的原生測試、提交與 SHA256 | [win.4／mac.6 原生驗收與 SHA256](2026-10-16-gemini-integration-review.md#原生發布狀態) |
 | 從原始碼執行、建置或測試 | [開發者入口](development.md) |
 | 查以前版本的修訂、驗證與搜尋實驗 | [歷史紀錄](history/README.md) |
 

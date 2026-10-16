@@ -1,7 +1,12 @@
 {
-  "source_platform": "macos",
+  "kind": "source-sequential-language-subset",
   "host": "Linux/Tk8.6.14",
   "native_binary_acceptance": false,
+  "source_platform": "macos",
+  "source_commit": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91",
+  "passed": true,
+  "check_count": 35,
+  "derived_from": "macos-native-sequence-source.json",
   "checks": [
     {
       "name": "English selector uses a native selection event",
@@ -130,9 +135,18 @@
     {
       "name": "Navigation labels have readable native foreground/background contrast",
       "passed": true
+    },
+    {
+      "name": "Hidden workbench defers idle plot rendering and preserves results",
+      "passed": true
+    },
+    {
+      "name": "Hidden plot export forces the current season without changing results",
+      "passed": true
+    },
+    {
+      "name": "Reopening the overview renders the latest deferred plot",
+      "passed": true
     }
-  ],
-  "callback_errors": [],
-  "passed": true,
-  "extracted_from": "macos-native-sequence-source.json"
+  ]
 }
