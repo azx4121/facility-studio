@@ -99,10 +99,16 @@ def run(root, app, main, check, pump, output=None):
             check("V556 stale report retained immediately with exports disabled", lambda: main.result is None and main.last_good_result["hash"] == last_hash and main.export_button.instate(["disabled"]) and "待重算" in main.text.get("1.0", "end"))
             main.recalculate()
             check("V556 invalid input retains only a clearly stale report", lambda: main.result is None and main.last_good_result is not None and "不能匯出" in main.text.get("1.0", "end"))
+            if hasattr(main, "plot"):
+                check("V556 invalid input visibly marks the previous plot stale",
+                      lambda: getattr(main, "stale_plot_label", None) in main.ax.texts)
             main.variables["oa_t"].set("35")
             main.recalculate()
             pump()
             check("V556 corrected inputs restore current result and export", lambda: main.ensure_result() and main.export_button.instate(["!disabled"]))
+            if hasattr(main, "plot"):
+                check("V556 corrected plot clears its stale marker",
+                      lambda: getattr(main, "stale_plot_label", None) not in main.ax.texts)
 
             gas = app.pages["gas"]
             app.show_tool("gas")

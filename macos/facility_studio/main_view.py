@@ -1,4 +1,5 @@
 from .localized_plot import translated_axes
+from . import i18n
 from pathlib import Path
 from .localized_tk import tk
 try:
@@ -644,6 +645,11 @@ class MainView:
         if n not in (0, 1, 2, 8) and hasattr(self, "task_scope"):
             self.task_scope.set("全部工程分頁")
         self.current = n
+        for index, page in self.pages.items():
+            if index == n:
+                page.grid()
+            else:
+                page.grid_remove()
         self.pages[n].tkraise()
         self.title.config(text=PAGES[n])
         self.subtitle.config(text="基本先填現場條件｜F5 重新計算")
@@ -881,6 +887,22 @@ class MainView:
             ("HT", c["heat_state"]),
             ("SA", c["supply"]),
         ]
+        # Utility edits and repeated validation often leave every plotted point
+        # unchanged. Keep the existing artists and remove only a stale marker.
+        key = (i18n.language(), self.season.get(), p, self.fig.dpi,
+               tuple(map(float, self.fig.get_size_inches())),
+               tuple((name, state["t"], state["w"]) for name, state in nodes))
+        if key == getattr(self, "_plot_key", None):
+            stale = getattr(self, "stale_plot_label", None)
+            removed = stale is not None and stale in self.ax.texts
+            if removed:
+                stale.remove()
+            self.stale_plot_label = None
+            if removed:
+                self.queue_plot()
+            else:
+                self.plot.draw_pending()
+            return
         lo = min((x["t"] for _, x in nodes)) - 5
         hi = max((x["t"] for _, x in nodes)) + 5
         ymax = max((x["w"] * 1000 for _, x in nodes)) * 1.22 + 1
@@ -948,6 +970,8 @@ class MainView:
         translated_axes(self.ax).grid(alpha=0.15)
         self.fig.tight_layout()
         annotate_states(self.ax, clusters)
+        self._plot_key = key
+        self.stale_plot_label = None
         self.queue_plot()
 
     def _plot_mapped(self, event):

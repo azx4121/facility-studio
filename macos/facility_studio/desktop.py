@@ -674,6 +674,7 @@ class DesktopApp(SessionController, MainView):
         for k in PD_KEYS:
             self.grid.item(k, values=("—", "—", "—", "—"))
         if HAS_PLOT:
+            self._plot_key = None
             self.ax.clear()
             self.ax.text(
                 0.5,
@@ -885,6 +886,7 @@ class DesktopApp(SessionController, MainView):
             for key in PD_KEYS:
                 self.grid.item(key, values=("—", "—", "—", "—"))
             if HAS_PLOT and not getattr(self, "last_good_result", None):
+                self._plot_key = None
                 self.ax.clear()
                 self.ax.text(
                     0.5,
@@ -909,7 +911,6 @@ class DesktopApp(SessionController, MainView):
         self.decorate_receipts(r)
         self.result = r
         self.last_good_result = r
-        self.stale_plot_label = None
         self.update_visibility()
         self.status.config(
             text="檢核完成｜"

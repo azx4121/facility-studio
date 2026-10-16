@@ -260,7 +260,8 @@ def run():
             def open_page(index=page):
                 workbench.show_page(index)
                 pump_gui()
-                return workbench.pages[index].winfo_ismapped() == 1
+                return all(bool(widget.winfo_ismapped()) == (number == index)
+                           for number, widget in workbench.pages.items())
 
             check(f"Workbench live page: {page}", open_page)
         from facility_studio.language_acceptance import run as check_languages
