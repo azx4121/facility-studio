@@ -50,7 +50,7 @@ class Theme:
     CARD = "#FFFFFF"
     BORDER = "#CBD5E1"
     NAV = "#0F172A"
-    PRIMARY = "#0284C7"
+    PRIMARY = "#0369A1"
     TEXT = "#334155"
     MUTED = "#64748B"
     SUCCESS = "#16A34A"

@@ -39,12 +39,13 @@ def rejected(name, callback):
 manifest = bootstrap.verify_payload(ROOT / "installer")
 check("01_real_payload_manifest", bool(manifest))
 payload = ROOT / "installer/payload"
+mismatches = [relative for relative in manifest
+              if (ROOT / relative).read_bytes() != (payload / relative).read_bytes()]
+if mismatches:
+    print("Staged payload differs from release sources:", ", ".join(mismatches), flush=True)
 check(
     "02_payload_matches_release_sources",
-    all(
-        (ROOT / relative).read_bytes() == (payload / relative).read_bytes()
-        for relative in manifest
-    ),
+    not mismatches,
 )
 modules = ROOT / "facility_studio"
 missing = []

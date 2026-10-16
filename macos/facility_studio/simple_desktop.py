@@ -588,6 +588,10 @@ class SimpleToolsApp:
         root.bind("<Return>", lambda event: self.active_page()._enter())
         root.bind("<Configure>", self.resize, add="+")
         root.protocol("WM_DELETE_WINDOW", self.close)
+        from .platform_support import bind_mac_shortcuts, install_mac_quit
+
+        bind_mac_shortcuts(root, calculate=lambda: self.active_page().calculate(True))
+        install_mac_quit(root, self.close)
         self.show_tool("electrical")
 
     def wheel(self, event):

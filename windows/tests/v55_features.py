@@ -212,12 +212,16 @@ proc = subprocess.run(
     text=True,
 )
 check("headless_engine", proc.returncode, 0)
+check("shipped_default_matches_schema",
+      json.loads((ROOT / "Default_Project.json").read_text(encoding="utf-8")) == default_project(),
+      True)
 (ROOT / "evidence/V55_Feature_Checks.json").write_text(
     json.dumps(dict(cases=cases, checks=checks), ensure_ascii=False, indent=2),
     encoding="utf-8",
 )
-(ROOT / "Default_Project.json").write_text(
-    json.dumps(default_project(), ensure_ascii=False, indent=2), encoding="utf-8"
+(ROOT / "evidence/Default_Project.generated.json").write_text(
+    json.dumps(default_project(), ensure_ascii=False, indent=2),
+    encoding="utf-8", newline="\n",
 )
 (ROOT / "evidence/Design_Summary.html").write_text(summary_html(r), encoding="utf-8")
 print(f"{len(cases)} new numerical conditions / {len(checks)} feature checks passed")

@@ -31,7 +31,7 @@
       "html_report.py": "767022507e7ac676490d9fbf99385b70847c3ae955bf94907905bd1ad3d9705f",
       "i18n.py": "8a8b24f71fd0dca4e4937186c0418afd7102338ef8c774b996f4465a8e68a7d8",
       "inactive_acceptance.py": "283d75dde46f9fbc632d194a751f02aebddc5da7fa2edba3376db4bb13bce271",
-      "industrial_theme.py": "214fb1ab18b66a8f8edf82c31340433ff9d03daec82646ec96313040101931be",
+      "industrial_theme.py": "5b26c8b21a76ee14c132f19fd1932c0e5c59b5793f3a12fd400ce635ac7fbb5f",
       "json_io.py": "3d214c49a83f468dec8dfe6d80f03881854321bb9c6e422c48f1f1c8ee4864ea",
       "keypad_acceptance.py": "762dc7de3391edc72c904a610352d7a0873c735366590f470be18acecef8d2c0",
       "language_acceptance.py": "b45dbdc404cb0e9a0948c0ec7de69695ef2405fa2f8cd6c2e8da8291cee3e746",
@@ -69,7 +69,7 @@
     "source_platform": "windows",
     "host": "Linux-6.18.44-x86_64-with-glibc2.39",
     "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
-    "finished_utc": "2026-10-16T10:16:08.582091+00:00",
+    "finished_utc": "2026-10-16T10:33:22.240271+00:00",
     "scenario_count": 100,
     "original_manifest_sha256": "19faa50b7a81709158b6296ae70125d50391f1997209be1613aca12ea2e5271c",
     "distinct_physical_input_count": 100,
@@ -92,16 +92,16 @@
     },
     "partial_report_api_probe_count": 11,
     "partial_report_api_guard_failures": 0,
-    "seconds": 10.863950738000312,
+    "seconds": 12.438059719999728,
     "latency_ms": {
-      "median": 2.696768000078009,
-      "p95": 4.157088000283693,
-      "max": 12.69353299994691
+      "median": 3.1626080003661627,
+      "p95": 4.691758999797457,
+      "max": 84.33864600010565
     },
     "rss_peak_mib": 113.80078125,
     "scope": "Linux headless windows source stress test; both seasons; no native binary or GUI execution"
   },
   "failed_checks": [],
   "full_check_records_file": "windows-cleanroom100-schema12-repeat20.json.gz",
-  "full_check_records_sha256": "fd1e339fa6c59a1f99f52e99bef3f1dec808ca65281d0ce32836c3fc7b740c35"
+  "full_check_records_sha256": "7cd2a23cb20c9c47a521c0b1df63cbca207f70b965513c89f92c69ede2cd85ad"
 }

@@ -132,6 +132,24 @@ def _simple_checks(check, errors, directory):
             for key, widget in page.widgets.items():
                 if widget.winfo_ismapped() and widget.winfo_manager() == "grid":
                     check(tool + "/" + key + " fits its row", widget.winfo_x() >= 0 and widget.winfo_x() + widget.winfo_width() <= widget.master.winfo_width() + 2)
+        # Measure rendered style colors for both idle and hovered navigation.
+        # The selected button uses a separate style and must remain legible too.
+        from tkinter import ttk
+        style = ttk.Style(root)
+
+        def luminance(color):
+            rgb = [value / 65535 for value in root.winfo_rgb(color)]
+            linear = [v / 12.92 if v <= .04045 else ((v + .055) / 1.055) ** 2.4
+                      for v in rgb]
+            return sum(v * weight for v, weight in zip(linear, (.2126, .7152, .0722)))
+
+        for tool, button in app.nav.items():
+            for state in ((), ("active",)):
+                name = button.cget("style")
+                light, dark = sorted((luminance(style.lookup(name, color, state=state))
+                                      for color in ("foreground", "background")), reverse=True)
+                check(tool + "/" + ("hover" if state else "idle") + " navigation contrast",
+                      (light + .05) / (dark + .05) >= 4.5)
         app.show_tool("cleanroom")
         room = app.active_page()
         app.show_tool("heat_loads")

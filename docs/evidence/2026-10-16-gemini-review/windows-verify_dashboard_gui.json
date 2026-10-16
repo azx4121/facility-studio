@@ -6,7 +6,7 @@
   "tk_patchlevel": "8.6.14",
   "native_binary_acceptance": false,
   "passed": true,
-  "check_count": 258,
+  "check_count": 278,
   "checks": [
     {
       "name": "基本模式/MAU/en_fcu_cmh grid visibility",
@@ -862,6 +862,86 @@
     },
     {
       "name": "pumps/eta_motor fits its row",
+      "passed": true
+    },
+    {
+      "name": "electrical/idle navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "electrical/hover navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "duct/idle navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "duct/hover navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "gas/idle navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "gas/hover navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "lighting/idle navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "lighting/hover navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "water/idle navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "water/hover navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "air/idle navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "air/hover navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "units/idle navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "units/hover navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "cleanroom/idle navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "cleanroom/hover navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "heat_loads/idle navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "heat_loads/hover navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "pumps/idle navigation contrast",
+      "passed": true
+    },
+    {
+      "name": "pumps/hover navigation contrast",
       "passed": true
     },
     {

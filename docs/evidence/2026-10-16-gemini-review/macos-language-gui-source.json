@@ -1,0 +1,137 @@
+{
+  "source_platform": "macos",
+  "host": "Linux/Tk8.6.14",
+  "native_binary_acceptance": false,
+  "checks": [
+    {
+      "name": "English selector uses a native selection event",
+      "passed": true
+    },
+    {
+      "name": "English main-window title",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: electrical",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: duct",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: gas",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: lighting",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: water",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: air",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: units",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: cleanroom",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: heat_loads",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: pumps",
+      "passed": true
+    },
+    {
+      "name": "English choice maps to canonical electrical enum and actual factor",
+      "passed": true
+    },
+    {
+      "name": "Localized validation, blocked export and invalid-input round trip",
+      "passed": true
+    },
+    {
+      "name": "English volume-based lighting labels and live link",
+      "passed": true
+    },
+    {
+      "name": "English gas unit changes preserve actual flow",
+      "passed": true
+    },
+    {
+      "name": "Full workbench language sync, project hash and result parity",
+      "passed": true
+    },
+    {
+      "name": "Full workbench English labels and action captions",
+      "passed": true
+    },
+    {
+      "name": "Engineering quick tools, plot redraw and language round trip",
+      "passed": true
+    },
+    {
+      "name": "AHU stage controls, heat-source enums and balance parity",
+      "passed": true
+    },
+    {
+      "name": "AHU English guidance and visible captions",
+      "passed": true
+    },
+    {
+      "name": "Closed child windows do not break subsequent switching",
+      "passed": true
+    },
+    {
+      "name": "English Excel template loads all seven systems",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: Electrical",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: PCW",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: CDA",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: N2",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: EXHAUST",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: DI",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: PV",
+      "passed": true
+    },
+    {
+      "name": "English action buttons fit the visible desktop",
+      "passed": true
+    },
+    {
+      "name": "Navigation labels have readable native foreground/background contrast",
+      "passed": true
+    }
+  ],
+  "callback_errors": [],
+  "passed": true
+}
