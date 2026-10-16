@@ -292,7 +292,7 @@ class DesktopApp(SessionController, MainView):
         )
         if path:
             try:
-                self.draw()
+                self.draw(force=True)
                 self.fig.savefig(path, dpi=180)
             except Exception as e:
                 messagebox.showerror("圖形匯出失敗", str(e), parent=self.root)
@@ -661,7 +661,7 @@ class DesktopApp(SessionController, MainView):
                 if old is not None and old in self.ax.texts:
                     old.remove()
                 self.stale_plot_label = self.ax.text(.5, .5, "上次有效結果｜待重算", transform=self.ax.transAxes, ha="center", va="center", fontsize=15, color="#b45309", bbox=dict(facecolor="white", alpha=.9))
-                self.plot.draw_idle()
+                self.queue_plot()
             self.interlocks()
             self.after_id = self.root.after(650, self.recalculate)
             return
@@ -682,7 +682,7 @@ class DesktopApp(SessionController, MainView):
                 ha="center",
                 transform=self.ax.transAxes,
             )
-            self.plot.draw_idle()
+            self.queue_plot()
         self.interlocks()
         self.after_id = self.root.after(650, self.recalculate)
 
@@ -893,7 +893,7 @@ class DesktopApp(SessionController, MainView):
                     ha="center",
                     transform=self.ax.transAxes,
                 )
-                self.plot.draw_idle()
+                self.queue_plot()
             field = getattr(e, "field_name", None)
             self.bad_key = field if field in self.widgets else None
             self.bad_pd = field[3:] if field and field.startswith("PD:") else None

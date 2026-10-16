@@ -203,6 +203,7 @@ class PowerUnitWidgets(unittest.TestCase):
             for language in ("en", "zh-Hant") * 3:
                 i18n.set_language(language, persist=False)
                 for _ in range(30):
+                    i18n.set_language(language, persist=False)
                     source.set("一般設備")
                     choice.set("一般設備")
                     label.configure(text="一般設備")

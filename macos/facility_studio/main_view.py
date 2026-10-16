@@ -23,7 +23,7 @@ from .utils import dewpoint, state_trh
 
 try:
     from matplotlib.figure import Figure
-    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+    from .visible_plot import FigureCanvasTkAgg
     from matplotlib import font_manager, rcParams
 
     HAS_PLOT = True
@@ -656,6 +656,11 @@ class MainView:
                     else "Workbench.Nav.TButton"
                 )
             )
+        if n == 0 and HAS_PLOT and hasattr(self, "plot"):
+            if getattr(self, "_plot_deferred", False):
+                self.draw()
+            else:
+                self.plot.draw_pending()
 
     def wheel(self, e):
         if e.widget.winfo_toplevel() != self.root:
@@ -836,7 +841,11 @@ class MainView:
             rcParams["axes.unicode_minus"] = False
             self.fig = Figure(figsize=(8.5, 5.2), dpi=100)
             self.ax = self.fig.add_subplot(111)
-            self.plot = FigureCanvasTkAgg(self.fig, master=b)
+            self.plot = FigureCanvasTkAgg(
+                self.fig, master=b,
+                visible=lambda: self.current == 0 and self.root.winfo_viewable(),
+            )
+            self.plot.get_tk_widget().bind("<Map>", self._plot_mapped, add="+")
             self.plot.get_tk_widget().configure(height=350)
             self.plot.get_tk_widget().pack(fill="x", pady=12)
         else:
@@ -939,9 +948,23 @@ class MainView:
         translated_axes(self.ax).grid(alpha=0.15)
         self.fig.tight_layout()
         annotate_states(self.ax, clusters)
-        self.plot.draw_idle()
+        self.queue_plot()
 
-    def draw(self):
+    def _plot_mapped(self, event):
+        if getattr(self, "_plot_deferred", False):
+            self.draw()
+
+    def queue_plot(self):
+        if self.current == 0 and self.root.winfo_viewable():
+            self.plot.draw_idle()
+        else:
+            self._plot_deferred = True
+
+    def draw(self, *, force=False):
+        if not force and (self.current != 0 or not self.root.winfo_viewable()):
+            self._plot_deferred = True
+            return
+        self._plot_deferred = False
         if self.result:
             return self._draw_process()
         if self.partial_hvac:
@@ -950,3 +973,5 @@ class MainView:
                 self._draw_process()
             finally:
                 self.result = None
+        elif HAS_PLOT and hasattr(self, "plot"):
+            self.plot.draw_idle()

@@ -8,6 +8,18 @@ import platform
 import subprocess
 import sys
 import shutil
+import time
+
+
+def retain_ui_timing(output, *, since, name="Native_UITiming.json"):
+    """Retain completed event turns even if a later turn/process times out."""
+    source = Path.home() / "Library/Logs/Facility_Studio_V5_5/Native_UITiming.json"
+    if source.is_file() and source.stat().st_mtime >= since:
+        try:
+            json.loads(source.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return
+        shutil.copy2(source, output / name)
 
 
 def verify_dmg(path, output):
@@ -52,16 +64,17 @@ def verify_dmg(path, output):
                 timeout=60,
             )
         with (output / "DMG_Native_GUI.txt").open("w") as file:
-            subprocess.run(
-                [
-                    str(app / "Contents/MacOS/FacilityStudio"),
-                    "--self-test",
-                ],
-                stdout=file,
-                stderr=subprocess.STDOUT,
-                check=True,
-                timeout=300,
-            )
+            started = time.time()
+            try:
+                subprocess.run(
+                    [str(app / "Contents/MacOS/FacilityStudio"), "--self-test"],
+                    stdout=file,
+                    stderr=subprocess.STDOUT,
+                    check=True,
+                    timeout=300,
+                )
+            finally:
+                retain_ui_timing(output, since=started, name="DMG_Native_UITiming.json")
     finally:
         if attached:
             subprocess.run(
@@ -122,13 +135,17 @@ def main():
             timeout=60,
         )
     with (output / "Native_GUI_Console.txt").open("w", encoding="utf-8") as file:
-        subprocess.run(
-            [str(app / "Contents/MacOS/FacilityStudio"), "--self-test"],
-            stdout=file,
-            stderr=subprocess.STDOUT,
-            check=True,
-            timeout=300,
-        )
+        started = time.time()
+        try:
+            subprocess.run(
+                [str(app / "Contents/MacOS/FacilityStudio"), "--self-test"],
+                stdout=file,
+                stderr=subprocess.STDOUT,
+                check=True,
+                timeout=300,
+            )
+        finally:
+            retain_ui_timing(output, since=started)
     path = Path.home() / "Library/Logs/Facility_Studio_V5_5/Mac_Acceptance.json"
     result = json.loads(path.read_text(encoding="utf-8"))
     assert result["passed"] and result["architecture"] == platform.machine()

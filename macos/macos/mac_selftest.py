@@ -208,6 +208,9 @@ def run():
             "phase": "initial-render" if initial_render else "interaction",
             "elapsed_seconds": round(elapsed, 3),
             "budget_seconds": budget,
+            "quick_tool": app.current,
+            "workbench_page": getattr(app.workbench, "current", None),
+            "workbench_state": app.workbench.root.state() if app.workbench else None,
         }
         ui_timings.append(timing)
         (destination / "Native_UITiming.json").write_text(

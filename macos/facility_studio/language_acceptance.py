@@ -347,6 +347,68 @@ def run(root, app, workbench, check, pump, output=None):
         "Navigation labels have readable native foreground/background contrast",
         readable_navigation,
     )
+    if hasattr(workbench, "plot"):
+        from unittest.mock import patch
+
+        page_before = workbench.current
+        state_before = workbench.root.state()
+        season_before = workbench.season.get()
+        language_before = i18n.language()
+        result_before = copy.deepcopy(workbench.result)
+        rendered = []
+        listener = None
+        try:
+            workbench.root.withdraw()
+            workbench.show_page(8)
+            pump()
+            listener = workbench.plot.mpl_connect("draw_event", lambda event: rendered.append(True))
+
+            def hidden_plot():
+                workbench.season.set("冬季")
+                i18n.set_language("zh-Hant", persist=False)
+                i18n.set_language("en", persist=False)
+                workbench.draw()
+                pump()
+                return require(not rendered and workbench.result == result_before,
+                               "Hidden workbench rasterized or changed its result")
+
+            check("Hidden workbench defers idle plot rendering and preserves results", hidden_plot)
+
+            def hidden_export():
+                with tempfile.TemporaryDirectory(prefix="facility-hidden-plot-") as folder:
+                    path = Path(folder) / "winter.png"
+                    with patch("facility_studio.desktop.filedialog.asksaveasfilename", return_value=str(path)):
+                        workbench.save_plot()
+                    require(path.read_bytes().startswith(b"\x89PNG\r\n\x1a\n"), "Plot export missing")
+                    require(i18n.translate("冬季") in workbench.ax.get_title(), "Export retained the previous season")
+                    return require(workbench.result == result_before, "Plot export changed results")
+
+            check("Hidden plot export forces the current season without changing results", hidden_export)
+
+            def visible_plot():
+                rendered.clear()
+                workbench.root.deiconify()
+                workbench.root.lift()
+                workbench.show_page(0)
+                pump()
+                return require(bool(rendered) and i18n.translate("冬季") in workbench.ax.get_title()
+                               and workbench.result == result_before,
+                               "Visible plot did not render the latest season")
+
+            check("Reopening the overview renders the latest deferred plot", visible_plot)
+        finally:
+            if listener is not None:
+                workbench.plot.mpl_disconnect(listener)
+            workbench.season.set(season_before)
+            i18n.set_language(language_before, persist=False)
+            workbench.show_page(page_before)
+            if state_before == "withdrawn":
+                workbench.root.withdraw()
+            else:
+                workbench.root.deiconify()
+            workbench.draw()
+            root.lift()
+            pump()
     if output is not None:
         from PIL import ImageGrab
 
