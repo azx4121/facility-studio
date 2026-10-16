@@ -1,7 +1,7 @@
-"""Wrap workbench actions within the available width without hiding controls."""
+"""Wrap action controls to their actual client width, including translated text."""
 
-import math
 from .localized_tk import ttk
+from . import i18n
 
 
 class FlowToolbar(ttk.Frame):
@@ -9,10 +9,20 @@ class FlowToolbar(ttk.Frame):
         super().__init__(parent, **options)
         self._job = None
         self._layout_key = None
-        self._columns = 0
+        self._bound = set()
+        # Child requisitions must not force the workbench wider than its client.
+        self.pack_propagate(False)
+        self.grid_propagate(False)
         self.bind("<Configure>", self._schedule, add="+")
         self.bind("<Map>", self._schedule, add="+")
+        self.bind("<<ThemeChanged>>", self._schedule, add="+")
         self.bind("<Destroy>", self._destroy, add="+")
+        i18n.subscribe(self)
+
+    def refresh_language(self):
+        if self.winfo_exists():
+            self._layout_key = None
+            self._schedule()
 
     def _destroy(self, event):
         if event.widget is self and self._job is not None:
@@ -20,38 +30,43 @@ class FlowToolbar(ttk.Frame):
             self._job = None
 
     def _schedule(self, event=None):
-        if self._job is None:
+        if event is not None and event.widget is self:
+            if self._job is not None:
+                self.after_cancel(self._job)
+                self._job = None
+            self._arrange()
+        elif self._job is None:
             self._job = self.after_idle(self._arrange)
 
     def _arrange(self):
         self._job = None
         width = self.winfo_width()
         children = self.winfo_children()
-        if width < 50 or not children:
+        if width < 20 or not children:
             return
-        columns = max(1, width // 24)
-        widths = tuple(child.winfo_reqwidth() for child in children)
-        key = (columns, widths)
+        sizes = tuple((str(child), child.winfo_reqwidth(), child.winfo_reqheight())
+                      for child in children)
+        key = (width, sizes)
         if key == self._layout_key:
             return
         self._layout_key = key
-        for child in children:
-            if child.winfo_manager() == "pack":
-                child.pack_forget()
+        x, y, row_height = 4, 3, 0
+        for child, (_, requested, height) in zip(children, sizes):
+            if str(child) not in self._bound:
                 child.bind("<Configure>", self._schedule, add="+")
-        for column in range(max(columns, self._columns)):
-            self.columnconfigure(
-                column, minsize=24 if column < columns else 0,
-                weight=1 if column < columns else 0,
-                uniform="flow" if column < columns else "",
-            )
-        self._columns = columns
-        row = column = 0
-        for child, requested in zip(children, widths):
-            span = min(columns, max(1, math.ceil((requested + 8) / 24)))
-            if column + span > columns:
-                row += 1
-                column = 0
-            child.grid(row=row, column=column, columnspan=span,
-                       sticky="ew", padx=4, pady=3)
-            column += span
+                self._bound.add(str(child))
+            manager = child.winfo_manager()
+            if manager == "pack":
+                child.pack_forget()
+            elif manager == "grid":
+                child.grid_forget()
+            control_width = min(requested, max(1, width - 8))
+            if x > 4 and x + control_width + 4 > width:
+                y += row_height + 6
+                x, row_height = 4, 0
+            child.place(x=x, y=y, width=control_width, height=height)
+            x += control_width + 8
+            row_height = max(row_height, height)
+        height = y + row_height + 3
+        if int(self.cget("height")) != height:
+            self.configure(height=height)

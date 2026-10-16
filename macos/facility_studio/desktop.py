@@ -407,20 +407,34 @@ class DesktopApp(SessionController, MainView):
         self.subtitle.grid(row=1, column=0, columnspan=2, sticky="w", pady=(4, 0))
         self.document_status = tk.StringVar()
         self.receipt_status = tk.StringVar()
-        ttk.Label(
-            head,
-            textvariable=self.document_status,
-            wraplength=860,
-            style="Muted.TLabel",
-        ).grid(row=5, column=0, columnspan=2, sticky="w", pady=(6, 0))
-        ttk.Label(
-            head, textvariable=self.receipt_status, wraplength=860, style="Muted.TLabel"
-        ).grid(row=6, column=0, columnspan=2, sticky="w")
+        self.document_status_label = ttk.Label(
+            head, textvariable=self.document_status, wraplength=600, style="Muted.TLabel"
+        )
+        self.document_status_label.grid(row=5, column=0, columnspan=2, sticky="w", pady=(6, 0))
+        self.receipt_status_label = ttk.Label(
+            head, textvariable=self.receipt_status, wraplength=600, style="Muted.TLabel"
+        )
+        self.receipt_status_label.grid(row=6, column=0, columnspan=2, sticky="w")
         language_bar = ttk.Frame(head)
         language_bar.grid(row=0, column=1, sticky="e", pady=(6, 0))
         ttk.Label(language_bar, text="Language / 語言").pack(side="left", padx=(0, 6))
         self.language_picker = LanguagePicker(language_bar)
         self.language_picker.pack(side="right")
+        header_widths = [None]
+
+        def wrap_header(event):
+            if event.widget is not head:
+                return
+            width = max(120, event.width - 40)
+            widths = (width, max(120, width - language_bar.winfo_reqwidth() - 12))
+            if widths == header_widths[0]:
+                return
+            header_widths[0] = widths
+            self.title.configure(wraplength=widths[1])
+            for label in (self.subtitle, self.document_status_label, self.receipt_status_label):
+                label.configure(wraplength=width)
+
+        head.bind("<Configure>", wrap_header, add="+")
         bar = FlowToolbar(head)
         bar.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(6, 0))
         for txt, cmd in [

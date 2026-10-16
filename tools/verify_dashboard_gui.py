@@ -25,11 +25,11 @@ def _pump(root):
 
 
 def _dispose(root):
-    # Every application here is a disposable, unsaved test fixture. Cancel all
-    # timers before destroying its interpreter; do not invoke user save dialogs.
+    # Cancel Tcl events without deleting callback commands through the wrong
+    # widget. Each callback's owning widget deletes its command during destroy.
     try:
         for token in root.tk.splitlist(root.tk.call("after", "info")):
-            root.after_cancel(token)
+            root.tk.call("after", "cancel", token)
         root.destroy()
     except Exception:
         pass
@@ -105,6 +105,21 @@ def _main_checks(check, errors):
             apply(systems["MAU"], view, dcc_airflow_mode="獨立 DCC 循環")
             check(view + " independent DCC flow enabled", visible("dcc_airflow_cmh") and not disabled("dcc_airflow_cmh"))
         check("architecture switches preserve every numeric draft", all(app.variables[key].get() == value for key, value in drafts.items()))
+        from facility_studio import i18n
+        for language in ("zh-Hant", "en"):
+            i18n.set_language(language, persist=False)
+            root.geometry("880x560+0+0")
+            _pump(root)
+            left, top = root.winfo_rootx(), root.winfo_rooty()
+            right, bottom = left + root.winfo_width(), top + root.winfo_height()
+            for index, toolbar in enumerate(app.action_toolbars):
+                for control in toolbar.winfo_children():
+                    check(language + "/toolbar" + str(index) + "/" + str(control) + " fits minimum client",
+                          control.winfo_ismapped() and left <= control.winfo_rootx()
+                          and control.winfo_rootx() + control.winfo_width() <= right
+                          and top <= control.winfo_rooty()
+                          and control.winfo_rooty() + control.winfo_height() <= bottom)
+        i18n.set_language("zh-Hant", persist=False)
         check("main callbacks complete without errors", not errors)
         return str(root.tk.call("info", "patchlevel"))
     finally:
@@ -205,6 +220,24 @@ def _simple_checks(check, errors, directory):
         root.geometry("900x650")
         _pump(root)
         check("narrow form stacks panels", room._stacked)
+        app.show_tool("electrical")
+        electrical = app.active_page()
+        electrical.advanced.set(True)
+        electrical.update_visibility()
+        _pump(root)
+        electrical.canvas.yview_moveto(1)
+        _pump(root)
+        electrical.reset()
+        _pump(root)
+        entry = electrical.widgets["power"]
+        electrical.reveal(entry)
+        entry.focus_force()
+        _pump(root)
+        check("reset restores a current manual result", electrical.result is not None and not electrical.upstream_sources and not electrical.upstream_stale)
+        check("reset and reveal restore the power entry to the viewport",
+              entry.winfo_ismapped() and root.focus_get() is entry
+              and electrical.canvas.winfo_rooty() <= entry.winfo_rooty()
+              and entry.winfo_rooty() + entry.winfo_height() <= electrical.canvas.winfo_rooty() + electrical.canvas.winfo_height())
         baseline = float(root.tk.call("tk", "scaling"))
         for factor in (1.25, 1.5):
             root.tk.call("tk", "scaling", 96 / 72 * factor)

@@ -78,7 +78,7 @@ def run(root, app, main, check, pump, output=None):
                 for toolbar in main.action_toolbars:
                     for control in toolbar.winfo_children():
                         if not control.winfo_ismapped() or control.winfo_rootx() < left or control.winfo_rootx() + control.winfo_width() > right:
-                            raise AssertionError("Workbench action outside client bounds: " + str(control))
+                            raise AssertionError("Workbench action outside client bounds: " + str(control) + repr(dict(mapped=control.winfo_ismapped(), x=control.winfo_rootx(), width=control.winfo_width(), client_left=left, client_right=right, toolbar_width=toolbar.winfo_width(), manager=control.winfo_manager())))
                 return True
             for lang in ("zh-Hant", "en"):
                 i18n.set_language(lang, persist=False)

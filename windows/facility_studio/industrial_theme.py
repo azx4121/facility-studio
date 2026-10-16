@@ -174,8 +174,10 @@ class ScrollableFrame(ttk.Frame):
         self.body = ttk.Frame(self.canvas, padding=(16, 14))
         self.body.columnconfigure(0, weight=1)
         self.item = self.canvas.create_window(0, 0, window=self.body, anchor="nw")
-        self.body.bind("<Configure>", lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
-        self.canvas.bind("<Configure>", lambda e: self.canvas.itemconfigure(self.item, width=e.width))
+        self._scroll_bounds = None
+        self._body_width = None
+        self.body.bind("<Configure>", self._sync_scroll_region)
+        self.canvas.bind("<Configure>", self._fit_body)
         self._wheel_tag = "FacilityScroll" + str(self).replace(".", "_")
         self.bind_class(self._wheel_tag, "<MouseWheel>", self._wheel)
         self.bind_class(self._wheel_tag, "<Button-4>", self._wheel)
@@ -186,6 +188,17 @@ class ScrollableFrame(ttk.Frame):
         self._map_window = self.winfo_toplevel()
         self._map_binding = self._map_window.bind("<Map>", self._descendant_mapped, add="+")
         self.bind("<Destroy>", self._destroy, add="+")
+
+    def _sync_scroll_region(self, event=None):
+        bounds = self.canvas.bbox("all")
+        if bounds != self._scroll_bounds:
+            self._scroll_bounds = bounds
+            self.canvas.configure(scrollregion=bounds or (0, 0, 0, 0))
+
+    def _fit_body(self, event):
+        if event.width != self._body_width:
+            self._body_width = event.width
+            self.canvas.itemconfigure(self.item, width=event.width)
 
     def _attach_widget(self, widget):
         # Check the native widget class too: external callers may create a
@@ -251,7 +264,10 @@ class KPIFrame(ttk.Frame):
         self.bind("<Configure>", self._layout)
 
     def set_cards(self, cards):
-        self.cards = list(cards)
+        cards = [dict(card) for card in cards]
+        if cards == self.cards and len(self.boxes) == len(cards):
+            return
+        self.cards = cards
         for box in self.boxes:
             box.destroy()
         self.boxes = []

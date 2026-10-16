@@ -2,12 +2,13 @@
   "baseline_commit": "b9251d3d4e16c914b75eb1f1562a58fcbc9d6525",
   "provided_archive_sha256": "4772790c3e8044897c0451e925989e85ce939fb734b4aeaaee6c614805770fdd",
   "provided_setup_sha256": "4c69f351c7a85491b3bff25475fd486df855df2b8d102bcf74a0854f27055945",
-  "rebuilt_online_setup_sha256": "08d05a7c06ba34f3dc18f32bb6e788eff7f7367507d48d49b74affdb93ae6549",
+  "rebuilt_online_setup_sha256": "996d0aad5bc2ececfd7eac1112caa8b205c7f8b482070e98374eb69b1fd29a6e",
   "offline_native_acceptance": "pending GitHub Actions; current online Setup verification checks archive integrity only",
   "source_gui_host": "Linux x86_64, CPython 3.12.14, Tk 8.6.14 (also tested Tk 9.0.4)",
   "standalone_build_entry": "windows/winrelease/build.py; no installed-Python fallback",
   "ci_followup": "Required q_total_basis in complete-report validation; both platforms passed the 90 resilience guards and full 100-case / 20-repeat stress rerun.",
   "packaged_documentation": "Windows and Mac bundled readmes match ten tools, 30-inch pipe references, schema12 and explicit catalogue U; native workflows rerun after these packaging-text corrections.",
   "bundled_tutorial": "Both languages retain 18 chapters; ten-tool, 30-inch and explicit photometric U notes corrected; all three embedded copies match; 20 scenarios / 87 checks per platform pass.",
-  "native_followup": "Prevent V5.5 regression from rewriting shipped Default_Project.json; assert its schema consistency. Restore Mac simple-window Quit/Command-Return registration. Darken primary blue for readable navigation; preserve >=4.5 contrast gate."
+  "native_followup": "Prevent V5.5 regression from rewriting shipped Default_Project.json; assert its schema consistency. Restore Mac simple-window Quit/Command-Return registration. Darken primary blue for readable navigation; preserve >=4.5 contrast gate.",
+  "layout_followup": "Wrap actions by actual available pixels and constrain workbench status labels. Cache unchanged scroll extents, responsive widths and KPI cards. Reset returns input/output viewports to top. Keypad acceptance explicitly reveals targets in both scroll-container types; focus and decimal assertions unchanged. Native Intel5-second gate retained."
 }

@@ -133,5 +133,6 @@
     }
   ],
   "callback_errors": [],
-  "passed": true
+  "passed": true,
+  "extracted_from": "macos-native-sequence-source.json"
 }

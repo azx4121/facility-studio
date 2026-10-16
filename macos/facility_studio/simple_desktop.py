@@ -155,7 +155,9 @@ class SimplePage(ttk.Frame):
             self.air_chart = AirChart(output, app.family)
             self.air_chart.grid(row=7, column=0, sticky="ew", pady=12)
         self._stacked = None
+        self._wrap_widths = None
         self.bind("<Configure>", self.responsive, add="+")
+        self.bind("<Map>", self.responsive, add="+")
         for key, variable in self.variables.items():
             variable.trace_add("write", lambda *args, k=key: self.changed(k))
         self.bind("<Destroy>", self._destroy_page, add="+")
@@ -173,6 +175,8 @@ class SimplePage(ttk.Frame):
         return "break"
 
     def responsive(self, event=None):
+        if not self.winfo_ismapped():
+            return
         width = self.winfo_width()
         stacked = width < Theme.px(900)
         if self._stacked != stacked:
@@ -181,9 +185,13 @@ class SimplePage(ttk.Frame):
             self.rowconfigure(1, weight=1 if stacked else 0)
             self.columnconfigure(1, weight=0 if stacked else 3)
         left_width = max(300, self.input_scroll.winfo_width() - 42)
+        right_width = max(300, self.output_scroll.winfo_width() - 42)
+        widths = (left_width, right_width)
+        if widths == self._wrap_widths:
+            return
+        self._wrap_widths = widths
         for label in (self.subtitle, self.assumptions, self.status):
             label.configure(wraplength=left_width)
-        right_width = max(300, self.output_scroll.winfo_width() - 42)
         for label in (self.details, self.formula, self.note):
             label.configure(wraplength=right_width)
 
@@ -499,6 +507,8 @@ class SimplePage(ttk.Frame):
             self.suspended = False
         self.update_visibility()
         self.calculate()
+        self.canvas.yview_moveto(0)
+        self.output_scroll.canvas.yview_moveto(0)
 
 
 class SimpleToolsApp:
@@ -613,7 +623,8 @@ class SimpleToolsApp:
     def resize(self, event=None):
         if event is not None and event.widget is not self.root:
             return
-        for page in self.pages.values():
+        page = self.pages.get(self.current)
+        if page is not None:
             page.responsive()
 
     def configure_style(self):

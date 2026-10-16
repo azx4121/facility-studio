@@ -95,6 +95,7 @@ def run_ui(root, app, main, check, pump):
     from . import i18n
     from .ahu_desktop import AHUWindow
     from .main_view import ScrollPage
+    from .simple_desktop import SimplePage
     from .tools_view import QuickToolsWindow
     from .ui_common import install_numeric_keyboard
 
@@ -120,7 +121,7 @@ def run_ui(root, app, main, check, pump):
         # into the viewport, as a user must do before focusing an entry.
         ancestor = entry.master
         while ancestor is not None:
-            if isinstance(ancestor, ScrollPage):
+            if isinstance(ancestor, (ScrollPage, SimplePage)):
                 ancestor.reveal(entry)
                 break
             ancestor = getattr(ancestor, "master", None)

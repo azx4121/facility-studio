@@ -6,7 +6,7 @@
   "tk_patchlevel": "8.6.14",
   "native_binary_acceptance": false,
   "passed": true,
-  "check_count": 278,
+  "check_count": 314,
   "checks": [
     {
       "name": "基本模式/MAU/en_fcu_cmh grid visibility",
@@ -518,6 +518,142 @@
     },
     {
       "name": "architecture switches preserve every numeric draft",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar0/.!frame2.!flowtoolbar.!button fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar0/.!frame2.!flowtoolbar.!button2 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar0/.!frame2.!flowtoolbar.!button3 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar0/.!frame2.!flowtoolbar.!button4 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar1/.!frame2.!flowtoolbar2.!combobox fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar1/.!frame2.!flowtoolbar2.!button fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar1/.!frame2.!flowtoolbar2.!button2 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar1/.!frame2.!flowtoolbar2.!combobox2 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar1/.!frame2.!flowtoolbar2.!button3 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar2/.!frame2.!flowtoolbar3.!button fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar2/.!frame2.!flowtoolbar3.!button2 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar2/.!frame2.!flowtoolbar3.!button3 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar2/.!frame2.!flowtoolbar3.!button4 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar3/.!frame2.!flowtoolbar4.!button fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar3/.!frame2.!flowtoolbar4.!button2 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar3/.!frame2.!flowtoolbar4.!button3 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "zh-Hant/toolbar3/.!frame2.!flowtoolbar4.!button4 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar0/.!frame2.!flowtoolbar.!button fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar0/.!frame2.!flowtoolbar.!button2 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar0/.!frame2.!flowtoolbar.!button3 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar0/.!frame2.!flowtoolbar.!button4 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar1/.!frame2.!flowtoolbar2.!combobox fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar1/.!frame2.!flowtoolbar2.!button fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar1/.!frame2.!flowtoolbar2.!button2 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar1/.!frame2.!flowtoolbar2.!combobox2 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar1/.!frame2.!flowtoolbar2.!button3 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar2/.!frame2.!flowtoolbar3.!button fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar2/.!frame2.!flowtoolbar3.!button2 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar2/.!frame2.!flowtoolbar3.!button3 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar2/.!frame2.!flowtoolbar3.!button4 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar3/.!frame2.!flowtoolbar4.!button fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar3/.!frame2.!flowtoolbar4.!button2 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar3/.!frame2.!flowtoolbar4.!button3 fits minimum client",
+      "passed": true
+    },
+    {
+      "name": "en/toolbar3/.!frame2.!flowtoolbar4.!button4 fits minimum client",
       "passed": true
     },
     {
@@ -1062,6 +1198,14 @@
     },
     {
       "name": "narrow form stacks panels",
+      "passed": true
+    },
+    {
+      "name": "reset restores a current manual result",
+      "passed": true
+    },
+    {
+      "name": "reset and reveal restore the power entry to the viewport",
       "passed": true
     },
     {
