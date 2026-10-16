@@ -1,29 +1,25 @@
 Facility Studio V5.6.0｜Windows 廠務工程初估工具
 DESIGNED BY ANDY HUANG ©
 
-原始碼修訂提示（尚未作為新的原生發布檔）
-目前倉庫來源有十項快算，新增潔淨室風量、熱負荷初估與冰水泵浦；支援明確氣流路徑、
-上游結果帶入及設備設計量總覽。新來源需重新封裝、原生驗收並另發修訂，
-不代表下方公開 win.4 EXE 已包含此功能；其原七工具與驗收紀錄仍按發布版本保留。
-既有 schema 11 專案由新來源移轉至 schema 12 時，保留原FFU循環路徑與已採用條件。
-
-Source revision, not a new published binary: current sources contain ten calculators, adding
-cleanroom airflow, heat load estimate and chilled-water pump, with explicit airflow topology,
-upstream import and equipment summaries. A new packaged revision requires native acceptance.
-The public win.4 EXE and its historical seven-tool evidence below remain unchanged.
+本版修訂：V5.6.0 · Windows win.4
+十項快算包含潔淨室風量、熱負荷初估與冰水泵浦，支援上游帶入、KPI與HTML總覽。
+舊案以schema 12移轉並保留原假設；FFU氣流路徑／ACH基準須明確選擇。
+照明使用型錄利用係數U與實際長寬的室指數K；不以幾何公式取代燈具配光資料。
+工程覆核、測試與目前發布狀態：
+https://github.com/azx4121/facility-studio/blob/main/docs/2026-10-16-gemini-integration-review.md
 
 用途
-單項快算：電力配線、風管、CDA／特氣、照明（支援 DIALux 室指數 K 自動利用係數 U(K) 與手動係數切換）、冷熱水、空氣線圖與單位換算。
+單項快算：電力配線、風管、CDA／特氣、照明（型錄 U 與室指數 K 檢核）、冷熱水、空氣線圖、單位換算、潔淨室風量、熱負荷初估與冰水泵浦。
 多設備：用 Excel／CSV 彙整電力與廠務需求。
 完整工作台：整理空調方案、夏冬空調箱分段需求與報告。
 繁體中文／English 可即時切換；計算與專案保存可離線完成。
-七個快算直接列於左側；水管自動選型至24吋，先選符合水速的單管。
+十個快算直接列於左側；水管自動選型至30吋，先選符合水速的單管。
 氣體快算與工作台共同提供50種廠務氣體及自訂／混合氣，新增氣體需填設計流速。
 本修訂保留重選同種製程氣體的已填流速；切換到不同新增氣體須重新填寫。
 
 下載與開啟
 目前公開下載為 EXE：
-https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.4/Facility_Studio_V5_6_0_Windows_Offline.exe
+https://github.com/azx4121/facility-studio#readme
 儲存後雙擊開啟，第一次請等候內建環境展開。不需另裝 Python 或管理員權限。
 Windows 10／11 Intel／AMD x64 為支援目標；原生驗收為 Windows Server 2022／2025 x64。
 本版尚無正式發行者簽章。首次安全提示說明：
@@ -53,7 +49,7 @@ https://github.com/azx4121/facility-studio/issues
 
 English
 Use independent engineering calculators, import equipment schedules, or compare HVAC/AHU schemes.
-All ten calculators are direct sidebar buttons; automatic water sizing extends to 24 inches.
+All ten calculators are direct sidebar buttons; automatic water sizing extends to 30 inches.
 The calculator and workbench share 50 factory gases plus custom mixtures.
 Added gases require an entered design velocity; reselecting the same gas preserves it.
 Download the EXE above and double-click. The runtime and offline help are included.

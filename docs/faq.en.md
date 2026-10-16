@@ -28,11 +28,11 @@ If it persists, report OS, keyboard model, Num Lock, input method, window/field 
 <a id="v560-tools"></a>
 ## Where are water, psychrometrics and units? Have pipe and gas choices changed?
 
-All seven V5.6.0 calculators are direct sidebar buttons: electrical, duct, CDA/gas, lighting, water, air states/psychrometrics and units.
+All ten V5.6.0 calculators are direct sidebar buttons: electrical, duct, CDA/gas, lighting, water, air states/psychrometrics, units, cleanroom airflow, heat load estimate and chilled-water pump.
 
 Automatic water references extend to 30 inches. The tool selects a single pipe within the adopted velocity before adding parallel circuits. Added 14–30 inch references use STD walls; check actual ID when supplied dimensions differ. [Water and pipe guide](guides/water.en.md)
 
-The calculator and workbench share 50 named gases plus custom mixtures. Added gases have no preset design velocity: enter a design value, using custom velocity in the workbench. win.3 / mac.5 preserves entered velocity when the same gas is selected again; switching to a different added gas requires a new value. Mixtures need a name and composition. T/P/Z conversion covers single-gas-phase volume and velocity estimates only. [Gas and vacuum guide](guides/gas-vacuum.en.md)
+The calculator and workbench share 50 named gases plus custom mixtures. Added gases have no preset design velocity: enter a design value, using custom velocity in the workbench. The current revision preserves entered velocity when the same gas is selected again; switching to a different added gas requires a new value. Mixtures need a name and composition. T/P/Z conversion covers single-gas-phase volume and velocity estimates only. [Gas and vacuum guide](guides/gas-vacuum.en.md)
 
 In the full workbench, a route with zero flow retains custom velocity and custom/mixture names as drafts without validating or including them in calculations or reports. Added gases with nonzero demand still require custom velocity and an entered design value; mixtures also require a name and composition. The independent gas calculator still requires valid velocity even when its flow is zero.
 

@@ -10,7 +10,7 @@ wheel，更新本專案程式後，把 Tcl/Tk 編譯用設定腳本完整保留�
 放入 Resources 才能以資料資源封印；執行環境不需編譯擴充模組。
 接著改由 Apple codesign 逐一簽署 Mach-O、內層
 framework、外層 framework 與最後的 App。這是 ad-hoc 簽章，沒有冒充
-Developer ID，也不表示已公證。V5.6.0 繼續沿用此修復；本版原生交付另見[發布紀錄](../docs/2026-10-12-v5.6-native.md)。
+Developer ID，也不表示已公證。V5.6.0 繼續沿用此修復；本版原生交付另見[發布紀錄](../docs/2026-10-16-gemini-integration-review.md)。
 
 Matplotlib 原生啟動診斷停在第一次字型快取建立。其 font_manager.py 呼叫
 system_profiler 與 fc-list 時沒有時限。本修訂對三個外部查詢加上 5 秒時限，

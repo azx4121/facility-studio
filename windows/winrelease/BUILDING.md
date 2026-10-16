@@ -1,18 +1,18 @@
 # Windows V5.6.0 離線發行
 
-[目前下載與英文安裝](../../README.en.md#download-and-run) · [雙語原生驗收](../../docs/2026-10-13-v5.6-audit-stress.md)
+[目前下載與英文安裝](../../README.en.md#download-and-run) · [工程覆核與原生驗收](../../docs/2026-10-16-gemini-integration-review.md)
 
-Developer build only: the V5.6.0 EXE bundles Python; publication requires both native jobs to pass. Normal users do not run pip or these build commands. ZIPs are still built for native acceptance and developer diagnostics, but are no longer public delivery assets of the recommended releases. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.6.0-win.3 and must not overwrite its existing public assets. For a future release, update the builder, verifier, publisher and workflow version/output names together. See [distribution signing](../../docs/signing.en.md).
+Developer build only: the V5.6.0 EXE bundles Python; publication requires both native jobs to pass. Normal users do not run pip or these build commands. ZIPs are built for native acceptance and developer diagnostics. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.6.0-win.4 and refuses to overwrite an existing published release. For a future release, update the builder, verifier, publisher and workflow version/output names together. See [distribution signing](../../docs/signing.en.md).
 
-## 未發布的原始碼修訂
+## win.4 修訂與封裝
 
-目前來源的獨立快算已由七項擴為十項，新增 `cleanroom`、`heat_loads`、`pumps`。本修訂的 CLI、GUI、雙語與原生 self-test 清單均應涵蓋十項；設備表仍是原有七個系統，兩者不要混改。下方 win.3 的七工具原生驗收描述是歷史範圍，不表示既有 EXE 已包含來源新功能。
+獨立快算共十項，包含新增的 `cleanroom`、`heat_loads`、`pumps`。CLI、GUI、雙語與原生 self-test 均涵蓋十項；設備表仍是原有七個系統。照明採型錄 U 與實際室指數 K，水管參考延伸至30吋。
 
-新封裝前應使用當前 `windows/facility_studio`、資源與 `Default_Project.json`，驗證 schema 11 專案可移轉至 schema 12 且保留原氣流路徑及採用值，再執行來源工程、雙語、GUI 及兩個 Windows 環境的原生驗收。另更新 builder、verifier、publisher 和 workflow 的新修訂識別與檔名；不要覆寫既有 win.3 資產或驗收數字。
+使用當前 `windows/facility_studio`、資源與 `Default_Project.json`，驗證 schema 11 專案可移轉至 schema 12 且保留原氣流路徑及採用值，再執行來源工程、雙語、GUI 及兩個 Windows 環境的原生驗收。既有 win.3 資產與驗收紀錄保留。
 
-舊 `windows/installer/payload`、`payload_sha256.json` 與歷史線上安裝器 binary 是成套驗證快照。日常來源同步不應對它們執行 `windows/build_release.py` 的重新 staging；需要新版線上安裝器時應另建修訂，產生相配 manifest／binary 及新的原生驗證紀錄，保留原快照。現行離線流程直接封裝當前來源，不依賴改寫歷史 payload。
+當前線上 Setup 的 `windows/installer/payload`、`payload_sha256.json` 與 binary 須由 `windows/build_release.py` 成套更新，通過完整解壓與逐檔一致性檢查；這不等於離線 EXE 原生驗收。V5.5.4 歷史安裝器的固定 fixture 位於 `windows/tests/fixtures`，不可改寫。離線流程直接封裝當前來源。
 
-Current source revision (not a published binary): ten independent tools are now covered, while equipment schedules still have seven systems. Refresh current sources/resources/defaults in a fresh build, verify schema migration and all ten tools, then complete native acceptance for a new revision. Preserve existing release assets and historical installer payload/manifests. See the [engineering audit](../../docs/2026-10-15-engineering-dashboard-audit.md).
+win.4 covers ten independent calculators and seven equipment systems. Build current sources/resources/defaults, verify schema migration and all ten tools, then complete native acceptance. Preserve published releases and frozen historical installer fixtures. See the [engineering audit and release status](../../docs/2026-10-16-gemini-integration-review.md).
 
 `entry.py` 為單檔 EXE 的視窗模式入口；日常使用不執行 pip、不尋找外部 Python、不下載元件。
 主應用程式與完整計算邏輯仍使用 `windows/facility_studio`；不是另一套精簡計算版本。
@@ -34,7 +34,7 @@ python -m winrelease.verify --assets C:\FacilityStudioBuild --output C:\Facility
 驗收時 EXE 的 PATH 移除外部 Python，工作目錄為空白資料夾；
 僅針對該 EXE 建立暫時對外封鎖防火牆規則，完成即刪除。
 另使用 Python audit hook 禁止 socket 連線，檢查封裝資源、原生 Tk、
-七種工具、七種設備分析、完整工作台八頁、原生繪圖、CLI報告與模板輸出。
+十種工具、七種設備分析、完整工作台八頁、原生繪圖、CLI報告與模板輸出。
 相同檔案另在第二個 Windows runner 重複驗證，成功才允許 main 發布新 Release。
 另在中文與空格的 EXE 路徑驗收；該額外路徑測試使用 socket audit hook，
 不與 Windows 防火牆的程式路徑正規化混為一談。防火牆規則使用展開短路徑別名後的完整路徑。
@@ -48,13 +48,13 @@ python -m winrelease.verify --assets C:\FacilityStudioBuild --output C:\Facility
 
 
 
-V5.6.0 win.3 / 大型水管、直接快算與廠務氣體
+V5.6.0 win.4 / 十項快算、氣流路徑、工程帶入與設備總覽
 簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
 簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
 完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
 V5.6.0 可由完整工作台「開啟練習新案」建立副本；原廠選型與設備阻力等待補資料仍需補。
-V5.6.0 retains author credit and offline walkthroughs. win.3 retains keypad checks and additionally verifies direct navigation, large water pipes, factory gas choices and retained velocity when reselecting the same process gas.
+V5.6.0 retains author credit, offline walkthroughs, keypad checks, factory gases and retained velocity when reselecting the same gas. win.4 additionally validates airflow topology, upstream electrical units, manual photometric U and equipment summaries.
 No additional Python installation or internet is needed for the tutorial.
 
 
-Revision3 also treats zero-demand gas velocity as an inactive retained draft and executes100 physically distinct,20-repeat calculation/persistence stress recipes inside the delivered EXE. Source CI separately runs the independent100-cleanroom matrix. Publication requires both native Windows environments to pass.
+Zero-demand gas velocity remains an inactive retained draft. The delivered EXE executes100 physically distinct,20-repeat calculation/persistence stress recipes. Source CI separately runs the independent100-cleanroom matrix. Publication requires both native Windows environments to pass.

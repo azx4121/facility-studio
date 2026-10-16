@@ -1,14 +1,14 @@
-# Native macOS release building (V5.6.0 mac.4)
+# Native macOS release building (V5.6.0 mac.6)
 
 The original V5.5.4 mac.1 package passed byte-level checks but failed Apple's native deep
 signature validation on both macOS 15 architectures. Static verification must
-not be treated as native release acceptance. Historical assets are retained. V5.6.0 includes the repaired runtime and bilingual presentation; [current verification](../../docs/2026-10-13-v5.6-audit-stress.md) records native delivery separately; publication requires Apple Silicon and Intel acceptance. These commands are for developers; normal users use the [bundled downloads](../../README.en.md#download-and-run).
+not be treated as native release acceptance. Historical assets are retained. V5.6.0 includes the repaired runtime and bilingual presentation; [current verification](../../docs/2026-10-16-gemini-integration-review.md) records native delivery separately; publication requires Apple Silicon and Intel acceptance. These commands are for developers; normal users use the [bundled downloads](../../README.en.md#download-and-run).
 
-## Current source revision (not yet published)
+## mac.6 revision
 
-The repository adds `cleanroom`, `heat_loads` and `pumps`, taking independent calculators from seven to ten. Current CLI, GUI, language and native self-tests now cover ten tools; the Excel equipment template still has seven systems. Published mac.4/mac.5 assets and their original acceptance counts remain historical evidence and are not changed by this source revision.
+The repository adds `cleanroom`, `heat_loads` and `pumps`, taking independent calculators from seven to ten. Current CLI, GUI, language and native self-tests now cover ten tools; the Excel equipment template still has seven systems. Published mac.4/mac.5 assets and their original acceptance counts remain historical evidence. mac.6 adds explicit catalogue U / geometric K checks, upstream electrical-unit protection and equipment summaries.
 
-Before a new release, refresh the app and source archive from current `macos/facility_studio`, resources and `Default_Project.json` in a fresh output directory. Verify schema 11-to-12 migration with the retained independent-FFU topology and saved assumptions, then run all ten tools, bilingual/GUI checks and native acceptance on both architectures. Update builder/verifier/publisher/workflow version and output names together instead of overwriting existing public assets. Re-sign after the final source change. The legacy Windows online-installer payload and manifest are a separate historical snapshot and must not be refreshed as a shortcut for this build. See the [engineering audit](../../docs/2026-10-15-engineering-dashboard-audit.md).
+Before a new release, refresh the app and source archive from current `macos/facility_studio`, resources and `Default_Project.json` in a fresh output directory. Verify schema 11-to-12 migration with the retained independent-FFU topology and saved assumptions, then run all ten tools, bilingual/GUI checks and native acceptance on both architectures. Update builder/verifier/publisher/workflow version and output names together instead of overwriting existing public assets. Re-sign after the final source change. Windows online-installer staging is separate from this Mac build. Preserve the frozen historical fixtures and published binaries. See the [engineering audit and publication status](../../docs/2026-10-16-gemini-integration-review.md).
 
 ## Shipping build
 
@@ -41,8 +41,8 @@ To validate those exact delivery files on a second Mac architecture:
 
 ```sh
 python3 macos/macos/verify_native_release.py \
-  --package /absolute/path/Facility_Studio_V5_6_0_macOS_mac4_OneClick.zip \
-  --dmg /absolute/path/Facility_Studio_V5_6_0_macOS_mac4.dmg \
+  --package /absolute/path/Facility_Studio_V5_6_0_macOS_mac6_OneClick.zip \
+  --dmg /absolute/path/Facility_Studio_V5_6_0_macOS_mac6.dmg \
   --checksums /absolute/path/SHA256SUMS.txt \
   --output /absolute/path/second-mac-evidence
 ```
@@ -50,7 +50,7 @@ python3 macos/macos/verify_native_release.py \
 The workflow `.github/workflows/macos-native-release.yml` uses Apple Silicon
 macOS 15 to build and Intel macOS 15 to execute the same ZIP and DMG. On the
 repair branch it only tests. On main, publication runs only after both jobs pass;
-the publisher targets `v5.6.0-mac.4` without replacing existing public assets or moving tags.
+the publisher targets `v5.6.0-mac.6` without replacing existing public assets or moving tags.
 For a future release, update version and output names in the builder, verifier,
 publisher and workflow together; do not try to overwrite the already published
 v5.6.0 files after a source change.
@@ -125,13 +125,13 @@ recreates them using their stored Unix file types.
 
 
 
-V5.6.0 mac.4 / 零需求氣體草稿與100組壓力驗證
+V5.6.0 mac.6 / 十項快算、氣流路徑、工程帶入與設備總覽
 簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
 簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
 完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
 V5.6.0 可由完整工作台「開啟練習新案」建立副本；原廠選型與設備阻力等待補資料仍需補。
-V5.6.0 retains author credit and offline walkthroughs. mac.4 verifies keypad entry, selections and read-only protection through delivered Aqua widgets.
+V5.6.0 retains author credit and offline walkthroughs. mac.6 verifies keypad entry, selections and read-only protection through delivered Aqua widgets.
 No additional Python installation or internet is needed for the tutorial.
 
 
-Revision3 also treats zero-demand gas velocity as an inactive retained draft and executes100 physically distinct,20-repeat calculation/persistence stress recipes inside the delivered App. Source CI separately runs the independent100-cleanroom matrix. Publication requires Apple Silicon and Intel native environments to pass.
+This revision retains zero-demand gas velocity as an inactive retained draft and executes100 physically distinct,20-repeat calculation/persistence stress recipes inside the delivered App. Source CI separately runs the independent100-cleanroom matrix. Publication requires Apple Silicon and Intel native environments to pass.
