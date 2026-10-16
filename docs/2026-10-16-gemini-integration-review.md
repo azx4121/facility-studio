@@ -43,6 +43,8 @@
 
 [本次測試證據](evidence/2026-10-16-gemini-review/) · [重現命令](development.md)
 
+GitHub 原生流程補充攔截了新增 `q_total_basis` 欄位的完整報告檢查遺漏；已將該欄納入必要結果，重跑 V5.5.9 防護回歸後重新驗收。該次失敗候選未發布。
+
 ## 原生發布狀態
 
 Windows win.4 須通過 Server 2022 建置及 Server 2025 相同交付檔的離線執行；mac.6 須通過 Apple Silicon／Intel 的相同 ZIP／DMG 驗收。原生執行與新下載資產，以 GitHub Actions 及對應 Release 為準。本頁本機來源結果不冒充原生二進位測試。

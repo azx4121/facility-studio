@@ -354,7 +354,7 @@ def _validate_full_result(r):
                       "coverage_exceeded coverage_limit_pct coverage_ratio dcc_cmh "
                       "dcc_sensible_kw ffu_airflow_basis ffu_area_each ffu_count ffu_size "
                       "ffu_total_cmh ffu_unit_cmh leakage_cmh q_mau_kw "
-                      "q_room_sensible_kw q_total_kw q_total_rt required_oa_cmh "
+                      "q_room_sensible_kw q_total_kw q_total_rt q_total_basis required_oa_cmh "
                       "dcc_return_cmh dcc_design_cmh dcc_design_season".split())
     if isinstance(r, dict) and isinstance(r.get("effective_inputs"), dict) and "ffu_topology" in r["effective_inputs"]:
         report_keys.add("ffu_topology")

@@ -2,8 +2,9 @@
   "baseline_commit": "b9251d3d4e16c914b75eb1f1562a58fcbc9d6525",
   "provided_archive_sha256": "4772790c3e8044897c0451e925989e85ce939fb734b4aeaaee6c614805770fdd",
   "provided_setup_sha256": "4c69f351c7a85491b3bff25475fd486df855df2b8d102bcf74a0854f27055945",
-  "rebuilt_online_setup_sha256": "e6b2df5d26f7a4e5f8f8861a4918e73865138178a4ad2e3ef5796eaac854e3bf",
+  "rebuilt_online_setup_sha256": "dde376d5c324faeb2476396eb65408d35f8b6b4f8bc3775de88e4f65ae22f70a",
   "offline_native_acceptance": "pending GitHub Actions; current online Setup verification checks archive integrity only",
   "source_gui_host": "Linux x86_64, CPython 3.12.14, Tk 8.6.14 (also tested Tk 9.0.4)",
-  "standalone_build_entry": "windows/winrelease/build.py; no installed-Python fallback"
+  "standalone_build_entry": "windows/winrelease/build.py; no installed-Python fallback",
+  "ci_followup": "Required q_total_basis in complete-report validation; both platforms passed the 90 resilience guards and full 100-case / 20-repeat stress rerun."
 }
