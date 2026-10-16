@@ -2,10 +2,11 @@
   "baseline_commit": "b9251d3d4e16c914b75eb1f1562a58fcbc9d6525",
   "provided_archive_sha256": "4772790c3e8044897c0451e925989e85ce939fb734b4aeaaee6c614805770fdd",
   "provided_setup_sha256": "4c69f351c7a85491b3bff25475fd486df855df2b8d102bcf74a0854f27055945",
-  "rebuilt_online_setup_sha256": "1f4eaf267459085b0588a3c9ac143cd0e17d5f52f45e553a7a8efc796c72b8c5",
+  "rebuilt_online_setup_sha256": "89779eea7b032c03625eee120583c0986fe7feb7a0b30b22326da77b30f95a56",
   "offline_native_acceptance": "pending GitHub Actions; current online Setup verification checks archive integrity only",
   "source_gui_host": "Linux x86_64, CPython 3.12.14, Tk 8.6.14 (also tested Tk 9.0.4)",
   "standalone_build_entry": "windows/winrelease/build.py; no installed-Python fallback",
   "ci_followup": "Required q_total_basis in complete-report validation; both platforms passed the 90 resilience guards and full 100-case / 20-repeat stress rerun.",
-  "packaged_documentation": "Windows and Mac bundled readmes match ten tools, 30-inch pipe references, schema12 and explicit catalogue U; native workflows rerun after these packaging-text corrections."
+  "packaged_documentation": "Windows and Mac bundled readmes match ten tools, 30-inch pipe references, schema12 and explicit catalogue U; native workflows rerun after these packaging-text corrections.",
+  "bundled_tutorial": "Both languages retain 18 chapters; ten-tool, 30-inch and explicit photometric U notes corrected; all three embedded copies match; 20 scenarios / 87 checks per platform pass."
 }

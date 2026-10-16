@@ -29,7 +29,7 @@
 
 ## 驗證與原始資料
 
-[Windows 教學檢查](verification-windows.json) · [macOS 教學檢查](verification-macos.json) · [V5.6.0 原生交付](../2026-10-13-v5.6-audit-stress.md)
+[Windows 教學檢查](verification-windows.json) · [macOS 教學檢查](verification-macos.json) · [V5.6.0 原生交付](../2026-10-16-gemini-integration-review.md)
 
 <details>
 <summary>開發者：重現教學數值與報告</summary>
