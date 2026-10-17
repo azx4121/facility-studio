@@ -475,20 +475,30 @@ class SimplePage(ttk.Frame):
 
     def apply_dialux_mode(self):
         if self.tool != "lighting":
-            return
+            return False
+        self.advanced.set(True)
+        if self.variables["area_mode"].get() != "長×寬":
+            # Area alone cannot establish the actual room geometry. Keep the
+            # current calculation instead of adopting hidden length/width drafts.
+            self.update_visibility()
+            self.calculate(True)
+            if self.result is not None:
+                self.banner.show(
+                    "已保留目前面積與燈具條件。室指數 K 需要實際長寬；請選長×寬並確認尺寸後，再按此按鈕。",
+                    "warning",
+                )
+                self.reveal(self.widgets["area_mode"])
+            return False
         self.app.invalidate_dependents(self.tool)
         self.suspended = True
         try:
-            self.advanced.set(True)
-            self.variables["mode"].set("反算燈數")
-            self.variables["lumen_mode"].set("燈具型錄流明")
-            self.variables["area_mode"].set("長×寬")
             self.variables["u_mode"].set("型錄 U＋室指數 K 檢核")
             self.previous = self.data()
         finally:
             self.suspended = False
         self.update_visibility()
         self.calculate(True)
+        return self.result is not None
 
     def reset(self):
         self.app.invalidate_dependents(self.tool)

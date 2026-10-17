@@ -1,7 +1,7 @@
 Facility Studio V5.6.0｜Windows 廠務工程初估工具
 DESIGNED BY ANDY HUANG ©
 
-本版修訂：V5.6.0 · Windows win.4
+本版修訂：V5.6.0 · Windows win.5
 十項快算包含潔淨室風量、熱負荷初估與冰水泵浦，支援上游帶入、KPI與HTML總覽。
 舊案以schema 12移轉並保留原假設；FFU氣流路徑／ACH基準須明確選擇。
 照明使用型錄利用係數U與實際長寬的室指數K；不以幾何公式取代燈具配光資料。
@@ -64,3 +64,5 @@ https://github.com/azx4121/facility-studio/blob/main/README.en.md
 https://github.com/azx4121/facility-studio/blob/main/docs/development.md
 Historical platform instructions:
 https://github.com/azx4121/facility-studio/blob/main/docs/history/windows-v5.5.6-readme.txt
+
+win.5：照明模式切換保留面積與流明來源；室指數 K 須先確認實際長寬。

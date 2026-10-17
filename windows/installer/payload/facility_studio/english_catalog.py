@@ -2,6 +2,11 @@
 
 TEXT = {}
 
+TEXT["已保留目前面積與燈具條件。室指數 K 需要實際長寬；請選長×寬並確認尺寸後，再按此按鈕。"] = (
+    "Current area and luminaire inputs are retained. Room index K needs actual length and width; "
+    "select Length × width, confirm the dimensions, then press this button again."
+)
+
 
 def _add(rows):
     for row in rows.strip("\n").splitlines():

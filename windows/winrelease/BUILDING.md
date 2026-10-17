@@ -2,9 +2,11 @@
 
 [目前下載與英文安裝](../../README.en.md#download-and-run) · [工程覆核與原生驗收](../../docs/2026-10-16-gemini-integration-review.md)
 
-Developer build only: the V5.6.0 EXE bundles Python; publication requires both native jobs to pass. Normal users do not run pip or these build commands. ZIPs are built for native acceptance and developer diagnostics. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.6.0-win.4 and refuses to overwrite an existing published release. For a future release, update the builder, verifier, publisher and workflow version/output names together. See [distribution signing](../../docs/signing.en.md).
+Developer build only: the V5.6.0 EXE bundles Python; publication requires both native jobs to pass. Normal users do not run pip or these build commands. ZIPs are built for native acceptance and developer diagnostics. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.6.0-win.5 and refuses to overwrite an existing published release. For a future release, update the builder, verifier, publisher and workflow version/output names together. See [distribution signing](../../docs/signing.en.md).
 
-## win.4 修訂與封裝
+## win.5 修訂與封裝
+
+win.5 修正照明 F07：保留面積模式、計算模式與流明來源；m²／坪／體積需先確認實際長寬才能啟用 K。`tests/lighting_presets.py --gui` 與封裝 EXE 的 `winrelease.selftest` 均執行中英文實際按鈕回歸。其他稽核項目 F01–F06 仍另案追蹤。
 
 獨立快算共十項，包含新增的 `cleanroom`、`heat_loads`、`pumps`。CLI、GUI、雙語與原生 self-test 均涵蓋十項；設備表仍是原有七個系統。照明採型錄 U 與實際室指數 K，水管參考延伸至30吋。
 
@@ -12,7 +14,7 @@ Developer build only: the V5.6.0 EXE bundles Python; publication requires both n
 
 當前線上 Setup 的 `windows/installer/payload`、`payload_sha256.json` 與 binary 須由 `windows/build_release.py` 成套更新，通過完整解壓與逐檔一致性檢查；這不等於離線 EXE 原生驗收。V5.5.4 歷史安裝器的固定 fixture 位於 `windows/tests/fixtures`，不可改寫。離線流程直接封裝當前來源。
 
-win.4 covers ten independent calculators and seven equipment systems. Build current sources/resources/defaults, verify schema migration and all ten tools, then complete native acceptance. Preserve published releases and frozen historical installer fixtures. See the [engineering audit and release status](../../docs/2026-10-16-gemini-integration-review.md).
+win.5 covers ten independent calculators and seven equipment systems. Build current sources/resources/defaults, verify schema migration and all ten tools, then complete native acceptance. Preserve published releases and frozen historical installer fixtures. See the [engineering audit and release status](../../docs/2026-10-16-gemini-integration-review.md).
 
 `entry.py` 為單檔 EXE 的視窗模式入口；日常使用不執行 pip、不尋找外部 Python、不下載元件。
 主應用程式與完整計算邏輯仍使用 `windows/facility_studio`；不是另一套精簡計算版本。
@@ -48,12 +50,12 @@ python -m winrelease.verify --assets C:\FacilityStudioBuild --output C:\Facility
 
 
 
-V5.6.0 win.4 / 十項快算、氣流路徑、工程帶入與設備總覽
+V5.6.0 win.5 / 十項快算、氣流路徑、工程帶入與設備總覽
 簡易工具左下角持續顯示 DESIGNED BY ANDY HUANG ©。
 簡易工具、完整工程工作台及單台空調箱的「新手教學」可開啟離線中英逐步教學。
 完整 ZIP 的 Beginner_Tutorial/START_HERE.html 也可直接閱讀。
 V5.6.0 可由完整工作台「開啟練習新案」建立副本；原廠選型與設備阻力等待補資料仍需補。
-V5.6.0 retains author credit, offline walkthroughs, keypad checks, factory gases and retained velocity when reselecting the same gas. win.4 additionally validates airflow topology, upstream electrical units, manual photometric U and equipment summaries.
+V5.6.0 retains author credit, offline walkthroughs, keypad checks, factory gases and retained velocity when reselecting the same gas. win.5 additionally validates airflow topology, upstream electrical units, manual photometric U and equipment summaries.
 No additional Python installation or internet is needed for the tutorial.
 
 

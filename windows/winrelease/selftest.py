@@ -231,6 +231,8 @@ def run(destination):
             check_keypad_ui(root, app, workbench, check, pump)
             from facility_studio.v560_acceptance import run_ui as check_v560_ui
             check_v560_ui(root, app, workbench, check, pump)
+            from facility_studio.lighting_acceptance import run_ui as check_lighting_ui
+            check_lighting_ui(root, app, check, pump)
             check("Native GUI heartbeat", lambda: (pump(), True)[1])
             from matplotlib.figure import Figure
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -274,7 +276,7 @@ def run(destination):
 
     result = {
         "version": __version__,
-        "revision": "win.4",
+        "revision": "win.5",
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,

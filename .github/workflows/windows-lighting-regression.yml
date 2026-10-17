@@ -1,0 +1,38 @@
+name: Windows lighting area-preservation regression
+
+on:
+  push:
+    branches: [main, fix/windows-lighting-f07]
+    paths:
+      - .github/workflows/windows-lighting-regression.yml
+      - windows/facility_studio/**
+      - windows/tests/lighting_presets.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighting:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, windows-2025]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.13.15'
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r windows/winrelease/requirements.lock.txt
+      - name: Verify independent formulas and real lighting widgets
+        run: |
+          python windows/tests/lighting_presets.py --gui
+          if ($LASTEXITCODE -ne 0) { throw "Lighting regression failed" }

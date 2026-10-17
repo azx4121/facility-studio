@@ -6,6 +6,8 @@ Open **Lighting** and choose illuminance estimation or luminaire-count calculati
 
 Luminaire output is **lumens (lm)**; illuminance is **lux = lm/m²**. Watts alone do not determine lux. Use manufacturer lumens when known; an LED-watts estimate must retain its assumed efficacy.
 
+Windows **win.5**: the catalogue-U/room-index action retains the current area, calculation mode and lumen source. For m², ping or volume it asks you to select length × width and enter the actual dimensions; it never adopts hidden dimension drafts. K requires actual geometry, and U still comes from the manufacturer's photometric/reflectance data. See [F07 correction and acceptance](../2026-10-18-windows-lighting-f07.md). macOS mac.6 has not received this interaction fix.
+
 <a id="case-08"></a>
 ## Case 08: 90 m³, 3 m height, 40 W × 10 luminaires
 

@@ -52,6 +52,7 @@ jobs:
             }
           }
           Invoke-CheckedPython windows/tests/electrical_units.py --gui
+          Invoke-CheckedPython windows/tests/lighting_presets.py --gui
           Invoke-CheckedPython windows/tests/regression.py
           Invoke-CheckedPython windows/tests/v55_features.py
           Invoke-CheckedPython windows/tests/v552_core.py
