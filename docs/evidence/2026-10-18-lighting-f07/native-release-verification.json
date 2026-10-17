@@ -1,0 +1,350 @@
+{
+  "schema": 1,
+  "finding": "F07",
+  "fixed_commit": "c34a12782f7c70fa79b9b7d395971a1070ee6492",
+  "windows_source_tree": "0613acfa8c3b50b77167bc19d4e51cd714f16912",
+  "source_gui_runs": [
+    {
+      "run_id": 39050412943,
+      "branch": "fix/windows-lighting-f07",
+      "jobs": [
+        {
+          "job_id": 117447673228,
+          "name": "lighting (windows-2022)",
+          "conclusion": "success",
+          "checks": 2571,
+          "formula_checks": 2500,
+          "gui_checks": 71
+        },
+        {
+          "job_id": 117447673718,
+          "name": "lighting (windows-2025)",
+          "conclusion": "success",
+          "checks": 2571,
+          "formula_checks": 2500,
+          "gui_checks": 71
+        }
+      ]
+    },
+    {
+      "run_id": 39050546069,
+      "branch": "main",
+      "conclusion": "success"
+    }
+  ],
+  "source_regression_runs": [
+    {
+      "run_id": 39050412871,
+      "branch": "fix/windows-lighting-f07",
+      "jobs": [
+        {
+          "job_id": 117447673272,
+          "name": "windows source on Linux / Python 3.13",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 117447673461,
+          "name": "macos source on Linux / Python 3.13",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "run_id": 39050545990,
+      "branch": "main",
+      "conclusion": "success"
+    }
+  ],
+  "gui_scope": "Native Windows Python/Tk source GUI; frozen EXE acceptance is separately validated in native_jobs and native_summaries.",
+  "verified_reproducer": {
+    "area_m2": 75,
+    "target_lux": 500,
+    "lumens_per_fixture": 4000,
+    "utilization": 0.6,
+    "maintenance": 0.8,
+    "expected_count": 20,
+    "expected_rounded_average_lux": 512
+  },
+  "unchanged_mac_release": "v5.6.0-mac.6",
+  "unresolved_findings": [
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "F05",
+    "F06"
+  ],
+  "checked_at": "2026-10-17T17:11:51.008874+00:00",
+  "native_release_run": {
+    "id": 39050546260,
+    "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39050546260",
+    "head_sha": "c34a12782f7c70fa79b9b7d395971a1070ee6492",
+    "conclusion": "success",
+    "created_at": "2026-10-17T16:42:02Z",
+    "updated_at": "2026-10-17T17:10:04Z"
+  },
+  "native_jobs": [
+    {
+      "id": 117448061505,
+      "name": "build",
+      "conclusion": "success",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39050546260/job/117448061505"
+    },
+    {
+      "id": 117451162101,
+      "name": "verify",
+      "conclusion": "success",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39050546260/job/117451162101"
+    },
+    {
+      "id": 117453857201,
+      "name": "publish",
+      "conclusion": "success",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39050546260/job/117453857201"
+    }
+  ],
+  "release": {
+    "id": 415950448,
+    "tag_name": "v5.6.0-win.5",
+    "html_url": "https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.5",
+    "target_commitish": "c34a12782f7c70fa79b9b7d395971a1070ee6492",
+    "published_at": "2026-10-17T17:10:01Z",
+    "prerelease": true
+  },
+  "tag_sha": "c34a12782f7c70fa79b9b7d395971a1070ee6492",
+  "build_manifest": {
+    "revision": "5.6.0-win.5",
+    "source_commit": "c34a12782f7c70fa79b9b7d395971a1070ee6492",
+    "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-2022Server-10.0.20348-SP0",
+    "packages": {
+      "altgraph": "0.17.5",
+      "contourpy": "1.4.0",
+      "cycler": "0.12.1",
+      "fonttools": "4.66.1",
+      "kiwisolver": "1.5.1",
+      "matplotlib": "3.10.9",
+      "numpy": "2.3.3",
+      "packaging": "26.3",
+      "pefile": "2024.8.26",
+      "pillow": "12.3.0",
+      "pip": "26.2.1",
+      "pyinstaller": "6.22.3",
+      "pyinstaller-hooks-contrib": "2026.8",
+      "pyparsing": "3.3.3",
+      "python-dateutil": "2.9.0.post0",
+      "pywin32-ctypes": "0.2.3",
+      "setuptools": "84.0.0",
+      "six": "1.17.0"
+    },
+    "exe_sha256": "0b308ba4195ffd50a7c6f3341fa7ad72b07b60ae3ea67bc5e443a256f3b3e65f",
+    "exe_bytes": 41044893,
+    "build_only_internet": true,
+    "runtime_requires_python_installation": false
+  },
+  "artifacts": [
+    {
+      "id": 12108560312,
+      "name": "win560-build-evidence",
+      "size_in_bytes": 4928096,
+      "url": "https://api.github.com/repos/azx4121/facility-studio/actions/artifacts/12108560312",
+      "archive_download_url": "https://api.github.com/repos/azx4121/facility-studio/actions/artifacts/12108560312/zip",
+      "expired": false,
+      "created_at": "2026-10-17T16:56:42Z",
+      "expires_at": "2026-10-31T16:56:41Z",
+      "updated_at": "2026-10-17T16:56:42Z",
+      "digest": "sha256:8e7b591d3106e85964408e7e58278c39457b7a7b7842e14190a9c41f0fcb21e1",
+      "workflow_run": {
+        "id": 39050546260,
+        "repository_id": 1406593429,
+        "head_repository_id": 1406593429,
+        "head_branch": "main",
+        "head_sha": "c34a12782f7c70fa79b9b7d395971a1070ee6492"
+      }
+    },
+    {
+      "id": 12108361381,
+      "name": "win560-second-windows-evidence",
+      "size_in_bytes": 1825593,
+      "url": "https://api.github.com/repos/azx4121/facility-studio/actions/artifacts/12108361381",
+      "archive_download_url": "https://api.github.com/repos/azx4121/facility-studio/actions/artifacts/12108361381/zip",
+      "expired": false,
+      "created_at": "2026-10-17T17:09:44Z",
+      "expires_at": "2026-10-31T17:09:42Z",
+      "updated_at": "2026-10-17T17:09:44Z",
+      "digest": "sha256:2e92379a8c8db4039b25f287d6ed9b341f1c5ef656df77dfc26a8ed731868f34",
+      "workflow_run": {
+        "id": 39050546260,
+        "repository_id": 1406593429,
+        "head_repository_id": 1406593429,
+        "head_branch": "main",
+        "head_sha": "c34a12782f7c70fa79b9b7d395971a1070ee6492"
+      }
+    },
+    {
+      "id": 12108180655,
+      "name": "win560-delivery",
+      "size_in_bytes": 82670777,
+      "url": "https://api.github.com/repos/azx4121/facility-studio/actions/artifacts/12108180655",
+      "archive_download_url": "https://api.github.com/repos/azx4121/facility-studio/actions/artifacts/12108180655/zip",
+      "expired": false,
+      "created_at": "2026-10-17T16:56:46Z",
+      "expires_at": "2026-10-31T16:56:43Z",
+      "updated_at": "2026-10-17T16:56:46Z",
+      "digest": "sha256:f7d5b642e681b32335218179315e7f869eda1fa9b1590f5f19fddd31c00b2077",
+      "workflow_run": {
+        "id": 39050546260,
+        "repository_id": 1406593429,
+        "head_repository_id": 1406593429,
+        "head_branch": "main",
+        "head_sha": "c34a12782f7c70fa79b9b7d395971a1070ee6492"
+      }
+    }
+  ],
+  "public_download_verification": {
+    "checked_at": "2026-10-17T17:11:41.610974+00:00",
+    "method": "Fresh HTTPS downloads compared with native binary, GitHub asset digests, sizes and SHA256SUMS.txt",
+    "files": [
+      {
+        "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+        "asset_id": 651058799,
+        "public_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.5/Facility_Studio_V5_6_0_Windows_Offline.exe",
+        "bytes": 41044893,
+        "sha256": "0b308ba4195ffd50a7c6f3341fa7ad72b07b60ae3ea67bc5e443a256f3b3e65f",
+        "verified": true
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "asset_id": 651058894,
+        "public_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.5/SHA256SUMS.txt",
+        "bytes": 109,
+        "sha256": "c8a33f9e2e6ebacf1408818f9c1da240e2b456edf3040a2291930f7670c4235f",
+        "verified": true
+      }
+    ]
+  },
+  "preserved_releases": [
+    {
+      "tag": "v5.6.0-win.4",
+      "id": 415040406,
+      "unchanged": true,
+      "assets": [
+        {
+          "id": 647548251,
+          "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+          "size": 41038610,
+          "digest": "sha256:49a04498b8353f4ef1f0d202de48576af925502dff202c232d2356b02a48a802"
+        },
+        {
+          "id": 647548343,
+          "name": "SHA256SUMS.txt",
+          "size": 109,
+          "digest": "sha256:11885f5889bf2498661ed4f9c4f4b1bf59c71d67eb4c3d3c34b331d43c9d9a44"
+        }
+      ]
+    },
+    {
+      "tag": "v5.6.0-mac.6",
+      "id": 415125492,
+      "unchanged": true,
+      "assets": [
+        {
+          "id": 647793779,
+          "name": "Facility_Studio_V5_6_0_macOS_mac6.dmg",
+          "size": 146283098,
+          "digest": "sha256:fb5d4cf53856dcb22d735c5f67be6aebd86a4b03e1d70218720ebee1bbc4f4d7"
+        },
+        {
+          "id": 647794060,
+          "name": "SHA256SUMS.txt",
+          "size": 104,
+          "digest": "sha256:03eb67e94c439b6469d1b87f156bb6f88894858668050ad13d46fae4cb6c7a5a"
+        }
+      ]
+    },
+    {
+      "tag": "v5.6.0-mac.5",
+      "id": 411817363,
+      "unchanged": true,
+      "assets": [
+        {
+          "id": 637405595,
+          "name": "Facility_Studio_V5_6_0_macOS_mac5.dmg",
+          "size": 141828767,
+          "digest": "sha256:bcd0854fa7f30b78d09ceaf0e53d285e5c75e6363800fc18a046f875eca70e9d"
+        },
+        {
+          "id": 637405793,
+          "name": "SHA256SUMS.txt",
+          "size": 104,
+          "digest": "sha256:5b6a5d761c468c589e277b7ca98067550dc7c3ad786f1b4e56af02ca7de56016"
+        }
+      ]
+    },
+    {
+      "tag": "v5.6.0-win.3",
+      "id": 410882868,
+      "unchanged": true,
+      "assets": [
+        {
+          "id": 634580599,
+          "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+          "size": 40917171,
+          "digest": "sha256:4f92d83cdb08d65f660511ac8f1de0a889746e9386d023808baf392451b040c0"
+        },
+        {
+          "id": 634580731,
+          "name": "SHA256SUMS.txt",
+          "size": 109,
+          "digest": "sha256:f32fdd9d3fb36a7c9810852788c8e8e9766c3d51bb00f08d64d383b119aaebbc"
+        }
+      ]
+    },
+    {
+      "tag": "v5.6.0-win.2",
+      "id": 410432709,
+      "unchanged": true,
+      "assets": [
+        {
+          "id": 633310391,
+          "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+          "size": 40903786,
+          "digest": "sha256:4181edbe296902e940c8db9eb6e4848380a4a14bbbfd9ef27bf91992d15394ff"
+        },
+        {
+          "id": 633310518,
+          "name": "SHA256SUMS.txt",
+          "size": 109,
+          "digest": "sha256:d9973386f73ca117daa46bbdd089bf434f3cfc443fa185a1bbbc0cea051de43c"
+        }
+      ]
+    },
+    {
+      "tag": "v5.6.0-win.1",
+      "id": 410416298,
+      "unchanged": true,
+      "assets": [
+        {
+          "id": 633266767,
+          "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+          "size": 40904908,
+          "digest": "sha256:73e86aca9e06b506fd3804cf0a3fe202bf9fd769e446a1e8a4a0ed817419eff9"
+        },
+        {
+          "id": 633266861,
+          "name": "SHA256SUMS.txt",
+          "size": 109,
+          "digest": "sha256:49134aebda2b7636eb141f435936bf91c997d4fdfda8e26db64295921d657eec"
+        }
+      ]
+    }
+  ],
+  "native_summaries": [
+    "windows-2022/summary.json",
+    "windows-2025/summary.json"
+  ],
+  "downloaded_evidence_artifact_ids": [
+    12108560312,
+    12108361381
+  ]
+}

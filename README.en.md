@@ -11,13 +11,13 @@ Facility Studio is a desktop tool for facility, electrical and HVAC engineers. U
 <a id="installation-and-first-launch"></a>
 ## Download and run
 
-Published version: **V5.6.0 public test release**, Windows **win.4** / macOS **mac.6**, published 2026-10-16 after both native platform gates passed. Prior [win.3](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.3) / [mac.5](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-mac.5) releases remain available.
+Published version: **V5.6.0 public test release**, Windows **win.5** (2026-10-18, lighting correction) / macOS **mac.6** (2026-10-16). Each published binary passed its native acceptance gates. Previous releases remain available.
 
-This release's water sizing extends to **30 inches**; **all ten calculators are direct sidebar buttons** (including Cleanroom airflow, Heat load estimate and Chilled-water pump); the gas calculator and workbench share **50 factory gases plus custom mixtures**. Added gases with demand require an entered design velocity. Zero-demand workbench rows retain unused drafts without blocking the whole project. The test process includes **100 distinct scenarios, repeated 20 times each**. Explicit engineering rejections are distinguished from software faults. [Engineering review, dimension sources and scope](docs/2026-10-16-gemini-integration-review.md) · [Current native delivery and SHA256](docs/2026-10-16-gemini-integration-review.md#原生發布狀態)
+This release's water sizing extends to **30 inches**; **all ten calculators are direct sidebar buttons** (including Cleanroom airflow, Heat load estimate and Chilled-water pump); the gas calculator and workbench share **50 factory gases plus custom mixtures**. Added gases with demand require an entered design velocity. Zero-demand workbench rows retain unused drafts without blocking the whole project. The test process includes **100 distinct scenarios, repeated 20 times each**. Explicit engineering rejections are distinguished from software faults. [Engineering review, dimension sources and scope](docs/2026-10-16-gemini-integration-review.md) · [Windows win.5 acceptance and SHA256](docs/2026-10-18-windows-lighting-f07.md#原生發布結果)
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows 10/11, Intel/AMD x64 | [**Download Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.4/Facility_Studio_V5_6_0_Windows_Offline.exe) | Save and double-click; allow time for the bundled environment to unpack on first launch |
+| Windows 10/11, Intel/AMD x64 | [**Download Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.5/Facility_Studio_V5_6_0_Windows_Offline.exe) | Save and double-click; allow time for the bundled environment to unpack on first launch |
 | macOS, Apple Silicon / Intel | [**Download macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.6/Facility_Studio_V5_6_0_macOS_mac6.dmg) | Open the DMG, drag Facility Studio into Applications, then launch it there |
 
 Download one file for your platform. Help and equipment templates are bundled. [Versions and SHA256](https://github.com/azx4121/facility-studio/releases) · [Compatibility and first launch](docs/faq.en.md#compatibility)
@@ -25,7 +25,9 @@ Download one file for your platform. Help and equipment templates are bundled. [
 The Windows EXE has no official publisher signature; the Mac app has no Developer ID or Apple notarization. First launch may show a security prompt. Check the download source and follow the [security-prompt guide](docs/signing.en.md).
 
 <a id="current-source-revision"></a>
-## Engineering and dashboard revision (win.4 / mac.6)
+## Current revision (win.5 / mac.6)
+
+Windows **win.5 fixes lighting F07**: the catalogue-U/room-index action retains area, calculation mode and lumen source, and requests actual dimensions before enabling K. This prevents hidden old dimensions from reducing the fixture count by 60%. [Correction and acceptance](docs/2026-10-18-windows-lighting-f07.md). macOS remains mac.6.
 
 This revision includes **ten quick tools**, including Cleanroom airflow, Heat load estimate and Chilled-water pump, plus **explicit catalogue utilization factor U with room-index K checks** in both the Lighting calculator and Full Workbench. It adds explicit MAU/FFU airflow topology and ACH basis, nominal FFU module/coverage checks, separate pump shaft/electrical power, and an upstream-import chain from room airflow through heat load, water, pump and electrical demand. Imported electrical totals use explicit device inputs; chiller cooling is converted only with COP or an entered electrical input. Reports begin with calculated-demand and suggested-selection summaries, with KPI cards and HTML tables.
 
@@ -48,7 +50,7 @@ Each quick tool works independently. Adopted conditions and defaults appear on s
 
 ![Facility Studio V5.6.0 cleanroom dashboard and ten direct calculators](docs/images/v560-dashboard-source-en.png)
 
-*Actual reviewed source running on Linux/Tk. Ten calculators are directly available on the left, with TXT/HTML export below.*
+*V5.6.0 interface illustration captured from the win.4/mac.6 source on Linux/Tk. The Windows win.5 lighting action retains inputs as described above.*
 
 ## Try one small calculation first
 
@@ -66,7 +68,7 @@ For a project report, open **Full workbench → Beginner tutorial** and follow t
 - **Data:** calculations, saved projects and schedule imports are processed locally. User-entered names and notes retain their original language.
 - **License:** internal company engineering work, paid engineering projects and delivered calculation reports are permitted. Software resale, paid bundling or paid hosted software services require separate written permission. [Full terms](LICENSE) · [License examples](LICENSE_GUIDE.en.md)
 
-The published files passed native acceptance on Windows Server 2022/2025 x64 and Apple Silicon/Intel macOS 15. Windows 10/11 and macOS 11+ are support/packaging targets; other OS versions, devices and enterprise policies need individual confirmation. [win.4 / mac.6 verification](docs/2026-10-16-gemini-integration-review.md#原生發布狀態)
+The published files passed native acceptance on Windows Server 2022/2025 x64 and Apple Silicon/Intel macOS 15. Windows 10/11 and macOS 11+ are support/packaging targets; other OS versions, devices and enterprise policies need individual confirmation. [Windows win.5 verification](docs/2026-10-18-windows-lighting-f07.md#原生發布結果) · [macOS mac.6 verification](docs/2026-10-16-gemini-integration-review.md#原生發布狀態)
 
 ## Help and feedback
 
@@ -75,3 +77,5 @@ The published files passed native acceptance on Windows Server 2022/2025 x64 and
 Use [GitHub Issues](https://github.com/azx4121/facility-studio/issues) to report a problem. Include app/OS versions, steps, all values and units, and expected/actual results. Use synthetic data and remove client secrets.
 
 **DESIGNED BY ANDY HUANG ©** · Maintainer [azx4121](https://github.com/azx4121) · [Third-party components](THIRD_PARTY_NOTICES.md)
+
+Known audit findings F01–F06 remain open; win.5 fixes lighting F07 only. [Remaining findings](docs/2026-10-18-windows-lighting-f07.md#尚待修正項目).

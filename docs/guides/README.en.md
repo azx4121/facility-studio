@@ -72,6 +72,8 @@ See the [licensing examples](../../LICENSE_GUIDE.en.md) for permitted use. Repor
 
 [FAQ](../faq.en.md) · [Native acceptance](../2026-10-16-gemini-integration-review.md#原生發布狀態) · [Historical records](../history/README.md#english)
 
-## Current release (win.4 / mac.6)
+## Current release (win.5 / mac.6)
 
-This release adds cleanroom airflow, heat-load and water-pump calculators, explicit airflow topology, upstream transfers and HTML executive reports. These changes are included in the Windows win.4 / Mac mac.6 downloads. See the [integration review](../2026-10-16-gemini-integration-review.md#english) for model boundaries, compatibility and native acceptance.
+This release adds cleanroom airflow, heat-load and water-pump calculators, explicit airflow topology, upstream transfers and HTML executive reports. These changes are included in the Windows win.5 / Mac mac.6 downloads. See the [integration review](../2026-10-16-gemini-integration-review.md#english) for model boundaries, compatibility and native acceptance.
+
+Windows win.5 fixes the lighting action adopting hidden dimensions (F07); other audit findings remain separately tracked. [Lighting correction and acceptance](../2026-10-18-windows-lighting-f07.md).

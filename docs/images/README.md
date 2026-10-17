@@ -1,6 +1,7 @@
 # 介面截圖來源 / Screenshot provenance
 
-## V5.6.0 win.4／mac.6 來源：目前首頁
+以下圖片保留實際來源版本；Windows 目前下載為 win.5，其照明模式切換修正不改變本頁既有總覽配置。[win.5 驗收](../2026-10-18-windows-lighting-f07.md)。
+## V5.6.0 介面示意：win.4／mac.6 來源
 
 - `v560-dashboard-source-zh.png`（繁體中文）：SHA256 `38c2e46f6e5684d425527b3951fbb6677ac827ef27614daa252fbb436abd06fb`。
 - `v560-dashboard-source-en.png`（English）：SHA256 `9f355848884bcb84c05dfacbfa54ec150e6c549cd7d7abbef86bbf18b09ef01a`。
@@ -38,3 +39,10 @@ These are unmodified screenshots of the deliveredV5.6.0 win.3EXE. Earlier images
 兩張都是 [Windows 原生驗收](https://github.com/azx4121/facility-studio/actions/runs/38024376406) 的 `native/standalone` 實際截圖，原檔直接複製，未裁切、重畫或修改畫面。教學使用合成資料；系統桌面與背後其他視窗屬當時測試環境。
 
 Both are unmodified screenshots from the released V5.5.8 Windows native-acceptance run, rather than interface mockups. Earlier images in this folder retain their original version context.
+
+## V5.6.0 win.5 原生驗收
+
+- `v560-win5-native-en.png`：Windows Server 2022 實際執行 win.5 的英文電力頁，使用合成資料；直接複製原始截圖，保留驗收桌面與背景視窗。
+- 來源：[win.5 Windows 原生驗收](https://github.com/azx4121/facility-studio/actions/runs/39050546260)，build-evidence 的 `standalone/English_Electrical.png`。
+- 圖片 SHA256：`a585574af10bb9b72e7252e679a99d4eb9843443c269f38e1d198f193b9e8080`。
+- 受測 EXE SHA256：`0b308ba4195ffd50a7c6f3341fa7ad72b07b60ae3ea67bc5e443a256f3b3e65f`。

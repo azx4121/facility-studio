@@ -1,0 +1,980 @@
+[
+  {
+    "label": "standalone",
+    "platform": "Windows-2025Server-10.0.26100-SP0",
+    "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+    "revision": "win.5",
+    "frozen": true,
+    "all_gui_checks_passed": true,
+    "gui_checks": 318,
+    "f07_checks": [
+      {
+        "name": "F07 zh-Hant/m2 baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant preserves LED source and estimate mode",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant K uses the entered dimensions and mounting heights",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant invalid geometry clears results",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 en preserves LED source and estimate mode",
+        "passed": true
+      },
+      {
+        "name": "F07 en K uses the entered dimensions and mounting heights",
+        "passed": true
+      },
+      {
+        "name": "F07 en invalid geometry clears results",
+        "passed": true
+      }
+    ],
+    "delivery": {
+      "label": "standalone",
+      "gui_checks": 318,
+      "cli_tools": 10,
+      "firewall_outbound_blocked": true,
+      "network_audit_blocked": true,
+      "python_on_path": false,
+      "empty_working_directory": true,
+      "exe_sha256": "0b308ba4195ffd50a7c6f3341fa7ad72b07b60ae3ea67bc5e443a256f3b3e65f",
+      "passed": true
+    },
+    "stress100": {
+      "version": "5.6.0",
+      "passed": true,
+      "seed": 20261013,
+      "scenario_count": 100,
+      "distinct_physical_input_count": 100,
+      "repeat_per_scenario": 20,
+      "calculation_calls": 2400,
+      "simple_gas_calls": 200,
+      "expected_engineering_rejections": 2,
+      "software_passed": 100,
+      "software_failed": 0,
+      "engineering_status_counts": {
+        "待補資料": 100
+      },
+      "engineering_failed_scenarios": 0,
+      "engineering_pending_scenarios": 100,
+      "check_count": 3902,
+      "failed_checks": [],
+      "host": "Windows-2025Server-10.0.26100-SP0",
+      "frozen": true,
+      "seconds": 18.456329100000005,
+      "scope": "100 varied full-project calculation/report/persistence recipes; water and all factory gases; no GUI launch claim"
+    }
+  },
+  {
+    "label": "unicode-executable-path",
+    "platform": "Windows-2025Server-10.0.26100-SP0",
+    "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+    "revision": "win.5",
+    "frozen": true,
+    "all_gui_checks_passed": true,
+    "gui_checks": 318,
+    "f07_checks": [
+      {
+        "name": "F07 zh-Hant/m2 baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant preserves LED source and estimate mode",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant K uses the entered dimensions and mounting heights",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant invalid geometry clears results",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 en preserves LED source and estimate mode",
+        "passed": true
+      },
+      {
+        "name": "F07 en K uses the entered dimensions and mounting heights",
+        "passed": true
+      },
+      {
+        "name": "F07 en invalid geometry clears results",
+        "passed": true
+      }
+    ],
+    "delivery": {
+      "label": "unicode-executable-path",
+      "gui_checks": 318,
+      "cli_tools": 10,
+      "firewall_outbound_blocked": false,
+      "network_audit_blocked": true,
+      "python_on_path": false,
+      "empty_working_directory": true,
+      "exe_sha256": "0b308ba4195ffd50a7c6f3341fa7ad72b07b60ae3ea67bc5e443a256f3b3e65f",
+      "passed": true
+    },
+    "stress100": {
+      "version": "5.6.0",
+      "passed": true,
+      "seed": 20261013,
+      "scenario_count": 100,
+      "distinct_physical_input_count": 100,
+      "repeat_per_scenario": 20,
+      "calculation_calls": 2400,
+      "simple_gas_calls": 200,
+      "expected_engineering_rejections": 2,
+      "software_passed": 100,
+      "software_failed": 0,
+      "engineering_status_counts": {
+        "待補資料": 100
+      },
+      "engineering_failed_scenarios": 0,
+      "engineering_pending_scenarios": 100,
+      "check_count": 3902,
+      "failed_checks": [],
+      "host": "Windows-2025Server-10.0.26100-SP0",
+      "frozen": true,
+      "seconds": 18.593006699999933,
+      "scope": "100 varied full-project calculation/report/persistence recipes; water and all factory gases; no GUI launch claim"
+    }
+  },
+  {
+    "label": "zip-extracted",
+    "platform": "Windows-2025Server-10.0.26100-SP0",
+    "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+    "revision": "win.5",
+    "frozen": true,
+    "all_gui_checks_passed": true,
+    "gui_checks": 318,
+    "f07_checks": [
+      {
+        "name": "F07 zh-Hant/m2 baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/m2 exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/ping exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/volume exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant/geometry exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant preserves LED source and estimate mode",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant K uses the entered dimensions and mounting heights",
+        "passed": true
+      },
+      {
+        "name": "F07 zh-Hant invalid geometry clears results",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/m2 exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/ping exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/volume exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry baseline is 75 m2 / 20 fixtures",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 0 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 0 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 1 preserves every engineering input",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry repeat 1 only enables K with actual geometry",
+        "passed": true
+      },
+      {
+        "name": "F07 en/geometry exported TXT retains the adopted area and count",
+        "passed": true
+      },
+      {
+        "name": "F07 en preserves LED source and estimate mode",
+        "passed": true
+      },
+      {
+        "name": "F07 en K uses the entered dimensions and mounting heights",
+        "passed": true
+      },
+      {
+        "name": "F07 en invalid geometry clears results",
+        "passed": true
+      }
+    ],
+    "delivery": {
+      "label": "zip-extracted",
+      "gui_checks": 318,
+      "cli_tools": 10,
+      "firewall_outbound_blocked": true,
+      "network_audit_blocked": true,
+      "python_on_path": false,
+      "empty_working_directory": true,
+      "exe_sha256": "0b308ba4195ffd50a7c6f3341fa7ad72b07b60ae3ea67bc5e443a256f3b3e65f",
+      "passed": true
+    },
+    "stress100": {
+      "version": "5.6.0",
+      "passed": true,
+      "seed": 20261013,
+      "scenario_count": 100,
+      "distinct_physical_input_count": 100,
+      "repeat_per_scenario": 20,
+      "calculation_calls": 2400,
+      "simple_gas_calls": 200,
+      "expected_engineering_rejections": 2,
+      "software_passed": 100,
+      "software_failed": 0,
+      "engineering_status_counts": {
+        "待補資料": 100
+      },
+      "engineering_failed_scenarios": 0,
+      "engineering_pending_scenarios": 100,
+      "check_count": 3902,
+      "failed_checks": [],
+      "host": "Windows-2025Server-10.0.26100-SP0",
+      "frozen": true,
+      "seconds": 18.086762900000053,
+      "scope": "100 varied full-project calculation/report/persistence recipes; water and all factory gases; no GUI launch claim"
+    }
+  }
+]
