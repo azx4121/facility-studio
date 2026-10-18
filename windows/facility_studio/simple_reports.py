@@ -3,7 +3,7 @@ from .i18n import localized_report
 """Short results shared by the independent forms and their exports."""
 
 from .simple_schema import TOOLS
-from .version import VERSION
+from .version import VERSION, REPORT_VERSION
 from .gas_catalog import gas_label, CUSTOM_GAS
 from .i18n import verbatim
 
@@ -73,7 +73,10 @@ def presentation(result):
                 f"銅線 {result.get('insulation', 'XLPE')}｜端子 {result['terminal_c']}°C｜環溫 {result.get('ambient_c', 35):g}°C（溫度係數 {result['dt']:.2f}）｜同管 {result.get('loaded_conductors', 3)}根（同管係數 {result['dp']:.2f}）",
             ]
             if "design_breaker_a" in result:
-                details.append(f"1.25 倍連續負載初估 {result['design_breaker_a']:,.2f} A；馬達啟動、短路與保護協調另核。")
+                motor = result.get("shaft_kw") is not None or result["kind"] == "馬達"
+                basis = "馬達負載" if motor else "一般負載" if result["kind"] == "一般設備" else "連續負載"
+                factor = 1.0 if basis == "一般負載" else 1.25
+                details.append(f"設計電流依據：{basis}；運轉電流 {result['current_a']:,.4f} A × {factor:g}＝{result['design_a']:,.4f} A；馬達啟動、短路與保護協調另核。")
             if "electrical_input_kw" in result:
                 details.append(f"有效輸入電功率 {result['electrical_input_kw']:,.3f} kW｜採用效率 {result.get('eta', 1):.3f}")
             if result.get("shaft_kw") is not None:
@@ -209,16 +212,65 @@ def result_rows(result):
     return rows
 
 
+def input_rows(result, inputs=None):
+    """Only supplied, active conditions; never invent a legacy result's inputs."""
+    from .simple_schema import active_field, defaults, input_unit
+    inputs = result.get("adopted_inputs", {}) if inputs is None else inputs
+    if not isinstance(inputs, dict):
+        return []
+    tool = result["tool"]
+    values = dict(defaults(tool), **inputs)
+    rows = []
+    for row in TOOLS[tool]["fields"]:
+        key = row["key"]
+        if key not in inputs or not active_field(tool, key, values):
+            continue
+        value = verbatim(values[key]) if key == "gas_name" else str(values[key])
+        if row["checkbox"]:
+            value = "是" if value == "1" else "否"
+        unit = input_unit(tool, row, values)
+        rows.append((row["label"], value + (" " + unit if unit else "")))
+    return rows
+
+
+def electrical_source_rows(pipeline):
+    """Retain individual equipment inputs even when different splits sum alike."""
+    known = {"FFU", "照明", "CHWP", "MAU", "製程設備", "Chiller"}
+    return [(row["name"] if row["name"] in known else verbatim(row["name"]),
+             f"{row['power_kw']:,.6f} kW", row["basis"])
+            for row in pipeline.get("electrical_loads", [])]
+
+
+def electrical_source_basis(pipeline):
+    inputs = pipeline.get("adopted_inputs", {}).get("electrical", {})
+    if float(inputs.get("chiller_input_kw", 0)):
+        return "冰機用電依據：明填冰機輸入電功率。"
+    cop = float(inputs.get("chiller_cop", 0))
+    if cop and "Chiller" in {row["name"] for row in pipeline.get("electrical_loads", [])}:
+        return f"冰機用電依據：冷量 {pipeline['heat_loads']['q_total_kw']:,.6f} kW ÷ COP {cop:g}。"
+    return ""
+
+
 @localized_report
 def pipeline_report(result):
     from .reports import executive_summary_text
 
-    lines = ["廠務跨模組設計摘要｜V" + VERSION, "", executive_summary_text(result)]
+    lines = ["廠務跨模組設計摘要｜V" + REPORT_VERSION, "", executive_summary_text(result)]
     pipeline = result.get("pipeline", result)
+    sources = electrical_source_rows(pipeline)
+    if sources:
+        lines += ["", "設備輸入用電來源"] + ["｜".join(row) for row in sources]
+        lines.append(f"設備輸入電功率合計：{sum(row['power_kw'] for row in pipeline['electrical_loads']):,.6f} kW")
+        if electrical_source_basis(pipeline):
+            lines.append(electrical_source_basis(pipeline))
     for key, value in pipeline.items():
         if isinstance(value, dict) and value.get("tool"):
             cards, details = presentation(value)
-            lines += ["", key] + [label + "：" + number for label, number in cards] + details
+            conditions = input_rows(value, pipeline.get("adopted_inputs", {}).get(key))
+            lines += ["", key, "輸入條件"] + [label + "：" + text for label, text in conditions]
+            if not conditions:
+                lines.append("採用輸入條件未附於此結果，請附原始輸入資料。")
+            lines += ["結果"] + [label + "：" + number for label, number in cards] + details
     if pipeline.get("warnings"):
         lines += ["", "需確認的條件"] + list(pipeline["warnings"])
     return "\n".join(lines) + "\n"
@@ -231,18 +283,10 @@ def tool_report(result, inputs):
 
     inputs = dict(defaults(result["tool"]), **inputs)
 
-    lines = [f"廠務簡易工具 {VERSION}｜{TOOLS[result['tool']]['title']}", "", "核心設計量"]
+    lines = [f"廠務簡易工具 {REPORT_VERSION}｜{TOOLS[result['tool']]['title']}", "", "核心設計量"]
     lines += [f"  {label}：{value}" for label, value in cards]
     lines += ["", "輸入條件"]
-    for row in TOOLS[result["tool"]]["fields"]:
-        key = row["key"]
-        if active_field(result["tool"], key, inputs):
-            value = verbatim(inputs[key]) if key == "gas_name" else str(inputs[key])
-            if row["checkbox"]:
-                value = "是" if value == "1" else "否"
-            if row["units"]:
-                value += " " + inputs.get(row["units"][0], row["units"][1][0])
-            lines.append(f"  {row['label']}：{value}")
+    lines += [f"  {label}：{value}" for label, value in input_rows(result, inputs)]
     lines += ["", "結果"] + [f"  {label}：{value}" for label, value in cards]
     if result["tool"] == "lighting" and inputs["area_mode"] == "體積 m³":
         lines.append(

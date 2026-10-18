@@ -1,6 +1,7 @@
 from .errors import InputError
 import copy
 import math
+from collections.abc import Mapping
 from .data import VOLTAGE_MAP
 from .engine import calculate, electrical_from_inputs, gas_from_inputs, migrate_project
 from .schema import FIELDS
@@ -223,8 +224,26 @@ def calculate_pipeline(inputs):
     from .simple_engines import calculate_tool
     from .simple_schema import defaults
 
+    tools = ("cleanroom", "lighting", "heat_loads", "water", "pumps", "electrical")
+    if not isinstance(inputs, Mapping):
+        raise InputError("串接輸入需為工具與欄位的對照表。", code="invalid_input")
+    unknown = set(inputs) - set(tools) - {"pipes"}
+    if unknown:
+        raise InputError("未知的串接工具：" + ", ".join(sorted(map(str, unknown))), code="unknown_field")
+    if "water" in inputs and "pipes" in inputs:
+        raise InputError("water 與 pipes 代表同一工具，請只提供一份水管輸入。", "water", code="conflicting_input")
+    for name, values in inputs.items():
+        tool = "water" if name == "pipes" else name
+        if not isinstance(values, Mapping):
+            raise InputError("工具輸入需為欄位對照表：" + name, name)
+        allowed = set(defaults(tool)) | ({"device_loads"} if tool == "electrical" else set())
+        unknown = set(values) - allowed
+        if unknown:
+            field = name + "." + str(sorted(unknown, key=str)[0])
+            raise InputError("未知的串接輸入欄位：" + field, field, code="unknown_field")
+
     results, adopted = {}, {}
-    for tool in ("cleanroom", "lighting", "heat_loads", "water", "pumps", "electrical"):
+    for tool in tools:
         if tool == "lighting" and tool not in inputs:
             continue
         values = defaults(tool)

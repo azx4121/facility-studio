@@ -2,12 +2,13 @@ name: Windows lighting and engineering audit regressions
 
 on:
   push:
-    branches: [main, fix/windows-lighting-f07, fix/windows-audit-six]
+    branches: [main, fix/windows-lighting-f07, fix/windows-audit-six, codex/win8-report-audit]
     paths:
       - .github/workflows/windows-lighting-regression.yml
       - windows/facility_studio/**
       - windows/tests/lighting_presets.py
       - windows/tests/audit_regressions.py
+      - windows/tests/report_regressions.py
   workflow_dispatch:
 
 permissions:
@@ -41,10 +42,17 @@ jobs:
         run: |
           python windows/tests/audit_regressions.py --gui --output "$env:RUNNER_TEMP/audit-regressions.json"
           if ($LASTEXITCODE -ne 0) { throw "Engineering audit regression failed" }
+      - name: Verify report intent, units, revision and actual export buttons
+        run: |
+          python windows/tests/report_regressions.py --gui --output "$env:RUNNER_TEMP/report-regressions.json"
+          if ($LASTEXITCODE -ne 0) { throw "Report regression failed" }
       - name: Retain audit evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: audit-regressions-${{ matrix.os }}
-          path: ${{ runner.temp }}/audit-regressions.json
+          path: |
+            ${{ runner.temp }}/audit-regressions.json
+            ${{ runner.temp }}/report-regressions.json
+            ${{ runner.temp }}/report-samples
           if-no-files-found: warn

@@ -54,6 +54,7 @@ jobs:
           Invoke-CheckedPython windows/tests/electrical_units.py --gui
           Invoke-CheckedPython windows/tests/lighting_presets.py --gui
           Invoke-CheckedPython windows/tests/audit_regressions.py --gui --output "$env:RUNNER_TEMP/audit-regressions.json"
+          Invoke-CheckedPython windows/tests/report_regressions.py --gui --output "$env:RUNNER_TEMP/report-regressions.json"
           Invoke-CheckedPython windows/tests/regression.py
           Invoke-CheckedPython windows/tests/v55_features.py
           Invoke-CheckedPython windows/tests/v552_core.py
@@ -98,6 +99,8 @@ jobs:
             ${{ runner.temp }}/win-use-cases.json
             ${{ runner.temp }}/win-native-stress-source.json
             ${{ runner.temp }}/audit-regressions.json
+            ${{ runner.temp }}/report-regressions.json
+            ${{ runner.temp }}/report-samples
             ${{ runner.temp }}/all-fields-*.json
             ${{ runner.temp }}/gemini-review-*.json
             ${{ runner.temp }}/cleanroom100*.json

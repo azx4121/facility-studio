@@ -11,6 +11,7 @@ import shutil
 import subprocess
 import sys
 import zipfile
+from facility_studio.version import BUILD_VERSION
 
 ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY = ROOT.parent
@@ -162,7 +163,7 @@ def main():
     (evidence / "Build_Manifest.json").write_text(
         json.dumps(
             {
-                "revision": "5.6.0-win.7",
+                "revision": BUILD_VERSION,
                 "source_commit": os.environ.get("GITHUB_SHA"),
                 "python": sys.version,
                 "platform": platform.platform(),

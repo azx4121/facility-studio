@@ -2,7 +2,13 @@
 
 [目前下載與英文安裝](../../README.en.md#download-and-run) · [工程覆核與原生驗收](../../docs/2026-10-16-gemini-integration-review.md)
 
-Developer build only: the V5.6.0 EXE bundles Python; publication requires both native jobs to pass. Normal users do not run pip or these build commands. ZIPs are built for native acceptance and developer diagnostics. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.6.0-win.7 and refuses to overwrite an existing published release. For a future release, update the builder, verifier, publisher and workflow version/output names together. See [distribution signing](../../docs/signing.en.md).
+Developer build only: the V5.6.0 EXE bundles Python; publication requires both native jobs to pass. Normal users do not run pip or these build commands. ZIPs are built for native acceptance and developer diagnostics. The publisher uploads only the native-tested EXE and filtered public SHA256SUMS without changing internal acceptance files. The current publisher targets v5.6.0-win.8 and refuses to overwrite an existing published release. Product/revision strings are defined in `facility_studio/version.py`; update the PE resource version with them. See [distribution signing](../../docs/signing.en.md).
+
+## win.8 report acceptance
+
+`tests/report_regressions.py --gui` checks R01–R05: reject unknown pipeline fields, independently validate the requested 50 m path and circuit-duty text, decode equipment-source tables, preserve active conditions and per-unit ratings, include fixed units and identify the revision. The 405 semantic checks and 14 real export-button checks also run inside `--audit-self-test`, separately from the retained 2,182 engineering numeric checks and 140 legacy entry/UI checks. The two report-suite entry checks bring the extended top-level count to 142.
+
+Core acceptance disposes its temporary unmanaged TkAgg test canvas before a minimize/restore cycle and captures both the pre-cleanup observation and final electrical/air forms. Final form layout and actual canvas pixels are required; capture failure cannot be reported as visual success. This strengthens hosted Windows evidence without asserting physical Windows 10/11 DPI certification.
 
 ## win.7 修訂與封裝
 

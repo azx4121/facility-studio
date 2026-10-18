@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import sys
 import traceback
+from facility_studio.version import REVISION
 
 
 def main():
@@ -21,7 +22,7 @@ def main():
             sys.stdout = log_file
         if sys.stderr is None:
             sys.stderr = log_file
-        print("\nFacility Studio win.7 start " + datetime.now().isoformat())
+        print("\nFacility Studio " + REVISION + " start " + datetime.now().isoformat())
 
     if os.environ.get("FACILITY_TEST_BLOCK_NETWORK") == "1":
         def offline_audit(event, arguments):

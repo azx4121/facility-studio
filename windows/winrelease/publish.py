@@ -1,4 +1,4 @@
-"""Publish only verified win.7 assets; preserve every existing published release."""
+"""Publish only verified current assets; preserve every published release."""
 
 import argparse
 import hashlib
@@ -11,10 +11,12 @@ import urllib.parse
 import urllib.request
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tools.public_release_policy import prepare_public_assets
+from facility_studio.version import BUILD_VERSION, REVISION
 
 REPOSITORY = "azx4121/facility-studio"
-TAG = "v5.6.0-win.7"
+TAG = "v" + BUILD_VERSION
 FILENAMES = (
     "Facility_Studio_V5_6_0_Windows_Offline.exe",
     "SHA256SUMS.txt",
@@ -76,7 +78,7 @@ def main():
         payload = {
             "tag_name": TAG,
             "target_commitish": commit,
-            "name": "Facility Studio V5.6.0｜Windows 離線直接執行版 win.7",
+            "name": "Facility Studio V5.6.0｜Windows 離線直接執行版 " + REVISION,
             "body": body,
             "draft": True,
             "prerelease": True,

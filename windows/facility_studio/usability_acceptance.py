@@ -74,7 +74,8 @@ def run(root, app, main, check, pump, output=None):
             check("V556 diagnostics and model share the product version", lambda: __version__ == VERSION)
             check("V556 quick-tool title uses the product version", lambda: VERSION in root.title())
             check("V556 quick-tool report uses the product version", lambda: VERSION in tool_report(app.pages["electrical"].result, app.pages["electrical"].data()).splitlines()[0])
-            check("V556 printable report uses the product version", lambda: "V" + VERSION + "｜" in summary_html(main.result))
+            from .version import REPORT_VERSION
+            check("V556 printable report uses the product and revision", lambda: "V" + REPORT_VERSION + "｜" in summary_html(main.result))
             def toolbar_fit():
                 pump()
                 left = main.root.winfo_rootx()

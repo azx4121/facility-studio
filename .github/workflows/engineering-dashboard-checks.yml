@@ -101,6 +101,12 @@ jobs:
           set -euo pipefail
           xvfb-run -a python "${{ matrix.source }}/tests/electrical_units.py" --gui
           xvfb-run -a -s "-screen 0 1920x1440x24" python tools/verify_dashboard_gui.py --platform "${{ matrix.source }}" --output "$RUNNER_TEMP/engineering-dashboard/gui-source-smoke.json" 2>&1 | tee "$RUNNER_TEMP/engineering-dashboard/gui-source-smoke.log"
+      - name: Windows report semantic and export regressions
+        if: matrix.source == 'windows'
+        shell: bash
+        run: |
+          set -euo pipefail
+          xvfb-run -a python windows/tests/report_regressions.py --gui --output "$RUNNER_TEMP/engineering-dashboard/report-regressions.json"
       - name: Retain source-check evidence and generated HTML
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

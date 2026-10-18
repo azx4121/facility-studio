@@ -12,6 +12,7 @@ import uuid
 import zipfile
 
 from winrelease.build import EXE_NAME, ZIP_NAME, sha
+from facility_studio.version import REVISION
 
 
 def firewall(exe, rule, add):
@@ -103,6 +104,9 @@ def check_exe(exe, output, label, block_firewall=True):
             data = json.loads(report.read_text(encoding="utf-8"))
             if (
                 not data["passed"]
+                or data["revision"] != REVISION
+                or len(data.get("render_observations", [])) != 3
+                or not all(row["visible"] for row in data["render_observations"][1:])
                 or not data["frozen"]
                 or not data["offline_network_audit"]
             ):
@@ -112,10 +116,11 @@ def check_exe(exe, output, label, block_firewall=True):
             audit_report = evidence / "Windows_Audit_Acceptance.json"
             launch(exe, ["--audit-self-test", "--self-test-result", audit_report], cwd, env)
             audit = json.loads(audit_report.read_text(encoding="utf-8"))
-            if (not audit["passed"] or not audit["frozen"] or not audit["offline_network_audit"]
+            if (not audit["passed"] or audit["revision"] != REVISION or not audit["frozen"] or not audit["offline_network_audit"]
                     or audit["callback_errors"] or audit["execution_errors"]
-                    or len(audit["checks"]) != 140 or len(audit["audit_regressions"]) != 2182
-                    or not all(item["passed"] for item in audit["checks"] + audit["audit_regressions"])):
+                    or len(audit["checks"]) != 142 or len(audit["audit_regressions"]) != 2182
+                    or len(audit["report_regressions"]) != 405 or len(audit["report_gui_checks"]) != 14
+                    or not all(item["passed"] for item in audit["checks"] + audit["audit_regressions"] + audit["report_regressions"] + audit["report_gui_checks"])):
                 raise RuntimeError("Frozen Windows extended audit did not pass")
             for name in (
                 "electrical",
@@ -172,6 +177,8 @@ def check_exe(exe, output, label, block_firewall=True):
                 "core_gui_checks": len(data["checks"]),
                 "audit_gui_checks": len(audit["checks"]),
                 "audit_numeric_checks": len(audit["audit_regressions"]),
+                "report_semantic_checks": len(audit["report_regressions"]),
+                "report_export_gui_checks": len(audit["report_gui_checks"]),
                 "cli_tools": 10,
                 "firewall_outbound_blocked": block_firewall,
                 "network_audit_blocked": True,

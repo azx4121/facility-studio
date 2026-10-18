@@ -2,6 +2,7 @@ from .gas_catalog import gas_label, CUSTOM_GAS
 from .i18n import localized_report, verbatim
 from .engine import pv_to_torr
 from .schema import VERSION
+from .version import REPORT_VERSION
 from .utils import US_RT_KW, dewpoint
 from .errors import InputError
 from html import escape
@@ -401,7 +402,7 @@ def report(r):
     s = r["summer"]
     w = r["winter"]
     a(i["project_name"] + "｜設計條件與計算摘要")
-    a("系統：" + i["sys_type"] + "｜V" + VERSION + "｜需求初估")
+    a("系統：" + i["sys_type"] + "｜V" + REPORT_VERSION + "｜需求初估")
     a(
         "整體狀態："
         + r["quality"]["status"]
@@ -501,6 +502,22 @@ def report(r):
             f"末端冷卻選型基準：夏季 {_coil_kw(s):.3f} kW／冬季 {_coil_kw(w):.3f} kW；"
             f"夏冬較大值 × {sf:g}＝{r['terminal_cooling_kw'] * sf:.3f} kW。FCU 同時核對風量。"
         )
+        design_kw = r["terminal_cooling_kw"] * sf
+        if i["sys_type"].startswith("RCU"):
+            unit_rt = float(i["en_rcu_rt"])
+            unit_kw = unit_rt * r["rt_kw"]
+            a(f"RCU 單台額定：{unit_rt:g} RT／{unit_kw:.6f} kW；冷量需求台數 {design_kw / unit_kw:.6f}，向上取整 {r['counts']['RCU']} 台。")
+        else:
+            unit_rt, unit_flow = float(i["fcu_rt"]), float(i["en_fcu_cmh"])
+            unit_kw = unit_rt * r["rt_kw"]
+            cooling_count, airflow_count = design_kw / unit_kw, r["supply_room_cmh"] / unit_flow
+            governing = "風量" if airflow_count > cooling_count else "冷量"
+            a(f"FCU 單台額定：{unit_rt:g} RT／{unit_kw:.6f} kW；單台風量 {unit_flow:g} CMH。")
+            a(f"FCU 台數比較：冷量 {cooling_count:.6f}／風量 {airflow_count:.6f}；主導條件：{governing}；較大值向上取整 {r['counts']['FCU']} 台。")
+    elif i["sys_type"].startswith("MAU"):
+        unit_rt = float(i["en_dcc_rt"])
+        unit_kw = unit_rt * r["rt_kw"]
+        a(f"DCC 單台額定：{unit_rt:g} RT／{unit_kw:.6f} kW；夏冬較大顯熱 × {sf:g}＝{r['dcc_design_kw'] * sf:.6f} kW；需求台數 {r['dcc_design_kw'] * sf / unit_kw:.6f}，向上取整 {r['counts']['DCC']} 台。")
     if r.get("winter_room"):
         wr = r["winter_room"]
         a(
@@ -633,7 +650,7 @@ def _nm_report_base(r):
     i = dict(r["inputs"])
     i["name"] = verbatim(i["name"], NM_DEFAULTS["name"])
     lines = [
-        i["name"] + "｜MAU 分段需求與額定容量校核",
+        i["name"] + "｜MAU 分段需求與額定容量校核｜V" + REPORT_VERSION,
         "此表為需求反算；未達額定檢核時，表列目標狀態不代表已配置設備實際可達。",
         f"風量 {i['flow']} CMH，基準：{i['flow_basis']}；大氣 {i['p']} kPa；送風目標 {i['sa_t']}°C／{i['sa_rh']}%RH。",
         f"H1 熱源：{i['h1_source']}；H2 熱源：{i['h2_source']}；回收熱水情境：{i['recovery']}。",

@@ -708,4 +708,16 @@ def calculate_tool(tool, data):
         tool = "water"
     if tool not in ENGINES:
         raise ValidationError("沒有這個簡易工具", "tool")
-    return ENGINES[tool](data)
+    result = ENGINES[tool](data)
+    # Preserve the active conditions with the successful result. Inactive
+    # drafts must neither affect calculations nor appear as adopted inputs.
+    from .simple_schema import TOOLS, active_field, defaults
+    values = dict(defaults(tool), **data)
+    keys = set()
+    for row in TOOLS[tool]["fields"]:
+        if active_field(tool, row["key"], values):
+            keys.add(row["key"])
+            if row["units"]:
+                keys.add(row["units"][0])
+    result["adopted_inputs"] = {key: values[key] for key in sorted(keys)}
+    return result

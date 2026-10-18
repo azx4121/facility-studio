@@ -92,9 +92,11 @@ def run_checks(source_platform, artifacts_dir=None):
         "cleanroom": {"area": "100", "height": "3", "ach": "60", "delta_p": "15", "persons": "10",
                       "ffu_topology": "MAU入靜壓箱經FFU送風", "ffu_airflow_basis": "室內基本循環（另加OA）"},
         "electrical": {"chiller_cop": "5", "mau_input_kw": "2", "process_input_kw": "20"},
-        "water": {"length_m": "50"},
+        "water": {"length": "50"},
     }
     pipeline = calculate_pipeline(inputs)
+    check("requested 50 m water path is actually adopted", pipeline["water"]["pressure"]["length_m"] == 50)
+    check("adopted water pressure reaches pump input", pipeline["pumps"]["path_head_m"] == pipeline["water"]["pressure"]["head_m"])
     before = copy.deepcopy(pipeline)
     rows = executive_summary(pipeline)
     check("exactly seven equipment / system overview rows", len(rows) == 7)

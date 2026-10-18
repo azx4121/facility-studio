@@ -13,7 +13,7 @@ from .air_chart import AirChart
 from .simple_engines import calculate_tool, FLOW_FACTORS, GAS_FLOW_FACTORS
 from .simple_engines import AIR_PRESSURE_FACTORS, GAS_PRESSURE_FACTORS
 from .simple_reports import presentation, tool_report
-from .simple_schema import TOOLS, active_field, adopted_summary, defaults
+from .simple_schema import TOOLS, active_field, adopted_summary, defaults, input_unit
 from .ui_common import app_icon
 from .localized_tk import LanguagePicker
 from .utils import atomic_text, number
@@ -354,6 +354,8 @@ class SimplePage(ttk.Frame):
     def update_visibility(self):
         data = self.data()
         for spec in TOOLS[self.tool]["fields"]:
+            if spec["key"] in self.unit_labels:
+                self.unit_labels[spec["key"]].configure(text=input_unit(self.tool, spec, data))
             if spec["options"] and (spec["key"] in ("ffu_topology", "ffu_airflow_basis") or max(map(len, spec["options"])) > 18) and spec["key"] in self.hints:
                 self.hints[spec["key"]].configure(text=data[spec["key"]] + ("\n" + spec["help"] if spec["help"] else ""))
             visible = active_field(self.tool, spec["key"], data) and (

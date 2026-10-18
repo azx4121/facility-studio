@@ -11,6 +11,7 @@ import sys
 import tempfile
 import time
 import traceback
+from facility_studio.version import REVISION
 
 
 def run(destination):
@@ -86,6 +87,7 @@ def run(destination):
         check("Bundled notice: " + name, lambda item=name: (runtime / item).is_file())
     check("Full engineering defaults", lambda: bool(calculate(default_project())))
     native_stress = {}
+    render_observations = []
 
     def stress100():
         nonlocal native_stress
@@ -248,14 +250,29 @@ def run(destination):
             try:
                 workbench.root.withdraw()
                 root.deiconify()
+                root.lift()
                 app.show_tool("electrical")
                 pump()
-                ImageGrab.grab().save(destination.with_name("Windows_Electrical.png"))
+                from .render_probe import capture
+                render_observations.append(capture(root,app,destination,"Render_Before_TkAgg_Cleanup.png"))
+                # This test-only, unmanaged Canvas is not part of the app UI.
+                # Dispose its native drawable before validating the app window.
+                canvas.get_tk_widget().destroy()
+                figure.clear()
+                root.iconify()
+                pump()
+                root.deiconify()
+                root.lift()
+                pump()
+                render_observations.append(capture(root,app,destination,"Windows_Electrical.png"))
+                check("Electrical form pixels after TkAgg cleanup and restore",lambda:render_observations[-1]["visible"])
                 app.show_tool("air")
                 pump()
-                ImageGrab.grab().save(destination.with_name("Windows_Air.png"))
+                render_observations.append(capture(root,app,destination,"Windows_Air.png"))
+                check("Air form pixels after tool switch",lambda:render_observations[-1]["visible"])
             except Exception:
-                print("Screenshot capture unavailable: " + traceback.format_exc())
+                checks.append(dict(name="Native form pixel evidence",passed=False,detail=traceback.format_exc()))
+            check("No GUI callback exceptions after restore and capture",lambda:not callback_errors)
             from unittest.mock import patch
 
             with patch("tkinter.messagebox.askyesnocancel", return_value=False):
@@ -276,7 +293,7 @@ def run(destination):
 
     result = {
         "version": __version__,
-        "revision": "win.7",
+        "revision": REVISION,
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,
@@ -286,6 +303,8 @@ def run(destination):
         "offline_network_audit": os.environ.get("FACILITY_TEST_BLOCK_NETWORK") == "1",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "stress100": native_stress,
+        "render_observations": render_observations,
+        "callback_errors": callback_errors,
         "checks": checks,
         "passed": all(item["passed"] for item in checks),
     }
@@ -309,8 +328,9 @@ def run_audit(destination):
     from facility_studio.audit_acceptance import run_checks, run_ui
     from facility_studio.localized_tk import tk
     from facility_studio.simple_desktop import SimpleToolsApp
+    from facility_studio.report_acceptance import run_checks as report_checks, run_ui as report_ui
 
-    checks, numeric, callbacks, errors = [], [], [], []
+    checks, numeric, reports, report_widgets, callbacks, errors = [], [], [], [], [], []
 
     def check(name, action):
         print("Checking: " + name, flush=True)
@@ -327,6 +347,11 @@ def run_audit(destination):
         return bool(numeric) and all(item['passed'] for item in numeric)
 
     check("F01–F06 independent formulas, legacy data and finite-output boundaries", formulas)
+    def report_formulas():
+        nonlocal reports
+        reports=report_checks()
+        return len(reports)==405 and all(item['passed'] for item in reports)
+    check("R01–R05 report semantics and independently adopted conditions",report_formulas)
     old_storage = os.environ.get("LOCALAPPDATA")
     old_preferences = os.environ.get("FACILITY_STUDIO_PREFERENCES")
     with tempfile.TemporaryDirectory(prefix="FacilityStudioAuditGui-") as directory:
@@ -353,6 +378,14 @@ def run_audit(destination):
                     raise RuntimeError("GUI heartbeat exceeded five seconds")
 
             run_ui(root, app, workbench, check, pump, destination)
+            def report_exports():
+                def collect(name,action):
+                    if action() is False:
+                        raise AssertionError(name)
+                    report_widgets.append(dict(name=name,passed=True))
+                report_ui(root,app,collect,pump,destination)
+                return len(report_widgets)==14
+            check("R01–R05 actual report export buttons",report_exports)
             pump()
         except Exception:
             errors.append(traceback.format_exc())
@@ -364,16 +397,17 @@ def run_audit(destination):
                     os.environ.pop(name, None)
                 else:
                     os.environ[name] = value
-    result = dict(version=__version__, revision="win.7", scope="F01–F06 extended acceptance",
+    result = dict(version=__version__, revision=REVISION, scope="F01–F06 and R01–R05 extended acceptance",
                   platform=platform.platform(), python=sys.version,
                   frozen=bool(getattr(sys, "frozen", False)),
                   offline_network_audit=os.environ.get("FACILITY_TEST_BLOCK_NETWORK") == "1",
                   timestamp=datetime.now(timezone.utc).isoformat(),
-                  checks=checks, audit_regressions=numeric, callback_errors=callbacks, execution_errors=errors,
+                  checks=checks, audit_regressions=numeric, report_regressions=reports, report_gui_checks=report_widgets,
+                  callback_errors=callbacks, execution_errors=errors,
                   passed=bool(checks) and all(item["passed"] for item in checks) and not callbacks and not errors)
     destination = Path(destination)
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(json.dumps(dict(passed=result["passed"],checks=len(checks),numeric_checks=len(numeric),
+    print(json.dumps(dict(passed=result["passed"],checks=len(checks),numeric_checks=len(numeric),report_checks=len(reports),report_gui_checks=len(report_widgets),
                           callback_errors=callbacks,execution_errors=errors),ensure_ascii=False),flush=True)
     return 0 if result["passed"] else 2
