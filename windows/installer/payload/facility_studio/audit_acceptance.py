@@ -210,6 +210,7 @@ def legacy_example(unit):
     ledger = empty_ledger()
     ledger.update(version=1, entries={entry['id']: entry}, original=original,
                   baseline={'e_up_eq': 55.94524108447474}, last_updates=adopted)
+    del ledger['power_basis']  # The original native-audit files predate this snapshot.
     p['inputs'].update(adopted)
     return p, ledger, entry
 
@@ -298,6 +299,13 @@ def boundary_checks(a):
                     ledger, updates, _ = updated_ledger(ledger, entry, current)
                     current.update(updates)
                     a.near(prefix + '/same ID replaces', electrical_from_inputs(current)[pan]['kw'], expected + 10, 'F03')
+                    current.update(e_pf='.95', e_eff='.7')
+                    ledger, updates, _ = updated_ledger(ledger, entry, current)
+                    current.update(updates)
+                    a.near(prefix + '/changed shared PF and eta cannot reinterpret adopted base',
+                           electrical_from_inputs(current)[pan]['kw'], expected + 10, 'F03')
+                    a.near(prefix + '/changed shared PF retains reactive current basis',
+                           electrical_from_inputs(current)[pan]['current_a'], (expected + 10) * 1000 / (math.sqrt(3) * 380 * .85), 'F03')
                     _, updates, _ = removed_ledger(ledger, entry['id'], current)
                     current.update(updates)
                     a.check(prefix + '/remove restores original units', all(current[k] == inputs[k] for k in updates), issue='F03')
@@ -315,6 +323,22 @@ def boundary_checks(a):
             expected_q = 100 * math.sqrt(1 - base_pf ** 2) + 10 * math.tan(math.acos(.85))
             a.near('F03 PF real power/' + mode, result['kw'], expected_p, 'F03')
             a.near('F03 PF vector current/' + mode, result['current_a'], math.hypot(expected_p, expected_q) * 1000 / (math.sqrt(3) * 380), 'F03')
+        # UP and NP may first adopt at different common PF/efficiency settings.
+        p = empty_power_inputs()
+        inputs = p['inputs']
+        inputs.update(e_up_oven='100', u_e_up_oven='kVA', e_np_pump='100', u_e_np_pump='kVA')
+        entry_up = equipment_contribution(schedule, schedule['groups'][0], inputs, 'UP')
+        ledger, updates, _ = updated_ledger(empty_ledger(), entry_up, inputs)
+        inputs.update(updates)
+        inputs['e_pf'] = '.7'
+        entry_np = equipment_contribution(schedule, schedule['groups'][0], inputs, 'NP')
+        ledger, updates, _ = updated_ledger(ledger, entry_np, inputs)
+        inputs.update(updates)
+        for entry in (entry_up, entry_np):
+            ledger, updates, _ = updated_ledger(ledger, entry, inputs)
+            inputs.update(updates)
+        a.near('F03 each panel retains its own adoption basis/UP', electrical_from_inputs(inputs)['UP']['kw'], 95, 'F03')
+        a.near('F03 each panel retains its own adoption basis/NP', electrical_from_inputs(inputs)['NP']['kw'], 80, 'F03')
 
         for unit in ('W', 'kVA'):
             p, ledger, entry = legacy_example(unit)
@@ -471,6 +495,11 @@ def run_ui(root, app, main, check, pump, output=None):
                         main.recalculate()
                         check(prefix + ' reload retains exact physical demand', lambda: near(electrical_from_inputs(main.snapshot()['inputs'])[pan]['kw'], expected)
                               and main.demand_ledger['version'] == 2 and len(main.demand_ledger['entries']) == 1)
+                        main.variables['e_pf'].set('.95')
+                        main.variables['e_eff'].set('.7')
+                        main.recalculate()
+                        check(prefix + ' reload snapshot resists changed common PF and efficiency', lambda: main.apply_contribution(entry)
+                              and near(electrical_from_inputs(main.snapshot()['inputs'])[pan]['kw'], expected))
                         check(prefix + ' remove using actual ledger button', lambda: remove_source(entry['id']))
                         check(prefix + ' removal restores original raw units', lambda: main.snapshot()['inputs'][key] == '100'
                               and main.snapshot()['inputs']['u_' + key] == unit)

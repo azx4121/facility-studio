@@ -25,7 +25,7 @@ LEGACY_POWER_WARNING = "舊版 W／kVA 電力帶入可能已存成錯誤的 kW�
 
 
 def empty_ledger():
-    return dict(version=2, entries={}, original={}, baseline={}, last_updates={}, selections={})
+    return dict(version=2, entries={}, original={}, baseline={}, last_updates={}, selections={}, power_basis={})
 
 
 def legacy_power_keys(ledger):
@@ -56,9 +56,20 @@ def finite(value, minimum=0, maximum=1e9):
 
 
 def validate_ledger(value):
+    # Older ledgers have no explicit per-panel conversion snapshot. Keep their
+    # version so unsafe historical W/kVA adoptions remain detectable.
+    if isinstance(value, dict) and set(value) == set(empty_ledger()) - {"power_basis"}:
+        value = dict(value, power_basis={})
     if not isinstance(value, dict) or set(value) != set(empty_ledger()) or type(value["version"]) is not int or value["version"] not in (1, 2):
         raise ValidationError("需求彙整格式不符")
     d = copy.deepcopy(value)
+    if not isinstance(d["power_basis"], dict) or set(d["power_basis"]) - {"UP", "NP"}:
+        raise ValidationError("盤別設計需求不完整")
+    for basis in d["power_basis"].values():
+        if not isinstance(basis, dict) or set(basis) != {"pf", "efficiency"}:
+            raise ValidationError("盤別設計需求不完整")
+        finite(basis["pf"], .01, 1)
+        finite(basis["efficiency"], .01, 1)
     for name in ("original", "last_updates"):
         fields = d[name]
         if not isinstance(fields, dict) or set(fields) - set(FIELDS) or any(not isinstance(v, str) or len(v) > 1000 for v in fields.values()):
@@ -171,7 +182,8 @@ def aggregate_ledger(ledger, inputs):
         if any(abs(p["voltage"] - voltage) > .01 for p in records):
             raise ValidationError("來源盤電壓與主案三相線電壓不同，請另案計算", "e_volt")
         prefix = "e_" + pan.lower()
-        base_pf = float(d["original"].get(prefix + "_pf", inputs[prefix + "_pf"]) if d["original"].get(prefix + "_pf_mode", inputs.get(prefix + "_pf_mode")) == "本盤獨立 PF" else inputs["e_pf"])
+        basis = d["power_basis"].get(pan, {})
+        base_pf = basis.get("pf", float(d["original"].get(prefix + "_pf", inputs[prefix + "_pf"]) if d["original"].get(prefix + "_pf_mode", inputs.get(prefix + "_pf_mode")) == "本盤獨立 PF" else inputs["e_pf"]))
         base = sum(d["baseline"].get(k, 0) for k in summed if k in POWER_KEYS and k.startswith(prefix + "_"))
         for key in POWER_KEYS:
             if not key.startswith(prefix + "_") or key in summed:
@@ -180,7 +192,8 @@ def aggregate_ledger(ledger, inputs):
             unchanged = inputs[key] == d["last_updates"].get(key) and inputs[unit_key] == d["last_updates"].get(unit_key)
             value = float(d["original"].get(key, inputs[key]) if unchanged else inputs[key])
             unit = d["original"].get(unit_key, inputs[unit_key]) if unchanged else inputs[unit_key]
-            kw = electrical_power_kw(value, unit, voltage, base_pf, inputs["e_eff"], key)
+            efficiency = basis.get("efficiency", inputs["e_eff"]) if unchanged else inputs["e_eff"]
+            kw = electrical_power_kw(value, unit, voltage, base_pf, efficiency, key)
             base += kw
             if unit != "kW":
                 # Non-kW drafts use their actual electrical conversion basis.
@@ -206,10 +219,15 @@ def aggregate_ledger(ledger, inputs):
 
 
 def updated_ledger(ledger, entry, inputs):
-    d = copy.deepcopy(ledger)
+    d = validate_ledger(ledger)
     if legacy_power_keys(d):
         raise ValidationError(LEGACY_POWER_WARNING, legacy_power_keys(d)[0], code="legacy_power_adoption")
     d["version"] = 2
+    for pan in entry["power"]:
+        prefix = "e_" + pan.lower()
+        d["power_basis"].setdefault(pan, dict(
+            pf=float(inputs[prefix + "_pf"] if inputs.get(prefix + "_pf_mode") == "本盤獨立 PF" else inputs["e_pf"]),
+            efficiency=float(inputs["e_eff"])))
     d["entries"][entry["id"]] = copy.deepcopy(entry)
     validate_ledger(d)
     summary = aggregate_ledger(d, inputs)
@@ -224,8 +242,10 @@ def updated_ledger(ledger, entry, inputs):
 
 
 def removed_ledger(ledger, ident, inputs):
-    d = copy.deepcopy(ledger)
+    d = validate_ledger(ledger)
     d["entries"].pop(ident, None)
+    active_panels = {pan for entry in d["entries"].values() for pan in entry["power"]}
+    d["power_basis"] = {pan: basis for pan, basis in d["power_basis"].items() if pan in active_panels}
     summary = aggregate_ledger(d, inputs)
     updates = dict(summary["updates"])
     for key, previous in d["last_updates"].items():
