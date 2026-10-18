@@ -1,0 +1,43 @@
+{
+  "before_commit": "852c9a097224c5011633ba8493833fc3f68e3b79",
+  "after_commit": "400a8ee88ff18dbfb7b16b759e61a35533c249f3",
+  "before": {
+    "manual_edit_then_remove": {
+      "raw": "200",
+      "unit": "kVA",
+      "kw": 170.0
+    },
+    "new_200kw_baseline_then_readopt_and_remove": {
+      "raw": "100",
+      "unit": "kVA",
+      "kw": 85.0
+    },
+    "released_original": {
+      "u_e_up_eq": "kVA",
+      "e_up_eq": "100",
+      "e_up_pf_mode": "沿用共用 PF",
+      "e_up_pf": "0.85",
+      "e_up_design_floor": "0",
+      "e_up_type": "一般負載",
+      "e_length_m": "30"
+    },
+    "released_baseline": {
+      "e_up_eq": 200
+    }
+  },
+  "after": {
+    "manual_edit_then_remove": {
+      "raw": "200",
+      "unit": "kW",
+      "kw": 200.0
+    },
+    "new_200kw_baseline_then_readopt_and_remove": {
+      "raw": "200",
+      "unit": "kW",
+      "kw": 200.0
+    },
+    "released_original": {},
+    "released_baseline": {}
+  },
+  "scope": "Same synthetic input and adoption/removal sequence; source module comparison. Native UI is recorded separately."
+}

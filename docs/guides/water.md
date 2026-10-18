@@ -5,7 +5,7 @@
 <a id="source-revision"></a>
 ## 現行原始碼：熱負荷 → 冰水 → 泵浦
 
-本節說明目前來源修訂；下方 V5.6.0 已驗算管徑及案例數字保留。新來源功能需經另行封裝與原生驗收，既有下載檔不會因此改變。
+本節功能已包含於 Windows win.7／macOS mac.6；後續僅套用 Windows 的稽核修正見下方說明。
 
 「熱負荷初估」分列照明、圍護、人員顯熱／潛熱、設備入室熱與 FFU 風機熱。圍護 20 W/m²、FFU 0.18 kW/台、外氣焓差 50 kJ/kg 是可改的初估假設。選外氣焓差終點時要維持控制體一致：
 
@@ -52,8 +52,12 @@ V5.6自動表擴充至30吋，先選符合水速的單管，仍不足才並聯�
 
 候選僅符合指定水速；不代表整個水系統已合格。水泵揚程、換熱器／盤管壓降、完整供回水路徑、膨脹槽、靜壓及NPSH另核。
 
-案例輸入：[10](../examples/10-water.json)、[11](../examples/11-water.json)。[反算記錄](../examples/calculation-results-windows.json)。
+案例輸入：[10](../examples/10-water.json)、[11](../examples/11-water.json)。[來源反算記錄](../evidence/2026-10-18-audit-six/windows-use-cases.json)。
 
 
 
 2026-10-16：26／28／30 吋 STD 參考內徑分別為 641.4／692.2／743.0 mm（外徑減兩倍 9.5 mm 壁厚）；依[供應商表格](https://www.snyi.com.tw/product-femco01.html)核對，仍需確認實供材質與壁厚。
+
+## Windows win.7：ΣK 報告與泵浦單位
+
+水管 TXT／HTML 列出計算實際採用的 ΣK；局部壓損仍為 `Δp=ΣK×ρ×v²/2`，不是把原本已正確的壓損再加一次。泵浦單位切換保留物理流量：100 LPM＝6 m³/h≈26.4172 US GPM。相同揚程與效率下，軸功率、輸入電力及建議馬達保持一致。這些修正始於 win.6，win.7 保留；mac.6 尚未套用。[修正與驗算](../2026-10-18-windows-audit-six.md)。

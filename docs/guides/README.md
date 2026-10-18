@@ -57,7 +57,7 @@ python windows/Facility_Studio_V5_5.py --tool air --tool-input docs/examples/12-
 
 其餘快算把`--tool`與輸入檔換成對應類型。macOS來源將`windows/`改為`macos/`，必要時用`python3`。已下載EXE／App者可直接照教學填GUI，不必執行這些開發指令。
 
-每個來源平台原始紀錄通過121項情境檢核，包括電流、截面流速、氣體溫壓、照度、冷熱量、空氣狀態、設備分組、AHU熱濕守恆及容量不足判定。兩份原始結果：[Windows](../examples/calculation-results-windows.json)、[macOS](../examples/calculation-results-macos.json)。這是同一組18個計算情境與2個不適用對照，沒有把重複平台檢查宣稱為40個不同問題。
+每個來源平台原始紀錄通過121項情境檢核，包括電流、截面流速、氣體溫壓、照度、冷熱量、空氣狀態、設備分組、AHU熱濕守恆及容量不足判定。兩份原始結果：[Windows](../evidence/2026-10-18-audit-six/windows-use-cases.json)、[macOS](../examples/calculation-results-macos.json)。這是同一組18個計算情境與2個不適用對照，沒有把重複平台檢查宣稱為40個不同問題。
 
 </details>
 
@@ -74,8 +74,8 @@ python windows/Facility_Studio_V5_5.py --tool air --tool-input docs/examples/12-
 
 [常見問題](../faq.md) · [原生驗收](../2026-10-16-gemini-integration-review.md#原生發布狀態) · [歷史紀錄](../history/README.md)
 
-## 目前版本（win.5／mac.6）
+## 目前版本（win.7／mac.6）
 
-本版新增潔淨室風量、熱負荷與冰水泵浦快算，並提供明確氣流路徑、上游帶入與 HTML 設計總覽。這些變更已包含在 Windows win.5／Mac mac.6 下載檔中；模型邊界、相容性與原生驗收見[整合覆核](../2026-10-16-gemini-integration-review.md)。
+本版新增潔淨室風量、熱負荷與冰水泵浦快算，並提供明確氣流路徑、上游帶入與 HTML 設計總覽。這些變更已包含在 Windows win.7／Mac mac.6 下載檔中；模型邊界、相容性與原生驗收見[整合覆核](../2026-10-16-gemini-integration-review.md)。
 
-Windows win.5 修正照明模式切換會採用隱藏舊長寬的 F07；其餘稽核項目仍另案追蹤。[照明修正與驗收](../2026-10-18-windows-lighting-f07.md)。
+Windows win.7 已修正 F01–F06 與來源移除／再次帶入的資料復原，並保留 win.5 照明 F07 修正。舊 W／kVA 來源須依說明重建；ledger v2 整案不能由 mac.6 開啟。[修正與原生驗收](../2026-10-18-windows-audit-six.md)。

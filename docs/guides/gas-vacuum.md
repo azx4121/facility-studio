@@ -42,5 +42,5 @@
 
 此為**製程真空體積流量初估**，不是高真空、導通率、抽空時間或幫浦性能選型。需另外取得泵曲線、管路導通率、漏氣／放氣量及外壓屈曲資料；Torr／kPa／mbar切換不會把絕壓變成表壓。完整工作台的本路壓力與遠端最低壓力須符合供氣上下限。
 
-案例輸入：[05](../examples/05-gas.json)、[06](../examples/06-gas.json)；PV完整條件保留在[情境07](../examples/scenarios.json)。[反算記錄](../examples/calculation-results-windows.json)。
+案例輸入：[05](../examples/05-gas.json)、[06](../examples/06-gas.json)；PV完整條件保留在[情境07](../examples/scenarios.json)。[來源反算記錄](../evidence/2026-10-18-audit-six/windows-use-cases.json)。
 

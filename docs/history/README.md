@@ -2,10 +2,13 @@
 
 [目前下載](../../README.md#下載) · [文件中心](../README.md) · [English](#english)
 
-以下文件保存**當時版本**的修訂、數字、雜湊及截圖。請以 [V5.6.0 原生交付](../2026-10-13-v5.6-audit-stress.md)及目前 Release 核對現行下載；歷史文件中的檔名或步驟不一定適用新版。
+以下文件保存**當時版本**的修訂、數字、雜湊及截圖。請以 [Windows win.7 原生交付](../2026-10-18-windows-audit-six.md) · [mac.6 原生交付](../2026-10-16-gemini-integration-review.md)及目前 Release 核對現行下載；歷史文件中的檔名或步驟不一定適用新版。
 
 | 紀錄 | 內容 |
 | --- | --- |
+| [Windows win.7 工程稽核與來源復原](../2026-10-18-windows-audit-six.md) | F01–F06 修正、移除／再次帶入與原生交付證據 |
+| [Windows win.5 照明 F07](../2026-10-18-windows-lighting-f07.md) | 面積保留與原版發布雜湊 |
+| [win.4／mac.6 整合](../2026-10-16-gemini-integration-review.md) | 氣流路徑、跨工具需求與兩平台歷史交付 |
 | [V5.6.0 win.2／mac.2 交付](../2026-10-12-v5.6-native.md) | 24吋水管、七個直接快算、50種氣體的前次公開修訂 |
 | [V5.5.10 原生交付](../2026-10-11-v5.5.10-native.md) | 當時 EXE／DMG 的測試提交與 SHA256 |
 | [V5.5.10 數字鍵盤修正](../2026-10-11-v5.5.10-keypad.md) | 數字鍵盤 Del／小數點辨識與原生驗證範圍 |
@@ -32,6 +35,6 @@
 <a id="english"></a>
 ## English
 
-These records describe the versions tested at the time. Use [V5.6.0 native delivery evidence](../2026-10-13-v5.6-audit-stress.md#english) and current Releases for today's downloads. Historical filenames and startup steps may differ.
+These records describe the versions tested at the time. Use [Windows win.7 native delivery evidence](../2026-10-18-windows-audit-six.md#english) and [mac.6 evidence](../2026-10-16-gemini-integration-review.md#english) and current Releases for today's downloads. Historical filenames and startup steps may differ.
 
 Previous commits, tags, Releases, evidence and [MIT grants](../../LICENSE_LEGACY_MIT) are retained. Search experiments document their method and limits; they do not guarantee rankings or recommendations.

@@ -34,4 +34,4 @@ Actual native English macOS screen below uses **25°C / 50% RH at standard press
 
 ![Native English psychrometric chart on macOS](../images/macos-psychrometrics-en.png)
 
-Inputs: [12](../examples/12-air.json), [13](../examples/13-air.json). The original verifier independently checks humidity ratio/enthalpy against the Buck saturation-pressure correlation with 0.3% approximation tolerance: [results](../examples/calculation-results-windows.json).
+Inputs: [12](../examples/12-air.json), [13](../examples/13-air.json). The original verifier independently checks humidity ratio/enthalpy against the Buck saturation-pressure correlation with 0.3% approximation tolerance: [results](../evidence/2026-10-18-audit-six/windows-use-cases.json).

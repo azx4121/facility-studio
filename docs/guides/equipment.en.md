@@ -64,4 +64,12 @@ DI continuous circulation is not reduced by diversity. Water quality and supply/
 
 Utilities remain separated by supply group. Acid, alkaline, organic and general exhaust remain separated by type; aggregation does not permit mixing incompatible systems. Gas standard flows normalize to 25°C / 101.325 kPa(abs); group sizing uses the lowest entered absolute pressure, highest temperature and lowest velocity limit.
 
-Data: [cases 16 and 17](../examples/scenarios.json). [Parsing, grouping and inverse checks](../examples/calculation-results-windows.json).
+Data: [cases 16 and 17](../examples/scenarios.json). [Parsing, grouping and inverse checks](../evidence/2026-10-18-audit-six/windows-use-cases.json).
+
+## Windows win.7: baselines, removal and legacy data
+
+Retaining another equipment baseline gives 95 kW for 100 kVA at PF 0.85 plus a 10 kW source, or 10.1 kW for 100 W plus 10 kW. Each panel captures its first adoption PF/efficiency; same-ID updates and save/reload retain that basis despite later common-setting edits.
+
+Removing the last source restores untouched fields to their values before this adoption. If either value or unit was edited, both drafts remain together. Re-adoption captures the new original; a stale nonzero baseline cannot reappear over a current zero load. These restoration corrections start with win.7.
+
+For “Legacy electrical adoption must be rebuilt”, back up the workspace, remove the panel's adopted power sources, then reimport using the original W/kVA data. Do not retain corrupt stored kW as a new baseline. Main-only JSON without source history needs manual comparison. Whole-workspace ledger v2, used since win.6, currently requires new Windows; mac.6 cannot read it. [Checks and limits](../2026-10-18-windows-audit-six.md#english).

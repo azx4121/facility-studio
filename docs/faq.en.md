@@ -14,7 +14,7 @@ No. The Windows EXE and macOS DMG include their runtime. Calculations, saved pro
 | Windows | Windows 10/11 on Intel/AMD x64 are support targets. Download and double-click the EXE; allow time for the bundled environment to unpack on first launch. | Windows Server 2022/2025 x64 |
 | macOS | Universal App for Apple Silicon / Intel, packaging target macOS 11+. Open the DMG, drag into Applications, then launch there. Eject the DMG after installation. | Apple Silicon / Intel macOS 15 |
 
-Windows ARM, 32-bit Windows, and other Mac OS versions/devices were not included in this acceptance. Enterprise policies may also restrict execution. [Full acceptance and download hashes](2026-10-16-gemini-integration-review.md#原生發布狀態)
+Windows ARM, 32-bit Windows, and other Mac OS versions/devices were not included in this acceptance. Enterprise policies may also restrict execution. [Windows win.7 acceptance](2026-10-18-windows-audit-six.md#原生發布結果) · [mac.6 acceptance](2026-10-16-gemini-integration-review.md#原生發布狀態)
 
 Close the old app before replacing the EXE/App. Saved projects and recovery data are retained.
 
@@ -98,3 +98,7 @@ For startup failures, you can include logs:
 Use synthetic data and remove client/site secrets. Native and historical evidence are available through the [documentation center](README.en.md).
 
 **DESIGNED BY ANDY HUANG ©**
+
+## Can mac.6 open new Windows whole-workspace files?
+
+win.6/win.7 use demand ledger v2, which mac.6 rejects. Matching main schema 12 does not establish whole-workspace compatibility. Keep those files in current Windows until the Mac reader is updated. See [legacy W/kVA recovery and source restoration](2026-10-18-windows-audit-six.md#english).

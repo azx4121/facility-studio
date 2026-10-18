@@ -1,0 +1,31 @@
+[
+  {
+    "file": "gemini-review-windows.json",
+    "raw_sha256": "c7955250886952b2e47056644527206c84c9629490c6b226baf502b4856f26a6",
+    "summary": {
+      "passed": true,
+      "source_platform": "windows",
+      "host_os": "Windows",
+      "python": "3.13.15",
+      "scenarios": 100,
+      "checks": 4432
+    }
+  },
+  {
+    "file": "all-fields-windows.json",
+    "raw_sha256": "4ea57e8ff4688449264f3a1f7c215c2140354b4e72469b8082f7d0c414aebb36",
+    "summary": {
+      "iterations": 100,
+      "passed": true,
+      "total_checks": 6977,
+      "field_coverage": {
+        "simple_fields_tested": 112,
+        "workbench_fields_tested": 257,
+        "pressure_drop_fields_tested": 220,
+        "ahu_fields_tested": 105,
+        "equipment_columns_tested": 95,
+        "reports_verified": 4226
+      }
+    }
+  }
+]

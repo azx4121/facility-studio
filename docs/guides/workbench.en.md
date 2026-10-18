@@ -5,7 +5,7 @@
 <a id="source-revision"></a>
 ## Current source: airflow topology, upstream import and design summary
 
-This section describes the current repository revision. The existing V5.6.0 walkthrough numbers, screenshots and published EXE/DMG evidence below retain their original scope. Downloading those existing binaries does not install these source changes; a new native-tested release is required.
+These features are included in Windows win.7 and macOS mac.6; the subsequent Windows-only audit corrections are described below.
 
 For MAU systems, choose the **MAU / FFU airflow path** before interpreting ACH. With DCC set to follow the circulation flow, let `Q=room volume x ACH` and `OA=final design outdoor airflow`:
 
@@ -221,3 +221,9 @@ Resaving an existing project preserves a `.json.bak`. An exported calculation re
 Practice verification runs **20 operation-related conditions per source platform**, including heat/moisture conservation, units, water ownership, pressure-loss scope, MAU linking and insufficient capacity. See [inputs, verifier and evidence](../tutorial/README.md). Control locations were checked against source. Native acceptance of the new tutorial entry and author credit is tracked separately; numerical checks are not described as manual testing of every UI control.
 
 For remaining problems, [report an issue](https://github.com/azx4121/facility-studio/issues) with version, platform, page, steps and synthetic input. Formal product/protection selection needs site conditions and manufacturer data. Use remains governed by the [current license guide](../../LICENSE_GUIDE.en.md), including the internal engineering-work permission.
+
+## Windows win.7: terminal capacity and workspace format
+
+RCU/FCU cooling counts use the larger summer/winter C1+C2 coil load with the design allowance, rounded up by unit capacity. FCU also takes the larger airflow-based count. Reports identify the governing season and cooling basis; winter internal/solar load cannot be omitted. Manufacturer performance and achievable conditions still require review.
+
+Demand ledger v2 is separate from main-project schema 12. win.6/win.7 read legacy ledger v1, but **mac.6 cannot open new ledger v2 whole workspaces**. Keep those files in current Windows until the Mac reader is updated. Do not discard source, AHU or comparison data to force an old reader. See [source restoration](equipment.en.md) and [acceptance](../2026-10-18-windows-audit-six.md#english).

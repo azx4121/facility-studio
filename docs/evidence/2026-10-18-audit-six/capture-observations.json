@@ -1,0 +1,14 @@
+{
+  "scope": "Manual inspection of actual native captures; not a confirmed general-user reproduction",
+  "hosts": [
+    "Windows Server 2022",
+    "Windows Server 2025"
+  ],
+  "earlier_English_capture": "Electrical input and 20 AT / 5.5 mm2 result visible",
+  "end_of_suite_capture": "Header/navigation visible; central form/result client area blank",
+  "status": "Open: physical Windows 10/11 repaint, minimize/restore and DPI validation still required",
+  "homepage_image": "v560-win7-native-en.png",
+  "observation_image": "v560-win7-capture-observation.png",
+  "observation_sha256": "55ddf2a5ec704d29b572824cccaa42b3b968d02b9638cdc4fb7512877d8ecfc5",
+  "images_modified": false
+}

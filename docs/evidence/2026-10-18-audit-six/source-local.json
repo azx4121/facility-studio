@@ -1,0 +1,658 @@
+{
+  "scope": "Windows source on Linux/Tk; native EXE evidence recorded separately",
+  "source_commit": "400a8ee88ff18dbfb7b16b759e61a35533c249f3",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "formula_checks": 2182,
+  "gui_checks": 140,
+  "passed": true,
+  "gui_assertions": [
+    {
+      "name": "F05 zh-Hant/0/m³/h preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/0/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/0/LPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/0/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/0/LPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/100/m³/h preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/100/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/100/LPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/100/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/100/LPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/1234.5/m³/h preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/1234.5/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/1234.5/LPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/1234.5/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/1234.5/LPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant invalid draft clears prior results",
+      "passed": true
+    },
+    {
+      "name": "F06 zh-Hant overflow clears output",
+      "passed": true
+    },
+    {
+      "name": "F06 zh-Hant correction restores finite output",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/kVA adopt retains baseline",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/kVA physical panel demand",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/kVA update same ID",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/kVA save workspace",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/kVA reload retains exact physical demand",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/kVA reload snapshot resists changed common PF and efficiency",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/kVA remove using actual ledger button",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/kVA removal restores original raw units",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/W adopt retains baseline",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/W physical panel demand",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/W update same ID",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/W save workspace",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/W reload retains exact physical demand",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/W reload snapshot resists changed common PF and efficiency",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/W remove using actual ledger button",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/UP/W removal restores original raw units",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/kVA adopt retains baseline",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/kVA physical panel demand",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/kVA update same ID",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/kVA save workspace",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/kVA reload retains exact physical demand",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/kVA reload snapshot resists changed common PF and efficiency",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/kVA remove using actual ledger button",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/kVA removal restores original raw units",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/W adopt retains baseline",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/W physical panel demand",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/W update same ID",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/W save workspace",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/W reload retains exact physical demand",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/W reload snapshot resists changed common PF and efficiency",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/W remove using actual ledger button",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/NP/W removal restores original raw units",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant cancelled adoption changes nothing",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/W legacy error visibly fails quality",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/W legacy cannot silently re-adopt",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/W legacy original restored by removal",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/W legacy reimport adopts correct power",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/kVA legacy error visibly fails quality",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/kVA legacy cannot silently re-adopt",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/kVA legacy original restored by removal",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/kVA legacy reimport adopts correct power",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant manual value and unit remain paired on actual removal",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant manual 200kW is not restored as 200kVA",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/0 re-adopt uses current baseline",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/0 save re-adopted workspace",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/0 remove restores this cycle after reload",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/1 re-adopt uses current baseline",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/1 save re-adopted workspace",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant/1 remove restores this cycle after reload",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant zero baseline replaces stale saved history",
+      "passed": true
+    },
+    {
+      "name": "F03 zh-Hant zero baseline removal restores zero",
+      "passed": true
+    },
+    {
+      "name": "F05 en/0/m³/h preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/0/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/0/LPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/0/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/0/LPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/100/m³/h preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/100/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/100/LPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/100/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/100/LPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/1234.5/m³/h preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/1234.5/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/1234.5/LPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/1234.5/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en/1234.5/LPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 en invalid draft clears prior results",
+      "passed": true
+    },
+    {
+      "name": "F06 en overflow clears output",
+      "passed": true
+    },
+    {
+      "name": "F06 en correction restores finite output",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/kVA adopt retains baseline",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/kVA physical panel demand",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/kVA update same ID",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/kVA save workspace",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/kVA reload retains exact physical demand",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/kVA reload snapshot resists changed common PF and efficiency",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/kVA remove using actual ledger button",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/kVA removal restores original raw units",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/W adopt retains baseline",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/W physical panel demand",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/W update same ID",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/W save workspace",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/W reload retains exact physical demand",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/W reload snapshot resists changed common PF and efficiency",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/W remove using actual ledger button",
+      "passed": true
+    },
+    {
+      "name": "F03 en/UP/W removal restores original raw units",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/kVA adopt retains baseline",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/kVA physical panel demand",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/kVA update same ID",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/kVA save workspace",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/kVA reload retains exact physical demand",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/kVA reload snapshot resists changed common PF and efficiency",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/kVA remove using actual ledger button",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/kVA removal restores original raw units",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/W adopt retains baseline",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/W physical panel demand",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/W update same ID",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/W save workspace",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/W reload retains exact physical demand",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/W reload snapshot resists changed common PF and efficiency",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/W remove using actual ledger button",
+      "passed": true
+    },
+    {
+      "name": "F03 en/NP/W removal restores original raw units",
+      "passed": true
+    },
+    {
+      "name": "F03 en cancelled adoption changes nothing",
+      "passed": true
+    },
+    {
+      "name": "F03 en/W legacy error visibly fails quality",
+      "passed": true
+    },
+    {
+      "name": "F03 en/W legacy cannot silently re-adopt",
+      "passed": true
+    },
+    {
+      "name": "F03 en/W legacy original restored by removal",
+      "passed": true
+    },
+    {
+      "name": "F03 en/W legacy reimport adopts correct power",
+      "passed": true
+    },
+    {
+      "name": "F03 en/kVA legacy error visibly fails quality",
+      "passed": true
+    },
+    {
+      "name": "F03 en/kVA legacy cannot silently re-adopt",
+      "passed": true
+    },
+    {
+      "name": "F03 en/kVA legacy original restored by removal",
+      "passed": true
+    },
+    {
+      "name": "F03 en/kVA legacy reimport adopts correct power",
+      "passed": true
+    },
+    {
+      "name": "F03 en manual value and unit remain paired on actual removal",
+      "passed": true
+    },
+    {
+      "name": "F03 en manual 200kW is not restored as 200kVA",
+      "passed": true
+    },
+    {
+      "name": "F03 en/0 re-adopt uses current baseline",
+      "passed": true
+    },
+    {
+      "name": "F03 en/0 save re-adopted workspace",
+      "passed": true
+    },
+    {
+      "name": "F03 en/0 remove restores this cycle after reload",
+      "passed": true
+    },
+    {
+      "name": "F03 en/1 re-adopt uses current baseline",
+      "passed": true
+    },
+    {
+      "name": "F03 en/1 save re-adopted workspace",
+      "passed": true
+    },
+    {
+      "name": "F03 en/1 remove restores this cycle after reload",
+      "passed": true
+    },
+    {
+      "name": "F03 en zero baseline replaces stale saved history",
+      "passed": true
+    },
+    {
+      "name": "F03 en zero baseline removal restores zero",
+      "passed": true
+    },
+    {
+      "name": "F01–F06 no unexpected validation dialogs",
+      "passed": true
+    },
+    {
+      "name": "F01–F06 no unhandled GUI callback errors",
+      "passed": true
+    }
+  ],
+  "suites": [
+    {
+      "suite": "electrical_units",
+      "exit_code": 0,
+      "log_sha256": "56432331d9c921b75e7a4af6007c104f1fcebb569f0fb301faede4ed169f3b2e"
+    },
+    {
+      "suite": "regression",
+      "exit_code": 0,
+      "log_sha256": "f488180b8e564d6618ca4f1bc2821cf760938e6099262e6910e2bce96f66be9c"
+    },
+    {
+      "suite": "v55_features",
+      "exit_code": 0,
+      "log_sha256": "df8ec45d557f9a6ec328e85081e7b4c380f38540a7db7eb5c2592534a15f12f7"
+    },
+    {
+      "suite": "v552_core",
+      "exit_code": 0,
+      "log_sha256": "e9807e875470a66eb741d3cef894084bf6bb433d0c7ec02887c66bcbc0ff56b1"
+    },
+    {
+      "suite": "simple_features",
+      "exit_code": 0,
+      "log_sha256": "9b19c660ea519361f59d5238c5381d4a6e04108c3886317022f8676dcaf034ab"
+    },
+    {
+      "suite": "v554_features",
+      "exit_code": 0,
+      "log_sha256": "744701f3c53e22039f190c5d7f270d003f1e32c1d51201f34304e16cc69d93e4"
+    },
+    {
+      "suite": "v556_features",
+      "exit_code": 0,
+      "log_sha256": "509d0bffccf46582c6dcaf50af1909ef1ea4c86a28c3a96382279e0328a430ff"
+    },
+    {
+      "suite": "v557_inactive",
+      "exit_code": 0,
+      "log_sha256": "d3968284ab948b6de6244c9d603b3572a5aaa326dc7cbfd91e04f1469d6c40ed"
+    },
+    {
+      "suite": "v558_review",
+      "exit_code": 0,
+      "log_sha256": "f4ecab3fabfd070ee358f14583f1828b9bcc395cf3c3319655b5adf9eb725fda"
+    },
+    {
+      "suite": "v559_resilience",
+      "exit_code": 0,
+      "log_sha256": "904a9128d8f7f7abffe2dfb8bd30f921f359a754784dd51ca83e9294cc93fb91"
+    },
+    {
+      "suite": "v5510_keypad",
+      "exit_code": 0,
+      "log_sha256": "800fb6d34d795457e54f4be4ba505b90eb1f153b5ef087e23609a88acd152e58"
+    },
+    {
+      "suite": "v560_features",
+      "exit_code": 0,
+      "log_sha256": "ec480852535d46d7c9e994f28a2aea8f4a661207626d20d94e1ec740b3611c2b"
+    },
+    {
+      "suite": "maintenance_checks",
+      "exit_code": 0,
+      "log_sha256": "7bf25f6b409d3e6271af90d74df8b956a520d67c93432df62f6a3b192f308d02"
+    },
+    {
+      "suite": "security_checks",
+      "exit_code": 0,
+      "log_sha256": "ba6f31710c47d07e1e57968db9b4d96bbd427a42153d3a6f82c8910bcac11e27"
+    },
+    {
+      "suite": "bilingual",
+      "exit_code": 0,
+      "log_sha256": "3ae0a0f3835afa1e3099f7c97a1174d87f9f3534055ab85179eaa8444e08e1e6"
+    },
+    {
+      "suite": "installer_integrity_checks",
+      "exit_code": 0,
+      "log_sha256": "20aad81d5ece9af4ab6538dec316cefde33682aab8e03be129f4430a4f15a318"
+    },
+    {
+      "suite": "packaging_checks",
+      "exit_code": 0,
+      "log_sha256": "6bd3b31b2b509c74062b2fe55b5c33971e48c0f3ebd7972b3e8047f62828a8e9"
+    }
+  ],
+  "final_source_gui_log_sha256": "a5ccd708e677d91de1b292f7e762aa254f81fea024e7ec3b24d3ff27c7b612b6"
+}

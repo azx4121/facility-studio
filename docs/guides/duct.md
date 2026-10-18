@@ -35,7 +35,7 @@
 
 這個快算路徑假設尺寸與流量沿線不變；完整多支路、各段尺寸、污染物處理、風機曲線與濾網終阻力另核。不得把設備端要求靜壓的最大值當成全管網 ESP。
 
-案例輸入：[03](../examples/03-duct.json)、[04](../examples/04-duct.json)。[反算記錄](../examples/calculation-results-windows.json)。
+案例輸入：[03](../examples/03-duct.json)、[04](../examples/04-duct.json)。[來源反算記錄](../evidence/2026-10-18-audit-six/windows-use-cases.json)。
 
 ## 目前來源修訂：等摩擦圓管換算
 

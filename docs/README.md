@@ -1,10 +1,10 @@
 # Facility Studio 文件中心
 
-[2026-10-16 Gemini integration review / 修正與測試](2026-10-16-gemini-integration-review.md)
+[Windows win.7 工程修正與原生驗收 / Corrections and acceptance](2026-10-18-windows-audit-six.md) · [win.4／mac.6 整合歷史](2026-10-16-gemini-integration-review.md)
 
 [English](README.en.md) · [首頁與下載](../README.md) · [問題回報](https://github.com/azx4121/facility-studio/issues)
 
-目前版本：**V5.6.0 公開測試版（win.5／mac.6）**。先依手上的任務選文件，需要完整工作台時再跟做練習案。
+目前版本：**V5.6.0 公開測試版（win.7／mac.6）**。先依手上的任務選文件，需要完整工作台時再跟做練習案。
 
 ## 開始使用
 
@@ -26,7 +26,7 @@
 | --- | --- |
 | 查看操作條件、公式與對照結果 | [20 個情境：18 個計算案例與 2 個範圍對照](guides/README.md) |
 | 了解目前 30 吋水管、十個直接快算與 50 種氣體 | [本版功能與覆核](2026-10-16-gemini-integration-review.md) |
-| 核對公開 EXE／DMG 的原生測試、提交與 SHA256 | [Windows win.5 驗收與 SHA256](2026-10-18-windows-lighting-f07.md#原生發布結果) · [macOS mac.6](2026-10-16-gemini-integration-review.md#原生發布狀態) |
+| 核對公開 EXE／DMG 的原生測試、提交與 SHA256 | [Windows win.7 驗收與 SHA256](2026-10-18-windows-audit-six.md#原生發布結果) · [macOS mac.6](2026-10-16-gemini-integration-review.md#原生發布狀態) |
 | 從原始碼執行、建置或測試 | [開發者入口](development.md) |
 | 查以前版本的修訂、驗證與搜尋實驗 | [歷史紀錄](history/README.md) |
 

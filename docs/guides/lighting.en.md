@@ -6,7 +6,7 @@ Open **Lighting** and choose illuminance estimation or luminaire-count calculati
 
 Luminaire output is **lumens (lm)**; illuminance is **lux = lm/m²**. Watts alone do not determine lux. Use manufacturer lumens when known; an LED-watts estimate must retain its assumed efficacy.
 
-Windows **win.5**: the catalogue-U/room-index action retains the current area, calculation mode and lumen source. For m², ping or volume it asks you to select length × width and enter the actual dimensions; it never adopts hidden dimension drafts. K requires actual geometry, and U still comes from the manufacturer's photometric/reflectance data. See [F07 correction and acceptance](../2026-10-18-windows-lighting-f07.md). macOS mac.6 has not received this interaction fix.
+Windows **win.5 and later (currently win.7)**: the catalogue-U/room-index action retains the current area, calculation mode and lumen source. For m², ping or volume it asks you to select length × width and enter the actual dimensions; it never adopts hidden dimension drafts. K requires actual geometry, and U still comes from the manufacturer's photometric/reflectance data. See [F07 correction and acceptance](../2026-10-18-windows-lighting-f07.md). macOS mac.6 has not received this interaction fix.
 
 <a id="case-08"></a>
 ## Case 08: 90 m³, 3 m height, 40 W × 10 luminaires
@@ -32,4 +32,4 @@ The rounded-up count gives 512 lux and 0.32 kW. Seven luminaires give only 448 l
 
 U, M and 100 lm/W are example assumptions. Confirm luminaire data, reflectance, installation height, cleaning and aging. This tool estimates average illuminance; it does not simulate photometric files, glare, point illuminance or uniformity.
 
-Inputs: [08](../examples/08-lighting.json), [09](../examples/09-lighting.json). [Original inverse-check results](../examples/calculation-results-windows.json).
+Inputs: [08](../examples/08-lighting.json), [09](../examples/09-lighting.json). [Windows win.7 source checks](../evidence/2026-10-18-audit-six/windows-use-cases.json).

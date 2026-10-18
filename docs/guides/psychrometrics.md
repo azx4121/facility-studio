@@ -28,5 +28,5 @@ RH=0%時不存在有限露點，軟體不以假數值代替。冬夏盤管容量
 
 ![Windows 空氣線圖快算，25°C及50%RH](../images/windows-air.png)
 
-案例輸入：[12](../examples/12-air.json)、[13](../examples/13-air.json)。反算另以Buck飽和水蒸氣壓關聯式核對含濕比／焓，容許0.3%近似差異，見[記錄](../examples/calculation-results-windows.json)。
+案例輸入：[12](../examples/12-air.json)、[13](../examples/13-air.json)。反算另以Buck飽和水蒸氣壓關聯式核對含濕比／焓，容許0.3%近似差異，見[記錄](../evidence/2026-10-18-audit-six/windows-use-cases.json)。
 

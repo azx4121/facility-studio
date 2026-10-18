@@ -26,4 +26,8 @@ Pressure conversion retains the gauge/absolute basis: changing bar to kPa does n
 
 A one-off stable conversion can be answered directly. The tool is useful for repeated offline comparison and engineering calculations.
 
-Inputs: [14](../examples/14-units.json), [15](../examples/15-units.json). [Original results](../examples/calculation-results-windows.json).
+Inputs: [14](../examples/14-units.json), [15](../examples/15-units.json). [Windows win.7 source results](../evidence/2026-10-18-audit-six/windows-use-cases.json).
+
+## Windows win.7: numeric boundaries
+
+An unrepresentable finite result raises a structured error and clears old output instead of reporting infinity as success. Representable 1e308°F remains accepted. −459.67°F equals 0 K and is accepted; temperatures below absolute zero are rejected. These corrections began in win.6 and remain in win.7; mac.6 has not received them. [Boundary checks](../2026-10-18-windows-audit-six.md#english).

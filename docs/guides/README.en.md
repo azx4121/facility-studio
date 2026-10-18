@@ -57,7 +57,7 @@ python windows/Facility_Studio_V5_5.py --language en --tool air --tool-input doc
 
 For macOS source, replace `windows/` with `macos/` and use `python3` if required. Bundled EXE/App users can enter the same data in the GUI without these development commands.
 
-Each source distribution originally passed 121 example checks: numerical inverses, reports, equipment groups, AHU heat/moisture conservation and insufficient-capacity detection. Original results: [Windows](../examples/calculation-results-windows.json), [macOS](../examples/calculation-results-macos.json). They are the same 18 applicable cases and two out-of-scope controls, not 40 different questions. Native release acceptance and the separate 20 bilingual parity cases are documented independently.
+Each source distribution originally passed 121 example checks: numerical inverses, reports, equipment groups, AHU heat/moisture conservation and insufficient-capacity detection. Windows win.7 source results: [Windows](../evidence/2026-10-18-audit-six/windows-use-cases.json), [macOS](../examples/calculation-results-macos.json). They are the same 18 applicable cases and two out-of-scope controls, not 40 different questions. Native release acceptance and the separate 20 bilingual parity cases are documented independently.
 
 </details>
 
@@ -72,8 +72,8 @@ See the [licensing examples](../../LICENSE_GUIDE.en.md) for permitted use. Repor
 
 [FAQ](../faq.en.md) · [Native acceptance](../2026-10-16-gemini-integration-review.md#原生發布狀態) · [Historical records](../history/README.md#english)
 
-## Current release (win.5 / mac.6)
+## Current release (win.7 / mac.6)
 
-This release adds cleanroom airflow, heat-load and water-pump calculators, explicit airflow topology, upstream transfers and HTML executive reports. These changes are included in the Windows win.5 / Mac mac.6 downloads. See the [integration review](../2026-10-16-gemini-integration-review.md#english) for model boundaries, compatibility and native acceptance.
+This release adds cleanroom airflow, heat-load and water-pump calculators, explicit airflow topology, upstream transfers and HTML executive reports. These changes are included in the Windows win.7 / Mac mac.6 downloads. See the [integration review](../2026-10-16-gemini-integration-review.md#english) for model boundaries, compatibility and native acceptance.
 
-Windows win.5 fixes the lighting action adopting hidden dimensions (F07); other audit findings remain separately tracked. [Lighting correction and acceptance](../2026-10-18-windows-lighting-f07.md).
+Windows win.7 fixes F01–F06 and source restoration/re-adoption, retaining win.5 lighting F07. Legacy W/kVA adoptions need recovery; ledger v2 workspaces cannot be read by mac.6. [Corrections and native acceptance](../2026-10-18-windows-audit-six.md#english).

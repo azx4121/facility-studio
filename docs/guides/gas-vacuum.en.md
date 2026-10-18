@@ -48,4 +48,4 @@ Minimum ID is 109.300 mm. The reference table selects 6 in (150A), ID 160.3 mm, 
 
 This is a **process-vacuum volume-flow estimate**, not high-vacuum performance, conductance, evacuation time or pump selection. Obtain pump curves, conductance, leaks/outgassing and external-pressure collapse data separately. Torr/kPa/mbar conversion retains the absolute-pressure basis. Supply and remote minimum pressures must satisfy the full workbench's pressure bounds.
 
-Inputs: [05](../examples/05-gas.json), [06](../examples/06-gas.json), [PV scenario 07](../examples/scenarios.json). [Original results](../examples/calculation-results-windows.json).
+Inputs: [05](../examples/05-gas.json), [06](../examples/06-gas.json), [PV scenario 07](../examples/scenarios.json). [Windows win.7 source results](../evidence/2026-10-18-audit-six/windows-use-cases.json).

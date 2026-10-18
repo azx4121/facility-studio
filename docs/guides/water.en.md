@@ -5,7 +5,7 @@
 <a id="source-revision"></a>
 ## Current source: heat load to chilled water and pump
 
-This section covers the repository revision. Existing V5.6.0 pipe references and worked results below are retained. New source features require separate packaging and native acceptance; existing downloads are unchanged.
+These features are included in Windows win.7 and macOS mac.6; the subsequent Windows-only audit corrections are described below.
 
 Heat load estimate separates lighting, envelope, occupant sensible/latent heat, equipment room heat and FFU fan heat. Envelope 20 W/m2, FFU 0.18 kW per unit and OA enthalpy difference 50 kJ/kg are editable preliminary assumptions. Keep the enthalpy endpoint and control volume consistent:
 
@@ -54,7 +54,11 @@ Candidate 65A (2-1/2 in), reference ID 67.9 mm, velocity 1.319 m/s.
 
 The candidate satisfies the chosen velocity limit only. Pump head, coil/heat-exchanger loss, complete supply/return routes, expansion vessel, static pressure and NPSH need separate checks.
 
-Inputs: [10](../examples/10-water.json), [11](../examples/11-water.json). [Original inverse-check results](../examples/calculation-results-windows.json).
+Inputs: [10](../examples/10-water.json), [11](../examples/11-water.json). [Windows win.7 source checks](../evidence/2026-10-18-audit-six/windows-use-cases.json).
 
 
 2026-10-16: STD reference bores at 26/28/30 inches are 641.4/692.2/743.0 mm (OD minus two 9.5 mm walls), checked against the [supplier table](https://www.snyi.com.tw/product-femco01.html). Confirm supplied material and wall thickness.
+
+## Windows win.7: K reports and pump units
+
+Water TXT/HTML reports show the actual adopted ΣK. Local loss remains `Δp=ΣK×ρ×v²/2`; it is not added twice. Pump-unit switching preserves physical flow: 100 LPM = 6 m³/h ≈ 26.4172 US GPM. With unchanged head and efficiencies, shaft/input power and motor selection remain unchanged. These fixes began in win.6 and are retained in win.7; mac.6 has not received them. [Independent checks](../2026-10-18-windows-audit-six.md#english).

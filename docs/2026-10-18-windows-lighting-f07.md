@@ -1,5 +1,7 @@
 # Windows win.5：照明 F07 修正與驗收
 
+本頁保留 win.5 當時的測試與下載身分。F01–F06 後續已在 Windows 修正，win.7 另修正來源復原；目前結果見[工程稽核修正與驗收](2026-10-18-windows-audit-six.md)。
+
 ## 問題與修正
 
 win.4 照明頁的「型錄 U／室指數檢核」會在暫停欄位事件時強制切到長×寬，繞過正常的面積等值換算。輸入 75 m²、500 Lux、4,000 lm／盞、U = 0.6、M = 0.8，原本應為 20 盞；隱藏的預設 6 × 5 m 被採用後卻變成 8 盞，少 60%。
@@ -35,11 +37,12 @@ python windows/tests/lighting_presets.py --gui
 
 ## 範圍
 
-本次僅修正 Windows 照明 F07。先前 Windows 稽核的 F01–F06 仍待另行修正；macOS mac.6 尚未套用本次變更。使用者原本比較軟體、兩邊輸入與差異方向尚未取得，不能認定本缺陷是其實際案例的唯一原因。
+本次僅修正 Windows 照明 F07。當時 Windows 稽核的 F01–F06 尚未列入該版，後續 Windows 修正見上方連結；macOS mac.6 尚未套用本次變更。使用者原本比較軟體、兩邊輸入與差異方向尚未取得，不能認定本缺陷是其實際案例的唯一原因。
 
 核心流明法不變；U/M、燈具流明、工作面與配光資料仍須對齊。未載入 IES/LDT，不宣稱重現 DIALux 的照度分布、均勻度或眩光模擬。
 
-## 尚待修正項目
+<a id="尚待修正項目"></a>
+## win.5 當時尚待修正項目（歷史記錄）
 
 下表延續先前 Windows 稽核，這些項目未列入 win.5 修正。重現與測試留在 [Windows 深度稽核](https://github.com/azx4121/facility-studio/actions/runs/39047611894)及 [稽核腳本](https://github.com/azx4121/facility-studio/blob/2fa5c1fdfc75bad7346eb44935a4457481f1f243/audit/windows_deep_audit.py)。
 
@@ -56,7 +59,7 @@ F07 已修正的範圍是照明輸入切換；上述各項的修正與驗收需�
 
 ## English
 
-Windows win.5 fixes F07: the catalogue-U/room-index button previously replaced the current area with hidden dimensions, which could change 75 m² / 20 fixtures into 30 m² / 8 fixtures. It now preserves area, calculation mode and lumen source. For area/volume inputs it asks for actual length and width before enabling K. The 2,500 independent formula checks and 71 real-widget source checks pass on both native Windows environments; frozen EXE acceptance is recorded separately below. Other audit findings F01–F06 remain open, and macOS remains mac.6.
+Windows win.5 fixes F07: the catalogue-U/room-index button previously replaced the current area with hidden dimensions, which could change 75 m² / 20 fixtures into 30 m² / 8 fixtures. It now preserves area, calculation mode and lumen source. For area/volume inputs it asks for actual length and width before enabling K. The 2,500 independent formula checks and 71 real-widget source checks pass on both native Windows environments; frozen EXE acceptance is recorded separately below. F01–F06 were open at that release and were corrected in later Windows revisions; see the current audit report linked above. macOS remains mac.6.
 
 ## 原生發布結果
 

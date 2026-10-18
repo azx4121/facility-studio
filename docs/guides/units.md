@@ -23,5 +23,8 @@ Kv／Cv是閥門通流係數：Kv以水在壓差1 bar下的m³/h表示，Cv(US)�
 
 單次基本換算可以直接解答；需要重複比較、離線使用或把結果連到工程計算時，這個入口更有用。
 
-案例輸入：[14](../examples/14-units.json)、[15](../examples/15-units.json)。[反算記錄](../examples/calculation-results-windows.json)。
+案例輸入：[14](../examples/14-units.json)、[15](../examples/15-units.json)。[來源反算記錄](../evidence/2026-10-18-audit-six/windows-use-cases.json)。
 
+## Windows win.7：數值邊界
+
+無法以有限浮點數表示的結果會報錯並清除舊結果，不顯示成功的 infinity；仍可表示的 1e308°F 會正常換算。−459.67°F＝0 K 可接受，低於絕對零度拒絕。這些修正始於 win.6、保留於 win.7；mac.6 尚未套用。[邊界驗證](../2026-10-18-windows-audit-six.md)。

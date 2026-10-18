@@ -1,0 +1,50 @@
+{
+  "source_artifact": {
+    "id": 12131659685,
+    "name": "win560-build-evidence",
+    "bytes": 4978112,
+    "sha256": "5e6dce9638f9d65a4ea711a9059f936aaaa4d9088a59759c323cc6b52a96bff4"
+  },
+  "source_path": "_temp/windows-offline/evidence/native/standalone/English_Electrical.png",
+  "target": "docs/images/v560-win7-native-en.png",
+  "bytes": 64977,
+  "sha256": "28a339419d07143c96a6e5683990476c3826f79de63a164b4e3937bd7bcac109",
+  "transformed": false,
+  "captures": [
+    {
+      "host": "windows-2022",
+      "file": "English_Electrical.png",
+      "bytes": 64977,
+      "sha256": "28a339419d07143c96a6e5683990476c3826f79de63a164b4e3937bd7bcac109",
+      "scope": "Actual native evidence; visual observations recorded in the audit report."
+    },
+    {
+      "host": "windows-2022",
+      "file": "Windows_Electrical.png",
+      "bytes": 46743,
+      "sha256": "55ddf2a5ec704d29b572824cccaa42b3b968d02b9638cdc4fb7512877d8ecfc5",
+      "scope": "Actual native evidence; visual observations recorded in the audit report."
+    },
+    {
+      "host": "windows-2025",
+      "file": "English_Electrical.png",
+      "bytes": 74854,
+      "sha256": "06e1b2601bbafa8934239539f021fb3f2c9af3a633ca198309512855ef34e3ee",
+      "scope": "Actual native evidence; visual observations recorded in the audit report."
+    },
+    {
+      "host": "windows-2025",
+      "file": "Windows_Electrical.png",
+      "bytes": 60098,
+      "sha256": "d4a72afd92291f47a6093698f1dafb46072fd96d25be1dc62b4d6b4783449ded",
+      "scope": "Actual native evidence; visual observations recorded in the audit report."
+    }
+  ],
+  "observation_image": {
+    "source_path": "_temp/windows-offline/evidence/native/standalone/Windows_Electrical.png",
+    "target": "docs/images/v560-win7-capture-observation.png",
+    "bytes": 46743,
+    "sha256": "55ddf2a5ec704d29b572824cccaa42b3b968d02b9638cdc4fb7512877d8ecfc5",
+    "transformed": false
+  }
+}

@@ -1,0 +1,572 @@
+{
+  "schema": 1,
+  "checked_at": "2026-10-18T09:44:10.958062+00:00",
+  "fixed_commit": "400a8ee88ff18dbfb7b16b759e61a35533c249f3",
+  "windows_tree": "4474dda36cf512aea02fbff1efc626cfa0c469dd",
+  "application_tree": "3ad9fef9417170592008a72b2206ac0f22a8e81b",
+  "unchanged_macos_tree": "9343a70db1da7e9d3127bf8749826a0ac62cd671",
+  "run": {
+    "id": 39114093849,
+    "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093849",
+    "head_sha": "400a8ee88ff18dbfb7b16b759e61a35533c249f3",
+    "conclusion": "success",
+    "created_at": "2026-10-18T09:07:22Z",
+    "updated_at": "2026-10-18T09:42:22Z"
+  },
+  "jobs": [
+    {
+      "id": 117636198997,
+      "name": "build",
+      "conclusion": "success",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093849/job/117636198997"
+    },
+    {
+      "id": 117639824419,
+      "name": "verify",
+      "conclusion": "success",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093849/job/117639824419"
+    },
+    {
+      "id": 117642872762,
+      "name": "publish",
+      "conclusion": "success",
+      "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093849/job/117642872762"
+    }
+  ],
+  "source_gui": [
+    {
+      "run": {
+        "id": 39114093013,
+        "head_sha": "400a8ee88ff18dbfb7b16b759e61a35533c249f3",
+        "head_branch": "fix/windows-audit-six",
+        "name": "Windows lighting and engineering audit regressions",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093013"
+      },
+      "jobs": [
+        {
+          "id": 117636195946,
+          "name": "lighting (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093013/job/117636195946"
+        },
+        {
+          "id": 117636196270,
+          "name": "lighting (windows-2025)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093013/job/117636196270"
+        }
+      ],
+      "results": [
+        {
+          "job_id": 117636195946,
+          "passed": true,
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "checks": 2322,
+          "formula_checks": 2182,
+          "gui_checks": 140
+        },
+        {
+          "job_id": 117636196270,
+          "passed": true,
+          "platform": "Windows-2025Server-10.0.26100-SP0",
+          "checks": 2322,
+          "formula_checks": 2182,
+          "gui_checks": 140
+        }
+      ],
+      "lighting_results": [
+        {
+          "job_id": 117636195946,
+          "passed": true,
+          "checks": 2571,
+          "formula_checks": 2500,
+          "gui": true
+        },
+        {
+          "job_id": 117636196270,
+          "passed": true,
+          "checks": 2571,
+          "formula_checks": 2500,
+          "gui": true
+        }
+      ]
+    },
+    {
+      "run": {
+        "id": 39114093859,
+        "head_sha": "400a8ee88ff18dbfb7b16b759e61a35533c249f3",
+        "head_branch": "main",
+        "name": "Windows lighting and engineering audit regressions",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093859"
+      },
+      "jobs": [
+        {
+          "id": 117636198716,
+          "name": "lighting (windows-2025)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093859/job/117636198716"
+        },
+        {
+          "id": 117636198966,
+          "name": "lighting (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093859/job/117636198966"
+        }
+      ],
+      "results": [
+        {
+          "job_id": 117636198716,
+          "passed": true,
+          "platform": "Windows-2025Server-10.0.26100-SP0",
+          "checks": 2322,
+          "formula_checks": 2182,
+          "gui_checks": 140
+        },
+        {
+          "job_id": 117636198966,
+          "passed": true,
+          "platform": "Windows-2022Server-10.0.20348-SP0",
+          "checks": 2322,
+          "formula_checks": 2182,
+          "gui_checks": 140
+        }
+      ],
+      "lighting_results": [
+        {
+          "job_id": 117636198716,
+          "passed": true,
+          "checks": 2571,
+          "formula_checks": 2500,
+          "gui": true
+        },
+        {
+          "job_id": 117636198966,
+          "passed": true,
+          "checks": 2571,
+          "formula_checks": 2500,
+          "gui": true
+        }
+      ]
+    }
+  ],
+  "source_regressions": [
+    {
+      "run": {
+        "id": 39114093044,
+        "head_sha": "400a8ee88ff18dbfb7b16b759e61a35533c249f3",
+        "head_branch": "fix/windows-audit-six",
+        "name": "Engineering dashboard source checks",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093044"
+      },
+      "jobs": [
+        {
+          "id": 117636196362,
+          "name": "windows source on Linux / Python 3.13",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093044/job/117636196362"
+        },
+        {
+          "id": 117636196735,
+          "name": "macos source on Linux / Python 3.13",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093044/job/117636196735"
+        }
+      ]
+    },
+    {
+      "run": {
+        "id": 39114093855,
+        "head_sha": "400a8ee88ff18dbfb7b16b759e61a35533c249f3",
+        "head_branch": "main",
+        "name": "Engineering dashboard source checks",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093855"
+      },
+      "jobs": [
+        {
+          "id": 117636198896,
+          "name": "macos source on Linux / Python 3.13",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093855/job/117636198896"
+        },
+        {
+          "id": 117636199052,
+          "name": "windows source on Linux / Python 3.13",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/azx4121/facility-studio/actions/runs/39114093855/job/117636199052"
+        }
+      ]
+    }
+  ],
+  "release": {
+    "id": 416362766,
+    "tag_name": "v5.6.0-win.7",
+    "target_commitish": "400a8ee88ff18dbfb7b16b759e61a35533c249f3",
+    "prerelease": true,
+    "draft": false,
+    "html_url": "https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.7",
+    "published_at": "2026-10-18T09:42:19Z"
+  },
+  "assets": [
+    {
+      "url": "https://api.github.com/repos/azx4121/facility-studio/releases/assets/653098616",
+      "id": 653098616,
+      "node_id": "RA_kwDOU9bplc4m7X54",
+      "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+      "label": "",
+      "uploader": {
+        "login": "github-actions[bot]",
+        "id": 41898282,
+        "node_id": "MDM6Qm90NDE4OTgyODI=",
+        "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+        "html_url": "https://github.com/apps/github-actions",
+        "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "content_type": "application/octet-stream",
+      "state": "uploaded",
+      "size": 41079379,
+      "digest": "sha256:f9e3b30fb3f3feb581212822e13cebb9e115ca3893d818f876159c4db3a8e4b9",
+      "download_count": 0,
+      "created_at": "2026-10-18T09:42:16Z",
+      "updated_at": "2026-10-18T09:42:18Z",
+      "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.7/Facility_Studio_V5_6_0_Windows_Offline.exe"
+    },
+    {
+      "url": "https://api.github.com/repos/azx4121/facility-studio/releases/assets/653098673",
+      "id": 653098673,
+      "node_id": "RA_kwDOU9bplc4m7X6x",
+      "name": "SHA256SUMS.txt",
+      "label": "",
+      "uploader": {
+        "login": "github-actions[bot]",
+        "id": 41898282,
+        "node_id": "MDM6Qm90NDE4OTgyODI=",
+        "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+        "html_url": "https://github.com/apps/github-actions",
+        "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "content_type": "application/octet-stream",
+      "state": "uploaded",
+      "size": 109,
+      "digest": "sha256:222b78e7c3ba63f02b1ee8072d7eea92640c9556245f06acf198e3ae064e8868",
+      "download_count": 0,
+      "created_at": "2026-10-18T09:42:18Z",
+      "updated_at": "2026-10-18T09:42:18Z",
+      "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.7/SHA256SUMS.txt"
+    }
+  ],
+  "public_fresh_download": [
+    {
+      "id": 653098616,
+      "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+      "bytes": 41079379,
+      "sha256": "f9e3b30fb3f3feb581212822e13cebb9e115ca3893d818f876159c4db3a8e4b9",
+      "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.7/Facility_Studio_V5_6_0_Windows_Offline.exe",
+      "size_matches": true,
+      "digest_matches": true,
+      "windows_revision_strings_match": true
+    },
+    {
+      "id": 653098673,
+      "name": "SHA256SUMS.txt",
+      "bytes": 109,
+      "sha256": "222b78e7c3ba63f02b1ee8072d7eea92640c9556245f06acf198e3ae064e8868",
+      "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.7/SHA256SUMS.txt",
+      "size_matches": true,
+      "digest_matches": true
+    }
+  ],
+  "public_checksums_match": true,
+  "build_manifest": {
+    "revision": "5.6.0-win.7",
+    "source_commit": "400a8ee88ff18dbfb7b16b759e61a35533c249f3",
+    "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-2022Server-10.0.20348-SP0",
+    "packages": {
+      "altgraph": "0.17.5",
+      "contourpy": "1.4.0",
+      "cycler": "0.12.1",
+      "fonttools": "4.66.1",
+      "kiwisolver": "1.5.1",
+      "matplotlib": "3.10.9",
+      "numpy": "2.3.3",
+      "packaging": "26.3",
+      "pefile": "2024.8.26",
+      "pillow": "12.3.0",
+      "pip": "26.2.1",
+      "pyinstaller": "6.22.3",
+      "pyinstaller-hooks-contrib": "2026.8",
+      "pyparsing": "3.3.3",
+      "python-dateutil": "2.9.0.post0",
+      "pywin32-ctypes": "0.2.3",
+      "setuptools": "84.0.0",
+      "six": "1.17.0"
+    },
+    "exe_sha256": "f9e3b30fb3f3feb581212822e13cebb9e115ca3893d818f876159c4db3a8e4b9",
+    "exe_bytes": 41079379,
+    "build_only_internet": true,
+    "runtime_requires_python_installation": false
+  },
+  "artifact_downloads": [
+    {
+      "id": 12131659685,
+      "name": "win560-build-evidence",
+      "bytes": 4978112,
+      "sha256": "5e6dce9638f9d65a4ea711a9059f936aaaa4d9088a59759c323cc6b52a96bff4"
+    },
+    {
+      "id": 12132845992,
+      "name": "win560-second-windows-evidence",
+      "bytes": 1866554,
+      "sha256": "ffa1910e4bbdaf34e381c118a3c77b18a1744a5d907c93ecc0a202be8003cdbd"
+    }
+  ],
+  "all_artifacts": [
+    {
+      "id": 12132845992,
+      "name": "win560-second-windows-evidence",
+      "size_in_bytes": 1866554,
+      "url": "https://api.github.com/repos/azx4121/facility-studio/actions/artifacts/12132845992",
+      "archive_download_url": "https://api.github.com/repos/azx4121/facility-studio/actions/artifacts/12132845992/zip",
+      "expired": false,
+      "created_at": "2026-10-18T09:42:00Z",
+      "expires_at": "2026-11-01T09:41:59Z",
+      "updated_at": "2026-10-18T09:42:00Z",
+      "digest": "sha256:ffa1910e4bbdaf34e381c118a3c77b18a1744a5d907c93ecc0a202be8003cdbd",
+      "workflow_run": {
+        "id": 39114093849,
+        "repository_id": 1406593429,
+        "head_repository_id": 1406593429,
+        "head_branch": "main",
+        "head_sha": "400a8ee88ff18dbfb7b16b759e61a35533c249f3"
+      }
+    },
+    {
+      "id": 12132415683,
+      "name": "win560-delivery",
+      "size_in_bytes": 82753691,
+      "url": "https://api.github.com/repos/azx4121/facility-studio/actions/artifacts/12132415683",
+      "archive_download_url": "https://api.github.com/repos/azx4121/facility-studio/actions/artifacts/12132415683/zip",
+      "expired": false,
+      "created_at": "2026-10-18T09:26:05Z",
+      "expires_at": "2026-11-01T09:26:02Z",
+      "updated_at": "2026-10-18T09:26:05Z",
+      "digest": "sha256:2e14c12d251817a1b95da7a97f8d388e9ef6d3ec3bc9ba5b1c97787f1f9db674",
+      "workflow_run": {
+        "id": 39114093849,
+        "repository_id": 1406593429,
+        "head_repository_id": 1406593429,
+        "head_branch": "main",
+        "head_sha": "400a8ee88ff18dbfb7b16b759e61a35533c249f3"
+      }
+    },
+    {
+      "id": 12131659685,
+      "name": "win560-build-evidence",
+      "size_in_bytes": 4978112,
+      "url": "https://api.github.com/repos/azx4121/facility-studio/actions/artifacts/12131659685",
+      "archive_download_url": "https://api.github.com/repos/azx4121/facility-studio/actions/artifacts/12131659685/zip",
+      "expired": false,
+      "created_at": "2026-10-18T09:26:02Z",
+      "expires_at": "2026-11-01T09:26:01Z",
+      "updated_at": "2026-10-18T09:26:02Z",
+      "digest": "sha256:5e6dce9638f9d65a4ea711a9059f936aaaa4d9088a59759c323cc6b52a96bff4",
+      "workflow_run": {
+        "id": 39114093849,
+        "repository_id": 1406593429,
+        "head_repository_id": 1406593429,
+        "head_branch": "main",
+        "head_sha": "400a8ee88ff18dbfb7b16b759e61a35533c249f3"
+      }
+    }
+  ],
+  "preserved_releases": [
+    {
+      "id": 416215461,
+      "tag_name": "v5.6.0-win.6",
+      "target_commitish": "852c9a097224c5011633ba8493833fc3f68e3b79",
+      "prerelease": true,
+      "draft": false,
+      "html_url": "https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.6",
+      "assets": [
+        {
+          "id": 652379181,
+          "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+          "size": 41076785,
+          "digest": "sha256:c776c42f5b5067ace5e439416d98fb6b7d31799642e3d285e97eeb9da49511fe",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.6/Facility_Studio_V5_6_0_Windows_Offline.exe"
+        },
+        {
+          "id": 652379249,
+          "name": "SHA256SUMS.txt",
+          "size": 109,
+          "digest": "sha256:2e7112e4525513ae6cbcb8c683a134e1277bbe9b60e29a36dc27528ad8354878",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.6/SHA256SUMS.txt"
+        }
+      ]
+    },
+    {
+      "id": 415950448,
+      "tag_name": "v5.6.0-win.5",
+      "target_commitish": "c34a12782f7c70fa79b9b7d395971a1070ee6492",
+      "prerelease": true,
+      "draft": false,
+      "html_url": "https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.5",
+      "assets": [
+        {
+          "id": 651058799,
+          "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+          "size": 41044893,
+          "digest": "sha256:0b308ba4195ffd50a7c6f3341fa7ad72b07b60ae3ea67bc5e443a256f3b3e65f",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.5/Facility_Studio_V5_6_0_Windows_Offline.exe"
+        },
+        {
+          "id": 651058894,
+          "name": "SHA256SUMS.txt",
+          "size": 109,
+          "digest": "sha256:c8a33f9e2e6ebacf1408818f9c1da240e2b456edf3040a2291930f7670c4235f",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.5/SHA256SUMS.txt"
+        }
+      ]
+    },
+    {
+      "id": 415040406,
+      "tag_name": "v5.6.0-win.4",
+      "target_commitish": "cd2fe8330aee584f948e152b4962c1a02d0c0ed3",
+      "prerelease": true,
+      "draft": false,
+      "html_url": "https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.4",
+      "assets": [
+        {
+          "id": 647548251,
+          "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+          "size": 41038610,
+          "digest": "sha256:49a04498b8353f4ef1f0d202de48576af925502dff202c232d2356b02a48a802",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.4/Facility_Studio_V5_6_0_Windows_Offline.exe"
+        },
+        {
+          "id": 647548343,
+          "name": "SHA256SUMS.txt",
+          "size": 109,
+          "digest": "sha256:11885f5889bf2498661ed4f9c4f4b1bf59c71d67eb4c3d3c34b331d43c9d9a44",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.4/SHA256SUMS.txt"
+        }
+      ]
+    },
+    {
+      "id": 415125492,
+      "tag_name": "v5.6.0-mac.6",
+      "target_commitish": "4eabd9ce7cb6c275f588309ab0faf39ef0ea9b91",
+      "prerelease": true,
+      "draft": false,
+      "html_url": "https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-mac.6",
+      "assets": [
+        {
+          "id": 647793779,
+          "name": "Facility_Studio_V5_6_0_macOS_mac6.dmg",
+          "size": 146283098,
+          "digest": "sha256:fb5d4cf53856dcb22d735c5f67be6aebd86a4b03e1d70218720ebee1bbc4f4d7",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.6/Facility_Studio_V5_6_0_macOS_mac6.dmg"
+        },
+        {
+          "id": 647794060,
+          "name": "SHA256SUMS.txt",
+          "size": 104,
+          "digest": "sha256:03eb67e94c439b6469d1b87f156bb6f88894858668050ad13d46fae4cb6c7a5a",
+          "browser_download_url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.6/SHA256SUMS.txt"
+        }
+      ]
+    }
+  ],
+  "independent_source_summaries": [
+    {
+      "file": "gemini-review-windows.json",
+      "raw_sha256": "c7955250886952b2e47056644527206c84c9629490c6b226baf502b4856f26a6",
+      "summary": {
+        "passed": true,
+        "source_platform": "windows",
+        "host_os": "Windows",
+        "python": "3.13.15",
+        "scenarios": 100,
+        "checks": 4432
+      }
+    },
+    {
+      "file": "all-fields-windows.json",
+      "raw_sha256": "4ea57e8ff4688449264f3a1f7c215c2140354b4e72469b8082f7d0c414aebb36",
+      "summary": {
+        "iterations": 100,
+        "passed": true,
+        "total_checks": 6977,
+        "field_coverage": {
+          "simple_fields_tested": 112,
+          "workbench_fields_tested": 257,
+          "pressure_drop_fields_tested": 220,
+          "ahu_fields_tested": 105,
+          "equipment_columns_tested": 95,
+          "reports_verified": 4226
+        }
+      }
+    }
+  ],
+  "published_example_checks": {
+    "source_file": "win-use-cases.json",
+    "raw_sha256": "f1fbf5a7a4162ea8c21e7ffcfb9cb4dcce81ecd643860a9f2a9c67b6095dbd0c",
+    "published_file_sha256": "174b9e1a417695ff8d94026140551720b3aab8068ae655935ff054b9bee63a14",
+    "check_count": 121,
+    "scope": "Source Python on native Windows 2022, not frozen EXE"
+  },
+  "scope": "Same EXE, two native hosts, three delivery paths per host; core and extended tests are separate bounded processes.",
+  "core_checks_per_path": 318,
+  "audit_entry_ui_checks_per_path": 140,
+  "numeric_assertions_per_path": 2182,
+  "combined_top_level_checks_per_path": 458,
+  "cli_tools_per_path": 10,
+  "limits": [
+    "Windows 10/11 physical hardware not tested",
+    "End-of-suite capture/repaint requires separate visual review",
+    "Legacy corrupt W/kVA without history needs manual reconciliation",
+    "mac.6 cannot read ledger v2 whole workspaces"
+  ]
+}

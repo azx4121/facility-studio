@@ -1,0 +1,12 @@
+{
+  "host": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "scope": "Source readers only; not native macOS execution",
+  "windows_source_commit": "400a8ee88ff18dbfb7b16b759e61a35533c249f3",
+  "macos_source_tree": "9343a70db1da7e9d3127bf8749826a0ac62cd671",
+  "windows_v2_workspace_in_mac6": {
+    "accepted": false,
+    "type": "ValidationError",
+    "error": "需求彙整格式不符"
+  },
+  "legacy_v1_in_windows_accepted": true
+}

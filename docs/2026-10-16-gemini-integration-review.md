@@ -1,6 +1,6 @@
 # Gemini 修正版整合覆核 · 2026-10-16
 
-本頁保留 2026-10-16 win.4／mac.6 的整合與發布紀錄；目前 Windows 照明修正見 [win.5／F07 驗收](2026-10-18-windows-lighting-f07.md)。
+本頁保留 2026-10-16 win.4／mac.6 的整合與發布紀錄；目前 Windows 結果見 [win.7 工程稽核與驗收](2026-10-18-windows-audit-six.md)，照明修正的原始 win.5 證據見 [F07 驗收](2026-10-18-windows-lighting-f07.md)。
 基於 GitHub `b9251d3`，與提供的完整 `facility-studio-v5.6.0-win4-mac6-fixed.zip` 及逐份附件比對。保留 V5.6.0；Windows 修訂 win.4、macOS 修訂 mac.6。計算資料 schema 12，舊 schema 11 保留原獨立 FFU 循環語意。
 
 ## 已確認並修正

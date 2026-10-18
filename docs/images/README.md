@@ -1,6 +1,9 @@
 # 介面截圖來源 / Screenshot provenance
 
-以下圖片保留實際來源版本；Windows 目前下載為 win.5，其照明模式切換修正不改變本頁既有總覽配置。[win.5 驗收](../2026-10-18-windows-lighting-f07.md)。
+首頁目前使用 win.7 的原生英文電力頁。歷史圖片保留各自來源版本；不得將 Linux 原始碼畫面或舊版畫面當成新版交付檔。[win.7 驗收與畫面觀察](../2026-10-18-windows-audit-six.md)。
+
+Current homepage image: native win.7 English electrical page. Historical captures retain their original provenance. See the current acceptance report for capture/repaint limits.
+
 ## V5.6.0 介面示意：win.4／mac.6 來源
 
 - `v560-dashboard-source-zh.png`（繁體中文）：SHA256 `38c2e46f6e5684d425527b3951fbb6677ac827ef27614daa252fbb436abd06fb`。
@@ -46,3 +49,13 @@ Both are unmodified screenshots from the released V5.5.8 Windows native-acceptan
 - 來源：[win.5 Windows 原生驗收](https://github.com/azx4121/facility-studio/actions/runs/39050546260)，build-evidence 的 `standalone/English_Electrical.png`。
 - 圖片 SHA256：`a585574af10bb9b72e7252e679a99d4eb9843443c269f38e1d198f193b9e8080`。
 - 受測 EXE SHA256：`0b308ba4195ffd50a7c6f3341fa7ad72b07b60ae3ea67bc5e443a256f3b3e65f`。
+
+## V5.6.0 win.7 原生驗收
+
+- `v560-win7-native-en.png`：Windows Server 2022 的實際 win.7 EXE，English 電力頁、合成 10 kW 資料；直接複製，保留桌面與背景視窗，未裁切或重畫。
+- 來源：[win.7 原生流程](https://github.com/azx4121/facility-studio/actions/runs/39114093849)，build-evidence 的 `standalone/English_Electrical.png`。
+- 圖片 SHA256：`28a339419d07143c96a6e5683990476c3826f79de63a164b4e3937bd7bcac109`。
+- 受測 EXE SHA256：`f9e3b30fb3f3feb581212822e13cebb9e115ca3893d818f876159c4db3a8e4b9`。
+- 結尾 `Windows_Electrical.png` 曾出現空白表單／結果區；這張內容完整的較早英文擷取與結尾重繪觀察分開記錄，見[完整驗收與限制](../2026-10-18-windows-audit-six.md)。
+
+`v560-win7-capture-observation.png` 保存同次 Server 2022 `standalone/Windows_Electrical.png` 的結尾空白區觀察，未修改；SHA256 `55ddf2a5ec704d29b572824cccaa42b3b968d02b9638cdc4fb7512877d8ecfc5`。此圖用於問題記錄，與首頁內容完整的英文擷取分開。Server 2025 同樣觀察見[記錄](../evidence/2026-10-18-audit-six/capture-observations.json)。

@@ -127,3 +127,16 @@ macOS 來源將 `--platform windows` 改為 `--platform macos`。原生平台直
 照明改為型錄 U 配合實際幾何 K；不以 `K/(K+0.59)` 當光度模擬。舊候選 schema 12 自動 U 模式會移轉到型錄模式並保留手填 U 草稿，須重新確認。電力工具的 kW/W 為輸入、HP/PS 為軸輸出；上游帶入一律明填 kW。管路參考至 30 吋。[完整覆核](2026-10-16-gemini-integration-review.md)
 
 Installer manifests compare exact bytes. Repository attributes preserve authored line endings on every OS; keep Windows CMD files in CRLF and do not normalize an existing frozen payload after generating its SHA256 manifest.
+
+## Windows win.7：工程稽核與來源復原回歸
+
+```sh
+python windows/tests/audit_regressions.py --output audit-numeric.json
+python windows/tests/audit_regressions.py --gui --output audit-source-ui.json
+```
+
+數值 2,182 項；真實 Tk 中英文操作 140 項，合計 2,322。涵蓋 F01–F06、功率單位／逐盤 PF 與效率快照、夏冬末端容量、轉換溢位、手動數值／單位成組保留、多次帶入與移除、存檔重開及舊 v2 空彙整記錄。F07 另有 2,500 數值與 71 來源 GUI 檢查。
+
+封裝 EXE 分開執行 `--self-test` 與 `--audit-self-test`，各維持 210 秒程序上限與五秒 GUI 心跳；每個啟動路徑須通過 318 核心、140 延伸入口／介面及 2,182 獨立數值檢查。逾時僅終止該測試程序樹，不放寬限制。每個原生 Windows 主機重驗獨立 EXE、ZIP 解壓及中文空格路徑，發布須兩主機全通過。詳見[當前驗收](2026-10-18-windows-audit-six.md)。macOS 應用來源未改；其 ledger v1 讀取器無法讀 Windows 新整案的 ledger v2，不能僅憑主案 schema 12 宣稱雙向相容。
+
+English: audit regression acceptance has 2,182 numeric assertions and 140 real-widget source checks (2,322 total). Frozen acceptance runs 318 core checks and 140 extended entry/UI checks in separate bounded processes, plus the same 2,182 assertions. Both native hosts must pass all three launch paths before publication. Source success and online Setup extraction do not substitute for delivered EXE execution. mac.6's ledger v1 reader cannot open v2 workspaces; its application source is unchanged.
