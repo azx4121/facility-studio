@@ -1,7 +1,7 @@
 Facility Studio V5.6.0｜Windows 廠務工程初估工具
 DESIGNED BY ANDY HUANG ©
 
-本版修訂：V5.6.0 · Windows win.6
+本版修訂：V5.6.0 · Windows win.7
 十項快算包含潔淨室風量、熱負荷初估與冰水泵浦，支援上游帶入、KPI與HTML總覽。
 舊案以schema 12移轉並保留原假設；FFU氣流路徑／ACH基準須明確選擇。
 照明使用型錄利用係數U與實際長寬的室指數K；不以幾何公式取代燈具配光資料。
@@ -65,6 +65,10 @@ https://github.com/azx4121/facility-studio/blob/main/docs/development.md
 Historical platform instructions:
 https://github.com/azx4121/facility-studio/blob/main/docs/history/windows-v5.5.6-readme.txt
 
-win.6：修正水管 ΣK 報告、同迴路電力候選、W／kVA 帶入、夏冬 RCU／FCU 容量、泵浦單位切換及換算溢位；保留 win.5 照明修正。
+win.7：修正水管 ΣK 報告、同迴路電力候選、W／kVA 帶入、夏冬 RCU／FCU 容量、泵浦單位切換及換算溢位；保留 win.5 照明修正。
 舊版已錯存的電力來源會標示未達條件，請移除本盤已納入電力來源，再用原始資料重新帶入。僅有主案而無來源記錄的舊檔，請核對原始 W／kVA；不自動猜改已存 kW。
-win.6 fixes F01–F06; historical W/kVA source adoptions must be removed and reimported from original data. Main-only legacy files require manual comparison with original values.
+win.7 fixes F01–F06; historical W/kVA source adoptions must be removed and reimported from original data. Main-only legacy files require manual comparison with original values.
+
+win.7：來源移除時一併保留手動修改的數值與單位；再次帶入以當次原值為復原基準，清除已釋出欄位的舊記錄。
+整案的需求彙整使用 ledger v2，mac.6 無法讀取；請在目前 Windows 版繼續使用這類整案。主案 schema 12 與整案 ledger 版本是不同的格式層級。
+win.7 preserves edited value/unit pairs and restores the latest baseline after re-adoption. Ledger v2 whole-workspace files require current Windows; mac.6 cannot open them.

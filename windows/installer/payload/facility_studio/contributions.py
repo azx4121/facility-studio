@@ -218,10 +218,39 @@ def aggregate_ledger(ledger, inputs):
     return dict(updates=updates, water=list(groups.values()), sources=[dict(id=e["id"], name=e["name"], kind=e["kind"]) for e in d["entries"].values()], notes=list(dict.fromkeys(notes)), pending=list(dict.fromkeys(pending)))
 
 
+def restoration_updates(ledger, inputs, owned):
+    """Restore untouched value/unit pairs together; preserve manual drafts."""
+    previous = ledger["last_updates"]
+    protected = set()
+    for unit_key in previous:
+        if not unit_key.startswith("u_"):
+            continue
+        value_key = unit_key[2:]
+        if value_key not in FIELDS:
+            value_key += "_q"
+        if value_key not in previous:
+            continue
+        pair = {value_key, unit_key}
+        if pair & set(owned) or any(inputs[key] != previous[key] for key in pair):
+            protected.update(pair)
+    return {key: ledger["original"][key] for key, value in previous.items()
+            if key not in owned and key not in protected and inputs[key] == value}
+
+
+def retain_owned_history(ledger, updates):
+    """Released fields must capture a fresh original at their next adoption."""
+    ledger["last_updates"] = dict(updates)
+    for name in ("original", "baseline"):
+        ledger[name] = {key: value for key, value in ledger[name].items() if key in updates}
+
+
 def updated_ledger(ledger, entry, inputs):
     d = validate_ledger(ledger)
     if legacy_power_keys(d):
         raise ValidationError(LEGACY_POWER_WARNING, legacy_power_keys(d)[0], code="legacy_power_adoption")
+    # Older v2 saves may still cache originals for already released fields.
+    # Baselines for newly adopted fields are explicitly chosen by the caller.
+    d["original"] = {key: value for key, value in d["original"].items() if key in d["last_updates"]}
     d["version"] = 2
     for pan in entry["power"]:
         prefix = "e_" + pan.lower()
@@ -229,15 +258,15 @@ def updated_ledger(ledger, entry, inputs):
             pf=float(inputs[prefix + "_pf"] if inputs.get(prefix + "_pf_mode") == "本盤獨立 PF" else inputs["e_pf"]),
             efficiency=float(inputs["e_eff"])))
     d["entries"][entry["id"]] = copy.deepcopy(entry)
+    active_panels = {pan for source in d["entries"].values() for pan in source["power"]}
+    d["power_basis"] = {pan: basis for pan, basis in d["power_basis"].items() if pan in active_panels}
     validate_ledger(d)
     summary = aggregate_ledger(d, inputs)
     for key in summary["updates"]:
         d["original"].setdefault(key, inputs[key])
     updates = dict(summary["updates"])
-    for key, previous in d["last_updates"].items():
-        if key not in updates and inputs[key] == previous:
-            updates[key] = d["original"][key]
-    d["last_updates"] = dict(summary["updates"])
+    updates.update(restoration_updates(d, inputs, updates))
+    retain_owned_history(d, summary["updates"])
     return d, updates, summary
 
 
@@ -248,10 +277,8 @@ def removed_ledger(ledger, ident, inputs):
     d["power_basis"] = {pan: basis for pan, basis in d["power_basis"].items() if pan in active_panels}
     summary = aggregate_ledger(d, inputs)
     updates = dict(summary["updates"])
-    for key, previous in d["last_updates"].items():
-        if key not in updates and inputs[key] == previous:
-            updates[key] = d["original"][key]
-    d["last_updates"] = dict(summary["updates"])
+    updates.update(restoration_updates(d, inputs, updates))
+    retain_owned_history(d, summary["updates"])
     if not legacy_power_keys(d):
         d["version"] = 2
     return d, updates, summary

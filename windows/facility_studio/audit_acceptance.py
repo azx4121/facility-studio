@@ -306,9 +306,83 @@ def boundary_checks(a):
                            electrical_from_inputs(current)[pan]['kw'], expected + 10, 'F03')
                     a.near(prefix + '/changed shared PF retains reactive current basis',
                            electrical_from_inputs(current)[pan]['current_a'], (expected + 10) * 1000 / (math.sqrt(3) * 380 * .85), 'F03')
+                    for edit, values in (('value', {key: '200'}), ('unit', {'u_' + key: 'W'}),
+                                         ('both', {key: '12.3', 'u_' + key: 'kVA'})):
+                        manual = dict(current, **values)
+                        _, restore, _ = removed_ledger(ledger, entry['id'], manual)
+                        restored = dict(manual, **restore)
+                        a.check(prefix + '/manual pair survives removal/' + edit,
+                                restored[key] == manual[key] and restored['u_' + key] == manual['u_' + key], issue='F03')
+                        if edit == 'value':
+                            a.near(prefix + '/manual 200kW remains 200kW', electrical_from_inputs(restored)[pan]['kw'], 200, 'F03')
                     _, updates, _ = removed_ledger(ledger, entry['id'], current)
                     current.update(updates)
                     a.check(prefix + '/remove restores original units', all(current[k] == inputs[k] for k in updates), issue='F03')
+
+        # Releasing ownership must discard cached history, including saved v2
+        # ledgers from win.6 which retained old originals after the last removal.
+        for pan, key in (('UP', 'e_up_eq'), ('NP', 'e_np_exh')):
+            inputs = empty_power_inputs()['inputs']
+            entry = equipment_contribution(schedule, schedule['groups'][0], inputs, pan)
+            ledger = empty_ledger()
+            ledger['original'] = {key: '100', 'u_' + key: 'kVA'}
+            ledger['baseline'][key] = 85
+            for cycle, (unit, value, base, keep) in enumerate((('kW', '200', 200, True),
+                                                            ('W', '100', .1, False),
+                                                            ('kVA', '100', 95, True))):
+                inputs.update({key: value, 'u_' + key: unit, 'e_pf': '.95'})
+                original = dict(inputs)
+                ledger['baseline'][key] = base if keep else 0
+                ledger, updates, _ = updated_ledger(ledger, entry, inputs)
+                inputs.update(updates)
+                ledger = validate_ledger(json.loads(json.dumps(ledger)))
+                label = f'F03 fresh baseline/{pan}/{cycle}/{unit}'
+                a.near(label + '/adopt', electrical_from_inputs(inputs)[pan]['kw'], (base if keep else 0) + 10, 'F03')
+                ledger, updates, _ = removed_ledger(ledger, entry['id'], inputs)
+                inputs.update(updates)
+                a.check(label + '/restore this cycle', all(inputs[k] == original[k] for k in updates), issue='F03')
+                a.check(label + '/released history empty', not any(ledger[k] for k in
+                        ('original', 'baseline', 'last_updates', 'power_basis', 'entries')), issue='F03')
+
+        # An existing source can relinquish its fields without being removed.
+        inputs = empty_power_inputs()['inputs']
+        inputs.update(e_up_eq='100', u_e_up_eq='kVA')
+        entry = equipment_contribution(schedule, schedule['groups'][0], inputs)
+        ledger, updates, _ = updated_ledger(empty_ledger(), entry, inputs)
+        inputs.update(updates)
+        no_power = dict(entry, power={}, updates={})
+        ledger, updates, _ = updated_ledger(ledger, no_power, inputs)
+        inputs.update(updates)
+        a.check('F03 updated source releases conversion basis and history', inputs['e_up_eq'] == '100'
+                and inputs['u_e_up_eq'] == 'kVA' and not any(ledger[k] for k in
+                ('original', 'baseline', 'last_updates', 'power_basis')), issue='F03')
+        inputs.update(e_up_eq='200', u_e_up_eq='kW', e_pf='.7')
+        ledger['baseline']['e_up_eq'] = 200
+        ledger, updates, _ = updated_ledger(ledger, entry, inputs)
+        a.near('F03 returned source captures new conversion basis', ledger['power_basis']['UP']['pf'], .7, 'F03')
+        inputs.update(updates)
+        ledger, updates, _ = removed_ledger(ledger, entry['id'], inputs)
+        inputs.update(updates)
+        a.check('F03 returned source restores new raw original', inputs['e_up_eq'] == '200'
+                and inputs['u_e_up_eq'] == 'kW', issue='F03')
+
+        # Value/unit names differ between water, gas and exhaust fields.
+        for key, unit_key in (('mchw_q', 'u_mchw'), ('gas1_q', 'u_gas1'),
+                              ('gex_q', 'u_gex'), ('pcw_tot', 'u_pcw_tot')):
+            for operation in ('remove', 'replace'):
+                inputs = empty_power_inputs()['inputs']
+                inputs.update({key: '100', unit_key: FIELDS[unit_key]['options'][-1]})
+                source = dict(no_power, updates={key: '20', unit_key: FIELDS[unit_key]['options'][0]})
+                ledger, updates, _ = updated_ledger(empty_ledger(), source, inputs)
+                inputs.update(updates)
+                inputs[key] = '200'
+                if operation == 'remove':
+                    _, updates, _ = removed_ledger(ledger, source['id'], inputs)
+                else:
+                    _, updates, _ = updated_ledger(ledger, no_power, inputs)
+                inputs.update(updates)
+                a.check(f'F03 manual flow pair/{key}/{operation}', inputs[key] == '200'
+                        and inputs[unit_key] == FIELDS[unit_key]['options'][0], issue='F03')
 
         # A different source PF must preserve both real and reactive base power.
         for mode in ('沿用共用 PF', '本盤獨立 PF'):
@@ -532,6 +606,37 @@ def run_ui(root, app, main, check, pump, output=None):
                     with patch('facility_studio.session_controller.messagebox.askyesnocancel', return_value=True):
                         check(f'F03 {lang}/{unit} legacy reimport adopts correct power', lambda: main.apply_contribution(entry)
                               and near(electrical_from_inputs(main.snapshot()['inputs'])['UP']['kw'], expected))
+                main.variables['e_up_eq'].set('200')
+                main.recalculate()
+                check(f'F03 {lang} manual value and unit remain paired on actual removal',
+                      lambda: remove_source(entry['id']) and main.snapshot()['inputs']['e_up_eq'] == '200'
+                      and main.snapshot()['inputs']['u_e_up_eq'] == 'kW')
+                check(f'F03 {lang} manual 200kW is not restored as 200kVA',
+                      lambda: near(electrical_from_inputs(main.snapshot()['inputs'])['UP']['kw'], 200))
+                for cycle, value in enumerate(('200', '73.25')):
+                    main.variables['e_up_eq'].set(value)
+                    main.recalculate()
+                    with patch('facility_studio.session_controller.messagebox.askyesnocancel', return_value=True):
+                        check(f'F03 {lang}/{cycle} re-adopt uses current baseline', lambda: main.apply_contribution(entry)
+                              and near(electrical_from_inputs(main.snapshot()['inputs'])['UP']['kw'], float(value) + 10))
+                    path = Path(directory) / f'readopt {lang} {cycle}.json'
+                    check(f'F03 {lang}/{cycle} save re-adopted workspace', lambda: main.save_workspace(path))
+                    main.apply_workspace(read_workspace(path), path)
+                    main.recalculate()
+                    check(f'F03 {lang}/{cycle} remove restores this cycle after reload',
+                          lambda: remove_source(entry['id']) and main.snapshot()['inputs']['e_up_eq'] == value
+                          and main.snapshot()['inputs']['u_e_up_eq'] == 'kW'
+                          and not main.demand_ledger['original'] and not main.demand_ledger['baseline'])
+                # Actual win.6 empty-ledger shape could retain an old nonzero
+                # baseline even after the user had replaced the main field by 0.
+                main.variables['e_up_eq'].set('0')
+                main.demand_ledger['baseline']['e_up_eq'] = 85
+                main.demand_ledger['original'].update(e_up_eq='100', u_e_up_eq='kVA')
+                main.recalculate()
+                check(f'F03 {lang} zero baseline replaces stale saved history', lambda: main.apply_contribution(entry)
+                      and near(electrical_from_inputs(main.snapshot()['inputs'])['UP']['kw'], 10))
+                check(f'F03 {lang} zero baseline removal restores zero', lambda: remove_source(entry['id'])
+                      and main.snapshot()['inputs']['e_up_eq'] == '0' and main.snapshot()['inputs']['u_e_up_eq'] == 'kW')
             check('F01–F06 no unexpected validation dialogs', lambda: not dialogs)
     finally:
         main.apply_workspace(original, original_path)

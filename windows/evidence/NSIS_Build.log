@@ -2,10 +2,10 @@ MakeNSIS v3.09-4 - Copyright 1999-2023 Contributors
 See the file COPYING for license details.
 Credits can be found in the Users Manual.
 
-Command line defined: "FS_SETUP_OUTPUT=/workspace/scratch/5438c14ec8d6/windows-six-fixes/windows/.nsis-build-uxtgcw7j/Facility_Studio_V5_6_0_Setup.exe"
-Changing directory to: "/workspace/scratch/5438c14ec8d6/windows-six-fixes/windows"
+Command line defined: "FS_SETUP_OUTPUT=/workspace/scratch/5438c14ec8d6/facility-studio/windows/.nsis-build-9qi16hd1/Facility_Studio_V5_6_0_Setup.exe"
+Changing directory to: "/workspace/scratch/5438c14ec8d6/facility-studio/windows"
 
-Processing script file: "/workspace/scratch/5438c14ec8d6/windows-six-fixes/windows/installer.nsi" (UTF8)
+Processing script file: "/workspace/scratch/5438c14ec8d6/facility-studio/windows/installer.nsi" (UTF8)
 Processing default plugins: "/workspace/scratch/5438c14ec8d6/dependencies/root/usr/share/nsis/Plugins/x86-unicode/*.dll"
  + AdvSplash::show
  + Banner::destroy
@@ -81,7 +81,7 @@ NSIS Modern User Interface version 2.1 - Copyright 2002-2023 Joost Verburg (/wor
 !include: closed: "/workspace/scratch/5438c14ec8d6/dependencies/root/usr/share/nsis/Contrib/Modern UI 2/MUI2.nsh"
 !include: closed: "/workspace/scratch/5438c14ec8d6/dependencies/root/usr/share/nsis/Include/MUI2.nsh"
 Name: "廠務簡易工具 V5.6.0"
-OutFile: "/workspace/scratch/5438c14ec8d6/windows-six-fixes/windows/.nsis-build-uxtgcw7j/Facility_Studio_V5_6_0_Setup.exe"
+OutFile: "/workspace/scratch/5438c14ec8d6/facility-studio/windows/.nsis-build-9qi16hd1/Facility_Studio_V5_6_0_Setup.exe"
 VIAddVersionKey: "ProductName" "廠務簡易工具"
 VIAddVersionKey: "FileDescription" "Facility Studio V5.6.0 Online Setup"
 VIAddVersionKey: "FileVersion" "5.6.0.0"
@@ -135,7 +135,7 @@ File: "Facility_Studio_V5_5.py" 205 bytes
 File: "LICENSE" 8051 bytes
 File: "LICENSE_GUIDE.md" 3193 bytes
 File: "LICENSE_LEGACY_MIT" 1100 bytes
-File: "README.txt" 4826 bytes
+File: "README.txt" 5330 bytes
 File: "THIRD_PARTY_NOTICES.md" 1050 bytes
 File: Descending to: "installer/payload/facility_studio/"
 File: "__init__.py" 123 bytes
@@ -145,9 +145,9 @@ File: "ahu_schema.py" 12430 bytes
 File: "ahu_view.py" 27823 bytes
 File: "air_chart.py" 6741 bytes
 File: "api.py" 819 bytes
-File: "audit_acceptance.py" 32863 bytes
+File: "audit_acceptance.py" 40447 bytes
 File: "cli.py" 5774 bytes
-File: "contributions.py" 21747 bytes
+File: "contributions.py" 23055 bytes
 File: "data.py" 6495 bytes
 File: "database.py" 5194 bytes
 File: "design_workflow.py" 6823 bytes
@@ -183,7 +183,7 @@ File: "resilience_acceptance.py" 8171 bytes
 File: "review_acceptance.py" 14767 bytes
 File: "schema.py" 31260 bytes
 File: "services.py" 9607 bytes
-File: "session_controller.py" 25662 bytes
+File: "session_controller.py" 25681 bytes
 File: "simple_desktop.py" 37275 bytes
 File: "simple_engines.py" 35102 bytes
 File: "simple_reports.py" 14205 bytes
@@ -251,7 +251,7 @@ Removing unused resources... Done!
 Generating language tables... Done!
 Generating uninstaller... Done!
 
-Output: "/workspace/scratch/5438c14ec8d6/windows-six-fixes/windows/.nsis-build-uxtgcw7j/Facility_Studio_V5_6_0_Setup.exe"
+Output: "/workspace/scratch/5438c14ec8d6/facility-studio/windows/.nsis-build-9qi16hd1/Facility_Studio_V5_6_0_Setup.exe"
 Install: 4 pages (256 bytes), 1 section (4120 bytes), 468 instructions (13104 bytes), 265 strings (23462 bytes), 1 language table (286 bytes).
 Uninstall: 2 pages (192 bytes), 1 section (4120 bytes), 57 instructions (1596 bytes), 93 strings (1780 bytes), 1 language table (250 bytes).
 Datablock optimizer saved 26498 bytes (~1.2%).
@@ -260,9 +260,9 @@ Using lzma (compress whole) compression.
 
 EXE header size:              114176 / 100864 bytes
 Install code:                          (39644 bytes)
-Install data:                          (2000131 bytes)
+Install data:                          (2009546 bytes)
 Uninstall code+data:                   (20254 bytes)
-Compressed data:              790767 / 2060029 bytes
-CRC (0x16267C94):                  4 / 4 bytes
+Compressed data:              792314 / 2069444 bytes
+CRC (0x051D0AAD):                  4 / 4 bytes
 
-Total size:                   904947 / 2160897 bytes (41.8%)
+Total size:                   906494 / 2170312 bytes (41.7%)

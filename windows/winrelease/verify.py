@@ -114,7 +114,7 @@ def check_exe(exe, output, label, block_firewall=True):
             audit = json.loads(audit_report.read_text(encoding="utf-8"))
             if (not audit["passed"] or not audit["frozen"] or not audit["offline_network_audit"]
                     or audit["callback_errors"] or audit["execution_errors"]
-                    or len(audit["checks"]) != 120 or len(audit["audit_regressions"]) != 2073
+                    or len(audit["checks"]) != 140 or len(audit["audit_regressions"]) != 2182
                     or not all(item["passed"] for item in audit["checks"] + audit["audit_regressions"])):
                 raise RuntimeError("Frozen Windows extended audit did not pass")
             for name in (

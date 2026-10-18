@@ -276,7 +276,7 @@ def run(destination):
 
     result = {
         "version": __version__,
-        "revision": "win.6",
+        "revision": "win.7",
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,
@@ -364,7 +364,7 @@ def run_audit(destination):
                     os.environ.pop(name, None)
                 else:
                     os.environ[name] = value
-    result = dict(version=__version__, revision="win.6", scope="F01–F06 extended acceptance",
+    result = dict(version=__version__, revision="win.7", scope="F01–F06 extended acceptance",
                   platform=platform.platform(), python=sys.version,
                   frozen=bool(getattr(sys, "frozen", False)),
                   offline_network_audit=os.environ.get("FACILITY_TEST_BLOCK_NETWORK") == "1",
