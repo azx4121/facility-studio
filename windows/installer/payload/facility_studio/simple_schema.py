@@ -331,6 +331,41 @@ TOOLS.update({
     ], units={"flow_unit": "LPM"}),
 })
 
+# Fixed engineering units belong to the field definition, not to help-text
+# parsing. Both native controls and reports read the same metadata.
+FIXED_UNITS = {
+    "electrical": dict(length="m", terminal="°C", ambient="°C", drop_limit="%",
+                       mau_input_kw="kW", process_input_kw="kW", chiller_input_kw="kW"),
+    "duct": dict(velocity="m/s", roughness_mm="mm", length="m", equipment="Pa"),
+    "gas": dict(velocity="m/s", temperature="°C", atmosphere="kPa(abs)",
+                reference_t="°C", reference_p="kPa(abs)"),
+    "lighting": dict(length="m", width="m", height="m", watts="W", target="Lux",
+                     efficacy="lm/W", lumens="lm", mount_h="m", work_h="m"),
+    "water": dict(delta="K", velocity="m/s", length="m", equipment_pa="Pa", roughness_mm="mm"),
+    "air": dict(temperature="°C", rh="%RH", atmosphere="kPa(abs)"),
+    "cleanroom": dict(area="m²", height="m", ach="1/h", exhaust_cmh="CMH", delta_p="Pa",
+                      base_leak_ach="1/h", oa_cmh="CMH", ffu_unit_cmh="CMH", ffu_unit_kw="kW",
+                      coverage_limit_pct="%"),
+    "heat_loads": dict(area="m²", equipment_kw="kW", lighting_w_m2="W/m²", envelope_w_m2="W/m²",
+                       people_sensible_w="W/人", people_latent_w="W/人", ffu_unit_kw="kW",
+                       oa_cmh="CMH", oa_delta_h="kJ/kg", mau_room_sensible_kw="kW", mau_supply_delta_t="K"),
+    "pumps": dict(head_m="m", terminal_head_m="m", static_head_m="m", head_margin_pct="%"),
+}
+for _tool, _units in FIXED_UNITS.items():
+    for _row in TOOLS[_tool]["fields"]:
+        if _row["key"] in _units:
+            _row["display_unit"] = _units[_row["key"]]
+
+
+def input_unit(tool, row, data):
+    if row["units"]:
+        return data.get(row["units"][0], row["units"][1][0])
+    if tool == "lighting" and row["key"] == "area":
+        return {"面積 m²": "m²", "面積 坪": "坪", "體積 m³": "m³"}.get(data["area_mode"], "m²")
+    if tool == "units" and row["key"] == "value":
+        return data["unit"]
+    return row.get("display_unit", "")
+
 
 def defaults(tool):
     spec = TOOLS[tool]

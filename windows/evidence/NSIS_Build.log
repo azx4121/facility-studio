@@ -2,10 +2,10 @@ MakeNSIS v3.09-4 - Copyright 1999-2023 Contributors
 See the file COPYING for license details.
 Credits can be found in the Users Manual.
 
-Command line defined: "FS_SETUP_OUTPUT=/workspace/scratch/5438c14ec8d6/facility-studio/windows/.nsis-build-9qi16hd1/Facility_Studio_V5_6_0_Setup.exe"
-Changing directory to: "/workspace/scratch/5438c14ec8d6/facility-studio/windows"
+Command line defined: "FS_SETUP_OUTPUT=/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-zuxvelt9/Facility_Studio_V5_6_0_Setup.exe"
+Changing directory to: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows"
 
-Processing script file: "/workspace/scratch/5438c14ec8d6/facility-studio/windows/installer.nsi" (UTF8)
+Processing script file: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/installer.nsi" (UTF8)
 Processing default plugins: "/workspace/scratch/5438c14ec8d6/dependencies/root/usr/share/nsis/Plugins/x86-unicode/*.dll"
  + AdvSplash::show
  + Banner::destroy
@@ -81,11 +81,11 @@ NSIS Modern User Interface version 2.1 - Copyright 2002-2023 Joost Verburg (/wor
 !include: closed: "/workspace/scratch/5438c14ec8d6/dependencies/root/usr/share/nsis/Contrib/Modern UI 2/MUI2.nsh"
 !include: closed: "/workspace/scratch/5438c14ec8d6/dependencies/root/usr/share/nsis/Include/MUI2.nsh"
 Name: "廠務簡易工具 V5.6.0"
-OutFile: "/workspace/scratch/5438c14ec8d6/facility-studio/windows/.nsis-build-9qi16hd1/Facility_Studio_V5_6_0_Setup.exe"
+OutFile: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-zuxvelt9/Facility_Studio_V5_6_0_Setup.exe"
 VIAddVersionKey: "ProductName" "廠務簡易工具"
 VIAddVersionKey: "FileDescription" "Facility Studio V5.6.0 Online Setup"
-VIAddVersionKey: "FileVersion" "5.6.0.0"
-VIAddVersionKey: "ProductVersion" "5.6.0"
+VIAddVersionKey: "FileVersion" "5.6.0.8"
+VIAddVersionKey: "ProductVersion" "5.6.0-win.8"
 VIAddVersionKey: "LegalCopyright" "Facility Studio"
 InstallDir: "$LOCALAPPDATA\Facility_Studio_V5_5"
 CRCCheck: force
@@ -127,7 +127,7 @@ RMDir: /r "$INSTDIR\installer\payload"
 SetOutPath: "$INSTDIR\installer"
 File: "START.cmd" 3692 bytes
 File: "oneclick_setup.py" 13235 bytes
-File: "payload_sha256.json" 8684 bytes
+File: "payload_sha256.json" 8794 bytes
 File: "probe_python.py" 231 bytes
 File: Descending to: "installer/payload/"
 File: "Default_Project.json" 40241 bytes
@@ -135,7 +135,7 @@ File: "Facility_Studio_V5_5.py" 205 bytes
 File: "LICENSE" 8051 bytes
 File: "LICENSE_GUIDE.md" 3193 bytes
 File: "LICENSE_LEGACY_MIT" 1100 bytes
-File: "README.txt" 5330 bytes
+File: "README.txt" 5463 bytes
 File: "THIRD_PARTY_NOTICES.md" 1050 bytes
 File: Descending to: "installer/payload/facility_studio/"
 File: "__init__.py" 123 bytes
@@ -154,8 +154,8 @@ File: "design_workflow.py" 6823 bytes
 File: "desktop.py" 41532 bytes
 File: "display_helpers.py" 7442 bytes
 File: "engine.py" 43373 bytes
-File: "english_catalog.py" 269251 bytes
-File: "equipment_analysis.py" 30009 bytes
+File: "english_catalog.py" 271170 bytes
+File: "equipment_analysis.py" 30052 bytes
 File: "equipment_io.py" 17848 bytes
 File: "equipment_schema.py" 7268 bytes
 File: "equipment_view.py" 18282 bytes
@@ -163,7 +163,7 @@ File: "errors.py" 362 bytes
 File: "field_state.py" 9312 bytes
 File: "flow_toolbar.py" 2704 bytes
 File: "gas_catalog.py" 3870 bytes
-File: "html_report.py" 9608 bytes
+File: "html_report.py" 10486 bytes
 File: "i18n.py" 5489 bytes
 File: "inactive_acceptance.py" 15262 bytes
 File: "industrial_theme.py" 16468 bytes
@@ -178,26 +178,27 @@ File: "native_redraw.py" 1912 bytes
 File: "project_store.py" 3031 bytes
 File: "quality.py" 9351 bytes
 File: "quick_tools.py" 10741 bytes
-File: "reports.py" 44775 bytes
+File: "report_acceptance.py" 13124 bytes
+File: "reports.py" 46124 bytes
 File: "resilience_acceptance.py" 8171 bytes
 File: "review_acceptance.py" 14767 bytes
 File: "schema.py" 31260 bytes
-File: "services.py" 9607 bytes
+File: "services.py" 10702 bytes
 File: "session_controller.py" 25681 bytes
-File: "simple_desktop.py" 37275 bytes
-File: "simple_engines.py" 35102 bytes
-File: "simple_reports.py" 14205 bytes
-File: "simple_schema.py" 21417 bytes
+File: "simple_desktop.py" 37431 bytes
+File: "simple_engines.py" 35659 bytes
+File: "simple_reports.py" 16627 bytes
+File: "simple_schema.py" 23480 bytes
 File: "stress_acceptance.py" 13281 bytes
 File: "template_language.py" 2550 bytes
 File: "tools_view.py" 29846 bytes
 File: "tutorial_acceptance.py" 4752 bytes
 File: "tutorial_help.py" 2922 bytes
 File: "ui_common.py" 3937 bytes
-File: "usability_acceptance.py" 13934 bytes
+File: "usability_acceptance.py" 13994 bytes
 File: "utils.py" 31780 bytes
 File: "v560_acceptance.py" 18611 bytes
-File: "version.py" 92 bytes
+File: "version.py" 205 bytes
 File: "winter.py" 2243 bytes
 File: "workspace_store.py" 6937 bytes
 File: "workspace_view.py" 13567 bytes
@@ -217,7 +218,7 @@ File: "PV.csv" 390 bytes
 File: "電力.csv" 355 bytes
 File: Returning to: "installer"
 DetailPrint: "正在下載、建立程式與驗證，請保留開啟的進度視窗。"
-ClearErrors:
+ClearErrors: 
 ExecWait: ""$SYSDIR\cmd.exe" /D /C ""$INSTDIR\installer\START.cmd" /installer"" (->$0)
 IfErrors ?install_failed:
 StrCmp "$0" "0" equal=install_ok, nonequal=
@@ -227,7 +228,7 @@ Abort: ""
 WriteUninstaller: "$INSTDIR\Uninstall.exe"
 WriteRegStr: HKCU\Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55\DisplayName=廠務簡易工具 V5.6.0
 WriteRegStr: HKCU\Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55\UninstallString="$INSTDIR\Uninstall.exe"
-WriteRegStr: HKCU\Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55\DisplayVersion=5.6.0
+WriteRegStr: HKCU\Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55\DisplayVersion=5.6.0-win.8
 WriteRegStr: HKCU\Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55\DisplayIcon=$INSTDIR\installer\payload\facility_studio\resources\app.ico
 WriteRegDWORD: HKCU\Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55\NoModify=1
 WriteRegDWORD: HKCU\Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55\NoRepair=1
@@ -251,18 +252,18 @@ Removing unused resources... Done!
 Generating language tables... Done!
 Generating uninstaller... Done!
 
-Output: "/workspace/scratch/5438c14ec8d6/facility-studio/windows/.nsis-build-9qi16hd1/Facility_Studio_V5_6_0_Setup.exe"
-Install: 4 pages (256 bytes), 1 section (4120 bytes), 468 instructions (13104 bytes), 265 strings (23462 bytes), 1 language table (286 bytes).
+Output: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-zuxvelt9/Facility_Studio_V5_6_0_Setup.exe"
+Install: 4 pages (256 bytes), 1 section (4120 bytes), 469 instructions (13132 bytes), 267 strings (23528 bytes), 1 language table (286 bytes).
 Uninstall: 2 pages (192 bytes), 1 section (4120 bytes), 57 instructions (1596 bytes), 93 strings (1780 bytes), 1 language table (250 bytes).
 Datablock optimizer saved 26498 bytes (~1.2%).
 
 Using lzma (compress whole) compression.
 
 EXE header size:              114176 / 100864 bytes
-Install code:                          (39644 bytes)
-Install data:                          (2009546 bytes)
+Install code:                          (39738 bytes)
+Install data:                          (2033572 bytes)
 Uninstall code+data:                   (20254 bytes)
-Compressed data:              792314 / 2069444 bytes
-CRC (0x051D0AAD):                  4 / 4 bytes
+Compressed data:              797423 / 2093564 bytes
+CRC (0xCFA8035F):                  4 / 4 bytes
 
-Total size:                   906494 / 2170312 bytes (41.7%)
+Total size:                   911603 / 2194432 bytes (41.5%)

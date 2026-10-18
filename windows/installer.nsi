@@ -5,11 +5,11 @@ Name "廠務簡易工具 V5.6.0"
  !define FS_SETUP_OUTPUT "Facility_Studio_V5_6_0_Setup.exe"
 !endif
 OutFile "${FS_SETUP_OUTPUT}"
-VIProductVersion "5.6.0.0"
+VIProductVersion "5.6.0.8"
 VIAddVersionKey /LANG=1028 "ProductName" "廠務簡易工具"
 VIAddVersionKey /LANG=1028 "FileDescription" "Facility Studio V5.6.0 Online Setup"
-VIAddVersionKey /LANG=1028 "FileVersion" "5.6.0.0"
-VIAddVersionKey /LANG=1028 "ProductVersion" "5.6.0"
+VIAddVersionKey /LANG=1028 "FileVersion" "5.6.0.8"
+VIAddVersionKey /LANG=1028 "ProductVersion" "5.6.0-win.8"
 VIAddVersionKey /LANG=1028 "LegalCopyright" "Facility Studio"
 InstallDir "$LOCALAPPDATA\Facility_Studio_V5_5"
 RequestExecutionLevel user
@@ -52,7 +52,7 @@ Section "安裝"
  WriteUninstaller "$INSTDIR\Uninstall.exe"
  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55" "DisplayName" "廠務簡易工具 V5.6.0"
  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55" "UninstallString" '$\"$INSTDIR\Uninstall.exe$\"'
- WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55" "DisplayVersion" "5.6.0"
+ WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55" "DisplayVersion" "5.6.0-win.8"
  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55" "DisplayIcon" "$INSTDIR\installer\payload\facility_studio\resources\app.ico"
  WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55" "NoModify" 1
  WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudio55" "NoRepair" 1

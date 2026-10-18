@@ -10,6 +10,7 @@ from .data import PIPE_DB
 from .equipment_io import Cell, EquipmentImportError, percentage_value
 from .equipment_schema import SCHEMAS, SYSTEMS
 from .schema import VERSION
+from .version import REPORT_VERSION
 from .errors import ValidationError
 from .simple_engines import (
     electrical,
@@ -591,7 +592,7 @@ def equipment_report(result):
         return verbatim(value, example(system).get(key))
 
     lines = [
-        "設備需求分析 V" + VERSION,
+        "設備需求分析 V" + REPORT_VERSION,
         f"來源：{verbatim(result['source_name'])}",
         f"全檔啟用{result['active_records']}筆；略過{result['skipped_records']}筆",
         "",
