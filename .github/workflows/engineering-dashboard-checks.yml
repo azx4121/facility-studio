@@ -80,6 +80,7 @@ jobs:
           python tools/verify_gemini_review.py --platform "${{ matrix.source }}" --output "$RUNNER_TEMP/engineering-dashboard/independent-review.json"
           python tools/verify_100x_all_fields_and_reports.py --platform "${{ matrix.source }}" --iterations 100 --output "$RUNNER_TEMP/engineering-dashboard/all-fields-100.json"
           python tools/verify_dashboard_reports.py --platform "${{ matrix.source }}" --output "$RUNNER_TEMP/engineering-dashboard/reports.json" --artifacts-dir "$RUNNER_TEMP/engineering-dashboard/html"
+          python docs/tutorial/verify_tutorial.py --platform "${{ matrix.source }}" --output "$RUNNER_TEMP/engineering-dashboard/tutorial.json"
       - name: Existing source regressions
         shell: bash
         run: |

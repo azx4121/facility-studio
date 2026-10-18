@@ -44,6 +44,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw "Engineering audit regression failed" }
       - name: Verify report intent, units, revision and actual export buttons
         run: |
+          python docs/tutorial/verify_tutorial.py --platform windows --output "$env:RUNNER_TEMP/tutorial.json"
+          if ($LASTEXITCODE -ne 0) { throw "Tutorial regression failed" }
           python windows/tests/report_regressions.py --gui --output "$env:RUNNER_TEMP/report-regressions.json"
           if ($LASTEXITCODE -ne 0) { throw "Report regression failed" }
       - name: Retain audit evidence
@@ -55,4 +57,5 @@ jobs:
             ${{ runner.temp }}/audit-regressions.json
             ${{ runner.temp }}/report-regressions.json
             ${{ runner.temp }}/report-samples
+            ${{ runner.temp }}/tutorial.json
           if-no-files-found: warn

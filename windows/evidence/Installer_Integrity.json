@@ -1,13 +1,13 @@
 {
   "passed": true,
-  "bytes": 911603,
-  "sha256": "b9e3fa7fc82d9b6db4ac60345a34ef61cd0de638d5b5343a5c3a96da53c3eb09",
+  "bytes": 911741,
+  "sha256": "ddabf88e14c8d0bb731bb1be794abb4095a52821cd4a77000cb2e726a3659585",
   "header_offset": 114176,
   "header_length": 39710,
-  "archive_length": 797427,
+  "archive_length": 797565,
   "forced_crc": true,
-  "crc32": "CFA8035F",
-  "decoded_bytes": 2088613,
+  "crc32": "98B485D4",
+  "decoded_bytes": 2088678,
   "data_blocks": 92,
   "embedded_files": 87,
   "member_sha256": {
@@ -66,7 +66,7 @@
     "payload/facility_studio/resources/Equipment_Template.xlsx": "25160dc5f699ac73851bc4137309f6426b11c75c5b7c6b2927da750fab96d2ed",
     "payload/facility_studio/resources/app.ico": "a5778937818983f0873b98df806635e625150bb83fdb3a96f289df3b6955823a",
     "payload/facility_studio/resources/app.png": "d95d0e7510920daa4ae6f8d78229dae6420e416cdec469d2302f3c63a6888db4",
-    "payload/facility_studio/resources/beginner_tutorial.zip": "246ac0e78748f2bfc76dc471199913e852f6564dc8a89ee571970b73616fea73",
+    "payload/facility_studio/resources/beginner_tutorial.zip": "6a01c685138625ded322bfe83d7955a48abb810e8197b66c13f952c1a518fbf5",
     "payload/facility_studio/resources/engineering_tables.json": "b57d8a64ceecaaf90593ae528542e67fad18f4c7a20ed43b4845ba162692adae",
     "payload/facility_studio/resources/equipment_csv/CDA.csv": "5ca6a76db3e90420c984b6f0e02118aff4191f6afb8472587b17e2ac11e378ca",
     "payload/facility_studio/resources/equipment_csv/DI.csv": "8e5c39596a0262b59fd13a43a63c9607dd6479d4b71d3e503cb7399d8ef7834d",
@@ -96,7 +96,7 @@
     "payload/facility_studio/winter.py": "e93461af4d72c055febb85a27669f9881d4e7f9e91b8fadf4519b32a068297d0",
     "payload/facility_studio/workspace_store.py": "8b55ef58affaf12c8fcc5269a6953724f7c50f9134c7079a6aabd37cadd5649f",
     "payload/facility_studio/workspace_view.py": "3f897e4240beaf9e66e6895898c76372fbaf8dfe405cc54d7668606f3f765e5c",
-    "payload_sha256.json": "99c8358f1a2ccfe07afc93a1a7c1b1b5fc2a182602648c521d1cfd54162f8588",
+    "payload_sha256.json": "21643ffaae3cc9c89e341f6457a1db002e6a6845551d9df8e1e02305e4ad63d1",
     "probe_python.py": "d7033a4e5c2e3e059fbaedfc9d67384863be6de099a4e799f6f5fd872902362e"
   },
   "windows_execution_tested": false

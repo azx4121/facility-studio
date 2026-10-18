@@ -13,6 +13,7 @@ import json
 import math
 from pathlib import Path
 import sys
+import zipfile
 
 
 def main():
@@ -30,12 +31,19 @@ def main():
     from facility_studio.errors import ValidationError
     from facility_studio.reports import report, nm_report
     from facility_studio import i18n
+    from facility_studio.tutorial_help import TUTORIAL_FILES
+    from facility_studio import version
 
     directory = Path(__file__).parent
+    reference_directory = directory / args.platform
+    if not reference_directory.is_dir():
+        reference_directory = directory  # Retain the mac.6 reference fixtures.
     a = read_workspace(directory / "01_Practice_AHU.json")
     b = read_workspace(directory / "02_Practice_MAU_and_AHU.json")
     base = calculate(a["main"])
     records, checks = [], 0
+    with zipfile.ZipFile(root / args.platform / "facility_studio/resources/beginner_tutorial.zip") as archive:
+        bundled = {name: archive.read(name) for name in archive.namelist()}
 
     def check(value):
         nonlocal checks
@@ -52,7 +60,7 @@ def main():
             return "\n".join(line.rstrip() for line in text.splitlines()) + "\n"
 
         actual = canonical(str(actual))
-        expected = canonical((directory / filename).read_text(encoding="utf-8"))
+        expected = canonical((reference_directory / filename).read_text(encoding="utf-8"))
         if actual != expected:
             difference = "".join(difflib.unified_diff(
                 expected.splitlines(keepends=True), actual.splitlines(keepends=True),
@@ -60,6 +68,7 @@ def main():
             ))
             raise AssertionError("Tutorial reference report differs:\n" + difference)
         check(True)
+        check(canonical(bundled[filename].decode("utf-8")) == expected)
 
     def changed(**values):
         project = copy.deepcopy(a["main"])
@@ -75,6 +84,8 @@ def main():
     def record(name, values):
         records.append(dict(case=len(records)+1, name=name, passed=True, values=values))
 
+    check(set(bundled) == TUTORIAL_FILES)
+    check(getattr(version, "REPORT_VERSION", version.VERSION) in bundled["START_HERE.html"].decode("utf-8"))
     close(base["light"]["area_m2"],96)
     close(base["zones"]["A"]["volume"],288)
     close(base["qs"],7.869996)
