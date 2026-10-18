@@ -30,19 +30,21 @@ def main():
         sys.addaudithook(offline_audit)
 
     try:
-        if "--self-test" in sys.argv:
+        if "--self-test" in sys.argv or "--audit-self-test" in sys.argv:
             parser = argparse.ArgumentParser(description="Local Windows acceptance; no uploads")
-            parser.add_argument("--self-test", action="store_true")
+            scope = parser.add_mutually_exclusive_group(required=True)
+            scope.add_argument("--self-test", action="store_true")
+            scope.add_argument("--audit-self-test", action="store_true")
             parser.add_argument("--self-test-result", type=Path, default=logs / "Windows_Acceptance.json")
             args = parser.parse_args()
-            from winrelease.selftest import run
-            return run(args.self_test_result)
+            from winrelease.selftest import run, run_audit
+            return (run_audit if args.audit_self_test else run)(args.self_test_result)
         from facility_studio.cli import main as application_main
         return application_main()
     except Exception:
         details = traceback.format_exc()
         print(details, file=sys.stderr)
-        if frozen and "--self-test" not in sys.argv:
+        if frozen and not {"--self-test", "--audit-self-test"}.intersection(sys.argv):
             import ctypes
             ctypes.windll.user32.MessageBoxW(
                 None,

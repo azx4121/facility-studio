@@ -8,7 +8,9 @@ if not exist "%FACILITY_CHECK_LOGS%" mkdir "%FACILITY_CHECK_LOGS%"
 echo Checking the bundled Windows EXE. No Python installation or internet is needed.
 start "" /wait "%~dp0Facility_Studio_V5_6_0_Windows_Offline.exe" --self-test --self-test-result "%FACILITY_CHECK_LOGS%\Windows_Acceptance.json"
 if errorlevel 1 goto failed
-echo PASS. Report: %FACILITY_CHECK_LOGS%\Windows_Acceptance.json
+start "" /wait "%~dp0Facility_Studio_V5_6_0_Windows_Offline.exe" --audit-self-test --self-test-result "%FACILITY_CHECK_LOGS%\Windows_Audit_Acceptance.json"
+if errorlevel 1 goto failed
+echo PASS. Reports: %FACILITY_CHECK_LOGS%\Windows_Acceptance.json and Windows_Audit_Acceptance.json
 pause
 exit /b 0
 :missing

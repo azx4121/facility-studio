@@ -34,9 +34,17 @@ def firewall(exe, rule, add):
 
 
 def launch(exe, arguments, cwd, env):
-    result = subprocess.run(
-        [str(exe), *map(str, arguments)], cwd=cwd, env=env, timeout=210
-    )
+    process = subprocess.Popen([str(exe), *map(str, arguments)], cwd=cwd, env=env)
+    try:
+        process.wait(timeout=210)
+    except subprocess.TimeoutExpired:
+        # A one-file EXE has a bootloader parent and a runtime child. Stop
+        # this complete test tree before temporary-profile cleanup so a
+        # locked runtime log cannot hide the original timeout.
+        subprocess.run(["taskkill.exe", "/PID", str(process.pid), "/T", "/F"], timeout=30, check=False)
+        process.wait(timeout=30)
+        raise
+    result = process
     if result.returncode:
         if "--self-test-result" in arguments:
             index = arguments.index("--self-test-result") + 1
@@ -99,6 +107,16 @@ def check_exe(exe, output, label, block_firewall=True):
                 or not data["offline_network_audit"]
             ):
                 raise RuntimeError("Frozen Windows acceptance did not pass")
+            # Independent bounded invocation preserves the core time budget
+            # while requiring every extended regression on this exact EXE.
+            audit_report = evidence / "Windows_Audit_Acceptance.json"
+            launch(exe, ["--audit-self-test", "--self-test-result", audit_report], cwd, env)
+            audit = json.loads(audit_report.read_text(encoding="utf-8"))
+            if (not audit["passed"] or not audit["frozen"] or not audit["offline_network_audit"]
+                    or audit["callback_errors"] or audit["execution_errors"]
+                    or len(audit["checks"]) != 120 or len(audit["audit_regressions"]) != 2073
+                    or not all(item["passed"] for item in audit["checks"] + audit["audit_regressions"])):
+                raise RuntimeError("Frozen Windows extended audit did not pass")
             for name in (
                 "electrical",
                 "duct",
@@ -150,7 +168,10 @@ def check_exe(exe, output, label, block_firewall=True):
                 raise RuntimeError("Frozen full engineering CLI failed")
             summary = {
                 "label": label,
-                "gui_checks": len(data["checks"]),
+                "gui_checks": len(data["checks"]) + len(audit["checks"]),
+                "core_gui_checks": len(data["checks"]),
+                "audit_gui_checks": len(audit["checks"]),
+                "audit_numeric_checks": len(audit["audit_regressions"]),
                 "cli_tools": 10,
                 "firewall_outbound_blocked": block_firewall,
                 "network_audit_blocked": True,

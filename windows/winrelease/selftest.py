@@ -96,15 +96,6 @@ def run(destination):
                 and native_stress["distinct_physical_input_count"] == 100)
 
     check("100 distinct delivered-runtime stress scenarios, 20 repetitions", stress100)
-    audit_regressions = []
-
-    def audit_formulas():
-        nonlocal audit_regressions
-        from facility_studio.audit_acceptance import run_checks
-        audit_regressions = run_checks()
-        return bool(audit_regressions) and all(item["passed"] for item in audit_regressions)
-
-    check("F01–F06 independent formulas, legacy data and finite-output boundaries", audit_formulas)
     from facility_studio.inactive_acceptance import run_checks as check_inactive
     check("V557 complete-output inactive-field regression", lambda: check_inactive(random_repeats=0)["passed"])
     for tool in TOOLS:
@@ -242,8 +233,6 @@ def run(destination):
             check_v560_ui(root, app, workbench, check, pump)
             from facility_studio.lighting_acceptance import run_ui as check_lighting_ui
             check_lighting_ui(root, app, check, pump)
-            from facility_studio.audit_acceptance import run_ui as check_audit_ui
-            check_audit_ui(root, app, workbench, check, pump, destination)
             check("Native GUI heartbeat", lambda: (pump(), True)[1])
             from matplotlib.figure import Figure
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -297,7 +286,6 @@ def run(destination):
         "offline_network_audit": os.environ.get("FACILITY_TEST_BLOCK_NETWORK") == "1",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "stress100": native_stress,
-        "audit_regressions": audit_regressions,
         "checks": checks,
         "passed": all(item["passed"] for item in checks),
     }
@@ -307,4 +295,85 @@ def run(destination):
         json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if result["passed"] else 2
+
+
+def run_audit(destination):
+    """Run the extended suite in its own bounded EXE invocation.
+
+    Core acceptance retains its original 210-second process budget. The audit
+    uses a fresh UI with the same process budget and five-second heartbeat;
+    no assertions are dropped to fit an ever-growing single invocation.
+    """
+    from facility_studio import __version__, i18n
+    from facility_studio.audit_acceptance import run_checks, run_ui
+    from facility_studio.localized_tk import tk
+    from facility_studio.simple_desktop import SimpleToolsApp
+
+    checks, numeric, callbacks, errors = [], [], [], []
+
+    def check(name, action):
+        print("Checking: " + name, flush=True)
+        try:
+            if action() is False:
+                raise AssertionError(name)
+            checks.append(dict(name=name, passed=True))
+        except Exception:
+            checks.append(dict(name=name, passed=False, detail=traceback.format_exc()))
+
+    def formulas():
+        nonlocal numeric
+        numeric = run_checks()
+        return bool(numeric) and all(item['passed'] for item in numeric)
+
+    check("F01–F06 independent formulas, legacy data and finite-output boundaries", formulas)
+    old_storage = os.environ.get("LOCALAPPDATA")
+    old_preferences = os.environ.get("FACILITY_STUDIO_PREFERENCES")
+    with tempfile.TemporaryDirectory(prefix="FacilityStudioAuditGui-") as directory:
+        os.environ["LOCALAPPDATA"] = directory
+        os.environ["FACILITY_STUDIO_PREFERENCES"] = str(Path(directory) / "preferences.json")
+        i18n.set_language("zh-Hant", persist=False)
+        root = None
+        try:
+            root = tk.Tk()
+
+            def callback_error(*details):
+                callbacks.append("".join(traceback.format_exception(*details)))
+
+            root.report_callback_exception = callback_error
+            app = SimpleToolsApp(root)
+            workbench = app.open_workbench()
+            workbench.root.report_callback_exception = callback_error
+
+            def pump():
+                started = time.monotonic()
+                root.after(200, root.quit)
+                root.mainloop()
+                if time.monotonic() - started > 5:
+                    raise RuntimeError("GUI heartbeat exceeded five seconds")
+
+            run_ui(root, app, workbench, check, pump, destination)
+            pump()
+        except Exception:
+            errors.append(traceback.format_exc())
+        finally:
+            if root is not None:
+                root.destroy()
+            for name, value in (("LOCALAPPDATA", old_storage), ("FACILITY_STUDIO_PREFERENCES", old_preferences)):
+                if value is None:
+                    os.environ.pop(name, None)
+                else:
+                    os.environ[name] = value
+    result = dict(version=__version__, revision="win.6", scope="F01–F06 extended acceptance",
+                  platform=platform.platform(), python=sys.version,
+                  frozen=bool(getattr(sys, "frozen", False)),
+                  offline_network_audit=os.environ.get("FACILITY_TEST_BLOCK_NETWORK") == "1",
+                  timestamp=datetime.now(timezone.utc).isoformat(),
+                  checks=checks, audit_regressions=numeric, callback_errors=callbacks, execution_errors=errors,
+                  passed=bool(checks) and all(item["passed"] for item in checks) and not callbacks and not errors)
+    destination = Path(destination)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(json.dumps(dict(passed=result["passed"],checks=len(checks),numeric_checks=len(numeric),
+                          callback_errors=callbacks,execution_errors=errors),ensure_ascii=False),flush=True)
     return 0 if result["passed"] else 2

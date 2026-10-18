@@ -60,3 +60,5 @@ No additional Python installation or internet is needed for the tutorial.
 
 
 Zero-demand gas velocity remains an inactive retained draft. The delivered EXE executes100 physically distinct,20-repeat calculation/persistence stress recipes. Source CI separately runs the independent100-cleanroom matrix. Publication requires both native Windows environments to pass.
+
+win.6 splits core acceptance and the extended audit into separate EXE invocations (`--self-test` and `--audit-self-test`). Both retain the 210-second process budget and five-second GUI heartbeat. Every launch path must pass both: 318 core checks, 120 audit entry/UI checks and 2,073 independent numeric checks. `Delivery_Check.json` records both counts; raw reports are `Windows_Acceptance.json` and `Windows_Audit_Acceptance.json`. A timed-out test terminates only its own complete process tree before profile cleanup.
