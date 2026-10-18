@@ -292,6 +292,9 @@ class SimplePage(ttk.Frame):
                     "flow_unit": ("flow", UNITS["水量"]),
                     "power_unit": ("power", UNITS["冷熱功率"]),
                 },
+                "pumps": {
+                    "flow_unit": ("flow", UNITS["水量"]),
+                },
             }
             if key in rules.get(self.tool, {}):
                 value_key, factors = rules[self.tool][key]

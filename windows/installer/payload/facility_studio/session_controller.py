@@ -12,7 +12,8 @@ from .engine import calculate
 from .workspace_store import validate_workspace, read_workspace
 from .project_store import save_project_file, recovery_save
 from .design_workflow import ahu_requirement_updates, ahu_source_hash
-from .contributions import empty_ledger, aggregate_ledger, updated_ledger, removed_ledger, SUM_KEYS
+from .contributions import (empty_ledger, aggregate_ledger, updated_ledger, removed_ledger,
+                            SUM_KEYS, legacy_power_keys, LEGACY_POWER_WARNING)
 
 
 class SessionController:
@@ -307,6 +308,8 @@ class SessionController:
         items = copy.deepcopy(result["base_quality"]["items"])
         result["source_receipts"] = copy.deepcopy(self.transfer_receipts)
         ledger = getattr(self, "demand_ledger", empty_ledger())
+        if legacy_power_keys(ledger):
+            finding(items, "舊版電力帶入需重建", "未達", LEGACY_POWER_WARNING, legacy_power_keys(ledger)[0])
         try:
             summary = aggregate_ledger(ledger, result["effective_inputs"])
         except (ValueError, TypeError, KeyError) as exc:
@@ -337,10 +340,13 @@ class SessionController:
     def apply_contribution(self, entry, parent=None):
         from .workspace_view import apply_updates
         from .engine import std_lpm
-        import math
+        from .utils import electrical_power_kw
 
         inputs = self.snapshot()["inputs"]
         ledger = copy.deepcopy(getattr(self, "demand_ledger", empty_ledger()))
+        if legacy_power_keys(ledger):
+            messagebox.showerror("電力來源需重新帶入", LEGACY_POWER_WARNING, parent=parent or self.root)
+            return False
         new_keys = (set(entry["updates"]) & SUM_KEYS) - set(ledger["last_updates"])
         old_loads = {}
         for key in new_keys:
@@ -350,7 +356,7 @@ class SessionController:
                 pan = key.split("_")[1]
                 pf = float(inputs["e_" + pan + "_pf"] if inputs.get("e_" + pan + "_pf_mode") == "本盤獨立 PF" else inputs["e_pf"])
                 from .data import VOLTAGE_MAP
-                value = value if unit == "kW" else value * .745699871582 / float(inputs["e_eff"]) if unit == "HP" else value * math.sqrt(3) * VOLTAGE_MAP[inputs["e_volt"]] * pf / 1000
+                value = electrical_power_kw(value, unit, VOLTAGE_MAP[inputs["e_volt"]], pf, inputs["e_eff"], key)
             elif key.startswith("gas") or key == "pv_q":
                 value = std_lpm(value, inputs["u_" + key.removesuffix("_q")])
             elif key.endswith("ex_q"):

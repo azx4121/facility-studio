@@ -364,6 +364,23 @@ def next_standard(value, ratings):
     return next((float(r) for r in ratings if r + 1e-10 >= required), None)
 
 
+def electrical_power_kw(value, unit, voltage, pf, efficiency, field_name="power"):
+    """Normalize a three-phase workbench load to real electrical input kW."""
+    power = number(value, field_name, 0)
+    choice(unit, ("kW", "W", "HP", "kVA", "A"), "u_" + field_name)
+    if unit == "W":
+        power *= 0.001
+    elif unit == "HP":
+        power *= 0.745699871582 / number(efficiency, "e_eff", 0.01, 1)
+    elif unit == "kVA":
+        power *= number(pf, "pf", 0.01, 1)
+    elif unit == "A":
+        power *= math.sqrt(3) * number(voltage, "e_volt", 1) * number(pf, "pf", 0.01, 1) / 1000
+    if not math.isfinite(power):
+        raise InputError("電力換算結果超出可表示範圍", field_name, code="overflow")
+    return power
+
+
 def load_current(power_kw, voltage, pf=1.0, eta=1.0, phases=3):
     """kW may be electrical input (eta=1) or shaft output (eta=motor efficiency)."""
     power = number(power_kw, "power", 0)

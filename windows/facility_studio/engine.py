@@ -34,6 +34,7 @@ from .utils import (
     dewpoint,
     duct_selection,
     electrical_result,
+    electrical_power_kw,
     gas_result,
     integer,
     number,
@@ -775,8 +776,10 @@ def calculate(p, isolate_utilities=False):
         raise InputError(f"乾盤管進水未達露點＋安全裕度", field_name=f"dccw_in")
     dcc = 0 if dcc < 1e-06 else dcc
     coilkw = summer["c1"]["water_kw"] + summer["c2"]["water_kw"]
+    winter_coilkw = winter["c1"]["water_kw"] + winter["c2"]["water_kw"]
+    terminal_coilkw = max(coilkw, winter_coilkw)
     fcu_need = max(
-        m * room["v_da"] * 3600 / n("en_fcu_cmh"), coilkw * sf / rtkw / n("fcu_rt")
+        m * room["v_da"] * 3600 / n("en_fcu_cmh"), terminal_coilkw * sf / rtkw / n("fcu_rt")
     )
     counts = {
         "FFU": ffu_count,
@@ -785,7 +788,7 @@ def calculate(p, isolate_utilities=False):
         ),
         "FCU": math.ceil(fcu_need - 1e-12) if i["sys_type"].startswith("FCU") else 0,
         "RCU": (
-            math.ceil(coilkw * sf / rtkw / n("en_rcu_rt") - 1e-12)
+            math.ceil(terminal_coilkw * sf / rtkw / n("en_rcu_rt") - 1e-12)
             if i["sys_type"].startswith("RCU")
             else 0
         ),
@@ -958,6 +961,8 @@ def calculate(p, isolate_utilities=False):
         "q_total_rt": sum(loads[key] for key in ("MCHW", "CHW", "DCCW")) / sf / US_RT_KW,
         "q_total_basis": "各溫度迴路容量包絡（未加餘裕）",
         "counts": counts,
+        "terminal_cooling_kw": terminal_coilkw,
+        "terminal_cooling_season": "winter" if winter_coilkw > coilkw else "summer",
         "water": water,
         "pressure": pressure,
         "ducts": ducts,
@@ -1039,17 +1044,7 @@ def electrical_from_inputs(i):
         pan = key.split("_")[1]
         pf_key = "e_" + pan + "_pf"
         pf = n(pf_key) if i.get("e_" + pan + "_pf_mode") == "本盤獨立 PF" else n("e_pf")
-        if unit == "kW":
-            return v
-        if unit == "HP":
-            return v * 0.745699871582 / n("e_eff")
-        if unit == "A":
-            return v * math.sqrt(3) * VOLTAGE_MAP[i["e_volt"]] * pf / 1000
-        if unit == "kVA":
-            return v * pf
-        if unit == "W":
-            return v * 0.001
-        raise InputError(f"不支援：{unit}", field_name="u_" + key)
+        return electrical_power_kw(v, unit, VOLTAGE_MAP[i["e_volt"]], pf, i["e_eff"], key)
 
     for pan, keys in [
         ("up", ["eq", "oven"]),

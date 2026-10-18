@@ -74,5 +74,9 @@
   {
     "name": "15_CMD_real_line_endings_and_version",
     "passed": true
+  },
+  {
+    "name": "16_v560_setup_exe_verified",
+    "passed": true
   }
 ]

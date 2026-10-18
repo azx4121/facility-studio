@@ -161,6 +161,10 @@
     {
       "name": "21_empty_expected_manifest",
       "passed": true
+    },
+    {
+      "name": "22_v560_setup_extracts_every_staged_payload_file",
+      "passed": true
     }
   ]
 }

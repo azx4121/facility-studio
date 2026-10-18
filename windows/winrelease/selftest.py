@@ -96,6 +96,15 @@ def run(destination):
                 and native_stress["distinct_physical_input_count"] == 100)
 
     check("100 distinct delivered-runtime stress scenarios, 20 repetitions", stress100)
+    audit_regressions = []
+
+    def audit_formulas():
+        nonlocal audit_regressions
+        from facility_studio.audit_acceptance import run_checks
+        audit_regressions = run_checks()
+        return bool(audit_regressions) and all(item["passed"] for item in audit_regressions)
+
+    check("F01–F06 independent formulas, legacy data and finite-output boundaries", audit_formulas)
     from facility_studio.inactive_acceptance import run_checks as check_inactive
     check("V557 complete-output inactive-field regression", lambda: check_inactive(random_repeats=0)["passed"])
     for tool in TOOLS:
@@ -233,6 +242,8 @@ def run(destination):
             check_v560_ui(root, app, workbench, check, pump)
             from facility_studio.lighting_acceptance import run_ui as check_lighting_ui
             check_lighting_ui(root, app, check, pump)
+            from facility_studio.audit_acceptance import run_ui as check_audit_ui
+            check_audit_ui(root, app, workbench, check, pump, destination)
             check("Native GUI heartbeat", lambda: (pump(), True)[1])
             from matplotlib.figure import Figure
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -276,7 +287,7 @@ def run(destination):
 
     result = {
         "version": __version__,
-        "revision": "win.5",
+        "revision": "win.6",
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,
@@ -286,6 +297,7 @@ def run(destination):
         "offline_network_audit": os.environ.get("FACILITY_TEST_BLOCK_NETWORK") == "1",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "stress100": native_stress,
+        "audit_regressions": audit_regressions,
         "checks": checks,
         "passed": all(item["passed"] for item in checks),
     }

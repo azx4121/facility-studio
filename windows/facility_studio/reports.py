@@ -255,17 +255,18 @@ def executive_summary(result):
     else:
         electric = pipeline.get("electrical", r if r.get("tool") == "electrical" else {})
         electric = electric if isinstance(electric, dict) else {}
-        at = _num(electric, "recommended_breaker_at")
-        if "recommended_breaker_at" not in electric and electric.get("selected"):
-            at = _num(electric["selected"], "nfb_a")
-        power = _num(electric, "electrical_input_kw", "power_kw")
+        candidate = electric.get("selected") or {}
+        at = _num(candidate, "nfb_a")
+        power = _num(electric, "power_kw", "electrical_input_kw")
         demand = "明列設備有效輸入功率 " + _fmt(power, "kW") + "；運轉電流 " + _fmt(electric.get("current_a"), "A")
-        demand += "；1.25 倍電流 " + _fmt(electric.get("design_breaker_a"), "A")
-        selection = (_fmt(at, "AT", 0) + " 初估；啟動、短路及配線協調另核") if at is not None else (
-            "需求超出內建斷路器級距，須另選規格" if electric else NOT_CALCULATED)
-        rows.append(_row("主配電斷路器 MCCB", demand, selection,
-                         "連續負載初估" if at is not None else "超出級距" if electric else "待資料",
-                         "warning" if at is not None or not electric else "danger"))
+        demand += "；配線設計電流 " + _fmt(electric.get("design_a"), "A")
+        selection = (_fmt(at, "AT", 0) + "；同迴路導線 " + _fmt(candidate.get("size_mm2"), "mm²/相")
+                     + " × " + _fmt(candidate.get("runs"), "組", 0)
+                     + "；主進線未計算，啟動、短路及上下游保護協調另核") if at is not None else (
+            "無用電需求" if power == 0 else "需求超出內建斷路器級距，須另選規格" if electric else NOT_CALCULATED)
+        rows.append(_row("配電斷路器 NFB（本次迴路）" if electric else "主配電斷路器 MCCB", demand, selection,
+                         "同迴路配線候選" if at is not None else "無需求" if power == 0 else "超出級距" if electric else "待資料",
+                         "neutral" if power == 0 else "warning" if at is not None or not electric else "danger"))
     return rows
 
 
@@ -355,7 +356,8 @@ def _validate_full_result(r):
                       "dcc_sensible_kw ffu_airflow_basis ffu_area_each ffu_count ffu_size "
                       "ffu_total_cmh ffu_unit_cmh leakage_cmh q_mau_kw "
                       "q_room_sensible_kw q_total_kw q_total_rt q_total_basis required_oa_cmh "
-                      "dcc_return_cmh dcc_design_cmh dcc_design_season".split())
+                      "dcc_return_cmh dcc_design_cmh dcc_design_season "
+                      "terminal_cooling_kw terminal_cooling_season".split())
     if isinstance(r, dict) and isinstance(r.get("effective_inputs"), dict) and "ffu_topology" in r["effective_inputs"]:
         report_keys.add("ffu_topology")
     mappings = "project effective_inputs quality summer winter zones light latent room counts water pressure ducts gas electric upw".split()
@@ -494,6 +496,11 @@ def report(r):
             or "無設備需求"
         )
     )
+    if i["sys_type"].startswith(("FCU", "RCU")) and r.get("terminal_cooling_kw") is not None:
+        a(
+            f"末端冷卻選型基準：夏季 {_coil_kw(s):.3f} kW／冬季 {_coil_kw(w):.3f} kW；"
+            f"夏冬較大值 × {sf:g}＝{r['terminal_cooling_kw'] * sf:.3f} kW。FCU 同時核對風量。"
+        )
     if r.get("winter_room"):
         wr = r["winter_room"]
         a(

@@ -3,7 +3,7 @@
 import math
 
 from .data import (NFB_SIZES, PIPE_DB, WIRE_DB, FFU_SIZES, ROUGHNESS_MM, HVAC_PIPES, HVAC_PIPE_REFERENCES,
-                   STANDARD_MOTOR_KW, STANDARD_BREAKER_AT)
+                   STANDARD_MOTOR_KW)
 from .errors import ValidationError
 from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, custom_name
 from .quick_tools import (
@@ -109,10 +109,10 @@ def electrical(
         number(data["chiller_cop"], "chiller_cop", 0, 20)
     factor = math.sqrt(3) if phases == 3 else 1.0
     current = load_current(kw, voltage, pf, 1.0, phases)
-    design_breaker = current * 1.25
     design = current * (1.25 if kind != "一般設備" or has_motor else 1.0)
     if design_current_a is not None:
         design = number(design_current_a, "design_current_a", current - 1e-8, 100000000)
+    design_breaker = design
     temperature = 90 if insulation == "XLPE" else 60
     dt = next(
         correction
@@ -186,7 +186,9 @@ def electrical(
         if options
         else None
     )
-    breaker_at = next_standard(design_breaker, STANDARD_BREAKER_AT)
+    # This is the same protected circuit as the selected conductor, not an
+    # independently sized upstream main feeder.
+    breaker_at = candidate["nfb_a"] if candidate else None
     equivalents = {
         u: el_kw / electrical_unit_factor(u, voltage, pf, eta, phases)
         for u in ELECTRICAL_POWER_UNITS
@@ -214,7 +216,7 @@ def electrical(
         design_a=design,
         design_breaker_a=design_breaker,
         recommended_breaker_at=breaker_at,
-        warnings=[] if breaker_at is not None else ["需求超出內建斷路器級距，須另選規格"],
+        warnings=[] if candidate is not None or kw == 0 else ["需求超出內建斷路器級距，須另選規格"],
         kind=kind,
         selected=candidate,
         length_m=length,
@@ -514,7 +516,7 @@ def water(data):
                     loss_pa=loss, head_m=loss / (1000 * 9.80665),
                     friction_pa_m=friction_rate, friction_factor=friction_factor,
                     roughness_mm=rough, relative_roughness=rough / 1000 / diameter if diameter else 0,
-                    length_m=length, equipment_included=equipment > 0)
+                    length_m=length, k_sum=k_sum, equipment_included=equipment > 0)
     return dict(
         tool="water",
         thermal=thermal,

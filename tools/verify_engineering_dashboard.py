@@ -86,7 +86,12 @@ def run_checks(source_platform):
     expected_current = 10000 / (math.sqrt(3) * 380 * .85 * .9)
     near('shaft kW current uses efficiency once', load['current_a'], expected_current)
     near('continuous design current is 125pct', load['design_breaker_a'], 1.25 * expected_current)
-    check('125pct breaker uses provided catalogue', load['recommended_breaker_at'] == 30)
+    if source_platform == 'windows':
+        check('125pct breaker and conductor use the same circuit selection',
+              load['recommended_breaker_at'] == load['selected']['nfb_a'] == 25
+              and load['design_a'] <= load['selected']['nfb_a'] <= load['selected']['ampacity_a'])
+    else:
+        check('legacy Mac continuous breaker reference', load['recommended_breaker_at'] == 30)
     near('single phase current', load_current(4.4, 220, 1, 1, 1), 20)
 
     # Use a fixed duct calculation then independently reconstruct its equal-circle

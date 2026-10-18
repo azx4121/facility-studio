@@ -2,6 +2,25 @@
 
 TEXT = {}
 
+TEXT.update({
+    "工作空間": "Workspace",
+    "無用電需求": "No electrical demand",
+    "末端冷卻選型基準": "Terminal cooling selection basis",
+    "舊版 W／kVA 電力帶入可能已存成錯誤的 kW。請先移除本盤已納入的電力來源，再用原始資料重新帶入；原值保留供復原，不自動猜改已保存數值。": "An older W/kVA adoption may have saved incorrect kW. Remove the adopted electrical sources for this panel, then import the original data again. Original values are retained for restoration; saved values are not guessed or overwritten.",
+    "舊版電力帶入需重建": "Legacy electrical adoption must be rebuilt",
+    "電力來源需重新帶入": "Electrical sources must be imported again",
+    "電力換算結果超出可表示範圍": "Electrical conversion exceeds the numeric range",
+    "換算結果超出可表示範圍，請縮小輸入值。": "The conversion exceeds the numeric range; enter a smaller value.",
+    "配線設計電流": "Conductor design current",
+    "同迴路導線": "Conductor for the same circuit",
+    "主進線未計算，啟動、短路及上下游保護協調另核": "Main feeder not calculated; check starting, short-circuit duty and upstream/downstream coordination separately",
+    "配電斷路器 NFB（本次迴路）": "Circuit breaker NFB (calculated circuit)",
+    "同迴路配線候選": "Candidate coordinated with the circuit conductor",
+    "末端冷卻選型基準：": "Terminal cooling selection basis: ",
+    "夏冬較大值": "Larger seasonal cooling load",
+    "FCU 同時核對風量。": "FCU count also checks airflow.",
+})
+
 TEXT["已保留目前面積與燈具條件。室指數 K 需要實際長寬；請選長×寬並確認尺寸後，再按此按鈕。"] = (
     "Current area and luminaire inputs are retained. Room index K needs actual length and width; "
     "select Length × width, confirm the dimensions, then press this button again."

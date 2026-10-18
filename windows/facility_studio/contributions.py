@@ -10,7 +10,7 @@ from collections import defaultdict
 
 from .errors import ValidationError
 from .schema import FIELDS
-from .utils import project_hash, VOLTAGE_MAP
+from .utils import project_hash, VOLTAGE_MAP, electrical_power_kw
 
 LOOPS = {
     "MCHW": ("mchw_q", "u_mchw", "chw1_dt", "chw1_in"),
@@ -21,10 +21,32 @@ LOOPS = {
 POWER_KEYS = {"e_up_eq", "e_up_oven", "e_np_fan", "e_np_heat", "e_np_humid", "e_np_exh", "e_np_pump"}
 FLOW_KEYS = {"gas1_q", "gas2_q", "gas3_q", "pv_q", "gex_q", "sex_q", "aex_q", "vex_q", "hex_q", "upw_q"}
 SUM_KEYS = POWER_KEYS | FLOW_KEYS
+LEGACY_POWER_WARNING = "舊版 W／kVA 電力帶入可能已存成錯誤的 kW。請先移除本盤已納入的電力來源，再用原始資料重新帶入；原值保留供復原，不自動猜改已保存數值。"
 
 
 def empty_ledger():
-    return dict(version=1, entries={}, original={}, baseline={}, last_updates={}, selections={})
+    return dict(version=2, entries={}, original={}, baseline={}, last_updates={}, selections={})
+
+
+def legacy_power_keys(ledger):
+    """Identify pre-fix adopted W/kVA values whose physical history is unsafe."""
+    if ledger.get("version") != 1:
+        return []
+    panels = {pan for entry in ledger["entries"].values() for pan in entry["power"]}
+    adopted = {key for entry in ledger["entries"].values() for key in entry["updates"] if key in POWER_KEYS}
+    affected = []
+    for key in sorted(POWER_KEYS):
+        if key.split("_")[1].upper() not in panels or key not in ledger["last_updates"]:
+            continue
+        if ledger["original"].get("u_" + key) not in ("W", "kVA"):
+            continue
+        try:
+            nonzero = float(ledger["original"].get(key, "0")) != 0
+        except ValueError:
+            nonzero = True
+        if nonzero and (key not in adopted or ledger["baseline"].get(key, 0) > 0):
+            affected.append(key)
+    return affected
 
 
 def finite(value, minimum=0, maximum=1e9):
@@ -34,7 +56,7 @@ def finite(value, minimum=0, maximum=1e9):
 
 
 def validate_ledger(value):
-    if not isinstance(value, dict) or set(value) != set(empty_ledger()) or value["version"] != 1:
+    if not isinstance(value, dict) or set(value) != set(empty_ledger()) or type(value["version"]) is not int or value["version"] not in (1, 2):
         raise ValidationError("需求彙整格式不符")
     d = copy.deepcopy(value)
     for name in ("original", "last_updates"):
@@ -96,6 +118,8 @@ def circuit_id(water):
 def aggregate_ledger(ledger, inputs):
     d = validate_ledger(ledger)
     updates, notes, pending, groups = {}, [], [], {}
+    if legacy_power_keys(d):
+        pending.append(LEGACY_POWER_WARNING)
     summed, scalar_values = defaultdict(float), defaultdict(set)
     powers = defaultdict(list)
     for entry in d["entries"].values():
@@ -156,10 +180,10 @@ def aggregate_ledger(ledger, inputs):
             unchanged = inputs[key] == d["last_updates"].get(key) and inputs[unit_key] == d["last_updates"].get(unit_key)
             value = float(d["original"].get(key, inputs[key]) if unchanged else inputs[key])
             unit = d["original"].get(unit_key, inputs[unit_key]) if unchanged else inputs[unit_key]
-            kw = value if unit == "kW" else value * .745699871582 / float(inputs["e_eff"]) if unit == "HP" else value * math.sqrt(3) * voltage * base_pf / 1000
+            kw = electrical_power_kw(value, unit, voltage, base_pf, inputs["e_eff"], key)
             base += kw
             if unit != "kW":
-                # A and shaft-HP drafts used the original panel PF/efficiency.
+                # Non-kW drafts use their actual electrical conversion basis.
                 # Normalize their unchanged physical input before setting a
                 # new equivalent panel PF; otherwise their kW would drift.
                 updates[key] = format(kw, ".15g")
@@ -183,6 +207,9 @@ def aggregate_ledger(ledger, inputs):
 
 def updated_ledger(ledger, entry, inputs):
     d = copy.deepcopy(ledger)
+    if legacy_power_keys(d):
+        raise ValidationError(LEGACY_POWER_WARNING, legacy_power_keys(d)[0], code="legacy_power_adoption")
+    d["version"] = 2
     d["entries"][entry["id"]] = copy.deepcopy(entry)
     validate_ledger(d)
     summary = aggregate_ledger(d, inputs)
@@ -205,6 +232,8 @@ def removed_ledger(ledger, ident, inputs):
         if key not in updates and inputs[key] == previous:
             updates[key] = d["original"][key]
     d["last_updates"] = dict(summary["updates"])
+    if not legacy_power_keys(d):
+        d["version"] = 2
     return d, updates, summary
 
 

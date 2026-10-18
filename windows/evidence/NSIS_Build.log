@@ -2,10 +2,10 @@ MakeNSIS v3.09-4 - Copyright 1999-2023 Contributors
 See the file COPYING for license details.
 Credits can be found in the Users Manual.
 
-Command line defined: "FS_SETUP_OUTPUT=/workspace/scratch/5438c14ec8d6/lighting-f07-fix/windows/.nsis-build-p4y1jw69/Facility_Studio_V5_6_0_Setup.exe"
-Changing directory to: "/workspace/scratch/5438c14ec8d6/lighting-f07-fix/windows"
+Command line defined: "FS_SETUP_OUTPUT=/workspace/scratch/5438c14ec8d6/windows-six-fixes/windows/.nsis-build-3acrjm3y/Facility_Studio_V5_6_0_Setup.exe"
+Changing directory to: "/workspace/scratch/5438c14ec8d6/windows-six-fixes/windows"
 
-Processing script file: "/workspace/scratch/5438c14ec8d6/lighting-f07-fix/windows/installer.nsi" (UTF8)
+Processing script file: "/workspace/scratch/5438c14ec8d6/windows-six-fixes/windows/installer.nsi" (UTF8)
 Processing default plugins: "/workspace/scratch/5438c14ec8d6/dependencies/root/usr/share/nsis/Plugins/x86-unicode/*.dll"
  + AdvSplash::show
  + Banner::destroy
@@ -81,7 +81,7 @@ NSIS Modern User Interface version 2.1 - Copyright 2002-2023 Joost Verburg (/wor
 !include: closed: "/workspace/scratch/5438c14ec8d6/dependencies/root/usr/share/nsis/Contrib/Modern UI 2/MUI2.nsh"
 !include: closed: "/workspace/scratch/5438c14ec8d6/dependencies/root/usr/share/nsis/Include/MUI2.nsh"
 Name: "廠務簡易工具 V5.6.0"
-OutFile: "/workspace/scratch/5438c14ec8d6/lighting-f07-fix/windows/.nsis-build-p4y1jw69/Facility_Studio_V5_6_0_Setup.exe"
+OutFile: "/workspace/scratch/5438c14ec8d6/windows-six-fixes/windows/.nsis-build-3acrjm3y/Facility_Studio_V5_6_0_Setup.exe"
 VIAddVersionKey: "ProductName" "廠務簡易工具"
 VIAddVersionKey: "FileDescription" "Facility Studio V5.6.0 Online Setup"
 VIAddVersionKey: "FileVersion" "5.6.0.0"
@@ -127,7 +127,7 @@ RMDir: /r "$INSTDIR\installer\payload"
 SetOutPath: "$INSTDIR\installer"
 File: "START.cmd" 3692 bytes
 File: "oneclick_setup.py" 13235 bytes
-File: "payload_sha256.json" 8575 bytes
+File: "payload_sha256.json" 8684 bytes
 File: "probe_python.py" 231 bytes
 File: Descending to: "installer/payload/"
 File: "Default_Project.json" 40241 bytes
@@ -135,7 +135,7 @@ File: "Facility_Studio_V5_5.py" 205 bytes
 File: "LICENSE" 8051 bytes
 File: "LICENSE_GUIDE.md" 3193 bytes
 File: "LICENSE_LEGACY_MIT" 1100 bytes
-File: "README.txt" 4355 bytes
+File: "README.txt" 4826 bytes
 File: "THIRD_PARTY_NOTICES.md" 1050 bytes
 File: Descending to: "installer/payload/facility_studio/"
 File: "__init__.py" 123 bytes
@@ -145,15 +145,16 @@ File: "ahu_schema.py" 12430 bytes
 File: "ahu_view.py" 27823 bytes
 File: "air_chart.py" 6741 bytes
 File: "api.py" 819 bytes
+File: "audit_acceptance.py" 30717 bytes
 File: "cli.py" 5774 bytes
-File: "contributions.py" 19013 bytes
+File: "contributions.py" 20399 bytes
 File: "data.py" 6495 bytes
 File: "database.py" 5194 bytes
 File: "design_workflow.py" 6823 bytes
 File: "desktop.py" 41532 bytes
 File: "display_helpers.py" 7442 bytes
-File: "engine.py" 43382 bytes
-File: "english_catalog.py" 267591 bytes
+File: "engine.py" 43373 bytes
+File: "english_catalog.py" 269251 bytes
 File: "equipment_analysis.py" 30009 bytes
 File: "equipment_io.py" 17848 bytes
 File: "equipment_schema.py" 7268 bytes
@@ -176,15 +177,15 @@ File: "main_view.py" 41386 bytes
 File: "native_redraw.py" 1912 bytes
 File: "project_store.py" 3031 bytes
 File: "quality.py" 9351 bytes
-File: "quick_tools.py" 10385 bytes
-File: "reports.py" 44141 bytes
+File: "quick_tools.py" 10741 bytes
+File: "reports.py" 44775 bytes
 File: "resilience_acceptance.py" 8171 bytes
 File: "review_acceptance.py" 14767 bytes
 File: "schema.py" 31260 bytes
 File: "services.py" 9607 bytes
-File: "session_controller.py" 25299 bytes
-File: "simple_desktop.py" 37169 bytes
-File: "simple_engines.py" 34994 bytes
+File: "session_controller.py" 25662 bytes
+File: "simple_desktop.py" 37275 bytes
+File: "simple_engines.py" 35102 bytes
 File: "simple_reports.py" 14205 bytes
 File: "simple_schema.py" 21417 bytes
 File: "stress_acceptance.py" 13281 bytes
@@ -194,7 +195,7 @@ File: "tutorial_acceptance.py" 4752 bytes
 File: "tutorial_help.py" 2922 bytes
 File: "ui_common.py" 3937 bytes
 File: "usability_acceptance.py" 13934 bytes
-File: "utils.py" 31040 bytes
+File: "utils.py" 31780 bytes
 File: "v560_acceptance.py" 18611 bytes
 File: "version.py" 92 bytes
 File: "winter.py" 2243 bytes
@@ -250,18 +251,18 @@ Removing unused resources... Done!
 Generating language tables... Done!
 Generating uninstaller... Done!
 
-Output: "/workspace/scratch/5438c14ec8d6/lighting-f07-fix/windows/.nsis-build-p4y1jw69/Facility_Studio_V5_6_0_Setup.exe"
-Install: 4 pages (256 bytes), 1 section (4120 bytes), 467 instructions (13076 bytes), 264 strings (23422 bytes), 1 language table (286 bytes).
+Output: "/workspace/scratch/5438c14ec8d6/windows-six-fixes/windows/.nsis-build-3acrjm3y/Facility_Studio_V5_6_0_Setup.exe"
+Install: 4 pages (256 bytes), 1 section (4120 bytes), 468 instructions (13104 bytes), 265 strings (23462 bytes), 1 language table (286 bytes).
 Uninstall: 2 pages (192 bytes), 1 section (4120 bytes), 57 instructions (1596 bytes), 93 strings (1780 bytes), 1 language table (250 bytes).
 Datablock optimizer saved 26498 bytes (~1.2%).
 
 Using lzma (compress whole) compression.
 
 EXE header size:              114176 / 100864 bytes
-Install code:                          (39576 bytes)
-Install data:                          (1959992 bytes)
+Install code:                          (39644 bytes)
+Install data:                          (1996637 bytes)
 Uninstall code+data:                   (20254 bytes)
-Compressed data:              782344 / 2019822 bytes
-CRC (0xF9AC817E):                  4 / 4 bytes
+Compressed data:              790218 / 2056535 bytes
+CRC (0xE627C50D):                  4 / 4 bytes
 
-Total size:                   896524 / 2120690 bytes (42.2%)
+Total size:                   904398 / 2157403 bytes (41.9%)

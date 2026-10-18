@@ -134,11 +134,18 @@ def run_checks(source_platform, artifacts_dir=None):
     large_load = calculate_tool("electrical", large_input)
     independent_current = 200000 / (math.sqrt(3) * 380 * .85)
     check("200 kW general-load current uses the declared supply", math.isclose(large_load["current_a"], independent_current))
-    check("continuous sizing reference exceeds the 400 AT short table", large_load["design_breaker_a"] > 400 and large_load["recommended_breaker_at"] is None)
     check("ordinary-load cable candidate may still be 400 AT", large_load["selected"]["nfb_a"] == 400)
     large_row = executive_summary(large_load)[6]
-    check("missing continuous breaker is not replaced with a smaller ordinary candidate", large_row["status"] == "超出級距" and large_row["tone"] == "danger" and "400 AT" not in large_row["selection"])
-    check("above-catalogue electrical result retains a warning", bool(large_load.get("warnings")))
+    if source_platform == "windows":
+        check("general-load design current follows the declared circuit duty", math.isclose(large_load["design_breaker_a"], independent_current))
+        check("summary adopts the same coordinated 400 AT circuit candidate", large_load["recommended_breaker_at"] == 400
+              and "400 AT" in large_row["selection"] and large_row["status"] == "同迴路配線候選")
+        check("circuit candidate does not claim an upstream main feeder", "主進線未計算" in large_row["selection"])
+        check("ordinary-load circuit retains a valid protection bound", 400 <= large_load["selected"]["ampacity_a"])
+    else:
+        check("legacy Mac continuous reference exceeds the 400 AT short table", large_load["design_breaker_a"] > 400 and large_load["recommended_breaker_at"] is None)
+        check("legacy Mac reference is not replaced with an ordinary candidate", large_row["status"] == "超出級距" and large_row["tone"] == "danger" and "400 AT" not in large_row["selection"])
+        check("legacy Mac above-catalogue reference retains a warning", bool(large_load.get("warnings")))
 
     attack = copy.deepcopy(pipeline)
     attack["cleanroom"]["ffu_size"] = '<img src=x onerror="alert(1)">'
