@@ -2,7 +2,7 @@ MakeNSIS v3.09-4 - Copyright 1999-2023 Contributors
 See the file COPYING for license details.
 Credits can be found in the Users Manual.
 
-Command line defined: "FS_SETUP_OUTPUT=/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-0yu2vwl0/Facility_Studio_V5_6_0_Setup.exe"
+Command line defined: "FS_SETUP_OUTPUT=/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-bg07ncky/Facility_Studio_V5_6_0_Setup.exe"
 Changing directory to: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows"
 
 Processing script file: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/installer.nsi" (UTF8)
@@ -81,7 +81,7 @@ NSIS Modern User Interface version 2.1 - Copyright 2002-2023 Joost Verburg (/wor
 !include: closed: "/workspace/scratch/5438c14ec8d6/dependencies/root/usr/share/nsis/Contrib/Modern UI 2/MUI2.nsh"
 !include: closed: "/workspace/scratch/5438c14ec8d6/dependencies/root/usr/share/nsis/Include/MUI2.nsh"
 Name: "廠務簡易工具 V5.6.0"
-OutFile: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-0yu2vwl0/Facility_Studio_V5_6_0_Setup.exe"
+OutFile: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-bg07ncky/Facility_Studio_V5_6_0_Setup.exe"
 VIAddVersionKey: "ProductName" "廠務簡易工具"
 VIAddVersionKey: "FileDescription" "Facility Studio V5.6.0 Online Setup"
 VIAddVersionKey: "FileVersion" "5.6.0.8"
@@ -174,7 +174,7 @@ File: "lighting_acceptance.py" 6681 bytes
 File: "localized_plot.py" 904 bytes
 File: "localized_tk.py" 13505 bytes
 File: "main_view.py" 41737 bytes
-File: "native_redraw.py" 2081 bytes
+File: "native_redraw.py" 1912 bytes
 File: "project_store.py" 3031 bytes
 File: "pv_acceptance.py" 3791 bytes
 File: "quality.py" 9351 bytes
@@ -253,7 +253,7 @@ Removing unused resources... Done!
 Generating language tables... Done!
 Generating uninstaller... Done!
 
-Output: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-0yu2vwl0/Facility_Studio_V5_6_0_Setup.exe"
+Output: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-bg07ncky/Facility_Studio_V5_6_0_Setup.exe"
 Install: 4 pages (256 bytes), 1 section (4120 bytes), 470 instructions (13160 bytes), 268 strings (23562 bytes), 1 language table (286 bytes).
 Uninstall: 2 pages (192 bytes), 1 section (4120 bytes), 57 instructions (1596 bytes), 93 strings (1780 bytes), 1 language table (250 bytes).
 Datablock optimizer saved 26498 bytes (~1.2%).
@@ -262,9 +262,9 @@ Using lzma (compress whole) compression.
 
 EXE header size:              114176 / 100864 bytes
 Install code:                          (39800 bytes)
-Install data:                          (2038679 bytes)
+Install data:                          (2038510 bytes)
 Uninstall code+data:                   (20254 bytes)
-Compressed data:              798299 / 2098733 bytes
-CRC (0x3A78647C):                  4 / 4 bytes
+Compressed data:              798267 / 2098564 bytes
+CRC (0xA78276FA):                  4 / 4 bytes
 
-Total size:                   912479 / 2199601 bytes (41.4%)
+Total size:                   912447 / 2199432 bytes (41.4%)

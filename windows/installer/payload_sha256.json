@@ -42,7 +42,7 @@
   "facility_studio/localized_plot.py": "59f89d77fc2308345100d2d7ea97a9e45632ee272bd444e0519e7aba2dd17432",
   "facility_studio/localized_tk.py": "ae5c4fae11c93af1abeba63f713ee11c1dfcdde827fcc5d85bbf4779de74a40a",
   "facility_studio/main_view.py": "fe91347e9215f3beacb0371e2b8f7a77e80aab230f9a57896aceaa84e03a51fc",
-  "facility_studio/native_redraw.py": "1730d187a74f51197d846e666499690d1035902d496316ba6338945a23aabb0c",
+  "facility_studio/native_redraw.py": "8bafff8dcd38f3067d2344533aa97af5208b683d5a581d97604b5e5942a8ba7e",
   "facility_studio/project_store.py": "74a51aea521a59e4500afbd0920c29125740b3e55f3f7f625f037479178f19aa",
   "facility_studio/pv_acceptance.py": "a8c634845c45b2ae5cd3428e865d4206419281e43c65f5eb613498dc1c43be9d",
   "facility_studio/quality.py": "2d7d8f198c880c30b1747872d60261777d7c7809161b12884632ca070a9b174f",

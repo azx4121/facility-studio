@@ -1,13 +1,13 @@
 {
   "passed": true,
-  "bytes": 912479,
-  "sha256": "32ac50994607d897b7a872876a455933306a23a004637e929be8a43a266cd7f2",
+  "bytes": 912447,
+  "sha256": "054bcb02720b23a77df8a534d9226bea610bda22f878451c8a043eef36dd6c33",
   "header_offset": 114176,
   "header_length": 39772,
-  "archive_length": 798303,
+  "archive_length": 798271,
   "forced_crc": true,
-  "crc32": "3A78647C",
-  "decoded_bytes": 2093782,
+  "crc32": "A78276FA",
+  "decoded_bytes": 2093613,
   "data_blocks": 93,
   "embedded_files": 88,
   "member_sha256": {
@@ -56,7 +56,7 @@
     "payload/facility_studio/localized_plot.py": "59f89d77fc2308345100d2d7ea97a9e45632ee272bd444e0519e7aba2dd17432",
     "payload/facility_studio/localized_tk.py": "ae5c4fae11c93af1abeba63f713ee11c1dfcdde827fcc5d85bbf4779de74a40a",
     "payload/facility_studio/main_view.py": "fe91347e9215f3beacb0371e2b8f7a77e80aab230f9a57896aceaa84e03a51fc",
-    "payload/facility_studio/native_redraw.py": "1730d187a74f51197d846e666499690d1035902d496316ba6338945a23aabb0c",
+    "payload/facility_studio/native_redraw.py": "8bafff8dcd38f3067d2344533aa97af5208b683d5a581d97604b5e5942a8ba7e",
     "payload/facility_studio/project_store.py": "74a51aea521a59e4500afbd0920c29125740b3e55f3f7f625f037479178f19aa",
     "payload/facility_studio/pv_acceptance.py": "a8c634845c45b2ae5cd3428e865d4206419281e43c65f5eb613498dc1c43be9d",
     "payload/facility_studio/quality.py": "2d7d8f198c880c30b1747872d60261777d7c7809161b12884632ca070a9b174f",
@@ -97,7 +97,7 @@
     "payload/facility_studio/winter.py": "e93461af4d72c055febb85a27669f9881d4e7f9e91b8fadf4519b32a068297d0",
     "payload/facility_studio/workspace_store.py": "8b55ef58affaf12c8fcc5269a6953724f7c50f9134c7079a6aabd37cadd5649f",
     "payload/facility_studio/workspace_view.py": "3f897e4240beaf9e66e6895898c76372fbaf8dfe405cc54d7668606f3f765e5c",
-    "payload_sha256.json": "a78951f3866a07a159ae63afaf9c572aa6f19ac6e0148ba5b3e1a35768b3574c",
+    "payload_sha256.json": "7214f0f5f686386414089ee7c6a41bbc5d8813c190cc25851e6ffd002e8dbfdf",
     "probe_python.py": "d7033a4e5c2e3e059fbaedfc9d67384863be6de099a4e799f6f5fd872902362e"
   },
   "windows_execution_tested": false

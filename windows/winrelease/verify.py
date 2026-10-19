@@ -107,6 +107,8 @@ def check_exe(exe, output, label, block_firewall=True):
                 or data["revision"] != REVISION
                 or len(data.get("render_observations", [])) != 3
                 or not all(row["visible"] for row in data["render_observations"][1:])
+                or not all(row.get("consecutive_visible_frames", 0) >= 2
+                           and row["elapsed_seconds"] <= 3.5 for row in data["render_observations"][1:])
                 or not data["frozen"]
                 or not data["offline_network_audit"]
             ):

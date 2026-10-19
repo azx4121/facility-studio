@@ -1,5 +1,6 @@
 """Record native layout and actual canvas pixels without changing the image."""
 from pathlib import Path
+import time
 
 
 def capture(root, app, destination, name):
@@ -25,3 +26,27 @@ def capture(root, app, destination, name):
                               visible=bool(canvas.winfo_ismapped() and frame.body.winfo_ismapped()
                                            and colors > 8 and dark_fraction < .15))
     return dict(file=path.name, tool=app.current, regions=regions, visible=all(r["visible"] for r in regions.values()))
+
+
+def wait_for_form(root, app, destination, name, pump):
+    """Observe native presentation; require two visible frames within 3 s.
+
+    Tk layout and GDI/DWM presentation do not complete in the same event turn.
+    Retain every original capture and deadline instead of accepting a mapped
+    widget alone or forcing a tool switch to obtain a successful screenshot.
+    """
+    started, consecutive, attempts = time.monotonic(), 0, []
+    path = Path(name)
+    while True:
+        pump()
+        row = capture(root, app, destination, path.stem+"_"+str(len(attempts))+path.suffix)
+        row["elapsed_seconds"] = round(time.monotonic()-started, 3)
+        attempts.append(row)
+        consecutive = consecutive+1 if row["visible"] else 0
+        if consecutive >= 2 or time.monotonic()-started >= 3:
+            break
+    # Preserve the accepted (or last failed) original bytes for the named image.
+    final = Path(destination).with_name(name)
+    final.write_bytes(Path(destination).with_name(row["file"]).read_bytes())
+    return dict(row, file=final.name, visible=consecutive >= 2,
+                consecutive_visible_frames=consecutive, attempts=attempts)

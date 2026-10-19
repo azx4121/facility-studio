@@ -253,7 +253,7 @@ def run(destination):
                 root.lift()
                 app.show_tool("electrical")
                 pump()
-                from .render_probe import capture
+                from .render_probe import capture, wait_for_form
                 render_observations.append(capture(root,app,destination,"Render_Before_TkAgg_Cleanup.png"))
                 # This test-only, unmanaged Canvas is not part of the app UI.
                 # Dispose its native drawable before validating the app window.
@@ -264,11 +264,11 @@ def run(destination):
                 root.deiconify()
                 root.lift()
                 pump()
-                render_observations.append(capture(root,app,destination,"Windows_Electrical.png"))
+                render_observations.append(wait_for_form(root,app,destination,"Windows_Electrical.png",pump))
                 check("Electrical form pixels after TkAgg cleanup and restore",lambda:render_observations[-1]["visible"])
                 app.show_tool("air")
                 pump()
-                render_observations.append(capture(root,app,destination,"Windows_Air.png"))
+                render_observations.append(wait_for_form(root,app,destination,"Windows_Air.png",pump))
                 check("Air form pixels after tool switch",lambda:render_observations[-1]["visible"])
             except Exception:
                 checks.append(dict(name="Native form pixel evidence",passed=False,detail=traceback.format_exc()))
