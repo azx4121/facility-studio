@@ -7,7 +7,7 @@ from .localized_tk import ttk, filedialog, messagebox
 from .errors import InputError, ValidationError
 from .gas_catalog import CUSTOM_GAS, gas_label, reference_velocity, switched_velocity
 from .tutorial_help import open_tutorial
-from .version import VERSION
+from .version import VERSION, BUILD_VERSION
 from .quick_tools import UNITS, UNIT_HELP
 from .air_chart import AirChart
 from .simple_engines import calculate_tool, FLOW_FACTORS, GAS_FLOW_FACTORS
@@ -533,7 +533,7 @@ class SimpleToolsApp:
         self.pages = {}
         self.workbench = None
         self.equipment_window = None
-        root.title("廠務簡易工具 V" + VERSION)
+        root.title("廠務簡易工具 V" + BUILD_VERSION)
         self.configure_style()
         width = min(Theme.px(1440), max(Theme.px(980), root.winfo_screenwidth() - Theme.px(60)))
         height = min(Theme.px(830), max(Theme.px(600), root.winfo_screenheight() - Theme.px(100)))

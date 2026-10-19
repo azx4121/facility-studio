@@ -3357,3 +3357,9 @@ TEXT.update({'各溫度迴路容量包絡（未加餘裕）': 'Separate-temperat
                     'allowance)'})
 
 TEXT.update({'PV 真空': 'PV vacuum'})
+
+from .version import BUILD_VERSION as _CURRENT_BUILD_VERSION
+TEXT.update({
+    "廠務簡易工具 V" + _CURRENT_BUILD_VERSION: "Facility Studio V" + _CURRENT_BUILD_VERSION,
+    "廠務工程工作台 V" + _CURRENT_BUILD_VERSION: "Facility Studio Workbench V" + _CURRENT_BUILD_VERSION,
+})

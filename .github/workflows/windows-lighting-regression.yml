@@ -46,7 +46,7 @@ jobs:
         run: |
           python docs/tutorial/verify_tutorial.py --platform windows --output "$env:RUNNER_TEMP/tutorial.json"
           if ($LASTEXITCODE -ne 0) { throw "Tutorial regression failed" }
-          python windows/tests/report_regressions.py --gui --output "$env:RUNNER_TEMP/report-regressions.json"
+          python -X utf8=0 windows/tests/report_regressions.py --gui --output "$env:RUNNER_TEMP/report-regressions.json"
           if ($LASTEXITCODE -ne 0) { throw "Report regression failed" }
       - name: Retain audit evidence
         if: always()

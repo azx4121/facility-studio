@@ -6,6 +6,7 @@ import math
 def run_ui(root, app, check, pump):
     from . import i18n
     from .utils import project_hash
+    from .version import BUILD_VERSION
 
     language, geometry = i18n.language(), root.geometry()
     main = app.open_workbench()
@@ -31,7 +32,8 @@ def run_ui(root, app, check, pump):
             check("PV shortcut exposes vacuum without changing project / "+lang,
                   lambda: main.current == 3 and main.task_scope.get() == "全部工程分頁"
                   and bool(main.widgets["pv_q"].winfo_ismapped())
-                  and project_hash(main.snapshot()) == before)
+                  and project_hash(main.snapshot()) == before
+                  and BUILD_VERSION in main.root.title())
             def vacuum_in_view():
                 widget, canvas = main.widgets["pv_q"], main.pages[3].canvas
                 return (canvas.winfo_rooty() <= widget.winfo_rooty()

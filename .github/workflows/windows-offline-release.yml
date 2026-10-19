@@ -54,7 +54,7 @@ jobs:
           Invoke-CheckedPython windows/tests/electrical_units.py --gui
           Invoke-CheckedPython windows/tests/lighting_presets.py --gui
           Invoke-CheckedPython windows/tests/audit_regressions.py --gui --output "$env:RUNNER_TEMP/audit-regressions.json"
-          Invoke-CheckedPython windows/tests/report_regressions.py --gui --output "$env:RUNNER_TEMP/report-regressions.json"
+          Invoke-CheckedPython -X utf8=0 windows/tests/report_regressions.py --gui --output "$env:RUNNER_TEMP/report-regressions.json"
           Invoke-CheckedPython windows/tests/regression.py
           Invoke-CheckedPython windows/tests/v55_features.py
           Invoke-CheckedPython windows/tests/v552_core.py

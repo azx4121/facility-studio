@@ -1,6 +1,7 @@
 """Run report semantic regressions; --gui exercises real export buttons."""
 import argparse
 import json
+import locale
 import os
 from pathlib import Path
 import platform
@@ -31,7 +32,9 @@ def main():
             try:run_ui(root,SimpleToolsApp(root),check,root.update,args.output)
             finally:root.destroy()
             assert not errors,errors
-    result=dict(passed=True,platform=platform.platform(),numeric_and_report_checks=formulas,gui_checks=len(checks)-formulas,checks=checks,callback_errors=errors)
+    result=dict(passed=True,platform=platform.platform(),utf8_mode=sys.flags.utf8_mode,
+                default_text_encoding=locale.getpreferredencoding(False),
+                numeric_and_report_checks=formulas,gui_checks=len(checks)-formulas,checks=checks,callback_errors=errors)
     if args.output:
         args.output.parent.mkdir(parents=True,exist_ok=True)
         args.output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

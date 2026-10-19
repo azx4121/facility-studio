@@ -3,6 +3,7 @@
 import csv
 from datetime import datetime, timezone
 import json
+import locale
 import math
 import os
 from pathlib import Path
@@ -399,6 +400,7 @@ def run_audit(destination):
                     os.environ[name] = value
     result = dict(version=__version__, revision=REVISION, scope="F01–F06 and R01–R05 extended acceptance",
                   platform=platform.platform(), python=sys.version,
+                  utf8_mode=sys.flags.utf8_mode, default_text_encoding=locale.getpreferredencoding(False),
                   frozen=bool(getattr(sys, "frozen", False)),
                   offline_network_audit=os.environ.get("FACILITY_TEST_BLOCK_NETWORK") == "1",
                   timestamp=datetime.now(timezone.utc).isoformat(),

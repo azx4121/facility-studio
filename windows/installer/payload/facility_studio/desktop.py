@@ -1,4 +1,5 @@
 import copy
+from .version import BUILD_VERSION
 from .tools_view import QuickToolsWindow
 from .workspace_view import WorkspaceWindow
 from .project_store import recovery_save
@@ -323,7 +324,7 @@ class DesktopApp(SessionController, MainView):
 
     def _build_window(self, root):
         self.root = root
-        root.title("廠務工程工作台 V" + VERSION)
+        root.title("廠務工程工作台 V" + BUILD_VERSION)
         root.geometry(
             f"{min(1240, max(880, root.winfo_screenwidth() - 60))}x{min(840, max(560, root.winfo_screenheight() - 80))}"
         )
@@ -573,7 +574,7 @@ class DesktopApp(SessionController, MainView):
 
         attach_window(root)
         self._build_window(root)
-        root.title("廠務工程工作台 V" + VERSION)
+        root.title("廠務工程工作台 V" + BUILD_VERSION)
         app_icon(root)
         i18n.subscribe(self)
         self.unit_previous = {

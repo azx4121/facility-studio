@@ -175,7 +175,7 @@ def run_checks():
 def run_ui(root, app, check, pump, output=None):
     """Export via actual buttons and verify the values users receive."""
     from . import i18n
-    from .version import REPORT_VERSION
+    from .version import REPORT_VERSION, BUILD_VERSION
     original_language, original_tool = i18n.language(), app.current
     snapshots={}
     from .pv_acceptance import run_ui as check_pv
@@ -201,11 +201,11 @@ def run_ui(root, app, check, pump, output=None):
                         app.export_button.invoke();pump()
                     text=path.read_text(encoding="utf-8")
                     check("R04 actual exported 50 m / "+lang+suffix,lambda:re.search(r"\b50\s*m\b",text) is not None)
-                    check("R05 actual exported revision / "+lang+suffix,lambda:REPORT_VERSION in text)
+                    check("R05 actual exported revision / "+lang+suffix,lambda:REPORT_VERSION in text and BUILD_VERSION in root.title())
                 summary=folder/("summary-"+lang+".html")
                 with patch("facility_studio.simple_desktop.filedialog.asksaveasfilename",return_value=str(summary)):
                     app.summary_button.invoke();pump()
-                check("R03 summary button retains adopted conditions / "+lang,lambda:any(row[1:]==("50 m",) for row in ReportTables(summary.read_text()).rows))
+                check("R03 summary button retains adopted conditions / "+lang,lambda:any(row[1:]==("50 m",) for row in ReportTables(summary.read_text(encoding="utf-8")).rows))
                 app.nav["lighting"].invoke();page=app.active_page()
                 snapshots.setdefault("lighting",page.data())
                 page.variables["area_mode"].set("體積 m³");pump()
