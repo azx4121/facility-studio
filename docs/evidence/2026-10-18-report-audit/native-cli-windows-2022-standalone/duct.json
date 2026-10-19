@@ -1,0 +1,52 @@
+{
+  "tool": "duct",
+  "flow_cmh": 3000.0,
+  "pressure_pa": 200.0,
+  "velocity_limit": 8.0,
+  "ratio": 2.0,
+  "rectangle": {
+    "flow_cmh": 3000.0,
+    "shape": "方管",
+    "area_m2": 0.105,
+    "diameter_m": 0.3230769230769231,
+    "velocity_mps": 7.936507936507937,
+    "w_mm": 350,
+    "h_mm": 300,
+    "round_in": 16,
+    "ratio_actual": 1.1666666666666667,
+    "velocity_limit_mps": 8.0,
+    "hydraulic_diameter_m": 0.3230769230769231,
+    "equivalent_diameter_m": 0.35396337309849557,
+    "equivalent_velocity_mps": 8.46861174409413
+  },
+  "round": {
+    "flow_cmh": 3000.0,
+    "shape": "圓管",
+    "area_m2": 0.1297171146489594,
+    "diameter_m": 0.4064,
+    "velocity_mps": 6.4242358118163585,
+    "w_mm": 350,
+    "h_mm": 300,
+    "round_in": 16,
+    "ratio_actual": 1.1666666666666667,
+    "velocity_limit_mps": 8.0,
+    "hydraulic_diameter_m": 0.4064,
+    "equivalent_diameter_m": 0.4064,
+    "equivalent_velocity_mps": 6.4242358118163585
+  },
+  "path_checked": false,
+  "length_m": null,
+  "k_sum": null,
+  "equipment_input_pa": null,
+  "roughness_mm": null,
+  "friction_method": null,
+  "formula": "A=風量/3600/風速；圓管D=√(4A/π)。路徑阻力=f×L/Dh×ρv²/2＋ΣK×ρv²/2＋設備壓降。",
+  "note": "靜壓是可用於管路的壓力預算，不能單獨決定尺寸。未勾選已知路徑時不判定壓力是否足夠；圓管依2英吋級距選取。",
+  "adopted_inputs": {
+    "check_path": "0",
+    "flow": "3000",
+    "flow_unit": "CMH",
+    "ratio": "2",
+    "velocity": "8"
+  }
+}

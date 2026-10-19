@@ -140,3 +140,19 @@ python windows/tests/audit_regressions.py --gui --output audit-source-ui.json
 封裝 EXE 分開執行 `--self-test` 與 `--audit-self-test`，各維持 210 秒程序上限與五秒 GUI 心跳；每個啟動路徑須通過 318 核心、140 延伸入口／介面及 2,182 獨立數值檢查。逾時僅終止該測試程序樹，不放寬限制。每個原生 Windows 主機重驗獨立 EXE、ZIP 解壓及中文空格路徑，發布須兩主機全通過。詳見[當前驗收](2026-10-18-windows-audit-six.md)。macOS 應用來源未改；其 ledger v1 讀取器無法讀 Windows 新整案的 ledger v2，不能僅憑主案 schema 12 宣稱雙向相容。
 
 English: audit regression acceptance has 2,182 numeric assertions and 140 real-widget source checks (2,322 total). Frozen acceptance runs 318 core checks and 140 extended entry/UI checks in separate bounded processes, plus the same 2,182 assertions. Both native hosts must pass all three launch paths before publication. Source success and online Setup extraction do not substitute for delivered EXE execution. mac.6's ledger v1 reader cannot open v2 workspaces; its application source is unchanged.
+
+## Windows win.8：報告語意、PV 入口與畫面
+
+```sh
+python windows/tests/report_regressions.py --gui --output report-regressions.json
+python tools/refresh_tutorial.py --platform windows
+python docs/tutorial/verify_tutorial.py --platform windows --output tutorial-windows.json
+```
+
+報告檢查 405 項，從文字算式與 HTML 表格核對實際倍率、採用輸入、來源功率、單台額定、單位與修訂。實際操作 28 項：14 項報告匯出、14 項 PV 中英文入口與三種絕壓單位／流量一致性。PV 入口需在最小視窗可見，並在原先空調範圍隱藏分頁時仍可開啟，不修改專案數值。
+
+本版凍結驗收為 321 核心、142 延伸入口／介面、2,182 獨立工程數值、405 報告語意、28 匯出／PV 操作；每個主機的三種啟動路徑都須通過。程序上限仍為 210 秒、GUI 心跳五秒。畫面檢查保存未修改截圖，要求表單映射、像素內容與黑塊比例符合條件，不以功能斷言替代畫面。詳見[本輪結果](2026-10-18-windows-report-audit.md)。
+
+教學更新器只重建指定平台的參考報告與 ZIP。Windows 報告保存在 `docs/tutorial/windows/`；mac.6 既有教學保留，不能用 Windows 新報告覆寫。應用來源或資源修改後，須同步重建 installer payload、manifest 及 Setup，再跑封裝與完整性檢查。
+
+English: win.8 adds 405 report-semantic assertions and 28 actual export/PV operations to frozen acceptance. Native capture checks mapped forms, real pixels and black-region fraction. Platform-scoped tutorial refresh preserves the other platform's bundle. Rebuild and verify installer payloads whenever application bytes change.

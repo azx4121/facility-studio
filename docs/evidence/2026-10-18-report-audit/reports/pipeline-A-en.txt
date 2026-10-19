@@ -1,0 +1,161 @@
+Facility calculation pipeline summary | V 5.6.0 · Windows win.8
+
+╔══════════════════════════════════════════════════════════════════╗
+ ★ Executive Design Summary 
+ Calculated requirements and selection targets are separate; missing values remain not calculated. 
+
+ FFU fan filter units  |  Preliminary layout 
+   [Calculated requirement]  Total airflow 18,300 CMH
+   [Selection target]  Per unit 1,000 CMH; 1200x600 (0.72m²);  Demand  19  units  ; coverage 13.68 %;  MAU enters the plenum and supplies air through FFUs ;  Room recirculation (add OA separately)  (project layout limit 85 %)
+
+ MAU makeup air unit  |  Preliminary demand 
+   [Calculated requirement]  Design outdoor air 300 CMH;  Cooling  Dehumidification  5 kW / 1.42 US RT
+   [Selection target]  Select for airflow, supply dew point and coil operating conditions 
+
+ DCC room dry cooling coil  |  Preliminary demand 
+   [Calculated requirement]  Recirculated return air 18,000 CMH;  Sensible heat  27.37 kW
+   [Selection target]  Keep the coil surface above room dew point; select for water temperature and airflow 
+
+ Central chiller  |  Preliminary cooling load 
+   [Calculated requirement] 32.92 kW / 9.36 US RT
+   [Selection target]  Select for design cooling load and actual supply / return water conditions 
+
+ Chilled-water main piping  |  Pipe size  Preliminary estimate 
+   [Calculated requirement]  Design flow 94.35 LPM
+   [Selection target] 40A (1-1/2"); 1.2 m/s; 426.65 Pa/m
+
+ CHWP chilled-water pump  |  Preliminary selection 
+   [Calculated requirement]  Design flow 94.35 LPM ; head 2.47 m ; shaft power 0.05 kW
+   [Selection target] 0.75 kW motor nameplate (rated shaft output, with 15% margin) 
+
+ Circuit breaker NFB (calculated circuit)  |  Candidate coordinated with the circuit conductor 
+   [Calculated requirement]  Listed equipment active input power 33.26 kW;  Operating current  59.46 A;  Conductor design current  74.32 A
+   [Selection target] 80 AT;  Conductor for the same circuit  38 mm²/phase  × 1  sets ;  Main feeder not calculated; check starting, short-circuit duty and upstream/downstream coordination separately 
+╚══════════════════════════════════════════════════════════════════╝
+
+ Equipment electrical input sources 
+FFU | 3.420000 kW |  Electrical input 
+ lighting  | 1.200000 kW |  Electrical input 
+CHWP | 0.060422 kW |  Electrical input 
+MAU | 2.000000 kW |  Electrical input 
+ Process equipment  | 20.000000 kW |  Electrical input 
+Chiller | 6.584000 kW |  Electrical input 
+ Total equipment electrical input : 33.264422 kW
+ Chiller electrical input basis :  Cooling capacity  32.920000 kW ÷ COP 5.
+
+cleanroom
+ Input conditions 
+ Room floor area : 100 m²
+ Room  clear height : 3 m
+ MAU / FFU airflow path :  MAU enters the plenum and supplies air through FFUs 
+ ACH / face-flow basis :  Room recirculation (add OA separately) 
+ ACH on selected airflow basis : 60 1/h
+ Simultaneous room occupancy : 10
+ Total process and general exhaust : 0 CMH
+ Design pressure difference to lower-pressure zone : 15 Pa
+ Leakage ACH at 15 Pa : 1 1/h
+ Specified OA (0=automatic minimum) : 0 CMH
+ Rated airflow per FFU : 1000 CMH
+ FFU nominal dimensions : 1200x600 (0.72m²)
+ FFU electrical input per unit : 0.18 kW
+ Available ceiling installation ratio : 85 %
+ Results 
+ Required FFU count : 19  units 
+ MAU outdoor airflow : 300.0 CMH
+ Ceiling coverage : 13.7 %
+ Room volume  300.0 m³ | Base recirculation 18,000.0 CMH | Coverage limit 85 %
+ FFU total design airflow 18,300.0 CMH |  Per unit 1,000.0 CMH | 1200x600 (0.72m²)
+ DCC recirculated return air 18,000.0 CMH |  Outdoor air  300.0 CMH
+ Pressure-driven leakage 300.0 CMH |  Exhaust  0.0 CMH
+FFU  Input  Electrical  /  Room  Fan  heat  3.42 kW
+ Coverage is within the project layout limit; verify ceiling grid and equipment layout. 
+
+heat_loads
+ Input conditions 
+ Space floor area : 100.0 m²
+ Simultaneous room occupancy : 10
+ Equipment room sensible heat : 20 kW
+ lighting  Power  Density : 12 W/m²
+ Envelope heat load per area : 20 W/m²
+ Sensible heat per person : 75  W / person 
+ Latent heat per person : 55  W / person 
+ Operating FFU count : 19
+ FFU electrical input per unit : 0.18 kW
+ MAU design outdoor airflow : 300.0 CMH
+ Outdoor-air cooling enthalpy difference : 50 kJ/kg
+ Outdoor-air enthalpy endpoint :  Outdoor air to room reference 
+ Results 
+ Total chiller cooling load : 9.36 US RT
+DCC  Sensible heat  Demand : 27.37 kW
+ MAU outdoor air cooling load : 5.00 kW
+ Total system cooling load 32.92 kW | 9.36 US RT
+ lighting  1.20 kW | envelope 2.00 kW | Equipment  20.00 kW
+FFU  Fan  heat  3.42 kW | Occupant sensible 0.75 kW | occupant latent heat 0.55 kW
+ Neutral-supply estimate; MAU room sensible cooling has not been credited 
+
+water
+ Input conditions 
+ Known quantity :  Known heat load 
+ Heating / cooling load : 32.919999999999995 kW
+ Supply / return temperature difference : 5 K
+ Nominal pipe size (1/2"–30") :  Auto-size by velocity limit 
+ Maximum design water velocity : 1.5 m/s
+ Critical-path straight length : 50 m
+ Fitting loss coefficient sum K : 4
+ Equipment / terminal pressure drop : 0 Pa
+ Pipe absolute roughness : 0.045 mm
+ Results 
+ Circulating water flow : 94.35 LPM
+ Reference pipe size : 40A (1-1/2")
+ Thermal capacity : 32.92 kW
+ Capacity 9.36 US RT | Supply / return temperature difference 5K
+ Actual internal diameter 40.9 mm | Water velocity per run 1.20m/s
+ Straight friction 426.65Pa/m | Total path loss 24,197.9Pa | Loss head 2.47m | Straight length 50 m | ΣK=4 | Equipment drop 0.0 Pa | Roughness  0.045mm
+
+pumps
+ Input conditions 
+ Design circulation flow : 94.35368300372596 LPM
+ Piping and included equipment loss head : 2.4675021376096202 m
+ Additional terminal equipment loss : 0 m
+ Open-system static head : 0 m
+ Friction and equipment head allowance : 0 %
+ Pump efficiency : 0.70
+ Motor efficiency : 0.90
+ Results 
+ Suggested motor nameplate : 0.75 kW
+ Design head : 2.47 m
+ Design flow : 94.35 LPM
+ Hydraulic power 0.038 kW | pump shaft power 0.054 kW |  Motor  Input  0.060 kW
+ Path head 2.47 m | Terminal head 0.00  m | Static head  0.00 m | Head margin 0 %
+ Pump efficiency 70.0% | motor efficiency 90.0% | Required motor output with margin 0.063 kW
+ Motor nameplate uses shaft power plus 15% margin, rounded up to a built-in size; electrical input is separate. 
+
+electrical
+ Input conditions 
+ Equipment power : 33.26442179209722 kW
+ Power supply :  Three-phase 380 V 
+ Load type :  Continuous load 
+ Power factor PF : .85
+ One-way cable length : 30 m
+ Copper cable insulation : XLPE
+ Terminal temperature rating : 60 °C
+ Ambient temperature : 35 °C
+ Loaded conductors in conduit : 3
+ Maximum voltage drop : 3 %
+ For import: MAU electrical input : 2 kW
+ For import: process equipment electrical input : 20 kW
+ For import: chiller COP : 5
+ For import: chiller electrical input : 0 kW
+ Results 
+ Circuit breaker (NFB) : 80 AT
+ Copper conductor per phase : 38 mm² × 1 sets 
+ Operating current : 59.46 A
+ Electrical input 33.264 kW | 33,264.4 W | 39.13 kVA
+ Design current 74.32A ≤ NFB 80 AT ≤ effective ampacity 85.00A
+ One-way length 30 m | Voltage drop 1.51V / 0.40% | Drop limit 3%
+ Copper XLPE | Terminal 60°C | Ambient 35°C (temp factor 1.00 ) | Loaded conductors 3 (grouping factor 1.00)
+ Design current basis :  Continuous load ;  Operating current  59.4589 A × 1.25 = 74.3236 A; verify motor starting, short-circuit and protection coordination. 
+ Active electrical input 33.264 kW | adopted efficiency 1.000
+
+ Conditions to confirm 
+ Coil and terminal equipment losses are absent from the piping and pump calculation. Pump sizing currently covers piping losses only.

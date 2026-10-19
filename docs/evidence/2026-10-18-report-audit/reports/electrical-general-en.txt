@@ -1,0 +1,39 @@
+Facility Studio  5.6.0 · Windows win.8 |  Electrical sizing 
+
+ Key design values 
+   Circuit breaker (NFB) : 20 AT
+   Copper conductor per phase : 5.5 mm² × 1 sets 
+   Operating current : 17.87 A
+
+ Input conditions 
+   Equipment power : 10 kW
+   Power supply :  Three-phase 380 V 
+   Load type :  General load 
+   Power factor PF : .85
+   One-way cable length : 30 m
+   Copper cable insulation : XLPE
+   Terminal temperature rating : 60 °C
+   Ambient temperature : 35 °C
+   Loaded conductors in conduit : 3
+   Maximum voltage drop : 3 %
+   For import: MAU electrical input : 0 kW
+   For import: process equipment electrical input : 0 kW
+   For import: chiller COP : 0
+   For import: chiller electrical input : 0 kW
+
+ Results 
+   Circuit breaker (NFB) : 20 AT
+   Copper conductor per phase : 5.5 mm² × 1 sets 
+   Operating current : 17.87 A
+   Electrical input 10.000 kW | 10,000.0 W | 11.76 kVA
+   Design current 17.87A ≤ NFB 20 AT ≤ effective ampacity 25.00A
+   One-way length 30 m | Voltage drop 2.90V / 0.76% | Drop limit 3%
+   Copper XLPE | Terminal 60°C | Ambient 35°C (temp factor 1.00 ) | Loaded conductors 3 (grouping factor 1.00)
+   Design current basis :  General load ;  Operating current  17.8746 A × 1 = 17.8746 A; verify motor starting, short-circuit and protection coordination. 
+   Active electrical input 10.000 kW | adopted efficiency 1.000
+
+ Formula 
+ Three-phase I=P_input×1000/(√3×V×PF); single-phase I=P_input×1000/(V×PF). Divide HP/PS shaft power by motor efficiency for input kW; continuous/motor loads use a preliminary 125% allowance. 
+
+ Scope / assumptions 
+ kW/W are electrical input; HP/PS are shaft output divided by efficiency. Multiply kVA by PF; convert A using voltage and phases. Thermal RT is not electricity: enter chiller COP or electrical input kW for imports. The 125% estimate does not replace starting, overload or short-circuit protection.

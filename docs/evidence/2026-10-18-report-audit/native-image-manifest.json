@@ -1,0 +1,581 @@
+{
+  "scope": "All saved native screenshots from the six completed launch combinations; unmodified original bytes",
+  "images": [
+    {
+      "host": "windows-2022",
+      "label": "standalone",
+      "file": "native/windows-2022/standalone/English_Electrical.png",
+      "bytes": 65435,
+      "sha256": "303a4b5c7ba7a9afac104ffdcc5b6737095c65d5e490c100a24614965cdc65d1",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "standalone",
+      "file": "native/windows-2022/standalone/English_Psychrometrics.png",
+      "bytes": 62783,
+      "sha256": "c7de0ab4dffb734861b83ddf51d2fa4f7be0002f872cc727fec3b25806f040b1",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "standalone",
+      "file": "native/windows-2022/standalone/Render_Before_TkAgg_Cleanup.png",
+      "bytes": 47369,
+      "sha256": "e36bf3a211b9b8fe590fb29e50874ac8152cec1c3daab549d58829c5a1c6eeae",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "standalone",
+      "file": "native/windows-2022/standalone/V556_AHU_Stages.png",
+      "bytes": 79175,
+      "sha256": "74c1784c0b7f4990160bd431a033ab8e6badcaf95406e6636bb138c746b3fb59",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "standalone",
+      "file": "native/windows-2022/standalone/V556_Equipment_Transfer.png",
+      "bytes": 69475,
+      "sha256": "d9850ac46800102f891adda6acba5794584dd0e15eb8c82e3750df783360f6a2",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "standalone",
+      "file": "native/windows-2022/standalone/V556_Workbench_Basic.png",
+      "bytes": 73807,
+      "sha256": "683492825ae2b9ebadc397c536073c4ae4592aa9e3a80d9dbeed10bff9a8c960",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "standalone",
+      "file": "native/windows-2022/standalone/Windows_Air.png",
+      "bytes": 66613,
+      "sha256": "51e7cfa2ad405794f5c477ad7cacfe6355a0cfc067fbd4692d9d6b17bddee11c",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "standalone",
+      "file": "native/windows-2022/standalone/Windows_Air_0.png",
+      "bytes": 66613,
+      "sha256": "51e7cfa2ad405794f5c477ad7cacfe6355a0cfc067fbd4692d9d6b17bddee11c",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "standalone",
+      "file": "native/windows-2022/standalone/Windows_Air_1.png",
+      "bytes": 66613,
+      "sha256": "51e7cfa2ad405794f5c477ad7cacfe6355a0cfc067fbd4692d9d6b17bddee11c",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "standalone",
+      "file": "native/windows-2022/standalone/Windows_Electrical.png",
+      "bytes": 68739,
+      "sha256": "76c8f8a168ee2b18dc14cfeeacfad882b763a2d101da3b21ee8a313542e69660",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "standalone",
+      "file": "native/windows-2022/standalone/Windows_Electrical_0.png",
+      "bytes": 68739,
+      "sha256": "76c8f8a168ee2b18dc14cfeeacfad882b763a2d101da3b21ee8a313542e69660",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "standalone",
+      "file": "native/windows-2022/standalone/Windows_Electrical_1.png",
+      "bytes": 68739,
+      "sha256": "76c8f8a168ee2b18dc14cfeeacfad882b763a2d101da3b21ee8a313542e69660",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "zip-extracted",
+      "file": "native/windows-2022/zip-extracted/English_Electrical.png",
+      "bytes": 65511,
+      "sha256": "63d898d0b36265e306ca497db57ef7d96a2327993f6e912e8c0779b6e362ec64",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "zip-extracted",
+      "file": "native/windows-2022/zip-extracted/English_Psychrometrics.png",
+      "bytes": 62855,
+      "sha256": "e35eba025c0ebe45b16e3f3a15f280e5465d7125cbeab434e2bb563670972f21",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "zip-extracted",
+      "file": "native/windows-2022/zip-extracted/Render_Before_TkAgg_Cleanup.png",
+      "bytes": 47762,
+      "sha256": "d4a895710d28eb5963219a66ee503814a4346902abca5888de0f5afbf80a4465",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "zip-extracted",
+      "file": "native/windows-2022/zip-extracted/V556_AHU_Stages.png",
+      "bytes": 79182,
+      "sha256": "26fb5cba6b9dc1cb61115df6cbea2c6176fd3f8a04bc78cad4ef857e0db8ae2b",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "zip-extracted",
+      "file": "native/windows-2022/zip-extracted/V556_Equipment_Transfer.png",
+      "bytes": 69478,
+      "sha256": "86720addb87712457f85eea99f6adfc310b35fcbfbfc407e2fe6ae0390c821e6",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "zip-extracted",
+      "file": "native/windows-2022/zip-extracted/V556_Workbench_Basic.png",
+      "bytes": 73758,
+      "sha256": "af099cab2dcd5ee9f8941ada6910a614d53f78aac61aea3561c5e2ccead2d0a2",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "zip-extracted",
+      "file": "native/windows-2022/zip-extracted/Windows_Air.png",
+      "bytes": 66635,
+      "sha256": "fe8b890b43544367bb7cb4542601ccda18dabdad1e39a20a5d1e0d1265b820d8",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "zip-extracted",
+      "file": "native/windows-2022/zip-extracted/Windows_Air_0.png",
+      "bytes": 66635,
+      "sha256": "fe8b890b43544367bb7cb4542601ccda18dabdad1e39a20a5d1e0d1265b820d8",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "zip-extracted",
+      "file": "native/windows-2022/zip-extracted/Windows_Air_1.png",
+      "bytes": 66635,
+      "sha256": "fe8b890b43544367bb7cb4542601ccda18dabdad1e39a20a5d1e0d1265b820d8",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "zip-extracted",
+      "file": "native/windows-2022/zip-extracted/Windows_Electrical.png",
+      "bytes": 68763,
+      "sha256": "2f926c5b078aa6d3a8a82f100ea16f0d5397eb9248be500483d8650fe2f6d9a2",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "zip-extracted",
+      "file": "native/windows-2022/zip-extracted/Windows_Electrical_0.png",
+      "bytes": 68763,
+      "sha256": "2f926c5b078aa6d3a8a82f100ea16f0d5397eb9248be500483d8650fe2f6d9a2",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "zip-extracted",
+      "file": "native/windows-2022/zip-extracted/Windows_Electrical_1.png",
+      "bytes": 68763,
+      "sha256": "2f926c5b078aa6d3a8a82f100ea16f0d5397eb9248be500483d8650fe2f6d9a2",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2022/unicode-executable-path/English_Electrical.png",
+      "bytes": 65455,
+      "sha256": "4dfd1da68bdb22f68c0e2464b0f290f74435c082d40ef82c835e9097dd5f9b74",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2022/unicode-executable-path/English_Psychrometrics.png",
+      "bytes": 62798,
+      "sha256": "0dd8f16c8731d5dee52c1c048e81afbb60b9ce5c53103b1f5c7d32f8c6d29fff",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2022/unicode-executable-path/Render_Before_TkAgg_Cleanup.png",
+      "bytes": 47661,
+      "sha256": "9d73d3bd2168eeaa18507e6a0abab64ca864b21e082075f7f1a72442c211d989",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2022/unicode-executable-path/V556_AHU_Stages.png",
+      "bytes": 79210,
+      "sha256": "4fd1dbd24c0ee10ccf7ba6b3d584b19e4b936ebe496ae6ed26fa6e4b4fc8029a",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2022/unicode-executable-path/V556_Equipment_Transfer.png",
+      "bytes": 69496,
+      "sha256": "5c4aa6e77091a4b7ebdcb2e446cd045cdaaef5a4fe9325b41e20a043692917b4",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2022/unicode-executable-path/V556_Workbench_Basic.png",
+      "bytes": 73792,
+      "sha256": "06fc84a92fb1d8c8cbd4608b1efdf61c7470379901d35d822a7e526e348986c6",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2022/unicode-executable-path/Windows_Air.png",
+      "bytes": 66525,
+      "sha256": "11bffd4469d4be1048e7b0d951620d3bb6b8b07198f11ff8153d79a34bf7588b",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2022/unicode-executable-path/Windows_Air_0.png",
+      "bytes": 66525,
+      "sha256": "11bffd4469d4be1048e7b0d951620d3bb6b8b07198f11ff8153d79a34bf7588b",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2022/unicode-executable-path/Windows_Air_1.png",
+      "bytes": 66525,
+      "sha256": "11bffd4469d4be1048e7b0d951620d3bb6b8b07198f11ff8153d79a34bf7588b",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2022/unicode-executable-path/Windows_Electrical.png",
+      "bytes": 68651,
+      "sha256": "a063ad90a2133bf72a491d1f0e2a0423e600b6d81d26e6873cea4b82627b5924",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2022/unicode-executable-path/Windows_Electrical_0.png",
+      "bytes": 68651,
+      "sha256": "a063ad90a2133bf72a491d1f0e2a0423e600b6d81d26e6873cea4b82627b5924",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2022",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2022/unicode-executable-path/Windows_Electrical_1.png",
+      "bytes": 68651,
+      "sha256": "a063ad90a2133bf72a491d1f0e2a0423e600b6d81d26e6873cea4b82627b5924",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "standalone",
+      "file": "native/windows-2025/standalone/English_Electrical.png",
+      "bytes": 75219,
+      "sha256": "dc13c743001d994a64a21f57797239b100474eed093a925b2b5788eb087c06c4",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "standalone",
+      "file": "native/windows-2025/standalone/English_Psychrometrics.png",
+      "bytes": 72741,
+      "sha256": "4f2ffcdf85be09de7dfd5acd03e96727929cf3f377dbdd7ded0e74a6f8a716cd",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "standalone",
+      "file": "native/windows-2025/standalone/Render_Before_TkAgg_Cleanup.png",
+      "bytes": 61093,
+      "sha256": "e7a3783d7ddc2fb5930bda89ce105c353ef019a03ef6fa475e52bb0cc9171f76",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "standalone",
+      "file": "native/windows-2025/standalone/V556_AHU_Stages.png",
+      "bytes": 82092,
+      "sha256": "7261cf6beed24d2a19c8069b1d24bc1c06429d81a090d032e3bee2456593c1ba",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "standalone",
+      "file": "native/windows-2025/standalone/V556_Equipment_Transfer.png",
+      "bytes": 73176,
+      "sha256": "5a023b7672cfdbf130b487ba69452e420b3a218e84d2a112fffe1c9189e88a1f",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "standalone",
+      "file": "native/windows-2025/standalone/V556_Workbench_Basic.png",
+      "bytes": 87579,
+      "sha256": "47f050f61901849ef253aa82cc75d6d1d4bfe156242f5923fd78f7232c1c7ec9",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "standalone",
+      "file": "native/windows-2025/standalone/Windows_Air.png",
+      "bytes": 79582,
+      "sha256": "7f02aa2eaf26b04b3d491f793dd9b9ecb68ef0cdae832a2dd8672ed7ecd54f8e",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "standalone",
+      "file": "native/windows-2025/standalone/Windows_Air_0.png",
+      "bytes": 79582,
+      "sha256": "7f02aa2eaf26b04b3d491f793dd9b9ecb68ef0cdae832a2dd8672ed7ecd54f8e",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "standalone",
+      "file": "native/windows-2025/standalone/Windows_Air_1.png",
+      "bytes": 79582,
+      "sha256": "7f02aa2eaf26b04b3d491f793dd9b9ecb68ef0cdae832a2dd8672ed7ecd54f8e",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "standalone",
+      "file": "native/windows-2025/standalone/Windows_Electrical.png",
+      "bytes": 81832,
+      "sha256": "f92e4975a56fecd52b365bbfbf89249df63719538229adf89096063ee5b6a901",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "standalone",
+      "file": "native/windows-2025/standalone/Windows_Electrical_0.png",
+      "bytes": 81832,
+      "sha256": "f92e4975a56fecd52b365bbfbf89249df63719538229adf89096063ee5b6a901",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "standalone",
+      "file": "native/windows-2025/standalone/Windows_Electrical_1.png",
+      "bytes": 81832,
+      "sha256": "f92e4975a56fecd52b365bbfbf89249df63719538229adf89096063ee5b6a901",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "zip-extracted",
+      "file": "native/windows-2025/zip-extracted/English_Electrical.png",
+      "bytes": 75356,
+      "sha256": "8f44c1916a4e97511965e7ae651c07c12871a6af94b30fffb630adcdb18f251a",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "zip-extracted",
+      "file": "native/windows-2025/zip-extracted/English_Psychrometrics.png",
+      "bytes": 72876,
+      "sha256": "253a4e9545336e314280f4af5cb2da0111543f7e470e86b63427156f0a6482f0",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "zip-extracted",
+      "file": "native/windows-2025/zip-extracted/Render_Before_TkAgg_Cleanup.png",
+      "bytes": 61087,
+      "sha256": "e241173b160763cd1608c5e5c6109ce9d9c7e6db9f094336f8fe332b1165c0b4",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "zip-extracted",
+      "file": "native/windows-2025/zip-extracted/V556_AHU_Stages.png",
+      "bytes": 82231,
+      "sha256": "ff1aea26678e5904cc5dbb577d4239dbf16c8dae26bb19574a7f774563d2ccfd",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "zip-extracted",
+      "file": "native/windows-2025/zip-extracted/V556_Equipment_Transfer.png",
+      "bytes": 73286,
+      "sha256": "750e9a5a3689c91ba8326b61a9aba7154660e0e0de016a43e90015bfe24c2659",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "zip-extracted",
+      "file": "native/windows-2025/zip-extracted/V556_Workbench_Basic.png",
+      "bytes": 87718,
+      "sha256": "88bf2f68882039791779f4c6238e9a07740d8ee49c25245f2405ee0e2a8c3782",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "zip-extracted",
+      "file": "native/windows-2025/zip-extracted/Windows_Air.png",
+      "bytes": 79573,
+      "sha256": "2ab4abf9df0a1ea53d822d2e6c6630c86d75730903ecde47a25be120d674d213",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "zip-extracted",
+      "file": "native/windows-2025/zip-extracted/Windows_Air_0.png",
+      "bytes": 79573,
+      "sha256": "2ab4abf9df0a1ea53d822d2e6c6630c86d75730903ecde47a25be120d674d213",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "zip-extracted",
+      "file": "native/windows-2025/zip-extracted/Windows_Air_1.png",
+      "bytes": 79573,
+      "sha256": "2ab4abf9df0a1ea53d822d2e6c6630c86d75730903ecde47a25be120d674d213",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "zip-extracted",
+      "file": "native/windows-2025/zip-extracted/Windows_Electrical.png",
+      "bytes": 81823,
+      "sha256": "8bf41fce7e397479ee305c141362fc3160a4ad77a1ec973b4db25db706742d91",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "zip-extracted",
+      "file": "native/windows-2025/zip-extracted/Windows_Electrical_0.png",
+      "bytes": 81823,
+      "sha256": "8bf41fce7e397479ee305c141362fc3160a4ad77a1ec973b4db25db706742d91",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "zip-extracted",
+      "file": "native/windows-2025/zip-extracted/Windows_Electrical_1.png",
+      "bytes": 81823,
+      "sha256": "8bf41fce7e397479ee305c141362fc3160a4ad77a1ec973b4db25db706742d91",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2025/unicode-executable-path/English_Electrical.png",
+      "bytes": 75366,
+      "sha256": "479fe745a524c3b667f58ba7c147c7e7cf2b6f0986aeaf05a79f3d952b0ad4b2",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2025/unicode-executable-path/English_Psychrometrics.png",
+      "bytes": 72888,
+      "sha256": "09188f07f6e3ca59b45392c0b7050298e48dcb71c9ddc48f48ad3f6cbbeb163e",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2025/unicode-executable-path/Render_Before_TkAgg_Cleanup.png",
+      "bytes": 61053,
+      "sha256": "1a8b9c9bc1d8520795082284b969d1f3b171259b4cdc3316b0970549a2046b27",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2025/unicode-executable-path/V556_AHU_Stages.png",
+      "bytes": 82245,
+      "sha256": "1e3c04e7c97518322d97bf0c74ebc505a1823fcd9c756bf7ba6064337638aa26",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2025/unicode-executable-path/V556_Equipment_Transfer.png",
+      "bytes": 73326,
+      "sha256": "19cc0883a6148ee9f997fd462c97c451e2d824070a224f24c11c06a5058a64a1",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2025/unicode-executable-path/V556_Workbench_Basic.png",
+      "bytes": 87732,
+      "sha256": "12a8e4cfdd31f16dbbf0dee5f48ac75fcaff35f7eabbcfa6980845334082557d",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2025/unicode-executable-path/Windows_Air.png",
+      "bytes": 79539,
+      "sha256": "5105bcf93f498c42362154641a668bf3d74f50d0e0e629fc6c4442237a516128",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2025/unicode-executable-path/Windows_Air_0.png",
+      "bytes": 79539,
+      "sha256": "5105bcf93f498c42362154641a668bf3d74f50d0e0e629fc6c4442237a516128",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2025/unicode-executable-path/Windows_Air_1.png",
+      "bytes": 79539,
+      "sha256": "5105bcf93f498c42362154641a668bf3d74f50d0e0e629fc6c4442237a516128",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2025/unicode-executable-path/Windows_Electrical.png",
+      "bytes": 81789,
+      "sha256": "f836096b243f24f73a9c47dcfe5c21a97b17d4dd7d004d7280e6035d0d106ff9",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2025/unicode-executable-path/Windows_Electrical_0.png",
+      "bytes": 81789,
+      "sha256": "f836096b243f24f73a9c47dcfe5c21a97b17d4dd7d004d7280e6035d0d106ff9",
+      "unmodified": true
+    },
+    {
+      "host": "windows-2025",
+      "label": "unicode-executable-path",
+      "file": "native/windows-2025/unicode-executable-path/Windows_Electrical_1.png",
+      "bytes": 81789,
+      "sha256": "f836096b243f24f73a9c47dcfe5c21a97b17d4dd7d004d7280e6035d0d106ff9",
+      "unmodified": true
+    }
+  ]
+}

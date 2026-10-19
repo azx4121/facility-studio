@@ -8,21 +8,21 @@ Facility Studio 是供廠務、機電與空調工程人員使用的桌面工具�
 
 **Windows／macOS · 繁體中文／English · 離線運算 · 免另裝 Python**
 
-## 本版修訂重點（win.7／mac.6）
+## 本版修訂重點（win.8／mac.6）
 
-Windows **win.7** 修正水管 ΣK 報告、同迴路斷路器／線徑一致性、W／kVA 來源帶入、夏冬 RCU／FCU 容量、泵浦單位切換及換算邊界。移除後不再由來源控制的欄位，會一併保留手動修改的數值與單位；再次帶入會以當次原值為復原基準。保留 win.5 照明 F07 修正，避免按室指數檢核時採用隱藏長寬而少算六成。[修正、驗算與原生驗收](docs/2026-10-18-windows-audit-six.md)。macOS 仍為 mac.6。
+Windows **win.8** 補回清楚的「PV 真空」入口；從首頁或工作台一按即可展開真空欄位。報告補上採用條件、設備用電來源、單台額定及選型台數依據，並修正一般負載倍率文字、固定單位與修訂識別。串接輸入遇到未知欄位會明確拒絕，避免默默採用預設值。[本輪修正、報告與驗收](docs/2026-10-18-windows-report-audit.md)。保留 win.7 的 F01–F07、來源復原與照明六成差異修正；macOS 仍為 mac.6。
 
 本版新增**氣流路徑／ACH 基準、三項工程快算（共十項左側直接快算）、照明型錄 U 與室指數 K 檢核、跨工具帶入、KPI 儀表板、向量 SCADA 與 HTML／TXT 頂部「★ 核心工程設計量與設備選型總覽」**，並修正進階模式顯示互斥 FCU／RCU／MAU 欄位的問題。舊案自動移轉為 schema 12，保留既有獨立循環結果。公式成立條件與驗證界線見[工程審核與修訂說明](docs/2026-10-16-gemini-integration-review.md)；開發者可依[開發文件](docs/development.md)重現來源檢查。
 
 ## 下載
 
-目前已發布：**V5.6.0 公開測試版**，Windows **win.7**（2026-10-18，工程與來源復原修正）／macOS **mac.6**（2026-10-16）。各自通過原生驗收後發布，舊版本保留於 Releases。
+目前已發布：**V5.6.0 公開測試版**，Windows **win.8**（2026-10-19，報告與 PV 入口修正）／macOS **mac.6**（2026-10-16）。各自通過原生驗收後發布，舊版本保留於 Releases。
 
-本版水管自動選型擴充至 **30 吋**；**十個快算直接放在左側**（含潔淨室風量、熱負荷初估、冰水泵浦）；氣體快算與工作台共同提供 **50 種廠務氣體＋自訂／混合氣**。有需求的新增氣體須填設計流速；完整工作台零需求時保留未使用草稿，避免阻擋整案計算。測試流程包含 **100 組不同案例，每組重算 20 次**；工程條件不足會明確拒絕，不等同程式故障。[工程審核、尺寸來源與範圍](docs/2026-10-16-gemini-integration-review.md) · [Windows win.7 驗收與 SHA256](docs/2026-10-18-windows-audit-six.md#原生發布結果)
+本版水管自動選型擴充至 **30 吋**；**十個快算直接放在左側**（含潔淨室風量、熱負荷初估、冰水泵浦）；氣體快算與工作台共同提供 **50 種廠務氣體＋自訂／混合氣**。有需求的新增氣體須填設計流速；完整工作台零需求時保留未使用草稿，避免阻擋整案計算。測試流程包含 **100 組不同案例，每組重算 20 次**；工程條件不足會明確拒絕，不等同程式故障。[工程審核、尺寸來源與範圍](docs/2026-10-16-gemini-integration-review.md) · [Windows win.8 驗收與 SHA256](docs/2026-10-18-windows-report-audit.md#原生發布結果)
 
 | 平台 | 下載 | 開始使用 |
 | --- | --- | --- |
-| Windows 10／11，Intel／AMD x64 | [**下載 Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.7/Facility_Studio_V5_6_0_Windows_Offline.exe) | 儲存後雙擊開啟；首次啟動請等候內建環境展開 |
+| Windows 10／11，Intel／AMD x64 | [**下載 Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.8/Facility_Studio_V5_6_0_Windows_Offline.exe) | 儲存後雙擊開啟；首次啟動請等候內建環境展開 |
 | macOS，Apple Silicon／Intel | [**下載 macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.6/Facility_Studio_V5_6_0_macOS_mac6.dmg) | 開啟 DMG，將 Facility Studio 拖到「應用程式」，再從那裡開啟 |
 
 每個平台下載上表的一個檔案即可，教學與設備範本已內建。[版本與 SHA256](https://github.com/azx4121/facility-studio/releases) · [相容性與首次開啟](docs/faq.md#compatibility)
@@ -36,19 +36,20 @@ Windows 尚無正式發行者簽章；Mac 尚未取得 Developer ID／Apple 公�
 | 新增設備，先估配電需求 | 電流、NFB 與線徑候選、壓降初估 | [電力配線](docs/guides/electrical.md) |
 | 已知排風量，要比較方管／圓管 | 尺寸、實際風速；提供路徑後可初估壓損 | [風管尺寸](docs/guides/duct.md) |
 | 已知 CDA／N2／製程氣體流量與壓力，要估管徑 | 實際體積流量與參考管徑 | [CDA／特氣管徑](docs/guides/gas-vacuum.md) |
+| 找 PV 真空抽氣量與管徑初估 | 絕壓換算、管內實際流量與參考管徑 | Windows win.8 首頁「PV 真空」；mac.6 由完整工作台開啟 → [PV 案例](docs/guides/gas-vacuum.md#case-07) |
 | 整理空間與冷熱需求 | 平均照度／燈數、水量／熱量、空氣狀態與單位換算 | [照明](docs/guides/lighting.md)／[冷熱水](docs/guides/water.md)／[空氣線圖](docs/guides/psychrometrics.md)／[換算](docs/guides/units.md) |
 | 手上已有整批設備 Excel／CSV | 分組彙整電力、PCW、CDA、N2、EXHAUST、DI、PV 需求 | [設備表匯入](docs/guides/equipment.md) |
 | 比較空調方案與空調箱各段配置 | 夏冬熱濕需求、預熱／預冷／加濕／再冷／再熱、容量檢核與報告 | [完整工作台](docs/guides/workbench.md)／[單台空調箱](docs/guides/ahu.md) |
 
 各快算工具可獨立使用。採用的條件與預設值會顯示在畫面及報告，方便回頭核對，也方便比較修改前後的需求。
 
-![Facility Studio Windows win.7 原生英文電力頁](docs/images/v560-win7-native-en.png)
+![Facility Studio Windows win.8 原生英文電力頁](docs/images/v560-win8-native-en.png)
 
-*Windows Server 2022 的 win.7 EXE 實際驗收畫面，使用合成 10 kW 資料並切至 English。原圖取自封裝測試證據，顯示 20 AT 與每相 5.5 mm² 候選。*
+*Windows Server 2022 的 win.8 EXE 實際驗收畫面，使用合成 10 kW 資料並切至 English。原圖取自封裝測試證據，顯示 20 AT 與每相 5.5 mm² 候選。*
 
 ## 第一次使用，從一個小問題開始
 
-1. 開啟軟體，在右上角選擇「繁體中文」或「English」。
+1. 開啟軟體，在右上角選擇「繁體中文」或「English」；Windows 主視窗標題應含 `5.6.0-win.8`。
 2. 選一個工具，輸入手上的數值與單位；先查看畫面列出的採用條件。
 3. 按「計算」，閱讀結果後複製或匯出 TXT。需要公式或操作說明時，按「本工具教學」。
 
@@ -62,9 +63,9 @@ Windows 尚無正式發行者簽章；Mac 尚未取得 Developer ID／Apple 公�
 - **資料：**計算、專案保存與設備表匯入在本機完成；自己的設備名稱與備註保留原文。
 - **授權：**允許公司內部工程工作、收費工程案件及計算書交付；軟體轉售、付費綁售或付費線上軟體服務需另行書面授權。[完整條款](LICENSE) · [授權案例](LICENSE_GUIDE.md)
 
-目前發布檔已通過 Windows Server 2022／2025 x64，以及 Apple Silicon／Intel macOS 15 原生驗收。Windows 10／11 與 macOS 11+ 為支援／封裝目標，其他版本、實機與企業政策仍需個別確認。[Windows win.7 驗證](docs/2026-10-18-windows-audit-six.md#原生發布結果) · [macOS mac.6 驗證](docs/2026-10-16-gemini-integration-review.md#原生發布狀態)
+目前發布檔已通過 Windows Server 2022／2025 x64，以及 Apple Silicon／Intel macOS 15 原生驗收。Windows 10／11 與 macOS 11+ 為支援／封裝目標，其他版本、實機與企業政策仍需個別確認。[Windows win.8 驗證](docs/2026-10-18-windows-report-audit.md#原生發布結果) · [macOS mac.6 驗證](docs/2026-10-16-gemini-integration-review.md#原生發布狀態)
 
-Windows 已修正 F01–F07，原始稽核與各版證據保留。舊版錯存的 W／kVA 來源需移除後用原始資料重新帶入；若只剩主案、沒有來源記錄，須人工核對。win.6／win.7 整案使用 ledger v2，**mac.6 無法開啟這類整案**；先在目前 Windows 版使用，待 Mac 讀取器更新。[資料處理步驟與驗證限制](docs/2026-10-18-windows-audit-six.md)。
+Windows 已修正 F01–F07，原始稽核與各版證據保留。舊版錯存的 W／kVA 來源需移除後用原始資料重新帶入；若只剩主案、沒有來源記錄，須人工核對。win.6 及後續 Windows 整案使用 ledger v2，**mac.6 無法開啟這類整案**；先在目前 Windows 版使用，待 Mac 讀取器更新。[資料處理步驟與驗證限制](docs/2026-10-18-windows-audit-six.md)。
 
 ## 文件與問題回報
 

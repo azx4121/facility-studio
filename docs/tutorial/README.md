@@ -8,7 +8,7 @@
 
 ## 不開軟體，也可以先看教學
 
-[下載離線教學包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)，完整解壓縮後用瀏覽器開啟 `START_HERE.html`。不需 Python 或套件；只有外部 GitHub 連結需要網路。
+[下載 Windows win.8 離線教學包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial_Windows.zip)；[mac.6 既有教學包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip) 保留。完整解壓縮後用瀏覽器開啟 `START_HERE.html`。不需 Python 或套件；只有外部 GitHub 連結需要網路。
 
 可切換中英文、逐步閱讀或列印。勾選進度只代表已閱讀，存在本機瀏覽器，不代表工程驗證通過。
 
@@ -25,11 +25,13 @@
 
 第一案可從教學左側下載，再用工作台「開啟」及「另存新檔」保存自己的副本。「開啟練習新案」則直接載入**第二案**，建立新的案件身分；修改後用「儲存整案」保存。
 
+Windows win.8 對照報告：[第一案中文](windows/01_Expected_Report.txt)／[English](windows/01_Expected_Report.en.txt)、[第二案空調箱中文](windows/02_Expected_AHU_Report.txt)／[English](windows/02_Expected_AHU_Report.en.txt)。Windows 內建 ZIP 使用這組內容並保留檔名；教學根目錄的舊對照報告保留供 mac.6 使用。
+
 案例是合成練習配置，刻意保留未知原廠性能與現場條件。「待補資料」需要補真實資料，計算完成不代表正式選型合格。`workbench-map.svg`／`.en.svg` 是控制項位置示意圖，並非 GUI 截圖。
 
 ## 驗證與原始資料
 
-[Windows 教學檢查](verification-windows.json) · [macOS 教學檢查](verification-macos.json) · [Windows win.7 原生交付](../2026-10-18-windows-audit-six.md) · [mac.6 原生交付](../2026-10-16-gemini-integration-review.md)
+[Windows 教學檢查](verification-windows.json) · [macOS 既有教學檢查](verification-macos.json) · [Windows win.8 原生交付](../2026-10-18-windows-report-audit.md) · [mac.6 原生交付](../2026-10-16-gemini-integration-review.md)
 
 <details>
 <summary>開發者：重現教學數值與報告</summary>
@@ -39,7 +41,7 @@ python docs/tutorial/verify_tutorial.py --platform windows --output tutorial-win
 python3 docs/tutorial/verify_tutorial.py --platform macos --output tutorial-macos.json
 ```
 
-每個來源平台各有 20 情境／87 檢查，包含工作台條件、設備與水路、空調箱守恆及容量檢核；中文／英文報告另完整比對。來源數值檢查與原生按鈕、署名及練習載入驗收分開記錄。
+本輪 Windows 有 20 情境／93 檢查，包含工作台條件、設備與水路、空調箱守恆及容量檢核；中文／英文報告完整比對，另檢查實際內建 ZIP 的報告與修訂。macOS 既有證據依各檔案記錄。來源數值檢查與原生按鈕、署名及練習載入驗收分開記錄。
 
 </details>
 

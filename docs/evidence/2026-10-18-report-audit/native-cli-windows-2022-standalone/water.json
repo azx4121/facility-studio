@@ -1,0 +1,50 @@
+{
+  "tool": "water",
+  "thermal": {
+    "kw": 34.89000000000001,
+    "lpm": 100.0,
+    "delta_t": 5.0,
+    "us_rt": 9.920801798319399,
+    "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]"
+  },
+  "pipe": {
+    "lpm": 100.0,
+    "id_mm": 40.9,
+    "runs": 1,
+    "velocity_mps": 1.268563619234664,
+    "area_m2": 0.0013138219017128853,
+    "size": "40A (1-1/2\")"
+  },
+  "flow_lpm": 100.0,
+  "load_kw": 34.89000000000001,
+  "pressure": {
+    "friction_pa": 14268.242808501034,
+    "local_pa": 3218.5073120914994,
+    "equipment_pa": 0.0,
+    "loss_pa": 17486.750120592533,
+    "head_m": 1.7831522610261947,
+    "friction_pa_m": 475.6080936167011,
+    "friction_factor": 0.024175643107403402,
+    "roughness_mm": 0.045,
+    "relative_roughness": 0.001100244498777506,
+    "length_m": 30.0,
+    "k_sum": 4.0,
+    "equipment_included": false
+  },
+  "velocity_limit": 1.5,
+  "pipe_size": "自動依流速選型",
+  "formula": "Q[kW]=LPM/60000 × ρ[kg/m³] × cp[kJ/(kg·K)] × ΔT[K]",
+  "note": "水物性採ρ=1000 kg/m³、cp=4.1868 kJ/(kg·K)、μ=0.001Pa·s；壓損按一條最不利路徑估算，並聯管分流。設備壓降為明填值；閉式循環不加樓高。",
+  "adopted_inputs": {
+    "delta": "5",
+    "equipment_pa": "0",
+    "flow": "100",
+    "flow_unit": "LPM",
+    "k_sum": "4",
+    "length": "30",
+    "mode": "已知水量",
+    "pipe_size": "自動依流速選型",
+    "roughness_mm": "0.045",
+    "velocity": "1.5"
+  }
+}

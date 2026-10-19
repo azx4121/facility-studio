@@ -1,0 +1,74 @@
+{
+  "scope": "Static review of pathlib text I/O and manually reviewed direct open calls; Windows source modules",
+  "source_commit": "c121cd872af8f52e3ef8963d138b54b2e7fa8333",
+  "passed": true,
+  "explicit_pathlib_text_operations": 11,
+  "operations": [
+    {
+      "module": "project_store.py",
+      "line": 61,
+      "operation": "read_text"
+    },
+    {
+      "module": "i18n.py",
+      "line": 62,
+      "operation": "read_text"
+    },
+    {
+      "module": "audit_acceptance.py",
+      "line": 33,
+      "operation": "write_text"
+    },
+    {
+      "module": "audit_acceptance.py",
+      "line": 111,
+      "operation": "write_text"
+    },
+    {
+      "module": "audit_acceptance.py",
+      "line": 181,
+      "operation": "write_text"
+    },
+    {
+      "module": "audit_acceptance.py",
+      "line": 126,
+      "operation": "write_text"
+    },
+    {
+      "module": "report_acceptance.py",
+      "line": 202,
+      "operation": "read_text"
+    },
+    {
+      "module": "report_acceptance.py",
+      "line": 208,
+      "operation": "read_text"
+    },
+    {
+      "module": "review_acceptance.py",
+      "line": 62,
+      "operation": "write_text"
+    },
+    {
+      "module": "review_acceptance.py",
+      "line": 123,
+      "operation": "write_text"
+    },
+    {
+      "module": "review_acceptance.py",
+      "line": 140,
+      "operation": "write_text"
+    }
+  ],
+  "non_text_open_exclusions": [
+    {
+      "module": "tutorial_help.py",
+      "reason": "webbrowser.open launches a URL; it is not text file I/O."
+    },
+    {
+      "module": "equipment_io.py",
+      "reason": "archive.open returns a binary ZipExtFile; XML is parsed from bytes."
+    }
+  ],
+  "cp1252_gui_simulation": "Fallback Path.read_text encoding forced to CP1252; 405 semantic and 28 export/PV assertions passed; actual Windows locale run recorded separately"
+}

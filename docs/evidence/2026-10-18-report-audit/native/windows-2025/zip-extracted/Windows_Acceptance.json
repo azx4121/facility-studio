@@ -1,0 +1,2985 @@
+{
+  "version": "5.6.0",
+  "revision": "win.8",
+  "platform": "Windows-2025Server-10.0.26100-SP0",
+  "architecture": "AMD64",
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.3.3",
+  "matplotlib": "3.10.9",
+  "frozen": true,
+  "offline_network_audit": true,
+  "timestamp": "2026-10-19T08:55:42.059482+00:00",
+  "stress100": {
+    "version": "5.6.0",
+    "passed": true,
+    "seed": 20261013,
+    "scenario_count": 100,
+    "distinct_physical_input_count": 100,
+    "repeat_per_scenario": 20,
+    "calculation_calls": 2400,
+    "simple_gas_calls": 200,
+    "expected_engineering_rejections": 2,
+    "software_passed": 100,
+    "software_failed": 0,
+    "engineering_status_counts": {
+      "待補資料": 100
+    },
+    "engineering_failed_scenarios": 0,
+    "engineering_pending_scenarios": 100,
+    "check_count": 3902,
+    "failed_checks": [],
+    "cases": [
+      {
+        "id": "ST001",
+        "software_pass": true,
+        "physical_input_sha256": "a2fdd711fee0b325d676ac9c4fe28cbf391132c6d92c8a6d242f39eb95ea6004",
+        "gas": "N2",
+        "water_lpm": 13007.3611285101,
+        "outcome_sha256": "830e6b9621b6aea5b88b709afd004312d4dea74c456e5f5a935a7b3437fd554d",
+        "engineering_output_sha256": "e61246eafb71fdd7dbfcd72cd04d0890ede0732abcfca1937188703af51a13c0",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18660710000000336
+      },
+      {
+        "id": "ST002",
+        "software_pass": true,
+        "physical_input_sha256": "9b56f46324f9b03fa0d1745be5c8481a72e88f3b420600c79ff5d8ba530835e9",
+        "gas": "CDA",
+        "water_lpm": 19511.0026707207,
+        "outcome_sha256": "aa396fe664bf8d36c508f3c0868e19a19e91fb44901a51955134c69c91b83492",
+        "engineering_output_sha256": "972624241f3db56dd4ba903f4582902be2ecc4eafab0c7ffaf11ad00a0ad9abd",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17313089999998965
+      },
+      {
+        "id": "ST003",
+        "software_pass": true,
+        "physical_input_sha256": "a694e291024049137dd34cf96b62621da92f6fd5df4133d8ae206e648d58421b",
+        "gas": "O2",
+        "water_lpm": 26014.7222570201,
+        "outcome_sha256": "e9c92c31fb6f7a8ad9021e7b2b57305449bec2a4d01f5c5c3313db9524b83374",
+        "engineering_output_sha256": "5b7840b34d295e17626ee04178d619c8b40ce5587b2af5395f2563c88a484cb5",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17322169999999915
+      },
+      {
+        "id": "ST004",
+        "software_pass": true,
+        "physical_input_sha256": "863c586487704be3e0f2c1d9b8fd69dc9549ac467dfabdf07d4a7261029a8d99",
+        "gas": "Ar",
+        "water_lpm": 32518.3377845345,
+        "outcome_sha256": "5bb5940c326aedff8b4dda1ef862c3ae84eea3cb541c82fac6caf7f24349bce9",
+        "engineering_output_sha256": "64b9843246e98aa343c4e51f7699756f1268ad4bd32e1d922b6fb469ec562a88",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1827435999999807
+      },
+      {
+        "id": "ST005",
+        "software_pass": true,
+        "physical_input_sha256": "4f35836908d2ec1d9bdeec37a197b317a79e15e79c990151e5c90f6325298072",
+        "gas": "He",
+        "water_lpm": 39022.0833855302,
+        "outcome_sha256": "852ce36c933952b1ce8706259a8bbee440cf5feeeb74fae64b0a930ddabd5997",
+        "engineering_output_sha256": "8bc4c74ec37db0fa8025cb198a224071f376c47fafe279da9d9eaf4e62019a39",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17319939999998724
+      },
+      {
+        "id": "ST006",
+        "software_pass": true,
+        "physical_input_sha256": "f6769471fc042e510137e3e1727c044de1cc16358d20f66d88bd8cbe89271a1d",
+        "gas": "H2",
+        "water_lpm": 45525.6728983484,
+        "outcome_sha256": "8f062bba471e7beafbaf54ef8275904b727cd80cf4c141bfeb7afb1a902d134a",
+        "engineering_output_sha256": "8d1bdf8bd63957df702198f1e983c388caec4a4671b9c7913bd9b9cb968844e0",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17753570000002128
+      },
+      {
+        "id": "ST007",
+        "software_pass": true,
+        "physical_input_sha256": "d8325dd6ad39945244fcfd488be593cdd88d296536cb650cc21425e082ba73ba",
+        "gas": "CO2",
+        "water_lpm": 52029.4445140402,
+        "outcome_sha256": "d24b25c4b9617c21e4419dbc8e390150ac6fea69c38beef9532a84d437ba6d73",
+        "engineering_output_sha256": "68a2a95c9e87933f2591e6d1addabbb9638537dc5a308dab64b2ecc5aa1a124e",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.2074519999999893
+      },
+      {
+        "id": "ST008",
+        "software_pass": true,
+        "physical_input_sha256": "a4fb6e570e6277fbf23083e306b556df1362a136026474dbc51aeef14b7aac6e",
+        "gas": "GN2",
+        "water_lpm": 58533.0080121622,
+        "outcome_sha256": "35ceb9f331bf7eb798e44caea02777bdac6284db95c6169b6fceb9d3f56064df",
+        "engineering_output_sha256": "2586f8a7291ab39a485b900739452b76f87f21cf924df93e1cf0ec177fcb0088",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18527100000000019
+      },
+      {
+        "id": "ST009",
+        "software_pass": true,
+        "physical_input_sha256": "02f17c1fdb726ecc03130356a95aaed6fee264ae1c054f7a03f78076187eae71",
+        "gas": "PN2",
+        "water_lpm": 65036.8056425503,
+        "outcome_sha256": "c3fb1973d101653f358aa21083722cb39d4b688df17dac01748fe74005b080b5",
+        "engineering_output_sha256": "6254d8f2603cc9b9073d086aceb815482c7290cc2d31261b605abb740b9bd1d2",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.19520890000001145
+      },
+      {
+        "id": "ST010",
+        "software_pass": true,
+        "physical_input_sha256": "32da05de97b80b4e505a778e31dc3359feaca2dff1818cb11e5d2e7bab936488",
+        "gas": "N2O",
+        "water_lpm": 71540.343125976,
+        "outcome_sha256": "bfe3861775f175884e023ac2f81c2528295057091e59c35125594ad799e22382",
+        "engineering_output_sha256": "7719c5cffc53430ccbced9a644fe81fbed6cc4e594cce235bc0a81a4269b73dd",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.19557340000000067
+      },
+      {
+        "id": "ST011",
+        "software_pass": true,
+        "physical_input_sha256": "ee7a543dcd1145174634d2d3aad1b034edf22e8dd55a2def3ed4d166a54e1184",
+        "gas": "NH3",
+        "water_lpm": 13007.3611285101,
+        "outcome_sha256": "6f6d3a888977be57b2fd48fe304321a8d730b59cfd3cf2aa80caad971ef285ba",
+        "engineering_output_sha256": "9aca3b1ed8d7deb63f6f281b8213d1dd65589a7fff8819f0712b0bd270601470",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1792276999999558
+      },
+      {
+        "id": "ST012",
+        "software_pass": true,
+        "physical_input_sha256": "39d9e0239a9bf37c3705eef59639e8735db7e3274be726d1f59c66d5e02f1a18",
+        "gas": "CH4",
+        "water_lpm": 19511.0026707207,
+        "outcome_sha256": "85bcf3e7827c9c3bb3546c747a50c906ac40f07e3b077a542656df8227c977f7",
+        "engineering_output_sha256": "ddab1ae5715fd30a72bd511585c58404e9c9ec53246ca7fd4fd9cf02cb3fef51",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17449129999999968
+      },
+      {
+        "id": "ST013",
+        "software_pass": true,
+        "physical_input_sha256": "1a401dd5aaedd1cabd8060fdd498935a6203096ec31c0a5adcdcbb8f173ba296",
+        "gas": "C2H2",
+        "water_lpm": 23947.2994840929,
+        "outcome_sha256": "db1f37f8763fb2b88aba6760466e6b7e09ff7cc2bc9609c40e54004773f5caab",
+        "engineering_output_sha256": "b3e97a7b1b06f3af89a1289add0b8768ee3476664c976da62fd0c78c996ca1f2",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18320109999996248
+      },
+      {
+        "id": "ST014",
+        "software_pass": true,
+        "physical_input_sha256": "1d96b364135853a98f147b722c47b2c9cfe1f9bcdf8a94a7b1631a3505e0cc48",
+        "gas": "CO",
+        "water_lpm": 10086.7363974048,
+        "outcome_sha256": "3c490f0e3d11416139c7ddcd0b6da04e6d10991b432dec9c3c45c715ed21a4aa",
+        "engineering_output_sha256": "b7ab44499c90f02fce53196b2e7962b192090ca602646a98d21d93111cdedd33",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17561019999999417
+      },
+      {
+        "id": "ST015",
+        "software_pass": true,
+        "physical_input_sha256": "339a4da482a8b32baa215e182fd107d2f8ff6ceab0998ae16db570c4dc3f8445",
+        "gas": "NF3",
+        "water_lpm": 78335.5228035038,
+        "outcome_sha256": "64ce88d4da05331ea283ca6ed64289cf112290dea81c4354a38960d06eefcc18",
+        "engineering_output_sha256": "27f25e7300542ccd174830c22ff223d54ea19abf3f0e8b71763ee2d651d49d7a",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17332819999995763
+      },
+      {
+        "id": "ST016",
+        "software_pass": true,
+        "physical_input_sha256": "2b7a012d4d0c6cd47aa7e07c9ff5b1cce45440dff17ce439265ac877905b1f13",
+        "gas": "CF4",
+        "water_lpm": 136106.51823937,
+        "outcome_sha256": "e01d238f19b306a80d38b3e2529716f3507c7364fe8165c7ce1d245e52ebf610",
+        "engineering_output_sha256": "8d6ddfe911144ed881779fa79af590a43f7310430ee27a8f5ea39aedffefaa99",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1792416999999773
+      },
+      {
+        "id": "ST017",
+        "software_pass": true,
+        "physical_input_sha256": "e5a5ee531b344c660dea46eb5a1f3d2ff8b6e677c214fcba51ca76667ff66c08",
+        "gas": "C2F6",
+        "water_lpm": 148919.653722858,
+        "outcome_sha256": "94f95f8d385b65b9c5c05ab9ef7e4331313b4a439982662e498271ff2a7f0109",
+        "engineering_output_sha256": "b21633568ffd69715a9cad90f98dc2198b8aabe3ab2e2542b1377d3aed7ed5f2",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17651079999996
+      },
+      {
+        "id": "ST018",
+        "software_pass": true,
+        "physical_input_sha256": "8c3025b72cd55f351618e29725906cc5a52ec8b6ff21f5e769a43d2166097e8e",
+        "gas": "C3F8",
+        "water_lpm": 147755.415786248,
+        "outcome_sha256": "be7fc5442478289098121f64d0fe2dec0f0876ec2fabf5b550cfd9b66730bc44",
+        "engineering_output_sha256": "74347e5516ad2204ab44e94dbc3887bcc62549ee0da53e10c57b147354f011d6",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1814288999999576
+      },
+      {
+        "id": "ST019",
+        "software_pass": true,
+        "physical_input_sha256": "56df95e7842157225c73bc649a8ee9d86175cb0b6ad24596859951f9065c1a3e",
+        "gas": "C4F8",
+        "water_lpm": 57934.9110509421,
+        "outcome_sha256": "9fa2d874427830a3a238061a48c7123173b72898036916e3d0e0637f35474fdd",
+        "engineering_output_sha256": "4486dabcd9ae86e1d20ece8c0243d9785584ba0b6cdef740d263d4ab1446b664",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1747022000000129
+      },
+      {
+        "id": "ST020",
+        "software_pass": true,
+        "physical_input_sha256": "53acbf9c5e25a0ea599af757a799afd79697fc4536cffc757c0abb77e221f956",
+        "gas": "C4F6",
+        "water_lpm": 98956.3738248367,
+        "outcome_sha256": "4d7bfee260f15fcfe6f8b74dcb07d3ffa39aec36d202497c367a4dc0e7cad444",
+        "engineering_output_sha256": "f2f31ac9f194490acba188458ca1414e1cf06d0a97e2ecf121eb3396e9ba616a",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1720053999999891
+      },
+      {
+        "id": "ST021",
+        "software_pass": true,
+        "physical_input_sha256": "171efee1e5a12ccdaa177eeb39f570ff2ef78b9a42cdf6897c567970e01c7301",
+        "gas": "CH2F2",
+        "water_lpm": 32607.2919388199,
+        "outcome_sha256": "d99afc1c515aa448119e169eff15fed646df9782a01e7bbb4d49b20d2a250fd4",
+        "engineering_output_sha256": "577eee31116398f7b52b3f8797a2a0d0d487b171fedb9180983bcc02649afa77",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17287280000005012
+      },
+      {
+        "id": "ST022",
+        "software_pass": true,
+        "physical_input_sha256": "1f66717ee429f9a421da2aeb7137abf95173ecf2f183d0d2f9a53b6db463a29e",
+        "gas": "SF6",
+        "water_lpm": 40191.6049704407,
+        "outcome_sha256": "b3d41ce5adcb2b152f005831a462e309081e77eed6ea7a6f2d35b0dc31147a41",
+        "engineering_output_sha256": "2f04200f182ca4f190c9428a8dee3aec0df0cd7d7a750c98b172dce11507641b",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17970489999999018
+      },
+      {
+        "id": "ST023",
+        "software_pass": true,
+        "physical_input_sha256": "e2f3354f29bf65992dbc0b681cccf613bf0c1427e8148550bd00b4603cc23909",
+        "gas": "SiH4",
+        "water_lpm": 35048.6930196253,
+        "outcome_sha256": "0b121cb4e3b1a459b42e36f519d2261bb4fc08370f7829fd0c251c27c53ee7f9",
+        "engineering_output_sha256": "cc5fb0695afdceed8d24611a6353bc737b2d0d98d4c4409491ac7f895915dfb0",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17435549999999012
+      },
+      {
+        "id": "ST024",
+        "software_pass": true,
+        "physical_input_sha256": "6592eaa7cd5bc13b1fb47fcf57574beb2dc0db9990f9d815baea3202b15ebbc9",
+        "gas": "Si2H6",
+        "water_lpm": 52362.4155100416,
+        "outcome_sha256": "cf1902f336a23914770417813a014e0b638d083d968f0363962e7ec2c34fa28c",
+        "engineering_output_sha256": "f4c861e4b9652ae8d1c3d3469e7ecc6add3313f25ae3556266a3453e67687f84",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17354770000002873
+      },
+      {
+        "id": "ST025",
+        "software_pass": true,
+        "physical_input_sha256": "4f2201abefdb191a5605ae2371193acd573eb198bf26245345b13fb6e5d267fc",
+        "gas": "PH3",
+        "water_lpm": 111053.273721508,
+        "outcome_sha256": "3b23a1fc015fb4d34a9c28789432ab6d18da31ed4bb232f1945fb0e09f7e5c3d",
+        "engineering_output_sha256": "5ccd1bb9f3977276935c0223a0798aad696913977b57348cb9737ab3d419b0ac",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18423439999997981
+      },
+      {
+        "id": "ST026",
+        "software_pass": true,
+        "physical_input_sha256": "1c8bc848ad9ec35056f517893027d05681d25fb85650f624988bfa9d149b259f",
+        "gas": "AsH3",
+        "water_lpm": 47272.2781081574,
+        "outcome_sha256": "812aefa73e4852007d44752c6295d162c44678e59a8beca274b4ab7bbab5634a",
+        "engineering_output_sha256": "2b6b87bf166a5b71ce3bcb29d08afeac033258010722ca8693509c9cc1f9b9e1",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17497830000002068
+      },
+      {
+        "id": "ST027",
+        "software_pass": true,
+        "physical_input_sha256": "c379adf70c706ac777c8558707234c39c87b04a625fd6455f8895f1e32b7629f",
+        "gas": "B2H6",
+        "water_lpm": 43382.3996796505,
+        "outcome_sha256": "0cc6d3213b44365e7677e6200ff4871db605119d33a711ae6c2329712538b30a",
+        "engineering_output_sha256": "b8cbef06234216418c275e67358ec1d9a7ba6f13d72456b46c867c160098d36a",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17930029999990893
+      },
+      {
+        "id": "ST028",
+        "software_pass": true,
+        "physical_input_sha256": "c1dd88fd97126159c1a8669088a2f28d2a41284d0615df095f1bcda87307ce6a",
+        "gas": "BF3",
+        "water_lpm": 63559.9389723742,
+        "outcome_sha256": "a764fee3addeda35e083d8036becbf800a962a50f248f96e7f8401eeb6c9ce27",
+        "engineering_output_sha256": "cde0a905e2ece650632d5451cbd508c9552e2989dd8dfc327f1453bb6e9b1c7b",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17608680000000732
+      },
+      {
+        "id": "ST029",
+        "software_pass": true,
+        "physical_input_sha256": "1df1f1bb7b3a2296384c96185aa0b670effaa012d00ffef6b403051b6a6404fe",
+        "gas": "BCl3",
+        "water_lpm": 143766.105855169,
+        "outcome_sha256": "ff6fbbca5abfd837150be83bf3dd678e2cb23651184c2994736f655c75bdadf6",
+        "engineering_output_sha256": "e31696a8a7f7a415acf62aedce2a27468ea1247a80a3b02f26b01a029e01284c",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1746236000000181
+      },
+      {
+        "id": "ST030",
+        "software_pass": true,
+        "physical_input_sha256": "1273cc6d48fe2fc47fadca6d77412b8a9f589cfab0db1c51e839f370457d3703",
+        "gas": "SiF4",
+        "water_lpm": 214354.322371317,
+        "outcome_sha256": "c5f8ed3487b449af0a1a83acfe08a6495b006fd3e470c3c377d5a4350d30251f",
+        "engineering_output_sha256": "c063b0f605df64659a29b91195337ec747b3b767a888446b1d4ee3a0eb1c3578",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17622209999990446
+      },
+      {
+        "id": "ST031",
+        "software_pass": true,
+        "physical_input_sha256": "68bc80968c5e976ae5fbe666eae5a253ab3073e96b45119793e1124ebb4dd2e5",
+        "gas": "Cl2",
+        "water_lpm": 27325.5457459221,
+        "outcome_sha256": "a021533f52162cf74780f936f5f0d30bbab24dab4a8c5540e54cb18b468784eb",
+        "engineering_output_sha256": "27af32ee09b4434178a5ab54ad5e7c5b547e7e2b0010454843b62c73001624ac",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17374260000008235
+      },
+      {
+        "id": "ST032",
+        "software_pass": true,
+        "physical_input_sha256": "f19e382c21d286183f6fd71bc9386396ef004450987d650565e61b10411e413a",
+        "gas": "HCl",
+        "water_lpm": 19253.8070403075,
+        "outcome_sha256": "7b4d4583db490d4f36905aac517baf57c22cf79718c57387da882ec8ef7c4b04",
+        "engineering_output_sha256": "4710553a0aaabcf72c880dd7a944d1ea19901008f16b435859f4fb6266429e33",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1805103000000372
+      },
+      {
+        "id": "ST033",
+        "software_pass": true,
+        "physical_input_sha256": "51aa760a0ba5264794be2e1d8797f293f6a808129084849f356346df9cae3cf1",
+        "gas": "HBr",
+        "water_lpm": 1675.04436305305,
+        "outcome_sha256": "d382525a8196ab870143483c1b9b732f66e5ae4592cad2e752172555c551ca71",
+        "engineering_output_sha256": "1133dfb4dcd63464bab3e43f1305519535a71bad747d087c3dfc49282160c5b4",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17377049999993233
+      },
+      {
+        "id": "ST034",
+        "software_pass": true,
+        "physical_input_sha256": "60a112400e70341122d35637dec28fc7b2880c5dd4da0ace4b56c5bf0cb8460d",
+        "gas": "HF",
+        "water_lpm": 44054.7586479126,
+        "outcome_sha256": "78067bfefc82139536cbc2c3d92412aa4d50dfef16e73dadb941c2bada2074d9",
+        "engineering_output_sha256": "0cba69d61b4bbcba6095116809dcb5632a9cc501854ef701b61d1f80335a72df",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17729170000006889
+      },
+      {
+        "id": "ST035",
+        "software_pass": true,
+        "physical_input_sha256": "79f6118f89dca8ded674dfede9d6b9ee7938d4e8e6c720a7b7c6e4979836303b",
+        "gas": "WF6",
+        "water_lpm": 41790.3048769422,
+        "outcome_sha256": "ae143d59fe275ab4bed8aa5065761895902bb86f47a51455c65a521ca5cea827",
+        "engineering_output_sha256": "908abbd87fea6f05821b8243a1a13d80f94f3ce344d6a7f153ac14a7b2d24091",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17974049999997987
+      },
+      {
+        "id": "ST036",
+        "software_pass": true,
+        "physical_input_sha256": "4bbbd57476f5a4790214cdac456f37826fe3e48d7f002e9076fa7290e2fbc4ff",
+        "gas": "GeH4",
+        "water_lpm": 90408.2953707127,
+        "outcome_sha256": "2dd0df21229ad6214afbadc5afa261a8e0bd07af72bfd9c1831b97b3add4a778",
+        "engineering_output_sha256": "e0fa7759de8e93c0cff432419f02621b126d292a1b20999fe2615616d4b77edd",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17786130000001776
+      },
+      {
+        "id": "ST037",
+        "software_pass": true,
+        "physical_input_sha256": "8f483b390649cf30a30107ef2a375184d7835cbe56e790407edbf12803a45273",
+        "gas": "Ne",
+        "water_lpm": 31175.6466280368,
+        "outcome_sha256": "dd832e19bd4ea3804a948bf1a872416c9ee47a1619224e451f995ed62ea1d022",
+        "engineering_output_sha256": "df5a3d39faf3b656ddd8f277b7d747c26384a206288a201d585d9f4a837b4d96",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17331309999997302
+      },
+      {
+        "id": "ST038",
+        "software_pass": true,
+        "physical_input_sha256": "170eabaa252a3abf0945de7e9f4c375fd2a5915b71ee88e041649e9d7f1e0927",
+        "gas": "Kr",
+        "water_lpm": 13608.3850786676,
+        "outcome_sha256": "ae200c45aaee401b20948974c6e371eb54d884452c84e589a48f1aea8464d641",
+        "engineering_output_sha256": "4d506d8c01fa29f9d067760b729323abb0a9aebc46cb9b81bf4d6fb6f583627c",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18435230000000047
+      },
+      {
+        "id": "ST039",
+        "software_pass": true,
+        "physical_input_sha256": "2dc3390f1bdbc5f56009e204c1549f3c06b6dfbf34ba16144d2cc07e4619f929",
+        "gas": "Xe",
+        "water_lpm": 130068.602558143,
+        "outcome_sha256": "c5bf6f398a38b246e5fa467467834d6094efe01483c3adf1c84204342a4025d9",
+        "engineering_output_sha256": "dd349cd256e86597d95e22aabbe09bfb1eb9f57951266a4608d34638fd5bf548",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1754124999999931
+      },
+      {
+        "id": "ST040",
+        "software_pass": true,
+        "physical_input_sha256": "0230caa28565ec757ace6144ca71585a021c05b789253a67527f44cb3e3ead59",
+        "gas": "CHF3",
+        "water_lpm": 137488.039998301,
+        "outcome_sha256": "0c2c07ae85e7d177bbe136da0afe4bf27915fea572eb965ae91ee08714fa4720",
+        "engineering_output_sha256": "0816d7a9b12f57aadf84225995733521172a1841db02cc0a35fec468aa0ee5f2",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17608680000000732
+      },
+      {
+        "id": "ST041",
+        "software_pass": true,
+        "physical_input_sha256": "0bc71ed8f89cd914bd1c6926c73191e1af9978fe0cac4174ceb33472d3160d93",
+        "gas": "CH3F",
+        "water_lpm": 2280.14662484798,
+        "outcome_sha256": "e40d0b8cbc7bbc1ba23492ed97a2d964e1e85bb08b6e48694e0b5e3e389255d4",
+        "engineering_output_sha256": "ee8e82563e3a9cc1493ff16a1bea2661530d379e68cc035777d0b79f3103610d",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17731250000008458
+      },
+      {
+        "id": "ST042",
+        "software_pass": true,
+        "physical_input_sha256": "0c5c6c50eda9b3e08614a6b2f652e5d51d0ed51c70a5f777b79bb35afe56fefe",
+        "gas": "F2",
+        "water_lpm": 47232.7819529694,
+        "outcome_sha256": "4890671ef4ec353a7091e9c432fba827bfd5e77d81fbece39dbaccafc4e7346b",
+        "engineering_output_sha256": "21b93aa336d5c1cef7b66e10bf16f52d99884e0b7c1c2f9d80c6b4eac039e13e",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17856749999998556
+      },
+      {
+        "id": "ST043",
+        "software_pass": true,
+        "physical_input_sha256": "844a57f3901dac00df864e3b53b7d1f3097e595175a528d08602c2810826fcdf",
+        "gas": "ClF3",
+        "water_lpm": 42344.3822920668,
+        "outcome_sha256": "df33fffcd54514e9211c61f7cd3cef390de6138662ebd0f4439531d995655c32",
+        "engineering_output_sha256": "64e09ee11790607ae2119970db66edb5842ba087d1505a32b4f530d5692b79f4",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1768653000000313
+      },
+      {
+        "id": "ST044",
+        "software_pass": true,
+        "physical_input_sha256": "c61f3f2398080bcce9cbf301ed7387bc5087223c1406c11033db306d715b5b19",
+        "gas": "H2S",
+        "water_lpm": 10417.2486908901,
+        "outcome_sha256": "e21b95d46695e0ff536f6368e8d7e97d35f878a4512e1993766bdbf63051d871",
+        "engineering_output_sha256": "c693d935e30742e8e521db588040df4cc47f8e0847df260a90ae301812c55c08",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18397289999995792
+      },
+      {
+        "id": "ST045",
+        "software_pass": true,
+        "physical_input_sha256": "a781d47a303db15b16d1f70b09ad19a1da182d0c07fdc917e6561c0c2970945a",
+        "gas": "SiH2Cl2",
+        "water_lpm": 59464.0196804141,
+        "outcome_sha256": "d9801d5e7712a79b8d668f353df3c3cca8b2700ea4d964c135410021a1977fbb",
+        "engineering_output_sha256": "7fce50f648ce05ec9c5e1d3c833be74536b86bd8f6007a84bc9cb5c56531a72a",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17930530000001
+      },
+      {
+        "id": "ST046",
+        "software_pass": true,
+        "physical_input_sha256": "93f4841c63ea2b1ac95898467fd617b0ebe5a80e384a075fee63e0d973773fb8",
+        "gas": "SiHCl3",
+        "water_lpm": 49970.1216313521,
+        "outcome_sha256": "07f6c9ff40220fe3eead5ed8b63bde1ab7cb20fc9d1ba29189472811636284ab",
+        "engineering_output_sha256": "e02c4a02b5b6bf4e9576bdd67cb8f7b44270ab1ef918aaac35cb6c1f73e80882",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17944860000000062
+      },
+      {
+        "id": "ST047",
+        "software_pass": true,
+        "physical_input_sha256": "ca52e4ce555eb75a3f2918d6dbd56594a006f0ec54d9afbdbf5b0af0b8f13d42",
+        "gas": "SiCl4",
+        "water_lpm": 137275.564057171,
+        "outcome_sha256": "58f2edfa1f6e9fce8e8d98cc1e06646157faf6867eca03ed2572ef280d7e7349",
+        "engineering_output_sha256": "72ba3de538fabdec6092b92514b7ef2e80e707bc39e70e7ec7799bdb707daf97",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1835995000000139
+      },
+      {
+        "id": "ST048",
+        "software_pass": true,
+        "physical_input_sha256": "72ea0effd8494a0999230e4a423de2a0b7639eb2a511e4c432095918271012b9",
+        "gas": "SO2",
+        "water_lpm": 128403.835519022,
+        "outcome_sha256": "6bdcecc09b37726b1c6ac2fd24573dd7bffa7c3ef80e69b1770406ec54dc7d28",
+        "engineering_output_sha256": "5ad47724a970dbeea84d71bc6ee43e8364f2a49338be5c4a6bcd2fc4bc21204b",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17760820000000876
+      },
+      {
+        "id": "ST049",
+        "software_pass": true,
+        "physical_input_sha256": "87b776ef7eab876969f93087cb410897162a8e6edd86efd59d951901f720ef46",
+        "gas": "NO",
+        "water_lpm": 12334.3012427141,
+        "outcome_sha256": "07dd1caef98e1351a34b609cec1248d268cfb571c2e34ed890e726346ea04b2a",
+        "engineering_output_sha256": "902a3458bf9bef0324b91c6a89b1b06e02113d8b0511d547905431d3c5ed82c1",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17756250000002183
+      },
+      {
+        "id": "ST050",
+        "software_pass": true,
+        "physical_input_sha256": "7f858db5e7b8ede01fed138e3a32dfed706dc43615c7f521b6e222980c40974a",
+        "gas": "C3H6",
+        "water_lpm": 103140.101383836,
+        "outcome_sha256": "9ee8e39e9f194e7e96e17daeda8953c5cd84c87ba219406e904c42487121090b",
+        "engineering_output_sha256": "cca6abce3eeeda7b3aaa6b0da7fea7e3208a8dbbd0463272c39cb2c938c26479",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17805320000002212
+      },
+      {
+        "id": "ST051",
+        "software_pass": true,
+        "physical_input_sha256": "fd29924310078195115a7345bdc594bb2cc42e8d3b994c592a990045309572e6",
+        "gas": "自訂／混合氣",
+        "water_lpm": 2575.54716236775,
+        "outcome_sha256": "fb3ec44ca82b773ac379cf392e8c22289643af5fd1b4c77bc79a37b3fbf0a382",
+        "engineering_output_sha256": "41d1684d661ccc19849631afc59d95b0bfc90e54d7f2b4acf795fce883366e79",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17489289999991797
+      },
+      {
+        "id": "ST052",
+        "software_pass": true,
+        "physical_input_sha256": "fae27dd376a442a2864ec53583b20b6b26742551fc7fd23072187301bec1add6",
+        "gas": "N2",
+        "water_lpm": 35766.3646151826,
+        "outcome_sha256": "e1baca8d8bee3439883ead8562b259ea0f4651da8e2b408cb1934396eb0878c3",
+        "engineering_output_sha256": "de1d051745006bae8087b696cfce8eb5b4bd3680f3c99470a9c74bf11cad6ec7",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1748393999999962
+      },
+      {
+        "id": "ST053",
+        "software_pass": true,
+        "physical_input_sha256": "2012b460da3dd921ec683642c9d9cd36fbb0e1cea604cb0756faa073f20a97be",
+        "gas": "CDA",
+        "water_lpm": 2141.72860614299,
+        "outcome_sha256": "63c669336c447de8bffa3ce63be6641fae76aa176a42703318ce94b3250a6bdc",
+        "engineering_output_sha256": "166827c87b7ae1a59483fccb4daa21fb82ba281447a65a8f4c107c444355ff7c",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17576020000001336
+      },
+      {
+        "id": "ST054",
+        "software_pass": true,
+        "physical_input_sha256": "f3bcba7e30275eb7a01c7421a4654a341131f905fc5c46021fb37abd09248178",
+        "gas": "O2",
+        "water_lpm": 94772.4367528561,
+        "outcome_sha256": "77be497b6f280d1125e2832229cef5fd2c52457badf5f501feda638bbdfdc014",
+        "engineering_output_sha256": "c283dc59ab4f4418a4706aec8d14b06c9c4d34befe041eeb0343f65cab1767f9",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17703990000006797
+      },
+      {
+        "id": "ST055",
+        "software_pass": true,
+        "physical_input_sha256": "f1403e18b3926c2e30728a4682ccf2202b0401487f8f0a57c6c07766927f7f40",
+        "gas": "Ar",
+        "water_lpm": 76017.0371261873,
+        "outcome_sha256": "353fb3ccfcb996f144b5317a789e2f55811a4c6e3fec54ebac23d2dc8c8a0c4d",
+        "engineering_output_sha256": "e1bb09a2981ac28e3a80fafb07f9e797874cad1fbfe87f88c0331f98e999d525",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17676499999993212
+      },
+      {
+        "id": "ST056",
+        "software_pass": true,
+        "physical_input_sha256": "90b695dcf5123bd00232fec2ec6b574dbc62fee700186a83288d2ea86758f91d",
+        "gas": "He",
+        "water_lpm": 135243.16941993,
+        "outcome_sha256": "90a8a63a54b9d3de54710c2ea17ac8b1d610442b4fe6da7a29050b6f254c8232",
+        "engineering_output_sha256": "a801119bc0b8e7bc14c9be6470dd289c4940dd4b250932c58a4d8f19f41a9da5",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17850029999999606
+      },
+      {
+        "id": "ST057",
+        "software_pass": true,
+        "physical_input_sha256": "83e9345237ce54649856c96a83697df544d135c20ef0ea9560ed4f910fdb25c1",
+        "gas": "H2",
+        "water_lpm": 44172.1647415992,
+        "outcome_sha256": "c5cc6d67c9b3b56e37ca035365d8ac7cfa62ce647ae88caeec924a3cf491e5da",
+        "engineering_output_sha256": "621174a23d49779aa0925e188cac880dff2240fc3946b1f8607ee961844ffd03",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.19387119999998959
+      },
+      {
+        "id": "ST058",
+        "software_pass": true,
+        "physical_input_sha256": "2dece12ae90005cb46e7ee053ea63f4cd9c9efa8996df81210ca903c8508fbfb",
+        "gas": "CO2",
+        "water_lpm": 114982.583561161,
+        "outcome_sha256": "405ced12645fca990521dff8ca886a3dccc65bf71ab807f3fe678c86c6d3aeac",
+        "engineering_output_sha256": "fa58c9e94306e0b991fe61021fe17a0926c0fe7aff2b95bb628773ed6fad0fb8",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1780096999999614
+      },
+      {
+        "id": "ST059",
+        "software_pass": true,
+        "physical_input_sha256": "55b186efeceaf8b6310d02e9effc25143eb80e192148b56fb116e9304bd55547",
+        "gas": "GN2",
+        "water_lpm": 88499.4008386422,
+        "outcome_sha256": "ed1a116ef457e31b26dd39a8eb0e413c86bf613065c2d69b24d19d9c58b0431b",
+        "engineering_output_sha256": "2ee925fc2bc14af2bd8dadbd971f735b5540859557344c97ae82ad03565421bb",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18076429999996435
+      },
+      {
+        "id": "ST060",
+        "software_pass": true,
+        "physical_input_sha256": "0b6e7ba0c4289d292603b0f6d087045c4ab5879be68ef35a9df78eba80783dd1",
+        "gas": "PN2",
+        "water_lpm": 183335.798024332,
+        "outcome_sha256": "d115b7b67de0e1cc3458770964bd3a5a7904fb811e0a2c1ffd11088a25a648bf",
+        "engineering_output_sha256": "1f2362b1a8968b6e125fb41634c55bbfed331be178c12862564b2968ee39fcc7",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17704909999997653
+      },
+      {
+        "id": "ST061",
+        "software_pass": true,
+        "physical_input_sha256": "e23a8bc941b556513cfdf7f6a22f634df837a0379e171ef3484f5d1159e53d8d",
+        "gas": "N2O",
+        "water_lpm": 7664.66617265237,
+        "outcome_sha256": "17a345bd754876588d971cd65a6944fc45e8344096695f734c137ca66e450956",
+        "engineering_output_sha256": "f3f873af474acad50189e1480da51116e11b947440611be46165f0d2fa84c99d",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17730420000009417
+      },
+      {
+        "id": "ST062",
+        "software_pass": true,
+        "physical_input_sha256": "98c2393f13bde630707a6fc69f4c9a6c4393e774d39e1467bb80df70d9bde4d1",
+        "gas": "NH3",
+        "water_lpm": 1465.85312009176,
+        "outcome_sha256": "842a502855ca2a715fde58c21a2a490608f84478225a60b97a73f05124e7e1f0",
+        "engineering_output_sha256": "b4dae5f7f74636aa9375d6992d5e3c3f559e5dc3b0cb29679df259970a3c3dee",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17848589999994147
+      },
+      {
+        "id": "ST063",
+        "software_pass": true,
+        "physical_input_sha256": "f8c03c48422ec6cd39ddf76b8886f8f811dffb78a1370ba14e5b2e65d85961b6",
+        "gas": "CH4",
+        "water_lpm": 35284.5422300166,
+        "outcome_sha256": "1839d95fd105f0dbe1ba856d3c87f4563f2053a2d67d2902110cee9521e4f93b",
+        "engineering_output_sha256": "b5adcfe63e50e0a3e63ab874dd4124de76fb5866c2de6596625c0163c4f3e237",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17808590000004187
+      },
+      {
+        "id": "ST064",
+        "software_pass": true,
+        "physical_input_sha256": "b985c71cf351be63aedf0c465a5402d0428a3ca275326b741b5a8196572c5042",
+        "gas": "C2H2",
+        "water_lpm": 16142.2291757968,
+        "outcome_sha256": "dc5133bf62eeaf70f89fdb01690d31551a35c7977dc3ec5800080c675a3306a0",
+        "engineering_output_sha256": "f4ea97286ee37db697cab1a1316efd058a6ddab98a01f7a6b328859e7cad4a54",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1772991999999931
+      },
+      {
+        "id": "ST065",
+        "software_pass": true,
+        "physical_input_sha256": "73067afc084cfd2553473e390c0c78b7667260091b69c16d96c5cd18684e5af2",
+        "gas": "CO",
+        "water_lpm": 75094.3608538853,
+        "outcome_sha256": "547304761f1ca22f78b30a4f40ba762c24c47a9969420c9b493d81eac230cd83",
+        "engineering_output_sha256": "16f31e697a9e60352ea29fba4fea32ee7bef29f24301fa48ee2e626bc5669116",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17901610000001256
+      },
+      {
+        "id": "ST066",
+        "software_pass": true,
+        "physical_input_sha256": "8c1df5a544955ab12a8d0b96553fd509dc0b6fc55398dc56e0cfc43c30748318",
+        "gas": "NF3",
+        "water_lpm": 34201.9847248569,
+        "outcome_sha256": "799dca414644a2fd97f9a0199e56a164ca0da556fcb202bfcb54d40693f44dfe",
+        "engineering_output_sha256": "c532ecef7adb27db7d5a0559f7afb25765967e33611f7e1f22b350b5ac2637d8",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17959450000000743
+      },
+      {
+        "id": "ST067",
+        "software_pass": true,
+        "physical_input_sha256": "b5dbe9904fcf40b44e9687c2aea40300fc35bb4cd4c0172455bf1860a7ef67f1",
+        "gas": "CF4",
+        "water_lpm": 68586.7737485696,
+        "outcome_sha256": "376c4100a46e60d83a550d74d07a32ef53f72a176d245147ea4850f84d3d45ff",
+        "engineering_output_sha256": "d2bb80bbf935ca629d92983291fdd3277ca7b42f4469cdb4d45830208b18e48d",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17870049999999083
+      },
+      {
+        "id": "ST068",
+        "software_pass": true,
+        "physical_input_sha256": "177037d872981b2c125e0ae2d7195cbbc7d2df07389aa261e6ec7fa6fed1d874",
+        "gas": "C2F6",
+        "water_lpm": 117295.687976873,
+        "outcome_sha256": "49c5cb55e68d631dac75c7450a343550da2f3e7fab4738e21d8a729d6b5a3034",
+        "engineering_output_sha256": "c202f63c2496a206141f8e5909d556f2ca1ed9bfc64dfcd11b247f320c2d2449",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18093229999999494
+      },
+      {
+        "id": "ST069",
+        "software_pass": true,
+        "physical_input_sha256": "29ca410fd5389b0a74bf34aa89b0d3a40c3ca57fd3363f8a8596043bcd07f2de",
+        "gas": "C3F8",
+        "water_lpm": 192734.425159668,
+        "outcome_sha256": "260ed378b7a1429d95a9e5e32aa18eaca4ce2a58bda8bc784af55b8f5184a8a2",
+        "engineering_output_sha256": "dad18caa9dc2ac978b7ac1f400799369ea57d9c61534a25dbb88cb654267f8d6",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17793879999999263
+      },
+      {
+        "id": "ST070",
+        "software_pass": true,
+        "physical_input_sha256": "81128d31e29ee5aee7dac0051934db1e466b16cc933dfb1f0fc53251d4c2624e",
+        "gas": "C4F8",
+        "water_lpm": 201540.759311003,
+        "outcome_sha256": "45de16a659ac2ef4d88361b5b7e95633a9aaba1db1e880b851255026033d9c17",
+        "engineering_output_sha256": "af012bfcf043d3c91836022dc23d61b7f41a54b21748c6b9fab1a8889d39437e",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18169509999995626
+      },
+      {
+        "id": "ST071",
+        "software_pass": true,
+        "physical_input_sha256": "09ceb9aa430b0e84fb4d27106f3616d69f3d043a2bb185c9f9d4eb1cde7d7c36",
+        "gas": "C4F6",
+        "water_lpm": 34032.9511707275,
+        "outcome_sha256": "168f21d9eb2fc8d02f08ee579ec00f3dc1f22977cbcd8e1e4d41dc7ec5ac29f7",
+        "engineering_output_sha256": "196f19e87cdca0421997e85aa8784d53a450afed81876cee7a35a950a76e0782",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17689640000003237
+      },
+      {
+        "id": "ST072",
+        "software_pass": true,
+        "physical_input_sha256": "e3a626e0d0c11ba92b9b5b9f9ef3bcc91542ef00801f2a5b01220ac379cf7254",
+        "gas": "CH2F2",
+        "water_lpm": 51465.7585077004,
+        "outcome_sha256": "5835ca779b6a7bd5b12bc87283e3e6a8f2be42c4e28740120aee9d44eb17f25c",
+        "engineering_output_sha256": "d12a5c20b5fd3c35ed6ebfc10acd0974a2cf2437db923d95a3148d09bf39fa97",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18197350000002643
+      },
+      {
+        "id": "ST073",
+        "software_pass": true,
+        "physical_input_sha256": "049027671c36e5e12c51eed7a4b82026b268ff69dd8ed18f29317c49ab5121d5",
+        "gas": "SF6",
+        "water_lpm": 67668.705655085,
+        "outcome_sha256": "e034d9169ca3723734ff1abd462ce0943644b5097961120b379ac71701543cd3",
+        "engineering_output_sha256": "2834a89b0e6d810f80e5bcad00d10e6056fa3003636a7efa0668c8b2522b8a07",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17709679999995842
+      },
+      {
+        "id": "ST074",
+        "software_pass": true,
+        "physical_input_sha256": "e612c2efcc988f20b698f354c8662897378df1b592581c6a639240f1132a23c7",
+        "gas": "SiH4",
+        "water_lpm": 51426.9697252721,
+        "outcome_sha256": "84335557b33c5dc8257c92fc5d87f9040a30f4361434f2b9f32742546c992b3f",
+        "engineering_output_sha256": "ae58287ce2c42023ba14e092bd89f120e238759beb22afcccad228e1b0d6668d",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1774255999999923
+      },
+      {
+        "id": "ST075",
+        "software_pass": true,
+        "physical_input_sha256": "2e99812d0bc63150faf75532573d3d39ae291498abfda1cefa5203cf44b3e76e",
+        "gas": "Si2H6",
+        "water_lpm": 27044.8835744678,
+        "outcome_sha256": "3c56317529b851f1ece5ead986e38ee5a341e93d2c0f06593e6fedd9216b3c69",
+        "engineering_output_sha256": "78a67c1b48943f7d32d30251b2e78a88f50e945d6dbfd29a0d601dcc1b48990e",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1777599999999211
+      },
+      {
+        "id": "ST076",
+        "software_pass": true,
+        "physical_input_sha256": "5dbe2d4d506dcfbd3563cc220d4e34fd0adff11ba6a6700c22bcabdd0af75241",
+        "gas": "PH3",
+        "water_lpm": 74976.3340398864,
+        "outcome_sha256": "30f46f0a321a32882620edb6a450fa2e638f95d046cea15c982635d9383a35f8",
+        "engineering_output_sha256": "988a3cf9026483c9328921df7ed1b40eb202ecba149186b5b50b85a5d6804689",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1800869999999577
+      },
+      {
+        "id": "ST077",
+        "software_pass": true,
+        "physical_input_sha256": "f7e2b088dd70afaf7df2096552a216e5ed3b676810d3ef57c304762551a61804",
+        "gas": "AsH3",
+        "water_lpm": 148552.655468336,
+        "outcome_sha256": "4dd603affccfce2b35dda7a5088e69541d9c1770f1da261135e231db201ae62d",
+        "engineering_output_sha256": "4b93e456586fc746fdac6ec66e307a9919d9caa3dc4618cd38535ef3697de2a9",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17744199999992816
+      },
+      {
+        "id": "ST078",
+        "software_pass": true,
+        "physical_input_sha256": "6f2aa0f739deef745e45b8c5c803cb68fe5e82159d2d7969434285f3de8e2937",
+        "gas": "B2H6",
+        "water_lpm": 135138.641196195,
+        "outcome_sha256": "413393ba664a173cc1c3201cee479b81ab895b31bd198202a402b85d1de2916d",
+        "engineering_output_sha256": "e91e7a471e89b070893358604fd61a46d9adee511f92e33be2ef3a4b9ceca583",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18345739999995203
+      },
+      {
+        "id": "ST079",
+        "software_pass": true,
+        "physical_input_sha256": "1740d7adf850186c69174eb899de1e5e362736112b6bf69e636e5e8e3a4a11a8",
+        "gas": "BF3",
+        "water_lpm": 115609.633140632,
+        "outcome_sha256": "9c8f65c5b8758802d7b8d8b9732ad9d808cbe94d02cbff1cc2e32c7c6b16dd8b",
+        "engineering_output_sha256": "50887ff0ea2f9da48c87be72b5caaa8a00556c724a4889058a7546090e2a1ff7",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17791729999999006
+      },
+      {
+        "id": "ST080",
+        "software_pass": true,
+        "physical_input_sha256": "88479e31f0459fdd29d81488d8e09a483743a14f7ac1068876d7ca8159af0021",
+        "gas": "BCl3",
+        "water_lpm": 201383.517274817,
+        "outcome_sha256": "dc75b734eb1b0cae65fd3a3396826d5346181e3025f0630a358b7f35f72fef1b",
+        "engineering_output_sha256": "d558b5aa56e4516363abeaf00a995984dbc377bf3847bab4e8b546fcf82b6297",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1770274000000427
+      },
+      {
+        "id": "ST081",
+        "software_pass": true,
+        "physical_input_sha256": "0f38e784a5c44840d54e0a9c8b1b494ce1026d432940362ddbdcfe7e7cfa3b3d",
+        "gas": "SiF4",
+        "water_lpm": 35947.1949961904,
+        "outcome_sha256": "4d3c6057dd603a62c257f3753ea5db059ef9f8c4754d04996f18bf611ff1d5fc",
+        "engineering_output_sha256": "ff26d874944592f6ef75f15c2699f4926b371f48fb91a3c1fdd54485de3c84aa",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1795595000000958
+      },
+      {
+        "id": "ST082",
+        "software_pass": true,
+        "physical_input_sha256": "2b4059c2b77acb6b4baa23e1e49fbd7874cceda90080127d17f6b6355a047506",
+        "gas": "Cl2",
+        "water_lpm": 16379.4612295102,
+        "outcome_sha256": "b56781fc96e66c2de4fcb8a9949b521ad8d7f8186725c63852fb08864eb24f9d",
+        "engineering_output_sha256": "d525f3e458a3030bb93825f8cf2ed754bea1c3d71dab4207d55c2f44335908f5",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18519310000010591
+      },
+      {
+        "id": "ST083",
+        "software_pass": true,
+        "physical_input_sha256": "b82869871ef37e9cf5e6bde2452c4f815fa4edb1e032e387191549a8045445dd",
+        "gas": "HCl",
+        "water_lpm": 72450.7529412218,
+        "outcome_sha256": "6f3db4ef644a6f4f092d42127f3fa7774664dc0389ebae5f0aee437c901fe549",
+        "engineering_output_sha256": "ac31dc44c903c62a5cbd329ea2e13570505e3cf75c3b2a8e9413985681d5ee7f",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18472610000003442
+      },
+      {
+        "id": "ST084",
+        "software_pass": true,
+        "physical_input_sha256": "26a4f108022b60883251d2af94224ff94b7b6eb76f9e6973879d88e920a047f0",
+        "gas": "HBr",
+        "water_lpm": 34980.4000438296,
+        "outcome_sha256": "fe5e45145e480eb65d3099823461c807a317881898b775b03547580e7897f84f",
+        "engineering_output_sha256": "5ac40ff196516122777ba4e0070b87d4b04f8f2855727e76d6a8d8ce4727659f",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18145400000003065
+      },
+      {
+        "id": "ST085",
+        "software_pass": true,
+        "physical_input_sha256": "9146557d8836f423dadfec5c9dfdcd11db4daea291afc839f483f33721d64f18",
+        "gas": "HF",
+        "water_lpm": 62650.9907830642,
+        "outcome_sha256": "1a19e5711b3a15a86501a608239587388bc6ef10e55d3811a74ab689effe7d07",
+        "engineering_output_sha256": "53bfe28a6bbd9ed1a1138ef26ee6c0370da88df9c9c84bda3cdb97343215babb",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18491560000006757
+      },
+      {
+        "id": "ST086",
+        "software_pass": true,
+        "physical_input_sha256": "63711ef18766014f9529baa36e556fe3fd50da9ddc8594a86f55c2835dd04269",
+        "gas": "WF6",
+        "water_lpm": 111780.311243203,
+        "outcome_sha256": "aa84e37bf6a97195a241c7438bcd4ac4bb5fb45403cf78c94d08a2f639f9bfea",
+        "engineering_output_sha256": "2cc2f4ec44662eda4dbb22c6f9da4b857ed9544c859d19e9211d0cf74c870ac4",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18205620000003364
+      },
+      {
+        "id": "ST087",
+        "software_pass": true,
+        "physical_input_sha256": "d5bcedacec0304a7b5947facea4dc9850b8197a59b52b8c617d964a3bb2cdf4f",
+        "gas": "GeH4",
+        "water_lpm": 138226.062991591,
+        "outcome_sha256": "84b3a1ccc85897447813b216325dd31184d99fb27683320064dde528944368b6",
+        "engineering_output_sha256": "8ba0bd0324693628cd963816c5798c4b77b3641841f98ece21c33c3ff1ee9cd0",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18269039999995584
+      },
+      {
+        "id": "ST088",
+        "software_pass": true,
+        "physical_input_sha256": "d05725d01e89a09892716bc446d45c879588045a192a4d4f5e9ed9d84e6102d0",
+        "gas": "Ne",
+        "water_lpm": 157990.924914814,
+        "outcome_sha256": "79b1eeb9c2edf36955a4da8139f464d162099f0d3fe0dd133deefe62220e76cd",
+        "engineering_output_sha256": "28a731e06023489a2ab929b0e4897cc92260dcfa902aa602f7cde0c6aab73876",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.2299239999999827
+      },
+      {
+        "id": "ST089",
+        "software_pass": true,
+        "physical_input_sha256": "c54e7cc88a8ffadb8ac60c0ba0a8657f8af9bea5c3f293f503d8280ebd382731",
+        "gas": "Kr",
+        "water_lpm": 27132.3512441613,
+        "outcome_sha256": "e6e9798d96b34ab9fa5281be24c1781fd434a60084a096f91c9bb29c4fed0900",
+        "engineering_output_sha256": "9d55431011ad55fa546c5eaa733899b1ede837f79fca7347c6e3e8db75bde364",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17890650000003916
+      },
+      {
+        "id": "ST090",
+        "software_pass": true,
+        "physical_input_sha256": "3c8c4cc2431526e98f425ccaf3c3f620d2fdc62cf78d37041afe128a39cb3a8b",
+        "gas": "Xe",
+        "water_lpm": 149838.69071032,
+        "outcome_sha256": "7d14e378433c9eea423296bdce06946015e3bebb7cefe2ff9ab25b19ab5a3c08",
+        "engineering_output_sha256": "7431edcd71a25757812d6856aede839ce6edcc1f383181427d37e00217b05975",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1797647999999299
+      },
+      {
+        "id": "ST091",
+        "software_pass": true,
+        "physical_input_sha256": "c6dacba006b70ac796b22e480d33d423a14530779337fab13d7aa6cdda5efb43",
+        "gas": "CHF3",
+        "water_lpm": 7469.98207786529,
+        "outcome_sha256": "b3f9b9d80365e5102c12294b391ffa58378287de2110268a68ab6e50a60c4a53",
+        "engineering_output_sha256": "80f3e8e37889c6258212d614eab7dd24b0c325e8fae4b7fee650ffa8071ad9a4",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18402230000003783
+      },
+      {
+        "id": "ST092",
+        "software_pass": true,
+        "physical_input_sha256": "4d21dd667eefb20152e4a210ba16661bdcbead76780f967c164122fe9bf91f6b",
+        "gas": "CH3F",
+        "water_lpm": 40741.2219049178,
+        "outcome_sha256": "6584882ed703eceaebc8fa7f861ecf9815d4603c2c728e3a1514c88b0c83019b",
+        "engineering_output_sha256": "51a9e71185e20ccbb16d0b2f8469a5194c2361bb1886df87086c84a64de45f7a",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18876059999990957
+      },
+      {
+        "id": "ST093",
+        "software_pass": true,
+        "physical_input_sha256": "7fd3950dd3a013c3c5012af0cf20c4a2717487f28fc71d0787f17bf53ae865d8",
+        "gas": "F2",
+        "water_lpm": 38773.0473961899,
+        "outcome_sha256": "def9deb5793d4a4a540bd7deca7d4c07fa3a243ed018f9b2360cc400ac97546c",
+        "engineering_output_sha256": "1b4a637a899874290f3b864f6216a99d361241731063a1fdcebf144722f46f64",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18003010000006725
+      },
+      {
+        "id": "ST094",
+        "software_pass": true,
+        "physical_input_sha256": "3edb5b1f6d303bba3df42708128105debfc9e92eb3afe1f0a09af9c2015c9f74",
+        "gas": "ClF3",
+        "water_lpm": 65556.5642061614,
+        "outcome_sha256": "267f94a09ea3f1044befa495f237f3342d9d5c1a93972f27ae18b3846495b585",
+        "engineering_output_sha256": "b5762a0bb151520115abfd6fec44f168bf15329e98229bf2f55047ce38b419f8",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17850429999998596
+      },
+      {
+        "id": "ST095",
+        "software_pass": true,
+        "physical_input_sha256": "7703084015a795feafce642b4ddbada75a2b4c12a3bf587f795f75a004f10bd0",
+        "gas": "H2S",
+        "water_lpm": 49822.4046747769,
+        "outcome_sha256": "48eeed26c5d714f5248f3dcb136e666da166476cda27d77dc8f33cd01f5f3042",
+        "engineering_output_sha256": "865de0f5b399875d8df0f816cc77d7e5d4340d81f5b5a0c05e9ae8be0754a256",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1899385000000393
+      },
+      {
+        "id": "ST096",
+        "software_pass": true,
+        "physical_input_sha256": "66ec7717f22fd52a80d69cb27132c7c71fcb3773ae17d9854d97fa37c5b9d1e4",
+        "gas": "SiH2Cl2",
+        "water_lpm": 22226.0242175659,
+        "outcome_sha256": "0c423eccb9fb55a8e115dd72215cd98c113b5f47ed7820168530a7a34e18c911",
+        "engineering_output_sha256": "1d5c9e18147da5d6d2b394d6e751883c760ced7df6553fe7444c90ce8de191fb",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18020579999995334
+      },
+      {
+        "id": "ST097",
+        "software_pass": true,
+        "physical_input_sha256": "266a3ef498b3669a2c015d5b62c63f2083d53e4cb73956d586d84c480497ad1a",
+        "gas": "SiHCl3",
+        "water_lpm": 32396.4721771458,
+        "outcome_sha256": "2a79acde3ee9708c76ebba884d4c89b9be7dad229851a9f72bc6dd28eb0cb7bd",
+        "engineering_output_sha256": "de0a96fa3a384a71d151b14e46a4026666fc8ef910730ef1892551a75122219b",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17586599999992814
+      },
+      {
+        "id": "ST098",
+        "software_pass": true,
+        "physical_input_sha256": "4db9934bbf8b7915dd7a00bbda6a73bb48181cb93ca2bcd98c26bbd44d9484f3",
+        "gas": "SiCl4",
+        "water_lpm": 75958.3671900741,
+        "outcome_sha256": "13f086edf11e4907e868eccc5146753a7b477f6c76e862a063a283e9ec72ebf7",
+        "engineering_output_sha256": "f3844f7c2dd9d8d502ad9dc7cf3d1e5c95a03fd22e7a117c839d932595c0da7f",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.17622749999998177
+      },
+      {
+        "id": "ST099",
+        "software_pass": true,
+        "physical_input_sha256": "f0f03e9a26fbf55e3772b6b26d930eec69c77702ac728ec632b945f84fe7cc65",
+        "gas": "SO2",
+        "water_lpm": 134638.818731951,
+        "outcome_sha256": "6b344c5bb9ecfeddbd094d2989603f27f06297cf3634a486e72ff84ae4ffda21",
+        "engineering_output_sha256": "92638a70d4b7438dc95215c97e30541b56c9ae6a83ccd5f146d4a3f55520a7a9",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.18244709999999031
+      },
+      {
+        "id": "ST100",
+        "software_pass": true,
+        "physical_input_sha256": "d66d22dd9fc34a4f491357fc6d7a9f69c57f607c415cfe5ec8772f65d10bee19",
+        "gas": "NO",
+        "water_lpm": 118557.107674882,
+        "outcome_sha256": "e0cfd177fb2e6edaaa2f1e771a6b4bb5152be495a40553627e214ef69e4b0e09",
+        "engineering_output_sha256": "070ad793b5b87dfed0428599f0139e12fe12193a9a2c67bcec9de94b7b92d4ff",
+        "engineering_status": "待補資料",
+        "engineering_failed": 0,
+        "engineering_pending": 6,
+        "check_count": 39,
+        "seconds": 0.1789453000000094
+      }
+    ],
+    "host": "Windows-2025Server-10.0.26100-SP0",
+    "frozen": true,
+    "seconds": 18.148975000000007,
+    "scope": "100 varied full-project calculation/report/persistence recipes; water and all factory gases; no GUI launch claim"
+  },
+  "render_observations": [
+    {
+      "file": "Render_Before_TkAgg_Cleanup.png",
+      "tool": "electrical",
+      "regions": {
+        "inputs": {
+          "canvas_mapped": false,
+          "body_mapped": true,
+          "bounds": [
+            213,
+            175,
+            913,
+            384
+          ],
+          "distinct_colors": 1,
+          "dark_fraction": 0.0,
+          "canvas_item_window": ".!frame3.!simplepage.!scrollableframe.!canvas.!frame",
+          "visible": false
+        },
+        "results": {
+          "canvas_mapped": false,
+          "body_mapped": true,
+          "bounds": [
+            213,
+            384,
+            913,
+            592
+          ],
+          "distinct_colors": 1,
+          "dark_fraction": 0.0,
+          "canvas_item_window": ".!frame3.!simplepage.!scrollableframe2.!canvas.!frame",
+          "visible": false
+        }
+      },
+      "visible": false
+    },
+    {
+      "file": "Windows_Electrical.png",
+      "tool": "electrical",
+      "regions": {
+        "inputs": {
+          "canvas_mapped": true,
+          "body_mapped": true,
+          "bounds": [
+            213,
+            175,
+            977,
+            418
+          ],
+          "distinct_colors": 148,
+          "dark_fraction": 0.00026932109538275914,
+          "canvas_item_window": ".!frame3.!simplepage.!scrollableframe.!canvas.!frame",
+          "visible": true
+        },
+        "results": {
+          "canvas_mapped": true,
+          "body_mapped": true,
+          "bounds": [
+            213,
+            418,
+            977,
+            660
+          ],
+          "distinct_colors": 268,
+          "dark_fraction": 0.0,
+          "canvas_item_window": ".!frame3.!simplepage.!scrollableframe2.!canvas.!frame",
+          "visible": true
+        }
+      },
+      "visible": true,
+      "elapsed_seconds": 0.531,
+      "consecutive_visible_frames": 2,
+      "attempts": [
+        {
+          "file": "Windows_Electrical_0.png",
+          "tool": "electrical",
+          "regions": {
+            "inputs": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                175,
+                977,
+                418
+              ],
+              "distinct_colors": 148,
+              "dark_fraction": 0.00026932109538275914,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe.!canvas.!frame",
+              "visible": true
+            },
+            "results": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                418,
+                977,
+                660
+              ],
+              "distinct_colors": 268,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe2.!canvas.!frame",
+              "visible": true
+            }
+          },
+          "visible": true,
+          "elapsed_seconds": 0.275
+        },
+        {
+          "file": "Windows_Electrical_1.png",
+          "tool": "electrical",
+          "regions": {
+            "inputs": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                175,
+                977,
+                418
+              ],
+              "distinct_colors": 148,
+              "dark_fraction": 0.00026932109538275914,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe.!canvas.!frame",
+              "visible": true
+            },
+            "results": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                418,
+                977,
+                660
+              ],
+              "distinct_colors": 268,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe2.!canvas.!frame",
+              "visible": true
+            }
+          },
+          "visible": true,
+          "elapsed_seconds": 0.531
+        }
+      ]
+    },
+    {
+      "file": "Windows_Air.png",
+      "tool": "air",
+      "regions": {
+        "inputs": {
+          "canvas_mapped": true,
+          "body_mapped": true,
+          "bounds": [
+            213,
+            175,
+            977,
+            418
+          ],
+          "distinct_colors": 219,
+          "dark_fraction": 0.0,
+          "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe.!canvas.!frame",
+          "visible": true
+        },
+        "results": {
+          "canvas_mapped": true,
+          "body_mapped": true,
+          "bounds": [
+            213,
+            418,
+            977,
+            660
+          ],
+          "distinct_colors": 256,
+          "dark_fraction": 0.0,
+          "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe2.!canvas.!frame",
+          "visible": true
+        }
+      },
+      "visible": true,
+      "elapsed_seconds": 0.507,
+      "consecutive_visible_frames": 2,
+      "attempts": [
+        {
+          "file": "Windows_Air_0.png",
+          "tool": "air",
+          "regions": {
+            "inputs": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                175,
+                977,
+                418
+              ],
+              "distinct_colors": 219,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe.!canvas.!frame",
+              "visible": true
+            },
+            "results": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                418,
+                977,
+                660
+              ],
+              "distinct_colors": 256,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe2.!canvas.!frame",
+              "visible": true
+            }
+          },
+          "visible": true,
+          "elapsed_seconds": 0.255
+        },
+        {
+          "file": "Windows_Air_1.png",
+          "tool": "air",
+          "regions": {
+            "inputs": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                175,
+                977,
+                418
+              ],
+              "distinct_colors": 219,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe.!canvas.!frame",
+              "visible": true
+            },
+            "results": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                418,
+                977,
+                660
+              ],
+              "distinct_colors": 256,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe2.!canvas.!frame",
+              "visible": true
+            }
+          },
+          "visible": true,
+          "elapsed_seconds": 0.507
+        }
+      ]
+    }
+  ],
+  "callback_errors": [],
+  "checks": [
+    {
+      "name": "Frozen standalone Windows x64 executable",
+      "passed": true
+    },
+    {
+      "name": "Bundled CPython 3.13 runtime",
+      "passed": true
+    },
+    {
+      "name": "Application loaded from bundle",
+      "passed": true
+    },
+    {
+      "name": "No external Python environment",
+      "passed": true
+    },
+    {
+      "name": "NumPy native extension",
+      "passed": true
+    },
+    {
+      "name": "Pillow native extension",
+      "passed": true
+    },
+    {
+      "name": "Bundled notice: LICENSE",
+      "passed": true
+    },
+    {
+      "name": "Bundled notice: LICENSE_GUIDE.md",
+      "passed": true
+    },
+    {
+      "name": "Bundled notice: LICENSE_LEGACY_MIT",
+      "passed": true
+    },
+    {
+      "name": "Bundled notice: THIRD_PARTY_NOTICES.md",
+      "passed": true
+    },
+    {
+      "name": "Bundled notice: THIRD_PARTY_LICENSES.txt",
+      "passed": true
+    },
+    {
+      "name": "Full engineering defaults",
+      "passed": true
+    },
+    {
+      "name": "100 distinct delivered-runtime stress scenarios, 20 repetitions",
+      "passed": true
+    },
+    {
+      "name": "V557 complete-output inactive-field regression",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: electrical",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: duct",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: gas",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: lighting",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: water",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: air",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: units",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: cleanroom",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: heat_loads",
+      "passed": true
+    },
+    {
+      "name": "Independent calculation: pumps",
+      "passed": true
+    },
+    {
+      "name": "Windows keypad decimal recognized",
+      "passed": true
+    },
+    {
+      "name": "Normal Delete remains Delete",
+      "passed": true
+    },
+    {
+      "name": "Unicode path Excel export",
+      "passed": true
+    },
+    {
+      "name": "Seven Excel worksheets load",
+      "passed": true
+    },
+    {
+      "name": "Disabled template never fabricates demand",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: 電力",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: PCW",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: CDA",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: N2",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: EXHAUST",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: DI",
+      "passed": true
+    },
+    {
+      "name": "Active equipment analysis: PV",
+      "passed": true
+    },
+    {
+      "name": "Native Windows Tk window system",
+      "passed": true
+    },
+    {
+      "name": "Application icon resources",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: electrical",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: duct",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: gas",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: lighting",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: water",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: air",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: units",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: cleanroom",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: heat_loads",
+      "passed": true
+    },
+    {
+      "name": "Live GUI: pumps",
+      "passed": true
+    },
+    {
+      "name": "Equipment import window",
+      "passed": true
+    },
+    {
+      "name": "Full engineering workbench calculates",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 0",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 1",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 2",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 3",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 4",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 5",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 6",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 7",
+      "passed": true
+    },
+    {
+      "name": "Workbench page: 8",
+      "passed": true
+    },
+    {
+      "name": "English selector uses a native selection event",
+      "passed": true
+    },
+    {
+      "name": "English main-window title",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: electrical",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: duct",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: gas",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: lighting",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: water",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: air",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: units",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: cleanroom",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: heat_loads",
+      "passed": true
+    },
+    {
+      "name": "English form, report and round-trip parity: pumps",
+      "passed": true
+    },
+    {
+      "name": "English choice maps to canonical electrical enum and actual factor",
+      "passed": true
+    },
+    {
+      "name": "Localized validation, blocked export and invalid-input round trip",
+      "passed": true
+    },
+    {
+      "name": "English volume-based lighting labels and live link",
+      "passed": true
+    },
+    {
+      "name": "English gas unit changes preserve actual flow",
+      "passed": true
+    },
+    {
+      "name": "Full workbench language sync, project hash and result parity",
+      "passed": true
+    },
+    {
+      "name": "Full workbench English labels and action captions",
+      "passed": true
+    },
+    {
+      "name": "Engineering quick tools, plot redraw and language round trip",
+      "passed": true
+    },
+    {
+      "name": "AHU stage controls, heat-source enums and balance parity",
+      "passed": true
+    },
+    {
+      "name": "AHU English guidance and visible captions",
+      "passed": true
+    },
+    {
+      "name": "Closed child windows do not break subsequent switching",
+      "passed": true
+    },
+    {
+      "name": "English Excel template loads all seven systems",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: Electrical",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: PCW",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: CDA",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: N2",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: EXHAUST",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: DI",
+      "passed": true
+    },
+    {
+      "name": "English CSV headers import: PV",
+      "passed": true
+    },
+    {
+      "name": "English action buttons fit the visible desktop",
+      "passed": true
+    },
+    {
+      "name": "Navigation labels have readable native foreground/background contrast",
+      "passed": true
+    },
+    {
+      "name": "Simple tools retain visible Andy Huang credit",
+      "passed": true
+    },
+    {
+      "name": "Author credit and tutorial entry fit the minimum window",
+      "passed": true
+    },
+    {
+      "name": "Offline guide and both practice workspaces are bundled",
+      "passed": true
+    },
+    {
+      "name": "Simple tutorial entry opens a local file, not a website",
+      "passed": true
+    },
+    {
+      "name": "Workbench tutorial entry starts at the first project",
+      "passed": true
+    },
+    {
+      "name": "Tutorial follows the selected UI language",
+      "passed": true
+    },
+    {
+      "name": "Practice workspace loads into actual workbench and calculates",
+      "passed": true
+    },
+    {
+      "name": "Actual ninth Design report page is visible",
+      "passed": true
+    },
+    {
+      "name": "Tutorial restores the original unsaved state",
+      "passed": true
+    },
+    {
+      "name": "V556 basic task hides utility navigation but preserves inputs",
+      "passed": true
+    },
+    {
+      "name": "V556 climate inputs precede the psychrometric plot",
+      "passed": true
+    },
+    {
+      "name": "V556 basic adopted references are visible",
+      "passed": true
+    },
+    {
+      "name": "V556 diagnostics and model share the product version",
+      "passed": true
+    },
+    {
+      "name": "V556 quick-tool title uses the product version",
+      "passed": true
+    },
+    {
+      "name": "V556 quick-tool report uses the product version",
+      "passed": true
+    },
+    {
+      "name": "V556 printable report uses the product and revision",
+      "passed": true
+    },
+    {
+      "name": "V556 wrapped workbench actions at minimum size: zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V556 author remains visible in compact workbench: zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V556 wrapped workbench actions at minimum size: en",
+      "passed": true
+    },
+    {
+      "name": "V556 author remains visible in compact workbench: en",
+      "passed": true
+    },
+    {
+      "name": "V556 stale report retained immediately with exports disabled",
+      "passed": true
+    },
+    {
+      "name": "V556 invalid input retains only a clearly stale report",
+      "passed": true
+    },
+    {
+      "name": "V556 corrected inputs restore current result and export",
+      "passed": true
+    },
+    {
+      "name": "V556 gas basis switch preserves demand",
+      "passed": true
+    },
+    {
+      "name": "V556 gas reverse basis switch preserves input",
+      "passed": true
+    },
+    {
+      "name": "V556 dimension-only duct mode does not require pressure",
+      "passed": true
+    },
+    {
+      "name": "V556 pressure-check mode exposes required route data",
+      "passed": true
+    },
+    {
+      "name": "V556 AHU chart is a capacity-checked demand target",
+      "passed": true
+    },
+    {
+      "name": "V556 AHU stale table retained and return disabled",
+      "passed": true
+    },
+    {
+      "name": "V556 first actual AHU contribution is previewed and applied",
+      "passed": true
+    },
+    {
+      "name": "V556 repeated actual AHU return is idempotent",
+      "passed": true
+    },
+    {
+      "name": "V556 another actual AHU adds only its demand",
+      "passed": true
+    },
+    {
+      "name": "V556 editable workspace saves ledger and AHUs",
+      "passed": true
+    },
+    {
+      "name": "V556 duplicate creates a new project identity",
+      "passed": true
+    },
+    {
+      "name": "V556 duplicate retains both demand sources",
+      "passed": true
+    },
+    {
+      "name": "V556 Save-as cancellation preserves active path",
+      "passed": true
+    },
+    {
+      "name": "V556 equipment shows normalized percentage and enables explicit transfer",
+      "passed": true
+    },
+    {
+      "name": "V556 equipment transfer changes only selected supply group",
+      "passed": true
+    },
+    {
+      "name": "V556 transfer cancellation retains demand ledger",
+      "passed": true
+    },
+    {
+      "name": "V556 new transfer controls switch to English",
+      "passed": true
+    },
+    {
+      "name": "V556 invalid air input retains an explicitly stale point",
+      "passed": true
+    },
+    {
+      "name": "V556 beginner help follows selected quick tool",
+      "passed": true
+    },
+    {
+      "name": "V557 general HP load enables largest-motor field",
+      "passed": true
+    },
+    {
+      "name": "V557 continuous load ignores retained largest motor",
+      "passed": true
+    },
+    {
+      "name": "V557 reactivated invalid largest motor locates its field",
+      "passed": true
+    },
+    {
+      "name": "V557 recovery-only heater ignores inactive efficiency",
+      "passed": true
+    },
+    {
+      "name": "V557 steam-only report omits wash-pump sizing",
+      "passed": true
+    },
+    {
+      "name": "V557 closed-loop rationale is visible",
+      "passed": true
+    },
+    {
+      "name": "V558 standalone invalid flow locates field and locks export",
+      "passed": true
+    },
+    {
+      "name": "V558 actual Save writes explicitly marked draft",
+      "passed": true
+    },
+    {
+      "name": "V558 saved invalid draft satisfies standalone close guard",
+      "passed": true
+    },
+    {
+      "name": "V558 actual Load restores invalid draft without valid result",
+      "passed": true
+    },
+    {
+      "name": "V558 draft-save state is displayed in English",
+      "passed": true
+    },
+    {
+      "name": "V558 corrected standalone draft recalculates and unlocks export",
+      "passed": true
+    },
+    {
+      "name": "V558 corrected file is ordinary v4 AHU",
+      "passed": true
+    },
+    {
+      "name": "V558 overwritten draft retained as backup",
+      "passed": true
+    },
+    {
+      "name": "V558 declined draft overwrite preserves file and saved hash",
+      "passed": true
+    },
+    {
+      "name": "V558 draft workflow reports no unexpected dialog error",
+      "passed": true
+    },
+    {
+      "name": "V559 native main C1 location and export lock zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V559 native main C1 location and export lock en",
+      "passed": true
+    },
+    {
+      "name": "V559 native partial HVAC remains visible with complete export locked",
+      "passed": true
+    },
+    {
+      "name": "V559 delivered report API rejects incomplete domain result",
+      "passed": true
+    },
+    {
+      "name": "V559 native standalone C1 location and export lock zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V559 native standalone C1 location and export lock en",
+      "passed": true
+    },
+    {
+      "name": "V559 native standalone explicit C1 uses seasonal field",
+      "passed": true
+    },
+    {
+      "name": "V559 corrected C1 restores calculation and export",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/electrical",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/duct",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/gas",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/lighting",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/water",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/air",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form zh-Hant/units",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/electrical",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/duct",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/gas",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/lighting",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/water",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/air",
+      "passed": true
+    },
+    {
+      "name": "V5510 native keypad live form en/units",
+      "passed": true
+    },
+    {
+      "name": "V5510 native single insertion keypad",
+      "passed": true
+    },
+    {
+      "name": "V5510 native single insertion numlock",
+      "passed": true
+    },
+    {
+      "name": "V5510 native single insertion period",
+      "passed": true
+    },
+    {
+      "name": "V5510 native partial selection replacement",
+      "passed": true
+    },
+    {
+      "name": "V5510 native dedicated Delete unchanged",
+      "passed": true
+    },
+    {
+      "name": "V5510 native ttk state prevents input disabled",
+      "passed": true
+    },
+    {
+      "name": "V5510 native ttk state prevents input readonly",
+      "passed": true
+    },
+    {
+      "name": "V5510 native incomplete decimal retains draft and blocks export",
+      "passed": true
+    },
+    {
+      "name": "V5510 native workbench keypad",
+      "passed": true
+    },
+    {
+      "name": "V5510 native standalone AHU keypad",
+      "passed": true
+    },
+    {
+      "name": "V5510 native engineering quick tool keypad",
+      "passed": true
+    },
+    {
+      "name": "V5510 native newly created window entry",
+      "passed": true
+    },
+    {
+      "name": "V5510 native Windows reproduces unhandled keypad Del",
+      "passed": true
+    },
+    {
+      "name": "V5510 native Windows OS message 46/extended=False",
+      "passed": true
+    },
+    {
+      "name": "V5510 native Windows OS message 110/extended=False",
+      "passed": true
+    },
+    {
+      "name": "V5510 native Windows OS message 46/extended=True",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/electrical",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/duct",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/gas",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/lighting",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/water",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/air",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/units",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/cleanroom",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/heat_loads",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window zh-Hant/pumps",
+      "passed": true
+    },
+    {
+      "name": "V560 complete direct navigation zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 author visible zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 all factory gases in native combo zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 process gas requires entered velocity zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 process gas native calculation zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 reselected gas retains entered velocity zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 custom mixture native field zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 custom draft retained while inactive zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 native large single water pipe zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "V560 workbench gas choices zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "Zero-demand native velocity draft disabled zh-Hant/1",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native velocity draft revalidated zh-Hant/1",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native valid velocity calculates zh-Hant/1",
+      "passed": true
+    },
+    {
+      "name": "Zero-demand native velocity draft disabled zh-Hant/2",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native velocity draft revalidated zh-Hant/2",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native valid velocity calculates zh-Hant/2",
+      "passed": true
+    },
+    {
+      "name": "Zero-demand native velocity draft disabled zh-Hant/3",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native velocity draft revalidated zh-Hant/3",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native valid velocity calculates zh-Hant/3",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/electrical",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/duct",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/gas",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/lighting",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/water",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/air",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/units",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/cleanroom",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/heat_loads",
+      "passed": true
+    },
+    {
+      "name": "V560 direct sidebar button at minimum window en/pumps",
+      "passed": true
+    },
+    {
+      "name": "V560 complete direct navigation en",
+      "passed": true
+    },
+    {
+      "name": "V560 author visible en",
+      "passed": true
+    },
+    {
+      "name": "V560 all factory gases in native combo en",
+      "passed": true
+    },
+    {
+      "name": "V560 process gas requires entered velocity en",
+      "passed": true
+    },
+    {
+      "name": "V560 process gas native calculation en",
+      "passed": true
+    },
+    {
+      "name": "V560 reselected gas retains entered velocity en",
+      "passed": true
+    },
+    {
+      "name": "V560 custom mixture native field en",
+      "passed": true
+    },
+    {
+      "name": "V560 custom draft retained while inactive en",
+      "passed": true
+    },
+    {
+      "name": "V560 native large single water pipe en",
+      "passed": true
+    },
+    {
+      "name": "V560 workbench gas choices en",
+      "passed": true
+    },
+    {
+      "name": "Zero-demand native velocity draft disabled en/1",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native velocity draft revalidated en/1",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native valid velocity calculates en/1",
+      "passed": true
+    },
+    {
+      "name": "Zero-demand native velocity draft disabled en/2",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native velocity draft revalidated en/2",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native valid velocity calculates en/2",
+      "passed": true
+    },
+    {
+      "name": "Zero-demand native velocity draft disabled en/3",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native velocity draft revalidated en/3",
+      "passed": true
+    },
+    {
+      "name": "Positive-demand native valid velocity calculates en/3",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/m2 baseline is 75 m2 / 20 fixtures",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/m2 repeat 0 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/m2 repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/m2 repeat 0 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/m2 repeat 1 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/m2 repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/m2 repeat 1 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/m2 exported TXT retains the adopted area and count",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/ping baseline is 75 m2 / 20 fixtures",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/ping repeat 0 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/ping repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/ping repeat 0 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/ping repeat 1 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/ping repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/ping repeat 1 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/ping exported TXT retains the adopted area and count",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/volume baseline is 75 m2 / 20 fixtures",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/volume repeat 0 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/volume repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/volume repeat 0 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/volume repeat 1 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/volume repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/volume repeat 1 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/volume exported TXT retains the adopted area and count",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/geometry baseline is 75 m2 / 20 fixtures",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/geometry repeat 0 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/geometry repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/geometry repeat 0 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/geometry repeat 1 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/geometry repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/geometry repeat 1 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant/geometry exported TXT retains the adopted area and count",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant preserves LED source and estimate mode",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant K uses the entered dimensions and mounting heights",
+      "passed": true
+    },
+    {
+      "name": "F07 zh-Hant invalid geometry clears results",
+      "passed": true
+    },
+    {
+      "name": "F07 en/m2 baseline is 75 m2 / 20 fixtures",
+      "passed": true
+    },
+    {
+      "name": "F07 en/m2 repeat 0 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 en/m2 repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 en/m2 repeat 0 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 en/m2 repeat 1 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 en/m2 repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 en/m2 repeat 1 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 en/m2 exported TXT retains the adopted area and count",
+      "passed": true
+    },
+    {
+      "name": "F07 en/ping baseline is 75 m2 / 20 fixtures",
+      "passed": true
+    },
+    {
+      "name": "F07 en/ping repeat 0 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 en/ping repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 en/ping repeat 0 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 en/ping repeat 1 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 en/ping repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 en/ping repeat 1 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 en/ping exported TXT retains the adopted area and count",
+      "passed": true
+    },
+    {
+      "name": "F07 en/volume baseline is 75 m2 / 20 fixtures",
+      "passed": true
+    },
+    {
+      "name": "F07 en/volume repeat 0 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 en/volume repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 en/volume repeat 0 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 en/volume repeat 1 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 en/volume repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 en/volume repeat 1 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 en/volume exported TXT retains the adopted area and count",
+      "passed": true
+    },
+    {
+      "name": "F07 en/geometry baseline is 75 m2 / 20 fixtures",
+      "passed": true
+    },
+    {
+      "name": "F07 en/geometry repeat 0 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 en/geometry repeat 0 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 en/geometry repeat 0 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 en/geometry repeat 1 preserves every engineering input",
+      "passed": true
+    },
+    {
+      "name": "F07 en/geometry repeat 1 retains 75 m2 / 20 fixtures / 512 lux",
+      "passed": true
+    },
+    {
+      "name": "F07 en/geometry repeat 1 only enables K with actual geometry",
+      "passed": true
+    },
+    {
+      "name": "F07 en/geometry exported TXT retains the adopted area and count",
+      "passed": true
+    },
+    {
+      "name": "F07 en preserves LED source and estimate mode",
+      "passed": true
+    },
+    {
+      "name": "F07 en K uses the entered dimensions and mounting heights",
+      "passed": true
+    },
+    {
+      "name": "F07 en invalid geometry clears results",
+      "passed": true
+    },
+    {
+      "name": "Native GUI heartbeat",
+      "passed": true
+    },
+    {
+      "name": "Native Matplotlib TkAgg drawing",
+      "passed": true
+    },
+    {
+      "name": "No GUI callback exceptions",
+      "passed": true
+    },
+    {
+      "name": "Electrical form pixels after TkAgg cleanup and restore",
+      "passed": true
+    },
+    {
+      "name": "Air form pixels after tool switch",
+      "passed": true
+    },
+    {
+      "name": "No GUI callback exceptions after restore and capture",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

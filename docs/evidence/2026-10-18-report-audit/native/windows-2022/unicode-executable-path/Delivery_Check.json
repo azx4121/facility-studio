@@ -1,0 +1,16 @@
+{
+  "label": "unicode-executable-path",
+  "gui_checks": 463,
+  "core_gui_checks": 321,
+  "audit_gui_checks": 142,
+  "audit_numeric_checks": 2182,
+  "report_semantic_checks": 405,
+  "report_export_gui_checks": 28,
+  "cli_tools": 10,
+  "firewall_outbound_blocked": false,
+  "network_audit_blocked": true,
+  "python_on_path": false,
+  "empty_working_directory": true,
+  "exe_sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+  "passed": true
+}

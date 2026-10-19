@@ -1,0 +1,96 @@
+General factory example  | Design conditions / calculation summary 
+ System :  RCU (room cooling unit + outdoor air)  | V5.6.0 · Windows win.8 |  Preliminary demand 
+ Overall status:  Data required  ; equipment counts are demand candidates. Do not select directly when checks fail. 
+[ Data required ] CHW  Equipment resistance :  Piping subtotal only. Neither Simple nor Detailed mode treats unknown resistance as zero. 
+[ Data required ] HW  Equipment resistance :  Piping subtotal only. Neither Simple nor Detailed mode treats unknown resistance as zero. 
+[ Data required ]  Equipment selection at design conditions :  This tool calculates demand. Manufacturer coil / terminal selections and actual fan curves are still required. 
+[ Data required ]  Electrical-candidate review :  Tables are estimates only. Installation, fault, grounding and motor-protection data required. 
+[ Data required ]  Winter room / electrical boundary :  Steady-state room heat / moisture balance uses specified loads. NP still requires actual equipment electrical power. 
+
+╔══════════════════════════════════════════════════════════════════╗
+ ★ Executive Design Summary 
+ Calculated requirements and selection targets are separate; missing values remain not calculated. 
+
+ FFU fan filter units  |  Not applicable 
+   [Calculated requirement]  This system does not use FFUs 
+   [Selection target]  Not applicable 
+
+ MAU makeup air unit  |  Not applicable 
+   [Calculated requirement]  Outdoor air mixes at the AHU inlet; no separate MAU 
+   [Selection target]  Not applicable 
+
+ DCC room dry cooling coil  |  Not applicable 
+   [Calculated requirement]  This system does not use a DCC 
+   [Selection target]  Not applicable 
+
+ Central chiller  |  Preliminary cooling load 
+   [Calculated requirement]  Separate-temperature loop capacity envelope (before allowance)  77.94 kW / 22.16 US RT
+   [Selection target]  Capacity target across separate temperature loops 85.73 kW / 24.38 US RT (including project capacity margin; manufacturer rating pending) 
+
+ Chilled-water main piping  |  Separate temperature loops 
+   [Calculated requirement] MCHW 0 LPM | CHW 245.72 LPM | DCCW 0 LPM
+   [Selection target] MCHW  No demand ; 0 m/s; 0 Pa/m ; path pressure loss 0 Pa | CHW 50A (2"); 1.89 m/s; 739.58 Pa/m ; path pressure loss 96,145.41 Pa | DCCW  No demand ; 0 m/s; 0 Pa/m ; path pressure loss 0 Pa
+
+ CHWP chilled-water pump  |  Selection pending 
+   [Calculated requirement] MCHW 0 LPM ; head 0 m ; shaft power 0 kW | CHW 245.72 LPM ; head 9.8 m ; shaft power 0.56 kW | DCCW 0 LPM ; head 0 m ; shaft power 0 kW
+   [Selection target]  Motor nameplate not selected; size each loop pump separately 
+
+ Main distribution MCCB  |  Panel candidates 
+   [Calculated requirement] UP 155 kW; 277.06 A | NP 55 kW; 98.31 A
+   [Selection target] UP 300 AT; 1  sets  × 250 mm²/phase  | NP 125 AT; 1  sets  × 100 mm²/phase  ; main incomer not calculated; panel AT ratings are not added 
+╚══════════════════════════════════════════════════════════════════╝
+ 1. Design conditions 
+ Atmospheric pressure  101.325 kPa;  Summer  35°C / 70%RH;  Winter  8°C / 70%RH;  Room  22°C / 50 %RH (exact target). 
+A zone 300.0 m² / 1200.0 m³; ACH 8  Demand  9600.0 CMH ; positive pressure 0  Pa; cleanliness record  None .
+B zone 0.0 m² / 0.0 m³; ACH 0  Demand  0.0 CMH ; positive pressure 0  Pa; cleanliness record  None .
+ Positive pressure leakage 0.00 CMH ( Gap-orifice method  ); minimum makeup OA 480.00 CMH;  Adopted 480.00 CMH;  Additional  Relief demand  0.00 CMH (both at room conditions). 
+ lighting  157  luminaires  / 6.280 kW;  Room  Sensible heat  60.448 kW; reference latent load 1.100 kW; moisture generation 1.583 kg/h.
+ Sensible breakdown: net equipment 32.000 (PCW removed 0.000 , exhaust removed 0.000 ), occupant sensible 1.500 , lighting 6.280 , wall 5.927 , floor 14.741 , oven 0.000 , solar 0.000 , fan & FFU 0.000 kW.
+ Moisture sources: occupants 1.583 + additional process 0.000 kg/h; process input method:  No additional moisture  . Outdoor moisture is calculated at the coils, not added again to the room. 
+ 2. HVAC duties and states 
+ First-stage supply water 12.0°C / ΔT 5 K ( Automatic bypass-factor estimate  , target 26.0°C) ; second stage 7.0°C / ΔT 5.0 K;  No DCC loop (standby ΔT 4.0 K);  Capacity  Margin  10% (refrigeration ton basis:  US RT (3024 kcal/hr) ).
+ Treated airflow 18435.67 CMH (room reference);  Outdoor air mixed at HVAC inlet .
+ Point            Dry bulb °C   RH%     w(g/kg dry air)      h(kJ/kg dry air) 
+ Inlet             22.349   51.538         8.665165          44.514499
+ First-stage outlet           22.349   51.538         8.665165          44.514499
+ Second-stage outlet           10.978  100.000         8.151478          31.597251
+ Final supply air           12.207   92.190         8.151478          32.852406
+ Room             22.000   50.000         8.224239          43.037358
+ First-stage coil  : air-side 0.000 kW; water-side 0.000 kW; including margin 0.000 RT;  Condensate  0.000 kg/h.
+ Second-stage coil  : air-side 78.082 kW; water-side 77.939 kW; including margin 24.378 RT;  Condensate  11.178 kg/h.
+DCC  Sensible heat  0.000 kW;  Summer  Reheat  7.587 kW;  Humidification  0.000 kg/h (air-side 0.000 kW).
+ Equipment  Preliminary estimate : RCU 1  units 
+ Terminal cooling selection basis:  Summer  77.939 kW /  Winter  31.161 kW;  Larger seasonal cooling load  × 1.1 = 85.733 kW. FCU count also checks airflow. 
+ RCU rating per unit : 40 RT / 140.674114 kW;  Unit demand from cooling  0.609444,  Round up to  1  units .
+ Winter room heat / moisture balance: sensible 33.397 kW;  Supply air  16.589°C / 69.427%RH;  Heating  0.000 kW /  Humidification  0.445 kg/h.
+ DCC maximum summer / winter demand 0.000 kW; winter is a steady-state estimate of specified loads, not hourly building simulation. 
+ 3. Piping / velocity / pressure drop 
+CHW: 245.724 LPM, ΔT 5.00 K, 1  runs × 50A (2") / ID 52.5 mm, 1.892 m/s;  Pressure drop  96145.410 Pa.
+   Adopted  Fluid properties : ρ 1000 kg/m³; cp 4.1868 kJ/(kg·K); μ 0.001 Pa·s;  Source   Use shared reference .
+   Closed circulation excludes building height from pump differential pressure; check system static pressure separately. 
+HW: 11.960 LPM, ΔT 10.00 K, 1  runs × 15A (1/2") / ID 15.8 mm, 1.017 m/s;  Pressure drop  137048.669 Pa.
+   Adopted  Fluid properties : ρ 1000 kg/m³; cp 4.1868 kJ/(kg·K); μ 0.001 Pa·s;  Source   Use shared reference .
+   Closed circulation excludes building height from pump differential pressure; check system static pressure separately. 
+PV  Maximum design velocity  18.000 m/s.
+ Gas standard-volume reference: 25°C / 101.325 kPa;  in pipe  25 °C, Z ratio 1 ; velocity-based estimate only. 
+ Simple pressure-loss estimate: CHW 30% / HW 30% fitting equivalent-length allowance; Δp = straight friction×(1+allowance) + known equipment pressure drop + applicable static head. 
+ 4. Electrical candidates 
+3Φ4W 380/220V; PF 0.85 ; HP conversion efficiency 0.90;  XLPE insulated cable (90°C) ;  Terminal  60°C;  One-way length 30 m; selection order  Fewest parallel runs .
+ Workbench derating uses selected ranges: ambient  35°C or below (reference)  ; current-carrying conductors  Up to 3 conductors (reference) .
+  UP adopted ambient 35 C, temperature factor 1 , grouping factor 1.
+UP : operating 277.057 A, design 277.057 A; NFB  Candidate  300 AT, 1  sets ×250.0 mm²/phase , Iz 300.000 A, voltage drop 0.417 %; grounding record:  Verification pending .
+  NP adopted ambient 35 C, temperature factor 1 , grouping factor 1.
+NP : operating 98.310 A, design 122.888 A; NFB  Candidate  125 AT, 1  sets ×100.0 mm²/phase , Iz 164.000 A, voltage drop 0.285 %; grounding record:  Verification pending .
+ Continuous load: total operating current x 1.25; the largest-motor draft is excluded. 
+ 5. Key formulas and explanation 
+ lighting  N=ceil(E×A/(Φ×U×M))=ceil(500×300/(2000×0.6×0.8))=157  luminaires .
+ Room  Sensible heat  Qs=m_da(1.006+1.86ws)(Tr−Ts)+QDCC=60.448 kW; moisture G = 3600×m_da(wr−ws) = 1.583 kg/h.
+ h = 1.006T+w(2501+1.86T); coil Qair = m_da(hin−hout); Qwater = Qair−m_condensate×cp_water×T_condensate. 
+ Water flow  LPM=60000Q/(ρcpΔT);  Rectangular duct  A=WH / Dh=2WH/(W+H);  parallel runs  v=V̇/(nA); Δp=f(L/Dh)ρv²/2+ Fittings + Equipment  Pressure drop .
+ Three-phase I = 1000P/(√3 VLL·PF). HP is shaft output; multiply by 0.7456999/η for input kW. General candidates require design current ≤ AT ≤ effective ampacity and small-conductor protection limit. 
+ Coils use demand / ADP approximations, not manufacturer selections. Cables use project tables with conservative limits; terminals, fault rating, grounding and motor starting still need review. 
+ Items to confirm: 
+•  FCU / RCU use an equivalent control volume with outdoor air mixed at the inlet. A separate MAU requires a different system topology. 
+•  Pressure loss CHW / HW excludes equipment resistance: piping subtotal only. Add coil, filter and treatment-equipment pressure drops before selecting pumps / fans. 
+•  Air-side heating / humidification demands are not automatically included in NP. Enter actual input power by equipment type and efficiency. 
+ Basis: bundled versioned engineering tables are estimate references, not confirmed applicable statutory ampacity tables. Parameter provenance is stored in project JSON / HTML appendices.

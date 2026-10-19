@@ -1,11 +1,13 @@
 # 完整工程工作台：新手跟做教學
 
-[English](workbench.en.md) · [下載軟體](../../README.md#下載) · [工具指南](README.md) · [離線教學懶人包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)
+[English](workbench.en.md) · [下載軟體](../../README.md#下載) · [工具指南](README.md) · [離線教學懶人包](../tutorial/README.md)
+
+Windows win.8 報告列出 DCC／RCU／FCU 單台額定；FCU 同列風量與冷量各自所需台數及主導條件，方便由報告反算選型。PV 可直接按工作台「PV 真空」，不必先切換工程範圍。[報告樣本與驗收](../2026-10-18-windows-report-audit.md)
 
 <a id="source-revision"></a>
 ## 現行原始碼：氣流路徑、上游帶入與設計總覽
 
-本節功能已包含於 Windows win.7／macOS mac.6；後續僅套用 Windows 的稽核修正見下方說明。
+本節功能已包含於 Windows win.8／macOS mac.6；後續僅套用 Windows 的稽核修正見下方說明。
 
 MAU 系統先確認「MAU／FFU氣流路徑」，再解讀 ACH。下表以「沿用 FFU 循環」的 DCC 設定、基準風量 `Q=體積×ACH` 及最終設計外氣量 `OA` 說明：
 
@@ -69,7 +71,7 @@ MAU 系統先確認「MAU／FFU氣流路徑」，再解讀 ACH。下表以「沿
 ## 3. 開啟第一個練習案
 
 1. 開啟 Facility Studio →「完整工程工作台」→「新手教學」。
-2. 在瀏覽器教學左側「練習檔案」下載 `01_Practice_AHU.json`，保存到自己的資料夾。也可完整解壓縮[教學包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)取得同一份檔案。
+2. 在瀏覽器教學左側「練習檔案」下載 `01_Practice_AHU.json`，保存到自己的資料夾。也可完整解壓縮[教學包](../tutorial/README.md)取得同一份檔案。
 3. 回工作台按上方「開啟」，選擇 `01_Practice_AHU.json`。現有案件若有修改，先保存再切換。
 4. 按「另存新檔」存成 `My_First_Project.json`，選「基本模式」，再按下方「重新計算」或 F5。
 

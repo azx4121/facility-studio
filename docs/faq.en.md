@@ -14,7 +14,7 @@ No. The Windows EXE and macOS DMG include their runtime. Calculations, saved pro
 | Windows | Windows 10/11 on Intel/AMD x64 are support targets. Download and double-click the EXE; allow time for the bundled environment to unpack on first launch. | Windows Server 2022/2025 x64 |
 | macOS | Universal App for Apple Silicon / Intel, packaging target macOS 11+. Open the DMG, drag into Applications, then launch there. Eject the DMG after installation. | Apple Silicon / Intel macOS 15 |
 
-Windows ARM, 32-bit Windows, and other Mac OS versions/devices were not included in this acceptance. Enterprise policies may also restrict execution. [Windows win.7 acceptance](2026-10-18-windows-audit-six.md#原生發布結果) · [mac.6 acceptance](2026-10-16-gemini-integration-review.md#原生發布狀態)
+Windows ARM, 32-bit Windows, and other Mac OS versions/devices were not included in this acceptance. Enterprise policies may also restrict execution. [Windows win.8 acceptance](2026-10-18-windows-report-audit.md#原生發布結果) · [mac.6 acceptance](2026-10-16-gemini-integration-review.md#原生發布狀態)
 
 Close the old app before replacing the EXE/App. Saved projects and recovery data are retained.
 
@@ -35,6 +35,13 @@ Automatic water references extend to 30 inches. The tool selects a single pipe w
 The calculator and workbench share 50 named gases plus custom mixtures. Added gases have no preset design velocity: enter a design value, using custom velocity in the workbench. The current revision preserves entered velocity when the same gas is selected again; switching to a different added gas requires a new value. Mixtures need a name and composition. T/P/Z conversion covers single-gas-phase volume and velocity estimates only. [Gas and vacuum guide](guides/gas-vacuum.en.md)
 
 In the full workbench, a route with zero flow retains custom velocity and custom/mixture names as drafts without validating or including them in calculations or reports. Added gases with nonzero demand still require custom velocity and an entered design value; mixtures also require a name and composition. The independent gas calculator still requires valid velocity even when its flow is zero.
+
+<a id="pv"></a>
+## Why is the PV option missing?
+
+PV remains under **Gases / vacuum** in the full workbench. The default HVAC task scope hid utility pages. Windows win.8 adds **PV vacuum** on both the homepage and workbench, exposing and scrolling to the PV fields. In older builds select **All engineering pages** first.
+
+PV uses dedicated extraction-flow and absolute-pressure fields, separate from positive-pressure gas choices. Torr/kPa/mbar switching converts equivalent absolute pressure. [Inputs and independent example](guides/gas-vacuum.en.md#case-07)
 
 <a id="security"></a>
 ## Why does Windows or macOS show an unknown-publisher prompt?
@@ -101,4 +108,4 @@ Use synthetic data and remove client/site secrets. Native and historical evidenc
 
 ## Can mac.6 open new Windows whole-workspace files?
 
-win.6/win.7 use demand ledger v2, which mac.6 rejects. Matching main schema 12 does not establish whole-workspace compatibility. Keep those files in current Windows until the Mac reader is updated. See [legacy W/kVA recovery and source restoration](2026-10-18-windows-audit-six.md#english).
+win.6 and later Windows builds use demand ledger v2, which mac.6 rejects. Matching main schema 12 does not establish whole-workspace compatibility. Keep those files in current Windows until the Mac reader is updated. See [legacy W/kVA recovery and source restoration](2026-10-18-windows-audit-six.md#english).

@@ -1,11 +1,13 @@
 # Full workbench: a beginner walkthrough
 
-[繁體中文](workbench.md) · [Download the app](../../README.en.md#download-and-run) · [Tool guides](README.en.md) · [Offline tutorial package](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)
+[繁體中文](workbench.md) · [Download the app](../../README.en.md#download-and-run) · [Tool guides](README.en.md) · [Offline tutorial package](../tutorial/README.md)
+
+Windows win.8 reports show per-unit DCC/RCU/FCU ratings; FCU reports compare airflow- and cooling-driven counts and identify the governing demand. The workbench PV vacuum button exposes the vacuum fields without first changing the task scope. [Report samples and acceptance](../2026-10-18-windows-report-audit.md#english)
 
 <a id="source-revision"></a>
 ## Current source: airflow topology, upstream import and design summary
 
-These features are included in Windows win.7 and macOS mac.6; the subsequent Windows-only audit corrections are described below.
+These features are included in Windows win.8 and macOS mac.6; the subsequent Windows-only audit corrections are described below.
 
 For MAU systems, choose the **MAU / FFU airflow path** before interpreting ACH. With DCC set to follow the circulation flow, let `Q=room volume x ACH` and `OA=final design outdoor airflow`:
 
@@ -69,7 +71,7 @@ This is a **location diagram based on actual controls, not a GUI screenshot**.
 ## 3. Open the first practice project
 
 1. Open Facility Studio → **Full workbench → Beginner tutorial**.
-2. Download `01_Practice_AHU.json` from **Practice files** in the browser's left sidebar and save it to your folder. Alternatively extract the [tutorial package](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip) for the same file.
+2. Download `01_Practice_AHU.json` from **Practice files** in the browser's left sidebar and save it to your folder. Alternatively extract the [tutorial package](../tutorial/README.md) for the same file.
 3. Return to the workbench, click **Open**, and select that JSON. Save an existing modified project before switching.
 4. Use **Save as** to write `My_First_Project.json`, choose **Basic mode**, then click **Recalculate** or press F5.
 

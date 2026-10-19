@@ -1,0 +1,31 @@
+{
+  "tool": "lighting",
+  "area_m2": 30.0,
+  "quantity": 10,
+  "watts": 40.0,
+  "lumens_per_lamp": 4000.0,
+  "lumen_mode": "LED功率初估",
+  "u_mode": "手動固定 U",
+  "room_index_k": null,
+  "mount_h_m": null,
+  "work_h_m": null,
+  "utilization": 0.6,
+  "maintenance": 0.8,
+  "illuminance_lux": 640.0,
+  "total_kw": 0.4,
+  "target_lux": null,
+  "formula": "平均照度Lux=盞數×每盞流明lm×利用率U×維護係數M/面積m²；所需盞數向上取整。",
+  "note": "Lux是空間照度，燈具光通量使用lm。體積須除以淨高換算面積；LED功率初估使用假設光效，不能代替型錄流明或照度均勻度模擬。",
+  "adopted_inputs": {
+    "area": "30",
+    "area_mode": "面積 m²",
+    "efficacy": "100",
+    "lumen_mode": "LED功率初估",
+    "maintenance": ".8",
+    "mode": "估算照度",
+    "quantity": "10",
+    "u_mode": "手動固定 U",
+    "utilization": ".6",
+    "watts": "40"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": 417091451,
+  "tag": "v5.6.0-win.8",
+  "target_commit": "c121cd872af8f52e3ef8963d138b54b2e7fa8333",
+  "draft": false,
+  "prerelease": true,
+  "published": "2026-10-19T09:03:56Z",
+  "url": "https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.8",
+  "assets": [
+    {
+      "id": 655763926,
+      "name": "Facility_Studio_V5_6_0_Windows_Offline.exe",
+      "bytes": 41123955,
+      "sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+      "url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.8/Facility_Studio_V5_6_0_Windows_Offline.exe"
+    },
+    {
+      "id": 655764014,
+      "name": "SHA256SUMS.txt",
+      "bytes": 109,
+      "sha256": "533fddebf9df3ad07d347db7e9ca549ad11cad9fa6c75ba467db4829996dbe87",
+      "url": "https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.8/SHA256SUMS.txt"
+    }
+  ],
+  "passed": true,
+  "scope": "GitHub public release metadata digests/size matched downloaded native-tested delivery bytes and expected checksum text; not a second HTTP download of the public EXE"
+}

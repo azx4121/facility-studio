@@ -1,0 +1,82 @@
+{
+  "source_commit": "c121cd872af8f52e3ef8963d138b54b2e7fa8333",
+  "scope": "Windows calculation source on Linux; independent PV flow and room-air accounting, synthetic inputs",
+  "isolating_conditions": {
+    "people_A": 0,
+    "people_B": 0,
+    "room_pressure_A_Pa": 0,
+    "room_pressure_B_Pa": 0,
+    "room_and_standard_temperature_C": 25,
+    "room_and_standard_pressure_kPa": 101.325
+  },
+  "passed": true,
+  "checks": [
+    {
+      "name": "150 Torr: standard to actual vacuum pipe flow",
+      "actual": 10133.333333337334,
+      "expected": 10133.333333333334,
+      "passed": true
+    },
+    {
+      "name": "75 Torr doubles actual pipe volume at the same standard demand",
+      "actual": 20266.666666674668,
+      "expected": 20266.666666674668,
+      "passed": true
+    },
+    {
+      "name": "Pipe pressure does not change HVAC minimum OA for unchanged extraction mass",
+      "actual": 120.00000000000001,
+      "expected": 120.00000000000001,
+      "passed": true
+    },
+    {
+      "name": "Room fraction 1 minus sealed process fraction 0 at the same room/reference state",
+      "actual": 120.00000000000001,
+      "expected": 120,
+      "passed": true
+    },
+    {
+      "name": "CMH retains standard flow",
+      "actual": 2000.0000000000002,
+      "expected": 2000,
+      "passed": true
+    },
+    {
+      "name": "CMH retains actual pipe flow",
+      "actual": 10133.333333337336,
+      "expected": 10133.333333337334,
+      "passed": true
+    },
+    {
+      "name": "CMH retains HVAC minimum OA",
+      "actual": 120.00000000000003,
+      "expected": 120.00000000000001,
+      "passed": true
+    },
+    {
+      "name": "SCFM retains standard flow",
+      "actual": 2000.0000000000002,
+      "expected": 2000,
+      "passed": true
+    },
+    {
+      "name": "SCFM retains actual pipe flow",
+      "actual": 10133.333333337336,
+      "expected": 10133.333333337334,
+      "passed": true
+    },
+    {
+      "name": "SCFM retains HVAC minimum OA",
+      "actual": 120.00000000000003,
+      "expected": 120.00000000000001,
+      "passed": true
+    },
+    {
+      "name": "Default people/exhaust maximum may govern instead of PV",
+      "with_pv_minimum_oa": 480.0,
+      "without_pv_minimum_oa": 480.0,
+      "people": "20 + 0",
+      "passed": true
+    }
+  ]
+}

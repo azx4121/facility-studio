@@ -1,0 +1,35 @@
+[
+  {
+    "file": "v560-win8-native-en.png",
+    "source": "windows-2022/standalone/English_Electrical.png",
+    "bytes": 65435,
+    "sha256": "303a4b5c7ba7a9afac104ffdcc5b6737095c65d5e490c100a24614965cdc65d1",
+    "run": 39222780789,
+    "artifact_id": 12173526201,
+    "source_commit": "c121cd872af8f52e3ef8963d138b54b2e7fa8333",
+    "exe_sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+    "unmodified": true
+  },
+  {
+    "file": "v560-win8-native-zh.png",
+    "source": "windows-2022/standalone/Windows_Electrical.png",
+    "bytes": 68739,
+    "sha256": "76c8f8a168ee2b18dc14cfeeacfad882b763a2d101da3b21ee8a313542e69660",
+    "run": 39222780789,
+    "artifact_id": 12173526201,
+    "source_commit": "c121cd872af8f52e3ef8963d138b54b2e7fa8333",
+    "exe_sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+    "unmodified": true
+  },
+  {
+    "file": "v560-win8-native-air-zh.png",
+    "source": "windows-2022/unicode-executable-path/Windows_Air.png",
+    "bytes": 66525,
+    "sha256": "11bffd4469d4be1048e7b0d951620d3bb6b8b07198f11ff8153d79a34bf7588b",
+    "run": 39222780789,
+    "artifact_id": 12173526201,
+    "source_commit": "c121cd872af8f52e3ef8963d138b54b2e7fa8333",
+    "exe_sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+    "unmodified": true
+  }
+]

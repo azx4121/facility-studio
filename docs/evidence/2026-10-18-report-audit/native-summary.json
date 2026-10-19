@@ -1,0 +1,246 @@
+{
+  "source_commit": "c121cd872af8f52e3ef8963d138b54b2e7fa8333",
+  "application_tree": "6269dd85af0462b0ec4bf8b665b2dd88c413ab38",
+  "run": 39222780789,
+  "exe_sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+  "exe_bytes": 41123955,
+  "build_artifact_id": 12173526201,
+  "build_artifact_sha256": "634dffcf73499a34533b78b4bb8d931225c7bc16a7bfadb57672948d00f07280",
+  "complete": true,
+  "launches": [
+    {
+      "host": "Windows Server 2022",
+      "label": "standalone",
+      "core": 321,
+      "extended": 142,
+      "engineering_numeric": 2182,
+      "report_semantic": 405,
+      "export_and_pv": 28,
+      "cli_tools": 10,
+      "utf8_mode": 0,
+      "default_text_encoding": "cp1252",
+      "exe_sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+      "firewall_outbound_blocked": true,
+      "network_audit_blocked": true,
+      "render": [
+        {
+          "file": "Windows_Electrical.png",
+          "visible": true,
+          "elapsed_seconds": 0.528,
+          "consecutive_visible_frames": 2
+        },
+        {
+          "file": "Windows_Air.png",
+          "visible": true,
+          "elapsed_seconds": 0.497,
+          "consecutive_visible_frames": 2
+        }
+      ],
+      "passed": true
+    },
+    {
+      "host": "Windows Server 2022",
+      "label": "zip-extracted",
+      "core": 321,
+      "extended": 142,
+      "engineering_numeric": 2182,
+      "report_semantic": 405,
+      "export_and_pv": 28,
+      "cli_tools": 10,
+      "utf8_mode": 0,
+      "default_text_encoding": "cp1252",
+      "exe_sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+      "firewall_outbound_blocked": true,
+      "network_audit_blocked": true,
+      "render": [
+        {
+          "file": "Windows_Electrical.png",
+          "visible": true,
+          "elapsed_seconds": 0.512,
+          "consecutive_visible_frames": 2
+        },
+        {
+          "file": "Windows_Air.png",
+          "visible": true,
+          "elapsed_seconds": 0.502,
+          "consecutive_visible_frames": 2
+        }
+      ],
+      "passed": true
+    },
+    {
+      "host": "Windows Server 2022",
+      "label": "unicode-executable-path",
+      "core": 321,
+      "extended": 142,
+      "engineering_numeric": 2182,
+      "report_semantic": 405,
+      "export_and_pv": 28,
+      "cli_tools": 10,
+      "utf8_mode": 0,
+      "default_text_encoding": "cp1252",
+      "exe_sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+      "firewall_outbound_blocked": false,
+      "network_audit_blocked": true,
+      "render": [
+        {
+          "file": "Windows_Electrical.png",
+          "visible": true,
+          "elapsed_seconds": 0.506,
+          "consecutive_visible_frames": 2
+        },
+        {
+          "file": "Windows_Air.png",
+          "visible": true,
+          "elapsed_seconds": 0.499,
+          "consecutive_visible_frames": 2
+        }
+      ],
+      "passed": true
+    },
+    {
+      "host": "Windows Server 2025",
+      "label": "standalone",
+      "core": 321,
+      "extended": 142,
+      "engineering_numeric": 2182,
+      "report_semantic": 405,
+      "export_and_pv": 28,
+      "cli_tools": 10,
+      "utf8_mode": 0,
+      "default_text_encoding": "cp1252",
+      "exe_sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+      "firewall_outbound_blocked": true,
+      "network_audit_blocked": true,
+      "render": [
+        {
+          "file": "Windows_Electrical.png",
+          "visible": true,
+          "elapsed_seconds": 0.526,
+          "consecutive_visible_frames": 2
+        },
+        {
+          "file": "Windows_Air.png",
+          "visible": true,
+          "elapsed_seconds": 0.508,
+          "consecutive_visible_frames": 2
+        }
+      ],
+      "passed": true
+    },
+    {
+      "host": "Windows Server 2025",
+      "label": "zip-extracted",
+      "core": 321,
+      "extended": 142,
+      "engineering_numeric": 2182,
+      "report_semantic": 405,
+      "export_and_pv": 28,
+      "cli_tools": 10,
+      "utf8_mode": 0,
+      "default_text_encoding": "cp1252",
+      "exe_sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+      "firewall_outbound_blocked": true,
+      "network_audit_blocked": true,
+      "render": [
+        {
+          "file": "Windows_Electrical.png",
+          "visible": true,
+          "elapsed_seconds": 0.531,
+          "consecutive_visible_frames": 2
+        },
+        {
+          "file": "Windows_Air.png",
+          "visible": true,
+          "elapsed_seconds": 0.507,
+          "consecutive_visible_frames": 2
+        }
+      ],
+      "passed": true
+    },
+    {
+      "host": "Windows Server 2025",
+      "label": "unicode-executable-path",
+      "core": 321,
+      "extended": 142,
+      "engineering_numeric": 2182,
+      "report_semantic": 405,
+      "export_and_pv": 28,
+      "cli_tools": 10,
+      "utf8_mode": 0,
+      "default_text_encoding": "cp1252",
+      "exe_sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+      "firewall_outbound_blocked": false,
+      "network_audit_blocked": true,
+      "render": [
+        {
+          "file": "Windows_Electrical.png",
+          "visible": true,
+          "elapsed_seconds": 0.503,
+          "consecutive_visible_frames": 2
+        },
+        {
+          "file": "Windows_Air.png",
+          "visible": true,
+          "elapsed_seconds": 0.508,
+          "consecutive_visible_frames": 2
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "second_artifact_id": 12175115342,
+  "second_artifact_sha256": "a046e3d3f4e0c9cf3e359d83d225d09f0e85795e0d0fb12c94d32429c1de9bf8",
+  "ten_cli_cross_host_parity": [
+    {
+      "tool": "electrical",
+      "json_equal": true,
+      "txt_equal": true
+    },
+    {
+      "tool": "duct",
+      "json_equal": true,
+      "txt_equal": true
+    },
+    {
+      "tool": "gas",
+      "json_equal": true,
+      "txt_equal": true
+    },
+    {
+      "tool": "lighting",
+      "json_equal": true,
+      "txt_equal": true
+    },
+    {
+      "tool": "water",
+      "json_equal": true,
+      "txt_equal": true
+    },
+    {
+      "tool": "air",
+      "json_equal": true,
+      "txt_equal": true
+    },
+    {
+      "tool": "units",
+      "json_equal": true,
+      "txt_equal": true
+    },
+    {
+      "tool": "cleanroom",
+      "json_equal": true,
+      "txt_equal": true
+    },
+    {
+      "tool": "heat_loads",
+      "json_equal": true,
+      "txt_equal": true
+    },
+    {
+      "tool": "pumps",
+      "json_equal": true,
+      "txt_equal": true
+    }
+  ]
+}

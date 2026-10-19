@@ -1,0 +1,38 @@
+{
+  "tool": "gas",
+  "flow_basis": "標準流量",
+  "gas": "CDA",
+  "custom_name": null,
+  "z_ratio": 1.0,
+  "standard_lpm": 800.0,
+  "actual_lpm": 115.58122125975831,
+  "atmosphere_kpa": 101.325,
+  "absolute_kpa": 701.325,
+  "gauge_kpa": 600.0,
+  "minimum_id_mm": 12.787258481990266,
+  "pipe": {
+    "name": "1/2\" (15A)",
+    "id": 16.1
+  },
+  "velocity_mps": 9.46224949762154,
+  "velocity_limit": 15.0,
+  "temperature_c": 25.0,
+  "reference_t": 25.0,
+  "reference_p": 101.325,
+  "formula": "實際流量=標準流量×P標準/P絕對×T管內(K)/T標準(K)×Z管內/Z標準；D內=√(4Q實際/πv)。",
+  "note": "壓力採管內表壓，另加所在地大氣壓。Z比1為理想氣體；僅適用單一氣相流速定寸，不核定材料相容、洩漏、點火或氣體安全；參考內徑需依實供管材核對，長管路另算壓降。",
+  "adopted_inputs": {
+    "atmosphere": "101.325",
+    "flow": "800",
+    "flow_basis": "標準流量",
+    "flow_unit": "SLPM",
+    "gas": "CDA",
+    "pressure": "6",
+    "pressure_unit": "bar(g)",
+    "reference_p": "101.325",
+    "reference_t": "25",
+    "temperature": "25",
+    "velocity": "15",
+    "z_ratio": "1"
+  }
+}

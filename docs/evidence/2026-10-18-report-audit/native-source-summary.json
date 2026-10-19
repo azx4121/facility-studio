@@ -1,0 +1,50 @@
+{
+  "commit": "c121cd872af8f52e3ef8963d138b54b2e7fa8333",
+  "app_tree": "6269dd85af0462b0ec4bf8b665b2dd88c413ab38",
+  "workflow_run": 39222780790,
+  "scope": "Windows source with native Tk and UTF-8 mode disabled; not frozen EXE acceptance",
+  "hosts": [
+    {
+      "name": "audit-regressions-windows-2025",
+      "id": 12173050260,
+      "size": 33611,
+      "sha256": "d1f879d46aeae041f623640ac7bad5c86254a950ee8cf92d03c912e792f67e8e",
+      "host": "Windows Server 2025",
+      "report": {
+        "passed": true,
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "utf8_mode": 0,
+        "default_text_encoding": "cp1252",
+        "numeric_and_report_checks": 405,
+        "gui_checks": 28
+      },
+      "audit": {
+        "passed": true,
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "formula_checks": 2182,
+        "gui_checks": 140
+      }
+    },
+    {
+      "name": "audit-regressions-windows-2022",
+      "id": 12172053181,
+      "size": 33611,
+      "sha256": "88db06807b851f5c33b49338fa197625b2d83277822fb7b6c356ec5704a6b7ac",
+      "host": "Windows Server 2022",
+      "report": {
+        "passed": true,
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "utf8_mode": 0,
+        "default_text_encoding": "cp1252",
+        "numeric_and_report_checks": 405,
+        "gui_checks": 28
+      },
+      "audit": {
+        "passed": true,
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "formula_checks": 2182,
+        "gui_checks": 140
+      }
+    }
+  ]
+}

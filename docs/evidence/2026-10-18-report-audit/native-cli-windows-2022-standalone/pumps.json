@@ -1,0 +1,30 @@
+{
+  "tool": "pumps",
+  "flow_lpm": 100.0,
+  "flow_m3_h": 6.0,
+  "head_m": 20.0,
+  "eta_pump": 0.7,
+  "eta_motor": 0.9,
+  "path_head_m": 20.0,
+  "static_head_m": 0.0,
+  "terminal_head_m": 0.0,
+  "head_margin_pct": 0.0,
+  "hydraulic_power_kw": 0.327,
+  "shaft_power_kw": 0.4671428571428572,
+  "motor_input_kw": 0.5190476190476191,
+  "required_motor_kw": 0.5372142857142858,
+  "recommended_motor_kw": 0.75,
+  "warnings": [],
+  "formula": "清水水功率kW=Q(m³/h)×H(m)×9.81/3600；軸功率=水功率/η泵；輸入電功率=軸功率/η馬達；銘牌以軸功率×1.15向上選級。",
+  "note": "馬達銘牌為額定機械輸出kW，不能以輸入電功率選級。設計揚程須含最不利回路及設備壓差；閉式循環不直接加樓高，另核NPSH與泵曲線。",
+  "adopted_inputs": {
+    "eta_motor": "0.90",
+    "eta_pump": "0.70",
+    "flow": "100",
+    "flow_unit": "LPM",
+    "head_m": "20",
+    "head_margin_pct": "0",
+    "static_head_m": "0",
+    "terminal_head_m": "0"
+  }
+}

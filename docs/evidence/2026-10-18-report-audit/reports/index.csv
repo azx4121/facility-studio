@@ -1,0 +1,25 @@
+﻿case,format,bytes,sha256,origin
+electrical-general-zh-Hant,txt,1534,b5fc2d00631ea426d93bc118dfa537a3aaf4e3e645766619b763d3447711558c,Windows source on Linux; synthetic input; c121cd8
+electrical-general-zh-Hant,html,9513,189c3a6dcd35960787a81254354709da150b09eb9b30cdd387a1717427670537,Windows source on Linux; synthetic input; c121cd8
+pipeline-A-zh-Hant,txt,6418,1f9b60c883a5af03509d969c66572c959a1913b22377e246e4482f25482bc6b6,Windows source on Linux; synthetic input; c121cd8
+pipeline-A-zh-Hant,html,17729,d5e0efcb1b44890242f7411e73689a083be13cfa7e083dd92b8ff29292c8651c,Windows source on Linux; synthetic input; c121cd8
+pipeline-B-zh-Hant,txt,6420,1668f544d49f5049634b93d7232bea0e6e56d7ea8116b2d0a91aab7ec8026e2a,Windows source on Linux; synthetic input; c121cd8
+pipeline-B-zh-Hant,html,17731,148b209b40656cfd442f2a254cf3a174a7d8fa5345fbcc15d7a94889cec00c4d,Windows source on Linux; synthetic input; c121cd8
+FCU-zh-Hant,txt,8252,2b86ecd3c672b676d1aaf668d6f5e066944dab574a994e6a8c59377479224a23,Windows source on Linux; synthetic input; c121cd8
+FCU-zh-Hant,html,17821,b125289fb353188f8b910e5da8edb527222fd904457d3fcda7b0f5fadfc1e801,Windows source on Linux; synthetic input; c121cd8
+RCU-30RT-zh-Hant,txt,8170,16ab91d6eccd3f91d7a542cd062ef35a402b7f9bd88264ed6fe2d7731e617d8d,Windows source on Linux; synthetic input; c121cd8
+RCU-30RT-zh-Hant,html,17742,2b9a41a644b18d0ff7e666087b58558bd8c36b77cf1ee42cbeb6afe82aa668e4,Windows source on Linux; synthetic input; c121cd8
+RCU-40RT-zh-Hant,txt,8170,150cf735d24c129b27664af3e9dca89246d160629e262e8c65650283ef79a325,Windows source on Linux; synthetic input; c121cd8
+RCU-40RT-zh-Hant,html,17742,2e0a0f65e81ffdea2063290c289502a9d2d9dab983066d200054829e2829b942,Windows source on Linux; synthetic input; c121cd8
+electrical-general-en,txt,1904,8288f4e4d114070a8fe741f8a2af20b46f0fe07993cc3d328f751f588df2296f,Windows source on Linux; synthetic input; c121cd8
+electrical-general-en,html,10310,99a2f019547d149639f88a399e5a756de47c41f3aa97380d9d2ca410a1220a83,Windows source on Linux; synthetic input; c121cd8
+pipeline-A-en,txt,7876,756a149f92a2203e33c8b70a9032694aaa52f47330b4080a07264ec011d4ec63,Windows source on Linux; synthetic input; c121cd8
+pipeline-A-en,html,20005,c0348192e523f3db0271ca60d0643b00781b4257ff8e359fb7afb52faf36c07a,Windows source on Linux; synthetic input; c121cd8
+pipeline-B-en,txt,7878,4910b6d95c6199aaa47098241d66396b16c396a6d91c156c63393cc654463291,Windows source on Linux; synthetic input; c121cd8
+pipeline-B-en,html,20007,fc42284cfec2cc3812be59c5ae022f23d8a2bbd9b5cedd34f3ed8d7fd460a6f3,Windows source on Linux; synthetic input; c121cd8
+FCU-en,txt,9782,7cd044b237a869ca83f5fb68740ce0218b8137a82b8927e4c52380e4ffbece2d,Windows source on Linux; synthetic input; c121cd8
+FCU-en,html,20034,c3d6c5e62787f26ed2634cf5734f752ace79d2ba9c715eadc9b9b7125c77a5fe,Windows source on Linux; synthetic input; c121cd8
+RCU-30RT-en,txt,9669,79068c4bf454c817597c15ca4b2539d3572d6a9ec722dbe6fef7a3370ac9bc40,Windows source on Linux; synthetic input; c121cd8
+RCU-30RT-en,html,19930,1432741d51d1001d50577fc9a453318ab039f08837eacb91b261a02069c34dd8,Windows source on Linux; synthetic input; c121cd8
+RCU-40RT-en,txt,9669,03804482c23c200551ec49019c716cdd93c9ffddb309acacdd47827d81212da6,Windows source on Linux; synthetic input; c121cd8
+RCU-40RT-en,html,19930,6f522aebf8527dfd331ca1398115afb61b9941ceff3a2bc2c764dc058307f7a5,Windows source on Linux; synthetic input; c121cd8

@@ -2,10 +2,12 @@
 
 [English](water.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
+Windows win.8 的 TXT／HTML 列出實際採用管長與固定單位，串接輸出也保留採用條件。可直接核對報告中的 30 m／50 m 等採用管長與對應壓差。正常桌面管長欄位維持原有計算。[本輪報告與反算](../2026-10-18-windows-report-audit.md)
+
 <a id="source-revision"></a>
 ## 現行原始碼：熱負荷 → 冰水 → 泵浦
 
-本節功能已包含於 Windows win.7／macOS mac.6；後續僅套用 Windows 的稽核修正見下方說明。
+本節功能已包含於 Windows win.8／macOS mac.6；後續僅套用 Windows 的稽核修正見下方說明。
 
 「熱負荷初估」分列照明、圍護、人員顯熱／潛熱、設備入室熱與 FFU 風機熱。圍護 20 W/m²、FFU 0.18 kW/台、外氣焓差 50 kJ/kg 是可改的初估假設。選外氣焓差終點時要維持控制體一致：
 

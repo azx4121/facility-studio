@@ -6,7 +6,7 @@ Choose a tool for your question, then review its inputs, formulas and result. Th
 
 ## Start with the full-workbench walkthrough
 
-The [beginner guide](workbench.en.md) starts with two reopenable practice projects and explains essential inputs, reports, latent load, water flow, pressure losses and AHU links. The [offline tutorial](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip) works in a browser on Windows or macOS.
+The [beginner guide](workbench.en.md) starts with two reopenable practice projects and explains essential inputs, reports, latent load, water flow, pressure losses and AHU links. The [offline tutorial](../tutorial/README.md) works in a browser on Windows or macOS.
 
 ## Choose your calculation
 
@@ -72,8 +72,10 @@ See the [licensing examples](../../LICENSE_GUIDE.en.md) for permitted use. Repor
 
 [FAQ](../faq.en.md) · [Native acceptance](../2026-10-16-gemini-integration-review.md#原生發布狀態) · [Historical records](../history/README.md#english)
 
-## Current release (win.7 / mac.6)
+## Current release (win.8 / mac.6)
 
-This release adds cleanroom airflow, heat-load and water-pump calculators, explicit airflow topology, upstream transfers and HTML executive reports. These changes are included in the Windows win.7 / Mac mac.6 downloads. See the [integration review](../2026-10-16-gemini-integration-review.md#english) for model boundaries, compatibility and native acceptance.
+This release adds cleanroom airflow, heat-load and water-pump calculators, explicit airflow topology, upstream transfers and HTML executive reports. These changes are included in the Windows win.8 / Mac mac.6 downloads. See the [integration review](../2026-10-16-gemini-integration-review.md#english) for model boundaries, compatibility and native acceptance.
 
 Windows win.7 fixes F01–F06 and source restoration/re-adoption, retaining win.5 lighting F07. Legacy W/kVA adoptions need recovery; ledger v2 workspaces cannot be read by mac.6. [Corrections and native acceptance](../2026-10-18-windows-audit-six.md#english).
+
+Windows win.8 adds direct PV vacuum entry, adopted conditions, equipment-source details, unit ratings and governing counts in reports, with corrected duty text, units and revision identity. [Reports and acceptance](../2026-10-18-windows-report-audit.md#english)

@@ -1,0 +1,30 @@
+{
+  "revision": "5.6.0-win.8",
+  "source_commit": "c121cd872af8f52e3ef8963d138b54b2e7fa8333",
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-2022Server-10.0.20348-SP0",
+  "packages": {
+    "altgraph": "0.17.5",
+    "contourpy": "1.4.0",
+    "cycler": "0.12.1",
+    "fonttools": "4.66.1",
+    "kiwisolver": "1.5.1",
+    "matplotlib": "3.10.9",
+    "numpy": "2.3.3",
+    "packaging": "26.3",
+    "pefile": "2024.8.26",
+    "pillow": "12.3.0",
+    "pip": "26.2.1",
+    "pyinstaller": "6.22.3",
+    "pyinstaller-hooks-contrib": "2026.8",
+    "pyparsing": "3.3.3",
+    "python-dateutil": "2.9.0.post0",
+    "pywin32-ctypes": "0.2.3",
+    "setuptools": "84.0.0",
+    "six": "1.17.0"
+  },
+  "exe_sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+  "exe_bytes": 41123955,
+  "build_only_internet": true,
+  "runtime_requires_python_installation": false
+}

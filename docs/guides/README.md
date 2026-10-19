@@ -6,7 +6,7 @@
 
 ## 完整工作台先從這裡開始
 
-[新手跟做教學](workbench.md)以兩份可開啟的專案，教您從基本條件到報告，並說明潛熱、水量、壓損及空調箱連動。[離線教學懶人包](https://github.com/azx4121/facility-studio/raw/refs/heads/main/docs/tutorial/Facility_Studio_Beginner_Tutorial.zip)可在 Windows／macOS 瀏覽器閱讀。
+[新手跟做教學](workbench.md)以兩份可開啟的專案，教您從基本條件到報告，並說明潛熱、水量、壓損及空調箱連動。[離線教學懶人包](../tutorial/README.md)可在 Windows／macOS 瀏覽器閱讀。
 
 ## 快速操作案例
 
@@ -74,8 +74,10 @@ python windows/Facility_Studio_V5_5.py --tool air --tool-input docs/examples/12-
 
 [常見問題](../faq.md) · [原生驗收](../2026-10-16-gemini-integration-review.md#原生發布狀態) · [歷史紀錄](../history/README.md)
 
-## 目前版本（win.7／mac.6）
+## 目前版本（win.8／mac.6）
 
-本版新增潔淨室風量、熱負荷與冰水泵浦快算，並提供明確氣流路徑、上游帶入與 HTML 設計總覽。這些變更已包含在 Windows win.7／Mac mac.6 下載檔中；模型邊界、相容性與原生驗收見[整合覆核](../2026-10-16-gemini-integration-review.md)。
+本版新增潔淨室風量、熱負荷與冰水泵浦快算，並提供明確氣流路徑、上游帶入與 HTML 設計總覽。這些變更已包含在 Windows win.8／Mac mac.6 下載檔中；模型邊界、相容性與原生驗收見[整合覆核](../2026-10-16-gemini-integration-review.md)。
 
 Windows win.7 已修正 F01–F06 與來源移除／再次帶入的資料復原，並保留 win.5 照明 F07 修正。舊 W／kVA 來源須依說明重建；ledger v2 整案不能由 mac.6 開啟。[修正與原生驗收](../2026-10-18-windows-audit-six.md)。
+
+Windows win.8 另補「PV 真空」直接入口、報告採用條件、設備來源、單台額定與台數依據；修正負載倍率文字與單位，報告標示 Windows 修訂。[本輪報告與驗收](../2026-10-18-windows-report-audit.md)

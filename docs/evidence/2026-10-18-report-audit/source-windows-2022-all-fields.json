@@ -1,0 +1,107 @@
+{
+  "kind": "audit-100x-all-fields-and-reports",
+  "platform": "windows",
+  "iterations": 100,
+  "passed": true,
+  "total_checks": 6977,
+  "field_coverage": {
+    "simple_fields_tested": 112,
+    "workbench_fields_tested": 257,
+    "pressure_drop_fields_tested": 220,
+    "ahu_fields_tested": 105,
+    "equipment_columns_tested": 95,
+    "reports_verified": 4226
+  },
+  "sample_iterations": [
+    {
+      "iteration": 1,
+      "pipeline_q_total_kw": 96.984,
+      "workbench_sys_type": "MAU+FFU+DCC (全外氣/無塵室)",
+      "workbench_qs_kw": 96.528,
+      "ahu_humidifier": "循環水洗濕膜",
+      "equipment_system": "電力",
+      "passed": true
+    },
+    {
+      "iteration": 2,
+      "pipeline_q_total_kw": 143.092,
+      "workbench_sys_type": "AHU (OA+RA 混合)",
+      "workbench_qs_kw": 52.968,
+      "ahu_humidifier": "循環水洗濕膜",
+      "equipment_system": "PCW",
+      "passed": true
+    },
+    {
+      "iteration": 3,
+      "pipeline_q_total_kw": 144.227,
+      "workbench_sys_type": "AHU (OA+RA 混合)",
+      "workbench_qs_kw": 54.288,
+      "ahu_humidifier": "循環水洗濕膜",
+      "equipment_system": "CDA",
+      "passed": true
+    },
+    {
+      "iteration": 4,
+      "pipeline_q_total_kw": 119.45,
+      "workbench_sys_type": "MAU+FFU+DCC (全外氣/無塵室)",
+      "workbench_qs_kw": 33.888,
+      "ahu_humidifier": "循環水洗濕膜",
+      "equipment_system": "N2",
+      "passed": true
+    },
+    {
+      "iteration": 5,
+      "pipeline_q_total_kw": 132.212,
+      "workbench_sys_type": "AHU (OA+RA 混合)",
+      "workbench_qs_kw": 103.528,
+      "ahu_humidifier": "循環水洗濕膜",
+      "equipment_system": "EXHAUST",
+      "passed": true
+    },
+    {
+      "iteration": 96,
+      "pipeline_q_total_kw": 88.93,
+      "workbench_sys_type": "MAU+FFU+DCC (全外氣/無塵室)",
+      "workbench_qs_kw": 92.808,
+      "ahu_humidifier": "循環水洗濕膜",
+      "equipment_system": "EXHAUST",
+      "passed": true
+    },
+    {
+      "iteration": 97,
+      "pipeline_q_total_kw": 59.999,
+      "workbench_sys_type": "RCU (機房空調箱+外氣)",
+      "workbench_qs_kw": 81.208,
+      "ahu_humidifier": "電熱式蒸汽",
+      "equipment_system": "DI",
+      "passed": true
+    },
+    {
+      "iteration": 98,
+      "pipeline_q_total_kw": 125.245,
+      "workbench_sys_type": "AHU (OA+RA 混合)",
+      "workbench_qs_kw": 95.728,
+      "ahu_humidifier": "電極式蒸汽",
+      "equipment_system": "PV",
+      "passed": true
+    },
+    {
+      "iteration": 99,
+      "pipeline_q_total_kw": 118.405,
+      "workbench_sys_type": "FCU (風機盤管+外氣)",
+      "workbench_qs_kw": 70.288,
+      "ahu_humidifier": "電熱式蒸汽",
+      "equipment_system": "電力",
+      "passed": true
+    },
+    {
+      "iteration": 100,
+      "pipeline_q_total_kw": 202.398,
+      "workbench_sys_type": "AHU (OA+RA 混合)",
+      "workbench_qs_kw": 101.208,
+      "ahu_humidifier": "電熱式蒸汽",
+      "equipment_system": "PCW",
+      "passed": true
+    }
+  ]
+}

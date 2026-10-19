@@ -6,6 +6,8 @@ Pipe size needs **flow, pressure and a velocity limit**. Pressure and velocity w
 
 Added process gases have no preset design velocity; enter a design value (choose custom velocity in the workbench). Reselecting the same gas preserves entered velocity; switching to a different added gas requires a new value. Identify mixtures by name and composition. Advanced Zactual/Zstandard defaults to 1; reverse actual-to-standard conversion divides by this ratio. Single gas phase only. [50-gas catalog and scope](../2026-10-12-v5.6-expansion.md)
 
+**Where is PV?** Windows win.8 adds **PV vacuum** on the homepage and workbench. It exposes **Gases / vacuum** and scrolls to the PV standard extraction field. In older builds use **Full workbench → All engineering pages → Gases / vacuum**; the default HVAC task scope hid that page. PV uses dedicated absolute-pressure fields and is absent from the positive-pressure gas dropdown. Opening it preserves project values.
+
 In the full workbench, a route with zero flow retains custom velocity and custom/mixture names as drafts without validating or including them in calculations or reports. Added gases with nonzero demand still require custom velocity and an entered design value; mixtures also require a name and composition. The independent gas calculator still requires valid velocity even when its flow is zero.
 
 SLPM, SCFM and Sm³/h are standard-volume units; ALPM is actual pipe volume flow. Default reference: 25°C and 101.325 kPa absolute. Default pipe temperature and local atmospheric pressure are also 25°C and 101.325 kPa. Check the equipment's reference conditions and adjust them if needed.
@@ -40,12 +42,14 @@ Choose Standard flow for SLPM/SCFM/Sm³/h or Actual pipe flow for ALPM/ACFM/Am³
 <a id="case-07"></a>
 ## Case 07: PV 2,000 SLPM, 150 Torr(abs)
 
-In **Full workbench**, open the gas/PV section and enter 2,000 SLPM and 150 Torr absolute. Use maximum velocity 18 m/s, pipe/reference temperature 25°C and Z ratio 1.
+Click **PV vacuum** and enter 2,000 SLPM and 150 Torr absolute. Use advanced mode to set maximum velocity 18 m/s; retain pipe/reference temperature 25°C and Z ratio 1.
 
 150 Torr(abs) = 19.9984 kPa(abs) = 199.984 mbar(abs).
 `Q_actual = 2000 × 760/150 = 10,133.333 ALPM`.
 Minimum ID is 109.300 mm. The reference table selects 6 in (150A), ID 160.3 mm, velocity 8.368 m/s. Its 4 in candidate has ID 108.3 mm and is too small.
 
-This is a **process-vacuum volume-flow estimate**, not high-vacuum performance, conductance, evacuation time or pump selection. Obtain pump curves, conductance, leaks/outgassing and external-pressure collapse data separately. Torr/kPa/mbar conversion retains the absolute-pressure basis. Supply and remote minimum pressures must satisfy the full workbench's pressure bounds.
+This is a **process-vacuum volume-flow estimate**, not high-vacuum performance, conductance, evacuation time or pump selection. Obtain pump curves, conductance, leaks/outgassing and external-pressure collapse data separately. Torr/kPa/mbar conversion retains the absolute-pressure basis. Positive-pressure gas routes have separate supply/minimum-pressure bounds. PV uses dedicated absolute-pressure fields: this model is limited to 1–760 Torr, and active vacuum demand must not exceed local atmospheric pressure. Lower pressure requires a vacuum-conductance model.
+
+In Advanced mode, confirm **Fraction of PV drawn from room**. HVAC makeup uses room-state volume, separate from expanded vacuum-pipe volume. People or other exhaust requirements may govern the minimum OA. At equal room/reference temperature and pressure, 2,000 SLPM with room fraction 1 means 120 CMH room extraction, while the 150 Torr pipe carries about 10,133 ALPM. Changing pipe pressure does not change the same standard extraction mass. [11 PV flow/makeup cross-checks](../evidence/2026-10-18-report-audit/pv-flow-crosschecks.json)
 
 Inputs: [05](../examples/05-gas.json), [06](../examples/06-gas.json), [PV scenario 07](../examples/scenarios.json). [Windows win.7 source results](../evidence/2026-10-18-audit-six/windows-use-cases.json).

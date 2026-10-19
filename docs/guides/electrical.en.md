@@ -18,6 +18,8 @@ Select **English** at the top right, then open **Electrical sizing**. Enter equi
 
 Under **Adjust defaults / advanced settings**, check PF, one-way cable length, ambient temperature, loaded conductors and terminal temperature. The example defaults are PF 0.85, copper XLPE, 30 m one-way, 35°C ambient, 60°C terminals, three conductors in conduit and 3% maximum voltage drop. These are reference assumptions, not universal installation rules.
 
+Windows win.8 prints the actual quick-tool duty multiplier: general current × 1, continuous/motor × 1.25, with HP/PS treated as motor loads. The general 10 kW case remains 17.8746 A and 20 AT; the earlier 1.25 description was incorrect. TXT/HTML include adopted units and the Windows revision; pipeline reports itemize source input power and chiller COP/explicit input power. [Reports and verification](../2026-10-18-windows-report-audit.md#english)
+
 <a id="case-01"></a>
 ## Case 01: 10 kW, three-phase 380 V
 

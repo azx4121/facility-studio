@@ -1,0 +1,508 @@
+{
+  "scope": "Unpublished failed candidates; original native captures, synthetic inputs",
+  "candidates": [
+    {
+      "commit": "a332f986652b4fbbadf21fe245ccb2cc5f77a9f2",
+      "run": 39137959923,
+      "artifact_id": 12140905887,
+      "artifact_sha256": "ec754af7f9c35a9ca6732ea150d5cccd25765ce339a6f6995f9c021a1ba49e0d",
+      "published": false,
+      "passed": false,
+      "total_checks": 321,
+      "failed": [
+        "Electrical form pixels after TkAgg cleanup and restore"
+      ],
+      "render_observations": [
+        {
+          "file": "Render_Before_TkAgg_Cleanup.png",
+          "tool": "electrical",
+          "regions": {
+            "inputs": {
+              "canvas_mapped": false,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                169,
+                913,
+                381
+              ],
+              "distinct_colors": 1,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe.!canvas.!frame",
+              "visible": false
+            },
+            "results": {
+              "canvas_mapped": false,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                381,
+                913,
+                592
+              ],
+              "distinct_colors": 1,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe2.!canvas.!frame",
+              "visible": false
+            }
+          },
+          "visible": false
+        },
+        {
+          "file": "Windows_Electrical.png",
+          "tool": "electrical",
+          "regions": {
+            "inputs": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                169,
+                977,
+                415
+              ],
+              "distinct_colors": 4,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe.!canvas.!frame",
+              "visible": false
+            },
+            "results": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                415,
+                977,
+                660
+              ],
+              "distinct_colors": 63,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe2.!canvas.!frame",
+              "visible": true
+            }
+          },
+          "visible": false
+        },
+        {
+          "file": "Windows_Air.png",
+          "tool": "air",
+          "regions": {
+            "inputs": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                169,
+                977,
+                415
+              ],
+              "distinct_colors": 223,
+              "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe.!canvas.!frame",
+              "visible": true
+            },
+            "results": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                415,
+                977,
+                660
+              ],
+              "distinct_colors": 256,
+              "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe2.!canvas.!frame",
+              "visible": true
+            }
+          },
+          "visible": true
+        }
+      ],
+      "callback_errors": []
+    },
+    {
+      "commit": "ff2b234caa50a638173b14999e6913e421255cd8",
+      "run": 39219503433,
+      "artifact_id": 12170719289,
+      "artifact_sha256": "cc94435316eb85cf33a5d7c2b913a0ec8c81dcf51c65009a1295110ba3e663ec",
+      "published": false,
+      "passed": false,
+      "total_checks": 321,
+      "failed": [
+        "Electrical form pixels after TkAgg cleanup and restore"
+      ],
+      "render_observations": [
+        {
+          "file": "Render_Before_TkAgg_Cleanup.png",
+          "tool": "electrical",
+          "regions": {
+            "inputs": {
+              "canvas_mapped": false,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                175,
+                913,
+                384
+              ],
+              "distinct_colors": 1,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe.!canvas.!frame",
+              "visible": false
+            },
+            "results": {
+              "canvas_mapped": false,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                384,
+                913,
+                592
+              ],
+              "distinct_colors": 1,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe2.!canvas.!frame",
+              "visible": false
+            }
+          },
+          "visible": false
+        },
+        {
+          "file": "Windows_Electrical.png",
+          "tool": "electrical",
+          "regions": {
+            "inputs": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                175,
+                977,
+                418
+              ],
+              "distinct_colors": 4,
+              "dark_fraction": 0.7588175726628316,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe.!canvas.!frame",
+              "visible": false
+            },
+            "results": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                418,
+                977,
+                660
+              ],
+              "distinct_colors": 49,
+              "dark_fraction": 0.5038726147721864,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe2.!canvas.!frame",
+              "visible": false
+            }
+          },
+          "visible": false
+        },
+        {
+          "file": "Windows_Air.png",
+          "tool": "air",
+          "regions": {
+            "inputs": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                175,
+                977,
+                418
+              ],
+              "distinct_colors": 219,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe.!canvas.!frame",
+              "visible": true
+            },
+            "results": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                418,
+                977,
+                660
+              ],
+              "distinct_colors": 256,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe2.!canvas.!frame",
+              "visible": true
+            }
+          },
+          "visible": true
+        }
+      ],
+      "callback_errors": []
+    },
+    {
+      "commit": "0c82d44c5508763a6026cae3acb70e680c2c21cb",
+      "run": 39220884720,
+      "artifact_id": 12172016820,
+      "published": false,
+      "core_passed": true,
+      "total_core_checks": 321,
+      "render_observations": [
+        {
+          "file": "Render_Before_TkAgg_Cleanup.png",
+          "tool": "electrical",
+          "regions": {
+            "inputs": {
+              "canvas_mapped": false,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                175,
+                913,
+                384
+              ],
+              "distinct_colors": 1,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe.!canvas.!frame",
+              "visible": false
+            },
+            "results": {
+              "canvas_mapped": false,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                384,
+                913,
+                592
+              ],
+              "distinct_colors": 1,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe2.!canvas.!frame",
+              "visible": false
+            }
+          },
+          "visible": false
+        },
+        {
+          "file": "Windows_Electrical.png",
+          "tool": "electrical",
+          "regions": {
+            "inputs": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                175,
+                977,
+                418
+              ],
+              "distinct_colors": 147,
+              "dark_fraction": 0.00026932109538275914,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe.!canvas.!frame",
+              "visible": true
+            },
+            "results": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                418,
+                977,
+                660
+              ],
+              "distinct_colors": 265,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage.!scrollableframe2.!canvas.!frame",
+              "visible": true
+            }
+          },
+          "visible": true,
+          "elapsed_seconds": 0.549,
+          "consecutive_visible_frames": 2,
+          "attempts": [
+            {
+              "file": "Windows_Electrical_0.png",
+              "tool": "electrical",
+              "regions": {
+                "inputs": {
+                  "canvas_mapped": true,
+                  "body_mapped": true,
+                  "bounds": [
+                    213,
+                    175,
+                    977,
+                    418
+                  ],
+                  "distinct_colors": 147,
+                  "dark_fraction": 0.00026932109538275914,
+                  "canvas_item_window": ".!frame3.!simplepage.!scrollableframe.!canvas.!frame",
+                  "visible": true
+                },
+                "results": {
+                  "canvas_mapped": true,
+                  "body_mapped": true,
+                  "bounds": [
+                    213,
+                    418,
+                    977,
+                    660
+                  ],
+                  "distinct_colors": 265,
+                  "dark_fraction": 0.0,
+                  "canvas_item_window": ".!frame3.!simplepage.!scrollableframe2.!canvas.!frame",
+                  "visible": true
+                }
+              },
+              "visible": true,
+              "elapsed_seconds": 0.281
+            },
+            {
+              "file": "Windows_Electrical_1.png",
+              "tool": "electrical",
+              "regions": {
+                "inputs": {
+                  "canvas_mapped": true,
+                  "body_mapped": true,
+                  "bounds": [
+                    213,
+                    175,
+                    977,
+                    418
+                  ],
+                  "distinct_colors": 147,
+                  "dark_fraction": 0.00026932109538275914,
+                  "canvas_item_window": ".!frame3.!simplepage.!scrollableframe.!canvas.!frame",
+                  "visible": true
+                },
+                "results": {
+                  "canvas_mapped": true,
+                  "body_mapped": true,
+                  "bounds": [
+                    213,
+                    418,
+                    977,
+                    660
+                  ],
+                  "distinct_colors": 265,
+                  "dark_fraction": 0.0,
+                  "canvas_item_window": ".!frame3.!simplepage.!scrollableframe2.!canvas.!frame",
+                  "visible": true
+                }
+              },
+              "visible": true,
+              "elapsed_seconds": 0.549
+            }
+          ]
+        },
+        {
+          "file": "Windows_Air.png",
+          "tool": "air",
+          "regions": {
+            "inputs": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                175,
+                977,
+                418
+              ],
+              "distinct_colors": 219,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe.!canvas.!frame",
+              "visible": true
+            },
+            "results": {
+              "canvas_mapped": true,
+              "body_mapped": true,
+              "bounds": [
+                213,
+                418,
+                977,
+                660
+              ],
+              "distinct_colors": 256,
+              "dark_fraction": 0.0,
+              "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe2.!canvas.!frame",
+              "visible": true
+            }
+          },
+          "visible": true,
+          "elapsed_seconds": 0.497,
+          "consecutive_visible_frames": 2,
+          "attempts": [
+            {
+              "file": "Windows_Air_0.png",
+              "tool": "air",
+              "regions": {
+                "inputs": {
+                  "canvas_mapped": true,
+                  "body_mapped": true,
+                  "bounds": [
+                    213,
+                    175,
+                    977,
+                    418
+                  ],
+                  "distinct_colors": 219,
+                  "dark_fraction": 0.0,
+                  "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe.!canvas.!frame",
+                  "visible": true
+                },
+                "results": {
+                  "canvas_mapped": true,
+                  "body_mapped": true,
+                  "bounds": [
+                    213,
+                    418,
+                    977,
+                    660
+                  ],
+                  "distinct_colors": 256,
+                  "dark_fraction": 0.0,
+                  "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe2.!canvas.!frame",
+                  "visible": true
+                }
+              },
+              "visible": true,
+              "elapsed_seconds": 0.248
+            },
+            {
+              "file": "Windows_Air_1.png",
+              "tool": "air",
+              "regions": {
+                "inputs": {
+                  "canvas_mapped": true,
+                  "body_mapped": true,
+                  "bounds": [
+                    213,
+                    175,
+                    977,
+                    418
+                  ],
+                  "distinct_colors": 219,
+                  "dark_fraction": 0.0,
+                  "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe.!canvas.!frame",
+                  "visible": true
+                },
+                "results": {
+                  "canvas_mapped": true,
+                  "body_mapped": true,
+                  "bounds": [
+                    213,
+                    418,
+                    977,
+                    660
+                  ],
+                  "distinct_colors": 256,
+                  "dark_fraction": 0.0,
+                  "canvas_item_window": ".!frame3.!simplepage6.!scrollableframe2.!canvas.!frame",
+                  "visible": true
+                }
+              },
+              "visible": true,
+              "elapsed_seconds": 0.497
+            }
+          ]
+        }
+      ],
+      "audit_passed": false,
+      "failure_reason": "Report acceptance reader omitted explicit UTF-8 under frozen CP1252 default; runtime reports were already written as UTF-8."
+    }
+  ]
+}

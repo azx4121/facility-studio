@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "current_documents": 33,
+  "relative_links": 495,
+  "broken_links": [],
+  "json_files": 56,
+  "native_combinations": 6,
+  "unmodified_native_images": 72,
+  "application_changes_after_native_test": false
+}

@@ -1,0 +1,117 @@
+{
+  "source_commit": "c121cd872af8f52e3ef8963d138b54b2e7fa8333",
+  "application_tree": "6269dd85af0462b0ec4bf8b665b2dd88c413ab38",
+  "R01": {
+    "adopted_length_m": 50.0,
+    "pressure_pa": 24197.929837789383,
+    "pump_head_m": 2.4675021376096202,
+    "unknown_field_rejection": {
+      "code": "unknown_field",
+      "field": "water.length_m",
+      "message": "未知的串接輸入欄位：water.length_m"
+    }
+  },
+  "R02": {
+    "operating_a": 17.87462133714012,
+    "design_a": 17.87462133714012,
+    "multiplier": 1.0
+  },
+  "R03": {
+    "a_loads": [
+      {
+        "name": "FFU",
+        "power_kw": 3.42,
+        "basis": "電氣輸入"
+      },
+      {
+        "name": "照明",
+        "power_kw": 1.2,
+        "basis": "電氣輸入"
+      },
+      {
+        "name": "CHWP",
+        "power_kw": 0.06042179209721605,
+        "basis": "電氣輸入"
+      },
+      {
+        "name": "MAU",
+        "power_kw": 2.0,
+        "basis": "電氣輸入"
+      },
+      {
+        "name": "製程設備",
+        "power_kw": 20.0,
+        "basis": "電氣輸入"
+      },
+      {
+        "name": "Chiller",
+        "power_kw": 6.583999999999999,
+        "basis": "電氣輸入"
+      }
+    ],
+    "b_loads": [
+      {
+        "name": "FFU",
+        "power_kw": 3.42,
+        "basis": "電氣輸入"
+      },
+      {
+        "name": "照明",
+        "power_kw": 1.2,
+        "basis": "電氣輸入"
+      },
+      {
+        "name": "CHWP",
+        "power_kw": 0.06042179209721605,
+        "basis": "電氣輸入"
+      },
+      {
+        "name": "MAU",
+        "power_kw": 12.0,
+        "basis": "電氣輸入"
+      },
+      {
+        "name": "製程設備",
+        "power_kw": 10.0,
+        "basis": "電氣輸入"
+      },
+      {
+        "name": "Chiller",
+        "power_kw": 6.583999999999999,
+        "basis": "電氣輸入"
+      }
+    ],
+    "total_a_kw": 33.26442179209722,
+    "total_b_kw": 33.26442179209722,
+    "different_reports": [
+      {
+        "language": "zh-Hant",
+        "txt": true,
+        "html": true
+      },
+      {
+        "language": "en",
+        "txt": true,
+        "html": true
+      }
+    ]
+  },
+  "PV": {
+    "reason_for_missing_entry": "Default HVAC task scope hides the gases/vacuum page; vacuum is separate from positive-pressure gas choices.",
+    "ui_checks": 14,
+    "native_source_hosts": [
+      "Windows Server 2022",
+      "Windows Server 2025"
+    ],
+    "absolute_pressure_units": [
+      "Torr(abs)",
+      "kPa(abs)",
+      "mbar(abs)"
+    ],
+    "150_torr_kpa": 19.998355263157894,
+    "150_torr_mbar": 199.98355263157896
+  },
+  "verified_against_commit": "c121cd872af8f52e3ef8963d138b54b2e7fa8333",
+  "verified_against_application_tree": "6269dd85af0462b0ec4bf8b665b2dd88c413ab38",
+  "report_implementation_unchanged": true
+}

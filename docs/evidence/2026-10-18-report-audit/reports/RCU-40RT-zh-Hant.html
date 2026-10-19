@@ -1,0 +1,139 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一般廠房初估範例</title><style>
+:root{color-scheme:light;--page:#F8FAFC;--card:#FFFFFF;--border:#CBD5E1;
+--nav:#0F172A;--blue:#0284C7;--ink:#334155;--muted:#64748B;
+--success:#16A34A;--success-bg:#DCFCE7;--warning:#D97706;--warning-bg:#FEF9C3;
+--danger:#DC2626;--danger-bg:#FEE2E2}
+*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);overflow-wrap:anywhere;
+font:14px/1.7 "Microsoft JhengHei UI","Noto Sans TC",system-ui,sans-serif}
+.report-header{background:var(--nav);color:#fff;padding:28px max(24px,calc((100vw - 1240px)/2))}
+.report-header h1{margin:0 0 8px;font-size:28px;overflow-wrap:anywhere}.report-header p{margin:0;color:#CBD5E1}
+main{max-width:1288px;margin:0 auto;padding:24px}h2{font-size:19px;color:var(--nav);margin:0 0 16px}
+section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:22px}
+.executive-summary{border-top:4px solid var(--blue)}.kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:16px 0 22px}
+.kpi-card{border:1px solid var(--border);border-radius:10px;padding:14px 16px;min-width:0;background:var(--card)}
+.kpi-label{font-size:12px;color:var(--muted);margin:0 0 8px}.kpi-value{font:700 20px/1.4 Consolas,"DejaVu Sans Mono",monospace;
+color:var(--nav);margin:0 0 12px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11px;line-height:1.5;white-space:normal}
+.success{color:#166534;background:var(--success-bg)}.warning{color:#92400E;background:var(--warning-bg)}
+.danger{color:#991B1B;background:var(--danger-bg)}.neutral{color:var(--muted);background:#E2E8F0}
+.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;margin:0}th,td{text-align:left;padding:11px 12px;
+border-bottom:1px solid #E2E8F0;vertical-align:top;overflow-wrap:anywhere}thead th{background:var(--nav);color:#fff;font-size:12px}
+tbody tr:nth-child(even){background:var(--page)}tbody th{font-weight:600;width:20%}
+.selection-table td{font-family:Consolas,"Microsoft JhengHei UI",monospace;font-variant-numeric:tabular-nums}
+.selection-table td:last-child{font-family:"Microsoft JhengHei UI",sans-serif;width:11%}
+.status{padding:12px 16px;border-left:4px solid var(--warning);background:var(--warning-bg);border-radius:4px;margin:0 0 20px}
+.muted,small{color:var(--muted)}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.8 Consolas,"Microsoft JhengHei UI",monospace;
+margin:0;font-variant-numeric:tabular-nums}.toolbar{max-width:1288px;margin:16px auto 0;padding:0 24px;text-align:right}
+button{border:0;border-radius:7px;padding:10px 18px;background:var(--blue);color:white;font-weight:700;cursor:pointer}
+button:hover{background:#0369A1}footer{padding:8px 24px 24px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.selection-table{min-width:720px}}
+@media(max-width:560px){main{padding:12px}section{padding:14px}.kpi-grid{grid-template-columns:1fr}.report-header h1{font-size:23px}}
+@media print{body{background:white;font-size:10pt}.toolbar{display:none}.report-header{background:white;color:#0F172A;padding:0 0 18px}
+.report-header p{color:#64748B}main{max-width:none;padding:0}section{border-radius:0;padding:12px;margin-bottom:16px}
+.kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.kpi-card{padding:10px}.kpi-value{font-size:13pt}
+thead{display:table-header-group}tr,.kpi-card{break-inside:avoid}.table-scroll{overflow:visible}.selection-table{min-width:0}
+.appendix{break-before:page}th,td{padding:6px}footer{padding:0}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:A4 landscape;margin:14mm}}
+</style></head><body><header class="report-header"><h1>一般廠房初估範例</h1><p>V5.6.0 · Windows win.8｜工程設計摘要</p></header><div class="toolbar"><button type="button" onclick="window.print()">列印／另存 PDF</button></div><main><section class="executive-summary" aria-labelledby="executive-title"><h2 id="executive-title">★ 核心工程設計量與設備選型總覽（Executive Design Summary）</h2><div class="kpi-grid"><article class="kpi-card"><p class="kpi-label">FFU 循環風機濾網組</p><p class="kpi-value">不適用</p><span class="badge neutral">不適用</span></article><article class="kpi-card"><p class="kpi-label">MAU 外氣空調箱</p><p class="kpi-value">不適用</p><span class="badge neutral">不適用</span></article><article class="kpi-card"><p class="kpi-label">DCC 室內乾冷盤管</p><p class="kpi-value">不適用</p><span class="badge neutral">不適用</span></article><article class="kpi-card"><p class="kpi-label">中央冰水主機 Chiller</p><p class="kpi-value">22.16 US RT</p><span class="badge warning">冷量初估</span></article><article class="kpi-card"><p class="kpi-label">冰水主管路規格</p><p class="kpi-value">MCHW 0 LPM｜CHW 245.72 LPM｜DCCW 0 LPM</p><span class="badge warning">各溫度迴路分列</span></article><article class="kpi-card"><p class="kpi-label">冰水循環泵浦 CHWP</p><p class="kpi-value">待選型</p><span class="badge warning">待選型</span></article><article class="kpi-card"><p class="kpi-label">主配電斷路器 MCCB</p><p class="kpi-value">UP 300 AT / NP 125 AT</p><span class="badge warning">分盤候選</span></article></div><div class="table-scroll"><table class="selection-table"><thead><tr><th scope="col">設備／系統</th><th scope="col">計算需求值</th><th scope="col">建議選型規格</th><th scope="col">狀態</th></tr></thead><tbody><tr><th scope="row">FFU 循環風機濾網組</th><td>此系統未採用 FFU</td><td>不適用</td><td><span class="badge neutral">不適用</span></td></tr><tr><th scope="row">MAU 外氣空調箱</th><td>此系統於空調入口混合外氣；未配置獨立 MAU</td><td>不適用</td><td><span class="badge neutral">不適用</span></td></tr><tr><th scope="row">DCC 室內乾冷盤管</th><td>此系統未採用 DCC</td><td>不適用</td><td><span class="badge neutral">不適用</span></td></tr><tr><th scope="row">中央冰水主機 Chiller</th><td>各溫度迴路容量包絡（未加餘裕） 77.94 kW / 22.16 US RT</td><td>分溫度迴路容量目標 85.73 kW / 24.38 US RT（含本案容量餘裕，原廠額定待確認）</td><td><span class="badge warning">冷量初估</span></td></tr><tr><th scope="row">冰水主管路規格</th><td>MCHW 0 LPM｜CHW 245.72 LPM｜DCCW 0 LPM</td><td>MCHW 無需求；0 m/s；0 Pa/m；路徑壓差 0 Pa｜CHW 50A (2&quot;)；1.89 m/s；739.58 Pa/m；路徑壓差 96,145.41 Pa｜DCCW 無需求；0 m/s；0 Pa/m；路徑壓差 0 Pa</td><td><span class="badge warning">各溫度迴路分列</span></td></tr><tr><th scope="row">冰水循環泵浦 CHWP</th><td>MCHW 0 LPM；揚程 0 m；軸功率 0 kW｜CHW 245.72 LPM；揚程 9.8 m；軸功率 0.56 kW｜DCCW 0 LPM；揚程 0 m；軸功率 0 kW</td><td>馬達銘牌尚未選型；各迴路須分別選泵</td><td><span class="badge warning">待選型</span></td></tr><tr><th scope="row">主配電斷路器 MCCB</th><td>UP 155 kW；277.06 A｜NP 55 kW；98.31 A</td><td>UP 300 AT；1 組 × 250 mm²/相｜NP 125 AT；1 組 × 100 mm²/相；主進線未計算，不將分盤 AT 相加</td><td><span class="badge warning">分盤候選</span></td></tr></tbody></table></div></section><p class="status">待補資料｜需求初估，待原廠同工況及工程覆核</p><section><h2>設計條件</h2><div class="table-scroll"><table><thead><tr><th scope="col">項目</th><th scope="col">設計條件</th></tr></thead><tbody><tr><td>系統</td><td>RCU (機房空調箱+外氣)</td></tr><tr><td>夏季外氣</td><td>35 °C／70 %RH</td></tr><tr><td>冬季外氣</td><td>8 °C／70 %RH</td></tr><tr><td>室內</td><td>22 °C／50 %RH</td></tr><tr><td>冬季邊界</td><td>室內熱濕平衡（定風量）</td></tr><tr><td>容量餘裕</td><td>10 %</td></tr></tbody></table></div></section><section><h2>需確認的條件</h2><div class="table-scroll"><table><thead><tr><th scope="col">狀態</th><th scope="col">項目</th><th scope="col">說明</th></tr></thead><tbody><tr><td>待資料</td><td>CHW 設備阻力</td><td>僅列管路小計；詳細與簡易模式皆未將未知阻力當成零。</td></tr><tr><td>待資料</td><td>HW 設備阻力</td><td>僅列管路小計；詳細與簡易模式皆未將未知阻力當成零。</td></tr><tr><td>待資料</td><td>設備同工況選型</td><td>本工具計算需求，仍需盤管／末端原廠選型與實際風機曲線。</td></tr><tr><td>待資料</td><td>配電候選覆核</td><td>原表僅供初估；需敷設方式、短路、接地及馬達保護資料。</td></tr><tr><td>待資料</td><td>冬季室內與電力範圍</td><td>依明列負荷完成穩態室內熱濕收支；NP 仍須實際設備電力。</td></tr></tbody></table></div></section><section class="appendix"><h2>計算附錄</h2><pre>一般廠房初估範例｜設計條件與計算摘要
+系統：RCU (機房空調箱+外氣)｜V5.6.0 · Windows win.8｜需求初估
+整體狀態：待補資料；設備台數為需求候選，未達條件不可直接選用。
+[待資料] CHW 設備阻力：僅列管路小計；詳細與簡易模式皆未將未知阻力當成零。
+[待資料] HW 設備阻力：僅列管路小計；詳細與簡易模式皆未將未知阻力當成零。
+[待資料] 設備同工況選型：本工具計算需求，仍需盤管／末端原廠選型與實際風機曲線。
+[待資料] 配電候選覆核：原表僅供初估；需敷設方式、短路、接地及馬達保護資料。
+[待資料] 冬季室內與電力範圍：依明列負荷完成穩態室內熱濕收支；NP 仍須實際設備電力。
+
+╔══════════════════════════════════════════════════════════════════╗
+★ 核心工程設計量與設備選型總覽（Executive Design Summary）
+【計算需求值】與【建議選型規格】分列；缺值保留尚未計算。
+
+FFU 循環風機濾網組｜不適用
+  【計算需求值】此系統未採用 FFU
+  【建議選型規格】不適用
+
+MAU 外氣空調箱｜不適用
+  【計算需求值】此系統於空調入口混合外氣；未配置獨立 MAU
+  【建議選型規格】不適用
+
+DCC 室內乾冷盤管｜不適用
+  【計算需求值】此系統未採用 DCC
+  【建議選型規格】不適用
+
+中央冰水主機 Chiller｜冷量初估
+  【計算需求值】各溫度迴路容量包絡（未加餘裕） 77.94 kW / 22.16 US RT
+  【建議選型規格】分溫度迴路容量目標 85.73 kW / 24.38 US RT（含本案容量餘裕，原廠額定待確認）
+
+冰水主管路規格｜各溫度迴路分列
+  【計算需求值】MCHW 0 LPM｜CHW 245.72 LPM｜DCCW 0 LPM
+  【建議選型規格】MCHW 無需求；0 m/s；0 Pa/m；路徑壓差 0 Pa｜CHW 50A (2&quot;)；1.89 m/s；739.58 Pa/m；路徑壓差 96,145.41 Pa｜DCCW 無需求；0 m/s；0 Pa/m；路徑壓差 0 Pa
+
+冰水循環泵浦 CHWP｜待選型
+  【計算需求值】MCHW 0 LPM；揚程 0 m；軸功率 0 kW｜CHW 245.72 LPM；揚程 9.8 m；軸功率 0.56 kW｜DCCW 0 LPM；揚程 0 m；軸功率 0 kW
+  【建議選型規格】馬達銘牌尚未選型；各迴路須分別選泵
+
+主配電斷路器 MCCB｜分盤候選
+  【計算需求值】UP 155 kW；277.06 A｜NP 55 kW；98.31 A
+  【建議選型規格】UP 300 AT；1 組 × 250 mm²/相｜NP 125 AT；1 組 × 100 mm²/相；主進線未計算，不將分盤 AT 相加
+╚══════════════════════════════════════════════════════════════════╝
+
+一、設計條件
+大氣壓 101.325 kPa；夏季 35°C / 70%RH；冬季 8°C / 70%RH；室內 22°C / 50%RH（精確目標）。
+A 區 300.0 m²、1200.0 m³；ACH 8 需求 9600.0 CMH；正壓 0 Pa；潔淨紀錄 無 (None)。
+B 區 0.0 m²、0.0 m³；ACH 0 需求 0.0 CMH；正壓 0 Pa；潔淨紀錄 無 (None)。
+正壓洩漏 0.00 CMH（門縫孔口法）；補償外氣下限 480.00 CMH；採用 480.00 CMH；額外洩壓需求 0.00 CMH（均以室內狀態基準）。
+照明 157 盞／6.280 kW；室內顯熱 60.448 kW；潛熱參考 1.100 kW；產濕 1.583 kg/h。
+顯熱組成：設備淨熱 32.000（PCW帶走 0.000、排氣帶走 0.000）、人員顯熱 1.500、照明 6.280、外牆 5.927、樓板 14.741、烤箱 0.000、日射 0.000、風機與FFU 0.000 kW。
+產濕來源：人員 1.583＋額外製程 0.000 kg/h；製程方式：沒有額外產濕。外氣水氣由盤管另算，不重複加進室內。
+
+二、空調分工與狀態
+一段供水 12.0°C／ΔT 5 K（自動旁通因子估算，目標 26.0°C）；二段 7.0°C／ΔT 5.0 K；無 DCC 迴路（備用ΔT 4.0 K）；容量餘裕 10%（冷凍噸基準：US RT (美制 3024 kcal/hr)）。
+處理風量 18435.67 CMH（室內基準）；外氣於空調入口混合。
+點位             乾球°C    RH%       w(g/kg乾空氣)       h(kJ/kg乾空氣)
+入口            22.349   51.538         8.665165          44.514499
+一段出口          22.349   51.538         8.665165          44.514499
+二段出口          10.978  100.000         8.151478          31.597251
+最終送風          12.207   92.190         8.151478          32.852406
+室內            22.000   50.000         8.224239          43.037358
+一段盤管：空氣側 0.000 kW；水側 0.000 kW；含餘裕 0.000 RT；凝結水 0.000 kg/h。
+二段盤管：空氣側 78.082 kW；水側 77.939 kW；含餘裕 24.378 RT；凝結水 11.178 kg/h。
+DCC 顯熱 0.000 kW；夏季再熱 7.587 kW；加濕 0.000 kg/h（空氣側 0.000 kW）。
+設備初估：RCU 1 台
+末端冷卻選型基準：夏季 77.939 kW／冬季 31.161 kW；夏冬較大值 × 1.1＝85.733 kW。FCU 同時核對風量。
+RCU 單台額定：40 RT／140.674114 kW；冷量需求台數 0.609444，向上取整 1 台。
+冬季室內熱濕平衡：顯熱 33.397 kW；送風 16.589°C／69.427%RH；加熱 0.000 kW、加濕 0.445 kg/h。
+DCC 夏冬較大需求 0.000 kW；冬季為明列負荷的穩態估算，非逐時建築模擬。
+
+三、管路／流速／壓差
+CHW：245.724 LPM，ΔT 5.00 K，1 支×50A (2&quot;)／ID 52.5 mm，1.892 m/s；壓差 96145.410 Pa。
+  採用物性：ρ 1000 kg/m³；cp 4.1868 kJ/(kg·K)；μ 0.001 Pa·s；來源 沿用共用參考。
+  閉式循環不把樓高加進循環泵差壓；系統靜壓另核。
+HW：11.960 LPM，ΔT 10.00 K，1 支×15A (1/2&quot;)／ID 15.8 mm，1.017 m/s；壓差 137048.669 Pa。
+  採用物性：ρ 1000 kg/m³；cp 4.1868 kJ/(kg·K)；μ 0.001 Pa·s；來源 沿用共用參考。
+  閉式循環不把樓高加進循環泵差壓；系統靜壓另核。
+PV 設計流速上限 18.000 m/s。
+氣體標準體積：25°C／101.325 kPa；管內 25°C，Z 比 1；僅流速初估。
+壓損簡易初估：CHW 30%、HW 30% 管件等效長度餘裕；Δp＝直管摩擦×(1＋餘裕)＋已知設備壓差＋適用靜揚程。
+
+四、配電候選
+3Φ4W 380/220V；PF 0.85；HP 換算效率 0.90；XLPE 絕緣電纜 (90°C)；端子 60°C；單程 30 m；排序 最少並聯組數。
+本工作台降載採下拉區間：環溫 35℃ 以下 (標準)；同管載流導線 3根以下 (標準)。
+  UP 採用環溫 35°C，溫度係數 1，同管係數 1。
+UP：運轉 277.057 A，設計 277.057 A；NFB 候選 300 AT，1 組×250.0 mm²/相，Iz 300.000 A，壓降 0.417%；接地紀錄：待核。
+  NP 採用環溫 35°C，溫度係數 1，同管係數 1。
+NP：運轉 98.310 A，設計 122.888 A；NFB 候選 125 AT，1 組×100.0 mm²/相，Iz 164.000 A，壓降 0.285%；接地紀錄：待核。
+  連續負載採總運轉電流×1.25；最大馬達草稿不參與計算。
+
+五、主要公式與簡短說明
+照明 N=ceil(E×A/(Φ×U×M))=ceil(500×300/(2000×0.6×0.8))=157 盞。
+室內顯熱 Qs=m_da(1.006+1.86ws)(Tr−Ts)+QDCC=60.448 kW；產濕 G=3600×m_da(wr−ws)=1.583 kg/h。
+h=1.006T+w(2501+1.86T)；盤管 Qair=m_da(hin−hout)；Qwater=Qair−m凝結水×cp水×T凝結水。
+水量 LPM=60000Q/(ρcpΔT)；方管 A=WH、Dh=2WH/(W+H)；並聯 v=V̇/(nA)；Δp=f(L/Dh)ρv²/2+管件+設備壓差。
+三相 I=1000P/(√3VLL·PF)；HP 為軸輸出，先乘 0.7456999/η 換輸入 kW；一般候選需滿足設計電流≤AT≤有效載流與小線保護上限。
+盤管為需求／ADP 近似，非廠商性能選定；電纜沿用專案表並加保守條件，端子、短路、接地及馬達啟動仍需覆核。
+
+本案待確認：
+• FCU／RCU 採外氣於入口混入的等效控制體；實際外氣另接 MAU 時需另設系統拓樸。
+• 壓損 CHW、HW 未含設備阻力，僅為管路小計；選泵／風機前須補盤管、濾網、處理設備等壓差。
+• 加熱與加濕的空氣側需求尚未自動併入 NP；請按設備型式、效率與實際輸入功率填列。
+資料依據：隨附版本化工程表為初估參考，並非已確認適用的法規載流表。參數來源另存於專案 JSON／HTML 附錄。
+</pre></section><section><h2>參數來源</h2><div class="table-scroll"><table><thead><tr><th scope="col">欄位</th><th scope="col">來源</th><th scope="col">備註</th></tr></thead><tbody></tbody></table></div><p class="muted">專案雜湊：523c139d792a864d895b85ab7d1d79ffd57abe07a67848365fbd611215aed98d</p></section></main><footer>需求初估；設備額定與實際工況須由原廠及設計人員確認。</footer></body></html>

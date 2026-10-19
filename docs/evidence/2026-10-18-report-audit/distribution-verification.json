@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "scope": "Downloaded GitHub delivery artifact; PE/resource, full SHA256 and ZIP executable equality; public-release metadata verified separately",
+  "source_commit": "c121cd872af8f52e3ef8963d138b54b2e7fa8333",
+  "artifact_id": 12172424757,
+  "artifact_sha256": "a65bc476aa5a97b45173d5ac4a6f1d7486a05473e2c0e9bc202576e0580eb251",
+  "exe_bytes": 41123955,
+  "exe_sha256": "c91509784295e5c0a42a2148cec6a2aa12108e47203113e7c86eb37eb24d3d56",
+  "pe_machine": "AMD64",
+  "pe_format": "PE32+",
+  "subsystem": "Windows GUI",
+  "file_version": "5.6.0.8",
+  "product_version": "5.6.0-win.8",
+  "zip_exe_same": true,
+  "all_internal_checksums_valid": true
+}

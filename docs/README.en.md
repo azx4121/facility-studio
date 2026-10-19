@@ -1,10 +1,10 @@
 # Facility Studio documentation
 
-[Windows win.7 工程修正與原生驗收 / Corrections and acceptance](2026-10-18-windows-audit-six.md) · [win.4／mac.6 整合歷史](2026-10-16-gemini-integration-review.md)
+[Windows win.8 工程修正與原生驗收 / Corrections and acceptance](2026-10-18-windows-report-audit.md) · [win.4／mac.6 整合歷史](2026-10-16-gemini-integration-review.md)
 
 [繁體中文](README.md) · [Home and downloads](../README.en.md) · [Report a problem](https://github.com/azx4121/facility-studio/issues)
 
-Current version: **V5.6.0 public test release (win.7 / mac.6)**. Choose documentation for your task; use the practice walkthrough when you need a full project.
+Current version: **V5.6.0 public test release (win.8 / mac.6)**. Choose documentation for your task; use the practice walkthrough when you need a full project.
 
 ## Start here
 
@@ -26,7 +26,7 @@ Help is bundled: use **This tool's guide** in a quick calculator or **Beginner t
 | --- | --- |
 | Check inputs, formulas and worked results | [20 scenarios: 18 calculations and two scope controls](guides/README.en.md) |
 | Check V5.6.0 water sizes, ten direct calculators and 50 gases | [Current features and sources](2026-10-16-gemini-integration-review.md#english) |
-| Verify native tests, commits and SHA256 of the published EXE/DMG | [Windows win.7 acceptance and SHA256](2026-10-18-windows-audit-six.md#原生發布結果) · [macOS mac.6](2026-10-16-gemini-integration-review.md#原生發布狀態) |
+| Verify native tests, commits and SHA256 of the published EXE/DMG | [Windows win.8 acceptance and SHA256](2026-10-18-windows-report-audit.md#原生發布結果) · [macOS mac.6](2026-10-16-gemini-integration-review.md#原生發布狀態) |
 | Run, build or test source | [Developer entry](development.md#english) |
 | Review previous fixes, tests and search experiments | [Historical records](history/README.md#english) |
 

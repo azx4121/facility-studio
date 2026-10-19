@@ -1,0 +1,55 @@
+{
+  "source_commit": "c121cd872af8f52e3ef8963d138b54b2e7fa8333",
+  "run": 39222780789,
+  "artifact_id": 12173526201,
+  "scope": "Source preflight on native Windows builder; frozen execution recorded separately",
+  "files": [
+    {
+      "file": "source-windows-2022-all-fields.json",
+      "passed": true,
+      "summary": {
+        "iterations": 100,
+        "passed": true,
+        "total_checks": 6977
+      }
+    },
+    {
+      "file": "source-windows-2022-gemini-review.json",
+      "passed": true,
+      "summary": {
+        "passed": true,
+        "checks": 4432
+      }
+    },
+    {
+      "file": "source-windows-2022-use-cases.json",
+      "passed": true,
+      "summary": {
+        "check_count": 121
+      },
+      "scenario_status_counts": {
+        "計算與反算通過": 18,
+        "不適用": 2
+      }
+    },
+    {
+      "file": "source-windows-2022-stress100.json",
+      "passed": true,
+      "summary": {
+        "passed": true,
+        "scenario_count": 100,
+        "software_passed": 100,
+        "software_failed": 0,
+        "check_count": 3902
+      }
+    },
+    {
+      "file": "source-windows-2022-tutorial.json",
+      "passed": true,
+      "summary": {
+        "checks": 93,
+        "passed": true
+      }
+    }
+  ]
+}
