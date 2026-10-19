@@ -2,7 +2,7 @@ MakeNSIS v3.09-4 - Copyright 1999-2023 Contributors
 See the file COPYING for license details.
 Credits can be found in the Users Manual.
 
-Command line defined: "FS_SETUP_OUTPUT=/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-dpwt01np/Facility_Studio_V5_6_0_Setup.exe"
+Command line defined: "FS_SETUP_OUTPUT=/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-0yu2vwl0/Facility_Studio_V5_6_0_Setup.exe"
 Changing directory to: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows"
 
 Processing script file: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/installer.nsi" (UTF8)
@@ -81,7 +81,7 @@ NSIS Modern User Interface version 2.1 - Copyright 2002-2023 Joost Verburg (/wor
 !include: closed: "/workspace/scratch/5438c14ec8d6/dependencies/root/usr/share/nsis/Contrib/Modern UI 2/MUI2.nsh"
 !include: closed: "/workspace/scratch/5438c14ec8d6/dependencies/root/usr/share/nsis/Include/MUI2.nsh"
 Name: "廠務簡易工具 V5.6.0"
-OutFile: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-dpwt01np/Facility_Studio_V5_6_0_Setup.exe"
+OutFile: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-0yu2vwl0/Facility_Studio_V5_6_0_Setup.exe"
 VIAddVersionKey: "ProductName" "廠務簡易工具"
 VIAddVersionKey: "FileDescription" "Facility Studio V5.6.0 Online Setup"
 VIAddVersionKey: "FileVersion" "5.6.0.8"
@@ -127,7 +127,7 @@ RMDir: /r "$INSTDIR\installer\payload"
 SetOutPath: "$INSTDIR\installer"
 File: "START.cmd" 3692 bytes
 File: "oneclick_setup.py" 13235 bytes
-File: "payload_sha256.json" 8794 bytes
+File: "payload_sha256.json" 8900 bytes
 File: "probe_python.py" 231 bytes
 File: Descending to: "installer/payload/"
 File: "Default_Project.json" 40241 bytes
@@ -151,10 +151,10 @@ File: "contributions.py" 23055 bytes
 File: "data.py" 6495 bytes
 File: "database.py" 5194 bytes
 File: "design_workflow.py" 6823 bytes
-File: "desktop.py" 41532 bytes
+File: "desktop.py" 41673 bytes
 File: "display_helpers.py" 7442 bytes
 File: "engine.py" 43373 bytes
-File: "english_catalog.py" 271170 bytes
+File: "english_catalog.py" 271211 bytes
 File: "equipment_analysis.py" 30052 bytes
 File: "equipment_io.py" 17848 bytes
 File: "equipment_schema.py" 7268 bytes
@@ -173,19 +173,20 @@ File: "language_acceptance.py" 13161 bytes
 File: "lighting_acceptance.py" 6681 bytes
 File: "localized_plot.py" 904 bytes
 File: "localized_tk.py" 13505 bytes
-File: "main_view.py" 41386 bytes
-File: "native_redraw.py" 1912 bytes
+File: "main_view.py" 41737 bytes
+File: "native_redraw.py" 2081 bytes
 File: "project_store.py" 3031 bytes
+File: "pv_acceptance.py" 3791 bytes
 File: "quality.py" 9351 bytes
 File: "quick_tools.py" 10741 bytes
-File: "report_acceptance.py" 13124 bytes
+File: "report_acceptance.py" 13211 bytes
 File: "reports.py" 46124 bytes
 File: "resilience_acceptance.py" 8171 bytes
 File: "review_acceptance.py" 14767 bytes
 File: "schema.py" 31260 bytes
 File: "services.py" 10702 bytes
 File: "session_controller.py" 25681 bytes
-File: "simple_desktop.py" 37431 bytes
+File: "simple_desktop.py" 37783 bytes
 File: "simple_engines.py" 35659 bytes
 File: "simple_reports.py" 16627 bytes
 File: "simple_schema.py" 23480 bytes
@@ -252,18 +253,18 @@ Removing unused resources... Done!
 Generating language tables... Done!
 Generating uninstaller... Done!
 
-Output: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-dpwt01np/Facility_Studio_V5_6_0_Setup.exe"
-Install: 4 pages (256 bytes), 1 section (4120 bytes), 469 instructions (13132 bytes), 267 strings (23528 bytes), 1 language table (286 bytes).
+Output: "/workspace/scratch/5438c14ec8d6/win8-report-fixes/windows/.nsis-build-0yu2vwl0/Facility_Studio_V5_6_0_Setup.exe"
+Install: 4 pages (256 bytes), 1 section (4120 bytes), 470 instructions (13160 bytes), 268 strings (23562 bytes), 1 language table (286 bytes).
 Uninstall: 2 pages (192 bytes), 1 section (4120 bytes), 57 instructions (1596 bytes), 93 strings (1780 bytes), 1 language table (250 bytes).
 Datablock optimizer saved 26498 bytes (~1.2%).
 
 Using lzma (compress whole) compression.
 
 EXE header size:              114176 / 100864 bytes
-Install code:                          (39738 bytes)
-Install data:                          (2033637 bytes)
+Install code:                          (39800 bytes)
+Install data:                          (2038679 bytes)
 Uninstall code+data:                   (20254 bytes)
-Compressed data:              797561 / 2093629 bytes
-CRC (0x98B485D4):                  4 / 4 bytes
+Compressed data:              798299 / 2098733 bytes
+CRC (0x3A78647C):                  4 / 4 bytes
 
-Total size:                   911741 / 2194497 bytes (41.5%)
+Total size:                   912479 / 2199601 bytes (41.4%)

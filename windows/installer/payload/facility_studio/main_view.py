@@ -630,6 +630,15 @@ class MainView:
                 ),
             )
 
+    def show_pv(self):
+        """Expose the vacuum fields even when the HVAC task has hidden utilities."""
+        self.root.deiconify()
+        self.show_page(FIELDS["pv_q"]["page"])
+        self.root.lift()
+        self.root.update_idletasks()
+        self.pages[self.current].reveal(self.widgets["pv_q"])
+        self.widgets["pv_q"].focus_set()
+
     def show_page(self, n):
         if n not in (0, 1, 2, 8) and hasattr(self, "task_scope"):
             self.task_scope.set("全部工程分頁")

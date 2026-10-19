@@ -38,8 +38,10 @@ class NativeRedraw:
         self.pending = None
         if not self.window.winfo_exists() or not self.window.winfo_ismapped():
             return False
-        # INVALIDATE | ERASE | ALLCHILDREN | UPDATENOW | ERASENOW.
-        return bool(self.repaint_window(self.window.winfo_id(), None, None, 0x0385))
+        # INVALIDATE | ALLCHILDREN | UPDATENOW. Tk paints its own backgrounds;
+        # synchronous background erasure can clear child surfaces before Tk's
+        # idle drawing runs, leaving black regions after a window is restored.
+        return bool(self.repaint_window(self.window.winfo_id(), None, None, 0x0181))
 
     def release(self, event):
         if event.widget is self.window and self.pending is not None:

@@ -3355,3 +3355,5 @@ TEXT.update({'室指數 K 自動（DIALux 基準）': 'Legacy automatic U from K
 
 TEXT.update({'各溫度迴路容量包絡（未加餘裕）': 'Separate-temperature loop capacity envelope (before '
                     'allowance)'})
+
+TEXT.update({'PV 真空': 'PV vacuum'})

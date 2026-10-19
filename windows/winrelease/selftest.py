@@ -384,7 +384,7 @@ def run_audit(destination):
                         raise AssertionError(name)
                     report_widgets.append(dict(name=name,passed=True))
                 report_ui(root,app,collect,pump,destination)
-                return len(report_widgets)==14
+                return len(report_widgets)==28
             check("R01–R05 actual report export buttons",report_exports)
             pump()
         except Exception:

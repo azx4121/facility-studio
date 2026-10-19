@@ -572,12 +572,13 @@ class SimpleToolsApp:
         ttk.Label(
             header, text="選工具 → 填條件 → 看結果", style="Simple.Header.TLabel"
         ).grid(row=0, column=0, columnspan=3, sticky="w")
-        ttk.Button(header, text="完整工程工作台", command=self.open_workbench).grid(
-            row=1, column=0, sticky="w", pady=(8, 0)
-        )
-        ttk.Button(header, text="設備表匯入", command=self.open_equipment).grid(
-            row=1, column=1, padx=(6, 0), pady=(8, 0)
-        )
+        from .flow_toolbar import FlowToolbar
+        engineering = FlowToolbar(header)
+        engineering.grid(row=1, column=0, columnspan=2, sticky="ew", pady=(8, 0))
+        ttk.Button(engineering, text="完整工程工作台", command=self.open_workbench).pack(side="left")
+        self.pv_button = ttk.Button(engineering, text="PV 真空", command=self.open_pv)
+        self.pv_button.pack(side="left", padx=(6, 0))
+        ttk.Button(engineering, text="設備表匯入", command=self.open_equipment).pack(side="left", padx=(6, 0))
         ttk.Label(header, text="Language / 語言").grid(
             row=2, column=2, sticky="e", pady=(3, 0)
         )
@@ -743,6 +744,11 @@ class SimpleToolsApp:
         window = tk.Toplevel(self.root)
         self.workbench = DesktopApp(window)
         return self.workbench
+
+    def open_pv(self):
+        workbench = self.open_workbench()
+        workbench.show_pv()
+        return workbench
 
     def close(self):
         if self.workbench is not None and self.workbench.root.winfo_exists():

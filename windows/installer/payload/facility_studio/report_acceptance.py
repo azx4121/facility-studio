@@ -178,6 +178,8 @@ def run_ui(root, app, check, pump, output=None):
     from .version import REPORT_VERSION
     original_language, original_tool = i18n.language(), app.current
     snapshots={}
+    from .pv_acceptance import run_ui as check_pv
+    check_pv(root, app, check, pump)
     with tempfile.TemporaryDirectory(prefix="report-export-") as temp:
         folder=Path(output).parent/"report-samples" if output else Path(temp)
         folder.mkdir(parents=True,exist_ok=True)

@@ -478,6 +478,8 @@ class DesktopApp(SessionController, MainView):
         )
         utilities = FlowToolbar(head)
         utilities.grid(row=4, column=0, columnspan=2, sticky="ew", pady=(4, 0))
+        self.pv_button = ttk.Button(utilities, text="PV 真空", command=self.show_pv)
+        self.pv_button.pack(side="left", padx=(0, 8))
         for label, command in [
             ("快速工程工具", lambda: QuickToolsWindow(root, self)),
             ("來源／比較／復原", lambda: WorkspaceWindow(root, self)),
