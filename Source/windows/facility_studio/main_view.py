@@ -7,6 +7,7 @@ except ImportError:
     tkfont = None
 from .localized_tk import ttk
 from .engine import wetbulb
+from .flow_toolbar import FlowToolbar
 from .display_helpers import duct_dimensions, annotate_states
 from .industrial_theme import Theme
 from .schema import (
@@ -687,6 +688,40 @@ class MainView:
         self.text.insert("1.0", t)
         self.text.configure(state="disabled")
 
+    FORM_MIN_HEIGHT = 160  # smallest form area worth showing between the header and the footer bar
+
+    def fit_min_height(self, event=None):
+        """Keep the window tall enough that the header, footer bar and sidebar are never cut off.
+
+        The header toolbars wrap onto more rows when the window is narrow or the language is longer,
+        and they re-flow only after the window changed, so the height is measured once the layout
+        has settled (idle), not assumed.
+        """
+        if getattr(self, "_min_height_job", None) is None:
+            self._min_height_job = self.root.after_idle(self._apply_min_height)
+
+    def _apply_min_height(self):
+        self._min_height_job = None
+        if not self.root.winfo_exists():
+            return
+        if getattr(self, "simple_app", None) is not None and not self.simple_app.workbench_mode:
+            return
+        bands = [w for r in (0, 2) for w in self.root.grid_slaves(row=r, column=1)]
+        for w in bands:
+            if not getattr(w, "_min_height_bound", False):
+                w.bind("<Configure>", self.fit_min_height, add="+")
+                w._min_height_bound = True
+        side = self.nav[0].master
+        side_need = 0
+        for child in side.winfo_children():
+            if child.winfo_manager() != "pack":
+                continue
+            pad = child.pack_info()["pady"]
+            side_need += child.winfo_reqheight() + (sum(map(int, pad)) if isinstance(pad, (tuple, list)) else 2 * int(pad))
+        need = max(560, sum(w.winfo_reqheight() for w in bands) + self.FORM_MIN_HEIGHT, side_need)
+        if self.root.minsize()[1] != need:
+            self.root.minsize(880, need)
+
     def sidebar_layout(self, event=None):
         if event is not None and event.widget != self.root:
             return
@@ -694,11 +729,14 @@ class MainView:
         if self._compact == compact:
             return
         self._compact = compact
+        # Wrapped (translated) navigation texts are taller; a short window gives them tighter rows.
+        for button in self.nav:
+            button.configure(pady=3 if compact else 7)
         for w in self._side_order:
             if not isinstance(w, tk.Label):
                 continue
             text = str(w.cget("text"))
-            hide = "FACILITY" in text or bool(w.cget("image"))
+            hide = "FACILITY" in text or bool(w.cget("image")) or w is getattr(self, "side_subtitle", None)
             if not hide:
                 continue
             if compact:
@@ -778,7 +816,7 @@ class MainView:
         self.summary.pack(fill="x", pady=12)
         self.psy_label = ttk.Label(b, text="", wraplength=650)
         self.psy_label.pack(fill="x", pady=8)
-        row = ttk.Frame(b)
+        row = FlowToolbar(b)  # wraps instead of squeezing the buttons when the window is narrow
         row.pack(fill="x")
         ttk.Label(row, text="流程圖季節").pack(side="left")
         self.season = tk.StringVar(value="夏季")
@@ -796,9 +834,7 @@ class MainView:
             text="編輯共同氣候",
             command=lambda: self.pages[0].reveal(self.widgets["oa_t"]),
         ).pack(side="left", padx=8)
-        ttk.Button(row, text="另存流程圖 PNG", command=self.save_plot).pack(
-            side="right"
-        )
+        ttk.Button(row, text="另存流程圖 PNG", command=self.save_plot).pack(side="left")
         if HAS_PLOT:
             names = {f.name for f in font_manager.fontManager.ttflist}
             if not names.intersection(

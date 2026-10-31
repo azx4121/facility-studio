@@ -97,12 +97,12 @@ class Theme:
                         foreground=cls.TEXT, bordercolor="#E2E8F0", borderwidth=1)
         style.map("TButton", background=[("active", "#E2E8F0")])
         style.configure("Nav.TButton", background=cls.NAV, foreground=cls.TEXT,
-                        anchor="w", padding=(12, 8), borderwidth=0,
+                        anchor="w", padding=(12, 6), borderwidth=0,
                         font=(cls.family, 10))
         style.map("Nav.TButton", background=[("active", "#E0E6EF")],
                   foreground=[("active", cls.TEXT)])
         style.configure("Nav.Active.TButton", background="#DCEBFC",
-                        foreground="#004C99", anchor="w", padding=(12, 8),
+                        foreground="#004C99", anchor="w", padding=(12, 6),
                         borderwidth=0, font=(cls.family, 10, "bold"))
         style.map("Nav.Active.TButton", background=[("active", "#CFDFF5")],
                   foreground=[("active", "#004C99")])
@@ -352,8 +352,9 @@ class KPIFrame(ttk.Frame):
         for card in self.cards:
             box = GlassCard(self, self.compact)
             content = box.content
-            tk.Label(content, text=card.get("title", ""), bg=Theme.CARD, fg=Theme.MUTED,
-                     anchor="w", font=(Theme.family, 9 if self.compact else 10)).pack(anchor="w")
+            title = tk.Label(content, text=card.get("title", ""), bg=Theme.CARD, fg=Theme.MUTED,
+                             anchor="w", justify="left", font=(Theme.family, 9 if self.compact else 10))
+            title.pack(anchor="w")
             main = tk.Frame(content, bg=Theme.CARD)
             main.pack(fill="x", pady=(2, 1) if self.compact else (8, 9))
             value = card.get("value", "—")
@@ -374,7 +375,8 @@ class KPIFrame(ttk.Frame):
             if not self.compact:
                 tk.Label(content, text=card.get("status", "需求初估"), bg=bg, fg=fg,
                          padx=8, pady=3, font=(Theme.family, 9)).pack(anchor="w")
-            box.bind("<Configure>", lambda e, w=label: w.configure(wraplength=max(100, e.width - 34)), add="+")
+            # Title and value wrap to the card, so a long translated title is never cut off.
+            box.bind("<Configure>", lambda e, w=label, t=title: [x.configure(wraplength=max(100, e.width - 34)) for x in (w, t)], add="+")
             self.boxes.append(box)
         self._columns = None
         self._layout()

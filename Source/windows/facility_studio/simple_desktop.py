@@ -15,6 +15,7 @@ from .simple_engines import AIR_PRESSURE_FACTORS, GAS_PRESSURE_FACTORS
 from .simple_reports import presentation, tool_report
 from .simple_schema import TOOLS, active_field, adopted_summary, defaults, input_unit
 from .ui_common import app_icon
+from .flow_toolbar import FlowToolbar
 from .localized_tk import LanguagePicker
 from .utils import atomic_text, number
 from .industrial_theme import (Theme, ScrollableFrame, KPIFrame, ResultTable, InlineBanner,
@@ -35,6 +36,14 @@ def field_unit(spec):
         return first
     return {"pf": "—", "eta": "—", "efficiency": "—", "value": "",
             "quantity": "盞", "loaded": "條", "ratio": "—"}.get(spec["key"], "")
+
+
+def wrap_to_width(label):
+    """Wrap at the width the layout really gives the label, so a narrow column never cuts a word."""
+    def resize(event):
+        if event.width > 1 and int(float(label.cget("wraplength") or 0)) != event.width:
+            label.configure(wraplength=event.width)
+    label.bind("<Configure>", resize, add="+")
 
 
 class SimplePage(ttk.Frame):
@@ -86,6 +95,7 @@ class SimplePage(ttk.Frame):
             self.labels[key] = ttk.Label(row, text=spec["label"], style="Simple.Card.TLabel",
                                          width=16, wraplength=Theme.px(135), anchor="w")
             self.labels[key].grid(row=0, column=0, sticky="w", padx=(0, 8))
+            wrap_to_width(self.labels[key])
             if spec["checkbox"]:
                 widget = ttk.Checkbutton(row, variable=self.variables[key], onvalue="1", offvalue="0", text="啟用")
             elif spec["options"]:
@@ -122,6 +132,7 @@ class SimplePage(ttk.Frame):
             if spec["help"] or key in ("ffu_topology", "ffu_airflow_basis") or (spec["options"] and max(map(len, spec["options"])) > 18):
                 hint = ttk.Label(row, text=spec["help"], style="Simple.Hint.TLabel", wraplength=310)
                 hint.grid(row=hint_row, column=0, columnspan=3, sticky="ew", pady=(3, 0))
+                wrap_to_width(hint)
                 self.hints[key] = hint
             self.rows[key] = row
         self.assumptions = ttk.Label(self.body, style="Simple.Muted.TLabel", wraplength=360)
@@ -137,16 +148,19 @@ class SimplePage(ttk.Frame):
         self.upstream_button.pack(side="left")
         # Clearing every input sits apart from the import action and asks first.
         ttk.Button(action_row, text="恢復預設", command=self.confirm_reset).pack(side="right")
+        # Tool-specific actions wrap onto further rows instead of being squeezed beside each other.
+        extras = FlowToolbar(controls) if tool in ("heat_loads", "lighting", "air") else None
+        if extras is not None:
+            extras.pack(fill="x", pady=(5, 0))
         if tool == "heat_loads":
-            links = ttk.Frame(controls)
-            links.pack(fill="x", pady=5)
-            ttk.Button(links, text="帶入照明功率密度", command=lambda: self.import_upstream("lighting")).pack(side="left", padx=(0, 4))
+            links = extras
+            ttk.Button(links, text="帶入照明功率密度", command=lambda: self.import_upstream("lighting")).pack(side="left")
             ttk.Button(links, text="帶入A/B空氣焓差", command=lambda: self.import_upstream("air")).pack(side="left")
         if tool == "lighting":
             self.dialux_button = ttk.Button(
-                action_row, text="型錄 U／室指數檢核", command=self.apply_dialux_mode
+                extras, text="型錄 U／室指數檢核", command=self.apply_dialux_mode
             )
-            self.dialux_button.pack(side="left", padx=(5, 0))
+            self.dialux_button.pack(side="left")
         # Retain the read-only label API for integrations; the visible status is a banner.
         self.status = ttk.Label(self.body, style="Simple.Muted.TLabel", wraplength=360)
         output = self.output_scroll.body
@@ -172,7 +186,7 @@ class SimplePage(ttk.Frame):
         if tool == "air":
             self.air_chart = AirChart(self.output_frame, app.family)
             self.air_chart.grid(row=1, column=0, sticky="nsew", padx=8, pady=4)
-            ttk.Button(action_row, text="放大空氣線圖", command=self.open_air_chart).pack(side="left", padx=5)
+            ttk.Button(extras, text="放大空氣線圖", command=self.open_air_chart).pack(side="left")
         self._stacked = None
         self._wrap_widths = None
         self.bind("<Configure>", self.responsive, add="+")
@@ -599,8 +613,19 @@ class SimpleToolsApp:
         side.grid(row=0, column=0, rowspan=3, sticky="ns")
         side.pack_propagate(False)
         self.sidebar = side
+        # Footer first: pack gives space in packing order, so a short window clips the
+        # navigation list instead of the tutorial button and the author credit.
+        self.author_credit = tk.Label(
+            side, text="DESIGNED BY\nANDY HUANG ©", bg=Theme.NAV,
+            fg=Theme.MUTED, justify="left", font=(self.family, 9),
+        )
+        self.author_credit.pack(side="bottom", anchor="w", padx=18, pady=(8, 16))
+        self.tutorial_button = ttk.Button(
+            side, text="本工具教學", command=lambda: open_tutorial(root, self.current),
+        )
+        self.tutorial_button.pack(side="bottom", fill="x", padx=12, pady=(8, 0))
         ttk.Label(side, text="廠務簡易工具\nV" + VERSION, style="Simple.Brand.TLabel").pack(
-            anchor="w", padx=18, pady=(22, 24)
+            anchor="w", padx=18, pady=(16, 12)
         )
         self.nav = {}
         for key in TOOLS:
@@ -613,22 +638,13 @@ class SimpleToolsApp:
             if key == "gas":
                 self.pv_button = ttk.Button(side, text="   PV 真空", command=self.open_pv, style="Nav.TButton", width=20)
                 self.pv_button.pack(fill="x", padx=8, pady=2)
-        self.author_credit = tk.Label(
-            side, text="DESIGNED BY\nANDY HUANG ©", bg=Theme.NAV,
-            fg=Theme.MUTED, justify="left", font=(self.family, 9),
-        )
-        self.author_credit.pack(side="bottom", anchor="w", padx=18, pady=(8, 16))
-        self.tutorial_button = ttk.Button(
-            side, text="本工具教學", command=lambda: open_tutorial(root, self.current),
-        )
-        self.tutorial_button.pack(side="bottom", fill="x", padx=12, pady=(8, 0))
+        self.fit_window_to_sidebar()
         header = ttk.Frame(root, padding=(18, 12))
         header.grid(row=0, column=1, sticky="ew")
         header.columnconfigure(0, weight=1)
         ttk.Label(
             header, text="選工具 → 填條件 → 看結果", style="Simple.Header.TLabel"
         ).grid(row=0, column=0, columnspan=3, sticky="w")
-        from .flow_toolbar import FlowToolbar
         engineering = FlowToolbar(header)
         engineering.grid(row=1, column=0, columnspan=2, sticky="ew", pady=(8, 0))
         ttk.Button(engineering, text="完整工程工作台", command=self.open_workbench).pack(side="left")
@@ -822,6 +838,20 @@ class SimpleToolsApp:
         self.bind_mode_shortcuts()
         return self.workbench
 
+    def sidebar_required_height(self):
+        """Height at which every sidebar item (navigation, tutorial, credit) is fully visible."""
+        self.sidebar.update_idletasks()
+        total = 0
+        for child in self.sidebar.winfo_children():
+            pad = child.pack_info()["pady"]
+            total += child.winfo_reqheight() + (sum(map(int, pad)) if isinstance(pad, (tuple, list)) else 2 * int(pad))
+        return total
+
+    def fit_window_to_sidebar(self):
+        self.root.minsize(Theme.px(900), max(Theme.px(600), self.sidebar_required_height()))
+        if self.root.winfo_height() < self.root.minsize()[1]:
+            self.root.geometry(f"{self.root.winfo_width()}x{self.root.minsize()[1]}")
+
     def show_simple_tools(self):
         self.workbench_mode = False
         for widget in self.workbench_widgets:
@@ -829,7 +859,7 @@ class SimpleToolsApp:
         for widget in self.simple_widgets:
             widget.grid()
         self.root.title("廠務簡易工具 V" + BUILD_VERSION)
-        self.root.minsize(Theme.px(900), Theme.px(600))
+        self.fit_window_to_sidebar()
         self.bind_mode_shortcuts()
         self.root.protocol("WM_DELETE_WINDOW", self.close)
         return self

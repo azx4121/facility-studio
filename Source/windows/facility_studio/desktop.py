@@ -379,13 +379,16 @@ class DesktopApp(SessionController, MainView):
             font=("Segoe UI", 15, "bold"),
             justify="left",
         ).pack(anchor="w", padx=18, pady=(25, 6))
-        tk.Label(
+        self.side_subtitle = tk.Label(
             side,
             text="廠務工程工作台  V" + VERSION,
             bg=Theme.NAV,
             fg=Theme.MUTED,
             font=(self.ui_font, 10),
-        ).pack(anchor="w", padx=18, pady=(0, 24))
+            justify="left",
+            wraplength=148,  # sidebar 184 px less its 18 px side margins: long translations wrap, never clip
+        )
+        self.side_subtitle.pack(anchor="w", padx=18, pady=(0, 24))
         for j, name in enumerate(PAGES):
             b = tk.Button(
                 side,
@@ -401,6 +404,8 @@ class DesktopApp(SessionController, MainView):
                 pady=7,
                 font=(self.ui_font, 10),
                 cursor="hand2",
+                justify="left",
+                wraplength=140,  # sidebar 184 px less button margins and padding
             )
             b.pack(fill="x", padx=8, pady=2)
             self.nav.append(b)
@@ -524,15 +529,17 @@ class DesktopApp(SessionController, MainView):
             foot, text="啟動檢核中…", wraplength=470, style="Muted.TLabel"
         )
         self.status.grid(row=0, column=0, sticky="w")
-        def wrap_status(event):
-            width = max(120, event.width - 340)
+        def wrap_status(event=None):
+            # The status text gets what the three buttons leave over, in any language.
+            buttons = sum(w.winfo_reqwidth() + 8 for w in (locate, self.calc_button, self.export_button))
+            width = max(120, foot.winfo_width() - buttons - 24)
             if str(self.status.cget("wraplength")) != str(width):
                 self.status.configure(wraplength=width)
 
         foot.bind("<Configure>", wrap_status)
-        ttk.Button(foot, text="定位問題", command=self.focus_issue, width=9).grid(
-            row=0, column=1, padx=4
-        )
+
+        locate = ttk.Button(foot, text="定位問題", command=self.focus_issue)
+        locate.grid(row=0, column=1, padx=4)
         self.calc_button = ttk.Button(
             foot,
             text="重新計算",
@@ -542,6 +549,8 @@ class DesktopApp(SessionController, MainView):
         self.calc_button.grid(row=0, column=2, padx=4)
         self.export_button = ttk.Button(foot, text="匯出設計報告", command=self.export)
         self.export_button.grid(row=0, column=3, padx=4)
+        for button in (locate, self.calc_button, self.export_button):
+            button.bind("<Configure>", wrap_status, add="+")
         for key, var in self.variables.items():
             var.trace_add("write", lambda *a, k=key: self.changed(k))
         self.pd_last_units = {k: row["unit"].get() for k, row in self.pd.items()}
@@ -595,7 +604,9 @@ class DesktopApp(SessionController, MainView):
         self._side_pack = {w: w.pack_info() for w in self._side_order}
         self._compact = None
         root.bind("<Configure>", self.sidebar_layout, add="+")
+        root.bind("<Configure>", self.fit_min_height, add="+")
         self.sidebar_layout()
+        self.fit_min_height()
         self.recovery_token = uuid.uuid4().hex
         self.recovery_job = self.root.after(30000, self.autosave)
         self.latent_mode_previous = self.variables["latent_mode"].get()

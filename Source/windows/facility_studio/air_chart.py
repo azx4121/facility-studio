@@ -110,6 +110,20 @@ class AirChart(_Canvas):
         self.plot_data = chart_data(state, comparison)
         self.redraw()
 
+    def separate_labels(self, top, bottom):
+        """Move the A / B text blocks apart vertically when they would cover each other."""
+        a, b = self.bbox("state_label_bg"), self.bbox("comparison_label_bg")
+        if not a or not b or a[2] <= b[0] or b[2] <= a[0] or a[3] <= b[1] or b[3] <= a[1]:
+            return
+        upper, lower = ("state_label", "comparison_label") if a[1] <= b[1] else ("comparison_label", "state_label")
+        ub, lb = (a, b) if upper == "state_label" else (b, a)
+        gap = ub[3] - lb[1] + 3
+        # A few pixels beyond the plot box are free: the caption above and the axis ticks below sit further out.
+        if lb[3] + gap <= bottom + 4:
+            self.move(lower, 0, gap), self.move(lower + "_bg", 0, gap)
+        elif ub[1] - gap >= top - 2:
+            self.move(upper, 0, -gap), self.move(upper + "_bg", 0, -gap)
+
     def mark_stale(self):
         if self.state is None:
             self.clear()
@@ -215,14 +229,14 @@ class AirChart(_Canvas):
         )
         self.create_text(
             right,
-            52,
+            60,
             text="含濕比 g/kg乾空氣",
             anchor="e",
             font=(self.family, 9),
             fill="#18334d",
         )
-        self.create_text(left, 35, text="綠虛線：等焓｜褐虛線：等濕球",
-                         anchor="w", fill="#587084", font=(self.family, 8), tags="legend")
+        self.create_text(left, 27, text="綠虛線：等焓｜褐虛線：等濕球", anchor="nw", width=max(120, width - left - 10),
+                         fill="#587084", font=(self.family, 8), tags="legend")
         x, y = xy(*data["point"])
         self.point_xy = x, y
         self.create_line(
@@ -266,6 +280,7 @@ class AirChart(_Canvas):
                              fill="#047c88", font=(self.family, 9, "bold"), tags="comparison_label")
             self.create_rectangle(*self.bbox("comparison_label"), fill="white", outline="white", tags="comparison_label_bg")
             self.tag_lower("comparison_label_bg", "comparison_label")
+            self.separate_labels(top, bottom)
             self.create_text(left, height-9, anchor="w",
                              text=f"A−B：Δh={state['h']-b['h']:.3f} kJ/kg｜Δw={(state['w']-b['w'])*1000:.3f} g/kg",
                              fill="#18334d", font=(self.family, 9, "bold"), tags="comparison_delta")
