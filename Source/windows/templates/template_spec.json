@@ -1,0 +1,1251 @@
+{
+  "schema_id": "FacilityStudioEquipment/1",
+  "header_row": 5,
+  "systems": [
+    {
+      "name": "電力",
+      "columns": [
+        {
+          "key": "enabled",
+          "label": "啟用(1/0)",
+          "default": null,
+          "required": true,
+          "kind": "integer",
+          "low": 0,
+          "high": 1,
+          "options": [],
+          "help": "1納入計算，0不納入。範例預設0。"
+        },
+        {
+          "key": "id",
+          "label": "設備編號",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "同一系統內不得重複。"
+        },
+        {
+          "key": "name",
+          "label": "設備名稱",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "group",
+          "label": "供應群組",
+          "default": "主系統",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "填配電盤或共用主管名稱。不同群組分開定寸。"
+        },
+        {
+          "key": "quantity",
+          "label": "設備台數",
+          "default": 1,
+          "required": false,
+          "kind": "integer",
+          "low": 1,
+          "high": 1000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "usage",
+          "label": "同時使用率(%)",
+          "default": 100,
+          "required": false,
+          "kind": "number",
+          "low": 0,
+          "high": 100,
+          "options": [],
+          "help": "瞬間同時需求的估算係數，填0~100；不是每小時運轉分鐘數。支路仍按額定負載。"
+        },
+        {
+          "key": "power",
+          "label": "每台輸入功率(kW)",
+          "default": null,
+          "required": true,
+          "kind": "number",
+          "low": 0,
+          "high": 1000000,
+          "options": [],
+          "help": "電氣輸入kW；馬達軸輸出或HP需先換算並考慮效率。插座數不再乘功率。"
+        },
+        {
+          "key": "voltage",
+          "label": "供電電壓(V)",
+          "default": null,
+          "required": true,
+          "kind": "number",
+          "low": 50,
+          "high": 690,
+          "options": [],
+          "help": "三相填線間電壓；單相填設備兩端電壓。不同供電方式分組，不直接合併電流。"
+        },
+        {
+          "key": "phases",
+          "label": "供電相數(1/3)",
+          "default": null,
+          "required": true,
+          "kind": "choice",
+          "low": 0,
+          "high": 100000000,
+          "options": [
+            "1",
+            "3"
+          ],
+          "help": ""
+        },
+        {
+          "key": "pf",
+          "label": "功率因數(PF)",
+          "default": 0.85,
+          "required": false,
+          "kind": "number",
+          "low": 0.1,
+          "high": 1,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "kind",
+          "label": "負載類型",
+          "default": "一般設備",
+          "required": false,
+          "kind": "choice",
+          "low": 0,
+          "high": 100000000,
+          "options": [
+            "一般設備",
+            "連續運轉",
+            "馬達"
+          ],
+          "help": ""
+        },
+        {
+          "key": "sockets",
+          "label": "每台所需插座數",
+          "default": 0,
+          "required": false,
+          "kind": "integer",
+          "low": 0,
+          "high": 10000,
+          "options": [],
+          "help": "僅統計點位。每台功率已包含該設備需求，不再乘插座數。"
+        },
+        {
+          "key": "length",
+          "label": "單程配線長度(m)",
+          "default": 30,
+          "required": false,
+          "kind": "number",
+          "low": 0,
+          "high": 10000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "notes",
+          "label": "備註",
+          "default": "",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        }
+      ],
+      "example": {
+        "enabled": 0,
+        "id": "EQ-001",
+        "name": "製程設備範例",
+        "group": "UP-01",
+        "quantity": 1,
+        "usage": 100,
+        "power": 10,
+        "voltage": 380,
+        "phases": "3",
+        "pf": 0.85,
+        "kind": "一般設備",
+        "sockets": 1,
+        "length": 30,
+        "notes": ""
+      }
+    },
+    {
+      "name": "PCW",
+      "columns": [
+        {
+          "key": "enabled",
+          "label": "啟用(1/0)",
+          "default": null,
+          "required": true,
+          "kind": "integer",
+          "low": 0,
+          "high": 1,
+          "options": [],
+          "help": "1納入計算，0不納入。範例預設0。"
+        },
+        {
+          "key": "id",
+          "label": "設備編號",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "同一系統內不得重複。"
+        },
+        {
+          "key": "name",
+          "label": "設備名稱",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "group",
+          "label": "供應群組",
+          "default": "主系統",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "填配電盤或共用主管名稱。不同群組分開定寸。"
+        },
+        {
+          "key": "quantity",
+          "label": "設備台數",
+          "default": 1,
+          "required": false,
+          "kind": "integer",
+          "low": 1,
+          "high": 1000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "usage",
+          "label": "同時使用率(%)",
+          "default": 100,
+          "required": false,
+          "kind": "number",
+          "low": 0,
+          "high": 100,
+          "options": [],
+          "help": "瞬間同時需求的估算係數，填0~100；不是每小時運轉分鐘數。支路仍按額定負載。"
+        },
+        {
+          "key": "flow",
+          "label": "每台需求流量",
+          "default": null,
+          "required": true,
+          "kind": "number",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "unit",
+          "label": "流量單位",
+          "default": "LPM",
+          "required": false,
+          "kind": "choice",
+          "low": 0,
+          "high": 100000000,
+          "options": [
+            "LPM",
+            "US GPM",
+            "m³/h",
+            "L/s"
+          ],
+          "help": ""
+        },
+        {
+          "key": "delta",
+          "label": "供回水溫差(K)",
+          "default": 5,
+          "required": false,
+          "kind": "number",
+          "low": 0.1,
+          "high": 100,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "velocity",
+          "label": "定寸流速上限(m/s)",
+          "default": 1.5,
+          "required": false,
+          "kind": "number",
+          "low": 0.1,
+          "high": 40,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "notes",
+          "label": "備註",
+          "default": "",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        }
+      ],
+      "example": {
+        "enabled": 0,
+        "id": "EQ-001",
+        "name": "水冷機台範例",
+        "group": "PCW-01",
+        "quantity": 1,
+        "usage": 100,
+        "flow": 30,
+        "unit": "LPM",
+        "delta": 5,
+        "velocity": 1.5,
+        "notes": ""
+      }
+    },
+    {
+      "name": "CDA",
+      "columns": [
+        {
+          "key": "enabled",
+          "label": "啟用(1/0)",
+          "default": null,
+          "required": true,
+          "kind": "integer",
+          "low": 0,
+          "high": 1,
+          "options": [],
+          "help": "1納入計算，0不納入。範例預設0。"
+        },
+        {
+          "key": "id",
+          "label": "設備編號",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "同一系統內不得重複。"
+        },
+        {
+          "key": "name",
+          "label": "設備名稱",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "group",
+          "label": "供應群組",
+          "default": "主系統",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "填配電盤或共用主管名稱。不同群組分開定寸。"
+        },
+        {
+          "key": "quantity",
+          "label": "設備台數",
+          "default": 1,
+          "required": false,
+          "kind": "integer",
+          "low": 1,
+          "high": 1000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "usage",
+          "label": "同時使用率(%)",
+          "default": 100,
+          "required": false,
+          "kind": "number",
+          "low": 0,
+          "high": 100,
+          "options": [],
+          "help": "瞬間同時需求的估算係數，填0~100；不是每小時運轉分鐘數。支路仍按額定負載。"
+        },
+        {
+          "key": "flow",
+          "label": "每台需求流量",
+          "default": null,
+          "required": true,
+          "kind": "number",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "unit",
+          "label": "流量單位",
+          "default": "SLPM",
+          "required": false,
+          "kind": "choice",
+          "low": 0,
+          "high": 100000000,
+          "options": [
+            "SLPM",
+            "SCFM",
+            "Sm³/h",
+            "ALPM"
+          ],
+          "help": "S表示標準狀態流量；ALPM是下方管內溫壓的實際L/min。"
+        },
+        {
+          "key": "pressure",
+          "label": "管內表壓",
+          "default": null,
+          "required": true,
+          "kind": "number",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "pressure_unit",
+          "label": "壓力單位",
+          "default": "bar(g)",
+          "required": false,
+          "kind": "choice",
+          "low": 0,
+          "high": 100000000,
+          "options": [
+            "bar(g)",
+            "kPa(g)",
+            "kgf/cm²(g)",
+            "MPa(g)"
+          ],
+          "help": ""
+        },
+        {
+          "key": "temperature",
+          "label": "管內溫度(°C)",
+          "default": 25,
+          "required": false,
+          "kind": "number",
+          "low": -60,
+          "high": 150,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "atmosphere",
+          "label": "當地大氣壓(kPa絕壓)",
+          "default": 101.325,
+          "required": false,
+          "kind": "number",
+          "low": 60,
+          "high": 120,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "velocity",
+          "label": "定寸流速上限(m/s)",
+          "default": 15,
+          "required": false,
+          "kind": "number",
+          "low": 0.1,
+          "high": 40,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "reference_t",
+          "label": "標準流量溫度(°C)",
+          "default": 25,
+          "required": false,
+          "kind": "number",
+          "low": -60,
+          "high": 60,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "reference_p",
+          "label": "標準流量絕壓(kPa)",
+          "default": 101.325,
+          "required": false,
+          "kind": "number",
+          "low": 60,
+          "high": 120,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "notes",
+          "label": "備註",
+          "default": "",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        }
+      ],
+      "example": {
+        "enabled": 0,
+        "id": "EQ-001",
+        "name": "氣動設備範例",
+        "group": "CDA-01",
+        "quantity": 1,
+        "usage": 100,
+        "flow": 100,
+        "unit": "SLPM",
+        "pressure": 6,
+        "pressure_unit": "bar(g)",
+        "temperature": 25,
+        "atmosphere": 101.325,
+        "velocity": 15,
+        "reference_t": 25,
+        "reference_p": 101.325,
+        "notes": ""
+      }
+    },
+    {
+      "name": "N2",
+      "columns": [
+        {
+          "key": "enabled",
+          "label": "啟用(1/0)",
+          "default": null,
+          "required": true,
+          "kind": "integer",
+          "low": 0,
+          "high": 1,
+          "options": [],
+          "help": "1納入計算，0不納入。範例預設0。"
+        },
+        {
+          "key": "id",
+          "label": "設備編號",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "同一系統內不得重複。"
+        },
+        {
+          "key": "name",
+          "label": "設備名稱",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "group",
+          "label": "供應群組",
+          "default": "主系統",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "填配電盤或共用主管名稱。不同群組分開定寸。"
+        },
+        {
+          "key": "quantity",
+          "label": "設備台數",
+          "default": 1,
+          "required": false,
+          "kind": "integer",
+          "low": 1,
+          "high": 1000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "usage",
+          "label": "同時使用率(%)",
+          "default": 100,
+          "required": false,
+          "kind": "number",
+          "low": 0,
+          "high": 100,
+          "options": [],
+          "help": "瞬間同時需求的估算係數，填0~100；不是每小時運轉分鐘數。支路仍按額定負載。"
+        },
+        {
+          "key": "flow",
+          "label": "每台需求流量",
+          "default": null,
+          "required": true,
+          "kind": "number",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "unit",
+          "label": "流量單位",
+          "default": "SLPM",
+          "required": false,
+          "kind": "choice",
+          "low": 0,
+          "high": 100000000,
+          "options": [
+            "SLPM",
+            "SCFM",
+            "Sm³/h",
+            "ALPM"
+          ],
+          "help": "S表示標準狀態流量；ALPM是下方管內溫壓的實際L/min。"
+        },
+        {
+          "key": "pressure",
+          "label": "管內表壓",
+          "default": null,
+          "required": true,
+          "kind": "number",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "pressure_unit",
+          "label": "壓力單位",
+          "default": "bar(g)",
+          "required": false,
+          "kind": "choice",
+          "low": 0,
+          "high": 100000000,
+          "options": [
+            "bar(g)",
+            "kPa(g)",
+            "kgf/cm²(g)",
+            "MPa(g)"
+          ],
+          "help": ""
+        },
+        {
+          "key": "temperature",
+          "label": "管內溫度(°C)",
+          "default": 25,
+          "required": false,
+          "kind": "number",
+          "low": -60,
+          "high": 150,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "atmosphere",
+          "label": "當地大氣壓(kPa絕壓)",
+          "default": 101.325,
+          "required": false,
+          "kind": "number",
+          "low": 60,
+          "high": 120,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "velocity",
+          "label": "定寸流速上限(m/s)",
+          "default": 12,
+          "required": false,
+          "kind": "number",
+          "low": 0.1,
+          "high": 40,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "reference_t",
+          "label": "標準流量溫度(°C)",
+          "default": 25,
+          "required": false,
+          "kind": "number",
+          "low": -60,
+          "high": 60,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "reference_p",
+          "label": "標準流量絕壓(kPa)",
+          "default": 101.325,
+          "required": false,
+          "kind": "number",
+          "low": 60,
+          "high": 120,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "notes",
+          "label": "備註",
+          "default": "",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        }
+      ],
+      "example": {
+        "enabled": 0,
+        "id": "EQ-001",
+        "name": "氮氣設備範例",
+        "group": "N2-01",
+        "quantity": 1,
+        "usage": 100,
+        "flow": 50,
+        "unit": "SLPM",
+        "pressure": 5,
+        "pressure_unit": "bar(g)",
+        "temperature": 25,
+        "atmosphere": 101.325,
+        "velocity": 12,
+        "reference_t": 25,
+        "reference_p": 101.325,
+        "notes": ""
+      }
+    },
+    {
+      "name": "EXHAUST",
+      "columns": [
+        {
+          "key": "enabled",
+          "label": "啟用(1/0)",
+          "default": null,
+          "required": true,
+          "kind": "integer",
+          "low": 0,
+          "high": 1,
+          "options": [],
+          "help": "1納入計算，0不納入。範例預設0。"
+        },
+        {
+          "key": "id",
+          "label": "設備編號",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "同一系統內不得重複。"
+        },
+        {
+          "key": "name",
+          "label": "設備名稱",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "group",
+          "label": "供應群組",
+          "default": "主系統",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "填配電盤或共用主管名稱。不同群組分開定寸。"
+        },
+        {
+          "key": "quantity",
+          "label": "設備台數",
+          "default": 1,
+          "required": false,
+          "kind": "integer",
+          "low": 1,
+          "high": 1000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "usage",
+          "label": "同時使用率(%)",
+          "default": 100,
+          "required": false,
+          "kind": "number",
+          "low": 0,
+          "high": 100,
+          "options": [],
+          "help": "瞬間同時需求的估算係數，填0~100；不是每小時運轉分鐘數。支路仍按額定負載。"
+        },
+        {
+          "key": "exhaust_type",
+          "label": "排氣類型",
+          "default": "GEX",
+          "required": false,
+          "kind": "choice",
+          "low": 0,
+          "high": 100000000,
+          "options": [
+            "GEX",
+            "SEX",
+            "AEX",
+            "VEX",
+            "HEX"
+          ],
+          "help": "一般／酸性／鹼性／有機／機台熱排分開彙總，不能自行混接。"
+        },
+        {
+          "key": "flow",
+          "label": "每台需求流量",
+          "default": null,
+          "required": true,
+          "kind": "number",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "unit",
+          "label": "流量單位",
+          "default": "CMH",
+          "required": false,
+          "kind": "choice",
+          "low": 0,
+          "high": 100000000,
+          "options": [
+            "CMH",
+            "CFM",
+            "L/s"
+          ],
+          "help": ""
+        },
+        {
+          "key": "pressure",
+          "label": "設備要求靜壓(Pa)",
+          "default": null,
+          "required": false,
+          "kind": "number",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "設備端要求，僅列最大值；不是全路徑風機ESP。未知填空白保留待資料。"
+        },
+        {
+          "key": "velocity",
+          "label": "定寸流速上限(m/s)",
+          "default": 8,
+          "required": false,
+          "kind": "number",
+          "low": 0.1,
+          "high": 40,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "notes",
+          "label": "備註",
+          "default": "",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        }
+      ],
+      "example": {
+        "enabled": 0,
+        "id": "EQ-001",
+        "name": "排氣設備範例",
+        "group": "EX-01",
+        "quantity": 1,
+        "usage": 100,
+        "exhaust_type": "GEX",
+        "flow": 500,
+        "unit": "CMH",
+        "pressure": 200,
+        "velocity": 8,
+        "notes": ""
+      }
+    },
+    {
+      "name": "DI",
+      "columns": [
+        {
+          "key": "enabled",
+          "label": "啟用(1/0)",
+          "default": null,
+          "required": true,
+          "kind": "integer",
+          "low": 0,
+          "high": 1,
+          "options": [],
+          "help": "1納入計算，0不納入。範例預設0。"
+        },
+        {
+          "key": "id",
+          "label": "設備編號",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "同一系統內不得重複。"
+        },
+        {
+          "key": "name",
+          "label": "設備名稱",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "group",
+          "label": "供應群組",
+          "default": "主系統",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "填配電盤或共用主管名稱。不同群組分開定寸。"
+        },
+        {
+          "key": "quantity",
+          "label": "設備台數",
+          "default": 1,
+          "required": false,
+          "kind": "integer",
+          "low": 1,
+          "high": 1000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "usage",
+          "label": "同時使用率(%)",
+          "default": 100,
+          "required": false,
+          "kind": "number",
+          "low": 0,
+          "high": 100,
+          "options": [],
+          "help": "瞬間同時需求的估算係數，填0~100；不是每小時運轉分鐘數。支路仍按額定負載。"
+        },
+        {
+          "key": "flow",
+          "label": "每台需求流量",
+          "default": null,
+          "required": true,
+          "kind": "number",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "unit",
+          "label": "流量單位",
+          "default": "LPM",
+          "required": false,
+          "kind": "choice",
+          "low": 0,
+          "high": 100000000,
+          "options": [
+            "LPM",
+            "US GPM",
+            "m³/h",
+            "L/s"
+          ],
+          "help": ""
+        },
+        {
+          "key": "circulation",
+          "label": "每台額外循環量(LPM)",
+          "default": 0,
+          "required": false,
+          "kind": "number",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "額外持續循環量不乘同時使用率。避免把已含循環的流量重複填入。"
+        },
+        {
+          "key": "velocity",
+          "label": "定寸流速上限(m/s)",
+          "default": 1.2,
+          "required": false,
+          "kind": "number",
+          "low": 0.1,
+          "high": 40,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "notes",
+          "label": "備註",
+          "default": "",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        }
+      ],
+      "example": {
+        "enabled": 0,
+        "id": "EQ-001",
+        "name": "洗滌設備範例",
+        "group": "DI-01",
+        "quantity": 1,
+        "usage": 100,
+        "flow": 10,
+        "unit": "LPM",
+        "circulation": 2,
+        "velocity": 1.2,
+        "notes": ""
+      }
+    },
+    {
+      "name": "PV",
+      "columns": [
+        {
+          "key": "enabled",
+          "label": "啟用(1/0)",
+          "default": null,
+          "required": true,
+          "kind": "integer",
+          "low": 0,
+          "high": 1,
+          "options": [],
+          "help": "1納入計算，0不納入。範例預設0。"
+        },
+        {
+          "key": "id",
+          "label": "設備編號",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "同一系統內不得重複。"
+        },
+        {
+          "key": "name",
+          "label": "設備名稱",
+          "default": null,
+          "required": true,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "group",
+          "label": "供應群組",
+          "default": "主系統",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": "填配電盤或共用主管名稱。不同群組分開定寸。"
+        },
+        {
+          "key": "quantity",
+          "label": "設備台數",
+          "default": 1,
+          "required": false,
+          "kind": "integer",
+          "low": 1,
+          "high": 1000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "usage",
+          "label": "同時使用率(%)",
+          "default": 100,
+          "required": false,
+          "kind": "number",
+          "low": 0,
+          "high": 100,
+          "options": [],
+          "help": "瞬間同時需求的估算係數，填0~100；不是每小時運轉分鐘數。支路仍按額定負載。"
+        },
+        {
+          "key": "flow",
+          "label": "每台需求流量",
+          "default": null,
+          "required": true,
+          "kind": "number",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "unit",
+          "label": "流量單位",
+          "default": "SLPM",
+          "required": false,
+          "kind": "choice",
+          "low": 0,
+          "high": 100000000,
+          "options": [
+            "SLPM",
+            "SCFM",
+            "Sm³/h",
+            "ALPM"
+          ],
+          "help": "S表示標準狀態流量；ALPM是下方管內溫壓的實際L/min。"
+        },
+        {
+          "key": "pressure",
+          "label": "管內絕對壓力",
+          "default": null,
+          "required": true,
+          "kind": "number",
+          "low": 1e-06,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "pressure_unit",
+          "label": "壓力單位",
+          "default": "Torr(abs)",
+          "required": false,
+          "kind": "choice",
+          "low": 0,
+          "high": 100000000,
+          "options": [
+            "Torr(abs)",
+            "kPa(abs)",
+            "mbar(abs)"
+          ],
+          "help": ""
+        },
+        {
+          "key": "temperature",
+          "label": "管內溫度(°C)",
+          "default": 25,
+          "required": false,
+          "kind": "number",
+          "low": -60,
+          "high": 150,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "velocity",
+          "label": "定寸流速上限(m/s)",
+          "default": 18,
+          "required": false,
+          "kind": "number",
+          "low": 0.1,
+          "high": 40,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "reference_t",
+          "label": "標準流量溫度(°C)",
+          "default": 25,
+          "required": false,
+          "kind": "number",
+          "low": -60,
+          "high": 60,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "reference_p",
+          "label": "標準流量絕壓(kPa)",
+          "default": 101.325,
+          "required": false,
+          "kind": "number",
+          "low": 60,
+          "high": 120,
+          "options": [],
+          "help": ""
+        },
+        {
+          "key": "notes",
+          "label": "備註",
+          "default": "",
+          "required": false,
+          "kind": "text",
+          "low": 0,
+          "high": 100000000,
+          "options": [],
+          "help": ""
+        }
+      ],
+      "example": {
+        "enabled": 0,
+        "id": "EQ-001",
+        "name": "真空設備範例",
+        "group": "PV-01",
+        "quantity": 1,
+        "usage": 100,
+        "flow": 100,
+        "unit": "SLPM",
+        "pressure": 150,
+        "pressure_unit": "Torr(abs)",
+        "temperature": 25,
+        "velocity": 18,
+        "reference_t": 25,
+        "reference_p": 101.325,
+        "notes": ""
+      }
+    }
+  ]
+}
