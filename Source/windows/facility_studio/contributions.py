@@ -136,12 +136,35 @@ def circuit_id(water):
 FLUID_PROPERTIES = ("rho", "cp", "mu")
 INDEPENDENT_FLUID = "本迴路獨立物性"
 CLEAN_WATER = dict(rho=1000.0, cp=4.1868, mu=.001)
+# Stored in ledger["selections"][loop] after a manual edit: nothing is adopted for the loop
+# until the user selects a circuit again or no source remains for it.
+MANUAL_HOLD = "manual-hold"
 
 
 def fluid_keys(loop):
     """Main-project fields that describe one loop's fluid; restored or kept as a unit."""
     prefix = loop.lower() + "_"
     return [prefix + k for k in ("fluid_mode", "fluid_name") + FLUID_PROPERTIES]
+
+
+def loop_keys(loop):
+    """Every main-project field one adopted circuit writes: flow, unit, dT, supply, link, fluid."""
+    flow, unit, dt, tin = LOOPS[loop]
+    return [flow, unit, dt] + ([tin] if tin else []) + [loop.lower() + "_link"] + fluid_keys(loop)
+
+
+def loop_touched(d, inputs, loop):
+    """True when the user changed the loop after the ledger last wrote it.
+
+    Not touched: every owned field still holds the last written value, or every owned field
+    still holds its pre-adoption value (the adoption was never applied, e.g. a preview the
+    caller did not accept). Any other mix means a manual edit. Limitation: a user who retypes
+    the whole loop exactly as it was before adoption looks like an unapplied adoption.
+    """
+    owned = [k for k in loop_keys(loop) if k in d["last_updates"]]
+    if all(inputs.get(k) == d["last_updates"][k] for k in owned):
+        return False
+    return not all(k in d["original"] and inputs.get(k) == d["original"][k] for k in owned)
 
 
 def fluid_differences(main, source):
@@ -153,12 +176,12 @@ def fluid_differences(main, source):
 def main_fluid(d, inputs, loop):
     """The main project's own fluid for one loop: (mode, properties or None if unreadable).
 
-    While every ledger-owned fluid field still holds what the ledger last wrote, the
+    While every ledger-owned field of the loop still holds what the ledger last wrote, the
     pre-adoption snapshot is the main project's fluid; once the user changes any of them,
     the current fields are. Shared mode resolves to water_* like engine.water_properties.
     """
     owned = [k for k in fluid_keys(loop) if k in d["last_updates"] and k in d["original"]]
-    untouched = bool(owned) and all(inputs.get(k) == d["last_updates"][k] for k in owned)
+    untouched = bool(owned) and not loop_touched(d, inputs, loop)
 
     def value(key):
         return d["original"].get(key, inputs[key]) if untouched else inputs[key]
@@ -172,9 +195,16 @@ def main_fluid(d, inputs, loop):
     return mode, props if all(math.isfinite(v) for v in props.values()) else None
 
 
-def aggregate_ledger(ledger, inputs):
+def aggregate_ledger(ledger, inputs, fresh=()):
+    """fresh: loops whose circuit the user selected in this very call (consent on current values).
+
+    A stored selection is consent for the values it produced. Once the user edits any field of
+    the loop, the loop is held (summary "held_selections"): current values stay and nothing is
+    adopted until the user selects again. A selected circuit that no longer exists is released
+    (summary "released_selections").
+    """
     d = validate_ledger(ledger)
-    updates, notes, pending, groups = {}, [], [], {}
+    updates, notes, pending, groups, released, held = {}, [], [], {}, [], []
     if legacy_power_keys(d):
         pending.append(LEGACY_POWER_WARNING)
     summed, scalar_values = defaultdict(float), defaultdict(set)
@@ -210,6 +240,17 @@ def aggregate_ledger(ledger, inputs):
             g["adopted"] = False
         selected = d["selections"].get(loop)
         mode, main = main_fluid(d, inputs, loop)
+        if loop not in fresh and (selected == MANUAL_HOLD or loop_touched(d, inputs, loop)):
+            # The user's edit after adoption wins: keep the whole loop as it is now.
+            if candidates:
+                if selected != MANUAL_HOLD:
+                    held.append(loop)
+                pending.append(f"{loop} 主案水力／流體欄位在帶入後已手動修改；保留目前整組值，來源未再帶入。如要採用來源，請重新明確選擇該迴路。")
+                if len(candidates) > 1:
+                    pending.append(loop + " 有不同供回水／介質／供應迴路，分開列示；主案水力列只能選其中一組，不能代表全廠總管。")
+            elif selected:
+                released.append(loop)
+            continue
         if len(candidates) == 1 and not selected:
             cand0 = candidates[0]
             # Source flows were computed for the source fluid; they cannot stand for another one.
@@ -222,12 +263,14 @@ def aggregate_ledger(ledger, inputs):
             else:
                 selected = cand0["id"]
         group = next((g for g in candidates if g["id"] == selected), None)
-        if selected and candidates and group is None:
-            pending.append(f"{loop} 先前選擇的來源迴路已不存在；未帶入水量與流體，請重新選擇。")
+        if selected and group is None:
+            released.append(loop)
+            if candidates:
+                pending.append(f"{loop} 先前選擇的來源迴路已不存在（來源條件已變更）；未帶入新迴路，主案整組還原為採用前的值，請重新選擇。")
         elif group and d["selections"].get(loop) == group["id"] and main and fluid_differences(main, group):
             notes.append(
                 f"{loop} 依使用者選擇採用來源迴路「{group['circuit']}」的介質與水量，取代主案流體物性（主案≠來源）："
-                + "、".join(fluid_differences(main, group)) + "；移除來源即還原主案原值。"
+                + "、".join(fluid_differences(main, group)) + "；之後若未手動修改，移除來源時整組還原為採用前的主案值。"
             )
         if len(candidates) > 1:
             pending.append(loop + " 有不同供回水／介質／供應迴路，分開列示；主案水力列只能選其中一組，不能代表全廠總管。")
@@ -305,7 +348,7 @@ def aggregate_ledger(ledger, inputs):
         updates[prefix + "_type"] = "一般負載"
         notes.append(pan + " 同盤同電壓幹線：非馬達連續負載 125%、其他非馬達負載與全部馬達 100%，另加全群最大單台馬達 25%（" + (demand["largest_motor_source"] or "無馬達") + "）；P、Q 分開合成。各來源支路設計電流仍為下限，支路候選保留在設備明細。")
         updates["e_length_m"] = format(max(float(d["original"].get("e_length_m", inputs["e_length_m"])), float(updates.get("e_length_m", "0")), *(x["length_m"] for x in records)), ".15g")
-    return dict(updates=updates, water=list(groups.values()), sources=[dict(id=e["id"], name=e["name"], kind=e["kind"]) for e in d["entries"].values()], notes=list(dict.fromkeys(notes)), pending=list(dict.fromkeys(pending)))
+    return dict(updates=updates, water=list(groups.values()), sources=[dict(id=e["id"], name=e["name"], kind=e["kind"]) for e in d["entries"].values()], notes=list(dict.fromkeys(notes)), pending=list(dict.fromkeys(pending)), released_selections=released, held_selections=held)
 
 
 def restoration_updates(ledger, inputs, owned):
@@ -324,7 +367,7 @@ def restoration_updates(ledger, inputs, owned):
         if pair & set(owned) or any(inputs[key] != previous[key] for key in pair):
             protected.update(pair)
     for loop in LOOPS:
-        group = {key for key in fluid_keys(loop) if key in previous}
+        group = {key for key in loop_keys(loop) if key in previous}
         if group & set(owned) or any(inputs[key] != previous[key] for key in group):
             protected.update(group)
     return {key: ledger["original"][key] for key, value in previous.items()
@@ -338,7 +381,8 @@ def retain_owned_history(ledger, updates):
         ledger[name] = {key: value for key, value in ledger[name].items() if key in updates}
 
 
-def updated_ledger(ledger, entry, inputs):
+def updated_ledger(ledger, entry, inputs, select=None):
+    """select: {loop: circuit id} chosen explicitly by the user in this call."""
     d = validate_ledger(ledger)
     if legacy_power_keys(d):
         raise ValidationError(LEGACY_POWER_WARNING, legacy_power_keys(d)[0], code="legacy_power_adoption")
@@ -356,8 +400,22 @@ def updated_ledger(ledger, entry, inputs):
     d["entries"][entry["id"]] = copy.deepcopy(entry)
     active_panels = {pan for source in d["entries"].values() for pan in source["power"]}
     d["power_basis"] = {pan: basis for pan, basis in d["power_basis"].items() if pan in active_panels}
+    fresh = dict(select or {})
+    for loop, ident in fresh.items():
+        if loop not in LOOPS or not isinstance(ident, str) or len(ident) > 100:
+            raise ValidationError("來源迴路選擇不合法")
+        if loop_touched(d, inputs, loop):
+            # The user's current values are what removing this source should restore.
+            for key in loop_keys(loop):
+                if key in d["original"]:
+                    d["original"][key] = inputs[key]
+        d["selections"][loop] = ident
     validate_ledger(d)
-    summary = aggregate_ledger(d, inputs)
+    summary = aggregate_ledger(d, inputs, fresh)
+    for loop in summary["released_selections"]:
+        d["selections"].pop(loop, None)
+    for loop in summary["held_selections"]:
+        d["selections"][loop] = MANUAL_HOLD
     for key in summary["updates"]:
         d["original"].setdefault(key, inputs[key])
     updates = dict(summary["updates"])
@@ -372,6 +430,10 @@ def removed_ledger(ledger, ident, inputs):
     active_panels = {pan for entry in d["entries"].values() for pan in entry["power"]}
     d["power_basis"] = {pan: basis for pan, basis in d["power_basis"].items() if pan in active_panels}
     summary = aggregate_ledger(d, inputs)
+    for loop in summary["released_selections"]:
+        d["selections"].pop(loop, None)
+    for loop in summary["held_selections"]:
+        d["selections"][loop] = MANUAL_HOLD
     updates = dict(summary["updates"])
     updates.update(restoration_updates(d, inputs, updates))
     retain_owned_history(d, summary["updates"])

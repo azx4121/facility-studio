@@ -3462,11 +3462,14 @@ TEXT.update({
     "」不同（主案≠來源）：": "\u201d (main≠source): ",
     "；來源水量依來源介質計算，不能代表主案介質，未自動覆寫主案流體與水量。若確定改用來源介質，請在需求彙整中明確選擇該迴路。":
         "; source flows were computed for the source fluid and cannot represent the main-project fluid, so the main fluid and flow were not overwritten. To use the source fluid, select that circuit explicitly in the demand summary.",
-    " 先前選擇的來源迴路已不存在；未帶入水量與流體，請重新選擇。":
-        " previously selected source circuit no longer exists; no flow or fluid was adopted. Please select again.",
+    " 先前選擇的來源迴路已不存在（來源條件已變更）；未帶入新迴路，主案整組還原為採用前的值，請重新選擇。":
+        " previously selected source circuit no longer exists (source conditions changed); the new circuit was not adopted and the whole main-project loop returned to its values before adoption. Please select again.",
+    " 主案水力／流體欄位在帶入後已手動修改；保留目前整組值，來源未再帶入。如要採用來源，請重新明確選擇該迴路。":
+        " main-project flow/fluid fields were edited after adoption; all current values are kept and the source was not adopted again. To use the source, select that circuit explicitly again.",
     " 依使用者選擇採用來源迴路「": " uses the fluid and flow of source circuit \u201c",
     "」的介質與水量，取代主案流體物性（主案≠來源）：": "\u201d as selected by the user, replacing the main-project fluid properties (main≠source): ",
-    "；移除來源即還原主案原值。": "; removing the source restores the main-project values.",
+    "；之後若未手動修改，移除來源時整組還原為採用前的主案值。":
+        "; unless edited afterwards, removing the source returns the whole loop to the main-project values before adoption.",
     " 單機以清水物性計算水量，與主案目前有效物性（": " stand-alone unit computed its flows for clean water, which differs from the main project's effective fluid (",
     "）不同（主案≠來源）：": ") (main≠source): ",
     "；已保留單機來源物性並分列，不靜默重算。": "; the unit's own fluid is kept and listed separately without silent recalculation.",

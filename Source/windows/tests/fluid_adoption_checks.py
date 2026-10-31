@@ -137,7 +137,8 @@ d, up, _, after = adopt(shared_water, ahu_entry(shared_water))
 manual = dict(after, chw_mu="0.0025")
 d, up_manual, summary_manual, kept = adopt(manual, ahu_entry(manual), d)
 check("manual mu edit after adoption is not overwritten", kept["chw_mu"] == "0.0025" and "chw_mu" not in up_manual, up_manual)
-check("manual edit makes the source pending", chw_pending(summary_manual), summary_manual["pending"])
+check("manual edit makes the source pending",
+      any(x.startswith("CHW 主案水力／流體欄位在帶入後已手動修改") for x in summary_manual["pending"]), summary_manual["pending"])
 check("fluid fields are kept together (no partial restore)",
       all(kept[k] == manual[k] for k in CHW_FLUID), {k: (kept[k], manual[k]) for k in CHW_FLUID if kept[k] != manual[k]})
 
