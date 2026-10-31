@@ -2,6 +2,7 @@ from .gas_catalog import gas_label, CUSTOM_GAS
 from .i18n import localized_report, verbatim
 from .engine import pv_to_torr
 from .schema import VERSION
+from .version import REPORT_VERSION
 from .utils import US_RT_KW, dewpoint
 from .errors import InputError
 from html import escape
@@ -179,14 +180,17 @@ def executive_summary(result):
         total_kw = mau_kw + actual_dcc if actual_dcc is not None else None
     total_demand = _fmt(total_kw, "kW")
     if main:
-        total_demand = "各溫度迴路容量包絡（未加餘裕） " + total_demand
+        basis_label = str(r.get("q_total_basis", "夏冬同時峰值冷量（未加餘裕）"))
+        total_demand = basis_label + " " + total_demand
     if total_kw is not None:
         total_demand += " / " + _fmt(total_kw / US_RT_KW, "US RT")
     sf = _num(r, "sf") if main else None
-    design_values = [_num(r.get("water", {}).get(k, {}), "load_kw") for k in ("MCHW", "CHW", "DCCW")] if main else []
-    design_kw = sum(design_values) if design_values and all(v is not None for v in design_values) else (
-        total_kw * sf if total_kw is not None and sf is not None else None)
-    selection = ("分溫度迴路容量目標 " + _fmt(design_kw, "kW") + " / " + _fmt(design_kw / US_RT_KW, "US RT")
+    design_kw = (
+        total_kw * sf
+        if total_kw is not None and sf is not None
+        else None
+    )
+    selection = ("同時峰值容量目標 " + _fmt(design_kw, "kW") + " / " + _fmt(design_kw / US_RT_KW, "US RT")
                  + "（含本案容量餘裕，原廠額定待確認）") if design_kw is not None else (
                      "依設計冷量及實際供回水工況選型" if total_kw is not None else NOT_CALCULATED)
     rows.append(_row("中央冰水主機 Chiller", total_demand, selection,
@@ -213,10 +217,14 @@ def executive_summary(result):
                                + "；路徑壓差 " + _fmt(loss.get("total_pa"), "Pa")))
             pump_rows.append(key + " " + _fmt(pipe.get("lpm"), "LPM") + "；揚程 " + _fmt(loss.get("head_m"), "m")
                              + "；軸功率 " + _fmt(loss.get("shaft_kw"), "kW"))
-        rows.append(_row("冰水主管路規格", "｜".join(row[0] for row in water_rows) or NOT_CALCULATED,
+        # MCHW / CHW / DCCW flows are sized on the load with the capacity margin (engine: loads = coil kW x sf), unlike the
+        # chiller line above which states the peak without margin. Say so, or the two "demand" figures look comparable.
+        margin_pct = (sf - 1) * 100 if sf is not None else None
+        flow_note = ("（含 " + format(margin_pct, "g") + "% 容量餘裕）" if margin_pct and margin_pct > 1e-9 else "（未加容量餘裕）") if water_rows else ""
+        rows.append(_row("冰水主管路規格", "｜".join(row[0] for row in water_rows) + flow_note if water_rows else NOT_CALCULATED,
                          "｜".join(row[1] for row in water_rows) or NOT_CALCULATED,
                          "各溫度迴路分列" if water_rows else "待資料"))
-        rows.append(_row("冰水循環泵浦 CHWP", "｜".join(pump_rows) or NOT_CALCULATED,
+        rows.append(_row("冰水循環泵浦 CHWP", "｜".join(pump_rows) + flow_note if pump_rows else NOT_CALCULATED,
                          "馬達銘牌尚未選型；各迴路須分別選泵", "待選型"))
     else:
         water = pipeline.get("water", r if r.get("tool") == "water" else {})
@@ -249,23 +257,26 @@ def executive_summary(result):
             demands.append(key + " " + _fmt(panel.get("kw"), "kW") + "；" + _fmt(panel.get("current_a"), "A"))
             selections.append(key + " " + _fmt(candidate.get("nfb_candidate_a"), "AT", 0)
                               + "；" + _fmt(candidate.get("runs"), "組", 0) + " × "
-                              + _fmt(candidate.get("size_mm2"), "mm²/相"))
+                              + _fmt(candidate.get("size_mm2"), "mm²/相")
+                              + "；" + candidate.get("pe_spec", "接地待核"))
         rows.append(_row("主配電斷路器 MCCB", "｜".join(demands), "｜".join(selections)
                          + "；主進線未計算，不將分盤 AT 相加", "分盤候選"))
     else:
         electric = pipeline.get("electrical", r if r.get("tool") == "electrical" else {})
         electric = electric if isinstance(electric, dict) else {}
-        at = _num(electric, "recommended_breaker_at")
-        if "recommended_breaker_at" not in electric and electric.get("selected"):
-            at = _num(electric["selected"], "nfb_a")
-        power = _num(electric, "electrical_input_kw", "power_kw")
+        candidate = electric.get("selected") or {}
+        at = _num(candidate, "nfb_a")
+        power = _num(electric, "power_kw", "electrical_input_kw")
         demand = "明列設備有效輸入功率 " + _fmt(power, "kW") + "；運轉電流 " + _fmt(electric.get("current_a"), "A")
-        demand += "；1.25 倍電流 " + _fmt(electric.get("design_breaker_a"), "A")
-        selection = (_fmt(at, "AT", 0) + " 初估；啟動、短路及配線協調另核") if at is not None else (
-            "需求超出內建斷路器級距，須另選規格" if electric else NOT_CALCULATED)
-        rows.append(_row("主配電斷路器 MCCB", demand, selection,
-                         "連續負載初估" if at is not None else "超出級距" if electric else "待資料",
-                         "warning" if at is not None or not electric else "danger"))
+        demand += "；配線設計電流 " + _fmt(electric.get("design_a"), "A")
+        selection = (_fmt(at, "AT", 0) + "；同迴路導線 " + _fmt(candidate.get("size_mm2"), "mm²/相")
+                     + " × " + _fmt(candidate.get("runs"), "組", 0)
+                     + "；" + candidate.get("pe_spec", "接地待核")
+                     + "；主進線未計算，啟動、短路及上下游保護協調另核") if at is not None else (
+            "無用電需求" if power == 0 else "需求超出內建斷路器級距，須另選規格" if electric else NOT_CALCULATED)
+        rows.append(_row("配電斷路器 NFB（本次迴路）" if electric else "主配電斷路器 MCCB", demand, selection,
+                         "同迴路配線候選" if at is not None else "無需求" if power == 0 else "超出級距" if electric else "待資料",
+                         "neutral" if power == 0 else "warning" if at is not None or not electric else "danger"))
     return rows
 
 
@@ -354,8 +365,9 @@ def _validate_full_result(r):
                       "coverage_exceeded coverage_limit_pct coverage_ratio dcc_cmh "
                       "dcc_sensible_kw ffu_airflow_basis ffu_area_each ffu_count ffu_size "
                       "ffu_total_cmh ffu_unit_cmh leakage_cmh q_mau_kw "
-                      "q_room_sensible_kw q_total_kw q_total_rt q_total_basis required_oa_cmh "
-                      "dcc_return_cmh dcc_design_cmh dcc_design_season".split())
+                      "q_room_sensible_kw q_total_kw q_total_rt q_total_basis q_loop_envelope_kw q_loop_envelope_rt required_oa_cmh "
+                      "dcc_return_cmh dcc_design_cmh dcc_design_season "
+                      "terminal_cooling_kw terminal_cooling_season".split())
     if isinstance(r, dict) and isinstance(r.get("effective_inputs"), dict) and "ffu_topology" in r["effective_inputs"]:
         report_keys.add("ffu_topology")
     mappings = "project effective_inputs quality summer winter zones light latent room counts water pressure ducts gas electric upw".split()
@@ -399,7 +411,7 @@ def report(r):
     s = r["summer"]
     w = r["winter"]
     a(i["project_name"] + "｜設計條件與計算摘要")
-    a("系統：" + i["sys_type"] + "｜V" + VERSION + "｜需求初估")
+    a("系統：" + i["sys_type"] + "｜V" + REPORT_VERSION + "｜需求初估")
     a(
         "整體狀態："
         + r["quality"]["status"]
@@ -453,6 +465,7 @@ def report(r):
         f"產濕來源：人員 {r['latent']['people_kg_h']:.3f}＋額外製程 {r['latent']['process_kg_h']:.3f} kg/h；製程方式：{i['latent_mode']}。外氣水氣由盤管另算，不重複加進室內。"
     )
     a("\n二、空調分工與狀態")
+    single_coil = i["pre_mode"] == "單盤管（一般空調箱）"
     c1_desc = (
         f"一段旁通（備用ΔT {i['chw1_dt']} K）"
         if i["pre_mode"] == "停用／旁通"
@@ -464,7 +477,7 @@ def report(r):
         else f"無 DCC 迴路（備用ΔT {i['dt_dccw']} K）"
     )
     a(
-        f"{c1_desc}；二段 {i['chw2_in']}°C／ΔT {i['dt_chw']} K；{dcc_desc}；容量餘裕 {i['sf']}%（冷凍噸基準：{i['rt_type']}）。"
+        (f"單盤管：冰水 {i['chw2_in']}°C／ΔT {i['dt_chw']} K；" if single_coil else f"{c1_desc}；二段 {i['chw2_in']}°C／ΔT {i['dt_chw']} K；") + f"{dcc_desc}；容量餘裕 {i['sf']}%（冷凍噸基準：{i['rt_type']}）。"
     )
     a(
         f"處理風量 {r['supply_room_cmh']:.2f} CMH（室內基準）；{('FFU 循環另計 ' + format(r['circulation_cmh'], '.2f') + ' CMH' if i['sys_type'].startswith('MAU') else '外氣於空調入口混合')}。"
@@ -472,17 +485,22 @@ def report(r):
     a("點位             乾球°C    RH%       w(g/kg乾空氣)       h(kJ/kg乾空氣)")
     for title, state in [
         ("入口", s["enter"]),
-        ("一段出口", s["c1"]["outlet"]),
-        ("二段出口", s["c2"]["outlet"]),
+        *(([] if single_coil else [("一段出口", s["c1"]["outlet"])])),
+        ("冷卻盤管出口" if single_coil else "二段出口", s["c2"]["outlet"]),
         ("最終送風", s["supply"]),
         ("室內", r["room"]),
     ]:
         a(
             f"{title:<10} {state['t']:9.3f} {state['rh']:8.3f} {state['w'] * 1000:16.6f} {state['h']:18.6f}"
         )
-    for c in [s["c1"], s["c2"]]:
+    for c in ([s["c2"]] if single_coil else [s["c1"], s["c2"]]):
+        adp_bf = (
+            f"（所需 ADP {c['adp_req_c']:.2f}°C／BF {c['bf_req']:.3f}）"
+            if c.get("adp_req_c") is not None and c.get("bf_req") is not None
+            else ""
+        )
         a(
-            f"{c['name']}：空氣側 {c['air_kw']:.3f} kW；水側 {c['water_kw']:.3f} kW；含餘裕 {c['water_kw'] * sf / r['rt_kw']:.3f} RT；凝結水 {c['condensate_kg_s'] * 3600:.3f} kg/h。"
+            f"{c['name']}{adp_bf}：空氣側 {c['air_kw']:.3f} kW；水側 {c['water_kw']:.3f} kW；含餘裕 {c['water_kw'] * sf / r['rt_kw']:.3f} RT；凝結水 {c['condensate_kg_s'] * 3600:.3f} kg/h。"
         )
     a(
         f"DCC 顯熱 {r['dcc_kw']:.3f} kW；夏季再熱 {s['reheat_kw']:.3f} kW；加濕 {s['humid_kg_h']:.3f} kg/h（空氣側 {s['humid_air_kw']:.3f} kW）。"
@@ -494,10 +512,37 @@ def report(r):
             or "無設備需求"
         )
     )
+    if i["sys_type"].startswith(("FCU", "RCU")) and r.get("terminal_cooling_kw") is not None:
+        a(
+            f"末端冷卻選型基準：夏季 {_coil_kw(s):.3f} kW／冬季 {_coil_kw(w):.3f} kW；"
+            f"夏冬較大值 × {sf:g}＝{r['terminal_cooling_kw'] * sf:.3f} kW。FCU 同時核對風量。"
+        )
+        design_kw = r["terminal_cooling_kw"] * sf
+        if i["sys_type"].startswith("RCU"):
+            unit_rt = float(i["en_rcu_rt"])
+            unit_kw = unit_rt * r["rt_kw"]
+            a(f"RCU 單台額定：{unit_rt:g} RT／{unit_kw:.6f} kW；冷量需求台數 {design_kw / unit_kw:.6f}，向上取整 {r['counts']['RCU']} 台。")
+        else:
+            unit_rt, unit_flow = float(i["fcu_rt"]), float(i["en_fcu_cmh"])
+            unit_kw = unit_rt * r["rt_kw"]
+            cooling_count, airflow_count = design_kw / unit_kw, r["supply_room_cmh"] / unit_flow
+            governing = "風量" if airflow_count > cooling_count else "冷量"
+            a(f"FCU 單台額定：{unit_rt:g} RT／{unit_kw:.6f} kW；單台風量 {unit_flow:g} CMH。")
+            a(f"FCU 台數比較：冷量 {cooling_count:.6f}／風量 {airflow_count:.6f}；主導條件：{governing}；較大值向上取整 {r['counts']['FCU']} 台。")
+    elif i["sys_type"].startswith("MAU"):
+        unit_rt = float(i["en_dcc_rt"])
+        unit_kw = unit_rt * r["rt_kw"]
+        a(f"DCC 單台額定：{unit_rt:g} RT／{unit_kw:.6f} kW；夏冬較大顯熱 × {sf:g}＝{r['dcc_design_kw'] * sf:.6f} kW；需求台數 {r['dcc_design_kw'] * sf / unit_kw:.6f}，向上取整 {r['counts']['DCC']} 台。")
     if r.get("winter_room"):
         wr = r["winter_room"]
+        term_note = (
+            f"、室內加熱需求 {wr['terminal_heat_kw']:.3f}"
+            + (" kW（已計入 HW）" if wr.get("terminal_heat_source") == "HW" else " kW（未配置熱源，待指定；未計入 HW 或 NP）")
+            if wr.get("terminal_heat_kw", 0.0) > 1e-6
+            else ""
+        )
         a(
-            f"冬季室內熱濕平衡：顯熱 {wr['sensible_kw']:.3f} kW；送風 {w['supply']['t']:.3f}°C／{w['supply']['rh']:.3f}%RH；加熱 {w['reheat_kw']:.3f} kW、加濕 {w['humid_kg_h']:.3f} kg/h。"
+            f"冬季室內熱濕平衡：顯熱 {wr['sensible_kw']:.3f} kW；送風 {w['supply']['t']:.3f}°C／{w['supply']['rh']:.3f}%RH；加熱 {w['reheat_kw']:.3f} kW{term_note}、加濕 {w['humid_kg_h']:.3f} kg/h。"
         )
         a(
             f"DCC 夏冬較大需求 {r['dcc_design_kw']:.3f} kW；冬季為明列負荷的穩態估算，非逐時建築模擬。"
@@ -574,7 +619,7 @@ def report(r):
         c = e["selected"]
         a(f"  {k} 採用環溫 {e['ambient_c']:g}°C，溫度係數 {e['dt']:g}，同管係數 {e['dp']:g}。")
         a(
-            f"{k}：運轉 {e['current_a']:.3f} A，設計 {e['design_current_a']:.3f} A；NFB 候選 {c['nfb_candidate_a']} AT，{c['runs']} 組×{c['size_mm2']} mm²/相，Iz {c['iz_a']:.3f} A，壓降 {c['voltage_drop_pct']:.3f}%；接地紀錄：{i['e_' + k.lower() + '_ground']}。"
+            f"{k}：運轉 {e['current_a']:.3f} A，設計 {e['design_current_a']:.3f} A；NFB 候選 {c['nfb_candidate_a']} AT，{c['runs']} 組×{c['size_mm2']} mm²/相，Iz {c['iz_a']:.3f} A，壓降 {c['voltage_drop_pct']:.3f}%；動力設備接地 {c.get('pe_spec', '待核')}；接地覆核紀錄：{i['e_' + k.lower() + '_ground']}。"
         )
         if i.get("e_" + k.lower() + "_pf_mode") == "本盤獨立 PF":
             a(f"  {k} 採用獨立 PF={e['pf']:.6g}；匯入設計電流下限 {i['e_' + k.lower() + '_design_floor']} A。")
@@ -586,6 +631,8 @@ def report(r):
                 if e["largest_hp"] > 0 else
                 "  最大馬達未知：保守採總運轉電流×1.25。"
             )
+    from .grounding import PE_BASIS
+    a(PE_BASIS)
     a("\n五、主要公式與簡短說明")
     if r["light"].get("room_index_k") is not None:
         a(
@@ -626,12 +673,14 @@ def _nm_report_base(r):
     i = dict(r["inputs"])
     i["name"] = verbatim(i["name"], NM_DEFAULTS["name"])
     lines = [
-        i["name"] + "｜MAU 分段需求與額定容量校核",
+        i["name"] + "｜MAU 分段需求與額定容量校核｜V" + REPORT_VERSION,
         "此表為需求反算；未達額定檢核時，表列目標狀態不代表已配置設備實際可達。",
         f"風量 {i['flow']} CMH，基準：{i['flow_basis']}；大氣 {i['p']} kPa；送風目標 {i['sa_t']}°C／{i['sa_rh']}%RH。",
         f"H1 熱源：{i['h1_source']}；H2 熱源：{i['h2_source']}；回收熱水情境：{i['recovery']}。",
         f"C1 水溫 {i['c1_in']}/{i['c1_out']}°C；C2 {i['c2_in']}/{i['c2_out']}°C；容量餘裕 {i['sf']}%。",
     ]
+    if all(i[s + "_c1_mode"] == "旁通" for s in ("summer", "winter")):
+        lines[4] = f"單盤管：冰水 {i['c2_in']}/{i['c2_out']}°C；容量餘裕 {i['sf']}%。"
     if i.get("target_mode") == "主案分季需求":
         lines[2] = (
             "分季送風目標："
@@ -669,8 +718,13 @@ def _nm_report_base(r):
             (s["c1"], float(i["c1_out"]) - float(i["c1_in"])),
             (s["c2"], float(i["c2_out"]) - float(i["c2_in"])),
         ]:
+            adp_bf = (
+                f"（所需 ADP {c['adp_req_c']:.2f}°C／BF {c['bf_req']:.3f}）"
+                if c.get("adp_req_c") is not None and c.get("bf_req") is not None
+                else ""
+            )
             a(
-                f"{c['name']}：水側 {c['water_kw']:.3f} kW／{c['water_kw'] / US_RT_KW:.3f} US RT；需水 {c['water_kw'] * 60000 / (1000 * 4.1868 * delta):.3f} LPM；凝結水 {c['condensate_kg_s'] * 3600:.3f} kg/h。"
+                f"{c['name']}{adp_bf}：水側 {c['water_kw']:.3f} kW／{c['water_kw'] / US_RT_KW:.3f} US RT；需水 {c['water_kw'] * 60000 / (1000 * 4.1868 * delta):.3f} LPM；凝結水 {c['condensate_kg_s'] * 3600:.3f} kg/h。"
             )
         if "水洗" in i["humidifier"]:
             a(

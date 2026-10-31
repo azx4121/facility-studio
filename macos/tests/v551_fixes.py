@@ -7,7 +7,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, simpledialog
 from facility_studio.desktop import DesktopApp
 from facility_studio.ahu_desktop import AHUWindow
 from facility_studio.workspace_view import WorkspaceWindow
@@ -42,6 +42,8 @@ messagebox.showerror = lambda *a, **k: errors.append(str(a))
 messagebox.showinfo = lambda *a, **k: None
 messagebox.askokcancel = lambda *a, **k: True
 messagebox.askyesno = lambda *a, **k: True
+# The AHU send asks for this unit's share of the main project; answer its 100% default.
+simpledialog.askfloat = lambda *a, **k: k.get("initialvalue")
 original_read = Path.read_text
 with tempfile.TemporaryDirectory(prefix="facility551_") as td, patch.dict(
     os.environ, {"LOCALAPPDATA": td}
@@ -129,11 +131,12 @@ with tempfile.TemporaryDirectory(prefix="facility551_") as td, patch.dict(
 
     relink()
     flows = [c.vars[s + "_flow"].get() for s in ["summer", "winter"]]
-    c.target_preset(55)
+    # win.9 preset buttons: cooling supply estimate 16 °C at 85 % or 90 % (was 22 °C / 50–55 %).
+    c.target_preset(85)
     check(
         "seasonal_preset_both_targets",
         all(
-            c.vars[s + "_sa_rh"].get() == "55" and c.vars[s + "_sa_t"].get() == "22"
+            c.vars[s + "_sa_rh"].get() == "85" and c.vars[s + "_sa_t"].get() == "16"
             for s in ["summer", "winter"]
         ),
     )

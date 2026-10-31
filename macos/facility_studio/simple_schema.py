@@ -200,21 +200,21 @@ TOOLS = {
                 "燈具流明來源",
                 "LED功率初估",
                 options=("LED功率初估", "燈具型錄流明"),
-                advanced=True,
+                advanced=False,
             ),
             field(
                 "efficacy",
                 "LED初估光效",
                 "100",
-                advanced=True,
-                help="lm/W，初估假設，非燈具保證值",
+                advanced=False,
+                help="lm/W；整盞燈具輸入功率×光效＝每盞lm；非LED晶片光效。",
             ),
             field(
                 "lumens",
                 "型錄每盞光通量",
                 "4000",
-                advanced=True,
-                help="lm；燈具不是用Lux標示光通量",
+                advanced=False,
+                help="lm／完整燈具；請與每盞W使用同一規格，勿混用單管與整組。",
             ),
             field(
                 "u_mode",
@@ -224,7 +224,7 @@ TOOLS = {
                 advanced=True,
                 help="室指數只計幾何；U須依燈具配光及室內反射率查型錄填入，不能由K唯一決定。",
             ),
-            field("utilization", "照明利用率 U", ".6", advanced=True),
+            field("utilization", "照明利用率 U", ".6", help="0–1；通用初估0.6，依型錄及空間反射率確認。"),
             field(
                 "mount_h",
                 "燈具安裝高度",
@@ -239,7 +239,7 @@ TOOLS = {
                 advanced=True,
                 help="m；桌面／機台作業高度，請依實際作業面填入。",
             ),
-            field("maintenance", "維護係數 M", ".8", advanced=True),
+            field("maintenance", "維護係數 M", ".8", help="0–1；通用初估0.8，依清潔與光衰維護計畫確認。"),
         ],
     ),
     "water": dict(
@@ -267,10 +267,14 @@ TOOLS = {
     ),
     "air": dict(
         title="空氣狀態／線圖",
-        subtitle="填乾球與濕度，數值及線圖點位即時更新；曲線依目前大氣壓計算。",
+        subtitle="比較外氣A與室內／出風B的溫濕度；同圖顯示兩點、焓差與含濕量差，可帶入熱負荷。",
         fields=[
-            field("temperature", "空氣乾球溫度", "25", help="°C"),
-            field("rh", "相對濕度", "50", help="%RH"),
+            field("temperature", "A點乾球溫度", "35", help="°C；例如外氣入口"),
+            field("rh", "A點相對濕度", "60", help="%RH"),
+            field("compare", "比較第二個空氣狀態", "1", checkbox=True),
+            field("temperature_b", "B點乾球溫度", "26", help="°C；例如室內或盤管出風"),
+            field("rh_b", "B點相對濕度", "50", help="%RH"),
+            field("comparison_basis", "B點代表", "室內狀態", options=("室內狀態", "盤管出風／送風")),
             field(
                 "atmosphere", "所在地大氣壓", "101.325", advanced=True, help="kPa(abs)"
             ),
@@ -308,8 +312,15 @@ TOOLS.update({
         field("area", "空間地板面積", "100", help="m²"),
         field("persons", "同時在室人數", "10", help="人"),
         field("equipment_kw", "設備入室顯熱", "20", help="kW；扣除密閉排氣及PCW已帶走部分"),
-        field("lighting_w_m2", "照明功率密度", "12", help="W/m²"),
-        field("envelope_w_m2", "圍護結構熱負荷密度", "20", help="W/m²；初估值"),
+        field("lighting_w_m2", "照明功率密度", "12", advanced=True, help="W/m²；未有照明設計先用12初估；可帶入照明照度結果。"),
+        field("envelope_mode", "圍護結構計算", "一般建築初估", options=("一般建築初估", "面積推估外牆／樓板", "自訂熱負荷密度"), help="一般初估自動採20 W/m²；這是起始假設，非規範值。面積不能唯一決定建築熱負荷。"),
+        field("envelope_w_m2", "自訂圍護熱負荷密度", "20", help="W/m²；有設計值才直接填入，不需自行反算。"),
+        field("envelope_height", "空間淨高", "3", help="m；方形平面、四面外牆初估，可在進階修正U與溫度。"),
+        field("envelope_wall_u", "外牆傳熱係數U", "1.6", advanced=True, help="W/(m²·K)；初估，依牆體構造修正。"),
+        field("envelope_floor_u", "樓板傳熱係數U", "3.8", advanced=True, help="W/(m²·K)；初估，非屋頂日射模擬。"),
+        field("envelope_outdoor_t", "外氣乾球", "35", advanced=True, help="°C；依所在地設計條件修正。"),
+        field("envelope_room_t", "室內設計溫度", "26", advanced=True, help="°C"),
+        field("envelope_adjacent_t", "樓板相鄰空間溫度", "30", advanced=True, help="°C；同溫樓層填與室內相同。"),
         field("people_sensible_w", "每人顯熱", "75", advanced=True, help="W/人"),
         field("people_latent_w", "每人潛熱", "55", advanced=True, help="W/人"),
         field("ffu_count", "FFU運轉台數", "0", help="台"),
@@ -331,6 +342,43 @@ TOOLS.update({
     ], units={"flow_unit": "LPM"}),
 })
 
+# Fixed engineering units belong to the field definition, not to help-text
+# parsing. Both native controls and reports read the same metadata.
+FIXED_UNITS = {
+    "electrical": dict(length="m", terminal="°C", ambient="°C", drop_limit="%",
+                       mau_input_kw="kW", process_input_kw="kW", chiller_input_kw="kW"),
+    "duct": dict(velocity="m/s", roughness_mm="mm", length="m", equipment="Pa"),
+    "gas": dict(velocity="m/s", temperature="°C", atmosphere="kPa(abs)",
+                reference_t="°C", reference_p="kPa(abs)"),
+    "lighting": dict(length="m", width="m", height="m", watts="W", target="Lux",
+                     efficacy="lm/W", lumens="lm", mount_h="m", work_h="m"),
+    "water": dict(delta="K", velocity="m/s", length="m", equipment_pa="Pa", roughness_mm="mm"),
+    "air": dict(temperature="°C", rh="%RH", temperature_b="°C", rh_b="%RH", atmosphere="kPa(abs)"),
+    "cleanroom": dict(area="m²", height="m", ach="1/h", exhaust_cmh="CMH", delta_p="Pa",
+                      base_leak_ach="1/h", oa_cmh="CMH", ffu_unit_cmh="CMH", ffu_unit_kw="kW",
+                      coverage_limit_pct="%"),
+    "heat_loads": dict(area="m²", equipment_kw="kW", lighting_w_m2="W/m²", envelope_w_m2="W/m²",
+                       people_sensible_w="W/人", people_latent_w="W/人", ffu_unit_kw="kW",
+                       oa_cmh="CMH", oa_delta_h="kJ/kg", mau_room_sensible_kw="kW", mau_supply_delta_t="K",
+                       envelope_height="m", envelope_wall_u="W/(m²·K)", envelope_floor_u="W/(m²·K)",
+                       envelope_room_t="°C", envelope_outdoor_t="°C", envelope_adjacent_t="°C"),
+    "pumps": dict(head_m="m", terminal_head_m="m", static_head_m="m", head_margin_pct="%"),
+}
+for _tool, _units in FIXED_UNITS.items():
+    for _row in TOOLS[_tool]["fields"]:
+        if _row["key"] in _units:
+            _row["display_unit"] = _units[_row["key"]]
+
+
+def input_unit(tool, row, data):
+    if row["units"]:
+        return data.get(row["units"][0], row["units"][1][0])
+    if tool == "lighting" and row["key"] == "area":
+        return {"面積 m²": "m²", "面積 坪": "坪", "體積 m³": "m³"}.get(data["area_mode"], "m²")
+    if tool == "units" and row["key"] == "value":
+        return data["unit"]
+    return row.get("display_unit", "")
+
 
 def defaults(tool):
     spec = TOOLS[tool]
@@ -340,6 +388,14 @@ def defaults(tool):
 
 
 def active_field(tool, key, data):
+    if tool == "air" and key in ("temperature_b", "rh_b", "comparison_basis"):
+        return data.get("compare", "0") == "1"
+    if tool == "heat_loads":
+        envelope_mode = data.get("envelope_mode", "自訂熱負荷密度")
+        if key == "envelope_w_m2":
+            return envelope_mode == "自訂熱負荷密度"
+        if key.startswith("envelope_") and key != "envelope_mode":
+            return envelope_mode == "面積推估外牆／樓板"
     if tool == "electrical" and key == "motor_efficiency":
         return data.get("power_unit", "kW") in MOTOR_POWER_UNITS
     if tool == "cleanroom" and key == "ffu_airflow_basis":
@@ -389,7 +445,7 @@ def adopted_summary(tool, data):
             if data.get("oa_load_basis") == "外氣至實際露點送風"
             else ""
         )
-        return f"採用：中性供風初估｜外氣焓差{data['oa_delta_h']}kJ/kg（{data['oa_load_basis']}）｜FFU每台{data['ffu_unit_kw']}kW{credit}"
+        return f"採用：照明{data['lighting_w_m2']} W/m²｜圍護{data.get('envelope_mode', '自訂熱負荷密度')}｜外氣焓差{data['oa_delta_h']}kJ/kg（{data['oa_load_basis']}）｜FFU每台{data['ffu_unit_kw']}kW{credit}"
     if tool == "pumps":
         return f"採用：清水｜泵效率{data['eta_pump']}｜馬達效率{data['eta_motor']}｜末端{data['terminal_head_m']}m｜靜揚程{data['static_head_m']}m｜裕度{data['head_margin_pct']}%｜馬達銘牌按軸功率加15%選級"
     if tool == "electrical":
@@ -415,5 +471,5 @@ def adopted_summary(tool, data):
         ps = data.get("pipe_size", "自動依流速選型")
         return f"採用：管徑{ps}｜水速≤{data['velocity']}m/s｜長{data['length']}m｜ΣK={data['k_sum']}｜設備{data['equipment_pa']}Pa｜粗糙度{data['roughness_mm']}mm｜清水ρ=1000、cp=4.1868｜依實際參考內徑選型"
     if tool == "air":
-        return f"採用：大氣壓{data['atmosphere']}kPa(abs)，以kg乾空氣為基準"
+        return f"採用：大氣壓{data['atmosphere']}kPa(abs)，以kg乾空氣為基準；焓差方向A−B。"
     return "溫度含零點位移；壓力換算保持原有表壓／絕對壓基準"

@@ -171,11 +171,26 @@ class AHUWindow(AHUView):
         try:
             if self.vars["target_mode"].get() == "主案分季需求":
                 for season in ["summer", "winter"]:
-                    self.vars[season + "_sa_t"].set("22")
+                    self.vars[season + "_sa_t"].set("16")
                     self.vars[season + "_sa_rh"].set(str(rh))
             else:
-                self.vars["sa_t"].set("22")
+                self.vars["sa_t"].set("16")
                 self.vars["sa_rh"].set(str(rh))
+            self.vars["linked_main_hash"].set("尚未連動")
+            self.source_project_id = ""
+        finally:
+            self.suspended = False
+        self.changed()
+        self.calculate()
+
+    def coil_preset(self, dual=False):
+        self.remember_undo()
+        self.suspended = True
+        try:
+            self.vars["summer_c1_mode"].set("自動需求" if dual else "旁通")
+            self.vars["winter_c1_mode"].set("旁通")
+            for season in ("summer", "winter"):
+                self.vars[season + "_c2_mode"].set("自動需求")
             self.vars["linked_main_hash"].set("尚未連動")
             self.source_project_id = ""
         finally:
@@ -306,7 +321,7 @@ class AHUWindow(AHUView):
         style = ttk.Style(self.win)
         style.configure("Ahu.Card.TFrame", background=Theme.CARD, relief="flat", borderwidth=0)
         style.configure("Ahu.Nav.TFrame", background=Theme.NAV)
-        style.configure("Ahu.Brand.TLabel", background=Theme.NAV, foreground="white",
+        style.configure("Ahu.Brand.TLabel", background=Theme.NAV, foreground=Theme.TEXT,
                         font=(Theme.family, 14, "bold"))
         style.configure("Ahu.Card.TLabel", background=Theme.CARD, foreground=Theme.TEXT)
         style.configure("Ahu.Unit.TLabel", background=Theme.CARD, foreground=Theme.MUTED, font=(Theme.family, 10))
@@ -402,10 +417,12 @@ class AHUWindow(AHUView):
             ttk.Button(intro, text="帶入主畫面外氣", command=self.import_climate).pack(
                 anchor="w", pady=3
             )
-        for rh in (50, 55):
+        ttk.Button(intro, text="單盤管（一般空調箱）", command=lambda: self.coil_preset(False)).pack(anchor="w", pady=3)
+        ttk.Button(intro, text="雙盤管（選配預冷）", command=lambda: self.coil_preset(True)).pack(anchor="w", pady=3)
+        for rh in (85, 90):
             ttk.Button(
                 intro,
-                text=f"套用送風 22°C／{rh}%",
+                text=f"一般冷卻送風初估 16°C／{rh}%",
                 command=lambda value=rh: self.target_preset(value),
             ).pack(anchor="w", pady=3)
         ttk.Button(intro, text="復原帶入", command=self.undo_changes).pack(

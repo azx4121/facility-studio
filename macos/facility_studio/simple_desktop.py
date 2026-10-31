@@ -7,14 +7,15 @@ from .localized_tk import ttk, filedialog, messagebox
 from .errors import InputError, ValidationError
 from .gas_catalog import CUSTOM_GAS, gas_label, reference_velocity, switched_velocity
 from .tutorial_help import open_tutorial
-from .version import VERSION
+from .version import VERSION, BUILD_VERSION
 from .quick_tools import UNITS, UNIT_HELP
 from .air_chart import AirChart
 from .simple_engines import calculate_tool, FLOW_FACTORS, GAS_FLOW_FACTORS
 from .simple_engines import AIR_PRESSURE_FACTORS, GAS_PRESSURE_FACTORS
 from .simple_reports import presentation, tool_report
-from .simple_schema import TOOLS, active_field, adopted_summary, defaults
+from .simple_schema import TOOLS, active_field, adopted_summary, defaults, input_unit
 from .ui_common import app_icon
+from .flow_toolbar import FlowToolbar
 from .localized_tk import LanguagePicker
 from .utils import atomic_text, number
 from .industrial_theme import (Theme, ScrollableFrame, KPIFrame, ResultTable, InlineBanner,
@@ -37,6 +38,14 @@ def field_unit(spec):
             "quantity": "盞", "loaded": "條", "ratio": "—"}.get(spec["key"], "")
 
 
+def wrap_to_width(label):
+    """Wrap at the width the layout really gives the label, so a narrow column never cuts a word."""
+    def resize(event):
+        if event.width > 1 and int(float(label.cget("wraplength") or 0)) != event.width:
+            label.configure(wraplength=event.width)
+    label.bind("<Configure>", resize, add="+")
+
+
 class SimplePage(ttk.Frame):
     def __init__(self, parent, tool, app):
         super().__init__(parent)
@@ -55,8 +64,17 @@ class SimplePage(ttk.Frame):
         self.rowconfigure(0, weight=1)
         self.input_scroll = ScrollableFrame(self)
         self.input_scroll.grid(row=0, column=0, sticky="nsew")
-        self.output_scroll = ScrollableFrame(self)
-        self.output_scroll.grid(row=0, column=1, sticky="nsew")
+        self.output_frame = ttk.Frame(self)
+        self.output_frame.grid(row=0, column=1, sticky="nsew")
+        self.output_frame.columnconfigure(0, weight=1)
+        self.output_frame.rowconfigure(0, weight=1, uniform="result-halves")
+        self.output_frame.rowconfigure(1, weight=1, uniform="result-halves")
+        self.output_scroll = ScrollableFrame(self.output_frame)
+        self.output_scroll.grid(row=0, column=0, sticky="nsew")
+        self.detail_scroll = None
+        if tool != "air":
+            self.detail_scroll = ScrollableFrame(self.output_frame)
+            self.detail_scroll.grid(row=1, column=0, sticky="nsew")
         self.canvas, self.body, self.win = self.input_scroll.canvas, self.input_scroll.body, self.input_scroll.item
         self.advanced = tk.BooleanVar(self, False)
         self.body.columnconfigure(0, weight=1)
@@ -77,6 +95,7 @@ class SimplePage(ttk.Frame):
             self.labels[key] = ttk.Label(row, text=spec["label"], style="Simple.Card.TLabel",
                                          width=16, wraplength=Theme.px(135), anchor="w")
             self.labels[key].grid(row=0, column=0, sticky="w", padx=(0, 8))
+            wrap_to_width(self.labels[key])
             if spec["checkbox"]:
                 widget = ttk.Checkbutton(row, variable=self.variables[key], onvalue="1", offvalue="0", text="啟用")
             elif spec["options"]:
@@ -113,6 +132,7 @@ class SimplePage(ttk.Frame):
             if spec["help"] or key in ("ffu_topology", "ffu_airflow_basis") or (spec["options"] and max(map(len, spec["options"])) > 18):
                 hint = ttk.Label(row, text=spec["help"], style="Simple.Hint.TLabel", wraplength=310)
                 hint.grid(row=hint_row, column=0, columnspan=3, sticky="ew", pady=(3, 0))
+                wrap_to_width(hint)
                 self.hints[key] = hint
             self.rows[key] = row
         self.assumptions = ttk.Label(self.body, style="Simple.Muted.TLabel", wraplength=360)
@@ -124,14 +144,23 @@ class SimplePage(ttk.Frame):
                             command=self.update_visibility).pack(anchor="w", pady=4)
         action_row = ttk.Frame(controls)
         action_row.pack(fill="x")
-        ttk.Button(action_row, text="恢復預設", command=self.reset).pack(side="left", padx=(0, 5))
         self.upstream_button = ttk.Button(action_row, text="帶入上游結果", command=self.import_upstream)
         self.upstream_button.pack(side="left")
+        # Clearing every input sits apart from the import action and asks first.
+        ttk.Button(action_row, text="恢復預設", command=self.confirm_reset).pack(side="right")
+        # Tool-specific actions wrap onto further rows instead of being squeezed beside each other.
+        extras = FlowToolbar(controls) if tool in ("heat_loads", "lighting", "air") else None
+        if extras is not None:
+            extras.pack(fill="x", pady=(5, 0))
+        if tool == "heat_loads":
+            links = extras
+            ttk.Button(links, text="帶入照明功率密度", command=lambda: self.import_upstream("lighting")).pack(side="left")
+            ttk.Button(links, text="帶入A/B空氣焓差", command=lambda: self.import_upstream("air")).pack(side="left")
         if tool == "lighting":
             self.dialux_button = ttk.Button(
-                action_row, text="型錄 U／室指數檢核", command=self.apply_dialux_mode
+                extras, text="型錄 U／室指數檢核", command=self.apply_dialux_mode
             )
-            self.dialux_button.pack(side="left", padx=(5, 0))
+            self.dialux_button.pack(side="left")
         # Retain the read-only label API for integrations; the visible status is a banner.
         self.status = ttk.Label(self.body, style="Simple.Muted.TLabel", wraplength=360)
         output = self.output_scroll.body
@@ -139,21 +168,25 @@ class SimplePage(ttk.Frame):
         ttk.Label(output, text="工程設計總覽", style="Simple.Title.TLabel").grid(row=0, column=0, sticky="w", pady=(0, 8))
         self.banner = InlineBanner(output)
         self.banner.grid(row=1, column=0, sticky="ew", pady=(0, 8))
-        self.result_box = KPIFrame(output)
+        self.result_box = KPIFrame(output, compact=True)
         self.result_box.grid(row=2, column=0, sticky="ew")
         self.cards, self.card_boxes = [], []
-        self.result_table = ResultTable(output)
-        self.result_table.grid(row=3, column=0, sticky="nsew", pady=12)
-        self.details = ttk.Label(output, style="Simple.Normal.TLabel", wraplength=600)
-        self.details.grid(row=4, column=0, sticky="ew", pady=6)
-        self.formula = ttk.Label(output, style="Simple.Muted.TLabel", wraplength=600)
-        self.formula.grid(row=5, column=0, sticky="ew", pady=6)
-        self.note = ttk.Label(output, style="Simple.Muted.TLabel", wraplength=600)
-        self.note.grid(row=6, column=0, sticky="ew", pady=(4, 12))
+        detail_output = self.detail_scroll.body if self.detail_scroll is not None else output
+        detail_output.columnconfigure(0, weight=1)
+        offset = 0 if self.detail_scroll is not None else 3
+        self.result_table = ResultTable(detail_output)
+        self.result_table.grid(row=offset, column=0, sticky="nsew", pady=12)
+        self.details = ttk.Label(detail_output, style="Simple.Normal.TLabel", wraplength=600)
+        self.details.grid(row=offset+1, column=0, sticky="ew", pady=6)
+        self.formula = ttk.Label(detail_output, style="Simple.Muted.TLabel", wraplength=600)
+        self.formula.grid(row=offset+2, column=0, sticky="ew", pady=6)
+        self.note = ttk.Label(detail_output, style="Simple.Muted.TLabel", wraplength=600)
+        self.note.grid(row=offset+3, column=0, sticky="ew", pady=(4, 12))
         self.air_chart = None
         if tool == "air":
-            self.air_chart = AirChart(output, app.family)
-            self.air_chart.grid(row=7, column=0, sticky="ew", pady=12)
+            self.air_chart = AirChart(self.output_frame, app.family)
+            self.air_chart.grid(row=1, column=0, sticky="nsew", padx=8, pady=4)
+            ttk.Button(extras, text="放大空氣線圖", command=self.open_air_chart).pack(side="left")
         self._stacked = None
         self._wrap_widths = None
         self.bind("<Configure>", self.responsive, add="+")
@@ -170,6 +203,19 @@ class SimplePage(ttk.Frame):
             self.after_cancel(self.pending)
             self.pending = None
 
+    def open_air_chart(self):
+        if self.result is None:
+            self.calculate(True)
+        if self.result is None:
+            return
+        win = tk.Toplevel(self)
+        win.title("空氣狀態｜放大空氣線圖")
+        win.geometry("1100x700")
+        chart = AirChart(win, self.app.family)
+        chart.pack(fill="both", expand=True, padx=14, pady=14)
+        chart.set_state(self.result["state"], self.result.get("comparison_state"))
+        ttk.Label(win, text="本視窗為開啟當下的狀態快照；輸入變更後請重開核對。", style="Simple.Muted.TLabel").pack(pady=(0, 8))
+
     def _enter(self):
         self.calculate(True)
         return "break"
@@ -178,11 +224,12 @@ class SimplePage(ttk.Frame):
         if not self.winfo_ismapped():
             return
         width = self.winfo_width()
-        stacked = width < Theme.px(900)
+        stacked = width < Theme.px(680)
         if self._stacked != stacked:
             self._stacked = stacked
-            self.output_scroll.grid(row=1 if stacked else 0, column=0 if stacked else 1, sticky="nsew")
+            self.output_frame.grid(row=1 if stacked else 0, column=0 if stacked else 1, sticky="nsew")
             self.rowconfigure(1, weight=1 if stacked else 0)
+            self.columnconfigure(0, weight=2)
             self.columnconfigure(1, weight=0 if stacked else 3)
         left_width = max(300, self.input_scroll.winfo_width() - 42)
         right_width = max(300, self.output_scroll.winfo_width() - 42)
@@ -200,17 +247,22 @@ class SimplePage(ttk.Frame):
         self.canvas.yview_moveto(max(0, (widget.winfo_rooty() - self.body.winfo_rooty() - 35)
                                       / max(1, self.body.winfo_height())))
 
-    def import_upstream(self):
+    def import_upstream(self, only=None):
         results = {key: page.result for key, page in self.app.pages.items() if page.result is not None}
+        if only:
+            results = {key: value for key, value in results.items() if key == only}
+        elif self.upstream_sources:
+            results = {key: value for key, value in results.items() if key in self.upstream_sources}
         try:
             values = upstream_values(self.tool, results, self.data())
             if not values:
                 self.banner.show("尚無可帶入的上游結果；請先完成對應工具計算。", "warning")
                 return False
-            sources = {"heat_loads": ("cleanroom", "lighting"), "water": ("heat_loads",),
+            sources = {"heat_loads": ("cleanroom", "lighting", "air"), "water": ("heat_loads",),
                        "pumps": ("water",), "electrical": ("cleanroom", "heat_loads", "lighting", "pumps")}
-            self.upstream_sources = {key for key in sources.get(self.tool, ()) if key in results}
-            self.upstream_keys = set(values)
+            fresh_sources = {key for key in sources.get(self.tool, ()) if key in results}
+            self.upstream_sources = self.upstream_sources | fresh_sources if only else fresh_sources
+            self.upstream_keys = self.upstream_keys | set(values) if only else set(values)
             self.upstream_stale = False
             self.app.invalidate_dependents(self.tool)
             self.suspended = True
@@ -292,6 +344,9 @@ class SimplePage(ttk.Frame):
                     "flow_unit": ("flow", UNITS["水量"]),
                     "power_unit": ("power", UNITS["冷熱功率"]),
                 },
+                "pumps": {
+                    "flow_unit": ("flow", UNITS["水量"]),
+                },
             }
             if key in rules.get(self.tool, {}):
                 value_key, factors = rules[self.tool][key]
@@ -351,6 +406,8 @@ class SimplePage(ttk.Frame):
     def update_visibility(self):
         data = self.data()
         for spec in TOOLS[self.tool]["fields"]:
+            if spec["key"] in self.unit_labels:
+                self.unit_labels[spec["key"]].configure(text=input_unit(self.tool, spec, data))
             if spec["options"] and (spec["key"] in ("ffu_topology", "ffu_airflow_basis") or max(map(len, spec["options"])) > 18) and spec["key"] in self.hints:
                 self.hints[spec["key"]].configure(text=data[spec["key"]] + ("\n" + spec["help"] if spec["help"] else ""))
             visible = active_field(self.tool, spec["key"], data) and (
@@ -417,7 +474,7 @@ class SimplePage(ttk.Frame):
             self.result_table.set_rows(rows)
             self.result = result
             if self.air_chart is not None:
-                self.air_chart.set_state(result["state"])
+                self.air_chart.set_state(result["state"], result.get("comparison_state"))
             self.details.config(text="\n".join(details))
             if (
                 self.tool == "lighting"
@@ -444,6 +501,8 @@ class SimplePage(ttk.Frame):
                 text=status_message,
                 style="Simple.Error.TLabel" if shortfall else "Simple.Good.TLabel",
             )
+            self.banner.show(warnings[0] if warnings else status_message,
+                             "warning" if warnings or shortfall else "success")
         except (ValidationError, ValueError) as error:
             self.clear()
             key = getattr(error, "field_name", None)
@@ -475,20 +534,41 @@ class SimplePage(ttk.Frame):
 
     def apply_dialux_mode(self):
         if self.tool != "lighting":
-            return
+            return False
+        self.advanced.set(True)
+        if self.variables["area_mode"].get() != "長×寬":
+            # Area alone cannot establish the actual room geometry. Keep the
+            # current calculation instead of adopting hidden length/width drafts.
+            self.update_visibility()
+            self.calculate(True)
+            if self.result is not None:
+                self.banner.show(
+                    "已保留目前面積與燈具條件。室指數 K 需要實際長寬；請選長×寬並確認尺寸後，再按此按鈕。",
+                    "warning",
+                )
+                self.reveal(self.widgets["area_mode"])
+            return False
         self.app.invalidate_dependents(self.tool)
         self.suspended = True
         try:
-            self.advanced.set(True)
-            self.variables["mode"].set("反算燈數")
-            self.variables["lumen_mode"].set("燈具型錄流明")
-            self.variables["area_mode"].set("長×寬")
             self.variables["u_mode"].set("型錄 U＋室指數 K 檢核")
             self.previous = self.data()
         finally:
             self.suspended = False
         self.update_visibility()
         self.calculate(True)
+        return self.result is not None
+
+    def confirm_reset(self):
+        """Button entry point: ask before discarding inputs that differ from the defaults."""
+        changed = any(key in self.variables and self.variables[key].get() != value
+                      for key, value in defaults(self.tool).items())
+        if changed and not messagebox.askokcancel(
+                "恢復預設", "將清除本工具目前的所有輸入並恢復預設值，此動作無法復原。確定要繼續嗎？",
+                parent=self.winfo_toplevel()):
+            return False
+        self.reset()
+        return True
 
     def reset(self):
         self.app.invalidate_dependents(self.tool)
@@ -518,7 +598,9 @@ class SimpleToolsApp:
         self.pages = {}
         self.workbench = None
         self.equipment_window = None
-        root.title("廠務簡易工具 V" + VERSION)
+        self.workbench_mode = False
+        self.extra_host = None
+        root.title("廠務簡易工具 V" + BUILD_VERSION)
         self.configure_style()
         width = min(Theme.px(1440), max(Theme.px(980), root.winfo_screenwidth() - Theme.px(60)))
         height = min(Theme.px(830), max(Theme.px(600), root.winfo_screenheight() - Theme.px(100)))
@@ -531,8 +613,19 @@ class SimpleToolsApp:
         side.grid(row=0, column=0, rowspan=3, sticky="ns")
         side.pack_propagate(False)
         self.sidebar = side
+        # Footer first: pack gives space in packing order, so a short window clips the
+        # navigation list instead of the tutorial button and the author credit.
+        self.author_credit = tk.Label(
+            side, text="DESIGNED BY\nANDY HUANG ©", bg=Theme.NAV,
+            fg=Theme.MUTED, justify="left", font=(self.family, 9),
+        )
+        self.author_credit.pack(side="bottom", anchor="w", padx=18, pady=(8, 16))
+        self.tutorial_button = ttk.Button(
+            side, text="本工具教學", command=lambda: open_tutorial(root, self.current),
+        )
+        self.tutorial_button.pack(side="bottom", fill="x", padx=12, pady=(8, 0))
         ttk.Label(side, text="廠務簡易工具\nV" + VERSION, style="Simple.Brand.TLabel").pack(
-            anchor="w", padx=18, pady=(22, 24)
+            anchor="w", padx=18, pady=(16, 12)
         )
         self.nav = {}
         for key in TOOLS:
@@ -542,27 +635,21 @@ class SimpleToolsApp:
             )
             button.pack(fill="x", padx=8, pady=2)
             self.nav[key] = button
-        self.author_credit = tk.Label(
-            side, text="DESIGNED BY\nANDY HUANG ©", bg=Theme.NAV,
-            fg="#a6bdcc", justify="left", font=(self.family, 9),
-        )
-        self.author_credit.pack(side="bottom", anchor="w", padx=18, pady=(8, 16))
-        self.tutorial_button = ttk.Button(
-            side, text="本工具教學", command=lambda: open_tutorial(root, self.current),
-        )
-        self.tutorial_button.pack(side="bottom", fill="x", padx=12, pady=(8, 0))
+            if key == "gas":
+                self.pv_button = ttk.Button(side, text="   PV 真空", command=self.open_pv, style="Nav.TButton", width=20)
+                self.pv_button.pack(fill="x", padx=8, pady=2)
+        self.fit_window_to_sidebar()
         header = ttk.Frame(root, padding=(18, 12))
         header.grid(row=0, column=1, sticky="ew")
         header.columnconfigure(0, weight=1)
         ttk.Label(
             header, text="選工具 → 填條件 → 看結果", style="Simple.Header.TLabel"
         ).grid(row=0, column=0, columnspan=3, sticky="w")
-        ttk.Button(header, text="完整工程工作台", command=self.open_workbench).grid(
-            row=1, column=0, sticky="w", pady=(8, 0)
-        )
-        ttk.Button(header, text="設備表匯入", command=self.open_equipment).grid(
-            row=1, column=1, padx=(6, 0), pady=(8, 0)
-        )
+        engineering = FlowToolbar(header)
+        engineering.grid(row=1, column=0, columnspan=2, sticky="ew", pady=(8, 0))
+        ttk.Button(engineering, text="完整工程工作台", command=self.open_workbench).pack(side="left")
+        ttk.Button(engineering, text="設備表匯入", command=self.open_equipment).pack(side="left", padx=(6, 0))
+        ttk.Button(engineering, text="其他工程快算", command=self.open_extra_tools).pack(side="left", padx=(6, 0))
         ttk.Label(header, text="Language / 語言").grid(
             row=2, column=2, sticky="e", pady=(3, 0)
         )
@@ -573,6 +660,7 @@ class SimpleToolsApp:
         self.container.columnconfigure(0, weight=1)
         self.container.rowconfigure(0, weight=1)
         footer = ttk.Frame(root, padding=(16, 10))
+        self.footer = footer
         footer.grid(row=2, column=1, sticky="ew")
         footer.columnconfigure(0, weight=1)
         self.footer_text = ttk.Label(
@@ -594,15 +682,28 @@ class SimpleToolsApp:
         self.export_button.grid(row=0, column=3, padx=3)
         self.summary_button = ttk.Button(footer, text="設計總覽 HTML", command=self.export_summary)
         self.summary_button.grid(row=0, column=4, padx=3)
-        root.bind("<F5>", lambda event: self.active_page().calculate(True))
-        root.bind("<Return>", lambda event: self.active_page()._enter())
+        self.bind_mode_shortcuts()
         root.bind("<Configure>", self.resize, add="+")
         root.protocol("WM_DELETE_WINDOW", self.close)
         from .platform_support import bind_mac_shortcuts, install_mac_quit
 
-        bind_mac_shortcuts(root, calculate=lambda: self.active_page().calculate(True))
+        bind_mac_shortcuts(
+            root,
+            calculate=lambda: self.workbench.recalculate(True) if self.workbench_mode else self.active_page().calculate(True),
+            save=lambda: self.workbench.save() if self.workbench_mode else None,
+            open=lambda: self.workbench.load() if self.workbench_mode else None,
+        )
         install_mac_quit(root, self.close)
         self.show_tool("electrical")
+        self.simple_widgets = [w for w in root.winfo_children() if w.winfo_manager() == "grid"]
+
+    def bind_mode_shortcuts(self):
+        self.root.bind("<F5>", lambda event: self.workbench.recalculate(True) if self.workbench_mode else
+                       self.extra_tools.calculate() if self.extra_host and self.extra_host.winfo_ismapped() else self.active_page().calculate(True))
+        self.root.bind("<Return>", lambda event: None if self.workbench_mode else
+                       self.extra_tools.calculate() if self.extra_host and self.extra_host.winfo_ismapped() else self.active_page()._enter())
+        self.root.bind("<Control-s>", lambda event: self.workbench.save() if self.workbench_mode else None)
+        self.root.bind("<Control-o>", lambda event: self.workbench.load() if self.workbench_mode else None)
 
     def wheel(self, event):
         if event.widget.winfo_toplevel() is not self.root or isinstance(
@@ -635,6 +736,11 @@ class SimpleToolsApp:
         return self.pages[self.current]
 
     def show_tool(self, tool):
+        if self.workbench_mode:
+            self.show_simple_tools()
+        if self.extra_host is not None and self.extra_host.winfo_exists():
+            self.extra_host.grid_remove()
+            self.footer.grid()
         for page in self.pages.values():
             page.grid_remove()
         self.current = tool
@@ -724,16 +830,72 @@ class SimpleToolsApp:
             return False
 
     def open_workbench(self):
-        if self.workbench is not None and self.workbench.root.winfo_exists():
-            self.workbench.root.lift()
-            return self.workbench
-        from .desktop import DesktopApp
-
-        window = tk.Toplevel(self.root)
-        self.workbench = DesktopApp(window)
+        for widget in self.simple_widgets:
+            widget.grid_remove()
+        self.workbench_mode = True
+        if self.workbench is None:
+            from .desktop import DesktopApp
+            before = set(self.root.winfo_children())
+            self.workbench = DesktopApp(self.root)
+            self.workbench.simple_app = self
+            self.workbench_widgets = [w for w in self.root.winfo_children() if w not in before and w.winfo_manager() == "grid"]
+        else:
+            for widget in self.workbench_widgets:
+                widget.grid()
+        self.root.title("廠務工程工作台 V" + BUILD_VERSION)
+        self.root.protocol("WM_DELETE_WINDOW", self.close)
+        self.bind_mode_shortcuts()
         return self.workbench
 
+    def sidebar_required_height(self):
+        """Height at which every sidebar item (navigation, tutorial, credit) is fully visible."""
+        self.sidebar.update_idletasks()
+        total = 0
+        for child in self.sidebar.winfo_children():
+            pad = child.pack_info()["pady"]
+            total += child.winfo_reqheight() + (sum(map(int, pad)) if isinstance(pad, (tuple, list)) else 2 * int(pad))
+        return total
+
+    def fit_window_to_sidebar(self):
+        self.root.minsize(Theme.px(900), max(Theme.px(600), self.sidebar_required_height()))
+        if self.root.winfo_height() < self.root.minsize()[1]:
+            self.root.geometry(f"{self.root.winfo_width()}x{self.root.minsize()[1]}")
+
+    def show_simple_tools(self):
+        self.workbench_mode = False
+        for widget in self.workbench_widgets:
+            widget.grid_remove()
+        for widget in self.simple_widgets:
+            widget.grid()
+        self.root.title("廠務簡易工具 V" + BUILD_VERSION)
+        self.fit_window_to_sidebar()
+        self.bind_mode_shortcuts()
+        self.root.protocol("WM_DELETE_WINDOW", self.close)
+        return self
+
+    def open_extra_tools(self):
+        if self.workbench is None:
+            self.open_workbench()
+            self.show_simple_tools()
+        if self.extra_host is None or not self.extra_host.winfo_exists():
+            from .tools_view import QuickToolsWindow
+            self.extra_host = ttk.Frame(self.container)
+            self.extra_tools = QuickToolsWindow(self.container, self.workbench, host=self.extra_host,
+                allowed_tools=("濕空氣計算", "兩股混風", "兩點空氣過程", "水量與熱量", "水管實際流速", "Kv 與壓差", "耗電與費用"))
+        for page in self.pages.values():
+            page.grid_remove()
+        self.extra_host.grid(row=0, column=0, sticky="nsew")
+        self.footer.grid_remove()
+        return self.extra_tools
+
+    def open_pv(self):
+        workbench = self.open_workbench()
+        workbench.show_pv()
+        return workbench
+
     def close(self):
+        if self.workbench is not None and self.workbench.root is self.root:
+            return self.workbench.close()
         if self.workbench is not None and self.workbench.root.winfo_exists():
             self.workbench.close()
             if self.workbench.root.winfo_exists():

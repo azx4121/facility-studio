@@ -6,6 +6,7 @@ import math
 from .json_io import read_json_file
 from .data import VOLTAGE_MAP, FFU_SIZES
 from .quality import assess_main
+from . import airflow_guard
 from .schema import (
     V54_INPUT_KEYS,
     V55_INPUT_KEYS,
@@ -34,6 +35,7 @@ from .utils import (
     dewpoint,
     duct_selection,
     electrical_result,
+    electrical_power_kw,
     gas_result,
     integer,
     number,
@@ -180,13 +182,20 @@ def water_properties(inputs, loop):
     )
 
 
+def _inward(x, up):
+    """Round x to 6 significant digits toward the inside of the allowed range, so the stated bound is accepted."""
+    scale = 10 ** (5 - math.floor(math.log10(abs(x))))
+    return (math.ceil(x * scale - 1e-9) if up else math.floor(x * scale + 1e-9)) / scale
+
+
 def pv_to_torr(value, unit):
     factor = {"Torr(abs)": 1.0, "kPa(abs)": 760 / 101.325, "mbar(abs)": 760 / 1013.25}
     choice(unit, tuple(factor), "pv_pressure_unit")
-    torr = number(value, "pv_torr", 1e-06, 1000000.0) * factor[unit]
+    torr = number(value, "pv_torr") * factor[unit]
     if torr < 1 - 1e-09 or torr > 760 + 1e-09:
         raise InputError(
-            f"本模型限 1～760 Torr 絕壓（約 0.133322～101.325 kPa）；請確認單位",
+            f"PV 絕對壓力須介於 {_inward(1 / factor[unit], True):.6g}～{_inward(760 / factor[unit], False):.6g} {unit}"
+            f"（本模型限 1～760 Torr 絕壓，約 0.133322～101.325 kPa）；請確認單位",
             field_name=f"pv_torr",
         )
     return min(760.0, max(1.0, torr))
@@ -273,8 +282,9 @@ def validate_project(p, exclude=()):
         or p["schema_version"] != SCHEMA_VERSION
     ):
         raise InputError(f"專案格式需要 V5.6；支援完整 V5.0～5.5 專案自動移轉")
-    if not isinstance(p["inputs"], dict) or set(p["inputs"]) != set(FIELDS):
-        raise InputError(f"專案輸入欄位缺漏或含未知欄位")
+    from .optional_inputs import check_input_keys, validate_optional_inputs
+
+    check_input_keys(p["inputs"], "專案輸入欄位缺漏或含未知欄位")
     if not isinstance(p["pressure_drop"], dict) or set(p["pressure_drop"]) != set(
         PD_KEYS
     ):
@@ -298,6 +308,11 @@ def validate_project(p, exclude=()):
                 raise InputError(f"文字不可空白且不得超過 500 字", field_name=f"{k}")
         else:
             number(v, k, f["low"], f["high"])
+    from .field_state import optional_inactive
+
+    validate_optional_inputs(
+        p["inputs"], inactive, optional_inactive(p["inputs"], inactive), exclude
+    )
     if "pv_torr" not in exclude:
         pv_to_torr(p["inputs"]["pv_torr"], p["inputs"]["pv_pressure_unit"])
     for k, c in p["pressure_drop"].items():
@@ -358,6 +373,7 @@ def lighting(i):
         ("手動固定 U", "型錄 U＋室指數 K 檢核"),
         "light_u_mode",
     )
+    zone_k = {}
     if u_mode == "型錄 U＋室指數 K 檢核":
         work_h = n("light_work_h")
         if area > 0:
@@ -373,6 +389,7 @@ def lighting(i):
                             field_name="light_work_h",
                         )
                     k_z = a_z / (hm * (l_z + w_z))
+                    zone_k[z] = k_z
                     k_weighted += a_z * k_z
             room_index = k_weighted / area
             u_val = n("light_u")
@@ -394,9 +411,11 @@ def lighting(i):
         "area_m2": area,
         "qty": qty,
         "kw": qty * n("light_w") / 1000,
+        "lighting_w_m2": qty * n("light_w") / area if area else 0,
         "u": u_val,
         "u_mode": u_mode,
         "room_index_k": room_index,
+        **({"zone_k": zone_k} if zone_k else {}),
     }
 
 
@@ -452,10 +471,168 @@ def c1_blend(enter, adp, beta, p, *, season, target_t, field_name):
         ) from error
 
 
+def solve_c2_bypass(
+    s1,
+    ts,
+    wc,
+    a2,
+    p,
+    *,
+    allow_reheat="1",
+    bf_min=0.0,
+    field_name="chw2_in",
+    raise_on_infeasible=True,
+):
+    """Cooling-coil outlet on the bypass line from s1 to a saturated ADP, ending at humidity wc.
+
+    For ADP temperature A the outlet humidity fixes BF(A) = (wc - w_A) / (w_1 - w_A); the
+    outlet is the BF mix of s1 and ADP(A), with dry bulb t(A). BF(A) falls strictly as A
+    rises; t(A) is not monotonic. An ADP is admissible when a2 <= A <= tdp(wc) (chilled
+    water), BF(A) >= bf_min (coil depth) and t(A) >= tdp (a bypass line crossing the
+    saturation curve gives no realisable outlet there).
+      * direct: some admissible A gives t(A) = ts; the one with the largest BF is used;
+      * reheat: otherwise, the warmest admissible outlet below ts, then reheat; when reheat is
+        not allowed this raises, or (raise_on_infeasible=False) returns that coil point with
+        path "reheat_required" so the reheat stage, not the coil, reports the shortfall;
+      * no admissible path: otherwise, including BF(a2) < bf_min or tdp < a2; reheat cannot
+        help, and the outlet is never forced to saturation (BF = 0) past a stated floor.
+    Over-drying followed by humidification is not modelled. Every feasible point satisfies
+    outlet = BF x s1 + (1 - BF) x ADP. bf_min <= 0 means no coil performance basis: BF >= 0
+    is used and the result is pending equipment data. With raise_on_infeasible=False an
+    infeasible result has feasible_adp False, no ADP/BF and an unsaturated placeholder tc.
+    Returned keys are a superset of the previous version's keys.
+    """
+    basis_known = bf_min is not None and float(bf_min) > 0
+    bf_lim = float(bf_min) if basis_known else 0.0
+    tdp = dewpoint(wc, p)
+    result = dict(
+        tc=None, direct_tc=None, achievable_without_reheat=False, adp_req_c=None, bf_req=None,
+        bf_min=bf_lim, low_bf_warning=False, tdp=tdp, t_at_a2=tdp, feasible_adp=False,
+        bf_basis="專案指定" if basis_known else "未提供（設備能力待資料）",
+        bf_at_a2=None, t_min_reachable=None, t_max_reachable=None, path="infeasible", reason=None,
+    )
+
+    def infeasible(reason, tc, field=field_name):
+        result.update(reason=reason, tc=max(tc, tdp), direct_tc=max(tc, tdp))
+        if raise_on_infeasible:
+            raise InputError(reason, field_name=field)
+        return result
+
+    def feasible(path, adp_t, tc):
+        bf = at(adp_t)[0]
+        result.update(tc=tc, direct_tc=tc, achievable_without_reheat=path == "direct", adp_req_c=adp_t,
+                      bf_req=bf, low_bf_warning=bf < 0.05, path=path, feasible_adp=True)
+        return result
+
+    placeholder = max(tdp, min(s1["t"], ts))
+    if tdp < a2 - airflow_guard.COIL_DEWPOINT_TOLERANCE_K:
+        return infeasible("冷卻盤管所需露點低於供水＋ADP 裕度；需增加可用除濕風量或降低供水溫度", placeholder)
+
+    def at(adp_t):
+        sat = state_trh(adp_t, 100, p)
+        bf = (wc - sat["w"]) / (s1["w"] - sat["w"])
+        h = bf * s1["h"] + (1.0 - bf) * sat["h"]
+        return bf, (h - 2501.0 * wc) / (1.006 + 1.86 * wc)
+
+    bf_a2, t_a2 = at(a2)
+    result.update(t_at_a2=t_a2, bf_at_a2=bf_a2)
+    if bf_a2 < bf_lim - 1e-12:
+        return infeasible(
+            f"冷卻盤管無法除濕到 {wc * 1000:.3f} g/kg：BF 最高只能為 {bf_a2:.3f}（ADP 取最低 {a2:.2f}°C），"
+            f"低於盤管 BF 下限 {bf_lim:g}；再熱無法解決",
+            placeholder,
+        )
+    a_hi = tdp
+    if bf_lim > 0:
+        lo, hi = a2, tdp
+        for _ in range(80):
+            mid = 0.5 * (lo + hi)
+            if at(mid)[0] >= bf_lim:
+                lo = mid
+            else:
+                hi = mid
+        a_hi = lo
+    n = 400
+    points = [a2 + (a_hi - a2) * k / n for k in range(n + 1)]
+    temps = [at(x)[1] for x in points]
+
+    def refine(k, sign):
+        """Golden-section search for sign x t(A) around grid point k; never worse than it."""
+        lo, hi = points[max(k - 1, 0)], points[min(k + 1, n)]
+        g = (5 ** 0.5 - 1) / 2
+        f = lambda x: sign * at(x)[1]
+        x1, x2 = hi - g * (hi - lo), lo + g * (hi - lo)
+        f1, f2 = f(x1), f(x2)
+        for _ in range(60):
+            if f1 >= f2:
+                hi, x2, f2 = x2, x1, f1
+                x1 = hi - g * (hi - lo)
+                f1 = f(x1)
+            else:
+                lo, x1, f1 = x1, x2, f2
+                x2 = lo + g * (hi - lo)
+                f2 = f(x2)
+        return max(points[k], 0.5 * (lo + hi), key=f)
+
+    valid = [k for k in range(n + 1) if temps[k] >= tdp - 1e-09]
+    if not valid:
+        return infeasible(
+            f"冷卻盤管旁通線在 BF 下限 {bf_lim:g} 內全部落入過飽和區（入口接近飽和）；"
+            f"無可實現的出風，再熱無法解決",
+            placeholder,
+        )
+    a_max = refine(max(valid, key=temps.__getitem__), 1)
+    t_max = at(a_max)[1]
+    t_min = max(tdp, min(temps[k] for k in valid))
+    result.update(t_min_reachable=t_min, t_max_reachable=t_max)
+    tol = 5e-07  # K; absorbs dew-point round-off between callers and this solver
+    if ts >= tdp - tol:
+        # A root t(A) = ts >= tdp is unsaturated, so any bracket counts; scan from the largest BF.
+        pairs = sorted(set(zip(points, temps)) | {(a_max, t_max)})
+        for (x0, y0), (x1, y1) in zip(pairs, pairs[1:]):
+            if abs(y0 - ts) <= tol:
+                return feasible("direct", x0, ts)
+            if (y0 - ts) * (y1 - ts) <= 0:
+                lo, hi, f_lo = x0, x1, y0 - ts
+                for _ in range(80):
+                    mid = 0.5 * (lo + hi)
+                    f_mid = at(mid)[1] - ts
+                    if f_lo * f_mid <= 0:
+                        hi = mid
+                    else:
+                        lo, f_lo = mid, f_mid
+                return feasible("direct", 0.5 * (lo + hi), ts)
+        if abs(pairs[-1][1] - ts) <= tol:
+            return feasible("direct", pairs[-1][0], ts)
+    below = [k for k in valid if temps[k] < ts - tol]
+    if not below:
+        return infeasible(
+            f"冷卻盤管在 BF 下限 {bf_lim:g}、出風含濕比 {wc * 1000:.3f} g/kg 時，最低可達出風乾球為 {t_min:.2f}°C，"
+            f"高於送風目標 {ts:.2f}°C；再熱無法解決。需提供可達更低 BF 的盤管性能、降低供水溫度、提高送風溫度或增加除濕風量",
+            t_min,
+        )
+    if t_max < ts:
+        warm_a, warm_t = a_max, t_max
+    else:  # admissible set with a gap around ts (not observed in sampling): best grid point below ts
+        k = max(below, key=temps.__getitem__)
+        warm_a, warm_t = points[k], temps[k]
+    if allow_reheat == "0":
+        # The coil point itself is admissible; what is missing is reheat (a system issue).
+        reason = (f"冷卻盤管需再熱：送風目標 {ts:.2f}°C 高於盤管在出風含濕比 {wc * 1000:.3f} g/kg 時的最高可達出風 {warm_t:.2f}°C；"
+                  f"目前不允許再熱")
+        if raise_on_infeasible:
+            raise InputError(reason, field_name="allow_reheat")
+        feasible("reheat_required", warm_a, warm_t)
+        result["reason"] = reason
+        return result
+    return feasible("reheat", warm_a, warm_t)
+
+
 def condition_air(i, enter, m, ts, ws, pre=True, *, season="summer"):
     p = float(i["atm_kpa"])
     cp = float(i["water_cp"])
-    a1 = float(i["chw1_in"]) + float(i["adp_approach"])
+    a1 = (float(i["chw1_in"]) + float(i["adp_approach"])
+          if i["pre_mode"] != "單盤管（一般空調箱）" else 0.0)
     a2 = float(i["chw2_in"]) + float(i["coil_approach"])
     supply = state_tw(ts, ws, p)
     s1 = enter
@@ -488,20 +665,32 @@ def condition_air(i, enter, m, ts, ws, pre=True, *, season="summer"):
             raise InputError(f"一段除濕露點低於可達 ADP", field_name=f"pre_rh")
     c1 = coil_record("一段盤管", enter, s1, m, cp)
     wc = min(s1["w"], ws)
+    c2_sol = None
     if wc < s1["w"] - 1e-10:
-        tc = dewpoint(wc, p)
-        if tc < a2 - 1e-07:
-            raise InputError(
-                f"二段所需露點低於供水＋ADP 裕度；需增加可用除濕風量或降低供水溫度",
-                field_name=f"chw2_in",
-            )
-        tc = min(tc, s1["t"], ts)
+        c2_sol = solve_c2_bypass(
+            s1,
+            ts,
+            wc,
+            a2,
+            p,
+            allow_reheat=i.get("allow_reheat", "1"),
+            bf_min=float(i.get("c2_bf_min", 0.0)),
+            field_name="chw2_in",
+        )
+        tc = c2_sol["tc"]
     else:
         tc = min(s1["t"], ts)
     if tc < s1["t"] - 1e-08 and tc < a2 - 1e-07:
-        raise InputError(f"二段冷卻溫度低於可達 ADP", field_name=f"coil_approach")
+        raise InputError(f"冷卻盤管冷卻溫度低於可達 ADP", field_name=f"coil_approach")
     s2 = state_tw(tc, wc, p)
-    c2 = coil_record("二段盤管", s1, s2, m, cp)
+    c2 = coil_record("冷卻盤管" if i["pre_mode"] == "單盤管（一般空調箱）" else "二段盤管", s1, s2, m, cp)
+    if c2_sol is not None:
+        c2["direct_outlet_t"] = c2_sol["direct_tc"]
+        c2["achievable_without_reheat"] = c2_sol["achievable_without_reheat"]
+        c2["adp_req_c"] = c2_sol["adp_req_c"]
+        c2["bf_req"] = c2_sol["bf_req"]
+        c2["bf_min"] = c2_sol["bf_min"]
+        c2["overcool_reheat_penalty_kw"] = max(0.0, m * (state_tw(c2_sol["direct_tc"], wc, p)["h"] - s2["h"]))
     heat_state = state_tw(ts, wc, p)
     heat = m * (heat_state["h"] - s2["h"])
     humid = m * (ws - wc)
@@ -520,6 +709,7 @@ def condition_air(i, enter, m, ts, ws, pre=True, *, season="summer"):
         c1["air_kw"] + c2["air_kw"] - heat - humid_kw - m * (enter["h"] - supply["h"])
     )
     return {
+        "coil_configuration": "單盤管" if i["pre_mode"] == "單盤管（一般空調箱）" else "雙盤管／預冷旁通" if i["pre_mode"] == "停用／旁通" else "雙盤管",
         "enter": enter,
         "c1": c1,
         "c2": c2,
@@ -667,7 +857,7 @@ def calculate(p, isolate_utilities=False):
     if is_mau:
         if moist and minw >= room["w"]:
             raise InputError(
-                f"可達含濕量不足以處理室內產濕，請降低二段 ADP", field_name=f"chw2_in"
+                f"可達含濕量不足以處理室內產濕，請降低冷卻盤管 ADP", field_name=f"chw2_in"
             )
         needed = moist / (room["w"] - minw) * 1.05 if moist else 0
         if manual and moa + 1e-09 < needed / 1.05:
@@ -707,27 +897,74 @@ def calculate(p, isolate_utilities=False):
                 field_name=f"mau_supply_t",
             )
         enter = oa
+        airflow_basis = airflow_guard.not_applicable("MAU 外氣量由解析式決定；FFU 循環風量另計")
     else:
         ffu_total = 0.0
         dcc_return = 0.0
-        m = max(circ / room["v_da"] / 3600, moa, abs(qs) / 10, moist / 0.002, 1e-08)
-        for _ in range(160):
-            ws = room["w"] - moist / m
-            ts = room["t"] - qs / (m * (1.006 + 1.86 * max(0, ws)))
-            trial_enter = blend(oa, room, moa / m, n("atm_kpa"))
-            humidity_possible = trial_enter["w"] <= ws + 1e-10 or ws >= minw - 1e-10
-            if (
-                ws >= 0
-                and ts >= minadp
-                and (ts <= 80)
+        m_floor = max(circ / room["v_da"] / 3600, moa, 1e-08)
+        m = (
+            m_floor
+            if i.get("airflow_search_floor") == "circulation"
+            else max(m_floor, abs(qs) / 10, moist / 0.002)
+        )
+
+        m_start = m
+        # PHYSICAL: does any finite airflow exist? Raises with the cause and the remedy when it does not.
+        airflow_exist = airflow_guard.existence(
+            room, oa, moa, qs, moist, minadp, minw, n("atm_kpa"), m_start, n("coil_approach")
+        )
+        # NUMERICAL: the net moisture the coil must remove does not depend on the trial airflow. The old test
+        # compared w(enter) with w(supply) against 1e-10 kg/kg; that difference is moisture / airflow, so at an
+        # enormous airflow it fell below the tolerance and the search accepted a limit point (defect F-1).
+        coil_moisture = airflow_guard.moisture_to_remove(room, oa, moa, moist)
+        coil_moisture_tol = airflow_guard.humidity_tolerance(m_start)
+
+        def _airflow_feasible(m_cand):
+            ws_c = room["w"] - moist / m_cand
+            if ws_c < 0:
+                return False, ws_c, 0.0
+            ts_c = room["t"] - qs / (m_cand * (1.006 + 1.86 * max(0, ws_c)))
+            blend(oa, room, moa / m_cand, n("atm_kpa"))  # a supersaturated mixture is still rejected here
+            humidity_possible = coil_moisture <= coil_moisture_tol or airflow_guard.supply_humidity_reachable(
+                ws_c, minw, minadp, n("atm_kpa")
+            )
+            ok = (
+                ts_c >= minadp
+                and (ts_c <= 80)
                 and humidity_possible
-                and (dewpoint(ws, n("atm_kpa")) <= ts + 1e-07)
-            ):
+                and (dewpoint(ws_c, n("atm_kpa")) <= ts_c + 1e-07)
+            )
+            return ok, ws_c, ts_c
+
+        prev_m = m_floor
+        for step in range(airflow_guard.SEARCH_STEPS):
+            ok, ws, ts = _airflow_feasible(m)
+            if ok:
+                if step > 0 and not _airflow_feasible(prev_m)[0]:
+                    lo_m, hi_m = prev_m, m
+                    for _ in range(32):
+                        mid_m = 0.5 * (lo_m + hi_m)
+                        if _airflow_feasible(mid_m)[0]:
+                            hi_m = mid_m
+                        else:
+                            lo_m = mid_m
+                    m = hi_m
+                    _, ws, ts = _airflow_feasible(m)
                 break
-            m *= 1.08
+            prev_m = m
+            m *= airflow_guard.SEARCH_GROWTH
         else:
             raise InputError(f"無法求得滿足顯熱／濕度與供水條件的送風量")
         enter = blend(oa, room, moa / m, n("atm_kpa"))
+        airflow_basis = airflow_guard.describe(
+            m, m_start, m_floor, room, qs, moist, minw, minadp, n("atm_kpa"), n("coil_approach"),
+            n("chw2_in"), "circulation" if i.get("airflow_search_floor") == "circulation" else "load", airflow_exist,
+        )
+        if airflow_basis["load_driven"] and airflow_basis["inflation"] > airflow_guard.INFLATION_WARN:
+            warn.append(
+                f"供風量由{airflow_basis['governing']}決定：基準 {m_start * room['v_da'] * 3600:,.0f} CMH 增為 {airflow_basis['inflation']:.1f} 倍"
+                f"（供風溫差 {airflow_basis['supply_dt_k']:.2f} K）；請確認冰水供水溫度與室內濕度目標。"
+            )
         dcc = 0
         mau_qs = qs
         if not i["sys_type"].startswith("AHU"):
@@ -735,12 +972,22 @@ def calculate(p, isolate_utilities=False):
                 "FCU／RCU 採外氣於入口混入的等效控制體；實際外氣另接 MAU 時需另設系統拓樸。"
             )
     summer = condition_air(i, enter, m, ts, ws)
+    if is_mau:
+        dcc_flow_cmh = n("dcc_airflow_cmh") if i["dcc_airflow_mode"] == "獨立 DCC 循環" else dcc_return
+        if dcc_flow_cmh > 0:
+            m_dcc = dcc_flow_cmh / 3600 / room["v_da"]
+            cp_room = 1.006 + 1.86 * room["w"]
+            t_dcc_out = room["t"] - dcc / (m_dcc * cp_room)
+            summer["dcc_outlet_t"] = t_dcc_out
+            summer["dcc_condensation_risk"] = bool(t_dcc_out < dewpoint(room["w"], n("atm_kpa")) + 1e-6)
     winter_enter = ow if is_mau else blend(ow, room, moa / m, n("atm_kpa"))
     winter_room = None
     if i["winter_model"] == "室內熱濕平衡（定風量）":
         from .winter import room_targets
 
-        winter_room = room_targets(i, room, parts, m, moist)
+        winter_room = room_targets(
+            i, room, parts, m, moist, ffu_kw=ffu_count * n("ffu_w") / 1000
+        )
         winter = condition_air(
             i,
             winter_enter,
@@ -755,8 +1002,18 @@ def calculate(p, isolate_utilities=False):
             * (1.006 + 1.86 * winter["supply"]["w"])
             * (room["t"] - winter["supply"]["t"])
             + winter_room["dcc_kw"]
+            - winter_room.get("terminal_heat_kw", 0.0)
             - winter_room["sensible_kw"]
         )
+        # Same test as the HW design load below: only an explicit "HW" source puts the
+        # remaining room heat loss into HW; otherwise it stays an unassigned demand.
+        winter_room["terminal_heat_source"] = "HW" if i.get("winter_terminal_heat_source") == "HW" else None
+        if winter_room.get("mau_temp_capped"):
+            warn.append(
+                f"冬季 MAU 送風溫度已限制於上限 {winter_room['max_mau_t']:g}°C；剩餘室內熱損 {winter_room['terminal_heat_kw']:.2f}"
+                + (" kW 已轉列室內加熱需求並計入 HW。" if winter_room["terminal_heat_source"] == "HW"
+                   else " kW 列為未配置室內加熱需求，待指定熱源；未計入 HW 或 NP。")
+            )
         winter_room["moisture_residual_kg_s"] = (
             m * (room["w"] - winter["supply"]["w"]) - winter_room["moisture_kg_s"]
         )
@@ -775,8 +1032,12 @@ def calculate(p, isolate_utilities=False):
         raise InputError(f"乾盤管進水未達露點＋安全裕度", field_name=f"dccw_in")
     dcc = 0 if dcc < 1e-06 else dcc
     coilkw = summer["c1"]["water_kw"] + summer["c2"]["water_kw"]
+    winter_coilkw = winter["c1"]["water_kw"] + winter["c2"]["water_kw"]
+    terminal_coilkw = max(coilkw, winter_coilkw)
+    summer["coincident_cooling_kw"] = coilkw + dcc
+    winter["coincident_cooling_kw"] = winter_coilkw + (winter_room["dcc_kw"] if winter_room else 0.0)
     fcu_need = max(
-        m * room["v_da"] * 3600 / n("en_fcu_cmh"), coilkw * sf / rtkw / n("fcu_rt")
+        m * room["v_da"] * 3600 / n("en_fcu_cmh"), terminal_coilkw * sf / rtkw / n("fcu_rt")
     )
     counts = {
         "FFU": ffu_count,
@@ -785,12 +1046,15 @@ def calculate(p, isolate_utilities=False):
         ),
         "FCU": math.ceil(fcu_need - 1e-12) if i["sys_type"].startswith("FCU") else 0,
         "RCU": (
-            math.ceil(coilkw * sf / rtkw / n("en_rcu_rt") - 1e-12)
+            math.ceil(terminal_coilkw * sf / rtkw / n("en_rcu_rt") - 1e-12)
             if i["sys_type"].startswith("RCU")
             else 0
         ),
     }
-    heat = max(summer["reheat_kw"], winter["reheat_kw"])
+    winter_terminal_heat_kw = (
+        winter_room.get("terminal_heat_kw", 0.0) if winter_room else 0.0
+    )
+    heat = max(summer["reheat_kw"], winter["reheat_kw"] + (winter_terminal_heat_kw if i.get("winter_terminal_heat_source") == "HW" else 0.0))
     loads = {
         "MCHW": max(summer["c1"]["water_kw"], winter["c1"]["water_kw"]) * sf,
         "CHW": max(summer["c2"]["water_kw"], winter["c2"]["water_kw"]) * sf,
@@ -954,10 +1218,14 @@ def calculate(p, isolate_utilities=False):
         "required_oa_cmh": minoa,
         "leakage_cmh": leak,
         "q_mau_kw": coilkw if is_mau else 0.0,
-        "q_total_kw": sum(loads[key] for key in ("MCHW", "CHW", "DCCW")) / sf,
-        "q_total_rt": sum(loads[key] for key in ("MCHW", "CHW", "DCCW")) / sf / US_RT_KW,
-        "q_total_basis": "各溫度迴路容量包絡（未加餘裕）",
+        "q_total_kw": max(summer["coincident_cooling_kw"], winter["coincident_cooling_kw"]),
+        "q_total_rt": max(summer["coincident_cooling_kw"], winter["coincident_cooling_kw"]) / US_RT_KW,
+        "q_total_basis": "夏冬同時峰值冷量（未加餘裕）",
+        "q_loop_envelope_kw": sum(loads[key] for key in ("MCHW", "CHW", "DCCW")) / sf,
+        "q_loop_envelope_rt": sum(loads[key] for key in ("MCHW", "CHW", "DCCW")) / sf / US_RT_KW,
         "counts": counts,
+        "terminal_cooling_kw": terminal_coilkw,
+        "terminal_cooling_season": "winter" if winter_coilkw > coilkw else "summer",
         "water": water,
         "pressure": pressure,
         "ducts": ducts,
@@ -969,6 +1237,7 @@ def calculate(p, isolate_utilities=False):
         "mass_residual": massres,
         "sensible_residual": sensres,
         "warnings": warn,
+        "airflow_basis": airflow_basis,
     }
     r["winter_room"] = winter_room
     r["dcc_design_kw"] = dcc_design
@@ -1039,17 +1308,7 @@ def electrical_from_inputs(i):
         pan = key.split("_")[1]
         pf_key = "e_" + pan + "_pf"
         pf = n(pf_key) if i.get("e_" + pan + "_pf_mode") == "本盤獨立 PF" else n("e_pf")
-        if unit == "kW":
-            return v
-        if unit == "HP":
-            return v * 0.745699871582 / n("e_eff")
-        if unit == "A":
-            return v * math.sqrt(3) * VOLTAGE_MAP[i["e_volt"]] * pf / 1000
-        if unit == "kVA":
-            return v * pf
-        if unit == "W":
-            return v * 0.001
-        raise InputError(f"不支援：{unit}", field_name="u_" + key)
+        return electrical_power_kw(v, unit, VOLTAGE_MAP[i["e_volt"]], pf, i["e_eff"], key)
 
     for pan, keys in [
         ("up", ["eq", "oven"]),
@@ -1069,6 +1328,7 @@ def electrical_from_inputs(i):
                 e_np_fan=str(hp),
                 u_e_np_fan="HP",
                 e_np_pump=str(max(0, kw - hp * 0.745699871582 / n("e_eff"))),
+                u_e_np_pump="kW",
             )
             for key in ["heat", "humid", "exh"]:
                 ei["e_np_" + key] = "0"

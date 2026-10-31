@@ -74,12 +74,17 @@ def convert_all(category, value, unit):
     if category not in UNITS or unit not in UNITS[category]:
         raise ValidationError("不支援的換算單位", "unit")
     if category == "溫度":
-        c = (x - 32) * 5 / 9 if unit == "°F" else x - 273.15 if unit == "K" else x
-        if c < -273.15:
+        if x < {"°C": -273.15, "°F": -459.67, "K": 0}[unit]:
             raise ValidationError("溫度不可低於絕對零度", "value")
-        return {"°C": c, "°F": c * 9 / 5 + 32, "K": c + 273.15}
-    base = x * UNITS[category][unit]
-    return {u: base / factor for u, factor in UNITS[category].items()}
+        c = (x - 32) * (5 / 9) if unit == "°F" else x - 273.15 if unit == "K" else x
+        c = max(-273.15, c)  # Round-off at exactly -459.67°F must not create negative K.
+        result = {"°C": c, "°F": c * (9 / 5) + 32, "K": c + 273.15}
+    else:
+        source = UNITS[category][unit]
+        result = {u: x * (source / factor) for u, factor in UNITS[category].items()}
+    if not all(math.isfinite(v) for v in result.values()):
+        raise ValidationError("換算結果超出可表示範圍，請縮小輸入值。", "value", code="overflow")
+    return result
 
 
 PSY_MODES = ["乾球＋RH", "乾球＋濕球", "乾球＋露點", "焓＋含濕比"]
@@ -277,6 +282,8 @@ def electrical_quick(power, power_unit="kW", supply="三相 380V", kind="一般�
         design_a=res["design_a"],
         nfb_a=sel.get("nfb_a", 0),
         wire_mm2=sel.get("size_mm2", 0),
+        pe_spec=sel.get("pe_spec", "無需求"),
+        pe_mm2=sel.get("pe_mm2", 0),
         runs=sel.get("runs", 0),
         ampacity_a=sel.get("ampacity_a", 0),
         drop_pct=sel.get("drop_pct", 0),

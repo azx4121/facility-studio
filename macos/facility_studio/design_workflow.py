@@ -17,11 +17,18 @@ def ahu_requirement_updates(main_result):
     updates = {
         "p": i["atm_kpa"],
         "target_mode": "主案分季需求",
-        "c1_in": i["chw1_in"],
+        # Normalised like the outlets: a returned "7" must not differ from the main "7.0",
+        # or the boundary hash changes and every later return is refused as stale.
+        "c1_in": str(float(i["chw1_in"])),
         "c1_out": str(float(i["chw1_in"]) + float(i["chw1_dt"])),
-        "c2_in": i["chw2_in"],
+        "c2_in": str(float(i["chw2_in"])),
         "c2_out": str(float(i["chw2_in"]) + float(i["dt_chw"])),
     }
+    if i["pre_mode"] == "單盤管（一般空調箱）":
+        updates.update(summer_c1_mode="旁通", winter_c1_mode="旁通")
+    else:
+        updates.update(summer_c1_mode="旁通" if i["pre_mode"] == "停用／旁通" else "自動需求",
+                       winter_c1_mode="旁通")
     for season in ["summer", "winter"]:
         ch = r[season]
         sa = ch["supply"]
@@ -48,7 +55,8 @@ def ahu_source_hash(inputs):
                          if k not in inactive and k not in ["name", "linked_main_hash"]})
 
 
-def ahu_utility_preview(ahu_result):
+def ahu_utility_preview(ahu_result, main_inputs=None):
+    from .engine import water_properties
     r = ahu_result
     i = r["inputs"]
     updates = {}
@@ -61,6 +69,12 @@ def ahu_utility_preview(ahu_result):
         kw = max(r[s][tag]["water_kw"] for s in ["summer", "winter"]) * (
             1 + float(i["sf"]) / 100
         )
+        # Retain the AHU source's own water properties (1000 / 4.1868 / 0.001) without silent recalculation;
+        # warn explicitly if the destination main project uses different fluid properties.
+        if isinstance(main_inputs, dict):
+            dest_fluid = water_properties(main_inputs, key)
+            if abs(dest_fluid["rho"] - 1000.0) > 1e-6 or abs(dest_fluid["cp"] - 4.1868) > 1e-6:
+                notes.append(f"{key.upper()} 主案流體物性與單機清水基準不同；保留單機來源物性並標示，不靜默重算。")
         updates.update(
             {
                 flowkey: str(kw * 60000 / (1000 * 4.1868 * dt)),

@@ -50,7 +50,10 @@ class PowerUnits(unittest.TestCase):
                     self.close(result["current_a"], 9500/((math.sqrt(3) if phases == 3 else 1)*voltage*.85))
                     self.close(result["design_a"], baseline["design_a"])
                     for key, value in baseline["selected"].items():
-                        self.close(result["selected"][key], value)
+                        if isinstance(value, (int, float)) and value is not None:
+                            self.close(result["selected"][key], value)
+                        else:
+                            self.assertEqual(result["selected"][key], value)
 
     def test_horsepower_uses_shaft_efficiency_and_motor_allowance(self):
         for unit, shaft_kw in (("HP", 10*.745699871582), ("PS", 10*.73549875)):

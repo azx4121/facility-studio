@@ -3,7 +3,7 @@ from .i18n import localized_report
 """Short results shared by the independent forms and their exports."""
 
 from .simple_schema import TOOLS
-from .version import VERSION
+from .version import VERSION, REPORT_VERSION
 from .gas_catalog import gas_label, CUSTOM_GAS
 from .i18n import verbatim
 
@@ -34,6 +34,8 @@ def presentation(result):
         ]
         details = [
             f"系統總冷量 {result['q_total_kw']:,.2f} kW｜{result['q_total_rt']:,.2f} US RT",
+            f"採用照明功率密度 {result.get('lighting_w_m2', 12):,.2f} W/m²｜圍護熱負荷密度 {result.get('envelope_w_m2', 20):,.2f} W/m²",
+            result.get("envelope_detail", ""),
             f"照明 {result['q_lighting_kw']:,.2f} kW｜圍護 {result['q_envelope_kw']:,.2f} kW｜設備 {result['q_equipment_kw']:,.2f} kW",
             f"FFU 風機熱 {result['q_ffu_kw']:,.2f} kW｜人員顯熱 {result.get('q_people_sensible_kw', 0):,.2f} kW｜人員潛熱 {result['q_people_latent_kw']:,.2f} kW",
         ]
@@ -63,17 +65,23 @@ def presentation(result):
         if candidate:
             cards = [
                 ("NFB候選", f"{candidate['nfb_a']:g} AT"),
-                ("每相銅線", f"{candidate['size_mm2']:g} mm² × {candidate['runs']}組"),
+                ("每相銅線", f"{result.get('insulation', 'XLPE')} {candidate['size_mm2']:g} mm² × {candidate['runs']}組"),
+                ("動力設備接地 PE", candidate.get("pe_spec", "待核")),
                 ("運轉電流", f"{result['current_a']:,.2f} A"),
             ]
             details = [
+                candidate.get("pe_spec", ""),
+                candidate.get("pe_basis", ""),
                 f"電氣輸入 {result['power_kw']:,.3f} kW｜{result['power_w']:,.1f} W｜{result['apparent_kva']:,.2f} kVA",
                 f"設計電流 {result['design_a']:,.2f}A ≤ NFB {candidate['nfb_a']:g}AT ≤ 有效載流 {candidate['ampacity_a']:,.2f}A",
                 f"單程 {result['length_m']:g}m｜電壓降 {candidate['drop_v']:,.2f}V / {candidate['drop_pct']:.2f}%｜壓降上限 {result.get('drop_limit_pct', 3):g}%",
                 f"銅線 {result.get('insulation', 'XLPE')}｜端子 {result['terminal_c']}°C｜環溫 {result.get('ambient_c', 35):g}°C（溫度係數 {result['dt']:.2f}）｜同管 {result.get('loaded_conductors', 3)}根（同管係數 {result['dp']:.2f}）",
             ]
             if "design_breaker_a" in result:
-                details.append(f"1.25 倍連續負載初估 {result['design_breaker_a']:,.2f} A；馬達啟動、短路與保護協調另核。")
+                motor = result.get("shaft_kw") is not None or result["kind"] == "馬達"
+                basis = "馬達負載" if motor else "一般負載" if result["kind"] == "一般設備" else "連續負載"
+                factor = 1.0 if basis == "一般負載" else 1.25
+                details.append(f"設計電流依據：{basis}；運轉電流 {result['current_a']:,.4f} A × {factor:g}＝{result['design_a']:,.4f} A；馬達啟動、短路與保護協調另核。")
             if "electrical_input_kw" in result:
                 details.append(f"有效輸入電功率 {result['electrical_input_kw']:,.3f} kW｜採用效率 {result.get('eta', 1):.3f}")
             if result.get("shaft_kw") is not None:
@@ -143,6 +151,7 @@ def presentation(result):
             ("平均照度", f"{result['illuminance_lux']:,.1f} Lux"),
             ("燈具數量", f"{result['quantity']:,} 盞"),
             ("照明用電", f"{result['total_kw']:,.3f} kW"),
+            ("照明功率密度", f"{result.get('lighting_w_m2', result['total_kw'] * 1000 / result['area_m2']):,.2f} W/m²"),
         ]
         u_detail = (
             f"室指數K={result['room_index_k']:.2f}；採用型錄U={result['utilization']:.4f}"
@@ -152,11 +161,21 @@ def presentation(result):
         details = [
             f"照明面積 {result['area_m2']:,.2f}m²｜每盞 {result['lumens_per_lamp']:,.0f}lm、{result['watts']:g}W",
             f"流明來源：{result['lumen_mode']}｜{u_detail}，M={result['maintenance']:g}",
+            f"照明功率密度＝{result['quantity']:,}盞 × {result['watts']:g}W ÷ {result['area_m2']:,.2f}m²＝{result['total_kw']*1000/result['area_m2']:,.4f} W/m²；可供同範圍熱負荷使用。",
         ]
         if result["target_lux"] is not None:
             details.append(
                 f"目標 {result['target_lux']:g}Lux；盞數向上取整後採用上述平均照度。"
             )
+        comparison = result.get("comparison", {})
+        for name, label in (("estimated", "LED功率初估"), ("catalog", "燈具型錄流明")):
+            lm = comparison.get(name + "_lm")
+            count = comparison.get(name + "_quantity")
+            if lm is not None:
+                details.append(f"同條件對照｜{label}：每盞 {lm:,.1f} lm" + (f" → {count:,} 盞" if count is not None else ""))
+        if comparison.get("catalog_efficacy") is not None:
+            details.append(f"型錄整燈光效＝{comparison['catalog_efficacy']:,.1f} lm/W（型錄每盞lm÷每盞輸入W）")
+        details.extend(result.get("warnings", []))
     elif tool == "water":
         pipe, thermal = result["pipe"], result["thermal"]
         size = pipe["size"] + (f" × {pipe['runs']}並聯" if pipe["runs"] > 1 else "")
@@ -194,6 +213,18 @@ def presentation(result):
             f"乾球 {state['t']:g}°C｜濕度 {state['rh']:.2f}%RH｜大氣壓 {state['pressure_kpa']:g}kPa(abs)",
             f"含濕比 {state['w']*1000:.3f}g/kg乾空氣｜比容 {state['v_da']:.4f}m³/kg乾空氣",
         ]
+        b = result.get("comparison_state")
+        if b:
+            details.append(f"空氣焓值：{state['h']:.2f} kJ/kg乾空氣（A點）")
+            cards = [("A點焓值", f"{state['h']:,.2f} kJ/kg乾空氣"),
+                     ("B點焓值", f"{b['h']:,.2f} kJ/kg乾空氣"),
+                     ("冷卻焓差 A−B", f"{result['delta_h_kj_kg']:,.3f} kJ/kg乾空氣"),
+                     ("含濕量差 A−B", f"{result['delta_w_g_kg']:,.3f} g/kg乾空氣")]
+            details += [f"B點（{result['comparison_basis']}）：{b['t']:g}°C／{b['rh']:g}%RH；w={b['w']*1000:.3f} g/kg；h={b['h']:.3f} kJ/kg乾空氣",
+                        f"A−B：乾球差 {result['delta_t_k']:.3f} K；焓差 {result['delta_h_kj_kg']:.3f} kJ/kg乾空氣；含濕量差 {result['delta_w_g_kg']:.3f} g/kg乾空氣。"]
+            for label, point in (("A", state), ("B", b)):
+                dew = f"{point['dewpoint_c']:.3f}°C" if point['dewpoint_c'] is not None else "無有限露點"
+                details.append(f"{label}點濕球 {point['wetbulb_c']:.3f}°C｜露點 {dew}｜比容 {point['v_da']:.4f} m³/kg乾空氣")
     else:
         rows = list(result["values"].items())
         cards = [(unit, f"{value:,.6g}") for unit, value in rows[:3]]
@@ -209,16 +240,65 @@ def result_rows(result):
     return rows
 
 
+def input_rows(result, inputs=None):
+    """Only supplied, active conditions; never invent a legacy result's inputs."""
+    from .simple_schema import active_field, defaults, input_unit
+    inputs = result.get("adopted_inputs", {}) if inputs is None else inputs
+    if not isinstance(inputs, dict):
+        return []
+    tool = result["tool"]
+    values = dict(defaults(tool), **inputs)
+    rows = []
+    for row in TOOLS[tool]["fields"]:
+        key = row["key"]
+        if key not in inputs or not active_field(tool, key, values):
+            continue
+        value = verbatim(values[key]) if key == "gas_name" else str(values[key])
+        if row["checkbox"]:
+            value = "是" if value == "1" else "否"
+        unit = input_unit(tool, row, values)
+        rows.append((row["label"], value + (" " + unit if unit else "")))
+    return rows
+
+
+def electrical_source_rows(pipeline):
+    """Retain individual equipment inputs even when different splits sum alike."""
+    known = {"FFU", "照明", "CHWP", "MAU", "製程設備", "Chiller"}
+    return [(row["name"] if row["name"] in known else verbatim(row["name"]),
+             f"{row['power_kw']:,.6f} kW", row["basis"])
+            for row in pipeline.get("electrical_loads", [])]
+
+
+def electrical_source_basis(pipeline):
+    inputs = pipeline.get("adopted_inputs", {}).get("electrical", {})
+    if float(inputs.get("chiller_input_kw", 0)):
+        return "冰機用電依據：明填冰機輸入電功率。"
+    cop = float(inputs.get("chiller_cop", 0))
+    if cop and "Chiller" in {row["name"] for row in pipeline.get("electrical_loads", [])}:
+        return f"冰機用電依據：冷量 {pipeline['heat_loads']['q_total_kw']:,.6f} kW ÷ COP {cop:g}。"
+    return ""
+
+
 @localized_report
 def pipeline_report(result):
     from .reports import executive_summary_text
 
-    lines = ["廠務跨模組設計摘要｜V" + VERSION, "", executive_summary_text(result)]
+    lines = ["廠務跨模組設計摘要｜V" + REPORT_VERSION, "", executive_summary_text(result)]
     pipeline = result.get("pipeline", result)
+    sources = electrical_source_rows(pipeline)
+    if sources:
+        lines += ["", "設備輸入用電來源"] + ["｜".join(row) for row in sources]
+        lines.append(f"設備輸入電功率合計：{sum(row['power_kw'] for row in pipeline['electrical_loads']):,.6f} kW")
+        if electrical_source_basis(pipeline):
+            lines.append(electrical_source_basis(pipeline))
     for key, value in pipeline.items():
         if isinstance(value, dict) and value.get("tool"):
             cards, details = presentation(value)
-            lines += ["", key] + [label + "：" + number for label, number in cards] + details
+            conditions = input_rows(value, pipeline.get("adopted_inputs", {}).get(key))
+            lines += ["", key, "輸入條件"] + [label + "：" + text for label, text in conditions]
+            if not conditions:
+                lines.append("採用輸入條件未附於此結果，請附原始輸入資料。")
+            lines += ["結果"] + [label + "：" + number for label, number in cards] + details
     if pipeline.get("warnings"):
         lines += ["", "需確認的條件"] + list(pipeline["warnings"])
     return "\n".join(lines) + "\n"
@@ -231,18 +311,10 @@ def tool_report(result, inputs):
 
     inputs = dict(defaults(result["tool"]), **inputs)
 
-    lines = [f"廠務簡易工具 {VERSION}｜{TOOLS[result['tool']]['title']}", "", "核心設計量"]
+    lines = [f"廠務簡易工具 {REPORT_VERSION}｜{TOOLS[result['tool']]['title']}", "", "核心設計量"]
     lines += [f"  {label}：{value}" for label, value in cards]
     lines += ["", "輸入條件"]
-    for row in TOOLS[result["tool"]]["fields"]:
-        key = row["key"]
-        if active_field(result["tool"], key, inputs):
-            value = verbatim(inputs[key]) if key == "gas_name" else str(inputs[key])
-            if row["checkbox"]:
-                value = "是" if value == "1" else "否"
-            if row["units"]:
-                value += " " + inputs.get(row["units"][0], row["units"][1][0])
-            lines.append(f"  {row['label']}：{value}")
+    lines += [f"  {label}：{value}" for label, value in input_rows(result, inputs)]
     lines += ["", "結果"] + [f"  {label}：{value}" for label, value in cards]
     if result["tool"] == "lighting" and inputs["area_mode"] == "體積 m³":
         lines.append(

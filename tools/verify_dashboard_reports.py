@@ -138,7 +138,7 @@ def run_checks(source_platform, artifacts_dir=None):
     check("200 kW general-load current uses the declared supply", math.isclose(large_load["current_a"], independent_current))
     check("ordinary-load cable candidate may still be 400 AT", large_load["selected"]["nfb_a"] == 400)
     large_row = executive_summary(large_load)[6]
-    if source_platform == "windows":
+    if source_platform in ("windows", "macos"):
         check("general-load design current follows the declared circuit duty", math.isclose(large_load["design_breaker_a"], independent_current))
         check("summary adopts the same coordinated 400 AT circuit candidate", large_load["recommended_breaker_at"] == 400
               and "400 AT" in large_row["selection"] and large_row["status"] == "同迴路配線候選")

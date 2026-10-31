@@ -20,9 +20,29 @@ def run(root, app, workbench, check, pump):
     initial_geometry = root.geometry()
     root.geometry("780x560+0+0")
     pump()
-    check("Author credit and tutorial entry fit the minimum window", lambda:
-          visible_credit() and app.tutorial_button.winfo_ismapped()
-          and app.tutorial_button.winfo_y() >= 0)
+    def minimum_window_fit():
+        # The Windows window manager applies client bounds asynchronously.
+        # Wait for the actual layout while retaining the same visibility rules.
+        bounds = None
+        for _ in range(6):
+            pump()
+            credit = app.author_credit
+            button = app.tutorial_button
+            bounds = {
+                "root": root.geometry(),
+                "sidebar_height": credit.master.winfo_height(),
+                "credit": (credit.winfo_y(), credit.winfo_height()),
+                "tutorial": (button.winfo_y(), button.winfo_height()),
+            }
+            if (visible_credit() and button.winfo_ismapped()
+                    and button.winfo_y() >= 0
+                    and button.winfo_y() + button.winfo_height()
+                    <= button.master.winfo_height()):
+                return True
+        raise AssertionError("Minimum-window sidebar bounds: " + repr(bounds))
+
+    check("Author credit and tutorial entry fit the minimum window",
+          minimum_window_fit)
     root.geometry(initial_geometry)
     pump()
     with tempfile.TemporaryDirectory(prefix="facility-tutorial-check-") as directory:

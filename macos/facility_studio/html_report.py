@@ -5,6 +5,7 @@ from pathlib import Path
 
 from .reports import report, nm_report, executive_summary_html
 from .schema import DEFAULTS, VERSION
+from .version import REPORT_VERSION
 from .i18n import localized_report, verbatim
 
 
@@ -87,21 +88,29 @@ def summary_html(result):
     content += '<section><h2>需確認的條件</h2>' + (_table(issues, ("狀態", "項目", "說明")) if issues else '<p>目前已知條件無新增異常。</p>') + '</section>'
     content += '<section class="appendix"><h2>計算附錄</h2><pre>' + escape(appendix) + '</pre></section>'
     content += '<section><h2>參數來源</h2>' + _table(provenance, ("欄位", "來源", "備註")) + '<p class="muted">專案雜湊：' + escape(str(r["hash"])) + '</p></section>'
-    return _document(verbatim(i["project_name"], DEFAULTS["project_name"]), "V" + VERSION + "｜工程設計摘要", content)
+    return _document(verbatim(i["project_name"], DEFAULTS["project_name"]), "V" + REPORT_VERSION + "｜工程設計摘要", content)
 
 
 @localized_report
 def _quick_html(result):
-    from .simple_reports import presentation
+    from .simple_reports import presentation, input_rows, electrical_source_rows, electrical_source_basis
 
     pipeline = result.get("pipeline", result)
     content = executive_summary_html(result)
     content += '<p class="status">獨立工具／連動管線初估；尚未計算的設備不補造數值。</p>'
+    sources = electrical_source_rows(pipeline)
+    if sources:
+        total = sum(row["power_kw"] for row in pipeline["electrical_loads"])
+        content += '<section><h2>設備輸入用電來源</h2>' + _table(sources, ("設備", "電氣輸入", "依據"))
+        content += '<p>' + escape(f"設備輸入電功率合計：{total:,.6f} kW") + '</p>'
+        content += '<p>' + escape(electrical_source_basis(pipeline)) + '</p></section>'
     stages = [result] if result.get("tool") else [value for value in pipeline.values() if isinstance(value, dict) and value.get("tool")]
     for stage in stages:
         cards, details = presentation(stage)
         content += '<section><h2>' + escape(str(stage["tool"])) + '</h2>' + _table(cards, ("項目", "計算結果"))
         content += '<p>' + '<br>'.join(escape(str(item)) for item in details) + '</p>'
+        conditions = input_rows(stage, pipeline.get("adopted_inputs", {}).get(stage["tool"]) if not result.get("tool") else None)
+        content += '<h3>輸入條件</h3>' + (_table(conditions, ("項目", "採用條件")) if conditions else '<p>採用輸入條件未附於此結果，請附原始輸入資料。</p>')
         if stage.get("formula"):
             content += '<pre>' + escape(str(stage["formula"])) + '</pre>'
         if stage.get("note"):
@@ -110,7 +119,7 @@ def _quick_html(result):
     warnings = pipeline.get("warnings", [])
     if warnings:
         content += '<section><h2>需確認的條件</h2><p>' + '<br>'.join(escape(str(item)) for item in warnings) + '</p></section>'
-    return _document("工程設計摘要", "V" + VERSION + "｜跨模組計算", content)
+    return _document("工程設計摘要", "V" + REPORT_VERSION + "｜跨模組計算", content)
 
 
 @localized_report
@@ -121,7 +130,7 @@ def _ahu_html(result):
 
     text = nm_report(result, language="zh-Hant").source
     content = nm_summary_html(result) + '<section class="appendix"><h2>計算附錄</h2><pre>' + escape(text) + '</pre></section>'
-    return _document(verbatim(result["inputs"]["name"], NM_DEFAULTS["name"]), "V" + VERSION + "｜MAU 單機需求", content)
+    return _document(verbatim(result["inputs"]["name"], NM_DEFAULTS["name"]), "V" + REPORT_VERSION + "｜MAU 單機需求", content)
 
 
 def html_report(result, *, language=None):

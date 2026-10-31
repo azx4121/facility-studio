@@ -86,7 +86,7 @@ def run_checks(source_platform):
     expected_current = 10000 / (math.sqrt(3) * 380 * .85 * .9)
     near('shaft kW current uses efficiency once', load['current_a'], expected_current)
     near('continuous design current is 125pct', load['design_breaker_a'], 1.25 * expected_current)
-    if source_platform == 'windows':
+    if source_platform in ('windows', 'macos'):
         check('125pct breaker and conductor use the same circuit selection',
               load['recommended_breaker_at'] == load['selected']['nfb_a'] == 25
               and load['design_a'] <= load['selected']['nfb_a'] <= load['selected']['ampacity_a'])

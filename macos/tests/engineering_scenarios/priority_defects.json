@@ -1,0 +1,143 @@
+[
+ {
+  "id": "PD-1a",
+  "name": "F-1 reproducer on the current branch is refused, not solved",
+  "status": "PASS",
+  "detail": "current: {\"ok\": false, \"msg\": \"未達條件：盤管最低可達含濕量 6.683 g/kg（冰水供水＋ADP 裕度 8.06°C）不低於室內含濕量 6.562 g/kg（露點 7.79°C），任何風量都無法除濕；冰水供水溫度須低於 6.79°C，或提高室內相對濕度目標\"}",
+  "expected": "refused with 未達條件",
+  "actual": {
+   "ok": false,
+   "msg": "未達條件：盤管最低可達含濕量 6.683 g/kg（冰水供水＋ADP 裕度 8.06°C）不低於室內含濕量 6.562 g/kg（露點 7.79°C），任何風量都無法除濕；冰水供水溫度須低於 6.79°C，或提高室內相對濕度目標"
+  }
+ },
+ {
+  "id": "PD-1b",
+  "name": "F-1 reproducer on the imported baseline (before the fix)",
+  "status": "PASS",
+  "detail": "baseline: {\"ok\": true, \"cmh\": 7411601864.864676, \"status\": \"待補資料\"}  -> defect reproduced (> 1e9 CMH accepted)",
+  "expected": "baseline accepts an absurd airflow (confirms the defect existed)",
+  "actual": {
+   "ok": true,
+   "cmh": 7411601864.864676,
+   "status": "待補資料"
+  }
+ },
+ {
+  "id": "PD-1c",
+  "name": "the exact input behind the 7,412,540,040 CMH observation",
+  "status": "BLOCKED",
+  "detail": "the plan gives the output but not the input; the recorded reproducer above is the same failure mode (limit point at infinity)",
+  "expected": null,
+  "actual": null
+ },
+ {
+  "id": "PD-2a",
+  "name": "gate reaches 初估完成 when all user-suppliable data is given (D-01 inputs + latent/NP/FFU heat/BF floor 0.15 (tester assumption)/equipment dp)",
+  "status": "PASS",
+  "detail": "status=初估完成（待後續階段確認）; remaining=[('待後續', '設備同工況選型'), ('待後續', '配電候選覆核')]",
+  "expected": "初估完成（待後續階段確認）",
+  "actual": "初估完成（待後續階段確認）"
+ },
+ {
+  "id": "PD-2b",
+  "name": "with default data the gate says 待補資料 and lists the items",
+  "status": "PASS",
+  "detail": "status=待補資料 pending=5",
+  "expected": null,
+  "actual": null
+ },
+ {
+  "id": "PD-2c",
+  "name": "初估檢核通過 (the top status) with zero loads",
+  "status": "BLOCKED",
+  "detail": "zero-load status=待補資料; with any load 設備同工況選型 is always 待後續 so the top status is not reachable in practice",
+  "expected": "初估檢核通過",
+  "actual": "待補資料"
+ },
+ {
+  "id": "PD-2d",
+  "name": "DESIGN OBSERVATION: 初估檢核通過 is unreachable for any real room",
+  "status": "NOT APPLICABLE",
+  "detail": "by design (quality.py: 設備同工況選型 is 待後續 whenever qs or ql is non-zero). The earlier 'never PASS' complaint is resolved as a label problem: the reachable top status is 初估完成（待後續階段確認）. Whether 初估檢核通過 should exist is a product decision, not a calculation fault.",
+  "expected": null,
+  "actual": null
+ },
+ {
+  "id": "PD-3a",
+  "name": "margin arithmetic: coil load x sf = design load, applied once per loop (check G6 over the 20 cases)",
+  "status": "PASS",
+  "detail": "G6 results: 15 cases, ['PASS']; sf=10.0, CR-03 CHW load 323.684 kW (run run_scenarios.py first)",
+  "expected": null,
+  "actual": null
+ },
+ {
+  "id": "PD-3b",
+  "name": "report labels loads before / after the margin and states the margin percentage (zh)",
+  "status": "PASS",
+  "detail": "未加餘裕 / 含餘裕 / '10%' all present",
+  "expected": null,
+  "actual": null
+ },
+ {
+  "id": "PD-3c",
+  "name": "report labels the margin and its percentage (en)",
+  "status": "PASS",
+  "detail": "[Selection target]  Target with margin 323.68 kW / 92.04 US RT;  Actua | [Calculated requirement]  Seasonal coincident cooling peak (before saf",
+  "expected": null,
+  "actual": null
+ },
+ {
+  "id": "PD-4a",
+  "name": "wall load follows the selected U-value unit (hand calc: U x A x dT)",
+  "status": "PASS",
+  "detail": "kcal/(h·m²·K): engine 0.6978 vs 0.697800 kW; W/(m²·K): engine 0.6 vs 0.600000 kW",
+  "expected": {
+   "kcal/(h·m²·K)": 0.6978,
+   "W/(m²·K)": 0.6
+  },
+  "actual": {
+   "kcal/(h·m²·K)": 0.6978,
+   "W/(m²·K)": 0.6
+  }
+ },
+ {
+  "id": "PD-4b",
+  "name": "the U-value field itself shows its unit",
+  "status": "FAIL",
+  "detail": "FIELDS['wall_u'] unit='', label='外牆 U 值'; the unit lives in a separate selector (u_unit, default 'kcal/(h·m²·K)'). Entering a W/(m2.K) value while the default kcal unit is selected under-states the load by 14 % (1/1.163) with no warning.",
+  "expected": "unit shown next to the value",
+  "actual": ""
+ },
+ {
+  "id": "PD-4c",
+  "name": "the report prints the U-value unit next to the wall load",
+  "status": "FAIL",
+  "detail": "the report prints the wall load in kW but never the U value or its unit, and FIELD_HELP has no hint for wall_u / floor_u / u_unit",
+  "expected": null,
+  "actual": null
+ },
+ {
+  "id": "PD-5a",
+  "name": "field envelope covers the per-unit ranges",
+  "status": "PASS",
+  "detail": "field 0.133322..1013.25; per unit 1-760 Torr = 0.1333-101.325 kPa = 1.333-1013.25 mbar",
+  "expected": null,
+  "actual": null
+ },
+ {
+  "id": "PD-5b",
+  "name": "per-unit boundary values are accepted / refused consistently (12 values)",
+  "status": "PASS",
+  "detail": "all 12 boundary checks as expected",
+  "expected": null,
+  "actual": null
+ },
+ {
+  "id": "PD-5c",
+  "name": "the field hint states the per-unit ranges",
+  "status": "PASS",
+  "detail": "全部為絕對壓力；150 Torr ≈ 20.00 kPa ≈ 199.98 mbar。允許範圍依所選單位：1～760 Torr ≈ 0.1333～101.325 kPa ≈ 1.333～1013.25 mbar。",
+  "expected": null,
+  "actual": null
+ }
+]

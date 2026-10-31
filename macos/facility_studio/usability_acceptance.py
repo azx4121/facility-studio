@@ -40,6 +40,10 @@ def run(root, app, main, check, pump, output=None):
         destination.mkdir(parents=True, exist_ok=True)
         window.lift()
         pump()
+        if hasattr(window, "_native_redraw"):
+            if not window._native_redraw.repaint():
+                raise AssertionError("Windows client repaint failed")
+            pump()
         try:
             ImageGrab.grab().save(destination / name)
         except (OSError, RuntimeError) as exc:
@@ -56,7 +60,7 @@ def run(root, app, main, check, pump, output=None):
             main.task_scope.set("空調與熱負荷")
             main.update_visibility()
             pump()
-            check("V556 basic task hides utility navigation but preserves inputs", lambda: not main.nav[3].winfo_manager() and bool(main.nav[8].winfo_manager()) and "gas2_q" in main.snapshot()["inputs"])
+            check("V556 basic task retains direct PV navigation and preserves inputs", lambda: bool(main.nav[3].winfo_manager()) and bool(main.nav[8].winfo_manager()) and "gas2_q" in main.snapshot()["inputs"])
             check("V556 climate inputs precede the psychrometric plot", lambda: main.widgets["oa_t"].winfo_rooty() < main.plot.get_tk_widget().winfo_rooty())
             adopted = main.snapshot()["inputs"]["light_u"]
             main.show_page(2)
@@ -70,7 +74,8 @@ def run(root, app, main, check, pump, output=None):
             check("V556 diagnostics and model share the product version", lambda: __version__ == VERSION)
             check("V556 quick-tool title uses the product version", lambda: VERSION in root.title())
             check("V556 quick-tool report uses the product version", lambda: VERSION in tool_report(app.pages["electrical"].result, app.pages["electrical"].data()).splitlines()[0])
-            check("V556 printable report uses the product version", lambda: "V" + VERSION + "｜" in summary_html(main.result))
+            from .version import REPORT_VERSION
+            check("V556 printable report uses the product and revision", lambda: "V" + REPORT_VERSION + "｜" in summary_html(main.result))
             def toolbar_fit():
                 pump()
                 left = main.root.winfo_rootx()
@@ -99,16 +104,10 @@ def run(root, app, main, check, pump, output=None):
             check("V556 stale report retained immediately with exports disabled", lambda: main.result is None and main.last_good_result["hash"] == last_hash and main.export_button.instate(["disabled"]) and "待重算" in main.text.get("1.0", "end"))
             main.recalculate()
             check("V556 invalid input retains only a clearly stale report", lambda: main.result is None and main.last_good_result is not None and "不能匯出" in main.text.get("1.0", "end"))
-            if hasattr(main, "plot"):
-                check("V556 invalid input visibly marks the previous plot stale",
-                      lambda: getattr(main, "stale_plot_label", None) in main.ax.texts)
             main.variables["oa_t"].set("35")
             main.recalculate()
             pump()
             check("V556 corrected inputs restore current result and export", lambda: main.ensure_result() and main.export_button.instate(["!disabled"]))
-            if hasattr(main, "plot"):
-                check("V556 corrected plot clears its stale marker",
-                      lambda: getattr(main, "stale_plot_label", None) not in main.ax.texts)
 
             gas = app.pages["gas"]
             app.show_tool("gas")

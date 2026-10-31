@@ -160,13 +160,15 @@ def result_text(value, indent=""):
 
 
 class QuickToolsWindow:
-    def __init__(self, parent, main_app):
+    def __init__(self, parent, main_app, host=None, allowed_tools=None):
         self.main_app = main_app
-        self.win = tk.Toplevel(parent)
-        self.win.title("工程快算｜V" + VERSION)
-        self.win.geometry("1020x850")
-        self.win.minsize(840, 650)
-        app_icon(self.win)
+        self.win = host if host is not None else tk.Toplevel(parent)
+        self.allowed_tools = tuple(allowed_tools) if allowed_tools else tuple(TOOLS)
+        if host is None:
+            self.win.title("工程快算｜V" + VERSION)
+            self.win.geometry("1020x850")
+            self.win.minsize(840, 650)
+            app_icon(self.win)
         main_app.children.append(self)
         self.values = {}
         self.widgets = {}
@@ -211,11 +213,15 @@ class QuickToolsWindow:
             )
         except (OSError, ValueError, TypeError, AttributeError):
             pass
+        self.other_favorites = [x for x in self.favorites if x not in self.allowed_tools]
+        self.other_history = [x for x in self.history if x["tool"] not in self.allowed_tools]
+        self.favorites = [x for x in self.favorites if x in self.allowed_tools]
+        self.history = [x for x in self.history if x["tool"] in self.allowed_tools]
         top = ttk.Frame(self.win, padding=12)
         top.pack(fill="x")
         ttk.Label(top, text="工程快算", style="Title.TLabel").pack(side="left")
         self.tool = tk.StringVar(
-            value=self.favorites[0] if self.favorites else "單位轉換"
+            value=self.favorites[0] if self.favorites else self.allowed_tools[0]
         )
         self.selector = ttk.Combobox(
             top,
@@ -288,7 +294,8 @@ class QuickToolsWindow:
             pane.add(pf, weight=1)
         except ImportError:
             pass
-        self.win.protocol("WM_DELETE_WINDOW", self.close)
+        if host is None:
+            self.win.protocol("WM_DELETE_WINDOW", self.close)
         self.build()
         self.calculate()
         i18n.subscribe(self)
@@ -298,7 +305,7 @@ class QuickToolsWindow:
             self.draw()
 
     def ordered_tools(self):
-        return self.favorites + [x for x in TOOLS if x not in self.favorites]
+        return self.favorites + [x for x in self.allowed_tools if x not in self.favorites]
 
     def set_text(self, text):
         self.text.config(state="normal")
@@ -642,8 +649,8 @@ class QuickToolsWindow:
                 self.settings,
                 json.dumps(
                     dict(
-                        history=self.history,
-                        favorites=self.favorites,
+                        history=(self.history + self.other_history)[:30],
+                        favorites=self.favorites + self.other_favorites,
                         drafts=self.drafts,
                     ),
                     ensure_ascii=False,

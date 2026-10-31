@@ -165,20 +165,20 @@ group(
 )
 group(
     1,
-    "兩段盤管／再熱／加濕",
+    "冷卻盤管配置／再熱／加濕",
     [
         (
             "pre_mode",
             "一段盤管控制",
             "",
-            ["自動旁通因子估算", "指定出口（需求檢核）", "停用／旁通"],
+            ["單盤管（一般空調箱）", "自動旁通因子估算", "指定出口（需求檢核）", "停用／旁通"],
         ),
         ("chw1_in", "一段供水溫度", "°C", 0, 60),
         ("adp_approach", "一段 ADP 高於供水", "K", 0.1, 15),
         ("pre_t", "一段目標出口乾球", "°C", 0, 60),
         ("pre_rh", "指定一段出口相對濕度", "%RH", 1, 100),
-        ("chw2_in", "二段供水溫度", "°C", 0, 30),
-        ("coil_approach", "二段最低 ADP 高於供水", "K", 0.1, 15),
+        ("chw2_in", "冷卻／除濕盤管供水溫度", "°C", 0, 30),
+        ("coil_approach", "冷卻盤管最低 ADP 高於供水", "K", 0.1, 15),
         ("allow_reheat", "允許加熱／再熱", "", ["1", "0"]),
         ("allow_humidify", "允許加濕", "", ["1", "0"]),
         ("dccw_in", "DCCW 供水溫度", "°C", 0, 50),
@@ -454,8 +454,10 @@ for page, title, keys in GROUPS:
     if title == "水質參考值來源":
         keys.clear()
 FIELDS["process_latent_kw"]["label"] = "額外製程潛熱（不含人員／外氣）"
+# The model range is 1-760 Torr (abs). Expressed in the selected unit that is 1-760 Torr, 0.1333-101.325 kPa or
+# 1.333-1013.25 mbar, so the unit-independent envelope is 0.133322-1013.25; the exact range is checked per unit.
 FIELDS["pv_torr"].update(
-    label="PV 管內絕對壓力", unit="所選單位", low=1e-06, high=1000000.0
+    label="PV 管內絕對壓力", unit="所選單位", low=0.133322, high=1013.25
 )
 FIELDS["upw_res"]["label"] = "電阻率參考（25°C）"
 DEFAULTS.update(
@@ -509,17 +511,17 @@ FIELD_HELP = {
     "light_lux": "工作面平均照度；燈具數量會自動計算。",
     "eq_kw": "填設備總發熱，非一律把銘牌電力當成入室熱。",
     "pcw_n": "同時開機台數；水帶走的熱不可再次算入室內。",
-    "pv_torr": "全部為絕對壓力；150 Torr ≈ 20.00 kPa ≈ 199.98 mbar。",
+    "pv_torr": "全部為絕對壓力；150 Torr ≈ 20.00 kPa ≈ 199.98 mbar。允許範圍依所選單位：1～760 Torr ≈ 0.1333～101.325 kPa ≈ 1.333～1013.25 mbar。",
     "upw_res": "水型只提供初估參考，RO／DI 製法本身不保證此值。",
     "process_moisture_kg_h": "每小時實際散入室內的水；已由密閉排氣帶走的部分不要算入。",
     "process_latent_kw": "只填額外製程水氣負荷；人員與外氣已另外計算。",
-    "pre_mode": "此設定只用於主案夏季一段盤管；冬季固定旁通。冬季逐段控制請使用空調箱分段設計。",
+    "pre_mode": "一般箱選單盤管，只用一組冰水溫度。需要第二道時選自動旁通因子估算或指定出口，啟用夏季預冷盤管；既有雙盤管專案保留原值。冬季預冷旁通。",
     "e_temp": "完整工作台採所選區間的上限環溫；不是另有一個未顯示的實測環溫。",
     "e_pipe": "按本盤每一路實際同管載流線數選區間；並聯線路及中性線是否計入須另核。",
     "e_up_largest_hp": "一般／馬達負載且含 HP 馬達時生效；連續負載固定採總電流 125%。0 表示未知，保守採總電流 125%。",
     "e_np_largest_hp": "一般／馬達負載且含 HP 馬達時生效；連續負載固定採總電流 125%。0 表示未知，保守採總電流 125%。",
 }
-FIELDS["pre_mode"]["label"] = "夏季一段盤管模式"
+FIELDS["pre_mode"]["label"] = "冷卻盤管配置"
 PD_KEYS = ["MCHW", "CHW", "DCCW", "PCW", "HW", "GEX", "SEX", "AEX", "VEX", "HEX"]
 PD_FIELDS = [
     ("length_m", "直管長度", "m"),
@@ -800,6 +802,11 @@ FIELD_HELP.update({
     "light_work_h": "室指數K有效燈高＝空間淨高−工作面高度；請依實際燈具位置確認。",
 })
 
+
+DEFAULTS["pre_mode"] = "單盤管（一般空調箱）"
+DEFAULTS.update(e_up_eq="0", e_up_oven="0", e_np_fan="0", e_np_heat="0",
+                e_np_humid="0", e_np_exh="0", e_np_pump="0", upw_temp="依用途確認")
+BASIC_KEYS.add("pre_mode")
 
 BASIC_KEYS.update({
     "rt_type", "mau_supply_t", "base_leak_ach",
