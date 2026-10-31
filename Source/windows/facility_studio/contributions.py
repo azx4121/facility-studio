@@ -9,6 +9,7 @@ import math
 from collections import defaultdict
 
 from .errors import ValidationError
+from .quality import STATUS_PASS
 from .schema import FIELDS
 from .utils import project_hash, VOLTAGE_MAP, electrical_power_kw, uses_largest_motor
 from .panel_demand import (
@@ -502,7 +503,7 @@ def ahu_contribution(result, ident, inputs):
     if pump > 0:
         entry["pending"].append(i["name"] + " 水洗泵台數與單台額定未知：暫以水洗泵總輸入 " + format(pump, ".6g") + " kW 視為單台，作為最大馬達候選（上界）；請補單台額定功率與台數。")
     entry["notes"].extend([i["name"] + " 額定電力採回傳時共用 PF=" + format(pf, ".4g") + "；風機／電熱／加濕／水洗泵為不同設備，不由冷量換算耗電。", "只納入明確回傳的單機；同 ID 再回傳會更新原台，不能把方案 A/B 當成同時運轉的兩台。"])
-    if result["quality"]["status"] != "通過":
+    if result["quality"]["status"] != STATUS_PASS:
         entry["pending"].append(i["name"] + " 單機狀態：" + result["quality"]["status"] + "；容量為需求草稿。")
     return entry
 

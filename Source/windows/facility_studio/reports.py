@@ -217,10 +217,14 @@ def executive_summary(result):
                                + "；路徑壓差 " + _fmt(loss.get("total_pa"), "Pa")))
             pump_rows.append(key + " " + _fmt(pipe.get("lpm"), "LPM") + "；揚程 " + _fmt(loss.get("head_m"), "m")
                              + "；軸功率 " + _fmt(loss.get("shaft_kw"), "kW"))
-        rows.append(_row("冰水主管路規格", "｜".join(row[0] for row in water_rows) or NOT_CALCULATED,
+        # MCHW / CHW / DCCW flows are sized on the load with the capacity margin (engine: loads = coil kW x sf), unlike the
+        # chiller line above which states the peak without margin. Say so, or the two "demand" figures look comparable.
+        margin_pct = (sf - 1) * 100 if sf is not None else None
+        flow_note = ("（含 " + format(margin_pct, "g") + "% 容量餘裕）" if margin_pct and margin_pct > 1e-9 else "（未加容量餘裕）") if water_rows else ""
+        rows.append(_row("冰水主管路規格", "｜".join(row[0] for row in water_rows) + flow_note if water_rows else NOT_CALCULATED,
                          "｜".join(row[1] for row in water_rows) or NOT_CALCULATED,
                          "各溫度迴路分列" if water_rows else "待資料"))
-        rows.append(_row("冰水循環泵浦 CHWP", "｜".join(pump_rows) or NOT_CALCULATED,
+        rows.append(_row("冰水循環泵浦 CHWP", "｜".join(pump_rows) + flow_note if pump_rows else NOT_CALCULATED,
                          "馬達銘牌尚未選型；各迴路須分別選泵", "待選型"))
     else:
         water = pipeline.get("water", r if r.get("tool") == "water" else {})

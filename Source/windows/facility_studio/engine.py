@@ -6,6 +6,7 @@ import math
 from .json_io import read_json_file
 from .data import VOLTAGE_MAP, FFU_SIZES
 from .quality import assess_main
+from . import airflow_guard
 from .schema import (
     V54_INPUT_KEYS,
     V55_INPUT_KEYS,
@@ -181,13 +182,20 @@ def water_properties(inputs, loop):
     )
 
 
+def _inward(x, up):
+    """Round x to 6 significant digits toward the inside of the allowed range, so the stated bound is accepted."""
+    scale = 10 ** (5 - math.floor(math.log10(abs(x))))
+    return (math.ceil(x * scale - 1e-9) if up else math.floor(x * scale + 1e-9)) / scale
+
+
 def pv_to_torr(value, unit):
     factor = {"Torr(abs)": 1.0, "kPa(abs)": 760 / 101.325, "mbar(abs)": 760 / 1013.25}
     choice(unit, tuple(factor), "pv_pressure_unit")
-    torr = number(value, "pv_torr", 1e-06, 1000000.0) * factor[unit]
+    torr = number(value, "pv_torr") * factor[unit]
     if torr < 1 - 1e-09 or torr > 760 + 1e-09:
         raise InputError(
-            f"本模型限 1～760 Torr 絕壓（約 0.133322～101.325 kPa）；請確認單位",
+            f"PV 絕對壓力須介於 {_inward(1 / factor[unit], True):.6g}～{_inward(760 / factor[unit], False):.6g} {unit}"
+            f"（本模型限 1～760 Torr 絕壓，約 0.133322～101.325 kPa）；請確認單位",
             field_name=f"pv_torr",
         )
     return min(760.0, max(1.0, torr))
@@ -517,7 +525,7 @@ def solve_c2_bypass(
         return result
 
     placeholder = max(tdp, min(s1["t"], ts))
-    if tdp < a2 - 1e-07:
+    if tdp < a2 - airflow_guard.COIL_DEWPOINT_TOLERANCE_K:
         return infeasible("冷卻盤管所需露點低於供水＋ADP 裕度；需增加可用除濕風量或降低供水溫度", placeholder)
 
     def at(adp_t):
@@ -889,6 +897,7 @@ def calculate(p, isolate_utilities=False):
                 field_name=f"mau_supply_t",
             )
         enter = oa
+        airflow_basis = airflow_guard.not_applicable("MAU 外氣量由解析式決定；FFU 循環風量另計")
     else:
         ffu_total = 0.0
         dcc_return = 0.0
@@ -899,13 +908,26 @@ def calculate(p, isolate_utilities=False):
             else max(m_floor, abs(qs) / 10, moist / 0.002)
         )
 
+        m_start = m
+        # PHYSICAL: does any finite airflow exist? Raises with the cause and the remedy when it does not.
+        airflow_exist = airflow_guard.existence(
+            room, oa, moa, qs, moist, minadp, minw, n("atm_kpa"), m_start, n("coil_approach")
+        )
+        # NUMERICAL: the net moisture the coil must remove does not depend on the trial airflow. The old test
+        # compared w(enter) with w(supply) against 1e-10 kg/kg; that difference is moisture / airflow, so at an
+        # enormous airflow it fell below the tolerance and the search accepted a limit point (defect F-1).
+        coil_moisture = airflow_guard.moisture_to_remove(room, oa, moa, moist)
+        coil_moisture_tol = airflow_guard.humidity_tolerance(m_start)
+
         def _airflow_feasible(m_cand):
             ws_c = room["w"] - moist / m_cand
             if ws_c < 0:
                 return False, ws_c, 0.0
             ts_c = room["t"] - qs / (m_cand * (1.006 + 1.86 * max(0, ws_c)))
-            trial_enter = blend(oa, room, moa / m_cand, n("atm_kpa"))
-            humidity_possible = trial_enter["w"] <= ws_c + 1e-10 or ws_c >= minw - 1e-10
+            blend(oa, room, moa / m_cand, n("atm_kpa"))  # a supersaturated mixture is still rejected here
+            humidity_possible = coil_moisture <= coil_moisture_tol or airflow_guard.supply_humidity_reachable(
+                ws_c, minw, minadp, n("atm_kpa")
+            )
             ok = (
                 ts_c >= minadp
                 and (ts_c <= 80)
@@ -915,7 +937,7 @@ def calculate(p, isolate_utilities=False):
             return ok, ws_c, ts_c
 
         prev_m = m_floor
-        for step in range(160):
+        for step in range(airflow_guard.SEARCH_STEPS):
             ok, ws, ts = _airflow_feasible(m)
             if ok:
                 if step > 0 and not _airflow_feasible(prev_m)[0]:
@@ -930,10 +952,19 @@ def calculate(p, isolate_utilities=False):
                     _, ws, ts = _airflow_feasible(m)
                 break
             prev_m = m
-            m *= 1.08
+            m *= airflow_guard.SEARCH_GROWTH
         else:
             raise InputError(f"無法求得滿足顯熱／濕度與供水條件的送風量")
         enter = blend(oa, room, moa / m, n("atm_kpa"))
+        airflow_basis = airflow_guard.describe(
+            m, m_start, m_floor, room, qs, moist, minw, minadp, n("atm_kpa"), n("coil_approach"),
+            n("chw2_in"), "circulation" if i.get("airflow_search_floor") == "circulation" else "load", airflow_exist,
+        )
+        if airflow_basis["load_driven"] and airflow_basis["inflation"] > airflow_guard.INFLATION_WARN:
+            warn.append(
+                f"供風量由{airflow_basis['governing']}決定：基準 {m_start * room['v_da'] * 3600:,.0f} CMH 增為 {airflow_basis['inflation']:.1f} 倍"
+                f"（供風溫差 {airflow_basis['supply_dt_k']:.2f} K）；請確認冰水供水溫度與室內濕度目標。"
+            )
         dcc = 0
         mau_qs = qs
         if not i["sys_type"].startswith("AHU"):
@@ -1206,6 +1237,7 @@ def calculate(p, isolate_utilities=False):
         "mass_residual": massres,
         "sensible_residual": sensres,
         "warnings": warn,
+        "airflow_basis": airflow_basis,
     }
     r["winter_room"] = winter_room
     r["dcc_design_kw"] = dcc_design

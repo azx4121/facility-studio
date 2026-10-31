@@ -1,4 +1,16 @@
+import math
+
 from .utils import dewpoint, state_trh
+
+
+# Overall status of an assessment, worst first. Item statuses are "通過", "待資料", "待後續" and "未達".
+#   未達      the design does not meet a condition
+#   待資料    the user can supply the missing data in this tool
+#   待後續    needs vendor data or a later design stage; no input of this tool can clear it
+STATUS_FAIL = "未達條件"
+STATUS_PENDING = "待補資料"
+STATUS_DEFERRED = "初估完成（待後續階段確認）"
+STATUS_PASS = "初估檢核通過"
 
 
 def finding(items, name, status, detail, field=None):
@@ -7,12 +19,12 @@ def finding(items, name, status, detail, field=None):
 
 def assessment(items):
     state = (
-        "未達條件"
+        STATUS_FAIL
         if any((x["status"] == "未達" for x in items))
         else (
-            "待補資料"
+            STATUS_PENDING
             if any((x["status"] == "待資料" for x in items))
-            else "初估檢核通過"
+            else (STATUS_DEFERRED if any((x["status"] == "待後續" for x in items)) else STATUS_PASS)
         )
     )
     return dict(
@@ -20,6 +32,7 @@ def assessment(items):
         items=items,
         failed=sum((x["status"] == "未達" for x in items)),
         pending=sum((x["status"] == "待資料" for x in items)),
+        deferred=sum((x["status"] == "待後續" for x in items)),
     )
 
 
@@ -70,6 +83,38 @@ def _coil_capacity_basis(items, r):
                     "待資料",
                     "未提供盤管 BF 下限（廠商性能或專案依據）；除濕可達性只依供水 ADP 檢核，未驗證盤管排數能力。",
                 )
+
+
+def _airflow_basis(items, r):
+    """Judge a load-driven supply airflow by its inflation over the baseline, never by a fixed air-change rate.
+
+    The baseline is the larger of the circulation / fresh-air floor and the sensible design airflow, so a
+    cleanroom that circulates a lot is judged against what it already moves. Systems without this search
+    (MAU: outdoor-air mass flow from a closed-form balance, FFU circulation counted separately) are skipped.
+    """
+    b = r.get("airflow_basis")
+    if not b or not b.get("applicable") or not b.get("load_driven"):
+        return
+    v_da = r["room"]["v_da"]
+    cmh = lambda kg_s: kg_s * v_da * 3600
+    lim = b["limits"]
+    name = "供風量合理性"
+    facts = (
+        f"供風量由{b['governing']}決定：基準 {cmh(b['m_start_kg_s']):,.0f} CMH 增為 {b['inflation']:.1f} 倍"
+        f"（供風溫差 {b['supply_dt_k']:.2f} K）；室內露點 {b['room_dewpoint_c']:.2f}°C 與冰水 ADP {b['adp_floor_c']:.2f}°C 僅差 {b['dehumid_margin_k']:.2f} K"
+    )
+    remedy = ""
+    if b.get("chw_needed_c") is not None:
+        needed = math.floor(b["chw_needed_c"] * 100) / 100  # round down: the advice must land on the passing side
+        remedy = f"；請將冰水供水降至 {needed:.2f}°C 以下（目前 {b['chw_supply_c']:.2f}°C）、提高室內相對濕度目標，或改用乾盤管／再熱"
+    if b["inflation"] > lim["inflation_fail"] + 1e-9:
+        finding(items, name, "未達",
+                facts + f"，超過可行倍數 {lim['inflation_fail']:g}（供風溫差實務下限 {lim['min_supply_dt_k']:g} K）" + remedy, "chw2_in")
+    elif b.get("condition_number") and b["condition_number"] > lim["condition_fail"]:
+        finding(items, name, "未達",
+                f"除濕裕度過小，風量對輸入極敏感（條件數 {b['condition_number']:.0f}，上限 {lim['condition_fail']:g}）" + remedy, "chw2_in")
+    else:
+        finding(items, name, "通過", facts + f"，未超過可行倍數 {lim['inflation_fail']:g}。", "chw2_in")
 
 
 def assess_main(r):
@@ -171,7 +216,7 @@ def assess_main(r):
         finding(
             items,
             "設備同工況選型",
-            "待資料",
+            "待後續",
             "本工具計算需求，仍需盤管／末端原廠選型與實際風機曲線。",
         )
     if (r["qs"] > 1e-08 or r["ql"] > 1e-08) and r.get("electric") and r["electric"].get("NP", {}).get("kw", 0) <= 1e-08:
@@ -186,14 +231,14 @@ def assess_main(r):
         finding(
             items,
             "配電候選覆核",
-            "待資料",
+            "待後續",
             "原表僅供初估；需敷設方式、短路、接地及馬達保護資料。",
         )
     if any((g["standard_lpm"] for g in r["gas"].values())):
         finding(
             items,
             "氣體供壓／真空性能",
-            "待資料",
+            "待後續",
             "目前為流速截面初估，需管路壓降與幫浦／調壓器性能。",
         )
     for g in r["gas"].values():
@@ -225,7 +270,8 @@ def assess_main(r):
             "室指數偏小而手填利用係數偏高；請核對燈具配光表。",
             "light_u",
         )
-    if r["winter"]["reheat_kw"] or r["winter"]["humid_kg_h"]:
+    np_supplied = bool(r.get("electric")) and r["electric"].get("NP", {}).get("kw", 0) > 1e-08
+    if (r["winter"]["reheat_kw"] or r["winter"]["humid_kg_h"]) and not (r.get("winter_room") and np_supplied):
         finding(
             items,
             "冬季室內與電力範圍",
@@ -237,6 +283,7 @@ def assess_main(r):
             ),
         )
     _coil_capacity_basis(items, r)
+    _airflow_basis(items, r)
     return assessment(items)
 
 

@@ -3535,3 +3535,67 @@ TEXT.update({
 TEXT.update({
     "未知／低於三相點": "unknown / below the triple point",
 })
+
+# Supply-airflow guard (defect F-1), quality-gate status words, chilled-water margin note, PV pressure range.
+TEXT.update({
+    # overall status and item status
+    "未達條件": "Conditions not met",
+    "待後續": "Deferred",
+    "初估完成（待後續階段確認）": "Preliminary estimate complete (later-stage confirmation pending)",
+    "｜未達 ": "  |  Not met: ",
+    " 項／待資料 ": " / Data required: ",
+    " 項／待後續階段 ": " / Deferred: ",
+    " 項\n": "\n",
+    # airflow guard: governing factor
+    "除濕條件（冰水 ADP 過高）": "dehumidification limit (chilled-water ADP too high)",
+    "盤管供水 ADP 條件（顯熱）": "coil supply-ADP limit (sensible)",
+    "循環風量／外氣下限": "circulation / fresh-air floor",
+    "MAU 外氣量由解析式決定；FFU 循環風量另計": "MAU outdoor air comes from a closed-form balance; FFU circulation is counted separately",
+    # physical layer: sensible limit
+    "未達條件：冰水供水＋ADP 裕度 ": "Conditions not met: chilled-water supply plus ADP margin of ",
+    "°C 不低於室內乾球 ": "°C is not below the room dry bulb of ",
+    "°C，盤管無法移除室內顯熱 ": "°C, so the coil cannot remove the room sensible heat of ",
+    " kW；請降低冰水供水溫度或提高室內溫度": " kW; lower the chilled-water supply temperature or raise the room temperature",
+    # physical layer: moisture limit
+    "未達條件：盤管最低可達含濕量 ": "Conditions not met: the lowest humidity ratio the coil can reach is ",
+    " g/kg（冰水供水＋ADP 裕度 ": " g/kg (chilled-water supply plus ADP margin of ",
+    "°C）不低於室內含濕量 ": "°C), which is not below the room humidity ratio of ",
+    " g/kg（露點 ": " g/kg (dew point ",
+    "°C），任何風量都無法除濕；冰水供水溫度須低於 ": "°C); no airflow can dehumidify. Chilled-water supply must be below ",
+    "°C，或提高室內相對濕度目標": "°C, or the room relative-humidity target must be raised",
+    # physical layer: beyond the solvable range
+    "未達條件：除濕所需風量 ": "Conditions not met: the airflow needed for dehumidification is ",
+    "未達條件：顯熱所需風量 ": "Conditions not met: the airflow needed for sensible cooling is ",
+    " kg/s 為基準風量 ": " kg/s, against a baseline of ",
+    " kg/s 的 ": " kg/s, i.e. ",
+    " 倍，超出可求解範圍（": " times it, beyond the solvable range (",
+    " 倍）；冰水供水溫度與室內條件的裕度過小": " times); the margin between the chilled-water supply temperature and the room condition is too small",
+    # engineering layer
+    "供風量合理性": "Supply airflow plausibility",
+    "供風量由": "Supply airflow is set by the ",
+    "決定：基準 ": ": baseline ",
+    " CMH 增為 ": " CMH, raised to ",
+    " 倍（供風溫差 ": " times that (supply temperature difference ",
+    " K）；室內露點 ": " K); room dew point ",
+    "°C 與冰水 ADP ": "°C and chilled-water ADP ",
+    "°C 僅差 ": "°C differ by only ",
+    "，超過可行倍數 ": ", exceeding the feasible multiple of ",
+    "（供風溫差實務下限 ": " (practical minimum supply temperature difference ",
+    " K）": " K)",
+    "，未超過可行倍數 ": ", within the feasible multiple of ",
+    "；請將冰水供水降至 ": "; lower the chilled-water supply to below ",
+    "°C 以下（目前 ": "°C (currently ",
+    "°C）、提高室內相對濕度目標，或改用乾盤管／再熱": "°C), raise the room relative-humidity target, or use a dry coil / reheat",
+    "除濕裕度過小，風量對輸入極敏感（條件數 ": "Dehumidification margin too small; airflow is highly sensitive to the inputs (condition number ",
+    "，上限 ": ", limit ",
+    " K）；請確認冰水供水溫度與室內濕度目標。": " K); check the chilled-water supply temperature and the room humidity target.",
+    # chilled-water flow margin note
+    "（含 ": " (including ",
+    "% 容量餘裕）": "% capacity margin)",
+    "（未加容量餘裕）": " (no capacity margin)",
+    # PV pressure range
+    "PV 絕對壓力須介於 ": "PV absolute pressure must be between ",
+    "（本模型限 1～760 Torr 絕壓，約 0.133322～101.325 kPa）；請確認單位": " (the model is limited to 1-760 Torr absolute, about 0.133322-101.325 kPa); check the unit",
+    "全部為絕對壓力；150 Torr ≈ 20.00 kPa ≈ 199.98 mbar。允許範圍依所選單位：1～760 Torr ≈ 0.1333～101.325 kPa ≈ 1.333～1013.25 mbar。":
+        "All values are absolute pressures; 150 Torr = 20.00 kPa = 199.98 mbar. Allowed range for the selected unit: 1-760 Torr = 0.1333-101.325 kPa = 1.333-1013.25 mbar.",
+})

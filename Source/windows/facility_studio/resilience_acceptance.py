@@ -51,7 +51,8 @@ def run_checks():
            lambda: _error(lambda: report(partial), "incomplete_result"))
     for key in complete:
         if key in ("hash", "version", "parts", "oa", "winter_oa", "oa_mass",
-                   "mass_residual", "sensible_residual", "inactive_fields", "winter_room"):
+                   "mass_residual", "sensible_residual", "inactive_fields", "winter_room",
+                   "airflow_basis"):  # diagnostic of how the airflow was set; the quality gate reads it, the report does not
             continue
         bad = copy.deepcopy(complete)
         del bad[key]

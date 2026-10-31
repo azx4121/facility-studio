@@ -454,8 +454,10 @@ for page, title, keys in GROUPS:
     if title == "水質參考值來源":
         keys.clear()
 FIELDS["process_latent_kw"]["label"] = "額外製程潛熱（不含人員／外氣）"
+# The model range is 1-760 Torr (abs). Expressed in the selected unit that is 1-760 Torr, 0.1333-101.325 kPa or
+# 1.333-1013.25 mbar, so the unit-independent envelope is 0.133322-1013.25; the exact range is checked per unit.
 FIELDS["pv_torr"].update(
-    label="PV 管內絕對壓力", unit="所選單位", low=1e-06, high=1000000.0
+    label="PV 管內絕對壓力", unit="所選單位", low=0.133322, high=1013.25
 )
 FIELDS["upw_res"]["label"] = "電阻率參考（25°C）"
 DEFAULTS.update(
@@ -509,7 +511,7 @@ FIELD_HELP = {
     "light_lux": "工作面平均照度；燈具數量會自動計算。",
     "eq_kw": "填設備總發熱，非一律把銘牌電力當成入室熱。",
     "pcw_n": "同時開機台數；水帶走的熱不可再次算入室內。",
-    "pv_torr": "全部為絕對壓力；150 Torr ≈ 20.00 kPa ≈ 199.98 mbar。",
+    "pv_torr": "全部為絕對壓力；150 Torr ≈ 20.00 kPa ≈ 199.98 mbar。允許範圍依所選單位：1～760 Torr ≈ 0.1333～101.325 kPa ≈ 1.333～1013.25 mbar。",
     "upw_res": "水型只提供初估參考，RO／DI 製法本身不保證此值。",
     "process_moisture_kg_h": "每小時實際散入室內的水；已由密閉排氣帶走的部分不要算入。",
     "process_latent_kw": "只填額外製程水氣負荷；人員與外氣已另外計算。",
