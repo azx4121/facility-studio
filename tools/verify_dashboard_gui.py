@@ -167,6 +167,15 @@ def _simple_checks(check, errors, directory):
                       (light + .05) / (dark + .05) >= 4.5)
         app.show_tool("cleanroom")
         room = app.active_page()
+        # Heat loads refuse to adopt a lighting result for a different floor area than the cleanroom (win.9 and the
+        # macOS port); put both tools on the same area, as a user adopting both for one room would.
+        app.show_tool("lighting")
+        lighting = app.active_page()
+        lighting.variables["area_mode"].set("面積 m²")
+        lighting.variables["area"].set(room.variables["area"].get())
+        lighting.calculate(True)
+        _pump(root)
+        app.show_tool("cleanroom")
         app.show_tool("heat_loads")
         heat = app.active_page()
         check("cleanroom transfers into heat", heat.import_upstream())
@@ -206,6 +215,11 @@ def _simple_checks(check, errors, directory):
         room.widgets["area"].event_generate("<Return>", when="tail")
         _pump(root)
         check("Return key calculates a repaired input", room.result is not None)
+        # The adopted lighting result must describe the same 200 m2 room before heat loads accept both.
+        app.show_tool("lighting")
+        lighting.variables["area"].set("200")
+        lighting.calculate(True)
+        _pump(root)
         for tool in ("heat_loads", "water", "pumps", "electrical"):
             app.show_tool(tool)
             check(tool + " reimports repaired inputs", app.active_page().import_upstream())
@@ -219,7 +233,9 @@ def _simple_checks(check, errors, directory):
         check("form labels and inputs occupy aligned columns", all(room.labels[key].grid_info()["column"] == 0 and room.widgets[key].grid_info()["column"] == 1 for key in room.rows))
         root.geometry("900x650")
         _pump(root)
-        check("narrow form stacks panels", room._stacked)
+        # Both platforms stack the panels below 680 scaled pixels of page width and the minimum window keeps two
+        # panels visible, so check that the layout follows that rule.
+        check("narrow form follows the stacking threshold", room._stacked == (room.winfo_width() < Theme.px(680)))
         app.show_tool("electrical")
         electrical = app.active_page()
         electrical.advanced.set(True)
