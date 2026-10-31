@@ -18,6 +18,11 @@ def app_data_root(platform=None, home=None, environ=None):
     return home / ".local" / "share" / "Facility_Studio_V5_5"
 
 
+def uses_ttk_navigation(platform=None):
+    """macOS Aqua ignores background colours of tk.Button, so its navigation uses a ttk style; elsewhere tk.Button wraps long text."""
+    return (sys.platform if platform is None else platform) == "darwin"
+
+
 def preferred_ui_font(families, platform=None):
     platform = sys.platform if platform is None else platform
     names = ["Microsoft JhengHei", "Noto Sans CJK TC", "Noto Sans CJK JP"]

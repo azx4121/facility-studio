@@ -1,5 +1,6 @@
 import copy
 from .industrial_theme import Theme
+from .platform_support import uses_ttk_navigation
 from .version import BUILD_VERSION
 from .tools_view import QuickToolsWindow
 from .workspace_view import WorkspaceWindow
@@ -389,13 +390,32 @@ class DesktopApp(SessionController, MainView):
         )
         self.side_subtitle.pack(anchor="w", padx=18, pady=(0, 24))
         for j, name in enumerate(PAGES):
-            b = ttk.Button(
-                side,
-                text=f"{j + 1:02d}   {name}",
-                command=lambda n=j: self.show_page(n),
-                style="Workbench.Nav.TButton",
-                cursor="hand2",
-            )
+            if uses_ttk_navigation():
+                b = ttk.Button(
+                    side,
+                    text=f"{j + 1:02d}   {name}",
+                    command=lambda n=j: self.show_page(n),
+                    style="Workbench.Nav.TButton",
+                    cursor="hand2",
+                )
+            else:
+                b = tk.Button(
+                    side,
+                    text=f"{j + 1:02d}   {name}",
+                    command=lambda n=j: self.show_page(n),
+                    bg=Theme.NAV,
+                    fg=Theme.TEXT,
+                    activebackground="#E0E6EF",
+                    activeforeground=Theme.TEXT,
+                    relief="flat",
+                    anchor="w",
+                    padx=14,
+                    pady=7,
+                    font=(self.ui_font, 10),
+                    cursor="hand2",
+                    justify="left",
+                    wraplength=140,  # sidebar 184 px less button margins and padding
+                )
             b.pack(fill="x", padx=8, pady=2)
             self.nav.append(b)
         tk.Label(

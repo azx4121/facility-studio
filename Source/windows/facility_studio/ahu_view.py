@@ -222,7 +222,7 @@ class AHUView:
         )
         frame.bind(
             "<MouseWheel>",
-            lambda e: canvas.yview_scroll(-1 if e.delta > 0 else 1, "units"),
+            lambda e: self.wheel(e),
         )
         return (frame, body, canvas)
 
@@ -263,13 +263,17 @@ class AHUView:
         return frame, body, canvas
 
     def wheel(self, e):
-        if isinstance(e.widget, (tk.Text, ttk.Treeview)):
+        if isinstance(e.widget, (tk.Text, ttk.Treeview, ttk.Combobox)):
             return
         selected = self.nb.nametowidget(self.nb.select())
         if self.nb.index(self.nb.select()) == 0:
             # Do not steal Treeview scrolling from the dashboard on the right.
             if str(e.widget).startswith(str(self.input_canvas)):
-                step = -1 if getattr(e, "num", 0) == 4 or getattr(e, "delta", 0) > 0 else 1
+                from .platform_support import scroll_units
+
+                step = scroll_units(e)
+                if not step:
+                    return
                 self.input_canvas.yview_scroll(step, "units")
                 return "break"
             return
@@ -277,7 +281,11 @@ class AHUView:
             (w for w in selected.winfo_children() if isinstance(w, tk.Canvas)), None
         )
         if canvas:
-            step = -1 if getattr(e, "num", 0) == 4 or getattr(e, "delta", 0) > 0 else 1
+            from .platform_support import scroll_units
+
+            step = scroll_units(e)
+            if not step:
+                return
             canvas.yview_scroll(step, "units")
             return "break"
 

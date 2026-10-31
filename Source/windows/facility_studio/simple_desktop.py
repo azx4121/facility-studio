@@ -685,6 +685,15 @@ class SimpleToolsApp:
         self.bind_mode_shortcuts()
         root.bind("<Configure>", self.resize, add="+")
         root.protocol("WM_DELETE_WINDOW", self.close)
+        from .platform_support import bind_mac_shortcuts, install_mac_quit
+
+        bind_mac_shortcuts(
+            root,
+            calculate=lambda: self.workbench.recalculate(True) if self.workbench_mode else self.active_page().calculate(True),
+            save=lambda: self.workbench.save() if self.workbench_mode else None,
+            open=lambda: self.workbench.load() if self.workbench_mode else None,
+        )
+        install_mac_quit(root, self.close)
         self.show_tool("electrical")
         self.simple_widgets = [w for w in root.winfo_children() if w.winfo_manager() == "grid"]
 

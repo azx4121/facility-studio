@@ -11,6 +11,7 @@ from .engine import wetbulb
 from .flow_toolbar import FlowToolbar
 from .display_helpers import duct_dimensions, annotate_states
 from .industrial_theme import Theme
+from .platform_support import uses_ttk_navigation
 from .schema import (
     BASIC_KEYS,
     DEFAULTS,
@@ -671,13 +672,19 @@ class MainView:
         self.subtitle.config(text="基本先填現場條件｜F5 重新計算")
         self.update_visibility()
         for j, b in enumerate(self.nav):
-            b.config(
-                style=(
-                    "Selected.Workbench.Nav.TButton"
-                    if n == j
-                    else "Workbench.Nav.TButton"
+            if uses_ttk_navigation():
+                b.config(
+                    style=(
+                        "Selected.Workbench.Nav.TButton"
+                        if n == j
+                        else "Workbench.Nav.TButton"
+                    )
                 )
-            )
+            else:
+                b.config(
+                    bg="#DCEBFC" if n == j else Theme.NAV,
+                    fg="#004C99" if n == j else Theme.TEXT,
+                )
         if n == 0 and HAS_PLOT and hasattr(self, "plot"):
             if getattr(self, "_plot_deferred", False):
                 self.draw()
@@ -754,7 +761,10 @@ class MainView:
         self._compact = compact
         # Wrapped (translated) navigation texts are taller; a short window gives them tighter rows.
         for button in self.nav:
-            button.configure(padding=(14, 3 if compact else 7))
+            if uses_ttk_navigation():
+                button.configure(padding=(14, 3 if compact else 7))
+            else:
+                button.configure(pady=3 if compact else 7)
         for w in self._side_order:
             if not isinstance(w, tk.Label):
                 continue

@@ -1,4 +1,5 @@
 from .localized_plot import translated_axes
+from . import i18n
 from pathlib import Path
 from .localized_tk import tk
 try:
@@ -10,6 +11,7 @@ from .engine import wetbulb
 from .flow_toolbar import FlowToolbar
 from .display_helpers import duct_dimensions, annotate_states
 from .industrial_theme import Theme
+from .platform_support import uses_ttk_navigation
 from .schema import (
     BASIC_KEYS,
     DEFAULTS,
@@ -25,7 +27,7 @@ from .utils import dewpoint, state_trh
 
 try:
     from matplotlib.figure import Figure
-    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+    from .visible_plot import FigureCanvasTkAgg
     from matplotlib import font_manager, rcParams
 
     HAS_PLOT = True
@@ -49,14 +51,23 @@ class ScrollPage(ttk.Frame):
         self.body = ttk.Frame(self.canvas, padding=18)
         self.body.columnconfigure(0, weight=1)
         self.win = self.canvas.create_window(0, 0, window=self.body, anchor="nw")
-        self.body.bind(
-            "<Configure>",
-            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")),
-        )
-        self.canvas.bind(
-            "<Configure>",
-            lambda e: self.canvas.itemconfigure(self.win, width=max(700, e.width)),
-        )
+        self.minimum_body_width = 700
+        self._scroll_bounds = None
+        self._body_width = None
+        self.body.bind("<Configure>", self.sync_scroll_region)
+        self.canvas.bind("<Configure>", self.fit_body)
+
+    def sync_scroll_region(self, event=None):
+        bounds = self.canvas.bbox("all")
+        if bounds != self._scroll_bounds:
+            self._scroll_bounds = bounds
+            self.canvas.configure(scrollregion=bounds or (0, 0, 0, 0))
+
+    def fit_body(self, event):
+        width = max(self.minimum_body_width, event.width)
+        if width != self._body_width:
+            self._body_width = width
+            self.canvas.itemconfigure(self.win, width=width)
 
     def reveal(self, widget):
         self.update_idletasks()
@@ -67,6 +78,7 @@ class ScrollPage(ttk.Frame):
                 / max(1, self.body.winfo_height()),
             )
         )
+
 
 
 def hidden_system_equipment(system):
@@ -650,15 +662,34 @@ class MainView:
         if n not in (0, 1, 2, 8) and hasattr(self, "task_scope"):
             self.task_scope.set("全部工程分頁")
         self.current = n
+        for index, page in self.pages.items():
+            if index == n:
+                page.grid()
+            else:
+                page.grid_remove()
         self.pages[n].tkraise()
         self.title.config(text=PAGES[n])
         self.subtitle.config(text="基本先填現場條件｜F5 重新計算")
         self.update_visibility()
         for j, b in enumerate(self.nav):
-            b.config(
-                bg="#DCEBFC" if n == j else Theme.NAV,
-                fg="#004C99" if n == j else Theme.TEXT,
-            )
+            if uses_ttk_navigation():
+                b.config(
+                    style=(
+                        "Selected.Workbench.Nav.TButton"
+                        if n == j
+                        else "Workbench.Nav.TButton"
+                    )
+                )
+            else:
+                b.config(
+                    bg="#DCEBFC" if n == j else Theme.NAV,
+                    fg="#004C99" if n == j else Theme.TEXT,
+                )
+        if n == 0 and HAS_PLOT and hasattr(self, "plot"):
+            if getattr(self, "_plot_deferred", False):
+                self.draw()
+            else:
+                self.plot.draw_pending()
 
     def wheel(self, e):
         if not hasattr(e.widget, "winfo_toplevel"):
@@ -668,17 +699,16 @@ class MainView:
         if e.widget.winfo_toplevel() != self.root:
             return
         w = e.widget
-        if isinstance(w, (tk.Text, ttk.Treeview)):
+        if isinstance(w, (tk.Text, ttk.Treeview, ttk.Combobox)):
             return
         if self.current == 8:
             return
         page = self.pages[self.current]
-        if getattr(e, "num", 0) == 4:
-            step = -3
-        elif getattr(e, "num", 0) == 5:
-            step = 3
-        else:
-            step = -1 if e.delta > 0 else 1
+        from .platform_support import scroll_units
+
+        step = scroll_units(e)
+        if not step:
+            return
         page.canvas.yview_scroll(step, "units")
         return "break"
 
@@ -731,7 +761,10 @@ class MainView:
         self._compact = compact
         # Wrapped (translated) navigation texts are taller; a short window gives them tighter rows.
         for button in self.nav:
-            button.configure(pady=3 if compact else 7)
+            if uses_ttk_navigation():
+                button.configure(padding=(14, 3 if compact else 7))
+            else:
+                button.configure(pady=3 if compact else 7)
         for w in self._side_order:
             if not isinstance(w, tk.Label):
                 continue
@@ -751,20 +784,9 @@ class MainView:
 
     def _configure_theme(self):
         families = set(tkfont.families(self.root))
-        self.ui_font = next(
-            (
-                x
-                for x in [
-                    "Microsoft JhengHei",
-                    "Noto Sans CJK TC",
-                    "Noto Sans CJK JP",
-                    "PingFang TC",
-                    "DejaVu Sans",
-                ]
-                if x in families
-            ),
-            "TkDefaultFont",
-        )
+        from .platform_support import preferred_ui_font
+
+        self.ui_font = preferred_ui_font(families)
         st = ttk.Style(self.root)
         st.theme_use("clam")
         st.configure(
@@ -781,6 +803,27 @@ class MainView:
         st.configure("TEntry", fieldbackground="white", padding=5)
         st.configure("TCombobox", padding=5)
         st.configure("TButton", padding=(8, 6))
+        st.configure(
+            "Workbench.Nav.TButton",
+            background=Theme.NAV,
+            foreground=Theme.TEXT,
+            anchor="w",
+            padding=(14, 7),
+            font=(self.ui_font, 10),
+            borderwidth=0,
+            relief="flat",
+        )
+        st.map(
+            "Workbench.Nav.TButton",
+            background=[("active", "#E0E6EF")],
+            foreground=[("active", Theme.TEXT)],
+        )
+        st.configure(
+            "Selected.Workbench.Nav.TButton",
+            background="#DCEBFC",
+            foreground="#004C99",
+            font=(self.ui_font, 10, "bold"),
+        )
         st.configure("Title.TLabel", font=(self.ui_font, 18, "bold"))
         st.configure("Muted.TLabel", foreground="#5d7083")
         st.configure("Error.TLabel", foreground="#b63437")
@@ -871,7 +914,11 @@ class MainView:
             rcParams["axes.unicode_minus"] = False
             self.fig = Figure(figsize=(8.5, 5.2), dpi=100)
             self.ax = self.fig.add_subplot(111)
-            self.plot = FigureCanvasTkAgg(self.fig, master=b)
+            self.plot = FigureCanvasTkAgg(
+                self.fig, master=b,
+                visible=lambda: self.current == 0 and self.root.winfo_viewable(),
+            )
+            self.plot.get_tk_widget().bind("<Map>", self._plot_mapped, add="+")
             self.plot.get_tk_widget().configure(height=350)
             self.plot.get_tk_widget().pack(fill="x", pady=12)
         else:
@@ -909,6 +956,22 @@ class MainView:
         ]
         if c.get("coil_configuration") == "單盤管":
             nodes = [("CC" if name == "C2" else name, state) for name, state in nodes if name != "C1"]
+        # Utility edits and repeated validation often leave every plotted point
+        # unchanged. Keep the existing artists and remove only a stale marker.
+        key = (i18n.language(), self.season.get(), p, self.fig.dpi,
+               tuple(map(float, self.fig.get_size_inches())),
+               tuple((name, state["t"], state["w"]) for name, state in nodes))
+        if key == getattr(self, "_plot_key", None):
+            stale = getattr(self, "stale_plot_label", None)
+            removed = stale is not None and stale in self.ax.texts
+            if removed:
+                stale.remove()
+            self.stale_plot_label = None
+            if removed:
+                self.queue_plot()
+            else:
+                self.plot.draw_pending()
+            return
         lo = min((x["t"] for _, x in nodes)) - 5
         hi = max((x["t"] for _, x in nodes)) + 5
         ymax = max((x["w"] * 1000 for _, x in nodes)) * 1.22 + 1
@@ -976,9 +1039,25 @@ class MainView:
         translated_axes(self.ax).grid(alpha=0.15)
         self.fig.tight_layout()
         annotate_states(self.ax, clusters)
-        self.plot.draw_idle()
+        self._plot_key = key
+        self.stale_plot_label = None
+        self.queue_plot()
 
-    def draw(self):
+    def _plot_mapped(self, event):
+        if getattr(self, "_plot_deferred", False):
+            self.draw()
+
+    def queue_plot(self):
+        if self.current == 0 and self.root.winfo_viewable():
+            self.plot.draw_idle()
+        else:
+            self._plot_deferred = True
+
+    def draw(self, *, force=False):
+        if not force and (self.current != 0 or not self.root.winfo_viewable()):
+            self._plot_deferred = True
+            return
+        self._plot_deferred = False
         if self.result:
             return self._draw_process()
         if self.partial_hvac:
@@ -987,3 +1066,5 @@ class MainView:
                 self._draw_process()
             finally:
                 self.result = None
+        elif HAS_PLOT and hasattr(self, "plot"):
+            self.plot.draw_idle()

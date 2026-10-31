@@ -1,5 +1,6 @@
 import copy
 from .industrial_theme import Theme
+from .platform_support import uses_ttk_navigation
 from .version import BUILD_VERSION
 from .tools_view import QuickToolsWindow
 from .workspace_view import WorkspaceWindow
@@ -298,7 +299,7 @@ class DesktopApp(SessionController, MainView):
         )
         if path:
             try:
-                self.draw()
+                self.draw(force=True)
                 self.fig.savefig(path, dpi=180)
             except Exception as e:
                 messagebox.showerror("圖形匯出失敗", str(e), parent=self.root)
@@ -312,10 +313,9 @@ class DesktopApp(SessionController, MainView):
         self.status.config(text="操作未完成；請查看錯誤訊息。", style="Error.TLabel")
         details = "".join(traceback.format_exception(exc_type, exc_value, tb))
         try:
-            logdir = (
-                Path(os.environ.get("LOCALAPPDATA", str(Path.home())))
-                / "Facility_Studio_V5_5"
-            )
+            from .project_store import app_data
+
+            logdir = app_data()
             logdir.mkdir(parents=True, exist_ok=True)
             atomic_text(logdir / "error.log", details)
         except OSError:
@@ -376,7 +376,7 @@ class DesktopApp(SessionController, MainView):
             text="FACILITY\nSTUDIO",
             bg=Theme.NAV,
             fg=Theme.TEXT,
-            font=("Segoe UI", 15, "bold"),
+            font=(self.ui_font, 15, "bold"),
             justify="left",
         ).pack(anchor="w", padx=18, pady=(25, 6))
         self.side_subtitle = tk.Label(
@@ -390,23 +390,32 @@ class DesktopApp(SessionController, MainView):
         )
         self.side_subtitle.pack(anchor="w", padx=18, pady=(0, 24))
         for j, name in enumerate(PAGES):
-            b = tk.Button(
-                side,
-                text=f"{j + 1:02d}   {name}",
-                command=lambda n=j: self.show_page(n),
-                bg=Theme.NAV,
-                fg=Theme.TEXT,
-                activebackground="#E0E6EF",
-                activeforeground=Theme.TEXT,
-                relief="flat",
-                anchor="w",
-                padx=14,
-                pady=7,
-                font=(self.ui_font, 10),
-                cursor="hand2",
-                justify="left",
-                wraplength=140,  # sidebar 184 px less button margins and padding
-            )
+            if uses_ttk_navigation():
+                b = ttk.Button(
+                    side,
+                    text=f"{j + 1:02d}   {name}",
+                    command=lambda n=j: self.show_page(n),
+                    style="Workbench.Nav.TButton",
+                    cursor="hand2",
+                )
+            else:
+                b = tk.Button(
+                    side,
+                    text=f"{j + 1:02d}   {name}",
+                    command=lambda n=j: self.show_page(n),
+                    bg=Theme.NAV,
+                    fg=Theme.TEXT,
+                    activebackground="#E0E6EF",
+                    activeforeground=Theme.TEXT,
+                    relief="flat",
+                    anchor="w",
+                    padx=14,
+                    pady=7,
+                    font=(self.ui_font, 10),
+                    cursor="hand2",
+                    justify="left",
+                    wraplength=140,  # sidebar 184 px less button margins and padding
+                )
             b.pack(fill="x", padx=8, pady=2)
             self.nav.append(b)
         tk.Label(
@@ -415,7 +424,7 @@ class DesktopApp(SessionController, MainView):
             bg=Theme.NAV,
             fg=Theme.MUTED,
             justify="left",
-            font=("Segoe UI", 9),
+            font=(self.ui_font, 9),
         ).pack(side="bottom", anchor="w", padx=18, pady=18)
         head = ttk.Frame(root, padding=(20, 14))
         head.grid(row=0, column=1, sticky="ew")
@@ -566,7 +575,18 @@ class DesktopApp(SessionController, MainView):
         root.bind("<Control-s>", lambda e: self.save())
         root.bind("<Control-o>", lambda e: self.load())
         root.bind("<F5>", lambda e: self.recalculate(True))
+        from .platform_support import bind_mac_shortcuts
+
+        bind_mac_shortcuts(
+            root,
+            save=self.save,
+            open=self.load,
+            calculate=lambda: self.recalculate(True),
+        )
         root.protocol("WM_DELETE_WINDOW", self.close)
+        from .platform_support import install_mac_quit
+
+        install_mac_quit(root, self.close)
         self.view_mode.trace_add("write", lambda *a: self.update_visibility())
         self.suspended = False
         self.show_page(0)
@@ -678,7 +698,7 @@ class DesktopApp(SessionController, MainView):
                 if old is not None and old in self.ax.texts:
                     old.remove()
                 self.stale_plot_label = self.ax.text(.5, .5, "上次有效結果｜待重算", transform=self.ax.transAxes, ha="center", va="center", fontsize=15, color="#b45309", bbox=dict(facecolor="white", alpha=.9))
-                self.plot.draw_idle()
+                self.queue_plot()
             self.interlocks()
             self.after_id = self.root.after(650, self.recalculate)
             return
@@ -691,6 +711,7 @@ class DesktopApp(SessionController, MainView):
         for k in PD_KEYS:
             self.grid.item(k, values=("—", "—", "—", "—"))
         if HAS_PLOT:
+            self._plot_key = None
             self.ax.clear()
             self.ax.text(
                 0.5,
@@ -699,7 +720,7 @@ class DesktopApp(SessionController, MainView):
                 ha="center",
                 transform=self.ax.transAxes,
             )
-            self.plot.draw_idle()
+            self.queue_plot()
         self.interlocks()
         self.after_id = self.root.after(650, self.recalculate)
 
@@ -903,6 +924,7 @@ class DesktopApp(SessionController, MainView):
             for key in PD_KEYS:
                 self.grid.item(key, values=("—", "—", "—", "—"))
             if HAS_PLOT and not getattr(self, "last_good_result", None):
+                self._plot_key = None
                 self.ax.clear()
                 self.ax.text(
                     0.5,
@@ -911,7 +933,7 @@ class DesktopApp(SessionController, MainView):
                     ha="center",
                     transform=self.ax.transAxes,
                 )
-                self.plot.draw_idle()
+                self.queue_plot()
             field = getattr(e, "field_name", None)
             self.bad_key = field if field in self.widgets else None
             self.bad_pd = field[3:] if field and field.startswith("PD:") else None
@@ -927,7 +949,6 @@ class DesktopApp(SessionController, MainView):
         self.decorate_receipts(r)
         self.result = r
         self.last_good_result = r
-        self.stale_plot_label = None
         self.update_visibility()
         self.status.config(
             text="檢核完成｜"

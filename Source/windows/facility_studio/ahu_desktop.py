@@ -599,6 +599,9 @@ class AHUWindow(AHUView):
         self.win.bind("<Control-s>", lambda e: self.save())
         self.win.bind("<F5>", lambda e: self.calculate())
         self.win.bind("<Return>", self.calculate_from_keyboard)
+        from .platform_support import bind_mac_shortcuts
+
+        bind_mac_shortcuts(self.win, save=self.save, calculate=self.calculate)
         self.suspended = False
         self.visibility()
         self.calculate()
