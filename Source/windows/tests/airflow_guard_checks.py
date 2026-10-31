@@ -184,6 +184,20 @@ try:
 except Exception as _exc:  # a crash is a failure with a name, not a traceback
     check('section 4 (MAU outdoor air and FFU circulation are separate quantities ) raised ' + type(_exc).__name__, False, repr(_exc))
 
+def same(a, b, rel=1e-9):
+    """Equal up to floating-point round-off between platforms (libm differs in the last digits); a real change is >= 1e-6."""
+    if isinstance(a, dict) and isinstance(b, dict):
+        return a.keys() == b.keys() and all(same(a[k], b[k], rel) for k in a)
+    if isinstance(a, (list, tuple)) and isinstance(b, (list, tuple)):
+        return len(a) == len(b) and all(same(x, y, rel) for x, y in zip(a, b))
+    if isinstance(a, float) or isinstance(b, float):
+        try:
+            return abs(a - b) <= rel * max(1.0, abs(a), abs(b))
+        except TypeError:
+            return False
+    return a == b
+
+
 try:
     # 5. Ordinary designs are untouched: numbers identical to the recording made before the fix.
     lost, differ, status_ok = [], [], 0
@@ -195,7 +209,7 @@ try:
         got = dict(supply_room_cmh=r["supply_room_cmh"], mass=r["summer"]["mass"], qs=r["qs"], q_total_kw=r["q_total_kw"], supply=r["summer"]["supply"], enter=r["summer"]["enter"],
                    winter_mass=r["winter"]["mass"], water={k: [w["lpm"], w["load_kw"], w["velocity_mps"]] for k, w in r["water"].items()}, counts=r["counts"],
                    circulation_cmh=r["circulation_cmh"], oa_mass=r["oa_mass"])
-        d = [k for k in got if got[k] != e[k]]
+        d = [k for k in got if not same(got[k], e[k])]
         if d:
             differ.append((d[:2], c["overrides"]["sys_type"][:3]))
         if r["quality"]["status"] == e["status"]:
