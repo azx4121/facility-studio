@@ -6,6 +6,13 @@ name: Build and verify Windows win.9 candidate
 
 on:
   workflow_dispatch:
+  # The API can dispatch a workflow only if it exists on the default branch, so the candidate branch also
+  # runs it when this file or the candidate sources change.
+  push:
+    branches: [claude/festive-newton-0o715t]
+    paths:
+      - .github/workflows/windows-win9-candidate.yml
+      - Source/windows/**
 
 concurrency:
   group: facility-release-${{ github.workflow }}-${{ github.ref }}
