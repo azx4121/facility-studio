@@ -42,6 +42,8 @@ jobs:
         run: |
           New-Item -ItemType Directory stage | Out-Null
           Copy-Item Source/windows stage/windows -Recurse
+          # evidence/ is git-ignored in the candidate tree; the tests write into it
+          New-Item -ItemType Directory stage/windows/evidence -Force | Out-Null
           Copy-Item tools stage/tools -Recurse
           New-Item -ItemType Directory stage/docs | Out-Null
           Copy-Item docs/tutorial stage/docs/tutorial -Recurse
