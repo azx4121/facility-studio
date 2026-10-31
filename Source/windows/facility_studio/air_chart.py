@@ -110,7 +110,7 @@ class AirChart(_Canvas):
         self.plot_data = chart_data(state, comparison)
         self.redraw()
 
-    def separate_labels(self, top, bottom, left=None, right=None):
+    def separate_labels(self, top, bottom, left=None, right=None, shortened=False):
         """Move the A / B text blocks apart vertically when they would cover each other."""
         a, b = self.bbox("state_label_bg"), self.bbox("comparison_label_bg")
         if not a or not b or a[2] <= b[0] or b[2] <= a[0] or a[3] <= b[1] or b[3] <= a[1]:
@@ -131,6 +131,13 @@ class AirChart(_Canvas):
                 self.move(lower, to_right, 0), self.move(lower + "_bg", to_right, 0)
             elif lb[0] - to_left >= left:
                 self.move(lower, -to_left, 0), self.move(lower + "_bg", -to_left, 0)
+            elif not shortened:
+                # Neither direction has room: keep the temperature / humidity line and drop the enthalpy line
+                # (A-B enthalpy difference stays in the line below the chart), then separate again.
+                first_line = str(self.itemcget(lower, "text")).split("\n")[0]
+                self.itemconfigure(lower, text=first_line)
+                self.coords(lower + "_bg", *self.bbox(lower))
+                self.separate_labels(top, bottom, left, right, True)
 
     def mark_stale(self):
         if self.state is None:
