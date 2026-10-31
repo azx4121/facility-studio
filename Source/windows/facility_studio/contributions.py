@@ -133,6 +133,45 @@ def circuit_id(water):
     return project_hash({k: water[k] for k in ("loop", "circuit", "supply", "return", "rho", "cp", "mu")})[:24]
 
 
+FLUID_PROPERTIES = ("rho", "cp", "mu")
+INDEPENDENT_FLUID = "本迴路獨立物性"
+CLEAN_WATER = dict(rho=1000.0, cp=4.1868, mu=.001)
+
+
+def fluid_keys(loop):
+    """Main-project fields that describe one loop's fluid; restored or kept as a unit."""
+    prefix = loop.lower() + "_"
+    return [prefix + k for k in ("fluid_mode", "fluid_name") + FLUID_PROPERTIES]
+
+
+def fluid_differences(main, source):
+    """'rho main≠source' items for every property that differs; empty when all match."""
+    return [f"{k} {main[k]:.15g}≠{source[k]:.15g}" for k in FLUID_PROPERTIES
+            if not math.isclose(main[k], source[k], rel_tol=1e-9, abs_tol=1e-12)]
+
+
+def main_fluid(d, inputs, loop):
+    """The main project's own fluid for one loop: (mode, properties or None if unreadable).
+
+    While every ledger-owned fluid field still holds what the ledger last wrote, the
+    pre-adoption snapshot is the main project's fluid; once the user changes any of them,
+    the current fields are. Shared mode resolves to water_* like engine.water_properties.
+    """
+    owned = [k for k in fluid_keys(loop) if k in d["last_updates"] and k in d["original"]]
+    untouched = bool(owned) and all(inputs.get(k) == d["last_updates"][k] for k in owned)
+
+    def value(key):
+        return d["original"].get(key, inputs[key]) if untouched else inputs[key]
+
+    mode = value(loop.lower() + "_fluid_mode")
+    base = loop.lower() + "_" if mode == INDEPENDENT_FLUID else "water_"
+    try:
+        props = {k: float(value(base + k)) for k in FLUID_PROPERTIES}
+    except (TypeError, ValueError):
+        return mode, None
+    return mode, props if all(math.isfinite(v) for v in props.values()) else None
+
+
 def aggregate_ledger(ledger, inputs):
     d = validate_ledger(ledger)
     updates, notes, pending, groups = {}, [], [], {}
@@ -170,17 +209,26 @@ def aggregate_ledger(ledger, inputs):
             g["design_lpm"] = max(g["summer_lpm"], g["winter_lpm"])
             g["adopted"] = False
         selected = d["selections"].get(loop)
-        prefix_fl = loop.lower() + "_"
-        orig_fmode = d["original"].get(prefix_fl + "fluid_mode", inputs.get(prefix_fl + "fluid_mode", ""))
-        orig_rho = float(d["original"].get(prefix_fl + "rho", inputs.get(prefix_fl + "rho", "1000")) or 1000)
-        orig_cp = float(d["original"].get(prefix_fl + "cp", inputs.get(prefix_fl + "cp", "4.1868")) or 4.1868)
+        mode, main = main_fluid(d, inputs, loop)
         if len(candidates) == 1 and not selected:
             cand0 = candidates[0]
-            if orig_fmode == "本迴路獨立物性" and (abs(orig_rho - cand0["rho"]) > 1e-6 or abs(orig_cp - cand0["cp"]) > 1e-6):
-                pending.append(loop + " 主案已設定獨立流體物性，與來源清水物性不同；未自動覆寫主案流體與水量。")
+            # Source flows were computed for the source fluid; they cannot stand for another one.
+            diffs = fluid_differences(main, cand0) if main else ["主案物性無法解讀"]
+            if diffs:
+                pending.append(
+                    f"{loop} 主案流體物性（{mode}）與來源迴路「{cand0['circuit']}」不同（主案≠來源）：" + "、".join(diffs)
+                    + "；來源水量依來源介質計算，不能代表主案介質，未自動覆寫主案流體與水量。若確定改用來源介質，請在需求彙整中明確選擇該迴路。"
+                )
             else:
                 selected = cand0["id"]
         group = next((g for g in candidates if g["id"] == selected), None)
+        if selected and candidates and group is None:
+            pending.append(f"{loop} 先前選擇的來源迴路已不存在；未帶入水量與流體，請重新選擇。")
+        elif group and d["selections"].get(loop) == group["id"] and main and fluid_differences(main, group):
+            notes.append(
+                f"{loop} 依使用者選擇採用來源迴路「{group['circuit']}」的介質與水量，取代主案流體物性（主案≠來源）："
+                + "、".join(fluid_differences(main, group)) + "；移除來源即還原主案原值。"
+            )
         if len(candidates) > 1:
             pending.append(loop + " 有不同供回水／介質／供應迴路，分開列示；主案水力列只能選其中一組，不能代表全廠總管。")
         if not group:
@@ -275,6 +323,10 @@ def restoration_updates(ledger, inputs, owned):
         pair = {value_key, unit_key}
         if pair & set(owned) or any(inputs[key] != previous[key] for key in pair):
             protected.update(pair)
+    for loop in LOOPS:
+        group = {key for key in fluid_keys(loop) if key in previous}
+        if group & set(owned) or any(inputs[key] != previous[key] for key in group):
+            protected.update(group)
     return {key: ledger["original"][key] for key, value in previous.items()
             if key not in owned and key not in protected and inputs[key] == value}
 
@@ -339,9 +391,13 @@ def ahu_contribution(result, ident, inputs):
         # Retain AHU source's own fluid properties (water 1000 / 4.1868 / 0.001) without silent recalculation;
         # if main project uses custom fluid properties, flag explicitly in pending/notes.
         dest_fluid = water_properties(inputs, loop)
-        if abs(dest_fluid["rho"] - 1000.0) > 1e-6 or abs(dest_fluid["cp"] - 4.1868) > 1e-6:
-            entry["pending"].append(f"{i['name']} {loop} 單機採清水物性計算，與主案獨立物性不同；已保留單機來源物性並分列，不靜默重算。")
-        entry["water"].append(dict(loop=loop, circuit=loop, supply=supply, **{"return": ret}, rho=1000.0, cp=4.1868, mu=.001, **{s + "_lpm": result[s][tag]["water_kw"] * factor * 60000 / (1000 * 4.1868 * (ret - supply)) for s in ("summer", "winter")}))
+        diffs = fluid_differences(dest_fluid, CLEAN_WATER)
+        if diffs:
+            entry["pending"].append(
+                f"{i['name']} {loop} 單機以清水物性計算水量，與主案目前有效物性（{dest_fluid['source']}）不同（主案≠來源）："
+                + "、".join(diffs) + "；已保留單機來源物性並分列，不靜默重算。"
+            )
+        entry["water"].append(dict(loop=loop, circuit=loop, supply=supply, **{"return": ret}, **CLEAN_WATER, **{s + "_lpm": result[s][tag]["water_kw"] * factor * 60000 / (1000 * 4.1868 * (ret - supply)) for s in ("summer", "winter")}))
     hw = {}
     for season in ("summer", "winter"):
         for tag in ("h1", "h2"):

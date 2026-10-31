@@ -3454,3 +3454,21 @@ TEXT.update({
         " kW has no assigned heat source (pending) and is not included in HW or NP. Specify the room heating equipment and its source, or increase circulation airflow.",
     " kW 已計入 HW；仍須確認室內加熱設備。": " kW is included in HW; the room heating equipment still has to be confirmed.",
 })
+
+# Ledger fluid protection: source flows are only valid for the source fluid.
+TEXT.update({
+    " 主案流體物性（": " main-project fluid properties (",
+    "）與來源迴路「": ") differ from source circuit \u201c",
+    "」不同（主案≠來源）：": "\u201d (main≠source): ",
+    "；來源水量依來源介質計算，不能代表主案介質，未自動覆寫主案流體與水量。若確定改用來源介質，請在需求彙整中明確選擇該迴路。":
+        "; source flows were computed for the source fluid and cannot represent the main-project fluid, so the main fluid and flow were not overwritten. To use the source fluid, select that circuit explicitly in the demand summary.",
+    " 先前選擇的來源迴路已不存在；未帶入水量與流體，請重新選擇。":
+        " previously selected source circuit no longer exists; no flow or fluid was adopted. Please select again.",
+    " 依使用者選擇採用來源迴路「": " uses the fluid and flow of source circuit \u201c",
+    "」的介質與水量，取代主案流體物性（主案≠來源）：": "\u201d as selected by the user, replacing the main-project fluid properties (main≠source): ",
+    "；移除來源即還原主案原值。": "; removing the source restores the main-project values.",
+    " 單機以清水物性計算水量，與主案目前有效物性（": " stand-alone unit computed its flows for clean water, which differs from the main project's effective fluid (",
+    "）不同（主案≠來源）：": ") (main≠source): ",
+    "；已保留單機來源物性並分列，不靜默重算。": "; the unit's own fluid is kept and listed separately without silent recalculation.",
+    "主案物性無法解讀": "main-project fluid properties unreadable",
+})
