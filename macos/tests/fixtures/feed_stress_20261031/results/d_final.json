@@ -1,0 +1,31 @@
+{
+ "summary": {
+  "D1_edge_counts": {
+   "above/reject": 455,
+   "below/reject": 455,
+   "high/ok": 323,
+   "high/reject": 132,
+   "low/ok": 427,
+   "low/reject": 28
+  },
+  "D3_garbage_counts": {
+   "reject": 6496,
+   "ok": 329
+  },
+  "D2_runs": 3000,
+  "D2_outcomes": {
+   "reject": 1498,
+   "reject:ValidationError": 0,
+   "ok": 1502
+  },
+  "D2_quality_status_of_ok_runs": {
+   "待補資料": 1153,
+   "未達條件": 349
+  },
+  "D2_gate_inconsistencies": {},
+  "D2_slow_runs_over_2s": [],
+  "D2_seconds": 21.3,
+  "findings_by_kind": {}
+ },
+ "findings": []
+}

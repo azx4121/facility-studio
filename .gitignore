@@ -225,3 +225,5 @@ __marimo__/
 
 # Local hash-locked standalone builder
 .build-venv/
+
+# win.9 candidate: test runs regenerate Source/windows/evidence/ every time; kept records live in tests/fixtures/

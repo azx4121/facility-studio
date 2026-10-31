@@ -64,6 +64,9 @@ def install_numeric_keyboard(window):
     tag = "FacilityNumericInput"
     def attach(event=None, widget=None):
         current = widget if widget is not None else event.widget
+        # Tcl-created combobox popdowns have a widget path but no Python wrapper.
+        if not hasattr(current, "winfo_class"):
+            return
         if current.winfo_class() in ("Entry", "TEntry", "Spinbox", "TSpinbox"):
             tags = current.bindtags()
             if tag not in tags:
@@ -111,7 +114,7 @@ def quality_text(q):
     rows = [x["name"] + "：" + x["detail"] for x in q["items"] if x["status"] != "通過"]
     return (
         q["status"]
-        + f"｜未達 {q['failed']} 項／待資料 {q['pending']} 項\n"
+        + f"｜未達 {q['failed']} 項／待資料 {q['pending']} 項／待後續階段 {q.get('deferred', 0)} 項\n"
         + "\n".join(rows[:1])
         + ("\n其餘明細請查看報告。" if len(rows) > 1 else "")
     )

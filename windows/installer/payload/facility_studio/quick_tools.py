@@ -282,6 +282,8 @@ def electrical_quick(power, power_unit="kW", supply="三相 380V", kind="一般�
         design_a=res["design_a"],
         nfb_a=sel.get("nfb_a", 0),
         wire_mm2=sel.get("size_mm2", 0),
+        pe_spec=sel.get("pe_spec", "無需求"),
+        pe_mm2=sel.get("pe_mm2", 0),
         runs=sel.get("runs", 0),
         ampacity_a=sel.get("ampacity_a", 0),
         drop_pct=sel.get("drop_pct", 0),

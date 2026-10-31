@@ -2,6 +2,63 @@
 
 TEXT = {}
 
+TEXT.update({
+    "設計電流依據": "Design current basis",
+    "馬達負載": "Motor load",
+    "設備輸入用電來源": "Equipment electrical input sources",
+    "設備輸入電功率合計": "Total equipment electrical input",
+    "冰機用電依據": "Chiller electrical input basis",
+    "明填冰機輸入電功率。": "Explicit chiller electrical input.",
+    "明填冰機輸入電功率": "Explicit chiller electrical input",
+    "採用輸入條件未附": "Adopted input conditions are not attached",
+    "1.25 倍連續負載初估": "1.25-times continuous-load estimate",
+    "採用輸入條件未附於此結果，請附原始輸入資料。": "Adopted input conditions are not attached to this result; include the original inputs.",
+    "採用條件": "Adopted conditions",
+    "依據": "Basis",
+    "RCU 單台額定": "RCU rating per unit",
+    "FCU 單台額定": "FCU rating per unit",
+    "DCC 單台額定": "DCC rating per unit",
+    "冷量需求台數": "Unit demand from cooling",
+    "需求台數": "Unrounded unit demand",
+    "向上取整": "Round up to",
+    "FCU 台數比較": "FCU quantity comparison",
+    "單台風量": "Airflow per unit",
+    "主導條件": "Governing condition",
+    "較大值向上取整": "Round the larger value up to",
+    "夏冬較大顯熱": "Larger summer/winter sensible load",
+    "冷量": "Cooling capacity",
+    "管徑規格": "Nominal pipe size",
+    "串接輸入需為工具與欄位的對照表。": "Pipeline inputs must map tool names to field mappings.",
+    "未知的串接工具：": "Unknown pipeline tool: ",
+    "water 與 pipes 代表同一工具，請只提供一份水管輸入。": "water and pipes name the same tool; provide one water input mapping.",
+    "工具輸入需為欄位對照表：": "Tool inputs must be a field mapping: ",
+    "未知的串接輸入欄位：": "Unknown pipeline input field: ",
+})
+
+TEXT.update({
+    "工作空間": "Workspace",
+    "無用電需求": "No electrical demand",
+    "末端冷卻選型基準": "Terminal cooling selection basis",
+    "舊版 W／kVA 電力帶入可能已存成錯誤的 kW。請先移除本盤已納入的電力來源，再用原始資料重新帶入；原值保留供復原，不自動猜改已保存數值。": "An older W/kVA adoption may have saved incorrect kW. Remove the adopted electrical sources for this panel, then import the original data again. Original values are retained for restoration; saved values are not guessed or overwritten.",
+    "舊版電力帶入需重建": "Legacy electrical adoption must be rebuilt",
+    "電力來源需重新帶入": "Electrical sources must be imported again",
+    "電力換算結果超出可表示範圍": "Electrical conversion exceeds the numeric range",
+    "換算結果超出可表示範圍，請縮小輸入值。": "The conversion exceeds the numeric range; enter a smaller value.",
+    "配線設計電流": "Conductor design current",
+    "同迴路導線": "Conductor for the same circuit",
+    "主進線未計算，啟動、短路及上下游保護協調另核": "Main feeder not calculated; check starting, short-circuit duty and upstream/downstream coordination separately",
+    "配電斷路器 NFB（本次迴路）": "Circuit breaker NFB (calculated circuit)",
+    "同迴路配線候選": "Candidate coordinated with the circuit conductor",
+    "末端冷卻選型基準：": "Terminal cooling selection basis: ",
+    "夏冬較大值": "Larger seasonal cooling load",
+    "FCU 同時核對風量。": "FCU count also checks airflow.",
+})
+
+TEXT["已保留目前面積與燈具條件。室指數 K 需要實際長寬；請選長×寬並確認尺寸後，再按此按鈕。"] = (
+    "Current area and luminaire inputs are retained. Room index K needs actual length and width; "
+    "select Length × width, confirm the dimensions, then press this button again."
+)
+
 
 def _add(rows):
     for row in rows.strip("\n").splitlines():
@@ -3298,3 +3355,262 @@ TEXT.update({'室指數 K 自動（DIALux 基準）': 'Legacy automatic U from K
 
 TEXT.update({'各溫度迴路容量包絡（未加餘裕）': 'Separate-temperature loop capacity envelope (before '
                     'allowance)'})
+
+TEXT.update({'PV 真空': 'PV vacuum'})
+
+from .version import BUILD_VERSION as _CURRENT_BUILD_VERSION
+TEXT.update({
+    "廠務簡易工具 V" + _CURRENT_BUILD_VERSION: "Facility Studio V" + _CURRENT_BUILD_VERSION,
+    "廠務工程工作台 V" + _CURRENT_BUILD_VERSION: "Facility Studio Workbench V" + _CURRENT_BUILD_VERSION,
+})
+
+# General facility workflow, local Windows revision 9.
+TEXT.update({'設備接地：用戶用電設備裝置規則表九三～二，依同迴路NFB安培額定選銅絞線；PVC綠色／綠黃線。並聯分管每管各配完整線徑，不除以並聯組數。': 'Equipment PE: Taiwan User Electrical Equipment Installation Rules table ninety-three, part two, stranded copper sized by the protective breaker rating. Green or green/yellow PVC insulation. Each parallel raceway gets the full PE size, without division by parallel runs.', '冷卻盤管配置': 'Cooling coil configuration', '單盤管（一般空調箱）': 'Single coil (general AHU)', '一般空調箱單盤管初估': 'General single-coil AHU estimate', '動力設備接地 PE': 'Equipment protective earth PE', '動力設備接地': 'Equipment protective earth', '接地覆核紀錄': 'PE review record', '接地待核': 'PE to be reviewed', '冷卻／除濕盤管供水溫度': 'Cooling / dehumidifying coil supply water', '冷卻盤管最低 ADP 高於供水': 'Cooling coil minimum ADP above supply water', '冷卻盤管所需露點低於供水＋ADP 裕度': 'Cooling coil required dew point is below supply water plus ADP approach', '冷卻盤管冷卻溫度低於可達 ADP': 'Cooling coil temperature is below the available ADP', '可達含濕量不足以處理室內產濕，請降低冷卻盤管 ADP': 'Available humidity ratio cannot remove room moisture; lower the cooling coil ADP.', '未啟用預冷盤管，保留備用設定': 'Precooling coil is inactive; drafts retained.', '單盤管只使用CHW迴路，預冷水路未配置': 'Single coil uses CHW only; no precooling water circuit.', '未配置預冷盤管，使用單一冷卻盤管水溫': 'No precooling coil; use one cooling coil water temperature.', '冷卻盤管出口': 'Cooling coil outlet', '單盤管': 'Single coil', '冰水': 'Chilled water', '照明功率密度': 'Lighting power density', '型錄整燈光效': 'Catalog luminaire efficacy', '型錄每盞lm÷每盞輸入W': 'Catalog lm per luminaire / input W per luminaire', '可供同範圍熱負荷使用。': 'Use for heat loads covering the same area.', '同條件對照': 'Comparison with identical conditions', '兩模式每盞流明不同': 'The modes use different lumens per luminaire', '功率初估': 'Power estimate', '型錄流明÷輸入功率': 'Catalog lumens / input power', '請核對W與lm是否同一燈具／整組。': 'Check that watts and lumens refer to the same complete luminaire.', '倍。請核對同一盞完整燈具，含燈管數及驅動器；相同流明應得到相同燈數。': 'times. Verify the same complete luminaire, including lamp count and driver. Equal lumens produce equal counts.', '為初估的': 'relative to the estimate', '一般建築初估': 'General building estimate', '面積推估外牆／樓板': 'Estimate walls / floor from area', '自訂熱負荷密度': 'Custom heat load density', '圍護結構計算': 'Envelope calculation', '自訂圍護熱負荷密度': 'Custom envelope heat density', '圍護熱負荷密度': 'Envelope heat density', '採用照明功率密度': 'Adopted lighting power density', '一般建築起始假設': 'General building starting assumption', '地板面積': 'Floor area', '非規範值': 'Not a code requirement', '採使用者自訂圍護熱負荷密度': 'User-specified envelope heat density', '方形平面初估': 'Square-plan estimate', '外牆傳熱係數U': 'Wall U-value', '樓板傳熱係數U': 'Floor U-value', '外氣乾球': 'Outdoor dry bulb', '室內設計溫度': 'Room design temperature', '樓板相鄰空間溫度': 'Adjacent floor-space temperature', '外牆4×√面積×淨高': 'Walls = 4 x sqrt(area) x clear height', '外牆U': 'Wall U', '樓板U': 'Floor U', '外氣／室內／相鄰': 'Outdoor / room / adjacent', '未含窗戶、屋頂日射、滲風與蓄熱。': 'Excludes windows, roof solar gains, infiltration and thermal storage.', '圍護結構': 'Building envelope', '圍護': 'Envelope', 'A點乾球溫度': 'Point A dry bulb', 'A點相對濕度': 'Point A relative humidity', 'B點乾球溫度': 'Point B dry bulb', 'B點相對濕度': 'Point B relative humidity', '比較第二個空氣狀態': 'Compare a second air state', 'B點代表': 'Point B represents', '室內狀態': 'Room state', '盤管出風／送風': 'Coil outlet / supply air', 'A點焓值': 'Point A enthalpy', 'B點焓值': 'Point B enthalpy', 'A點濕球': 'Point A wet bulb', 'B點濕球': 'Point B wet bulb', '冷卻焓差': 'Cooling enthalpy difference', '含濕量差': 'Humidity ratio difference', '乾球差': 'Dry-bulb difference', '焓差方向': 'Enthalpy difference direction', 'A點': 'Point A', 'B點': 'Point B', 'A−B正焓差為可移除熱量，負值代表需加熱；含濕量差正值為需除濕。連線只表示兩點差異，不保證單一盤管可沿直線達成；濕度0%無有限露點。': 'Positive A-B enthalpy means heat removal; negative means heating. Positive humidity ratio difference means moisture removal. The line compares endpoints, without claiming a realizable single-coil process. 0% humidity has no finite dew point.', '綠虛線：等焓｜褐虛線：等濕球': 'Green dashed: constant enthalpy | Brown dashed: constant wet bulb', '放大空氣線圖': 'Enlarge psychrometric chart', '空氣狀態｜放大空氣線圖': 'Air states | Enlarged psychrometric chart', '本視窗為開啟當下的狀態快照；輸入變更後請重開核對。': 'Snapshot captured when opened; reopen after changing the inputs.', '雙盤管（選配預冷）': 'Dual coils (optional precooling)', '冷卻盤管配置／再熱／加濕': 'Cooling coils / reheat / humidification', '一般冷卻送風初估': 'General cooling supply estimate'})
+
+TEXT.update({'焓差': 'Enthalpy difference', '返回簡易工具': 'Back to simple tools', '其他工程快算': 'Additional calculators', '帶入照明功率密度': 'Adopt lighting power density', '帶入A/B空氣焓差': 'Adopt air A/B enthalpy difference', '依用途確認': 'Confirm for the intended use'})
+
+TEXT.update({'C1 同工況額定容量，0 未提供': 'C1 rated capacity at matching conditions; 0 not supplied', '冷卻盤管同工況額定容量，0 未提供': 'Cooling coil rated capacity at matching conditions; 0 not supplied', '水洗額定加濕能力，0 未提供': 'Rated washer humidification; 0 not supplied', '風機配置台數': 'Installed fan count', '單台額定電力，0 未提供': 'Rated input per fan; 0 not supplied', '末級濾網終阻力（未配置填0）': 'Final filter terminal resistance (0 if absent)', '冷卻盤管': 'Cooling coil', '雙盤管／預冷旁通': 'Dual coils / precooling bypassed', '雙盤管': 'Dual coils', '冷卻盤管所需露點低於供水＋ADP 裕度；需增加可用除濕風量或降低供水溫度': 'Required cooling-coil dew point is below water supply plus ADP approach; increase dehumidification airflow or lower the water temperature.', '用戶用電設備裝置規則': 'Taiwan User Electrical Equipment Installation Rules', '超出6300A表列範圍，需專案設計': 'Above the 6300 A table limit; project-specific design required', '一般箱預設單盤管及一組冰水溫度；雙盤管需在配置欄位啟用預冷段。ADP 裕度 1 K、露點裕度 1 K；目前值可在進階檢視。MAU 處理外氣，FFU／DCC 為室內循環；FCU／RCU 採入口混合等效模型。': 'General AHUs start with one cooling coil and one water temperature. Enable precooling for dual coils. ADP and dew-point approaches start at 1 K; inspect them in advanced view. MAU treats outside air; FFU/DCC recirculates room air; FCU/RCU uses an equivalent inlet mixture.', 'CC冷卻盤管': 'CC cooling coil', 'C1/C2盤管': 'C1/C2 coils', '一般箱選單盤管，只用一組冰水溫度。需要第二道時選自動旁通因子估算或指定出口，啟用夏季預冷盤管；既有雙盤管專案保留原值。冬季預冷旁通。': 'Select single coil for one water temperature. To add a precooling coil, select automatic bypass-factor estimation or a specified outlet. Existing dual-coil projects retain their settings. Winter precooling is bypassed.', '照明與潔淨室面積不同，請先確認同一計算範圍，再帶入熱負荷。': 'Lighting and cleanroom areas differ. Confirm matching boundaries before adopting both in heat loads.', 'A−B為負焓差，屬加熱工況，不能帶入外氣冷卻焓差；請核對A/B方向。': 'Negative A-B enthalpy difference is heating, and cannot be adopted as an outdoor cooling load. Check A/B direction.', '點濕球 ': ' point wet bulb ', '比較外氣A與室內／出風B的溫濕度；同圖顯示兩點、焓差與含濕量差，可帶入熱負荷。': 'Compare outdoor state A with room / supply state B. Plot both points and show enthalpy and humidity differences for heat-load adoption.', 'lm/W；整盞燈具輸入功率×光效＝每盞lm；非LED晶片光效。': 'lm/W; whole-luminaire input watts x efficacy = lm per luminaire. Use luminaire rather than LED chip efficacy.', 'lm／完整燈具；請與每盞W使用同一規格，勿混用單管與整組。': 'lm per complete luminaire. Match the wattage specification; do not mix individual lamps and complete fixtures.', '0–1；通用初估0.6，依型錄及空間反射率確認。': '0-1; initial estimate 0.6. Confirm using the catalog and room reflectance.', '0–1；通用初估0.8，依清潔與光衰維護計畫確認。': '0-1; initial estimate 0.8. Confirm using cleaning and lumen-maintenance plans.', '°C；例如外氣入口': '°C; e.g. outdoor inlet', '°C；例如室內或盤管出風': '°C; e.g. room or coil outlet', '空間淨高': 'Clear room height', 'W/m²；未有照明設計先用12初估；可帶入照明照度結果。': 'W/m²; initial estimate 12 before a lighting design is available. Adopt a lighting calculation when available.', '一般初估自動採20 W/m²；這是起始假設，非規範值。面積不能唯一決定建築熱負荷。': 'General estimate automatically uses 20 W/m² as a starting assumption, not a code value. Area alone cannot determine a building heat load.', 'W/m²；有設計值才直接填入，不需自行反算。': 'W/m²; enter an existing design value directly, without reverse calculation.', 'm；方形平面、四面外牆初估，可在進階修正U與溫度。': 'm; square-plan estimate with four exposed walls. Adjust U-values and temperatures in advanced settings.', 'W/(m²·K)；初估，依牆體構造修正。': 'W/(m² K); initial estimate, adjust to the wall construction.', 'W/(m²·K)；初估，非屋頂日射模擬。': 'W/(m² K); initial estimate, excludes roof solar simulation.', '°C；依所在地設計條件修正。': '°C; adjust to local design conditions.', '°C；同溫樓層填與室內相同。': '°C; use the room temperature for adjacent spaces at the same temperature.', '控制與量測規劃（供圖審；非 PLC 可執行程式）\n1. OA：量測外氣 T/RH；模式依含濕量需求切換，不只按日曆季節。\n2. H1：配置進／出風 T；預熱目標由水洗需求反算。一般加濕模式使 C1 旁通，避免預熱後又不必要預冷；防凍需求需另訂例外。\n3. 水洗：出口 T/RH、循環水流量／泵回訊、水槽高／低／極低液位。加濕需求與 AMC 持續洗滌需求分開；AMC 效率依污染物及原廠資料，程式不保證去除率。\n4. 水槽：低位補水、高位停止；極低位停循環泵；排水／清洗期間依供應商程序停泵並聯鎖補排水，避免乾轉或邊排邊補失控。水質／換水門檻由 RO 與洗滌水管理規格決定。\n5. C2：盤管後、再熱前量測 T/RH 或露點。真實盤管出口未必飽和，不可一律把乾球當露點。\n6. H2／EC：風機後送風 T 作再熱修正，納入實際風機熱；H1/H2 電熱均需風量證明、獨立過溫切斷及必要延時散熱，不能只靠軟體訊號。\n7. 濾網／濕膜：依實際元件配置壓差量測；濕膜與擋水器功能不可直接互相替代。末端／風管壓力控制須與最低通風、風機轉速限制協調。\n8. 各台風機各自故障／運轉回訊及適當保護；一台停機後能否維持風量，需 N−1 工況風機曲線，不能由台數自動保證。': 'Controls and instrumentation plan (design review only; not executable PLC logic) \n 1. OA: measure outdoor T/RH. Change mode by moisture demand, not just calendar season. \n 2. H1: measure inlet / leaving temperature. Derive preheat target from washer demand. Normally bypass C1 during humidification to avoid unnecessary precooling after preheat; specify frost-protection exceptions separately. \n 3. Washer: measure leaving T/RH, circulation flow, pump feedback and high / low / very-low tank levels. Separate humidification from continuous AMC washing. Removal efficiency needs pollutant-specific manufacturer data; this program does not guarantee it. \n 4. Tank: fill at low level, stop at high level, stop the pump at very-low level. Interlock fill / drain / pump during cleaning per supplier procedures. Set quality and water-change thresholds from RO / washer-water management specifications. \n 5. C2: measure T/RH or dew point after the coil and before reheat. A real leaving state is not necessarily saturated; dry bulb is not always dew point. \n 6. H2 / EC: use post-fan supply temperature for reheat trim, including actual fan heat. H1 / H2 electric heaters require proven airflow, independent overtemperature trips and any required cooldown delay. \n 7. Filters / media: measure differential pressure across actual components. Wetted media and droplet eliminators have different functions. Coordinate duct-pressure control with minimum ventilation and fan-speed limits. \n8. Provide fault/run feedback and protection for each fan. An N-1 fan curve is required to verify airflow after one fan fails; fan count alone does not establish redundancy.'})
+
+TEXT.update({'PV 真空／特氣': 'PV vacuum / gases'})
+
+TEXT.update({'圍護結構及外氣焓差依本案採用值計算。中性供風以室內顯熱作DCC需求；實際低露點模式不重加人員潛熱，並扣明填MAU入室顯熱供冷。抵扣不得超過1.2×OA/3600×1.006×明填室內減送風溫差的保守上限；未填抵扣時是冷量上界。再熱及濕度可達性請用完整工作台。': 'Envelope and outdoor enthalpy difference use the adopted project values. Neutral supply assigns room sensible heat to DCC. Actual low-dew-point mode does not add room latent heat twice and credits the explicit MAU room sensible cooling. The credit must not exceed the conservative limit 1.2 x OA/3600 x 1.006 x explicitly entered room-minus-supply temperature difference. With no credit, the result is an upper bound. Use the full model for reheat and humidity feasibility.'})
+
+TEXT.update({
+    "NP 空調與附屬設備用電": "NP HVAC and auxiliary electrical power",
+    "空調與照明已有負荷需求，但 NP 盤為 0 kW；請填列或由單機帶入。": "HVAC and lighting loads exist, but panel NP is 0 kW; enter loads or import from AHU/schedule.",
+    "特氣相態與液化檢核": "Specialty gas phase and liquefaction check",
+    "管內絕壓高於同溫飽和蒸氣壓，氣體將液化；請降低供壓或配置伴熱。": "Pipe absolute pressure exceeds saturation vapor pressure at pipe temperature; lower supply pressure or provide heat tracing.",
+    "冬季 MAU 送風溫度上限": "Winter MAU supply temperature limit",
+    "冬季所需送風溫度高於 40°C 上限，易致氣流分層；請配置室內加熱或增加循環風量。": "Required winter supply temperature exceeds 40°C limit, risking thermal stratification; provide room heating or increase circulation airflow.",
+    "照明室指數與利用係數": "Lighting room index and utilization factor",
+    "室指數偏小而手填利用係數偏高；請核對燈具配光表。": "Room index is small while manual utilization factor is high; verify luminaire photometric tables.",
+})
+
+TEXT.update({
+    "（所需 ADP ": " (required ADP ",
+    "°C／BF ": "°C / BF ",
+    "、室內加熱需求 ": ", room terminal heating demand ",
+    " kW（已計入 HW）": " kW (included in HW)",
+    "夏冬同時峰值冷量（未加餘裕）": "Seasonal coincident cooling peak (before safety factor)",
+    "夏冬同時峰值冷量（未加餘裕） ": "Seasonal coincident cooling peak (before safety factor) ",
+    "同時峰值容量目標 ": "Coincident peak capacity target ",
+    "冬季 MAU 送風溫度已限制於上限 ": "Winter MAU supply air temperature capped at ",
+    "°C；剩餘室內熱損 ": "°C; remaining room heat loss ",
+    " kW 已轉列室內加熱需求並計入 HW。": " kW transferred to room terminal heating demand and included in HW.",
+    "超臨界／高於臨界溫度": "Supercritical / above critical temperature",
+    "無液化風險": "No liquefaction risk",
+    "有液化風險": "Liquefaction risk detected",
+    "未知／混合氣需查分壓與氣液相圖": "Unknown / mixture requires partial-pressure phase diagram",
+    "未知／需原廠資料": "Unknown / vendor data required",
+    "未知／超出擬合溫域": "Unknown / outside validated temperature range",
+})
+
+TEXT.update({
+    " 單機採清水物性計算，與主案獨立物性不同；已保留單機來源物性並分列，不靜默重算。": " Single-unit AHU uses plain-water properties, differing from main project independent fluid properties; source properties are retained and listed separately without silent recalculation.",
+    " 主案流體物性與單機清水基準不同；保留單機來源物性並標示，不靜默重算。": " Main project fluid properties differ from single-unit plain-water basis; source fluid properties are retained and flagged without silent recalculation.",
+    "冷卻盤管直達送風點所需旁通因子 BF=": "Cooling coil required bypass factor for direct supply state BF=",
+    " 低於實際盤管下限 ": " is below the physical coil minimum ",
+    "（逼近無限排數），請啟用再熱或調整設計條件": " (approaching infinite rows); please enable reheat or adjust design conditions",
+    "未知／混合氣須按組分分壓對照原廠相圖": "Unknown / gas mixture requires partial-pressure check against vendor phase diagram",
+    "未知／超出內建溫域或待原廠蒸氣壓資料": "Unknown / outside built-in temperature range or pending vendor vapor-pressure data",
+    "液化或逼近飽和風險": "Liquefaction or near-saturation risk",
+    "氣相安全區間": "Safe gas-phase operating region",
+})
+
+# Cooling-coil feasible region (BF floor) messages.
+TEXT.update({
+    "冷卻盤管在 BF 下限 ": "Cooling coil at BF floor ",
+    "、出風含濕比 ": ", outlet humidity ratio ",
+    " g/kg 時，最低可達出風乾球為 ": " g/kg: lowest reachable outlet dry bulb is ",
+    "°C，高於送風目標 ": " °C, above the supply target ",
+    "°C；再熱無法解決。需提供可達更低 BF 的盤管性能、降低供水溫度、提高送風溫度或增加除濕風量":
+        " °C; reheat cannot solve this. Provide coil performance reaching a lower BF, lower the chilled-water supply, raise the supply temperature or increase dehumidifying airflow",
+    "冷卻盤管無法除濕到 ": "Cooling coil cannot dehumidify to ",
+    " g/kg：BF 最高只能為 ": " g/kg: the highest possible BF is ",
+    "（ADP 取最低 ": " (at the lowest ADP ",
+    "°C），低於盤管 BF 下限 ": " °C), below the coil BF floor ",
+    "；再熱無法解決": "; reheat cannot solve this",
+    "冷卻盤管需再熱：送風目標 ": "Cooling coil needs reheat: supply target ",
+    "°C 高於盤管在出風含濕比 ": " °C is above the warmest reachable outlet at humidity ratio ",
+    " g/kg 時的最高可達出風 ": " g/kg, which is ",
+    "°C；目前不允許再熱": " °C; reheat is currently not allowed",
+    "冷卻盤管旁通線在 BF 下限 ": "Within the BF floor ",
+    " 內全部落入過飽和區（入口接近飽和）；無可實現的出風，再熱無法解決":
+        " the cooling-coil bypass line lies entirely in the supersaturated region (inlet near saturation); no realisable outlet exists, and reheat cannot solve this",
+    " 排數能力": " row capacity",
+    "未提供盤管 BF 下限（廠商性能或專案依據）；除濕可達性只依供水 ADP 檢核，未驗證盤管排數能力。":
+        "No coil BF floor provided (vendor performance or project basis); dehumidification was checked against the chilled-water ADP only and coil row capacity is not verified.",
+})
+
+# Winter room heating that has no assigned heat source.
+TEXT.update({
+    " kW 列為未配置室內加熱需求，待指定熱源；未計入 HW 或 NP。":
+        " kW is listed as unassigned room heating demand pending a heat source; not included in HW or NP.",
+    " kW（未配置熱源，待指定；未計入 HW 或 NP）": " kW (no heat source assigned, pending; not included in HW or NP)",
+    "冬季所需送風溫度 ": "Required winter supply temperature ",
+    "°C 高於 MAU 送風上限 ": " °C exceeds the MAU supply limit ",
+    "°C，易致氣流分層；剩餘室內熱損 ": " °C, risking thermal stratification; remaining room heat loss ",
+    " kW 未配置熱源（待指定），未計入 HW 或 NP；請指定室內加熱設備與熱源，或增加循環風量。":
+        " kW has no assigned heat source (pending) and is not included in HW or NP. Specify the room heating equipment and its source, or increase circulation airflow.",
+    " kW 已計入 HW；仍須確認室內加熱設備。": " kW is included in HW; the room heating equipment still has to be confirmed.",
+})
+
+# Ledger fluid protection: source flows are only valid for the source fluid.
+TEXT.update({
+    " 主案流體物性（": " main-project fluid properties (",
+    "）與來源迴路「": ") differ from source circuit \u201c",
+    "」不同（主案≠來源）：": "\u201d (main≠source): ",
+    "；來源水量依來源介質計算，不能代表主案介質，未自動覆寫主案流體與水量。若確定改用來源介質，請在需求彙整中明確選擇該迴路。":
+        "; source flows were computed for the source fluid and cannot represent the main-project fluid, so the main fluid and flow were not overwritten. To use the source fluid, select that circuit explicitly in the demand summary.",
+    " 先前選擇的來源迴路已不存在（來源條件已變更）；未帶入新迴路，主案整組還原為採用前的值，請重新選擇。":
+        " previously selected source circuit no longer exists (source conditions changed); the new circuit was not adopted and the whole main-project loop returned to its values before adoption. Please select again.",
+    " 主案水力／流體欄位在帶入後已手動修改；保留目前整組值，來源未再帶入。如要採用來源，請重新明確選擇該迴路。":
+        " main-project flow/fluid fields were edited after adoption; all current values are kept and the source was not adopted again. To use the source, select that circuit explicitly again.",
+    " 依使用者選擇採用來源迴路「": " uses the fluid and flow of source circuit \u201c",
+    "」的介質與水量，取代主案流體物性（主案≠來源）：": "\u201d as selected by the user, replacing the main-project fluid properties (main≠source): ",
+    "；之後若未手動修改，移除來源時整組還原為採用前的主案值。":
+        "; unless edited afterwards, removing the source returns the whole loop to the main-project values before adoption.",
+    " 單機以清水物性計算水量，與主案目前有效物性（": " stand-alone unit computed its flows for clean water, which differs from the main project's effective fluid (",
+    "）不同（主案≠來源）：": ") (main≠source): ",
+    "；已保留單機來源物性並分列，不靜默重算。": "; the unit's own fluid is kept and listed separately without silent recalculation.",
+    "主案物性無法解讀": "main-project fluid properties unreadable",
+})
+
+# Confirmations for actions that discard user data.
+TEXT.update({
+    "將清除本工具目前的所有輸入並恢復預設值，此動作無法復原。確定要繼續嗎？":
+        "This clears every input of this tool and restores the defaults. It cannot be undone. Continue?",
+    "覆蓋方案快照": "Replace scenario snapshot",
+    "已有方案 ": "Scenario ",
+    " 的快照（": " already has a snapshot (",
+    "）。要以目前主案覆蓋嗎？覆蓋後無法復原。": "). Replace it with the current main project? This cannot be undone.",
+})
+
+# Optional-input validation messages.
+TEXT.update({
+    "冬季 MAU 送風上限不得低於 MAU 送風溫度": "Winter MAU supply limit must not be below the MAU supply air temperature",
+    "MAU 不搜尋混風送風量；停用值不參與計算": "MAU does not search the mixed supply airflow; disabled values are not used in the calculation",
+    "僅 MAU 冬季室內熱濕平衡使用；停用值不參與計算": "Used only for the MAU winter room heat and moisture balance; disabled values are not used in the calculation",
+    "專案指定": "specified by the project",
+    "未提供（設備能力待資料）": "not provided (equipment capability data pending)",
+})
+
+# Ledger circuit selection.
+TEXT.update({
+    "來源迴路選擇不合法": "Invalid source circuit selection",
+})
+
+# Panel feeder demand by load class.
+TEXT.update({
+    "主案原有負荷": "Existing main-project load",
+    " 來源未提供負載分類：": " sources without a load classification: ",
+    "。已改用來源自身設計值相加，可能重複計入連續或馬達加成（偏保守）；請重新帶入該來源以取得分類。":
+        ". Their own design values were added instead, which may count continuous or motor factors twice (conservative); re-import those sources to obtain a classification.",
+    " 同盤同電壓幹線：非馬達連續負載 125%、其他非馬達負載與全部馬達 100%，另加全群最大單台馬達 25%（":
+        " feeder for one panel and voltage: non-motor continuous loads 125%, other non-motor loads and all motors 100%, plus 25% of the largest single motor in the group (",
+    "無馬達": "no motor",
+    "）；P、Q 分開合成。各來源支路設計電流仍為下限，支路候選保留在設備明細。":
+        "); P and Q are combined separately. Each source's branch design current remains a lower limit; branch candidates are kept in the equipment details.",
+    " 負載分類：風機與水洗泵為馬達，電熱與蒸汽加濕為非馬達連續負載。":
+        " load classification: fans and air-washer pumps are motors; electric heat and steam humidification are non-motor continuous loads.",
+    " 水洗泵台數與單台額定未知：暫以水洗泵總輸入 ":
+        " air-washer pump count and unit rating unknown: the total air-washer pump input of ",
+    " kW 視為單台，作為最大馬達候選（上界）；請補單台額定功率與台數。":
+        " kW is provisionally treated as one unit and used as the largest-motor candidate (upper bound); provide the unit rating and count.",
+    "設備表群組未提供負載分類（舊版分析結果）；幹線以群組設計值相加，請重新分析後帶入。":
+        "Equipment-schedule groups have no load classification (results from an older analysis); the feeder adds the group design values. Re-analyse and import again.",
+    "盤別負載分類格式不符": "Panel load classification has an invalid format",
+    "盤別負載分類數值不合法": "Panel load classification has an invalid value",
+    "盤別負載分類合計與來源運轉 P／Q 不符": "Panel load classification totals do not match the source operating P/Q",
+    "有馬達負載時必須指明最大單台馬達": "The largest single motor must be specified when there is a motor load",
+    "盤別負載分類與來源設計 P／Q 不符": "Panel load classification does not match the source design P/Q",
+    "原盤負載類型「": "Existing panel load type \u201c",
+    "」無法辨識，基底暫以非馬達連續負載 125% 計，請確認盤型。":
+        "\u201d is not recognised; the base is provisionally counted as a non-motor continuous load at 125%. Confirm the panel type.",
+    "原盤最大單台馬達未填：暫以最大一列馬達負荷 ": "Largest single motor of the existing panel not entered: the largest motor row of ",
+    " kW 視為單台（上界），請補最大馬達 kW／HP。": " kW is provisionally treated as one unit (upper bound); provide the largest motor kW/HP.",
+})
+
+# Gas phase state.
+TEXT.update({
+    "未知／低於三相點": "unknown / below the triple point",
+})
+
+# Supply-airflow guard (defect F-1), quality-gate status words, chilled-water margin note, PV pressure range.
+TEXT.update({
+    # overall status and item status
+    "未達條件": "Conditions not met",
+    "待後續": "Deferred",
+    "初估完成（待後續階段確認）": "Preliminary estimate complete (later-stage confirmation pending)",
+    "｜未達 ": "  |  Not met: ",
+    " 項／待資料 ": " / Data required: ",
+    " 項／待後續階段 ": " / Deferred: ",
+    " 項\n": "\n",
+    # airflow guard: governing factor
+    "除濕條件（冰水 ADP 過高）": "dehumidification limit (chilled-water ADP too high)",
+    "盤管供水 ADP 條件（顯熱）": "coil supply-ADP limit (sensible)",
+    "循環風量／外氣下限": "circulation / fresh-air floor",
+    "MAU 外氣量由解析式決定；FFU 循環風量另計": "MAU outdoor air comes from a closed-form balance; FFU circulation is counted separately",
+    # physical layer: sensible limit
+    "未達條件：冰水供水＋ADP 裕度 ": "Conditions not met: chilled-water supply plus ADP margin of ",
+    "°C 不低於室內乾球 ": "°C is not below the room dry bulb of ",
+    "°C，盤管無法移除室內顯熱 ": "°C, so the coil cannot remove the room sensible heat of ",
+    " kW；請降低冰水供水溫度或提高室內溫度": " kW; lower the chilled-water supply temperature or raise the room temperature",
+    # physical layer: moisture limit
+    "未達條件：盤管最低可達含濕量 ": "Conditions not met: the lowest humidity ratio the coil can reach is ",
+    " g/kg（冰水供水＋ADP 裕度 ": " g/kg (chilled-water supply plus ADP margin of ",
+    "°C）不低於室內含濕量 ": "°C), which is not below the room humidity ratio of ",
+    " g/kg（露點 ": " g/kg (dew point ",
+    "°C），任何風量都無法除濕；冰水供水溫度須低於 ": "°C); no airflow can dehumidify. Chilled-water supply must be below ",
+    "°C，或提高室內相對濕度目標": "°C, or the room relative-humidity target must be raised",
+    # physical layer: beyond the solvable range
+    "未達條件：除濕所需風量 ": "Conditions not met: the airflow needed for dehumidification is ",
+    "未達條件：顯熱所需風量 ": "Conditions not met: the airflow needed for sensible cooling is ",
+    " kg/s 為基準風量 ": " kg/s, against a baseline of ",
+    " kg/s 的 ": " kg/s, i.e. ",
+    " 倍，超出可求解範圍（": " times it, beyond the solvable range (",
+    " 倍）；冰水供水溫度與室內條件的裕度過小": " times); the margin between the chilled-water supply temperature and the room condition is too small",
+    # engineering layer
+    "供風量合理性": "Supply airflow plausibility",
+    "供風量由": "Supply airflow is set by the ",
+    "決定：基準 ": ": baseline ",
+    " CMH 增為 ": " CMH, raised to ",
+    " 倍（供風溫差 ": " times that (supply temperature difference ",
+    " K）；室內露點 ": " K); room dew point ",
+    "°C 與冰水 ADP ": "°C and chilled-water ADP ",
+    "°C 僅差 ": "°C differ by only ",
+    "，超過可行倍數 ": ", exceeding the feasible multiple of ",
+    "（供風溫差實務下限 ": " (practical minimum supply temperature difference ",
+    " K）": " K)",
+    "，未超過可行倍數 ": ", within the feasible multiple of ",
+    "；請將冰水供水降至 ": "; lower the chilled-water supply to below ",
+    "°C 以下（目前 ": "°C (currently ",
+    "°C）、提高室內相對濕度目標，或改用乾盤管／再熱": "°C), raise the room relative-humidity target, or use a dry coil / reheat",
+    "除濕裕度過小，風量對輸入極敏感（條件數 ": "Dehumidification margin too small; airflow is highly sensitive to the inputs (condition number ",
+    "，上限 ": ", limit ",
+    " K）；請確認冰水供水溫度與室內濕度目標。": " K); check the chilled-water supply temperature and the room humidity target.",
+    # chilled-water flow margin note
+    "（含 ": " (including ",
+    "% 容量餘裕）": "% capacity margin)",
+    "（未加容量餘裕）": " (no capacity margin)",
+    # PV pressure range
+    "PV 絕對壓力須介於 ": "PV absolute pressure must be between ",
+    "（本模型限 1～760 Torr 絕壓，約 0.133322～101.325 kPa）；請確認單位": " (the model is limited to 1-760 Torr absolute, about 0.133322-101.325 kPa); check the unit",
+    "全部為絕對壓力；150 Torr ≈ 20.00 kPa ≈ 199.98 mbar。允許範圍依所選單位：1～760 Torr ≈ 0.1333～101.325 kPa ≈ 1.333～1013.25 mbar。":
+        "All values are absolute pressures; 150 Torr = 20.00 kPa = 199.98 mbar. Allowed range for the selected unit: 1-760 Torr = 0.1333-101.325 kPa = 1.333-1013.25 mbar.",
+})
+
+# U-value input unit is shown with the field, in its help and in the report.
+TEXT.update({
+    "依U值單位": "per U-value unit",
+    "單位依「U 值單位」選項：預設 kcal/(h·m²·K)；1 W/(m²·K) ＝ 0.860 kcal/(h·m²·K)。填入前請先確認單位，否則牆體負荷會差約 16%。":
+        "The unit follows the 'U-value unit' option: kcal/(h·m²·K) by default; 1 W/(m²·K) = 0.860 kcal/(h·m²·K). Check the unit before entering a value, otherwise the wall load is off by about 16%.",
+    "單位依「U 值單位」選項：預設 kcal/(h·m²·K)；1 W/(m²·K) ＝ 0.860 kcal/(h·m²·K)。填入前請先確認單位。":
+        "The unit follows the 'U-value unit' option: kcal/(h·m²·K) by default; 1 W/(m²·K) = 0.860 kcal/(h·m²·K). Check the unit before entering a value.",
+    "選擇外牆與樓板 U 值的輸入單位；切換單位不會自動換算已填的數值。":
+        "Selects the input unit of the wall and floor U values; changing it does not convert the values already entered.",
+    "圍護條件：外牆 ": "Envelope: wall ",
+    " m²×U ": " m² × U ",
+    "、樓板 ": ", floor ",
+    "（U 值單位 ": " (U-value unit ",
+})

@@ -44,6 +44,14 @@ from facility_studio.data import WIRE_DB, NFB_SIZES
 from types import SimpleNamespace
 
 SEED = args.seed
+
+
+def rejection_prefixes(prefix):
+    """Reheat-required rejections are worded '此工況需要加熱／再熱' or, since the coil BF-floor model, '冷卻盤管需再熱：'; same cause and field."""
+    return (prefix, '冷卻盤管需再熱：') if prefix == '此工況需要加熱／再熱' else (prefix,)
+
+
+HAS_FFU_RATIO = (args.source / args.platform / 'facility_studio' / 'optional_inputs.py').exists()
 MAIN_COMMIT = None  # Local test before the GitHub commit; module hashes are recorded separately.
 TREE = None
 assert api.VERSION == '5.6.0', api.VERSION
@@ -144,7 +152,16 @@ def reference_design(project):
     internal = net+people*n('people_sensible_w')/1000+lighting_qty*n('light_w')/1000+n('oven_kw')+n('fan_room_kw')+ffu*n('ffu_w')/1000
     factor = .001 if i['u_unit']=='W/(m²·K)' else 4.1868/3600
     summer_qs = internal+n('en_wall')*n('wall_u')*(n('oa_t')-n('ra_t'))*factor+n('en_floor')*n('floor_u')*(n('floor_adj_t')-n('ra_t'))*factor+n('solar_kw')
-    winter_qs = internal*n('winter_gain_ratio')/100+n('en_wall')*n('wall_u')*(n('ow_t')-n('ra_t'))*factor+n('en_floor')*n('floor_u')*(n('winter_floor_adj_t')-n('ra_t'))*factor+n('winter_solar_kw')
+    # Trees with optional_inputs.py (win.9 and the macOS port) keep the FFU heat on its own winter operating ratio
+    # (winter_ffu_ratio, default 100 %) for MAU systems; older trees scale all internal heat by winter_gain_ratio.
+    ffu_ratio_model = HAS_FFU_RATIO and i['sys_type'].startswith('MAU')
+    ffu_ratio = float(i.get('winter_ffu_ratio', '100')) / 100
+    if ffu_ratio_model:
+        winter_internal = ((net+people*n('people_sensible_w')/1000+lighting_qty*n('light_w')/1000+n('oven_kw')+n('fan_room_kw'))
+                           * n('winter_gain_ratio')/100 + ffu*n('ffu_w')/1000*ffu_ratio)
+    else:
+        winter_internal = internal*n('winter_gain_ratio')/100
+    winter_qs = winter_internal+n('en_wall')*n('wall_u')*(n('ow_t')-n('ra_t'))*factor+n('en_floor')*n('floor_u')*(n('winter_floor_adj_t')-n('ra_t'))*factor+n('winter_solar_kw')
     moist = people*n('people_latent_w')/1000/2501
     if i['latent_mode']=='已知產濕量 kg/h':
         moist += n('process_moisture_kg_h')/3600
@@ -173,7 +190,7 @@ def reference_design(project):
         ffu = final_ffu
         internal += extra_fan_kw
         summer_qs += extra_fan_kw
-        winter_qs += extra_fan_kw * n('winter_gain_ratio') / 100
+        winter_qs += extra_fan_kw * (ffu_ratio if ffu_ratio_model else n('winter_gain_ratio') / 100)
     else:
         ffu_total = dcc_return = None  # Incompatible ADP is rejected before sizing.
     return dict(room=room,zones=zones,circulation=circulation,ffu=ffu,
@@ -576,10 +593,10 @@ for case in cases:
               dict(actual=outcome['kind'],expected=case['expectation']['kind']))
         if outcome['kind']=='engineering_rejection':
             expected=case['expectation']
-            check(case['id']+'/specified rejection cause',outcome['message'].startswith(expected['prefix']),outcome)
+            check(case['id']+'/specified rejection cause',outcome['message'].startswith(rejection_prefixes(expected['prefix'])),outcome)
             check(case['id']+'/structured rejection field',outcome['field_name']==expected['field'],outcome)
             check(case['id']+'/rejected HVAC not shown as usable',domains['hvac']['result'] is None and
-                  domains['hvac']['error'].startswith(expected['prefix']))
+                  domains['hvac']['error'].startswith(rejection_prefixes(expected['prefix'])))
         else:
             check(case['id']+'/HVAC preserved by desktop domain router',domains['hvac']['error'] is None)
             for key in ['room','zones','qs','ql','moisture','minimum_oa_cmh','oa_room_cmh',

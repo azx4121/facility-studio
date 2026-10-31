@@ -272,6 +272,12 @@ class WorkspaceWindow:
             return
         if not hasattr(self.main, "comparisons"):
             self.main.comparisons = {}
+        existing = self.main.comparisons.get(tag)
+        if existing is not None and not messagebox.askokcancel(
+                "覆蓋方案快照",
+                f"已有方案 {tag} 的快照（{existing.get('captured_at', '舊快照')}）。要以目前主案覆蓋嗎？覆蓋後無法復原。",
+                parent=self.win):
+            return
         self.main.comparisons[tag] = copy.deepcopy(self.main.result)
         self.main.comparisons[tag]["captured_at"] = datetime.now(
             timezone.utc

@@ -43,6 +43,8 @@ jobs:
       - name: Install hash-locked build dependencies on the builder only
         run: |
           python -m pip install --require-hashes --only-binary=:all: -r windows/winrelease/requirements.lock.txt
+      - name: Independent psychrometric reference for the reference tests
+        run: python -m pip install psychrolib==2.5.0
       - name: Engineering and import security regressions
         run: |
           function Invoke-CheckedPython {
@@ -66,6 +68,20 @@ jobs:
           Invoke-CheckedPython windows/tests/v559_resilience.py
           Invoke-CheckedPython windows/tests/v5510_keypad.py
           Invoke-CheckedPython windows/tests/v560_features.py
+          Invoke-CheckedPython windows/tests/reference_psychrometrics.py
+          Invoke-CheckedPython windows/tests/airflow_guard_checks.py
+          Invoke-CheckedPython windows/tests/optional_inputs_checks.py
+          Invoke-CheckedPython windows/tests/panel_demand_checks.py
+          Invoke-CheckedPython windows/tests/c2_coil_feasibility_checks.py
+          Invoke-CheckedPython windows/tests/winter_terminal_heat_checks.py
+          Invoke-CheckedPython windows/tests/ahu_link_boundary_checks.py
+          Invoke-CheckedPython windows/tests/fluid_adoption_checks.py
+          Invoke-CheckedPython windows/tests/fluid_selection_history_checks.py
+          Invoke-CheckedPython windows/tests/ui_theme_and_actions_checks.py
+          Invoke-CheckedPython windows/tests/text_clipping_checks.py
+          Invoke-CheckedPython tools/verify_platform_sync.py
+          Invoke-CheckedPython windows/tests/engineering_scenarios/run_scenarios.py
+          Invoke-CheckedPython windows/tests/engineering_scenarios/priority_defects.py
           Invoke-CheckedPython windows/tests/stress100.py --output "$env:RUNNER_TEMP/win-native-stress-source.json"
           Invoke-CheckedPython tools/verify_stress_io.py
           Invoke-CheckedPython tools/cleanroom100_stress.py --source . --platform windows --manifest "$env:RUNNER_TEMP/cleanroom100.json" --generate --seed 20261013

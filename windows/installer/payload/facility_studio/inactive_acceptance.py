@@ -111,6 +111,7 @@ def run_checks(random_repeats=4):
     ):
         i = dict(NM_DEFAULTS, humidifier=humidifier, recovery=recovery,
                  h1_source=source, h2_source=source)
+        i.update(summer_h1_mode="自動需求", winter_h1_mode="自動需求", summer_h2_mode="自動需求", winter_h2_mode="自動需求")
         if recovery.startswith("二期"):
             i.update(h1_hw_kw="200", h2_hw_kw="140")
         baseline = nm_calculate(i)
@@ -251,6 +252,7 @@ def run_checks(random_repeats=4):
     def steam_power_and_reporting():
         i = dict(NM_DEFAULTS, humidifier="電熱式蒸汽", h1_source="回收熱水",
                  h2_source="停用", h1_kw="987", h2_kw="654", steam_kw="50", drift_lph="321")
+        i.update(summer_h1_mode="自動需求", winter_h1_mode="自動需求")
         result = nm_calculate(i)
         expected = float(i["fan_qty"]) * float(i["fan_unit_kw"]) + 50
         assert result["installed_electric_kw"] == result["active_installed_electric_kw"] == expected
@@ -305,6 +307,8 @@ def run_ui(main, check, pump):
         child.vars["h1_source"].set("回收熱水")
         child.vars["h1_eta"].set("0.05")
         child.vars["humidifier"].set("電熱式蒸汽")
+        child.vars["summer_h1_mode"].set("自動需求")
+        child.vars["winter_h1_mode"].set("自動需求")
         child.calculate()
         pump()
         check("V557 recovery-only heater ignores inactive efficiency", lambda: child.widgets["h1_eta"].instate(["disabled"]) and child.result is not None)

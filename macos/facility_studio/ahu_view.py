@@ -295,6 +295,7 @@ class AHUView:
 
         inputs = self.snapshot()
         inactive = ahu_inactive(inputs)
+        single_coil = all(inputs[s + "_c1_mode"] == "旁通" for s in ("summer", "winter"))
         seasonal = inputs["target_mode"] == "主案分季需求"
         needed = set()
         if seasonal:
@@ -360,6 +361,8 @@ class AHUView:
                     or ((key in NM_BASIC or key in needed) and key not in inactive)
                     or key == "flow_basis"
                 )
+                if single_coil and key in ("c1_in", "c1_out", "c1_adp", "c1_rt", "c1_t", "dp_c1"):
+                    visible = False
                 row = self.rows[key]
                 if not visible:
                     row.pack_forget()

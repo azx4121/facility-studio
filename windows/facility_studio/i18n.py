@@ -78,6 +78,7 @@ def set_language(value, *, persist=True):
     global _language, _initialized, _save_warning
     if value not in LANGUAGES:
         raise ValueError("Unsupported language: " + str(value))
+    changed = value != _language
     _initialized = True
     _language = value
     _save_warning = None
@@ -91,6 +92,8 @@ def set_language(value, *, persist=True):
         except (OSError, ValueError) as error:
             # Read-only profiles may still switch for the current session.
             _save_warning = str(error)
+    if not changed:
+        return
     for listener in list(_listeners):
         if hasattr(listener, "winfo_exists") and not listener.winfo_exists():
             continue

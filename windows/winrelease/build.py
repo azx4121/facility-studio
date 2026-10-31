@@ -165,6 +165,14 @@ def main():
             {
                 "revision": BUILD_VERSION,
                 "source_commit": os.environ.get("GITHUB_SHA"),
+                "source_files_sha256": {
+                    path.relative_to(REPOSITORY).as_posix(): sha(path)
+                    for path in sorted(ROOT.rglob("*"))
+                    if path.is_file() and (path.is_relative_to(ROOT / "facility_studio")
+                                          or path.is_relative_to(ROOT / "winrelease")
+                                          or path == ROOT / "Default_Project.json")
+                    and "__pycache__" not in path.parts and path.suffix != ".pyc"
+                },
                 "python": sys.version,
                 "platform": platform.platform(),
                 "packages": versions,

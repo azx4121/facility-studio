@@ -9,8 +9,12 @@ import math
 from collections import defaultdict
 
 from .errors import ValidationError
+from .quality import STATUS_PASS
 from .schema import FIELDS
-from .utils import project_hash, VOLTAGE_MAP
+from .utils import project_hash, VOLTAGE_MAP, electrical_power_kw, uses_largest_motor
+from .panel_demand import (
+    base_composition, composition_design, design_current_a, group_design, make_composition, validate_composition,
+)
 
 LOOPS = {
     "MCHW": ("mchw_q", "u_mchw", "chw1_dt", "chw1_in"),
@@ -21,10 +25,33 @@ LOOPS = {
 POWER_KEYS = {"e_up_eq", "e_up_oven", "e_np_fan", "e_np_heat", "e_np_humid", "e_np_exh", "e_np_pump"}
 FLOW_KEYS = {"gas1_q", "gas2_q", "gas3_q", "pv_q", "gex_q", "sex_q", "aex_q", "vex_q", "hex_q", "upw_q"}
 SUM_KEYS = POWER_KEYS | FLOW_KEYS
+POWER_FIELDS = frozenset({"kw", "kvar", "design_kw", "design_kvar", "branch_floor_a", "length_m", "voltage"})
+LEGACY_POWER_WARNING = "舊版 W／kVA 電力帶入可能已存成錯誤的 kW。請先移除本盤已納入的電力來源，再用原始資料重新帶入；原值保留供復原，不自動猜改已保存數值。"
 
 
 def empty_ledger():
-    return dict(version=1, entries={}, original={}, baseline={}, last_updates={}, selections={})
+    return dict(version=2, entries={}, original={}, baseline={}, last_updates={}, selections={}, power_basis={})
+
+
+def legacy_power_keys(ledger):
+    """Identify pre-fix adopted W/kVA values whose physical history is unsafe."""
+    if ledger.get("version") != 1:
+        return []
+    panels = {pan for entry in ledger["entries"].values() for pan in entry["power"]}
+    adopted = {key for entry in ledger["entries"].values() for key in entry["updates"] if key in POWER_KEYS}
+    affected = []
+    for key in sorted(POWER_KEYS):
+        if key.split("_")[1].upper() not in panels or key not in ledger["last_updates"]:
+            continue
+        if ledger["original"].get("u_" + key) not in ("W", "kVA"):
+            continue
+        try:
+            nonzero = float(ledger["original"].get(key, "0")) != 0
+        except ValueError:
+            nonzero = True
+        if nonzero and (key not in adopted or ledger["baseline"].get(key, 0) > 0):
+            affected.append(key)
+    return affected
 
 
 def finite(value, minimum=0, maximum=1e9):
@@ -34,9 +61,20 @@ def finite(value, minimum=0, maximum=1e9):
 
 
 def validate_ledger(value):
-    if not isinstance(value, dict) or set(value) != set(empty_ledger()) or value["version"] != 1:
+    # Older ledgers have no explicit per-panel conversion snapshot. Keep their
+    # version so unsafe historical W/kVA adoptions remain detectable.
+    if isinstance(value, dict) and set(value) == set(empty_ledger()) - {"power_basis"}:
+        value = dict(value, power_basis={})
+    if not isinstance(value, dict) or set(value) != set(empty_ledger()) or type(value["version"]) is not int or value["version"] not in (1, 2):
         raise ValidationError("需求彙整格式不符")
     d = copy.deepcopy(value)
+    if not isinstance(d["power_basis"], dict) or set(d["power_basis"]) - {"UP", "NP"}:
+        raise ValidationError("盤別設計需求不完整")
+    for basis in d["power_basis"].values():
+        if not isinstance(basis, dict) or set(basis) != {"pf", "efficiency"}:
+            raise ValidationError("盤別設計需求不完整")
+        finite(basis["pf"], .01, 1)
+        finite(basis["efficiency"], .01, 1)
     for name in ("original", "last_updates"):
         fields = d[name]
         if not isinstance(fields, dict) or set(fields) - set(FIELDS) or any(not isinstance(v, str) or len(v) > 1000 for v in fields.values()):
@@ -82,10 +120,13 @@ def validate_ledger(value):
         if not isinstance(entry["power"], dict) or set(entry["power"]) - {"UP", "NP"}:
             raise ValidationError("盤別來源格式不符")
         for power in entry["power"].values():
-            if not isinstance(power, dict) or set(power) != {"kw", "kvar", "design_kw", "design_kvar", "branch_floor_a", "length_m", "voltage"}:
+            # "composition" is optional: older sources stay valid and are marked unclassified.
+            if not isinstance(power, dict) or not POWER_FIELDS <= set(power) or set(power) - POWER_FIELDS - {"composition"}:
                 raise ValidationError("盤別設計需求不完整")
-            for v in power.values():
-                finite(v)
+            for key in POWER_FIELDS:
+                finite(power[key])
+            if "composition" in power:
+                validate_composition(power["composition"], power)
     return d
 
 
@@ -93,9 +134,80 @@ def circuit_id(water):
     return project_hash({k: water[k] for k in ("loop", "circuit", "supply", "return", "rho", "cp", "mu")})[:24]
 
 
-def aggregate_ledger(ledger, inputs):
+FLUID_PROPERTIES = ("rho", "cp", "mu")
+INDEPENDENT_FLUID = "本迴路獨立物性"
+CLEAN_WATER = dict(rho=1000.0, cp=4.1868, mu=.001)
+# Stored in ledger["selections"][loop] after a manual edit: nothing is adopted for the loop
+# until the user selects a circuit again or no source remains for it.
+MANUAL_HOLD = "manual-hold"
+
+
+def fluid_keys(loop):
+    """Main-project fields that describe one loop's fluid; restored or kept as a unit."""
+    prefix = loop.lower() + "_"
+    return [prefix + k for k in ("fluid_mode", "fluid_name") + FLUID_PROPERTIES]
+
+
+def loop_keys(loop):
+    """Every main-project field one adopted circuit writes: flow, unit, dT, supply, link, fluid."""
+    flow, unit, dt, tin = LOOPS[loop]
+    return [flow, unit, dt] + ([tin] if tin else []) + [loop.lower() + "_link"] + fluid_keys(loop)
+
+
+def loop_touched(d, inputs, loop):
+    """True when the user changed the loop after the ledger last wrote it.
+
+    Not touched: every owned field still holds the last written value, or every owned field
+    still holds its pre-adoption value (the adoption was never applied, e.g. a preview the
+    caller did not accept). Any other mix means a manual edit. Limitation: a user who retypes
+    the whole loop exactly as it was before adoption looks like an unapplied adoption.
+    """
+    owned = [k for k in loop_keys(loop) if k in d["last_updates"]]
+    if all(inputs.get(k) == d["last_updates"][k] for k in owned):
+        return False
+    return not all(k in d["original"] and inputs.get(k) == d["original"][k] for k in owned)
+
+
+def fluid_differences(main, source):
+    """'rho main≠source' items for every property that differs; empty when all match."""
+    return [f"{k} {main[k]:.15g}≠{source[k]:.15g}" for k in FLUID_PROPERTIES
+            if not math.isclose(main[k], source[k], rel_tol=1e-9, abs_tol=1e-12)]
+
+
+def main_fluid(d, inputs, loop):
+    """The main project's own fluid for one loop: (mode, properties or None if unreadable).
+
+    While every ledger-owned field of the loop still holds what the ledger last wrote, the
+    pre-adoption snapshot is the main project's fluid; once the user changes any of them,
+    the current fields are. Shared mode resolves to water_* like engine.water_properties.
+    """
+    owned = [k for k in fluid_keys(loop) if k in d["last_updates"] and k in d["original"]]
+    untouched = bool(owned) and not loop_touched(d, inputs, loop)
+
+    def value(key):
+        return d["original"].get(key, inputs[key]) if untouched else inputs[key]
+
+    mode = value(loop.lower() + "_fluid_mode")
+    base = loop.lower() + "_" if mode == INDEPENDENT_FLUID else "water_"
+    try:
+        props = {k: float(value(base + k)) for k in FLUID_PROPERTIES}
+    except (TypeError, ValueError):
+        return mode, None
+    return mode, props if all(math.isfinite(v) for v in props.values()) else None
+
+
+def aggregate_ledger(ledger, inputs, fresh=()):
+    """fresh: loops whose circuit the user selected in this very call (consent on current values).
+
+    A stored selection is consent for the values it produced. Once the user edits any field of
+    the loop, the loop is held (summary "held_selections"): current values stay and nothing is
+    adopted until the user selects again. A selected circuit that no longer exists is released
+    (summary "released_selections").
+    """
     d = validate_ledger(ledger)
-    updates, notes, pending, groups = {}, [], [], {}
+    updates, notes, pending, groups, released, held = {}, [], [], {}, [], []
+    if legacy_power_keys(d):
+        pending.append(LEGACY_POWER_WARNING)
     summed, scalar_values = defaultdict(float), defaultdict(set)
     powers = defaultdict(list)
     for entry in d["entries"].values():
@@ -107,7 +219,7 @@ def aggregate_ledger(ledger, inputs):
             else:
                 scalar_values[key].add(value)
         for pan, power in entry["power"].items():
-            powers[pan].append(power)
+            powers[pan].append(dict(power, source=entry["name"]))
         for water in entry["water"]:
             ident = circuit_id(water)
             if ident not in groups:
@@ -128,9 +240,39 @@ def aggregate_ledger(ledger, inputs):
             g["design_lpm"] = max(g["summer_lpm"], g["winter_lpm"])
             g["adopted"] = False
         selected = d["selections"].get(loop)
-        if len(candidates) == 1:
-            selected = candidates[0]["id"]
+        mode, main = main_fluid(d, inputs, loop)
+        if loop not in fresh and (selected == MANUAL_HOLD or loop_touched(d, inputs, loop)):
+            # The user's edit after adoption wins: keep the whole loop as it is now.
+            if candidates:
+                if selected != MANUAL_HOLD:
+                    held.append(loop)
+                pending.append(f"{loop} 主案水力／流體欄位在帶入後已手動修改；保留目前整組值，來源未再帶入。如要採用來源，請重新明確選擇該迴路。")
+                if len(candidates) > 1:
+                    pending.append(loop + " 有不同供回水／介質／供應迴路，分開列示；主案水力列只能選其中一組，不能代表全廠總管。")
+            elif selected:
+                released.append(loop)
+            continue
+        if len(candidates) == 1 and not selected:
+            cand0 = candidates[0]
+            # Source flows were computed for the source fluid; they cannot stand for another one.
+            diffs = fluid_differences(main, cand0) if main else ["主案物性無法解讀"]
+            if diffs:
+                pending.append(
+                    f"{loop} 主案流體物性（{mode}）與來源迴路「{cand0['circuit']}」不同（主案≠來源）：" + "、".join(diffs)
+                    + "；來源水量依來源介質計算，不能代表主案介質，未自動覆寫主案流體與水量。若確定改用來源介質，請在需求彙整中明確選擇該迴路。"
+                )
+            else:
+                selected = cand0["id"]
         group = next((g for g in candidates if g["id"] == selected), None)
+        if selected and group is None:
+            released.append(loop)
+            if candidates:
+                pending.append(f"{loop} 先前選擇的來源迴路已不存在（來源條件已變更）；未帶入新迴路，主案整組還原為採用前的值，請重新選擇。")
+        elif group and d["selections"].get(loop) == group["id"] and main and fluid_differences(main, group):
+            notes.append(
+                f"{loop} 依使用者選擇採用來源迴路「{group['circuit']}」的介質與水量，取代主案流體物性（主案≠來源）："
+                + "、".join(fluid_differences(main, group)) + "；之後若未手動修改，移除來源時整組還原為採用前的主案值。"
+            )
         if len(candidates) > 1:
             pending.append(loop + " 有不同供回水／介質／供應迴路，分開列示；主案水力列只能選其中一組，不能代表全廠總管。")
         if not group:
@@ -147,8 +289,11 @@ def aggregate_ledger(ledger, inputs):
         if any(abs(p["voltage"] - voltage) > .01 for p in records):
             raise ValidationError("來源盤電壓與主案三相線電壓不同，請另案計算", "e_volt")
         prefix = "e_" + pan.lower()
-        base_pf = float(d["original"].get(prefix + "_pf", inputs[prefix + "_pf"]) if d["original"].get(prefix + "_pf_mode", inputs.get(prefix + "_pf_mode")) == "本盤獨立 PF" else inputs["e_pf"])
-        base = sum(d["baseline"].get(k, 0) for k in summed if k in POWER_KEYS and k.startswith(prefix + "_"))
+        basis = d["power_basis"].get(pan, {})
+        base_pf = basis.get("pf", float(d["original"].get(prefix + "_pf", inputs[prefix + "_pf"]) if d["original"].get(prefix + "_pf_mode", inputs.get(prefix + "_pf_mode")) == "本盤獨立 PF" else inputs["e_pf"]))
+        base_eff = float(basis.get("efficiency", inputs["e_eff"]))
+        base_rows = [(d["baseline"].get(k, 0), False) for k in summed if k in POWER_KEYS and k.startswith(prefix + "_")]
+        has_hp_base = False
         for key in POWER_KEYS:
             if not key.startswith(prefix + "_") or key in summed:
                 continue
@@ -156,66 +301,166 @@ def aggregate_ledger(ledger, inputs):
             unchanged = inputs[key] == d["last_updates"].get(key) and inputs[unit_key] == d["last_updates"].get(unit_key)
             value = float(d["original"].get(key, inputs[key]) if unchanged else inputs[key])
             unit = d["original"].get(unit_key, inputs[unit_key]) if unchanged else inputs[unit_key]
-            kw = value if unit == "kW" else value * .745699871582 / float(inputs["e_eff"]) if unit == "HP" else value * math.sqrt(3) * voltage * base_pf / 1000
-            base += kw
+            efficiency = basis.get("efficiency", inputs["e_eff"]) if unchanged else inputs["e_eff"]
+            kw = electrical_power_kw(value, unit, voltage, base_pf, efficiency, key)
+            base_rows.append((kw, unit == "HP" and value > 0))
+            if unit == "HP" and value > 0:
+                has_hp_base = True
             if unit != "kW":
-                # A and shaft-HP drafts used the original panel PF/efficiency.
+                # Non-kW drafts use their actual electrical conversion basis.
                 # Normalize their unchanged physical input before setting a
                 # new equivalent panel PF; otherwise their kW would drift.
                 updates[key] = format(kw, ".15g")
                 updates[unit_key] = "kW"
+        base = sum(kw for kw, _ in base_rows)
         base_q = base * math.tan(math.acos(base_pf))
+        # Always read panel load type from d["original"] first so repeated imports
+        # do not misread the overwritten "一般負載" value from inputs.
+        orig_type = d["original"].get(prefix + "_type", inputs.get(prefix + "_type", "連續負載"))
+        largest_kw = 0.0
+        if uses_largest_motor(orig_type, has_hp_base):
+            try:
+                largest_kw = float(d["original"].get(prefix + "_largest_motor_kw", inputs.get(prefix + "_largest_motor_kw", "0")) or 0)
+                if largest_kw <= 0:
+                    hp = float(d["original"].get(prefix + "_largest_hp", inputs.get(prefix + "_largest_hp", "0")) or 0)
+                    largest_kw = hp * 0.745699871582 / base_eff
+            except ValueError:
+                largest_kw = 0.0
+            if not math.isfinite(largest_kw) or largest_kw < 0:
+                largest_kw = 0.0
+        base_comp, base_pending = base_composition(base_rows, orig_type, largest_kw, base_pf)
+        if base_pending and base > 0:
+            pending.append(pan + " " + base_pending)
         p = sum(x["kw"] for x in records) + base
         q = sum(x["kvar"] for x in records) + base_q
-        dp = sum(x["design_kw"] for x in records) + base * 1.25
-        dq = sum(x["design_kvar"] for x in records) + base_q * 1.25
+        base_dp, base_dq = composition_design(base_comp)
+        parts = [dict(name="主案原有負荷", design_kw=base_dp, design_kvar=base_dq, composition=base_comp)]
+        parts += [dict(name=x["source"], design_kw=x["design_kw"], design_kvar=x["design_kvar"], composition=x.get("composition")) for x in records]
+        demand = group_design(parts)
+        dp, dq = demand["design_kw"], demand["design_kvar"]
+        if demand["unclassified"]:
+            pending.append(pan + " 來源未提供負載分類：" + "、".join(demand["unclassified"]) + "。已改用來源自身設計值相加，可能重複計入連續或馬達加成（偏保守）；請重新帶入該來源以取得分類。")
         kva = math.hypot(p, q)
         updates[prefix + "_pf_mode"] = "本盤獨立 PF"
         updates[prefix + "_pf"] = format(p / kva if kva else 1, ".15g")
-        updates[prefix + "_design_floor"] = format(max(math.hypot(dp, dq) * 1000 / (math.sqrt(3) * voltage), max(x["branch_floor_a"] for x in records)), ".15g")
+        updates[prefix + "_design_floor"] = format(max(design_current_a(dp, dq, voltage), max(x["branch_floor_a"] for x in records)), ".15g")
         # The main row already receives the explicit design floor; do not apply
         # 125% twice. Each imported feeder retains its own independent report.
         updates[prefix + "_type"] = "一般負載"
-        notes.append(pan + " 彙整運轉 P/Q 與來源設計電流；各來源設計餘裕相加，較只加全群最大馬達保守。支路候選仍保留在設備明細。")
+        notes.append(pan + " 同盤同電壓幹線：非馬達連續負載 125%、其他非馬達負載與全部馬達 100%，另加全群最大單台馬達 25%（" + (demand["largest_motor_source"] or "無馬達") + "）；P、Q 分開合成。各來源支路設計電流仍為下限，支路候選保留在設備明細。")
         updates["e_length_m"] = format(max(float(d["original"].get("e_length_m", inputs["e_length_m"])), float(updates.get("e_length_m", "0")), *(x["length_m"] for x in records)), ".15g")
-    return dict(updates=updates, water=list(groups.values()), sources=[dict(id=e["id"], name=e["name"], kind=e["kind"]) for e in d["entries"].values()], notes=list(dict.fromkeys(notes)), pending=list(dict.fromkeys(pending)))
+    return dict(updates=updates, water=list(groups.values()), sources=[dict(id=e["id"], name=e["name"], kind=e["kind"]) for e in d["entries"].values()], notes=list(dict.fromkeys(notes)), pending=list(dict.fromkeys(pending)), released_selections=released, held_selections=held)
 
 
-def updated_ledger(ledger, entry, inputs):
-    d = copy.deepcopy(ledger)
+def restoration_updates(ledger, inputs, owned):
+    """Restore untouched value/unit pairs together; preserve manual drafts."""
+    previous = ledger["last_updates"]
+    protected = set()
+    for unit_key in previous:
+        if not unit_key.startswith("u_"):
+            continue
+        value_key = unit_key[2:]
+        if value_key not in FIELDS:
+            value_key += "_q"
+        if value_key not in previous:
+            continue
+        pair = {value_key, unit_key}
+        if pair & set(owned) or any(inputs[key] != previous[key] for key in pair):
+            protected.update(pair)
+    for loop in LOOPS:
+        group = {key for key in loop_keys(loop) if key in previous}
+        if group & set(owned) or any(inputs[key] != previous[key] for key in group):
+            protected.update(group)
+    return {key: ledger["original"][key] for key, value in previous.items()
+            if key not in owned and key not in protected and inputs[key] == value}
+
+
+def retain_owned_history(ledger, updates):
+    """Released fields must capture a fresh original at their next adoption."""
+    ledger["last_updates"] = dict(updates)
+    for name in ("original", "baseline"):
+        ledger[name] = {key: value for key, value in ledger[name].items() if key in updates}
+
+
+def updated_ledger(ledger, entry, inputs, select=None):
+    """select: {loop: circuit id} chosen explicitly by the user in this call."""
+    d = validate_ledger(ledger)
+    if legacy_power_keys(d):
+        raise ValidationError(LEGACY_POWER_WARNING, legacy_power_keys(d)[0], code="legacy_power_adoption")
+    # Older v2 saves may still cache originals for already released fields.
+    # Baselines for newly adopted fields are explicitly chosen by the caller.
+    d["original"] = {key: value for key, value in d["original"].items() if key in d["last_updates"]}
+    d["version"] = 2
+    for pan in entry["power"]:
+        prefix = "e_" + pan.lower()
+        d["power_basis"].setdefault(pan, dict(
+            pf=float(inputs[prefix + "_pf"] if inputs.get(prefix + "_pf_mode") == "本盤獨立 PF" else inputs["e_pf"]),
+            efficiency=float(inputs["e_eff"])))
+        # Snapshot the original panel load type BEFORE aggregate_ledger overwrites it to "一般負載"
+        d["original"].setdefault(prefix + "_type", inputs.get(prefix + "_type", "連續負載"))
     d["entries"][entry["id"]] = copy.deepcopy(entry)
+    active_panels = {pan for source in d["entries"].values() for pan in source["power"]}
+    d["power_basis"] = {pan: basis for pan, basis in d["power_basis"].items() if pan in active_panels}
+    fresh = dict(select or {})
+    for loop, ident in fresh.items():
+        if loop not in LOOPS or not isinstance(ident, str) or len(ident) > 100:
+            raise ValidationError("來源迴路選擇不合法")
+        if loop_touched(d, inputs, loop):
+            # The user's current values are what removing this source should restore.
+            for key in loop_keys(loop):
+                if key in d["original"]:
+                    d["original"][key] = inputs[key]
+        d["selections"][loop] = ident
     validate_ledger(d)
-    summary = aggregate_ledger(d, inputs)
+    summary = aggregate_ledger(d, inputs, fresh)
+    for loop in summary["released_selections"]:
+        d["selections"].pop(loop, None)
+    for loop in summary["held_selections"]:
+        d["selections"][loop] = MANUAL_HOLD
     for key in summary["updates"]:
         d["original"].setdefault(key, inputs[key])
     updates = dict(summary["updates"])
-    for key, previous in d["last_updates"].items():
-        if key not in updates and inputs[key] == previous:
-            updates[key] = d["original"][key]
-    d["last_updates"] = dict(summary["updates"])
+    updates.update(restoration_updates(d, inputs, updates))
+    retain_owned_history(d, summary["updates"])
     return d, updates, summary
 
 
 def removed_ledger(ledger, ident, inputs):
-    d = copy.deepcopy(ledger)
+    d = validate_ledger(ledger)
     d["entries"].pop(ident, None)
+    active_panels = {pan for entry in d["entries"].values() for pan in entry["power"]}
+    d["power_basis"] = {pan: basis for pan, basis in d["power_basis"].items() if pan in active_panels}
     summary = aggregate_ledger(d, inputs)
+    for loop in summary["released_selections"]:
+        d["selections"].pop(loop, None)
+    for loop in summary["held_selections"]:
+        d["selections"][loop] = MANUAL_HOLD
     updates = dict(summary["updates"])
-    for key, previous in d["last_updates"].items():
-        if key not in updates and inputs[key] == previous:
-            updates[key] = d["original"][key]
-    d["last_updates"] = dict(summary["updates"])
+    updates.update(restoration_updates(d, inputs, updates))
+    retain_owned_history(d, summary["updates"])
+    if not legacy_power_keys(d):
+        d["version"] = 2
     return d, updates, summary
 
 
 def ahu_contribution(result, ident, inputs):
     from .design_workflow import ahu_source_hash
+    from .engine import water_properties
     i = result["inputs"]
     entry = dict(id=ident, name=i["name"], kind="AHU", source_hash=ahu_source_hash(i), updates={}, water=[], power={}, notes=[], pending=[])
     factor = 1 + float(i["sf"]) / 100
     for tag, loop in (("c1", "MCHW"), ("c2", "CHW")):
         supply, ret = float(i[tag + "_in"]), float(i[tag + "_out"])
-        entry["water"].append(dict(loop=loop, circuit=loop, supply=supply, **{"return": ret}, rho=1000.0, cp=4.1868, mu=.001, **{s + "_lpm": result[s][tag]["water_kw"] * factor * 60000 / (1000 * 4.1868 * (ret - supply)) for s in ("summer", "winter")}))
+        # Retain AHU source's own fluid properties (water 1000 / 4.1868 / 0.001) without silent recalculation;
+        # if main project uses custom fluid properties, flag explicitly in pending/notes.
+        dest_fluid = water_properties(inputs, loop)
+        diffs = fluid_differences(dest_fluid, CLEAN_WATER)
+        if diffs:
+            entry["pending"].append(
+                f"{i['name']} {loop} 單機以清水物性計算水量，與主案目前有效物性（{dest_fluid['source']}）不同（主案≠來源）："
+                + "、".join(diffs) + "；已保留單機來源物性並分列，不靜默重算。"
+            )
+        entry["water"].append(dict(loop=loop, circuit=loop, supply=supply, **{"return": ret}, **CLEAN_WATER, **{s + "_lpm": result[s][tag]["water_kw"] * factor * 60000 / (1000 * 4.1868 * (ret - supply)) for s in ("summer", "winter")}))
     hw = {}
     for season in ("summer", "winter"):
         for tag in ("h1", "h2"):
@@ -240,11 +485,25 @@ def ahu_contribution(result, ident, inputs):
     for tag, value in (("fan", fan), ("heat", heat), ("humid", steam), ("pump", pump)):
         entry["updates"].update({"e_np_" + tag: format(value, ".15g"), "u_e_np_" + tag: "kW"})
     pf = float(inputs["e_pf"])
+    tan_phi = math.tan(math.acos(pf))
     kw = fan + heat + steam + pump
-    kvar = kw * math.tan(math.acos(pf))
-    entry["power"]["NP"] = dict(kw=kw, kvar=kvar, design_kw=kw * 1.25, design_kvar=kvar * 1.25, branch_floor_a=0.0, length_m=0.0, voltage=VOLTAGE_MAP[inputs["e_volt"]])
+    kvar = kw * tan_phi
+    # Fans and the wash pump are motors; electric heaters and steam generators
+    # are treated as continuous non-motor loads. The pump count is not known,
+    # so its total input is used as an upper bound for the largest motor and
+    # the source is marked pending until a single-unit rating is supplied.
+    motor, continuous = fan + pump, heat + steam
+    largest = max(float(i["fan_unit_kw"]) if fan > 0 else 0.0, pump)
+    comp = make_composition(continuous=(continuous, continuous * tan_phi), motor=(motor, motor * tan_phi),
+                            largest_motor=(largest, largest * tan_phi))
+    design_kw, design_kvar = composition_design(comp)
+    entry["power"]["NP"] = dict(kw=kw, kvar=kvar, design_kw=design_kw, design_kvar=design_kvar, branch_floor_a=0.0,
+                                length_m=0.0, voltage=VOLTAGE_MAP[inputs["e_volt"]], composition=comp)
+    entry["notes"].append(i["name"] + " 負載分類：風機與水洗泵為馬達，電熱與蒸汽加濕為非馬達連續負載。")
+    if pump > 0:
+        entry["pending"].append(i["name"] + " 水洗泵台數與單台額定未知：暫以水洗泵總輸入 " + format(pump, ".6g") + " kW 視為單台，作為最大馬達候選（上界）；請補單台額定功率與台數。")
     entry["notes"].extend([i["name"] + " 額定電力採回傳時共用 PF=" + format(pf, ".4g") + "；風機／電熱／加濕／水洗泵為不同設備，不由冷量換算耗電。", "只納入明確回傳的單機；同 ID 再回傳會更新原台，不能把方案 A/B 當成同時運轉的兩台。"])
-    if result["quality"]["status"] != "通過":
+    if result["quality"]["status"] != STATUS_PASS:
         entry["pending"].append(i["name"] + " 單機狀態：" + result["quality"]["status"] + "；容量為需求草稿。")
     return entry
 
@@ -262,6 +521,10 @@ def equipment_contribution(result, group, inputs, target="UP"):
         key = prefix + ("_eq" if target == "UP" else "_exh")
         u.update({key: format(group["demand_kw"], ".15g"), "u_" + key: "kW"})
         entry["power"][target] = dict(kw=group["demand_kw"], kvar=group["demand_kvar"], design_kw=group["design_kw"], design_kvar=group["design_kvar"], branch_floor_a=group["minimum_active_branch_design_a"], length_m=group["feeder_length_m"], voltage=group["voltage"])
+        if "composition" in group:
+            entry["power"][target]["composition"] = dict(group["composition"])
+        else:
+            entry["pending"].append("設備表群組未提供負載分類（舊版分析結果）；幹線以群組設計值相加，請重新分析後帶入。")
         entry["pending"].append("設備表進線候選需另核短路、啟動、相別與支路保護；用電不等於室內發熱。")
     elif system == "PCW":
         q = group["demand_lpm"]

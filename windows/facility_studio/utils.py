@@ -15,7 +15,14 @@ from .data import (
     WIRE_DB,
 )
 
-from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, custom_name, reference_velocity
+from .gas_catalog import (
+    GAS_OPTIONS,
+    CUSTOM_GAS,
+    custom_name,
+    evaluate_gas_phase,
+    reference_velocity,
+    saturation_pressure_kpa,
+)
 
 VERSION = "1.1.1"
 CFM_TO_CMH = 1.69901079552
@@ -523,6 +530,7 @@ def pressure_result(
         static_pa = rho * G * static if is_water else 0
     loss = friction + local + equipment
     total = loss + static_pa
+    friction_pa_m = friction / length if length > 0 and q_m3s > 0 else 0.0
     return {
         "flow_m3s": q_m3s,
         "id_m": diameter,
@@ -538,6 +546,8 @@ def pressure_result(
         "equivalent_length_m": leq,
         "sum_k": sum_k,
         "friction_pa": friction,
+        "friction_pa_m": friction_pa_m,
+        "high_friction_rate": bool(friction_pa_m > (400.0 if is_water else 1.5)),
         "local_pa": local,
         "equipment_pa": equipment,
         "static_pa": static_pa,
@@ -621,11 +631,11 @@ def electrical_result(i, warnings):
             "kind": i["e_up_type"],
         }
     }
-    npkw = n("e_np_pump", 0, 10000000.0)
+    npkw = 0.0
     nphp = 0.0
-    for name in ("fan", "heat", "humid", "exh"):
+    for name in ("fan", "heat", "humid", "exh", "pump"):
         value = n("e_np_" + name, 0, 10000000.0)
-        unit = choice(i["u_e_np_" + name], ("kW", "HP"), "NP " + name + " 單位")
+        unit = choice(i.get("u_e_np_" + name, "kW"), ("kW", "HP"), "NP " + name + " 單位")
         npkw += value if unit == "kW" else value * hpkw
         if unit == "HP":
             nphp += value
@@ -641,7 +651,8 @@ def electrical_result(i, warnings):
         hasmotor = bool(i.get(prefix + "_has_hp", pan["hp"] > 0)) or kind == "馬達負載"
         largest_key = prefix + "_largest_hp"
         largest = n(largest_key, 0, 10000000.0) if uses_largest_motor(kind, hasmotor) else 0.0
-        if largest > pan["hp"] + 1e-08:
+        max_possible_hp = (pan["kw"] / hpkw) if kind == "馬達負載" else pan["hp"]
+        if largest > max_possible_hp + 1e-08:
             raise InputError(
                 f"{key} 最大馬達 HP 不得大於明列的 HP 合計；請先以 HP 列出馬達負荷",
                 field_name=largest_key,
@@ -733,6 +744,8 @@ def electrical_result(i, warnings):
                 "copper_total_mm2": 0,
             }
         )
+        from .grounding import equipment_pe
+        selected.update(equipment_pe(selected["nfb_candidate_a"], selected["runs"]))
         pan.update(
             current_a=current,
             design_current_a=design,
@@ -833,6 +846,7 @@ def gas_result(i, warnings):
         row = next((r for r in pipes if r["id"] >= needed), None) if qstd else None
         if qstd and row is None:
             raise InputError(f"{typ} 超過原始管材表範圍；不可把最大管徑當作符合")
+        phase = evaluate_gas_phase(typ, temp, pa / 1000.0) if qstd > 0 and index < 4 else None
         result[str(index)] = {
             "type": typ,
             **({"custom_name": name} if name else {}),
@@ -846,6 +860,7 @@ def gas_result(i, warnings):
                 qactual / 60000 / (math.pi * (row["id"] / 1000) ** 2 / 4) if row else 0
             ),
             "velocity_limit_mps": vmax,
+            **({"phase_status": phase["phase_status"], "liquefaction_risk": phase["liquefaction_risk"], "vapor_pressure_kpa": phase["vapor_pressure_kpa"]} if phase is not None else {}),
         }
     warnings.extend(
         [

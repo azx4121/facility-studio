@@ -40,7 +40,11 @@ class FlowToolbar(ttk.Frame):
 
     def _arrange(self):
         self._job = None
-        width = self.winfo_width()
+        # A parent's requested width can briefly exceed the resized client.
+        # Keep actions inside the actual top-level client during that turn too.
+        window = self.winfo_toplevel()
+        available = window.winfo_rootx() + window.winfo_width() - self.winfo_rootx()
+        width = min(self.winfo_width(), available)
         children = self.winfo_children()
         if width < 20 or not children:
             return

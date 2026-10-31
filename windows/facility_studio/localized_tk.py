@@ -22,6 +22,7 @@ class Display:
         self._source_variable = None
         self._display_variable = None
         self._text_trace = None
+        self._rendered_text = None
         self._capture(kwargs, master)
         super().__init__(master, **kwargs)
         i18n.subscribe(self)
@@ -39,6 +40,7 @@ class Display:
         if "text" in options:
             self._source_text = options["text"]
             options["text"] = i18n.translate(options["text"])
+            self._rendered_text = options["text"]
         if "textvariable" in options:
             source = options["textvariable"]
             if isinstance(source, native.Variable):
@@ -59,8 +61,11 @@ class Display:
         options = dict(cnf or {}, **kwargs)
         if not options:
             return super().configure()
+        previous_text = self._rendered_text
         self._capture(options)
-        return super().configure(**options)
+        if "text" in options and options["text"] == previous_text:
+            options.pop("text")
+        return super().configure(**options) if options else None
 
     config = configure
 
@@ -68,9 +73,14 @@ class Display:
         if not self.winfo_exists():
             return
         if self._source_text is not None:
-            super().configure(text=i18n.translate(self._source_text))
+            rendered = i18n.translate(self._source_text)
+            if rendered != self._rendered_text:
+                super().configure(text=rendered)
+                self._rendered_text = rendered
         if self._source_variable is not None:
-            self._display_variable.set(i18n.translate(self._source_variable.get()))
+            rendered = i18n.translate(self._source_variable.get())
+            if self._display_variable.get() != rendered:
+                self._display_variable.set(rendered)
 
 
 class Combobox(native_ttk.Combobox):
@@ -79,6 +89,7 @@ class Combobox(native_ttk.Combobox):
         self._trace = None
         self._busy = False
         self._choices = tuple(kwargs.pop("values", ()))
+        self._rendered_choices = None
         source = kwargs.pop("textvariable", None)
         self._display = native.StringVar(master)
         super().__init__(master, textvariable=self._display, **kwargs)
@@ -119,8 +130,13 @@ class Combobox(native_ttk.Combobox):
             return
         self._busy = True
         try:
-            super().configure(values=[i18n.translate(x) for x in self._choices])
-            self._display.set(i18n.translate(self._canonical.get()))
+            choices = tuple(i18n.translate(x) for x in self._choices)
+            if choices != self._rendered_choices:
+                super().configure(values=choices)
+                self._rendered_choices = choices
+            rendered = i18n.translate(self._canonical.get())
+            if self._display.get() != rendered:
+                self._display.set(rendered)
         finally:
             self._busy = False
 
@@ -291,11 +307,14 @@ class Text(native.Text):
 
     def refresh_language(self):
         if self._report is not None:
+            rendered = i18n.translate(self._report)
+            if rendered == self.get("1.0", "end-1c"):
+                return
             state = self.cget("state")
             position = self.yview()[0]
             super().configure(state="normal")
             super().delete("1.0", "end")
-            super().insert("1.0", i18n.translate(self._report))
+            super().insert("1.0", rendered)
             super().configure(state=state)
             self.yview_moveto(position)
 

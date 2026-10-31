@@ -351,7 +351,7 @@ def run_audit(destination):
     def report_formulas():
         nonlocal reports
         reports=report_checks()
-        return len(reports)==405 and all(item['passed'] for item in reports)
+        return len(reports)==406 and all(item['passed'] for item in reports)
     check("R01–R05 report semantics and independently adopted conditions",report_formulas)
     old_storage = os.environ.get("LOCALAPPDATA")
     old_preferences = os.environ.get("FACILITY_STUDIO_PREFERENCES")

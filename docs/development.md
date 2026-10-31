@@ -156,3 +156,16 @@ python docs/tutorial/verify_tutorial.py --platform windows --output tutorial-win
 教學更新器只重建指定平台的參考報告與 ZIP。Windows 報告保存在 `docs/tutorial/windows/`；mac.6 既有教學保留，不能用 Windows 新報告覆寫。應用來源或資源修改後，須同步重建 installer payload、manifest 及 Setup，再跑封裝與完整性檢查。
 
 English: win.8 adds 405 report-semantic assertions and 28 actual export/PV operations to frozen acceptance. Native capture checks mapped forms, real pixels and black-region fraction. Platform-scoped tutorial refresh preserves the other platform's bundle. Rebuild and verify installer payloads whenever application bytes change.
+
+## win.9／mac.7：同一份程式碼、F-1 防護
+
+```sh
+python tools/verify_platform_sync.py          # windows/ 與 macos/ 的 facility_studio 只允許 version.py 與教學壓縮檔不同
+python windows/tests/airflow_guard_checks.py   # F-1 回歸與邊界掃描，74 項
+python windows/tests/engineering_scenarios/run_scenarios.py   # 20 組情境＋5 組掃描
+python windows/tests/engineering_scenarios/priority_defects.py
+python tools/refresh_tutorial.py --platform windows   # macOS 同理；再複製到各平台 resources/beginner_tutorial.zip
+```
+
+平台差異集中在 `facility_studio/platform_support.py`（資料目錄、字型、滾輪、Mac 快捷鍵、導覽按鈕種類）。驗收紀錄見[本輪驗收](2026-10-31-win9-mac7-acceptance.md)。原生延伸稽核數量：2,188 獨立工程數值、406 報告語意、28 匯出／PV 操作、142 延伸入口／介面。
+

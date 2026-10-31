@@ -83,6 +83,7 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
         ("cleanroom", "ffu_airflow_basis"): {"ffu_topology": "MAU入靜壓箱經FFU送風"},
         ("cleanroom", "base_leak_ach"): {"delta_p": "15"},
         ("heat_loads", "oa_load_basis"): {"oa_cmh": "600"},
+        ("heat_loads", "envelope_w_m2"): {"envelope_mode": "自訂熱負荷密度"},
         ("heat_loads", "mau_room_sensible_kw"): {"oa_load_basis": "外氣至實際露點送風", "oa_cmh": "1200", "mau_supply_delta_t": "8"},
         ("heat_loads", "mau_supply_delta_t"): {"oa_load_basis": "外氣至實際露點送風", "oa_cmh": "1200", "mau_room_sensible_kw": "1.5", "mau_supply_delta_t": "8"},
         ("electrical", "chiller_cop"): {"chiller_input_kw": "0"},
@@ -138,6 +139,11 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
         "mau_input_kw": "3.5",
         "process_input_kw": "18",
     }
+
+    for f in TOOLS["heat_loads"]["fields"]:
+        # Area-based envelope inputs (win.9 and the macOS port) are active only in their own mode.
+        if f["key"].startswith("envelope_") and f["key"] not in ("envelope_w_m2", "envelope_mode"):
+            simple_active_overrides.setdefault(("heat_loads", f["key"]), {"envelope_mode": "面積推估外牆／樓板"})
 
     for tool, spec in TOOLS.items():
         for f in spec["fields"]:
@@ -273,6 +279,19 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
         p0 = default_project()
         if key in wb_active_overrides:
             p0["inputs"].update(wb_active_overrides[key])
+        if key in main_inactive(p0["inputs"]):
+            # The default system of win.9 and the macOS port is a single-coil AHU; a field that belongs to another
+            # system is reachable by choosing that system, which is what a user would do.
+            for pre in [None] + list(FIELDS["pre_mode"]["options"]) if "pre_mode" in FIELDS else [None]:
+                found = False
+                for option in FIELDS["sys_type"]["options"]:
+                    trial = dict(p0["inputs"], sys_type=option, **({"pre_mode": pre} if pre else {}))
+                    if key not in main_inactive(trial):
+                        p0["inputs"].update(trial)
+                        found = True
+                        break
+                if found:
+                    break
         check(key not in main_inactive(p0["inputs"]), f"Workbench field {key} should be active")
         r0 = calculate(p0)
         rep0 = str(report(r0, language="zh-Hant"))
@@ -339,13 +358,14 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
         "winter_h1_t": {"winter_h1_mode": "指定出口乾球", "winter_h1_t": "25"},
         "winter_c1_t": {"winter_t": "20", "winter_rh": "80", "winter_c1_mode": "指定出口乾球", "winter_c1_t": "16"},
         "winter_c1_rh": {"winter_t": "20", "winter_rh": "80", "winter_c1_mode": "指定出口 T/RH", "winter_c1_t": "16", "winter_c1_rh": "90"},
-        "winter_c2_t": {"winter_c2_mode": "指定出口乾球", "winter_c2_t": "12"},
-        "winter_c2_rh": {"winter_c2_mode": "指定出口 T/RH", "winter_c2_t": "12", "winter_c2_rh": "95"},
+        "winter_c2_t": {"winter_t": "20", "winter_rh": "80", "winter_c2_mode": "指定出口乾球", "winter_c2_t": "12"},
+        "winter_c2_rh": {"winter_t": "20", "winter_rh": "80", "winter_c2_mode": "指定出口 T/RH", "winter_c2_t": "12", "winter_c2_rh": "95"},
         "winter_h2_t": {"winter_h2_mode": "指定出口乾球", "winter_h2_t": "19"},
     }
     for k in NM_FIELDS:
         if k.startswith("steam_"):
-            ahu_active_overrides[k] = {"humidifier": "電極式蒸汽"}
+            # Steam needs a heated, unsaturated supply condition; win.9 defaults (16 C / 90 %RH, stages bypassed) saturate.
+            ahu_active_overrides[k] = {"humidifier": "電極式蒸汽", "sa_t": "22", "sa_rh": "55", "winter_h1_mode": "自動需求", "h1_source": "電熱", "h1_kw": "400"}
 
     for key, spec in NM_FIELDS.items():
         if key == "linked_main_hash":
@@ -354,6 +374,19 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
         inp0 = dict(NM_DEFAULTS)
         if key in ahu_active_overrides:
             inp0.update(ahu_active_overrides[key])
+        if key in ahu_inactive(inp0):
+            # win.9 and the macOS port default the AHU stages to bypass; a field of another configuration is
+            # reachable by choosing that configuration (one selector at a time, in schema order).
+            reached = False
+            for selector, sspec in NM_FIELDS.items():
+                for option in (sspec.get("limit") if isinstance(sspec, dict) and isinstance(sspec.get("limit"), list) else []):
+                    trial = dict(inp0, **{selector: option})
+                    if key not in ahu_inactive(trial):
+                        inp0 = trial
+                        reached = True
+                        break
+                if reached:
+                    break
         check(key not in ahu_inactive(inp0), f"AHU field {key} should be active in test setup")
         ar0 = nm_calculate(inp0)
         arep_zh = str(nm_report(ar0, language="zh-Hant"))
@@ -583,6 +616,14 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
 
         # 2.4 Standalone AHU Iteration
         ahu_in = dict(NM_DEFAULTS)
+        if ahu_in.get("winter_h1_mode") == "旁通":
+            # win.9 and the macOS port default every AHU stage to bypass with a 16 C / 90 %RH target; these randomised
+            # designs (steam, wash, reheat) were written for an actively conditioned unit, so state that explicitly.
+            ahu_in.update(
+                fan_qty="8", fan_unit_kw="7.8", c1_in="14", c1_out="19", c1_rt="250", c2_rt="160",
+                wash_mode="AMC 需求持續水洗", wash_rating="619.4", sa_t="22", sa_rh="55", h1_kw="400", h2_kw="200",
+                **{f"{season}_{stage}_mode": "自動需求" for season in ("summer", "winter") for stage in ("c1", "h1", "h2")},
+            )
         ahu_in.update(
             flow=str(round(rng.uniform(8000, 60000), 0)),
             humidifier=rng.choice(["循環水洗濕膜", "電極式蒸汽", "電熱式蒸汽"]),

@@ -28,6 +28,8 @@ class NativeRedraw:
         window.bind("<Destroy>", self.release, add="+")
 
     def schedule(self, event=None):
+        if event is not None and not hasattr(event.widget, "winfo_toplevel"):
+            return
         if event is not None and event.widget.winfo_toplevel() is not self.window:
             return
         if self.pending is not None:

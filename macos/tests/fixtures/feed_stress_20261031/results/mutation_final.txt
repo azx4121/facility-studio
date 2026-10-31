@@ -1,0 +1,13 @@
+KILLED    M1 latent term of enthalpy off by 100 kJ/kg  ['AB:A_enthalpy_kJkg']
+KILLED    M2 air volume ignores atmospheric pressure  ['AB:A_volume_m3kg']
+KILLED    M3 condensate heat dropped from coil water load  ['AB:B4b_liquid_heat_magnitude']
+KILLED    M4 chilled-water flow uses fixed cp 4.0  ['AB:B5_water_lpm_rel,B5c_capacity_eq_load']
+KILLED    M5 pipe friction 30 % too high  ['AB:B7_friction_pa_rel']
+KILLED    M6 US refrigeration ton constant 3.0 kW  ['AB:B10_rt_conversion_rel']
+KILLED    M7 numeric upper bound no longer enforced  ['D:accepted_outside_bounds,crash_at_edge,crash_on_text']
+KILLED    M8 inactive FFU field leaks into room heat (guard removed too)  ['C:C6 inactive']
+KILLED    M9 DCC unit count ignores the capacity margin  ['F:F2_dcc_capacity_ge_load']
+KILLED    M10 floor heat gain sign reversed  ['F:F1_floor']
+KILLED    M11 continuous-load design current factor 1.0 instead of 1.25  ['F:F3_continuous_load_125pct']
+
+killed 11 / 11

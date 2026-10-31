@@ -70,7 +70,7 @@ with tempfile.TemporaryDirectory(prefix="nsis_contents_check_") as temporary:
     check(
         "05_extracted_payload_manifest_valid",
         len(bootstrap.verify_payload(target))
-        == len(json.loads((target / "payload_sha256.json").read_text())),
+        == len(json.loads((target / "payload_sha256.json").read_text(encoding="utf-8"))),
     )
 
 # A compiler exit status or PE header alone must never approve these cases.

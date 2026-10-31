@@ -1,0 +1,87 @@
+{
+ "valid_cases": 1500,
+ "E1 report has no nan/inf/None/{}/Traceback tokens": {
+  "n": 600,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "E1 report status_header": {
+  "n": 600,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "E1 report total_kw_and_rt": {
+  "n": 600,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "E1 report CHW_lpm": {
+  "n": 598,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "E1 report zh_en_same_numbers": {
+  "n": 600,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "E2 state_in_range (t -60..120, 0<=w<=0.2, rh<=100)": {
+  "n": 25500,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "E2 coil_never_heats_or_humidifies": {
+  "n": 6000,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "E2 condensate_non_negative": {
+  "n": 6000,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "E2 coil_leaving_air_not_colder_than_entering_water": {
+  "n": 2713,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "E2 engine_own_residuals_below_1e-6": {
+  "n": 6000,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "E2 supply_not_supersaturated": {
+  "n": 1500,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "E2 flows_and_loads_non_negative": {
+  "n": 1500,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "E2 load_driven_airflow_over_5x_baseline_is_flagged_not_met": {
+  "n": 188,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "E2 no_accepted_supply_difference_below_2K_unflagged_on_sensible_baseline": {
+  "n": 1245,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ }
+}

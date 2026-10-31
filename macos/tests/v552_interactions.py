@@ -4,7 +4,7 @@ import sys, json, copy, tempfile, os, math
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox, simpledialog
 from PIL import ImageGrab
 from facility_studio.desktop import DesktopApp
 from facility_studio.ahu_desktop import AHUWindow
@@ -23,6 +23,8 @@ messagebox.showinfo=lambda *a,**k: None
 messagebox.askokcancel=lambda *a,**k: dialogs.append(str(a)) or True
 messagebox.askyesno=lambda *a,**k: True
 messagebox.askyesnocancel=lambda *a,**k: False
+# The AHU send asks for this unit's share of the main project; answer its 100% default.
+simpledialog.askfloat=lambda *a,**k: k.get("initialvalue")
 
 def input_set(a,**values):
     a.suspended=True
@@ -80,14 +82,16 @@ with tempfile.TemporaryDirectory(prefix='facility552_') as td:
     check('15_electrode_requirements_in_basic',all(ahu.rows[k].winfo_manager() for k in ['steam_conductivity','steam_cond_min','steam_cond_max']))
     ahu.vars['humidifier'].set('循環水洗濕膜');ahu.vars['summer_c1_mode'].set('自動需求');ahu.vars['steam_kw'].set('');ahu.calculate()
     check('16_inactive_steam_draft_valid',ahu.result is not None)
-    ahu.vars['fan_qty'].set('4');ahu.calculate()
-    check('17_control_note_tracks_fans','4 台 EC' in ahu.control_notes.cget('text') and '8 台 EC' not in ahu.control_notes.cget('text'))
+    # win.9 defaults are generic (1 fan, 0 kW = not provided); state the fan rating explicitly.
+    ahu.vars['fan_qty'].set('4');ahu.vars['fan_unit_kw'].set('7.8');ahu.calculate()
+    # win.9 wording covers any fan count and type, so no stale count can be shown.
+    check('17_control_note_has_no_stale_fan_count','各台風機' in ahu.control_notes.cget('text') and '台 EC' not in ahu.control_notes.cget('text'))
     ahu.return_utilities();root.update();a.recalculate()
     check('18_receipt_created',bool(a.transfer_receipts) and a.variables['e_np_fan'].get()=='31.2')
     ahu.vars['fan_unit_kw'].set('6');root.update()
     check('19_changed_source_flagged_in_report','過期' in a.receipt_status.get() and '來源快照' in report(a.result) and '快照過期' in report(a.result))
     ahu.calculate();ahu.return_utilities();a.recalculate()
-    check('20_refreshed_source_applied',a.variables['e_np_fan'].get()=='24.0' and all('過期' not in x['status'] for x in a.transfer_receipts))
+    check('20_refreshed_source_applied',float(a.variables['e_np_fan'].get())==24.0 and all('過期' not in x['status'] for x in a.transfer_receipts))
     # Relink the changed main boundary once, then renaming must not invalidate engineering conditions.
     ahu.link_requirements();a.variables['project_name'].set('通用廠房驗收');a.recalculate();ahu.ensure()
     check('21_rename_preserves_boundary','工程邊界一致' in ahu.result['link_status'])

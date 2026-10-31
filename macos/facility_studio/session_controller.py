@@ -12,7 +12,8 @@ from .engine import calculate
 from .workspace_store import validate_workspace, read_workspace
 from .project_store import save_project_file, recovery_save
 from .design_workflow import ahu_requirement_updates, ahu_source_hash
-from .contributions import empty_ledger, aggregate_ledger, updated_ledger, removed_ledger, SUM_KEYS
+from .contributions import (empty_ledger, aggregate_ledger, updated_ledger, removed_ledger,
+                            SUM_KEYS, legacy_power_keys, LEGACY_POWER_WARNING)
 
 
 class SessionController:
@@ -307,6 +308,8 @@ class SessionController:
         items = copy.deepcopy(result["base_quality"]["items"])
         result["source_receipts"] = copy.deepcopy(self.transfer_receipts)
         ledger = getattr(self, "demand_ledger", empty_ledger())
+        if legacy_power_keys(ledger):
+            finding(items, "舊版電力帶入需重建", "未達", LEGACY_POWER_WARNING, legacy_power_keys(ledger)[0])
         try:
             summary = aggregate_ledger(ledger, result["effective_inputs"])
         except (ValueError, TypeError, KeyError) as exc:
@@ -337,10 +340,13 @@ class SessionController:
     def apply_contribution(self, entry, parent=None):
         from .workspace_view import apply_updates
         from .engine import std_lpm
-        import math
+        from .utils import electrical_power_kw
 
         inputs = self.snapshot()["inputs"]
         ledger = copy.deepcopy(getattr(self, "demand_ledger", empty_ledger()))
+        if legacy_power_keys(ledger):
+            messagebox.showerror("電力來源需重新帶入", LEGACY_POWER_WARNING, parent=parent or self.root)
+            return False
         new_keys = (set(entry["updates"]) & SUM_KEYS) - set(ledger["last_updates"])
         old_loads = {}
         for key in new_keys:
@@ -350,17 +356,18 @@ class SessionController:
                 pan = key.split("_")[1]
                 pf = float(inputs["e_" + pan + "_pf"] if inputs.get("e_" + pan + "_pf_mode") == "本盤獨立 PF" else inputs["e_pf"])
                 from .data import VOLTAGE_MAP
-                value = value if unit == "kW" else value * .745699871582 / float(inputs["e_eff"]) if unit == "HP" else value * math.sqrt(3) * VOLTAGE_MAP[inputs["e_volt"]] * pf / 1000
+                value = electrical_power_kw(value, unit, VOLTAGE_MAP[inputs["e_volt"]], pf, inputs["e_eff"], key)
             elif key.startswith("gas") or key == "pv_q":
                 value = std_lpm(value, inputs["u_" + key.removesuffix("_q")])
             elif key.endswith("ex_q"):
                 value *= 1.69901079552 if inputs["u_" + key.removesuffix("_q")] == "CFM" else 1
             old_loads[key] = value
+        answer = False
         if any(old_loads.values()):
             answer = messagebox.askyesnocancel("其他設備的原有需求", "目前目的欄位已有數值。這些是本次來源以外的其他設備嗎？\n是：作為其他服務基數保留並累加。\n否：改採來源彙整，原值保留供移除來源時復原。\n取消：不帶入。\n水迴路原負荷不自動相加，避免同一盤管重複計入。", parent=parent or self.root)
             if answer is None:
                 return False
-            ledger["baseline"].update({k: v if answer else 0.0 for k, v in old_loads.items()})
+        ledger["baseline"].update({k: v if answer else 0.0 for k, v in old_loads.items()})
         next_ledger, updates, summary = updated_ledger(ledger, entry, inputs)
         note = entry["name"] + "\n同一識別碼更新，多個已回傳來源彙整。夏／冬分季求和後取較大水量。\n" + "\n".join(summary["notes"] + summary["pending"])
         if apply_updates(self, updates, note, parent, source_type="來源快照"):
@@ -448,9 +455,9 @@ class SessionController:
                 return
             group = next(g for g in summary["water"] if g["id"] == ident)
             d = copy.deepcopy(self.demand_ledger)
-            d["selections"][group["loop"]] = ident
             entry = next(iter(d["entries"].values()))
-            d, updates, summary = updated_ledger(d, entry, self.snapshot()["inputs"])
+            # An explicit choice made now: consent applies to the current main-project values.
+            d, updates, summary = updated_ledger(d, entry, self.snapshot()["inputs"], select={group["loop"]: ident})
             if apply_updates(self, updates, "主案 " + group["loop"] + " 水力列改採選取迴路；其餘迴路仍分列於彙整報告。", win):
                 self.demand_ledger = d
                 for rec in self.transfer_receipts:
@@ -461,9 +468,10 @@ class SessionController:
 
         bar = ttk.Frame(win, padding=12)
         bar.pack(fill="x")
-        ttk.Button(bar, text="移除選取來源的需求", command=remove).pack(side="left")
-        ttk.Button(bar, text="主案採用選取水迴路", command=select_circuit).pack(side="left", padx=8)
-        ttk.Button(bar, text="重新讀取", command=refresh).pack(side="right")
+        ttk.Button(bar, text="主案採用選取水迴路", command=select_circuit).pack(side="left")
+        ttk.Button(bar, text="重新讀取", command=refresh).pack(side="left", padx=8)
+        # Removing a source is kept apart from adopting one.
+        ttk.Button(bar, text="移除選取來源的需求", command=remove).pack(side="right")
         refresh()
 
     def add_receipt(self, child, values):

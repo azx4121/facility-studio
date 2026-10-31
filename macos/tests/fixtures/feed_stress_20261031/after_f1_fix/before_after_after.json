@@ -1,0 +1,8 @@
+{
+ "rejected": 2039,
+ "rejected: no airflow can dehumidify (explicit cause)": 2038,
+ "accepted": 1961,
+ "moisture/ADP-limited designs solved (airflow above baseline)": 538,
+ "accepted with airflow > 5x baseline": 8,
+ "rejected: later coil solver": 1
+}

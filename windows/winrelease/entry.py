@@ -31,6 +31,13 @@ def main():
         sys.addaudithook(offline_audit)
 
     try:
+        if "--workflow-self-test" in sys.argv:
+            parser=argparse.ArgumentParser(description="Local field-workflow acceptance")
+            parser.add_argument("--workflow-self-test", action="store_true")
+            parser.add_argument("--self-test-result", type=Path, required=True)
+            args=parser.parse_args()
+            from facility_studio.workflow_acceptance import run as run_workflow
+            return run_workflow(args.self_test_result)
         if "--self-test" in sys.argv or "--audit-self-test" in sys.argv:
             parser = argparse.ArgumentParser(description="Local Windows acceptance; no uploads")
             scope = parser.add_mutually_exclusive_group(required=True)
@@ -45,7 +52,7 @@ def main():
     except Exception:
         details = traceback.format_exc()
         print(details, file=sys.stderr)
-        if frozen and not {"--self-test", "--audit-self-test"}.intersection(sys.argv):
+        if frozen and not {"--self-test", "--audit-self-test", "--workflow-self-test"}.intersection(sys.argv):
             import ctypes
             ctypes.windll.user32.MessageBoxW(
                 None,

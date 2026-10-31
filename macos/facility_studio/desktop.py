@@ -1,7 +1,11 @@
 import copy
+from .industrial_theme import Theme
+from .platform_support import uses_ttk_navigation
+from .version import BUILD_VERSION
 from .tools_view import QuickToolsWindow
 from .workspace_view import WorkspaceWindow
 from .project_store import recovery_save
+from .optional_inputs import check_input_keys, split_inputs
 from .html_report import summary_html
 import uuid
 from .project_store import save_project_file
@@ -106,9 +110,8 @@ class DesktopApp(SessionController, MainView):
             or p["schema_version"] != SCHEMA_VERSION
         ):
             raise ValueError("不支援的復原格式")
-        if set(p["inputs"]) != set(self.variables) or set(p["pressure_drop"]) != set(
-            self.pd
-        ):
+        check_input_keys(p["inputs"], "復原欄位不完整")
+        if set(p["pressure_drop"]) != set(self.pd):
             raise ValueError("復原欄位不完整")
         validate_provenance(p["provenance"], FIELDS)
         for k, v in p["inputs"].items():
@@ -119,14 +122,16 @@ class DesktopApp(SessionController, MainView):
                 not isinstance(v, str) or len(v) > 1000 for v in row.values()
             ):
                 raise ValueError("壓損復原內容格式不合法")
+        form, extra = split_inputs(p["inputs"], self.variables)
         self.suspended = True
         try:
-            for k, v in p["inputs"].items():
+            for k, v in form.items():
                 self.variables[k].set(v)
             for k, row in p["pressure_drop"].items():
                 for f, v in row.items():
                     self.pd[k][f].set(v)
             self.provenance = p["provenance"]
+            self.extra_inputs = extra
         finally:
             self.suspended = False
         self.unit_previous = {k: self.variables[k].get() for k in self.unit_previous}
@@ -141,9 +146,11 @@ class DesktopApp(SessionController, MainView):
         self.notify_children()
 
     def snapshot(self):
+        inputs = {k: v.get() for k, v in self.variables.items()}
+        inputs.update(getattr(self, "extra_inputs", {}))
         return {
             "schema_version": SCHEMA_VERSION,
-            "inputs": {k: v.get() for k, v in self.variables.items()},
+            "inputs": inputs,
             "pressure_drop": {
                 k: {f: v.get() for f, v in c.items()} for k, c in self.pd.items()
             },
@@ -322,13 +329,14 @@ class DesktopApp(SessionController, MainView):
 
     def _build_window(self, root):
         self.root = root
-        root.title("廠務工程工作台 V" + VERSION)
+        root.title("廠務工程工作台 V" + BUILD_VERSION)
         root.geometry(
             f"{min(1240, max(880, root.winfo_screenwidth() - 60))}x{min(840, max(560, root.winfo_screenheight() - 80))}"
         )
         root.minsize(880, 560)
         self.project = default_project()
         self.provenance = self.project["provenance"]
+        self.extra_inputs = {}
         self.variables = {
             k: tk.StringVar(value=v) for k, v in self.project["inputs"].items()
         }
@@ -360,39 +368,61 @@ class DesktopApp(SessionController, MainView):
         self.configure_style()
         root.columnconfigure(1, weight=1)
         root.rowconfigure(1, weight=1)
-        side = tk.Frame(root, bg="#11253b", width=184)
+        side = tk.Frame(root, bg=Theme.NAV, width=184)
         side.grid(row=0, column=0, rowspan=3, sticky="ns")
         side.pack_propagate(False)
         tk.Label(
             side,
             text="FACILITY\nSTUDIO",
-            bg="#11253b",
-            fg="#e7f2ff",
+            bg=Theme.NAV,
+            fg=Theme.TEXT,
             font=(self.ui_font, 15, "bold"),
             justify="left",
         ).pack(anchor="w", padx=18, pady=(25, 6))
-        tk.Label(
+        self.side_subtitle = tk.Label(
             side,
             text="廠務工程工作台  V" + VERSION,
-            bg="#11253b",
-            fg="#6edac7",
+            bg=Theme.NAV,
+            fg=Theme.MUTED,
             font=(self.ui_font, 10),
-        ).pack(anchor="w", padx=18, pady=(0, 24))
+            justify="left",
+            wraplength=148,  # sidebar 184 px less its 18 px side margins: long translations wrap, never clip
+        )
+        self.side_subtitle.pack(anchor="w", padx=18, pady=(0, 24))
         for j, name in enumerate(PAGES):
-            b = ttk.Button(
-                side,
-                text=f"{j + 1:02d}   {name}",
-                command=lambda n=j: self.show_page(n),
-                style="Workbench.Nav.TButton",
-                cursor="hand2",
-            )
+            if uses_ttk_navigation():
+                b = ttk.Button(
+                    side,
+                    text=f"{j + 1:02d}   {name}",
+                    command=lambda n=j: self.show_page(n),
+                    style="Workbench.Nav.TButton",
+                    cursor="hand2",
+                )
+            else:
+                b = tk.Button(
+                    side,
+                    text=f"{j + 1:02d}   {name}",
+                    command=lambda n=j: self.show_page(n),
+                    bg=Theme.NAV,
+                    fg=Theme.TEXT,
+                    activebackground="#E0E6EF",
+                    activeforeground=Theme.TEXT,
+                    relief="flat",
+                    anchor="w",
+                    padx=14,
+                    pady=7,
+                    font=(self.ui_font, 10),
+                    cursor="hand2",
+                    justify="left",
+                    wraplength=140,  # sidebar 184 px less button margins and padding
+                )
             b.pack(fill="x", padx=8, pady=2)
             self.nav.append(b)
         tk.Label(
             side,
             text="DESIGNED BY\nANDY HUANG ©",
-            bg="#11253b",
-            fg="#829aaf",
+            bg=Theme.NAV,
+            fg=Theme.MUTED,
             justify="left",
             font=(self.ui_font, 9),
         ).pack(side="bottom", anchor="w", padx=18, pady=18)
@@ -469,8 +499,10 @@ class DesktopApp(SessionController, MainView):
         )
         utilities = FlowToolbar(head)
         utilities.grid(row=4, column=0, columnspan=2, sticky="ew", pady=(4, 0))
+        self.pv_button = self.nav[3]
+        self.pv_button.configure(text="04   PV 真空／特氣", command=self.show_pv)
         for label, command in [
-            ("快速工程工具", lambda: QuickToolsWindow(root, self)),
+            ("返回簡易工具", self.show_simple_tools),
             ("來源／比較／復原", lambda: WorkspaceWindow(root, self)),
             ("匯出可列印摘要", self.export_html),
         ]:
@@ -506,16 +538,17 @@ class DesktopApp(SessionController, MainView):
             foot, text="啟動檢核中…", wraplength=470, style="Muted.TLabel"
         )
         self.status.grid(row=0, column=0, sticky="w")
-
-        def wrap_status(event):
-            width = max(120, event.width - 340)
+        def wrap_status(event=None):
+            # The status text gets what the three buttons leave over, in any language.
+            buttons = sum(w.winfo_reqwidth() + 8 for w in (locate, self.calc_button, self.export_button))
+            width = max(120, foot.winfo_width() - buttons - 24)
             if str(self.status.cget("wraplength")) != str(width):
                 self.status.configure(wraplength=width)
 
         foot.bind("<Configure>", wrap_status)
-        ttk.Button(foot, text="定位問題", command=self.focus_issue, width=9).grid(
-            row=0, column=1, padx=4
-        )
+
+        locate = ttk.Button(foot, text="定位問題", command=self.focus_issue)
+        locate.grid(row=0, column=1, padx=4)
         self.calc_button = ttk.Button(
             foot,
             text="重新計算",
@@ -525,6 +558,8 @@ class DesktopApp(SessionController, MainView):
         self.calc_button.grid(row=0, column=2, padx=4)
         self.export_button = ttk.Button(foot, text="匯出設計報告", command=self.export)
         self.export_button.grid(row=0, column=3, padx=4)
+        for button in (locate, self.calc_button, self.export_button):
+            button.bind("<Configure>", wrap_status, add="+")
         for key, var in self.variables.items():
             var.trace_add("write", lambda *a, k=key: self.changed(k))
         self.pd_last_units = {k: row["unit"].get() for k, row in self.pd.items()}
@@ -574,7 +609,7 @@ class DesktopApp(SessionController, MainView):
 
         attach_window(root)
         self._build_window(root)
-        root.title("廠務工程工作台 V" + VERSION)
+        root.title("廠務工程工作台 V" + BUILD_VERSION)
         app_icon(root)
         i18n.subscribe(self)
         self.unit_previous = {
@@ -583,13 +618,15 @@ class DesktopApp(SessionController, MainView):
         side = self.nav[0].master
         if hasattr(root, "_app_icon"):
             self.brand_icon = root._app_icon.subsample(4, 4)
-            label = tk.Label(side, image=self.brand_icon, bg="#11253b")
+            label = tk.Label(side, image=self.brand_icon, bg=Theme.NAV)
             label.pack(before=side.pack_slaves()[0], anchor="w", padx=18, pady=(14, 0))
         self._side_order = list(side.pack_slaves())
         self._side_pack = {w: w.pack_info() for w in self._side_order}
         self._compact = None
         root.bind("<Configure>", self.sidebar_layout, add="+")
+        root.bind("<Configure>", self.fit_min_height, add="+")
         self.sidebar_layout()
+        self.fit_min_height()
         self.recovery_token = uuid.uuid4().hex
         self.recovery_job = self.root.after(30000, self.autosave)
         self.latent_mode_previous = self.variables["latent_mode"].get()
@@ -761,9 +798,10 @@ class DesktopApp(SessionController, MainView):
     def _load_validated_project(self, p):
         p = validate_project(p)
         self.provenance = p["provenance"]
+        form, self.extra_inputs = split_inputs(p["inputs"], self.variables)
         self.suspended = True
         try:
-            for k, v in p["inputs"].items():
+            for k, v in form.items():
                 self.variables[k].set(v)
             for k, row in p["pressure_drop"].items():
                 for f, v in row.items():
@@ -1008,6 +1046,21 @@ class DesktopApp(SessionController, MainView):
 
     def close(self):
         return self.close_workspace()
+
+    def show_simple_tools(self):
+        if getattr(self, "simple_app", None) is not None:
+            return self.simple_app.show_simple_tools()
+        # Direct developer/legacy entry also reuses this same top-level window.
+        from .simple_desktop import SimpleToolsApp
+        widgets = [w for w in self.root.winfo_children() if w.winfo_manager() == "grid"]
+        for widget in widgets:
+            widget.grid_remove()
+        simple = SimpleToolsApp(self.root)
+        simple.workbench = self
+        simple.workbench_widgets = widgets
+        simple.simple_widgets = [w for w in self.root.winfo_children() if w not in widgets and w.winfo_manager() == "grid"]
+        self.simple_app = simple
+        return simple
 
     def autosave(self):
         return self.autosave_workspace()

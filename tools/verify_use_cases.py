@@ -295,6 +295,15 @@ def main():
                 close(by_system["EXHAUST"]["demand_cmh"], 500, "排氣需求與風量基準")
         elif tool == "ahu":
             inputs = dict(NM_DEFAULTS)
+            if inputs.get("winter_h1_mode") == "旁通":
+                # win.9 and the macOS port default every AHU stage to bypass; these scenarios were written against the
+                # earlier defaults, so state them explicitly instead of relying on a changed default.
+                inputs.update(
+                    fan_qty="8", fan_unit_kw="7.8", c1_in="14", c1_out="19", c1_rt="250", c2_rt="160",
+                    humidifier="循環水洗濕膜", wash_mode="AMC 需求持續水洗", wash_rating="619.4",
+                    summer_flow="58000", winter_flow="58000",
+                    **{f"{season}_{stage}_mode": "自動需求" for season in ("summer", "winter") for stage in ("c1", "h1", "h2")},
+                )
             inputs.update(case["inputs"])
             result = nm_calculate(inputs)
             for season in ("summer", "winter"):

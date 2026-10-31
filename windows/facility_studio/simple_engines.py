@@ -1,11 +1,12 @@
 """Independent everyday calculations, with explicit adopted assumptions."""
 
 import math
+from .grounding import equipment_pe
 
 from .data import (NFB_SIZES, PIPE_DB, WIRE_DB, FFU_SIZES, ROUGHNESS_MM, HVAC_PIPES, HVAC_PIPE_REFERENCES,
                    STANDARD_MOTOR_KW)
 from .errors import ValidationError
-from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, custom_name
+from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, custom_name, evaluate_gas_phase, saturation_pressure_kpa
 from .quick_tools import (
     UNITS,
     UNIT_ALIASES,
@@ -188,6 +189,8 @@ def electrical(
     )
     # This is the same protected circuit as the selected conductor, not an
     # independently sized upstream main feeder.
+    if candidate:
+        candidate.update(equipment_pe(candidate["nfb_a"], candidate["runs"]))
     breaker_at = candidate["nfb_a"] if candidate else None
     equivalents = {
         u: el_kw / electrical_unit_factor(u, voltage, pf, eta, phases)
@@ -351,6 +354,7 @@ def compressed_air(data):
     if standard and pipe is None:
         raise ValidationError("需求超過參考管徑表，不能把最大管徑當成符合。", "flow")
     speed = actual / 60000 / (math.pi * (pipe["id"] / 1000) ** 2 / 4) if pipe else 0.0
+    phase = evaluate_gas_phase(gas, temperature, absolute) if standard > 0 else None
     return dict(
         tool="gas",
         flow_basis=flow_basis,
@@ -369,6 +373,7 @@ def compressed_air(data):
         temperature_c=temperature,
         reference_t=reference_t,
         reference_p=reference_p,
+        **({"phase_status": phase["phase_status"], "liquefaction_risk": phase["liquefaction_risk"], "vapor_pressure_kpa": phase["vapor_pressure_kpa"]} if phase is not None else {}),
         formula="實際流量=標準流量×P標準/P絕對×T管內(K)/T標準(K)×Z管內/Z標準；D內=√(4Q實際/πv)。",
         note="壓力採管內表壓，另加所在地大氣壓。Z比1為理想氣體；僅適用單一氣相流速定寸，不核定材料相容、洩漏、點火或氣體安全；參考內徑需依實供管材核對，長管路另算壓降。",
     )
@@ -427,21 +432,45 @@ def lighting(data):
         qty = integer(data["quantity"], "quantity", 0, 1000000)
         target = None
     illuminance = qty * lumens * utilization * maintenance / area
+    comparison = {}
+    warnings = []
+    for key in ("efficacy", "lumens"):
+        try:
+            comparison[key] = number(data[key], key, 0.01, 10000000)
+        except (ValidationError, KeyError):
+            comparison[key] = None
+    estimated = watts * comparison["efficacy"] if comparison["efficacy"] else None
+    catalog = comparison["lumens"]
+    comparison.update(estimated_lm=estimated, catalog_lm=catalog,
+                      catalog_efficacy=catalog / watts if catalog and watts else None)
+    for name, value in (("estimated", estimated), ("catalog", catalog)):
+        comparison[name + "_quantity"] = (math.ceil(target * area / (value * utilization * maintenance) - 1e-12)
+                                          if target is not None and value else None)
+    if estimated and catalog:
+        comparison["lumen_ratio"] = catalog / estimated
+        if abs(catalog / estimated - 1) > 0.2:
+            warnings.append(f"兩模式每盞流明不同：功率初估 {watts:g} W × {comparison['efficacy']:g} lm/W＝{estimated:,.1f} lm；型錄 {catalog:,.1f} lm，為初估的 {catalog/estimated:.3g} 倍。請核對同一盞完整燈具，含燈管數及驅動器；相同流明應得到相同燈數。")
+    if comparison["catalog_efficacy"] and comparison["catalog_efficacy"] > 250:
+        warnings.append(f"型錄流明÷輸入功率＝{comparison['catalog_efficacy']:,.1f} lm/W，請核對W與lm是否同一燈具／整組。")
     return dict(
         tool="lighting",
         area_m2=area,
         quantity=qty,
         watts=watts,
         lumens_per_lamp=lumens,
+        comparison=comparison,
+        warnings=warnings,
         lumen_mode=lumen_mode,
         u_mode=u_mode,
         room_index_k=room_index,
+        **({"u_k_mismatch_warning": True} if (room_index is not None and room_index < 0.8 and utilization >= 0.6) else {}),
         mount_h_m=mount_h,
         work_h_m=work_h,
         utilization=utilization,
         maintenance=maintenance,
         illuminance_lux=illuminance,
         total_kw=qty * watts / 1000,
+        lighting_w_m2=qty * watts / area,
         target_lux=target,
         formula=(
             "室指數K=L×W/((H燈−H工)×(L+W))；U採手填型錄值；平均照度Lux=盞數×每盞流明lm×利用率U×維護係數M/面積m²；所需盞數向上取整。"
@@ -587,7 +616,27 @@ def heat_loads(data):
     area = number(data.get("area", "100"), "area", 0, 1e7)
     persons = integer(data.get("persons", "10"), "persons", 0, 100000)
     lighting = area * number(data.get("lighting_w_m2", "12"), "lighting_w_m2", 0, 10000) / 1000
-    envelope = area * number(data.get("envelope_w_m2", "20"), "envelope_w_m2", 0, 10000) / 1000
+    envelope_mode = selected(data.get("envelope_mode", "自訂熱負荷密度"),
+                             ("一般建築初估", "面積推估外牆／樓板", "自訂熱負荷密度"), "envelope_mode")
+    envelope_detail = "一般建築起始假設：20 W/m² × 地板面積；非規範值。"
+    if envelope_mode == "面積推估外牆／樓板":
+        h = number(data.get("envelope_height", "3"), "envelope_height", 0.1, 100)
+        wall_u = number(data.get("envelope_wall_u", "1.6"), "envelope_wall_u", 0, 20)
+        floor_u = number(data.get("envelope_floor_u", "3.8"), "envelope_floor_u", 0, 20)
+        tout = number(data.get("envelope_outdoor_t", "35"), "envelope_outdoor_t", -60, 90)
+        tin = number(data.get("envelope_room_t", "26"), "envelope_room_t", -60, 90)
+        tadj = number(data.get("envelope_adjacent_t", "30"), "envelope_adjacent_t", -60, 90)
+        wall_area = 4 * math.sqrt(area) * h
+        envelope = (wall_area * wall_u * max(0, tout - tin) + area * floor_u * max(0, tadj - tin)) / 1000
+        density = envelope * 1000 / area if area else 0
+        envelope_detail = (f"方形平面初估：外牆4×√面積×淨高＝{wall_area:,.2f}m²；"
+                           f"外牆U={wall_u:g}、樓板U={floor_u:g} W/(m²·K)；外氣／室內／相鄰={tout:g}/{tin:g}/{tadj:g}°C。未含窗戶、屋頂日射、滲風與蓄熱。")
+    else:
+        density = (20.0 if envelope_mode == "一般建築初估" else
+                   number(data.get("envelope_w_m2", "20"), "envelope_w_m2", 0, 10000))
+        envelope = area * density / 1000
+        if envelope_mode == "自訂熱負荷密度":
+            envelope_detail = f"採使用者自訂圍護熱負荷密度 {density:g} W/m²。"
     people_sensible = persons * number(data.get("people_sensible_w", "75"), "people_sensible_w", 0, 1000) / 1000
     people_latent = persons * number(data.get("people_latent_w", "55"), "people_latent_w", 0, 1000) / 1000
     equipment = number(data.get("equipment_kw", "20"), "equipment_kw", 0, 1e7)
@@ -597,8 +646,11 @@ def heat_loads(data):
     delta_h = number(data.get("oa_delta_h", "50"), "oa_delta_h", 0, 500)
     basis = selected(data.get("oa_load_basis", "外氣至室內基準"),
                      ("外氣至室內基準", "外氣至實際露點送風"), "oa_load_basis")
+    v_da = (number(data["air_v_da"], "air_v_da", 0.5, 2.0)
+            if "air_v_da" in data and str(data["air_v_da"]).strip() else None)
+    rho_da = (1.0 / v_da) if v_da else 1.2
     room = lighting + envelope + people_sensible + equipment + fan
-    mau = 1.2 * oa / 3600 * delta_h
+    mau = rho_da * oa / 3600 * delta_h
     # Actual low-dew-point MAU enthalpy already contains the room latent removal.
     # Avoid silently charging the same moisture a second time to the chiller.
     latent_addition = people_latent if basis == "外氣至室內基準" else 0.0
@@ -606,7 +658,7 @@ def heat_loads(data):
               if basis == "外氣至實際露點送風" else 0.0)
     supply_delta_t = (number(data.get("mau_supply_delta_t", "0"), "mau_supply_delta_t", 0, 60)
                       if basis == "外氣至實際露點送風" else 0.0)
-    credit_limit = 1.2 * oa / 3600 * 1.006 * supply_delta_t
+    credit_limit = rho_da * oa / 3600 * 1.006 * supply_delta_t
     if basis == "外氣至實際露點送風" and not oa and people_latent:
         raise ValidationError("零外氣無法在MAU實際露點模式處理人員潛熱，請提供除濕外氣量或改用室內基準。", "oa_cmh")
     if credit and not oa:
@@ -618,17 +670,20 @@ def heat_loads(data):
     scope = ("中性供風初估，未抵扣MAU顯熱" if basis == "外氣至室內基準" else
              "實際露點送風；MAU顯熱抵扣採明填值，零時為未抵扣冷量上界")
     return dict(tool="heat_loads", area_m2=area, persons=persons,
+                envelope_mode=envelope_mode, envelope_w_m2=density, envelope_detail=envelope_detail,
+                lighting_w_m2=number(data.get("lighting_w_m2", "12"), "lighting_w_m2", 0, 10000),
                 q_lighting_kw=lighting, q_envelope_kw=envelope,
                 q_people_sensible_kw=people_sensible, q_people_latent_kw=people_latent,
                 q_equipment_kw=equipment, q_ffu_kw=fan, ffu_count=count,
                 q_room_sensible_kw=room, q_mau_kw=mau, q_mau_rt=mau / US_RT_KW,
+                **({"adopted_rho_da": rho_da, "adopted_v_da": v_da} if v_da is not None else {}),
                 q_dcc_kw=dcc, dcc_sensible_kw=dcc, load_basis=scope,
                 mau_room_sensible_kw=credit,
                 mau_supply_delta_t=supply_delta_t, mau_sensible_limit_kw=credit_limit,
                 q_total_kw=total, q_total_rt=total / US_RT_KW,
                 room_latent_added_kw=latent_addition, oa_load_basis=basis, oa_cmh=oa,
                 formula="室內顯熱=照明＋圍護＋人員顯熱＋設備＋FFU；MAU=1.2×OA/3600×Δh；RT=總kW/3.516852842。",
-                note="圍護20W/m²與外氣Δh=50為初估。中性供風以室內顯熱作DCC需求；實際低露點模式不重加人員潛熱，並扣明填MAU入室顯熱供冷。抵扣不得超過1.2×OA/3600×1.006×明填室內減送風溫差的保守上限；未填抵扣時是冷量上界。再熱及濕度可達性請用完整工作台。")
+                note="圍護結構及外氣焓差依本案採用值計算。中性供風以室內顯熱作DCC需求；實際低露點模式不重加人員潛熱，並扣明填MAU入室顯熱供冷。抵扣不得超過1.2×OA/3600×1.006×明填室內減送風溫差的保守上限；未填抵扣時是冷量上界。再熱及濕度可達性請用完整工作台。")
 
 
 def pumps(data):
@@ -664,11 +719,22 @@ def air_state(data):
     rh = number(data["rh"], "rh", 0, 100)
     atmosphere = number(data["atmosphere"], "atmosphere", 60, 120)
     state = psychrometric("乾球＋RH", temperature, rh, atmosphere)
+    comparison = None
+    if selected(data.get("compare", "0"), ("0", "1"), "compare") == "1":
+        temperature_b = number(data.get("temperature_b", "26"), "temperature_b", -60, 90)
+        rh_b = number(data.get("rh_b", "50"), "rh_b", 0, 100)
+        comparison = psychrometric("乾球＋RH", temperature_b, rh_b, atmosphere)
+    basis = selected(data.get("comparison_basis", "室內狀態"), ("室內狀態", "盤管出風／送風"), "comparison_basis") if comparison else None
     return dict(
         tool="air",
         state=state,
+        comparison_state=comparison,
+        comparison_basis=basis,
+        delta_h_kj_kg=state["h"] - comparison["h"] if comparison else None,
+        delta_w_g_kg=(state["w"] - comparison["w"])*1000 if comparison else None,
+        delta_t_k=state["t"] - comparison["t"] if comparison else None,
         formula="w=0.621945×Pw/(P−Pw)；h=1.006T＋w(2501＋1.86T)，以kg乾空氣為基準。",
-        note="濕度0%時露點無有限值；顯示為無有限露點，不以假數值代替。",
+        note="A−B正焓差為可移除熱量，負值代表需加熱；含濕量差正值為需除濕。連線只表示兩點差異，不保證單一盤管可沿直線達成；濕度0%無有限露點。",
     )
 
 

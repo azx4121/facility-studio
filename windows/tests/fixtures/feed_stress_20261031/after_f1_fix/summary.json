@@ -1,0 +1,62 @@
+{
+  "full": true,
+  "mutation": true,
+  "groups": [
+    {
+      "group": "D robustness",
+      "passed": true,
+      "seconds": 37.0,
+      "checks_passed": null,
+      "tail": "}",
+      "failures": []
+    },
+    {
+      "group": "A/B oracles",
+      "passed": true,
+      "seconds": 25.2,
+      "checks_passed": 25,
+      "tail": "PASS    B11_accepted_humidity_reachable n=   1500 fail=     0 worst=0 (tol 0) ",
+      "failures": []
+    },
+    {
+      "group": "C one-factor changes",
+      "passed": true,
+      "seconds": 59.6,
+      "checks_passed": 9,
+      "tail": "PASS    C7 repeat + English give identical numbers     n=   57 fail=   0  ",
+      "failures": []
+    },
+    {
+      "group": "E report and hard limits",
+      "passed": true,
+      "seconds": 31.6,
+      "checks_passed": 14,
+      "tail": "PASS    E2 no_accepted_supply_difference_below_2K_unflagged_on_sensible_baseline n=  1245 fail=    0  ",
+      "failures": []
+    },
+    {
+      "group": "F hand calculation",
+      "passed": true,
+      "seconds": 15.0,
+      "checks_passed": 18,
+      "tail": "PASS    F3_largest_motor_plus_25pct          n=   333 fail=    0 worst=0 ",
+      "failures": []
+    },
+    {
+      "group": "G F-1 regression",
+      "passed": true,
+      "seconds": 17.6,
+      "checks_passed": null,
+      "tail": "airflow guard checks: 74/74 passed",
+      "failures": []
+    },
+    {
+      "group": "Mutation test (19 planted errors)",
+      "passed": true,
+      "seconds": 285.4,
+      "checks_passed": null,
+      "tail": "killed 19 / 19",
+      "failures": []
+    }
+  ]
+}

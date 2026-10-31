@@ -1,0 +1,56 @@
+{
+ "C1 dT_chw x2 -> flow x0.5, load unchanged": {
+  "n": 200,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "C2 oa_t up -> coincident cooling kW non-decreasing": {
+  "n": 640,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "C2 oa_rh up -> coincident cooling kW non-decreasing": {
+  "n": 640,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "C3 pressure down -> supply CMH non-decreasing": {
+  "n": 900,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "C4 eq_kw up -> qs/supply/flow non-decreasing": {
+  "n": 600,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "C4b qs is affine in eq_kw": {
+  "n": 150,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "C5 warmer chilled water never restores feasibility": {
+  "n": 150,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ },
+ "C6 inactive fields never change outputs": {
+  "n": 852,
+  "fail": 0,
+  "examples": [],
+  "note": "by system {}"
+ },
+ "C7 repeat + English give identical numbers": {
+  "n": 57,
+  "fail": 0,
+  "examples": [],
+  "note": ""
+ }
+}
