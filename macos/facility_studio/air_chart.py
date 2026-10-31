@@ -110,7 +110,7 @@ class AirChart(_Canvas):
         self.plot_data = chart_data(state, comparison)
         self.redraw()
 
-    def separate_labels(self, top, bottom):
+    def separate_labels(self, top, bottom, left=None, right=None):
         """Move the A / B text blocks apart vertically when they would cover each other."""
         a, b = self.bbox("state_label_bg"), self.bbox("comparison_label_bg")
         if not a or not b or a[2] <= b[0] or b[2] <= a[0] or a[3] <= b[1] or b[3] <= a[1]:
@@ -123,6 +123,14 @@ class AirChart(_Canvas):
             self.move(lower, 0, gap), self.move(lower + "_bg", 0, gap)
         elif ub[1] - gap >= top - 2:
             self.move(upper, 0, -gap), self.move(upper + "_bg", 0, -gap)
+        elif left is not None and right is not None:
+            # No vertical room (smallest window, wider native fonts): put the lower caption beside the upper one.
+            to_right = ub[2] - lb[0] + 6
+            to_left = lb[2] - ub[0] + 6
+            if lb[2] + to_right <= right:
+                self.move(lower, to_right, 0), self.move(lower + "_bg", to_right, 0)
+            elif lb[0] - to_left >= left:
+                self.move(lower, -to_left, 0), self.move(lower + "_bg", -to_left, 0)
 
     def mark_stale(self):
         if self.state is None:
@@ -280,7 +288,7 @@ class AirChart(_Canvas):
                              fill="#047c88", font=(self.family, 9, "bold"), tags="comparison_label")
             self.create_rectangle(*self.bbox("comparison_label"), fill="white", outline="white", tags="comparison_label_bg")
             self.tag_lower("comparison_label_bg", "comparison_label")
-            self.separate_labels(top, bottom)
+            self.separate_labels(top, bottom, left, right)
             self.create_text(left, height-9, anchor="w",
                              text=f"A−B：Δh={state['h']-b['h']:.3f} kJ/kg｜Δw={(state['w']-b['w'])*1000:.3f} g/kg",
                              fill="#18334d", font=(self.family, 9, "bold"), tags="comparison_delta")
