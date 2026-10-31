@@ -70,7 +70,9 @@ check("warning names an unassigned demand pending a heat source",
 check("no warning claims the heat is in HW", not any(c in w for w in r["warnings"] for c in claims_hw))
 check("report states the unassigned demand", "未配置熱源，待指定；未計入 HW 或 NP" in report)
 check("report does not claim the heat is in HW", "（已計入 HW）" not in report)
-check("quality lists the cap as pending data", len(pending) == 1 and pending[0]["status"] == "待資料", pending)
+# Room heat that no source supplies means the room cannot be held: the design is not met
+# (not merely missing data); the detail still names the pending heat-source assignment.
+check("quality marks the unsupplied room heat as not met", len(pending) == 1 and pending[0]["status"] == "未達", pending)
 detail = pending[0]["detail"] if pending else ""
 check("quality detail uses the stated limit and the unassigned amount",
       "40°C" in detail and f"{wr['terminal_heat_kw']:.2f} kW" in detail and "未計入 HW 或 NP" in detail, detail)

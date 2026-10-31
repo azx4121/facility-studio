@@ -303,13 +303,22 @@ def test_point6_coincident_chiller_and_consistency():
     _, _, summary = updated_ledger(empty_ledger(), entry, ws["main"]["inputs"])
     assert any("保留單機來源物性" in msg for msg in summary["pending"]), summary["pending"]
 
-    # Check upstream_values("heat_loads") uses air_v_da when present
+    # Check upstream_values("heat_loads") passes the air tool's own dry-air specific volume
+    # and heat_loads adopts it (no hand-written override of air_v_da).
     air_res = calculate_tool("air", defaults("air"))
-    air_res["air_v_da"] = 0.90
+    assert air_res.get("comparison_state"), "default air tool must be an A/B comparison for this check"
+    upstream_v = float(air_res["state"]["v_da"])
     up = upstream_values("heat_loads", {"air": air_res}, defaults("heat_loads"))
-    hl_in = dict(defaults("heat_loads"), **up, air_v_da="0.90")
+    assert float(up["air_v_da"]) == upstream_v, up
+    hl_in = dict(defaults("heat_loads"), **up)
+    hl_in["oa_cmh"] = "10000"  # an outdoor-air flow, so the MAU term depends on the density
     hl_res = calculate_tool("heat_loads", hl_in)
-    assert abs(hl_res["adopted_v_da"] - 0.90) < 1e-9
+    assert abs(hl_res["adopted_v_da"] - upstream_v) < 1e-12
+    expected_mau = 10000 / 3600 * float(up["oa_delta_h"]) / upstream_v
+    assert abs(hl_res["q_mau_kw"] - expected_mau) < 1e-9, (hl_res["q_mau_kw"], expected_mau)
+    fallback = calculate_tool("heat_loads", {k: v for k, v in hl_in.items() if k != "air_v_da"})
+    assert abs(fallback["q_mau_kw"] - 1.2 * 10000 / 3600 * float(up["oa_delta_h"])) < 1e-9
+    assert abs(hl_res["q_mau_kw"] - fallback["q_mau_kw"]) > 1e-3
 
 
 if __name__ == "__main__":
