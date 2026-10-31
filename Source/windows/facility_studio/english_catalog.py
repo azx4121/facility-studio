@@ -3475,3 +3475,13 @@ TEXT.update({
     "；已保留單機來源物性並分列，不靜默重算。": "; the unit's own fluid is kept and listed separately without silent recalculation.",
     "主案物性無法解讀": "main-project fluid properties unreadable",
 })
+
+# Confirmations for actions that discard user data.
+TEXT.update({
+    "將清除本工具目前的所有輸入並恢復預設值，此動作無法復原。確定要繼續嗎？":
+        "This clears every input of this tool and restores the defaults. It cannot be undone. Continue?",
+    "覆蓋方案快照": "Replace scenario snapshot",
+    "已有方案 ": "Scenario ",
+    " 的快照（": " already has a snapshot (",
+    "）。要以目前主案覆蓋嗎？覆蓋後無法復原。": "). Replace it with the current main project? This cannot be undone.",
+})

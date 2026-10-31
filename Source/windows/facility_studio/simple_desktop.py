@@ -133,9 +133,10 @@ class SimplePage(ttk.Frame):
                             command=self.update_visibility).pack(anchor="w", pady=4)
         action_row = ttk.Frame(controls)
         action_row.pack(fill="x")
-        ttk.Button(action_row, text="恢復預設", command=self.reset).pack(side="left", padx=(0, 5))
         self.upstream_button = ttk.Button(action_row, text="帶入上游結果", command=self.import_upstream)
         self.upstream_button.pack(side="left")
+        # Clearing every input sits apart from the import action and asks first.
+        ttk.Button(action_row, text="恢復預設", command=self.confirm_reset).pack(side="right")
         if tool == "heat_loads":
             links = ttk.Frame(controls)
             links.pack(fill="x", pady=5)
@@ -543,6 +544,17 @@ class SimplePage(ttk.Frame):
         self.update_visibility()
         self.calculate(True)
         return self.result is not None
+
+    def confirm_reset(self):
+        """Button entry point: ask before discarding inputs that differ from the defaults."""
+        changed = any(key in self.variables and self.variables[key].get() != value
+                      for key, value in defaults(self.tool).items())
+        if changed and not messagebox.askokcancel(
+                "恢復預設", "將清除本工具目前的所有輸入並恢復預設值，此動作無法復原。確定要繼續嗎？",
+                parent=self.winfo_toplevel()):
+            return False
+        self.reset()
+        return True
 
     def reset(self):
         self.app.invalidate_dependents(self.tool)

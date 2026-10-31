@@ -56,6 +56,14 @@ class Theme:
     SUCCESS = "#16A34A"
     WARNING = "#D97706"
     DANGER = "#DC2626"
+    # Input fields: white face and a boundary with >= 3:1 contrast against BG and CARD
+    # (WCAG 2.1 SC 1.4.11), so fields stay visible on every surface.
+    FIELD = "#FFFFFF"
+    FIELD_BORDER = "#7B8698"
+    FIELD_DISABLED = "#E2E8F0"
+    FIELD_DISABLED_BORDER = "#B4BDC9"
+    BUTTON_HOVER = "#DCE6F2"
+    BUTTON_PRESSED = "#C9D6E6"
     TONES = {
         "success": ("#326646", "#F0F6F2"),
         "warning": ("#8A5800", "#FFF7E7"),
@@ -134,7 +142,7 @@ class Theme:
                         foreground=cls.PRIMARY, font=(cls.mono, 20, "bold"))
         style.configure("Simple.Brand.TLabel", background=cls.NAV,
                         foreground=cls.TEXT, font=(cls.family, 14, "bold"))
-        style.configure("Simple.SideHint.TLabel", background=cls.NAV, foreground="#94A3B8")
+        style.configure("Simple.SideHint.TLabel", background=cls.NAV, foreground="#475569")
         style.configure("Unit.TLabel", background=cls.CARD, foreground=cls.MUTED,
                         font=(cls.mono, 10))
         for name, color in (("Simple.Good", cls.SUCCESS), ("Simple.Error", cls.DANGER),
@@ -152,14 +160,20 @@ class Theme:
         style.configure("Title.TLabel", font=(cls.family, 16, "bold"), foreground=cls.TEXT)
         style.configure("Accent.TButton", background=cls.PRIMARY, foreground="white")
         style.map("Accent.TButton", background=[("active", "#0055AA")])
-        # Seamless input rows: use the surrounding surface, without inset bevels.
+        # Flat surfaces, but input fields keep a white face and a visible boundary;
+        # the focused field is outlined in the primary colour.
         for name in ("TEntry", "TCombobox"):
-            style.configure(name, background=cls.BG, fieldbackground=cls.BG,
-                            borderwidth=0, relief="flat", bordercolor=cls.BG,
-                            lightcolor=cls.BG, darkcolor=cls.BG, arrowcolor=cls.MUTED)
-            style.map(name, bordercolor=[("focus", cls.BG)],
-                      lightcolor=[("focus", cls.BG)], darkcolor=[("focus", cls.BG)])
-        style.map("TCombobox", fieldbackground=[("disabled", cls.BG), ("readonly", cls.BG)],
+            style.configure(name, background=cls.BG, fieldbackground=cls.FIELD,
+                            foreground=cls.TEXT, insertcolor=cls.TEXT,
+                            borderwidth=1, relief="solid", bordercolor=cls.FIELD_BORDER,
+                            lightcolor=cls.FIELD, darkcolor=cls.FIELD, arrowcolor=cls.TEXT)
+            style.map(name,
+                      bordercolor=[("disabled", cls.FIELD_DISABLED_BORDER), ("focus", cls.PRIMARY)],
+                      lightcolor=[("disabled", cls.FIELD_DISABLED), ("focus", cls.PRIMARY)],
+                      darkcolor=[("disabled", cls.FIELD_DISABLED), ("focus", cls.PRIMARY)],
+                      fieldbackground=[("disabled", cls.FIELD_DISABLED)],
+                      foreground=[("disabled", cls.MUTED)])
+        style.map("TCombobox", fieldbackground=[("disabled", cls.FIELD_DISABLED), ("readonly", cls.FIELD)],
                   foreground=[("disabled", cls.MUTED), ("readonly", cls.TEXT)])
         style.configure("Simple.Card.TFrame", background=cls.BG, borderwidth=0, relief="flat")
         style.configure("Form.Row.TFrame", background=cls.BG, borderwidth=0)
@@ -168,7 +182,13 @@ class Theme:
         style.configure("TCheckbutton", background=cls.BG)
         style.configure("TLabelframe", background=cls.BG, borderwidth=0, relief="flat")
         style.configure("TLabelframe.Label", background=cls.BG)
-        style.configure("TButton", borderwidth=0, relief="flat")
+        # Buttons keep a visible outline on the flat surface; hover and press are distinct.
+        style.configure("TButton", borderwidth=1, relief="solid", bordercolor=cls.FIELD_BORDER,
+                        lightcolor=cls.CARD, darkcolor=cls.CARD)
+        style.map("TButton", background=[("disabled", cls.FIELD_DISABLED), ("pressed", cls.BUTTON_PRESSED),
+                                         ("active", cls.BUTTON_HOVER)],
+                  foreground=[("disabled", cls.MUTED)],
+                  bordercolor=[("disabled", cls.FIELD_DISABLED_BORDER), ("focus", cls.PRIMARY)])
         for name in ("Treeview.Heading", "Dashboard.Treeview.Heading"):
             style.configure(name, background="#DEE7F3", borderwidth=0, relief="flat",
                             lightcolor="#DEE7F3", darkcolor="#DEE7F3")

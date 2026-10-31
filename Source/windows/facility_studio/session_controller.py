@@ -468,9 +468,10 @@ class SessionController:
 
         bar = ttk.Frame(win, padding=12)
         bar.pack(fill="x")
-        ttk.Button(bar, text="移除選取來源的需求", command=remove).pack(side="left")
-        ttk.Button(bar, text="主案採用選取水迴路", command=select_circuit).pack(side="left", padx=8)
-        ttk.Button(bar, text="重新讀取", command=refresh).pack(side="right")
+        ttk.Button(bar, text="主案採用選取水迴路", command=select_circuit).pack(side="left")
+        ttk.Button(bar, text="重新讀取", command=refresh).pack(side="left", padx=8)
+        # Removing a source is kept apart from adopting one.
+        ttk.Button(bar, text="移除選取來源的需求", command=remove).pack(side="right")
         refresh()
 
     def add_receipt(self, child, values):
