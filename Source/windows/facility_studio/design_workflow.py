@@ -17,9 +17,11 @@ def ahu_requirement_updates(main_result):
     updates = {
         "p": i["atm_kpa"],
         "target_mode": "主案分季需求",
-        "c1_in": i["chw1_in"],
+        # Normalised like the outlets: a returned "7" must not differ from the main "7.0",
+        # or the boundary hash changes and every later return is refused as stale.
+        "c1_in": str(float(i["chw1_in"])),
         "c1_out": str(float(i["chw1_in"]) + float(i["chw1_dt"])),
-        "c2_in": i["chw2_in"],
+        "c2_in": str(float(i["chw2_in"])),
         "c2_out": str(float(i["chw2_in"]) + float(i["dt_chw"])),
     }
     if i["pre_mode"] == "單盤管（一般空調箱）":

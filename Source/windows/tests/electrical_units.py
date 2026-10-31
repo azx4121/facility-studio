@@ -179,7 +179,7 @@ class PowerUnitWidgets(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         i18n.set_language(cls.old_language, persist=False)
-        self.root.destroy()
+        cls.root.destroy()
 
     def choose(self, unit):
         widget = self.page.widgets["power_unit"]

@@ -6,7 +6,7 @@ import sys, json, copy, tempfile, os
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, simpledialog
 from PIL import ImageGrab
 from facility_studio.desktop import DesktopApp
 from facility_studio.ahu_desktop import AHUWindow
@@ -29,6 +29,8 @@ messagebox.showinfo = lambda *a, **k: None
 messagebox.askokcancel = lambda *a, **k: True
 messagebox.askyesno = lambda *a, **k: True
 messagebox.askyesnocancel = lambda *a, **k: False
+# The AHU send asks for this unit's share of the main project; answer its 100% default.
+simpledialog.askfloat = lambda *a, **k: k.get("initialvalue")
 r = tk.Tk()
 a = DesktopApp(r)
 r.update()

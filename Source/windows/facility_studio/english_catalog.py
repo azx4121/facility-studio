@@ -3485,3 +3485,53 @@ TEXT.update({
     " 的快照（": " already has a snapshot (",
     "）。要以目前主案覆蓋嗎？覆蓋後無法復原。": "). Replace it with the current main project? This cannot be undone.",
 })
+
+# Optional-input validation messages.
+TEXT.update({
+    "冬季 MAU 送風上限不得低於 MAU 送風溫度": "Winter MAU supply limit must not be below the MAU supply air temperature",
+    "MAU 不搜尋混風送風量；停用值不參與計算": "MAU does not search the mixed supply airflow; disabled values are not used in the calculation",
+    "僅 MAU 冬季室內熱濕平衡使用；停用值不參與計算": "Used only for the MAU winter room heat and moisture balance; disabled values are not used in the calculation",
+    "專案指定": "specified by the project",
+    "未提供（設備能力待資料）": "not provided (equipment capability data pending)",
+})
+
+# Ledger circuit selection.
+TEXT.update({
+    "來源迴路選擇不合法": "Invalid source circuit selection",
+})
+
+# Panel feeder demand by load class.
+TEXT.update({
+    "主案原有負荷": "Existing main-project load",
+    " 來源未提供負載分類：": " sources without a load classification: ",
+    "。已改用來源自身設計值相加，可能重複計入連續或馬達加成（偏保守）；請重新帶入該來源以取得分類。":
+        ". Their own design values were added instead, which may count continuous or motor factors twice (conservative); re-import those sources to obtain a classification.",
+    " 同盤同電壓幹線：非馬達連續負載 125%、其他非馬達負載與全部馬達 100%，另加全群最大單台馬達 25%（":
+        " feeder for one panel and voltage: non-motor continuous loads 125%, other non-motor loads and all motors 100%, plus 25% of the largest single motor in the group (",
+    "無馬達": "no motor",
+    "）；P、Q 分開合成。各來源支路設計電流仍為下限，支路候選保留在設備明細。":
+        "); P and Q are combined separately. Each source's branch design current remains a lower limit; branch candidates are kept in the equipment details.",
+    " 負載分類：風機與水洗泵為馬達，電熱與蒸汽加濕為非馬達連續負載。":
+        " load classification: fans and air-washer pumps are motors; electric heat and steam humidification are non-motor continuous loads.",
+    " 水洗泵台數與單台額定未知：暫以水洗泵總輸入 ":
+        " air-washer pump count and unit rating unknown: the total air-washer pump input of ",
+    " kW 視為單台，作為最大馬達候選（上界）；請補單台額定功率與台數。":
+        " kW is provisionally treated as one unit and used as the largest-motor candidate (upper bound); provide the unit rating and count.",
+    "設備表群組未提供負載分類（舊版分析結果）；幹線以群組設計值相加，請重新分析後帶入。":
+        "Equipment-schedule groups have no load classification (results from an older analysis); the feeder adds the group design values. Re-analyse and import again.",
+    "盤別負載分類格式不符": "Panel load classification has an invalid format",
+    "盤別負載分類數值不合法": "Panel load classification has an invalid value",
+    "盤別負載分類合計與來源運轉 P／Q 不符": "Panel load classification totals do not match the source operating P/Q",
+    "有馬達負載時必須指明最大單台馬達": "The largest single motor must be specified when there is a motor load",
+    "盤別負載分類與來源設計 P／Q 不符": "Panel load classification does not match the source design P/Q",
+    "原盤負載類型「": "Existing panel load type \u201c",
+    "」無法辨識，基底暫以非馬達連續負載 125% 計，請確認盤型。":
+        "\u201d is not recognised; the base is provisionally counted as a non-motor continuous load at 125%. Confirm the panel type.",
+    "原盤最大單台馬達未填：暫以最大一列馬達負荷 ": "Largest single motor of the existing panel not entered: the largest motor row of ",
+    " kW 視為單台（上界），請補最大馬達 kW／HP。": " kW is provisionally treated as one unit (upper bound); provide the largest motor kW/HP.",
+})
+
+# Gas phase state.
+TEXT.update({
+    "未知／低於三相點": "unknown / below the triple point",
+})
