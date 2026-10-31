@@ -1,0 +1,12 @@
+{
+ "rejected": 2009,
+ "rejected: generic 'cannot solve airflow'": 1969,
+ "accepted": 1991,
+ "moisture/ADP-limited designs solved (airflow above baseline)": 568,
+ "rejected: later coil solver": 40,
+ "accepted but physically impossible (coil cannot reach the supply humidity)": 68,
+ "accepted with airflow > 5x baseline": 68,
+ "accepted with airflow > 1e9 CMH": 68,
+ "   ...of which status NOT 未達條件": 4,
+ "   ...of which status NOT 未達條件 (silent)": 4
+}

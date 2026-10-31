@@ -1,0 +1,110 @@
+{
+ "F1_equipment_net": {
+  "n": 1377,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F1_people": {
+  "n": 1377,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F1_wall": {
+  "n": 1377,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F1_floor": {
+  "n": 1377,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F1_oven_solar_fan": {
+  "n": 1377,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F1_qs_is_sum_of_parts": {
+  "n": 1377,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F2_ffu_capacity_ge_airflow": {
+  "n": 268,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F2_dcc_capacity_ge_load": {
+  "n": 268,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F2_rcu_capacity_ge_load": {
+  "n": 368,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F2_fcu_capacity_ge_load": {
+  "n": 372,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F2_pipe_velocity_within_limit": {
+  "n": 1998,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F3_current_formula_rel": {
+  "n": 1377,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F3_design_current_ge_running": {
+  "n": 1377,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F3_breaker_ge_design_current": {
+  "n": 1377,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F3_cable_ge_breaker": {
+  "n": 1377,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F3_cable_ge_design_current": {
+  "n": 1377,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F3_continuous_load_125pct": {
+  "n": 434,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ },
+ "F3_largest_motor_plus_25pct": {
+  "n": 333,
+  "fail": 0,
+  "worst": 0.0,
+  "examples": []
+ }
+}
