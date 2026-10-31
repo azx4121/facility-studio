@@ -88,6 +88,28 @@ def verify_dmg(path, output):
             )
 
 
+def print_self_test_failure(console):
+    """Show the end of the self-test console and every failed check; never changes the pass/fail decision."""
+    try:
+        lines = console.read_text(encoding="utf-8", errors="replace").splitlines()
+        print("--- self-test console (last 60 lines) ---", flush=True)
+        print("\n".join(lines[-60:]), flush=True)
+    except OSError as error:
+        print("self-test console unavailable: " + str(error), flush=True)
+    result = Path.home() / "Library/Logs/Facility_Studio_V5_5/Mac_Acceptance.json"
+    try:
+        data = json.loads(result.read_text(encoding="utf-8"))
+        failed = [item for item in data.get("checks", []) if not item.get("passed")]
+        print("--- failed checks: " + str(len(failed)) + " of " + str(len(data.get("checks", []))) + " ---", flush=True)
+        for item in failed[:20]:
+            print(json.dumps(item, ensure_ascii=False)[:600], flush=True)
+        for key in ("callback_errors", "execution_errors"):
+            if data.get(key):
+                print(key + ": " + json.dumps(data[key], ensure_ascii=False)[:1500], flush=True)
+    except (OSError, ValueError) as error:
+        print("self-test result unavailable: " + str(error), flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--package", type=Path, required=True)
@@ -144,6 +166,10 @@ def main():
                 check=True,
                 timeout=300,
             )
+        except BaseException:
+            # The console and result stay in the evidence artifact; also print what failed so the CI log names it.
+            print_self_test_failure(output / "Native_GUI_Console.txt")
+            raise
         finally:
             retain_ui_timing(output, since=started)
     path = Path.home() / "Library/Logs/Facility_Studio_V5_5/Mac_Acceptance.json"
