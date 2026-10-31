@@ -88,7 +88,7 @@ def main():
     w(f"- 優先缺陷驗證：{pdc}。F-1 在基準版可重現（約 7.41×10⁹ CMH 且只標待補資料），在目前分支被明確拒絕；U 值單位易誤解**仍存在**（ISS-1）。")
     w("- **「PASS 很多」不等於工程合理**：H／P 類 4 案沒有負荷輸入（qs=0），PASS 只代表算術與規格一致；CR-01 則是引擎正確指出規格不可行。請看第 8 節的整體問題清單與第 9 節的待補資料。\n")
     w("## 2. 執行環境與讀取檔案\n")
-    w("- 讀取：`Facility_Studio_20組代表性工程情境測試_20261031.txt`（本計畫）、`Source/windows/facility_studio/{engine,quality,schema,airflow_guard,reports,optional_inputs}.py`、前一輪 `F1_FIX_REPORT.md`。")
+    w("- 讀取：`Facility_Studio_20組代表性工程情境測試_20261031.txt`（本計畫）、`windows/facility_studio/{engine,quality,schema,airflow_guard,reports,optional_inputs}.py`、前一輪 `F1_FIX_REPORT.md`。")
     w("- 分支 `claude/festive-newton-0o715t`，產品碼與上一次提交相同（`git diff HEAD -- facility_studio` 無差異）。")
     w("- 基準對照：`git archive 2c46056`（匯入的基準版）。\n")
     w("## 3. 假設（規格未給、逐一列出；不是實測值）\n")
@@ -159,7 +159,7 @@ def main():
     for p in PENDING:
         w("| " + " | ".join(p) + " |")
     w("\n## 10. 重現\n")
-    w("```bash\ncd Source/windows\npython tests/engineering_scenarios/run_scenarios.py            # 20 案 + 5 掃描 → results.json\npython tests/engineering_scenarios/run_scenarios.py --case CR-02\npython tests/engineering_scenarios/priority_defects.py --baseline-src <git archive 2c46056 的 Source/windows>\npython tests/engineering_scenarios/make_report.py             # 重建本報告\n```\n")
+    w("```bash\ncd windows\npython tests/engineering_scenarios/run_scenarios.py            # 20 案 + 5 掃描 → results.json\npython tests/engineering_scenarios/run_scenarios.py --case CR-02\npython tests/engineering_scenarios/priority_defects.py --baseline-src <git archive 2c46056 的 windows>\npython tests/engineering_scenarios/make_report.py             # 重建本報告\n```\n")
     w("## 11. 未驗證項目\n")
     w("- Windows 原生 GUI、EXE、MSI 安裝程式；Linux 虛擬顯示不等同。\n- 第 3 層全部（規範符合性）。\n- 計畫中 7,412,540,040 CMH 的確切輸入未提供，F-1 以記錄的重現案例驗證同一失效模式。\n- 以上未列為 PASS 的項目均為 BLOCKED／NOT APPLICABLE／待確認。")
     (HERE / "SCENARIO_REPORT.md").write_text("\n".join(L) + "\n", encoding="utf-8")

@@ -27,6 +27,7 @@ def hot_main():
     project["inputs"].update(sys_type="MAU+FFU+DCC (全外氣/無塵室)",
                              oa_t="40", oa_rh="90", pre_t="22.35",
                              chw1_in="14", adp_approach="1")
+    project["inputs"]["pre_mode"] = "自動旁通因子估算"
     return project
 
 
@@ -50,7 +51,8 @@ def run_checks():
            lambda: _error(lambda: report(partial), "incomplete_result"))
     for key in complete:
         if key in ("hash", "version", "parts", "oa", "winter_oa", "oa_mass",
-                   "mass_residual", "sensible_residual", "inactive_fields", "winter_room"):
+                   "mass_residual", "sensible_residual", "inactive_fields", "winter_room",
+                   "airflow_basis"):  # diagnostic of how the airflow was set; the quality gate reads it, the report does not
             continue
         bad = copy.deepcopy(complete)
         del bad[key]
@@ -85,6 +87,8 @@ def run_checks():
                        and format(t, ".4f") + "°C" in str(e)))
     for season, label in (("summer", "夏季"), ("winter", "冬季")):
         auto = dict(NM_DEFAULTS, c1_in="14", c1_out="19", c1_adp="1", c1_t="22.35")
+        auto[season + "_c1_mode"] = "自動需求"
+        auto.update(summer_h1_mode="自動需求", winter_h1_mode="自動需求", summer_h2_mode="自動需求", winter_h2_mode="自動需求")
         auto[season + "_t"] = "40"
         auto[season + "_rh"] = "90"
         other = "winter" if season == "summer" else "summer"
@@ -141,6 +145,7 @@ def run_ui(main, check, pump):
         check("V559 delivered report API rejects incomplete domain result",
               lambda: bool(_error(lambda: report(main.partial_hvac), "incomplete_result")))
         child = AHUWindow(main.root)
+        child.vars["summer_c1_mode"].set("自動需求")
         child.vars["summer_t"].set("40")
         child.vars["summer_rh"].set("90")
         child.vars["c1_in"].set("14")

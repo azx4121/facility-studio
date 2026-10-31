@@ -60,7 +60,7 @@ def run(root, app, main, check, pump, output=None):
             main.task_scope.set("空調與熱負荷")
             main.update_visibility()
             pump()
-            check("V556 basic task hides utility navigation but preserves inputs", lambda: not main.nav[3].winfo_manager() and bool(main.nav[8].winfo_manager()) and "gas2_q" in main.snapshot()["inputs"])
+            check("V556 basic task retains direct PV navigation and preserves inputs", lambda: bool(main.nav[3].winfo_manager()) and bool(main.nav[8].winfo_manager()) and "gas2_q" in main.snapshot()["inputs"])
             check("V556 climate inputs precede the psychrometric plot", lambda: main.widgets["oa_t"].winfo_rooty() < main.plot.get_tk_widget().winfo_rooty())
             adopted = main.snapshot()["inputs"]["light_u"]
             main.show_page(2)

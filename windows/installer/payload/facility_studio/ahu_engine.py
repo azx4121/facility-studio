@@ -5,7 +5,7 @@ import copy
 import json
 from .json_io import read_json_file
 from .ahu_schema import AHU_OPTIONAL_NUMBERS, NM_DEFAULTS, NM_FIELDS, NM_V1_KEYS
-from .engine import blend, c1_blend, coil_record
+from .engine import blend, c1_blend, coil_record, solve_c2_bypass
 import math
 from .quality import assess_ahu
 from .utils import (
@@ -43,6 +43,8 @@ def _nm_validate_base(i):
         elif not v.strip() or len(v) > 300:
             raise InputError(f"專案名稱不可空白或過長", field_name=f"{k}")
     for prefix in ("c1", "c2"):
+        if prefix + "_out" in inactive:
+            continue
         if float(i[prefix + "_out"]) <= float(i[prefix + "_in"]):
             raise InputError(f"冷卻水回水必須高於供水", field_name=f"{prefix}_out")
     if "hw_in" not in inactive and float(i["hw_in"]) <= float(i["hw_out"]):
@@ -190,17 +192,38 @@ def _nm_season_base(i, season):
     washed = nm_wash(wash_in, eff, p) if wash_on else wash_in
     if washed["w"] < ws - 1e-08:
         raise InputError(f"水洗後含濕量不足，無法以再熱補水氣", field_name=f"wash_eff")
-    w2 = ws if washed["w"] > ws + 1e-09 else washed["w"]
-    t2 = min(washed["t"], pre_fan_t)
-    if washed["w"] > ws + 1e-09:
-        t2 = min(t2, dewpoint(ws, p))
-    c2out = state_tw(t2, w2, p)
     adp = float(i["c2_in"]) + float(i["c2_adp"])
-    c2_feasible = t2 >= adp - 1e-08 or (
-        washed["t"] <= t2 + 1e-08 and washed["w"] <= w2 + 1e-10
+    w2 = ws if washed["w"] > ws + 1e-09 else washed["w"]
+    c2_sol = None
+    if washed["w"] > ws + 1e-09:
+        c2_sol = solve_c2_bypass(
+            washed,
+            pre_fan_t,
+            w2,
+            adp,
+            p,
+            allow_reheat="0" if i.get("h2_source") == "停用" else "1",
+            raise_on_infeasible=False,
+        )
+        t2 = c2_sol["tc"]
+    else:
+        t2 = min(washed["t"], pre_fan_t)
+    c2out = state_tw(t2, w2, p)
+    c2_feasible = (
+        (c2_sol["feasible_adp"] if c2_sol is not None else True)
+        and (
+            t2 >= adp - 1e-08
+            or (washed["t"] <= t2 + 1e-08 and washed["w"] <= w2 + 1e-10)
+        )
     )
     c1 = coil_record("C1 預冷", c1in, c1out, m, 4.1868)
     c2 = coil_record("C2 再冷", washed, c2out, m, 4.1868)
+    if c2_sol is not None:
+        c2["direct_outlet_t"] = c2_sol["direct_tc"]
+        c2["achievable_without_reheat"] = c2_sol["achievable_without_reheat"]
+        c2["adp_req_c"] = c2_sol["adp_req_c"]
+        c2["bf_req"] = c2_sol["bf_req"]
+        c2["bf_min"] = c2_sol["bf_min"]
     h2 = nm_heater("h2", c2out, pre_fan_t, m, i, p)
     sa = state_tw(h2["outlet"]["t"] + fanheat / (m * (1.006 + 1.86 * w2)), w2, p)
     evap = m * (washed["w"] - wash_in["w"]) * 3600
@@ -608,11 +631,28 @@ def nm_season(i, season):
     if steam_on:
         c2in, steam = nm_steam(washed, ws, m, i, p)
     mode = i[season + "_c2_mode"]
+    c2_sol = None
     if mode == "自動需求":
         w2 = min(c2in["w"], ws)
-        t2 = min(c2in["t"], pre_fan_t)
         if c2in["w"] > ws + 1e-09:
-            t2 = min(t2, dewpoint(ws, p))
+            adp2 = n("c2_in") + n("c2_adp")
+            allow_rh = (
+                "0"
+                if (i.get("h2_source") == "停用" or i.get(season + "_h2_mode") == "旁通")
+                else "1"
+            )
+            c2_sol = solve_c2_bypass(
+                c2in,
+                pre_fan_t,
+                w2,
+                adp2,
+                p,
+                allow_reheat=allow_rh,
+                raise_on_infeasible=False,
+            )
+            t2 = c2_sol["tc"]
+        else:
+            t2 = min(c2in["t"], pre_fan_t)
         c2out = state_tw(t2, w2, p)
     else:
         c2out = nm_explicit_coil(c2in, "c2", season, i, p)
@@ -628,6 +668,12 @@ def nm_season(i, season):
     sa = state_tw(ht + fanheat / (m * (1.006 + 1.86 * c2out["w"])), c2out["w"], p)
     c1 = coil_record("C1 預冷", c1in, c1out, m, 4.1868)
     c2 = coil_record("C2 再冷", c2in, c2out, m, 4.1868)
+    if c2_sol is not None:
+        c2["direct_outlet_t"] = c2_sol["direct_tc"]
+        c2["achievable_without_reheat"] = c2_sol["achievable_without_reheat"]
+        c2["adp_req_c"] = c2_sol["adp_req_c"]
+        c2["bf_req"] = c2_sol["bf_req"]
+        c2["bf_min"] = c2_sol["bf_min"]
     evap = m * (washed["w"] - wash_in["w"]) * 3600
     nodes = [("OA 外氣", oa), ("初／中效濾網", oa)]
 
@@ -715,6 +761,7 @@ def nm_season(i, season):
     )
     if abs(balance) > 1e-05 or abs(moisture) > 1e-05:
         raise InputError(f"分段熱濕守恆未通過")
+    pump_kw = float(i["pump_input_kw"]) if wet and i["pump_input_kw"].strip() else 0.0
     return {
         "season": season,
         "oa": oa,
@@ -725,6 +772,7 @@ def nm_season(i, season):
         "wash_in": wash_in,
         "wash_out": washed,
         "wash_on": wash_on,
+        **({"washer_pump_heat_kw": pump_kw} if wash_on and pump_kw > 0 else {}),
         "evap_kg_h": evap,
         "c2": c2,
         "h2": h2,

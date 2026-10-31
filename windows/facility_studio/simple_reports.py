@@ -34,6 +34,8 @@ def presentation(result):
         ]
         details = [
             f"系統總冷量 {result['q_total_kw']:,.2f} kW｜{result['q_total_rt']:,.2f} US RT",
+            f"採用照明功率密度 {result.get('lighting_w_m2', 12):,.2f} W/m²｜圍護熱負荷密度 {result.get('envelope_w_m2', 20):,.2f} W/m²",
+            result.get("envelope_detail", ""),
             f"照明 {result['q_lighting_kw']:,.2f} kW｜圍護 {result['q_envelope_kw']:,.2f} kW｜設備 {result['q_equipment_kw']:,.2f} kW",
             f"FFU 風機熱 {result['q_ffu_kw']:,.2f} kW｜人員顯熱 {result.get('q_people_sensible_kw', 0):,.2f} kW｜人員潛熱 {result['q_people_latent_kw']:,.2f} kW",
         ]
@@ -63,10 +65,13 @@ def presentation(result):
         if candidate:
             cards = [
                 ("NFB候選", f"{candidate['nfb_a']:g} AT"),
-                ("每相銅線", f"{candidate['size_mm2']:g} mm² × {candidate['runs']}組"),
+                ("每相銅線", f"{result.get('insulation', 'XLPE')} {candidate['size_mm2']:g} mm² × {candidate['runs']}組"),
+                ("動力設備接地 PE", candidate.get("pe_spec", "待核")),
                 ("運轉電流", f"{result['current_a']:,.2f} A"),
             ]
             details = [
+                candidate.get("pe_spec", ""),
+                candidate.get("pe_basis", ""),
                 f"電氣輸入 {result['power_kw']:,.3f} kW｜{result['power_w']:,.1f} W｜{result['apparent_kva']:,.2f} kVA",
                 f"設計電流 {result['design_a']:,.2f}A ≤ NFB {candidate['nfb_a']:g}AT ≤ 有效載流 {candidate['ampacity_a']:,.2f}A",
                 f"單程 {result['length_m']:g}m｜電壓降 {candidate['drop_v']:,.2f}V / {candidate['drop_pct']:.2f}%｜壓降上限 {result.get('drop_limit_pct', 3):g}%",
@@ -146,6 +151,7 @@ def presentation(result):
             ("平均照度", f"{result['illuminance_lux']:,.1f} Lux"),
             ("燈具數量", f"{result['quantity']:,} 盞"),
             ("照明用電", f"{result['total_kw']:,.3f} kW"),
+            ("照明功率密度", f"{result.get('lighting_w_m2', result['total_kw'] * 1000 / result['area_m2']):,.2f} W/m²"),
         ]
         u_detail = (
             f"室指數K={result['room_index_k']:.2f}；採用型錄U={result['utilization']:.4f}"
@@ -155,11 +161,21 @@ def presentation(result):
         details = [
             f"照明面積 {result['area_m2']:,.2f}m²｜每盞 {result['lumens_per_lamp']:,.0f}lm、{result['watts']:g}W",
             f"流明來源：{result['lumen_mode']}｜{u_detail}，M={result['maintenance']:g}",
+            f"照明功率密度＝{result['quantity']:,}盞 × {result['watts']:g}W ÷ {result['area_m2']:,.2f}m²＝{result['total_kw']*1000/result['area_m2']:,.4f} W/m²；可供同範圍熱負荷使用。",
         ]
         if result["target_lux"] is not None:
             details.append(
                 f"目標 {result['target_lux']:g}Lux；盞數向上取整後採用上述平均照度。"
             )
+        comparison = result.get("comparison", {})
+        for name, label in (("estimated", "LED功率初估"), ("catalog", "燈具型錄流明")):
+            lm = comparison.get(name + "_lm")
+            count = comparison.get(name + "_quantity")
+            if lm is not None:
+                details.append(f"同條件對照｜{label}：每盞 {lm:,.1f} lm" + (f" → {count:,} 盞" if count is not None else ""))
+        if comparison.get("catalog_efficacy") is not None:
+            details.append(f"型錄整燈光效＝{comparison['catalog_efficacy']:,.1f} lm/W（型錄每盞lm÷每盞輸入W）")
+        details.extend(result.get("warnings", []))
     elif tool == "water":
         pipe, thermal = result["pipe"], result["thermal"]
         size = pipe["size"] + (f" × {pipe['runs']}並聯" if pipe["runs"] > 1 else "")
@@ -197,6 +213,18 @@ def presentation(result):
             f"乾球 {state['t']:g}°C｜濕度 {state['rh']:.2f}%RH｜大氣壓 {state['pressure_kpa']:g}kPa(abs)",
             f"含濕比 {state['w']*1000:.3f}g/kg乾空氣｜比容 {state['v_da']:.4f}m³/kg乾空氣",
         ]
+        b = result.get("comparison_state")
+        if b:
+            details.append(f"空氣焓值：{state['h']:.2f} kJ/kg乾空氣（A點）")
+            cards = [("A點焓值", f"{state['h']:,.2f} kJ/kg乾空氣"),
+                     ("B點焓值", f"{b['h']:,.2f} kJ/kg乾空氣"),
+                     ("冷卻焓差 A−B", f"{result['delta_h_kj_kg']:,.3f} kJ/kg乾空氣"),
+                     ("含濕量差 A−B", f"{result['delta_w_g_kg']:,.3f} g/kg乾空氣")]
+            details += [f"B點（{result['comparison_basis']}）：{b['t']:g}°C／{b['rh']:g}%RH；w={b['w']*1000:.3f} g/kg；h={b['h']:.3f} kJ/kg乾空氣",
+                        f"A−B：乾球差 {result['delta_t_k']:.3f} K；焓差 {result['delta_h_kj_kg']:.3f} kJ/kg乾空氣；含濕量差 {result['delta_w_g_kg']:.3f} g/kg乾空氣。"]
+            for label, point in (("A", state), ("B", b)):
+                dew = f"{point['dewpoint_c']:.3f}°C" if point['dewpoint_c'] is not None else "無有限露點"
+                details.append(f"{label}點濕球 {point['wetbulb_c']:.3f}°C｜露點 {dew}｜比容 {point['v_da']:.4f} m³/kg乾空氣")
     else:
         rows = list(result["values"].items())
         cards = [(unit, f"{value:,.6g}") for unit, value in rows[:3]]

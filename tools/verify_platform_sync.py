@@ -3,7 +3,7 @@
 Only these files may differ: version.py (platform revision label) and resources/beginner_tutorial.zip
 (platform-specific screenshots and wording). Platform behaviour lives behind facility_studio/platform_support.py.
 
-    python tools/verify_platform_sync.py [--windows Source/windows] [--macos macos]
+    python tools/verify_platform_sync.py [--windows windows] [--macos macos]
 """
 import argparse
 import filecmp
@@ -19,7 +19,7 @@ def files(root):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--windows", default="Source/windows")
+    parser.add_argument("--windows", default="windows")
     parser.add_argument("--macos", default="macos")
     args = parser.parse_args()
     w, m = Path(args.windows) / "facility_studio", Path(args.macos) / "facility_studio"

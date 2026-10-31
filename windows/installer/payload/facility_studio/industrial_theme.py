@@ -46,21 +46,29 @@ def format_number(value, decimals=2):
 
 
 class Theme:
-    BG = "#F8FAFC"
-    CARD = "#FFFFFF"
-    BORDER = "#CBD5E1"
-    NAV = "#0F172A"
-    PRIMARY = "#0369A1"
-    TEXT = "#334155"
-    MUTED = "#64748B"
+    BG = "#EAF0FA"
+    CARD = "#F8FBFF"
+    BORDER = "#DCE1E9"
+    NAV = "#D5DFE8"
+    PRIMARY = "#0066CC"
+    TEXT = "#1D1D1F"
+    MUTED = "#62626A"
     SUCCESS = "#16A34A"
     WARNING = "#D97706"
     DANGER = "#DC2626"
+    # Input fields: white face and a boundary with >= 3:1 contrast against BG and CARD
+    # (WCAG 2.1 SC 1.4.11), so fields stay visible on every surface.
+    FIELD = "#FFFFFF"
+    FIELD_BORDER = "#7B8698"
+    FIELD_DISABLED = "#E2E8F0"
+    FIELD_DISABLED_BORDER = "#B4BDC9"
+    BUTTON_HOVER = "#DCE6F2"
+    BUTTON_PRESSED = "#C9D6E6"
     TONES = {
-        "success": (SUCCESS, "#DCFCE7"),
-        "warning": (WARNING, "#FEF9C3"),
-        "danger": (DANGER, "#FEE2E2"),
-        "neutral": (MUTED, "#E2E8F0"),
+        "success": ("#326646", "#F0F6F2"),
+        "warning": ("#8A5800", "#FFF7E7"),
+        "danger": ("#B42332", "#FFF0F1"),
+        "neutral": (MUTED, "#EEF1F5"),
     }
     family = "Microsoft JhengHei UI"
     mono = "Consolas"
@@ -88,21 +96,21 @@ class Theme:
         style.configure("TButton", padding=(12, 8), background=cls.CARD,
                         foreground=cls.TEXT, bordercolor="#E2E8F0", borderwidth=1)
         style.map("TButton", background=[("active", "#E2E8F0")])
-        style.configure("Nav.TButton", background=cls.NAV, foreground="white",
-                        anchor="w", padding=(12, 8), borderwidth=0,
+        style.configure("Nav.TButton", background=cls.NAV, foreground=cls.TEXT,
+                        anchor="w", padding=(12, 6), borderwidth=0,
                         font=(cls.family, 10))
-        style.map("Nav.TButton", background=[("active", "#1E293B")],
-                  foreground=[("active", "white")])
-        style.configure("Nav.Active.TButton", background=cls.PRIMARY,
-                        foreground="white", anchor="w", padding=(12, 8),
+        style.map("Nav.TButton", background=[("active", "#E0E6EF")],
+                  foreground=[("active", cls.TEXT)])
+        style.configure("Nav.Active.TButton", background="#DCEBFC",
+                        foreground="#004C99", anchor="w", padding=(12, 6),
                         borderwidth=0, font=(cls.family, 10, "bold"))
-        style.map("Nav.Active.TButton", background=[("active", "#0369A1")],
-                  foreground=[("active", "white")])
+        style.map("Nav.Active.TButton", background=[("active", "#CFDFF5")],
+                  foreground=[("active", "#004C99")])
         for prefix in ("Primary", "Simple.Primary"):
             name = prefix + ".TButton"
             style.configure(name, background=cls.PRIMARY, foreground="white",
                             bordercolor=cls.PRIMARY, font=(cls.family, 10, "bold"))
-            style.map(name, background=[("disabled", "#94A3B8"), ("active", "#0369A1")],
+            style.map(name, background=[("disabled", "#94A3B8"), ("active", "#0055AA")],
                       foreground=[("disabled", "#F1F5F9"), ("active", "white")])
         for name in ("TEntry", "TCombobox"):
             style.configure(name, padding=6, fieldbackground=cls.CARD,
@@ -133,8 +141,8 @@ class Theme:
         style.configure("Simple.Value.TLabel", background=cls.CARD,
                         foreground=cls.PRIMARY, font=(cls.mono, 20, "bold"))
         style.configure("Simple.Brand.TLabel", background=cls.NAV,
-                        foreground="white", font=(cls.family, 14, "bold"))
-        style.configure("Simple.SideHint.TLabel", background=cls.NAV, foreground="#94A3B8")
+                        foreground=cls.TEXT, font=(cls.family, 14, "bold"))
+        style.configure("Simple.SideHint.TLabel", background=cls.NAV, foreground="#475569")
         style.configure("Unit.TLabel", background=cls.CARD, foreground=cls.MUTED,
                         font=(cls.mono, 10))
         for name, color in (("Simple.Good", cls.SUCCESS), ("Simple.Error", cls.DANGER),
@@ -149,6 +157,41 @@ class Theme:
                   foreground=[("selected", "#0F172A")])
         style.configure("TLabelframe", background=cls.CARD, bordercolor=cls.BORDER)
         style.configure("TLabelframe.Label", background=cls.CARD, font=(cls.family, 11, "bold"))
+        style.configure("Title.TLabel", font=(cls.family, 16, "bold"), foreground=cls.TEXT)
+        style.configure("Accent.TButton", background=cls.PRIMARY, foreground="white")
+        style.map("Accent.TButton", background=[("active", "#0055AA")])
+        # Flat surfaces, but input fields keep a white face and a visible boundary;
+        # the focused field is outlined in the primary colour.
+        for name in ("TEntry", "TCombobox"):
+            style.configure(name, background=cls.BG, fieldbackground=cls.FIELD,
+                            foreground=cls.TEXT, insertcolor=cls.TEXT,
+                            borderwidth=1, relief="solid", bordercolor=cls.FIELD_BORDER,
+                            lightcolor=cls.FIELD, darkcolor=cls.FIELD, arrowcolor=cls.TEXT)
+            style.map(name,
+                      bordercolor=[("disabled", cls.FIELD_DISABLED_BORDER), ("focus", cls.PRIMARY)],
+                      lightcolor=[("disabled", cls.FIELD_DISABLED), ("focus", cls.PRIMARY)],
+                      darkcolor=[("disabled", cls.FIELD_DISABLED), ("focus", cls.PRIMARY)],
+                      fieldbackground=[("disabled", cls.FIELD_DISABLED)],
+                      foreground=[("disabled", cls.MUTED)])
+        style.map("TCombobox", fieldbackground=[("disabled", cls.FIELD_DISABLED), ("readonly", cls.FIELD)],
+                  foreground=[("disabled", cls.MUTED), ("readonly", cls.TEXT)])
+        style.configure("Simple.Card.TFrame", background=cls.BG, borderwidth=0, relief="flat")
+        style.configure("Form.Row.TFrame", background=cls.BG, borderwidth=0)
+        for name in ("Simple.Card.TLabel", "Simple.Hint.TLabel", "Unit.TLabel"):
+            style.configure(name, background=cls.BG)
+        style.configure("TCheckbutton", background=cls.BG)
+        style.configure("TLabelframe", background=cls.BG, borderwidth=0, relief="flat")
+        style.configure("TLabelframe.Label", background=cls.BG)
+        # Buttons keep a visible outline on the flat surface; hover and press are distinct.
+        style.configure("TButton", borderwidth=1, relief="solid", bordercolor=cls.FIELD_BORDER,
+                        lightcolor=cls.CARD, darkcolor=cls.CARD)
+        style.map("TButton", background=[("disabled", cls.FIELD_DISABLED), ("pressed", cls.BUTTON_PRESSED),
+                                         ("active", cls.BUTTON_HOVER)],
+                  foreground=[("disabled", cls.MUTED)],
+                  bordercolor=[("disabled", cls.FIELD_DISABLED_BORDER), ("focus", cls.PRIMARY)])
+        for name in ("Treeview.Heading", "Dashboard.Treeview.Heading"):
+            style.configure(name, background="#DEE7F3", borderwidth=0, relief="flat",
+                            lightcolor="#DEE7F3", darkcolor="#DEE7F3")
         return style
 
 
@@ -201,6 +244,8 @@ class ScrollableFrame(ttk.Frame):
             self.canvas.itemconfigure(self.item, width=event.width)
 
     def _attach_widget(self, widget):
+        if not hasattr(widget, "winfo_class"):
+            return
         # Check the native widget class too: external callers may create a
         # standard Tk Text/Treeview rather than our localized subclass.
         if widget.winfo_class() not in ("TCombobox", "Treeview", "Text"):
@@ -209,6 +254,8 @@ class ScrollableFrame(ttk.Frame):
                 widget.bindtags((tags[0], self._wheel_tag, *tags[1:]))
 
     def _descendant_mapped(self, event):
+        if not hasattr(event.widget, "winfo_class"):
+            return
         if event.widget is self or str(event.widget).startswith(str(self) + "."):
             self._attach_widget(event.widget)
 
@@ -255,9 +302,40 @@ class InlineBanner(ttk.Frame):
         self.label.configure(text=text, foreground=fg, background=bg)
 
 
+class GlassCard(tk.Frame):
+    """Opaque text on a softly layered card, preserving native text contrast."""
+    def __init__(self, parent, compact=False):
+        super().__init__(parent, bg=Theme.BG)
+        self.glass = tk.Canvas(self, bg=Theme.BG, highlightthickness=0)
+        self.glass.place(x=0, y=0, relwidth=1, relheight=1)
+        self.content = tk.Frame(self, bg=Theme.CARD)
+        self.content.pack(fill="both", expand=True, padx=10 if compact else 12, pady=3 if compact else 16)
+        self.bind("<Configure>", self.redraw)
+
+    def redraw(self, event=None):
+        w,h=self.winfo_width(),self.winfo_height()
+        if w<20 or h<20:return
+        c=self.glass;c.delete("all")
+        def rounded(x1,y1,x2,y2,r,fill,outline):
+            return c.create_polygon(x1+r,y1,x2-r,y1,x2,y1,x2,y1+r,x2,y2-r,x2,y2,x2-r,y2,
+                                    x1+r,y2,x1,y2,x1,y2-r,x1,y1+r,x1,y1,
+                                    smooth=True,splinesteps=12,fill=fill,outline=outline)
+        rounded(2,3,w-2,h-1,14,"#E4E9F1","#E4E9F1")
+        rounded(1,1,w-3,h-4,14,Theme.CARD,"#DFE5EE")
+        start,end=(239,247,255),(243,238,250)
+        for y in range(3,max(4,h-5),2):
+            f=y/max(1,h-5)
+            color='#'+''.join(f'{round(a+(b-a)*f):02x}' for a,b in zip(start,end))
+            edge=min(y-1,h-5-y,14)
+            inset=14-math.sqrt(max(0,14**2-(14-edge)**2))
+            c.create_line(3+inset,y,w-5-inset,y,fill=color,width=2)
+        c.create_line(14,2,w-16,2,fill="#FFFFFF",width=2)
+
+
 class KPIFrame(ttk.Frame):
-    def __init__(self, parent, **kwargs):
+    def __init__(self, parent, compact=False, **kwargs):
         super().__init__(parent, **kwargs)
+        self.compact = compact
         self.cards = []
         self.boxes = []
         self._columns = None
@@ -272,30 +350,40 @@ class KPIFrame(ttk.Frame):
             box.destroy()
         self.boxes = []
         for card in self.cards:
-            box = tk.Frame(self, bg=Theme.CARD, highlightbackground=Theme.BORDER,
-                            highlightthickness=1, padx=16, pady=14)
-            tk.Label(box, text=card.get("title", ""), bg=Theme.CARD, fg=Theme.MUTED,
-                     anchor="w", font=(Theme.family, 10)).pack(anchor="w")
-            main = tk.Frame(box, bg=Theme.CARD)
-            main.pack(fill="x", pady=(8, 9))
+            box = GlassCard(self, self.compact)
+            content = box.content
+            title = tk.Label(content, text=card.get("title", ""), bg=Theme.CARD, fg=Theme.MUTED,
+                             anchor="w", justify="left", font=(Theme.family, 9 if self.compact else 10))
+            title.pack(anchor="w")
+            main = tk.Frame(content, bg=Theme.CARD)
+            main.pack(fill="x", pady=(2, 1) if self.compact else (8, 9))
             value = card.get("value", "—")
+            unit = card.get("unit", "")
+            if self.compact and isinstance(value, str) and not unit:
+                import re
+                match = re.fullmatch(r"([-+]?[\d,]+(?:\.\d+)?)\s+(.+)", value)
+                if match:
+                    value, unit = match.groups()
             label = tk.Label(main, text=format_number(value) if not isinstance(value, str) else value,
-                             bg=Theme.CARD, fg=Theme.NAV, anchor="w", justify="left",
-                             font=(Theme.mono, 20, "bold"), wraplength=220)
+                             bg=Theme.CARD, fg=Theme.TEXT, anchor="w", justify="left",
+                             font=(Theme.mono, 12 if self.compact else 20, "bold"), wraplength=220)
             label.pack(anchor="w")
-            tk.Label(main, text=card.get("unit", ""), bg=Theme.CARD, fg=Theme.MUTED,
-                     font=(Theme.mono, 10)).pack(anchor="w")
+            if unit or not self.compact:
+                tk.Label(main, text=unit, bg=Theme.CARD, fg=Theme.MUTED,
+                         font=(Theme.mono, 8 if self.compact else 10)).pack(anchor="w")
             fg, bg = Theme.TONES.get(card.get("tone", "neutral"), Theme.TONES["neutral"])
-            tk.Label(box, text=card.get("status", "需求初估"), bg=bg, fg=fg,
-                     padx=8, pady=3, font=(Theme.family, 9)).pack(anchor="w")
-            box.bind("<Configure>", lambda e, w=label: w.configure(wraplength=max(100, e.width - 34)))
+            if not self.compact:
+                tk.Label(content, text=card.get("status", "需求初估"), bg=bg, fg=fg,
+                         padx=8, pady=3, font=(Theme.family, 9)).pack(anchor="w")
+            # Title and value wrap to the card, so a long translated title is never cut off.
+            box.bind("<Configure>", lambda e, w=label, t=title: [x.configure(wraplength=max(100, e.width - 34)) for x in (w, t)], add="+")
             self.boxes.append(box)
         self._columns = None
         self._layout()
 
     def _layout(self, event=None):
         width = event.width if event is not None else self.winfo_width()
-        columns = 3 if width >= Theme.px(840) else 2 if width >= Theme.px(470) else 1
+        columns = (2 if width >= 300 else 1) if self.compact else (3 if width >= Theme.px(840) else 2 if width >= Theme.px(470) else 1)
         if self._columns == columns:
             return
         self._columns = columns
@@ -303,7 +391,7 @@ class KPIFrame(ttk.Frame):
             self.columnconfigure(index, weight=1 if index < columns else 0,
                                  uniform="kpi" if index < columns else "", minsize=0)
         for index, box in enumerate(self.boxes):
-            box.grid(row=index // columns, column=index % columns, sticky="nsew", padx=5, pady=5)
+            box.grid(row=index // columns, column=index % columns, sticky="nsew", padx=3 if self.compact else 5, pady=3 if self.compact else 5)
 
 
 class ResultTable(ttk.Frame):

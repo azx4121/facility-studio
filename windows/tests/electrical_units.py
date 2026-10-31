@@ -50,7 +50,10 @@ class PowerUnits(unittest.TestCase):
                     self.close(result["current_a"], 9500/((math.sqrt(3) if phases == 3 else 1)*voltage*.85))
                     self.close(result["design_a"], baseline["design_a"])
                     for key, value in baseline["selected"].items():
-                        self.close(result["selected"][key], value)
+                        if isinstance(value, (int, float)) and value is not None:
+                            self.close(result["selected"][key], value)
+                        else:
+                            self.assertEqual(result["selected"][key], value)
 
     def test_horsepower_uses_shaft_efficiency_and_motor_allowance(self):
         for unit, shaft_kw in (("HP", 10*.745699871582), ("PS", 10*.73549875)):
@@ -184,6 +187,59 @@ class PowerUnitWidgets(unittest.TestCase):
         widget.event_generate("<<ComboboxSelected>>")
         self.page.calculate()
         self.root.update()
+
+    def test_repeated_localization_preserves_canonical_choices_and_edit_draft(self):
+        import tkinter as tk
+        from facility_studio.localized_tk import ttk
+        window = tk.Toplevel(self.root)
+        try:
+            source = tk.StringVar(window, "一般設備")
+            label = ttk.Label(window, textvariable=source)
+            label.pack()
+            choice = tk.StringVar(window, "一般設備")
+            combo = ttk.Combobox(window, textvariable=choice, values=("一般設備", "馬達"), state="readonly")
+            combo.pack()
+            entry = ttk.Entry(window)
+            entry.insert(0, "10.25 unfinished")
+            entry.selection_range(0, 5)
+            entry.pack()
+            for language in ("en", "zh-Hant") * 3:
+                i18n.set_language(language, persist=False)
+                for _ in range(30):
+                    i18n.set_language(language, persist=False)
+                    source.set("一般設備")
+                    choice.set("一般設備")
+                    label.configure(text="一般設備")
+                self.root.update()
+                self.assertEqual(choice.get(), "一般設備")
+                self.assertEqual(combo.get(), "一般設備")
+                self.assertEqual(str(label.cget("text")), i18n.translate("一般設備"))
+                self.assertEqual(entry.get(), "10.25 unfinished")
+                self.assertEqual((entry.index("sel.first"), entry.index("sel.last")), (0, 5))
+        finally:
+            window.destroy()
+
+    def test_toolbar_actions_stay_inside_client_during_parent_overflow(self):
+        import tkinter as tk
+        from facility_studio.flow_toolbar import FlowToolbar
+        from facility_studio.localized_tk import ttk
+        window = tk.Toplevel(self.root)
+        try:
+            toolbar = FlowToolbar(window)
+            toolbar.place(x=30, y=0, relwidth=1, width=5)
+            for caption in ("開啟", "儲存", "另存新檔", "重新計算"):
+                ttk.Button(toolbar, text=caption).pack(side="left")
+            for language, width in (("zh-Hant", 420), ("en", 260), ("zh-Hant", 420)):
+                i18n.set_language(language, persist=False)
+                window.geometry(f"{width}x300+0+0")
+                self.root.update()
+                right = window.winfo_rootx() + window.winfo_width()
+                self.assertGreater(toolbar.winfo_rootx() + toolbar.winfo_width(), right)
+                for button in toolbar.winfo_children():
+                    self.assertTrue(button.winfo_ismapped())
+                    self.assertLessEqual(button.winfo_rootx() + button.winfo_width(), right)
+        finally:
+            window.destroy()
 
     def test_readonly_unit_switches_preserve_load_and_motor_settings(self):
         widget = self.page.widgets["power_unit"]

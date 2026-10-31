@@ -8,6 +8,7 @@ import re
 
 from .data import PIPE_DB
 from .equipment_io import Cell, EquipmentImportError, percentage_value
+from .panel_demand import make_composition
 from .equipment_schema import SCHEMAS, SYSTEMS
 from .schema import VERSION
 from .version import REPORT_VERSION
@@ -231,6 +232,7 @@ def analyze_equipment(imported):
             phases, voltage = key[2:]
             p_full = q_full = p = q = pd = qd = 0.0
             motors, sockets = [], 0
+            by_kind = {"連續運轉": [0.0, 0.0], "一般設備": [0.0, 0.0], "馬達": [0.0, 0.0]}
             for row in items:
                 raw = row["power"] * row["quantity"]
                 ratio = math.tan(math.acos(row["pf"]))
@@ -240,6 +242,8 @@ def analyze_equipment(imported):
                 p += demand
                 q += demand * ratio
                 multiplier = 1.25 if row["kind"] == "連續運轉" else 1.0
+                by_kind[row["kind"]][0] += demand
+                by_kind[row["kind"]][1] += demand * ratio
                 pd += demand * multiplier
                 qd += demand * ratio * multiplier
                 if row["kind"] == "馬達" and demand > 0:
@@ -266,6 +270,7 @@ def analyze_equipment(imported):
                         adopted_defaults=row["adopted_defaults"],
                     )
                 )
+            motor_p = motor_q = 0.0
             if motors:
                 _, motor_p, motor_q = max(motors)
                 pd += 0.25 * motor_p
@@ -312,6 +317,12 @@ def analyze_equipment(imported):
                 current_a=current,
                 design_current_a=design_current,
                 minimum_active_branch_design_a=branch_floor,
+                composition=make_composition(
+                    continuous=tuple(by_kind["連續運轉"]),
+                    noncontinuous=tuple(by_kind["一般設備"]),
+                    motor=tuple(by_kind["馬達"]),
+                    largest_motor=(motor_p, motor_q),
+                ),
                 candidate=candidate,
                 pending=pending,
                 sockets=sockets,
@@ -529,7 +540,7 @@ def group_metrics(group):
     if system == "電力":
         selected = (group["candidate"] or {}).get("selected")
         size = (
-            f"{selected['nfb_a']:g}AT；{selected['size_mm2']:g}mm²×{selected['runs']}組/相"
+            f"{selected['nfb_a']:g}AT；{selected['size_mm2']:g}mm²×{selected['runs']}組/相；{selected.get('pe_spec', '接地待核')}"
             if selected
             else group["pending"] or "無需求"
         )
@@ -636,7 +647,7 @@ def equipment_report(result):
             candidate = (row["per_device_branch"] or {}).get("selected")
             line += f"，連接{row['connected_kw']:.3f}kW／同時{row['demand_kw']:.3f}kW"
             if candidate:
-                line += f"；每台支路{candidate['nfb_a']:g}AT、{candidate['size_mm2']:g}mm²×{candidate['runs']}組"
+                line += f"；每台支路{candidate['nfb_a']:g}AT、{candidate['size_mm2']:g}mm²×{candidate['runs']}組；{candidate.get('pe_spec', '接地待核')}"
             elif row["pending"]:
                 line += "；待資料：" + row["pending"]
         elif "demand_standard_lpm" in row:

@@ -1,4 +1,5 @@
 from .localized_plot import translated_axes
+from . import i18n
 from pathlib import Path
 from .localized_tk import tk
 try:
@@ -7,7 +8,10 @@ except ImportError:
     tkfont = None
 from .localized_tk import ttk
 from .engine import wetbulb
+from .flow_toolbar import FlowToolbar
 from .display_helpers import duct_dimensions, annotate_states
+from .industrial_theme import Theme
+from .platform_support import uses_ttk_navigation
 from .schema import (
     BASIC_KEYS,
     DEFAULTS,
@@ -23,7 +27,7 @@ from .utils import dewpoint, state_trh
 
 try:
     from matplotlib.figure import Figure
-    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+    from .visible_plot import FigureCanvasTkAgg
     from matplotlib import font_manager, rcParams
 
     HAS_PLOT = True
@@ -47,14 +51,23 @@ class ScrollPage(ttk.Frame):
         self.body = ttk.Frame(self.canvas, padding=18)
         self.body.columnconfigure(0, weight=1)
         self.win = self.canvas.create_window(0, 0, window=self.body, anchor="nw")
-        self.body.bind(
-            "<Configure>",
-            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")),
-        )
-        self.canvas.bind(
-            "<Configure>",
-            lambda e: self.canvas.itemconfigure(self.win, width=max(700, e.width)),
-        )
+        self.minimum_body_width = 700
+        self._scroll_bounds = None
+        self._body_width = None
+        self.body.bind("<Configure>", self.sync_scroll_region)
+        self.canvas.bind("<Configure>", self.fit_body)
+
+    def sync_scroll_region(self, event=None):
+        bounds = self.canvas.bbox("all")
+        if bounds != self._scroll_bounds:
+            self._scroll_bounds = bounds
+            self.canvas.configure(scrollregion=bounds or (0, 0, 0, 0))
+
+    def fit_body(self, event):
+        width = max(self.minimum_body_width, event.width)
+        if width != self._body_width:
+            self._body_width = width
+            self.canvas.itemconfigure(self.win, width=width)
 
     def reveal(self, widget):
         self.update_idletasks()
@@ -65,6 +78,7 @@ class ScrollPage(ttk.Frame):
                 / max(1, self.body.winfo_height()),
             )
         )
+
 
 
 def hidden_system_equipment(system):
@@ -90,9 +104,12 @@ class MainView:
     def update_visibility(self):
         advanced = self.view_mode.get() == "進階模式"
         excluded_equipment = hidden_system_equipment(self.variables["sys_type"].get())
+        single = self.variables["pre_mode"].get() == "單盤管（一般空調箱）"
+        if single:
+            excluded_equipment.update("chw1_in adp_approach pre_t pre_rh chw1_dt mchw_q u_mchw mchw_link".split())
         all_pages = advanced or not hasattr(self, "task_scope") or self.task_scope.get() == "全部工程分頁"
         for page, button in enumerate(self.nav):
-            if all_pages or page in (0, 1, 2, 8):
+            if all_pages or page in (0, 1, 2, 3, 8):
                 if not button.winfo_manager():
                     following = next((w for w in self.nav[page + 1:] if w.winfo_manager()), None)
                     opts = dict(fill="x", padx=8, pady=2)
@@ -400,7 +417,7 @@ class MainView:
                     style="Good.TLabel",
                 ).grid(row=len(keys) + 1, column=0, sticky="w", pady=6)
         notes = {
-            1: "自動參考：一／二段 ADP 裕度 1 K、露點裕度 1 K；目前值可在進階檢視。MAU 處理外氣，FFU／DCC 為室內循環；FCU／RCU 採入口混合等效模型。",
+            1: "一般箱預設單盤管及一組冰水溫度；雙盤管需在配置欄位啟用預冷段。ADP 裕度 1 K、露點裕度 1 K；目前值可在進階檢視。MAU 處理外氣，FFU／DCC 為室內循環；FCU／RCU 採入口混合等效模型。",
             2: "利用係數 U=0.6、維護係數 M=0.8、人員顯熱 75 W／潛熱 55 W 是初估起點，實際採用值在進階欄位。未知製程產濕不當成已確認零產濕。",
             3: "PV 三種單位皆為絕壓，切換會換算數字。CMH 在此為標準狀態流量。特氣／PV 僅作流速初估；材質及真空性能需另核。",
             4: "kW 是電力輸入；HP 是軸輸出。切換單位會自動換算並保留原負荷。原專案線表僅初估，接地及保護仍需覆核。",
@@ -593,7 +610,7 @@ class MainView:
         self.result_labels[4].config(
             text="\n".join(
                 (
-                    f"{k}：運轉 {e['current_a']:.2f} A／設計 {e['design_current_a']:.2f} A，候選 {e['selected']['nfb_candidate_a']} AT，{e['selected']['runs']}組×{e['selected']['size_mm2']} mm²/相"
+                    f"{k}：運轉 {e['current_a']:.2f} A／設計 {e['design_current_a']:.2f} A，候選 {e['selected']['nfb_candidate_a']} AT，{e['selected']['runs']}組×{e['selected']['size_mm2']} mm²/相；{e['selected'].get('pe_spec', '接地待核')}"
                     for k, e in r["electric"].items()
                 )
             )
@@ -640,34 +657,58 @@ class MainView:
         self.widgets["pv_q"].focus_set()
 
     def show_page(self, n):
+        if getattr(self, "simple_app", None) is not None and not self.simple_app.workbench_mode:
+            self.simple_app.open_workbench()
         if n not in (0, 1, 2, 8) and hasattr(self, "task_scope"):
             self.task_scope.set("全部工程分頁")
         self.current = n
+        for index, page in self.pages.items():
+            if index == n:
+                page.grid()
+            else:
+                page.grid_remove()
         self.pages[n].tkraise()
         self.title.config(text=PAGES[n])
         self.subtitle.config(text="基本先填現場條件｜F5 重新計算")
         self.update_visibility()
         for j, b in enumerate(self.nav):
-            b.config(
-                bg="#265270" if n == j else "#11253b",
-                fg="white" if n == j else "#d7e5f4",
-            )
+            if uses_ttk_navigation():
+                b.config(
+                    style=(
+                        "Selected.Workbench.Nav.TButton"
+                        if n == j
+                        else "Workbench.Nav.TButton"
+                    )
+                )
+            else:
+                b.config(
+                    bg="#DCEBFC" if n == j else Theme.NAV,
+                    fg="#004C99" if n == j else Theme.TEXT,
+                )
+        if n == 0 and HAS_PLOT and hasattr(self, "plot"):
+            if getattr(self, "_plot_deferred", False):
+                self.draw()
+            else:
+                self.plot.draw_pending()
 
     def wheel(self, e):
+        if not hasattr(e.widget, "winfo_toplevel"):
+            return
+        if getattr(self, "simple_app", None) is not None and not self.simple_app.workbench_mode:
+            return
         if e.widget.winfo_toplevel() != self.root:
             return
         w = e.widget
-        if isinstance(w, (tk.Text, ttk.Treeview)):
+        if isinstance(w, (tk.Text, ttk.Treeview, ttk.Combobox)):
             return
         if self.current == 8:
             return
         page = self.pages[self.current]
-        if getattr(e, "num", 0) == 4:
-            step = -3
-        elif getattr(e, "num", 0) == 5:
-            step = 3
-        else:
-            step = -1 if e.delta > 0 else 1
+        from .platform_support import scroll_units
+
+        step = scroll_units(e)
+        if not step:
+            return
         page.canvas.yview_scroll(step, "units")
         return "break"
 
@@ -677,6 +718,40 @@ class MainView:
         self.text.insert("1.0", t)
         self.text.configure(state="disabled")
 
+    FORM_MIN_HEIGHT = 160  # smallest form area worth showing between the header and the footer bar
+
+    def fit_min_height(self, event=None):
+        """Keep the window tall enough that the header, footer bar and sidebar are never cut off.
+
+        The header toolbars wrap onto more rows when the window is narrow or the language is longer,
+        and they re-flow only after the window changed, so the height is measured once the layout
+        has settled (idle), not assumed.
+        """
+        if getattr(self, "_min_height_job", None) is None:
+            self._min_height_job = self.root.after_idle(self._apply_min_height)
+
+    def _apply_min_height(self):
+        self._min_height_job = None
+        if not self.root.winfo_exists():
+            return
+        if getattr(self, "simple_app", None) is not None and not self.simple_app.workbench_mode:
+            return
+        bands = [w for r in (0, 2) for w in self.root.grid_slaves(row=r, column=1)]
+        for w in bands:
+            if not getattr(w, "_min_height_bound", False):
+                w.bind("<Configure>", self.fit_min_height, add="+")
+                w._min_height_bound = True
+        side = self.nav[0].master
+        side_need = 0
+        for child in side.winfo_children():
+            if child.winfo_manager() != "pack":
+                continue
+            pad = child.pack_info()["pady"]
+            side_need += child.winfo_reqheight() + (sum(map(int, pad)) if isinstance(pad, (tuple, list)) else 2 * int(pad))
+        need = max(560, sum(w.winfo_reqheight() for w in bands) + self.FORM_MIN_HEIGHT, side_need)
+        if self.root.minsize()[1] != need:
+            self.root.minsize(880, need)
+
     def sidebar_layout(self, event=None):
         if event is not None and event.widget != self.root:
             return
@@ -684,11 +759,17 @@ class MainView:
         if self._compact == compact:
             return
         self._compact = compact
+        # Wrapped (translated) navigation texts are taller; a short window gives them tighter rows.
+        for button in self.nav:
+            if uses_ttk_navigation():
+                button.configure(padding=(14, 3 if compact else 7))
+            else:
+                button.configure(pady=3 if compact else 7)
         for w in self._side_order:
             if not isinstance(w, tk.Label):
                 continue
             text = str(w.cget("text"))
-            hide = "FACILITY" in text or bool(w.cget("image"))
+            hide = "FACILITY" in text or bool(w.cget("image")) or w is getattr(self, "side_subtitle", None)
             if not hide:
                 continue
             if compact:
@@ -703,20 +784,9 @@ class MainView:
 
     def _configure_theme(self):
         families = set(tkfont.families(self.root))
-        self.ui_font = next(
-            (
-                x
-                for x in [
-                    "Microsoft JhengHei",
-                    "Noto Sans CJK TC",
-                    "Noto Sans CJK JP",
-                    "PingFang TC",
-                    "DejaVu Sans",
-                ]
-                if x in families
-            ),
-            "TkDefaultFont",
-        )
+        from .platform_support import preferred_ui_font
+
+        self.ui_font = preferred_ui_font(families)
         st = ttk.Style(self.root)
         st.theme_use("clam")
         st.configure(
@@ -733,6 +803,27 @@ class MainView:
         st.configure("TEntry", fieldbackground="white", padding=5)
         st.configure("TCombobox", padding=5)
         st.configure("TButton", padding=(8, 6))
+        st.configure(
+            "Workbench.Nav.TButton",
+            background=Theme.NAV,
+            foreground=Theme.TEXT,
+            anchor="w",
+            padding=(14, 7),
+            font=(self.ui_font, 10),
+            borderwidth=0,
+            relief="flat",
+        )
+        st.map(
+            "Workbench.Nav.TButton",
+            background=[("active", "#E0E6EF")],
+            foreground=[("active", Theme.TEXT)],
+        )
+        st.configure(
+            "Selected.Workbench.Nav.TButton",
+            background="#DCEBFC",
+            foreground="#004C99",
+            font=(self.ui_font, 10, "bold"),
+        )
         st.configure("Title.TLabel", font=(self.ui_font, 18, "bold"))
         st.configure("Muted.TLabel", foreground="#5d7083")
         st.configure("Error.TLabel", foreground="#b63437")
@@ -747,6 +838,8 @@ class MainView:
 
     def configure_style(self):
         self._configure_theme()
+        Theme.apply(self.root)
+        self.ui_font = Theme.family
         ttk.Style(self.root).configure("Warn.TLabel", foreground="#9a5b0b")
 
     def _build_dashboard(self):
@@ -766,7 +859,7 @@ class MainView:
         self.summary.pack(fill="x", pady=12)
         self.psy_label = ttk.Label(b, text="", wraplength=650)
         self.psy_label.pack(fill="x", pady=8)
-        row = ttk.Frame(b)
+        row = FlowToolbar(b)  # wraps instead of squeezing the buttons when the window is narrow
         row.pack(fill="x")
         ttk.Label(row, text="流程圖季節").pack(side="left")
         self.season = tk.StringVar(value="夏季")
@@ -784,9 +877,7 @@ class MainView:
             text="編輯共同氣候",
             command=lambda: self.pages[0].reveal(self.widgets["oa_t"]),
         ).pack(side="left", padx=8)
-        ttk.Button(row, text="另存流程圖 PNG", command=self.save_plot).pack(
-            side="right"
-        )
+        ttk.Button(row, text="另存流程圖 PNG", command=self.save_plot).pack(side="left")
         if HAS_PLOT:
             names = {f.name for f in font_manager.fontManager.ttflist}
             if not names.intersection(
@@ -823,7 +914,11 @@ class MainView:
             rcParams["axes.unicode_minus"] = False
             self.fig = Figure(figsize=(8.5, 5.2), dpi=100)
             self.ax = self.fig.add_subplot(111)
-            self.plot = FigureCanvasTkAgg(self.fig, master=b)
+            self.plot = FigureCanvasTkAgg(
+                self.fig, master=b,
+                visible=lambda: self.current == 0 and self.root.winfo_viewable(),
+            )
+            self.plot.get_tk_widget().bind("<Map>", self._plot_mapped, add="+")
             self.plot.get_tk_widget().configure(height=350)
             self.plot.get_tk_widget().pack(fill="x", pady=12)
         else:
@@ -859,6 +954,24 @@ class MainView:
             ("HT", c["heat_state"]),
             ("SA", c["supply"]),
         ]
+        if c.get("coil_configuration") == "單盤管":
+            nodes = [("CC" if name == "C2" else name, state) for name, state in nodes if name != "C1"]
+        # Utility edits and repeated validation often leave every plotted point
+        # unchanged. Keep the existing artists and remove only a stale marker.
+        key = (i18n.language(), self.season.get(), p, self.fig.dpi,
+               tuple(map(float, self.fig.get_size_inches())),
+               tuple((name, state["t"], state["w"]) for name, state in nodes))
+        if key == getattr(self, "_plot_key", None):
+            stale = getattr(self, "stale_plot_label", None)
+            removed = stale is not None and stale in self.ax.texts
+            if removed:
+                stale.remove()
+            self.stale_plot_label = None
+            if removed:
+                self.queue_plot()
+            else:
+                self.plot.draw_pending()
+            return
         lo = min((x["t"] for _, x in nodes)) - 5
         hi = max((x["t"] for _, x in nodes)) + 5
         ymax = max((x["w"] * 1000 for _, x in nodes)) * 1.22 + 1
@@ -912,7 +1025,7 @@ class MainView:
             ylim=(0, ymax),
             xlabel="乾球溫度 °C",
             ylabel="含濕比 g/kg乾空氣",
-            title=self.season.get() + f"｜{p:g} kPa｜IN入口 C1/C2盤管 HT加熱 SA送風",
+            title=self.season.get() + f"｜{p:g} kPa｜IN入口 " + ("CC冷卻盤管" if c.get("coil_configuration") == "單盤管" else "C1/C2盤管") + " HT加熱 SA送風",
         )
         translated_axes(self.ax).text(
             0.01,
@@ -926,9 +1039,25 @@ class MainView:
         translated_axes(self.ax).grid(alpha=0.15)
         self.fig.tight_layout()
         annotate_states(self.ax, clusters)
-        self.plot.draw_idle()
+        self._plot_key = key
+        self.stale_plot_label = None
+        self.queue_plot()
 
-    def draw(self):
+    def _plot_mapped(self, event):
+        if getattr(self, "_plot_deferred", False):
+            self.draw()
+
+    def queue_plot(self):
+        if self.current == 0 and self.root.winfo_viewable():
+            self.plot.draw_idle()
+        else:
+            self._plot_deferred = True
+
+    def draw(self, *, force=False):
+        if not force and (self.current != 0 or not self.root.winfo_viewable()):
+            self._plot_deferred = True
+            return
+        self._plot_deferred = False
         if self.result:
             return self._draw_process()
         if self.partial_hvac:
@@ -937,3 +1066,5 @@ class MainView:
                 self._draw_process()
             finally:
                 self.result = None
+        elif HAS_PLOT and hasattr(self, "plot"):
+            self.plot.draw_idle()

@@ -3,6 +3,7 @@ Overall status:  Data required  (passed means estimates under known conditions, 
 [ Data required ]  Air washer  Circulating water flow :  Effective wetted area and manufacturer irrigation density required.
 [ Data required ]  Washer circulation-pump head :  Nozzle head, elevation and piping losses required. A confirmed 0 m elevation is valid.
 [ Data required ]  Manufacturer performance at design conditions :  Nominal RT / kW and necessary-condition checks do not replace coil, fan and humidifier performance at matching conditions.
+[ Data required ]  Summer  C2  Secondary cooling  row capacity :  No coil BF floor provided (vendor performance or project basis); dehumidification was checked against the chilled-water ADP only and coil row capacity is not verified.
  MAU unit key design values
 MAU  Design airflow : 358.33 CMH |  Supply-air state (verification pending)
  Summer coil water-side cooling : 8.65 kW | 2.46 US RT
@@ -11,9 +12,9 @@ MAU  Design airflow : 358.33 CMH |  Supply-air state (verification pending)
  Enable  Equipment  Nominal  Electrical : 16.37 kW |  Excludes unspecified circulation pumps and auxiliaries
  Winter  Humidification  Demand : 0.88 kg/h |  By humidifier type
 
-Tutorial MAU-01 | MAU stage demand / rated-capacity verification  | V5.6.0 · Windows win.8
+Tutorial MAU-01 | MAU stage demand / rated-capacity verification  | V5.6.0 · Windows win.9
  This table calculates requirements. When rated-capacity checks fail, target states do not represent achievable installed-equipment performance.
- Seasonal supply targets:  Summer  358.32741149943365 CMH (supply state) / 22.0°C / 41.01522224098197%RH;  Winter  358.32741149943365 CMH (supply state) / 22.0°C / 41.01522224098197%RH ; source main project 1813a0bcf9cd7e880a43d13c40f48544642944fb285c12889c734232c0a9301c
+ Seasonal supply targets:  Summer  358.32741149943365 CMH (supply state) / 22.0°C / 41.01522224098197%RH;  Winter  358.32741149943365 CMH (supply state) / 22.0°C / 41.01522224098197%RH ; source main project 1a20d11ccb26c5a89d809c1611b81f3c16554f3d7fe677b7da925a5fa9f528c9
  H1 heat source:  Electric heat  ; H2 heat source:  Electric heat  ; recovered-hot-water scenario:  Phase 1 unavailable .
  C1 water temperature 12.0/17.0°C; C2 7.0/12.0°C;  Capacity  Margin  0%.
  Wetted-media effectiveness 0.85 (preliminary / manufacturer selection required).
@@ -34,7 +35,7 @@ H1: 35.000°C / 70.000% → 35.000°C / 70.000 %; total heat demand 0.000 kW; ho
 H2: 8.162°C / 100.000% → 22.000°C / 41.015 %; total heat demand 1.660 kW; hot water 0.000 kW / 0.000 LPM;  Electrical  Demand  1.660 kW.
   all-electric full-load backup  Demand  1.660 kW; this stage's rated electric heater 8.000 kW.
 C1  Precooling  : water-side 4.341 kW / 1.234 US RT; required water 12.443 LPM;  Condensate  4.011 kg/h.
-C2  Secondary cooling  : water-side 4.308 kW / 1.225 US RT; required water 12.348 LPM;  Condensate  3.802 kg/h.
+C2  Secondary cooling  (required ADP 8.16°C / BF -0.000) : water-side 4.308 kW / 1.225 US RT; required water 12.348 LPM;  Condensate  3.802 kg/h.
  Washer evaporation demand 0.000 kg/h (not circulation-pump flow); seasonal washer  Bypass .
  Rated-capacity / necessary-condition checks:  H1 all-electric full-load backup :  Passed  Preliminary estimate ;  H1 current heat-source scenario :  Passed  Preliminary estimate ;  H2 all-electric full-load backup :  Passed  Preliminary estimate ;  H2 current heat-source scenario :  Passed  Preliminary estimate ;  C1 schedule candidate capacity :  Passed  Preliminary estimate ; C1 achievable ADP :  Passed  Preliminary estimate ;  C2 schedule candidate capacity :  Passed  Preliminary estimate ;  C2 achievable ADP :  Passed  Preliminary estimate ;  Supply air  dry bulb  Target :  Passed  Preliminary estimate ;  Supply humidity-ratio target :  Passed  Preliminary estimate ;  Wetted-media schedule candidate capacity :  Passed  Preliminary estimate
 
@@ -78,7 +79,7 @@ H1 adopted electric-heating efficiency 1.
 H2 adopted electric-heating efficiency 1.
  Winter :  Mixed specified / automatic stage demand
 H1  Automatic demand
-C1  Automatic demand
+C1  Bypass
 C2  Automatic demand
 H2  Automatic demand
 H1 adopted electric-heating efficiency 1.

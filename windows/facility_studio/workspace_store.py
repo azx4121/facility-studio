@@ -11,6 +11,7 @@ from .errors import ValidationError
 from .schema import FIELDS, PD_DEFAULTS, PD_KEYS, SCHEMA_VERSION, VERSION
 from .ahu_schema import NM_DEFAULTS
 from .project_store import validate_provenance
+from .optional_inputs import ALLOWED_INPUT_KEYS, check_input_keys
 from .json_io import read_json_file
 from .contributions import empty_ledger, validate_ledger
 
@@ -20,8 +21,7 @@ def raw_project(project):
     p = migrate_project(copy.deepcopy(project))
     if not isinstance(p, dict) or set(p) != {"schema_version", "inputs", "pressure_drop", "provenance"} or p["schema_version"] != SCHEMA_VERSION:
         raise ValidationError("主案結構或版本不符")
-    if not isinstance(p["inputs"], dict) or set(p["inputs"]) != set(FIELDS):
-        raise ValidationError("主案欄位不完整")
+    check_input_keys(p["inputs"], "主案欄位不完整")
     bounded_strings(p["inputs"])
     if not isinstance(p["pressure_drop"], dict) or set(p["pressure_drop"]) != set(PD_KEYS):
         raise ValidationError("壓損資料不完整")
@@ -63,7 +63,7 @@ def validate_workspace(doc):
     if not isinstance(d["app_version"], str) or len(d["app_version"]) > 30:
         raise ValidationError("軟體版本不合法")
     d["main"] = raw_project(d["main"])
-    if not isinstance(d["drafts"], dict) or set(d["drafts"]) - set(FIELDS):
+    if not isinstance(d["drafts"], dict) or set(d["drafts"]) - ALLOWED_INPUT_KEYS:
         raise ValidationError("保留草稿格式不符")
     for k, v in d["drafts"].items():
         validate_provenance({k: v}, [k])

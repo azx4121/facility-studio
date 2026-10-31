@@ -7,6 +7,7 @@ from .schema import DEFAULTS, FIELDS, PD_DEFAULTS
 from .ahu_schema import NM_DEFAULTS, NM_FIELDS
 from .utils import uses_largest_motor
 from .gas_catalog import CUSTOM_GAS, has_demand
+from .optional_inputs import OPTIONAL_INPUTS
 
 
 def main_inactive(i):
@@ -30,14 +31,19 @@ def main_inactive(i):
         disable(["base_leak_ach"], "目前使用門縫孔口法，不採基準ACH假設")
     else:
         disable("en_gap_L en_gap_W en_door_A en_door_F gap_B_L gap_B_W door_B_A door_B_F door_open_seconds leak_cd".split(), "目前使用基準ACH法，門縫孔口草稿不參與計算")
-    if i.get("pre_mode") == "停用／旁通":
-        disable(["chw1_in", "adp_approach", "pre_t", "pre_rh"], "一段旁通，保留備用設定")
+    if i.get("pre_mode") in ("停用／旁通", "單盤管（一般空調箱）"):
+        disable(["chw1_in", "adp_approach", "pre_t", "pre_rh"], "未啟用預冷盤管，保留備用設定")
+        if i.get("pre_mode") == "單盤管（一般空調箱）":
+            disable(["chw1_dt", "mchw_q", "u_mchw", "mchw_link"], "單盤管只使用CHW迴路，預冷水路未配置")
+            disable(["mchw_" + k for k in ("fluid_mode", "fluid_name", "rho", "cp", "mu")], "單盤管只使用CHW迴路，預冷水路未配置")
     elif i.get("pre_mode") != "指定出口（需求檢核）":
         disable(["pre_rh"], "出口濕度由盤管過程計算")
     for zone in "AB":
         keys = ["face_" + zone, "coverage_" + zone] if i.get("mode_" + zone) == "ACH" else ["en_ach_" + zone]
         disable(keys, "未採用的循環風量計算方式")
     for prefix, flow, unit in WATER_ROWS:
+        if prefix == "mchw" and i.get("pre_mode") == "單盤管（一般空調箱）":
+            continue
         if i.get(prefix + "_link") == "連動負荷":
             disable([flow, unit], "採用負荷反算水量，手填值僅保留")
         if i.get(prefix + "_fluid_mode") != "本迴路獨立物性":
@@ -81,11 +87,33 @@ WATER_ROWS = [
 ]
 
 
+def optional_inactive(i, main_off=None):
+    """Activation rules for OPTIONAL_INPUTS, mirroring where calculations read them."""
+    off = {}
+    mau = str(i.get("sys_type", "")).startswith("MAU")
+    if not (mau and i.get("winter_model") == "室內熱濕平衡（定風量）"):
+        for k in ("winter_ffu_ratio", "winter_mau_max_t"):
+            off[k] = "僅 MAU 冬季室內熱濕平衡使用；停用值不參與計算"
+    if mau:
+        off["airflow_search_floor"] = "MAU 不搜尋混風送風量；停用值不參與計算"
+    main_off = main_inactive(i) if main_off is None else main_off
+    for k, spec in OPTIONAL_INPUTS.items():
+        if spec.get("pair") in main_off:
+            off[k] = "本盤不採用最大馬達加成；停用值不參與計算"
+    return off
+
+
 def effective_main(i):
-    """Normalize every inactive field, including valid but stale saved values."""
+    """Normalize every inactive field, including valid but stale saved values.
+
+    Inactive optional keys are removed, so each reader applies its own default.
+    """
     out = dict(i)
-    for k in main_inactive(i):
+    main_off = main_inactive(i)
+    for k in main_off:
         out[k] = DEFAULTS[k]
+    for k in optional_inactive(i, main_off):
+        out.pop(k, None)
     return out
 
 
@@ -124,6 +152,8 @@ def ahu_inactive(i):
     disable(["linked_main_hash"], "來源快照識別，不能手動修改")
     if i.get("summer_c1_mode") != "自動需求":
         disable(["c1_t"], "分季指定／旁通優先，此為自動模式備用目標")
+    if all(i.get(s + "_c1_mode") == "旁通" for s in ("summer", "winter")):
+        disable(["c1_in", "c1_out", "c1_adp", "c1_rt", "c1_t", "dp_c1"], "未配置預冷盤管，使用單一冷卻盤管水溫")
     for season in ["summer", "winter"]:
         for tag in ["h1", "c1", "c2", "h2"]:
             prefix = season + "_" + tag

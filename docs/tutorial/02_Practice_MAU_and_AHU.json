@@ -1673,7 +1673,7 @@
         "summer_h2_t": "22",
         "winter_h1_mode": "自動需求",
         "winter_h1_t": "35",
-        "winter_c1_mode": "自動需求",
+        "winter_c1_mode": "旁通",
         "winter_c1_t": "22",
         "winter_c1_rh": "95",
         "winter_c2_mode": "自動需求",
@@ -1699,7 +1699,7 @@
         "summer_flow": "358.32741149943365",
         "winter_flow": "358.32741149943365",
         "pump_input_kw": "0.1",
-        "linked_main_hash": "1813a0bcf9cd7e880a43d13c40f48544642944fb285c12889c734232c0a9301c"
+        "linked_main_hash": "1a20d11ccb26c5a89d809c1611b81f3c16554f3d7fe677b7da925a5fa9f528c9"
       }
     }
   ],

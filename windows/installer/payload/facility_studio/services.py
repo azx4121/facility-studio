@@ -1,4 +1,4 @@
-from .errors import InputError
+from .errors import InputError, ValidationError
 import copy
 import math
 from collections.abc import Mapping
@@ -191,8 +191,17 @@ def upstream_values(tool, results, inputs=None):
                           oa_cmh=str(clean["oa_cmh"]), ffu_count=str(clean["ffu_count"]),
                           ffu_unit_kw=str(clean["ffu_unit_kw"]))
         if light:
-            area = clean["area_m2"] if clean else number(i.get("area", light["area_m2"]), "area", 0.01)
+            area = clean["area_m2"] if clean else light["area_m2"]
+            if abs(area - light["area_m2"]) > 1e-6 * max(1, area):
+                raise ValidationError("照明與潔淨室面積不同，請先確認同一計算範圍，再帶入熱負荷。", "area")
+            values["area"] = str(area)
             values["lighting_w_m2"] = str(light["total_kw"] * 1000 / area)
+        air = _result(results, "air")
+        if air and air.get("comparison_state"):
+            if air["delta_h_kj_kg"] < 0:
+                raise ValidationError("A−B為負焓差，屬加熱工況，不能帶入外氣冷卻焓差；請核對A/B方向。", "oa_delta_h")
+            values.update(oa_delta_h=str(air["delta_h_kj_kg"]), air_v_da=str(air["state"]["v_da"]),
+                          oa_load_basis="外氣至室內基準" if air["comparison_basis"] == "室內狀態" else "外氣至實際露點送風")
         return values
     if tool in ("water", "pipes") and heat:
         return dict(mode="已知熱量", power=str(heat["q_total_kw"]), power_unit="kW")
@@ -236,7 +245,7 @@ def calculate_pipeline(inputs):
         tool = "water" if name == "pipes" else name
         if not isinstance(values, Mapping):
             raise InputError("工具輸入需為欄位對照表：" + name, name)
-        allowed = set(defaults(tool)) | ({"device_loads"} if tool == "electrical" else set())
+        allowed = set(defaults(tool)) | ({"device_loads"} if tool == "electrical" else {"air_v_da"} if tool == "heat_loads" else set())
         unknown = set(values) - allowed
         if unknown:
             field = name + "." + str(sorted(unknown, key=str)[0])

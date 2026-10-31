@@ -455,9 +455,9 @@ class SessionController:
                 return
             group = next(g for g in summary["water"] if g["id"] == ident)
             d = copy.deepcopy(self.demand_ledger)
-            d["selections"][group["loop"]] = ident
             entry = next(iter(d["entries"].values()))
-            d, updates, summary = updated_ledger(d, entry, self.snapshot()["inputs"])
+            # An explicit choice made now: consent applies to the current main-project values.
+            d, updates, summary = updated_ledger(d, entry, self.snapshot()["inputs"], select={group["loop"]: ident})
             if apply_updates(self, updates, "主案 " + group["loop"] + " 水力列改採選取迴路；其餘迴路仍分列於彙整報告。", win):
                 self.demand_ledger = d
                 for rec in self.transfer_receipts:
@@ -468,9 +468,10 @@ class SessionController:
 
         bar = ttk.Frame(win, padding=12)
         bar.pack(fill="x")
-        ttk.Button(bar, text="移除選取來源的需求", command=remove).pack(side="left")
-        ttk.Button(bar, text="主案採用選取水迴路", command=select_circuit).pack(side="left", padx=8)
-        ttk.Button(bar, text="重新讀取", command=refresh).pack(side="right")
+        ttk.Button(bar, text="主案採用選取水迴路", command=select_circuit).pack(side="left")
+        ttk.Button(bar, text="重新讀取", command=refresh).pack(side="left", padx=8)
+        # Removing a source is kept apart from adopting one.
+        ttk.Button(bar, text="移除選取來源的需求", command=remove).pack(side="right")
         refresh()
 
     def add_receipt(self, child, values):

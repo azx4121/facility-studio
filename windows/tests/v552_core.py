@@ -33,6 +33,7 @@ for system in FIELDS['sys_type']['options']:
 # Inactive stage conditions also cover bypass / no humidification / electric-only.
 for mode in ['循環水洗濕膜','電極式蒸汽','不加濕']:
     inp=dict(NM_DEFAULTS);inp['humidifier']=mode;inp['summer_c1_mode']='旁通';inp['h1_source']='電熱'
+    inp.update(summer_h1_mode='自動需求', winter_h1_mode='自動需求', summer_h2_mode='自動需求', winter_h2_mode='自動需求')
     baseline=nm_calculate(inp)
     for key in ahu_inactive(inp):
         candidate=dict(inp);candidate[key]=''

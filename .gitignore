@@ -227,4 +227,3 @@ __marimo__/
 .build-venv/
 
 # win.9 candidate: test runs regenerate Source/windows/evidence/ every time; kept records live in tests/fixtures/
-Source/windows/evidence/

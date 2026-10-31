@@ -9,7 +9,7 @@ import os
 import tempfile
 HERE = Path(__file__).resolve().parent
 TESTS = HERE.parent
-SRC = Path(os.environ.get("FS_SRC") or HERE.parents[1]).resolve()  # the Source/windows directory under test
+SRC = Path(os.environ.get("FS_SRC") or HERE.parents[1]).resolve()  # the windows directory under test
 PY = sys.executable
 OUT = Path(tempfile.mkdtemp(prefix="feed_mutants_"))  # mutated copies live outside the repository
 

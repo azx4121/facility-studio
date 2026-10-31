@@ -222,7 +222,7 @@ class AHUView:
         )
         frame.bind(
             "<MouseWheel>",
-            lambda e: canvas.yview_scroll(-1 if e.delta > 0 else 1, "units"),
+            lambda e: self.wheel(e),
         )
         return (frame, body, canvas)
 
@@ -263,13 +263,17 @@ class AHUView:
         return frame, body, canvas
 
     def wheel(self, e):
-        if isinstance(e.widget, (tk.Text, ttk.Treeview)):
+        if isinstance(e.widget, (tk.Text, ttk.Treeview, ttk.Combobox)):
             return
         selected = self.nb.nametowidget(self.nb.select())
         if self.nb.index(self.nb.select()) == 0:
             # Do not steal Treeview scrolling from the dashboard on the right.
             if str(e.widget).startswith(str(self.input_canvas)):
-                step = -1 if getattr(e, "num", 0) == 4 or getattr(e, "delta", 0) > 0 else 1
+                from .platform_support import scroll_units
+
+                step = scroll_units(e)
+                if not step:
+                    return
                 self.input_canvas.yview_scroll(step, "units")
                 return "break"
             return
@@ -277,7 +281,11 @@ class AHUView:
             (w for w in selected.winfo_children() if isinstance(w, tk.Canvas)), None
         )
         if canvas:
-            step = -1 if getattr(e, "num", 0) == 4 or getattr(e, "delta", 0) > 0 else 1
+            from .platform_support import scroll_units
+
+            step = scroll_units(e)
+            if not step:
+                return
             canvas.yview_scroll(step, "units")
             return "break"
 
@@ -287,6 +295,7 @@ class AHUView:
 
         inputs = self.snapshot()
         inactive = ahu_inactive(inputs)
+        single_coil = all(inputs[s + "_c1_mode"] == "旁通" for s in ("summer", "winter"))
         seasonal = inputs["target_mode"] == "主案分季需求"
         needed = set()
         if seasonal:
@@ -352,6 +361,8 @@ class AHUView:
                     or ((key in NM_BASIC or key in needed) and key not in inactive)
                     or key == "flow_basis"
                 )
+                if single_coil and key in ("c1_in", "c1_out", "c1_adp", "c1_rt", "c1_t", "dp_c1"):
+                    visible = False
                 row = self.rows[key]
                 if not visible:
                     row.pack_forget()

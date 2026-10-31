@@ -1,5 +1,6 @@
 """Project provenance and recovery; no code execution or silent value repair."""
 
+from .platform_support import app_data_root
 from pathlib import Path
 from datetime import datetime, timezone
 import json, os, uuid
@@ -46,10 +47,7 @@ def validate_provenance(provenance, fields):
 
 
 def app_data():
-    root = (
-        Path(os.environ.get("LOCALAPPDATA", str(Path.home() / ".local/share")))
-        / "Facility_Studio_V5_5"
-    )
+    root = app_data_root()
     root.mkdir(parents=True, exist_ok=True)
     return root
 

@@ -358,13 +358,14 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
         "winter_h1_t": {"winter_h1_mode": "指定出口乾球", "winter_h1_t": "25"},
         "winter_c1_t": {"winter_t": "20", "winter_rh": "80", "winter_c1_mode": "指定出口乾球", "winter_c1_t": "16"},
         "winter_c1_rh": {"winter_t": "20", "winter_rh": "80", "winter_c1_mode": "指定出口 T/RH", "winter_c1_t": "16", "winter_c1_rh": "90"},
-        "winter_c2_t": {"winter_c2_mode": "指定出口乾球", "winter_c2_t": "12"},
-        "winter_c2_rh": {"winter_c2_mode": "指定出口 T/RH", "winter_c2_t": "12", "winter_c2_rh": "95"},
+        "winter_c2_t": {"winter_t": "20", "winter_rh": "80", "winter_c2_mode": "指定出口乾球", "winter_c2_t": "12"},
+        "winter_c2_rh": {"winter_t": "20", "winter_rh": "80", "winter_c2_mode": "指定出口 T/RH", "winter_c2_t": "12", "winter_c2_rh": "95"},
         "winter_h2_t": {"winter_h2_mode": "指定出口乾球", "winter_h2_t": "19"},
     }
     for k in NM_FIELDS:
         if k.startswith("steam_"):
-            ahu_active_overrides[k] = {"humidifier": "電極式蒸汽"}
+            # Steam needs a heated, unsaturated supply condition; win.9 defaults (16 C / 90 %RH, stages bypassed) saturate.
+            ahu_active_overrides[k] = {"humidifier": "電極式蒸汽", "sa_t": "22", "sa_rh": "55", "winter_h1_mode": "自動需求", "h1_source": "電熱", "h1_kw": "400"}
 
     for key, spec in NM_FIELDS.items():
         if key == "linked_main_hash":
@@ -615,6 +616,14 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
 
         # 2.4 Standalone AHU Iteration
         ahu_in = dict(NM_DEFAULTS)
+        if ahu_in.get("winter_h1_mode") == "旁通":
+            # win.9 and the macOS port default every AHU stage to bypass with a 16 C / 90 %RH target; these randomised
+            # designs (steam, wash, reheat) were written for an actively conditioned unit, so state that explicitly.
+            ahu_in.update(
+                fan_qty="8", fan_unit_kw="7.8", c1_in="14", c1_out="19", c1_rt="250", c2_rt="160",
+                wash_mode="AMC 需求持續水洗", wash_rating="619.4", sa_t="22", sa_rh="55", h1_kw="400", h2_kw="200",
+                **{f"{season}_{stage}_mode": "自動需求" for season in ("summer", "winter") for stage in ("c1", "h1", "h2")},
+            )
         ahu_in.update(
             flow=str(round(rng.uniform(8000, 60000), 0)),
             humidifier=rng.choice(["循環水洗濕膜", "電極式蒸汽", "電熱式蒸汽"]),

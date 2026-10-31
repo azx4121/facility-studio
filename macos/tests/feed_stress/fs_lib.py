@@ -6,7 +6,7 @@ import sys
 import traceback
 from pathlib import Path
 
-ROOT = Path(os.environ.get("FS_SRC") or Path(__file__).resolve().parents[2]).resolve()  # Source/windows or a mutated copy
+ROOT = Path(os.environ.get("FS_SRC") or Path(__file__).resolve().parents[2]).resolve()  # windows or a mutated copy
 sys.path.insert(0, str(ROOT))
 from facility_studio import api, i18n  # noqa: E402
 from facility_studio.errors import ValidationError  # noqa: E402

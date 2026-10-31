@@ -1,15 +1,30 @@
+import math
+
+from .utils import dewpoint, state_trh
+
+
+# Overall status of an assessment, worst first. Item statuses are "通過", "待資料", "待後續" and "未達".
+#   未達      the design does not meet a condition
+#   待資料    the user can supply the missing data in this tool
+#   待後續    needs vendor data or a later design stage; no input of this tool can clear it
+STATUS_FAIL = "未達條件"
+STATUS_PENDING = "待補資料"
+STATUS_DEFERRED = "初估完成（待後續階段確認）"
+STATUS_PASS = "初估檢核通過"
+
+
 def finding(items, name, status, detail, field=None):
     items.append(dict(name=name, status=status, detail=detail, field=field))
 
 
 def assessment(items):
     state = (
-        "未達條件"
+        STATUS_FAIL
         if any((x["status"] == "未達" for x in items))
         else (
-            "待補資料"
+            STATUS_PENDING
             if any((x["status"] == "待資料" for x in items))
-            else "初估檢核通過"
+            else (STATUS_DEFERRED if any((x["status"] == "待後續" for x in items)) else STATUS_PASS)
         )
     )
     return dict(
@@ -17,12 +32,96 @@ def assessment(items):
         items=items,
         failed=sum((x["status"] == "未達" for x in items)),
         pending=sum((x["status"] == "待資料" for x in items)),
+        deferred=sum((x["status"] == "待後續" for x in items)),
     )
+
+
+def _coil_pinch_and_enthalpy_ok(c, tin_w, tout_w, p_kpa, pinch_min=0.5):
+    """Check counterflow dry, fully-wet, and partially-wet coil pinch & saturation enthalpy."""
+    ta_in = c["inlet"]["t"]
+    ta_out = c["outlet"]["t"]
+    dt_cold = ta_out - tin_w
+    dt_hot = ta_in - tout_w
+    if dt_cold < pinch_min - 1e-6 or dt_hot < pinch_min - 1e-6:
+        return False
+    if c.get("condensate_kg_s", 0.0) > 1e-9:
+        h_sat_in = state_trh(tin_w, 100, p_kpa)["h"]
+        if c["outlet"]["h"] <= h_sat_in + 1e-6:
+            return False
+        tdp_in = dewpoint(c["inlet"]["w"], p_kpa)
+        if tout_w < tdp_in - 1e-6:
+            # Fully wet coil: water outlet is below inlet air dewpoint
+            h_sat_out = state_trh(tout_w, 100, p_kpa)["h"]
+            if c["inlet"]["h"] <= h_sat_out + 1e-6:
+                return False
+        else:
+            # Partially wet coil: dry sensible cooling from ta_in to tdp_in, wet below tdp_in
+            dh_total = max(1e-9, c["inlet"]["h"] - c["outlet"]["h"])
+            cp_in = 1.006 + 1.86 * c["inlet"]["w"]
+            dh_dry = max(0.0, min(dh_total, cp_in * max(0.0, ta_in - tdp_in)))
+            f_dry = dh_dry / dh_total
+            tw_wet_boundary = tout_w - f_dry * (tout_w - tin_w)
+            if tdp_in - tw_wet_boundary < pinch_min - 1e-6:
+                return False
+            h_air_boundary = c["inlet"]["h"] - dh_dry
+            h_sat_boundary = state_trh(tw_wet_boundary, 100, p_kpa)["h"]
+            if h_air_boundary <= h_sat_boundary + 1e-6:
+                return False
+    return True
+
+
+def _coil_capacity_basis(items, r):
+    """A dehumidifying coil solved without a BF floor has no verified row capacity."""
+    for season, title in (("summer", "夏季"), ("winter", "冬季")):
+        chain = r.get(season)
+        for tag in ("c1", "c2"):
+            c = chain.get(tag) if isinstance(chain, dict) else None
+            if c and "bf_min" in c and c["bf_min"] <= 0 and c.get("air_kw", 0) > 1e-08:
+                finding(
+                    items,
+                    title + " " + c["name"] + " 排數能力",
+                    "待資料",
+                    "未提供盤管 BF 下限（廠商性能或專案依據）；除濕可達性只依供水 ADP 檢核，未驗證盤管排數能力。",
+                )
+
+
+def _airflow_basis(items, r):
+    """Judge a load-driven supply airflow by its inflation over the baseline, never by a fixed air-change rate.
+
+    The baseline is the larger of the circulation / fresh-air floor and the sensible design airflow, so a
+    cleanroom that circulates a lot is judged against what it already moves. Systems without this search
+    (MAU: outdoor-air mass flow from a closed-form balance, FFU circulation counted separately) are skipped.
+    """
+    b = r.get("airflow_basis")
+    if not b or not b.get("applicable") or not b.get("load_driven"):
+        return
+    v_da = r["room"]["v_da"]
+    cmh = lambda kg_s: kg_s * v_da * 3600
+    lim = b["limits"]
+    name = "供風量合理性"
+    facts = (
+        f"供風量由{b['governing']}決定：基準 {cmh(b['m_start_kg_s']):,.0f} CMH 增為 {b['inflation']:.1f} 倍"
+        f"（供風溫差 {b['supply_dt_k']:.2f} K）；室內露點 {b['room_dewpoint_c']:.2f}°C 與冰水 ADP {b['adp_floor_c']:.2f}°C 僅差 {b['dehumid_margin_k']:.2f} K"
+    )
+    remedy = ""
+    if b.get("chw_needed_c") is not None:
+        needed = math.floor(b["chw_needed_c"] * 100) / 100  # round down: the advice must land on the passing side
+        remedy = f"；請將冰水供水降至 {needed:.2f}°C 以下（目前 {b['chw_supply_c']:.2f}°C）、提高室內相對濕度目標，或改用乾盤管／再熱"
+    if b["inflation"] > lim["inflation_fail"] + 1e-9:
+        finding(items, name, "未達",
+                facts + f"，超過可行倍數 {lim['inflation_fail']:g}（供風溫差實務下限 {lim['min_supply_dt_k']:g} K）" + remedy, "chw2_in")
+    elif b.get("condition_number") and b["condition_number"] > lim["condition_fail"]:
+        finding(items, name, "未達",
+                f"除濕裕度過小，風量對輸入極敏感（條件數 {b['condition_number']:.0f}，上限 {lim['condition_fail']:g}）" + remedy, "chw2_in")
+    else:
+        finding(items, name, "通過", facts + f"，未超過可行倍數 {lim['inflation_fail']:g}。", "chw2_in")
 
 
 def assess_main(r):
     i = r.get("effective_inputs", r["project"]["inputs"])
     f = lambda k: float(i[k])
+    p_kpa = f("atm_kpa")
+    pinch_min = float(i.get("coil_pinch_min_k", "0.5"))
     items = []
     dcc_kw = r.get("dcc_design_kw", r["dcc_kw"])
     if dcc_kw > 1e-08:
@@ -74,14 +173,16 @@ def assess_main(r):
             c = r[season][tag]
             if c["air_kw"] <= 1e-08:
                 continue
-            tout = f(water) + f(delta)
+            tin_w = f(water)
+            tout = tin_w + f(delta)
             ta = c["inlet"]["t"]
+            valid = tout < ta and _coil_pinch_and_enthalpy_ok(c, tin_w, tout, p_kpa, pinch_min)
             finding(
                 items,
                 ("夏季" if season == "summer" else "冬季")
                 + c["name"]
                 + " 回水必要條件",
-                "通過" if tout < ta else "未達",
+                "通過" if valid else "未達",
                 f"回水 {tout:g}°C；入口空氣 {ta:.2f}°C。水量公式成立仍須滿足換熱溫差。",
                 delta,
             )
@@ -115,24 +216,62 @@ def assess_main(r):
         finding(
             items,
             "設備同工況選型",
-            "待資料",
+            "待後續",
             "本工具計算需求，仍需盤管／末端原廠選型與實際風機曲線。",
+        )
+    if (r["qs"] > 1e-08 or r["ql"] > 1e-08) and r.get("electric") and r["electric"].get("NP", {}).get("kw", 0) <= 1e-08:
+        finding(
+            items,
+            "NP 空調與附屬設備用電",
+            "待資料",
+            "空調與照明已有負荷需求，但 NP 盤為 0 kW；請填列或由單機帶入。",
+            "e_np_fan",
         )
     if any((e["kw"] for e in r["electric"].values())):
         finding(
             items,
             "配電候選覆核",
-            "待資料",
+            "待後續",
             "原表僅供初估；需敷設方式、短路、接地及馬達保護資料。",
         )
     if any((g["standard_lpm"] for g in r["gas"].values())):
         finding(
             items,
             "氣體供壓／真空性能",
-            "待資料",
+            "待後續",
             "目前為流速截面初估，需管路壓降與幫浦／調壓器性能。",
         )
-    if r["winter"]["reheat_kw"] or r["winter"]["humid_kg_h"]:
+    for g in r["gas"].values():
+        if g.get("standard_lpm", 0) > 0 and g.get("liquefaction_risk") is True:
+            finding(
+                items,
+                "特氣相態與液化檢核",
+                "待資料",
+                "管內絕壓高於同溫飽和蒸氣壓，氣體將液化；請降低供壓或配置伴熱。",
+                "gas_barg",
+            )
+    if r.get("winter_room") and r["winter_room"].get("mau_overtemp_warning"):
+        wr = r["winter_room"]
+        finding(
+            items,
+            "冬季 MAU 送風溫度上限",
+            "未達" if wr.get("terminal_heat_kw", 0.0) > 1e-6 else "待資料",
+            f"冬季所需送風溫度 {wr['unconstrained_supply_t']:.1f}°C 高於 MAU 送風上限 {wr['max_mau_t']:g}"
+            f"°C，易致氣流分層；剩餘室內熱損 {wr['terminal_heat_kw']:.2f}"
+            + (" kW 已計入 HW；仍須確認室內加熱設備。" if wr.get("terminal_heat_source") == "HW"
+               else " kW 未配置熱源（待指定），未計入 HW 或 NP；請指定室內加熱設備與熱源，或增加循環風量。"),
+            "winter_model",
+        )
+    if r["light"].get("room_index_k") is not None and 0 < r["light"]["room_index_k"] < 0.8 and r["light"]["u"] >= 0.6:
+        finding(
+            items,
+            "照明室指數與利用係數",
+            "待資料",
+            "室指數偏小而手填利用係數偏高；請核對燈具配光表。",
+            "light_u",
+        )
+    np_supplied = bool(r.get("electric")) and r["electric"].get("NP", {}).get("kw", 0) > 1e-08
+    if (r["winter"]["reheat_kw"] or r["winter"]["humid_kg_h"]) and not (r.get("winter_room") and np_supplied):
         finding(
             items,
             "冬季室內與電力範圍",
@@ -143,12 +282,16 @@ def assess_main(r):
                 else "冬季目前為外氣處理基準；需另核室內熱濕與 NP 設備電力。"
             ),
         )
+    _coil_capacity_basis(items, r)
+    _airflow_basis(items, r)
     return assessment(items)
 
 
 def assess_ahu(r):
     i = r["inputs"]
     f = lambda k: float(i[k])
+    p_kpa = f("p")
+    pinch_min = float(i.get("coil_pinch_min_k", "0.5"))
     items = []
     for season, title in [("summer", "夏季"), ("winter", "冬季")]:
         s = r[season]
@@ -170,12 +313,17 @@ def assess_ahu(r):
         for tag in ["c1", "c2"]:
             c = s[tag]
             if c["air_kw"] > 1e-08:
-                valid = f(tag + "_out") < c["inlet"]["t"]
+                tin_w = f(tag + "_in")
+                tout_w = f(tag + "_out")
+                valid = (
+                    tout_w < c["inlet"]["t"]
+                    and _coil_pinch_and_enthalpy_ok(c, tin_w, tout_w, p_kpa, pinch_min)
+                )
                 finding(
                     items,
                     title + " " + tag.upper() + " 回水必要條件",
                     "通過" if valid else "未達",
-                    f"回水 {f(tag + '_out'):g}°C；入口空氣 {c['inlet']['t']:.2f}°C。",
+                    f"回水 {tout_w:g}°C；入口空氣 {c['inlet']['t']:.2f}°C。",
                     tag + "_out",
                 )
     dpkeys = [k for k in i if k.startswith("dp_") and k != "dp_status"]
@@ -257,4 +405,5 @@ def assess_ahu(r):
         "待資料",
         "名目 RT／kW 與必要條件檢核不能替代同工況盤管、風機與加濕設備性能。",
     )
+    _coil_capacity_basis(items, r)
     return assessment(items)
