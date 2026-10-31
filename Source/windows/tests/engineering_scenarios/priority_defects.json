@@ -12,15 +12,11 @@
  },
  {
   "id": "PD-1b",
-  "name": "F-1 reproducer on the imported baseline (before the fix)",
-  "status": "PASS",
-  "detail": "baseline: {\"ok\": true, \"cmh\": 7411601864.864676, \"status\": \"待補資料\"}  -> defect reproduced (> 1e9 CMH accepted)",
-  "expected": "baseline accepts an absurd airflow (confirms the defect existed)",
-  "actual": {
-   "ok": true,
-   "cmh": 7411601864.864676,
-   "status": "待補資料"
-  }
+  "name": "F-1 reproducer on the imported baseline",
+  "status": "BLOCKED",
+  "detail": "no --baseline-src given",
+  "expected": null,
+  "actual": null
  },
  {
   "id": "PD-1c",
@@ -103,16 +99,16 @@
  {
   "id": "PD-4b",
   "name": "the U-value field itself shows its unit",
-  "status": "FAIL",
-  "detail": "FIELDS['wall_u'] unit='', label='外牆 U 值'; the unit lives in a separate selector (u_unit, default 'kcal/(h·m²·K)'). Entering a W/(m2.K) value while the default kcal unit is selected under-states the load by 14 % (1/1.163) with no warning.",
+  "status": "PASS",
+  "detail": "FIELDS['wall_u'] unit='依U值單位', label='外牆 U 值'; the unit lives in a separate selector (u_unit, default 'kcal/(h·m²·K)'). Entering a W/(m2.K) value while the default kcal unit is selected under-states the load by 14 % (1/1.163) with no warning.",
   "expected": "unit shown next to the value",
-  "actual": ""
+  "actual": "依U值單位"
  },
  {
   "id": "PD-4c",
   "name": "the report prints the U-value unit next to the wall load",
-  "status": "FAIL",
-  "detail": "the report prints the wall load in kW but never the U value or its unit, and FIELD_HELP has no hint for wall_u / floor_u / u_unit",
+  "status": "PASS",
+  "detail": "unit string present in the report",
   "expected": null,
   "actual": null
  },

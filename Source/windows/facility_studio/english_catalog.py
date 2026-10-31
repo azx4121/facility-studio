@@ -3599,3 +3599,18 @@ TEXT.update({
     "全部為絕對壓力；150 Torr ≈ 20.00 kPa ≈ 199.98 mbar。允許範圍依所選單位：1～760 Torr ≈ 0.1333～101.325 kPa ≈ 1.333～1013.25 mbar。":
         "All values are absolute pressures; 150 Torr = 20.00 kPa = 199.98 mbar. Allowed range for the selected unit: 1-760 Torr = 0.1333-101.325 kPa = 1.333-1013.25 mbar.",
 })
+
+# U-value input unit is shown with the field, in its help and in the report.
+TEXT.update({
+    "依U值單位": "per U-value unit",
+    "單位依「U 值單位」選項：預設 kcal/(h·m²·K)；1 W/(m²·K) ＝ 0.860 kcal/(h·m²·K)。填入前請先確認單位，否則牆體負荷會差約 16%。":
+        "The unit follows the 'U-value unit' option: kcal/(h·m²·K) by default; 1 W/(m²·K) = 0.860 kcal/(h·m²·K). Check the unit before entering a value, otherwise the wall load is off by about 16%.",
+    "單位依「U 值單位」選項：預設 kcal/(h·m²·K)；1 W/(m²·K) ＝ 0.860 kcal/(h·m²·K)。填入前請先確認單位。":
+        "The unit follows the 'U-value unit' option: kcal/(h·m²·K) by default; 1 W/(m²·K) = 0.860 kcal/(h·m²·K). Check the unit before entering a value.",
+    "選擇外牆與樓板 U 值的輸入單位；切換單位不會自動換算已填的數值。":
+        "Selects the input unit of the wall and floor U values; changing it does not convert the values already entered.",
+    "圍護條件：外牆 ": "Envelope: wall ",
+    " m²×U ": " m² × U ",
+    "、樓板 ": ", floor ",
+    "（U 值單位 ": " (U-value unit ",
+})

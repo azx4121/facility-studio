@@ -217,9 +217,9 @@ group(
     "圍護與其他入室熱",
     [
         ("en_wall", "外牆面積", "m²", 0, 100000000.0),
-        ("wall_u", "外牆 U 值", "", 0, 100),
+        ("wall_u", "外牆 U 值", "依U值單位", 0, 100),
         ("en_floor", "樓板面積", "m²", 0, 100000000.0),
-        ("floor_u", "樓板 U 值", "", 0, 100),
+        ("floor_u", "樓板 U 值", "依U值單位", 0, 100),
         ("u_unit", "U 值單位", "", ["kcal/(h·m²·K)", "W/(m²·K)"]),
         ("floor_adj_t", "樓板相鄰空間溫度", "°C", -40, 90),
         ("solar_kw", "日射入室熱", "kW", 0, 10000000.0),
@@ -508,6 +508,9 @@ REFERENCE_KEYS = set(
     "atm_kpa light_u light_m people_sensible_w people_latent_w water_rho water_cp water_mu water_velocity_max water_roughness_mm air_rho air_mu duct_roughness_mm v_gex v_sex v_aex v_vex v_hex duct_ratio exhaust_margin_pct gas_std_t gas_std_kpa gas_temp gas_z_ratio adp_approach coil_approach dccw_dp_margin leak_cd door_open_seconds oa_per_person".split()
 )
 FIELD_HELP = {
+    "wall_u": "單位依「U 值單位」選項：預設 kcal/(h·m²·K)；1 W/(m²·K) ＝ 0.860 kcal/(h·m²·K)。填入前請先確認單位，否則牆體負荷會差約 16%。",
+    "floor_u": "單位依「U 值單位」選項：預設 kcal/(h·m²·K)；1 W/(m²·K) ＝ 0.860 kcal/(h·m²·K)。填入前請先確認單位。",
+    "u_unit": "選擇外牆與樓板 U 值的輸入單位；切換單位不會自動換算已填的數值。",
     "light_lux": "工作面平均照度；燈具數量會自動計算。",
     "eq_kw": "填設備總發熱，非一律把銘牌電力當成入室熱。",
     "pcw_n": "同時開機台數；水帶走的熱不可再次算入室內。",

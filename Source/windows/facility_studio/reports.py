@@ -461,6 +461,10 @@ def report(r):
         a(
             f"顯熱組成：設備淨熱 {parts.get('equipment_net', parts.get('設備淨熱', 0)):.3f}（PCW帶走 {parts.get('pcw_removed', parts.get('PCW帶走', 0)):.3f}、排氣帶走 {parts.get('exhaust_removed', parts.get('排氣帶走', 0)):.3f}）、人員顯熱 {parts.get('people', parts.get('人員顯熱', 0)):.3f}、照明 {parts.get('lighting', parts.get('照明', 0)):.3f}、外牆 {parts.get('wall', parts.get('外牆', 0)):.3f}、樓板 {parts.get('floor', parts.get('樓板', 0)):.3f}、烤箱 {parts.get('oven', parts.get('烤箱', 0)):.3f}、日射 {parts.get('solar', parts.get('日射', 0)):.3f}、風機與FFU {parts.get('fan', parts.get('風機與FFU', 0)):.3f} kW。"
         )
+    if float(i["en_wall"]) > 0 or float(i["en_floor"]) > 0:
+        a(
+            f"圍護條件：外牆 {float(i['en_wall']):g} m²×U {float(i['wall_u']):g}、樓板 {float(i['en_floor']):g} m²×U {float(i['floor_u']):g}（U 值單位 {i['u_unit']}）。"
+        )
     a(
         f"產濕來源：人員 {r['latent']['people_kg_h']:.3f}＋額外製程 {r['latent']['process_kg_h']:.3f} kg/h；製程方式：{i['latent_mode']}。外氣水氣由盤管另算，不重複加進室內。"
     )
