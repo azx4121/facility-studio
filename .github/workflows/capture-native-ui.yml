@@ -1,0 +1,98 @@
+name: Capture native UI screenshots
+
+# Starts the PUBLISHED win.9 EXE and mac.7 DMG on native desktops, in both languages, and keeps the window pictures.
+# Manual only; it publishes nothing and changes no release. Pictures go to an artifact and to a branch per platform.
+
+on:
+  workflow_dispatch:
+    inputs:
+      windows_tag:
+        description: Windows release tag
+        default: v5.6.0-win.9
+      macos_tag:
+        description: macOS release tag
+        default: v5.6.0-mac.7
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-2022
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.13.15'
+          architecture: x64
+      - name: Download the published EXE and verify its checksum
+        shell: pwsh
+        run: |
+          gh release download "${{ inputs.windows_tag }}" --pattern "Facility_Studio_V5_6_0_Windows_Offline.exe" --pattern "SHA256SUMS.txt" --dir app
+          $expected = ((Get-Content app/SHA256SUMS.txt | Where-Object { $_ -match "Windows_Offline.exe" }) -split "\s+")[0]
+          $actual = (Get-FileHash app/Facility_Studio_V5_6_0_Windows_Offline.exe -Algorithm SHA256).Hash.ToLower()
+          if ($expected.ToLower() -ne $actual) { throw "SHA256 mismatch: $expected vs $actual" }
+          "SHA256 $actual"
+      - name: Capture the first-launch window in both languages
+        shell: pwsh
+        run: |
+          python -m pip install pillow
+          python tools/capture_native_ui.py --platform windows --app app/Facility_Studio_V5_6_0_Windows_Offline.exe --language zh-Hant --out shots/windows-zh.png
+          python tools/capture_native_ui.py --platform windows --app app/Facility_Studio_V5_6_0_Windows_Offline.exe --language en --out shots/windows-en.png
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: native-ui-windows
+          path: shots
+          retention-days: 14
+      - name: Keep the pictures on a branch so they can be reviewed and copied
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C native-ui-screenshots-windows
+          git add -f shots
+          git commit -m "Native win.9 window captures (published EXE, Windows Server 2022)"
+          git push -f origin native-ui-screenshots-windows
+
+  macos:
+    runs-on: macos-15
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.13.15'
+      - name: Download the published DMG, verify its checksum and copy the app out
+        run: |
+          gh release download "${{ inputs.macos_tag }}" --pattern "Facility_Studio_V5_6_0_macOS_mac7.dmg" --pattern "SHA256SUMS.txt" --dir app
+          expected=$(grep "macOS_mac7.dmg" app/SHA256SUMS.txt | awk '{print $1}')
+          actual=$(shasum -a 256 app/Facility_Studio_V5_6_0_macOS_mac7.dmg | awk '{print $1}')
+          test "$expected" = "$actual" || { echo "SHA256 mismatch $expected vs $actual"; exit 1; }
+          mkdir -p /tmp/fsmount
+          hdiutil attach -nobrowse -readonly -mountpoint /tmp/fsmount app/Facility_Studio_V5_6_0_macOS_mac7.dmg
+          cp -R "/tmp/fsmount/Facility Studio.app" "$RUNNER_TEMP/Facility Studio.app"
+          hdiutil detach /tmp/fsmount
+          codesign --verify --deep --strict "$RUNNER_TEMP/Facility Studio.app" && echo "codesign ok"
+      - name: Capture the first-launch window in both languages
+        run: |
+          python3 -m pip install pyobjc-framework-Quartz
+          python3 tools/capture_native_ui.py --platform macos --app "$RUNNER_TEMP/Facility Studio.app" --language zh-Hant --out shots/macos-zh.png
+          python3 tools/capture_native_ui.py --platform macos --app "$RUNNER_TEMP/Facility Studio.app" --language en --out shots/macos-en.png
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: native-ui-macos
+          path: shots
+          retention-days: 14
+      - name: Keep the pictures on a branch so they can be reviewed and copied
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C native-ui-screenshots-macos
+          git add -f shots
+          git commit -m "Native mac.7 window captures (published DMG, macOS 15)"
+          git push -f origin native-ui-screenshots-macos
