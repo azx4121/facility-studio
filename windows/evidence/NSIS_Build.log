@@ -2,7 +2,7 @@ MakeNSIS v3.09-4 - Copyright 1999-2023 Contributors
 See the file COPYING for license details.
 Credits can be found in the Users Manual.
 
-Command line defined: "FS_SETUP_OUTPUT=/home/user/facility-studio/windows/.nsis-build-ielldepq/Facility_Studio_V5_6_0_Setup.exe"
+Command line defined: "FS_SETUP_OUTPUT=/home/user/facility-studio/windows/.nsis-build-c3r2tbqt/Facility_Studio_V5_6_0_Setup.exe"
 Processing config: /etc/nsisconf.nsh
 Processing default plugins: "/usr/share/nsis/Plugins/x86-unicode/*.dll"
  + AdvSplash::show
@@ -84,7 +84,7 @@ NSIS Modern User Interface version 2.1 - Copyright 2002-2023 Joost Verburg (/usr
 !include: closed: "/usr/share/nsis/Contrib/Modern UI 2/MUI2.nsh"
 !include: closed: "/usr/share/nsis/Include/MUI2.nsh"
 Name: "廠務簡易工具 V5.6.0"
-OutFile: "/home/user/facility-studio/windows/.nsis-build-ielldepq/Facility_Studio_V5_6_0_Setup.exe"
+OutFile: "/home/user/facility-studio/windows/.nsis-build-c3r2tbqt/Facility_Studio_V5_6_0_Setup.exe"
 VIAddVersionKey: "ProductName" "廠務簡易工具"
 VIAddVersionKey: "FileDescription" "Facility Studio V5.6.0 Online Setup"
 VIAddVersionKey: "FileVersion" "5.6.0.9"
@@ -174,7 +174,7 @@ File: "inactive_acceptance.py" 15596 bytes
 File: "industrial_theme.py" 21939 bytes
 File: "json_io.py" 2042 bytes
 File: "keypad_acceptance.py" 14601 bytes
-File: "language_acceptance.py" 13161 bytes
+File: "language_acceptance.py" 13495 bytes
 File: "lighting_acceptance.py" 6681 bytes
 File: "localized_plot.py" 904 bytes
 File: "localized_tk.py" 14347 bytes
@@ -263,7 +263,7 @@ Removing unused resources... Done!
 Generating language tables... Done!
 Generating uninstaller... Done!
 
-Output: "/home/user/facility-studio/windows/.nsis-build-ielldepq/Facility_Studio_V5_6_0_Setup.exe"
+Output: "/home/user/facility-studio/windows/.nsis-build-c3r2tbqt/Facility_Studio_V5_6_0_Setup.exe"
 Install: 4 pages (256 bytes), 1 section (4120 bytes), 477 instructions (13356 bytes), 275 strings (23810 bytes), 1 language table (286 bytes).
 Uninstall: 2 pages (192 bytes), 1 section (4120 bytes), 57 instructions (1596 bytes), 93 strings (1780 bytes), 1 language table (250 bytes).
 Datablock optimizer saved 26498 bytes (~1.1%).
@@ -272,9 +272,9 @@ Using lzma (compress whole) compression.
 
 EXE header size:              114176 / 100864 bytes
 Install code:                          (40244 bytes)
-Install data:                          (2205021 bytes)
+Install data:                          (2205355 bytes)
 Uninstall code+data:                   (20254 bytes)
-Compressed data:              835246 / 2265519 bytes
-CRC (0x046C8E77):                  4 / 4 bytes
+Compressed data:              835264 / 2265853 bytes
+CRC (0x44E567B7):                  4 / 4 bytes
 
-Total size:                   949426 / 2366387 bytes (40.1%)
+Total size:                   949444 / 2366721 bytes (40.1%)
