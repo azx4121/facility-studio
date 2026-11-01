@@ -32,10 +32,12 @@ PIPE_DEFAULTS = {
 class VerificationWindow:
     def __init__(self, parent, ahu_provider=None, water_provider=None):
         import tkinter as tk
-        from tkinter import ttk
+        from tkinter import ttk, font as tkfont
+        from .platform_support import preferred_ui_font
         from .flow_toolbar import FlowToolbar
 
         self.tk, self.ttk = tk, ttk
+        self.family = preferred_ui_font(set(tkfont.families(parent)))
         self.ahu_provider, self.water_provider = ahu_provider, water_provider
         self.results, self.texts, self.source_snapshot = {}, {}, None
         self.win = tk.Toplevel(parent)
@@ -49,7 +51,7 @@ class VerificationWindow:
         ttk.Label(
             self.win,
             text="工程驗證｜AHU 對照・液態水管・單位換算",
-            font=("PingFang TC", 16, "bold"),
+            font=(self.family, 16, "bold"),
         ).pack(anchor="w", padx=14, pady=(14, 4))
         ttk.Label(self.win, textvariable=self.status, wraplength=680).pack(
             anchor="w", padx=14, pady=4
@@ -183,7 +185,7 @@ class VerificationWindow:
         text = scrolledtext.ScrolledText(
             self.frames[key],
             wrap="word",
-            font=("PingFang TC", 13),
+            font=(self.family, 13),
             foreground="#202938",
             background="white",
             padx=10,

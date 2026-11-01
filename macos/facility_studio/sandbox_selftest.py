@@ -4,6 +4,7 @@ import json
 import math
 from pathlib import Path
 import platform
+import sys
 import tempfile
 
 
@@ -59,20 +60,32 @@ def run(destination):
     view = VerificationWindow(root)
     try:
         root.update()
-        from .sandbox_native_menu import application_menu_titles
+        if sys.platform == "darwin":
+            from .sandbox_native_menu import application_menu_titles
 
-        check(
-            "原生應用程式選單繁體中文",
-            lambda: (
-                bool(application_menu_titles())
-                and not any(
-                    title.startswith(
-                        ("Preferences", "Services", "Hide ", "Quit ", "Show All")
+            check(
+                "原生應用程式選單繁體中文",
+                lambda: (
+                    bool(application_menu_titles())
+                    and not any(
+                        title.startswith(
+                            ("Preferences", "Services", "Hide ", "Quit ", "Show All")
+                        )
+                        for title in application_menu_titles()
                     )
-                    for title in application_menu_titles()
-                )
-            ),
-        )
+                ),
+            )
+        else:
+            menu = root._sandbox_menu
+            titles = [
+                menu.entrycget(i, "label")
+                for i in range(menu.index("end") + 1)
+                if menu.type(i) == "cascade"
+            ]
+            check(
+                "原生應用程式選單繁體中文",
+                lambda: {"檔案", "編輯", "視窗", "說明"}.issubset(titles),
+            )
         check("三個功能分頁", lambda: len(view.nb.tabs()) == 3)
         check(
             "工程品質原因可見",
@@ -107,6 +120,11 @@ def run(destination):
     result = {
         "build": BUILD,
         "architecture": platform.machine(),
+        "frozen": bool(getattr(sys, "frozen", False)),
+        "offline_network_audit": __import__("os").environ.get(
+            "FACILITY_TEST_BLOCK_NETWORK"
+        )
+        == "1",
         "checks": checks,
         "passed": all(x["passed"] for x in checks),
         "engineering_approval": False,

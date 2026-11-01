@@ -616,7 +616,7 @@ class SimpleToolsApp:
         # Footer first: pack gives space in packing order, so a short window clips the
         # navigation list instead of the tutorial button and the author credit.
         self.author_credit = tk.Label(
-            side, text="DESIGNED BY\nANDY HUANG ©", bg=Theme.NAV,
+            side, text="設計：\nANDY HUANG ©", bg=Theme.NAV,
             fg=Theme.MUTED, justify="left", font=(self.family, 9),
         )
         self.author_credit.pack(side="bottom", anchor="w", padx=18, pady=(8, 16))
@@ -650,7 +650,10 @@ class SimpleToolsApp:
         ttk.Button(engineering, text="完整工程工作台", command=self.open_workbench).pack(side="left")
         ttk.Button(engineering, text="設備表匯入", command=self.open_equipment).pack(side="left", padx=(6, 0))
         ttk.Button(engineering, text="其他工程快算", command=self.open_extra_tools).pack(side="left", padx=(6, 0))
-        ttk.Label(header, text="Language / 語言").grid(
+        ttk.Button(engineering, text="工程驗證沙盒", command=self.open_engineering_verification).pack(side="left", padx=(6, 0))
+        from .sandbox_ui import install_menus
+        install_menus(root)
+        ttk.Label(header, text="介面語言").grid(
             row=2, column=2, sticky="e", pady=(3, 0)
         )
         self.language_picker = LanguagePicker(header)
@@ -731,6 +734,17 @@ class SimpleToolsApp:
     def configure_style(self):
         Theme.apply(self.root)
         self.family = Theme.family
+
+    def open_engineering_verification(self):
+        from .feed_review_preview import open_preview
+        from .engineering_verification import pipe_from_water_tool
+
+        def water_provider():
+            if "water" not in self.pages:
+                raise ValueError("請先開啟冷熱水快算並填寫條件。")
+            return pipe_from_water_tool(self.pages["water"].data())
+
+        return open_preview(self.root, water_provider=water_provider)
 
     def active_page(self):
         return self.pages[self.current]
