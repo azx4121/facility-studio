@@ -8,7 +8,11 @@ Facility Studio 是供廠務、機電與空調工程人員使用的桌面工具�
 
 **Windows／macOS · 繁體中文／English · 離線運算 · 免另裝 Python**
 
-## 本版修訂重點（win.9／mac.7）
+## 本版修訂重點（win.10／mac.8）
+
+**win.10／mac.8 只改畫面：Windows 的視窗改成與 macOS 一致。** 原本同一個視窗在 Windows 的文字比 macOS 大約三分之一（Tk 對「點」的換算不同），完整工作台導覽也用不同的按鈕元件；現在兩個平台使用相同的字級換算與導覽樣式。**因此 win.10 的文字比 win.9 小**（顯示縮放 125 %、150 % 時仍依比例放大）。計算與報告內容不變。兩平台的字型與視窗外框由系統提供，所以不會逐像素相同。[畫面比對與驗證](docs/2026-11-01-win10-mac8-ui-unification.md)
+
+自 win.9／mac.7 起的計算與報告修正：
 
 修正「供風溫差趨近零時，靜默輸出荒謬風量」的缺陷（曾可得約 7.4×10⁹ CMH 且只標「待補資料」）：現在以數值、物理、工程三層防護處理，不可行的設計明確標示「未達條件」並寫出原因與冰水須低於多少 °C，**不以固定 ACH 上限遮蔽**；一般設計的結果不變（560 個記錄案例逐項一致）。品質閘門狀態語意統一，冰水餘裕分列「未加餘裕」與「含餘裕」，PV 壓力提示與各單位檢查一致，U 值單位顯示在欄位、說明與報告。**Windows 與 macOS 現在出貨同一份計算程式碼**。[發布說明 win.9](docs/releases/v5.6.0-win.9.md)／[mac.7](docs/releases/v5.6.0-mac.7.md)；[驗收紀錄與限制](docs/2026-10-31-win9-mac7-acceptance.md)。
 
@@ -22,14 +26,14 @@ Windows **win.8** 補回清楚的「PV 真空」入口；從首頁或工作台�
 
 ## 下載
 
-目前已發布：**V5.6.0 公開測試版**，Windows **win.9**（2026-10-31，F-1 荒謬風量防護與品質閘門）／macOS **mac.7**（2026-11-01，同一份計算程式碼）。皆為預發布（prerelease），各自通過原生驗收後發布，舊版本保留於 Releases。
+目前已發布：**V5.6.0 公開測試版**，Windows **win.10**（2026-11-01，畫面與 macOS 一致；計算同 win.9）／macOS **mac.8**（2026-11-01，同一份計算程式碼）。皆為預發布（prerelease），各自通過原生驗收後發布，舊版本保留於 Releases。
 
 本版水管自動選型擴充至 **30 吋**；**十個快算直接放在左側**（含潔淨室風量、熱負荷初估、冰水泵浦）；氣體快算與工作台共同提供 **50 種廠務氣體＋自訂／混合氣**。有需求的新增氣體須填設計流速；完整工作台零需求時保留未使用草稿，避免阻擋整案計算。測試流程包含 **100 組不同案例，每組重算 20 次**；工程條件不足會明確拒絕，不等同程式故障。[工程審核、尺寸來源與範圍](docs/2026-10-16-gemini-integration-review.md) · [Windows win.8 驗收與 SHA256](docs/2026-10-18-windows-report-audit.md#原生發布結果)
 
 | 平台 | 下載 | 開始使用 |
 | --- | --- | --- |
-| Windows 10／11，Intel／AMD x64 | [**下載 Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.9/Facility_Studio_V5_6_0_Windows_Offline.exe) | 儲存後雙擊開啟；首次啟動請等候內建環境展開 |
-| macOS，Apple Silicon／Intel | [**下載 macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.7/Facility_Studio_V5_6_0_macOS_mac7.dmg) | 開啟 DMG，將 Facility Studio 拖到「應用程式」，再從那裡開啟 |
+| Windows 10／11，Intel／AMD x64 | [**下載 Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.10/Facility_Studio_V5_6_0_Windows_Offline.exe) | 儲存後雙擊開啟；首次啟動請等候內建環境展開 |
+| macOS，Apple Silicon／Intel | [**下載 macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.8/Facility_Studio_V5_6_0_macOS_mac8.dmg) | 開啟 DMG，將 Facility Studio 拖到「應用程式」，再從那裡開啟 |
 
 每個平台下載上表的一個檔案即可，教學與設備範本已內建。[版本與 SHA256](https://github.com/azx4121/facility-studio/releases) · [相容性與首次開啟](docs/faq.md#compatibility)
 
@@ -42,22 +46,22 @@ Windows 尚無正式發行者簽章；Mac 尚未取得 Developer ID／Apple 公�
 | 新增設備，先估配電需求 | 電流、NFB 與線徑候選、壓降初估 | [電力配線](docs/guides/electrical.md) |
 | 已知排風量，要比較方管／圓管 | 尺寸、實際風速；提供路徑後可初估壓損 | [風管尺寸](docs/guides/duct.md) |
 | 已知 CDA／N2／製程氣體流量與壓力，要估管徑 | 實際體積流量與參考管徑 | [CDA／特氣管徑](docs/guides/gas-vacuum.md) |
-| 找 PV 真空抽氣量與管徑初估 | 絕壓換算、管內實際流量與參考管徑 | Windows win.9／macOS mac.7 首頁「PV 真空」；或由完整工作台開啟 → [PV 案例](docs/guides/gas-vacuum.md#case-07) |
+| 找 PV 真空抽氣量與管徑初估 | 絕壓換算、管內實際流量與參考管徑 | Windows win.10／macOS mac.8 首頁「PV 真空」；或由完整工作台開啟 → [PV 案例](docs/guides/gas-vacuum.md#case-07) |
 | 整理空間與冷熱需求 | 平均照度／燈數、水量／熱量、空氣狀態與單位換算 | [照明](docs/guides/lighting.md)／[冷熱水](docs/guides/water.md)／[空氣線圖](docs/guides/psychrometrics.md)／[換算](docs/guides/units.md) |
 | 手上已有整批設備 Excel／CSV | 分組彙整電力、PCW、CDA、N2、EXHAUST、DI、PV 需求 | [設備表匯入](docs/guides/equipment.md) |
 | 比較空調方案與空調箱各段配置 | 夏冬熱濕需求、預熱／預冷／加濕／再冷／再熱、容量檢核與報告 | [完整工作台](docs/guides/workbench.md)／[單台空調箱](docs/guides/ahu.md) |
 
 各快算工具可獨立使用。採用的條件與預設值會顯示在畫面及報告，方便回頭核對，也方便比較修改前後的需求。
 
-| Windows（win.9） | macOS（mac.7） |
+| Windows（win.10） | macOS（mac.8） |
 | --- | --- |
-| ![Facility Studio Windows win.9 開啟後的繁體中文畫面](docs/images/v560-win9-native-zh.png) | ![Facility Studio macOS mac.7 開啟後的繁體中文畫面](docs/images/v560-mac7-native-zh.png) |
+| ![Facility Studio Windows win.10 開啟後的繁體中文畫面](docs/images/v560-win10-native-zh.png) | ![Facility Studio macOS mac.8 開啟後的繁體中文畫面](docs/images/v560-mac8-native-zh.png) |
 
 *兩張都是已發布的安裝檔／DMG 在原生桌面（GitHub Actions：Windows Server 2022、macOS 15）實際開啟後擷取的視窗，未裁切、未重繪，使用預設輸入。兩平台字型與視窗外框由系統提供，所以並非逐像素相同；來源、檔案雜湊與擷取方式見 [圖片來源](docs/images/README.md)。*
 
 ## 第一次使用，從一個小問題開始
 
-1. 開啟軟體，在右上角選擇「繁體中文」或「English」；Windows 主視窗標題應含 `5.6.0-win.9`（macOS 為 `5.6.0-mac.7`）。
+1. 開啟軟體，在右上角選擇「繁體中文」或「English」；Windows 主視窗標題應含 `5.6.0-win.10`（macOS 為 `5.6.0-mac.8`）。
 2. 選一個工具，輸入手上的數值與單位；先查看畫面列出的採用條件。
 3. 按「計算」，閱讀結果後複製或匯出 TXT。需要公式或操作說明時，按「本工具教學」。
 
