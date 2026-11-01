@@ -1222,7 +1222,7 @@ _add("""
 額外製程潛熱（不含人員／外氣）	Additional process latent load (excluding occupants / outdoor air)
 電阻率參考（25°C）	Reference resistivity (25°C)
 室內模式以明列得熱、外牆、樓板與產濕作穩態收支；沿用夏季設計風量。並非逐時建築負荷或多室模型。	Room mode balances specified heat gains, envelope conduction and moisture at steady state using the summer design airflow. It is not an hourly building-load or multi-zone model.
-總覽與空氣線圖	Overview / psychrometrics
+總覽與空氣線圖	Overview / air chart
 空調與空間	HVAC / rooms
 熱負荷與照明	Heat loads / lighting
 特氣與真空	Gases / vacuum
