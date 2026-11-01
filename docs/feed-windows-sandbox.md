@@ -22,3 +22,5 @@ GitHub `feed-windows-sandbox.yml` 在原生 Windows Server 2022 建置與執行�
 GitHub 工作流程不發布 Release、不合併 main、不使用付費模型或公司資料。通過後才將安裝包、免安裝包、核對碼與說明上傳至使用者已連接的私人 Google Drive，不調整分享權限。
 
 來源：[PyInstaller 官方封裝模式](https://pyinstaller.org/en/stable/operating-mode.html)、[NSIS 腳本參考](https://nsis.sourceforge.io/Docs/Chapter4.html)、[GitHub Windows 2022 runner](https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md)。
+
+保留的 win.10 線上安裝包未改寫。一般來源 CI 對它採 `packaging_checks.py --legacy-assets-only`，保留 manifest、CRC、完整解壓與 embedded bytes 檢查，明確不計為新沙盒來源一致性。正式發布流程不帶此參數，仍強制原本的來源一致性；新沙盒則由 build manifest、交付 SHA-256 及兩個 Windows 原生安裝／執行 gate 驗證，不能用歷史包測試取代。
