@@ -374,7 +374,7 @@ class AHUWindow(AHUView):
         self.tutorial_button.pack(side="left")
         self.language_picker = LanguagePicker(language_bar)
         self.language_picker.pack(side="right")
-        ttk.Label(language_bar, text="Language / 語言").pack(side="right", padx=8)
+        ttk.Label(language_bar, text="介面語言").pack(side="right", padx=8)
         linkbar = ttk.Frame(self.win, padding=(12, 0))
         linkbar.pack(fill="x")
         if main_app:

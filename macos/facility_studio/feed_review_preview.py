@@ -38,6 +38,7 @@ class VerificationWindow:
         self.ahu_provider, self.water_provider = ahu_provider, water_provider
         self.results, self.texts, self.source_snapshot = {}, {}, None
         self.win = tk.Toplevel(parent)
+        self.win.configure(background="#eef3f8")
         self.win.title("工程驗證沙盒｜" + BUILD)
         self.win.geometry(
             f"{min(1120, parent.winfo_screenwidth() - 60)}x{min(820, parent.winfo_screenheight() - 100)}"
@@ -88,7 +89,7 @@ class VerificationWindow:
             "length_m": "直管長度 m",
             "roughness_mm": "絕對粗糙度 mm",
             "sum_k": "管件 K 加總",
-            "equipment_pa": "設備壓降 Pa",
+            "equipment_pa": "設備壓降 Pa（0 未納入）",
             "boundary": "系統邊界",
             "static_m": "開式靜揚程 m",
         }

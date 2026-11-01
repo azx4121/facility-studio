@@ -3618,3 +3618,5 @@ TEXT.update({
 TEXT.update({"工程驗證沙盒": "Engineering verification sandbox"})
 
 TEXT.update({"請先開啟冷熱水快算並填寫條件。": "Open the water tool and enter its conditions first."})
+
+TEXT.update({"介面語言": "Interface language", "設計：\nANDY HUANG ©": "DESIGNED BY\nANDY HUANG ©"})

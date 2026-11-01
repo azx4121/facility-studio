@@ -616,7 +616,7 @@ class SimpleToolsApp:
         # Footer first: pack gives space in packing order, so a short window clips the
         # navigation list instead of the tutorial button and the author credit.
         self.author_credit = tk.Label(
-            side, text="DESIGNED BY\nANDY HUANG ©", bg=Theme.NAV,
+            side, text="設計：\nANDY HUANG ©", bg=Theme.NAV,
             fg=Theme.MUTED, justify="left", font=(self.family, 9),
         )
         self.author_credit.pack(side="bottom", anchor="w", padx=18, pady=(8, 16))
@@ -653,7 +653,7 @@ class SimpleToolsApp:
         ttk.Button(engineering, text="工程驗證沙盒", command=self.open_engineering_verification).pack(side="left", padx=(6, 0))
         from .sandbox_ui import install_menus
         install_menus(root)
-        ttk.Label(header, text="Language / 語言").grid(
+        ttk.Label(header, text="介面語言").grid(
             row=2, column=2, sticky="e", pady=(3, 0)
         )
         self.language_picker = LanguagePicker(header)
