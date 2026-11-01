@@ -1,12 +1,19 @@
 # 介面截圖來源 / Screenshot provenance
 
-win.9／mac.7（2026-10-31／11-01）：首頁圖片仍是 win.8 的原生畫面。win.9 與 mac.7 的原生畫面在各次原生驗收的證據包（發布 win.9 的 [Windows run 41211395058](https://github.com/azx4121/facility-studio/actions/runs/41211395058)；發布 mac.7 的是 main 提交 `6e8556e` 的 macOS 流程，見 Actions 頁面）內，需登入 GitHub 下載；建立本頁的環境無法下載這些證據包，因此尚未放入本倉庫，也不以 Linux 原始碼畫面代替。
+## 首頁圖片：win.9／mac.7 開啟後的原生畫面（2026-11-01）
 
-win.9 / mac.7: the homepage image is still the native win.8 capture. Native win.9 and mac.7 captures are in the evidence artifacts of the native acceptance runs (sign-in required to download). They could not be fetched where this page was prepared, so they are not yet in this repository, and Linux source screenshots are not substituted.
+- `v560-win9-native-zh.png` SHA256 `808801baed04e1cc012936349c6e574f532fbc3953ba5531a3f9f61399992cc7`
+- `v560-win9-native-en.png` SHA256 `82c9588fc3eabf78b48905d0414dbdcbbd47a089d1371b9659fcf04cc11d43a9`
+- `v560-mac7-native-zh.png` SHA256 `13585315b87bed455aaa0e50c3afe9b857fb6ea6efefe1151366bd9ca3531358`
+- `v560-mac7-native-en.png` SHA256 `5a6d6bf4c0af98027f5f5d250aa96ece904a9951c848a59b38269753232f6af3`
 
-首頁目前使用 win.8 的原生英文電力頁，標題含 win.8，首頁有 PV 真空按鈕。歷史圖片保留各自來源版本；不得將 Linux 原始碼畫面或舊版畫面當成新版交付檔。[win.8 驗收與畫面觀察](../2026-10-18-windows-report-audit.md)。
+來源：Actions 流程 [Capture native UI screenshots（run 41272257213）](https://github.com/azx4121/facility-studio/actions/runs/41272257213)。流程下載**已發布**的 v5.6.0-win.9 EXE 與 v5.6.0-mac.7 DMG，核對 SHA256SUMS，各在 Windows Server 2022、macOS 15 的原生桌面上用 `tools/capture_native_ui.py` 啟動（僅預先寫入語言偏好檔，未改程式、未操作畫面），等視窗出現並再等 8 秒後擷取該視窗，未裁切、未重繪。畫面為第一個工具（電力配線）的預設輸入。
 
-Current homepage image: native win.8 English electrical page, with the PV vacuum button and win.8 caption. Historical captures retain their original provenance. See the current acceptance report for capture/repaint limits.
+限制：這是 GitHub 託管的虛擬桌面，不是實體電腦；Windows 為 100% 縮放；macOS 視窗標題列呈未取得焦點的灰色，為擷取當下狀態。兩平台字型（Windows：Microsoft JhengHei UI／Consolas；macOS：PingFang TC／Menlo）與視窗外框由系統提供，所以不會逐像素相同。
+
+英文／中文 README 的首頁圖並列這兩平台的圖。win.8 以前的圖片保留為歷史紀錄。
+
+English: the homepage images are the published win.9 EXE and mac.7 DMG started on native desktops (GitHub Actions run 41272257213: Windows Server 2022, macOS 15) with `tools/capture_native_ui.py`, which only pre-sets the language preference file, waits for the window plus 8 s and captures that window, uncropped and unretouched, default inputs (SHA256 values above). Limits: hosted virtual desktops, not physical machines; Windows at 100 % scaling; the macOS title bar is grey because the window had no focus. Fonts and window frames come from each system, so the two platforms are not pixel-identical. Images up to win.8 are kept as history.
 
 ## V5.6.0 介面示意：win.4／mac.6 來源
 
