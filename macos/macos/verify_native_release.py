@@ -71,7 +71,7 @@ def verify_dmg(path, output):
                     stdout=file,
                     stderr=subprocess.STDOUT,
                     check=True,
-                    timeout=300,
+                    timeout=SELF_TEST_TIMEOUT_SECONDS,
                 )
             finally:
                 retain_ui_timing(output, since=started, name="DMG_Native_UITiming.json")
@@ -86,6 +86,11 @@ def verify_dmg(path, output):
                 check=True,
                 timeout=60,
             )
+
+
+# Whole-process limit of one delivered-app self-test. The Intel runner needs more than the earlier 300 s (one run ended
+# at 300 s with every check passed so far); the per-interaction 5 s budget inside the self-test is unchanged.
+SELF_TEST_TIMEOUT_SECONDS = 480
 
 
 def print_self_test_failure(console):
@@ -164,7 +169,7 @@ def main():
                 stdout=file,
                 stderr=subprocess.STDOUT,
                 check=True,
-                timeout=300,
+                timeout=SELF_TEST_TIMEOUT_SECONDS,
             )
         except BaseException:
             # The console and result stay in the evidence artifact; also print what failed so the CI log names it.
