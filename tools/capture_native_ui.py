@@ -107,7 +107,7 @@ def main():
             window = windows_find() if args.platform == "windows" else mac_find()
         if window is None:
             raise SystemExit("no Facility Studio window appeared within " + str(args.timeout) + " s")
-        print("window:", window, flush=True)
+        print("window:", ascii(window), flush=True)
         time.sleep(8)  # first calculation and layout settle
         out = Path(args.out)
         out.parent.mkdir(parents=True, exist_ok=True)
