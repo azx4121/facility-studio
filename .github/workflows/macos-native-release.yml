@@ -53,6 +53,8 @@ jobs:
           python3 macos/tests/v559_resilience.py
           python3 macos/tests/v5510_keypad.py
           python3 macos/tests/v560_features.py
+          python3 macos/tests/ui_scaling_checks.py
+          python3 macos/tests/text_clipping_checks.py
           python3 tools/verify_platform_sync.py
           python3 macos/tests/reference_psychrometrics.py
           python3 macos/tests/airflow_guard_checks.py

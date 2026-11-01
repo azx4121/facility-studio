@@ -23,6 +23,19 @@ def uses_ttk_navigation(platform=None):
     return (sys.platform if platform is None else platform) == "darwin"
 
 
+def normalize_tk_scaling(root, platform=None):
+    """Give every platform the same text size.
+
+    Fonts are specified in points. Tk maps 1 pt to 1.33 px on Windows (96 dpi) but to 1 px on macOS (72 dpi), which made
+    the macOS window show text 25 % smaller than Windows in the same window size. macOS is set to the Windows mapping so
+    the delivered windows look alike; Windows and Linux keep the scaling the system reports.
+    """
+    if (sys.platform if platform is None else platform) != "darwin":
+        return False
+    root.tk.call("tk", "scaling", 96.0 / 72.0)
+    return True
+
+
 def preferred_ui_font(families, platform=None):
     platform = sys.platform if platform is None else platform
     names = ["Microsoft JhengHei", "Noto Sans CJK TC", "Noto Sans CJK JP"]
