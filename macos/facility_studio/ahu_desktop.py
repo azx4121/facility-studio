@@ -374,7 +374,7 @@ class AHUWindow(AHUView):
         self.tutorial_button.pack(side="left")
         self.language_picker = LanguagePicker(language_bar)
         self.language_picker.pack(side="right")
-        ttk.Label(language_bar, text="Language / 語言").pack(side="right", padx=8)
+        ttk.Label(language_bar, text="介面語言").pack(side="right", padx=8)
         linkbar = ttk.Frame(self.win, padding=(12, 0))
         linkbar.pack(fill="x")
         if main_app:
@@ -389,6 +389,8 @@ class AHUWindow(AHUView):
             ttk.Button(
                 linkbar, text="設為本案獨立設計", command=self.make_independent
             ).pack(side="left", padx=4)
+        from .feed_review_preview import open_preview
+        ttk.Button(linkbar, text="工程驗證沙盒", command=lambda: open_preview(self.win, ahu_provider=self.snapshot)).pack(side="left", padx=4)
         ttk.Button(linkbar, text="定位問題", command=self.focus_issue).pack(
             side="right"
         )

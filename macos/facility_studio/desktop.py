@@ -420,7 +420,7 @@ class DesktopApp(SessionController, MainView):
             self.nav.append(b)
         tk.Label(
             side,
-            text="DESIGNED BY\nANDY HUANG ©",
+            text="設計：\nANDY HUANG ©",
             bg=Theme.NAV,
             fg=Theme.MUTED,
             justify="left",
@@ -447,7 +447,7 @@ class DesktopApp(SessionController, MainView):
         self.receipt_status_label.grid(row=6, column=0, columnspan=2, sticky="w")
         language_bar = ttk.Frame(head)
         language_bar.grid(row=0, column=1, sticky="e", pady=(6, 0))
-        ttk.Label(language_bar, text="Language / 語言").pack(side="left", padx=(0, 6))
+        ttk.Label(language_bar, text="介面語言").pack(side="left", padx=(0, 6))
         self.language_picker = LanguagePicker(language_bar)
         self.language_picker.pack(side="right")
         header_widths = [None]
@@ -594,6 +594,8 @@ class DesktopApp(SessionController, MainView):
         self.recalculate()
 
     def __init__(self, root):
+        from .sandbox_ui import install_menus
+        root.after_idle(lambda: install_menus(root))
         self.children = []
         self.project_id = uuid.uuid4().hex
         self.ahu_documents = {}
