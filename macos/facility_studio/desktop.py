@@ -594,6 +594,8 @@ class DesktopApp(SessionController, MainView):
         self.recalculate()
 
     def __init__(self, root):
+        from .sandbox_ui import install_menus
+        root.after_idle(lambda: install_menus(root))
         self.children = []
         self.project_id = uuid.uuid4().hex
         self.ahu_documents = {}

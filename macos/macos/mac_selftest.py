@@ -17,7 +17,7 @@ import traceback
 
 def run():
     checks = []
-    destination = Path.home() / "Library/Logs/Facility_Studio_V5_5"
+    destination = Path(os.environ.get("FACILITY_STUDIO_SANDBOX_DATA", Path.home() / "Library/Logs/Facility_Studio_V5_5"))
     destination.mkdir(parents=True, exist_ok=True)
     if sys.platform == "darwin":
         faulthandler.enable()
@@ -314,7 +314,7 @@ def run():
         else:
             os.environ["LOCALAPPDATA"] = old_storage
         gui_storage.cleanup()
-    destination = Path.home() / "Library" / "Logs" / "Facility_Studio_V5_5"
+    destination = Path(os.environ.get("FACILITY_STUDIO_SANDBOX_DATA", Path.home() / "Library/Logs/Facility_Studio_V5_5"))
     destination.mkdir(parents=True, exist_ok=True)
     report = {
         "version": __version__,

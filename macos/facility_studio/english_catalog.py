@@ -3614,3 +3614,7 @@ TEXT.update({
     "、樓板 ": ", floor ",
     "（U 值單位 ": " (U-value unit ",
 })
+
+TEXT.update({"工程驗證沙盒": "Engineering verification sandbox"})
+
+TEXT.update({"請先開啟冷熱水快算並填寫條件。": "Open the water tool and enter its conditions first."})
