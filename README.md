@@ -49,9 +49,11 @@ Windows 尚無正式發行者簽章；Mac 尚未取得 Developer ID／Apple 公�
 
 各快算工具可獨立使用。採用的條件與預設值會顯示在畫面及報告，方便回頭核對，也方便比較修改前後的需求。
 
-![Facility Studio Windows win.8 原生英文電力頁](docs/images/v560-win8-native-en.png)
+| Windows（win.9） | macOS（mac.7） |
+| --- | --- |
+| ![Facility Studio Windows win.9 開啟後的繁體中文畫面](docs/images/v560-win9-native-zh.png) | ![Facility Studio macOS mac.7 開啟後的繁體中文畫面](docs/images/v560-mac7-native-zh.png) |
 
-*（此圖為 win.8 的原生畫面；win.9／mac.7 的原生畫面在各次驗收的證據包內，尚未放入本倉庫。）Windows Server 2022 的 win.8 EXE 實際驗收畫面，使用合成 10 kW 資料並切至 English。原圖取自封裝測試證據，顯示 20 AT 與每相 5.5 mm² 候選。*
+*兩張都是已發布的安裝檔／DMG 在原生桌面（GitHub Actions：Windows Server 2022、macOS 15）實際開啟後擷取的視窗，未裁切、未重繪，使用預設輸入。兩平台字型與視窗外框由系統提供，所以並非逐像素相同；來源、檔案雜湊與擷取方式見 [圖片來源](docs/images/README.md)。*
 
 ## 第一次使用，從一個小問題開始
 

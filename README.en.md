@@ -55,9 +55,11 @@ See the [engineering and dashboard audit](docs/2026-10-16-gemini-integration-rev
 
 Each quick tool works independently. Adopted conditions and defaults appear on screen and in reports, so you can review the assumptions and compare demand after a change.
 
-![Facility Studio Windows win.8 native English electrical page](docs/images/v560-win8-native-en.png)
+| Windows (win.9) | macOS (mac.7) |
+| --- | --- |
+| ![Facility Studio Windows win.9 window as opened, English](docs/images/v560-win9-native-en.png) | ![Facility Studio macOS mac.7 window as opened, English](docs/images/v560-mac7-native-en.png) |
 
-*(This is the win.8 native image; native win.9 / mac.7 screenshots are in the acceptance evidence artifacts and are not yet in this repository.) Actual win.8 EXE acceptance on Windows Server 2022, switched to English with synthetic 10 kW data. The unmodified native evidence image shows the 20 AT / 5.5 mm² candidate.*
+*Both are the published installer / DMG started on a native desktop (GitHub Actions: Windows Server 2022, macOS 15) and captured as the window opens, uncropped and unretouched, with default inputs. Fonts and window frames come from each system, so the two are not pixel-identical; provenance, hashes and method are in [image provenance](docs/images/README.md).*
 
 ## Try one small calculation first
 
