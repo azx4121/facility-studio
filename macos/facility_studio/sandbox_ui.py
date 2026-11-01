@@ -67,3 +67,6 @@ def install_menus(root):
     menu.add_cascade(label="說明", menu=help_menu)
     root.configure(menu=menu)
     root._sandbox_menu = menu
+    from .sandbox_native_menu import localize_application_menu
+
+    root.after_idle(localize_application_menu)

@@ -318,3 +318,12 @@ def test_traditional_chinese_native_menu(monkeypatch):
         assert not {"File", "Edit", "Window", "Help"}.intersection(labels)
     finally:
         root.destroy()
+
+
+def test_cocoa_menu_translation_preserves_application_name():
+    from facility_studio.sandbox_native_menu import translated_title
+
+    assert translated_title("Quit 工程驗證沙盒") == "結束 工程驗證沙盒"
+    assert translated_title("Hide Others") == "隱藏其他程式"
+    assert translated_title("Preferences…") == "偏好設定…"
+    assert translated_title("服務") == "服務"

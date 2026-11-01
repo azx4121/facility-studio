@@ -54,6 +54,20 @@ def run(destination):
     view = VerificationWindow(root)
     try:
         root.update()
+        from .sandbox_native_menu import application_menu_titles
+
+        check(
+            "原生應用程式選單繁體中文",
+            lambda: (
+                bool(application_menu_titles())
+                and not any(
+                    title.startswith(
+                        ("Preferences", "Services", "Hide ", "Quit ", "Show All")
+                    )
+                    for title in application_menu_titles()
+                )
+            ),
+        )
         check("三個功能分頁", lambda: len(view.nb.tabs()) == 3)
         check(
             "工程品質原因可見",
