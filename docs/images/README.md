@@ -1,5 +1,9 @@
 # 介面截圖來源 / Screenshot provenance
 
+win.9／mac.7（2026-10-31／11-01）：首頁圖片仍是 win.8 的原生畫面。win.9 與 mac.7 的原生畫面在各次原生驗收的證據包（發布 win.9 的 [Windows run 41211395058](https://github.com/azx4121/facility-studio/actions/runs/41211395058)；發布 mac.7 的是 main 提交 `6e8556e` 的 macOS 流程，見 Actions 頁面）內，需登入 GitHub 下載；建立本頁的環境無法下載這些證據包，因此尚未放入本倉庫，也不以 Linux 原始碼畫面代替。
+
+win.9 / mac.7: the homepage image is still the native win.8 capture. Native win.9 and mac.7 captures are in the evidence artifacts of the native acceptance runs (sign-in required to download). They could not be fetched where this page was prepared, so they are not yet in this repository, and Linux source screenshots are not substituted.
+
 首頁目前使用 win.8 的原生英文電力頁，標題含 win.8，首頁有 PV 真空按鈕。歷史圖片保留各自來源版本；不得將 Linux 原始碼畫面或舊版畫面當成新版交付檔。[win.8 驗收與畫面觀察](../2026-10-18-windows-report-audit.md)。
 
 Current homepage image: native win.8 English electrical page, with the PV vacuum button and win.8 caption. Historical captures retain their original provenance. See the current acceptance report for capture/repaint limits.

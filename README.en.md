@@ -11,21 +11,27 @@ Facility Studio is a desktop tool for facility, electrical and HVAC engineers. U
 <a id="installation-and-first-launch"></a>
 ## Download and run
 
-Published version: **V5.6.0 public test release**, Windows **win.8** (2026-10-19, reports and PV entry) / macOS **mac.6** (2026-10-16). Each published binary passed its native acceptance gates. Previous releases remain available.
+Published version: **V5.6.0 public test release**, Windows **win.9** (2026-10-31, absurd-airflow guard and quality gate) / macOS **mac.7** (2026-11-01, same calculation code). Both are prereleases; each published binary passed its native acceptance gates. Previous releases remain available.
 
 This release's water sizing extends to **30 inches**; **all ten calculators are direct sidebar buttons** (including Cleanroom airflow, Heat load estimate and Chilled-water pump); the gas calculator and workbench share **50 factory gases plus custom mixtures**. Added gases with demand require an entered design velocity. Zero-demand workbench rows retain unused drafts without blocking the whole project. The test process includes **100 distinct scenarios, repeated 20 times each**. Explicit engineering rejections are distinguished from software faults. [Engineering review, dimension sources and scope](docs/2026-10-16-gemini-integration-review.md) · [Windows win.8 acceptance and SHA256](docs/2026-10-18-windows-report-audit.md#原生發布結果)
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows 10/11, Intel/AMD x64 | [**Download Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.8/Facility_Studio_V5_6_0_Windows_Offline.exe) | Save and double-click; allow time for the bundled environment to unpack on first launch |
-| macOS, Apple Silicon / Intel | [**Download macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.6/Facility_Studio_V5_6_0_macOS_mac6.dmg) | Open the DMG, drag Facility Studio into Applications, then launch it there |
+| Windows 10/11, Intel/AMD x64 | [**Download Windows EXE**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-win.9/Facility_Studio_V5_6_0_Windows_Offline.exe) | Save and double-click; allow time for the bundled environment to unpack on first launch |
+| macOS, Apple Silicon / Intel | [**Download macOS DMG**](https://github.com/azx4121/facility-studio/releases/download/v5.6.0-mac.7/Facility_Studio_V5_6_0_macOS_mac7.dmg) | Open the DMG, drag Facility Studio into Applications, then launch it there |
 
 Download one file for your platform. Help and equipment templates are bundled. [Versions and SHA256](https://github.com/azx4121/facility-studio/releases) · [Compatibility and first launch](docs/faq.en.md#compatibility)
 
 The Windows EXE has no official publisher signature; the Mac app has no Developer ID or Apple notarization. First launch may show a security prompt. Check the download source and follow the [security-prompt guide](docs/signing.en.md).
 
 <a id="current-source-revision"></a>
-## Current revision (win.8 / mac.6)
+## Current revision (win.9 / mac.7)
+
+Fixes the defect where a supply temperature difference near zero silently produced an absurd airflow (about 7.4×10⁹ CMH, shown only as "data pending"). Three guards (numerical, physical, engineering) now refuse such designs as "Conditions not met" with the cause and the chilled-water limit, **without a fixed ACH cap**; ordinary designs are unchanged (560 recorded cases identical). Quality-gate statuses are unified, chilled-water margins are listed before and after the margin, PV pressure hints match the per-unit ranges, and the U-value unit is shown with the field, in help and in the report. **Windows and macOS now ship the same calculation code.** Release notes: [win.9](docs/releases/v5.6.0-win.9.md) / [mac.7](docs/releases/v5.6.0-mac.7.md); [acceptance record and limits](docs/2026-10-31-win9-mac7-acceptance.md).
+
+Note: air-handler defaults are now bypass stages with no humidifier and 5,000 CMH; state stage settings explicitly in older examples. Verification covers calculation implementation and selection reasonableness; it is **not** proof of FEED, hospital infection-control, GMP or electrical-code compliance.
+
+## Previous revision (win.8 / mac.6)
 
 Windows **win.8** adds visible **PV vacuum** buttons on the homepage and workbench. Reports include adopted conditions, individual equipment power sources, unit ratings and governing equipment counts; duty explanations, fixed units and revision identity are corrected. Unknown pipeline inputs are rejected rather than silently using defaults. [Corrections, report samples and acceptance](docs/2026-10-18-windows-report-audit.md#english). It retains win.7 F01–F07, source restoration and the lighting-count correction. macOS remains mac.6.
 
@@ -42,7 +48,7 @@ See the [engineering and dashboard audit](docs/2026-10-16-gemini-integration-rev
 | Estimate supply requirements for new equipment | Current, circuit-breaker and conductor candidates, preliminary voltage drop | [Electrical sizing](docs/guides/electrical.en.md) |
 | Compare round and rectangular ducts for a known airflow | Dimensions and actual velocity; preliminary pressure loss when a route is supplied | [Duct sizing](docs/guides/duct.en.md) |
 | Estimate CDA / nitrogen / process-gas piping from flow and pressure | Actual volume flow and reference pipe diameter | [CDA / gas piping](docs/guides/gas-vacuum.en.md) |
-| Find process-vacuum flow and preliminary piping | Absolute-pressure conversion, actual pipe flow and reference diameter | Windows win.8 homepage **PV vacuum**; mac.6 full workbench → [PV example](docs/guides/gas-vacuum.en.md#case-07) |
+| Find process-vacuum flow and preliminary piping | Absolute-pressure conversion, actual pipe flow and reference diameter | Windows win.9 / macOS mac.7 homepage **PV vacuum**, or the full workbench → [PV example](docs/guides/gas-vacuum.en.md#case-07) |
 | Check room and thermal requirements | Average lux / lamp count, water flow / capacity, air states and unit conversions | [Lighting](docs/guides/lighting.en.md) / [Water](docs/guides/water.en.md) / [Psychrometrics](docs/guides/psychrometrics.en.md) / [Units](docs/guides/units.en.md) |
 | Consolidate an Excel/CSV equipment schedule | Grouped electricity, PCW, CDA, N2, EXHAUST, DI and PV demand | [Equipment schedules](docs/guides/equipment.en.md) |
 | Compare HVAC schemes and AHU stage configurations | Summer/winter heat and moisture demand, preheat / precool / humidification / recool / reheat, capacity checks and reports | [Full workbench](docs/guides/workbench.en.md) / [Standalone AHU](docs/guides/ahu.en.md) |
@@ -51,11 +57,11 @@ Each quick tool works independently. Adopted conditions and defaults appear on s
 
 ![Facility Studio Windows win.8 native English electrical page](docs/images/v560-win8-native-en.png)
 
-*Actual win.8 EXE acceptance on Windows Server 2022, switched to English with synthetic 10 kW data. The unmodified native evidence image shows the 20 AT / 5.5 mm² candidate.*
+*(This is the win.8 native image; native win.9 / mac.7 screenshots are in the acceptance evidence artifacts and are not yet in this repository.) Actual win.8 EXE acceptance on Windows Server 2022, switched to English with synthetic 10 kW data. The unmodified native evidence image shows the 20 AT / 5.5 mm² candidate.*
 
 ## Try one small calculation first
 
-1. Launch the app and choose **English** or **Traditional Chinese** at the top right. The Windows main caption should include `5.6.0-win.8`.
+1. Launch the app and choose **English** or **Traditional Chinese** at the top right. The Windows main caption should include `5.6.0-win.9` (macOS: `5.6.0-mac.7`).
 2. Select a tool and enter your values and units. Review the displayed assumptions.
 3. Click **Calculate**, then copy the result or export TXT. **This tool's guide** opens the relevant instructions and formulas.
 

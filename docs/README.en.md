@@ -1,10 +1,10 @@
 # Facility Studio documentation
 
-[Windows win.8 工程修正與原生驗收 / Corrections and acceptance](2026-10-18-windows-report-audit.md) · [win.4／mac.6 整合歷史](2026-10-16-gemini-integration-review.md)
+[win.9 / mac.7 acceptance record](2026-10-31-win9-mac7-acceptance.md) · [Windows win.8 工程修正與原生驗收 / Corrections and acceptance](2026-10-18-windows-report-audit.md) · [win.4／mac.6 整合歷史](2026-10-16-gemini-integration-review.md)
 
 [繁體中文](README.md) · [Home and downloads](../README.en.md) · [Report a problem](https://github.com/azx4121/facility-studio/issues)
 
-Current version: **V5.6.0 public test release (win.8 / mac.6)**. Choose documentation for your task; use the practice walkthrough when you need a full project.
+Current version: **V5.6.0 public test release (win.9 / mac.7)**. Choose documentation for your task; use the practice walkthrough when you need a full project.
 
 ## Start here
 
