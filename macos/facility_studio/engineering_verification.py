@@ -267,7 +267,12 @@ def pipe_calculate(inputs):
     rho = PropsSI("D", "T", t + 273.15, "P", p, "Water")
     mu = PropsSI("V", "T", t + 273.15, "P", p, "Water")
     cp = PropsSI("C", "T", t + 273.15, "P", p, "Water")
-    velocity = q / (math.pi * d * d / 4)
+    run_count = finite(inputs.get("runs", 1), "等流量並聯支數", 1, 32)
+    if run_count != int(run_count):
+        raise ValueError("等流量並聯支數必須是整數。")
+    runs = int(run_count)
+    branch_q = q / runs
+    velocity = branch_q / (math.pi * d * d / 4)
     re = Reynolds(V=velocity, D=d, rho=rho, mu=mu) if q else 0
     transitional = 2040 <= re < 4000
     f = friction_factor(Re=re, eD=rough / d, Darcy=True) if q else 0
@@ -288,6 +293,8 @@ def pipe_calculate(inputs):
         "mu_pa_s": mu,
         "cp_j_kg_k": cp,
         "flow_m3s": q,
+        "runs": runs,
+        "branch_flow_m3s": branch_q,
         "velocity_m_s": velocity,
         "reynolds": re,
         "darcy_factor": f,
@@ -307,7 +314,7 @@ def pipe_calculate(inputs):
         if re < 2040
         else "紊流",
         "versions": metadata(),
-        "scope": "單相純水、圓管、單一路徑。直管採 Darcy–Weisbach／fluids，水物性採 CoolProp；K 與設備壓降為使用者輸入。過渡流不判合格。未涵蓋氣體可壓縮流、混合液或網路平衡。",
+        "scope": "單相純水、圓管、單一路徑或同徑等流量並聯。壓差為單支路徑壓差，不乘並聯支數。直管採 Darcy–Weisbach／fluids，水物性採 CoolProp；K 與設備壓降為使用者輸入。過渡流不判合格。未涵蓋氣體可壓縮流、混合液或網路平衡。",
     }
 
 
@@ -319,6 +326,7 @@ def pipe_from_water_tool(data):
         raise ValueError("原水管工具目前沒有管徑需求，請在本頁明填內徑。")
     return {
         "flow_lpm": str(r["flow_lpm"]),
+        "runs": str(r["pipe"]["runs"]),
         "id_mm": str(r["pipe"]["id_mm"]),
         "length_m": str(data["length"]),
         "sum_k": str(data["k_sum"]),
@@ -377,6 +385,9 @@ def report_text(result):
     elif result["kind"] == "liquid_pipe":
         labels = [
             ("regime", "流況"),
+            ("runs", "等流量並聯支數"),
+            ("flow_m3s", "總水量 m³/s"),
+            ("branch_flow_m3s", "每支水量 m³/s"),
             ("rho_kg_m3", "水密度 kg/m³"),
             ("mu_pa_s", "動力黏度 Pa·s"),
             ("cp_j_kg_k", "比熱 J/(kg·K)"),

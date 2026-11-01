@@ -16,6 +16,7 @@ from .engineering_verification import (
 
 PIPE_DEFAULTS = {
     "flow_lpm": "100",
+    "runs": "1",
     "id_mm": "50",
     "temperature_c": "20",
     "pressure_kpa": "200",
@@ -82,7 +83,8 @@ class VerificationWindow:
             key: tk.StringVar(self.win, value) for key, value in PIPE_DEFAULTS.items()
         }
         labels = {
-            "flow_lpm": "循環水量 LPM",
+            "flow_lpm": "總循環水量 LPM",
+            "runs": "等流量並聯支數",
             "id_mm": "實際內徑 mm",
             "temperature_c": "水溫 °C",
             "pressure_kpa": "水絕對壓力 kPa",
@@ -117,7 +119,7 @@ class VerificationWindow:
         pipe_form.columnconfigure(3, weight=1)
         ttk.Label(
             self.frames["pipe"],
-            text="純水、單相、圓管；水溫／壓力請另行確認，從原工具帶入時不會猜測。",
+            text="純水、單相、同徑等流量支路；水溫／壓力請另行確認，不推測未提供資料。",
             wraplength=680,
         ).pack(anchor="w", pady=5)
         pipe_bar = FlowToolbar(self.frames["pipe"])

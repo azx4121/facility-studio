@@ -48,6 +48,11 @@ def run(destination):
         ),
     )
     check("溫度換算", lambda: abs(convert_units(0, "溫度", "°C")["°F"] - 32) < 1e-9)
+    parallel = pipe_calculate({**PIPE_DEFAULTS, "flow_lpm": "200", "runs": "2"})
+    check(
+        "並聯總流量依支數分流",
+        lambda: abs(parallel["total_pa"] - pipe["total_pa"]) < 1e-8,
+    )
     root = tk.Tk()
     root.withdraw()
     install_menus(root)

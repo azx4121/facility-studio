@@ -327,3 +327,35 @@ def test_cocoa_menu_translation_preserves_application_name():
     assert translated_title("Hide Others") == "隱藏其他程式"
     assert translated_title("Preferences…") == "偏好設定…"
     assert translated_title("服務") == "服務"
+
+
+def test_parallel_water_bridge_and_invalid_counts():
+    from facility_studio.simple_schema import defaults
+    from facility_studio.simple_engines import water
+
+    data = defaults("water")
+    data["flow"] = "50000"
+    old = water(data)
+    assert old["pipe"]["runs"] > 1
+    carried = pipe_from_water_tool(data)
+    assert int(carried["runs"]) == old["pipe"]["runs"]
+    result = pipe_calculate({**PIPE_DEFAULTS, **carried})
+    assert result["velocity_m_s"] == pytest.approx(old["pipe"]["velocity_mps"])
+    assert result["branch_flow_m3s"] * result["runs"] == pytest.approx(
+        result["flow_m3s"]
+    )
+    for count in (0, 1.5, 33, True):
+        with pytest.raises(ValueError):
+            pipe_calculate({**PIPE_DEFAULTS, "runs": count})
+
+
+@PROPERTIES
+@given(
+    st.floats(min_value=1, max_value=1000, allow_nan=False, allow_infinity=False),
+    st.integers(min_value=1, max_value=32),
+)
+def test_equal_parallel_branches_match_single_branch(flow, runs):
+    parallel = pipe_calculate({**PIPE_DEFAULTS, "flow_lpm": flow, "runs": runs})
+    single = pipe_calculate({**PIPE_DEFAULTS, "flow_lpm": flow / runs, "runs": 1})
+    assert parallel["velocity_m_s"] == pytest.approx(single["velocity_m_s"], rel=1e-12)
+    assert parallel["total_pa"] == pytest.approx(single["total_pa"], rel=1e-12)
