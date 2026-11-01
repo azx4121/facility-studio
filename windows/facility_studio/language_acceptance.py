@@ -27,6 +27,12 @@ def run(root, app, workbench, check, pump, output=None):
         app.language_picker.choice.set(i18n.LANGUAGES[code])
         app.language_picker.event_generate("<<ComboboxSelected>>")
         pump()
+        # A slower host can still be handling the native event after the first short pump; wait for it, bounded
+        # (at most ten more 0.2 s pumps), and still require that the language really changed through that event.
+        for _ in range(10):
+            if i18n.language() == code:
+                break
+            pump()
         return require(i18n.language() == code, "Language selection did not fire")
 
     check("English selector uses a native selection event", lambda: choose("en"))
