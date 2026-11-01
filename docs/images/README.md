@@ -1,19 +1,24 @@
 # 介面截圖來源 / Screenshot provenance
 
-## 首頁圖片：win.9／mac.7 開啟後的原生畫面（2026-11-01）
+## 首頁圖片：win.10／mac.8 開啟後的原生畫面（2026-11-01）
+
+- `v560-win10-native-zh.png` SHA256 `0885812517b5fcbbe111d9a103d683fc5f103995645964169be44c35c1395de2`
+- `v560-win10-native-en.png` SHA256 `079302504860ba83b3d1aa1be65ecd8e58370a85465280025d3ff00c6d2fee15`
+- `v560-mac8-native-zh.png` SHA256 `d470f6a92b4f344f5ede892a4f384652cc782d145e402fd0b16c415369f36f03`
+- `v560-mac8-native-en.png` SHA256 `a40901854a329f54991860735898048da6632d8b7537fcf9756ba370a61dd861`
+
+來源：Actions 流程 [Capture native UI screenshots（run 41278438651）](https://github.com/azx4121/facility-studio/actions/runs/41278438651)。流程下載**已發布**的 v5.6.0-win.10 EXE 與 v5.6.0-mac.8 DMG，核對 SHA256SUMS，各在 Windows Server 2022、macOS 15 的原生桌面上用 `tools/capture_native_ui.py` 啟動（僅預先寫入語言偏好檔，未改程式、未操作畫面），等視窗出現並再等 8 秒後擷取該視窗，未裁切、未重繪。畫面為第一個工具（電力配線）的預設輸入。
+
+限制：這是 GitHub 託管的虛擬桌面，不是實體電腦；Windows 為 100% 縮放；macOS 視窗標題列呈未取得焦點的灰色，為擷取當下狀態。兩平台字型（Windows：Microsoft JhengHei UI／Consolas；macOS：PingFang TC／Menlo）與視窗外框由系統提供，所以不會逐像素相同；已知的小差異：Windows 的文字換行位置略不同、語言選單與選取項目的字重不完全相同。
+
+English: the homepage images are the published win.10 EXE and mac.8 DMG started on native desktops (GitHub Actions run 41278438651: Windows Server 2022, macOS 15) with `tools/capture_native_ui.py`, which only pre-sets the language preference file, waits for the window plus 8 s and captures that window, uncropped and unretouched, default inputs (SHA256 values above). Limits: hosted virtual desktops, not physical machines; Windows at 100 % scaling; the macOS title bar is grey because the window had no focus. Fonts and window frames come from each system, so the two platforms are not pixel-identical; known small differences: line-wrap positions on Windows and the weight of the language selector and selected navigation item.
+
+## 歷史：win.9／mac.7 開啟後的原生畫面（2026-11-01，文字大小與 mac.7 不同）
 
 - `v560-win9-native-zh.png` SHA256 `808801baed04e1cc012936349c6e574f532fbc3953ba5531a3f9f61399992cc7`
 - `v560-win9-native-en.png` SHA256 `82c9588fc3eabf78b48905d0414dbdcbbd47a089d1371b9659fcf04cc11d43a9`
 - `v560-mac7-native-zh.png` SHA256 `13585315b87bed455aaa0e50c3afe9b857fb6ea6efefe1151366bd9ca3531358`
 - `v560-mac7-native-en.png` SHA256 `5a6d6bf4c0af98027f5f5d250aa96ece904a9951c848a59b38269753232f6af3`
-
-來源：Actions 流程 [Capture native UI screenshots（run 41272257213）](https://github.com/azx4121/facility-studio/actions/runs/41272257213)。流程下載**已發布**的 v5.6.0-win.9 EXE 與 v5.6.0-mac.7 DMG，核對 SHA256SUMS，各在 Windows Server 2022、macOS 15 的原生桌面上用 `tools/capture_native_ui.py` 啟動（僅預先寫入語言偏好檔，未改程式、未操作畫面），等視窗出現並再等 8 秒後擷取該視窗，未裁切、未重繪。畫面為第一個工具（電力配線）的預設輸入。
-
-限制：這是 GitHub 託管的虛擬桌面，不是實體電腦；Windows 為 100% 縮放；macOS 視窗標題列呈未取得焦點的灰色，為擷取當下狀態。兩平台字型（Windows：Microsoft JhengHei UI／Consolas；macOS：PingFang TC／Menlo）與視窗外框由系統提供，所以不會逐像素相同。
-
-英文／中文 README 的首頁圖並列這兩平台的圖。win.8 以前的圖片保留為歷史紀錄。
-
-English: the homepage images are the published win.9 EXE and mac.7 DMG started on native desktops (GitHub Actions run 41272257213: Windows Server 2022, macOS 15) with `tools/capture_native_ui.py`, which only pre-sets the language preference file, waits for the window plus 8 s and captures that window, uncropped and unretouched, default inputs (SHA256 values above). Limits: hosted virtual desktops, not physical machines; Windows at 100 % scaling; the macOS title bar is grey because the window had no focus. Fonts and window frames come from each system, so the two platforms are not pixel-identical. Images up to win.8 are kept as history.
 
 ## V5.6.0 介面示意：win.4／mac.6 來源
 

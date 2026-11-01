@@ -1,10 +1,10 @@
 # Facility Studio 文件中心
 
-[win.9／mac.7 驗收紀錄 / Acceptance record](2026-10-31-win9-mac7-acceptance.md) · [Windows win.8 工程修正與原生驗收 / Corrections and acceptance](2026-10-18-windows-report-audit.md) · [win.4／mac.6 整合歷史](2026-10-16-gemini-integration-review.md)
+[win.10／mac.8 畫面一致 / UI unification](2026-11-01-win10-mac8-ui-unification.md) · [win.9／mac.7 驗收紀錄 / Acceptance record](2026-10-31-win9-mac7-acceptance.md) · [Windows win.8 工程修正與原生驗收 / Corrections and acceptance](2026-10-18-windows-report-audit.md) · [win.4／mac.6 整合歷史](2026-10-16-gemini-integration-review.md)
 
 [English](README.en.md) · [首頁與下載](../README.md) · [問題回報](https://github.com/azx4121/facility-studio/issues)
 
-目前版本：**V5.6.0 公開測試版（win.9／mac.7）**。先依手上的任務選文件，需要完整工作台時再跟做練習案。
+目前版本：**V5.6.0 公開測試版（win.10／mac.8）**。先依手上的任務選文件，需要完整工作台時再跟做練習案。
 
 ## 開始使用
 
