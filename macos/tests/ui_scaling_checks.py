@@ -1,8 +1,8 @@
-"""macOS must show the same text size as Windows (1 pt = 1.33 px), not 1 pt = 1 px.
+"""Windows and macOS must draw text at the same size (the macOS mapping: 1 pt = 1 px at 100 % display scaling).
 
-The mapping is checked on a real Tk root: a 72 dpi interpreter (what macOS reports) is normalised to 96 dpi, and
-a 10 pt font then measures the same as on a 96 dpi interpreter. Windows and Linux are left alone.
-This proves the scaling rule, not how macOS draws its fonts.
+Real Tk roots emulate what each platform reports: 72 dpi (macOS), 96 dpi (Windows at 100 %) and 144 dpi (Windows at
+150 %). After normalising, 72 and 96 dpi give identical 10 pt text, 144 dpi gives 1.5 times that, the returned scale is
+dpi/96 (never below 1) and a second call changes nothing. This proves the scaling rule, not how each OS draws fonts.
 """
 
 import sys
@@ -16,44 +16,38 @@ sys.path.insert(0, str(ROOT))
 from facility_studio.platform_support import normalize_tk_scaling  # noqa: E402
 
 
-def line_height(root):
-    return tkfont.Font(root=root, family="TkDefaultFont", size=10).metrics("linespace")
+def emulate(dpi):
+    root = tk.Tk()
+    root.withdraw()
+    root.tk.call("tk", "scaling", dpi / 72.0)
+    reported = root.winfo_fpixels("1i")
+    scale = normalize_tk_scaling(root)
+    again = normalize_tk_scaling(root)
+    height = tkfont.Font(root=root, family="TkDefaultFont", size=10).metrics("linespace")
+    pixels = root.winfo_fpixels("10p")
+    root.destroy()
+    return round(reported), scale, again, height, pixels
 
 
 def main():
     failures = []
-    reference = tk.Tk()
-    reference.withdraw()
-    reference.tk.call("tk", "scaling", 96.0 / 72.0)
-    expected = line_height(reference)
-    reference.destroy()
-
-    root = tk.Tk()
-    root.withdraw()
-    root.tk.call("tk", "scaling", 1.0)  # what macOS reports: 72 dpi
-    if round(root.winfo_fpixels("1i")) != 72:
-        failures.append("test setup: could not emulate a 72 dpi interpreter")
-    small = line_height(root)
-    if normalize_tk_scaling(root, platform="darwin") is not True:
-        failures.append("darwin was not normalised")
-    if round(root.winfo_fpixels("1i")) != 96:
-        failures.append(f"darwin dpi after normalising is {root.winfo_fpixels('1i')}, expected 96")
-    after = line_height(root)
-    if after != expected:
-        failures.append(f"10 pt line height {after} px, Windows mapping gives {expected} px")
-    if not after > small:
-        failures.append(f"text did not grow: {small} -> {after}")
-
-    root.tk.call("tk", "scaling", 2.0)
-    before = float(root.tk.call("tk", "scaling"))  # Tk rounds the request to a whole pixel size
-    for platform in ("win32", "linux"):
-        if normalize_tk_scaling(root, platform=platform):
-            failures.append(f"{platform} must not be touched")
-    if float(root.tk.call("tk", "scaling")) != before:
-        failures.append("scaling on a non-macOS platform changed")
-    root.destroy()
-
-    print(f"line height 10 pt: 72 dpi {small} px -> normalised {after} px (Windows mapping {expected} px)")
+    mac = emulate(72)
+    win100 = emulate(96)
+    win150 = emulate(144)
+    for name, (reported, scale, again, height, pixels), expected_scale in (
+        ("72 dpi (macOS)", mac, 1.0),
+        ("96 dpi (Windows 100 %)", win100, 1.0),
+        ("144 dpi (Windows 150 %)", win150, 1.5),
+    ):
+        print(f"{name}: reported {reported} dpi, scale {scale:.3f}, 10 pt text {height} px line, 10 pt = {pixels:.1f} px")
+        if abs(scale - expected_scale) > 0.01:
+            failures.append(f"{name}: scale {scale}, expected {expected_scale}")
+        if again != scale:
+            failures.append(f"{name}: second call changed the scale to {again}")
+    if mac[3] != win100[3] or abs(mac[4] - win100[4]) > 1e-6:
+        failures.append(f"macOS and Windows 100 % differ: {mac[3:]} vs {win100[3:]}")
+    if abs(win150[4] / win100[4] - 1.5) > 0.02:
+        failures.append("150 % display did not draw 1.5 times larger text")
     if failures:
         print("FAILED:", *failures, sep="\n  ")
         return 1

@@ -1,7 +1,8 @@
 Facility Studio V5.6.0｜macOS 廠務工程初估工具
 DESIGNED BY ANDY HUANG ©
 
-本版修訂：V5.6.0 · macOS mac.7（win.9 移植版，僅供本機測試，尚未發布）
+本版修訂：V5.6.0 · macOS mac.8（與 Windows win.10 同步）
+mac.8：計算與報告內容與 mac.7 相同；畫面不變，Windows win.10 改成與本版一致。
 十項快算包含潔淨室風量、熱負荷初估與冰水泵浦，支援上游帶入、KPI與HTML總覽。
 舊案以schema 12移轉並保留原假設；FFU氣流路徑／ACH基準須明確選擇。
 照明使用型錄利用係數U與實際長寬的室指數K；不以幾何公式取代燈具配光資料。

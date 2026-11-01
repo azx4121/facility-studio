@@ -113,7 +113,19 @@ class RecordingStyle:
         return self.option(name, key)
 
 
+class FakeTcl:
+    """Records the Tk scaling calls; the display scaling variable is never set, so Theme.apply computes it."""
+
+    def eval(self, script):
+        return "0"
+
+    def call(self, *args):
+        return ""
+
+
 class FakeRoot:
+    tk = FakeTcl()
+
     def winfo_fpixels(self, value):
         return 96.0
 

@@ -8,10 +8,10 @@ on:
     inputs:
       windows_tag:
         description: Windows release tag
-        default: v5.6.0-win.9
+        default: v5.6.0-win.10
       macos_tag:
         description: macOS release tag
-        default: v5.6.0-mac.7
+        default: v5.6.0-mac.8
 
 permissions:
   contents: write
@@ -54,7 +54,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -C native-ui-screenshots-windows
           git add -f shots
-          git commit -m "Native win.9 window captures (published EXE, Windows Server 2022)"
+          git commit -m "Native win.10 window captures (published EXE, Windows Server 2022)"
           git push -f origin native-ui-screenshots-windows
 
   macos:
@@ -69,12 +69,12 @@ jobs:
           python-version: '3.13.15'
       - name: Download the published DMG, verify its checksum and copy the app out
         run: |
-          gh release download "${{ inputs.macos_tag }}" --pattern "Facility_Studio_V5_6_0_macOS_mac7.dmg" --pattern "SHA256SUMS.txt" --dir app
-          expected=$(grep "macOS_mac7.dmg" app/SHA256SUMS.txt | awk '{print $1}')
-          actual=$(shasum -a 256 app/Facility_Studio_V5_6_0_macOS_mac7.dmg | awk '{print $1}')
+          gh release download "${{ inputs.macos_tag }}" --pattern "Facility_Studio_V5_6_0_macOS_mac8.dmg" --pattern "SHA256SUMS.txt" --dir app
+          expected=$(grep "macOS_mac8.dmg" app/SHA256SUMS.txt | awk '{print $1}')
+          actual=$(shasum -a 256 app/Facility_Studio_V5_6_0_macOS_mac8.dmg | awk '{print $1}')
           test "$expected" = "$actual" || { echo "SHA256 mismatch $expected vs $actual"; exit 1; }
           mkdir -p /tmp/fsmount
-          hdiutil attach -nobrowse -readonly -mountpoint /tmp/fsmount app/Facility_Studio_V5_6_0_macOS_mac7.dmg
+          hdiutil attach -nobrowse -readonly -mountpoint /tmp/fsmount app/Facility_Studio_V5_6_0_macOS_mac8.dmg
           cp -R "/tmp/fsmount/Facility Studio.app" "$RUNNER_TEMP/Facility Studio.app"
           hdiutil detach /tmp/fsmount
           codesign --verify --deep --strict "$RUNNER_TEMP/Facility Studio.app" && echo "codesign ok"
@@ -94,5 +94,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -C native-ui-screenshots-macos
           git add -f shots
-          git commit -m "Native mac.7 window captures (published DMG, macOS 15)"
+          git commit -m "Native mac.8 window captures (published DMG, macOS 15)"
           git push -f origin native-ui-screenshots-macos

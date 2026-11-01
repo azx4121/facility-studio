@@ -82,8 +82,7 @@ class Theme:
     def apply(cls, root):
         from .platform_support import normalize_tk_scaling
 
-        normalize_tk_scaling(root)
-        cls.scale = max(1.0, float(root.winfo_fpixels("1i")) / 96.0)
+        cls.scale = normalize_tk_scaling(root)
         families = set(tkfont.families(root))
         cls.family = next((n for n in ("Microsoft JhengHei UI", "Microsoft JhengHei",
                          "PingFang TC", "Noto Sans CJK TC", "Segoe UI") if n in families), "TkDefaultFont")

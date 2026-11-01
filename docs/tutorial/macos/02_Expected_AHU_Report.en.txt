@@ -12,7 +12,7 @@ MAU  Design airflow : 358.33 CMH |  Supply-air state (verification pending)
  Enable  Equipment  Nominal  Electrical : 16.37 kW |  Excludes unspecified circulation pumps and auxiliaries
  Winter  Humidification  Demand : 0.88 kg/h |  By humidifier type
 
-Tutorial MAU-01 | MAU stage demand / rated-capacity verification  | V5.6.0 · macOS mac.7
+Tutorial MAU-01 | MAU stage demand / rated-capacity verification  | V5.6.0 · macOS mac.8
  This table calculates requirements. When rated-capacity checks fail, target states do not represent achievable installed-equipment performance.
  Seasonal supply targets:  Summer  358.32741149943365 CMH (supply state) / 22.0°C / 41.01522224098197%RH;  Winter  358.32741149943365 CMH (supply state) / 22.0°C / 41.01522224098197%RH ; source main project 1a20d11ccb26c5a89d809c1611b81f3c16554f3d7fe677b7da925a5fa9f528c9
  H1 heat source:  Electric heat  ; H2 heat source:  Electric heat  ; recovered-hot-water scenario:  Phase 1 unavailable .

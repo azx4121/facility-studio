@@ -174,7 +174,7 @@ def main():
     if broken_after_signing:
         raise ValueError(f"Broken symlinks after signing: {broken_after_signing}")
     manifest = {
-        "version": "5.6.0-mac.7",
+        "version": "5.6.0-mac.8",
         "minimum_macos": "11.0",
         "architectures": ["arm64", "x86_64"],
         "runtime": {
