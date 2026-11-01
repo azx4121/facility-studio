@@ -1,7 +1,8 @@
 Facility Studio V5.6.0｜Windows 廠務工程初估工具
 DESIGNED BY ANDY HUANG ©
 
-本版修訂：V5.6.0 · Windows win.8
+本版修訂：V5.6.0 · Windows win.10
+win.10：計算與報告內容與 win.9 相同；畫面改與 macOS 版一致（字級換算與導覽列元件相同，文字較 win.9 小；高 DPI 螢幕仍依比例放大）。
 
 win.8：串接服務拒絕拼錯欄位；一般／連續／馬達電流文字依實際倍率；TXT／HTML 列採用條件、用電來源、單台設備額定及固定單位；報告標示 Windows win.8。
 Windows win.8 adds explicit pipeline validation, adopted input and equipment power-source tables, per-unit selection ratings, fixed units and revision labels. Report export and window restoration are included in native acceptance.

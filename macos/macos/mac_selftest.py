@@ -318,7 +318,7 @@ def run():
     destination.mkdir(parents=True, exist_ok=True)
     report = {
         "version": __version__,
-        "revision": "mac.7",
+        "revision": "mac.8",
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": sys.version,

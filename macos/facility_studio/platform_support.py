@@ -18,9 +18,25 @@ def app_data_root(platform=None, home=None, environ=None):
     return home / ".local" / "share" / "Facility_Studio_V5_5"
 
 
+def normalize_tk_scaling(root):
+    """Give every platform the macOS text size: 1 pt is 1 px at 100 % display scaling.
+
+    Fonts are specified in points. Tk maps 1 pt to 1.33 px on Windows (96 dpi) but to 1 px on macOS (72 dpi), which made
+    the same window show text 33 % larger on Windows. Every platform now uses the macOS mapping, multiplied by the
+    display scaling the system reports (dpi / 96, never below 1), so a 150 % Windows screen still draws larger text.
+    The rule is the same on every platform and is applied once per Tk interpreter; the scale factor is returned.
+    """
+    if int(root.tk.eval("info exists ::facility_display_scale")):
+        return float(root.tk.eval("set ::facility_display_scale"))
+    scale = max(1.0, float(root.winfo_fpixels("1i")) / 96.0)
+    root.tk.call("tk", "scaling", scale)
+    root.tk.eval(f"set ::facility_display_scale {scale!r}")
+    return scale
+
+
 def uses_ttk_navigation(platform=None):
-    """macOS Aqua ignores background colours of tk.Button, so its navigation uses a ttk style; elsewhere tk.Button wraps long text."""
-    return (sys.platform if platform is None else platform) == "darwin"
+    """The workbench navigation is one ttk style on every platform, so Windows and macOS look the same."""
+    return True
 
 
 def preferred_ui_font(families, platform=None):

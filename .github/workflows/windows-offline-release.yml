@@ -78,6 +78,7 @@ jobs:
           Invoke-CheckedPython windows/tests/fluid_adoption_checks.py
           Invoke-CheckedPython windows/tests/fluid_selection_history_checks.py
           Invoke-CheckedPython windows/tests/ui_theme_and_actions_checks.py
+          Invoke-CheckedPython windows/tests/ui_scaling_checks.py
           Invoke-CheckedPython windows/tests/text_clipping_checks.py
           Invoke-CheckedPython tools/verify_platform_sync.py
           Invoke-CheckedPython windows/tests/engineering_scenarios/run_scenarios.py

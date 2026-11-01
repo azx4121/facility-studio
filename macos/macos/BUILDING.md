@@ -1,4 +1,4 @@
-# Native macOS release building (V5.6.0 mac.7)
+# Native macOS release building (V5.6.0 mac.8)
 
 The original V5.5.4 mac.1 package passed byte-level checks but failed Apple's native deep
 signature validation on both macOS 15 architectures. Static verification must
@@ -41,8 +41,8 @@ To validate those exact delivery files on a second Mac architecture:
 
 ```sh
 python3 macos/macos/verify_native_release.py \
-  --package /absolute/path/Facility_Studio_V5_6_0_macOS_mac7_OneClick.zip \
-  --dmg /absolute/path/Facility_Studio_V5_6_0_macOS_mac7.dmg \
+  --package /absolute/path/Facility_Studio_V5_6_0_macOS_mac8_OneClick.zip \
+  --dmg /absolute/path/Facility_Studio_V5_6_0_macOS_mac8.dmg \
   --checksums /absolute/path/SHA256SUMS.txt \
   --output /absolute/path/second-mac-evidence
 ```
@@ -50,7 +50,7 @@ python3 macos/macos/verify_native_release.py \
 The workflow `.github/workflows/macos-native-release.yml` uses Apple Silicon
 macOS 15 to build and Intel macOS 15 to execute the same ZIP and DMG. On the
 repair branch it only tests. On main, publication runs only after both jobs pass;
-the publisher targets `v5.6.0-mac.7` without replacing existing public assets or moving tags.
+the publisher targets `v5.6.0-mac.8` without replacing existing public assets or moving tags.
 For a future release, update version and output names in the builder, verifier,
 publisher and workflow together; do not try to overwrite the already published
 v5.6.0 files after a source change.
