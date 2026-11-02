@@ -16,6 +16,17 @@ from winrelease.build_sandbox import EXE_NAME, SETUP_NAME, ZIP_NAME, PACKAGE, sh
 from winrelease.verify import check_exe, firewall
 
 
+def install_silently(setup, destination, timeout):
+    # NSIS consumes the entire raw suffix after /D=. Its documented syntax
+    # forbids quotes even for spaces; Python's list2cmdline would quote /D=.
+    # https://nsis.sourceforge.io/Docs/Chapter3.html#installerusage
+    target = str(Path(destination).resolve())
+    if any(c in target for c in ('"', '\r', '\n')):
+        raise ValueError("安裝測試路徑含不支援的字元。")
+    command_line = subprocess.list2cmdline([str(setup), "/S"]) + " /D=" + target
+    return subprocess.run(command_line, executable=str(setup), timeout=timeout)
+
+
 def smoke(exe, evidence, label, data_root=None):
     target = evidence / (label + "-Sandbox_Acceptance.json")
     with tempfile.TemporaryDirectory(prefix="FacilitySandbox-") as d:
@@ -91,9 +102,7 @@ def main():
         occupied.mkdir()
         marker = occupied / "保留資料.txt"
         marker.write_text("preserve-existing", encoding="utf-8")
-        blocked = subprocess.run(
-            [str(assets / SETUP_NAME), "/S", "/D=" + str(occupied)], timeout=60
-        )
+        blocked = install_silently(assets / SETUP_NAME, occupied, timeout=60)
         if (
             blocked.returncode == 0
             or marker.read_text(encoding="utf-8") != "preserve-existing"
@@ -108,12 +117,17 @@ def main():
             }
         )
         installed = base / "中文 安裝位置"
-        r = subprocess.run(
-            [str(assets / SETUP_NAME), "/S", "/D=" + str(installed)], timeout=180
-        )
+        r = install_silently(assets / SETUP_NAME, installed, timeout=180)
         exe = installed / EXE_NAME
+        (out / "Installer_Path_Check.json").write_text(
+            json.dumps({"exit_code": r.returncode, "destination": str(installed),
+                        "files": [p.name for p in installed.glob("*")],
+                        "exe_sha256": sha(exe) if exe.is_file() else None,
+                        "expected_sha256": sums[EXE_NAME]}, ensure_ascii=False, indent=2)
+            + "\n", encoding="utf-8"
+        )
         if r.returncode or not exe.is_file() or sha(exe) != sums[EXE_NAME]:
-            raise RuntimeError("實際安裝或 EXE 雜湊不符。")
+            raise RuntimeError(f"實際安裝或 EXE 雜湊不符；安裝退出碼 {r.returncode}，程式存在 {exe.is_file()}。")
         records.append(
             {
                 "name": "中文路徑實際離線安裝與雜湊",
