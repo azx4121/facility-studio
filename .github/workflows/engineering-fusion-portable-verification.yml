@@ -1,0 +1,51 @@
+name: Engineering fusion portable Windows verification
+on:
+  push:
+    branches: ['sandbox/engineering-fusion-20261102']
+    paths: ['.github/workflows/engineering-fusion-portable-verification.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  identical-portable-on-windows-2025:
+    runs-on: windows-2025
+    timeout-minutes: 12
+    steps:
+      - name: Download the existing c9113ab native Windows delivery
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: fusion-Windows-x64-delivery
+          run-id: 41459407184
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/fusion-delivery
+      - name: Verify SHA256 and run without development Python or network
+        shell: pwsh
+        run: |
+          $zip = Get-ChildItem "$env:RUNNER_TEMP/fusion-delivery/*.zip" | Select-Object -First 1
+          $lines = Get-Content "$env:RUNNER_TEMP/fusion-delivery/SHA256SUMS.txt"
+          $line = $lines | Where-Object { $_.EndsWith('  ' + $zip.Name) }
+          if (@($line).Count -ne 1) { throw 'Expected one portable SHA256 record' }
+          $expected = $line.Substring(0,64)
+          if ((Get-FileHash $zip.FullName -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expected) { throw 'Portable SHA256 mismatch' }
+          Expand-Archive $zip.FullName "$env:RUNNER_TEMP/fusion-extracted"
+          $exe = Get-ChildItem "$env:RUNNER_TEMP/fusion-extracted" -Filter '*.exe' -Recurse | Select-Object -First 1
+          New-Item -ItemType Directory "$env:RUNNER_TEMP/fusion-verify" | Out-Null
+          $env:FACILITY_STUDIO_FUSION_DATA = "$env:RUNNER_TEMP/fusion-test-data"
+          $env:FACILITY_TEST_BLOCK_NETWORK = '1'
+          $env:PATH = "$env:SystemRoot/System32;$env:SystemRoot"
+          foreach ($kind in @('fusion', 'sandbox')) {
+            $result = "$env:RUNNER_TEMP/fusion-verify/$kind.json"
+            $process = Start-Process -FilePath $exe.FullName -ArgumentList @("--$kind-self-test", "`"$result`"") -Wait -PassThru
+            if ($process.ExitCode -ne 0) { throw "Native $kind acceptance exited $($process.ExitCode)" }
+            $acceptance = Get-Content $result -Raw -Encoding UTF8 | ConvertFrom-Json
+            if (-not $acceptance.passed -or -not $acceptance.frozen) { throw "Native $kind acceptance failed" }
+          }
+          @{ passed=$true; originalBuildCommit='c9113abf1cb3070a5a6fc50268deeb758cde6548'; portableSha256=$expected; host='windows-2025'; externalPythonPathRemoved=$true; networkBlocked=$true } |
+            ConvertTo-Json | Set-Content "$env:RUNNER_TEMP/fusion-verify/Portable_Verification.json" -Encoding UTF8
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: fusion-identical-Windows-2025-evidence
+          path: ${{ runner.temp }}/fusion-verify
+          retention-days: 14
