@@ -82,6 +82,7 @@ jobs:
           name: fusion-${{ matrix.platform }}-delivery
           path: |
             ${{ runner.temp }}/fusion-build/*.zip
+            ${{ runner.temp }}/fusion-build/*Setup.exe
             ${{ runner.temp }}/fusion-build/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 14
