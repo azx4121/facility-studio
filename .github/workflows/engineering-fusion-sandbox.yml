@@ -1,0 +1,117 @@
+name: Engineering five-library fusion sandbox
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: engineering-fusion-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  source-and-gui:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      FACILITY_STUDIO_PREFERENCES: /tmp/fusion-prefs.json
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12.16'
+      - name: Install pinned isolated dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y xvfb xauth fonts-noto-cjk
+          python -m pip install -r integration/requirements.lock.txt
+          python -m pip check
+      - name: Physical properties, adversarial inputs and four hundred generated cases
+        run: |
+          mkdir -p fusion-evidence
+          xvfb-run -a python -m pytest integration/test_fusion.py macos/tests/test_feed_sandbox.py -q --hypothesis-show-statistics --junitxml=fusion-evidence/pytest.xml > fusion-evidence/pytest.log 2>&1
+          cat fusion-evidence/pytest.log
+      - name: Existing complete engineering and GUI suites
+        run: xvfb-run -a python windows/winrelease/source_sandbox_checks.py --output fusion-evidence/source
+      - name: Synthetic UI capture and actual workbench integration
+        env:
+          PYTHONPATH: macos
+          FACILITY_STUDIO_FUSION_DATA: /tmp/fusion-acceptance
+          FACILITY_TEST_BLOCK_NETWORK: '1'
+          FACILITY_CAPTURE_SYNTHETIC_UI: '1'
+        run: xvfb-run -a -s '-screen 0 1440x1100x24' python integration/entry.py --fusion-self-test fusion-evidence/Fusion_Source_Acceptance.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: fusion-source-evidence
+          path: fusion-evidence
+          retention-days: 14
+  native-build:
+    needs: source-and-gui
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-15
+            platform: macOS-arm64
+          - os: windows-2022
+            platform: Windows-x64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12.16'
+      - name: Install locked build dependencies
+        run: |
+          python -m pip install -r integration/requirements.lock.txt
+          python -m pip check
+      - name: Build and execute self-contained native application offline
+        run: python integration/build.py --output "${{ runner.temp }}/fusion-build"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: fusion-${{ matrix.platform }}-evidence
+          path: ${{ runner.temp }}/fusion-build/evidence
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: fusion-${{ matrix.platform }}-delivery
+          path: |
+            ${{ runner.temp }}/fusion-build/*.zip
+            ${{ runner.temp }}/fusion-build/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14
+  second-windows-host:
+    needs: native-build
+    runs-on: windows-2025
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: fusion-Windows-x64-delivery
+          path: ${{ runner.temp }}/fusion-delivery
+      - name: Execute the identical portable application without external Python
+        shell: pwsh
+        run: |
+          $zip = Get-ChildItem "$env:RUNNER_TEMP/fusion-delivery/*.zip" | Select-Object -First 1
+          Expand-Archive $zip.FullName "$env:RUNNER_TEMP/fusion-extracted"
+          $exe = Get-ChildItem "$env:RUNNER_TEMP/fusion-extracted" -Filter '*.exe' -Recurse | Select-Object -First 1
+          New-Item -ItemType Directory "$env:RUNNER_TEMP/fusion-verify" | Out-Null
+          $env:FACILITY_STUDIO_FUSION_DATA = "$env:RUNNER_TEMP/fusion-test-data"
+          $env:FACILITY_TEST_BLOCK_NETWORK = '1'
+          $env:PATH = "$env:SystemRoot/System32;$env:SystemRoot"
+          $result = "$env:RUNNER_TEMP/fusion-verify/Fusion_Acceptance.json"
+          $process = Start-Process -FilePath $exe.FullName -ArgumentList @('--fusion-self-test', "`"$result`"") -Wait -PassThru
+          if ($process.ExitCode -ne 0) { throw "Native acceptance exited $($process.ExitCode)" }
+          $acceptance = Get-Content $result -Raw | ConvertFrom-Json
+          if (-not $acceptance.passed -or -not $acceptance.frozen) { throw 'Native acceptance did not pass' }
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: fusion-Windows-2025-evidence
+          path: ${{ runner.temp }}/fusion-verify
+          retention-days: 14
