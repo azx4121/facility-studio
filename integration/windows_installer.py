@@ -37,8 +37,8 @@ def build(app, output, name, runner):
     lines.extend(['CreateDirectory "$SMPROGRAMS\\Facility Studio 五庫融合測試版"',
                   f'CreateShortcut "$SMPROGRAMS\\Facility Studio 五庫融合測試版\\5.7.1.lnk" "$INSTDIR\\{quoted(name)}.exe"',
                   'WriteUninstaller "$INSTDIR\\Uninstall.exe"',
-                  'WriteRegStr HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioFusion570" "DisplayName" "Facility Studio 五庫融合測試版 5.7.1"',
-                  'WriteRegStr HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioFusion570" "UninstallString" \'$\\"$INSTDIR\\Uninstall.exe$\\"\'',
+                  'WriteRegStr HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioFusion571" "DisplayName" "Facility Studio 五庫融合測試版 5.7.1"',
+                  'WriteRegStr HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioFusion571" "UninstallString" \'$\\"$INSTDIR\\Uninstall.exe$\\"\'',
                   "SectionEnd", 'Section "Uninstall"', "SetShellVarContext current"])
     for file in files:
         lines.append(f'Delete "$INSTDIR\\{quoted(file.relative_to(app))}"')
@@ -46,7 +46,7 @@ def build(app, output, name, runner):
     lines.extend(['Delete "$INSTDIR\\Uninstall.exe"',
                   'Delete "$SMPROGRAMS\\Facility Studio 五庫融合測試版\\5.7.1.lnk"',
                   'RMDir "$SMPROGRAMS\\Facility Studio 五庫融合測試版"', 'RMDir "$INSTDIR"',
-                  'DeleteRegKey HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioFusion570"',
+                  'DeleteRegKey HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioFusion571"',
                   'DetailPrint "只移除本版已交付檔案；保留專案、偏好與額外檔案。"', "SectionEnd"])
     script = output / "fusion-installer.nsi"
     script.write_text("\n".join(lines), encoding="utf-8-sig")
