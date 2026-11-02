@@ -164,7 +164,10 @@ def run_checks(source_platform, artifacts_dir=None):
     check("legacy sensible-load report pattern is retained", f"室內顯熱 {full['qs']:.3f} kW" in text)
     check("separate panels do not imply a main-incomer calculation", "主進線未計算" in text)
     full_rows = executive_summary(full)
-    check("panel selection contains AT and conductor area", "AT" in full_rows[6]["selection"] and "mm²" in full_rows[6]["selection"])
+    panel_row = next(row for row in full_rows if row["equipment"] == "主配電斷路器 MCCB")
+    check("panel selection contains AT and conductor area", "AT" in panel_row["selection"] and "mm²" in panel_row["selection"])
+    envelope_row = next(row for row in full_rows if row["equipment"] == "水路供冷容量包絡（另列）")
+    check("water-loop capacity envelope is separately reported", "kW" in envelope_row["demand"] and "同時峰值" in envelope_row["selection"])
     for missing in ("summer", "electric", "water", "ffu_count", "project"):
         incomplete = copy.deepcopy(full)
         del incomplete[missing]
