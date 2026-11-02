@@ -45,14 +45,14 @@ def test_presented_choices_round_trip_to_existing_project_values(canonical):
 
 
 def test_installer_public_name_and_operation_guide_are_product_only():
-    readme = (ROOT/'integration/README_繁體中文.md').read_text()
+    readme = (ROOT/'integration/README_繁體中文.md').read_text(encoding="utf-8")
     assert not BANNED.search(readme)
-    build = (ROOT/'integration/build.py').read_text()
+    build = (ROOT/'integration/build.py').read_text(encoding="utf-8")
     assert 'NAME = "Facility Studio 5.7.1 測試版"' in build
-    meta = (ROOT/'integration/windows_version.txt').read_text()
+    meta = (ROOT/'integration/windows_version.txt').read_text(encoding="utf-8")
     assert 'FacilityStudioEngineeringFusion' not in meta
     assert '五庫' not in meta
-    installer = (ROOT/'integration/windows_installer.py').read_text()
+    installer = (ROOT/'integration/windows_installer.py').read_text(encoding="utf-8")
     welcome = next(line for line in installer.splitlines() if 'MUI_WELCOMEPAGE_TEXT' in line)
     assert not BANNED.search(welcome)
     assert '五套工程計算庫' not in welcome and 'Python' not in welcome
@@ -64,7 +64,7 @@ def test_exported_review_files_omit_dependency_metadata(tmp_path):
     for extension in ('txt', 'html', 'json'):
         target = tmp_path / ('核對.' + extension)
         export_report(data, target)
-        content = target.read_text()
+        content = target.read_text(encoding="utf-8")
         assert not BANNED.search(content)
         assert '套件版本' not in content
 
@@ -85,7 +85,7 @@ def test_bundled_tutorial_is_current_and_uses_product_wording(platform):
 
 def test_native_menu_copy_uses_public_engineering_language():
     import ast
-    tree = ast.parse((ROOT/'macos/facility_studio/sandbox_ui.py').read_text())
+    tree = ast.parse((ROOT/'macos/facility_studio/sandbox_ui.py').read_text(encoding="utf-8"))
     for node in ast.walk(tree):
         if isinstance(node, ast.Constant) and isinstance(node.value, str):
             assert not BANNED.search(node.value)

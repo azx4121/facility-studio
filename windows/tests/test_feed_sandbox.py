@@ -58,7 +58,7 @@ def test_psychrolib_documented_dewpoint():
 
 
 def test_scenarios_preserve_expected_engineering_outcomes():
-    cases = json.loads((Path(__file__).parent / "scenarios.json").read_text())
+    cases = json.loads((Path(__file__).parent / "scenarios.json").read_text(encoding="utf-8"))
     cases = [c for c in cases if c["model"] == "nm"]
     assert len(cases) == 16
     for c in cases:
@@ -221,7 +221,8 @@ def test_project_rejection_readonly_and_safe_report_export(tmp_path):
         json.dumps(
             {"kind": "ahu_stage", "schema_version": 4, "inputs": NM_DEFAULTS},
             ensure_ascii=False,
-        )
+        ),
+        encoding="utf-8",
     )
     old = p.read_bytes()
     r = compare_file(p)
@@ -234,11 +235,11 @@ def test_project_rejection_readonly_and_safe_report_export(tmp_path):
         out = tmp_path / ("report." + ext)
         assert len(export_report(r, out)) == 64
         if ext == "json":
-            assert json.loads(out.read_text())["inputs"] == r["inputs"]
+            assert json.loads(out.read_text(encoding="utf-8"))["inputs"] == r["inputs"]
         if ext == "html":
             assert (
-                "<script>" not in out.read_text()
-                and "&lt;script&gt;" in out.read_text()
+                "<script>" not in out.read_text(encoding="utf-8")
+                and "&lt;script&gt;" in out.read_text(encoding="utf-8")
             )
     p.write_text('{"kind":"invalid","schema_version":4,"inputs":{}}')
     with pytest.raises(Exception):
@@ -280,7 +281,7 @@ def test_gui_stale_error_recovery_and_current_ahu(tmp_path, monkeypatch):
         out = tmp_path / "gui-report.json"
         monkeypatch.setattr(filedialog, "asksaveasfilename", lambda **kw: str(out))
         view.export_current()
-        assert json.loads(out.read_text())["kind"] == "liquid_pipe"
+        assert json.loads(out.read_text(encoding="utf-8"))["kind"] == "liquid_pipe"
         view.nb.select(2)
         root.update()
         view.convert()
@@ -359,7 +360,7 @@ def test_main_workspace_transfer_stale_source_and_keyboard(tmp_path, monkeypatch
         assert liquid.import_upstream("water")
         app.calculate_active()
         assert liquid.result["flow_lpm"] == pytest.approx(700)
-        assert app.export_result(report) and "700" in report.read_text()
+        assert app.export_result(report) and "700" in report.read_text(encoding="utf-8")
         units = app.open_engineering_verification("units")
         units.variables["category"].set("溫度")
         units.variables["unit"].set("°C")

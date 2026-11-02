@@ -142,10 +142,10 @@ class PowerUnits(unittest.TestCase):
                 command = [sys.executable, str(ROOT/"Facility_Studio_V5_5.py"), "--tool", "electrical", "--tool-input", str(source), "--result", str(output), "--report", str(report)]
                 run = subprocess.run(command, text=True, capture_output=True)
                 self.assertEqual(run.returncode, 0, run.stderr)
-                result = json.loads(output.read_text())
+                result = json.loads(output.read_text(encoding="utf-8"))
                 self.close(result["power_kw"], 10)
                 self.assertEqual(result["power_unit"], unit)
-                self.assertIn(unit, report.read_text())
+                self.assertIn(unit, report.read_text(encoding="utf-8"))
             source.write_text('{"power_unit":"VA"}', encoding="utf-8")
             output.unlink()
             run = subprocess.run(command, text=True, capture_output=True)

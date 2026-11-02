@@ -224,7 +224,7 @@ with tempfile.TemporaryDirectory() as folder:
     os.environ["FACILITY_STUDIO_PREFERENCES"] = str(folder / "prefs/preferences.json")
     i18n.set_language("en")
     check(
-        json.loads(i18n.preference_path().read_text())["language"] == "en",
+        json.loads(i18n.preference_path().read_text(encoding="utf-8"))["language"] == "en",
         "Preference persistence",
     )
     script = (
