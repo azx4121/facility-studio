@@ -5,7 +5,7 @@ from .localized_tk import tk
 from .localized_tk import ttk, filedialog, messagebox
 
 from .errors import InputError, ValidationError
-from .gas_catalog import CUSTOM_GAS, gas_label, reference_velocity, switched_velocity
+from .gas_catalog import gas_label, reference_velocity, switched_velocity
 from .tutorial_help import open_tutorial
 from .version import VERSION, BUILD_VERSION
 from .quick_tools import UNITS, UNIT_HELP
@@ -19,7 +19,7 @@ from .flow_toolbar import FlowToolbar
 from .localized_tk import LanguagePicker
 from .utils import atomic_text, number
 from .industrial_theme import (Theme, ScrollableFrame, KPIFrame, ResultTable, InlineBanner,
-                               format_number, set_entry_valid)
+                               set_entry_valid)
 from .services import upstream_values
 
 
@@ -751,6 +751,12 @@ class SimpleToolsApp:
     def resize(self, event=None):
         if event is not None and event.widget is not self.root:
             return
+        if self.workbench_mode or self.verification_active:
+            return
+        viewport = (self.root.winfo_width(), self.root.winfo_height(), self.current)
+        if event is not None and viewport == getattr(self, "_last_viewport", None):
+            return
+        self._last_viewport = viewport
         page = self.pages.get(self.current)
         if page is not None:
             page.responsive()
