@@ -1,5 +1,13 @@
 name: Engineering five-library fusion sandbox
 on:
+  push:
+    branches: ['sandbox/engineering-fusion-20261102']
+    paths:
+      - 'integration/**'
+      - 'macos/facility_studio/**'
+      - 'windows/facility_studio/**'
+      - 'macos/tests/**'
+      - 'windows/tests/**'
   workflow_dispatch:
 permissions:
   contents: read
