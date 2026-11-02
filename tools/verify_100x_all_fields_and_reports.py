@@ -109,6 +109,8 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
         ("lighting", "work_h"): {"u_mode": "型錄 U＋室指數 K 檢核", "area_mode": "長×寬"},
         ("water", "flow"): {"mode": "已知水量"},
         ("water", "power"): {"mode": "已知熱量"},
+        ("water", "water_t"): {"property_source": "CoolProp 純水溫壓"},
+        ("water", "water_p"): {"property_source": "CoolProp 純水溫壓"},
     }
     simple_alt_values = {
         "mau_supply_delta_t": "12",

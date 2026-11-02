@@ -39,6 +39,7 @@ def open_settings(app):
     from .main_view import ScrollPage
     from .errors import InputError
     win = tk.Toplevel(app.root)
+    owner_project = app.project_id
     win.title("工程模型設定｜五庫核心融合")
     win.geometry("840x720")
     win.minsize(720, 500)
@@ -87,7 +88,21 @@ def open_settings(app):
         widget.grid(row=row, column=1, sticky="ew", padx=12, pady=5)
         widgets[key] = widget
         frame.columnconfigure(1, weight=1)
+    def refresh_enabled(*args):
+        conditions = dict(app.snapshot()["inputs"], **{k: v.get() for k, v in values.items()})
+        off = optional_inactive(conditions)
+        for key, widget in widgets.items():
+            options = SETTINGS[key][2]
+            widget.configure(state="disabled" if key in off else "readonly" if isinstance(options, list) else "normal")
+    for key, variable in values.items():
+        if isinstance(SETTINGS[key][2], list):
+            variable.trace_add("write", refresh_enabled)
+    refresh_enabled()
+    win.bind("<FocusIn>", refresh_enabled, add="+")
     def apply():
+        if app.project_id != owner_project:
+            messagebox.showerror("設定未採用", "主案已切換，請關閉並重新開啟工程模型設定。", parent=win)
+            return
         proposed = dict(app.snapshot()["inputs"])
         for key, variable in values.items():
             value = variable.get().strip()
@@ -100,8 +115,10 @@ def open_settings(app):
             validate_optional_inputs(proposed, off, optional_inactive(proposed, off))
             # Verify every adopted automatic fluid state before changing inputs.
             from .engine import water_properties
+            from .field_state import effective_main
+            effective = effective_main(proposed)
             for loop in ("MCHW", "CHW", "DCCW", "PCW", "HW"):
-                water_properties(proposed, loop)
+                water_properties(effective, loop)
         except (InputError, ValueError) as error:
             field = getattr(error, "field_name", None)
             if field in groups:

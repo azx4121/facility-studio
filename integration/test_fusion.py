@@ -95,6 +95,31 @@ def test_vapor_water_rejected():
         calculate_tool("water", data)
 
 
+@pytest.mark.parametrize("key", ["water_t", "water_p"])
+def test_water_validation_identifies_the_actual_field(key):
+    from facility_studio.errors import ValidationError
+    data = defaults("water")
+    data.update(property_source="CoolProp 純水溫壓", water_t="10", water_p="300")
+    data[key] = "不是數字"
+    with pytest.raises(ValidationError) as error:
+        calculate_tool("water", data)
+    assert error.value.field_name == key
+
+
+def test_inactive_model_drafts_are_preserved_and_not_used():
+    from facility_studio.errors import ValidationError
+    p = default_project()
+    p["inputs"].update(chw_property_source="沿用手動物性", chw_property_t="保留草稿", chw_property_p="另一草稿",
+                       motor_input_efficiency="未用草稿", np_auto_mode="手動填列")
+    before = copy.deepcopy(p)
+    assert calculate(p)["water"]["CHW"]["fluid_properties"]["rho"] == 1000
+    assert p == before
+    p["inputs"]["chw_property_source"] = "CoolProp 純水溫壓"
+    with pytest.raises(ValidationError) as error:
+        calculate(p)
+    assert error.value.field_name in ("chw_property_t", "chw_property_p")
+
+
 def test_dual_sizing_corrects_audited_case_and_manual_warns():
     old = water_selection(221.75, 2.)
     new = water_selection(221.75, 2., max_friction_pa_m=350)
@@ -162,6 +187,18 @@ def test_legacy_ahu_preserves_values_and_gets_new_editable_fields(tmp_path):
     migrated = nm_read_project(file)["inputs"]
     assert all(migrated[k] == v for k, v in legacy.items())
     assert migrated["c2_bf_min"] == "" and migrated["coil_rating_mode"] == "需求 ADP／BF"
+
+
+def test_inactive_c1_cannot_block_a_complete_pressure_record():
+    i = dict(NM_DEFAULTS, dp_status="已填完整同風量資料")
+    for key in i:
+        if key.startswith("dp_") and key != "dp_status":
+            i[key] = "20"
+    i["dp_c1"] = "保留未用草稿"
+    r = nm_calculate(i)
+    assert "dp_c1" in r["inactive_fields"]
+    assert r["pressure_complete"]
+    assert not any(q["name"] == "風機壓差完整度" for q in r["quality"]["items"])
 
 
 def test_actual_geometric_coil_and_invalid_geometry():

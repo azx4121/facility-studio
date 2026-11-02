@@ -346,7 +346,8 @@ def assess_ahu(r):
                     f"回水 {tout_w:g}°C；入口空氣 {c['inlet']['t']:.2f}°C。",
                     tag + "_out",
                 )
-    dpkeys = [k for k in i if k.startswith("dp_") and k != "dp_status"]
+    off = r.get("inactive_fields", {})
+    dpkeys = [k for k in i if k.startswith("dp_") and k != "dp_status" and k not in off]
     missing = [k for k in dpkeys if not i[k].strip()]
     if missing or not r["pressure_complete"]:
         finding(
@@ -359,7 +360,7 @@ def assess_ahu(r):
     zero_components = [
         k
         for k in ["dp_filter", "dp_hepa", "dp_c1", "dp_c2"]
-        if i[k].strip() and float(i[k]) <= 0
+        if k not in off and i[k].strip() and float(i[k]) <= 0
     ]
     if zero_components:
         r["pressure_complete"] = False

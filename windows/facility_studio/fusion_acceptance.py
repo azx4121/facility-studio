@@ -50,6 +50,8 @@ def run(destination):
     ahu = nm_calculate(dict(NM_DEFAULTS, flow="850", summer_t="26", summer_rh="50", sa_t="15", sa_rh="85",
                             coil_rating_mode="幾何 ε-NTU（python-hvac）"))
     rating = ahu["summer"]["coil_rating"]
+    if getattr(sys, "frozen", False):
+        check("交付程式未載入未使用的 IAPWS 套件", not any(k == "iapws" or k.startswith("iapws.") for k in sys.modules))
     check("AHU 直接執行幾何 ε-NTU", "error" not in rating and 4.5 < rating["capacity_kw"] < 5)
     check("盤管空氣側熱平衡", abs(rating["air_balance_residual_kw"]) < .001)
     check("盤管兩側壓降", rating["air_dp_pa"] > 0 and rating["water_dp_pa"] > 0)

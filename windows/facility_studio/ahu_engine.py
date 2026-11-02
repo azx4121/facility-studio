@@ -350,7 +350,7 @@ def _nm_calculate_base(i):
         ),
         "air_dp_pa": dp,
         "pressure_complete": i["dp_status"] == "已填完整同風量資料"
-        and all((i[k].strip() for k in i if k.startswith("dp_") and k != "dp_status")),
+        and all((i[k].strip() for k in i if k.startswith("dp_") and k != "dp_status" and k not in ahu_inactive(raw))),
         "fan_required_kw": fan_power,
         "fan_installed_kw": fan_installed,
         "installed_electric_kw": n("h1_kw") + n("h2_kw") + fan_installed,

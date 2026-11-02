@@ -92,11 +92,28 @@ def optional_inactive(i, main_off=None):
     off = {}
     mau = str(i.get("sys_type", "")).startswith("MAU")
     if not (mau and i.get("winter_model") == "室內熱濕平衡（定風量）"):
-        for k in ("winter_ffu_ratio", "winter_mau_max_t"):
+        for k in ("winter_ffu_ratio", "winter_mau_max_t", "winter_terminal_heat_source"):
             off[k] = "僅 MAU 冬季室內熱濕平衡使用；停用值不參與計算"
     if mau:
         off["airflow_search_floor"] = "MAU 不搜尋混風送風量；停用值不參與計算"
     main_off = main_inactive(i) if main_off is None else main_off
+    for loop in ("mchw", "chw", "dccw", "pcw", "hw"):
+        if loop + "_fluid_mode" in main_off:
+            for suffix in ("property_source", "property_t", "property_p"):
+                off[loop + "_" + suffix] = "本迴路未配置，保留模型草稿"
+        elif i.get(loop + "_property_source") != "CoolProp 純水溫壓":
+            for suffix in ("property_t", "property_p"):
+                off[loop + "_" + suffix] = "目前沿用手動物性，溫壓草稿不參與計算"
+    if i.get("np_auto_mode") != "自動加總本案（手填為額外負荷）":
+        for key in ("main_fan_input_kw", "ffu_input_w", "motor_input_efficiency",
+                    "main_humidifier_input_kw", "chiller_power_scope", "chiller_input_kw_rt"):
+            off[key] = "未啟用NP本案連動，保留設備輸入草稿"
+    elif i.get("chiller_power_scope") != "本案冰機列NP":
+        off["chiller_input_kw_rt"] = "冰機位於外部供冷邊界，不計入本案NP"
+    if not mau:
+        off["ffu_input_w"] = "本模式未配置FFU"
+    if i.get("main_reheat_source") != "電熱":
+        off["main_reheat_efficiency"] = "未採電熱，不使用電熱效率草稿"
     for k, spec in OPTIONAL_INPUTS.items():
         if spec.get("pair") in main_off:
             off[k] = "本盤不採用最大馬達加成；停用值不參與計算"

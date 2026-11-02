@@ -3645,3 +3645,14 @@ TEXT.update({
 })
 
 TEXT.update({"空調與冬季": "HVAC and winter", "水路物性與選管": "Water properties and sizing", "NP 設備用電": "NP equipment electrical input"})
+
+TEXT.update({
+    "本迴路未配置，保留模型草稿": "This loop is not configured; model drafts are retained",
+    "目前沿用手動物性，溫壓草稿不參與計算": "Manual properties are selected; T/P drafts do not affect calculations",
+    "未啟用NP本案連動，保留設備輸入草稿": "NP project linking is disabled; equipment input drafts are retained",
+    "冰機位於外部供冷邊界，不計入本案NP": "The chiller is outside this project's electrical boundary and is excluded from NP",
+    "本模式未配置FFU": "This topology has no FFUs",
+    "未採電熱，不使用電熱效率草稿": "Electric reheat is not selected; its efficiency draft is unused",
+})
+
+TEXT["主案已切換，請關閉並重新開啟工程模型設定。"] = "The project changed. Close and reopen engineering model settings."

@@ -36,15 +36,42 @@ def main():
     evidence = output / "evidence"
     evidence.mkdir()
     source = ROOT / ("macos" if sys.platform == "darwin" else "windows")
+    # Keep python-hvac's MIT process/coil implementation and CoolProp fluids.
+    # The product does not use its separate Water/Ice wrappers backed by the
+    # GPL iapws package. Patch only a build-local copy's eager initializer;
+    # never alter the installed environment or any engineering equation.
+    hvac_dist = importlib.metadata.distribution("python-hvac")
+    vendor = output / "vendor"
+    shutil.copytree(hvac_dist.locate_file("hvac"), vendor / "hvac",
+                    ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+    initializer = vendor / "hvac/fluids/__init__.py"
+    original = initializer.read_text(encoding="utf-8")
+    selected = original
+    for line in ("from .water import Water\n", "from .ice import Ice\n"):
+        if selected.count(line) != 1:
+            raise RuntimeError("Pinned python-hvac initializer changed; review loading patch.")
+        selected = selected.replace(line, "")
+    initializer.write_text(selected, encoding="utf-8")
     manifest = dict(python=platform.python_version(), platform=platform.platform(),
                     commit=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
+                    build_inputs_sha256={p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+                                         for p in (ROOT / "integration").glob("*") if p.is_file()},
                     product_source_sha256={p.relative_to(source).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                                            for p in (source / "facility_studio").rglob("*")
                                            if p.is_file() and "__pycache__" not in p.parts})
     manifest_file = evidence / "Build_Manifest.json"
+    manifest["python_hvac_loading_adapter"] = dict(
+        upstream_commit="94247560a667905bfbf67e45a58965a58254fce8",
+        original_initializer_sha256=hashlib.sha256(original.encode()).hexdigest(),
+        selected_initializer_sha256=hashlib.sha256(selected.encode()).hexdigest(),
+        excluded_unused_wrappers=["hvac.fluids.water", "hvac.fluids.ice", "iapws"],
+        engineering_equations_modified=False,
+    )
     manifest_file.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     notices = []
     for dist in sorted(importlib.metadata.distributions(), key=lambda d: d.metadata["Name"]):
+        if dist.metadata["Name"].lower() == "iapws":
+            continue  # Not part of the delivered executable.
         for file in dist.files or ():
             path = dist.locate_file(file)
             if path.is_file() and path.stat().st_size < 2_000_000 and any(w in str(file).lower() for w in ("license", "copying", "copyright", "notice")):
@@ -62,11 +89,11 @@ def main():
     notice_file = evidence / "第三方授權.txt"
     notice_file.write_text("\n\n".join(notices), encoding="utf-8")
     args = [sys.executable, "-m", "PyInstaller", "--noconfirm", "--clean", "--onedir", "--windowed", "--noupx",
-            "--name", NAME, "--paths", source, "--collect-submodules", "facility_studio",
+            "--name", NAME, "--paths", source, "--paths", vendor, "--collect-submodules", "facility_studio",
             "--additional-hooks-dir", ROOT / "windows/winrelease/hooks",
             "--hidden-import", "matplotlib.backends.backend_tkagg", "--hidden-import", "CoolProp.CoolProp",
             "--hidden-import", "CoolProp._constants", "--collect-data", "pint", "--collect-data", "fluids",
-            "--collect-data", "hvac", "--collect-data", "iapws", "--collect-data", "scipy",
+            "--collect-data", "hvac", "--collect-data", "scipy",
             "--add-data", str(source / "facility_studio/resources") + os.pathsep + "facility_studio/resources",
             "--add-data", str(notice_file) + os.pathsep + ".",
             "--add-data", str(manifest_file) + os.pathsep + ".",
@@ -76,16 +103,20 @@ def main():
     # python-hvac imports CoolProp.Plots through hvac.charts even when this
     # product only requests process calculations. Frozen execution proved that
     # Plots must remain; only unused tests/GUI are excluded.
-    for name in ("pytest", "hypothesis", "CoolProp.tests", "CoolProp.GUI", "numpy.tests", "scipy.tests", "pandas.tests", "IPython"):
+    for name in ("pytest", "hypothesis", "CoolProp.tests", "CoolProp.GUI", "numpy.tests", "scipy.tests", "pandas.tests", "IPython", "iapws", "hvac.fluids.water", "hvac.fluids.ice"):
         args += ["--exclude-module", name]
     if sys.platform == "win32":
         args += ["--add-binary", str(Path(sys.base_prefix) / "python3.dll") + os.pathsep + ".",
+                 "--version-file", ROOT / "integration/windows_version.txt",
                  "--icon", source / "facility_studio/resources/app.ico"]
     else:
         args += ["--osx-bundle-identifier", "com.facilitystudio.engineeringfusion.preview570",
                  "--icon", source / "facility_studio/resources/app.png"]
     args += [ROOT / "integration/entry.py"]
     run(args, evidence / "PyInstaller_Build.txt")
+    archive_index = output / "work" / NAME / "PYZ-00.toc"
+    if "'iapws" in archive_index.read_text(encoding="utf-8"):
+        raise RuntimeError("Unused iapws implementation entered the frozen archive.")
     if sys.platform == "darwin":
         app = output / "dist" / (NAME + ".app")
         shutil.copy2(ROOT / "integration/README_繁體中文.md", app / "Contents/Resources/操作說明_繁體中文.md")

@@ -489,9 +489,10 @@ def water(data):
     from .engineering_backends import liquid_water
     source = selected(data.get("property_source", "既有清水參考值"), ("既有清水參考值", "CoolProp 純水溫壓"), "property_source")
     if source == "CoolProp 純水溫壓":
+        temperature = number(data["water_t"], "water_t", .1, 150)
+        pressure_abs = number(data["water_p"], "water_p", 1, 10000)
         try:
-            fluid = dict(liquid_water(number(data["water_t"], "water_t", .1, 150),
-                                      number(data["water_p"], "water_p", 1, 10000)))
+            fluid = dict(liquid_water(temperature, pressure_abs))
         except ValueError as error:
             raise ValidationError(str(error), "water_t") from None
     else:
