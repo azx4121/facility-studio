@@ -20,8 +20,22 @@ def engineering_result_rows(result):
                 rows.append((prefix + label, value, unit, "需求初估"))
 
     tool = result["tool"]
-    if tool == "cleanroom":
-        add(result, [("volume_m3", "室內容積", "m³"), ("ach", "回循環換氣次數", "1/h"),
+    if tool == "liquid":
+        add(result, [("flow_lpm", "設計流量", "LPM"), ("outer_mm", "管外徑", "mm"),
+                     ("wall_mm", "管壁厚度", "mm"), ("inner_mm", "管內徑", "mm"),
+                     ("velocity_mps", "實際管內流速", "m/s"), ("rho", "工況密度", "kg/m³"),
+                     ("cp", "工況比熱", "kJ/(kg·K)"), ("mu", "動力黏度", "Pa·s"),
+                     ("reynolds", "雷諾數", ""), ("friction_pa_m", "直管單位壓損", "Pa/m"),
+                     ("loss_pa", "最不利路徑壓損", "Pa")])
+    elif tool == "vacuum":
+        add(result, [("standard_lpm", "標準氣體流量", "SLPM"), ("actual_lpm", "實際氣體流量", "ALPM"),
+                     ("pressure_pa", "管內絕對壓力", "Pa"), ("inner_mm", "實際管內徑", "mm"),
+                     ("velocity_mps", "實際流速", "m/s"), ("regime", "流態及模型適用性", "")])
+        if result["conductance_l_s"] is not None:
+            add(result, [("conductance_l_s", "管路導通率", "L/s"), ("effective_speed_l_s", "有效抽速", "L/s")])
+    elif tool == "cleanroom":
+        add(result, [("relief_required_cmh", "另需洩壓／排放量", "CMH"), ("total_supply_ach", "明列基準總供風換氣次數", "1/h")])
+        add(result, [("volume_m3", "室內容積", "m³"), ("ach", "採用 ACH（基準見條件）", "1/h"),
                      ("dcc_cmh", "DCC 回風循環量", "CMH"), ("leakage_cmh", "正壓洩漏", "CMH"),
                      ("required_oa_cmh", "最低外氣需求", "CMH"), ("oa_cmh", "採用外氣量", "CMH"),
                      ("ffu_total_cmh", "FFU 總設計風量", "CMH"), ("ffu_unit_cmh", "單台 FFU 風量", "CMH"),
@@ -64,6 +78,9 @@ def engineering_result_rows(result):
         add(result.get("pressure", {}), [("friction_pa_m", "直管單位壓損", "Pa/m"),
                                         ("loss_pa", "最不利路徑壓損", "Pa"), ("head_m", "路徑損失水頭", "m")])
     elif tool == "duct":
+        sheet = result['rectangle'].get('sheet')
+        if sheet and 'label' in sheet:
+            rows.append(('矩形風管鐵皮選用厚度', sheet['label'], '', sheet['status']))
         add(result, [("flow_cmh", "設計風量", "CMH")])
         for key, title in (("rectangle", "方管 "), ("round", "圓管 ")):
             add(result[key], [("w_mm", "寬度", "mm"), ("h_mm", "高度", "mm"),
@@ -84,6 +101,11 @@ def engineering_result_rows(result):
                               ("h", "比焓", "kJ/kg"), ("wetbulb_c", "濕球溫度", "°C"), ("dewpoint_c", "露點溫度", "°C")])
     elif tool == "units":
         rows = [("換算結果", value, unit, "等值換算") for unit, value in result["values"].items()]
+    ins = result.get('insulation')
+    if isinstance(ins, dict):
+        rows.append(('管路保溫選用', ins['designation'], '', '初估，須契約／防潮及熱橋覆核'))
+        if ins['feasible']:
+            add(ins, [('thickness_mm', '保溫厚度', 'mm'), ('surface_t_c', '保溫外表面溫度', '°C'), ('heat_w_m', '每米熱損／得熱', 'W/m')])
     return rows
 
 

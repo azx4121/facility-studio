@@ -14,14 +14,14 @@ def install_menus(root):
     menu = tk.Menu(root)
     apple = tk.Menu(menu, name="apple", tearoff=False)
     apple.add_command(
-        label="關於工程驗證沙盒",
+        label="關於 Facility Studio",
         command=lambda: messagebox.showinfo(
-            "工程驗證沙盒",
+            "Facility Studio",
             f"Facility Studio {BUILD}\n合成案例、工程數值對照與單相水管分析。\n工程條件與軟體數值測試分別列示。",
             parent=root,
         ),
     )
-    menu.add_cascade(label="工程驗證沙盒", menu=apple)
+    menu.add_cascade(label="Facility Studio", menu=apple)
     file_menu = tk.Menu(menu, tearoff=False)
 
     def close_window():
@@ -60,7 +60,7 @@ def install_menus(root):
         label="驗證用途與範圍",
         command=lambda: messagebox.showinfo(
             "驗證用途與範圍",
-            "主畫面的「設計檢核中心」可直接使用 AHU 核對、水管物性與壓損、九類單位換算。\n冷熱水快算可帶入目前條件；AHU 視窗按「獨立核對與報告」讀取目前輸入。\n\n報告分別列出工程品質、內部數值門檻與採用條件。內部門檻不等於 FEED 設計驗收。",
+            "一般設計請用左側簡易工具：PV、液體／純水、單位換算均直接在原頁操作。\nAHU 模型差異核對用於原條件的 PsychroLib／CoolProp 偏差分析，不是另一份負荷設計，也不代表工程認證。\n冷熱水頁可估保溫，液體頁可選材料與介質；數據不足或超出模型範圍會明確提示。",
             parent=root,
         ),
     )

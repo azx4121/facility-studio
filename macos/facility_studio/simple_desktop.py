@@ -163,13 +163,11 @@ class SimplePage(ttk.Frame):
                 extras, text="型錄 U／室指數檢核", command=self.apply_dialux_mode
             )
             self.dialux_button.pack(side="left")
-        if tool in ("water", "units"):
+        if tool == "water":
             ttk.Button(
                 extras,
-                text="帶入物性與壓損分析" if tool == "water" else "九類工程單位換算",
-                command=lambda: app.open_engineering_verification(
-                    "pipe" if tool == "water" else "units", carry_water=tool == "water"
-                ),
+                text="液體與管材選擇",
+                command=lambda: app.show_tool("liquid"),
             ).pack(side="left")
         # Retain the read-only label API for integrations; the visible status is a banner.
         self.status = ttk.Label(self.body, style="Simple.Muted.TLabel", wraplength=360)
@@ -323,6 +321,14 @@ class SimplePage(ttk.Frame):
         self.app.invalidate_dependents(self.tool)
         self.suspended = True
         try:
+            if self.tool == "liquid" and key in ("liquid", "concentration", "liquid_t", "liquid_p"):
+                # A different medium/condition must not inherit an apparently
+                # verified supplier-property set from the previous medium.
+                self.variables["property_reference"].set("")
+            if self.tool == "liquid" and key == "material":
+                old_rough = ".015" if self.previous["material"] == "SUS316L" else ".0015"
+                if self.variables["roughness_mm"].get() == old_rough:
+                    self.variables["roughness_mm"].set(".015" if self.variables[key].get() == "SUS316L" else ".0015")
             if self.tool == "electrical" and key == "power_unit":
                 old, new = self.previous[key], self.variables[key].get()
                 phases, volts = SUPPLIES[self.variables["supply"].get()]
@@ -342,6 +348,9 @@ class SimplePage(ttk.Frame):
                 self.variables["flow_unit"].set("SLPM" if is_standard else "ALPM")
             gas_factors = GAS_FLOW_FACTORS if self.variables.get("flow_basis") is None or self.variables["flow_basis"].get() == "標準流量" else {"ALPM": 1, "ACFM": 28.316846592, "Am³/h": 1000 / 60}
             rules = {
+                "liquid": {"flow_unit": ("flow", UNITS["水量"])},
+                "vacuum": {"flow_unit": ("flow", GAS_FLOW_FACTORS),
+                           "vacuum_unit": ("vacuum_p", {"Torr(abs)": 101325/760, "Pa(abs)": 1, "kPa(abs)": 1000, "mbar(abs)": 100})},
                 "duct": {
                     "flow_unit": ("flow", FLOW_FACTORS),
                     "pressure_unit": ("pressure", AIR_PRESSURE_FACTORS),
@@ -666,9 +675,8 @@ class SimpleToolsApp:
             )
             button.pack(fill="x", padx=8, pady=2)
             self.nav[key] = button
-            if key == "gas":
-                self.pv_button = ttk.Button(side, text="   PV 真空", command=self.open_pv, style="Nav.TButton", width=20)
-                self.pv_button.pack(fill="x", padx=8, pady=2)
+            if key == "vacuum":
+                self.pv_button = button
         self.fit_window_to_sidebar()
         header = ttk.Frame(root, padding=(18, 12))
         header.grid(row=0, column=1, sticky="ew")
@@ -681,13 +689,11 @@ class SimpleToolsApp:
         ttk.Button(engineering, text="完整工程工作台", command=self.open_workbench).pack(side="left")
         ttk.Button(engineering, text="設備表匯入", command=self.open_equipment).pack(side="left", padx=(6, 0))
         ttk.Button(engineering, text="其他工程快算", command=self.open_extra_tools).pack(side="left", padx=(6, 0))
-        ttk.Button(engineering, text="設計檢核中心", command=self.open_engineering_verification,
+        ttk.Button(engineering, text="AHU 模型差異核對", command=self.open_engineering_verification,
                    style="Simple.Primary.TButton").pack(side="left", padx=(6, 0))
         features = FlowToolbar(header)
         features.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(6, 0))
-        for title, tab in (("AHU 獨立核對", "ahu"), ("水管物性與壓損", "pipe"), ("九類單位換算", "units")):
-            ttk.Button(features, text=title,
-                       command=lambda k=tab: self.open_engineering_verification(k)).pack(side="left", padx=(0, 6))
+        ttk.Label(features, text="一般設計直接使用左側工具；AHU 核對僅用來比較兩個物性模型差異。").pack(side="left")
         from .sandbox_ui import install_menus
         install_menus(root)
         ttk.Label(header, text="介面語言").grid(
@@ -787,6 +793,9 @@ class SimpleToolsApp:
         self.family = Theme.family
 
     def open_engineering_verification(self, initial_tab="ahu", carry_water=False):
+        if initial_tab in ("units", "pipe"):
+            self.show_tool("units" if initial_tab == "units" else "liquid")
+            return self.active_page()
         from .feed_review_preview import VerificationWindow
         from .engineering_verification import pipe_from_water_tool
 
@@ -815,6 +824,8 @@ class SimpleToolsApp:
         for key, button in self.nav.items():
             button.configure(style="Nav.TButton", text="   " + TOOLS[key]["title"])
         self.verification.nb.select(self.verification.frames[initial_tab])
+        for key in ("units", "pipe"):
+            self.verification.nb.hide(self.verification.frames[key])
         self.verification.refresh_sources()
         if carry_water:
             self.verification.load_water()
@@ -987,9 +998,8 @@ class SimpleToolsApp:
         return self.extra_tools
 
     def open_pv(self):
-        workbench = self.open_workbench()
-        workbench.show_pv()
-        return workbench
+        self.show_tool("vacuum")
+        return self.active_page()
 
     def close(self):
         if self.workbench is not None and self.workbench.root is self.root:

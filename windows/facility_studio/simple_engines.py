@@ -258,6 +258,11 @@ def ducts(data):
     ratio = number(data["ratio"], "ratio", 1, 4)
     rectangle = duct_selection(cmh, velocity, ratio, "方管")
     round_duct = duct_selection(cmh, velocity, ratio, "圓管")
+    from .facility_simple import duct_sheet
+    rectangle["sheet"] = duct_sheet(max(rectangle["w_mm"], rectangle["h_mm"]))
+    duct_warnings = ["板厚為明列來源的中壓矩形風管參考；須另核補強、接縫、壓力等級與契約規範，不自動核准施工。"]
+    if velocity > 10:
+        duct_warnings.append("設計風速超過本案 10 m/s 提醒值，請覆核噪音、用途與壓損；此值不是通用法規上限。")
     length = None
     if check_path == "1":
         length = number(data["length"], "length", 0, 100000)
@@ -294,6 +299,7 @@ def ducts(data):
             )
     return dict(
         tool="duct",
+        warnings=duct_warnings,
         flow_cmh=cmh,
         pressure_pa=pressure,
         velocity_limit=velocity,
@@ -486,6 +492,7 @@ def lighting(data):
 
 
 def water(data):
+    selected(str(data.get("insulate", "0")), ("0", "1"), "insulate")
     from .engineering_backends import liquid_water
     source = selected(data.get("property_source", "既有清水參考值"), ("既有清水參考值", "CoolProp 純水溫壓"), "property_source")
     if source == "CoolProp 純水溫壓":
@@ -564,8 +571,13 @@ def water(data):
                     high_friction_rate=friction_rate > friction_limit, friction_limit_pa_m=friction_limit)
     if friction_rate > friction_limit:
         water_warnings.append(f"水管摩擦壓損 {friction_rate:.2f} Pa/m 超過本案警戒 {friction_limit:g} Pa/m；請放大管徑或覆核依據。")
+    from .facility_simple import insulation
+    outer = pipe.get("reference", {}).get("outside_mm")
+    ins = insulation(data, outer or number(data.get("insulation_outer_mm", ""), "insulation_outer_mm", 1, 3000),
+                     number(data.get("water_t", "20"), "water_t", .1, 150)) if data.get("insulate", "0") == "1" else None
     return dict(
         tool="water",
+        insulation=ins,
         fluid_properties=fluid,
         thermal=thermal,
         pipe=pipe,
@@ -615,6 +627,9 @@ def cleanroom(data):
                 if coverage > limit else [])
     if dcc < 0:
         warnings.append("FFU總送風小於OA，無法成立回風混合控制體；請增加循環需求或改用基本循環另加OA。")
+    relief = max(0, oa - exhaust - leakage)
+    if relief > 1e-8:
+        warnings.append(f"另需洩壓／回風排放 {relief:,.2f} CMH；未設排放路徑時，不能保證指定室壓。")
     result = dict(tool="cleanroom", area_m2=area, volume_m3=volume, height_m=height,
                 ach=ach, persons=persons, delta_p=delta_p, base_leak_ach=base_leak,
                 dcc_cmh=dcc, recirculation_cmh=recirculation,
@@ -622,6 +637,9 @@ def cleanroom(data):
                 airflow_feasible=dcc >= 0,
                 leakage_cmh=leakage, exhaust_cmh=exhaust,
                 required_oa_cmh=required_oa, oa_cmh=oa,
+                relief_required_cmh=relief,
+                airflow_balance_residual_cmh=oa - exhaust - leakage - relief,
+                total_supply_ach=(ffu_total + (oa if topology == "獨立FFU循環（MAU直接入室）" else 0)) / volume,
                 ffu_total_cmh=ffu_total, ffu_unit_cmh=unit_cmh, ffu_size=size,
                 ffu_area_each=FFU_SIZES[size], ffu_count=count,
                 ffu_unit_kw=unit_kw, ffu_fan_kw=count * unit_kw,
@@ -790,6 +808,8 @@ ENGINES = {
     "heat_loads": heat_loads,
     "pumps": pumps,
 }
+from .facility_simple import liquid, vacuum
+ENGINES.update(liquid=liquid, vacuum=vacuum)
 
 
 def calculate_tool(tool, data):

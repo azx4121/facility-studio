@@ -307,7 +307,7 @@ TOOLS.update({
         field("area", "室內地板面積", "100", help="m²"),
         field("height", "室內淨高", "3", help="m"),
         field("ffu_topology", "MAU／FFU氣流路徑", "MAU入靜壓箱經FFU送風", options=("獨立FFU循環（MAU直接入室）", "MAU入靜壓箱經FFU送風")),
-        field("ffu_airflow_basis", "ACH／截面風量基準", "室內基本循環（另加OA）", options=("FFU總送風（已含OA）", "室內基本循環（另加OA）")),
+        field("ffu_airflow_basis", "ACH／截面風量基準", "FFU總送風（已含OA）", options=("FFU總送風（已含OA）", "室內基本循環（另加OA）")),
         field("ach", "採用基準換氣次數", "60", help="1/h；依所選風量基準"),
         field("persons", "同時在室人數", "10", help="人"),
         field("exhaust_cmh", "製程及一般排氣合計", "0", help="CMH"),
@@ -406,6 +406,10 @@ def defaults(tool):
 
 
 def active_field(tool, key, data):
+    from .facility_simple_schema import active
+    state = active(tool, key, data)
+    if state is not None:
+        return state
     if tool == "air" and key in ("temperature_b", "rh_b", "comparison_basis"):
         return data.get("compare", "0") == "1"
     if tool == "heat_loads":
@@ -439,7 +443,7 @@ def active_field(tool, key, data):
         return conditions.get(key, True)
     if tool == "water":
         if key in ("water_t", "water_p"):
-            return data.get("property_source") == "CoolProp 純水溫壓"
+            return data.get("property_source") == "CoolProp 純水溫壓" or (key == "water_t" and data.get("insulate") == "1")
         if key == "flow":
             return data["mode"] == "已知水量"
         if key == "power":
@@ -495,3 +499,7 @@ def adopted_summary(tool, data):
     if tool == "air":
         return f"採用：大氣壓{data['atmosphere']}kPa(abs)，以kg乾空氣為基準；焓差方向A−B。"
     return "溫度含零點位移；壓力換算保持原有表壓／絕對壓基準"
+
+
+from .facility_simple_schema import install as _install_facilities
+_install_facilities(TOOLS, field)

@@ -2,10 +2,10 @@
 
 import os
 
-VERSION = "5.7.0"
-REVISION = "fusion.2"
+VERSION = "5.7.1"
+REVISION = "preview.1"
 if os.environ.get("FACILITY_STUDIO_SANDBOX"):
-    VERSION = "5.7.0"
-    REVISION = "fusion.2"
+    VERSION = "5.7.1"
+    REVISION = "preview.1"
 REPORT_VERSION = VERSION + " · Windows " + REVISION
 BUILD_VERSION = VERSION + "-" + REVISION

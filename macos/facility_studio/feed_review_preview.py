@@ -186,6 +186,8 @@ class VerificationWindow:
         else:
             self.run("ahu", compare_defaults)
         self.nb.select(self.frames[initial_tab])
+        for key in ("units", "pipe"):
+            self.nb.hide(self.frames[key])
         self.win.verification = self
 
     def make_text(self, key):

@@ -11,7 +11,26 @@ from .i18n import verbatim
 def presentation(result):
     tool = result["tool"]
     details = []
-    if tool == "cleanroom":
+    if tool in ("liquid", "vacuum"):
+        if tool == "liquid":
+            cards = [("管徑（外徑×管壁）", f"{result['outer_mm']:g} × {result['wall_mm']:.3f} mm"),
+                     ("實際內徑", f"{result['inner_mm']:.3f} mm"),
+                     ("實際流速", f"{result['velocity_mps']:.3f} m/s"),
+                     ("設計流量", f"{result['flow_lpm']:,.3f} LPM")]
+            details = [f"{result['liquid']}｜{result['material']}｜{result['temperature_c']:g}°C",
+                       f"ρ={result['rho']:.3f} kg/m³；cp={result['cp']:.5f} kJ/(kg·K)；μ={result['mu']:.6g} Pa·s",
+                       f"物性來源：{result['properties_source']}",
+                       f"直管單位壓損 {result['friction_pa_m']:.3f} Pa/m；路徑壓降 {result['loss_pa']:.3f} Pa；水力功率 {result['hydraulic_kw']:.5f} kW",
+                       "材料資料：" + result['material_source']]
+        else:
+            cards = [("實際管內徑", f"{result['inner_mm']:.2f} mm"),
+                     ("實際氣體流量", f"{result['actual_lpm']:,.3f} ALPM"),
+                     ("管內流速", f"{result['velocity_mps']:.3f} m/s"),
+                     ("絕對壓力", f"{result['pressure_pa']:.6g} Pa")]
+            details = [result['regime'], f"泵入口抽速 {result['pump_speed_l_s']:g} L/s",
+                       f"導通率 {result['conductance_l_s']:.6g} L/s；有效抽速 {result['effective_speed_l_s']:.6g} L/s" if result['conductance_l_s'] is not None else "此流態／管長未採用分子流導通率，需適用模型及沿程壓力資料。"]
+        details.extend(result.get("warnings", []))
+    elif tool == "cleanroom":
         cards = [
             ("FFU 需求台數", f"{result['ffu_count']:,} 台"),
             ("MAU 外氣量", f"{result['oa_cmh']:,.1f} CMH"),
@@ -25,6 +44,7 @@ def presentation(result):
             f"FFU 輸入電力／室內風機熱 {result['ffu_fan_kw']:,.2f} kW",
             "結構空間超限，請調整 FFU 尺寸、風量或天花板配置。" if result['coverage_exceeded'] else "覆蓋率未超過本案配置上限；仍須核對格柵與設備配置。",
         ]
+        details.append(f"依明列基準之總供風換氣次數 {result['total_supply_ach']:.2f} 1/h；另需洩壓／排放 {result['relief_required_cmh']:,.2f} CMH")
         mau = result.get("mau")
         if mau:
             cards.append(("MAU 盤管水側需求", f"{mau['coil_water_kw']:,.2f} kW" if mau['coil'] else "條件未成立"))
@@ -141,6 +161,8 @@ def presentation(result):
                 )
         else:
             details.append("未核總路徑阻力，不把靜壓數字當成風管或風機已合格。")
+        if rect.get("sheet"):
+            details.append("矩形風管參考鐵皮厚度：" + rect['sheet'].get('label', '無需求') + "｜" + rect['sheet'].get('note', ''))
     elif tool == "gas":
         pipe = result["pipe"]
         cards = [
@@ -241,6 +263,13 @@ def presentation(result):
         rows = list(result["values"].items())
         cards = [(unit, f"{value:,.6g}") for unit, value in rows[:3]]
         details = [f"{value:,.10g} {unit}" for unit, value in rows]
+    ins = result.get("insulation")
+    if isinstance(ins, dict):
+        details.append("保溫選用：" + ins['designation'])
+        if ins['feasible']:
+            details.append(f"保溫外表面 {ins['surface_t_c']:.3f}°C；露點 {ins['dewpoint_c']:.3f}°C；每米熱損／得熱 {ins['heat_w_m']:.3f} W/m")
+        details.append(ins['basis'])
+        details.extend(ins['warnings'])
     return cards, details
 
 

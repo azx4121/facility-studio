@@ -6,7 +6,7 @@ import traceback
 
 
 def main():
-    data = Path(os.environ.get("FACILITY_STUDIO_FUSION_DATA", Path.home() / "Facility Studio 五庫融合測試資料-5.7.0"))
+    data = Path(os.environ.get("FACILITY_STUDIO_FUSION_DATA", Path.home() / "Facility Studio 五庫融合測試資料-5.7.1"))
     data.mkdir(parents=True, exist_ok=True)
     os.environ.update(FACILITY_STUDIO_SANDBOX="1", FACILITY_STUDIO_SANDBOX_DATA=str(data),
                       LOCALAPPDATA=str(data), FACILITY_STUDIO_PREFERENCES=str(data / "preferences.json"),
@@ -32,6 +32,9 @@ def main():
         if "--fusion-self-test" in sys.argv:
             from facility_studio.fusion_acceptance import run
             return run(sys.argv[sys.argv.index("--fusion-self-test") + 1])
+        if "--facilities-self-test" in sys.argv:
+            from facility_studio.facilities_acceptance import run
+            return run(sys.argv[sys.argv.index("--facilities-self-test") + 1])
         if "--sandbox-self-test" in sys.argv:
             from facility_studio.sandbox_selftest import run
             return run(sys.argv[sys.argv.index("--sandbox-self-test") + 1])

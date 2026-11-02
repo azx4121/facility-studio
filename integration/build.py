@@ -12,7 +12,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-NAME = "Facility Studio 五庫融合測試版 5.7.0"
+NAME = "Facility Studio 五庫融合測試版 5.7.1"
 
 
 def run(args, log, timeout=1500, env=None):
@@ -113,7 +113,7 @@ def main():
                  "--version-file", ROOT / "integration/windows_version.txt",
                  "--icon", source / "facility_studio/resources/app.ico"]
     else:
-        args += ["--osx-bundle-identifier", "com.facilitystudio.engineeringfusion.preview570",
+        args += ["--osx-bundle-identifier", "com.facilitystudio.engineeringfusion.preview571",
                  "--icon", source / "facility_studio/resources/app.png"]
     args += [ROOT / "integration/entry.py"]
     run(args, evidence / "PyInstaller_Build.txt")
@@ -125,7 +125,7 @@ def main():
         shutil.copy2(ROOT / "integration/README_繁體中文.md", app / "Contents/Resources/操作說明_繁體中文.md")
         info = app / "Contents/Info.plist"
         values = plistlib.loads(info.read_bytes())
-        values.update(CFBundleShortVersionString="5.7.0", CFBundleVersion="5.7.0.2",
+        values.update(CFBundleShortVersionString="5.7.1", CFBundleVersion="5.7.1.1",
                       CFBundleDisplayName=NAME, NSHighResolutionCapable=True)
         info.write_bytes(plistlib.dumps(values))
         run(["/usr/bin/codesign", "--force", "--sign", "-", "--timestamp=none", app], evidence / "Sign_App.txt")
@@ -137,12 +137,12 @@ def main():
         executable = app / (NAME + ".exe")
     env = dict(os.environ, FACILITY_STUDIO_FUSION_DATA=str(output / "isolated-test-data"), FACILITY_TEST_BLOCK_NETWORK="1")
     run([executable, "--fusion-self-test", evidence / "Fusion_Acceptance.json"], evidence / "Fusion_Acceptance.log", env=env, timeout=180)
-    run([executable, "--sandbox-self-test", evidence / "Legacy_Sandbox_Acceptance.json"], evidence / "Legacy_Sandbox_Acceptance.log", env=env, timeout=180)
+    run([executable, "--facilities-self-test", evidence / "Facilities_Acceptance.json"], evidence / "Facilities_Acceptance.log", env=env, timeout=180)
     if sys.platform == "win32":
         from windows_installer import build as build_installer, verify as verify_installer
         setup = build_installer(app, output, NAME, run)
         verify_installer(setup, output, NAME, run, env)
-    artifact = output / (("Facility-Studio-5.7.0-macOS-arm64.zip") if sys.platform == "darwin" else "Facility-Studio-5.7.0-Windows-x64-Portable.zip")
+    artifact = output / (("Facility-Studio-5.7.1-macOS-arm64.zip") if sys.platform == "darwin" else "Facility-Studio-5.7.1-Windows-x64-Portable.zip")
     if sys.platform == "darwin":
         run(["/usr/bin/ditto", "-c", "-k", "--sequesterRsrc", "--keepParent", app, artifact], evidence / "Archive.txt")
     else:

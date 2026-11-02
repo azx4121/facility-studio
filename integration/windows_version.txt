@@ -1,15 +1,15 @@
 # UTF-8
 VSVersionInfo(
-  ffi=FixedFileInfo(filevers=(5, 7, 0, 2), prodvers=(5, 7, 0, 2), mask=0x3f,
+  ffi=FixedFileInfo(filevers=(5, 7, 1, 1), prodvers=(5, 7, 1, 1), mask=0x3f,
                    flags=0x0, OS=0x40004, fileType=0x1, subtype=0x0, date=(0, 0)),
   kids=[StringFileInfo([StringTable('040404B0', [
       StringStruct('CompanyName', 'Facility Studio'),
       StringStruct('FileDescription', 'Facility Studio 五庫融合測試版'),
-      StringStruct('FileVersion', '5.7.0.2'),
+      StringStruct('FileVersion', '5.7.1.1'),
       StringStruct('InternalName', 'FacilityStudioEngineeringFusion'),
-      StringStruct('OriginalFilename', 'Facility Studio 五庫融合測試版 5.7.0.exe'),
+      StringStruct('OriginalFilename', 'Facility Studio 五庫融合測試版 5.7.1.exe'),
       StringStruct('ProductName', 'Facility Studio 五庫融合測試版'),
-      StringStruct('ProductVersion', '5.7.0-fusion.2'),
+      StringStruct('ProductVersion', '5.7.1-preview.1'),
       StringStruct('LegalCopyright', 'Andy Huang and Facility Studio contributors')
   ])]), VarFileInfo([VarStruct('Translation', [1028, 1200])])]
 )

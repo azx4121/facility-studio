@@ -1231,7 +1231,7 @@ def calculate(p, isolate_utilities=False):
         "minimum_oa_cmh": minoa,
         "oa_mass": moa,
         "oa_room_cmh": moa * room["v_da"] * 3600,
-        "extra_relief_cmh": max(0, moa * room["v_da"] * 3600 - minoa),
+        "extra_relief_cmh": max(0, moa * room["v_da"] * 3600 - (leak + n("prd_q") + sum(d["flow_cmh"] for d in ducts.values()) + pvroom)),
         "circulation_cmh": circ,
         "supply_room_cmh": m * room["v_da"] * 3600,
         "summer": summer,
