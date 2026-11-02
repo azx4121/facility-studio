@@ -1222,7 +1222,7 @@ _add("""
 額外製程潛熱（不含人員／外氣）	Additional process latent load (excluding occupants / outdoor air)
 電阻率參考（25°C）	Reference resistivity (25°C)
 室內模式以明列得熱、外牆、樓板與產濕作穩態收支；沿用夏季設計風量。並非逐時建築負荷或多室模型。	Room mode balances specified heat gains, envelope conduction and moisture at steady state using the summer design airflow. It is not an hourly building-load or multi-zone model.
-總覽與空氣線圖	Overview / psychrometrics
+總覽與空氣線圖	Overview / air chart
 空調與空間	HVAC / rooms
 熱負荷與照明	Heat loads / lighting
 特氣與真空	Gases / vacuum
@@ -3613,4 +3613,23 @@ TEXT.update({
     " m²×U ": " m² × U ",
     "、樓板 ": ", floor ",
     "（U 值單位 ": " (U-value unit ",
+})
+
+TEXT.update({"工程驗證沙盒": "Engineering verification sandbox"})
+
+TEXT.update({"請先開啟冷熱水快算並填寫條件。": "Open the water tool and enter its conditions first."})
+
+TEXT.update({"介面語言": "Interface language", "設計：\nANDY HUANG ©": "DESIGNED BY\nANDY HUANG ©"})
+
+TEXT.update({
+    "工程設計 → 獨立核對 → 匯出證據": "Engineering design → Independent checks → Export evidence",
+    "設計檢核中心": "Design verification center",
+    "AHU 獨立核對": "Independent AHU checks",
+    "水管物性與壓損": "Water properties and pressure loss",
+    "九類單位換算": "Nine engineering unit groups",
+    "九類工程單位換算": "Nine engineering unit groups",
+    "帶入物性與壓損分析": "Transfer to water properties and pressure loss",
+    "獨立核對與報告": "Independent checks and report",
+    "Facility Studio 設計檢核中心 V": "Facility Studio Design Verification Center V",
+    "Facility Studio 工程設計 V": "Facility Studio Engineering Design V",
 })

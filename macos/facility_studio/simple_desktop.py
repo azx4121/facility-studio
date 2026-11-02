@@ -149,7 +149,7 @@ class SimplePage(ttk.Frame):
         # Clearing every input sits apart from the import action and asks first.
         ttk.Button(action_row, text="恢復預設", command=self.confirm_reset).pack(side="right")
         # Tool-specific actions wrap onto further rows instead of being squeezed beside each other.
-        extras = FlowToolbar(controls) if tool in ("heat_loads", "lighting", "air") else None
+        extras = FlowToolbar(controls) if tool in ("heat_loads", "lighting", "air", "water", "units") else None
         if extras is not None:
             extras.pack(fill="x", pady=(5, 0))
         if tool == "heat_loads":
@@ -161,6 +161,14 @@ class SimplePage(ttk.Frame):
                 extras, text="型錄 U／室指數檢核", command=self.apply_dialux_mode
             )
             self.dialux_button.pack(side="left")
+        if tool in ("water", "units"):
+            ttk.Button(
+                extras,
+                text="帶入物性與壓損分析" if tool == "water" else "九類工程單位換算",
+                command=lambda: app.open_engineering_verification(
+                    "pipe" if tool == "water" else "units", carry_water=tool == "water"
+                ),
+            ).pack(side="left")
         # Retain the read-only label API for integrations; the visible status is a banner.
         self.status = ttk.Label(self.body, style="Simple.Muted.TLabel", wraplength=360)
         output = self.output_scroll.body
@@ -600,6 +608,8 @@ class SimpleToolsApp:
         self.equipment_window = None
         self.workbench_mode = False
         self.extra_host = None
+        self.verification_host = None
+        self.verification_active = False
         root.title("廠務簡易工具 V" + BUILD_VERSION)
         self.configure_style()
         width = min(Theme.px(1440), max(Theme.px(980), root.winfo_screenwidth() - Theme.px(60)))
@@ -643,14 +653,20 @@ class SimpleToolsApp:
         header.grid(row=0, column=1, sticky="ew")
         header.columnconfigure(0, weight=1)
         ttk.Label(
-            header, text="選工具 → 填條件 → 看結果", style="Simple.Header.TLabel"
+            header, text="工程設計 → 獨立核對 → 匯出證據", style="Simple.Header.TLabel"
         ).grid(row=0, column=0, columnspan=3, sticky="w")
         engineering = FlowToolbar(header)
         engineering.grid(row=1, column=0, columnspan=2, sticky="ew", pady=(8, 0))
         ttk.Button(engineering, text="完整工程工作台", command=self.open_workbench).pack(side="left")
         ttk.Button(engineering, text="設備表匯入", command=self.open_equipment).pack(side="left", padx=(6, 0))
         ttk.Button(engineering, text="其他工程快算", command=self.open_extra_tools).pack(side="left", padx=(6, 0))
-        ttk.Button(engineering, text="工程驗證沙盒", command=self.open_engineering_verification).pack(side="left", padx=(6, 0))
+        ttk.Button(engineering, text="設計檢核中心", command=self.open_engineering_verification,
+                   style="Simple.Primary.TButton").pack(side="left", padx=(6, 0))
+        features = FlowToolbar(header)
+        features.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(6, 0))
+        for title, tab in (("AHU 獨立核對", "ahu"), ("水管物性與壓損", "pipe"), ("九類單位換算", "units")):
+            ttk.Button(features, text=title,
+                       command=lambda k=tab: self.open_engineering_verification(k)).pack(side="left", padx=(0, 6))
         from .sandbox_ui import install_menus
         install_menus(root)
         ttk.Label(header, text="介面語言").grid(
@@ -692,7 +708,7 @@ class SimpleToolsApp:
 
         bind_mac_shortcuts(
             root,
-            calculate=lambda: self.workbench.recalculate(True) if self.workbench_mode else self.active_page().calculate(True),
+            calculate=self.calculate_active,
             save=lambda: self.workbench.save() if self.workbench_mode else None,
             open=lambda: self.workbench.load() if self.workbench_mode else None,
         )
@@ -701,12 +717,20 @@ class SimpleToolsApp:
         self.simple_widgets = [w for w in root.winfo_children() if w.winfo_manager() == "grid"]
 
     def bind_mode_shortcuts(self):
-        self.root.bind("<F5>", lambda event: self.workbench.recalculate(True) if self.workbench_mode else
-                       self.extra_tools.calculate() if self.extra_host and self.extra_host.winfo_ismapped() else self.active_page().calculate(True))
+        self.root.bind("<F5>", lambda event: self.calculate_active())
         self.root.bind("<Return>", lambda event: None if self.workbench_mode else
-                       self.extra_tools.calculate() if self.extra_host and self.extra_host.winfo_ismapped() else self.active_page()._enter())
+                       None if self.verification_active else self.extra_tools.calculate() if self.extra_host and self.extra_host.winfo_ismapped() else self.active_page()._enter())
         self.root.bind("<Control-s>", lambda event: self.workbench.save() if self.workbench_mode else None)
         self.root.bind("<Control-o>", lambda event: self.workbench.load() if self.workbench_mode else None)
+
+    def calculate_active(self):
+        if self.workbench_mode:
+            return self.workbench.recalculate(True)
+        if self.verification_active:
+            return self.verification.calculate_current()
+        if self.extra_host and self.extra_host.winfo_ismapped():
+            return self.extra_tools.calculate()
+        return self.active_page().calculate(True)
 
     def wheel(self, event):
         if event.widget.winfo_toplevel() is not self.root or isinstance(
@@ -735,8 +759,8 @@ class SimpleToolsApp:
         Theme.apply(self.root)
         self.family = Theme.family
 
-    def open_engineering_verification(self):
-        from .feed_review_preview import open_preview
+    def open_engineering_verification(self, initial_tab="ahu", carry_water=False):
+        from .feed_review_preview import VerificationWindow
         from .engineering_verification import pipe_from_water_tool
 
         def water_provider():
@@ -744,7 +768,29 @@ class SimpleToolsApp:
                 raise ValueError("請先開啟冷熱水快算並填寫條件。")
             return pipe_from_water_tool(self.pages["water"].data())
 
-        return open_preview(self.root, water_provider=water_provider)
+        if self.workbench_mode:
+            self.show_simple_tools()
+        if self.verification_host is None:
+            self.verification_host = ttk.Frame(self.container)
+            self.verification = VerificationWindow(
+                self.root, water_provider=water_provider, host=self.verification_host,
+                on_close=lambda: self.show_tool(self.current),
+            )
+        for page in self.pages.values():
+            page.grid_remove()
+        if self.extra_host is not None:
+            self.extra_host.grid_remove()
+        self.verification_host.grid(row=0, column=0, sticky="nsew")
+        self.verification_active = True
+        self.footer.grid_remove()
+        for key, button in self.nav.items():
+            button.configure(style="Nav.TButton", text="   " + TOOLS[key]["title"])
+        self.verification.nb.select(self.verification.frames[initial_tab])
+        self.verification.refresh_sources()
+        if carry_water:
+            self.verification.load_water()
+        self.root.title("Facility Studio 設計檢核中心 V" + BUILD_VERSION)
+        return self.verification_host
 
     def active_page(self):
         return self.pages[self.current]
@@ -755,9 +801,14 @@ class SimpleToolsApp:
         if self.extra_host is not None and self.extra_host.winfo_exists():
             self.extra_host.grid_remove()
             self.footer.grid()
+        if self.verification_host is not None:
+            self.verification_host.grid_remove()
+            self.verification_active = False
+            self.footer.grid()
         for page in self.pages.values():
             page.grid_remove()
         self.current = tool
+        self.root.title("Facility Studio 工程設計 V" + BUILD_VERSION)
         if tool not in self.pages:
             self.pages[tool] = SimplePage(self.container, tool, self)
         page = self.pages[tool]
@@ -898,6 +949,9 @@ class SimpleToolsApp:
                 allowed_tools=("濕空氣計算", "兩股混風", "兩點空氣過程", "水量與熱量", "水管實際流速", "Kv 與壓差", "耗電與費用"))
         for page in self.pages.values():
             page.grid_remove()
+        if self.verification_host is not None:
+            self.verification_host.grid_remove()
+            self.verification_active = False
         self.extra_host.grid(row=0, column=0, sticky="nsew")
         self.footer.grid_remove()
         return self.extra_tools

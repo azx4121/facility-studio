@@ -1,6 +1,7 @@
 """Verify the actual staged release and reject incomplete or changed payloads."""
 
 from pathlib import Path
+import argparse
 import ast
 import hashlib
 import importlib.util
@@ -19,6 +20,10 @@ spec = importlib.util.spec_from_file_location(
 )
 bootstrap = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(bootstrap)
+parser = argparse.ArgumentParser()
+parser.add_argument("--legacy-assets-only", action="store_true",
+                    help="Verify the retained online bundle, not the separate offline sandbox source")
+args = parser.parse_args()
 checks = []
 
 
@@ -39,14 +44,15 @@ def rejected(name, callback):
 manifest = bootstrap.verify_payload(ROOT / "installer")
 check("01_real_payload_manifest", bool(manifest))
 payload = ROOT / "installer/payload"
-mismatches = [relative for relative in manifest
-              if (ROOT / relative).read_bytes() != (payload / relative).read_bytes()]
-if mismatches:
-    print("Staged payload differs from release sources:", ", ".join(mismatches), flush=True)
-check(
-    "02_payload_matches_release_sources",
-    not mismatches,
-)
+if args.legacy_assets_only:
+    print("Retained win.10 online bundle: source parity is outside this archive-only scope; "
+          "the separate offline sandbox must pass its native build/installer gate.", flush=True)
+else:
+    mismatches = [relative for relative in manifest
+                  if (ROOT / relative).read_bytes() != (payload / relative).read_bytes()]
+    if mismatches:
+        print("Staged payload differs from release sources:", ", ".join(mismatches), flush=True)
+    check("02_payload_matches_release_sources", not mismatches)
 modules = ROOT / "facility_studio"
 missing = []
 for path in modules.glob("*.py"):
@@ -163,4 +169,4 @@ check(
 (ROOT / "evidence/Packaging_Checks.json").write_text(
     json.dumps(checks, ensure_ascii=False, indent=2), encoding="utf-8"
 )
-print(f"{len(checks)} packaging checks passed; Windows installation remains untested")
+print(f"{len(checks)} packaging checks passed; scope={'retained online assets' if args.legacy_assets_only else 'release candidate source parity'}; this script does not prove native installation")

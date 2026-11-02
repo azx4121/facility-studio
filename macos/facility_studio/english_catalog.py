@@ -3620,3 +3620,16 @@ TEXT.update({"工程驗證沙盒": "Engineering verification sandbox"})
 TEXT.update({"請先開啟冷熱水快算並填寫條件。": "Open the water tool and enter its conditions first."})
 
 TEXT.update({"介面語言": "Interface language", "設計：\nANDY HUANG ©": "DESIGNED BY\nANDY HUANG ©"})
+
+TEXT.update({
+    "工程設計 → 獨立核對 → 匯出證據": "Engineering design → Independent checks → Export evidence",
+    "設計檢核中心": "Design verification center",
+    "AHU 獨立核對": "Independent AHU checks",
+    "水管物性與壓損": "Water properties and pressure loss",
+    "九類單位換算": "Nine engineering unit groups",
+    "九類工程單位換算": "Nine engineering unit groups",
+    "帶入物性與壓損分析": "Transfer to water properties and pressure loss",
+    "獨立核對與報告": "Independent checks and report",
+    "Facility Studio 設計檢核中心 V": "Facility Studio Design Verification Center V",
+    "Facility Studio 工程設計 V": "Facility Studio Engineering Design V",
+})
