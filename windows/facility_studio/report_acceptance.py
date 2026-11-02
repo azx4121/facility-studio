@@ -81,8 +81,27 @@ def run_checks():
     original = copy.deepcopy(inputs)
     pipeline = calculate_pipeline(inputs)
     check("R01", "50 m is adopted and retained", pipeline["water"]["pressure"]["length_m"] == 50 and pipeline["adopted_inputs"]["water"]["length"] == "50")
-    check("R01", "50 m pressure independent reference", math.isclose(pipeline["water"]["pressure"]["loss_pa"], 24197.929837789383, rel_tol=1e-10))
-    check("R01", "50 m pump head independent reference", math.isclose(pipeline["pumps"]["head_m"], 2.4675021376096202, rel_tol=1e-10))
+    # Reconstruct the default design from physical inputs. Total-supply ACH
+    # gives 18 FFUs; the old 19-FFU numeric fixture included OA twice.
+    ffu = math.ceil(100 * 3 * 60 / 1000)
+    heat_kw = 100 * .012 + 100 * .020 + 10 * .075 + 20 + ffu * .18 + 1.2 * 300 / 3600 * 50 + 10 * .055
+    flow_m3s = heat_kw / (1000 * 4.1868 * 5)
+    diameter = .0409
+    velocity = flow_m3s / (math.pi * diameter ** 2 / 4)
+    reynolds = 1000 * velocity * diameter / .001
+    low, high = .005, .2
+    for _ in range(80):
+        factor = (low + high) / 2
+        residual = 1 / math.sqrt(factor) + 2 * math.log10(.000045 / diameter / 3.7 + 2.51 / reynolds / math.sqrt(factor))
+        if residual > 0:
+            low = factor
+        else:
+            high = factor
+    expected_loss = ((low + high) / 2 * 50 / diameter + 4) * 1000 * velocity ** 2 / 2
+    check("R01", "total ACH FFU count independently reconstructed", pipeline["cleanroom"]["ffu_count"] == ffu)
+    check("R01", "flow from independently reconstructed thermal load", math.isclose(pipeline["water"]["flow_lpm"], flow_m3s * 60000, rel_tol=1e-12))
+    check("R01", "50 m pressure independent reference", math.isclose(pipeline["water"]["pressure"]["loss_pa"], expected_loss, rel_tol=1e-10))
+    check("R01", "50 m pump head independent reference", math.isclose(pipeline["pumps"]["head_m"], expected_loss / (1000 * 9.80665), rel_tol=1e-10))
     check("R01", "pipeline input not mutated", inputs == original)
     check("R01", "documented pipes tool alias retains 50 m", calculate_pipeline({"pipes": {"length": "50"}})["water"]["pressure"]["length_m"] == 50)
 

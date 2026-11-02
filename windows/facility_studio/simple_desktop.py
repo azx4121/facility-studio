@@ -3,6 +3,8 @@ from .simple_engines import SUPPLIES, ELECTRICAL_POWER_UNITS, MOTOR_POWER_UNITS,
 
 from .localized_tk import tk
 from .localized_tk import ttk, filedialog, messagebox
+import re
+from urllib.parse import urlsplit
 
 from .errors import InputError, ValidationError
 from .gas_catalog import gas_label, reference_velocity, switched_velocity
@@ -149,7 +151,7 @@ class SimplePage(ttk.Frame):
         # Clearing every input sits apart from the import action and asks first.
         ttk.Button(action_row, text="恢復預設", command=self.confirm_reset).pack(side="right")
         # Tool-specific actions wrap onto further rows instead of being squeezed beside each other.
-        extras = FlowToolbar(controls) if tool in ("cleanroom", "heat_loads", "lighting", "air", "water", "units") else None
+        extras = FlowToolbar(controls) if tool in ("cleanroom", "heat_loads", "lighting", "air", "water", "units", "liquid", "vacuum", "duct") else None
         if extras is not None:
             extras.pack(fill="x", pady=(5, 0))
         if tool == "cleanroom":
@@ -167,8 +169,10 @@ class SimplePage(ttk.Frame):
             ttk.Button(
                 extras,
                 text="液體與管材選擇",
-                command=lambda: app.show_tool("liquid"),
+                command=lambda: app.open_engineering_verification("pipe", carry_water=True),
             ).pack(side="left")
+        if tool in ("liquid", "vacuum", "duct"):
+            ttk.Button(extras, text="查看設計參考資料", command=self.open_reference).pack(side="left")
         # Retain the read-only label API for integrations; the visible status is a banner.
         self.status = ttk.Label(self.body, style="Simple.Muted.TLabel", wraplength=360)
         output = self.output_scroll.body
@@ -224,6 +228,16 @@ class SimplePage(ttk.Frame):
         chart.set_state(self.result["state"], self.result.get("comparison_state"))
         ttk.Label(win, text="本視窗為開啟當下的狀態快照；輸入變更後請重開核對。", style="Simple.Muted.TLabel").pack(pady=(0, 8))
 
+    def open_reference(self):
+        if self.result is None:
+            return False
+        url = (self.result.get("material_source") or self.result.get("source") or
+               self.result.get("rectangle", {}).get("sheet", {}).get("source", ""))
+        if urlsplit(url).scheme != "https" or not urlsplit(url).netloc:
+            return False
+        import webbrowser
+        return webbrowser.open(url)
+
     def _enter(self):
         self.calculate(True)
         return "break"
@@ -266,7 +280,7 @@ class SimplePage(ttk.Frame):
             if not values:
                 self.banner.show("尚無可帶入的上游結果；請先完成對應工具計算。", "warning")
                 return False
-            sources = {"heat_loads": ("cleanroom", "lighting", "air"), "water": ("heat_loads",),
+            sources = {"heat_loads": ("cleanroom", "lighting", "air"), "water": ("heat_loads",), "liquid": ("water",),
                        "pumps": ("water",), "electrical": ("cleanroom", "heat_loads", "lighting", "pumps")}
             fresh_sources = {key for key in sources.get(self.tool, ()) if key in results}
             self.upstream_sources = self.upstream_sources | fresh_sources if only else fresh_sources
@@ -275,6 +289,8 @@ class SimplePage(ttk.Frame):
             self.app.invalidate_dependents(self.tool)
             self.suspended = True
             try:
+                if self.tool == 'water' and self.variables['pipe_size'].get() == '自動依流速選型':
+                    self.variables['insulation_outer_mm'].set('')
                 for key, value in values.items():
                     if key in self.variables:
                         self.variables[key].set(str(value))
@@ -321,6 +337,13 @@ class SimplePage(ttk.Frame):
         self.app.invalidate_dependents(self.tool)
         self.suspended = True
         try:
+            if self.tool == 'water' and active_field('water', key, self.data()):
+                auto_pipe = self.variables['pipe_size'].get() == '自動依流速選型'
+                sizing_changed = key == 'pipe_size' or (auto_pipe and key in (
+                    'flow', 'power', 'delta', 'velocity', 'mode', 'sizing_basis',
+                    'friction_limit', 'property_source', 'water_p', 'water_t'))
+                if sizing_changed:
+                    self.variables['insulation_outer_mm'].set('')
             if self.tool == "liquid" and key in ("liquid", "concentration", "liquid_t", "liquid_p"):
                 # A different medium/condition must not inherit an apparently
                 # verified supplier-property set from the previous medium.
@@ -494,7 +517,11 @@ class SimplePage(ttk.Frame):
             self.result = result
             if self.air_chart is not None:
                 self.air_chart.set_state(result["state"], result.get("comparison_state"))
-            self.details.config(text="\n".join(details))
+            # Keep full reference URLs in the exported report and in the
+            # reference action. A hostname fits the on-screen explanation.
+            display_details = [re.sub(r"https://\S+", lambda m: "https://" + urlsplit(m.group()).netloc, line)
+                               for line in details]
+            self.details.config(text="\n".join(display_details))
             if (
                 self.tool == "lighting"
                 and self.variables["area_mode"].get() == "體積 m³"
@@ -691,9 +718,12 @@ class SimpleToolsApp:
         ttk.Button(engineering, text="其他工程快算", command=self.open_extra_tools).pack(side="left", padx=(6, 0))
         ttk.Button(engineering, text="AHU 模型差異核對", command=self.open_engineering_verification,
                    style="Simple.Primary.TButton").pack(side="left", padx=(6, 0))
-        features = FlowToolbar(header)
+        features = ttk.Frame(header)
         features.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(6, 0))
-        ttk.Label(features, text="一般設計直接使用左側工具；AHU 核對僅用來比較兩個物性模型差異。").pack(side="left")
+        features.columnconfigure(0, weight=1)
+        purpose = ttk.Label(features, text="一般設計直接使用左側工具；AHU 核對僅用來比較兩個物性模型差異。", wraplength=400)
+        purpose.grid(row=0, column=0, sticky="ew")
+        wrap_to_width(purpose)
         from .sandbox_ui import install_menus
         install_menus(root)
         ttk.Label(header, text="介面語言").grid(
@@ -795,6 +825,8 @@ class SimpleToolsApp:
     def open_engineering_verification(self, initial_tab="ahu", carry_water=False):
         if initial_tab in ("units", "pipe"):
             self.show_tool("units" if initial_tab == "units" else "liquid")
+            if initial_tab == "pipe" and carry_water:
+                self.active_page().import_upstream("water")
             return self.active_page()
         from .feed_review_preview import VerificationWindow
         from .engineering_verification import pipe_from_water_tool

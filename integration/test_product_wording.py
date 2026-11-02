@@ -52,6 +52,10 @@ def test_installer_public_name_and_operation_guide_are_product_only():
     meta = (ROOT/'integration/windows_version.txt').read_text()
     assert 'FacilityStudioEngineeringFusion' not in meta
     assert '五庫' not in meta
+    installer = (ROOT/'integration/windows_installer.py').read_text()
+    welcome = next(line for line in installer.splitlines() if 'MUI_WELCOMEPAGE_TEXT' in line)
+    assert not BANNED.search(welcome)
+    assert '五套工程計算庫' not in welcome and 'Python' not in welcome
 
 
 def test_exported_review_files_omit_dependency_metadata(tmp_path):
@@ -63,3 +67,17 @@ def test_exported_review_files_omit_dependency_metadata(tmp_path):
         content = target.read_text()
         assert not BANNED.search(content)
         assert '套件版本' not in content
+
+
+@pytest.mark.parametrize('platform', ['macos', 'windows'])
+def test_bundled_tutorial_is_current_and_uses_product_wording(platform):
+    import json
+    import zipfile
+    with zipfile.ZipFile(ROOT/platform/'facility_studio/resources/beginner_tutorial.zip') as archive:
+        page = archive.read('START_HERE.html').decode('utf-8')
+        data = json.loads(re.search(r'id="tutorial-data">(.*?)(</script>)', page, re.S)[1])
+        assert '5.7.1' in data['labels']['zh-Hant']['offline']
+        assert {'liquid', 'vacuum', 'cleanroom'} <= {c['id'] for c in data['content']['zh-Hant']}
+        for name in archive.namelist():
+            if name.endswith(('.html', '.txt')) and not name.upper().startswith('LICENSE'):
+                assert not BANNED.search(archive.read(name).decode('utf-8'))

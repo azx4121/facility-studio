@@ -575,6 +575,8 @@ def water(data):
     outer = pipe.get("reference", {}).get("outside_mm")
     ins = insulation(data, outer or number(data.get("insulation_outer_mm", ""), "insulation_outer_mm", 1, 3000),
                      number(data.get("water_t", "20"), "water_t", .1, 150)) if data.get("insulate", "0") == "1" else None
+    if ins and (outer or float(data['insulation_outer_mm'])) <= pipe['id_mm']:
+        raise ValidationError("保溫使用的管外徑必須大於目前所選管內徑；管徑變更後請重新確認外徑。", 'insulation_outer_mm')
     return dict(
         tool="water",
         insulation=ins,

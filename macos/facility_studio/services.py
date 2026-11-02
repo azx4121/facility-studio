@@ -192,6 +192,10 @@ def upstream_values(tool, results, inputs=None):
     heat = _result(results, "heat_loads")
     water = _result(results, "water") or _result(results, "pipes")
     light = _result(results, "lighting")
+    if tool == "liquid" and water:
+        # Carry flow only: the source steel-pipe geometry or reference water
+        # properties must not silently replace a chemical/material selection.
+        return dict(flow=str(water["flow_lpm"]), flow_unit="LPM")
     if tool == "heat_loads":
         values = {}
         if clean:

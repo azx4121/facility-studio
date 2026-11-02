@@ -112,7 +112,22 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
         ("water", "water_t"): {"property_source": "CoolProp 純水溫壓"},
         ("water", "water_p"): {"property_source": "CoolProp 純水溫壓"},
     }
+    insulation_fields = {'ambient_t', 'ambient_rh', 'insulation_k', 'external_h',
+                         'dew_margin', 'heat_limit', 'contract_insulation_mm', 'insulation_outer_mm'}
+    for tool in ('water', 'liquid'):
+        for key in insulation_fields:
+            simple_active_overrides[(tool, key)] = dict(insulate='1', insulation_outer_mm='48.3')
+    for key in ('liquid_rho', 'liquid_cp', 'liquid_mu', 'property_reference'):
+        simple_active_overrides[('liquid', key)] = dict(properties='供應商物性')
+    simple_active_overrides[('liquid', 'concentration')] = dict(liquid='乙二醇水溶液')
+    for key in ('outer_mm', 'wall_mm'):
+        simple_active_overrides[('liquid', key)] = dict(geometry='指定外徑及管壁')
+    simple_active_overrides[('vacuum', 'inner_mm')] = dict(diameter_mode='指定內徑')
+    simple_active_overrides[('vacuum', 'length')] = dict(diameter_mode='指定內徑', vacuum_p='.00001', flow='.0000001')
     simple_alt_values = {
+        "contract_insulation_mm": "50.8",
+        "ambient_rh": "85",
+        "property_reference": "Synthetic supplier reference B, same operating point",
         "outdoor_rh": "60",
         "room_pressure": "95",
         "coil_bf_min": "0.1",
@@ -154,6 +169,11 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
         for f in spec["fields"]:
             key = f["key"]
             base = defaults(tool)
+            if tool == 'water':
+                base['insulation_outer_mm'] = '48.3'
+            if tool == 'liquid':
+                base.update(liquid_rho='1000', liquid_cp='4.18', liquid_mu='.001',
+                            property_reference='Synthetic supplier reference A, same operating point')
             if (tool, key) in simple_active_overrides:
                 base.update(simple_active_overrides[(tool, key)])
             check(active_field(tool, key, base), f"Simple field {tool}.{key} must be active in test setup")
@@ -213,7 +233,8 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
 
             # Invalid input must raise ValidationError with field_name == key
             bad = dict(base)
-            bad[key] = "invalid_value_\n" if key == "gas_name" else "not_a_valid_input"
+            bad[key] = ("invalid_value_\n" if key == "gas_name" else
+                        "invalid_\x00_reference" if key == 'property_reference' else "not_a_valid_input")
             try:
                 calculate_tool(tool, bad)
             except ValidationError as exc:

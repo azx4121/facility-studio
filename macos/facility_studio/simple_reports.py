@@ -18,6 +18,7 @@ def presentation(result):
                      ("實際流速", f"{result['velocity_mps']:.3f} m/s"),
                      ("設計流量", f"{result['flow_lpm']:,.3f} LPM")]
             details = [f"{result['liquid']}｜{result['material']}｜{result['temperature_c']:g}°C",
+                       f"液體絕壓 {result['pressure_kpa']:g} kPa(abs)；質量濃度 {result['concentration_pct']:g}%；流速警戒 {result['velocity_limit_mps']:g} m/s；壓損警戒 {result['friction_limit_pa_m']:g} Pa/m",
                        f"ρ={result['rho']:.3f} kg/m³；cp={result['cp']:.5f} kJ/(kg·K)；μ={result['mu']:.6g} Pa·s",
                        f"物性來源：{result['properties_source']}",
                        f"直管單位壓損 {result['friction_pa_m']:.3f} Pa/m；路徑壓降 {result['loss_pa']:.3f} Pa；水力功率 {result['hydraulic_kw']:.5f} kW",
@@ -28,6 +29,8 @@ def presentation(result):
                      ("管內流速", f"{result['velocity_mps']:.3f} m/s"),
                      ("絕對壓力", f"{result['pressure_pa']:.6g} Pa")]
             details = [result['regime'], f"泵入口抽速 {result['pump_speed_l_s']:g} L/s",
+                       f"流速警戒 {result['velocity_limit_mps']:g} m/s",
+                       f"標準流量參考 {result['standard_t_c']:g}°C／{result['standard_p_pa']:g} Pa(abs)；操作 {result['temperature_c']:g}°C；所在地大氣 {result['atmosphere_pa']:g} Pa(abs)；直管長 {result['length_m']:g} m",
                        f"導通率 {result['conductance_l_s']:.6g} L/s；有效抽速 {result['effective_speed_l_s']:.6g} L/s" if result['conductance_l_s'] is not None else "此流態／管長未採用分子流導通率，需適用模型及沿程壓力資料。"]
         details.extend(result.get("warnings", []))
     elif tool == "cleanroom":
@@ -266,6 +269,8 @@ def presentation(result):
     ins = result.get("insulation")
     if isinstance(ins, dict):
         details.append("保溫選用：" + ins['designation'])
+        c = ins['criteria']
+        details.append(f"保溫設計條件：周圍 {c['ambient_t']:g}°C／{c['ambient_rh']:g}%RH；k={c['conductivity']:g} W/(m·K)；h={c['external_h']:g} W/(m²·K)；露點裕度 {c['dew_margin']:g} K；熱損上限 {c['heat_limit']:g} W/m；契約厚度下限 {c['contract_min_mm']:g} mm")
         if ins['feasible']:
             details.append(f"保溫外表面 {ins['surface_t_c']:.3f}°C；露點 {ins['dewpoint_c']:.3f}°C；每米熱損／得熱 {ins['heat_w_m']:.3f} W/m")
         details.append(ins['basis'])

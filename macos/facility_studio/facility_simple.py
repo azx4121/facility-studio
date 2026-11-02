@@ -70,6 +70,8 @@ def insulation(data, od_mm, fluid_t):
             chosen = dict(thickness_mm=mm, heat_w_m=q, surface_t_c=surface)
             break
     return dict(chosen or {}, feasible=chosen is not None, dewpoint_c=dp,
+                criteria=dict(ambient_t=ambient, ambient_rh=rh, conductivity=k,
+                              external_h=h, dew_margin=margin, heat_limit=qmax, contract_min_mm=minimum),
                 designation=(f"外徑 {od_mm:g} mm × {inches(chosen['thickness_mm'])}t" if chosen else "超出 200 mm 搜尋範圍／無可行保溫厚度"),
                 source=ASHRAE, basis="防結露＋明填每米熱損／得熱上限＋明填契約最小厚度；非宣稱現行法規最小厚度",
                 warnings=["以管外表面等於液體溫度保守估算；外表面熱傳係數須含對流與輻射；另須防潮層、接縫、支架熱橋與材料額定溫度確認。"])
@@ -91,7 +93,7 @@ def liquid(data):
         mu = n(data, "liquid_mu", "", 1e-7, 100)
         cp = n(data, "liquid_cp", "", .01, 20)
         source = str(data.get("property_reference", "")).strip()
-        if not source:
+        if not source or len(source) > 500 or any(ord(c) < 32 for c in source):
             raise ValidationError("化學液體與混合廢液須填物性來源及適用溫度／濃度，不能沿用水物性。", "property_reference")
     else:
         try:
@@ -155,6 +157,9 @@ def liquid(data):
     if ins and not ins["feasible"]:
         warnings.append("保溫條件不可達，不能採用厚度。")
     return dict(tool="liquid", liquid=name, material=material, flow_lpm=flow, temperature_c=t,
+                pressure_kpa=pressure, concentration_pct=concentration,
+                velocity_limit_mps=vlimit, friction_limit_pa_m=friction_limit,
+                roughness_mm=rough, length_m=length, k_sum=ksum,
                 rho=rho, cp=cp, mu=mu, properties_source=source, material_source=url,
                 outer_mm=od, wall_mm=wall, inner_mm=bore, velocity_mps=v, reynolds=re,
                 friction_pa_m=rate, loss_pa=drop, hydraulic_kw=flow / 60000 * drop / 1000,
@@ -203,6 +208,9 @@ def vacuum(data):
     if v > limit:
         warnings.append(f"PV 實際流速 {v:.2f} m/s 超過本案上限 {limit:g} m/s。")
     return dict(tool="vacuum", pressure_pa=p, standard_lpm=std, actual_lpm=actual,
+                velocity_limit_mps=limit,
+                atmosphere_pa=atmosphere, standard_t_c=std_t-273.15, standard_p_pa=std_p,
+                temperature_c=t-273.15, length_m=length,
                 inner_mm=d*1000, velocity_mps=v, regime=regime, conductance_l_s=conductance,
                 effective_speed_l_s=effective, pump_speed_l_s=pump, warnings=warnings,
                 formula="Qactual=Qstd×Pstd/Pabs×T/Tstd；分子流長直圓管 C=12.1d³/L（cm、L/s、空氣20°C）；1/Seff=1/Sp+1/C。",

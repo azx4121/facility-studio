@@ -68,6 +68,28 @@ def run(destination):
         liquid.variables['liquid_t'].set('7')
         liquid.calculate()
         check('液體頁保溫聯動成功', liquid.result is not None and liquid.result['insulation']['feasible'])
+        app.show_tool('water')
+        water = app.active_page()
+        water.variables['insulate'].set('1')
+        water.variables['insulation_outer_mm'].set('48.3')
+        water.calculate()
+        check('冷熱水採用確認之外徑作保溫', water.result is not None and water.result['insulation']['feasible'])
+        water.variables['flow'].set('200')
+        water.calculate()
+        check('變更自動選管條件使舊外徑失效', water.result is None and not water.variables['insulation_outer_mm'].get())
+        water.reset()
+        water.variables['flow'].set('350')
+        water.calculate()
+        app.open_engineering_verification('pipe', carry_water=True)
+        liquid = app.active_page()
+        check('冷熱水流量帶入液體原頁', liquid.result is not None and liquid.result['flow_lpm'] == 350 and app.verification_host is None)
+        water.variables['flow'].set('700')
+        import tempfile
+        with tempfile.TemporaryDirectory(prefix='facility-stale-export-') as folder:
+            report = Path(folder) / 'stale.txt'
+            check('上游水量改動阻擋過期液體匯出', liquid.upstream_stale and not app.export_result(report) and not report.exists())
+        water.calculate()
+        check('明確重新帶入後液體流量恢復', liquid.import_upstream('water') and liquid.result['flow_lpm'] == 700)
         for tool in ('vacuum', 'liquid', 'units', 'cleanroom', 'duct'):
             app.show_tool(tool)
             root.update()

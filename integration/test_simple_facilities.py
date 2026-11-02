@@ -124,3 +124,10 @@ def test_small_engineering_values_are_not_displayed_as_zero():
     row = next(x for x in engineering_result_rows(r) if x[0] == '動力黏度')
     assert isinstance(row[1], str) and float(row[1]) > 0
     assert float(row[1]) == pytest.approx(r['mu'], rel=1e-5)
+
+
+def test_insulation_cannot_use_bore_or_stale_smaller_outside_diameter():
+    d = dict(defaults('water'), insulate='1', insulation_outer_mm='20')
+    with pytest.raises(ValidationError) as caught:
+        calculate_tool('water', d)
+    assert caught.value.field_name == 'insulation_outer_mm'

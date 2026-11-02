@@ -24,7 +24,7 @@ def build(app, output, name, runner):
              'VIAddVersionKey /LANG=1028 "FileVersion" "5.7.1.1"',
              'VIAddVersionKey /LANG=1028 "ProductVersion" "5.7.1-preview.1"',
              '!define MUI_WELCOMEPAGE_TITLE "Facility Studio 5.7.1 測試版"',
-             '!define MUI_WELCOMEPAGE_TEXT "繁體中文、離線執行，內含五套工程計算庫與 Python。$\\r$\\n$\\r$\\n請使用新的空目錄。正式版、舊專案與使用者資料不會被替換。$\\r$\\n$\\r$\\n此為合成案例軟體驗證版本，不代表 FEED 設計簽核。"',
+             '!define MUI_WELCOMEPAGE_TEXT "繁體中文、離線執行，提供廠務工程計算與設計報表。$\\r$\\n$\\r$\\n請使用新的空目錄。正式版、舊專案與使用者資料不會被替換。$\\r$\\n$\\r$\\n本測試版供操作及合成案例驗證，工程採用仍須依專案設計條件覆核。"',
              "!insertmacro MUI_PAGE_WELCOME", "!insertmacro MUI_PAGE_DIRECTORY", "!insertmacro MUI_PAGE_INSTFILES",
              "!insertmacro MUI_PAGE_FINISH", "!insertmacro MUI_UNPAGE_CONFIRM", "!insertmacro MUI_UNPAGE_INSTFILES",
              '!insertmacro MUI_LANGUAGE "TradChinese"', 'Section "安裝"',
@@ -62,6 +62,8 @@ def verify(setup, output, name, runner, env):
         raise RuntimeError(f"Installer exited {result.returncode}")
     runner([install / (name + ".exe"), "--fusion-self-test", output / "evidence/Installed_Acceptance.json"],
            output / "evidence/Installed_Acceptance.log", env=env, timeout=180)
+    runner([install / (name + ".exe"), "--facilities-self-test", output / "evidence/Installed_Facilities_Acceptance.json"],
+           output / "evidence/Installed_Facilities_Acceptance.log", env=env, timeout=180)
     marker = install / "user-added-file.txt"
     marker.write_text("preserve", encoding="utf-8")
     retry = subprocess.run(f'"{setup}" /S /D={install}', timeout=120)

@@ -331,7 +331,6 @@ def test_cocoa_menu_translation_preserves_application_name():
 
 def test_main_workspace_transfer_stale_source_and_keyboard(tmp_path, monkeypatch):
     import tkinter as tk
-    from tkinter import filedialog
     from facility_studio.simple_desktop import SimpleToolsApp
 
     root = tk.Tk()
@@ -343,32 +342,33 @@ def test_main_workspace_transfer_stale_source_and_keyboard(tmp_path, monkeypatch
         water.calculate()
         host = app.open_engineering_verification("pipe", carry_water=True)
         root.update()
-        view = app.verification
-        assert host.winfo_toplevel() is root
+        liquid = app.active_page()
+        assert app.current == "liquid" and app.verification_host is None
+        assert host is liquid and host.winfo_toplevel() is root
         assert host.winfo_ismapped() and not water.winfo_ismapped()
         app.calculate_active()
-        assert view.results["pipe"]["flow_m3s"] == pytest.approx(350 / 60000)
-        assert "kPa" in view.summaries["pipe"].get()
-        report = tmp_path / "整合水管.json"
-        monkeypatch.setattr(filedialog, "asksaveasfilename", lambda **kw: str(report))
+        assert liquid.result["flow_lpm"] == pytest.approx(350)
+        assert liquid.result["material"] == "UPVC／PVC-U"
+        report = tmp_path / "整合液體.txt"
         water.variables["flow"].set("700")
-        view.export_current()
-        assert not report.exists() and "pipe" not in view.results
+        assert liquid.upstream_stale and liquid.result is None
+        assert not app.export_result(report) and not report.exists()
         app.calculate_active()
-        assert "pipe" not in view.results and "上游冷熱水條件已變更" in view.texts["pipe"].get("1.0", "end")
-        view.load_water()
+        assert liquid.result is None
+        water.calculate()
+        assert liquid.import_upstream("water")
         app.calculate_active()
-        assert view.results["pipe"]["flow_m3s"] == pytest.approx(700 / 60000)
-        view.export_current()
-        assert json.loads(report.read_text())["inputs"]["flow_lpm"] == "700.0"
-        app.open_engineering_verification("units")
-        view.group.set("溫度")
-        view.value.set("0")
+        assert liquid.result["flow_lpm"] == pytest.approx(700)
+        assert app.export_result(report) and "700" in report.read_text()
+        units = app.open_engineering_verification("units")
+        units.variables["category"].set("溫度")
+        units.variables["unit"].set("°C")
+        units.variables["value"].set("0")
         app.calculate_active()
-        assert view.results["units"]["values"]["°F"] == pytest.approx(32)
-        view.value.set("-274")
+        assert units.result["values"]["°F"] == pytest.approx(32)
+        units.variables["value"].set("-274")
         app.calculate_active()
-        assert "units" not in view.results
+        assert units.result is None
         app.show_tool("electrical")
         root.update()
         assert not app.verification_active and not host.winfo_ismapped()
@@ -376,7 +376,7 @@ def test_main_workspace_transfer_stale_source_and_keyboard(tmp_path, monkeypatch
         app.open_engineering_verification("pipe")
         root.geometry("1000x760")
         root.update()
-        assert view.export_button.winfo_rooty() + view.export_button.winfo_height() <= root.winfo_rooty() + root.winfo_height()
+        assert app.export_button.winfo_rooty() + app.export_button.winfo_height() <= root.winfo_rooty() + root.winfo_height()
         app.show_tool("heat_loads")
         heat = app.active_page()
         heat.calculate()
@@ -384,11 +384,11 @@ def test_main_workspace_transfer_stale_source_and_keyboard(tmp_path, monkeypatch
         assert water.import_upstream("heat_loads")
         app.open_engineering_verification("pipe", carry_water=True)
         app.calculate_active()
-        assert "pipe" in view.results
+        assert liquid.result is not None
         heat.variables["area"].set(str(float(heat.variables["area"].get()) + 1))
-        assert water.upstream_stale
+        assert water.upstream_stale and liquid.upstream_stale
         app.calculate_active()
-        assert "pipe" not in view.results
+        assert liquid.result is None
     finally:
         app.close()
 
