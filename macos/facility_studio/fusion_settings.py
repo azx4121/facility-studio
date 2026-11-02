@@ -40,7 +40,7 @@ def open_settings(app):
     from .errors import InputError
     win = tk.Toplevel(app.root)
     owner_project = app.project_id
-    win.title("工程模型設定｜五庫核心融合")
+    win.title("進階工程設定")
     win.geometry("840x720")
     win.minsize(720, 500)
     ttk.Label(win, text="本案計算直接採用的模型與工程假設", font=("", 16, "bold"),

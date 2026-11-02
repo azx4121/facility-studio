@@ -104,7 +104,7 @@ def test_actual_core_calls_all_five(monkeypatch):
     result = calculate(p)
     assert set(calls) == {"saturation_pressure", "moist_enthalpy", "moist_volume", "darcy_friction", "cooling_process", "liquid_water", "convert"}
     assert set(result["engineering_backends"]) == {"PsychroLib", "python-hvac", "CoolProp", "fluids", "Pint"}
-    assert all(name in report(result) for name in result["engineering_backends"])
+    assert all(name not in report(result) for name in result["engineering_backends"])
 
 
 @pytest.mark.parametrize("w", [0., 1e-12, 1e-8, .001, .01])

@@ -12,7 +12,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-NAME = "Facility Studio 五庫融合測試版 5.7.1"
+NAME = "Facility Studio 5.7.1 測試版"
 
 
 def run(args, log, timeout=1500, env=None):

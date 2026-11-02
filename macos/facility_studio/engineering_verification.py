@@ -418,12 +418,8 @@ def report_text(result):
         ]
     else:
         lines += [f"{k}：{v:.10g}" for k, v in result["values"].items()]
-    lines += [
-        "",
-        "套件版本："
-        + json.dumps(result.get("versions", metadata()), ensure_ascii=False),
-    ]
-    return "\n".join(lines)
+    from .presentation_terms import user_text
+    return user_text("\n".join(lines))
 
 
 def export_report(result, path):
@@ -435,7 +431,15 @@ def export_report(result, path):
     if path.exists():
         raise ValueError("為保留既有檔案，請使用新的報告檔名。")
     if path.suffix.lower() == ".json":
-        body = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
+        from .presentation_terms import user_text
+        def public_record(value):
+            if isinstance(value, dict):
+                return {key.replace('psychrolib', 'reference_model').replace('coolprop', 'property_model'): public_record(item)
+                        for key, item in value.items() if key not in ('versions', 'engineering_backends')}
+            if isinstance(value, list):
+                return [public_record(item) for item in value]
+            return user_text(value) if isinstance(value, str) else value
+        body = json.dumps(public_record(result), ensure_ascii=False, indent=2, allow_nan=False)
     elif path.suffix.lower() == ".html":
         body = (
             '<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>工程驗證報告</title><style>body{font:16px sans-serif;max-width:1100px;margin:32px auto;padding:0 20px}pre{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}</style><h1>工程驗證報告</h1><pre>'

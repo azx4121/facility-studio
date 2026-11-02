@@ -54,7 +54,7 @@ def run(destination):
     check("重算不重複累加 NP", result["electric"] == calculate(project)["electric"])
     check("NP 設備電氣輸入已連動", result["electric"]["NP"]["kw"] > 3)
     check("主案水路直接使用 CoolProp", "HEOS" in result["water"]["CHW"]["fluid_properties"]["source"])
-    check("主案報告列五庫與水路容量邊界", all(x in report(result) for x in ("PsychroLib", "python-hvac", "fluids", "CoolProp", "Pint", "水路供冷容量包絡")))
+    check("工程報告顯示容量邊界並省略套件品牌", "水路供冷容量包絡" in report(result) and all(x not in report(result) for x in ("PsychroLib", "python-hvac", "fluids", "CoolProp", "Pint")))
     ahu = nm_calculate(dict(NM_DEFAULTS, flow="850", summer_t="26", summer_rh="50", sa_t="15", sa_rh="85",
                             coil_rating_mode="幾何 ε-NTU（python-hvac）"))
     rating = ahu["summer"]["coil_rating"]
@@ -90,7 +90,7 @@ def run(destination):
         settings.destroy()
         root.geometry("880x560")
         root.update()
-        buttons = [w for w in _widgets(root) if w.winfo_class() in ("TButton", "Button") and "工程模型設定" in str(w.cget("text"))]
+        buttons = [w for w in _widgets(root) if w.winfo_class() in ("TButton", "Button") and "進階工程設定" in str(w.cget("text"))]
         check("最小視窗仍可開啟工程設定", len(buttons) == 1 and buttons[0].winfo_ismapped()
               and buttons[0].winfo_rootx() >= root.winfo_rootx()
               and buttons[0].winfo_rootx() + buttons[0].winfo_width() <= root.winfo_rootx() + root.winfo_width()

@@ -875,9 +875,6 @@ def nm_report(r):
 
 
 def backend_notes(result):
-    notes = []
-    if result.get("engineering_backends"):
-        notes.append("\n實際計算後端與版本（不代表 FEED 認證）")
-        notes.extend(f"{name} {spec['version']}：{spec['method']}。"
-                     for name, spec in result["engineering_backends"].items())
-    return notes
+    # Dependency versions remain in the build/audit manifest, outside the
+    # user's engineering report and decision flow.
+    return []

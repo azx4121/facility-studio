@@ -129,8 +129,10 @@ def translate(value, lang=None):
             rendered = rendered.replace(token, decoded)
         return rendered
     if (lang or _language) != "en":
-        return text
-    return _english_text(text)
+        from .presentation_terms import user_text
+        return user_text(text)
+    from .presentation_terms import user_text
+    return user_text(_english_text(text), english=True)
 
 
 @lru_cache(maxsize=4096)
@@ -160,7 +162,7 @@ def canonical_choice(value, options):
     """Accept either language in a schedule without changing canonical enums."""
     if value in options:
         return value
-    matches = [item for item in options if translate(item, "en") == value]
+    matches = [item for item in options if value in (translate(item, "en"), translate(item, "zh-Hant"))]
     if len(matches) == 1:
         return matches[0]
     return value

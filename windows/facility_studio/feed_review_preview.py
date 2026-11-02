@@ -46,15 +46,15 @@ class VerificationWindow:
         self.win = host if self.embedded else tk.Toplevel(parent)
         if not self.embedded:
             self.win.configure(background="#eef3f8")
-            self.win.title("設計檢核中心｜" + BUILD)
+            self.win.title("AHU 模型差異核對｜" + BUILD)
             self.win.geometry(
                 f"{min(1120, parent.winfo_screenwidth() - 60)}x{min(820, parent.winfo_screenheight() - 100)}"
             )
             self.win.minsize(720, 520)
-        self.status = tk.StringVar(self.win, "請選功能；所有結果都會標示採用條件。")
+        self.status = tk.StringVar(self.win, "讀取單機條件，比較同工況物性與熱濕收支的數值差異；一般設計請使用簡易工具或單機空調箱。")
         ttk.Label(
             self.win,
-            text="設計檢核中心｜計算 → 獨立核對 → 匯出證據",
+            text="AHU 模型差異核對｜同條件比較與熱濕平衡",
             font=(self.family, 16, "bold"),
         ).pack(anchor="w", padx=14, pady=(14, 4))
         ttk.Label(self.win, textvariable=self.status, wraplength=680).pack(
@@ -260,12 +260,12 @@ class VerificationWindow:
             elif key == "pipe":
                 self.summaries[key].set(
                     f"總壓差 {r['total_pa']/1000:.3f} kPa｜揚程 {r['head_m']:.3f} m｜流速 {r['velocity_m_s']:.3f} m/s\n"
-                    f"{r['regime']}｜{r['runs']} 支等流量支路｜水物性 CoolProp・摩擦因子 fluids"
+                    f"{r['regime']}｜{r['runs']} 支等流量支路｜依操作溫壓取得水物性與摩擦因子"
                 )
             else:
                 self.summaries[key].set(
                     f"{r['inputs']['group']}｜{r['inputs']['value']} {r['inputs']['unit']} → {len(r['values'])} 種單位\n"
-                    "採 Pint 同物理量換算；溫度為絕對溫度。"
+                    "依同物理量換算；溫度為絕對溫度。"
                 )
             self.status.set("計算完成；請核對工程品質明細、數值門檻與採用條件。")
         except Exception as error:
@@ -376,7 +376,7 @@ class VerificationWindow:
                     self.value.get(), self.group.get(), self.unit.get()
                 ),
                 "versions": metadata(),
-                "scope": "Pint 同物理量換算；美制冷凍噸採 US RT。溫度為絕對溫度，非溫差。",
+                "scope": "同物理量換算；美制冷凍噸採 US RT。溫度為絕對溫度，非溫差。",
             },
         )
 

@@ -1,5 +1,9 @@
 # Facility Studio：Claude 接管與最終交付
 
+## 最新使用者命名要求（優先）
+
+對外軟體名稱只用 **Facility Studio**。不得在 App 名稱、標題、選單、操作說明、工程報告顯示 Fusion／五庫融合等字眼，也不展示 PsychroLib、python-hvac、fluids、CoolProp、Pint 等套件名稱、套件版本或「實際計算後端與版本（不代表 FEED 認證）」段落。必要授權文件與內部建置／測試追溯獨立保留，不刪第三方授權。原始專案儲存枚舉為相容性保留；透過顯示層呈現工程名稱，必須驗證選單往返映射仍選到正確計算模式。驗收含 `integration/test_product_wording.py`。
+
 ## 使用者已授權的接管
 
 接管時間：2026-11-03 13:05，Asia/Taipei。既有 Claude Code：`/Users/chaoi/.local/bin/claude`，已查版本 2.1.316。今日僅執行 version/help/auth status，沒有呼叫 Claude 模型。**今日 auth status 回報 loggedIn=false／authMethod=none**，不可聲稱已登入或保證明日能啟動；dispatch 必須重新檢查，若仍未登入回報需要使用者 OAuth，不能讀取或搬移 token、代填帳密或改用付費 API。

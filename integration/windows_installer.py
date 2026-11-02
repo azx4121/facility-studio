@@ -16,14 +16,14 @@ def build(app, output, name, runner):
     setup = output / "Facility-Studio-5.7.1-Windows-x64-Setup.exe"
     files = sorted(p for p in app.rglob("*") if p.is_file())
     directories = sorted({p.parent.relative_to(app) for p in files}, key=lambda p: len(p.parts), reverse=True)
-    lines = ["Unicode true", "!include MUI2.nsh", 'Name "Facility Studio 五庫融合測試版 5.7.1"',
-             f'OutFile "{quoted(setup)}"', 'InstallDir "$LOCALAPPDATA\\Facility Studio 五庫融合\\Application-5.7.1.1"',
+    lines = ["Unicode true", "!include MUI2.nsh", 'Name "Facility Studio 5.7.1 測試版"',
+             f'OutFile "{quoted(setup)}"', 'InstallDir "$LOCALAPPDATA\\Facility Studio 測試版\\Application-5.7.1.1"',
              "RequestExecutionLevel user", "CRCCheck force", 'SetCompressor /SOLID lzma',
              'VIProductVersion "5.7.1.1"',
-             'VIAddVersionKey /LANG=1028 "ProductName" "Facility Studio 五庫融合測試版"',
+             'VIAddVersionKey /LANG=1028 "ProductName" "Facility Studio 測試版"',
              'VIAddVersionKey /LANG=1028 "FileVersion" "5.7.1.1"',
              'VIAddVersionKey /LANG=1028 "ProductVersion" "5.7.1-preview.1"',
-             '!define MUI_WELCOMEPAGE_TITLE "Facility Studio 五庫融合測試版 5.7.1"',
+             '!define MUI_WELCOMEPAGE_TITLE "Facility Studio 5.7.1 測試版"',
              '!define MUI_WELCOMEPAGE_TEXT "繁體中文、離線執行，內含五套工程計算庫與 Python。$\\r$\\n$\\r$\\n請使用新的空目錄。正式版、舊專案與使用者資料不會被替換。$\\r$\\n$\\r$\\n此為合成案例軟體驗證版本，不代表 FEED 設計簽核。"',
              "!insertmacro MUI_PAGE_WELCOME", "!insertmacro MUI_PAGE_DIRECTORY", "!insertmacro MUI_PAGE_INSTFILES",
              "!insertmacro MUI_PAGE_FINISH", "!insertmacro MUI_UNPAGE_CONFIRM", "!insertmacro MUI_UNPAGE_INSTFILES",
@@ -34,19 +34,19 @@ def build(app, output, name, runner):
     for file in files:
         rel = file.relative_to(app)
         lines.extend([f'SetOutPath "$INSTDIR\\{quoted(rel.parent)}"', f'File "{quoted(file)}"'])
-    lines.extend(['CreateDirectory "$SMPROGRAMS\\Facility Studio 五庫融合測試版"',
-                  f'CreateShortcut "$SMPROGRAMS\\Facility Studio 五庫融合測試版\\5.7.1.lnk" "$INSTDIR\\{quoted(name)}.exe"',
+    lines.extend(['CreateDirectory "$SMPROGRAMS\\Facility Studio 測試版"',
+                  f'CreateShortcut "$SMPROGRAMS\\Facility Studio 測試版\\5.7.1.lnk" "$INSTDIR\\{quoted(name)}.exe"',
                   'WriteUninstaller "$INSTDIR\\Uninstall.exe"',
-                  'WriteRegStr HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioFusion571" "DisplayName" "Facility Studio 五庫融合測試版 5.7.1"',
-                  'WriteRegStr HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioFusion571" "UninstallString" \'$\\"$INSTDIR\\Uninstall.exe$\\"\'',
+                  'WriteRegStr HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioPreview571" "DisplayName" "Facility Studio 5.7.1 測試版"',
+                  'WriteRegStr HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioPreview571" "UninstallString" \'$\\"$INSTDIR\\Uninstall.exe$\\"\'',
                   "SectionEnd", 'Section "Uninstall"', "SetShellVarContext current"])
     for file in files:
         lines.append(f'Delete "$INSTDIR\\{quoted(file.relative_to(app))}"')
     lines.extend(f'RMDir "$INSTDIR\\{quoted(directory)}"' for directory in directories)
     lines.extend(['Delete "$INSTDIR\\Uninstall.exe"',
-                  'Delete "$SMPROGRAMS\\Facility Studio 五庫融合測試版\\5.7.1.lnk"',
-                  'RMDir "$SMPROGRAMS\\Facility Studio 五庫融合測試版"', 'RMDir "$INSTDIR"',
-                  'DeleteRegKey HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioFusion571"',
+                  'Delete "$SMPROGRAMS\\Facility Studio 測試版\\5.7.1.lnk"',
+                  'RMDir "$SMPROGRAMS\\Facility Studio 測試版"', 'RMDir "$INSTDIR"',
+                  'DeleteRegKey HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioPreview571"',
                   'DetailPrint "只移除本版已交付檔案；保留專案、偏好與額外檔案。"', "SectionEnd"])
     script = output / "fusion-installer.nsi"
     script.write_text("\n".join(lines), encoding="utf-8-sig")
