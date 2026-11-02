@@ -1,26 +1,110 @@
 {
   "product": "Facility Studio",
   "candidate": "5.7.1-preview.1",
-  "product_commit": "2d750e039e5c416b729a846092f6fb9ecda088d2",
-  "numerical_and_wording_tests_passed": 117,
-  "native_simplified_gui_checks_passed": 21,
+  "product_commit": "bc4e557810e7d85faef3c4bf036efcd9a4fc0fc9",
+  "numerical_and_wording_tests_passed": 167,
+  "native_simplified_gui_checks_passed": 27,
+  "dashboard_gui_checks_passed": 362,
+  "text_clipping_checks_passed": 94,
+  "full_legacy_regression_passed": true,
+  "full_legacy_suites_passed": 27,
   "source_boundary_checks": {
     "macos": 68,
     "windows": 68
   },
-  "github_preview_run": 41475799549,
+  "all_fields_and_reports_100_iterations": {
+    "macos": 7898,
+    "windows": 7898
+  },
+  "independent_engineering_checks": 4434,
+  "tutorial_checks": {
+    "macos": 93,
+    "windows": 93
+  },
+  "bilingual_checks_passed": 6373,
+  "mac_frozen_checks": {
+    "core": 31,
+    "simplified": 27
+  },
+  "mac_relocated_offline_checks": {
+    "core": 31,
+    "simplified": 27,
+    "public_cli_and_normal_startup_commands": 4
+  },
+  "mac_signature": "ad-hoc signature verified with codesign --verify --deep --strict",
+  "mac_archive_sha256": "9874ffe8385e42485e24e7393f3f169f86bb2ef7f302d02aea706f852e4bac8e",
+  "local_app": "/Users/chaoi/Facility-Studio-5.7.1-交付/Facility Studio 5.7.1 測試版.app",
+  "evidence": "/Users/chaoi/Facility-Studio-Simple-Evidence-20261102",
+  "full_regression_evidence": "/Users/chaoi/Facility-Studio-Simple-Evidence-20261102/Final-r17/Full/Source_Suite_Results.json",
+  "github_preview_run": 41533629312,
   "github_preview_conclusion": "success",
-  "full_legacy_regression_passed": false,
-  "known_legacy_gate": "新增欄位／報告文案尚未全數翻譯成英文，舊雙語驗收失敗；不得宣稱完整回歸通過。",
+  "github_dashboard_run": 41533629308,
+  "windows_native_verification": "passed on windows-2022 and windows-2025",
+  "drive_folder_url": "https://drive.google.com/drive/folders/1kNKx6wAfCLaDQyWo4zGAD98mtdD62ojW",
+  "known_legacy_gate": null,
   "claude_logged_in": true,
   "claude_not_before": "2026-11-03T13:05:00+08:00",
-  "claude_session_stopped": "6bc47c23-301c-4ef9-a83a-d92a83f01e58",
   "codex_reset_checkpoint": "2026-11-03T04:07:00+08:00",
+  "codex_reset_is_not_a_stop_time": true,
   "automations": {
     "codex": "facility-studio-04-07",
     "claude": "claude-facility-studio-11-3-13-05"
   },
   "formal_release_published": false,
   "main_merged": false,
-  "original_app_replaced": false
+  "original_app_replaced": false,
+  "validation_commit": "dae2bf48c5f5c6f9b537d8b580020a12262e94af",
+  "product_source_matches_built_mac": true,
+  "mac_cloud_file_id": "1vefqj8LXMl26IBoa2-dddtfC89wtMqss",
+  "local_qwen_review": {
+    "model": "qwen3.8:27b",
+    "completed": true,
+    "output_tokens": 587,
+    "scope": "public operation-guide text only",
+    "engineering_certification": false
+  },
+  "github_dashboard_conclusion": "success",
+  "windows_frozen_checks": {
+    "core": 31,
+    "simplified": 27
+  },
+  "windows_installed_checks_per_host": {
+    "core": 31,
+    "simplified": 27
+  },
+  "windows_native_source_suites_passed": 27,
+  "windows_installer_protection": {
+    "installation_exit_code": 0,
+    "nonempty_destination_exit_code": 2,
+    "uninstall_exit_code": 0,
+    "user_added_files_preserved": true
+  },
+  "windows_second_host_same_sha256": true,
+  "local_delivery": "/Users/chaoi/Facility-Studio-5.7.1-交付",
+  "mac_cloud_readback_bytes": 78737669,
+  "mac_cloud_file_size_matches": true,
+  "claude_review_complete": false,
+  "gemini_review_current_commit_complete": false,
+  "windows_files": {
+    "Facility-Studio-5.7.1-Windows-x64-Portable.zip": {
+      "sha256": "6791e803fd28aafba6e98382cee1f2179ec11bf08c8dfbcc142cbb80220ab7a2",
+      "bytes": 103278533
+    },
+    "Facility-Studio-5.7.1-Windows-x64-Setup.exe": {
+      "sha256": "cebc08c45582022d35747d1ba0cb92558b37709260bd5f400340b5c4952e5330",
+      "bytes": 74708179
+    }
+  },
+  "mac_windows_unexpected_source_differences": [],
+  "validation_run_url": "https://github.com/azx4121/facility-studio/actions/runs/41533629312",
+  "cloud_windows_setup_file_id": "1ND8EoKb9jRY-Uj0E_OOE1KC90URwp_dS",
+  "cloud_windows_portable_file_id": "1GB3riShJIgJ8UtHajWOrdB6Jj7SKxLlR",
+  "delivery_complete": true,
+  "cloud_files_verified": 8,
+  "cloud_evidence_file_id": "12RVlAD52MEMZL1vaYQCH4Cc5qS8IV2Ko",
+  "cloud_checksum_file_id": "1piHgdi3UnIhi8HCCTPchdOpeEKhm1d9F",
+  "codex_delivery_monitor_removed": true,
+  "active_automations": [
+    "claude-facility-studio-11-3-13-05"
+  ]
 }
