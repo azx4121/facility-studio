@@ -1,5 +1,6 @@
 """One bounded Claude subscription session, never before the authorized reset."""
 import argparse
+import fcntl
 from datetime import datetime
 import json
 import os
@@ -28,6 +29,7 @@ def command(session):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--dry-run', action='store_true')
+    parser.add_argument('--start-now', action='store_true', help='使用者在本聊天明確要求立即改由 Claude Code 接續；不影響原定恢復時間')
     args = parser.parse_args()
     now = datetime.now(ZoneInfo('Asia/Taipei'))
     session = str(uuid.uuid4())
@@ -36,15 +38,23 @@ def main():
                               root=str(ROOT), executable_exists=CLAUDE.is_file(),
                               permission_mode='auto', api_calls_made=False), ensure_ascii=False))
         return 0
-    if now < RESET:
+    if now < RESET and not args.start_now:
         raise SystemExit('尚未到使用者授權的恢復時間；沒有呼叫 Claude。')
     if subprocess.check_output(['git', 'branch', '--show-current'], cwd=ROOT, text=True).strip() != 'sandbox/simple-facilities-20261102':
         raise SystemExit('非指定隔離分支，拒絕接管。')
+    active_dir = Path('/Users/chaoi/Facility-Studio-Simple-Evidence-20261102/claude-handoff')
+    active_dir.mkdir(parents=True, exist_ok=True)
+    lock = (active_dir/'active.lock').open('a')
+    try:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        raise SystemExit('已有 Claude 接管工作執行中，拒絕重複啟動。')
     run_dir = Path('/Users/chaoi/Facility-Studio-Simple-Evidence-20261102/claude-handoff') / session
     run_dir.mkdir(parents=True, exist_ok=False)
     receipt = dict(session_id=session, requested_at=now.isoformat(), state='PREFLIGHT',
                    source_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
                    no_permission_bypass=True, completed=False, released=False)
+    receipt['immediate_handoff_authorized'] = bool(args.start_now)
 
     def save():
         (run_dir/'receipt.json').write_text(json.dumps(receipt, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -91,7 +101,12 @@ def main():
                     event = json.loads(line)
                 except ValueError:
                     continue
-                if event.get('type') == 'assistant' and event.get('message', {}).get('content'):
+                content = event.get('message', {}).get('content') or []
+                limited = event.get('isApiErrorMessage') or event.get('error') or any(
+                    isinstance(item, dict) and any(word in str(item.get('text', '')).lower()
+                        for word in ('you\'ve hit your limit', 'rate_limit_error', 'usage limit reached'))
+                    for item in content)
+                if event.get('type') == 'assistant' and content and not limited:
                     receipt.update(state='CLAUDE_CONFIRMED', confirmed_at=datetime.now(ZoneInfo('Asia/Taipei')).isoformat())
                     save()
                 if event.get('type') == 'result':
