@@ -27,6 +27,14 @@ def engineering_result_rows(result):
                      ("ffu_total_cmh", "FFU 總設計風量", "CMH"), ("ffu_unit_cmh", "單台 FFU 風量", "CMH"),
                      ("ffu_size", "FFU 模組尺寸", ""), ("ffu_count", "FFU 需求台數", "台"),
                      ("coverage_ratio", "天花板覆蓋率", "%"), ("ffu_fan_kw", "FFU 輸入電功率", "kW")])
+        mau = result.get("mau")
+        if mau:
+            add(mau, [("mass_da_kg_s", "MAU 乾空氣質量流率", "kg/s"),
+                      ("room_moisture_kg_h", "室內總產濕", "kg/h"),
+                      ("supply_dewpoint_c", "所需送風露點", "°C"),
+                      ("coil_condensate_kg_h", "盤管凝結除濕需求", "kg/h"),
+                      ("coil_air_kw", "盤管空氣側需求", "kW"),
+                      ("coil_water_kw", "盤管水側需求", "kW")])
     elif tool == "heat_loads":
         add(result, [("q_lighting_kw", "照明顯熱", "kW"), ("q_envelope_kw", "圍護顯熱", "kW"),
                      ("q_people_sensible_kw", "人員顯熱", "kW"), ("q_people_latent_kw", "人員潛熱", "kW"),

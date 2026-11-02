@@ -198,6 +198,9 @@ def upstream_values(tool, results, inputs=None):
             values.update(area=str(clean["area_m2"]), persons=str(clean["persons"]),
                           oa_cmh=str(clean["oa_cmh"]), ffu_count=str(clean["ffu_count"]),
                           ffu_unit_kw=str(clean["ffu_unit_kw"]))
+            if clean.get("mau"):
+                values.update(envelope_room_t=str(clean["mau"]["room"]["t"]),
+                              envelope_outdoor_t=str(clean["mau"]["outdoor"]["t"]))
         if light:
             area = clean["area_m2"] if clean else light["area_m2"]
             if abs(area - light["area_m2"]) > 1e-6 * max(1, area):

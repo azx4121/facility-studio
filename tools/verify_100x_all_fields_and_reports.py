@@ -113,6 +113,9 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
         ("water", "water_p"): {"property_source": "CoolProp 純水溫壓"},
     }
     simple_alt_values = {
+        "outdoor_rh": "60",
+        "room_pressure": "95",
+        "coil_bf_min": "0.1",
         "mau_supply_delta_t": "12",
         "mau_room_sensible_kw": "2.0",
         "eta_pump": "0.80",

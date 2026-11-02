@@ -25,6 +25,18 @@ def presentation(result):
             f"FFU 輸入電力／室內風機熱 {result['ffu_fan_kw']:,.2f} kW",
             "結構空間超限，請調整 FFU 尺寸、風量或天花板配置。" if result['coverage_exceeded'] else "覆蓋率未超過本案配置上限；仍須核對格柵與設備配置。",
         ]
+        mau = result.get("mau")
+        if mau:
+            cards.append(("MAU 盤管水側需求", f"{mau['coil_water_kw']:,.2f} kW" if mau['coil'] else "條件未成立"))
+            details.insert(0, f"潔淨室設計 {mau['room']['t']:g}°C／{mau['room']['rh']:g}%RH；MAU 風量採室內狀態基準。")
+            details.append(f"夏季外氣 {mau['outdoor']['t']:g}°C／{mau['outdoor']['rh']:g}%RH；大氣壓 {mau['pressure_kpa']:g} kPa(abs)；送風目標 {mau['supply_t_c']:g}°C")
+            bf = f"{mau['bf_min']:g}" if mau['bf_min'] is not None else "待資料"
+            details.append(f"C2 供水 {mau['water_t']:g}°C；ADP 裕度 {mau['approach_k']:g} K；BF 下限 {bf}")
+            details.append(f"室內總產濕 {mau['room_moisture_kg_h']:,.3f} kg/h｜{mau['status']}")
+            if mau['supply']:
+                details.append(f"所需 MAU 送風 {mau['supply']['t']:,.2f}°C／{mau['supply']['rh']:,.2f}%RH；含濕比 {mau['supply']['w'] * 1000:,.3f} g/kg；露點 {mau['supply_dewpoint_c']:,.2f}°C")
+            if mau['coil']:
+                details.append(f"盤管凝結除濕需求 {mau['coil_condensate_kg_h']:,.3f} kg/h；空氣側冷量 {mau['coil_air_kw']:,.3f} kW；再熱 {mau['coil']['reheat_kw']:,.3f} kW")
         details.extend(result.get("warnings", []))
     elif tool == "heat_loads":
         cards = [

@@ -297,7 +297,13 @@ TOOLS = {
 }
 
 TOOLS.update({
-    "cleanroom": dict(title="潔淨室風量", subtitle="室內循環ACH、外氣與FFU設備分開計算，確認天花板可安裝量。", fields=[
+    "cleanroom": dict(title="潔淨室風量", subtitle="先填室內溫濕度與外氣條件；分列 FFU 循環、MAU 除濕需求與盤管能力邊界。", fields=[
+        field("room_t", "潔淨室設計溫度", "22", help="°C；全室共同設計條件"),
+        field("room_rh", "潔淨室相對濕度目標", "50", help="%RH；不是 MAU 出風相對濕度"),
+        field("outdoor_t", "夏季外氣乾球", "35", help="°C"),
+        field("outdoor_rh", "夏季外氣相對濕度", "70", help="%RH"),
+        field("process_moisture", "製程入室產濕量", "0", help="kg/h；不含下方人員產濕"),
+        field("mau_supply_t", "MAU 最終送風溫度", "22", help="°C；除濕後可再熱，不能低於所需露點"),
         field("area", "室內地板面積", "100", help="m²"),
         field("height", "室內淨高", "3", help="m"),
         field("ffu_topology", "MAU／FFU氣流路徑", "MAU入靜壓箱經FFU送風", options=("獨立FFU循環（MAU直接入室）", "MAU入靜壓箱經FFU送風")),
@@ -312,6 +318,11 @@ TOOLS.update({
         field("ffu_size", "FFU名義尺寸", "1200x600 (0.72m²)", options=FFU_SIZES),
         field("ffu_unit_kw", "單台FFU輸入電功率", "0.18", help="kW；以原廠實際工況確認"),
         field("coverage_limit_pct", "天花板可安裝比例上限", "85", advanced=True, help="%"),
+        field("people_latent_w", "每人潛熱", "55", advanced=True, help="W/人；依活動量確認"),
+        field("room_pressure", "所在地大氣壓", "101.325", advanced=True, help="kPa(abs)"),
+        field("coil_water_t", "C2 冰水入口溫度", "7", advanced=True, help="°C"),
+        field("coil_approach", "C2 供水至 ADP 裕度", "1", advanced=True, help="K"),
+        field("coil_bf_min", "C2 盤管 BF 下限", "", advanced=True, help="0～0.5；空白表示性能未知，非實機通過"),
     ]),
     "heat_loads": dict(title="熱負荷初估", subtitle="分列室內顯熱、FFU發熱與MAU全熱，檢查外氣焓差的計算邊界。", fields=[
         field("area", "空間地板面積", "100", help="m²"),
@@ -361,7 +372,9 @@ FIXED_UNITS = {
     "air": dict(temperature="°C", rh="%RH", temperature_b="°C", rh_b="%RH", atmosphere="kPa(abs)"),
     "cleanroom": dict(area="m²", height="m", ach="1/h", exhaust_cmh="CMH", delta_p="Pa",
                       base_leak_ach="1/h", oa_cmh="CMH", ffu_unit_cmh="CMH", ffu_unit_kw="kW",
-                      coverage_limit_pct="%"),
+                      coverage_limit_pct="%", room_t="°C", room_rh="%RH", outdoor_t="°C", outdoor_rh="%RH",
+                      process_moisture="kg/h", mau_supply_t="°C", people_latent_w="W/人",
+                      room_pressure="kPa(abs)", coil_water_t="°C", coil_approach="K", coil_bf_min="比例"),
     "heat_loads": dict(area="m²", equipment_kw="kW", lighting_w_m2="W/m²", envelope_w_m2="W/m²",
                        people_sensible_w="W/人", people_latent_w="W/人", ffu_unit_kw="kW",
                        oa_cmh="CMH", oa_delta_h="kJ/kg", mau_room_sensible_kw="kW", mau_supply_delta_t="K",

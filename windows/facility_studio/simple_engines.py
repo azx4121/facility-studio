@@ -615,7 +615,7 @@ def cleanroom(data):
                 if coverage > limit else [])
     if dcc < 0:
         warnings.append("FFU總送風小於OA，無法成立回風混合控制體；請增加循環需求或改用基本循環另加OA。")
-    return dict(tool="cleanroom", area_m2=area, volume_m3=volume, height_m=height,
+    result = dict(tool="cleanroom", area_m2=area, volume_m3=volume, height_m=height,
                 ach=ach, persons=persons, delta_p=delta_p, base_leak_ach=base_leak,
                 dcc_cmh=dcc, recirculation_cmh=recirculation,
                 ffu_topology=topology, ffu_airflow_basis=basis,
@@ -629,6 +629,10 @@ def cleanroom(data):
                 coverage_exceeded=coverage > limit, warnings=warnings,
                 formula="獨立循環：FFU=DCC=基準風量；靜壓箱路徑：FFU總風=DCC回風＋OA，依所選ACH基準分配。OA=max(排氣＋洩漏,人數×30)；洩漏=體積×基準ACH×√(ΔP/15)，ΔP≤0時為0。",
                 note="ACH依氣流路徑與風量基準解讀，不一律加OA。15Pa／1ACH、30CMH/人及85%是專案初估條件，需依實際洩漏、製程及安裝圖確認。負DCC回風量保留為不可行結果，不截成0。")
+    from .cleanroom_mau import evaluate
+    result["mau"] = evaluate(data, result)
+    result["warnings"].extend(result["mau"]["warnings"])
+    return result
 
 
 def heat_loads(data):

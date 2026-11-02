@@ -22,6 +22,14 @@ def run(destination):
     def check(name, passed):
         checks.append(dict(name=name, passed=bool(passed)))
     check("五套工程計算庫可載入", len(manifest()) == 5)
+    # Exercise the actual supported spreadsheet workflow after excluding
+    # pandas' unused optional Arrow/Parquet binaries from native packaging.
+    import tempfile
+    from .equipment_io import export_template, load_equipment
+    with tempfile.TemporaryDirectory(prefix="facility-fusion-excel-") as folder:
+        workbook = Path(folder) / "合成設備需求.xlsx"
+        export_template(workbook)
+        check("交付程式可匯出再讀取七表 Excel", len(load_equipment(workbook)["systems"]) == 7)
     check("絕對溫度零點", abs(convert_all("溫度", 0, "°C")["°F"] - 32) < 1e-9)
     check("溫差沒有零點位移", abs(convert_all("溫度差（升溫／降溫）", 5, "°C差")["°F差"] - 9) < 1e-9)
     conditions = []
@@ -103,6 +111,33 @@ def run(destination):
             settings.destroy()
     finally:
         root.destroy()
+    from .simple_desktop import SimpleToolsApp
+    simple_root = tk.Tk()
+    simple = SimpleToolsApp(simple_root)
+    try:
+        simple.show_tool("cleanroom")
+        simple_root.update()
+        page = simple.pages["cleanroom"]
+        check("潔淨室基本畫面可直接輸入溫濕度", all(page.rows[k].winfo_ismapped() for k in ("room_t", "room_rh", "outdoor_t", "outdoor_rh")))
+        page.variables["oa_cmh"].set("3000")
+        page.variables["room_rh"].set("60")
+        page.calculate(True)
+        humid = page.result["mau"]["coil_condensate_kg_h"]
+        page.variables["room_rh"].set("50")
+        page.calculate(True)
+        check("GUI 降低濕度目標增加除濕需求", page.result["mau"]["coil_condensate_kg_h"] > humid)
+        ahu_window = page.open_cleanroom_ahu()
+        simple_root.update()
+        check("潔淨室可建立獨立 MAU 核對案", ahu_window is not None and ahu_window.result is not None and ahu_window.source_project_id == "")
+        check("MAU 核對案保留乾空氣流率", abs(ahu_window.result["summer"]["mass"] - page.result["mau"]["mass_da_kg_s"]) < 1e-10)
+        if os.environ.get("FACILITY_CAPTURE_SYNTHETIC_UI") == "1":
+            from PIL import ImageGrab
+            ahu_window.win.withdraw()
+            simple_root.update()
+            ImageGrab.grab().save(Path(destination).parent / "潔淨室溫濕度與除濕需求.png")
+        ahu_window.win.destroy()
+    finally:
+        simple_root.destroy()
     output = dict(version=BUILD_VERSION, python=platform.python_version(), platform=platform.platform(),
                   frozen=bool(getattr(sys, "frozen", False)), backends=manifest(), checks=checks,
                   passed=all(c["passed"] for c in checks), engineering_certification=False,

@@ -149,9 +149,11 @@ class SimplePage(ttk.Frame):
         # Clearing every input sits apart from the import action and asks first.
         ttk.Button(action_row, text="恢復預設", command=self.confirm_reset).pack(side="right")
         # Tool-specific actions wrap onto further rows instead of being squeezed beside each other.
-        extras = FlowToolbar(controls) if tool in ("heat_loads", "lighting", "air", "water", "units") else None
+        extras = FlowToolbar(controls) if tool in ("cleanroom", "heat_loads", "lighting", "air", "water", "units") else None
         if extras is not None:
             extras.pack(fill="x", pady=(5, 0))
+        if tool == "cleanroom":
+            ttk.Button(extras, text="建立 MAU 盤管能力核對案", command=self.open_cleanroom_ahu).pack(side="left")
         if tool == "heat_loads":
             links = extras
             ttk.Button(links, text="帶入照明功率密度", command=lambda: self.import_upstream("lighting")).pack(side="left")
@@ -539,6 +541,25 @@ class SimplePage(ttk.Frame):
     def table_rows(self, result):
         from .display_helpers import engineering_result_rows
         return engineering_result_rows(result)
+
+    def open_cleanroom_ahu(self):
+        self.calculate(True)
+        if self.result is None:
+            return None
+        from .cleanroom_mau import ahu_inputs
+        from .ahu_desktop import AHUWindow
+        import uuid
+        try:
+            values = ahu_inputs(self.result)
+        except InputError as error:
+            self.banner.show(str(error), "danger")
+            return None
+        window = AHUWindow(self.app.root, document=dict(id=uuid.uuid4().hex,
+                           source_project_id="", inputs=values))
+        window.advanced.set(True)
+        window.visibility()
+        window.calculate()
+        return window
 
     def apply_dialux_mode(self):
         if self.tool != "lighting":

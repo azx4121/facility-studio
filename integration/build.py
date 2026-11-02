@@ -103,7 +103,10 @@ def main():
     # python-hvac imports CoolProp.Plots through hvac.charts even when this
     # product only requests process calculations. Frozen execution proved that
     # Plots must remain; only unused tests/GUI are excluded.
-    for name in ("pytest", "hypothesis", "CoolProp.tests", "CoolProp.GUI", "numpy.tests", "scipy.tests", "pandas.tests", "IPython", "iapws", "hvac.fluids.water", "hvac.fluids.ice"):
+    # Arrow is pandas' optional Parquet/Feather engine (110 MB of binaries on
+    # macOS). The product uses Excel/CSV, not these formats; pandas supports
+    # their absence. Retain and test openpyxl, the actual Excel dependency.
+    for name in ("pyarrow", "pytest", "hypothesis", "CoolProp.tests", "CoolProp.GUI", "numpy.tests", "scipy.tests", "pandas.tests", "IPython", "iapws", "hvac.fluids.water", "hvac.fluids.ice"):
         args += ["--exclude-module", name]
     if sys.platform == "win32":
         args += ["--add-binary", str(Path(sys.base_prefix) / "python3.dll") + os.pathsep + ".",
@@ -122,7 +125,7 @@ def main():
         shutil.copy2(ROOT / "integration/README_繁體中文.md", app / "Contents/Resources/操作說明_繁體中文.md")
         info = app / "Contents/Info.plist"
         values = plistlib.loads(info.read_bytes())
-        values.update(CFBundleShortVersionString="5.7.0", CFBundleVersion="5.7.0.1",
+        values.update(CFBundleShortVersionString="5.7.0", CFBundleVersion="5.7.0.2",
                       CFBundleDisplayName=NAME, NSHighResolutionCapable=True)
         info.write_bytes(plistlib.dumps(values))
         run(["/usr/bin/codesign", "--force", "--sign", "-", "--timestamp=none", app], evidence / "Sign_App.txt")

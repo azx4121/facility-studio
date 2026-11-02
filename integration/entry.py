@@ -16,6 +16,11 @@ def main():
         sys.stdout = log
     if sys.stderr is None:
         sys.stderr = log
+    # Windows console/CI may supply cp1252 streams even to a GUI executable.
+    # All diagnostic output must support the product's Traditional Chinese.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="backslashreplace")
     try:
         from facility_studio import i18n
         i18n.set_language("zh-Hant", persist=False)

@@ -1,4 +1,5 @@
-Overall status:  Data required  (passed means estimates under known conditions, not manufacturer performance certification) [ Data required ]  Fan pressure-drop data completeness :  Final stage resistances at matching airflow are missing. Blank means unknown; explicit 0 means a confirmed zero.
+Overall status:  Data required  (passed means estimates under known conditions, not manufacturer performance certification) [ Data required ]  Washer-pump heat allocation :  Pump input is included in installed electrical power, but its air-side heat fraction is unknown. Do not assume zero or all input enters air; enter the fraction for the actual sump/motor arrangement.
+[ Data required ]  Fan pressure-drop data completeness :  Final stage resistances at matching airflow are missing. Blank means unknown; explicit 0 means a confirmed zero.
 [ Data required ]  Fan heat to airflow :  Currently estimated at 0 kW. Actual operating power, motor location and heat to airflow required.
 [ Data required ]  Air washer  Circulating water flow :  Effective wetted area and manufacturer irrigation density required.
 [ Data required ]  Washer circulation-pump head :  Nozzle head, elevation and piping losses required. A confirmed 0 m elevation is valid.
@@ -9,12 +10,12 @@ MAU  Design airflow : 358.33 CMH |  Supply-air state (verification pending)
  Summer coil water-side cooling : 8.65 kW | 2.46 US RT
  Summer supply air state : 22 °C | 41.02 %RH
  Fan  Demand  Input  Electrical : 0 kW |  Estimated from entered pressure and efficiency
- Enable  Equipment  Nominal  Electrical : 16.37 kW |  Excludes unspecified circulation pumps and auxiliaries
+ Enable  Equipment  Nominal  Electrical : 16.47 kW |  Excludes unspecified circulation pumps and auxiliaries
  Winter  Humidification  Demand : 0.88 kg/h |  By humidifier type
 
-Tutorial MAU-01 | MAU stage demand / rated-capacity verification  | V5.6.0 · Windows win.10
+Tutorial MAU-01 | MAU stage demand / rated-capacity verification  | V5.7.0 · Windows fusion.2
  This table calculates requirements. When rated-capacity checks fail, target states do not represent achievable installed-equipment performance.
- Seasonal supply targets:  Summer  358.32741149943365 CMH (supply state) / 22.0°C / 41.01522224098197%RH;  Winter  358.32741149943365 CMH (supply state) / 22.0°C / 41.01522224098197%RH ; source main project 1a20d11ccb26c5a89d809c1611b81f3c16554f3d7fe677b7da925a5fa9f528c9
+ Seasonal supply targets:  Summer  358.32741149943354 CMH (supply state) / 22.0°C / 41.01522224098197%RH;  Winter  358.32741149943354 CMH (supply state) / 22.0°C / 41.01522224098197%RH ; source main project 1cd2326263ae224af08b80230931d81347dc2668008d1652375a2a66f1beadb0
  H1 heat source:  Electric heat  ; H2 heat source:  Electric heat  ; recovered-hot-water scenario:  Phase 1 unavailable .
  C1 water temperature 12.0/17.0°C; C2 7.0/12.0°C;  Capacity  Margin  0%.
  Wetted-media effectiveness 0.85 (preliminary / manufacturer selection required).
@@ -64,11 +65,11 @@ C2  Secondary cooling  : water-side 0.000 kW / 0.000 US RT; required water 0.000
  Maximum evaporative makeup approximately 0.885 L/h; including entered carryover / blowdown: 0.885 L/h, excluding unspecified blowdown or startup tank fill.
  Fan / selected electrical ratings
  Entered air-side pressure drop 0.0 Pa ( Data incomplete; equipment selection cannot be finalized  ); installed EC fans 1×0.37 kW.
- Fan input power required at entered pressure / efficiency 0.000 kW; selected heater + steam + EC rated power 16.370 kW, excluding circulation pump and auxiliaries.
+ Fan input power required at entered pressure / efficiency 0.000 kW; selected heater + steam + EC rated power 16.470 kW, excluding circulation pump and auxiliaries.
  Key formulas: m_da = V(CMH)/(3600×v_da); Q = m_da Δh; sensible heating keeps w constant. Washer h_out ≈ h_in, T_out = T_in−ε(T_in−T_as); evaporation G = m_da Δw×3600. Coil water-side duty deducts condensate liquid enthalpy.
  Limits: the recirculating wetted-media model is approximately adiabatic, excluding makeup-water sensible heat, pump heat to water and water-temperature control. Saturation / AMC removal is not guaranteed. Manufacturer recovery-coil capacity at design conditions is required; approach only screens necessary conditions.
  Supply T/RH defines this AHU boundary. If these are room setpoints, first account for room moisture to calculate required supply humidity ratio. Verify airflow reference, media effectiveness, C1 outlet, fan heat and ratings against original submittals.
- Stage controls / selected heat sources (V5.6.0)
+ Stage controls / selected heat sources (V5.7.0)
 H1:  Electric heat ; H2:  Electric heat ;  Humidification :  Recirculating wetted-media air washer  . A retained nominal heater rating does not mean a disabled source is supplying heat.
  Summer :  Mixed specified / automatic stage demand
 H1  Automatic demand
@@ -78,6 +79,7 @@ H2  Automatic demand
 H1 adopted electric-heating efficiency 1.
 H2 adopted electric-heating efficiency 1.
  Winter :  Mixed specified / automatic stage demand
+ Washer-pump input 0.100 kW; specified fraction transferred to air 0.000 kW.
 H1  Automatic demand
 C1  Bypass
 C2  Automatic demand
@@ -86,3 +88,9 @@ H1 adopted electric-heating efficiency 1.
 H2 adopted electric-heating efficiency 1.
  Rated power is not automatically added to the main NP panel; preview the transfer to avoid duplication.
  Steam is separate from washing: Δh_air = ṁsteam×hsteam/ṁda; Psteam = ṁsteam(hsteam−cp_water×T_feedwater)/η. Electrode humidifiers require conductive water. Compliance is not assumed without confirmed feedwater and manufacturer conductivity limits.
+ Actual numerical backends and versions (not FEED certification)
+PsychroLib 2.5.0:  Saturation pressure, moist-air enthalpy and specific volume (SI / ASHRAE) .
+python-hvac 0.1.3:  Coil heat/mass process with explicit condensate enthalpy, plus fin-tube epsilon-NTU .
+fluids 1.3.1:  Colebrook Darcy friction; explicitly interpolated transition regime .
+CoolProp 8.0.0:  Single-phase water at specified T/P using HEOS / IAPWS-95 .
+Pint 0.24.4:  Shared unit registry; absolute temperature and temperature difference are distinct .

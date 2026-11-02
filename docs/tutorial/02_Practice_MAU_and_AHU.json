@@ -4,7 +4,7 @@
   "app_version": "5.5.6",
   "project_id": "tutorial-b-mau-v555",
   "main": {
-    "schema_version": 10,
+    "schema_version": 12,
     "inputs": {
       "project_name": "Tutorial B - MAU and DCC",
       "atm_kpa": "101.325",
@@ -251,7 +251,19 @@
       "mchw_fluid_mode": "沿用共用參考",
       "dccw_rho": "1000",
       "pcw_fluid_mode": "沿用共用參考",
-      "dccw_fluid_mode": "沿用共用參考"
+      "dccw_fluid_mode": "沿用共用參考",
+      "gas3_name": "",
+      "gas1_name": "",
+      "gas2_name": "",
+      "light_u_mode": "手動固定 U",
+      "ffu_airflow_basis": "FFU總送風（已含OA）",
+      "base_leak_ach": "1",
+      "ffu_coverage_limit_pct": "85",
+      "light_work_h": "0.8",
+      "ffu_topology": "獨立FFU循環（MAU直接入室）",
+      "leak_method": "門縫孔口法",
+      "ffu_size": "1200x600 (0.72m²)",
+      "water_sizing_basis": "流速與摩擦壓損"
     },
     "pressure_drop": {
       "MCHW": {
@@ -1587,6 +1599,50 @@
         "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
         "value": "沿用共用參考",
         "recorded_at": "2026-10-07T12:44:01.899648+00:00"
+      },
+      "gas3_name": {
+        "source": "舊專案輸入",
+        "note": "V5.6移轉：新增自訂氣體名稱草稿，原氣體種類與工程條件保留"
+      },
+      "gas1_name": {
+        "source": "舊專案輸入",
+        "note": "V5.6移轉：新增自訂氣體名稱草稿，原氣體種類與工程條件保留"
+      },
+      "gas2_name": {
+        "source": "舊專案輸入",
+        "note": "V5.6移轉：新增自訂氣體名稱草稿，原氣體種類與工程條件保留"
+      },
+      "light_u_mode": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "ffu_airflow_basis": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "base_leak_ach": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "ffu_coverage_limit_pct": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "light_work_h": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "ffu_topology": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "leak_method": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "ffu_size": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
       }
     }
   },
@@ -1600,7 +1656,7 @@
         "flow_basis": "送風狀態（待核對）",
         "p": "101.325",
         "summer_t": "35.0",
-        "summer_rh": "70.0",
+        "summer_rh": "69.99999999999999",
         "winter_t": "8.0",
         "winter_rh": "70.0",
         "sa_t": "22",
@@ -1696,10 +1752,26 @@
         "summer_sa_rh": "41.01522224098197",
         "winter_sa_t": "22.0",
         "winter_sa_rh": "41.01522224098197",
-        "summer_flow": "358.32741149943365",
-        "winter_flow": "358.32741149943365",
+        "summer_flow": "358.32741149943354",
+        "winter_flow": "358.32741149943354",
         "pump_input_kw": "0.1",
-        "linked_main_hash": "1a20d11ccb26c5a89d809c1611b81f3c16554f3d7fe677b7da925a5fa9f528c9"
+        "linked_main_hash": "1cd2326263ae224af08b80230931d81347dc2668008d1652375a2a66f1beadb0",
+        "c2_bf_min": "",
+        "coil_pinch_min_k": "0.5",
+        "pump_air_fraction": "",
+        "coil_rating_mode": "需求 ADP／BF",
+        "coil_width": "900",
+        "coil_height": "180",
+        "coil_rows": "3",
+        "coil_pitch_trv": "25.4",
+        "coil_pitch_lon": "22",
+        "coil_do": "10.2",
+        "coil_di": "8.422",
+        "coil_fin_t": "0.3302",
+        "coil_fin_pitch": "3.175",
+        "coil_circuits": "2",
+        "coil_water_lpm": "14.217",
+        "coil_water_abs_kpa": "200"
       }
     }
   ],
@@ -1712,6 +1784,7 @@
     "original": {},
     "baseline": {},
     "last_updates": {},
-    "selections": {}
+    "selections": {},
+    "power_basis": {}
   }
 }

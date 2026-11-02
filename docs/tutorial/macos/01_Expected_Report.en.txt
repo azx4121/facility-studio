@@ -1,5 +1,5 @@
 Tutorial A - 96 m2 room | Design conditions / calculation summary
- System :  AHU (OA + RA mixing)  | V5.6.0 · macOS mac.8 |  Preliminary demand
+ System :  AHU (OA + RA mixing)  | V5.7.0 · macOS fusion.2 |  Preliminary demand
  Overall status:  Data required  ; equipment counts are demand candidates. Do not select directly when checks fail.
 [ Data required ] CHW  Equipment resistance :  Piping subtotal only. Neither Simple nor Detailed mode treats unknown resistance as zero.
 [ Deferred ]  Equipment selection at design conditions :  This tool calculates demand. Manufacturer coil / terminal selections and actual fan curves are still required.
@@ -26,12 +26,16 @@ Tutorial A - 96 m2 room | Design conditions / calculation summary
    [Calculated requirement]  Seasonal coincident cooling peak (before safety factor) 11.83 kW / 3.36 US RT
    [Selection target]  Coincident peak capacity target 13.01 kW / 3.7 US RT (including project capacity margin; manufacturer rating pending)
 
+ Water-loop cooling capacity envelope (separate)  |  Boundary requires review
+   [Calculated requirement] 13.01 kW
+   [Selection target]  Calculated from current flow, properties and temperature differences, including existing flow margin. Verify independent plant boundaries; this is not a coincident peak.
+
  Chilled-water main piping  |  Separate temperature loops
    [Calculated requirement] MCHW 0 LPM | CHW 37.28 LPM | DCCW 0 LPM (including 10 % capacity margin)
-   [Selection target] MCHW  No demand ; 0 m/s; 0 Pa/m ; path pressure loss 0 Pa | CHW 20A (3/4"); 1.81 m/s; 2,167.89 Pa/m ; path pressure loss 84,547.86 Pa | DCCW  No demand ; 0 m/s; 0 Pa/m ; path pressure loss 0 Pa
+   [Selection target] MCHW  No demand ; 0 m/s; 0 Pa/m ; path pressure loss 0 Pa | CHW 32A (1-1/4"); 0.64 m/s; 163.81 Pa/m ; path pressure loss 6,388.42 Pa | DCCW  No demand ; 0 m/s; 0 Pa/m ; path pressure loss 0 Pa
 
  CHWP chilled-water pump  |  Selection pending
-   [Calculated requirement] MCHW 0 LPM ; head 0 m ; shaft power 0 kW | CHW 37.28 LPM ; head 8.62 m ; shaft power 0.08 kW | DCCW 0 LPM ; head 0 m ; shaft power 0 kW (including 10 % capacity margin)
+   [Calculated requirement] MCHW 0 LPM ; head 0 m ; shaft power 0 kW | CHW 37.28 LPM ; head 0.65 m ; shaft power 0.01 kW | DCCW 0 LPM ; head 0 m ; shaft power 0 kW (including 10 % capacity margin)
    [Selection target]  Motor nameplate not selected; size each loop pump separately
 
  Main distribution MCCB  |  Panel candidates
@@ -63,7 +67,8 @@ DCC  Sensible heat  0.000 kW;  Summer  Reheat  0.000 kW;  Humidification  0.000 
  Winter room heat / moisture balance: sensible 5.232 kW;  Supply air  15.488°C / 73.129%RH;  Heating  0.000 kW /  Humidification  0.178 kg/h.
  DCC maximum summer / winter demand 0.000 kW; winter is a steady-state estimate of specified loads, not hourly building simulation.
  3. Piping / velocity / pressure drop
-CHW: 37.282 LPM, ΔT 5.00 K, 1  runs × 20A (3/4") / ID 20.9 mm, 1.811 m/s;  Pressure drop  84547.857 Pa.
+CHW: 37.282 LPM, ΔT 5.00 K, 1  runs × 32A (1-1/4") / ID 35.1 mm, 0.642 m/s;  Pressure drop  6388.422 Pa.
+ Carbon-steel STD reference: OD 42.2 mm / wall 3.55 mm; check supplied pipe dimensions.
    Adopted  Fluid properties : ρ 1000 kg/m³; cp 4.1868 kJ/(kg·K); μ 0.001 Pa·s;  Source   Use shared reference .
    Closed circulation excludes building height from pump differential pressure; check system static pressure separately.
 PV  Maximum design velocity  18.000 m/s.
@@ -89,3 +94,10 @@ NP : operating 1.787 A, design 2.234 A; NFB  Candidate  15 AT, 1  sets ×3.5 mm�
 •  Pressure loss CHW excludes equipment resistance: piping subtotal only. Add coil, filter and treatment-equipment pressure drops before selecting pumps / fans.
 •  Air-side heating / humidification demands are not automatically included in NP. Enter actual input power by equipment type and efficiency.
  Basis: bundled versioned engineering tables are estimate references, not confirmed applicable statutory ampacity tables. Parameter provenance is stored in project JSON / HTML appendices.
+ Actual numerical backends and versions (not FEED certification)
+PsychroLib 2.5.0:  Saturation pressure, moist-air enthalpy and specific volume (SI / ASHRAE) .
+python-hvac 0.1.3:  Coil heat/mass process with explicit condensate enthalpy, plus fin-tube epsilon-NTU .
+fluids 1.3.1:  Colebrook Darcy friction; explicitly interpolated transition regime .
+CoolProp 8.0.0:  Single-phase water at specified T/P using HEOS / IAPWS-95 .
+Pint 0.24.4:  Shared unit registry; absolute temperature and temperature difference are distinct .
+ Project coincident HVAC peak 11.825 kW; water-loop capacity envelope 13.008 kW. Loop flow x rho x cp x deltaT capacity envelope; may include margin, is not a coincident peak, and must exclude duplicate primary/secondary loads .

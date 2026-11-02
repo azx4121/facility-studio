@@ -3636,6 +3636,8 @@ TEXT.update({
 })
 
 from .fusion_english import TEXT as FUSION_TEXT
+from .cleanroom_english import TEXT as CLEANROOM_TEXT
+TEXT.update(CLEANROOM_TEXT)
 TEXT.update(FUSION_TEXT)
 
 TEXT.update({

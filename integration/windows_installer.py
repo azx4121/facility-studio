@@ -17,12 +17,12 @@ def build(app, output, name, runner):
     files = sorted(p for p in app.rglob("*") if p.is_file())
     directories = sorted({p.parent.relative_to(app) for p in files}, key=lambda p: len(p.parts), reverse=True)
     lines = ["Unicode true", "!include MUI2.nsh", 'Name "Facility Studio 五庫融合測試版 5.7.0"',
-             f'OutFile "{quoted(setup)}"', 'InstallDir "$LOCALAPPDATA\\Facility Studio 五庫融合\\Application-5.7.0.1"',
+             f'OutFile "{quoted(setup)}"', 'InstallDir "$LOCALAPPDATA\\Facility Studio 五庫融合\\Application-5.7.0.2"',
              "RequestExecutionLevel user", "CRCCheck force", 'SetCompressor /SOLID lzma',
-             'VIProductVersion "5.7.0.1"',
+             'VIProductVersion "5.7.0.2"',
              'VIAddVersionKey /LANG=1028 "ProductName" "Facility Studio 五庫融合測試版"',
-             'VIAddVersionKey /LANG=1028 "FileVersion" "5.7.0.1"',
-             'VIAddVersionKey /LANG=1028 "ProductVersion" "5.7.0-fusion.1"',
+             'VIAddVersionKey /LANG=1028 "FileVersion" "5.7.0.2"',
+             'VIAddVersionKey /LANG=1028 "ProductVersion" "5.7.0-fusion.2"',
              '!define MUI_WELCOMEPAGE_TITLE "Facility Studio 五庫融合測試版 5.7.0"',
              '!define MUI_WELCOMEPAGE_TEXT "繁體中文、離線執行，內含五套工程計算庫與 Python。$\\r$\\n$\\r$\\n請使用新的空目錄。正式版、舊專案與使用者資料不會被替換。$\\r$\\n$\\r$\\n此為合成案例軟體驗證版本，不代表 FEED 設計簽核。"',
              "!insertmacro MUI_PAGE_WELCOME", "!insertmacro MUI_PAGE_DIRECTORY", "!insertmacro MUI_PAGE_INSTFILES",

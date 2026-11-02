@@ -4,7 +4,7 @@
   "app_version": "5.5.6",
   "project_id": "tutorial-a-96m2-v555",
   "main": {
-    "schema_version": 10,
+    "schema_version": 12,
     "inputs": {
       "project_name": "Tutorial A - 96 m2 room",
       "atm_kpa": "101.325",
@@ -251,7 +251,19 @@
       "mchw_fluid_mode": "沿用共用參考",
       "dccw_rho": "1000",
       "pcw_fluid_mode": "沿用共用參考",
-      "dccw_fluid_mode": "沿用共用參考"
+      "dccw_fluid_mode": "沿用共用參考",
+      "gas3_name": "",
+      "gas1_name": "",
+      "gas2_name": "",
+      "light_u_mode": "手動固定 U",
+      "ffu_airflow_basis": "FFU總送風（已含OA）",
+      "base_leak_ach": "1",
+      "ffu_coverage_limit_pct": "85",
+      "light_work_h": "0.8",
+      "ffu_topology": "獨立FFU循環（MAU直接入室）",
+      "leak_method": "門縫孔口法",
+      "ffu_size": "1200x600 (0.72m²)",
+      "water_sizing_basis": "流速與摩擦壓損"
     },
     "pressure_drop": {
       "MCHW": {
@@ -1585,6 +1597,50 @@
         "note": "V5.5.6 移轉：保留原共用物性與計算範圍",
         "value": "沿用共用參考",
         "recorded_at": "2026-10-07T12:44:01.890114+00:00"
+      },
+      "gas3_name": {
+        "source": "舊專案輸入",
+        "note": "V5.6移轉：新增自訂氣體名稱草稿，原氣體種類與工程條件保留"
+      },
+      "gas1_name": {
+        "source": "舊專案輸入",
+        "note": "V5.6移轉：新增自訂氣體名稱草稿，原氣體種類與工程條件保留"
+      },
+      "gas2_name": {
+        "source": "舊專案輸入",
+        "note": "V5.6移轉：新增自訂氣體名稱草稿，原氣體種類與工程條件保留"
+      },
+      "light_u_mode": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "ffu_airflow_basis": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "base_leak_ach": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "ffu_coverage_limit_pct": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "light_work_h": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "ffu_topology": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "leak_method": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
+      },
+      "ffu_size": {
+        "source": "舊專案輸入",
+        "note": "工程修訂：保留獨立FFU循環、MAU直接入室及門縫孔口法；新增可選假設，未推定型錄值"
       }
     }
   },
@@ -1598,6 +1654,7 @@
     "original": {},
     "baseline": {},
     "last_updates": {},
-    "selections": {}
+    "selections": {},
+    "power_basis": {}
   }
 }

@@ -22,6 +22,64 @@ from facility_studio.reports import report, nm_report
 from facility_studio.coil_rating import rate_coil
 
 
+@pytest.mark.parametrize("temperature,rh", [(20, 40), (22, 50), (26, 60), (18, 45)])
+def test_cleanroom_design_inputs_drive_actual_mau_balance(temperature, rh):
+    d = dict(defaults("cleanroom"), room_t=str(temperature), room_rh=str(rh),
+             oa_cmh="3000", process_moisture=".5", coil_water_t="3", coil_approach="1")
+    r = calculate_tool("cleanroom", d)
+    m = r["mau"]
+    assert m["room"]["t"] == temperature
+    assert m["room"]["rh"] == pytest.approx(rh)
+    assert abs(m["room_moisture_residual_kg_s"]) < 1e-12
+    assert m["supply"]["w"] < m["room"]["w"]
+    assert m["coil"] is not None, m["warnings"]
+    assert abs(m["coil"]["energy_residual_kw"]) < 1e-8
+    assert m["coil_condensate_kg_h"] == pytest.approx(
+        m["mass_da_kg_s"] * (m["outdoor"]["w"] - m["supply"]["w"]) * 3600)
+    assert not m["performance_confirmed"]
+
+
+def test_cleanroom_humidity_changes_dewpoint_and_coil_demand():
+    d = dict(defaults("cleanroom"), oa_cmh="3000", coil_water_t="3")
+    humid = calculate_tool("cleanroom", dict(d, room_rh="60"))["mau"]
+    dry = calculate_tool("cleanroom", dict(d, room_rh="40"))["mau"]
+    assert dry["supply_dewpoint_c"] < humid["supply_dewpoint_c"]
+    assert dry["coil_condensate_kg_h"] > humid["coil_condensate_kg_h"]
+    assert dry["coil_water_kw"] > humid["coil_water_kw"]
+
+
+@pytest.mark.parametrize("patch", [dict(oa_cmh="0", persons="0", delta_p="0"),
+                                   dict(process_moisture="1000"),
+                                   dict(coil_water_t="25"),
+                                   dict(mau_supply_t="5", room_rh="90")])
+def test_cleanroom_infeasible_conditions_never_claim_equipment_pass(patch):
+    m = calculate_tool("cleanroom", dict(defaults("cleanroom"), **patch))["mau"]
+    assert m["status"] == "未達條件"
+    assert m["coil"] is None and m["warnings"]
+    assert not m["performance_confirmed"]
+
+
+def test_cleanroom_independent_ahu_snapshot_preserves_mass_and_coil_duty():
+    from facility_studio.cleanroom_mau import ahu_inputs
+    r = calculate_tool("cleanroom", dict(defaults("cleanroom"), oa_cmh="3000", outdoor_t="26", outdoor_rh="50", coil_bf_min=".05"))
+    i = ahu_inputs(r)
+    a = nm_calculate(i)
+    assert "coil_approach" not in i
+    assert a["summer"]["mass"] == pytest.approx(r["mau"]["mass_da_kg_s"])
+    assert a["summer"]["c2"]["water_kw"] == pytest.approx(r["mau"]["coil_water_kw"])
+    assert a["summer"]["c2"]["condensate_kg_s"] * 3600 == pytest.approx(r["mau"]["coil_condensate_kg_h"])
+
+
+@pytest.mark.parametrize("key", ["room_t", "room_rh", "outdoor_t", "outdoor_rh",
+                                "process_moisture", "mau_supply_t", "people_latent_w",
+                                "room_pressure", "coil_water_t", "coil_approach", "coil_bf_min"])
+def test_cleanroom_new_fields_report_actual_invalid_field(key):
+    from facility_studio.errors import ValidationError
+    with pytest.raises(ValidationError) as caught:
+        calculate_tool("cleanroom", dict(defaults("cleanroom"), **{key: "bad"}))
+    assert caught.value.field_name == key
+
+
 def test_actual_core_calls_all_five(monkeypatch):
     calls = {}
     for name in ("saturation_pressure", "moist_enthalpy", "moist_volume", "darcy_friction", "cooling_process", "liquid_water", "convert"):
