@@ -78,6 +78,8 @@ def main():
         ROOT / "winrelease/sandbox_version.txt",
         "--paths",
         ROOT,
+        "--additional-hooks-dir",
+        ROOT / "winrelease/hooks",
         "--collect-submodules",
         "facility_studio",
         "--hidden-import",
@@ -109,6 +111,12 @@ def main():
         "--specpath",
         output / "build",
     ]
+    # The official CoolProp wheel uses the stable ABI via python3.dll.
+    # Retain that shim even if dependency discovery considers it a system DLL.
+    stable_abi = Path(sys.base_prefix) / "python3.dll"
+    if not stable_abi.is_file():
+        raise RuntimeError("官方 Python 執行環境缺少穩定 ABI DLL。")
+    args += ["--add-binary", str(stable_abi) + os.pathsep + "."]
     for name in (
         "matplotlib",
         "numpy",
@@ -131,6 +139,25 @@ def main():
     exe = output / EXE_NAME
     if not exe.is_file() or exe.stat().st_size < 10_000_000:
         raise RuntimeError("未建立實際 Windows 執行檔。")
+    from importlib.util import find_spec
+    from PyInstaller.archive.readers import CArchiveReader
+
+    coolprop = Path(find_spec("CoolProp").origin).parent
+    sidecars = list((coolprop.parent / "coolprop.libs").glob("*.dll"))
+    if not sidecars:
+        raise RuntimeError("官方 CoolProp wheel 未含預期原生依賴。")
+    archive = CArchiveReader(str(exe))
+    bundled = {name.replace("\\", "/").lower() for name in archive.toc}
+    required = {"python3.dll", "coolprop/coolprop.pyd"}
+    required.update("coolprop.libs/" + p.name.lower() for p in sidecars)
+    missing = sorted(required - bundled)
+    if missing:
+        raise RuntimeError("封裝缺少原生 DLL／擴充模組：" + ", ".join(missing))
+    (evidence / "Native_DLL_Manifest.json").write_text(
+        json.dumps({"required": sorted(required), "missing": missing,
+                    "official_sidecar_sha256": {p.name: sha(p) for p in sidecars}},
+                   ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     readme = output / "README_Windows_繁體中文.txt"
     readme.write_text(
         """Facility Studio 整合測試版 5.6.1（建置 2；Windows x64）
