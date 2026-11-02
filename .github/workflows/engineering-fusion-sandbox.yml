@@ -3,6 +3,7 @@ on:
   push:
     branches: ['sandbox/engineering-fusion-20261102']
     paths:
+      - '.github/workflows/engineering-fusion-sandbox.yml'
       - 'integration/**'
       - 'macos/facility_studio/**'
       - 'windows/facility_studio/**'
@@ -65,8 +66,6 @@ jobs:
           - os: windows-2022
             platform: Windows-x64
     runs-on: ${{ matrix.os }}
-    env:
-      UV_PYTHON_INSTALL_DIR: ${{ runner.temp }}/fusion-managed-python
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -79,6 +78,7 @@ jobs:
         shell: bash
         run: |
           python -m pip install uv==0.13.6
+          export UV_PYTHON_INSTALL_DIR="$RUNNER_TEMP/fusion-managed-python"
           uv venv --python 3.12.16 "$RUNNER_TEMP/fusion-env"
           FUSION_PY="$(python -c "import os,pathlib; print((pathlib.Path(os.environ['RUNNER_TEMP']) / 'fusion-env' / ('Scripts/python.exe' if os.name == 'nt' else 'bin/python')).as_posix())")"
           uv pip install --python "$FUSION_PY" -r integration/requirements.lock.txt
