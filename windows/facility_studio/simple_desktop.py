@@ -942,6 +942,7 @@ class SimpleToolsApp:
         self.fit_window_to_sidebar()
         self.bind_mode_shortcuts()
         self.root.protocol("WM_DELETE_WINDOW", self.close)
+        self.resize()
         return self
 
     def open_extra_tools(self):
