@@ -1,0 +1,26 @@
+{
+  "product": "Facility Studio",
+  "candidate": "5.7.1-preview.1",
+  "product_commit": "2d750e039e5c416b729a846092f6fb9ecda088d2",
+  "numerical_and_wording_tests_passed": 117,
+  "native_simplified_gui_checks_passed": 21,
+  "source_boundary_checks": {
+    "macos": 68,
+    "windows": 68
+  },
+  "github_preview_run": 41475799549,
+  "github_preview_conclusion": "success",
+  "full_legacy_regression_passed": false,
+  "known_legacy_gate": "新增欄位／報告文案尚未全數翻譯成英文，舊雙語驗收失敗；不得宣稱完整回歸通過。",
+  "claude_logged_in": true,
+  "claude_not_before": "2026-11-03T13:05:00+08:00",
+  "claude_session_stopped": "6bc47c23-301c-4ef9-a83a-d92a83f01e58",
+  "codex_reset_checkpoint": "2026-11-03T04:07:00+08:00",
+  "automations": {
+    "codex": "facility-studio-04-07",
+    "claude": "claude-facility-studio-11-3-13-05"
+  },
+  "formal_release_published": false,
+  "main_merged": false,
+  "original_app_replaced": false
+}
