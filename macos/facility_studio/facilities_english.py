@@ -266,3 +266,5 @@ TEXT = {'AHU 模型差異核對': 'AHU model comparison',
  ' W/(m²·K)；露點裕度 ': ' W/(m².K); dew-point margin ',
  ' K；熱損上限 ': ' K; heat-flow limit ',
  ' W/m；契約厚度下限 ': ' W/m; contract minimum thickness '}
+
+TEXT['手填純水物性仍檢查液態工況'] = 'Manual pure-water properties still require liquid-phase conditions'

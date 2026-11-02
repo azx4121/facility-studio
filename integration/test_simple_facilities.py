@@ -131,3 +131,28 @@ def test_insulation_cannot_use_bore_or_stale_smaller_outside_diameter():
     with pytest.raises(ValidationError) as caught:
         calculate_tool('water', d)
     assert caught.value.field_name == 'insulation_outer_mm'
+
+
+@pytest.mark.parametrize('name', ['清水', 'UPW／DI／RO', '乙醇', '甲醇', '丙酮'])
+def test_manual_properties_cannot_bypass_known_pure_liquid_phase(name):
+    d = dict(defaults('liquid'), liquid=name, properties='供應商物性', liquid_t='150', liquid_p='1',
+             liquid_rho='1000', liquid_cp='4.18', liquid_mu='.001', property_reference='Synthetic transport properties')
+    with pytest.raises(ValidationError) as caught:
+        calculate_tool('liquid', d)
+    assert caught.value.field_name == 'liquid_t'
+
+
+def test_valid_manual_transport_properties_are_preserved():
+    d = dict(defaults('liquid'), properties='供應商物性', liquid_rho='999', liquid_cp='4.2',
+             liquid_mu='.0011', property_reference='Synthetic valid liquid reference, 20C 300kPa')
+    r = calculate_tool('liquid', d)
+    assert (r['rho'], r['cp'], r['mu']) == (999, 4.2, .0011)
+
+
+@pytest.mark.parametrize('mode', ['依介質模型', '供應商物性'])
+def test_pure_water_cannot_silently_use_metastable_subzero_state(mode):
+    d = dict(defaults('liquid'), properties=mode, liquid_t='-5', liquid_rho='1000',
+             liquid_cp='4.18', liquid_mu='.001', property_reference='Synthetic subzero liquid claim')
+    with pytest.raises(ValidationError) as caught:
+        calculate_tool('liquid', d)
+    assert caught.value.field_name == 'liquid_t'

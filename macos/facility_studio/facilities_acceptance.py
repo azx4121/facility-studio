@@ -90,6 +90,13 @@ def run(destination):
             check('上游水量改動阻擋過期液體匯出', liquid.upstream_stale and not app.export_result(report) and not report.exists())
         water.calculate()
         check('明確重新帶入後液體流量恢復', liquid.import_upstream('water') and liquid.result['flow_lpm'] == 700)
+        liquid.reset()
+        for key, value in dict(liquid_t='150', liquid_p='1', properties='供應商物性', liquid_rho='1000',
+                               liquid_cp='4.18', liquid_mu='.001', property_reference='Synthetic manual pure-water phase check').items():
+            liquid.variables[key].set(value)
+        liquid.calculate()
+        check('手填純水物性仍檢查液態工況', liquid.result is None and liquid.variables['property_reference'].get())
+        liquid.reset()
         for tool in ('vacuum', 'liquid', 'units', 'cleanroom', 'duct'):
             app.show_tool(tool)
             root.update()

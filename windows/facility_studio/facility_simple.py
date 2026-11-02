@@ -83,12 +83,22 @@ def liquid(data):
     name = choice(data, "liquid", "清水", LIQUIDS)
     material = choice(data, "material", "UPVC／PVC-U", MATERIALS)
     flow = convert_all("水量", n(data, "flow", "100", 0, 1e7), data.get("flow_unit", "LPM"))["LPM"]
-    t = n(data, "liquid_t", "20", -30, 150)
+    t = n(data, "liquid_t", "20", .1 if name in ("清水", "UPW／DI／RO") else -30, 150)
     pressure = n(data, "liquid_p", "300", 1, 10000)
     concentration = n(data, "concentration", "20", 0, 100) if name not in ("清水", "UPW／DI／RO", "乙醇", "甲醇", "丙酮") else 0
     mode = choice(data, "properties", "依介質模型", ("依介質模型", "供應商物性"))
     warnings = []
     if mode == "供應商物性" or name in ("丙酮", "IPA 異丙醇", "污水／混合廢液", "鹽酸", "硫酸", "氫氟酸", "氫氧化鈉", "過氧化氫", "自訂液體"):
+        # Supplier transport properties do not override a known pure fluid's
+        # phase boundary. Water's range also excludes metastable subzero water.
+        pure = {"清水": "HEOS::Water", "UPW／DI／RO": "HEOS::Water",
+                "乙醇": "Ethanol", "甲醇": "Methanol", "丙酮": "Acetone"}.get(name)
+        if pure:
+            try:
+                if PhaseSI("T", t + 273.15, "P", pressure * 1000, pure) != "liquid":
+                    raise ValueError("所填溫壓不是液相")
+            except ValueError as error:
+                raise ValidationError("液體物性模型不適用此溫壓／濃度：" + str(error), "liquid_t") from None
         rho = n(data, "liquid_rho", "", 1, 5000)
         mu = n(data, "liquid_mu", "", 1e-7, 100)
         cp = n(data, "liquid_cp", "", .01, 20)
