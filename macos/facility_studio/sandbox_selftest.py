@@ -132,6 +132,13 @@ def run(destination):
         embedded.value.set("0")
         app.calculate_active()
         check("主畫面快捷計算使用目前功能", lambda: abs(embedded.results["units"]["values"]["°F"] - 32) < 1e-9)
+        app.open_engineering_verification("pipe")
+        root.geometry("1000x760")
+        root.deiconify()
+        root.update()
+        check("小視窗保留可見匯出按鈕", lambda: embedded.export_button.winfo_ismapped()
+              and embedded.export_button.winfo_rooty() + embedded.export_button.winfo_height()
+              <= root.winfo_rooty() + root.winfo_height())
     finally:
         view.win.destroy()
         root.destroy()

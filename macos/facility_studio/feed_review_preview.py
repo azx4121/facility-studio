@@ -168,7 +168,9 @@ class VerificationWindow:
         self.value.trace_add("write", lambda *args: self.invalidate("units"))
         self.make_text("units")
         footer = FlowToolbar(self.win)
-        footer.pack(fill="x", padx=12, pady=(0, 12))
+        # Reserve the action row before the expandable notebook, including with
+        # taller CJK fonts. Packing it last can place export below the window.
+        footer.pack(side="bottom", fill="x", padx=12, pady=(0, 12), before=self.nb)
         self.export_button = ttk.Button(
             footer, text="匯出本頁報告", command=self.export_current, state="disabled"
         )

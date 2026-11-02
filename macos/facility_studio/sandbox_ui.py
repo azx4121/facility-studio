@@ -69,4 +69,22 @@ def install_menus(root):
     root._sandbox_menu = menu
     from .sandbox_native_menu import localize_application_menu
 
-    root.after_idle(localize_application_menu)
+    pending = getattr(root, "_sandbox_menu_after", None)
+    if pending is not None:
+        root.after_cancel(pending)
+
+    def localize():
+        root._sandbox_menu_after = None
+        localize_application_menu()
+
+    root._sandbox_menu_after = root.after_idle(localize)
+
+    if not getattr(root, "_sandbox_menu_cleanup", False):
+        def cleanup(event):
+            pending = getattr(root, "_sandbox_menu_after", None)
+            if event.widget is root and pending is not None:
+                root.after_cancel(pending)
+                root._sandbox_menu_after = None
+
+        root.bind("<Destroy>", cleanup, add="+")
+        root._sandbox_menu_cleanup = True
