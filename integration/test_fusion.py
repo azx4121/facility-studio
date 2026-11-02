@@ -80,6 +80,17 @@ def test_cleanroom_new_fields_report_actual_invalid_field(key):
     assert caught.value.field_name == key
 
 
+def test_cleanroom_to_ahu_limits_reject_instead_of_clamping():
+    from facility_studio.cleanroom_mau import ahu_inputs
+    from facility_studio.errors import ValidationError
+    cold = calculate_tool("cleanroom", dict(defaults("cleanroom"), outdoor_t="-35", outdoor_rh="50"))
+    with pytest.raises(ValidationError, match="-30"):
+        ahu_inputs(cold)
+    enormous = calculate_tool("cleanroom", dict(defaults("cleanroom"), oa_cmh="20000000"))
+    with pytest.raises(ValidationError):
+        ahu_inputs(enormous)
+
+
 def test_actual_core_calls_all_five(monkeypatch):
     calls = {}
     for name in ("saturation_pressure", "moist_enthalpy", "moist_volume", "darcy_friction", "cooling_process", "liquid_water", "convert"):

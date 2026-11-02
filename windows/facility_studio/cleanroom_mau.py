@@ -16,7 +16,7 @@ def evaluate(data, airflow):
     supply_t = n("mau_supply_t", "22", 5, 40)
     process = n("process_moisture", "0", 0, 1e6)
     people = airflow["persons"] * n("people_latent_w", "55", 0, 1000) / 1000 * 3600 / 2501
-    water_t = n("coil_water_t", "7", 0, 35)
+    water_t = n("coil_water_t", "7", 0, 30)
     approach = n("coil_approach", "1", .1, 15)
     bf_text = str(data.get("coil_bf_min", "")).strip()
     bf = number(bf_text, "coil_bf_min", 0, .5) if bf_text else None
@@ -70,6 +70,8 @@ def ahu_inputs(result):
     if mau["supply"] is None or mau["mass_da_kg_s"] <= 0:
         raise ValidationError("無有效 MAU 送風需求，請先修正潔淨室條件。", "room_rh")
     sa, oa = mau["supply"], mau["outdoor"]
+    if oa["t"] < -30:
+        raise ValidationError("外氣低於單機夏季入口 -30°C 下限；請在單機採用適用的冬季條件核對，不能自動改寫外氣。", "outdoor_t")
     # The legacy AHU humidity validator is 5..95%: do not silently clamp a
     # legitimate but unsupported short-form target into a different state.
     if not 5 <= sa["rh"] <= 95:
@@ -83,4 +85,6 @@ def ahu_inputs(result):
                   c2_out=str(mau["water_t"] + 5))
     if mau["bf_min"] is not None:
         values["c2_bf_min"] = str(mau["bf_min"])
+    from .ahu_engine import nm_validate
+    nm_validate(values)
     return values

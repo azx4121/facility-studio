@@ -1,5 +1,6 @@
 """Display-only translations for the cleanroom moisture-balance workflow."""
 TEXT = {
+    "外氣低於單機夏季入口 -30°C 下限；請在單機採用適用的冬季條件核對，不能自動改寫外氣。": "Outdoor air is below the AHU summer inlet limit of -30C. Review the applicable winter conditions in the AHU; outdoor temperature cannot be silently changed.",
     "夏季外氣 ": "Summer outdoor air ",
     "；大氣壓 ": "; atmospheric pressure ",
     "；送風目標 ": "; supply target ",
