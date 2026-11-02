@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 import sys
 import weakref
+from functools import lru_cache
 
 from .english_catalog import TEXT
 
@@ -129,6 +130,12 @@ def translate(value, lang=None):
         return rendered
     if (lang or _language) != "en":
         return text
+    return _english_text(text)
+
+
+@lru_cache(maxsize=4096)
+def _english_text(text):
+    """Reuse presentation text across widgets and repeated language changes."""
     if text in TEXT:
         return TEXT[text]
     global _pattern

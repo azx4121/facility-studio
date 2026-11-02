@@ -91,7 +91,7 @@ def run(root, app, main, check, pump, output=None):
                 check("V556 wrapped workbench actions at minimum size: " + lang, toolbar_fit)
                 main.view_mode.set("進階模式")
                 pump()
-                credit = next(widget for widget in main.nav[0].master.winfo_children() if hasattr(widget, "cget") and widget.winfo_class() == "Label" and "DESIGNED" in str(widget.cget("text")))
+                credit = next(widget for widget in main.nav[0].master.winfo_children() if hasattr(widget, "cget") and widget.winfo_class() == "Label" and "ANDY HUANG" in str(widget.cget("text")))
                 check("V556 author remains visible in compact workbench: " + lang, lambda: credit.winfo_ismapped() == 1)
                 main.view_mode.set("基本模式")
             i18n.set_language("zh-Hant", persist=False)

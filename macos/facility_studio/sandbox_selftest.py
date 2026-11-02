@@ -4,6 +4,7 @@ import json
 import math
 from pathlib import Path
 import platform
+import sys
 import tempfile
 
 
@@ -59,20 +60,32 @@ def run(destination):
     view = VerificationWindow(root)
     try:
         root.update()
-        from .sandbox_native_menu import application_menu_titles
+        if sys.platform == "darwin":
+            from .sandbox_native_menu import application_menu_titles
 
-        check(
-            "原生應用程式選單繁體中文",
-            lambda: (
-                bool(application_menu_titles())
-                and not any(
-                    title.startswith(
-                        ("Preferences", "Services", "Hide ", "Quit ", "Show All")
+            check(
+                "原生應用程式選單繁體中文",
+                lambda: (
+                    bool(application_menu_titles())
+                    and not any(
+                        title.startswith(
+                            ("Preferences", "Services", "Hide ", "Quit ", "Show All")
+                        )
+                        for title in application_menu_titles()
                     )
-                    for title in application_menu_titles()
-                )
-            ),
-        )
+                ),
+            )
+        else:
+            menu = root._sandbox_menu
+            titles = [
+                menu.entrycget(i, "label")
+                for i in range(menu.index("end") + 1)
+                if menu.type(i) == "cascade"
+            ]
+            check(
+                "原生應用程式選單繁體中文",
+                lambda: {"檔案", "編輯", "視窗", "說明"}.issubset(titles),
+            )
         check("三個功能分頁", lambda: len(view.nb.tabs()) == 3)
         check(
             "工程品質原因可見",
@@ -101,19 +114,49 @@ def run(destination):
                     view.win.winfo_width() >= 720 and view.win.winfo_height() >= 520
                 ),
             )
+        from .simple_desktop import SimpleToolsApp
+        app = SimpleToolsApp(root)
+        app.show_tool("water")
+        water = app.active_page()
+        water.variables["flow"].set("350")
+        host = app.open_engineering_verification("pipe", carry_water=True)
+        embedded = app.verification
+        app.calculate_active()
+        check("檢核中心嵌入主畫面", lambda: host.winfo_toplevel() is root and app.verification_active)
+        check("冷熱水帶入並計算", lambda: abs(embedded.results["pipe"]["flow_m3s"] - 350/60000) < 1e-12)
+        water.variables["flow"].set("700")
+        app.calculate_active()
+        check("上游變更禁止採用舊資料", lambda: "pipe" not in embedded.results)
+        app.open_engineering_verification("units")
+        embedded.group.set("溫度")
+        embedded.value.set("0")
+        app.calculate_active()
+        check("主畫面快捷計算使用目前功能", lambda: abs(embedded.results["units"]["values"]["°F"] - 32) < 1e-9)
+        app.open_engineering_verification("pipe")
+        root.geometry("1000x760")
+        root.deiconify()
+        root.update()
+        check("小視窗保留可見匯出按鈕", lambda: embedded.export_button.winfo_ismapped()
+              and embedded.export_button.winfo_rooty() + embedded.export_button.winfo_height()
+              <= root.winfo_rooty() + root.winfo_height())
     finally:
         view.win.destroy()
         root.destroy()
     result = {
         "build": BUILD,
         "architecture": platform.machine(),
+        "frozen": bool(getattr(sys, "frozen", False)),
+        "offline_network_audit": __import__("os").environ.get(
+            "FACILITY_TEST_BLOCK_NETWORK"
+        )
+        == "1",
         "checks": checks,
         "passed": all(x["passed"] for x in checks),
         "engineering_approval": False,
     }
     Path(destination).parent.mkdir(parents=True, exist_ok=True)
     Path(destination).write_text(
-        json.dumps(result, ensure_ascii=False, indent=2) + "\n"
+        json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     print(json.dumps(result, ensure_ascii=False))
     return 0 if result["passed"] else 1

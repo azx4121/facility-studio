@@ -195,6 +195,9 @@ def check_exe(exe, output, label, block_firewall=True):
             print(json.dumps(summary), flush=True)
         finally:
             runtime_log = user_data / "Facility_Studio_V5_5/Logs/Windows_Runtime.log"
+            sandbox_log = user_data / "Facility Studio FEED Sandbox/Data/Facility_Studio_V5_5/Logs/Windows_Runtime.log"
+            if sandbox_log.is_file():
+                runtime_log = sandbox_log
             if runtime_log.is_file():
                 shutil.copy2(runtime_log, evidence / "Windows_Runtime.txt")
             if block_firewall:

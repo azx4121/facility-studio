@@ -169,7 +169,7 @@ def main():
         CFBundleName="工程驗證沙盒",
         CFBundleDisplayName="Facility Studio 工程驗證沙盒",
         CFBundleShortVersionString="5.6.1",
-        CFBundleVersion="5.6.1.1",
+        CFBundleVersion="5.6.1.2",
         LSMinimumSystemVersion="12.0",
     )
     plist.write_bytes(plistlib.dumps(info))
@@ -202,7 +202,7 @@ def main():
     )
     os.symlink("/Applications", payload / "應用程式")
     (payload / "開始使用.txt").write_text(
-        "Facility Studio 工程驗證沙盒 5.6.1-1\n\n請將同名 App 複製到獨立位置，避免替換正式版。\n測試版使用獨立偏好、日誌與暫存。\n此沙盒採 ad-hoc 完整性簽章，未取得 Developer ID 與 Apple 公證。\n本機測試與工程合格判定分開；請閱讀各頁採用條件。\n"
+        "Facility Studio 整合測試版 5.6.1（建置 2）\n\n主畫面的設計檢核中心可直接使用 AHU 核對、水管物性與壓損、九類工程單位換算。\n冷熱水頁可帶入目前條件；AHU 視窗按獨立核對與報告。\n\n請將同名 App 複製到獨立位置，避免替換正式版。\n測試版使用獨立偏好、日誌與暫存。\n此沙盒採 ad-hoc 完整性簽章，未取得 Developer ID 與 Apple 公證。\n本機測試與工程合格判定分開；請閱讀各頁採用條件。\n"
     )
     dmg = output / (PACKAGE + ".dmg")
     zip_path = output / (PACKAGE + ".zip")

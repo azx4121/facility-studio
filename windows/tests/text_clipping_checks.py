@@ -170,7 +170,7 @@ for language, label in LANGUAGES:
         check(f"{tag}: window grew to the height its content needs ({wroot.winfo_height()} px)",
               wroot.winfo_height() >= wroot.minsize()[1], (wroot.winfo_height(), wroot.minsize()))
         side = workbench.nav[0].master
-        credit = next(w for w in side.winfo_children() if isinstance(w, tk.Label) and "DESIGNED" in str(w.cget("text")))
+        credit = next(w for w in side.winfo_children() if isinstance(w, tk.Label) and "ANDY HUANG" in str(w.cget("text")))
         check(f"{tag}: author credit and every navigation button are fully visible",
               inside(credit, side) and all(inside(b, side) for b in workbench.nav if b.winfo_manager()),
               [b.cget("text")[:20] for b in workbench.nav if b.winfo_manager() and not inside(b, side)])

@@ -10,7 +10,7 @@ def install_menus(root):
     from tkinter import messagebox
     from .engineering_verification import BUILD
 
-    root.title("Facility Studio 工程驗證沙盒 " + BUILD)
+    root.title("Facility Studio 整合測試版 " + BUILD)
     menu = tk.Menu(root)
     apple = tk.Menu(menu, name="apple", tearoff=False)
     apple.add_command(
@@ -60,7 +60,7 @@ def install_menus(root):
         label="驗證用途與範圍",
         command=lambda: messagebox.showinfo(
             "驗證用途與範圍",
-            "從空調箱按「工程驗證沙盒」讀取目前輸入；或從主畫面開啟水管壓損與單位換算。\n\n報告分別列出工程品質、內部數值門檻與採用條件。內部門檻不等於 FEED 設計驗收。",
+            "主畫面的「設計檢核中心」可直接使用 AHU 核對、水管物性與壓損、九類單位換算。\n冷熱水快算可帶入目前條件；AHU 視窗按「獨立核對與報告」讀取目前輸入。\n\n報告分別列出工程品質、內部數值門檻與採用條件。內部門檻不等於 FEED 設計驗收。",
             parent=root,
         ),
     )
@@ -69,4 +69,22 @@ def install_menus(root):
     root._sandbox_menu = menu
     from .sandbox_native_menu import localize_application_menu
 
-    root.after_idle(localize_application_menu)
+    pending = getattr(root, "_sandbox_menu_after", None)
+    if pending is not None:
+        root.after_cancel(pending)
+
+    def localize():
+        root._sandbox_menu_after = None
+        localize_application_menu()
+
+    root._sandbox_menu_after = root.after_idle(localize)
+
+    if not getattr(root, "_sandbox_menu_cleanup", False):
+        def cleanup(event):
+            pending = getattr(root, "_sandbox_menu_after", None)
+            if event.widget is root and pending is not None:
+                root.after_cancel(pending)
+                root._sandbox_menu_after = None
+
+        root.bind("<Destroy>", cleanup, add="+")
+        root._sandbox_menu_cleanup = True
