@@ -250,7 +250,7 @@ class VerificationWindow:
             if key == "ahu":
                 n, q = r["numerical_summary"], r["model_quality"]
                 self.summaries[key].set(
-                    f"數值對照 {n['within_limit']}/{n['checks']} 在內部門檻內｜工程狀態：{q['status']}\n"
+                    f"資料：{r['case']}\n數值對照 {n['within_limit']}/{n['checks']} 在內部門檻內｜工程狀態：{q['status']}\n"
                     f"工程未達 {q['failed']} 項、待資料 {q['pending']} 項；數值一致不代表工程設計通過。"
                 )
             elif key == "pipe":
@@ -301,6 +301,19 @@ class VerificationWindow:
 
     def pipe_data(self):
         return {k: v.get() for k, v in self.pipe_vars.items()}
+
+    def refresh_sources(self):
+        for key, snapshot, provider in (("ahu", self.source_snapshot, self.ahu_provider),
+                                        ("pipe", self.water_snapshot, self.water_provider)):
+            if key not in self.results or snapshot is None or provider is None:
+                continue
+            try:
+                unchanged = provider() == snapshot
+            except Exception:
+                unchanged = False
+            if not unchanged:
+                self.invalidate(key)
+                self.status.set("原始條件已變更；請重新讀取 AHU 或帶入冷熱水，再計算與匯出。")
 
     def calculate_pipe(self):
         def calculate():

@@ -783,7 +783,10 @@ class SimpleToolsApp:
         self.verification_host.grid(row=0, column=0, sticky="nsew")
         self.verification_active = True
         self.footer.grid_remove()
+        for key, button in self.nav.items():
+            button.configure(style="Nav.TButton", text="   " + TOOLS[key]["title"])
         self.verification.nb.select(self.verification.frames[initial_tab])
+        self.verification.refresh_sources()
         if carry_water:
             self.verification.load_water()
         self.root.title("Facility Studio 設計檢核中心 V" + BUILD_VERSION)
