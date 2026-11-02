@@ -14,7 +14,7 @@ from importlib.metadata import version
 from .ahu_engine import nm_calculate, nm_read_project
 from .ahu_schema import NM_DEFAULTS
 
-BUILD = "5.7.0-fusion.1"
+from .version import BUILD_VERSION as BUILD
 # Internal software/model-comparison limits, NOT a FEED design standard.
 LIMITS = {
     "psychrolib_w": {"relative": 0.0002, "absolute": 1e-8},
