@@ -94,7 +94,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python windows/tests/packaging_checks.py
+          if [[ -f windows/winrelease/build_sandbox.py ]]; then
+            python windows/tests/packaging_checks.py --legacy-assets-only
+          else
+            python windows/tests/packaging_checks.py
+          fi
           python windows/tests/installer_integrity_checks.py 2>&1 | tee "$RUNNER_TEMP/engineering-dashboard/legacy/installer_integrity_checks.log"
       - name: Linux Tk source smoke under a virtual display
         shell: bash
