@@ -1,0 +1,51 @@
+name: Simple facilities preview validation
+on:
+  push:
+    branches: ['sandbox/simple-facilities-20261102']
+    paths:
+      - '.github/workflows/simple-facilities-preview.yml'
+      - 'macos/facility_studio/**'
+      - 'windows/facility_studio/**'
+      - 'integration/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: simple-facilities-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  numerical-and-native-tk-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12.16'
+      - name: Install locked runtime and virtual display
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y xvfb xauth fonts-noto-cjk
+          python -m pip install -r integration/requirements.lock.txt
+          python -m pip check
+      - name: Numerical boundaries, conservation and generated cases
+        run: |
+          mkdir -p simple-evidence
+          python -m pytest integration/test_simple_facilities.py integration/test_fusion.py integration/test_product_wording.py -q --hypothesis-show-statistics --junitxml=simple-evidence/pytest.xml > simple-evidence/pytest.log 2>&1
+          cat simple-evidence/pytest.log
+          python tools/verify_platform_sync.py
+      - name: Actual simplified user journeys and synthetic UI
+        env:
+          PYTHONPATH: macos
+          FACILITY_STUDIO_FUSION_DATA: /tmp/simple-facilities-data
+          FACILITY_TEST_BLOCK_NETWORK: '1'
+          FACILITY_CAPTURE_SYNTHETIC_UI: '1'
+        run: xvfb-run -a -s '-screen 0 1440x1200x24' python integration/entry.py --facilities-self-test simple-evidence/Native_GUI.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: simple-facilities-preview-evidence
+          path: simple-evidence
+          retention-days: 14
