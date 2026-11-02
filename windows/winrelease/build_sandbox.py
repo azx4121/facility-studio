@@ -59,7 +59,7 @@ def main():
     with notices.open("a", encoding="utf-8") as file:
         file.write(
             "\nPsychroLib 2.5.0\n"
-            + (ROOT.parent / "macos/macos/PsychroLib-LICENSE.txt").read_text()
+            + (ROOT.parent / "macos/macos/PsychroLib-LICENSE.txt").read_text(encoding="utf-8")
         )
     args = [
         sys.executable,

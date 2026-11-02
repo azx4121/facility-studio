@@ -156,7 +156,7 @@ def run(destination):
     }
     Path(destination).parent.mkdir(parents=True, exist_ok=True)
     Path(destination).write_text(
-        json.dumps(result, ensure_ascii=False, indent=2) + "\n"
+        json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     print(json.dumps(result, ensure_ascii=False))
     return 0 if result["passed"] else 1

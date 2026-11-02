@@ -78,7 +78,7 @@ def main():
     out.mkdir(parents=True)
     sums = {
         line.split()[1]: line.split()[0]
-        for line in (assets / "SHA256SUMS.txt").read_text().splitlines()
+        for line in (assets / "SHA256SUMS.txt").read_text(encoding="utf-8").splitlines()
     }
     for name in (EXE_NAME, SETUP_NAME, ZIP_NAME):
         if sums.get(name) != sha(assets / name):
