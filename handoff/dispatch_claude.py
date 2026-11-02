@@ -29,7 +29,6 @@ def command(session):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--dry-run', action='store_true')
-    parser.add_argument('--start-now', action='store_true', help='使用者在本聊天明確要求立即改由 Claude Code 接續；不影響原定恢復時間')
     args = parser.parse_args()
     now = datetime.now(ZoneInfo('Asia/Taipei'))
     session = str(uuid.uuid4())
@@ -38,7 +37,7 @@ def main():
                               root=str(ROOT), executable_exists=CLAUDE.is_file(),
                               permission_mode='auto', api_calls_made=False), ensure_ascii=False))
         return 0
-    if now < RESET and not args.start_now:
+    if now < RESET:
         raise SystemExit('尚未到使用者授權的恢復時間；沒有呼叫 Claude。')
     if subprocess.check_output(['git', 'branch', '--show-current'], cwd=ROOT, text=True).strip() != 'sandbox/simple-facilities-20261102':
         raise SystemExit('非指定隔離分支，拒絕接管。')
@@ -54,7 +53,7 @@ def main():
     receipt = dict(session_id=session, requested_at=now.isoformat(), state='PREFLIGHT',
                    source_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
                    no_permission_bypass=True, completed=False, released=False)
-    receipt['immediate_handoff_authorized'] = bool(args.start_now)
+    receipt['time_gate'] = RESET.isoformat()
 
     def save():
         (run_dir/'receipt.json').write_text(json.dumps(receipt, ensure_ascii=False, indent=2), encoding='utf-8')
