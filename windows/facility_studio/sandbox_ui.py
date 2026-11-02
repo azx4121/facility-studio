@@ -7,7 +7,7 @@ def install_menus(root):
     if not os.environ.get("FACILITY_STUDIO_SANDBOX"):
         return
     import tkinter as tk
-    from tkinter import messagebox
+    from .localized_tk import messagebox
     from .engineering_verification import BUILD
 
     root.title("Facility Studio 整合測試版 " + BUILD)
@@ -17,7 +17,7 @@ def install_menus(root):
         label="關於 Facility Studio",
         command=lambda: messagebox.showinfo(
             "Facility Studio",
-            f"Facility Studio {BUILD}\n合成案例、工程數值對照與單相水管分析。\n工程條件與軟體數值測試分別列示。",
+            f"Facility Studio {BUILD}\n廠務工程計算、材料管路及設計報表。\n工程條件與軟體數值測試分別列示。",
             parent=root,
         ),
     )
@@ -60,7 +60,7 @@ def install_menus(root):
         label="驗證用途與範圍",
         command=lambda: messagebox.showinfo(
             "驗證用途與範圍",
-            "一般設計請用左側簡易工具：PV、液體／純水、單位換算均直接在原頁操作。\nAHU 模型差異核對用於原條件的 PsychroLib／CoolProp 偏差分析，不是另一份負荷設計，也不代表工程認證。\n冷熱水頁可估保溫，液體頁可選材料與介質；數據不足或超出模型範圍會明確提示。",
+            "一般設計請用左側簡易工具：PV、液體／純水、單位換算均直接在原頁操作。\nAHU 模型差異核對分析相同條件的模型偏差，不取代負荷設計與工程條件檢核。\n冷熱水頁可估保溫，液體頁可選材料與介質；數據不足或超出模型範圍會明確提示。",
             parent=root,
         ),
     )

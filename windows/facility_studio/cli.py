@@ -24,11 +24,8 @@ def main():
     parser.add_argument(
         "--full", action="store_true", help="Open the complete engineering workbench"
     )
-    parser.add_argument(
-        "--tool",
-        choices=("electrical", "duct", "gas", "lighting", "water", "air", "units",
-                 "cleanroom", "heat_loads", "pumps"),
-    )
+    from .simple_schema import TOOLS
+    parser.add_argument("--tool", choices=tuple(TOOLS))
     parser.add_argument("--tool-input", help="JSON inputs for one independent tool")
     parser.add_argument(
         "--gui-smoke",

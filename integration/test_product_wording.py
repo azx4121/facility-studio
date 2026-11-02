@@ -81,3 +81,19 @@ def test_bundled_tutorial_is_current_and_uses_product_wording(platform):
         for name in archive.namelist():
             if name.endswith(('.html', '.txt')) and not name.upper().startswith('LICENSE'):
                 assert not BANNED.search(archive.read(name).decode('utf-8'))
+
+
+def test_native_menu_copy_uses_public_engineering_language():
+    import ast
+    tree = ast.parse((ROOT/'macos/facility_studio/sandbox_ui.py').read_text())
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Constant) and isinstance(node.value, str):
+            assert not BANNED.search(node.value)
+
+
+@pytest.mark.parametrize('tool', ['liquid', 'vacuum'])
+def test_new_tools_are_available_through_the_delivered_command_line(tool, monkeypatch, capsys):
+    from facility_studio.cli import main
+    monkeypatch.setattr(sys, 'argv', ['facility-studio', '--language', 'zh-Hant', '--tool', tool])
+    assert main() == 0
+    assert not BANNED.search(capsys.readouterr().out)
