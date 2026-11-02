@@ -772,6 +772,8 @@ class SimpleToolsApp:
         def water_provider():
             if "water" not in self.pages:
                 raise ValueError("請先開啟冷熱水快算並填寫條件。")
+            if self.pages["water"].upstream_stale:
+                raise ValueError("冷熱水的上游條件已變更；請先重新帶入上游結果。")
             return pipe_from_water_tool(self.pages["water"].data())
 
         if self.workbench_mode:

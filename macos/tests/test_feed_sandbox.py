@@ -377,6 +377,18 @@ def test_main_workspace_transfer_stale_source_and_keyboard(tmp_path, monkeypatch
         root.geometry("1000x760")
         root.update()
         assert view.export_button.winfo_rooty() + view.export_button.winfo_height() <= root.winfo_rooty() + root.winfo_height()
+        app.show_tool("heat_loads")
+        heat = app.active_page()
+        heat.calculate()
+        app.show_tool("water")
+        assert water.import_upstream("heat_loads")
+        app.open_engineering_verification("pipe", carry_water=True)
+        app.calculate_active()
+        assert "pipe" in view.results
+        heat.variables["area"].set(str(float(heat.variables["area"].get()) + 1))
+        assert water.upstream_stale
+        app.calculate_active()
+        assert "pipe" not in view.results
     finally:
         app.close()
 
