@@ -3634,3 +3634,14 @@ TEXT.update({
     "Facility Studio 設計檢核中心 V": "Facility Studio Design Verification Center V",
     "Facility Studio 工程設計 V": "Facility Studio Engineering Design V",
 })
+
+from .fusion_english import TEXT as FUSION_TEXT
+TEXT.update(FUSION_TEXT)
+
+TEXT.update({
+    " C2 出風需求": " C2 leaving-air requirements",
+    "實體盤管全開工況的乾球或含濕比高於所需出口；總冷量足夠仍不能代表除濕／顯熱需求皆可達。": "The full-open physical coil leaves air warmer or more humid than required. Sufficient total capacity alone does not establish latent and sensible capability.",
+    "盤管乾空氣質量流率須為正有限數值。": "Coil dry-air mass flow must be positive and finite.",
+})
+
+TEXT.update({"空調與冬季": "HVAC and winter", "水路物性與選管": "Water properties and sizing", "NP 設備用電": "NP equipment electrical input"})

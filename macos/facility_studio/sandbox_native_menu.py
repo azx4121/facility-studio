@@ -11,7 +11,10 @@ import sys
 
 class NativeApplicationMenu:
     def __init__(self):
-        self.lib = ctypes.CDLL("/usr/lib/libobjc.A.dylib")
+        if sys.platform != "darwin":
+            raise OSError("原生應用程式選單只適用 macOS。")
+        from pathlib import PurePosixPath
+        self.lib = ctypes.CDLL(str(PurePosixPath("/usr/lib") / "libobjc.A.dylib"))
         self.lib.objc_getClass.argtypes = [ctypes.c_char_p]
         self.lib.objc_getClass.restype = ctypes.c_void_p
         self.lib.sel_registerName.argtypes = [ctypes.c_char_p]

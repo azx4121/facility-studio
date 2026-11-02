@@ -195,6 +195,11 @@ def executive_summary(result):
                      "依設計冷量及實際供回水工況選型" if total_kw is not None else NOT_CALCULATED)
     rows.append(_row("中央冰水主機 Chiller", total_demand, selection,
                      "冷量初估" if total_kw is not None else "待資料"))
+    if main and "q_water_capacity_envelope_kw" in r:
+        rows.append(_row("水路供冷容量包絡（另列）",
+                         _fmt(r["q_water_capacity_envelope_kw"], "kW"),
+                         "由現有水量與各迴路物性／溫差反算，含既有水量餘裕；須確認獨立冷源邊界，不能直接視為同時峰值。",
+                         "邊界待核對"))
 
     water_rows = []
     pump_rows = []
@@ -367,7 +372,8 @@ def _validate_full_result(r):
                       "ffu_total_cmh ffu_unit_cmh leakage_cmh q_mau_kw "
                       "q_room_sensible_kw q_total_kw q_total_rt q_total_basis q_loop_envelope_kw q_loop_envelope_rt required_oa_cmh "
                       "dcc_return_cmh dcc_design_cmh dcc_design_season "
-                      "terminal_cooling_kw terminal_cooling_season".split())
+                      "terminal_cooling_kw terminal_cooling_season engineering_backends np_auto "
+                      "q_internal_peak_kw q_water_capacity_envelope_kw q_water_capacity_basis".split())
     if isinstance(r, dict) and isinstance(r.get("effective_inputs"), dict) and "ffu_topology" in r["effective_inputs"]:
         report_keys.add("ffu_topology")
     mappings = "project effective_inputs quality summer winter zones light latent room counts water pressure ducts gas electric upw".split()
@@ -668,6 +674,13 @@ def report(r):
     a(
         "資料依據：隨附版本化工程表為初估參考，並非已確認適用的法規載流表。參數來源另存於專案 JSON／HTML 附錄。"
     )
+    lines.extend(backend_notes(r))
+    if r.get("np_auto"):
+        lines.append(f"NP 本案連動設備輸入小計 {r['np_auto']['total_kw']:.3f} kW；{r['np_auto']['boundary']}")
+        lines.extend(f"  {label}：{r['np_auto']['parts'][key]:.3f} kW" for key, label in
+                     (("fan", "空調風機＋FFU＋本案冰機"), ("heat", "電熱"), ("humid", "加濕器"), ("exh", "排氣風機"), ("pump", "水泵")))
+    if "q_water_capacity_envelope_kw" in r:
+        lines.append(f"本案空調同時峰值 {r['q_internal_peak_kw']:.3f} kW；水路供冷容量包絡 {r['q_water_capacity_envelope_kw']:.3f} kW。{r['q_water_capacity_basis']}。")
     return "\n".join(lines).replace("额外", "額外").replace("侧", "側") + "\n"
 
 
@@ -808,6 +821,14 @@ def nm_report(r):
     for season, title in [("summer", "夏季"), ("winter", "冬季")]:
         sr = r[season]
         extra.append(title + "：" + sr["control_basis"])
+        rating = sr.get("coil_rating")
+        if rating and not rating.get("inactive"):
+            if "error" in rating:
+                extra.append("C2 幾何模型未採用：" + rating["error"])
+            else:
+                extra.append(f"C2 ε-NTU：{rating['capacity_kw']:.3f} kW；出風 {rating['outlet_t']:.3f}°C；水回溫 {rating['water_outlet_t']:.3f}°C；空氣／水壓降 {rating['air_dp_pa']:.2f}／{rating['water_dp_pa']:.2f} Pa；{rating['surface']}。")
+        if sr.get("washer_pump_input_kw", 0):
+            extra.append(f"水洗泵輸入 {sr['washer_pump_input_kw']:.3f} kW；依指定比例轉入空氣 {sr.get('washer_pump_heat_kw', 0):.3f} kW。")
         for tag in ["h1", "c1", "c2", "h2"]:
             k = season + "_" + tag
             mode = i[k + "_mode"]
@@ -849,4 +870,14 @@ def nm_report(r):
             header += "[" + q["status"] + "] " + q["name"] + "：" + q["detail"] + "\n"
     summary = "MAU 單機核心設計量\n" + "\n".join(
         title + "：" + value + "｜" + note for title, value, note in nm_summary_rows(r))
+    extra.extend(backend_notes(r))
     return header + summary + "\n\n" + s + "\n".join(extra).replace("需求点", "需求點") + "\n"
+
+
+def backend_notes(result):
+    notes = []
+    if result.get("engineering_backends"):
+        notes.append("\n實際計算後端與版本（不代表 FEED 認證）")
+        notes.extend(f"{name} {spec['version']}：{spec['method']}。"
+                     for name, spec in result["engineering_backends"].items())
+    return notes

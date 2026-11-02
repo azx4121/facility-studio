@@ -255,6 +255,11 @@ TOOLS = {
             ),
             field("power", "冷熱負荷", "100", units=("power_unit", tuple(UNITS["冷熱功率"]))),
             field("delta", "供回水溫差", "5", help="°C溫差"),
+            field("property_source", "水物性來源", "既有清水參考值", options=("既有清水參考值", "CoolProp 純水溫壓")),
+            field("water_t", "計算水溫", "20", help="°C；依實際平均水溫填寫"),
+            field("water_p", "水絕對壓力", "300", help="kPa abs，不能填表壓"),
+            field("sizing_basis", "自動選管依據", "流速上限", options=("流速上限", "流速與摩擦壓損")),
+            field("friction_limit", "摩擦壓損警戒／上限", "400", advanced=True, help="Pa/m；專案設定，非通用法規"),
             field("pipe_size", "管徑規格（1/2\"～30\"）", "自動依流速選型", options=WATER_PIPE_OPTIONS,
                   help="預設依水速上限由小至大自動選管徑（1/2\"～30\"）；亦可直接指定管徑反算水速與壓損"),
             field("velocity", "設計水速上限", "1.5", advanced=True, help="m/s"),
@@ -420,6 +425,8 @@ def active_field(tool, key, data):
         }
         return conditions.get(key, True)
     if tool == "water":
+        if key in ("water_t", "water_p"):
+            return data.get("property_source") == "CoolProp 純水溫壓"
         if key == "flow":
             return data["mode"] == "已知水量"
         if key == "power":
@@ -469,7 +476,9 @@ def adopted_summary(tool, data):
         return f"採用：{source}｜{u_text}｜維護M={data['maintenance']}｜均勻一般照明初估"
     if tool == "water":
         ps = data.get("pipe_size", "自動依流速選型")
-        return f"採用：管徑{ps}｜水速≤{data['velocity']}m/s｜長{data['length']}m｜ΣK={data['k_sum']}｜設備{data['equipment_pa']}Pa｜粗糙度{data['roughness_mm']}mm｜清水ρ=1000、cp=4.1868｜依實際參考內徑選型"
+        prop = (f"CoolProp純水 {data.get('water_t')}°C／{data.get('water_p')}kPa abs"
+                if data.get("property_source") == "CoolProp 純水溫壓" else "清水參考ρ=1000、cp=4.1868")
+        return f"採用：管徑{ps}｜水速≤{data['velocity']}m/s｜長{data['length']}m｜ΣK={data['k_sum']}｜設備{data['equipment_pa']}Pa｜粗糙度{data['roughness_mm']}mm｜{prop}｜{data.get('sizing_basis', '流速上限')}"
     if tool == "air":
         return f"採用：大氣壓{data['atmosphere']}kPa(abs)，以kg乾空氣為基準；焓差方向A−B。"
     return "溫度含零點位移；壓力換算保持原有表壓／絕對壓基準"

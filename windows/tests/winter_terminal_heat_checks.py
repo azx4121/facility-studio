@@ -1,7 +1,7 @@
 """Winter room heating left over when the MAU supply temperature is capped.
 
-No heat-source selection is available in this build, so the remaining loss must be
-reported as an unassigned demand: never in the HW design load, never claimed for HW or NP.
+Unassigned terminal heat stays outside HW/NP. An explicit HW selection now
+assigns it to HW without silently changing the default boundary.
 """
 
 import copy
@@ -88,14 +88,14 @@ for name, text in (("warning", warn[0] if warn else ""), ("quality detail", deta
     english = i18n.translate(text, "en")
     check(f"{name} translates fully to English", text and not CJK.search(english), english)
 
-# 5. There is no way to assign a heat source in this build.
+# 5. The new engineering settings expose an explicit HW assignment.
 q = copy.deepcopy(project())
 q["inputs"]["winter_terminal_heat_source"] = "HW"
-try:
-    a.validate_project(q)
-    check("heat-source selection is not an accepted input in this build", False, "accepted")
-except ValidationError as e:
-    check("heat-source selection is not an accepted input in this build", e.field_name == "winter_terminal_heat_source", e)
+assigned = a.calculate(q)
+check("explicit HW source is accepted", assigned["winter_room"]["terminal_heat_source"] == "HW")
+check("HW includes the capped terminal heat without losing the room balance",
+      assigned["water"]["HW"]["load_kw"] >= assigned["winter_room"]["terminal_heat_kw"] * assigned["sf"] - 1e-6
+      and abs(assigned["winter_room"]["sensible_residual_kw"]) < 1e-5)
 
 failed = [c for c in checks if not c["passed"]]
 (ROOT / "evidence").mkdir(exist_ok=True)

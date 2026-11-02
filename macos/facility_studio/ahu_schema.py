@@ -268,3 +268,28 @@ NM_BASIC.add("target_mode")
 NM_DEFAULTS.update(name="一般空調箱單盤管初估", summer_c1_mode="旁通", winter_c1_mode="旁通",
                    summer_h1_mode="旁通", winter_h1_mode="旁通", summer_h2_mode="旁通", winter_h2_mode="旁通",
                    c1_in="7", c1_out="12")
+
+NM_V4_KEYS = set(NM_DEFAULTS)
+nm_group("工程模型｜盤管與水洗熱分配", [
+    ("c2_bf_min", "C2 廠商 BF 下限（留空未提供）", "", "比例", (0, .5)),
+    ("coil_pinch_min_k", "冷卻盤管最小端差", .5, "K", (0, 20)),
+    ("pump_air_fraction", "水洗泵輸入轉入空氣比例（留空未知）", "", "比例", (0, 1)),
+    ("coil_rating_mode", "C2 實體能力驗證", "需求 ADP／BF", "",
+     ["需求 ADP／BF", "幾何 ε-NTU（python-hvac）"]),
+])
+AHU_OPTIONAL_NUMBERS.update({"c2_bf_min", "pump_air_fraction"})
+NM_FIELDS["pump_input_kw"]["label"] = "水洗泵總輸入電力（留空未知）"
+nm_group("C2 幾何 ε-NTU｜初值為合成範例，須改成型錄／實際工況", [
+    ("coil_width", "有效寬度", 900, "mm", (10, 10000)),
+    ("coil_height", "有效高度", 180, "mm", (10, 10000)),
+    ("coil_rows", "管排數", 3, "排", (1, 30)),
+    ("coil_pitch_trv", "橫向管中心距", 25.4, "mm", (1, 200)),
+    ("coil_pitch_lon", "縱向管中心距", 22, "mm", (1, 200)),
+    ("coil_do", "管外徑", 10.2, "mm", (1, 100)),
+    ("coil_di", "管內徑", 8.422, "mm", (.5, 99)),
+    ("coil_fin_t", "翅片厚度", .3302, "mm", (.01, 5)),
+    ("coil_fin_pitch", "翅片間距", 3.175, "mm", (.1, 20)),
+    ("coil_circuits", "並聯水路數", 2, "路", (1, 1000)),
+    ("coil_water_lpm", "C2 實際水量（非需求反算）", 14.217, "LPM", (.01, 100000)),
+    ("coil_water_abs_kpa", "C2 入口水絕對壓力", 200, "kPa abs", (10, 10000)),
+])

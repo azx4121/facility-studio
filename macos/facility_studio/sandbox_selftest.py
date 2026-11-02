@@ -32,7 +32,7 @@ def run(destination):
 
     ahu = compare_defaults()
     pipe = pipe_calculate(PIPE_DEFAULTS)
-    check("四個執行套件皆可載入", lambda: len(ahu["versions"]) == 4)
+    check("五個執行套件皆可載入", lambda: len(ahu["versions"]) == 5)
     check(
         "AHU 數值門檻與工程狀態分開",
         lambda: (

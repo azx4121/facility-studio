@@ -9,7 +9,7 @@ import uuid
 from pathlib import Path
 from .errors import ValidationError
 from .schema import FIELDS, PD_DEFAULTS, PD_KEYS, SCHEMA_VERSION, VERSION
-from .ahu_schema import NM_DEFAULTS
+from .ahu_schema import NM_DEFAULTS, NM_V3_KEYS, NM_V4_KEYS
 from .project_store import validate_provenance
 from .optional_inputs import ALLOWED_INPUT_KEYS, check_input_keys
 from .json_io import read_json_file
@@ -80,6 +80,8 @@ def validate_workspace(doc):
         if not entry["id"] or entry["id"] in ids:
             raise ValidationError("單機識別碼重複或空白")
         ids.add(entry["id"])
+        if isinstance(entry["inputs"], dict) and set(entry["inputs"]) in (NM_V3_KEYS, NM_V4_KEYS):
+            entry["inputs"].update({k: v for k, v in NM_DEFAULTS.items() if k not in entry["inputs"]})
         if not isinstance(entry["inputs"], dict) or set(entry["inputs"]) != set(NM_DEFAULTS):
             raise ValidationError("單機草稿欄位不完整")
         bounded_strings(entry["inputs"])

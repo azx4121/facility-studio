@@ -169,6 +169,8 @@ def ahu_inactive(i):
         disable(["steam_conductivity", "steam_cond_min", "steam_cond_max"], "目前不是電極式蒸汽")
     if "水洗" not in i.get("humidifier", ""):
         disable(["wash_mode", "wash_eff", "wash_rating", "media_area", "wetting_rate", "drift_lph", "spray_head", "spray_rise", "loop_loss", "pump_input_kw"], "目前未採用水洗加濕，設備記錄保留")
+    if i.get("coil_rating_mode") != "幾何 ε-NTU（python-hvac）":
+        disable([k for k in i if k.startswith("coil_") and k not in ("coil_rating_mode", "coil_pinch_min_k")], "未啟用實體盤管幾何模型")
     any_common_water = False
     any_common_electric = False
     for tag in ["h1", "h2"]:

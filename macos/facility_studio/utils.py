@@ -1,4 +1,5 @@
 from .errors import InputError
+from . import engineering_backends as backend
 from pathlib import Path
 import hashlib
 import json
@@ -195,46 +196,24 @@ def fmt(value, dec=2):
 
 
 def to_cmh_strict(value, unit, label):
-    return (
-        number(value, label, 0, 1000000000.0)
-        * {"CMH": 1, "CFM": CFM_TO_CMH}[choice(unit, ("CMH", "CFM"), label + "單位")]
-    )
+    unit = choice(unit, ("CMH", "CFM"), label + "單位")
+    return backend.convert(number(value, label, 0, 1000000000.0),
+                           {"CMH": "meter**3/hour", "CFM": "foot**3/minute"}[unit], "meter**3/hour")
 
 
 def to_lpm_strict(value, unit, label):
-    return (
-        number(value, label, 0, 100000000.0)
-        * {"LPM": 1, "GPM": GPM_TO_LPM}[choice(unit, ("LPM", "GPM"), label + "單位")]
-    )
+    unit = choice(unit, ("LPM", "GPM"), label + "單位")
+    return backend.convert(number(value, label, 0, 100000000.0),
+                           {"LPM": "liter/minute", "GPM": "gallon/minute"}[unit], "liter/minute")
 
 
 def sat_pa(t):
     t = number(t, "乾球溫度", -100, 200)
-    k = t + 273.15
-    if t <= 0.01:
-        ln = (
-            -5674.5359 / k
-            + 6.3925247
-            - 0.009677843 * k
-            + 6.2215701e-07 * k * k
-            + 2.0747825e-09 * k**3
-            - 9.484024e-13 * k**4
-            + 4.1635019 * math.log(k)
-        )
-    else:
-        ln = (
-            -5800.2206 / k
-            + 1.3914993
-            - 0.048640239 * k
-            + 4.1764768e-05 * k * k
-            - 1.4452093e-08 * k**3
-            + 6.5459673 * math.log(k)
-        )
-    return math.exp(ln)
+    return backend.saturation_pressure(t)
 
 
 def enthalpy(t, w):
-    return CP_DA * t + w * (H_V0 + CP_V * t)
+    return backend.moist_enthalpy(t, w)
 
 
 def state_tw(t, w, p):
@@ -245,7 +224,7 @@ def state_tw(t, w, p):
     rh = 100 * pw / sat_pa(t)
     if rh > 100 + 1e-06:
         raise InputError(f"空氣狀態超飽和：{t:.4f}°C、{rh:.4f}%RH", code="supersaturated_air")
-    vol = 0.287042 * (t + 273.15) * (1 + w / MW_RATIO) / p
+    vol = backend.moist_volume(t, w, p)
     return {
         "t": t,
         "w": w,
@@ -398,7 +377,8 @@ def load_current(power_kw, voltage, pf=1.0, eta=1.0, phases=3):
     return power * 1000 / ((math.sqrt(3) if phases == 3 else 1) * volts * factor)
 
 
-def water_selection(lpm, vmax, mode="流速上限", manual_id=0):
+def water_selection(lpm, vmax, mode="流速上限", manual_id=0, *,
+                    max_friction_pa_m=None, rho=1000., mu=.001, rough_mm=.045):
     q = number(lpm, "水量", 0, 100000000.0) / 60000
     vmax = number(vmax, "水流速上限", 0.1, 10)
     choice(mode, ("流速上限", "原專案流量表"), "水管選型模式")
@@ -412,6 +392,12 @@ def water_selection(lpm, vmax, mode="流速上限", manual_id=0):
             "size": "無需求",
         }
     reference = None
+    def acceptable_friction(d_mm, speed):
+        if max_friction_pa_m is None:
+            return True
+        d_m = d_mm / 1000
+        rate = darcy_factor(rho * speed * d_m / mu, rough_mm / 1000 / d_m) * rho * speed**2 / (2 * d_m)
+        return rate <= max_friction_pa_m + 1e-9
     if manual_id > 0:
         d = number(manual_id, "實際內徑 mm", 1, 3000)
         runs = 1
@@ -423,7 +409,7 @@ def water_selection(lpm, vmax, mode="流速上限", manual_id=0):
                 area = math.pi * (pipe["id_mm"] / 1000) ** 2 / 4
                 if q / n / area <= vmax + 1e-12 and (
                     mode != "原專案流量表" or lpm / n <= pipe["max_flow_lpm"]
-                ):
+                ) and acceptable_friction(pipe["id_mm"], q / n / area):
                     selected = (n, pipe)
                     break
             if selected:
@@ -444,34 +430,14 @@ def water_selection(lpm, vmax, mode="流速上限", manual_id=0):
         "velocity_mps": q / runs / area,
         "area_m2": area,
         "size": size,
+        "friction_limit_pa_m": max_friction_pa_m,
+        "friction_limit_exceeded": not acceptable_friction(d, q / runs / area),
         **({"reference": dict(reference)} if reference else {}),
     }
 
 
 def darcy_factor(re, relative_roughness):
-    if re <= 0:
-        return 0.0
-    if re < 2300:
-        return 64 / re
-
-    def turbulent(r):
-        lo, hi = (0.002, 0.2)
-        for _ in range(65):
-            f = (lo + hi) / 2
-            residual = 1 / math.sqrt(f) + 2 * math.log10(
-                relative_roughness / 3.7 + 2.51 / (r * math.sqrt(f))
-            )
-            if residual > 0:
-                lo = f
-            else:
-                hi = f
-        return (lo + hi) / 2
-
-    if re >= 4000:
-        return turbulent(re)
-    f2300 = 64 / 2300
-    f4000 = turbulent(4000)
-    return f2300 + (f4000 - f2300) * (re - 2300) / 1700
+    return backend.darcy_friction(re, relative_roughness)
 
 
 def pressure_result(

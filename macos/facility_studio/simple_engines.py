@@ -486,26 +486,40 @@ def lighting(data):
 
 
 def water(data):
+    from .engineering_backends import liquid_water
+    source = selected(data.get("property_source", "既有清水參考值"), ("既有清水參考值", "CoolProp 純水溫壓"), "property_source")
+    if source == "CoolProp 純水溫壓":
+        try:
+            fluid = dict(liquid_water(number(data["water_t"], "water_t", .1, 150),
+                                      number(data["water_p"], "water_p", 1, 10000)))
+        except ValueError as error:
+            raise ValidationError(str(error), "water_t") from None
+    else:
+        fluid = dict(rho=1000., cp=4.1868, mu=.001, source=source, fluid="清水參考")
+    rho, cp, mu = (fluid[k] for k in ("rho", "cp", "mu"))
     mode = selected(data["mode"], ("已知水量", "已知熱量"), "mode")
     delta = number(data["delta"], "delta", 0.1, 100)
     if mode == "已知水量":
         unit = selected(data["flow_unit"], ("LPM", "US GPM", "m³/h"), "flow_unit")
         value = number(data["flow"], "flow", 0, 10000000)
         lpm = convert_all("水量", value, unit)["LPM"]
-        thermal = water_heat("熱量 kW", lpm, delta)
+        thermal = water_heat("熱量 kW", lpm, delta, rho, cp)
     else:
         unit = selected(data["power_unit"], tuple(UNITS["冷熱功率"]), "power_unit")
         kw = convert_all("冷熱功率", number(data["power"], "power", 0, 10000000), unit)[
             "kW"
         ]
-        thermal = water_heat("流量 LPM", kw, delta)
+        thermal = water_heat("流量 LPM", kw, delta, rho, cp)
         lpm = thermal["lpm"]
     limit = number(data["velocity"], "velocity", 0.1, 10)
     pipe_options = ("自動依流速選型",) + tuple(row["size"] for row in HVAC_PIPES)
     pipe_choice = selected(data.get("pipe_size", "自動依流速選型"), pipe_options, "pipe_size")
     water_warnings = []
+    basis = selected(data.get("sizing_basis", "流速上限"), ("流速上限", "流速與摩擦壓損"), "sizing_basis")
+    friction_limit = number(data.get("friction_limit", "400"), "friction_limit", 1, 10000)
     if pipe_choice == "自動依流速選型":
-        pipe = water_selection(lpm, limit)
+        pipe = water_selection(lpm, limit, max_friction_pa_m=friction_limit if basis == "流速與摩擦壓損" else None,
+                               rho=rho, mu=mu, rough_mm=number(data.get("roughness_mm", ".045"), "roughness_mm", 0, 5))
     else:
         chosen = next(row for row in HVAC_PIPES if row["size"] == pipe_choice)
         if lpm == 0:
@@ -534,20 +548,24 @@ def water(data):
     rough = number(data.get("roughness_mm", ROUGHNESS_MM["commercial_steel"]), "roughness_mm", 0, 5)
     diameter = pipe["id_mm"] / 1000
     speed = pipe["velocity_mps"]
-    re = 1000 * speed * diameter / 0.001
+    re = rho * speed * diameter / mu
     friction_factor = darcy_factor(re, rough / 1000 / diameter) if lpm else 0
-    friction_rate = friction_factor / diameter * 1000 * speed ** 2 / 2 if lpm else 0
+    friction_rate = friction_factor / diameter * rho * speed ** 2 / 2 if lpm else 0
     friction = friction_rate * length
-    local = k_sum * 1000 * speed ** 2 / 2
+    local = k_sum * rho * speed ** 2 / 2
     equipment = equipment if lpm else 0
     loss = friction + local + equipment
     pressure = dict(friction_pa=friction, local_pa=local, equipment_pa=equipment,
-                    loss_pa=loss, head_m=loss / (1000 * 9.80665),
+                    loss_pa=loss, head_m=loss / (rho * 9.80665),
                     friction_pa_m=friction_rate, friction_factor=friction_factor,
                     roughness_mm=rough, relative_roughness=rough / 1000 / diameter if diameter else 0,
-                    length_m=length, k_sum=k_sum, equipment_included=equipment > 0)
+                    length_m=length, k_sum=k_sum, equipment_included=equipment > 0,
+                    high_friction_rate=friction_rate > friction_limit, friction_limit_pa_m=friction_limit)
+    if friction_rate > friction_limit:
+        water_warnings.append(f"水管摩擦壓損 {friction_rate:.2f} Pa/m 超過本案警戒 {friction_limit:g} Pa/m；請放大管徑或覆核依據。")
     return dict(
         tool="water",
+        fluid_properties=fluid,
         thermal=thermal,
         pipe=pipe,
         flow_lpm=lpm,
@@ -557,7 +575,7 @@ def water(data):
         pipe_size=pipe_choice,
         **({"warnings": water_warnings} if water_warnings else {}),
         formula=thermal["formula"],
-        note="水物性採ρ=1000 kg/m³、cp=4.1868 kJ/(kg·K)、μ=0.001Pa·s；壓損按一條最不利路徑估算，並聯管分流。設備壓降為明填值；閉式循環不加樓高。",
+        note=f"物性來源：{fluid['source']}；ρ={rho:.4f} kg/m³、cp={cp:.6f} kJ/(kg·K)、μ={mu:.8g} Pa·s。壓損按一條最不利路徑估算，並聯管分流。設備壓降為明填值；閉式循環不加樓高。",
     )
 
 

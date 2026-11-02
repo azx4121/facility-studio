@@ -454,6 +454,8 @@ class DesktopApp(SessionController, MainView):
         ttk.Button(head, text="設計檢核中心", command=lambda: open_preview(self.root)).grid(
             row=2, column=0, sticky="w", pady=(6, 0)
         )
+        from .fusion_settings import open_settings
+        ttk.Button(head, text="工程模型設定｜五庫融合", command=lambda: open_settings(self)).grid(row=2, column=1, sticky="e", pady=(6, 0))
         header_widths = [None]
 
         def wrap_header(event):

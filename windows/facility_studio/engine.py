@@ -171,6 +171,13 @@ def migrate_project(p):
 def water_properties(inputs, loop):
     """Resolve fluid properties for one circuit without touching another circuit."""
     loop = loop.lower()
+    if inputs.get(loop + "_property_source") == "CoolProp 純水溫壓":
+        from .engineering_backends import liquid_water
+        try:
+            return dict(liquid_water(float(inputs[loop + "_property_t"]),
+                                     float(inputs[loop + "_property_p"])))
+        except (KeyError, ValueError) as error:
+            raise InputError(str(error), field_name=loop + "_property_source") from None
     independent = inputs[loop + "_fluid_mode"] == "本迴路獨立物性"
     prefix = loop + "_" if independent else "water_"
     return dict(
@@ -440,7 +447,10 @@ def coil_record(name, a, b, m, cp):
     if q < -1e-06 or cond < -1e-09:
         raise InputError(f"{name} 不可產生未配置的加熱或加濕")
     liquid = max(0, cond) * 4.1868 * b["t"]
-    water = q - liquid
+    from .engineering_backends import cooling_process
+    water, cond_model = cooling_process(a["h"], b["h"], a["w"], b["w"], m, 4.1868 * b["t"])
+    if abs(cond_model - cond) > 1e-9:
+        raise InputError("盤管質量模型不一致")
     if water < -1e-06:
         raise InputError(f"{name} 水側負荷不合理")
     return {
@@ -1055,6 +1065,9 @@ def calculate(p, isolate_utilities=False):
         winter_room.get("terminal_heat_kw", 0.0) if winter_room else 0.0
     )
     heat = max(summer["reheat_kw"], winter["reheat_kw"] + (winter_terminal_heat_kw if i.get("winter_terminal_heat_source") == "HW" else 0.0))
+    if i.get("main_reheat_source") == "電熱":
+        # Explicit electric reheat cannot also become an HW coil demand.
+        heat = winter_terminal_heat_kw if i.get("winter_terminal_heat_source") == "HW" else 0.0
     loads = {
         "MCHW": max(summer["c1"]["water_kw"], winter["c1"]["water_kw"]) * sf,
         "CHW": max(summer["c2"]["water_kw"], winter["c2"]["water_kw"]) * sf,
@@ -1080,7 +1093,10 @@ def calculate(p, isolate_utilities=False):
             else to_lpm_strict(i[q], i[u], key)
         )
         w = water_selection(
-            flow, n("water_velocity_max"), "流速上限", float(conf["manual_id_mm"])
+            flow, n("water_velocity_max"), "流速上限", float(conf["manual_id_mm"]),
+            max_friction_pa_m=(float(i.get("water_friction_limit", "400"))
+                               if i.get("water_sizing_basis") == "流速與摩擦壓損" else None),
+            rho=fluid["rho"], mu=fluid["mu"], rough_mm=n("water_roughness_mm"),
         )
         w.update(
             load_kw=loads[key],
@@ -1130,6 +1146,25 @@ def calculate(p, isolate_utilities=False):
             False,
         )
     electric = {} if isolate_utilities else electrical_from_inputs(i)
+    np_auto = None
+    if not isolate_utilities and i.get("np_auto_mode") == "自動加總本案（手填為額外負荷）":
+        if workspace and any("NP" in e["power"] for e in workspace["demand_ledger"]["entries"].values()):
+            raise InputError("NP 已採用帳本設備；請先移除重疊來源或維持手動填列，不能重複自動加總。", field_name="np_auto_mode")
+        from .np_link import equipment_inputs
+        design_kw = max(summer["coincident_cooling_kw"], winter["coincident_cooling_kw"]) * sf
+        if i.get("chiller_capacity_basis") == "獨立冷源水路包絡（確認無重複）":
+            design_kw = sum(water[k]["capacity_kw"] for k in ("MCHW", "CHW", "DCCW"))
+        np_auto = equipment_inputs(i, pressure, ffu_count, summer, winter, design_kw)
+        ei = dict(i)
+        for part, kw in np_auto["parts"].items():
+            key = "e_np_" + part
+            base = electrical_power_kw(i[key], i["u_" + key], VOLTAGE_MAP[i["e_volt"]],
+                                       electric["NP"]["pf"], i["e_eff"], key)
+            ei[key], ei["u_" + key] = str(base + kw), "kW"
+        extra_a = np_auto["total_kw"] * 1000 / (math.sqrt(3) * VOLTAGE_MAP[i["e_volt"]] * electric["NP"]["pf"])
+        ei["e_np_design_floor"] = str(electric["NP"]["design_current_a"] + 1.25 * extra_a)
+        electric = electrical_from_inputs(ei)
+        warn.extend(np_auto["pending"])
     gas = {} if isolate_utilities else gas_from_inputs(i)
     missing = [
         k
@@ -1168,7 +1203,7 @@ def calculate(p, isolate_utilities=False):
     for chain in [summer, winter]:
         if abs(chain["energy_residual_kw"]) > 1e-05:
             raise InputError(f"盤管能量檢核失敗，報告已停止")
-    if (
+    if not np_auto and (
         summer["reheat_kw"]
         or summer["humid_kg_h"]
         or winter["reheat_kw"]
@@ -1239,6 +1274,23 @@ def calculate(p, isolate_utilities=False):
         "warnings": warn,
         "airflow_basis": airflow_basis,
     }
+    from .engineering_backends import manifest
+    r["engineering_backends"] = manifest()
+    r["np_auto"] = np_auto
+    r["q_internal_peak_kw"] = r["q_total_kw"]
+    r["q_water_capacity_envelope_kw"] = sum(water[k]["capacity_kw"] for k in ("MCHW", "CHW", "DCCW"))
+    r["q_water_capacity_basis"] = "各水路流量×ρ×cp×ΔT之容量包絡；可能含餘裕，不等於同時峰值；須排除主次側重複"
+    if i.get("chiller_capacity_basis") == "獨立冷源水路包絡（確認無重複）":
+        r["q_total_kw"] = r["q_water_capacity_envelope_kw"] / sf
+        r["q_total_rt"] = r["q_total_kw"] / US_RT_KW
+        r["q_total_basis"] = "已選各獨立冷源水路容量包絡（先扣除本案餘裕，選型再加回；非同時峰值）"
+    for key, loss in pressure.items():
+        limit = float(i.get("water_friction_limit" if key in water else "duct_friction_limit",
+                            "400" if key in water else "1.5"))
+        loss["friction_limit_pa_m"] = limit
+        loss["high_friction_rate"] = loss["friction_pa_m"] > limit
+        if loss["high_friction_rate"]:
+            warn.append(f"{key} 摩擦壓損 {loss['friction_pa_m']:.2f} Pa/m 超過本案警戒 {limit:g} Pa/m。")
     r["winter_room"] = winter_room
     r["dcc_design_kw"] = dcc_design
     r["dcc_design_season"] = "winter" if winter_room and winter_room["dcc_kw"] > dcc else "summer"

@@ -177,7 +177,7 @@ try:
         if c["overrides"]["sys_type"].startswith("MAU"):
             r, _ = run(**c["overrides"])
             e = c["expect"]
-            unchanged += r is not None and r["oa_mass"] == e["oa_mass"] and r["circulation_cmh"] == e["circulation_cmh"] and r["counts"] == e["counts"] and r["supply_room_cmh"] == e["supply_room_cmh"]
+            unchanged += r is not None and all(math.isclose(r[k], e[k], rel_tol=1e-12, abs_tol=1e-10) for k in ("oa_mass", "circulation_cmh", "supply_room_cmh")) and r["counts"] == e["counts"]
     check("MAU golden cases: outdoor air, circulation, FFU/DCC counts identical to before", unchanged == golden["by_system"]["MAU"], (unchanged, golden["by_system"]["MAU"]))
 
 
@@ -212,7 +212,7 @@ try:
         d = [k for k in got if not same(got[k], e[k])]
         if d:
             differ.append((d[:2], c["overrides"]["sys_type"][:3]))
-        if r["quality"]["status"] == e["status"]:
+        if r["quality"]["status"] == e["status"] or any(item["name"].endswith(" 摩擦壓損警戒") and item["status"] == "未達" for item in r["quality"]["items"]):
             status_ok += 1
         elif not (r["quality"]["status"] == STATUS_FAIL and gate(r) and gate(r)["status"] == "未達" and r["airflow_basis"]["inflation"] > airflow_guard.INFLATION_FAIL):
             differ.append(("status changed without the gate", e["status"], r["quality"]["status"]))
@@ -227,8 +227,8 @@ try:
     # 6. Quality-gate vocabulary: what the user can fix and what needs a later stage are different.
     r, _ = run()
     q = r["quality"]
-    check("default project: user-fixable items and later-stage items are counted separately", q["status"] == STATUS_PENDING and q["pending"] >= 1 and q["deferred"] >= 1, (q["pending"], q["deferred"]))
-    p = project(e_np_fan="30", c2_bf_min="0.1")
+    check("default project: user-fixable items and later-stage items are counted separately", q["status"] == STATUS_FAIL and q["pending"] >= 1 and q["deferred"] >= 1 and any(item["name"].endswith(" 摩擦壓損警戒") for item in q["items"]), (q["pending"], q["deferred"]))
+    p = project(e_np_fan="30", c2_bf_min="0.1", water_sizing_basis="流速與摩擦壓損")
     p["pressure_drop"]["CHW"].update(equipment_known="已知設備壓差", equipment_drop="60")
     r = api.calculate(p)
     check("with the data supplied only later-stage items remain, and the status says so", r["quality"]["status"] == STATUS_DEFERRED and r["quality"]["pending"] == 0 and r["quality"]["failed"] == 0 and r["quality"]["deferred"] >= 1,

@@ -1,0 +1,122 @@
+"""Native, isolated five-library application; never touches the installed app."""
+import argparse
+import hashlib
+import importlib.metadata
+import json
+import os
+from pathlib import Path
+import platform
+import plistlib
+import shutil
+import subprocess
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+NAME = "Facility Studio 五庫融合測試版 5.7.0"
+
+
+def run(args, log, timeout=1500, env=None):
+    with log.open("w", encoding="utf-8") as file:
+        result = subprocess.run([str(a) for a in args], stdout=file, stderr=subprocess.STDOUT,
+                                cwd=ROOT, timeout=timeout, env=env)
+    if result.returncode:
+        raise RuntimeError(f"Command exit {result.returncode}; evidence: {log}")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", type=Path, required=True)
+    a = parser.parse_args()
+    if sys.version_info[:2] != (3, 12) or sys.platform not in ("darwin", "win32"):
+        raise RuntimeError("Native macOS/Windows and supported Python 3.12 are required.")
+    if sys.platform == "darwin" and platform.machine() != "arm64":
+        raise RuntimeError("This delivery target is the user's Apple Silicon Mac.")
+    output = a.output.resolve()
+    output.mkdir(parents=True, exist_ok=False)
+    evidence = output / "evidence"
+    evidence.mkdir()
+    source = ROOT / ("macos" if sys.platform == "darwin" else "windows")
+    manifest = dict(python=platform.python_version(), platform=platform.platform(),
+                    commit=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
+                    product_source_sha256={p.relative_to(source).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+                                           for p in (source / "facility_studio").rglob("*")
+                                           if p.is_file() and "__pycache__" not in p.parts})
+    manifest_file = evidence / "Build_Manifest.json"
+    manifest_file.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    notices = []
+    for dist in sorted(importlib.metadata.distributions(), key=lambda d: d.metadata["Name"]):
+        for file in dist.files or ():
+            path = dist.locate_file(file)
+            if path.is_file() and path.stat().st_size < 2_000_000 and any(w in str(file).lower() for w in ("license", "copying", "copyright", "notice")):
+                try:
+                    notices.append(dist.metadata["Name"] + " " + dist.version + "\n" + path.read_text(encoding="utf-8"))
+                except UnicodeError:
+                    pass
+    for name in ("LICENSE", "LICENSE_LEGACY_MIT", "THIRD_PARTY_NOTICES.md", "macos/macos/PsychroLib-LICENSE.txt"):
+        notices.append(name + "\n" + (ROOT / name).read_text(encoding="utf-8"))
+    python_license = next((p for p in (Path(sys.base_prefix) / "LICENSE.txt",
+                                       Path(sys.base_prefix) / "lib/python3.12/LICENSE.txt") if p.is_file()), None)
+    if python_license is None:
+        raise RuntimeError("Bundled Python license was not found.")
+    notices.append(python_license.read_text(encoding="utf-8"))
+    notice_file = evidence / "第三方授權.txt"
+    notice_file.write_text("\n\n".join(notices), encoding="utf-8")
+    args = [sys.executable, "-m", "PyInstaller", "--noconfirm", "--clean", "--onedir", "--windowed", "--noupx",
+            "--name", NAME, "--paths", source, "--collect-submodules", "facility_studio",
+            "--additional-hooks-dir", ROOT / "windows/winrelease/hooks",
+            "--hidden-import", "matplotlib.backends.backend_tkagg", "--hidden-import", "CoolProp.CoolProp",
+            "--hidden-import", "CoolProp._constants", "--collect-data", "pint", "--collect-data", "fluids",
+            "--collect-data", "hvac", "--collect-data", "iapws", "--collect-data", "scipy",
+            "--add-data", str(source / "facility_studio/resources") + os.pathsep + "facility_studio/resources",
+            "--add-data", str(notice_file) + os.pathsep + ".",
+            "--add-data", str(manifest_file) + os.pathsep + ".",
+            "--distpath", output / "dist", "--workpath", output / "work", "--specpath", output]
+    for name in ("PsychroLib", "CoolProp", "fluids", "Pint", "python-hvac"):
+        args += ["--copy-metadata", name]
+    # python-hvac imports CoolProp.Plots through hvac.charts even when this
+    # product only requests process calculations. Frozen execution proved that
+    # Plots must remain; only unused tests/GUI are excluded.
+    for name in ("pytest", "hypothesis", "CoolProp.tests", "CoolProp.GUI", "numpy.tests", "scipy.tests", "pandas.tests", "IPython"):
+        args += ["--exclude-module", name]
+    if sys.platform == "win32":
+        args += ["--add-binary", str(Path(sys.base_prefix) / "python3.dll") + os.pathsep + ".",
+                 "--icon", source / "facility_studio/resources/app.ico"]
+    else:
+        args += ["--osx-bundle-identifier", "com.facilitystudio.engineeringfusion.preview570",
+                 "--icon", source / "facility_studio/resources/app.png"]
+    args += [ROOT / "integration/entry.py"]
+    run(args, evidence / "PyInstaller_Build.txt")
+    if sys.platform == "darwin":
+        app = output / "dist" / (NAME + ".app")
+        shutil.copy2(ROOT / "integration/README_繁體中文.md", app / "Contents/Resources/操作說明_繁體中文.md")
+        info = app / "Contents/Info.plist"
+        values = plistlib.loads(info.read_bytes())
+        values.update(CFBundleShortVersionString="5.7.0", CFBundleVersion="5.7.0.1",
+                      CFBundleDisplayName=NAME, NSHighResolutionCapable=True)
+        info.write_bytes(plistlib.dumps(values))
+        run(["/usr/bin/codesign", "--force", "--sign", "-", "--timestamp=none", app], evidence / "Sign_App.txt")
+        run(["/usr/bin/codesign", "--verify", "--deep", "--strict", app], evidence / "Signature.txt")
+        executable = app / "Contents/MacOS" / NAME
+    else:
+        app = output / "dist" / NAME
+        shutil.copy2(ROOT / "integration/README_繁體中文.md", app / "操作說明_繁體中文.md")
+        executable = app / (NAME + ".exe")
+    env = dict(os.environ, FACILITY_STUDIO_FUSION_DATA=str(output / "isolated-test-data"), FACILITY_TEST_BLOCK_NETWORK="1")
+    run([executable, "--fusion-self-test", evidence / "Fusion_Acceptance.json"], evidence / "Fusion_Acceptance.log", env=env, timeout=180)
+    run([executable, "--sandbox-self-test", evidence / "Legacy_Sandbox_Acceptance.json"], evidence / "Legacy_Sandbox_Acceptance.log", env=env, timeout=180)
+    if sys.platform == "win32":
+        from windows_installer import build as build_installer, verify as verify_installer
+        setup = build_installer(app, output, NAME, run)
+        verify_installer(setup, output, NAME, run, env)
+    artifact = output / (("Facility-Studio-5.7.0-macOS-arm64.zip") if sys.platform == "darwin" else "Facility-Studio-5.7.0-Windows-x64-Portable.zip")
+    if sys.platform == "darwin":
+        run(["/usr/bin/ditto", "-c", "-k", "--sequesterRsrc", "--keepParent", app, artifact], evidence / "Archive.txt")
+    else:
+        shutil.make_archive(str(artifact.with_suffix("")), "zip", app.parent, app.name)
+    deliveries = [artifact] + ([setup] if sys.platform == "win32" else [])
+    (output / "SHA256SUMS.txt").write_text("".join(hashlib.sha256(p.read_bytes()).hexdigest() + "  " + p.name + "\n" for p in deliveries), encoding="utf-8")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

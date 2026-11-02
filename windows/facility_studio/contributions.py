@@ -239,6 +239,9 @@ def aggregate_ledger(ledger, inputs, fresh=()):
         for g in candidates:
             g["design_lpm"] = max(g["summer_lpm"], g["winter_lpm"])
             g["adopted"] = False
+        if candidates and inputs.get(loop.lower() + "_property_source") == "CoolProp 純水溫壓":
+            pending.append(loop + " 目前由 CoolProp 溫壓決定物性；來源水量使用其自身物性，未自動覆寫。若要採用來源整組水量／介質，請先在工程模型設定改為沿用手動物性，再明確選擇來源。")
+            continue
         selected = d["selections"].get(loop)
         mode, main = main_fluid(d, inputs, loop)
         if loop not in fresh and (selected == MANUAL_HOLD or loop_touched(d, inputs, loop)):

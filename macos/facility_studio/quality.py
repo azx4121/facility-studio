@@ -124,6 +124,9 @@ def assess_main(r):
     pinch_min = float(i.get("coil_pinch_min_k", "0.5"))
     items = []
     dcc_kw = r.get("dcc_design_kw", r["dcc_kw"])
+    if r.get("np_auto"):
+        for note in r["np_auto"]["pending"]:
+            finding(items, "NP 自動連動資料", "待資料", note, "np_auto_mode")
     if dcc_kw > 1e-08:
         flow = (
             r.get("dcc_design_cmh", r.get("dcc_cmh", r["circulation_cmh"]))
@@ -196,6 +199,10 @@ def assess_main(r):
                 key.lower() + "_link",
             )
     for key, d in r["pressure"].items():
+        if d.get("high_friction_rate"):
+            finding(items, key + " 摩擦壓損警戒", "未達",
+                    f"{d['friction_pa_m']:.2f} Pa/m 超過本案警戒 {d.get('friction_limit_pa_m', 400):g} Pa/m；請檢查管徑及設計基準。",
+                    "PD:" + key)
         if d["flow_m3s"] and (not d["equipment_included"]):
             finding(
                 items,
@@ -293,8 +300,21 @@ def assess_ahu(r):
     p_kpa = f("p")
     pinch_min = float(i.get("coil_pinch_min_k", "0.5"))
     items = []
+    if "水洗" in i["humidifier"] and float(i.get("pump_input_kw") or 0) > 0 and not i.get("pump_air_fraction", "").strip():
+        finding(items, "水洗泵熱分配", "待資料", "水洗泵電力已計入裝機電力；轉入空氣的熱比例尚未知，不能假定全部或零入熱。請依水槽／馬達配置填入比例。", "pump_air_fraction")
     for season, title in [("summer", "夏季"), ("winter", "冬季")]:
         s = r[season]
+        rating = s.get("coil_rating")
+        if rating and not rating.get("inactive"):
+            if "error" in rating:
+                finding(items, title + " C2 幾何模型", "未達", rating["error"], "coil_rating_mode")
+            else:
+                finding(items, title + " C2 幾何能力", "通過" if rating["demand_pass"] else "未達",
+                        f"ε-NTU 能力 {rating['capacity_kw']:.3f} kW；需求空氣側 {s['c2']['air_kw']:.3f} kW；{rating['surface']}。此為模型估算，仍須原廠同工況核對。", "coil_rating_mode")
+                if not rating["moisture_pass"] or not rating["temperature_pass"]:
+                    finding(items, title + " C2 出風需求", "未達", "實體盤管全開工況的乾球或含濕比高於所需出口；總冷量足夠仍不能代表除濕／顯熱需求皆可達。", "coil_rating_mode")
+                if rating["warnings"]:
+                    finding(items, title + " C2 模型警告", "待資料", "；".join(rating["warnings"]), "coil_rating_mode")
         for key, passed in s["checks"].items():
             state = "通過" if passed else "未達"
             if not passed and (

@@ -37,6 +37,8 @@ def independent_domains(p):
 
     def electric():
         validate_domain_inputs(i, [k for k, v in FIELDS.items() if v["page"] == 4])
+        if i.get("np_auto_mode") == "自動加總本案（手填為額外負荷）":
+            return calculate(p)["electric"]
         return electrical_from_inputs(i)
 
     def gas():
@@ -88,6 +90,12 @@ for pan, keys in [
 def converted_units(i, key, old, new):
     if old == new:
         return {}
+    from .engineering_backends import convert
+    physical = {"CMH": "meter**3/hour", "CFM": "foot**3/minute",
+                "LPM": "liter/minute", "GPM": "gallon/minute",
+                "SLPM": "liter/minute", "SCFM": "foot**3/minute"}
+    if key in UNIT_FACTORS:
+        return {UNIT_VALUES[key]: convert(number(i[UNIT_VALUES[key]], UNIT_VALUES[key], 0), physical[old], physical[new])}
     if key == "u_unit":
         scale = {"W/(m²·K)": 1.0, "kcal/(h·m²·K)": 4.1868 / 3.6}
         return {

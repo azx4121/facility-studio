@@ -1,4 +1,8 @@
-"""Additive numerical verification; production design equations stay unchanged."""
+"""Checks accompanying the integrated production backends.
+
+PsychroLib comparison is an implementation-consistency check because production
+now uses that same library. CoolProp remains a separate moist-air model.
+"""
 
 from functools import lru_cache
 import hashlib
@@ -10,7 +14,7 @@ from importlib.metadata import version
 from .ahu_engine import nm_calculate, nm_read_project
 from .ahu_schema import NM_DEFAULTS
 
-BUILD = "5.6.1-sandbox.2"
+BUILD = "5.7.0-fusion.1"
 # Internal software/model-comparison limits, NOT a FEED design standard.
 LIMITS = {
     "psychrolib_w": {"relative": 0.0002, "absolute": 1e-8},
@@ -37,7 +41,7 @@ UNIT_GROUPS = {
         "kPa": "kilopascal",
         "bar": "bar",
         "psi": "psi",
-        "mmH₂O": "millimeter_H2O",
+        "mmH₂O": "fs_mmAq",
     },
     "長度": {"m": "meter", "mm": "millimeter", "inch": "inch", "foot": "foot"},
     "溫度": {"°C": "degC", "°F": "degF", "K": "kelvin"},
@@ -58,9 +62,8 @@ UNIT_GROUPS = {
 
 @lru_cache(maxsize=1)
 def registry():
-    from pint import UnitRegistry
-
-    return UnitRegistry()
+    from .engineering_backends import registry as shared_registry
+    return shared_registry()
 
 
 def finite(value, label, low=-1e12, high=1e12):
@@ -88,7 +91,7 @@ def convert_units(value, group, source):
 
 def metadata():
     return {
-        name: version(name) for name in ("PsychroLib", "CoolProp", "Pint", "fluids")
+        name: version(name) for name in ("PsychroLib", "CoolProp", "Pint", "fluids", "python-hvac")
     }
 
 

@@ -12,6 +12,7 @@ activation; v2's extra upper limit for them is kept in FIELD_EXTRA_BOUNDS.
 from .errors import ValidationError
 from .schema import FIELDS
 from .utils import number
+from .fusion_settings import SETTINGS
 
 OPTIONAL_INPUTS = {
     "winter_ffu_ratio": dict(bounds=(0.0, 100.0)),
@@ -22,6 +23,11 @@ OPTIONAL_INPUTS = {
     "e_up_largest_motor_kw": dict(bounds=(0.0, 1e6), pair="e_up_largest_hp"),
     "e_np_largest_motor_kw": dict(bounds=(0.0, 1e6), pair="e_np_largest_hp"),
 }
+OPTIONAL_INPUTS.update({
+    key: {"bounds": None if isinstance(limit, list) else limit,
+          "choices": limit if isinstance(limit, list) else None}
+    for key, (_, _, limit) in SETTINGS.items()
+})
 FIELD_EXTRA_BOUNDS = {
     "e_up_largest_hp": (0.0, 1e6),
     "e_np_largest_hp": (0.0, 1e6),
@@ -60,6 +66,8 @@ def validate_optional_inputs(inputs, main_off, optional_off, exclude=()):
             raise ValidationError("專案值必須為文字", field_name=key)
         if key in optional_off or key in exclude or spec.get("pair") in exclude:
             continue
+        if spec.get("choices") and value not in spec["choices"]:
+            raise ValidationError("請選擇有效工程設定", field_name=key)
         if spec["bounds"] is not None:
             number(value, key, *spec["bounds"])
     for key, bounds in FIELD_EXTRA_BOUNDS.items():

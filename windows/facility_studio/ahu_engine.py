@@ -1,4 +1,4 @@
-from .ahu_schema import NM_V3_KEYS
+from .ahu_schema import NM_V3_KEYS, NM_V4_KEYS
 from .errors import InputError
 from pathlib import Path
 import copy
@@ -65,7 +65,10 @@ def nm_h_sat(h, p):
     return (lo + hi) / 2
 
 
-def nm_wash(s, eff, p):
+def nm_wash(s, eff, p, heat_per_kg=0.0):
+    if heat_per_kg:
+        h = s["h"] + heat_per_kg
+        s = state_tw((h - 2501 * s["w"]) / (1.006 + 1.86 * s["w"]), s["w"], p)
     ts = nm_h_sat(s["h"], p)
     t = s["t"] - eff * max(0, s["t"] - ts)
     w = (s["h"] - 1.006 * t) / (2501 + 1.86 * t)
@@ -203,6 +206,7 @@ def _nm_season_base(i, season):
             adp,
             p,
             allow_reheat="0" if i.get("h2_source") == "停用" else "1",
+            bf_min=float(i.get("c2_bf_min") or 0),
             raise_on_infeasible=False,
         )
         t2 = c2_sol["tc"]
@@ -357,6 +361,8 @@ def _nm_calculate_base(i):
 
 def nm_draft_inputs(i):
     """Check storage shape and bounds while retaining unfinished field text."""
+    if isinstance(i, dict) and set(i) in (NM_V3_KEYS, NM_V4_KEYS):
+        i = dict(i, **{k: v for k, v in NM_DEFAULTS.items() if k not in i})
     if not isinstance(i, dict) or set(i) != set(NM_DEFAULTS):
         raise InputError("單機草稿欄位缺漏或含未知欄位")
     for key, value in i.items():
@@ -368,8 +374,8 @@ def nm_draft_inputs(i):
 def nm_validate(i):
     from .field_state import ahu_inactive
 
-    if isinstance(i, dict) and set(i) == NM_V3_KEYS:
-        i = dict(i, **{k: v for k, v in NM_DEFAULTS.items() if k not in NM_V3_KEYS})
+    if isinstance(i, dict) and set(i) in (NM_V3_KEYS, NM_V4_KEYS):
+        i = dict(i, **{k: v for k, v in NM_DEFAULTS.items() if k not in i})
     _nm_validate_base(i)
     inactive = ahu_inactive(i)
     if "steam_cond_min" not in inactive and float(i["steam_cond_min"]) > float(i["steam_cond_max"]):
@@ -414,9 +420,9 @@ def nm_read_project(path):
     if doc["schema_version"] not in [2, 3, 4]:
         raise InputError(f"不支援的單機專案版本")
     # Add new optional fields before converting the legacy zero-as-unknown values.
-    if isinstance(doc["inputs"], dict) and set(doc["inputs"]) == NM_V3_KEYS:
+    if isinstance(doc["inputs"], dict) and set(doc["inputs"]) in (NM_V3_KEYS, NM_V4_KEYS):
         doc["inputs"].update(
-            {k: v for k, v in NM_DEFAULTS.items() if k not in NM_V3_KEYS}
+            {k: v for k, v in NM_DEFAULTS.items() if k not in doc["inputs"]}
         )
     if not isinstance(doc["inputs"], dict) or set(doc["inputs"]) != set(NM_DEFAULTS):
         raise InputError("單機專案欄位缺漏或含未知欄位")
@@ -535,6 +541,7 @@ def nm_season(i, season):
         auto
         and i["humidifier"] == "循環水洗濕膜"
         and all((i[tag + "_source"] == "熱水＋電熱" for tag in ["h1", "h2"]))
+        and not float(i.get("pump_air_fraction") or 0)
     ):
         s = _nm_season_base(i, season)
         for tag in ["h1", "h2"]:
@@ -542,6 +549,8 @@ def nm_season(i, season):
         s.update(
             steam={"kg_h": 0.0, "air_kw": 0.0, "electric_kw": 0.0},
             control_basis="自動目標需求",
+            washer_pump_input_kw=float(i["pump_input_kw"] or 0) if s["wash_on"] else 0.,
+            washer_pump_heat_kw=0.,
         )
         return s
     p = float(i["p"])
@@ -562,6 +571,11 @@ def nm_season(i, season):
         i["wash_mode"] == "AMC 需求持續水洗"
         or (i["wash_mode"] == "只在需要加濕時" and need)
     )
+
+    pump_input = n("pump_input_kw") if wash_on and i["pump_input_kw"].strip() else 0.0
+    pump_air_heat = pump_input * float(i.get("pump_air_fraction") or 0)
+    def wash(state):
+        return nm_wash(state, n("wash_eff"), p, pump_air_heat / m)
 
     def cooling1(s):
         mode = i[season + "_c1_mode"]
@@ -587,11 +601,11 @@ def nm_season(i, season):
         if wash_on and (not steam_on):
             lo = pre["t"]
             hi = 80.0
-            if nm_wash(state_tw(hi, pre["w"], p), n("wash_eff"), p)["w"] < ws:
+            if wash(state_tw(hi, pre["w"], p))["w"] < ws:
                 raise InputError(f"80°C 範圍仍無法達標", field_name=f"wash_eff")
             for _ in range(80):
                 mid = (lo + hi) / 2
-                if nm_wash(state_tw(mid, pre["w"], p), n("wash_eff"), p)["w"] >= ws:
+                if wash(state_tw(mid, pre["w"], p))["w"] >= ws:
                     hi = mid
                 else:
                     lo = mid
@@ -600,7 +614,7 @@ def nm_season(i, season):
 
             def deficit(t):
                 st = state_tw(t, pre["w"], p)
-                st = nm_wash(st, n("wash_eff"), p) if wash_on else st
+                st = wash(st) if wash_on else st
                 dw = max(0, ws - st["w"])
                 hh = st["h"] + dw * n("steam_h")
                 ww = st["w"] + dw
@@ -625,7 +639,7 @@ def nm_season(i, season):
         c1in = h1["outlet"]
         c1out = cooling1(c1in)
     wash_in = c1out if i["sequence"].startswith("H1") else h1["outlet"]
-    washed = nm_wash(wash_in, n("wash_eff"), p) if wash_on else wash_in
+    washed = wash(wash_in) if wash_on else wash_in
     steam = {"kg_h": 0.0, "air_kw": 0.0, "electric_kw": 0.0}
     c2in = washed
     if steam_on:
@@ -648,6 +662,7 @@ def nm_season(i, season):
                 adp2,
                 p,
                 allow_reheat=allow_rh,
+                bf_min=float(i.get("c2_bf_min") or 0),
                 raise_on_infeasible=False,
             )
             t2 = c2_sol["tc"]
@@ -755,13 +770,13 @@ def nm_season(i, season):
         - c2["air_kw"]
         + h2["air_kw"]
         + fanheat
+        + pump_air_heat
     )
     moisture = m * (sa["w"] - oa["w"]) * 3600 - (
         evap + steam["kg_h"] - (c1["condensate_kg_s"] + c2["condensate_kg_s"]) * 3600
     )
     if abs(balance) > 1e-05 or abs(moisture) > 1e-05:
         raise InputError(f"分段熱濕守恆未通過")
-    pump_kw = float(i["pump_input_kw"]) if wet and i["pump_input_kw"].strip() else 0.0
     return {
         "season": season,
         "oa": oa,
@@ -772,7 +787,8 @@ def nm_season(i, season):
         "wash_in": wash_in,
         "wash_out": washed,
         "wash_on": wash_on,
-        **({"washer_pump_heat_kw": pump_kw} if wash_on and pump_kw > 0 else {}),
+        "washer_pump_input_kw": pump_input,
+        "washer_pump_heat_kw": pump_air_heat,
         "evap_kg_h": evap,
         "c2": c2,
         "h2": h2,
@@ -799,9 +815,28 @@ def nm_calculate(i):
             )
         )
         + r["fan_installed_kw"]
+        + (float(i["pump_input_kw"]) if "水洗" in i["humidifier"] and i["pump_input_kw"].strip() else 0)
         + (float(i["steam_kw"]) if "蒸汽" in i["humidifier"] else 0)
     )
     # Compatibility alias; both keys now describe the same selected equipment.
     r["installed_electric_kw"] = r["active_installed_electric_kw"]
+    from .engineering_backends import manifest
+    r["engineering_backends"] = manifest()
+    if i.get("coil_rating_mode") == "幾何 ε-NTU（python-hvac）":
+        from .coil_rating import rate_coil
+        for season in ("summer", "winter"):
+            stage = r[season]["c2"]
+            if stage["air_kw"] <= 1e-8:
+                r[season]["coil_rating"] = {"inactive": True}
+                continue
+            try:
+                rating = rate_coil(i, stage["inlet"], r[season]["mass"])
+                rating["capacity_pass"] = rating["capacity_kw"] + .001 >= stage["air_kw"]
+                rating["moisture_pass"] = rating["outlet_w"] <= stage["outlet"]["w"] + 1e-7
+                rating["temperature_pass"] = rating["outlet_t"] <= stage["outlet"]["t"] + .01
+                rating["demand_pass"] = all(rating[k] for k in ("capacity_pass", "moisture_pass", "temperature_pass"))
+                r[season]["coil_rating"] = rating
+            except (ValueError, ArithmeticError) as error:
+                r[season]["coil_rating"] = {"error": str(error)}
     r["quality"] = assess_ahu(r)
     return r

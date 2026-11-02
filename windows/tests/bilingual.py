@@ -57,6 +57,7 @@ for path in (Path(__file__).resolve().parents[1] / "facility_studio").glob("*.py
     # existing bilingual product's authored-text checks remain unchanged.
     if path.stem in (
         "english_catalog", "i18n", "localized_tk", "language_acceptance",
+        "fusion_acceptance",  # Traditional-Chinese-only synthetic diagnostic names, not product UI
         "engineering_verification", "feed_review_preview", "sandbox_ui", "sandbox_selftest", "sandbox_native_menu",
     ):
         continue

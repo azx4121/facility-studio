@@ -76,12 +76,39 @@ def convert_all(category, value, unit):
     if category == "溫度":
         if x < {"°C": -273.15, "°F": -459.67, "K": 0}[unit]:
             raise ValidationError("溫度不可低於絕對零度", "value")
-        c = (x - 32) * (5 / 9) if unit == "°F" else x - 273.15 if unit == "K" else x
-        c = max(-273.15, c)  # Round-off at exactly -459.67°F must not create negative K.
-        result = {"°C": c, "°F": c * (9 / 5) + 32, "K": c + 273.15}
+        from .engineering_backends import convert
+        units = {"°C": "degC", "°F": "degF", "K": "kelvin"}
+        result = {u: convert(x, units[unit], target) for u, target in units.items()}
+        result["K"] = max(0.0, result["K"])
     else:
-        source = UNITS[category][unit]
-        result = {u: x * (source / factor) for u, factor in UNITS[category].items()}
+        from .engineering_backends import convert, registry
+        # Contextual electrical and valve factors remain explicit engineering
+        # definitions; Pint handles quantities, dimensions and conversion.
+        base = {"風量": "meter**3/hour", "水量": "liter/minute",
+                "壓力": "pascal", "冷熱功率": "kilowatt",
+                "電力（固定三相380V PF0.85）": "kilowatt", "長度": "millimeter",
+                "溫度差（升溫／降溫）": "kelvin",
+                "閥門流量係數（Kv／Cv）": "dimensionless"}[category]
+        known = {
+            "CMH": "meter**3/hour", "CFM": "foot**3/minute", "L/s": "liter/second",
+            "m³/s": "meter**3/second", "LPM": "liter/minute", "m³/h": "meter**3/hour",
+            "US GPM": "gallon/minute", "UK GPM": "imperial_gallon/minute",
+            "Pa": "pascal", "kPa": "kilopascal", "bar": "bar", "psi": "psi",
+            "kgf/cm²": "kilogram_force/centimeter**2", "mmAq": "fs_mmAq",
+            "mH₂O": "fs_mH2O", "Torr": "torr", "kW": "kilowatt", "W": "watt",
+            "HP": "horsepower", "kcal/h": "fs_kcal/hour", "BTU(IT)/h": "fs_Btu/hour",
+            "US RT": "fs_USRT", "日本冷凍噸": "fs_JRT",
+            "mm": "millimeter", "cm": "centimeter", "m": "meter", "inch": "inch",
+            "ft": "foot", "K": "kelvin", "°C差": "kelvin", "°F差": "delta_degF",
+        }
+        factors = UNITS[category]
+        # Fixed PF/current and Kv/Cv are context, never dimensionless aliases
+        # that could be accidentally reused for another voltage or fluid.
+        if category in ("電力（固定三相380V PF0.85）", "閥門流量係數（Kv／Cv）"):
+            q = registry().Quantity(x * factors[unit], base)
+            result = {u: q.to(base).magnitude / f for u, f in factors.items()}
+        else:
+            result = {u: convert(x, known[unit], known[u]) for u in factors}
     if not all(math.isfinite(v) for v in result.values()):
         raise ValidationError("換算結果超出可表示範圍，請縮小輸入值。", "value", code="overflow")
     return result
