@@ -329,6 +329,81 @@ def test_cocoa_menu_translation_preserves_application_name():
     assert translated_title("服務") == "服務"
 
 
+def test_main_workspace_transfer_stale_source_and_keyboard(tmp_path, monkeypatch):
+    import tkinter as tk
+    from tkinter import filedialog
+    from facility_studio.simple_desktop import SimpleToolsApp
+
+    root = tk.Tk()
+    app = SimpleToolsApp(root)
+    try:
+        app.show_tool("water")
+        water = app.active_page()
+        water.variables["flow"].set("350")
+        water.calculate()
+        host = app.open_engineering_verification("pipe", carry_water=True)
+        root.update()
+        view = app.verification
+        assert host.winfo_toplevel() is root
+        assert host.winfo_ismapped() and not water.winfo_ismapped()
+        app.calculate_active()
+        assert view.results["pipe"]["flow_m3s"] == pytest.approx(350 / 60000)
+        assert "kPa" in view.summaries["pipe"].get()
+        report = tmp_path / "整合水管.json"
+        monkeypatch.setattr(filedialog, "asksaveasfilename", lambda **kw: str(report))
+        water.variables["flow"].set("700")
+        view.export_current()
+        assert not report.exists() and "pipe" not in view.results
+        app.calculate_active()
+        assert "pipe" not in view.results and "上游冷熱水條件已變更" in view.texts["pipe"].get("1.0", "end")
+        view.load_water()
+        app.calculate_active()
+        assert view.results["pipe"]["flow_m3s"] == pytest.approx(700 / 60000)
+        view.export_current()
+        assert json.loads(report.read_text())["inputs"]["flow_lpm"] == "700.0"
+        app.open_engineering_verification("units")
+        view.group.set("溫度")
+        view.value.set("0")
+        app.calculate_active()
+        assert view.results["units"]["values"]["°F"] == pytest.approx(32)
+        view.value.set("-274")
+        app.calculate_active()
+        assert "units" not in view.results
+        app.show_tool("electrical")
+        root.update()
+        assert not app.verification_active and not host.winfo_ismapped()
+        assert app.footer.winfo_ismapped() and app.active_page().winfo_ismapped()
+        app.open_engineering_verification("pipe")
+        root.geometry("1000x760")
+        root.update()
+        assert view.export_button.winfo_rooty() + view.export_button.winfo_height() <= root.winfo_rooty() + root.winfo_height()
+    finally:
+        app.close()
+
+
+def test_water_manual_mode_preserves_values_without_upstream_claim():
+    import tkinter as tk
+
+    source = {"flow_lpm": "100", "id_mm": "50", "runs": "1"}
+    root = tk.Tk()
+    root.withdraw()
+    view = VerificationWindow(root, water_provider=lambda: dict(source), initial_tab="pipe")
+    try:
+        view.load_water()
+        source["flow_lpm"] = "200"
+        view.calculate_pipe()
+        assert "pipe" not in view.results
+        view.detach_water()
+        view.calculate_pipe()
+        assert view.results["pipe"]["flow_m3s"] == pytest.approx(100 / 60000)
+        assert view.water_snapshot is None
+        view.pipe_vars["id_mm"].set("0")
+        assert "pipe" not in view.results and "舊結果不可採用" in view.summaries["pipe"].get()
+    finally:
+        view.win.destroy()
+        root.destroy()
+
+
 def test_parallel_water_bridge_and_invalid_counts():
     from facility_studio.simple_schema import defaults
     from facility_studio.simple_engines import water

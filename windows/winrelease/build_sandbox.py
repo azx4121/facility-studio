@@ -133,13 +133,14 @@ def main():
         raise RuntimeError("未建立實際 Windows 執行檔。")
     readme = output / "README_Windows_繁體中文.txt"
     readme.write_text(
-        """Facility Studio 工程驗證沙盒 5.6.1-1（Windows x64）
+        """Facility Studio 整合測試版 5.6.1（建置 2；Windows x64）
 
 安裝：執行 Facility_Studio_FEED_Sandbox_5_6_1_Setup.exe，依繁中畫面安裝。
 免安裝：解壓縮 Portable.zip 後，開啟 Facility_Studio_FEED_Sandbox_5_6_1.exe。
 內含 Python、Tk 與計算套件；使用時不需另外安裝 Python 或連網。
 
-主畫面與每個 AHU 視窗均有「工程驗證沙盒」入口。
+主畫面「設計檢核中心」可直接使用 AHU 獨立核對、水管物性與壓損、九類單位換算。
+冷熱水頁可帶入物性與壓損分析；每個 AHU 視窗按「獨立核對與報告」讀取目前輸入。
 提供 AHU 目前輸入對照、完整品質原因、純水管路壓損、九類單位換算及 TXT/HTML/JSON 匯出。
 水管可帶入原快算條件；並聯依支數分流。請確認水溫、絕對壓力與系統邊界。
 輸入變更後必須重新計算；報告不覆寫既有檔案。
@@ -194,7 +195,7 @@ def main():
         "".join(f"{sha(output / name)}  {name}\n" for name in names), encoding="utf-8"
     )
     manifest = {
-        "build": "5.6.1-win-sandbox.1",
+        "build": "5.6.1-win-sandbox.2",
         "source_commit": os.environ.get(
             "FACILITY_SOURCE_COMMIT", os.environ.get("GITHUB_SHA")
         ),

@@ -450,6 +450,10 @@ class DesktopApp(SessionController, MainView):
         ttk.Label(language_bar, text="介面語言").pack(side="left", padx=(0, 6))
         self.language_picker = LanguagePicker(language_bar)
         self.language_picker.pack(side="right")
+        from .feed_review_preview import open_preview
+        ttk.Button(head, text="設計檢核中心", command=lambda: open_preview(self.root)).grid(
+            row=2, column=0, sticky="w", pady=(6, 0)
+        )
         header_widths = [None]
 
         def wrap_header(event):

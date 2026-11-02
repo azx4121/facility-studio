@@ -2,15 +2,15 @@
 !include MUI2.nsh
 Name "Facility Studio 工程驗證沙盒 5.6.1"
 OutFile "${FEED_OUT}"
-InstallDir "$LOCALAPPDATA\Facility Studio FEED Sandbox\Application-5.6.1.1"
+InstallDir "$LOCALAPPDATA\Facility Studio FEED Sandbox\Application-5.6.1.2"
 RequestExecutionLevel user
 CRCCheck force
 SetCompress off
-VIProductVersion "5.6.1.1"
+VIProductVersion "5.6.1.2"
 VIAddVersionKey /LANG=1028 "ProductName" "Facility Studio 工程驗證沙盒"
 VIAddVersionKey /LANG=1028 "FileDescription" "繁體中文離線安裝程式"
-VIAddVersionKey /LANG=1028 "FileVersion" "5.6.1.1"
-VIAddVersionKey /LANG=1028 "ProductVersion" "5.6.1-win-sandbox.1"
+VIAddVersionKey /LANG=1028 "FileVersion" "5.6.1.2"
+VIAddVersionKey /LANG=1028 "ProductVersion" "5.6.1-win-sandbox.2"
 VIAddVersionKey /LANG=1028 "LegalCopyright" "Andy Huang and contributors"
 !define MUI_ABORTWARNING
 !define MUI_WELCOMEPAGE_TITLE "Facility Studio 工程驗證沙盒"
@@ -49,7 +49,7 @@ Section "安裝"
  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudioFeedSandbox561" "DisplayName" "Facility Studio 工程驗證沙盒 5.6.1"
  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudioFeedSandbox561" "UninstallString" '$\"$INSTDIR\Uninstall.exe$\"'
  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudioFeedSandbox561" "InstallLocation" "$INSTDIR"
- WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudioFeedSandbox561" "DisplayVersion" "5.6.1.1"
+ WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudioFeedSandbox561" "DisplayVersion" "5.6.1.2"
  WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudioFeedSandbox561" "NoModify" 1
  WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\FacilityStudioFeedSandbox561" "NoRepair" 1
 SectionEnd

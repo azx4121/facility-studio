@@ -114,6 +114,24 @@ def run(destination):
                     view.win.winfo_width() >= 720 and view.win.winfo_height() >= 520
                 ),
             )
+        from .simple_desktop import SimpleToolsApp
+        app = SimpleToolsApp(root)
+        app.show_tool("water")
+        water = app.active_page()
+        water.variables["flow"].set("350")
+        host = app.open_engineering_verification("pipe", carry_water=True)
+        embedded = app.verification
+        app.calculate_active()
+        check("檢核中心嵌入主畫面", lambda: host.winfo_toplevel() is root and app.verification_active)
+        check("冷熱水帶入並計算", lambda: abs(embedded.results["pipe"]["flow_m3s"] - 350/60000) < 1e-12)
+        water.variables["flow"].set("700")
+        app.calculate_active()
+        check("上游變更禁止採用舊資料", lambda: "pipe" not in embedded.results)
+        app.open_engineering_verification("units")
+        embedded.group.set("溫度")
+        embedded.value.set("0")
+        app.calculate_active()
+        check("主畫面快捷計算使用目前功能", lambda: abs(embedded.results["units"]["values"]["°F"] - 32) < 1e-9)
     finally:
         view.win.destroy()
         root.destroy()
