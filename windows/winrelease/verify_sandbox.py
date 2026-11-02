@@ -198,7 +198,9 @@ def main():
     (out / "Windows_Sandbox_Delivery_Check.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
-    print(json.dumps(summary, ensure_ascii=False), flush=True)
+    # Machine-readable CI stdout must also work with a cp1252 host shell.
+    # The saved report above remains UTF-8 Traditional Chinese.
+    print(json.dumps(summary, ensure_ascii=True), flush=True)
 
 
 if __name__ == "__main__":
