@@ -17,6 +17,10 @@ def engineering_result_rows(result):
                 value = data[key]
                 if value is None:
                     value = "待選型"
+                elif isinstance(value, float) and 0 < abs(value) < .01:
+                    # Preserve engineering magnitudes such as Pa.s viscosity
+                    # and deep-vacuum pressure instead of rounding to 0.00.
+                    value = format(value, '.6g')
                 rows.append((prefix + label, value, unit, "需求初估"))
 
     tool = result["tool"]

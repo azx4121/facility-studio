@@ -116,3 +116,11 @@ def test_vacuum_absolute_unit_equivalence_and_pump_limits():
 def test_nonfinite_never_becomes_a_valid_result(tool,key,bad):
     with pytest.raises(ValidationError):
         calculate_tool(tool, dict(defaults(tool), **{key:bad}))
+
+
+def test_small_engineering_values_are_not_displayed_as_zero():
+    from facility_studio.display_helpers import engineering_result_rows
+    r = calculate_tool('liquid', defaults('liquid'))
+    row = next(x for x in engineering_result_rows(r) if x[0] == '動力黏度')
+    assert isinstance(row[1], str) and float(row[1]) > 0
+    assert float(row[1]) == pytest.approx(r['mu'], rel=1e-5)
