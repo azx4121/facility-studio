@@ -2,6 +2,19 @@
 
 本文件與 `STATUS.json` 優先於已封存的 5.7.1 交付狀態；原版成功交付不表示完整 FEED 已完成。
 
+## 11:17 使用量保留檢查點（最新）
+
+使用者明確要求保留 Codex 用量供 13:05 交接，現在停止擴大功能與重複測試，已啟動的 GitHub 驗證繼續執行。最新產品提交 `85cff1f8e597f243f60d9a20fb2233f1ca2c291b`；217 項 pytest 與兩平台來源各 7998 項全欄位／報表檢查通過。Mac 候選 `/Users/chaoi/Facility-Studio-5.7.2-Review-85cff1f` 的封裝內核心 31 項、操作 37 項通過。**這不是最終交付：尚待最新移機離線、Windows 成品與以下關閉行為檢查。**
+
+GitHub run `41571021522`（來源＋原生 Windows＋第二 Windows）及 `41571021461`（dashboard）於本檢查點仍執行中。接管時讀取結果，不能沿用前兩個已取消／失敗 run，也不要重派尚在執行的同一提交。所有先前候選與失敗證據保留。
+
+發布前先處理兩項源碼審閱發現，尚未做反例實測：
+
+1. `SimpleToolsApp.close()` 尚未詢問新 `DesignReviewWindow` 的未存變更，直接銷毀主視窗可能連帶丟失草稿；先寫主視窗關閉／切到完整工作台後關閉的拒絕離開反例，再串接確認。相關完整工作台關閉入口在 `session_controller.py:close_workspace`，避免同一動作重複詢問。
+2. `integration/build.py` 的 macOS bundle identifier 仍是原版 `com.facilitystudio.engineeringfusion.preview571`；新候選應使用獨立識別碼，例如 `com.facilitystudio.preview572`，避免與既有 App 識別混淆。修改後才重建並測試新的成品，不覆蓋現有封裝。
+
+若只讀 CI 或更新文件，不要重跑已過且無程式變動的測試。`windows/evidence/*` 是此次回歸產生的未提交檔案，保留；另有工作流備份 stash 與 `workflow-reviewed.patch`，不刪除、不套用覆蓋新工作流。
+
 ## 執行位置及時間
 
 - 新工作樹 `/Users/chaoi/Facility-Studio-FEED-20261103`，分支 `sandbox/feed-readiness-20261103`，版本 `5.7.2-preview.1`。
