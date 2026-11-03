@@ -6,6 +6,15 @@ from tempfile import TemporaryDirectory
 def run(root, app, check):
     from .design_basis_ui import DesignReviewWindow
     from . import design_basis as model
+    from .simple_engines import calculate_tool
+    from .simple_schema import defaults
+    from .errors import ValidationError
+    try:
+        calculate_tool("liquid", dict(defaults("liquid"), check_npsh="invalid"))
+    except ValidationError as error:
+        check("Invalid suction switch is rejected with its field name", error.field_name == "check_npsh")
+    else:
+        raise AssertionError("Invalid suction switch was accepted")
     with TemporaryDirectory(prefix="facility-design-check-") as temporary:
         folder = Path(temporary)
         ui = DesignReviewWindow(root)

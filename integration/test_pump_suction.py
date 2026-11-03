@@ -47,6 +47,9 @@ def test_unknown_curve_and_margin_never_pass():
 
 
 @pytest.mark.parametrize("key,value", [("suction_loss_kpa", ""), ("suction_loss_kpa", "-1"),
+    ("check_npsh", "invalid"),
+    ("pump_curve_reference", "invalid\x00reference"),
+    ("npsh_margin_reference", "invalid\x00reference"),
     ("suction_surface_kpa", "0"), ("npshr_m", "nan"), ("npsh_margin_m", "inf"),
     ("pump_curve_reference", ""), ("npsh_margin_reference", "")])
 def test_invalid_inputs_or_missing_sources_are_not_zero(key, value):

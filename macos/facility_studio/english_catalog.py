@@ -3930,3 +3930,5 @@ TEXT.update({'  不適用理由：': '  Not applicable reason:',
  '；待填：': '; To be filled:'})
 
 TEXT.update({'設計資料不得超過 4 MiB；請縮短規範文字並改附完整文件': 'Design data must not exceed 4 MiB; shorten the standards text and attach the full document instead'})
+
+TEXT.update({'來源文字不可含控制字元或超過 500 字': 'Source text must not contain control characters or exceed 500 characters'})

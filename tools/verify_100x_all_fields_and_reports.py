@@ -74,6 +74,14 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
             raise AssertionError(msg)
         total_checks += 1
 
+    missing_suction = dict(defaults('liquid'), check_npsh='1')
+    try:
+        calculate_tool('liquid', missing_suction)
+    except ValidationError as error:
+        check(error.field_name == 'suction_loss_kpa', 'Enabled suction check must require actual suction losses')
+    else:
+        raise AssertionError('Missing suction losses were silently treated as zero')
+
     # =========================================================================
     # PHASE 1: Exhaustive Per-Field Sensitivity, Validation & Report Reflection
     # =========================================================================
@@ -124,7 +132,20 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
         simple_active_overrides[('liquid', key)] = dict(geometry='指定外徑及管壁')
     simple_active_overrides[('vacuum', 'inner_mm')] = dict(diameter_mode='指定內徑')
     simple_active_overrides[('vacuum', 'length')] = dict(diameter_mode='指定內徑', vacuum_p='.00001', flow='.0000001')
+    # This optional check deliberately has no invented suction-loss or pump
+    # defaults. Supply a sourced synthetic operating point in the enabled-field
+    # fixture; missing-input rejection is separately asserted below and in pytest.
+    suction_fields = {'suction_surface_kpa', 'suction_level_m', 'suction_nozzle_offset_m',
+                      'suction_loss_kpa', 'vapor_pressure_kpa', 'vapor_reference',
+                      'npshr_m', 'pump_curve_reference', 'npsh_margin_m', 'npsh_margin_reference'}
+    for key in suction_fields:
+        simple_active_overrides[('liquid', key)] = dict(check_npsh='1')
+    for key in ('vapor_pressure_kpa', 'vapor_reference'):
+        simple_active_overrides[('liquid', key)].update(liquid='乙二醇水溶液')
     simple_alt_values = {
+        "vapor_reference": "Synthetic mixture bubble-point source B, 20 C / 20 wt%",
+        "pump_curve_reference": "Synthetic pump curve B, 100 LPM / 1450 rpm",
+        "npsh_margin_reference": "Synthetic owner margin requirement B",
         "contract_insulation_mm": "50.8",
         "ambient_rh": "85",
         "property_reference": "Synthetic supplier reference B, same operating point",
@@ -173,7 +194,11 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
                 base['insulation_outer_mm'] = '48.3'
             if tool == 'liquid':
                 base.update(liquid_rho='1000', liquid_cp='4.18', liquid_mu='.001',
-                            property_reference='Synthetic supplier reference A, same operating point')
+                            property_reference='Synthetic supplier reference A, same operating point',
+                            suction_loss_kpa='10', npshr_m='3', npsh_margin_m='1',
+                            vapor_pressure_kpa='1.7', vapor_reference='Synthetic mixture bubble-point source A, 20 C / 20 wt%',
+                            pump_curve_reference='Synthetic pump curve A, 100 LPM / 1450 rpm',
+                            npsh_margin_reference='Synthetic owner margin requirement A')
             if (tool, key) in simple_active_overrides:
                 base.update(simple_active_overrides[(tool, key)])
             check(active_field(tool, key, base), f"Simple field {tool}.{key} must be active in test setup")
@@ -234,7 +259,7 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
             # Invalid input must raise ValidationError with field_name == key
             bad = dict(base)
             bad[key] = ("invalid_value_\n" if key == "gas_name" else
-                        "invalid_\x00_reference" if key == 'property_reference' else "not_a_valid_input")
+                        "invalid_\x00_reference" if key in {'property_reference', 'vapor_reference', 'pump_curve_reference', 'npsh_margin_reference'} else "not_a_valid_input")
             try:
                 calculate_tool(tool, bad)
             except ValidationError as exc:

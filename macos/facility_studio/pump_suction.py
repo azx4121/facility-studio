@@ -7,10 +7,18 @@ PURE = {"清水": "Water", "UPW／DI／RO": "Water", "乙醇": "Ethanol", "甲�
 
 
 def suction_check(data, name, temperature_c, density, velocity):
-    if data.get("check_npsh", "0") != "1":
+    enabled = data.get("check_npsh", "0")
+    if enabled not in ("0", "1"):
+        raise ValidationError("請選擇有效選項", "check_npsh")
+    if enabled == "0":
         return None
     def n(key, low, high):
         return number(data.get(key, ""), key, low, high)
+    def reference(key):
+        value = str(data.get(key, "")).strip()
+        if len(value) > 500 or any(ord(c) < 32 for c in value):
+            raise ValidationError("來源文字不可含控制字元或超過 500 字", key)
+        return value
     surface = n("suction_surface_kpa", .001, 10000)
     elevation = n("suction_level_m", -100, 1000)
     nozzle_offset = number(data.get("suction_nozzle_offset_m", "0"), "suction_nozzle_offset_m", -100, 100)
@@ -24,7 +32,7 @@ def suction_check(data, name, temperature_c, density, velocity):
         vapor_source = "純液體操作溫度的飽和蒸氣壓"
     else:
         vapor = n("vapor_pressure_kpa", .000001, 10000)
-        vapor_source = str(data.get("vapor_reference", "")).strip()
+        vapor_source = reference("vapor_reference")
         if not vapor_source:
             raise ValidationError("混合液／化學液須填同溫度、濃度的泡點壓力來源", "vapor_reference")
     gravity = 9.80665
@@ -39,11 +47,11 @@ def suction_check(data, name, temperature_c, density, velocity):
     if static_kpa <= vapor:
         issues.append("估算吸入口靜壓不高於蒸氣壓，吸入管可能閃蒸；不可採用單相結果選泵。")
     required = margin = None
-    reference = str(data.get("pump_curve_reference", "")).strip()
-    margin_source = str(data.get("npsh_margin_reference", "")).strip()
+    pump_source = reference("pump_curve_reference")
+    margin_source = reference("npsh_margin_reference")
     if str(data.get("npshr_m", "")).strip():
         required = n("npshr_m", 0, 1000)
-        if not reference:
+        if not pump_source:
             raise ValidationError("須填原廠曲線、泵型、流量與轉速的對應依據", "pump_curve_reference")
     else:
         issues.append("待提供工況原廠 NPSHr，不判定選泵條件。")
@@ -62,7 +70,7 @@ def suction_check(data, name, temperature_c, density, velocity):
                 vapor_source=vapor_source, surface_kpa=surface, level_m=elevation,
                 nozzle_offset_m=nozzle_offset,
                 losses_kpa=losses, suction_static_kpa=static_kpa,
-                pump_reference=reference, margin_reference=margin_source,
+                pump_reference=pump_source, margin_reference=margin_source,
                 status="符合本案輸入的 NPSH 條件" if passed else "待資料或未達 NPSH 條件",
                 warnings=issues, source=REFERENCE,
                 formula="NPSHa=(液槽表面絕壓−蒸氣壓−吸入總壓損)/(ρg)+液面相對泵基準高度",
