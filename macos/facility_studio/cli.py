@@ -8,10 +8,16 @@ from .schema import default_project
 from .utils import atomic_text
 
 
+def _configure_redirected_streams():
+    """CLI pipes/files are strict UTF-8; leave interactive terminals unchanged."""
+    for stream in (sys.stdout, sys.stderr):
+        if stream is not None and not stream.isatty() and hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="strict")
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    _configure_redirected_streams()
+    parser = argparse.ArgumentParser(description="Redirected stdout and stderr use UTF-8.")
     parser.add_argument(
         "--language",
         choices=("zh-Hant", "en"),

@@ -230,20 +230,29 @@ def test_empty_lists_and_known_zero():
 
 def test_roundtrip_and_cli_exit_codes(tmp_path):
     p = plan()
+    p["name"] = "合成容量計畫 Ω 設備甲"
     path = tmp_path / "plan.json"
-    path.write_text(json.dumps(p), encoding="utf-8")
+    path.write_text(json.dumps(p, ensure_ascii=False), encoding="utf-8")
     assert m.read_plan(path) == p
     repo = Path(__file__).resolve().parents[1]
-    env = dict(os.environ, PYTHONPATH=str(repo / PLATFORM))
-    command = [sys.executable, "-c", "from facility_studio.cli import main; raise SystemExit(main())", "--capacity-plan", str(path)]
-    completed = subprocess.run(command, env=env, capture_output=True, text=True)
+    env = dict(os.environ, PYTHONPATH=str(repo / PLATFORM), PYTHONIOENCODING="cp1252:strict", PYTHONUTF8="0")
+    entry = ("import sys; assert sys.flags.utf8_mode == 0; "
+                "assert sys.stdout.encoding == 'cp1252'; "
+                "from facility_studio.cli import main; raise SystemExit(main())")
+    command = [sys.executable, "-X", "utf8=0", "-c", entry, "--capacity-plan", str(path)]
+    completed = subprocess.run(command, env=env, capture_output=True, encoding="utf-8", errors="strict")
     assert completed.returncode == 0, completed.stderr
     assert "合成驗證案例" in completed.stdout
+    assert p["name"] in completed.stdout
     p["demands"][0]["values"]["winter"] = None
     path.write_text(json.dumps(p), encoding="utf-8")
-    assert subprocess.run(command, env=env, capture_output=True).returncode == 3
+    pending = subprocess.run(command, env=env, capture_output=True, encoding="utf-8", errors="strict")
+    assert pending.returncode == 3, pending.stderr
+    assert "待資料／待覆核" in pending.stdout and p["name"] in pending.stdout
     path.write_text('{"kind": "x"}', encoding="utf-8")
-    assert subprocess.run(command, env=env, capture_output=True).returncode == 2
+    invalid = subprocess.run(command, env=env, capture_output=True, encoding="utf-8", errors="strict")
+    assert invalid.returncode == 2 and invalid.stderr
+    assert "Traceback" not in invalid.stderr
 
 
 def test_duplicate_json_fields_refused(tmp_path):
@@ -271,7 +280,7 @@ def test_oversized_integer_is_validation_error_and_cli_format_exit(tmp_path):
     path = tmp_path / "oversized.json"
     path.write_text(json.dumps(p), encoding="utf-8")
     env = dict(os.environ, PYTHONPATH=str(Path(__file__).resolve().parents[1] / PLATFORM))
-    result = subprocess.run([sys.executable, "-c", "from facility_studio.cli import main; raise SystemExit(main())", "--capacity-plan", str(path)], env=env, capture_output=True, text=True)
+    result = subprocess.run([sys.executable, "-c", "from facility_studio.cli import main; raise SystemExit(main())", "--capacity-plan", str(path)], env=env, capture_output=True, encoding="utf-8", errors="strict")
     assert result.returncode == 2
     assert "Traceback" not in result.stderr
 

@@ -8,6 +8,9 @@ on:
       - windows/facility_studio/**
       - integration/requirements.lock.txt
       - integration/requirements-runtime.in
+      - integration/test_cli_encoding.py
+      - integration/test_capacity_*.py
+      - integration/test_tutorial_launch.py
       - docs/tutorial/**
       - windows/tests/lighting_presets.py
       - windows/tests/lighting_reports.py
@@ -59,6 +62,13 @@ jobs:
           & $env:FACILITY_PY -X utf8=0 windows/tests/lighting_direct_checks.py
           if ($LASTEXITCODE -ne 0) { throw "Direct lighting regression failed" }
           Remove-Item Env:FACILITY_DIRECT_GUI
+      - name: Verify Unicode CLI, capacity planning and tutorial launch contracts
+        env:
+          FACILITY_TEST_PLATFORM: windows
+          FACILITY_REQUIRE_DISPLAY: '1'
+        run: |
+          & $env:FACILITY_PY -X utf8=0 -m pytest integration/test_cli_encoding.py integration/test_capacity_planning.py integration/test_capacity_controller.py integration/test_capacity_gui.py integration/test_tutorial_launch.py -q --junitxml="$env:RUNNER_TEMP/native-candidate.xml"
+          if ($LASTEXITCODE -ne 0) { throw "CLI and candidate regression failed" }
       - name: Verify F01–F06 physical boundaries and real workspaces
         run: |
           & $env:FACILITY_PY windows/tests/audit_regressions.py --gui --output "$env:RUNNER_TEMP/audit-regressions.json"
@@ -75,6 +85,7 @@ jobs:
         with:
           name: audit-regressions-${{ matrix.os }}
           path: |
+            ${{ runner.temp }}/native-candidate.xml
             ${{ runner.temp }}/audit-regressions.json
             ${{ runner.temp }}/report-regressions.json
             ${{ runner.temp }}/report-samples

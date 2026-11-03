@@ -55,6 +55,6 @@ def open_tutorial(parent=None, section="start"):
         if not webbrowser.open(page.resolve().as_uri() + "?language=" + language + "#" + anchor):
             messagebox.showinfo("新手教學", "教學檔案位置：\n" + str(page), parent=parent)
         return folder
-    except (OSError, ValueError, zipfile.BadZipFile, RuntimeError) as error:
+    except (OSError, ValueError, zipfile.BadZipFile, RuntimeError, webbrowser.Error) as error:
         messagebox.showerror("新手教學", "無法開啟離線教學：\n" + str(error), parent=parent)
         return None
