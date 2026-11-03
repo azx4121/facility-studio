@@ -1,3 +1,5 @@
+> 2026-11-03 護鎖稽核交付完成：由 Codex 執行，Claude 接管已撤銷。最新產品為 5.7.3-preview.1，提交 731e416；Mac／Windows 兩環境成品、安裝保護與來源驗收均通過，14 個雲端檔案已讀回核對。詳見 STATUS.json 及 CODEX_GUARD_AUDIT.md。下方保留歷史紀錄，不得重新啟動 Claude 或沿用舊版驗收數字。
+
 > 最新指示（2026-11-03 13:21）：使用者已取消 Claude 接管，現在由 Codex 繼續；Claude 程序已依要求停止。下方接管／額度保留指示是歷史，不得再啟動 Claude。保留全部修改與驗收資料。
 
 # Facility Studio：Claude 接管與最終交付
