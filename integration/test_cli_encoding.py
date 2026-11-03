@@ -13,9 +13,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / PLATFORM))
 from facility_studio import cli, design_basis
 
+# Shared pytest collections may have loaded the other platform first. Compare
+# child output with that same imported source, including its version header.
+# Isolated per-platform runs still select their source through PLATFORM above.
+SOURCE_ROOT = Path(cli.__file__).resolve().parents[1]
+
 
 def run_cli(tmp_path, *args):
-    env = dict(os.environ, PYTHONPATH=str(ROOT / PLATFORM),
+    env = dict(os.environ, PYTHONPATH=str(SOURCE_ROOT),
                PYTHONIOENCODING="cp1252:strict", PYTHONUTF8="0",
                FACILITY_STUDIO_PREFERENCES=str(tmp_path / "preferences.json"))
     entry = ("import sys; assert sys.flags.utf8_mode == 0; "
