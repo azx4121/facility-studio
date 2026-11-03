@@ -20,6 +20,23 @@ def run(root, app, check):
             source.write_text("Synthetic acceptance evidence, not an engineering approval.", encoding="utf-8")
             for key in model.DELIVERABLES:
                 model.attach(ui.data, folder, key, source)
+            record = ui.data["documents"]["basis"]["evidence"][0]
+            existing = folder / record["path"]
+            original_bytes = existing.read_bytes()
+            original_uuid = model.uuid4
+            class FixedId:
+                hex = existing.stem
+            try:
+                model.uuid4 = FixedId
+                try:
+                    model.attach(ui.data, folder, "basis", source)
+                except FileExistsError:
+                    pass
+                else:
+                    raise AssertionError("Attachment collision was not rejected")
+            finally:
+                model.uuid4 = original_uuid
+            check("Attachment collision preserves existing evidence", existing.is_file() and existing.read_bytes() == original_bytes)
             ui.reviewer.set("合成獨立覆核者")
             for key in model.DELIVERABLES:
                 ui.tree.selection_set(key)

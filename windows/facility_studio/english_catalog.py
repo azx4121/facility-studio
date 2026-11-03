@@ -3928,3 +3928,5 @@ TEXT.update({'  不適用理由：': '  Not applicable reason:',
  '須填原廠／業主採用的 NPSH 裕度依據': 'Basis for NPSH margin adopted by OEM/Owner must be provided',
  '驗收準則與允許誤差': 'Acceptance Criteria and Tolerances',
  '；待填：': '; To be filled:'})
+
+TEXT.update({'設計資料不得超過 4 MiB；請縮短規範文字並改附完整文件': 'Design data must not exceed 4 MiB; shorten the standards text and attach the full document instead'})

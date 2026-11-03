@@ -32,6 +32,7 @@ DELIVERABLES = {
     "acceptance": "業主驗收清單與簽核要求",
 }
 MAX_BYTES = 50 * 1024 * 1024
+MANIFEST_BYTES = 4 * 1024 * 1024
 LIMITATION = "本表只檢查文件完整性與人工覆核紀錄；不驗證內容正確性、簽章身分或工程認證。"
 
 
@@ -161,8 +162,10 @@ def attach(data, root, key, source):
     relative = f"evidence/{uuid4().hex}.bin"
     target = root / relative
     h, total = hashlib.sha256(), 0
+    created = False
     try:
         with source.open("rb") as src, target.open("xb") as dst:
+            created = True
             for chunk in iter(lambda: src.read(1024 * 1024), b""):
                 total += len(chunk)
                 if total > MAX_BYTES:
@@ -172,7 +175,8 @@ def attach(data, root, key, source):
         if total == 0:
             raise ValueError("證據不可空白")
     except Exception:
-        target.unlink(missing_ok=True)  # Only our own failed new copy.
+        if created:
+            target.unlink(missing_ok=True)  # Only our own failed new copy.
         raise
     record = dict(name=source.name, path=relative, sha256=h.hexdigest(), bytes=total)
     data["documents"][key]["evidence"].append(record)
@@ -237,15 +241,18 @@ def record_review(data, root, key, reviewer, decision, comment):
 
 def save_revision(data, root):
     validate(data)
+    encoded = json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False)
+    if len(encoded.encode("utf-8")) > MANIFEST_BYTES:
+        raise ValueError("設計資料不得超過 4 MiB；請縮短規範文字並改附完整文件")
     destination = Path(root) / ("設計審查_" + uuid4().hex + ".json")
     with destination.open("x", encoding="utf-8") as stream:
-        json.dump(data, stream, ensure_ascii=False, indent=2, allow_nan=False)
+        stream.write(encoded)
     return destination
 
 
 def load_revision(path):
     path = Path(path)
-    if path.is_symlink() or path.stat().st_size > 4 * 1024 * 1024:
+    if path.is_symlink() or path.stat().st_size > MANIFEST_BYTES:
         raise ValueError("設計資料不得為符號連結或超過 4 MiB")
     def unique_pairs(pairs):
         result = {}

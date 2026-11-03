@@ -182,3 +182,25 @@ def test_saved_dossier_cli_uses_real_readiness_exit_codes(tmp_path, monkeypatch,
     assert not json.loads(capsys.readouterr().out)["can_submit"]
     path.write_text("{}", encoding="utf-8")
     assert main() == 2
+
+
+def test_attachment_name_collision_never_removes_existing_evidence(tmp_path, monkeypatch):
+    data = attached(tmp_path)
+    record = data["documents"]["basis"]["evidence"][0]
+    existing = tmp_path / record["path"]
+    original_bytes = existing.read_bytes()
+    class FixedId:
+        hex = existing.stem
+    monkeypatch.setattr(m, "uuid4", FixedId)
+    with pytest.raises(FileExistsError):
+        m.attach(data, tmp_path, "balance", tmp_path / "合成.txt")
+    assert existing.is_file() and existing.read_bytes() == original_bytes
+
+
+def test_oversize_manifest_cannot_create_an_unloadable_revision(tmp_path):
+    data = filled()
+    data["standards"] = [dict(name="合成規範", edition="R1", clause="3.1", scope="x" * 10000,
+                              source="synthetic") for _ in range(500)]
+    with pytest.raises(ValueError):
+        m.save_revision(data, tmp_path)
+    assert not list(tmp_path.glob("設計審查_*.json"))
