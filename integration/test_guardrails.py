@@ -408,3 +408,15 @@ def test_missing_pump_curve_is_pending_not_a_proven_physical_failure(simple):
     assert page.result is not None
     assert not page.result.get('failures')
     assert page.banner.label.cget('background') == Theme.TONES['warning'][1]
+
+
+@pytest.mark.parametrize('flow', ['0', '3000', '10000'])
+def test_round_duct_rows_match_actual_geometry_and_card(flow):
+    from facility_studio.display_helpers import engineering_result_rows
+    r = calculate_tool('duct', dict(defaults('duct'), flow=flow))
+    rows = engineering_result_rows(r)
+    labels = [x[0] for x in rows]
+    assert '圓管 寬度' not in labels and '圓管 高度' not in labels
+    row = next(x for x in rows if x[0] == '圓管 直徑')
+    assert row[2] == 'mm' and row[1] == pytest.approx(r['round']['diameter_m'] * 1000)
+    assert next(x[1] for x in rows if x[0] == '方管 寬度') == r['rectangle']['w_mm']

@@ -54,6 +54,10 @@ def run(root, app, check):
         check('pressure failure has banner priority', '不足' in page.banner.label.cget('text')
               and page.banner.label.cget('background') == Theme.TONES['danger'][1])
         page.reset()
+        rows = page.table_rows(page.result)
+        check('round duct table matches diameter rather than rectangle width',
+              not any(row[0] in ('圓管 寬度', '圓管 高度') for row in rows)
+              and any(row[0] == '圓管 直徑' and abs(row[1] - page.result['round']['diameter_m'] * 1000) < 1e-9 for row in rows))
         failure_cases = [
             ('cleanroom', {'coverage_limit_pct': '1'}),
             ('cleanroom', {'oa_cmh': '30000'}),

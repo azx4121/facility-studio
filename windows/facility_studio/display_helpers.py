@@ -87,7 +87,9 @@ def engineering_result_rows(result):
             rows.append(('矩形風管鐵皮選用厚度', sheet['label'], '', sheet['status']))
         add(result, [("flow_cmh", "設計風量", "CMH")])
         for key, title in (("rectangle", "方管 "), ("round", "圓管 ")):
-            add(result[key], [("w_mm", "寬度", "mm"), ("h_mm", "高度", "mm"),
+            dimensions = [("w_mm", "寬度", "mm"), ("h_mm", "高度", "mm")] if key == "rectangle" else [("actual_diameter_mm", "直徑", "mm")]
+            displayed = dict(result[key], actual_diameter_mm=result[key]["diameter_m"] * 1000)
+            add(displayed, dimensions + [
                               ("velocity_mps", "實際風速", "m/s"), ("equivalent_diameter_m", "等摩擦當量直徑", "m"),
                               ("loss_pa", "路徑壓損", "Pa"), ("pressure_margin_pa", "靜壓餘量", "Pa")], title)
     elif tool == "lighting":
