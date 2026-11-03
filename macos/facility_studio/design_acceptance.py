@@ -21,6 +21,10 @@ def run(root, app, check):
         try:
             ui.install(model.new_dossier(), folder)
             check("空白設計資料不會標為文件齊備", not ui.refresh()["can_submit"])
+            for key in model.DELIVERABLES:
+                ui.tree.selection_set(key)
+                root.update()
+                check("Read-only document navigation stays clean: " + key, not ui.dirty)
             for key, var in ui.variables.items():
                 var.set("合成案例－" + key)
             ui.standards.insert("1.0", "合成規範｜R1｜3.1｜合成案例｜SYNTHETIC-001")

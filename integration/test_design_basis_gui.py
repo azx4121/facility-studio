@@ -83,6 +83,37 @@ def _dirty_review(app, root):
     return ui
 
 
+def test_document_navigation_does_not_invent_unsaved_edits(tmp_path):
+    from facility_studio.localized_tk import tk
+    from facility_studio.design_basis_ui import DesignReviewWindow
+    from facility_studio import design_basis as m
+    root = tk.Tk()
+    root.withdraw()
+    ui = DesignReviewWindow(root)
+    try:
+        ui.install(m.new_dossier(), tmp_path)
+        root.update()
+        before = ui.status.get()
+        assert not ui.dirty
+        for key in m.DELIVERABLES:
+            ui.tree.selection_set(key)
+            root.update()
+            assert not ui.dirty and ui.status.get() == before
+        ui.exclusion.set("Synthetic project-specific exclusion")
+        assert ui.dirty
+        ui.tree.selection_set("basis")
+        root.update()
+        assert ui.dirty
+        assert ui.data["documents"]["acceptance"]["exclusion"] == "Synthetic project-specific exclusion"
+        ui.save()
+        ui.tree.selection_set("acceptance")
+        root.update()
+        assert not ui.dirty
+        assert ui.exclusion.get() == "Synthetic project-specific exclusion"
+    finally:
+        root.destroy()
+
+
 def test_main_window_close_refuses_to_drop_unsaved_review_draft(monkeypatch):
     """Counterexample: closing the main window used to destroy the review draft silently."""
     from facility_studio.localized_tk import tk

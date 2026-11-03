@@ -85,6 +85,8 @@ class DesignReviewWindow:
         self.dirty = False
 
     def changed(self, *args):
+        if getattr(self, "_loading_document", False):
+            return
         if args and hasattr(args[0], "widget") and args[0].widget == self.standards:
             if not self.standards.edit_modified():
                 return
@@ -123,7 +125,13 @@ class DesignReviewWindow:
             return
         self.data["documents"][self.current]["exclusion"] = self.exclusion.get()
         self.current = selection[0]
-        self.exclusion.set(self.data["documents"][self.current]["exclusion"])
+        # Displaying another row is navigation, not an edit. Genuine exclusion
+        # edits already set dirty via the variable trace before selection changes.
+        self._loading_document = True
+        try:
+            self.exclusion.set(self.data["documents"][self.current]["exclusion"])
+        finally:
+            self._loading_document = False
         self.comment.set("")
         self.show_details()
 
