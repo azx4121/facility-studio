@@ -370,3 +370,41 @@ def test_workbench_custom_velocity_is_pending_reference(gas, velocity):
     result = calculate(p)
     assert any('流速' in w for w in result['gas']['1']['warnings'])
     assert any('流速依據' in row['name'] and row['status'] == '待資料' for row in result['quality']['items'])
+
+
+@pytest.mark.parametrize('tool,changes', [
+    ('cleanroom', {'coverage_limit_pct': '1'}),
+    ('cleanroom', {'oa_cmh': '30000'}),
+    ('cleanroom', {'process_moisture': '100000'}),
+    ('liquid', {'insulate': '1', 'heat_limit': '.01'}),
+    ('water', {'insulate': '1', 'insulation_outer_mm': '48.3', 'heat_limit': '.01'}),
+    ('vacuum', {'vacuum_p': '.00001', 'flow': '.001', 'diameter_mode': '指定內徑', 'inner_mm': '50'}),
+    ('liquid', {'check_npsh': '1', 'suction_surface_kpa': '101.325', 'suction_level_m': '2',
+                'suction_loss_kpa': '10', 'npshr_m': '100', 'npsh_margin_m': '1',
+                'pump_curve_reference': '合成曲線', 'npsh_margin_reference': '合成裕度'}),
+])
+def test_known_simple_engine_failure_is_red_and_precedes_general_notes(simple, tool, changes):
+    _, app = simple
+    app.show_tool(tool)
+    page = app.active_page()
+    for key, value in changes.items():
+        page.variables[key].set(value)
+    page.calculate()
+    assert page.result is not None
+    assert page.result.get('failures'), 'Known infeasibility needs a structural failure flag'
+    assert page.banner.label.cget('background') == Theme.TONES['danger'][1]
+    assert page.banner.label.cget('text').startswith(page.result['failures'][0])
+    assert all(w in tool_report(page.result, page.data()) for w in page.result['failures'])
+
+
+def test_missing_pump_curve_is_pending_not_a_proven_physical_failure(simple):
+    _, app = simple
+    app.show_tool('liquid')
+    page = app.active_page()
+    for key, value in {'check_npsh': '1', 'suction_surface_kpa': '101.325', 'suction_level_m': '2',
+                       'suction_loss_kpa': '10', 'npshr_m': '', 'npsh_margin_m': ''}.items():
+        page.variables[key].set(value)
+    page.calculate()
+    assert page.result is not None
+    assert not page.result.get('failures')
+    assert page.banner.label.cget('background') == Theme.TONES['warning'][1]

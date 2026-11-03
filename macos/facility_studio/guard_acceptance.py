@@ -54,6 +54,34 @@ def run(root, app, check):
         check('pressure failure has banner priority', '不足' in page.banner.label.cget('text')
               and page.banner.label.cget('background') == Theme.TONES['danger'][1])
         page.reset()
+        failure_cases = [
+            ('cleanroom', {'coverage_limit_pct': '1'}),
+            ('cleanroom', {'oa_cmh': '30000'}),
+            ('cleanroom', {'process_moisture': '100000'}),
+            ('liquid', {'insulate': '1', 'heat_limit': '.01'}),
+            ('water', {'insulate': '1', 'insulation_outer_mm': '48.3', 'heat_limit': '.01'}),
+            ('vacuum', {'vacuum_p': '.00001', 'flow': '.001', 'diameter_mode': '指定內徑', 'inner_mm': '50'}),
+            ('liquid', {'check_npsh': '1', 'suction_surface_kpa': '101.325', 'suction_level_m': '2',
+                        'suction_loss_kpa': '10', 'npshr_m': '100', 'npsh_margin_m': '1',
+                        'pump_curve_reference': 'Synthetic curve', 'npsh_margin_reference': 'Synthetic margin'}),
+        ]
+        for index, (tool, changes) in enumerate(failure_cases):
+            app.show_tool(tool)
+            page = app.active_page()
+            page.reset()
+            for key, value in changes.items():
+                page.variables[key].set(value)
+            page.calculate()
+            check('known failure shown first in red ' + str(index), page.result is not None
+                  and bool(page.result['failures'])
+                  and page.banner.label.cget('text').startswith(page.result['failures'][0])
+                  and page.banner.label.cget('background') == Theme.TONES['danger'][1])
+        page.variables['npshr_m'].set('')
+        page.variables['npsh_margin_m'].set('')
+        page.calculate()
+        check('missing curve is amber rather than proven failure', page.result is not None
+              and not page.result['failures']
+              and page.banner.label.cget('background') == Theme.TONES['warning'][1])
         work_root = desktop.tk.Toplevel(root)
         main = desktop.DesktopApp(work_root)
         ahu = ahu_desktop.AHUWindow(root)

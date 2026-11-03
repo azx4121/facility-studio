@@ -817,12 +817,51 @@ from .facility_simple import liquid, vacuum
 ENGINES.update(liquid=liquid, vacuum=vacuum)
 
 
+def known_failure_messages(result):
+    """Promote proven unmet criteria, keeping missing evidence as advisory."""
+    failures = []
+    tool = result["tool"]
+    if tool == "duct" and result["path_checked"] and any(
+            r.get("budget_sufficient") is False for r in (result["rectangle"], result["round"])):
+        failures.append("路徑壓力預算不足，請調整風管或可用靜壓後重算。")
+    if result.get("liquefaction_risk") is True:
+        failures.extend(phase_warnings(result))
+    if tool == "cleanroom":
+        if result.get("airflow_feasible") is False:
+            failures.append("外氣量超過總送風量，氣流平衡未達條件。")
+        if result.get("coverage_exceeded"):
+            failures.append("FFU 覆蓋率超過本案可安裝上限。")
+        if result.get("mau", {}).get("status") == "未達條件":
+            failures.extend(result["mau"]["warnings"])
+    ins = result.get("insulation")
+    if isinstance(ins, dict) and ins.get("feasible") is False:
+        failures.append("保溫條件不可達，不能採用厚度。")
+    suction = result.get("suction")
+    if suction:
+        if suction["surface_kpa"] <= suction["vapor_kpa"] or suction["suction_static_kpa"] <= suction["vapor_kpa"]:
+            failures.append("泵浦吸入條件未達：單相液體假設不成立，請調整工況。")
+        threshold = suction["threshold_m"]
+        if threshold is not None and suction["available_m"] < threshold:
+            failures.append("可用 NPSHa 小於原廠 NPSHr 加本案裕度。")
+    if tool == "vacuum" and result.get("effective_speed_l_s") is not None:
+        if result["actual_lpm"] / 60 > result["effective_speed_l_s"]:
+            failures.append("指定氣載所需實際抽速大於管路有效抽速，無法維持所填工作壓力。")
+    if tool in ("water", "liquid", "vacuum"):
+        actual = result["pipe"]["velocity_mps"] if tool == "water" else result["velocity_mps"]
+        limit = result["velocity_limit"] if tool == "water" else result["velocity_limit_mps"]
+        if actual > limit + 1e-9:
+            failures.append("計算流速超過本案指定上限，請調整管徑或工況。")
+    return list(dict.fromkeys(failures))
+
+
 def calculate_tool(tool, data):
     if tool == "pipes":
         tool = "water"
     if tool not in ENGINES:
         raise ValidationError("沒有這個簡易工具", "tool")
     result = ENGINES[tool](data)
+    result["failures"] = known_failure_messages(result)
+    result["warnings"] = list(dict.fromkeys(result["failures"] + result.get("warnings", [])))
     # Preserve the active conditions with the successful result. Inactive
     # drafts must neither affect calculations nor appear as adopted inputs.
     from .simple_schema import TOOLS, active_field, defaults

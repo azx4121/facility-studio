@@ -519,7 +519,7 @@ class SimplePage(ttk.Frame):
             warnings = result.get("warnings", [])
             shortfall = self.tool == "duct" and result["path_checked"] and any(
                 row.get("budget_sufficient") is False for row in (result["rectangle"], result["round"]))
-            failed = shortfall or result.get("liquefaction_risk") is True
+            failed = bool(result.get("failures"))
             tone = "danger" if failed else "warning" if warnings else "success"
             self.result_box.set_cards([dict(title=title, value=value, status="未達條件" if failed else "需核對" if warnings else "需求初估", tone=tone)
                                        for title, value in cards])
@@ -545,7 +545,8 @@ class SimplePage(ttk.Frame):
             status_message = (
                     "已計算｜路徑壓力預算不足，請核對"
                     if shortfall
-                    else "已計算｜相態風險尚未排除，結果僅供檢討" if failed
+                    else "已計算｜相態風險尚未排除，結果僅供檢討" if result.get("liquefaction_risk") is True
+                    else "已計算｜有未達條件，請查看警告及報告" if failed
                     else "已計算｜有待確認條件，請查看警告及報告" if warnings
                     else "已計算｜本工具可獨立使用，結果為初估"
                 )

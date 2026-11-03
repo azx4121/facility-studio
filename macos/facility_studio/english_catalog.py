@@ -3940,3 +3940,5 @@ TEXT.update({'相態篩選：': 'Phase screening: ', '。接近或超過內建�
 TEXT.update({'不足': 'Insufficient', '條件已變更': 'Inputs changed'})
 
 TEXT.update({'此氣體沒有內建流速參考；指定上限與計算流速須依同工況原廠／專案依據確認。': 'No built-in velocity reference for this gas. Confirm the chosen limit and calculated velocity against matching vendor or project data.', '指定流速上限高於內建參考：': 'Chosen velocity limit exceeds the built-in reference: ', '；計算流速：': '; Calculated velocity: ', '。內建參考不是安全核定值，請確認同工況管材、壓力與設備依據。': '. The built-in reference is not safety approval. Confirm matching material, pressure and equipment data.', '流速依據': 'Velocity basis'})
+
+TEXT.update({'外氣量超過總送風量，氣流平衡未達條件。': 'Outdoor air exceeds total supply; airflow balance fails the stated conditions.', 'FFU 覆蓋率超過本案可安裝上限。': 'FFU coverage exceeds the project installation limit.', '泵浦吸入條件未達：單相液體假設不成立，請調整工況。': 'Pump suction conditions fail: the single-phase liquid assumption is not met. Adjust the operating conditions.', '計算流速超過本案指定上限，請調整管徑或工況。': 'Calculated velocity exceeds the project limit. Adjust the diameter or operating conditions.', '已計算｜有未達條件，請查看警告及報告': 'Calculated | Criteria are not met; see warnings and report'})
