@@ -70,3 +70,79 @@ def test_entry_button_opens_document_window_without_workbench():
         assert app.workbench is None
     finally:
         root.destroy()
+
+
+def _dirty_review(app, root):
+    from facility_studio.localized_tk import tk
+    app.design_review_button.invoke()
+    root.update()
+    ui = app.design_review_window
+    ui.variables["project"].set("合成未存草稿")
+    root.update()
+    assert ui.dirty
+    return ui
+
+
+def test_main_window_close_refuses_to_drop_unsaved_review_draft(monkeypatch):
+    """Counterexample: closing the main window used to destroy the review draft silently."""
+    from facility_studio.localized_tk import tk
+    from facility_studio import design_basis_ui
+    from facility_studio.simple_desktop import SimpleToolsApp
+    root = tk.Tk()
+    app = SimpleToolsApp(root)
+    asked = []
+    try:
+        ui = _dirty_review(app, root)
+        # Reopening the entry reuses the same window instead of orphaning a second draft.
+        app.design_review_button.invoke()
+        assert app.design_review_window is ui
+        assert sum(isinstance(w, tk.Toplevel) and "交付審查" in w.title() for w in root.winfo_children()) == 1
+        monkeypatch.setattr(design_basis_ui.messagebox, "askyesno", lambda *a, **k: asked.append(a) or False)
+        app.close()
+        assert len(asked) == 1 and root.winfo_exists() and ui.win.winfo_exists()
+        monkeypatch.setattr(design_basis_ui.messagebox, "askyesno", lambda *a, **k: asked.append(a) or True)
+        app.close()
+        assert len(asked) == 2
+        try:
+            alive = root.winfo_exists()
+        except tk.TclError:
+            alive = False
+        assert not alive
+    finally:
+        try:
+            root.destroy()
+        except tk.TclError:
+            pass
+
+
+def test_workbench_close_paths_ask_once_for_unsaved_review_draft(monkeypatch):
+    """Embedded workbench close (window button and macOS Quit) must check the review draft once."""
+    from facility_studio.localized_tk import tk
+    from facility_studio import design_basis_ui, session_controller
+    from facility_studio.simple_desktop import SimpleToolsApp
+    root = tk.Tk()
+    app = SimpleToolsApp(root)
+    asked = []
+    try:
+        ui = _dirty_review(app, root)
+        workbench = app.open_workbench()
+        root.update()
+        monkeypatch.setattr(session_controller.messagebox, "askyesnocancel", lambda *a, **k: False)
+        monkeypatch.setattr(design_basis_ui.messagebox, "askyesno", lambda *a, **k: asked.append(a) or False)
+        app.close()
+        assert len(asked) == 1 and root.winfo_exists() and ui.win.winfo_exists()
+        workbench.close()  # the path bound to tk::mac::Quit after the workbench is opened
+        assert len(asked) == 2 and root.winfo_exists() and ui.win.winfo_exists()
+        monkeypatch.setattr(design_basis_ui.messagebox, "askyesno", lambda *a, **k: asked.append(a) or True)
+        app.close()
+        assert len(asked) == 3
+        try:
+            alive = root.winfo_exists()
+        except tk.TclError:
+            alive = False
+        assert not alive
+    finally:
+        try:
+            root.destroy()
+        except tk.TclError:
+            pass

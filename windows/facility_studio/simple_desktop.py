@@ -672,6 +672,7 @@ class SimpleToolsApp:
         self.pages = {}
         self.workbench = None
         self.equipment_window = None
+        self.design_review_window = None
         self.workbench_mode = False
         self.extra_host = None
         self.verification_host = None
@@ -730,9 +731,8 @@ class SimpleToolsApp:
         features = ttk.Frame(header)
         features.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(6, 0))
         features.columnconfigure(0, weight=1)
-        from .design_basis_ui import DesignReviewWindow
         self.design_review_button = ttk.Button(features, text="設計依據與交付審查",
-                                               command=lambda: DesignReviewWindow(root))
+                                               command=self.open_design_review)
         self.design_review_button.grid(row=1, column=0, sticky="w", pady=(4, 0))
         purpose = ttk.Label(features, text="一般設計直接使用左側工具；AHU 核對僅用來比較兩個物性模型差異。", wraplength=400)
         purpose.grid(row=0, column=0, sticky="ew")
@@ -1046,9 +1046,29 @@ class SimpleToolsApp:
         self.show_tool("vacuum")
         return self.active_page()
 
+    def open_design_review(self):
+        window = self.design_review_window
+        if window is not None and window.win.winfo_exists():
+            window.win.deiconify()
+            window.win.lift()
+            return window
+        from .design_basis_ui import DesignReviewWindow
+        self.design_review_window = DesignReviewWindow(self.root)
+        return self.design_review_window
+
+    def confirm_design_review_close(self):
+        """Ask once about an unsaved design-review draft before its parent window is destroyed."""
+        window = self.design_review_window
+        if window is None or not window.win.winfo_exists():
+            return True
+        return window.confirm_discard()
+
     def close(self):
         if self.workbench is not None and self.workbench.root is self.root:
+            # DesktopApp.close_workspace performs the review-draft check exactly once.
             return self.workbench.close()
+        if not self.confirm_design_review_close():
+            return
         if self.workbench is not None and self.workbench.root.winfo_exists():
             self.workbench.close()
             if self.workbench.root.winfo_exists():

@@ -65,6 +65,23 @@ def run(root, app, check):
             check("證據遭修改會阻擋齊備判定", not ui.refresh()["can_submit"])
         finally:
             ui.win.destroy()
+    from . import design_basis_ui
+    review = app.open_design_review()
+    check("重複開啟設計審查沿用同一視窗", app.open_design_review() is review)
+    review.variables["project"].set("合成未存草稿")
+    root.update()
+    asked = []
+    original_ask = design_basis_ui.messagebox.askyesno
+    try:
+        design_basis_ui.messagebox.askyesno = lambda *a, **k: asked.append(a) or False
+        app.close()
+        check("主視窗關閉會詢問設計審查未存草稿，拒絕時保留", len(asked) == 1 and root.winfo_exists() and review.win.winfo_exists() and review.dirty)
+    finally:
+        design_basis_ui.messagebox.askyesno = original_ask
+    review.dirty = False
+    review.close()
+    root.update()
+    check("無未存變更時設計審查可直接關閉", not review.win.winfo_exists())
     app.show_tool("liquid")
     liquid = app.active_page()
     liquid.reset()

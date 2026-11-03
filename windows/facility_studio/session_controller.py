@@ -211,6 +211,9 @@ class SessionController:
             return False
 
     def close_workspace(self):
+        simple = getattr(self, "simple_app", None)
+        if simple is not None and not simple.confirm_design_review_close():
+            return
         if self.session_dirty():
             answer = messagebox.askyesnocancel(
                 "整案未儲存",

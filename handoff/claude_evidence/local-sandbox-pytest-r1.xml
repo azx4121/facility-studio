@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="184" time="11.318" timestamp="2026-11-03T13:16:18.134694+08:00" hostname="huangzhaoyideMac-mini.local"><properties><property name="hypothesis-statistics-integration/test_fusion.py::test_colebrook_equation_independently" value="aW50ZWdyYXRpb24vdGVzdF9mdXNpb24ucHk6OnRlc3RfY29sZWJyb29rX2VxdWF0aW9uX2luZGVwZW5kZW50bHk6CgogIC0gZHVyaW5nIGdlbmVyYXRlIHBoYXNlICgwLjA2IHNlY29uZHMpOgogICAgLSBUeXBpY2FsIHJ1bnRpbWVzOiA8IDFtcywgb2Ygd2hpY2ggPCAxbXMgaW4gZGF0YSBnZW5lcmF0aW9uCiAgICAtIDEwMCBwYXNzaW5nLCAwIGZhaWxpbmcsIGFuZCAwIGludmFsaWQgdGVzdCBjYXNlcwoKICAtIFN0b3BwZWQgYmVjYXVzZSBzZXR0aW5ncy5tYXhfZXhhbXBsZXM9MTAw" /><property name="hypothesis-statistics-integration/test_pump_suction.py::test_bernoulli_equivalence_with_suction_static_pressure" value="aW50ZWdyYXRpb24vdGVzdF9wdW1wX3N1Y3Rpb24ucHk6OnRlc3RfYmVybm91bGxpX2VxdWl2YWxlbmNlX3dpdGhfc3VjdGlvbl9zdGF0aWNfcHJlc3N1cmU6CgogIC0gZHVyaW5nIGdlbmVyYXRlIHBoYXNlICgwLjAxIHNlY29uZHMpOgogICAgLSBUeXBpY2FsIHJ1bnRpbWVzOiA8IDFtcywgb2Ygd2hpY2ggPCAxbXMgaW4gZGF0YSBnZW5lcmF0aW9uCiAgICAtIDYwIHBhc3NpbmcsIDAgZmFpbGluZywgYW5kIDAgaW52YWxpZCB0ZXN0IGNhc2VzCgogIC0gU3RvcHBlZCBiZWNhdXNlIHNldHRpbmdzLm1heF9leGFtcGxlcz02MA==" /><property name="hypothesis-statistics-integration/test_simple_facilities.py::test_total_supply_is_not_double_counted" value="aW50ZWdyYXRpb24vdGVzdF9zaW1wbGVfZmFjaWxpdGllcy5weTo6dGVzdF90b3RhbF9zdXBwbHlfaXNfbm90X2RvdWJsZV9jb3VudGVkOgoKICAtIGR1cmluZyBnZW5lcmF0ZSBwaGFzZSAoMi4zOCBzZWNvbmRzKToKICAgIC0gVHlwaWNhbCBydW50aW1lczogfiAyMy0yNCBtcywgb2Ygd2hpY2ggPCAxbXMgaW4gZGF0YSBnZW5lcmF0aW9uCiAgICAtIDEwMCBwYXNzaW5nLCAwIGZhaWxpbmcsIGFuZCAwIGludmFsaWQgdGVzdCBjYXNlcwoKICAtIFN0b3BwZWQgYmVjYXVzZSBzZXR0aW5ncy5tYXhfZXhhbXBsZXM9MTAw" /></properties><testcase classname="integration.test_design_basis" name="test_blank_and_filled_basis_never_imply_complete_feed" time="0.001" /><testcase classname="integration.test_design_basis" name="test_fully_reviewed_register_is_only_document_readiness" time="0.009" /><testcase classname="integration.test_design_basis" name="test_every_basis_change_invalidates_all_previous_reviews[project]" time="0.009" /><testcase classname="integration.test_design_basis" name="test_every_basis_change_invalidates_all_previous_reviews[revision]" time="0.009" /><testcase classname="integration.test_design_basis" name="test_every_basis_change_invalidates_all_previous_reviews[site]" time="0.009" /><testcase classname="integration.test_design_basis" name="test_every_basis_change_invalidates_all_previous_reviews[owner]" time="0.009" /><testcase classname="integration.test_design_basis" name="test_every_basis_change_invalidates_all_previous_reviews[scope]" time="0.009" /><testcase classname="integration.test_design_basis" name="test_every_basis_change_invalidates_all_previous_reviews[conditions]" time="0.009" /><testcase classname="integration.test_design_basis" name="test_every_basis_change_invalidates_all_previous_reviews[units]" time="0.009" /><testcase classname="integration.test_design_basis" name="test_every_basis_change_invalidates_all_previous_reviews[criteria]" time="0.009" /><testcase classname="integration.test_design_basis" name="test_every_basis_change_invalidates_all_previous_reviews[preparer]" time="0.009" /><testcase classname="integration.test_design_basis" name="test_standard_edition_and_new_evidence_invalidate_reviews" time="0.010" /><testcase classname="integration.test_design_basis" name="test_evidence_failure_blocks_readiness_and_new_acceptance[tamper]" time="0.010" /><testcase classname="integration.test_design_basis" name="test_evidence_failure_blocks_readiness_and_new_acceptance[missing]" time="0.012" /><testcase classname="integration.test_design_basis" name="test_evidence_failure_blocks_readiness_and_new_acceptance[symlink]" time="0.010" /><testcase classname="integration.test_design_basis" name="test_preserve_previous_revisions_and_source_file" time="0.009" /><testcase classname="integration.test_design_basis" name="test_rejection_and_exclusion_require_real_record" time="0.018" /><testcase classname="integration.test_design_basis" name="test_preparer_cannot_self_review_or_accept_blank_documents" time="0.000" /><testcase classname="integration.test_design_basis" name="test_import_rejects_external_evidence_paths_before_read[../secret]" time="0.001" /><testcase classname="integration.test_design_basis" name="test_import_rejects_external_evidence_paths_before_read[/etc/passwd]" time="0.001" /><testcase classname="integration.test_design_basis" name="test_import_rejects_external_evidence_paths_before_read[evidence/../../secret]" time="0.001" /><testcase classname="integration.test_design_basis" name="test_import_rejects_external_evidence_paths_before_read[evidence\\secret]" time="0.001" /><testcase classname="integration.test_design_basis" name="test_import_rejects_external_evidence_paths_before_read[evidence/x.bin]" time="0.001" /><testcase classname="integration.test_design_basis" name="test_import_rejects_duplicate_unknown_and_future_schema" time="0.000" /><testcase classname="integration.test_design_basis" name="test_empty_source_and_linked_folder_are_rejected" time="0.000" /><testcase classname="integration.test_design_basis" name="test_report_rechecks_and_contains_names_sources_and_hashes" time="0.010" /><testcase classname="integration.test_design_basis" name="test_saved_dossier_cli_uses_real_readiness_exit_codes" time="0.011" /><testcase classname="integration.test_design_basis" name="test_attachment_name_collision_never_removes_existing_evidence" time="0.001" /><testcase classname="integration.test_design_basis" name="test_oversize_manifest_cannot_create_an_unloadable_revision" time="0.009" /><testcase classname="integration.test_design_basis_gui" name="test_native_review_window_roundtrip_and_stale_report" time="0.054"><failure message="_tkinter.TclError: Can't find a usable tk.tcl in the following directories: &#10;[+36 more lines; full report in element text]">tmp_path = PosixPath('/private/tmp/claude-501/pytest-of-chaoi/pytest-2/test_native_review_window_roun0')
+
+    def test_native_review_window_roundtrip_and_stale_report(tmp_path):
+        from facility_studio.localized_tk import tk
+        from facility_studio.design_basis_ui import DesignReviewWindow
+        from facility_studio import design_basis as m
+&gt;       root = tk.Tk()
+               ^^^^^^^
+
+integration/test_design_basis_gui.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;tkinter.Tk object .&gt;, screenName = None, baseName = '__main__'
+className = 'Tk', useTk = True, sync = False, use = None
+
+    def __init__(self, screenName=None, baseName=None, className='Tk',
+                 useTk=True, sync=False, use=None):
+        """Return a new top level widget on screen SCREENNAME. A new Tcl interpreter will
+        be created. BASENAME will be used for the identification of the profile file (see
+        readprofile).
+        It is constructed from sys.argv[0] without extensions if None is given. CLASSNAME
+        is the name of the widget class."""
+        self.master = None
+        self.children = {}
+        self._tkloaded = False
+        # to avoid recursions in the getattr code in case of failure, we
+        # ensure that self.tk is always _something_.
+        self.tk = None
+        if baseName is None:
+            import os
+            baseName = os.path.basename(sys.argv[0])
+            baseName, ext = os.path.splitext(baseName)
+            if ext not in ('.py', '.pyc'):
+                baseName = baseName + ext
+        interactive = False
+&gt;       self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       _tkinter.TclError: Can't find a usable tk.tcl in the following directories: 
+E           //zipfs:/app/tk_library //zipfs:/lib/tk/tk_library //zipfs:/lib/tk /tools/deps/lib/tk9.0 /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tcl9.0/tk9.0 /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tcl9.0/tk9.0/Resources/Scripts /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0 /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/Resources/Scripts /Users/chaoi/Facility-Studio-Fusion-Env-20261102/lib/tk9.0 /Users/chaoi/Facility-Studio-Fusion-Env-20261102/lib/tk9.0/Resources/Scripts /tools/deps/lib/tk9.0 /tools/deps/lib/tk9.0/Resources/Scripts /Users/chaoi/Facility-Studio-Fusion-Env-20261102/lib/tk9.0 /Users/chaoi/lib/tk9.0 /Users/chaoi/Facility-Studio-Fusion-Env-20261102/library
+E       
+E       /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/tk.tcl: cannot use non-numeric floating-point value "NaN" as left operand of "*"
+E       cannot use non-numeric floating-point value "NaN" as left operand of "*"
+E           while executing
+E       "expr {[tk scaling] * 75}"
+E           (procedure "::tk::ScalingPct" line 2)
+E           invoked from within
+E       "::tk::ScalingPct"
+E           (file "/Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/icons.tcl" line 17)
+E           invoked from within
+E       "source /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/icons.tcl"
+E           (in namespace eval "::" script line 1)
+E           invoked from within
+E       "namespace eval :: [list source [file join $::tk_library $file.tcl]]"
+E           (procedure "SourceLibFile" line 2)
+E           invoked from within
+E       "SourceLibFile icons"
+E           (in namespace eval "::tk" script line 2)
+E           invoked from within
+E       "namespace eval ::tk {
+E       	SourceLibFile icons
+E       	SourceLibFile iconbadges
+E       	SourceLibFile button
+E       	SourceLibFile entry
+E       	SourceLibFile listbox
+E       	SourceLibFile ..."
+E           (file "/Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/tk.tcl" line 505)
+E           invoked from within
+E       "source /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/tk.tcl"
+E           ("uplevel" body line 1)
+E           invoked from within
+E       "uplevel #0 [list source $file]"
+E       
+E       
+E       This probably means that tk wasn't installed properly.
+
+../FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/python3.12/tkinter/__init__.py:2346: TclError</failure></testcase><testcase classname="integration.test_design_basis_gui" name="test_entry_button_opens_document_window_without_workbench" time="0.012"><failure message="_tkinter.TclError: Can't find a usable tk.tcl in the following directories: &#10;[+36 more lines; full report in element text]">def test_entry_button_opens_document_window_without_workbench():
+        from facility_studio.localized_tk import tk
+        from facility_studio.simple_desktop import SimpleToolsApp
+&gt;       root = tk.Tk()
+               ^^^^^^^
+
+integration/test_design_basis_gui.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;tkinter.Tk object .&gt;, screenName = None, baseName = '__main__'
+className = 'Tk', useTk = True, sync = False, use = None
+
+    def __init__(self, screenName=None, baseName=None, className='Tk',
+                 useTk=True, sync=False, use=None):
+        """Return a new top level widget on screen SCREENNAME. A new Tcl interpreter will
+        be created. BASENAME will be used for the identification of the profile file (see
+        readprofile).
+        It is constructed from sys.argv[0] without extensions if None is given. CLASSNAME
+        is the name of the widget class."""
+        self.master = None
+        self.children = {}
+        self._tkloaded = False
+        # to avoid recursions in the getattr code in case of failure, we
+        # ensure that self.tk is always _something_.
+        self.tk = None
+        if baseName is None:
+            import os
+            baseName = os.path.basename(sys.argv[0])
+            baseName, ext = os.path.splitext(baseName)
+            if ext not in ('.py', '.pyc'):
+                baseName = baseName + ext
+        interactive = False
+&gt;       self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       _tkinter.TclError: Can't find a usable tk.tcl in the following directories: 
+E           //zipfs:/app/tk_library //zipfs:/lib/tk/tk_library //zipfs:/lib/tk /tools/deps/lib/tk9.0 /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tcl9.0/tk9.0 /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tcl9.0/tk9.0/Resources/Scripts /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0 /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/Resources/Scripts /Users/chaoi/Facility-Studio-Fusion-Env-20261102/lib/tk9.0 /Users/chaoi/Facility-Studio-Fusion-Env-20261102/lib/tk9.0/Resources/Scripts /tools/deps/lib/tk9.0 /tools/deps/lib/tk9.0/Resources/Scripts /Users/chaoi/Facility-Studio-Fusion-Env-20261102/lib/tk9.0 /Users/chaoi/lib/tk9.0 /Users/chaoi/Facility-Studio-Fusion-Env-20261102/library
+E       
+E       /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/tk.tcl: cannot use non-numeric floating-point value "NaN" as left operand of "*"
+E       cannot use non-numeric floating-point value "NaN" as left operand of "*"
+E           while executing
+E       "expr {[tk scaling] * 75}"
+E           (procedure "::tk::ScalingPct" line 2)
+E           invoked from within
+E       "::tk::ScalingPct"
+E           (file "/Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/icons.tcl" line 17)
+E           invoked from within
+E       "source /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/icons.tcl"
+E           (in namespace eval "::" script line 1)
+E           invoked from within
+E       "namespace eval :: [list source [file join $::tk_library $file.tcl]]"
+E           (procedure "SourceLibFile" line 2)
+E           invoked from within
+E       "SourceLibFile icons"
+E           (in namespace eval "::tk" script line 2)
+E           invoked from within
+E       "namespace eval ::tk {
+E       	SourceLibFile icons
+E       	SourceLibFile iconbadges
+E       	SourceLibFile button
+E       	SourceLibFile entry
+E       	SourceLibFile listbox
+E       	SourceLibFile ..."
+E           (file "/Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/tk.tcl" line 505)
+E           invoked from within
+E       "source /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/tk.tcl"
+E           ("uplevel" body line 1)
+E           invoked from within
+E       "uplevel #0 [list source $file]"
+E       
+E       
+E       This probably means that tk wasn't installed properly.
+
+../FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/python3.12/tkinter/__init__.py:2346: TclError</failure></testcase><testcase classname="integration.test_design_basis_gui" name="test_main_window_close_refuses_to_drop_unsaved_review_draft" time="0.004"><failure message="_tkinter.TclError: Can't find a usable tk.tcl in the following directories: &#10;[+36 more lines; full report in element text]">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x1147bffb0&gt;
+
+    def test_main_window_close_refuses_to_drop_unsaved_review_draft(monkeypatch):
+        """Counterexample: closing the main window used to destroy the review draft silently."""
+        from facility_studio.localized_tk import tk
+        from facility_studio import design_basis_ui
+        from facility_studio.simple_desktop import SimpleToolsApp
+&gt;       root = tk.Tk()
+               ^^^^^^^
+
+integration/test_design_basis_gui.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;tkinter.Tk object .&gt;, screenName = None, baseName = '__main__'
+className = 'Tk', useTk = True, sync = False, use = None
+
+    def __init__(self, screenName=None, baseName=None, className='Tk',
+                 useTk=True, sync=False, use=None):
+        """Return a new top level widget on screen SCREENNAME. A new Tcl interpreter will
+        be created. BASENAME will be used for the identification of the profile file (see
+        readprofile).
+        It is constructed from sys.argv[0] without extensions if None is given. CLASSNAME
+        is the name of the widget class."""
+        self.master = None
+        self.children = {}
+        self._tkloaded = False
+        # to avoid recursions in the getattr code in case of failure, we
+        # ensure that self.tk is always _something_.
+        self.tk = None
+        if baseName is None:
+            import os
+            baseName = os.path.basename(sys.argv[0])
+            baseName, ext = os.path.splitext(baseName)
+            if ext not in ('.py', '.pyc'):
+                baseName = baseName + ext
+        interactive = False
+&gt;       self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       _tkinter.TclError: Can't find a usable tk.tcl in the following directories: 
+E           //zipfs:/app/tk_library //zipfs:/lib/tk/tk_library //zipfs:/lib/tk /tools/deps/lib/tk9.0 /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tcl9.0/tk9.0 /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tcl9.0/tk9.0/Resources/Scripts /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0 /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/Resources/Scripts /Users/chaoi/Facility-Studio-Fusion-Env-20261102/lib/tk9.0 /Users/chaoi/Facility-Studio-Fusion-Env-20261102/lib/tk9.0/Resources/Scripts /tools/deps/lib/tk9.0 /tools/deps/lib/tk9.0/Resources/Scripts /Users/chaoi/Facility-Studio-Fusion-Env-20261102/lib/tk9.0 /Users/chaoi/lib/tk9.0 /Users/chaoi/Facility-Studio-Fusion-Env-20261102/library
+E       
+E       /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/tk.tcl: cannot use non-numeric floating-point value "NaN" as left operand of "*"
+E       cannot use non-numeric floating-point value "NaN" as left operand of "*"
+E           while executing
+E       "expr {[tk scaling] * 75}"
+E           (procedure "::tk::ScalingPct" line 2)
+E           invoked from within
+E       "::tk::ScalingPct"
+E           (file "/Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/icons.tcl" line 17)
+E           invoked from within
+E       "source /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/icons.tcl"
+E           (in namespace eval "::" script line 1)
+E           invoked from within
+E       "namespace eval :: [list source [file join $::tk_library $file.tcl]]"
+E           (procedure "SourceLibFile" line 2)
+E           invoked from within
+E       "SourceLibFile icons"
+E           (in namespace eval "::tk" script line 2)
+E           invoked from within
+E       "namespace eval ::tk {
+E       	SourceLibFile icons
+E       	SourceLibFile iconbadges
+E       	SourceLibFile button
+E       	SourceLibFile entry
+E       	SourceLibFile listbox
+E       	SourceLibFile ..."
+E           (file "/Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/tk.tcl" line 505)
+E           invoked from within
+E       "source /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/tk.tcl"
+E           ("uplevel" body line 1)
+E           invoked from within
+E       "uplevel #0 [list source $file]"
+E       
+E       
+E       This probably means that tk wasn't installed properly.
+
+../FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/python3.12/tkinter/__init__.py:2346: TclError</failure></testcase><testcase classname="integration.test_design_basis_gui" name="test_workbench_close_paths_ask_once_for_unsaved_review_draft" time="0.007"><failure message="_tkinter.TclError: Can't find a usable tk.tcl in the following directories: &#10;[+36 more lines; full report in element text]">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x1147beea0&gt;
+
+    def test_workbench_close_paths_ask_once_for_unsaved_review_draft(monkeypatch):
+        """Embedded workbench close (window button and macOS Quit) must check the review draft once."""
+        from facility_studio.localized_tk import tk
+        from facility_studio import design_basis_ui, session_controller
+        from facility_studio.simple_desktop import SimpleToolsApp
+&gt;       root = tk.Tk()
+               ^^^^^^^
+
+integration/test_design_basis_gui.py:123: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;tkinter.Tk object .&gt;, screenName = None, baseName = '__main__'
+className = 'Tk', useTk = True, sync = False, use = None
+
+    def __init__(self, screenName=None, baseName=None, className='Tk',
+                 useTk=True, sync=False, use=None):
+        """Return a new top level widget on screen SCREENNAME. A new Tcl interpreter will
+        be created. BASENAME will be used for the identification of the profile file (see
+        readprofile).
+        It is constructed from sys.argv[0] without extensions if None is given. CLASSNAME
+        is the name of the widget class."""
+        self.master = None
+        self.children = {}
+        self._tkloaded = False
+        # to avoid recursions in the getattr code in case of failure, we
+        # ensure that self.tk is always _something_.
+        self.tk = None
+        if baseName is None:
+            import os
+            baseName = os.path.basename(sys.argv[0])
+            baseName, ext = os.path.splitext(baseName)
+            if ext not in ('.py', '.pyc'):
+                baseName = baseName + ext
+        interactive = False
+&gt;       self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       _tkinter.TclError: Can't find a usable tk.tcl in the following directories: 
+E           //zipfs:/app/tk_library //zipfs:/lib/tk/tk_library //zipfs:/lib/tk /tools/deps/lib/tk9.0 /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tcl9.0/tk9.0 /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tcl9.0/tk9.0/Resources/Scripts /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0 /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/Resources/Scripts /Users/chaoi/Facility-Studio-Fusion-Env-20261102/lib/tk9.0 /Users/chaoi/Facility-Studio-Fusion-Env-20261102/lib/tk9.0/Resources/Scripts /tools/deps/lib/tk9.0 /tools/deps/lib/tk9.0/Resources/Scripts /Users/chaoi/Facility-Studio-Fusion-Env-20261102/lib/tk9.0 /Users/chaoi/lib/tk9.0 /Users/chaoi/Facility-Studio-Fusion-Env-20261102/library
+E       
+E       /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/tk.tcl: cannot use non-numeric floating-point value "NaN" as left operand of "*"
+E       cannot use non-numeric floating-point value "NaN" as left operand of "*"
+E           while executing
+E       "expr {[tk scaling] * 75}"
+E           (procedure "::tk::ScalingPct" line 2)
+E           invoked from within
+E       "::tk::ScalingPct"
+E           (file "/Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/icons.tcl" line 17)
+E           invoked from within
+E       "source /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/icons.tcl"
+E           (in namespace eval "::" script line 1)
+E           invoked from within
+E       "namespace eval :: [list source [file join $::tk_library $file.tcl]]"
+E           (procedure "SourceLibFile" line 2)
+E           invoked from within
+E       "SourceLibFile icons"
+E           (in namespace eval "::tk" script line 2)
+E           invoked from within
+E       "namespace eval ::tk {
+E       	SourceLibFile icons
+E       	SourceLibFile iconbadges
+E       	SourceLibFile button
+E       	SourceLibFile entry
+E       	SourceLibFile listbox
+E       	SourceLibFile ..."
+E           (file "/Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/tk.tcl" line 505)
+E           invoked from within
+E       "source /Users/chaoi/FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/tk9.0/tk.tcl"
+E           ("uplevel" body line 1)
+E           invoked from within
+E       "uplevel #0 [list source $file]"
+E       
+E       
+E       This probably means that tk wasn't installed properly.
+
+../FacilityStudio-Setup-Reports/2026-11-01/managed-python/cpython-3.12.16-macos-aarch64-none/lib/python3.12/tkinter/__init__.py:2346: TclError</failure></testcase><testcase classname="integration.test_fusion" name="test_cleanroom_design_inputs_drive_actual_mau_balance[20-40]" time="7.674" /><testcase classname="integration.test_fusion" name="test_cleanroom_design_inputs_drive_actual_mau_balance[22-50]" time="0.022" /><testcase classname="integration.test_fusion" name="test_cleanroom_design_inputs_drive_actual_mau_balance[26-60]" time="0.022" /><testcase classname="integration.test_fusion" name="test_cleanroom_design_inputs_drive_actual_mau_balance[18-45]" time="0.022" /><testcase classname="integration.test_fusion" name="test_cleanroom_humidity_changes_dewpoint_and_coil_demand" time="0.044" /><testcase classname="integration.test_fusion" name="test_cleanroom_infeasible_conditions_never_claim_equipment_pass[patch0]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_infeasible_conditions_never_claim_equipment_pass[patch1]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_infeasible_conditions_never_claim_equipment_pass[patch2]" time="0.006" /><testcase classname="integration.test_fusion" name="test_cleanroom_infeasible_conditions_never_claim_equipment_pass[patch3]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_independent_ahu_snapshot_preserves_mass_and_coil_duty" time="0.050" /><testcase classname="integration.test_fusion" name="test_cleanroom_new_fields_report_actual_invalid_field[room_t]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_new_fields_report_actual_invalid_field[room_rh]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_new_fields_report_actual_invalid_field[outdoor_t]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_new_fields_report_actual_invalid_field[outdoor_rh]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_new_fields_report_actual_invalid_field[process_moisture]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_new_fields_report_actual_invalid_field[mau_supply_t]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_new_fields_report_actual_invalid_field[people_latent_w]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_new_fields_report_actual_invalid_field[room_pressure]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_new_fields_report_actual_invalid_field[coil_water_t]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_new_fields_report_actual_invalid_field[coil_approach]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_new_fields_report_actual_invalid_field[coil_bf_min]" time="0.000" /><testcase classname="integration.test_fusion" name="test_cleanroom_to_ahu_limits_reject_instead_of_clamping" time="0.028" /><testcase classname="integration.test_fusion" name="test_actual_core_calls_all_five" time="0.052" /><testcase classname="integration.test_fusion" name="test_exact_dry_limit_and_analytical_enthalpy[0.0]" time="0.000" /><testcase classname="integration.test_fusion" name="test_exact_dry_limit_and_analytical_enthalpy[1e-12]" time="0.000" /><testcase classname="integration.test_fusion" name="test_exact_dry_limit_and_analytical_enthalpy[1e-08]" time="0.000" /><testcase classname="integration.test_fusion" name="test_exact_dry_limit_and_analytical_enthalpy[0.001]" time="0.000" /><testcase classname="integration.test_fusion" name="test_exact_dry_limit_and_analytical_enthalpy[0.01]" time="0.000" /><testcase classname="integration.test_fusion" name="test_colebrook_equation_independently" time="0.064" /><testcase classname="integration.test_fusion" name="test_process_condensate_control_volume" time="0.018" /><testcase classname="integration.test_fusion" name="test_production_units_preserve_explicit_definitions[\u98a8\u91cf]" time="0.000" /><testcase classname="integration.test_fusion" name="test_production_units_preserve_explicit_definitions[\u6c34\u91cf]" time="0.000" /><testcase classname="integration.test_fusion" name="test_production_units_preserve_explicit_definitions[\u58d3\u529b]" time="0.000" /><testcase classname="integration.test_fusion" name="test_production_units_preserve_explicit_definitions[\u51b7\u71b1\u529f\u7387]" time="0.000" /><testcase classname="integration.test_fusion" name="test_production_units_preserve_explicit_definitions[\u96fb\u529b\uff08\u56fa\u5b9a\u4e09\u76f8380V PF0.85\uff09]" time="0.000" /><testcase classname="integration.test_fusion" name="test_production_units_preserve_explicit_definitions[\u9577\u5ea6]" time="0.000" /><testcase classname="integration.test_fusion" name="test_production_units_preserve_explicit_definitions[\u6eab\u5ea6\u5dee\uff08\u5347\u6eab\uff0f\u964d\u6eab\uff09]" time="0.000" /><testcase classname="integration.test_fusion" name="test_production_units_preserve_explicit_definitions[\u95a5\u9580\u6d41\u91cf\u4fc2\u6578\uff08Kv\uff0fCv\uff09]" time="0.000" /><testcase classname="integration.test_fusion" name="test_production_units_preserve_explicit_definitions[\u6eab\u5ea6]" time="0.000" /><testcase classname="integration.test_fusion" name="test_water_properties_are_used_for_thermal_and_pressure[5.0]" time="0.000" /><testcase classname="integration.test_fusion" name="test_water_properties_are_used_for_thermal_and_pressure[10.0]" time="0.000" /><testcase classname="integration.test_fusion" name="test_water_properties_are_used_for_thermal_and_pressure[40.0]" time="0.000" /><testcase classname="integration.test_fusion" name="test_water_properties_are_used_for_thermal_and_pressure[80.0]" time="0.000" /><testcase classname="integration.test_fusion" name="test_vapor_water_rejected" time="0.000" /><testcase classname="integration.test_fusion" name="test_water_validation_identifies_the_actual_field[water_t]" time="0.000" /><testcase classname="integration.test_fusion" name="test_water_validation_identifies_the_actual_field[water_p]" time="0.000" /><testcase classname="integration.test_fusion" name="test_inactive_model_drafts_are_preserved_and_not_used" time="0.004" /><testcase classname="integration.test_fusion" name="test_dual_sizing_corrects_audited_case_and_manual_warns" time="0.004" /><testcase classname="integration.test_fusion" name="test_chiller_boundaries_and_safety_factor_not_repeated" time="0.007" /><testcase classname="integration.test_fusion" name="test_np_auto_is_deterministic_nonmutating_and_not_shaft_kw" time="0.011" /><testcase classname="integration.test_fusion" name="test_washer_pump_electric_and_heat_balance[0]" time="0.074" /><testcase classname="integration.test_fusion" name="test_washer_pump_electric_and_heat_balance[0.25]" time="0.050" /><testcase classname="integration.test_fusion" name="test_washer_pump_electric_and_heat_balance[1]" time="0.041" /><testcase classname="integration.test_fusion" name="test_legacy_ahu_preserves_values_and_gets_new_editable_fields" time="0.001" /><testcase classname="integration.test_fusion" name="test_inactive_c1_cannot_block_a_complete_pressure_record" time="0.006" /><testcase classname="integration.test_fusion" name="test_actual_geometric_coil_and_invalid_geometry" time="0.192" /><testcase classname="integration.test_product_wording" name="test_product_report_keeps_models_private_and_does_not_mutate_input" time="0.008" /><testcase classname="integration.test_product_wording" name="test_user_tool_reports_use_engineering_terms[water]" time="0.000" /><testcase classname="integration.test_product_wording" name="test_user_tool_reports_use_engineering_terms[liquid]" time="0.000" /><testcase classname="integration.test_product_wording" name="test_user_tool_reports_use_engineering_terms[vacuum]" time="0.000" /><testcase classname="integration.test_product_wording" name="test_user_tool_reports_use_engineering_terms[duct]" time="0.000" /><testcase classname="integration.test_product_wording" name="test_user_tool_reports_use_engineering_terms[units]" time="0.000" /><testcase classname="integration.test_product_wording" name="test_user_tool_reports_use_engineering_terms[cleanroom]" time="0.000" /><testcase classname="integration.test_product_wording" name="test_user_tool_reports_use_engineering_terms[electrical]" time="0.000" /><testcase classname="integration.test_product_wording" name="test_presented_choices_round_trip_to_existing_project_values[CoolProp \u7d14\u6c34\u6eab\u58d3]" time="0.000" /><testcase classname="integration.test_product_wording" name="test_presented_choices_round_trip_to_existing_project_values[\u5e7e\u4f55 \u03b5-NTU\uff08python-hvac\uff09]" time="0.000" /><testcase classname="integration.test_product_wording" name="test_installer_public_name_and_operation_guide_are_product_only" time="0.000" /><testcase classname="integration.test_product_wording" name="test_exported_review_files_omit_dependency_metadata" time="0.006" /><testcase classname="integration.test_product_wording" name="test_bundled_tutorial_is_current_and_uses_product_wording[macos]" time="0.022" /><testcase classname="integration.test_product_wording" name="test_bundled_tutorial_is_current_and_uses_product_wording[windows]" time="0.022" /><testcase classname="integration.test_product_wording" name="test_native_menu_copy_uses_public_engineering_language" time="0.001" /><testcase classname="integration.test_product_wording" name="test_new_tools_are_available_through_the_delivered_command_line[liquid]" time="0.001" /><testcase classname="integration.test_product_wording" name="test_new_tools_are_available_through_the_delivered_command_line[vacuum]" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_open_tank_matches_independent_hand_calculation_and_report" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_hot_water_has_lower_npsha_and_loss_is_not_discharge_route" time="0.001" /><testcase classname="integration.test_pump_suction" name="test_unknown_curve_and_margin_never_pass" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_invalid_inputs_or_missing_sources_are_not_zero[suction_loss_kpa-]" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_invalid_inputs_or_missing_sources_are_not_zero[suction_loss_kpa--1]" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_invalid_inputs_or_missing_sources_are_not_zero[check_npsh-invalid]" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_invalid_inputs_or_missing_sources_are_not_zero[pump_curve_reference-invalid\x00reference]" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_invalid_inputs_or_missing_sources_are_not_zero[npsh_margin_reference-invalid\x00reference]" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_invalid_inputs_or_missing_sources_are_not_zero[suction_surface_kpa-0]" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_invalid_inputs_or_missing_sources_are_not_zero[npshr_m-nan]" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_invalid_inputs_or_missing_sources_are_not_zero[npsh_margin_m-inf]" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_invalid_inputs_or_missing_sources_are_not_zero[pump_curve_reference-]" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_invalid_inputs_or_missing_sources_are_not_zero[npsh_margin_reference-]" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_low_pressure_and_large_suction_lift_are_not_accepted" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_positive_total_head_can_still_flash_at_high_velocity" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_mixture_requires_bubble_point_not_water_fallback" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_bernoulli_equivalence_with_suction_static_pressure" time="0.013" /><testcase classname="integration.test_pump_suction" name="test_disabled_optional_inputs_do_not_change_existing_result" time="0.000" /><testcase classname="integration.test_pump_suction" name="test_nozzle_elevation_is_not_confused_with_npsh_datum" time="0.000" /><testcase classname="integration.test_release_identity" name="test_mac_bundle_identifier_is_distinct_from_previous_delivery" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_gemini_cleanroom_case_and_legacy_explicit_basis" time="0.021" /><testcase classname="integration.test_simple_facilities" name="test_total_supply_is_not_double_counted" time="2.382" /><testcase classname="integration.test_simple_facilities" name="test_materials_are_explicit_and_never_approve_chemical_compatibility[SUS316L]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_materials_are_explicit_and_never_approve_chemical_compatibility[UPVC\uff0fPVC-U]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_materials_are_explicit_and_never_approve_chemical_compatibility[PVC]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_materials_are_explicit_and_never_approve_chemical_compatibility[CPVC\uff0fPVC-C]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_materials_are_explicit_and_never_approve_chemical_compatibility[PFA]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_materials_are_explicit_and_never_approve_chemical_compatibility[PVDF]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_materials_are_explicit_and_never_approve_chemical_compatibility[PU]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_materials_are_explicit_and_never_approve_chemical_compatibility[PP]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_materials_are_explicit_and_never_approve_chemical_compatibility[PPS]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_fluid_change_drives_actual_properties[\u4e59\u4e8c\u9187\u6c34\u6eb6\u6db2]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_fluid_change_drives_actual_properties[\u4e19\u4e8c\u9187\u6c34\u6eb6\u6db2]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_fluid_change_drives_actual_properties[\u4e59\u9187]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_fluid_change_drives_actual_properties[\u7532\u9187]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_unknown_chemical_properties_cannot_fall_back_to_water[\u4e19\u916e]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_unknown_chemical_properties_cannot_fall_back_to_water[IPA \u7570\u4e19\u9187]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_unknown_chemical_properties_cannot_fall_back_to_water[\u6c61\u6c34\uff0f\u6df7\u5408\u5ee2\u6db2]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_unknown_chemical_properties_cannot_fall_back_to_water[\u9e7d\u9178]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_unknown_chemical_properties_cannot_fall_back_to_water[\u786b\u9178]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_unknown_chemical_properties_cannot_fall_back_to_water[\u6c2b\u6c1f\u9178]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_unknown_chemical_properties_cannot_fall_back_to_water[\u6c2b\u6c27\u5316\u9209]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_unknown_chemical_properties_cannot_fall_back_to_water[\u904e\u6c27\u5316\u6c2b]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_unknown_chemical_properties_cannot_fall_back_to_water[\u81ea\u8a02\u6db2\u9ad4]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_small_pipe_and_high_pressure_loss_warn_in_same_form" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_inactive_drafts_do_not_poison_liquid_calculation" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_duct_thickness_boundary_and_source[460-0.6-#24]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_duct_thickness_boundary_and_source[461-0.8-#22]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_duct_thickness_boundary_and_source[1220-0.8-#22]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_duct_thickness_boundary_and_source[1221-1-#20]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_duct_thickness_boundary_and_source[1831-1.2-#18]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_insulation_changes_with_humidity_and_has_energy_balance" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_vacuum_absolute_unit_equivalence_and_pump_limits" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[NaN-liquid-flow]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[NaN-liquid-liquid_t]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[NaN-liquid-velocity]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[NaN-vacuum-vacuum_p]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[NaN-vacuum-pump_l_s]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[inf-liquid-flow]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[inf-liquid-liquid_t]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[inf-liquid-velocity]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[inf-vacuum-vacuum_p]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[inf-vacuum-pump_l_s]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[-inf-liquid-flow]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[-inf-liquid-liquid_t]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[-inf-liquid-velocity]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[-inf-vacuum-vacuum_p]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_nonfinite_never_becomes_a_valid_result[-inf-vacuum-pump_l_s]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_small_engineering_values_are_not_displayed_as_zero" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_insulation_cannot_use_bore_or_stale_smaller_outside_diameter" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_manual_properties_cannot_bypass_known_pure_liquid_phase[\u6e05\u6c34]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_manual_properties_cannot_bypass_known_pure_liquid_phase[UPW\uff0fDI\uff0fRO]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_manual_properties_cannot_bypass_known_pure_liquid_phase[\u4e59\u9187]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_manual_properties_cannot_bypass_known_pure_liquid_phase[\u7532\u9187]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_manual_properties_cannot_bypass_known_pure_liquid_phase[\u4e19\u916e]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_valid_manual_transport_properties_are_preserved" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_pure_water_cannot_silently_use_metastable_subzero_state[\u4f9d\u4ecb\u8cea\u6a21\u578b]" time="0.000" /><testcase classname="integration.test_simple_facilities" name="test_pure_water_cannot_silently_use_metastable_subzero_state[\u4f9b\u61c9\u5546\u7269\u6027]" time="0.000" /></testsuite></testsuites>

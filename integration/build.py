@@ -113,7 +113,7 @@ def main():
                  "--version-file", ROOT / "integration/windows_version.txt",
                  "--icon", source / "facility_studio/resources/app.ico"]
     else:
-        args += ["--osx-bundle-identifier", "com.facilitystudio.engineeringfusion.preview571",
+        args += ["--osx-bundle-identifier", "com.facilitystudio.preview572",
                  "--icon", source / "facility_studio/resources/app.png"]
     args += [ROOT / "integration/entry.py"]
     run(args, evidence / "PyInstaller_Build.txt")
