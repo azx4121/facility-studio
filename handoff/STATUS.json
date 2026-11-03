@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-03T03:18:12.181382+00:00",
+  "updated_at": "2026-11-03T06:06:56.786195+00:00",
   "version": "5.7.2-preview.1",
   "branch": "sandbox/feed-readiness-20261103",
   "worktree": "/Users/chaoi/Facility-Studio-FEED-20261103",
@@ -7,29 +7,39 @@
   "evidence_root": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103",
   "complete_feed_capability": false,
   "capability": "limited_scope_FEED_support",
-  "delivery_complete": false,
+  "delivery_complete": true,
   "source_pytest": {
-    "passed": 217,
+    "passed": 220,
     "failed": 0,
-    "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/combined-r10.xml"
+    "skipped": 0,
+    "exit_code": 0,
+    "source_commit": "be1b0cc7a3c52346b27bb8fba1d0e065ebd14f35",
+    "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/Source-be1b0cc/pytest.xml"
   },
   "native_source_gui": {
-    "passed": 35,
+    "passed": 52,
     "failed": 0,
-    "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/Native_GUI-r3.json"
+    "host": "Linux Xvfb native Tk",
+    "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/Source-be1b0cc/Native_GUI.json"
   },
-  "localization_checks": 6574,
+  "localization_checks": 6581,
   "mac_build": {
-    "state": "candidate_frozen_acceptance_passed_not_delivered",
-    "path": "/Users/chaoi/Facility-Studio-5.7.2-Review-85cff1f",
+    "state": "frozen_and_relocated_offline_passed",
+    "path": "/Users/chaoi/Facility-Studio-5.7.2-Review-be1b0cc",
+    "source_commit": "be1b0cc7a3c52346b27bb8fba1d0e065ebd14f35",
     "core_checks": 31,
-    "gui_checks": 37,
-    "latest_relocated_offline_verification": "pending"
+    "gui_checks": 52,
+    "offline_command_scenarios": 9,
+    "dossier_cli_scenarios": 3,
+    "bundle_identifier": "com.facilitystudio.preview572",
+    "evidence": "/Users/chaoi/Facility-Studio-5.7.2-Review-be1b0cc/移機離線驗收/Offline_Verification.json",
+    "archive_sha256": "7e04f4fd162ca430a0ec305bf31502ce130f6f3941eb71549aa5500a2a5d7c69"
   },
   "windows_ci": {
-    "state": "in_progress_at_checkpoint",
-    "run_id": 41571021522,
-    "url": "https://github.com/azx4121/facility-studio/actions/runs/41571021522"
+    "state": "success",
+    "run_id": 41584428775,
+    "url": "https://github.com/azx4121/facility-studio/actions/runs/41584428775",
+    "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/CI-be1b0cc.json"
   },
   "remaining_scopes": [
     "multi_zone_pressure_network",
@@ -46,35 +56,90 @@
     "successful_batches": 5,
     "output_tokens": 2330,
     "task": "public UI translation only; independently reviewed",
-    "first_attempt": "HTTP 501 for unsupported format=json; retried using previously verified request format"
+    "first_attempt": "HTTP 501 for unsupported format=json; retried using previously verified request format",
+    "latest_review": {
+      "model": "qwen3.8:27b",
+      "elapsed_seconds": 88.26,
+      "output_tokens": 950,
+      "bounded_partial_review": true,
+      "code_changes_from_model": false,
+      "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/qwen-npsh-review-r12.json"
+    }
   },
-  "claude_not_before": "2026-11-03T13:05:00+08:00",
   "original_delivery_preserved": true,
   "baseline_status": "STATUS_5.7.1_ARCHIVE.json",
   "published": false,
   "merged_main": false,
-  "source_commit": "85cff1f8e597f243f60d9a20fb2233f1ca2c291b",
-  "quota_checkpoint": "User requested preserving Codex quota for 13:05 Claude handoff; no further feature expansion or repeated tests before handoff.",
+  "source_commit": "be1b0cc7a3c52346b27bb8fba1d0e065ebd14f35",
+  "quota_checkpoint": "Claude takeover cancelled by user; Codex continues with bounded relevant verification.",
   "field_audits": {
     "macos": {
       "checks": 7998,
-      "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/fields-macos-r9.json"
+      "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/Dashboard-be1b0cc/engineering-dashboard-macos-source/all-fields-100.json",
+      "source_commit": "be1b0cc7a3c52346b27bb8fba1d0e065ebd14f35",
+      "scenarios": 100,
+      "host": "Linux source validation"
     },
     "windows_source": {
       "checks": 7998,
-      "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/fields-windows-r10.json"
+      "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/Dashboard-be1b0cc/engineering-dashboard-windows-source/all-fields-100.json",
+      "source_commit": "be1b0cc7a3c52346b27bb8fba1d0e065ebd14f35",
+      "scenarios": 100,
+      "host": "Linux source validation"
     }
   },
   "dashboard_ci": {
-    "state": "in_progress_at_checkpoint",
-    "run_id": 41571021461
+    "state": "success",
+    "run_id": 41584428803,
+    "url": "https://github.com/azx4121/facility-studio/actions/runs/41584428803",
+    "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/Dashboard_Verification_be1b0cc.json"
   },
   "release_blockers": [
-    "verify unsaved design-dossier draft guard on main-window close and workbench close",
-    "give new Mac candidate a distinct bundle identifier and rebuild",
-    "complete latest relocated/offline and Windows native acceptance",
-    "independent Claude review"
+    "Full FEED engineering scope, project standards/vendor data and qualified engineering acceptance remain incomplete; software preview acceptance is passed."
   ],
   "claude_automation_id": "claude-facility-studio-11-3-13-05",
-  "claude_automation_updated_to_new_worktree": true
+  "owner": "Codex",
+  "claude_handoff": "revoked_by_user",
+  "targeted_current_pytest": {
+    "passed": 53,
+    "failed": 0,
+    "exit_code": 0,
+    "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/codex-resume-r11.xml"
+  },
+  "claude_automation_deleted": true,
+  "targeted_navigation_gui": {
+    "passed": 5,
+    "failed": 0,
+    "exit_code": 0,
+    "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/navigation-gui-r13.xml",
+    "counterexample": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/navigation-before-r13.json"
+  },
+  "delivery_path": "/Users/chaoi/Facility-Studio-5.7.2-交付-be1b0cc",
+  "drive_folder": "https://drive.google.com/drive/folders/11meqqhIZibASCU4fnNnn6vptgBdhX2Hg",
+  "full_source_suites": {
+    "passed": 27,
+    "failed": 0,
+    "exit_codes": [
+      0
+    ],
+    "evidence": "/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/Source-be1b0cc/full/Source_Suite_Results.json"
+  },
+  "windows_native": {
+    "source_suites": 27,
+    "source_pytest": 36,
+    "frozen_core": 31,
+    "frozen_gui": 52,
+    "installed_core": 31,
+    "installed_gui": 52,
+    "hosts": [
+      "windows-2022",
+      "windows-2025"
+    ],
+    "installer_nonempty_destination_exit_code": 2,
+    "installer_success_exit_code": 0,
+    "uninstall_success_exit_code": 0,
+    "uninstall_preserves_added_user_files": true
+  },
+  "delivery_summary": "/Users/chaoi/Facility-Studio-5.7.2-交付-be1b0cc/交付驗證摘要.json",
+  "delivery_scope": "5.7.2 isolated software preview; not complete FEED engineering delivery"
 }

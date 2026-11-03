@@ -31,3 +31,20 @@ GitHub 全欄位工作流另找到新增 NPSH 開關對非法文字未攔截；�
 交付前新增反例發現並修正兩項資料保留缺陷：附件的隨機名稱碰撞時，原先錯誤清理可能刪到已存在的檔案；現在只清理本次成功建立而寫入失敗的副本，碰撞保持原檔完整。另限制儲存的設計 JSON 與讀取端同為 4 MiB，避免存得下卻讀不回。`counterexamples-before-r7.xml` 保存兩項真實失敗，修正後結果見 `combined-r7.xml`。碰撞反例亦已加入封裝內操作驗收。906934d 的第一次 Mac 封裝雖通過當時驗收，因這兩項新反例列為先前候選，不可作最終交付。
 
 13:05 後先讀本分支與最新 STATUS，再決定審查／修改。不要把原 5.7.1 已交付誤認為本分支或完整 FEED 已完成，也不要直接發布未驗收分支。保留先前時間、帳號、安全與發布界線。
+
+
+## Codex 接續完成本輪軟體驗收（2026-11-03）
+
+使用者取消 Claude 接管後，只終止本任務 Claude 程序，保留其提交及所有未提交檔案。`CLAUDE_HANDOFF_REVOKED.json` 與 dispatcher 防護已提交；實測拒絕接管退出碼 3、未發生模型 API 呼叫。
+
+產品提交 `be1b0cc7a3c52346b27bb8fba1d0e065ebd14f35`：修正四段驗收文字漏譯，以及只切換文件就誤報未存變更。保留並驗證主視窗／工作台關閉時的設計草稿保護、同視窗重用與獨立 Mac bundle identifier。反例 `navigation-before-r13.json` 顯示修正前純瀏覽使 dirty 變成 true；新增原生 GUI 及封裝驗收已通過。
+
+同版結果：220 項 pytest、27 套完整來源回歸；Windows 原生另有 27 套回歸及 36 項 pytest。兩份來源各 100 組條件／7,998 項欄位檢查通過。Mac 與 Windows 成品各 31 項核心、52 項操作檢查；Mac 完成 9 種離線移機命令情境。Windows 2022／2025 均通過同 SHA 套件、安裝、非空資料夾拒絕覆寫及移除保留額外檔案。Mac 與 Windows 各 106 個產品來源雜湊均與實際 Build Manifest 相符。
+
+本機 `qwen3.8:27b` 真實執行 88.26 秒、輸出 950 tokens；僅做有限範圍吸入公式複核，輸出達設定上限，不當成完整獨立工程審查，未因此修改方程式。
+
+CI：https://github.com/azx4121/facility-studio/actions/runs/41584428775
+來源檢核：https://github.com/azx4121/facility-studio/actions/runs/41584428803
+本機交付：`/Users/chaoi/Facility-Studio-5.7.2-交付-be1b0cc`。雲端：https://drive.google.com/drive/folders/11meqqhIZibASCU4fnNnn6vptgBdhX2Hg 。完整證據位於 `/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/Delivery_Evidence_be1b0cc`，另附交付證據 ZIP。
+
+本輪完成的是獨立測試版的功能／UX 修正及跨平台軟體驗收。完整 FEED 的管網、多區壓差、保護協調、產品資料及跨專業工程交付仍依 `FEED_GAPS.md` 接續。沒有合併 main、公開 Release、取代正式 App，亦未把文件齊備或 AI 審閱稱為工程認證。
