@@ -250,6 +250,9 @@ def assess_main(r):
         )
     from .gas_catalog import phase_warnings
     for key, g in r["gas"].items():
+        if g.get("velocity_warnings"):
+            finding(items, "特氣 " + key + " 流速依據", "待資料",
+                    "；".join(g["velocity_warnings"]), "gas" + key + "_velocity")
         if g.get("standard_lpm", 0) > 0 and "phase_status" in g and phase_warnings(g):
             finding(
                 items,

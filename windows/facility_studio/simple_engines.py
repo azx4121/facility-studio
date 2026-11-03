@@ -6,7 +6,7 @@ from .grounding import equipment_pe
 from .data import (NFB_SIZES, PIPE_DB, WIRE_DB, FFU_SIZES, ROUGHNESS_MM, HVAC_PIPES, HVAC_PIPE_REFERENCES,
                    STANDARD_MOTOR_KW)
 from .errors import ValidationError
-from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, custom_name, evaluate_gas_phase, saturation_pressure_kpa, phase_warnings
+from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, custom_name, evaluate_gas_phase, saturation_pressure_kpa, phase_warnings, velocity_warnings
 from .quick_tools import (
     UNITS,
     UNIT_ALIASES,
@@ -365,7 +365,7 @@ def compressed_air(data):
     phase = evaluate_gas_phase(gas, temperature, absolute) if standard > 0 else None
     return dict(
         tool="gas",
-        warnings=phase_warnings(phase),
+        warnings=phase_warnings(phase) + velocity_warnings(gas, velocity, speed, standard),
         flow_basis=flow_basis,
         gas=gas,
         custom_name=name,

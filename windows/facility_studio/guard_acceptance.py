@@ -40,6 +40,12 @@ def run(root, app, check):
                   page.result is not None and page.result['liquefaction_risk'] is risk
                   and page.banner.label.cget('background') == Theme.TONES[tone][1]
                   and all(w in tool_report(page.result, page.data()) for w in page.result['warnings']))
+        page.variables['gas'].set('N2')
+        page.variables['velocity'].set('100')
+        page.calculate()
+        check('custom gas velocity triggers reference warning',
+              any('流速' in w for w in page.result['warnings'])
+              and page.banner.label.cget('background') == Theme.TONES['warning'][1])
         app.show_tool('duct')
         page = app.active_page()
         for key, value in {'check_path': '1', 'pressure': '1', 'length': '100', 'equipment': '100'}.items():

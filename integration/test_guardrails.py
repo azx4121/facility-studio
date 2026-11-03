@@ -346,3 +346,27 @@ def test_copy_or_export_does_not_hide_workbench_quality_warning(tmp_path, monkey
         assert app.result['quality']['status'] in app.status.cget('text')
     finally:
         root.destroy()
+
+
+@pytest.mark.parametrize('gas,velocity', [('N2', '100'), ('H2', '100'), ('SiH4', '20')])
+def test_gas_custom_velocity_needs_visible_reference_review(simple, gas, velocity):
+    _, app = simple
+    app.show_tool('gas')
+    page = app.active_page()
+    page.variables['gas'].set(gas)
+    page.variables['velocity'].set(velocity)
+    page.variables['flow'].set('10000')
+    page.calculate()
+    assert page.result is not None
+    assert any('流速' in w for w in page.result['warnings'])
+    assert page.status.cget('style') != 'Simple.Good.TLabel'
+    assert all(w in tool_report(page.result, page.data()) for w in page.result['warnings'])
+
+
+@pytest.mark.parametrize('gas,velocity', [('N2', '100'), ('H2', '100'), ('SiH4', '20')])
+def test_workbench_custom_velocity_is_pending_reference(gas, velocity):
+    p = default_project()
+    p['inputs'].update(gas1_type=gas, gas1_q='10000', gas1_v_mode='自訂流速', gas1_velocity=velocity)
+    result = calculate(p)
+    assert any('流速' in w for w in result['gas']['1']['warnings'])
+    assert any('流速依據' in row['name'] and row['status'] == '待資料' for row in result['quality']['items'])

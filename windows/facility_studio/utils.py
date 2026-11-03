@@ -22,6 +22,7 @@ from .gas_catalog import (
     custom_name,
     evaluate_gas_phase,
     phase_warnings,
+    velocity_warnings,
     reference_velocity,
     saturation_pressure_kpa,
 )
@@ -814,7 +815,9 @@ def gas_result(i, warnings):
         if qstd and row is None:
             raise InputError(f"{typ} 超過原始管材表範圍；不可把最大管徑當作符合")
         phase = evaluate_gas_phase(typ, temp, pa / 1000.0) if qstd > 0 and index < 4 else None
-        warnings.extend(f"特氣 {index}｜{message}" for message in phase_warnings(phase))
+        actual_velocity = qactual / 60000 / (math.pi * (row["id"] / 1000) ** 2 / 4) if row else 0
+        speed_warnings = velocity_warnings(typ, vmax, actual_velocity, qstd) if index < 4 else []
+        warnings.extend(f"特氣 {index}｜{message}" for message in phase_warnings(phase) + speed_warnings)
         result[str(index)] = {
             "type": typ,
             **({"custom_name": name} if name else {}),
@@ -828,7 +831,8 @@ def gas_result(i, warnings):
                 qactual / 60000 / (math.pi * (row["id"] / 1000) ** 2 / 4) if row else 0
             ),
             "velocity_limit_mps": vmax,
-            "warnings": phase_warnings(phase),
+            "warnings": phase_warnings(phase) + speed_warnings,
+            "velocity_warnings": speed_warnings,
             **({"phase_status": phase["phase_status"], "liquefaction_risk": phase["liquefaction_risk"], "vapor_pressure_kpa": phase["vapor_pressure_kpa"]} if phase is not None else {}),
         }
     warnings.extend(

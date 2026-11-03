@@ -180,6 +180,20 @@ def phase_warnings(phase):
     return []
 
 
+def velocity_warnings(gas, limit, actual, demand):
+    """Review overrides against existing references, never invent safe limits."""
+    if not demand:
+        return []
+    reference = reference_velocity(gas)
+    if reference is None:
+        return ["此氣體沒有內建流速參考；指定上限與計算流速須依同工況原廠／專案依據確認。"]
+    if limit > reference + 1e-9:
+        return ["指定流速上限高於內建參考：" + f"{limit:g} > {reference:g} m/s"
+                + "；計算流速：" + f"{actual:.2f} m/s"
+                + "。內建參考不是安全核定值，請確認同工況管材、壓力與設備依據。"]
+    return []
+
+
 def reference_velocity(gas):
     return GAS_DESIGN_VELOCITY_MPS.get(gas) if gas in GAS_NAMES else None
 
