@@ -240,6 +240,11 @@ if args.gui:
     root=tk.Tk();app=SimpleToolsApp(root);app.show_tool('air');root.update()
     page=app.pages['air'];page.variables['compare'].set('1');page.calculate();root.update()
     win=page.open_air_chart();root.update()
+    from facility_studio import i18n
+    i18n.set_language('en',persist=False);root.update()
+    check(win.title()==i18n.translate('空氣狀態｜完整空氣線圖','en'),'Actual chart title did not switch to English')
+    i18n.set_language('zh-Hant',persist=False);root.update()
+    check(win.title()=='空氣狀態｜完整空氣線圖','Actual chart title did not switch back')
     snapshot=next(child for child in win.winfo_children() if isinstance(child,FullAirChart))
     original=dict(snapshot.state)
     page.variables['temperature'].set('not a temperature');page.calculate();root.update()

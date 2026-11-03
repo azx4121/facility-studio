@@ -56,6 +56,7 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
     from facility_studio.equipment_io import Cell
     from facility_studio.equipment_analysis import analyze_equipment, equipment_report
     from facility_studio.gas_catalog import CUSTOM_GAS
+    from facility_studio.lighting_report import CONTEXT_FIELDS
 
     rng = random.Random(20261015)
     total_checks = 0
@@ -186,9 +187,15 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
         if f["key"].startswith("envelope_") and f["key"] not in ("envelope_w_m2", "envelope_mode"):
             simple_active_overrides.setdefault(("heat_loads", f["key"]), {"envelope_mode": "面積推估外牆／樓板"})
 
+    # Report metadata is explicitly declared as text. A blank numeric default
+    # must still fail numeric auditing, never silently become a text field.
+    lighting_text_fields = {key for key, _ in CONTEXT_FIELDS}
+    check(lighting_text_fields <= {f["key"] for f in TOOLS["lighting"]["fields"]},
+          "Declared lighting metadata must be present in the audited schema")
     for tool, spec in TOOLS.items():
         for f in spec["fields"]:
             key = f["key"]
+            report_text = tool == "lighting" and key in lighting_text_fields
             base = defaults(tool)
             if tool == 'water':
                 base['insulation_outer_mm'] = '48.3'
@@ -217,7 +224,9 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
 
             alt = dict(base)
             cur = alt[key]
-            if key in simple_alt_values and simple_alt_values[key] != cur:
+            if report_text:
+                alt[key] = f"Audit {key} metadata B 20261103"
+            elif key in simple_alt_values and simple_alt_values[key] != cur:
                 alt[key] = simple_alt_values[key]
             elif f.get("options"):
                 opts = [o for o in f["options"] if o != cur]
@@ -247,7 +256,24 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
                 res1 != res0 or pres1 != pres0 or rep1_zh != rep0_zh or sum1 != adopted_summary(tool, base),
                 f"Simple field {tool}.{key} had no effect on result or report",
             )
-            if key not in ("mau_input_kw", "process_input_kw", "chiller_cop", "chiller_input_kw"):
+            if report_text:
+                # Identity/source text must appear in every report, but must not
+                # change the calculation or masquerade as a numerical input.
+                check(res1["report_context"][key] == alt[key],
+                      f"Lighting metadata {key} was not captured verbatim")
+                for language, text_report in (("zh-Hant", rep1_zh), ("en", rep1_en)):
+                    rendered = str(html_report(res1, language=language))
+                    check(alt[key] in text_report and alt[key] in rendered,
+                          f"Lighting metadata {key} missing from TXT/HTML ({language})")
+                    field_coverage["reports_verified"] += 1
+                engineering0 = {k: v for k, v in res0.items() if k not in {"report_context", "adopted_inputs"}}
+                engineering1 = {k: v for k, v in res1.items() if k not in {"report_context", "adopted_inputs"}}
+                check(engineering1 == engineering0 and pres1 == pres0,
+                      f"Report-only metadata {key} changed the engineering result")
+                limit = calculate_tool(tool, dict(base, **{key: "x" * 500}))
+                check(limit["report_context"][key] == "x" * 500,
+                      f"Lighting metadata {key} rejected its valid 500-character boundary")
+            elif key not in ("mau_input_kw", "process_input_kw", "chiller_cop", "chiller_input_kw"):
                 # Every standalone calculation field must change presentation(result) or adopted_summary
                 check(
                     pres1 != pres0 or sum1 != adopted_summary(tool, base),
@@ -256,16 +282,21 @@ def run_audit(platform_name: str = "windows", iterations: int = 100) -> dict:
             check(CJK.search(rep1_en) is None, f"Untranslated CJK in {tool}.{key} perturbed report")
             check(numerals(rep1_zh) == numerals(rep1_en), f"Numeral mismatch in {tool}.{key} perturbed report")
 
-            # Invalid input must raise ValidationError with field_name == key
-            bad = dict(base)
-            bad[key] = ("invalid_value_\n" if key == "gas_name" else
-                        "invalid_\x00_reference" if key in {'property_reference', 'vapor_reference', 'pump_curve_reference', 'npsh_margin_reference'} else "not_a_valid_input")
-            try:
-                calculate_tool(tool, bad)
-            except ValidationError as exc:
-                check(exc.field_name == key, f"Expected field_name={key}, got {exc.field_name} for {tool}.{key}")
-            else:
-                raise AssertionError(f"Simple field {tool}.{key} accepted invalid input {bad[key]!r}")
+            # Use each declared field's validation contract: arbitrary text is
+            # valid metadata, but oversized/non-text metadata must be rejected.
+            invalid_values = (["x" * 501, 123, None] if report_text else [
+                "invalid_value_\n" if key == "gas_name" else
+                "invalid_\x00_reference" if key in {'property_reference', 'vapor_reference', 'pump_curve_reference', 'npsh_margin_reference'} else "not_a_valid_input"
+            ])
+            for invalid in invalid_values:
+                bad = dict(base)
+                bad[key] = invalid
+                try:
+                    calculate_tool(tool, bad)
+                except ValidationError as exc:
+                    check(exc.field_name == key, f"Expected field_name={key}, got {exc.field_name} for {tool}.{key}")
+                else:
+                    raise AssertionError(f"Simple field {tool}.{key} accepted invalid input {bad[key]!r}")
 
             field_coverage["simple_fields_tested"] += 1
 

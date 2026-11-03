@@ -6,7 +6,7 @@ Open **Lighting** and choose illuminance estimation or luminaire-count calculati
 
 Luminaire output is **lumens (lm)**; illuminance is **lux = lm/m²**. Watts alone do not determine lux. Use manufacturer lumens when known; an LED-watts estimate must retain its assumed efficacy.
 
-Windows **win.5 and later (currently win.8)**: the catalogue-U/room-index action retains the current area, calculation mode and lumen source. For m², ping or volume it asks you to select length × width and enter the actual dimensions; it never adopts hidden dimension drafts. K requires actual geometry, and U still comes from the manufacturer's photometric/reflectance data. See [F07 correction and acceptance](../2026-10-18-windows-lighting-f07.md). macOS mac.6 has not received this interaction fix.
+This guide follows the **V5.7.3 preview.1 isolated candidate**, with matching Windows/macOS source. Older downloads may differ. Catalogue-U/room-index checks preserve area, calculation mode and lumen source. Select length × width and enter actual dimensions when geometry is needed. Hidden drafts are not adopted; K supports catalogue lookup and does not generate U.
 
 <a id="case-08"></a>
 ## Case 08: 90 m³, 3 m height, 40 W × 10 luminaires
@@ -30,7 +30,7 @@ Choose count calculation, area 30 m², target 500 lux, manufacturer output 4,000
 
 The rounded-up count gives 512 lux and 0.32 kW. Seven luminaires give only 448 lux.
 
-U, M and 100 lm/W are example assumptions. Confirm luminaire data, reflectance, installation height, cleaning and aging. This tool estimates average illuminance; it does not simulate photometric files, glare, point illuminance or uniformity.
+U, M and 100 lm/W are example assumptions. Confirm luminaire data, reflectance, installation height, cleaning and aging. The lumen method estimates average illuminance without point illuminance or uniformity. Use the separate Layout / direct illuminance workspace for sampled direct light. Neither method establishes glare or regulatory compliance.
 
 Inputs: [08](../examples/08-lighting.json), [09](../examples/09-lighting.json). [Windows win.7 source checks](../evidence/2026-10-18-audit-six/windows-use-cases.json).
 
@@ -42,8 +42,15 @@ Lighting result export defaults to HTML. Open it and select Print / Save as PDF 
 
 The report lists adopted geometry, average illuminance, luminaire schedule, total complete-luminaire flux, W, W/m², and W/m²/100 lx using the actual calculated average. The normalized metric is not applicable at zero illuminance. Hidden length, width and mounting-height drafts are never presented as adopted geometry.
 
-Emin, Emax, uniformity, surface illuminance, grids, isolux contours, reflections and UGR remain explicitly uncalculated. This is not a DIALux-equivalent simulation or a compliance assessment. Point calculation needs manufacturer IES/LDT photometry, positions/orientations, room and workplane geometry, and a grid; reflection results additionally need reflectances and an appropriate solver.
+In the **lumen-method report**, Emin, Emax, uniformity, surface illuminance, grids, isolux contours, reflections and UGR remain explicitly uncalculated. This is not a DIALux-equivalent simulation or a compliance assessment. Point calculation needs manufacturer IES/LDT photometry, positions/orientations, room and workplane geometry, and a grid; reflection results additionally need reflectances and an appropriate solver.
 
 ## Layout / direct illuminance (second-stage candidate)
 
 A separate workspace imports a strict supported subset of IES/LDT, accepts explicit fixture positions and file-C0 yaw, and calculates sampled horizontal-plane direct illuminance with uniformity and interpolated isolux contours. It exports HTML/CSV/JSON. It does not calculate reflections, shadows, daylight, UGR or compliance and is not DIALux-equivalent. The existing lumen method remains independent. See the [scope and validation record](../2026-11-03-direct-lighting.md).
+
+
+Beginner sequence: import a source → enter room/workplane/grid/maintenance → select source ID and rows/columns, then generate an editable layout or fill `ID,x,y,z,yaw,scale` → check orientation → calculate → export HTML/CSV/JSON. Generating a layout replaces the schedule. Maintenance defaults to 1; lumen-method U/M are not inherited. Changed sources, conditions or layout require recalculation, including changes during a save dialog.
+
+ID means photometry source ID. The origin is lower left, +X right, +Y up and z above floor; every luminaire faces down with no tilt. At yaw=0, file C0 points along +X and C90 along +Y. Positive yaw is counterclockwise from above. Confirm the manufacturer's file axes rather than guessing the housing front.
+
+**Saving:** imports are snapshots; reimport changed files explicitly. CSV/JSON preserve results and traceability but this version cannot reopen a direct-lighting project. Retain sources, inputs and layout before closing. Refine the grid to check convergence; sampled extrema are not continuous extrema. Reflections, shadows, daylight and UGR are excluded, and light-output scale is not an electrical-power multiplier.

@@ -106,7 +106,7 @@ jobs:
         run: |
           set -euo pipefail
           python tools/verify_capacity_planning.py --platform "${{ matrix.source }}" --output "$RUNNER_TEMP/engineering-dashboard/capacity-examples"
-          xvfb-run -a -s "-screen 0 1920x1440x24" python -m pytest integration/test_capacity_planning.py integration/test_capacity_controller.py integration/test_capacity_gui.py -q --junitxml="$RUNNER_TEMP/engineering-dashboard/capacity.xml"
+          xvfb-run -a -s "-screen 0 1920x1440x24" python -m pytest integration/test_language_lifecycle.py integration/test_capacity_planning.py integration/test_capacity_controller.py integration/test_capacity_gui.py -q --junitxml="$RUNNER_TEMP/engineering-dashboard/capacity.xml"
       - name: Historical Windows installer integrity fixtures
         if: matrix.source == 'windows'
         shell: bash

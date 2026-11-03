@@ -2,7 +2,9 @@
 
 [首頁與下載](../../README.md) · [中文跟做教學](../guides/workbench.md) · [English](#english)
 
-**V5.7.1 已內建教學，日常使用不必另外下載教學包。**
+**V5.7.3 preview.1 獨立候選版已內建教學，日常使用不必另外下載教學包。**
+
+本次修訂對照候選版實際操作，新增完整空氣線圖、直接照度配置、容量／擴建規劃，以及輸入變更後的重算／匯出規則。Windows 與 macOS 來源使用相同章節；本教學不代表舊下載檔已具備候選功能，也不代表原生交付已驗收。
 
 簡易工具按「本工具教學」可看目前工具；完整工作台按「新手教學」可跟做第一份報告。教學左側附練習檔案，先完成前六步，其餘章節按需要閱讀。
 
@@ -27,11 +29,11 @@
 
 本版對照報告：Windows 的[第一案](windows/01_Expected_Report.txt)／[第二案空調箱](windows/02_Expected_AHU_Report.txt)，macOS 的[第一案](macos/01_Expected_Report.txt)／[第二案空調箱](macos/02_Expected_AHU_Report.txt)。各平台 ZIP 使用對應的新報告；教學根目錄舊報告及通用 ZIP 保留作歷史資料。
 
-案例是合成練習配置，刻意保留未知原廠性能與現場條件。「待補資料」需要補真實資料，計算完成不代表正式選型合格。`workbench-map.svg`／`.en.svg` 是控制項位置示意圖，並非 GUI 截圖。
+案例是合成練習配置，刻意保留未知原廠性能與現場條件。「待補資料」需要補真實資料，計算完成不代表正式選型合格。舊 `workbench-map.svg`／`.en.svg` 保留作歷史位置示意，不是本候選版 GUI 截圖；現行教學以按鈕名稱與操作表定位。
 
 ## 驗證與原始資料
 
-[本候選版驗收狀態](../../handoff/STATUS.json)。以下屬歷史紀錄：[Windows 教學檢查](verification-windows.json) · [macOS 教學檢查](verification-macos.json) · [Windows win.8 原生交付](../2026-10-18-windows-report-audit.md) · [mac.6 原生交付](../2026-10-16-gemini-integration-review.md)。
+[歷史交付狀態（731e416，不是本候選版驗收）](../../handoff/STATUS.json) 僅記錄先前提交與交付；其中的完成標示、路徑及 CI 不適用於本次整合候選版。現行驗收須核對本次分支的實際提交與成品，不能沿用舊狀態判定完成。其他歷史紀錄：[Windows 教學檢查](verification-windows.json) · [macOS 教學檢查](verification-macos.json) · [Windows win.8 原生交付](../2026-10-18-windows-report-audit.md) · [mac.6 原生交付](../2026-10-16-gemini-integration-review.md)。
 
 <details>
 <summary>開發者：重現教學數值與報告</summary>
@@ -48,9 +50,11 @@ python3 docs/tutorial/verify_tutorial.py --platform macos --output tutorial-maco
 <a id="english"></a>
 ## English
 
-V5.7.1 includes offline help. Use **This tool's guide** in a calculator or **Full workbench → Beginner tutorial** for a first report. Complete the first six sections; additional chapters are optional.
+V5.7.3 preview.1 includes updated offline help for the isolated candidate. Full psychrometric charts, direct-lighting layouts, capacity/expansion plans and stale-result handling are covered in both languages. This does not establish that older downloads include the features or that native delivery has passed acceptance. Use **This tool's guide** in a calculator or **Full workbench → Beginner tutorial** for a first report. Complete the first six sections; additional chapters are optional.
 
 To read without launching the app, download the tutorial package above, extract it, and open `START_HERE.html` in a browser. No Python is needed. Progress records reading in local browser storage; only external links need internet.
+
+The [historical delivery status for 731e416](../../handoff/STATUS.json) is not acceptance of this candidate. Its completion flag, paths and CI describe the earlier delivery; verify the actual current candidate commit and artifacts separately.
 
 Start with `01_Practice_AHU.json`, available from the tutorial sidebar, and save your own copy. **Open practice copy** directly loads the second MAU/staged-AHU example with a new project identity. All examples are synthetic and leave unconfirmed manufacturer/site conditions pending.
 

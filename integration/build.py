@@ -11,6 +11,11 @@ import shutil
 import subprocess
 import sys
 
+try:
+    from .acceptance_validation import validate_acceptance, validate_embedded_manifest
+except ImportError:  # Direct script invocation.
+    from acceptance_validation import validate_acceptance, validate_embedded_manifest
+
 ROOT = Path(__file__).resolve().parents[1]
 NAME = "Facility Studio 5.7.3 測試版"
 
@@ -135,13 +140,16 @@ def main():
         app = output / "dist" / NAME
         shutil.copy2(ROOT / "integration/README_繁體中文.md", app / "操作說明_繁體中文.md")
         executable = app / (NAME + ".exe")
+    validate_embedded_manifest(app, manifest["commit"])
     env = dict(os.environ, FACILITY_STUDIO_FUSION_DATA=str(output / "isolated-test-data"), FACILITY_TEST_BLOCK_NETWORK="1")
     run([executable, "--fusion-self-test", evidence / "Fusion_Acceptance.json"], evidence / "Fusion_Acceptance.log", env=env, timeout=180)
     run([executable, "--facilities-self-test", evidence / "Facilities_Acceptance.json"], evidence / "Facilities_Acceptance.log", env=env, timeout=180)
+    validate_acceptance(evidence / "Fusion_Acceptance.json", expected_commit=manifest["commit"])
+    validate_acceptance(evidence / "Facilities_Acceptance.json", expected_commit=manifest["commit"])
     if sys.platform == "win32":
         from windows_installer import build as build_installer, verify as verify_installer
         setup = build_installer(app, output, NAME, run)
-        verify_installer(setup, output, NAME, run, env)
+        verify_installer(setup, output, NAME, run, env, expected_commit=manifest["commit"])
     artifact = output / (("Facility-Studio-5.7.3-macOS-arm64.zip") if sys.platform == "darwin" else "Facility-Studio-5.7.3-Windows-x64-Portable.zip")
     if sys.platform == "darwin":
         run(["/usr/bin/ditto", "-c", "-k", "--sequesterRsrc", "--keepParent", app, artifact], evidence / "Archive.txt")

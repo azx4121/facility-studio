@@ -17,7 +17,7 @@ TUTORIAL_FILES = {
     "LICENSE", "LICENSE_GUIDE.md", "LICENSE_GUIDE.en.md", "LICENSE_LEGACY_MIT",
 }
 SECTIONS = {"start", "interface", "first-case", "inputs", "results", "export",
-            "utilities", "ahu", "recovery", "faq", "electrical", "duct", "gas", "lighting", "water", "air", "units", "equipment", "liquid", "vacuum", "cleanroom"}
+            "utilities", "ahu", "recovery", "faq", "electrical", "duct", "gas", "lighting", "water", "air", "units", "equipment", "liquid", "vacuum", "cleanroom", "design_review", "pump_suction", "capacity"}
 
 
 def prepare_tutorial(destination=None):

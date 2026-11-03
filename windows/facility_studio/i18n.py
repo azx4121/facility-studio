@@ -96,8 +96,17 @@ def set_language(value, *, persist=True):
     if not changed:
         return
     for listener in list(_listeners):
-        if hasattr(listener, "winfo_exists") and not listener.winfo_exists():
-            continue
+        if hasattr(listener, "winfo_exists"):
+            # A Python widget can outlive its destroyed Tcl interpreter.
+            # Prune only dead-widget probes; real translation errors still surface.
+            from tkinter import TclError
+            try:
+                exists = listener.winfo_exists()
+            except TclError:
+                exists = False
+            if not exists:
+                _listeners.discard(listener)
+                continue
         listener.refresh_language()
 
 

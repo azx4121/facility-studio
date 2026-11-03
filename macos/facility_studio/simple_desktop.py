@@ -2,7 +2,7 @@ from .simple_engines import SUPPLIES, ELECTRICAL_POWER_UNITS, MOTOR_POWER_UNITS,
 """Independent short forms are the default entry; the full workbench is optional."""
 
 from .localized_tk import tk
-from .localized_tk import ttk, filedialog, messagebox
+from .localized_tk import ttk, filedialog, messagebox, attach_window
 import re
 from urllib.parse import urlsplit
 
@@ -224,6 +224,7 @@ class SimplePage(ttk.Frame):
         if self.result is None:
             return
         win = tk.Toplevel(self)
+        attach_window(win)
         win.title("空氣狀態｜完整空氣線圖")
         width = min(1440, max(800, win.winfo_screenwidth() - 60))
         height = min(1000, max(600, win.winfo_screenheight() - 100))

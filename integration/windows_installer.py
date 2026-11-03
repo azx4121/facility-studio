@@ -4,6 +4,11 @@ from pathlib import Path
 import shutil
 import subprocess
 
+try:
+    from .acceptance_validation import validate_acceptance, validate_embedded_manifest
+except ImportError:  # Direct script invocation.
+    from acceptance_validation import validate_acceptance, validate_embedded_manifest
+
 
 def quoted(value):
     return str(value).replace("$", "$$").replace('"', '$\\"')
@@ -54,16 +59,21 @@ def build(app, output, name, runner):
     return setup
 
 
-def verify(setup, output, name, runner, env):
+def verify(setup, output, name, runner, env, *, expected_commit):
     # NSIS /D must be the last argument, unquoted even when it contains spaces.
     install = output / "installer acceptance"
     result = subprocess.run(f'"{setup}" /S /D={install}', timeout=180)
     if result.returncode:
         raise RuntimeError(f"Installer exited {result.returncode}")
+    validate_embedded_manifest(install, expected_commit)
     runner([install / (name + ".exe"), "--fusion-self-test", output / "evidence/Installed_Acceptance.json"],
            output / "evidence/Installed_Acceptance.log", env=env, timeout=180)
     runner([install / (name + ".exe"), "--facilities-self-test", output / "evidence/Installed_Facilities_Acceptance.json"],
            output / "evidence/Installed_Facilities_Acceptance.log", env=env, timeout=180)
+    validate_acceptance(output / "evidence/Installed_Acceptance.json",
+                        expected_commit=expected_commit)
+    validate_acceptance(output / "evidence/Installed_Facilities_Acceptance.json",
+                        expected_commit=expected_commit)
     marker = install / "user-added-file.txt"
     marker.write_text("preserve", encoding="utf-8")
     retry = subprocess.run(f'"{setup}" /S /D={install}', timeout=120)

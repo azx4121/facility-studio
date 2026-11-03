@@ -365,9 +365,15 @@ class WindowTitle:
         self.text = str(text)
         return self.original(i18n.translate(self.text))
 
-    def refresh_language(self):
+    def winfo_exists(self):
         window = self.window()
-        if window is not None and window.winfo_exists():
+        try:
+            return window is not None and bool(window.winfo_exists())
+        except native.TclError:
+            return False
+
+    def refresh_language(self):
+        if self.winfo_exists():
             self.original(i18n.translate(self.text))
 
 

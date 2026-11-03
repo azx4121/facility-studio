@@ -2,7 +2,7 @@
 
 [繁體中文](psychrometrics.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-Open **Psychrometrics in the sidebar**. Enter dry-bulb temperature in °C and relative humidity in %RH. Properties and the chart point update live. Atmospheric pressure defaults to 101.325 kPa(abs) and can be changed in advanced settings; chart curves follow the selected pressure. This quick tool uses dry bulb plus RH; the full workbench offers additional state-input combinations.
+This guide follows the **V5.7.3 preview.1 isolated candidate**. Open Psychrometrics and enter A dry bulb °C/RH. Enable the second state for B and choose whether B represents the room or coil leaving/supply air. Valid results update both points and differences. Advanced local atmospheric pressure is kPa(abs), default 101.325, shared by both states; do not enter gauge pressure.
 
 <a id="case-12"></a>
 ## Case 12: 35°C, 70% RH, 101.325 kPa(abs)
@@ -30,8 +30,14 @@ Change atmospheric pressure to 80 kPa. Results: 12.568 g/kg dry air, enthalpy 57
 
 At RH 0%, no finite dew point exists; the software does not invent one. Coil loads require dry-air mass flow and inlet/outlet states; a single plotted point does not determine an HVAC load.
 
-Actual native English macOS screen below uses **25°C / 50% RH at standard pressure**, not the 35°C case above:
-
-![Native English psychrometric chart on macOS](../images/macos-psychrometrics-en.png)
 
 Inputs: [12](../examples/12-air.json), [13](../examples/13-air.json). The original verifier independently checks humidity ratio/enthalpy against the Buck saturation-pressure correlation with 0.3% approximation tolerance: [results](../evidence/2026-10-18-audit-six/windows-use-cases.json).
+
+## Full chart and snapshots
+
+1. Obtain a valid result and open Enlarge psychrometric chart. Dry-bulb/humidity grids, 10–100% RH, enthalpy, wet-bulb and specific-volume families follow the current pressure.
+2. Read dry bulb °C horizontally and g/kg dry air on the right. The outer green scale is h; brown WB is wet bulb; purple v is specific volume. Enthalpy and wet bulb are different scales.
+3. Use zoom buttons or the wheel, drag to pan, and Fit / reset or double-click to restore the full chart. Maximize enlarges the window; Esc or Close exits.
+4. The enlarged window is an **opening-time snapshot**, not live. After A/B or pressure edits, obtain a valid main-page result, close the old chart and reopen it.
+
+The A/B connection compares endpoints, not an actual equipment process. Coil loads also require airflow, dry-air mass flow and the appropriate state basis; a plotted line does not certify equipment performance.
