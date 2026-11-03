@@ -33,6 +33,19 @@ def install(tools, field):
                 field("length", "最不利路徑直管長", "30", help="m"),
                 field("k_sum", "管件阻力係數總和", "4", advanced=True, help="ΣK")]+ins,
         units=dict(flow_unit="LPM"))
+    tools["liquid"]["fields"] += [
+        field("check_npsh", "加做泵浦吸入校核", "0", checkbox=True),
+        field("suction_surface_kpa", "液槽表面絕對壓力", "101.325", help="kPa(abs)；開放槽填當地大氣壓，密閉槽填液面實際絕壓"),
+        field("suction_level_m", "最低液面相對泵基準", "0", help="m；液面高於泵為正，低於泵為負"),
+        field("suction_nozzle_offset_m", "吸入口相對泵基準高度", "0", help="m；相對原廠 NPSH 基準面，高於為正；不同基準不可混用"),
+        field("suction_loss_kpa", "吸入側總壓損", "", help="kPa；含入口、吸入管、閥、濾器；非排出路徑，不能留空當零"),
+        field("vapor_pressure_kpa", "同工況泡點壓力", "", help="kPa(abs)；化學液／混合液須提供，不能沿用純水值"),
+        field("vapor_reference", "泡點壓力來源與工況", "", help="原廠或試驗資料；註明溫度及濃度"),
+        field("npshr_m", "工況原廠 NPSHr", "", help="m；依泵型、流量與轉速曲線，空白保留待資料"),
+        field("pump_curve_reference", "原廠泵曲線與工作點", "", help="型號、文件版次、流量及轉速；不自動視為原廠確認"),
+        field("npsh_margin_m", "本案 NPSH 額外裕度", "", help="m；加在原廠 NPSHr 上，依原廠／業主確認"),
+        field("npsh_margin_reference", "裕度採用依據", "", help="原廠／業主規範版次與工況；不預設通用裕度"),
+    ]
     tools["vacuum"] = dict(title="PV 真空快算", subtitle="在此頁輸入標準流量與真空絕壓，完成實際流量、管徑、流速與抽速限制檢查。",
         fields=[field("flow", "標準氣體流量", "100", units=("flow_unit", ("SLPM", "SCFM", "Sm³/h")), help="下方明列標準狀態氣體量，不是管內實際量"),
                 field("vacuum_p", "管內真空絕對壓力", "150", units=("vacuum_unit", ("Torr(abs)", "Pa(abs)", "kPa(abs)", "mbar(abs)"))),
@@ -55,6 +68,9 @@ def active(tool, key, data):
     if key in {"ambient_t", "ambient_rh", "insulation_k", "external_h", "dew_margin", "heat_limit", "contract_insulation_mm", "insulation_outer_mm"}:
         return data.get("insulate", "0") == "1"
     if tool == "liquid":
+        if key in {"suction_surface_kpa", "suction_level_m", "suction_nozzle_offset_m", "suction_loss_kpa", "vapor_pressure_kpa", "vapor_reference", "npshr_m", "pump_curve_reference", "npsh_margin_m", "npsh_margin_reference"}:
+            from .pump_suction import PURE
+            return data.get("check_npsh", "0") == "1" and (key not in {"vapor_pressure_kpa", "vapor_reference"} or data.get("liquid") not in PURE)
         if key in {"liquid_rho", "liquid_cp", "liquid_mu", "property_reference"}:
             return data.get("properties") == "供應商物性" or data.get("liquid") not in LIQUIDS[:6]
         if key == "concentration":

@@ -1,5 +1,7 @@
 # Facility Studio：Claude 接管與最終交付
 
+> **2026-11-03 最新接續：先讀 [CLAUDE_FEED_HANDOFF.md](CLAUDE_FEED_HANDOFF.md) 與 STATUS.json。使用者再次要求補足 FEED，現工作樹為 `/Users/chaoi/Facility-Studio-FEED-20261103`，隔離分支 `sandbox/feed-readiness-20261103`，5.7.2-preview.1。下列 5.7.1 完成交付及來源路徑為歷史，不能套用於新版；新版工作範圍與接管路徑以新文件為準。13:05 時間與安全界線不變。**
+
 ## 目前執行狀態與時間限制（優先）
 
 Claude **只能在2026-11-03 13:05（Asia/Taipei）後繼續**。之前由Codex完成本機開發、回歸與隔離交付，不呼叫Claude或Gemini模型。Codex的04:07是額度重置及中斷恢復檢查點，**不是停止時間**；使用者明確要求可用額度尚有時持續執行。不要為等待重置而停止可完成的工作。

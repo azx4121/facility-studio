@@ -2,10 +2,10 @@
 
 import os
 
-VERSION = "5.7.1"
+VERSION = "5.7.2"
 REVISION = "preview.1"
 if os.environ.get("FACILITY_STUDIO_SANDBOX"):
-    VERSION = "5.7.1"
+    VERSION = "5.7.2"
     REVISION = "preview.1"
 REPORT_VERSION = VERSION + " · macOS " + REVISION
 BUILD_VERSION = VERSION + "-" + REVISION

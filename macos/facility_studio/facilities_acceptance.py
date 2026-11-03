@@ -107,6 +107,8 @@ def run(destination):
                 ImageGrab.grab().save(Path(destination).parent / (tool + '_簡易工具.png'))
         for tool in ('water','air','electrical','pumps'):
             check(tool + ' 既有核心仍可計算', calculate_tool(tool, defaults(tool))['tool'] == tool)
+        from .design_acceptance import run as design_checks
+        design_checks(root, app, check)
     finally:
         root.destroy()
     output = dict(version=BUILD_VERSION, frozen=bool(getattr(sys, 'frozen', False)), checks=checks,

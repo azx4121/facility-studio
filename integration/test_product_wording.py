@@ -48,7 +48,7 @@ def test_installer_public_name_and_operation_guide_are_product_only():
     readme = (ROOT/'integration/README_繁體中文.md').read_text(encoding="utf-8")
     assert not BANNED.search(readme)
     build = (ROOT/'integration/build.py').read_text(encoding="utf-8")
-    assert 'NAME = "Facility Studio 5.7.1 測試版"' in build
+    assert 'NAME = "Facility Studio 5.7.2 測試版"' in build
     meta = (ROOT/'integration/windows_version.txt').read_text(encoding="utf-8")
     assert 'FacilityStudioEngineeringFusion' not in meta
     assert '五庫' not in meta
@@ -76,7 +76,7 @@ def test_bundled_tutorial_is_current_and_uses_product_wording(platform):
     with zipfile.ZipFile(ROOT/platform/'facility_studio/resources/beginner_tutorial.zip') as archive:
         page = archive.read('START_HERE.html').decode('utf-8')
         data = json.loads(re.search(r'id="tutorial-data">(.*?)(</script>)', page, re.S)[1])
-        assert '5.7.1' in data['labels']['zh-Hant']['offline']
+        assert '5.7.2' in data['labels']['zh-Hant']['offline']
         assert {'liquid', 'vacuum', 'cleanroom'} <= {c['id'] for c in data['content']['zh-Hant']}
         for name in archive.namelist():
             if name.endswith(('.html', '.txt')) and not name.upper().startswith('LICENSE'):

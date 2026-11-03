@@ -3660,3 +3660,271 @@ TEXT.update({
 })
 
 TEXT["主案已切換，請關閉並重新開啟工程模型設定。"] = "The project changed. Close and reopen engineering model settings."
+
+# Design document and suction UI; local suggestions independently reviewed.
+TEXT.update({'  不適用理由：': '  Not applicable reason:',
+ '  填報覆核者：': '  Reviewer:',
+ '  證據：': '  Evidence:',
+ ' kPa(abs)；吸入口估算靜壓 ': ' kPa(abs); estimated static pressure at suction inlet ',
+ ' kPa(abs)；最低液面相對泵 ': ' kPa(abs); minimum liquid level relative to pump ',
+ ' m；吸入總壓損 ': ' m; total suction pressure loss ',
+ ' m；額外裕度=': ' m; additional margin=',
+ 'Facility Studio 設計審查_': 'Facility Studio Design Review_',
+ 'Facility Studio｜設計依據與交付審查': 'Facility Studio | Design Basis and Delivery Review',
+ 'NPSHa=(液槽表面絕壓−蒸氣壓−吸入總壓損)/(ρg)+液面相對泵基準高度': 'NPSHa = (Liquid tank surface absolute pressure - Vapor pressure - Total suction '
+                                            'pressure loss) / (ρg) + Liquid level relative to pump datum height',
+ 'NPSHr 或額外裕度尚未齊備，不作選泵符合判定。': 'NPSHr or additional margin not yet complete; no pump selection compliance determination made.',
+ 'kPa(abs)；化學液／混合液須提供，不能沿用純水值': 'kPa(abs); chemical liquids and mixtures require their own bubble-point pressure, not a '
+                                'pure-water value',
+ 'kPa(abs)；開放槽填當地大氣壓，密閉槽填液面實際絕壓': 'kPa(abs); for open tanks, enter local atmospheric pressure; for closed tanks, enter actual '
+                                  'absolute pressure at liquid surface',
+ 'kPa；含入口、吸入管、閥、濾器；非排出路徑，不能留空當零': 'kPa; includes inlet, suction pipe, valve, and filter; not the discharge path, cannot be left '
+                                  'blank as zero',
+ 'm；依泵型、流量與轉速曲線，空白保留待資料': 'm; based on pump type, flow rate, and speed curve, leave blank pending data',
+ 'm；加在原廠 NPSHr 上，依原廠／業主確認': "m; added to manufacturer's NPSHr, based on manufacturer/owner confirmation",
+ 'm；液面高於泵為正，低於泵為負': 'm; positive if liquid level is above pump, negative if below pump',
+ 'm；相對原廠 NPSH 基準面，高於為正；不同基準不可混用': 'm; relative to the manufacturer NPSH datum, positive above it; do not mix reference levels',
+ '① 設計依據與規範': '① Design Basis and Standards',
+ '② 文件與人工覆核': '② Documentation and Manual Review',
+ '不支援的設計資料版本': 'Unsupported Design Data Version',
+ '不適用理由（適用時留空）': 'Reason for Not Applicable (leave blank if applicable)',
+ '不適用項目須填具體覆核理由（至少八字）': 'Not applicable items must include a specific review reason (at least 8 characters)',
+ '不驗證': 'No verification',
+ '交付審查報告_': 'Delivery Review Report_',
+ '交付清單': 'Delivery List',
+ '交付項目': 'Deliverable',
+ '交付項目無效': 'Invalid Deliverable',
+ '人工覆核者（非編製者）': 'Manual Reviewer (not the preparer)',
+ '人工覆核要求修正：': 'Manual Review Requires Correction:',
+ '估算吸入口靜壓不高於蒸氣壓，吸入管可能閃蒸；不可採用單相結果選泵。': 'Estimated suction static pressure is not higher than vapor pressure; suction line may '
+                                      'flash; single-phase results cannot be used for pump selection.',
+ '僅限合成測試，文件依據已核對': 'For synthetic testing only; documentation basis has been verified',
+ '先前填報覆核：': 'Previously reported review:',
+ '先新增專案或開啟已存版次；不會更動原計算專案。': 'Add a new project or open a saved version first; the original calculation project will not be '
+                            'modified.',
+ '加做泵浦吸入校核': 'Perform additional pump suction check',
+ '匯出會重算失效狀態並保存對應設計資料': 'Export recalculates invalidation status and saves corresponding design data',
+ '原廠或試驗資料；註明溫度及濃度': 'Original manufacturer or test data; specify temperature and concentration',
+ '原廠泵曲線與工作點': 'OEM pump curve and operating point',
+ '原廠／業主規範版次與工況；不預設通用裕度': 'Manufacturer/owner specification revision and operating conditions; no default universal margin',
+ '另存新版次': 'Save as New Version',
+ '只能附加非空白的一般檔案，限 50 MiB，不接受符號連結': 'Only non-empty regular files up to 50 MiB are allowed; symbolic links are not accepted',
+ '可用 NPSHa 小於原廠 NPSHr 加本案裕度。': 'Available NPSHa is less than OEM NPSHr plus case-specific margin.',
+ '合成原廠曲線 100 LPM、1450 rpm': 'Synthetic OEM curve 100 LPM, 1450 rpm',
+ '合成新版 R2': 'Synthetic New Version R2',
+ '合成案例－': 'Synthetic Case -',
+ '合成業主要求 R1': 'Synthetic Owner Requirement R1',
+ '合成獨立覆核者': 'Synthetic Independent Reviewer',
+ '合成規範｜R1｜3.1｜合成案例｜SYNTHETIC-001': 'Synthetic Standard｜R1｜3.1｜Synthetic Case｜SYNTHETIC-001',
+ '合成證據.txt': 'Synthetic Evidence.txt',
+ '同工況泡點壓力': 'Bubble point pressure at same operating conditions',
+ '吸入側總壓損': 'Total suction side pressure loss',
+ '吸入口相對原廠 NPSH 基準面 ': 'Suction nozzle elevation relative to manufacturer NPSH datum ',
+ '吸入口相對泵基準高度': 'Suction nozzle elevation relative to pump datum',
+ '單位與基準狀態': 'Units and Reference States',
+ '型號、文件版次、流量及轉速；不自動視為原廠確認': 'Model, document revision, flow rate, and speed; not automatically considered as manufacturer '
+                            'confirmation',
+ '安全風險與適用危害分析': 'Safety Risks and Applicable Hazard Analysis',
+ '對應設計資料：': 'Corresponding design data:',
+ '尚未核對。': 'Not yet verified.',
+ '尚無附件；請附加原計算工具匯出的報告或相關設計文件。': 'No attachments yet; please attach the report exported from the original calculation tool or '
+                               'relevant design documents.',
+ '工況原廠 NPSHr': 'OEM NPSHr at operating conditions',
+ '工程數量／成本與估算依據': 'Engineering Quantities / Cost and Estimation Basis',
+ '工程核對與軟體測試證據': 'Engineering Verification and Software Test Evidence',
+ '已另存：': 'Saved as:',
+ '已記錄覆核': 'Recorded Review',
+ '已記錄覆核（不適用）': 'Recorded Review (Not Applicable)',
+ '廠址／適用地區': 'Site / Applicable Region',
+ '待人工覆核': 'Pending manual review',
+ '待提供工況原廠 NPSHr，不判定選泵條件。': 'Awaiting OEM NPSHr for operating conditions; pump selection criteria not determined.',
+ '待提供本案 NPSH 裕度；不套用通用固定值。': 'Awaiting NPSH margin for this case; no generic fixed value applied.',
+ '待處理': 'Pending',
+ '待補設計依據：': 'Pending design basis:',
+ '待資料或未達 NPSH 條件': 'Data pending or NPSH conditions not met',
+ '待附': 'Pending',
+ '待附文件或不適用理由': 'Pending documents or not applicable reason',
+ '必須為有效文字': 'Must be valid text',
+ '控制理念／連鎖／I/O 點表': 'Control Philosophy / Interlocks / I/O List',
+ '文件齊備，可送工程審查': 'Documents are complete, ready for engineering review',
+ '文件／覆核尚未齊備': 'Documents/reviews are not yet complete',
+ '新增獨立專案': 'Add Independent Project',
+ '最低液面相對泵基準': 'Minimum liquid level relative to pump datum',
+ '本案 NPSH 額外裕度': 'Additional NPSH margin for this case',
+ '本表只檢查文件完整性與人工覆核紀錄；不驗證內容正確性、簽章身分或工程認證。': 'This table only checks file integrity and manual review records; it does not verify '
+                                          'content accuracy, signature identity, or engineering certification.',
+ '核對並匯出報告': 'Verify and Export Report',
+ '核對已存設計審查 JSON；0=文件齊備，3=待處理，2=格式錯誤': 'Check saved design review JSON; 0=documents complete, 3=pending, 2=format error',
+ '業主驗收清單與簽核要求': 'Owner Acceptance Checklist and Approval Requirements',
+ '業主／委託單位': 'Owner / Client',
+ '欄位不完整或含未知欄位': 'Fields are incomplete or contain unknown fields',
+ '每筆規範須填五個欄位，使用全形 ｜ 分隔': 'Each standard entry requires five fields, separated by full-width ｜',
+ '泡點壓力來源與工況': 'Bubble point pressure source and operating conditions',
+ '泵曲線／工況：': 'Pump curve/operating point:',
+ '泵浦吸入校核：': 'Pump suction verification:',
+ '流程圖／管儀圖與系統界面': 'Process Flow Diagrams / P&IDs and System Interfaces',
+ '流量、管徑、水力及保溫在同一頁完成；泵浦吸入須另啟用校核。數值模型未涵蓋腐蝕、磨蝕、結垢、氣液兩相與管材壓溫額定。': 'Flow rate, pipe diameter, hydraulics, and insulation completed on '
+                                                              'the same page; pump suction must be separately enabled for '
+                                                              'verification. The numerical model does not cover corrosion, '
+                                                              'erosion, scaling, gas-liquid two-phase flow, and pipe material '
+                                                              'pressure-temperature ratings.',
+ '液槽表面壓力不高於泡點／飽和蒸氣壓，單相液體假設不成立。': 'Liquid tank surface pressure is not higher than bubble point/saturated vapor pressure; '
+                                 'single-phase liquid assumption does not hold.',
+ '液槽表面絕壓 ': 'Tank surface absolute pressure ',
+ '液槽表面絕對壓力': 'Liquid tank surface absolute pressure',
+ '液體頁完成本案泵浦吸入條件校核': 'Liquid page completed pump suction condition verification for this case',
+ '混合液／化學液須填同溫度、濃度的泡點壓力來源': 'For mixed/chemical liquids, source of bubble point pressure at same temperature and concentration '
+                           'must be provided',
+ '無效的專案識別碼': 'Invalid Project Identifier',
+ '無法求得此溫度的飽和蒸氣壓': 'Unable to determine saturated vapor pressure at this temperature',
+ '熱質平衡與公用需求': 'Heat and mass balance and utility requirements',
+ '版次變更使既有覆核失效': 'Version change invalidates existing reviews',
+ '用電負載／單線圖與保護': 'Electrical Load / Single-Line Diagrams and Protection',
+ '目前輸入尚未另存版次，確定離開嗎？': 'The current input has not been saved as a version. Are you sure you want to leave?',
+ '空白設計資料不會標為文件齊備': 'Blank design data will not be marked as documentation complete',
+ '符合本案輸入的 NPSH 條件': "Meets NPSH conditions for this case's inputs",
+ '管路／風管／保溫與材料選用': 'Piping / Ductwork / Insulation and Material Selection',
+ '系統範圍與界面': 'System Scope and Interfaces',
+ '純液體操作溫度的飽和蒸氣壓': 'Saturated vapor pressure at pure liquid operating temperature',
+ '編製者': 'Prepared by',
+ '舊覆核失效': 'Old review invalidated',
+ '蒸氣壓依據：': 'Vapor pressure basis:',
+ '蒸氣壓／泡點壓力 ': 'Vapor pressure/bubble point pressure ',
+ '裕度依據：': 'Margin basis:',
+ '裕度採用依據': 'Basis for margin adoption',
+ '覆核': 'Review',
+ '覆核快照無效': 'Review snapshot is invalid',
+ '覆核意見與依據': 'Review Comments and Basis',
+ '覆核意見／依據': 'Review Comments / Basis',
+ '覆核時間必須含時區': 'Review time must include a time zone',
+ '覆核決定無效': 'Review decision is invalid',
+ '覆核者': 'Reviewer',
+ '覆核者不可與編製者相同': 'The reviewer must not be the same as the author',
+ '覆核項目或決定無效': 'Review item or decision is invalid',
+ '覆核項目無效': 'Invalid Review Item',
+ '規範': 'Standard',
+ '規範每行一筆，以 ｜ 分隔：名稱｜版次｜條號｜適用範圍｜來源網址或文件編號': 'One standard per line, separated by ｜: Name｜Version｜Clause Number｜Scope of '
+                                          'Application｜Source URL or Document Number',
+ '規範清單格式錯誤': 'Invalid Standards List Format',
+ '計算參考：': 'Calculation reference:',
+ '記錄要求修正': 'Record Requirement for Correction',
+ '記錄覆核接受': 'Record Review Acceptance',
+ '設備表與規格書': 'Equipment List and Specifications',
+ '設計依據': 'Design Basis',
+ '設計依據或交付清單已變更，舊覆核失效': 'Design basis or delivery list has changed, previous review is invalid',
+ '設計依據與交付審查': 'Design basis and delivery review',
+ '設計依據與適用規範': 'Design Basis and Applicable Standards',
+ '設計依據／規範及此項證據須先齊備並通過完整性檢查': 'Design basis/standards and this evidence must be complete and pass the integrity check first',
+ '設計審查': 'Design Review',
+ '設計審查_': 'Design Review_',
+ '設計審查_*.json': 'DesignReview_*.json',
+ '設計工況／最不利條件': 'Design Conditions / Worst-Case Scenarios',
+ '設計版次': 'Design Revision',
+ '設計資料': 'Design Data',
+ '設計資料不得為符號連結或超過 4 MiB': 'Design data must not be a symbolic link or exceed 4 MiB',
+ '設計資料可儲存並重新讀回': 'Design data can be stored and reloaded',
+ '設計資料含重複欄位': 'Design data contains duplicate fields',
+ '請先新增獨立專案或開啟已存版次': 'Please add an independent project or open a saved version first',
+ '請填寫': 'Please fill in',
+ '證據': 'Evidence',
+ '證據不可空白': 'Evidence cannot be blank',
+ '證據不可空白或超過 50 MiB': 'Evidence Cannot Be Empty or Exceed 50 MiB',
+ '證據內容已變更：': 'Evidence content has changed:',
+ '證據名稱': 'Evidence name',
+ '證據檔案大小無效': 'Invalid evidence file size',
+ '證據清單格式錯誤': 'Evidence list format error',
+ '證據無法核對：': 'Evidence cannot be verified:',
+ '證據與覆核狀態': 'Evidence and Review Status',
+ '證據資料夾不得為符號連結': 'The evidence folder must not be a symbolic link',
+ '證據超出專案範圍': 'Evidence Outside Project Scope',
+ '證據超過 50 MiB': 'Evidence exceeds 50 MiB',
+ '證據路徑必須在專案 evidence 資料夾內': 'Evidence path must be within the project evidence folder',
+ '證據路徑重複': 'Duplicate evidence path',
+ '證據遭修改會阻擋齊備判定': 'Modified evidence blocks completeness determination',
+ '證據遺失或使用符號連結': 'Evidence Missing or Using Symbolic Links',
+ '證據雜湊格式錯誤': 'Evidence hash format error',
+ '變更流量使吸入損失與泵曲線依據失效': 'Changing flow rate invalidates suction loss and pump curve basis',
+ '資料快照 SHA256：': 'Data snapshot SHA256:',
+ '輸入已變更；儲存／匯出前會重新核對，既有覆核可能失效。': 'Input has been changed; re-verification will occur before saving/exporting, and existing '
+                                'reviews may become invalid.',
+ '逐項覆核後可送工程審查但不宣稱認證': 'Item-by-item review may proceed to engineering review but does not claim certification',
+ '這些是專案指定的適用依據；附件應另保存授權可用的規範／業主文件。': 'These are the applicable bases specified for the project; attachments should separately '
+                                     'store authorized and available standards/owner documents.',
+ '適用規範（使用者填報）：': 'Applicable Standards (User Input):',
+ '適用規範（名稱、版次、條號、適用範圍、來源）': 'Applicable standards (name, revision, clause number, scope, source)',
+ '選擇存放位置（會建立新的獨立資料夾）': 'Select storage location (a new independent folder will be created)',
+ '選擇已核對來源的設計證據（將複製到獨立專案）': 'Select verified design evidence from source (will be copied to independent project)',
+ '配置與維修／施工空間': 'Layout and Maintenance / Construction Space',
+ '重新核對': 'Re-verify',
+ '開啟已存版次': 'Open Saved Version',
+ '開啟設計審查版次': 'Open Design Review Version',
+ '附件：': 'Attachment:',
+ '附加本項證據': 'Attach Evidence for This Item',
+ '限大型液槽表面速度可忽略、等溫穩態滿管均質液體；吸入管採本頁內徑及流量。液位與吸入口高度均相對原廠 NPSH 基準面。吸入總壓損須另填，包含入口、管件、濾器及設備，不能直接套用排出路徑。全線局部高點、夾氣、瞬變、最小淹沒深度與泵全曲線須另核對。': 'Limited '
+                                                                                                                               'to '
+                                                                                                                               'a '
+                                                                                                                               'large '
+                                                                                                                               'vessel '
+                                                                                                                               'with '
+                                                                                                                               'negligible '
+                                                                                                                               'surface '
+                                                                                                                               'velocity '
+                                                                                                                               'and '
+                                                                                                                               'isothermal '
+                                                                                                                               'steady '
+                                                                                                                               'homogeneous '
+                                                                                                                               'full-pipe '
+                                                                                                                               'flow. '
+                                                                                                                               'Suction '
+                                                                                                                               'diameter '
+                                                                                                                               'and '
+                                                                                                                               'flow '
+                                                                                                                               'follow '
+                                                                                                                               'this '
+                                                                                                                               'page. '
+                                                                                                                               'Both '
+                                                                                                                               'liquid '
+                                                                                                                               'level '
+                                                                                                                               'and '
+                                                                                                                               'nozzle '
+                                                                                                                               'elevation '
+                                                                                                                               'reference '
+                                                                                                                               'the '
+                                                                                                                               'manufacturer '
+                                                                                                                               'NPSH '
+                                                                                                                               'datum. '
+                                                                                                                               'Enter '
+                                                                                                                               'total '
+                                                                                                                               'suction '
+                                                                                                                               'losses '
+                                                                                                                               'separately, '
+                                                                                                                               'including '
+                                                                                                                               'entry, '
+                                                                                                                               'fittings, '
+                                                                                                                               'filters '
+                                                                                                                               'and '
+                                                                                                                               'equipment; '
+                                                                                                                               'do '
+                                                                                                                               'not '
+                                                                                                                               'reuse '
+                                                                                                                               'discharge '
+                                                                                                                               'losses. '
+                                                                                                                               'Local '
+                                                                                                                               'high '
+                                                                                                                               'points, '
+                                                                                                                               'entrained '
+                                                                                                                               'gas, '
+                                                                                                                               'transients, '
+                                                                                                                               'minimum '
+                                                                                                                               'submergence '
+                                                                                                                               'and '
+                                                                                                                               'complete '
+                                                                                                                               'pump '
+                                                                                                                               'curves '
+                                                                                                                               'require '
+                                                                                                                               'separate '
+                                                                                                                               'checks.',
+ '須填原廠曲線、泵型、流量與轉速的對應依據': 'Basis for correspondence between OEM curve, pump model, flow rate, and speed must be provided',
+ '須填原廠／業主採用的 NPSH 裕度依據': 'Basis for NPSH margin adopted by OEM/Owner must be provided',
+ '驗收準則與允許誤差': 'Acceptance Criteria and Tolerances',
+ '；待填：': '; To be filled:'})

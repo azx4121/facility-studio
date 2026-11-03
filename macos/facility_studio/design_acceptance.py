@@ -1,0 +1,55 @@
+"""Bundled acceptance for document review and pump suction, synthetic data only."""
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+
+def run(root, app, check):
+    from .design_basis_ui import DesignReviewWindow
+    from . import design_basis as model
+    with TemporaryDirectory(prefix="facility-design-check-") as temporary:
+        folder = Path(temporary)
+        ui = DesignReviewWindow(root)
+        try:
+            ui.install(model.new_dossier(), folder)
+            check("空白設計資料不會標為文件齊備", not ui.refresh()["can_submit"])
+            for key, var in ui.variables.items():
+                var.set("合成案例－" + key)
+            ui.standards.insert("1.0", "合成規範｜R1｜3.1｜合成案例｜SYNTHETIC-001")
+            ui.sync()
+            source = folder / "合成證據.txt"
+            source.write_text("Synthetic acceptance evidence, not an engineering approval.", encoding="utf-8")
+            for key in model.DELIVERABLES:
+                model.attach(ui.data, folder, key, source)
+            ui.reviewer.set("合成獨立覆核者")
+            for key in model.DELIVERABLES:
+                ui.tree.selection_set(key)
+                root.update()
+                ui.comment.set("僅限合成測試，文件依據已核對")
+                ui.review("accepted")
+            check("逐項覆核後可送工程審查但不宣稱認證", ui.refresh()["can_submit"] and "不驗證" in ui.status.get())
+            saved = ui.save()
+            check("設計資料可儲存並重新讀回", model.load_revision(saved) == ui.data)
+            ui.variables["revision"].set("合成新版 R2")
+            check("版次變更使既有覆核失效", not ui.refresh()["can_submit"])
+            exported = ui.export()
+            check("匯出會重算失效狀態並保存對應設計資料", "舊覆核失效" in exported.read_text(encoding="utf-8") and len(list(folder.glob("設計審查_*.json"))) == 2)
+            ui.install(model.load_revision(saved), folder)
+            evidence = folder / ui.data["documents"]["basis"]["evidence"][0]["path"]
+            evidence.write_text("Modified synthetic evidence", encoding="utf-8")
+            check("證據遭修改會阻擋齊備判定", not ui.refresh()["can_submit"])
+        finally:
+            ui.win.destroy()
+    app.show_tool("liquid")
+    liquid = app.active_page()
+    liquid.reset()
+    for key, value in dict(check_npsh="1", suction_loss_kpa="10", suction_level_m="2",
+                           npshr_m="3", pump_curve_reference="合成原廠曲線 100 LPM、1450 rpm",
+                           npsh_margin_m="1", npsh_margin_reference="合成業主要求 R1").items():
+        liquid.variables[key].set(value)
+    liquid.calculate()
+    root.update()
+    check("液體頁完成本案泵浦吸入條件校核", liquid.result is not None and liquid.result["suction"]["criterion_met"])
+    liquid.variables["flow"].set("120")
+    liquid.calculate()
+    check("變更流量使吸入損失與泵曲線依據失效", liquid.result is None and not liquid.variables["suction_loss_kpa"].get() and not liquid.variables["pump_curve_reference"].get())
+    liquid.reset()

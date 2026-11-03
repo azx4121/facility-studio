@@ -39,7 +39,7 @@ def main():
         return 0
     if now < RESET:
         raise SystemExit('尚未到使用者授權的恢復時間；沒有呼叫 Claude。')
-    if subprocess.check_output(['git', 'branch', '--show-current'], cwd=ROOT, text=True).strip() != 'sandbox/simple-facilities-20261102':
+    if subprocess.check_output(['git', 'branch', '--show-current'], cwd=ROOT, text=True).strip() != 'sandbox/feed-readiness-20261103':
         raise SystemExit('非指定隔離分支，拒絕接管。')
     active_dir = Path('/Users/chaoi/Facility-Studio-Simple-Evidence-20261102/claude-handoff')
     active_dir.mkdir(parents=True, exist_ok=True)
@@ -48,7 +48,7 @@ def main():
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
         raise SystemExit('已有 Claude 接管工作執行中，拒絕重複啟動。')
-    run_dir = Path('/Users/chaoi/Facility-Studio-Simple-Evidence-20261102/claude-handoff') / session
+    run_dir = Path('/Users/chaoi/Facility-Studio-FEED-Evidence-20261103/claude-handoff') / session
     run_dir.mkdir(parents=True, exist_ok=False)
     receipt = dict(session_id=session, requested_at=now.isoformat(), state='PREFLIGHT',
                    source_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),

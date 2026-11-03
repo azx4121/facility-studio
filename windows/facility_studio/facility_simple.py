@@ -166,6 +166,10 @@ def liquid(data):
     ins = insulation(data, od, t)
     if ins and not ins["feasible"]:
         warnings.append("保溫條件不可達，不能採用厚度。")
+    from .pump_suction import suction_check
+    suction = suction_check(data, name, t, rho, v)
+    if suction:
+        warnings.extend(suction["warnings"])
     return dict(tool="liquid", liquid=name, material=material, flow_lpm=flow, temperature_c=t,
                 pressure_kpa=pressure, concentration_pct=concentration,
                 velocity_limit_mps=vlimit, friction_limit_pa_m=friction_limit,
@@ -173,9 +177,9 @@ def liquid(data):
                 rho=rho, cp=cp, mu=mu, properties_source=source, material_source=url,
                 outer_mm=od, wall_mm=wall, inner_mm=bore, velocity_mps=v, reynolds=re,
                 friction_pa_m=rate, loss_pa=drop, hydraulic_kw=flow / 60000 * drop / 1000,
-                insulation=ins, warnings=warnings, material_approved=False,
+                insulation=ins, suction=suction, warnings=warnings, material_approved=False,
                 formula="內徑＝外徑−2×管壁；v=Q/A；ΔP=(fL/D+ΣK)ρv²/2。",
-                note="流量、管徑、水力及保溫在同一頁完成。數值模型未涵蓋腐蝕、磨蝕、結垢、氣液兩相、泵汽蝕與管材壓溫額定。")
+                note="流量、管徑、水力及保溫在同一頁完成；泵浦吸入須另啟用校核。數值模型未涵蓋腐蝕、磨蝕、結垢、氣液兩相與管材壓溫額定。")
 
 
 def vacuum(data):

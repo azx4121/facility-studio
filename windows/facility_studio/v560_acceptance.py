@@ -36,7 +36,7 @@ def run_checks():
         else:
             raise AssertionError(name + ': accepted invalid input')
 
-    check('Facility Studio candidate version 5.7.1', VERSION == '5.7.1')
+    check('Facility Studio candidate version 5.7.2', VERSION == '5.7.2')
     check('50 named gases plus custom / mixture', len(GAS_OPTIONS) == 51 and len(set(GAS_OPTIONS)) == 51)
     check('Legacy gas order / compatibility', GAS_OPTIONS[:9] == ('N2','CDA','O2','Ar','He','H2','CO2','GN2','PN2'))
     for size, od, expected_id in ((14,355.6,336.6), (16,406.4,387.4), (18,457.2,438.2), (20,508.0,489.0), (22,558.8,539.8), (24,609.6,590.6), (26,660.4,641.4), (28,711.2,692.2), (30,762.0,743.0)):

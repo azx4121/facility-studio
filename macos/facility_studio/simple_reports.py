@@ -23,6 +23,16 @@ def presentation(result):
                        f"物性來源：{result['properties_source']}",
                        f"直管單位壓損 {result['friction_pa_m']:.3f} Pa/m；路徑壓降 {result['loss_pa']:.3f} Pa；水力功率 {result['hydraulic_kw']:.5f} kW",
                        "材料資料：" + result['material_source']]
+            suction = result.get("suction")
+            if suction:
+                details += [f"泵浦吸入校核：{suction['status']}；NPSHa={suction['available_m']:.3f} m",
+                            f"液槽表面絕壓 {suction['surface_kpa']:g} kPa(abs)；最低液面相對泵 {suction['level_m']:g} m；吸入總壓損 {suction['losses_kpa']:g} kPa",
+                            f"吸入口相對原廠 NPSH 基準面 {suction['nozzle_offset_m']:g} m",
+                            f"蒸氣壓／泡點壓力 {suction['vapor_kpa']:.5g} kPa(abs)；吸入口估算靜壓 {suction['suction_static_kpa']:.5g} kPa(abs)",
+                            "蒸氣壓依據：" + suction['vapor_source'],
+                            f"NPSHr={suction['required_m']} m；額外裕度={suction['margin_m']} m" if suction['threshold_m'] is not None else "NPSHr 或額外裕度尚未齊備，不作選泵符合判定。",
+                            "泵曲線／工況：" + suction['pump_reference'], "裕度依據：" + suction['margin_reference'],
+                            suction['formula'], suction['scope'], "計算參考：" + suction['source']]
         else:
             cards = [("實際管內徑", f"{result['inner_mm']:.2f} mm"),
                      ("實際氣體流量", f"{result['actual_lpm']:,.3f} ALPM"),

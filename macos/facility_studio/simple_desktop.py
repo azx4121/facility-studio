@@ -291,6 +291,9 @@ class SimplePage(ttk.Frame):
             try:
                 if self.tool == 'water' and self.variables['pipe_size'].get() == '自動依流速選型':
                     self.variables['insulation_outer_mm'].set('')
+                if self.tool == 'liquid':
+                    self.variables['suction_loss_kpa'].set('')
+                    self.variables['pump_curve_reference'].set('')
                 for key, value in values.items():
                     if key in self.variables:
                         self.variables[key].set(str(value))
@@ -348,6 +351,12 @@ class SimplePage(ttk.Frame):
                 # A different medium/condition must not inherit an apparently
                 # verified supplier-property set from the previous medium.
                 self.variables["property_reference"].set("")
+                self.variables["vapor_reference"].set("")
+            if self.tool == "liquid" and key in ("flow", "liquid", "concentration", "liquid_t", "liquid_p", "liquid_mu", "liquid_rho", "properties", "geometry", "sdr", "outer_mm", "wall_mm", "velocity", "roughness_mm"):
+                # A supplier/work-point number must not silently survive a
+                # different flow, medium or suction-line geometry.
+                self.variables["suction_loss_kpa"].set("")
+                self.variables["pump_curve_reference"].set("")
             if self.tool == "liquid" and key == "material":
                 old_rough = ".015" if self.previous["material"] == "SUS316L" else ".0015"
                 if self.variables["roughness_mm"].get() == old_rough:
@@ -721,6 +730,10 @@ class SimpleToolsApp:
         features = ttk.Frame(header)
         features.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(6, 0))
         features.columnconfigure(0, weight=1)
+        from .design_basis_ui import DesignReviewWindow
+        self.design_review_button = ttk.Button(features, text="設計依據與交付審查",
+                                               command=lambda: DesignReviewWindow(root))
+        self.design_review_button.grid(row=1, column=0, sticky="w", pady=(4, 0))
         purpose = ttk.Label(features, text="一般設計直接使用左側工具；AHU 核對僅用來比較兩個物性模型差異。", wraplength=400)
         purpose.grid(row=0, column=0, sticky="ew")
         wrap_to_width(purpose)

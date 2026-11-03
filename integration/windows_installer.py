@@ -13,17 +13,17 @@ def build(app, output, name, runner):
     compiler = shutil.which("makensis") or str(Path(os.environ.get("ProgramFiles(x86)", "C:/Program Files (x86)")) / "NSIS/makensis.exe")
     if not Path(compiler).is_file():
         raise RuntimeError("Native build environment is missing NSIS.")
-    setup = output / "Facility-Studio-5.7.1-Windows-x64-Setup.exe"
+    setup = output / "Facility-Studio-5.7.2-Windows-x64-Setup.exe"
     files = sorted(p for p in app.rglob("*") if p.is_file())
     directories = sorted({p.parent.relative_to(app) for p in files}, key=lambda p: len(p.parts), reverse=True)
-    lines = ["Unicode true", "!include MUI2.nsh", 'Name "Facility Studio 5.7.1 測試版"',
-             f'OutFile "{quoted(setup)}"', 'InstallDir "$LOCALAPPDATA\\Facility Studio 測試版\\Application-5.7.1.1"',
+    lines = ["Unicode true", "!include MUI2.nsh", 'Name "Facility Studio 5.7.2 測試版"',
+             f'OutFile "{quoted(setup)}"', 'InstallDir "$LOCALAPPDATA\\Facility Studio 測試版\\Application-5.7.2.1"',
              "RequestExecutionLevel user", "CRCCheck force", 'SetCompressor /SOLID lzma',
-             'VIProductVersion "5.7.1.1"',
+             'VIProductVersion "5.7.2.1"',
              'VIAddVersionKey /LANG=1028 "ProductName" "Facility Studio 測試版"',
-             'VIAddVersionKey /LANG=1028 "FileVersion" "5.7.1.1"',
-             'VIAddVersionKey /LANG=1028 "ProductVersion" "5.7.1-preview.1"',
-             '!define MUI_WELCOMEPAGE_TITLE "Facility Studio 5.7.1 測試版"',
+             'VIAddVersionKey /LANG=1028 "FileVersion" "5.7.2.1"',
+             'VIAddVersionKey /LANG=1028 "ProductVersion" "5.7.2-preview.1"',
+             '!define MUI_WELCOMEPAGE_TITLE "Facility Studio 5.7.2 測試版"',
              '!define MUI_WELCOMEPAGE_TEXT "繁體中文、離線執行，提供廠務工程計算與設計報表。$\\r$\\n$\\r$\\n請使用新的空目錄。正式版、舊專案與使用者資料不會被替換。$\\r$\\n$\\r$\\n本測試版供操作及合成案例驗證，工程採用仍須依專案設計條件覆核。"',
              "!insertmacro MUI_PAGE_WELCOME", "!insertmacro MUI_PAGE_DIRECTORY", "!insertmacro MUI_PAGE_INSTFILES",
              "!insertmacro MUI_PAGE_FINISH", "!insertmacro MUI_UNPAGE_CONFIRM", "!insertmacro MUI_UNPAGE_INSTFILES",
@@ -35,18 +35,18 @@ def build(app, output, name, runner):
         rel = file.relative_to(app)
         lines.extend([f'SetOutPath "$INSTDIR\\{quoted(rel.parent)}"', f'File "{quoted(file)}"'])
     lines.extend(['CreateDirectory "$SMPROGRAMS\\Facility Studio 測試版"',
-                  f'CreateShortcut "$SMPROGRAMS\\Facility Studio 測試版\\5.7.1.lnk" "$INSTDIR\\{quoted(name)}.exe"',
+                  f'CreateShortcut "$SMPROGRAMS\\Facility Studio 測試版\\5.7.2.lnk" "$INSTDIR\\{quoted(name)}.exe"',
                   'WriteUninstaller "$INSTDIR\\Uninstall.exe"',
-                  'WriteRegStr HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioPreview571" "DisplayName" "Facility Studio 5.7.1 測試版"',
-                  'WriteRegStr HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioPreview571" "UninstallString" \'$\\"$INSTDIR\\Uninstall.exe$\\"\'',
+                  'WriteRegStr HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioPreview572" "DisplayName" "Facility Studio 5.7.2 測試版"',
+                  'WriteRegStr HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioPreview572" "UninstallString" \'$\\"$INSTDIR\\Uninstall.exe$\\"\'',
                   "SectionEnd", 'Section "Uninstall"', "SetShellVarContext current"])
     for file in files:
         lines.append(f'Delete "$INSTDIR\\{quoted(file.relative_to(app))}"')
     lines.extend(f'RMDir "$INSTDIR\\{quoted(directory)}"' for directory in directories)
     lines.extend(['Delete "$INSTDIR\\Uninstall.exe"',
-                  'Delete "$SMPROGRAMS\\Facility Studio 測試版\\5.7.1.lnk"',
+                  'Delete "$SMPROGRAMS\\Facility Studio 測試版\\5.7.2.lnk"',
                   'RMDir "$SMPROGRAMS\\Facility Studio 測試版"', 'RMDir "$INSTDIR"',
-                  'DeleteRegKey HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioPreview571"',
+                  'DeleteRegKey HKCU "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\FacilityStudioPreview572"',
                   'DetailPrint "只移除本版已交付檔案；保留專案、偏好與額外檔案。"', "SectionEnd"])
     script = output / "fusion-installer.nsi"
     script.write_text("\n".join(lines), encoding="utf-8-sig")

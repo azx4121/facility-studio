@@ -18,6 +18,7 @@ def main():
         help="UI / text-report language; stored engineering data stays canonical",
     )
     parser.add_argument("--project")
+    parser.add_argument("--dossier-check", help="核對已存設計審查 JSON；0=文件齊備，3=待處理，2=格式錯誤")
     parser.add_argument("--report")
     parser.add_argument("--result")
     parser.add_argument("--write-default")
@@ -48,6 +49,16 @@ def main():
 
     if args.language:
         i18n.set_language(args.language, persist=False)
+    if args.dossier_check:
+        from pathlib import Path
+        from .design_basis import load_revision, evaluate
+        try:
+            state = evaluate(load_revision(args.dossier_check), Path(args.dossier_check).parent)
+            print(json.dumps(state, ensure_ascii=False, indent=2, allow_nan=False))
+            return 0 if state["can_submit"] else 3
+        except (OSError, ValueError, TypeError) as error:
+            print(str(error), file=sys.stderr)
+            return 2
     args.equipment_system = i18n.canonical_choice(
         args.equipment_system, ("電力", "PCW", "CDA", "N2", "EXHAUST", "DI", "PV")
     )
