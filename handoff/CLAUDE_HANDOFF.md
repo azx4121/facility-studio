@@ -1,3 +1,5 @@
+> 最新指示（2026-11-03 13:21）：使用者已取消 Claude 接管，現在由 Codex 繼續；Claude 程序已依要求停止。下方接管／額度保留指示是歷史，不得再啟動 Claude。保留全部修改與驗收資料。
+
 # Facility Studio：Claude 接管與最終交付
 
 > **2026-11-03 最新接續：先讀 [CLAUDE_FEED_HANDOFF.md](CLAUDE_FEED_HANDOFF.md) 與 STATUS.json。使用者再次要求補足 FEED，現工作樹為 `/Users/chaoi/Facility-Studio-FEED-20261103`，隔離分支 `sandbox/feed-readiness-20261103`，5.7.2-preview.1。下列 5.7.1 完成交付及來源路徑為歷史，不能套用於新版；新版工作範圍與接管路徑以新文件為準。13:05 時間與安全界線不變。**

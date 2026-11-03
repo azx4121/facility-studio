@@ -30,6 +30,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args()
+    if (ROOT / 'handoff/CLAUDE_HANDOFF_REVOKED.json').exists():
+        print(json.dumps(dict(disabled=True, owner='Codex', api_calls_made=False,
+                              reason='使用者已取消 Claude 接管，由 Codex 繼續'), ensure_ascii=False))
+        return 0 if args.dry_run else 3
     now = datetime.now(ZoneInfo('Asia/Taipei'))
     session = str(uuid.uuid4())
     if args.dry_run:

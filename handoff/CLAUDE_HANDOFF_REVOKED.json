@@ -1,0 +1,7 @@
+{
+  "revoked_at": "2026-11-03T05:22:53.455752+00:00",
+  "owner": "Codex",
+  "reason": "User explicitly revoked Claude handoff and asked Codex to continue",
+  "terminated_session": "b0c14b9a-f492-4bbd-9bcb-49c432e3c60c",
+  "handoff_automation_deleted": true
+}

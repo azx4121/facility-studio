@@ -3932,3 +3932,5 @@ TEXT.update({'  不適用理由：': '  Not applicable reason:',
 TEXT.update({'設計資料不得超過 4 MiB；請縮短規範文字並改附完整文件': 'Design data must not exceed 4 MiB; shorten the standards text and attach the full document instead'})
 
 TEXT.update({'來源文字不可含控制字元或超過 500 字': 'Source text must not contain control characters or exceed 500 characters'})
+
+TEXT.update({'重複開啟設計審查沿用同一視窗': 'Reopening design review reuses the same window', '合成未存草稿': 'Synthetic unsaved draft', '無未存變更時設計審查可直接關閉': 'Design review closes directly when there are no unsaved changes', '主視窗關閉會詢問設計審查未存草稿，拒絕時保留': 'Closing the main window asks about the unsaved design review and preserves it when declined'})
