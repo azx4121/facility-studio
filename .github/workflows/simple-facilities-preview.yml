@@ -1,7 +1,7 @@
 name: Simple facilities preview validation
 on:
   push:
-    branches: ['sandbox/simple-facilities-20261102']
+    branches: ['sandbox/simple-facilities-20261102', 'sandbox/feed-readiness-20261103']
     paths:
       - '.github/workflows/simple-facilities-preview.yml'
       - 'macos/facility_studio/**'
@@ -33,7 +33,7 @@ jobs:
       - name: Numerical boundaries, conservation and generated cases
         run: |
           mkdir -p simple-evidence
-          xvfb-run -a -s '-screen 0 1920x1440x24' python -m pytest integration/test_simple_facilities.py integration/test_fusion.py integration/test_product_wording.py macos/tests/test_feed_sandbox.py -q --hypothesis-show-statistics --junitxml=simple-evidence/pytest.xml > simple-evidence/pytest.log 2>&1
+          xvfb-run -a -s '-screen 0 1920x1440x24' python -m pytest integration/test_design_basis.py integration/test_design_basis_gui.py integration/test_pump_suction.py integration/test_simple_facilities.py integration/test_fusion.py integration/test_product_wording.py macos/tests/test_feed_sandbox.py -q --hypothesis-show-statistics --junitxml=simple-evidence/pytest.xml > simple-evidence/pytest.log 2>&1
           cat simple-evidence/pytest.log
           python tools/verify_platform_sync.py
       - name: Complete existing engineering and interface regression
@@ -133,7 +133,7 @@ jobs:
           $zips = @(Get-ChildItem "$delivery/*.zip")
           if ($zips.Count -ne 1) { throw 'Expected one portable package' }
           Expand-Archive $zips[0].FullName "$env:RUNNER_TEMP/facility-extracted"
-          $executables = @(Get-ChildItem "$env:RUNNER_TEMP/facility-extracted" -Filter 'Facility Studio 5.7.1 測試版.exe' -Recurse)
+          $executables = @(Get-ChildItem "$env:RUNNER_TEMP/facility-extracted" -Filter 'Facility Studio 5.7.2 測試版.exe' -Recurse)
           if ($executables.Count -ne 1) { throw 'Expected one product executable' }
           New-Item -ItemType Directory "$env:RUNNER_TEMP/facility-second-evidence" | Out-Null
           $env:FACILITY_STUDIO_FUSION_DATA = "$env:RUNNER_TEMP/facility-second-data"
@@ -144,9 +144,9 @@ jobs:
             $process = Start-Process -FilePath $executables[0].FullName -ArgumentList @("--$kind-self-test", "`"$result`"") -Wait -PassThru
             if ($process.ExitCode -ne 0) { throw "Standalone acceptance exit $($process.ExitCode)" }
             $acceptance = Get-Content $result -Raw -Encoding UTF8 | ConvertFrom-Json
-            if (-not $acceptance.passed -or -not $acceptance.frozen -or $acceptance.version -ne '5.7.1-preview.1') { throw 'Standalone acceptance failed' }
+            if (-not $acceptance.passed -or -not $acceptance.frozen -or $acceptance.version -ne '5.7.2-preview.1') { throw 'Standalone acceptance failed' }
           }
-          & $verifierPython -c "import os, pathlib, subprocess, sys; sys.path.insert(0, 'integration'); import windows_installer; base=pathlib.Path(os.environ['RUNNER_TEMP']); out=base/'facility-second-installer'; (out/'evidence').mkdir(parents=True); run=lambda args, log, env=None, timeout=180: subprocess.run([str(a) for a in args], env=env, timeout=timeout, stdout=log.open('w'), stderr=subprocess.STDOUT, check=True); setups=list((base/'facility-delivery').glob('*Setup.exe')); assert len(setups)==1; windows_installer.verify(setups[0],out,'Facility Studio 5.7.1 測試版',run,dict(os.environ))"
+          & $verifierPython -c "import os, pathlib, subprocess, sys; sys.path.insert(0, 'integration'); import windows_installer; base=pathlib.Path(os.environ['RUNNER_TEMP']); out=base/'facility-second-installer'; (out/'evidence').mkdir(parents=True); run=lambda args, log, env=None, timeout=180: subprocess.run([str(a) for a in args], env=env, timeout=timeout, stdout=log.open('w'), stderr=subprocess.STDOUT, check=True); setups=list((base/'facility-delivery').glob('*Setup.exe')); assert len(setups)==1; windows_installer.verify(setups[0],out,'Facility Studio 5.7.2 測試版',run,dict(os.environ))"
           if ($LASTEXITCODE) { throw 'Second-host installer verification failed' }
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
