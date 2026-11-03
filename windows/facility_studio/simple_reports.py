@@ -285,6 +285,9 @@ def presentation(result):
             details.append(f"保溫外表面 {ins['surface_t_c']:.3f}°C；露點 {ins['dewpoint_c']:.3f}°C；每米熱損／得熱 {ins['heat_w_m']:.3f} W/m")
         details.append(ins['basis'])
         details.extend(ins['warnings'])
+    for warning in result.get("warnings", []):
+        if warning not in details:
+            details.append(warning)
     return cards, details
 
 

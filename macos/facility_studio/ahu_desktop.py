@@ -291,10 +291,16 @@ class AHUWindow(AHUView):
     def export(self):
         if not self.ensure():
             return
+        result = self.result
+        snapshot_hash = project_hash(self.snapshot())
         path = filedialog.asksaveasfilename(
             parent=self.win, defaultextension=".txt", initialfile="AHU_Review.txt"
         )
         if path:
+            if self.result is not result or snapshot_hash != project_hash(self.snapshot()):
+                messagebox.showwarning(
+                    "匯出已停止", "匯出期間條件已變更，請重新計算後再匯出。", parent=self.win)
+                return False
             try:
                 atomic_text(path, nm_report(self.result))
             except OSError as e:
@@ -303,10 +309,16 @@ class AHUWindow(AHUView):
     def save_plot(self):
         if not NM_HAS_PLOT or not self.ensure():
             return
+        result = self.result
+        snapshot_hash = project_hash(self.snapshot())
         path = filedialog.asksaveasfilename(
             parent=self.win, defaultextension=".png", initialfile="AHU_Process.png"
         )
         if path:
+            if self.result is not result or snapshot_hash != project_hash(self.snapshot()):
+                messagebox.showwarning(
+                    "匯出已停止", "匯出期間條件已變更，請重新計算後再匯出。", parent=self.win)
+                return False
             try:
                 self.render()
                 self.fig.savefig(path, dpi=180)
@@ -719,7 +731,7 @@ class AHUWindow(AHUView):
             )
             quality = self.result["quality"]
             self.banner.show(quality_text(quality), "danger" if quality["failed"] else
-                             "warning" if quality["pending"] else "success")
+                             "warning" if quality["pending"] or quality["deferred"] else "success")
             self.set_text(nm_report(self.result))
         if self.main_app:
             self.main_app.refresh_receipts()

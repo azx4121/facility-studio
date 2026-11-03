@@ -6,7 +6,7 @@ import traceback
 
 
 def main():
-    data = Path(os.environ.get("FACILITY_STUDIO_FUSION_DATA", Path.home() / "Facility Studio 測試資料-5.7.2"))
+    data = Path(os.environ.get("FACILITY_STUDIO_FUSION_DATA", Path.home() / "Facility Studio 測試資料-5.7.3"))
     data.mkdir(parents=True, exist_ok=True)
     os.environ.update(FACILITY_STUDIO_SANDBOX="1", FACILITY_STUDIO_SANDBOX_DATA=str(data),
                       LOCALAPPDATA=str(data), FACILITY_STUDIO_PREFERENCES=str(data / "preferences.json"),

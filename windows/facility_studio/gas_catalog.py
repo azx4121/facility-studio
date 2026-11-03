@@ -169,6 +169,17 @@ def evaluate_gas_phase(gas, temperature_c, absolute_kpa, mole_fraction=1.0):
     )
 
 
+def phase_warnings(phase):
+    """Surface screening findings without turning an empirical margin into certification."""
+    if not phase:
+        return []
+    if phase.get("liquefaction_risk") is True:
+        return ["相態篩選：" + phase["phase_status"] + "。接近或超過內建液化警戒；單相定寸結果僅供檢討，須依原廠同工況資料確認。"]
+    if phase.get("liquefaction_risk") is None:
+        return ["相態篩選：" + phase["phase_status"] + "。相態尚未確認，不可視為單一氣相已核定；請補原廠同溫度、壓力及組分資料。"]
+    return []
+
+
 def reference_velocity(gas):
     return GAS_DESIGN_VELOCITY_MPS.get(gas) if gas in GAS_NAMES else None
 

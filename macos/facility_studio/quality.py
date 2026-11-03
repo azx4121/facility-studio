@@ -248,14 +248,15 @@ def assess_main(r):
             "待後續",
             "目前為流速截面初估，需管路壓降與幫浦／調壓器性能。",
         )
-    for g in r["gas"].values():
-        if g.get("standard_lpm", 0) > 0 and g.get("liquefaction_risk") is True:
+    from .gas_catalog import phase_warnings
+    for key, g in r["gas"].items():
+        if g.get("standard_lpm", 0) > 0 and "phase_status" in g and phase_warnings(g):
             finding(
                 items,
-                "特氣相態與液化檢核",
-                "待資料",
-                "管內絕壓高於同溫飽和蒸氣壓，氣體將液化；請降低供壓或配置伴熱。",
-                "gas_barg",
+                "特氣 " + key + " 相態與液化檢核",
+                "未達" if g.get("liquefaction_risk") is True else "待資料",
+                "；".join(phase_warnings(g)),
+                "gas" + key + "_barg" if i.get("gas" + key + "_pressure_mode") == "本路管內壓力" else "gas_min_barg",
             )
     if r.get("winter_room") and r["winter_room"].get("mau_overtemp_warning"):
         wr = r["winter_room"]

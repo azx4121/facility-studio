@@ -3934,3 +3934,7 @@ TEXT.update({'設計資料不得超過 4 MiB；請縮短規範文字並改附完
 TEXT.update({'來源文字不可含控制字元或超過 500 字': 'Source text must not contain control characters or exceed 500 characters'})
 
 TEXT.update({'重複開啟設計審查沿用同一視窗': 'Reopening design review reuses the same window', '合成未存草稿': 'Synthetic unsaved draft', '無未存變更時設計審查可直接關閉': 'Design review closes directly when there are no unsaved changes', '主視窗關閉會詢問設計審查未存草稿，拒絕時保留': 'Closing the main window asks about the unsaved design review and preserves it when declined'})
+
+TEXT.update({'相態篩選：': 'Phase screening: ', '。接近或超過內建液化警戒；單相定寸結果僅供檢討，須依原廠同工況資料確認。': '. Near or above the liquefaction screening threshold; single-phase sizing is for review only and requires matching vendor data.', '。相態尚未確認，不可視為單一氣相已核定；請補原廠同溫度、壓力及組分資料。': '. Phase is unconfirmed; single gas phase is not approved. Supply vendor data at matching temperature, pressure and composition.', '路徑壓力預算不足，請調整風管或可用靜壓後重算。': 'Insufficient path pressure budget. Adjust the duct or available static pressure and recalculate.', '已計算｜相態風險尚未排除，結果僅供檢討': 'Calculated | Phase risk remains; results are for review only', '已計算｜有待確認條件，請查看警告及報告': 'Calculated | Conditions require confirmation; see warnings and report', '匯出期間條件已變更，請重新計算後再匯出。': 'Inputs changed during export. Recalculate before exporting.', '匯出已停止': 'Export stopped', '相態與液化檢核': 'Phase and liquefaction check'})
+
+TEXT.update({'不足': 'Insufficient', '條件已變更': 'Inputs changed'})

@@ -517,8 +517,11 @@ class SimplePage(ttk.Frame):
             result = calculate_tool(self.tool, self.data())
             cards, details = presentation(result)
             warnings = result.get("warnings", [])
-            tone = "warning" if warnings else "success"
-            self.result_box.set_cards([dict(title=title, value=value, status="需核對" if warnings else "需求初估", tone=tone)
+            shortfall = self.tool == "duct" and result["path_checked"] and any(
+                row.get("budget_sufficient") is False for row in (result["rectangle"], result["round"]))
+            failed = shortfall or result.get("liquefaction_risk") is True
+            tone = "danger" if failed else "warning" if warnings else "success"
+            self.result_box.set_cards([dict(title=title, value=value, status="未達條件" if failed else "需核對" if warnings else "需求初估", tone=tone)
                                        for title, value in cards])
             rows = self.table_rows(result)
             rows += [("計算說明", text, "", "") for text in details]
@@ -539,25 +542,19 @@ class SimplePage(ttk.Frame):
                 self.details.config(text=explanation + "\n" + "\n".join(details))
             self.formula.config(text="公式：" + result["formula"])
             self.note.config(text=result["note"])
-            shortfall = (
-                self.tool == "duct"
-                and result["path_checked"]
-                and any(
-                    row.get("budget_sufficient") is False
-                    for row in (result["rectangle"], result["round"])
-                )
-            )
             status_message = (
                     "已計算｜路徑壓力預算不足，請核對"
                     if shortfall
+                    else "已計算｜相態風險尚未排除，結果僅供檢討" if failed
+                    else "已計算｜有待確認條件，請查看警告及報告" if warnings
                     else "已計算｜本工具可獨立使用，結果為初估"
                 )
             self.status.config(
                 text=status_message,
-                style="Simple.Error.TLabel" if shortfall else "Simple.Good.TLabel",
+                style="Simple.Error.TLabel" if failed else "Warn.TLabel" if warnings else "Simple.Good.TLabel",
             )
             self.banner.show(warnings[0] if warnings else status_message,
-                             "warning" if warnings or shortfall else "success")
+                             tone)
         except (ValidationError, ValueError) as error:
             self.clear()
             key = getattr(error, "field_name", None)
@@ -580,7 +577,7 @@ class SimplePage(ttk.Frame):
         if self.result is not None:
             issues = self.result.get("warnings", [])
             self.banner.show("；".join(issues) if issues else status_message,
-                             "warning" if issues else "danger" if shortfall else "success")
+                             tone)
         self.app.sync_actions()
 
     def table_rows(self, result):
@@ -940,6 +937,7 @@ class SimpleToolsApp:
         page.calculate()
         if page.result is None:
             return False
+        result, data = page.result, page.data()
         path = path or filedialog.asksaveasfilename(
             parent=self.root,
             defaultextension=".txt",
@@ -947,6 +945,9 @@ class SimpleToolsApp:
             filetypes=[("文字結果", "*.txt"), ("HTML 設計報表", "*.html")],
         )
         if not path:
+            return False
+        if page.result is not result or page.data() != data or page.upstream_stale:
+            page.banner.show("匯出期間條件已變更，請重新計算後再匯出。", "warning")
             return False
         try:
             from pathlib import Path
@@ -958,7 +959,7 @@ class SimpleToolsApp:
             atomic_text(path, content)
             self.footer_text.configure(text="已匯出本工具結果")
             return True
-        except OSError as error:
+        except (OSError, InputError, ValueError) as error:
             page.banner.show("未能匯出：" + str(error), "danger")
             return False
 
@@ -969,6 +970,10 @@ class SimpleToolsApp:
         path = path or filedialog.asksaveasfilename(parent=self.root, defaultextension=".html",
                          initialfile="Facility_Design_Summary.html", filetypes=[("HTML 設計報表", "*.html")])
         if not path:
+            return False
+        current = {key: page.result for key, page in self.pages.items() if page.result is not None}
+        if current.keys() != results.keys() or any(current[key] is not value or self.pages[key].upstream_stale for key, value in results.items()):
+            self.active_page().banner.show("匯出期間條件已變更，請重新計算後再匯出。", "warning")
             return False
         try:
             from .html_report import html_report

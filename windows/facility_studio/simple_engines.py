@@ -6,7 +6,7 @@ from .grounding import equipment_pe
 from .data import (NFB_SIZES, PIPE_DB, WIRE_DB, FFU_SIZES, ROUGHNESS_MM, HVAC_PIPES, HVAC_PIPE_REFERENCES,
                    STANDARD_MOTOR_KW)
 from .errors import ValidationError
-from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, custom_name, evaluate_gas_phase, saturation_pressure_kpa
+from .gas_catalog import GAS_OPTIONS, CUSTOM_GAS, custom_name, evaluate_gas_phase, saturation_pressure_kpa, phase_warnings
 from .quick_tools import (
     UNITS,
     UNIT_ALIASES,
@@ -297,6 +297,8 @@ def ducts(data):
                 roughness_mm=roughness,
                 relative_roughness=(roughness / 1000 / df) if df else 0,
             )
+    if check_path == "1" and any(row.get("budget_sufficient") is False for row in (rectangle, round_duct)):
+        duct_warnings.insert(0, "路徑壓力預算不足，請調整風管或可用靜壓後重算。")
     return dict(
         tool="duct",
         warnings=duct_warnings,
@@ -363,6 +365,7 @@ def compressed_air(data):
     phase = evaluate_gas_phase(gas, temperature, absolute) if standard > 0 else None
     return dict(
         tool="gas",
+        warnings=phase_warnings(phase),
         flow_basis=flow_basis,
         gas=gas,
         custom_name=name,

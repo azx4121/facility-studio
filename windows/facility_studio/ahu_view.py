@@ -539,7 +539,7 @@ class AHUView:
         s = r["winter" if self.season.get() == "冬季" else "summer"]
         q = r.get("quality", {})
         status = "待重算" if stale else q.get("status", "需求值")
-        tone = "warning" if stale else "danger" if q.get("failed") else "warning" if q.get("pending") else "success"
+        tone = "warning" if stale else "danger" if q.get("failed") else "warning" if q.get("pending") or q.get("deferred") else "success"
         cooling_kw = s["c1"]["water_kw"] + s["c2"]["water_kw"]
         seasonal = r["inputs"].get("target_mode") == "主案分季需求"
         flow_key = ("winter_flow" if self.season.get() == "冬季" else "summer_flow") if seasonal else "flow"

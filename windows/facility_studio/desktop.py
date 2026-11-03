@@ -254,25 +254,37 @@ class DesktopApp(SessionController, MainView):
     def export(self):
         if not self.ensure_result():
             return
+        result = self.result
+        snapshot_hash = project_hash(self.snapshot())
         path = filedialog.asksaveasfilename(
             defaultextension=".txt",
             initialfile="Design_Report.txt",
             filetypes=[("文字報告", "*.txt")],
         )
         if path:
+            if self.result is not result or snapshot_hash != project_hash(self.snapshot()):
+                messagebox.showwarning(
+                    "匯出已停止", "匯出期間條件已變更，請重新計算後再匯出。", parent=self.root)
+                return False
             try:
                 atomic_text(path, report(self.result))
-                self.status.config(text="設計報告已匯出", style="Good.TLabel")
+                self.status.config(text="設計報告已匯出" + "\n" + quality_text(self.result["quality"]), style=quality_style(self.result["quality"]))
             except Exception as e:
                 messagebox.showerror("匯出失敗", str(e), parent=self.root)
 
     def export_audit(self):
         if not self.ensure_result():
             return
+        result = self.result
+        snapshot_hash = project_hash(self.snapshot())
         path = filedialog.asksaveasfilename(
             defaultextension=".json", initialfile="Calculation_Audit.json"
         )
         if path:
+            if self.result is not result or snapshot_hash != project_hash(self.snapshot()):
+                messagebox.showwarning(
+                    "匯出已停止", "匯出期間條件已變更，請重新計算後再匯出。", parent=self.root)
+                return False
             try:
                 atomic_text(
                     path,
@@ -287,17 +299,23 @@ class DesktopApp(SessionController, MainView):
         if self.ensure_result():
             self.root.clipboard_clear()
             self.root.clipboard_append(report(self.result))
-            self.status.config(text="報告已複製", style="Good.TLabel")
+            self.status.config(text="報告已複製" + "\n" + quality_text(self.result["quality"]), style=quality_style(self.result["quality"]))
 
     def save_plot(self):
         if not HAS_PLOT:
             return messagebox.showinfo("圖形功能", "請先安裝 matplotlib。")
         if not self.ensure_result():
             return
+        result = self.result
+        snapshot_hash = project_hash(self.snapshot())
         path = filedialog.asksaveasfilename(
             defaultextension=".png", initialfile="Air_Process.png"
         )
         if path:
+            if self.result is not result or snapshot_hash != project_hash(self.snapshot()):
+                messagebox.showwarning(
+                    "匯出已停止", "匯出期間條件已變更，請重新計算後再匯出。", parent=self.root)
+                return False
             try:
                 self.draw(force=True)
                 self.fig.savefig(path, dpi=180)
@@ -1023,11 +1041,13 @@ class DesktopApp(SessionController, MainView):
                     text="\n".join(
                         (
                             f"{v['type']}：{v['size']}／{v['actual_lpm']:.2f} ALPM"
+                            + ("｜" + "；".join(v.get("warnings", [])) if v.get("warnings") else "")
                             for v in d["result"].values()
                         )
                     )
                     or "無需求",
-                    style="Muted.TLabel",
+                    style="Error.TLabel" if any(v.get("liquefaction_risk") is True for v in d["result"].values())
+                    else "Warn.TLabel" if any(v.get("warnings") for v in d["result"].values()) else "Muted.TLabel",
                 )
             else:
                 self.result_labels[page].config(
@@ -1076,10 +1096,16 @@ class DesktopApp(SessionController, MainView):
     def export_html(self):
         if not self.ensure_result():
             return
+        result = self.result
+        snapshot_hash = project_hash(self.snapshot())
         path = filedialog.asksaveasfilename(
             defaultextension=".html", filetypes=[("可列印設計摘要", "*.html")]
         )
         if path:
+            if self.result is not result or snapshot_hash != project_hash(self.snapshot()):
+                messagebox.showwarning(
+                    "匯出已停止", "匯出期間條件已變更，請重新計算後再匯出。", parent=self.root)
+                return False
             try:
                 atomic_text(path, summary_html(self.result))
                 messagebox.showinfo("已匯出", "使用瀏覽器開啟，可列印或另存 PDF。")

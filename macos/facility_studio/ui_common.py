@@ -106,12 +106,13 @@ def quality_style(q):
     return (
         "Error.TLabel"
         if q["failed"]
-        else "Warn.TLabel" if q["pending"] else "Good.TLabel"
+        else "Warn.TLabel" if q["pending"] or q.get("deferred", 0) else "Good.TLabel"
     )
 
 
 def quality_text(q):
-    rows = [x["name"] + "：" + x["detail"] for x in q["items"] if x["status"] != "通過"]
+    rows = [x["name"] + "：" + x["detail"] for state in ("未達", "待資料", "待後續")
+            for x in q["items"] if x["status"] == state]
     return (
         q["status"]
         + f"｜未達 {q['failed']} 項／待資料 {q['pending']} 項／待後續階段 {q.get('deferred', 0)} 項\n"

@@ -1166,6 +1166,8 @@ def calculate(p, isolate_utilities=False):
         electric = electrical_from_inputs(ei)
         warn.extend(np_auto["pending"])
     gas = {} if isolate_utilities else gas_from_inputs(i)
+    for key, gas_row in gas.items():
+        warn.extend(f"特氣 {key}｜{message}" for message in gas_row.get("warnings", []))
     missing = [
         k
         for k, d in pressure.items()
