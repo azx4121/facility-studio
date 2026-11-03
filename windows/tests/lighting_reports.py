@@ -154,7 +154,7 @@ class LightingReports(unittest.TestCase):
         # Production export method with display-only stubs, not native GUI QA.
         from facility_studio.simple_desktop import SimpleToolsApp
 
-        data = dict(defaults("lighting"), report_project="Stable")
+        data = dict(defaults("lighting"), report_project="Stable 設備甲")
         page = SimpleNamespace(result=calculate_tool("lighting", data), data=lambda: dict(data),
                                calculate=lambda: None, upstream_stale=False,
                                banner=SimpleNamespace(show=lambda *args: None))
@@ -171,7 +171,7 @@ class LightingReports(unittest.TestCase):
             path = Path(tmp) / "lighting.html"
             for _ in range(2):
                 self.assertTrue(app.export_result(str(path)))
-                self.assertIn("Stable", path.read_text())
+                self.assertIn("Stable 設備甲", path.read_text(encoding="utf-8"))
             before = path.read_bytes()
 
             def change_during_dialog(**kwargs):

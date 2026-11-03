@@ -51,12 +51,12 @@ jobs:
         run: |
           & $env:FACILITY_PY windows/tests/lighting_presets.py --gui
           if ($LASTEXITCODE -ne 0) { throw "Lighting regression failed" }
-          & $env:FACILITY_PY windows/tests/lighting_reports.py
+          & $env:FACILITY_PY -X utf8=0 windows/tests/lighting_reports.py
           if ($LASTEXITCODE -ne 0) { throw "Lighting report regression failed" }
-          & $env:FACILITY_PY windows/tests/photometry_formats.py
+          & $env:FACILITY_PY -X utf8=0 windows/tests/photometry_formats.py
           if ($LASTEXITCODE -ne 0) { throw "Photometry import regression failed" }
           $env:FACILITY_DIRECT_GUI = "1"
-          & $env:FACILITY_PY windows/tests/lighting_direct_checks.py
+          & $env:FACILITY_PY -X utf8=0 windows/tests/lighting_direct_checks.py
           if ($LASTEXITCODE -ne 0) { throw "Direct lighting regression failed" }
           Remove-Item Env:FACILITY_DIRECT_GUI
       - name: Verify F01–F06 physical boundaries and real workspaces

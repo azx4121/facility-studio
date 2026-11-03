@@ -245,7 +245,7 @@ class DirectLightingChecks(unittest.TestCase):
             for _ in range(2):
                 with patch("facility_studio.lighting_layout_ui.filedialog.asksaveasfilename", return_value=str(path)):
                     obj.export("html")
-                self.assertIn("<svg", path.read_text())
+                self.assertIn("<svg", path.read_text(encoding="utf-8"))
             before = path.read_bytes()
             def change(**kwargs):
                 obj.variables["length_m"].set("99")
@@ -266,7 +266,7 @@ class DirectLightingChecks(unittest.TestCase):
         obj.status = SimpleNamespace(set=lambda value: None)
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "existing.html"
-            path.write_text("preserve existing report")
+            path.write_text("preserve existing report", encoding="utf-8")
             for change in ("replace_source", "add_unused_source", "replace_result", "remove_source"):
                 obj.sources = {"P1": constant()}
                 obj.result = calculate_direct(obj.sources, parse_scene(fields, schedule, obj.sources))
@@ -279,7 +279,7 @@ class DirectLightingChecks(unittest.TestCase):
                     return str(path)
                 with self.subTest(change=change), patch("facility_studio.lighting_layout_ui.filedialog.asksaveasfilename", side_effect=mutate), self.assertRaises(ValueError):
                     obj.export("html")
-                self.assertEqual(path.read_text(), "preserve existing report")
+                self.assertEqual(path.read_text(encoding="utf-8"), "preserve existing report")
 
     def test_failed_atomic_export_preserves_existing_report(self):
         fields = {key: str(value) for key, value in scene().items() if key != "fixtures"}
@@ -295,10 +295,10 @@ class DirectLightingChecks(unittest.TestCase):
         obj.result_fingerprint = obj.fingerprint()
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "existing.json"
-            path.write_text("preserve existing report")
+            path.write_text("preserve existing report", encoding="utf-8")
             with patch("facility_studio.lighting_layout_ui.filedialog.asksaveasfilename", return_value=str(path)), patch("facility_studio.utils.os.replace", side_effect=OSError("simulated interrupted export")), self.assertRaises(OSError):
                 obj.export("json")
-            self.assertEqual(path.read_text(), "preserve existing report")
+            self.assertEqual(path.read_text(encoding="utf-8"), "preserve existing report")
             self.assertEqual(list(Path(tmp).iterdir()), [path])
 
     @unittest.skipUnless(os.environ.get("FACILITY_DIRECT_GUI") == "1", "Native Tk check requires an explicit display-enabled run")
@@ -312,7 +312,7 @@ class DirectLightingChecks(unittest.TestCase):
             window = SimplePage.open_direct_lighting(host)
             self.assertIs(SimplePage.open_direct_lighting(host), window)
             with tempfile.TemporaryDirectory() as tmp:
-                file = Path(tmp) / "source.ies"; file.write_text(ies())
+                file = Path(tmp) / "source.ies"; file.write_text(ies(), encoding="utf-8")
                 with patch("facility_studio.lighting_layout_ui.filedialog.askopenfilename", return_value=str(file)):
                     window.import_source(); window.import_source()
                 self.assertEqual(len(window.sources), 1)
@@ -327,7 +327,7 @@ class DirectLightingChecks(unittest.TestCase):
                 path = Path(tmp) / "report.html"
                 with patch("facility_studio.lighting_layout_ui.filedialog.asksaveasfilename", return_value=str(path)):
                     window.export("html")
-                self.assertIn("<svg", path.read_text())
+                self.assertIn("<svg", path.read_text(encoding="utf-8"))
                 adopted = window.result
                 with patch("facility_studio.lighting_layout_ui.filedialog.askopenfilename", return_value=""):
                     window.import_source()

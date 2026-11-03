@@ -83,8 +83,8 @@ def test_recalculate_save_export_and_source_stale(tmp_path):
     c.on_main_changed()
     assert "重新核對" in c.status.get()
     target = c.export(tmp_path / "report.txt")
-    assert "來源過期或未核對" in target.read_text()
-    assert "初篩容量足夠" not in target.read_text()
+    assert "來源過期或未核對" in target.read_text(encoding="utf-8")
+    assert "初篩容量足夠" not in target.read_text(encoding="utf-8")
 
 
 def test_invalid_new_input_clears_old_output_and_cannot_overwrite_export(tmp_path):
@@ -92,11 +92,11 @@ def test_invalid_new_input_clears_old_output_and_cannot_overwrite_export(tmp_pat
     assert "初篩容量足夠" in c.output.text
     c.variables["additional_margin_pct"].set("not numeric")
     output = tmp_path / "report.txt"
-    output.write_text("previous artifact")
+    output.write_text("previous artifact", encoding="utf-8")
     with pytest.raises(ValueError):
         c.export(output)
     assert "初篩容量足夠" not in c.output.text
-    assert c.result is None and output.read_text() == "previous artifact"
+    assert c.result is None and output.read_text(encoding="utf-8") == "previous artifact"
 
 
 def test_same_id_update_and_duplicate_asset_never_show_old_result():
@@ -199,8 +199,8 @@ def test_export_rechecks_sources_after_modal_dialog(monkeypatch, tmp_path):
         return str(target)
     monkeypatch.setattr(ui.filedialog, "asksaveasfilename", choose)
     c.export()
-    assert "來源過期或未核對" in target.read_text()
-    assert "初篩容量足夠" not in target.read_text()
+    assert "來源過期或未核對" in target.read_text(encoding="utf-8")
+    assert "初篩容量足夠" not in target.read_text(encoding="utf-8")
 
 
 def test_save_rechecks_form_after_modal_dialog(monkeypatch, tmp_path):
