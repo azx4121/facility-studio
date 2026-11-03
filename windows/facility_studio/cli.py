@@ -19,6 +19,8 @@ def main():
     )
     parser.add_argument("--project")
     parser.add_argument("--dossier-check", help="核對已存設計審查 JSON；0=文件齊備，3=待處理，2=格式錯誤")
+    parser.add_argument("--capacity-plan", help="核對容量與擴建計畫 JSON；0=初篩正常與N−1容量足夠，3=待資料或不足，2=格式錯誤")
+    parser.add_argument("--capacity-workspace", help="核對來源快照的目前整案 JSON；未提供則綁定計畫保持待覆核")
     parser.add_argument("--report")
     parser.add_argument("--result")
     parser.add_argument("--write-default")
@@ -49,6 +51,26 @@ def main():
 
     if args.language:
         i18n.set_language(args.language, persist=False)
+    if args.capacity_plan:
+        from .capacity_planning import read_plan, evaluate_plan, capacity_report
+        from .design_workflow import capacity_source_binding
+        from .workspace_store import read_workspace
+        try:
+            binding = capacity_source_binding(read_workspace(args.capacity_workspace)) if args.capacity_workspace else None
+            state = evaluate_plan(read_plan(args.capacity_plan), current_binding=binding)
+            if args.report:
+                atomic_text(args.report, capacity_report(state))
+            else:
+                print(capacity_report(state))
+            if args.result:
+                atomic_text(args.result, json.dumps(state, ensure_ascii=False, indent=2, allow_nan=False))
+            groups = [g for a in state["alternatives"] for g in a["groups"]]
+            ready = bool(groups) and all(a["groups"] and not a["issues"] for a in state["alternatives"])
+            ready = ready and all(g["normal_status"] == g["n_minus_one_status"] == "初篩容量足夠" for g in groups)
+            return 0 if ready else 3
+        except (OSError, ValueError, TypeError, KeyError) as error:
+            print(str(error), file=sys.stderr)
+            return 2
     if args.dossier_check:
         from pathlib import Path
         from .design_basis import load_revision, evaluate

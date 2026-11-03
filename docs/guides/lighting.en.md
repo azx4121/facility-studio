@@ -33,3 +33,17 @@ The rounded-up count gives 512 lux and 0.32 kW. Seven luminaires give only 448 l
 U, M and 100 lm/W are example assumptions. Confirm luminaire data, reflectance, installation height, cleaning and aging. This tool estimates average illuminance; it does not simulate photometric files, glare, point illuminance or uniformity.
 
 Inputs: [08](../examples/08-lighting.json), [09](../examples/09-lighting.json). [Windows win.7 source checks](../evidence/2026-10-18-audit-six/windows-use-cases.json).
+
+## Lighting design report (FEED estimate)
+
+Advanced conditions now include optional project, room, luminaire model, catalogue/photometric source, and design/U/M basis fields. These identify the report and record references; they do not change calculations or import/verify a photometric file.
+
+Lighting result export defaults to HTML. Open it and select Print / Save as PDF for the A4 portrait layout. TXT remains available, and combined HTML summaries include lighting details.
+
+The report lists adopted geometry, average illuminance, luminaire schedule, total complete-luminaire flux, W, W/m², and W/m²/100 lx using the actual calculated average. The normalized metric is not applicable at zero illuminance. Hidden length, width and mounting-height drafts are never presented as adopted geometry.
+
+Emin, Emax, uniformity, surface illuminance, grids, isolux contours, reflections and UGR remain explicitly uncalculated. This is not a DIALux-equivalent simulation or a compliance assessment. Point calculation needs manufacturer IES/LDT photometry, positions/orientations, room and workplane geometry, and a grid; reflection results additionally need reflectances and an appropriate solver.
+
+## Layout / direct illuminance (second-stage candidate)
+
+A separate workspace imports a strict supported subset of IES/LDT, accepts explicit fixture positions and file-C0 yaw, and calculates sampled horizontal-plane direct illuminance with uniformity and interpolated isolux contours. It exports HTML/CSV/JSON. It does not calculate reflections, shadows, daylight, UGR or compliance and is not DIALux-equivalent. The existing lumen method remains independent. See the [scope and validation record](../2026-11-03-direct-lighting.md).

@@ -240,6 +240,13 @@ TOOLS = {
                 help="m；桌面／機台作業高度，請依實際作業面填入。",
             ),
             field("maintenance", "維護係數 M", ".8", help="0–1；通用初估0.8，依清潔與光衰維護計畫確認。"),
+            field("report_project", "報告專案名稱", "", advanced=True, help="選填；只供報告識別，不影響照度計算。"),
+            field("report_room", "報告空間名稱", "", advanced=True),
+            field("report_fixture", "燈具廠牌／型號", "", advanced=True),
+            field("report_reference", "型錄／配光資料來源", "", advanced=True,
+                  help="選填來源或檔名；文字記錄不等於已匯入光度檔。"),
+            field("report_basis", "設計基準／U、M依據", "", advanced=True,
+                  help="選填適用作業、照度目標來源、利用率與維護計畫；不自動判定法規符合。"),
         ],
     ),
     "water": dict(

@@ -1,0 +1,8 @@
+IESNA:LM-63-2002
+[TEST]synthetic
+[LUMINAIRE]Synthetic constant 1000 cd; not manufacturer photometry
+TILT=NONE
+1 -1 1 4 1 1 2 0.1 0.2 0.03 1 1 10
+0 30 60 90
+0
+1000 1000 1000 1000

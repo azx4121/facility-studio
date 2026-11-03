@@ -354,11 +354,14 @@ def wetbulb(t, rh, p):
     hi = t
     for _ in range(100):
         b = (lo + hi) / 2
-        sw = (
-            state_trh(b, 100, p)["w"]
-            if b >= -60
-            else MW_RATIO * sat_pa(b) / (p * 1000 - sat_pa(b))
-        )
+        # This is a trial saturation state, not the user's air state. Its
+        # humidity ratio may exceed the public w <= 1 kg/kg input limit.
+        # Only the validated target above must satisfy that limit.
+        pw = sat_pa(b)
+        if pw >= p * 1000:
+            hi = b
+            continue
+        sw = MW_RATIO * pw / (p * 1000 - pw)
         if b >= 0:
             w = ((2501 - 2.326 * b) * sw - 1.006 * (t - b)) / (
                 2501 + 1.86 * t - 4.186 * b

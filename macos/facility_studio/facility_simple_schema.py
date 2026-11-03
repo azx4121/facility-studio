@@ -69,8 +69,8 @@ def active(tool, key, data):
         return data.get("insulate", "0") == "1"
     if tool == "liquid":
         if key in {"suction_surface_kpa", "suction_level_m", "suction_nozzle_offset_m", "suction_loss_kpa", "vapor_pressure_kpa", "vapor_reference", "npshr_m", "pump_curve_reference", "npsh_margin_m", "npsh_margin_reference"}:
-            from .pump_suction import PURE
-            return data.get("check_npsh", "0") == "1" and (key not in {"vapor_pressure_kpa", "vapor_reference"} or data.get("liquid") not in PURE)
+            from .pump_suction import pure_fluid
+            return data.get("check_npsh", "0") == "1" and (key not in {"vapor_pressure_kpa", "vapor_reference"} or pure_fluid(data, data.get("liquid")) is None)
         if key in {"liquid_rho", "liquid_cp", "liquid_mu", "property_reference"}:
             return data.get("properties") == "供應商物性" or data.get("liquid") not in LIQUIDS[:6]
         if key == "concentration":

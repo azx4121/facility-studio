@@ -151,11 +151,27 @@ def psychrometric(mode, first, second, pressure=101.325):
         lo, hi = 0.0, 100.0
         for _ in range(75):
             mid = (lo + hi) / 2
+            # At high temperature / low pressure, part of the RH bracket
+            # exceeds the supported w <= 1 kg/kg domain. Narrow that trial
+            # bracket instead of rejecting an otherwise valid final state.
+            pw = sat_pa(x) * mid / 100
+            if pw >= p * 1000 or MW_RATIO * pw / (p * 1000 - pw) > 1:
+                hi = mid
+                continue
             if wetbulb(x, mid, p) > y:
                 hi = mid
             else:
                 lo = mid
-        s = state_trh(x, (lo + hi) / 2, p)
+        rh = (lo + hi) / 2
+        pw = sat_pa(x) * rh / 100
+        if pw >= p * 1000 or MW_RATIO * pw / (p * 1000 - pw) > 1:
+            rh = lo
+        s = state_trh(x, rh, p)
+        # Do not silently clamp requests whose final humidity exceeds the
+        # model limit. Above, use the lower, validated side only when the
+        # last midpoint rounds up to an unsupported endpoint.
+        if abs(wetbulb(x, s["rh"], p) - y) > 1e-7:
+            raise ValidationError("濕球對應的空氣狀態超出模型範圍", "second")
     return dict(
         s,
         dewpoint_c=dewpoint(s["w"], p) if s["w"] > 0 else None,

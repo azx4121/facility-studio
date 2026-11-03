@@ -109,13 +109,19 @@ def _quick_html(result):
         cards, details = presentation(stage)
         content += '<section><h2>' + escape(str(stage["tool"])) + '</h2>' + _table(cards, ("項目", "計算結果"))
         content += '<p>' + '<br>'.join(escape(str(item)) for item in details) + '</p>'
-        conditions = input_rows(stage, pipeline.get("adopted_inputs", {}).get(stage["tool"]) if not result.get("tool") else None)
+        # Lighting owns a captured input snapshot. A separate pipeline draft
+        # must not replace it or fabricate inputs for an older result.
+        conditions = (input_rows(stage) if stage["tool"] == "lighting" else
+                      input_rows(stage, pipeline.get("adopted_inputs", {}).get(stage["tool"]) if not result.get("tool") else None))
         content += '<h3>輸入條件</h3>' + (_table(conditions, ("項目", "採用條件")) if conditions else '<p>採用輸入條件未附於此結果，請附原始輸入資料。</p>')
         if stage.get("formula"):
             content += '<pre>' + escape(str(stage["formula"])) + '</pre>'
         if stage.get("note"):
             content += '<p class="muted">' + escape(str(stage["note"])) + '</p>'
         content += '</section>'
+        if stage["tool"] == "lighting":
+            from .lighting_report import lighting_html_sections
+            content += lighting_html_sections(stage, include_inputs=False)
     warnings = pipeline.get("warnings", [])
     if warnings:
         content += '<section><h2>需確認的條件</h2><p>' + '<br>'.join(escape(str(item)) for item in warnings) + '</p></section>'
@@ -142,6 +148,9 @@ def html_report(result, *, language=None):
     if not isinstance(result, dict):
         from .errors import InputError
         raise InputError("設計總覽需要計算結果。", code="incomplete_result")
+    if result.get("tool") == "lighting":
+        from .lighting_report import lighting_html
+        return lighting_html(result, language=language)
     return _quick_html(result, language=language)
 
 

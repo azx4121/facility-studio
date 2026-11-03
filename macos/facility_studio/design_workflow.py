@@ -184,3 +184,72 @@ def compare_results(a, b):
         hash_a=a["hash"],
         hash_b=b["hash"],
     )
+
+
+def capacity_source_binding(workspace):
+    """Fingerprint the live engineering sources, not unrelated A/B navigation."""
+    return dict(project_id=workspace["project_id"], fingerprint=project_hash({
+        key: workspace[key] for key in ("project_id", "main", "ahus", "demand_ledger")
+    }))
+
+
+def capacity_plan_from_ledger(workspace):
+    """Copy ledger sources exactly once, without adding the already-adopted main totals.
+
+    This is deliberately a partial register, not a silent whole-plant total.
+    Unspecified frequency, fluids and exhaust rating conditions remain unknown.
+    """
+    from .contributions import validate_ledger, circuit_id
+    from .capacity_planning import new_plan, new_row, validate_plan
+
+    ledger = validate_ledger(workspace["demand_ledger"])
+    p = new_plan(workspace["main"]["inputs"]["project_name"] + "｜容量與擴建")
+    p["binding"] = capacity_source_binding(workspace)
+    p["scope"] = "僅已帶入需求彙整的電力／CHW／PCW／排氣來源；未加主案已含來源的總量。其他既有負荷、基數及供應容量須另核對。"
+    docs = {d["id"]: d for d in workspace["ahus"]}
+    for entry in ledger["entries"].values():
+        rows = []
+        def row_id(suffix):
+            return "ledger-" + project_hash([entry["id"], suffix])[:40]
+        for panel, power in entry["power"].items():
+            row = new_row("demand", row_id(panel))
+            row.update(name=entry["name"][:100], boundary=panel,
+                       conditions=dict(voltage_v=power["voltage"], phases=3, frequency_hz=None),
+                       values={c: power["kw"] for c in p["cases"]})
+            row["notes"].append("取來源運轉有功 kW，不重加設計電流或熱負荷；季節分配未提供，暫在兩工況保留相同值。")
+            row["pending"].append("電力頻率、季節同時率及 kW 容量額定條件須覆核；不由 kVA 直接視為 kW。")
+            rows.append(row)
+        for water in entry["water"]:
+            if water["loop"] not in ("CHW", "PCW"):
+                continue
+            row = new_row("demand", row_id(circuit_id(water)), water["loop"])
+            row.update(name=entry["name"][:100], boundary=water["circuit"],
+                       conditions=dict(fluid=None, supply_c=water["supply"], return_c=water["return"],
+                                       rho_kg_m3=water["rho"], cp_kj_kgk=water["cp"]),
+                       values={c: water[c + "_lpm"] for c in p["cases"]}, included_margin_pct=None)
+            row["pending"].append("來源含自身裕度及同時率，保留已計算水量；介質名稱、原始裕度及實際工況待核對。")
+            rows.append(row)
+        for prefix in ("gex", "sex", "aex", "vex", "hex"):
+            key = prefix + "_q"
+            if key not in entry["updates"]:
+                continue
+            if entry["updates"].get("u_" + prefix) != "CMH":
+                raise ValidationError("容量來源排氣需明列 CMH 單位，不能猜測換算")
+            try:
+                flow = float(entry["updates"][key])
+            except (ValueError, TypeError):
+                raise ValidationError("容量來源排氣數值無法解讀；請先修正需求彙整來源") from None
+            row = new_row("demand", row_id(prefix), "EXHAUST")
+            row.update(name=entry["name"][:100], boundary=prefix.upper(),
+                       conditions=dict(exhaust_type=prefix.upper(), temperature_c=None, absolute_kpa=None, required_static_pa=None),
+                       values={c: flow for c in p["cases"]})
+            row["pending"].append("排氣 CMH 的實際溫壓、同時工況及需求靜壓待核對；不同排氣類別不得混合。")
+            rows.append(row)
+        for row in rows:
+            row["source"] = dict(reference="需求彙整：" + entry["name"][:990], revision=entry["source_hash"], fingerprint=project_hash(entry))
+            row["notes"].extend(entry["notes"])
+            row["pending"].extend(entry["pending"])
+            if entry["kind"] == "AHU" and (entry["id"] not in docs or ahu_source_hash(docs[entry["id"]]["inputs"]) != entry["source_hash"]):
+                row["pending"].append("空調箱來源已變更或缺少原始資料；先重新計算並帶入來源，不能沿用舊數值。")
+        p["demands"].extend(rows)
+    return validate_plan(p)

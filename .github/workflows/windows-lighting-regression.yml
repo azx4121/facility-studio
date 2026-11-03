@@ -2,11 +2,14 @@ name: Windows lighting and engineering audit regressions
 
 on:
   push:
-    branches: [main, fix/windows-lighting-f07, fix/windows-audit-six, codex/win8-report-audit]
+    branches: [main, fix/windows-lighting-f07, fix/windows-audit-six, codex/win8-report-audit, dot/guardrail-integration-20261103]
     paths:
       - .github/workflows/windows-lighting-regression.yml
       - windows/facility_studio/**
       - windows/tests/lighting_presets.py
+      - windows/tests/lighting_reports.py
+      - windows/tests/photometry_formats.py
+      - windows/tests/lighting_direct_checks.py
       - windows/tests/audit_regressions.py
       - windows/tests/report_regressions.py
   workflow_dispatch:
@@ -38,6 +41,14 @@ jobs:
         run: |
           python windows/tests/lighting_presets.py --gui
           if ($LASTEXITCODE -ne 0) { throw "Lighting regression failed" }
+          python windows/tests/lighting_reports.py
+          if ($LASTEXITCODE -ne 0) { throw "Lighting report regression failed" }
+          python windows/tests/photometry_formats.py
+          if ($LASTEXITCODE -ne 0) { throw "Photometry import regression failed" }
+          $env:FACILITY_DIRECT_GUI = "1"
+          python windows/tests/lighting_direct_checks.py
+          if ($LASTEXITCODE -ne 0) { throw "Direct lighting regression failed" }
+          Remove-Item Env:FACILITY_DIRECT_GUI
       - name: Verify F01–F06 physical boundaries and real workspaces
         run: |
           python windows/tests/audit_regressions.py --gui --output "$env:RUNNER_TEMP/audit-regressions.json"

@@ -461,8 +461,15 @@ def lighting(data):
             warnings.append(f"兩模式每盞流明不同：功率初估 {watts:g} W × {comparison['efficacy']:g} lm/W＝{estimated:,.1f} lm；型錄 {catalog:,.1f} lm，為初估的 {catalog/estimated:.3g} 倍。請核對同一盞完整燈具，含燈管數及驅動器；相同流明應得到相同燈數。")
     if comparison["catalog_efficacy"] and comparison["catalog_efficacy"] > 250:
         warnings.append(f"型錄流明÷輸入功率＝{comparison['catalog_efficacy']:,.1f} lm/W，請核對W與lm是否同一燈具／整組。")
+    # Keep report-only data with this successful calculation, not live UI drafts.
+    from .lighting_report import capture_context
+    report_context = capture_context(data)
     return dict(
         tool="lighting",
+        report_context=report_context,
+        length_m=length_m if area_mode == "長×寬" else None,
+        width_m=width_m if area_mode == "長×寬" else None,
+        room_height_m=number(data["height"], "height", 0.1, 100) if area_mode == "體積 m³" else None,
         area_m2=area,
         quantity=qty,
         watts=watts,
@@ -838,7 +845,7 @@ def known_failure_messages(result):
         failures.append("保溫條件不可達，不能採用厚度。")
     suction = result.get("suction")
     if suction:
-        if suction["surface_kpa"] <= suction["vapor_kpa"] or suction["suction_static_kpa"] <= suction["vapor_kpa"]:
+        if suction["surface_kpa"] < suction["vapor_kpa"] or suction["suction_static_kpa"] <= suction["vapor_kpa"]:
             failures.append("泵浦吸入條件未達：單相液體假設不成立，請調整工況。")
         threshold = suction["threshold_m"]
         if threshold is not None and suction["available_m"] < threshold:

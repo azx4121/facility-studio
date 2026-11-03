@@ -210,7 +210,18 @@ class SessionController:
             messagebox.showerror("整案未儲存", str(exc), parent=self.root)
             return False
 
+    def open_capacity_planning(self):
+        from .capacity_planning_ui import CapacityPlanningWindow
+        for child in self.children:
+            if getattr(child, "independent_capacity_plan", False) and child.win.winfo_exists():
+                child.win.lift()
+                return child
+        return CapacityPlanningWindow(self.root, self)
+
     def close_workspace(self):
+        for child in list(self.children):
+            if getattr(child, "independent_capacity_plan", False) and not child.may_close():
+                return
         simple = getattr(self, "simple_app", None)
         if simple is not None and not simple.confirm_design_review_close():
             return
@@ -301,6 +312,11 @@ class SessionController:
                 text=result["quality"]["status"] + "｜結果與來源狀態已同步",
                 style=quality_style(result["quality"]),
             )
+        # AHU edits refresh receipts without calling notify_children. Invalidate
+        # linked capacity previews here too, without recursive AHU link refreshes.
+        for child in list(self.children):
+            if getattr(child, "independent_capacity_plan", False) and child.win.winfo_exists():
+                child.on_main_changed()
         return notices
 
     def decorate_receipts(self, result):

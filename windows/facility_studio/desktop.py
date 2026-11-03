@@ -539,7 +539,7 @@ class DesktopApp(SessionController, MainView):
         self.tutorial_button.pack(side="left", padx=(0, 8))
         actions = FlowToolbar(head)
         actions.grid(row=7, column=0, columnspan=2, sticky="ew", pady=(4, 0))
-        for label, command in [("複製為新方案", self.duplicate_workspace), ("設備表匯入", self.open_equipment), ("需求彙整", self.open_demand_ledger), ("開啟練習新案", self.open_practice)]:
+        for label, command in [("複製為新方案", self.duplicate_workspace), ("設備表匯入", self.open_equipment), ("需求彙整", self.open_demand_ledger), ("容量／擴建規劃", self.open_capacity_planning), ("開啟練習新案", self.open_practice)]:
             ttk.Button(actions, text=label, command=command).pack(side="left", padx=(0, 8))
         self.action_toolbars = (bar, modebar, utilities, actions)
         self.host = ttk.Frame(root)

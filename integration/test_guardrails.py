@@ -420,3 +420,113 @@ def test_round_duct_rows_match_actual_geometry_and_card(flow):
     row = next(x for x in rows if x[0] == '圓管 直徑')
     assert row[2] == 'mm' and row[1] == pytest.approx(r['round']['diameter_m'] * 1000)
     assert next(x[1] for x in rows if x[0] == '方管 寬度') == r['rectangle']['w_mm']
+
+
+@pytest.mark.parametrize('refresh', ['air', None])
+def test_upstream_refresh_cannot_revalidate_another_missing_source(simple, tmp_path, refresh):
+    _, app = simple
+    app.show_tool('lighting')
+    lighting = app.active_page()
+    app.show_tool('air')
+    app.show_tool('heat_loads')
+    heat = app.active_page()
+    assert heat.import_upstream()
+    assert heat.result['area_m2'] == 30
+    lighting.variables['area'].set('60')
+    assert lighting.result is None and heat.upstream_stale and heat.result is None
+    assert not heat.import_upstream(refresh)
+    assert heat.upstream_stale and heat.result is None
+    target = tmp_path / 'stale-heat.txt'
+    assert not app.export_result(target) and not target.exists()
+    lighting.calculate()
+    assert heat.import_upstream()
+    assert not heat.upstream_stale and heat.result['area_m2'] == 60
+
+
+def test_partial_refresh_only_clears_the_refreshed_source(simple):
+    _, app = simple
+    app.show_tool('lighting')
+    lighting = app.active_page()
+    app.show_tool('air')
+    air = app.active_page()
+    app.show_tool('heat_loads')
+    heat = app.active_page()
+    assert heat.import_upstream()
+    lighting.variables['area'].set('60')
+    air.variables['temperature'].set('36')
+    lighting.calculate()
+    air.calculate()
+    assert not heat.import_upstream('air')
+    assert heat.upstream_stale_sources == {'lighting'} and heat.result is None
+    assert heat.import_upstream('lighting')
+    assert not heat.upstream_stale and not heat.upstream_stale_sources
+    assert heat.result['area_m2'] == 60
+
+
+def test_import_preserves_engine_failure_banner(simple):
+    _, app = simple
+    app.show_tool('heat_loads')
+    heat = app.active_page()
+    heat.variables['equipment_kw'].set('100')
+    heat.calculate()
+    app.show_tool('water')
+    water = app.active_page()
+    water.variables['pipe_size'].set('15A (1/2")')
+    assert water.import_upstream()
+    assert water.result['failures']
+    assert water.banner.label.cget('background') == Theme.TONES['danger'][1]
+    assert water.banner.label.cget('text').startswith(water.result['failures'][0])
+
+
+
+def test_disabled_air_comparison_does_not_refresh_old_enthalpy_difference(simple):
+    _, app = simple
+    app.show_tool('lighting')
+    app.show_tool('air')
+    air = app.active_page()
+    app.show_tool('heat_loads')
+    heat = app.active_page()
+    assert heat.import_upstream()
+    air.variables['compare'].set('0')
+    air.calculate()
+    assert not heat.import_upstream()
+    assert heat.result is None and heat.upstream_stale
+    air.variables['compare'].set('1')
+    air.calculate()
+    assert heat.import_upstream() and not heat.upstream_stale
+
+
+def test_partial_refresh_enforces_shared_room_scope(simple):
+    _, app = simple
+    app.show_tool('cleanroom')
+    cleanroom = app.active_page()
+    cleanroom.variables['area'].set('30')
+    cleanroom.calculate()
+    app.show_tool('lighting')
+    lighting = app.active_page()
+    app.show_tool('heat_loads')
+    heat = app.active_page()
+    assert heat.import_upstream()
+    lighting.variables['area'].set('60')
+    lighting.calculate()
+    assert not heat.import_upstream('lighting')
+    assert heat.result is None and heat.upstream_stale
+    assert heat.variables['area'].get() == '30.0'
+
+
+@pytest.mark.parametrize('medium', ['乙二醇水溶液', '丙二醇水溶液'])
+def test_import_preserves_unverified_liquid_phase_warning(simple, tmp_path, medium):
+    _, app = simple
+    app.show_tool('water')
+    app.show_tool('liquid')
+    liquid = app.active_page()
+    for key, value in {'liquid': medium, 'material': 'SUS316L',
+                       'liquid_t': '80', 'liquid_p': '1'}.items():
+        liquid.variables[key].set(value)
+    assert liquid.import_upstream()
+    assert liquid.result['liquid_phase_verified'] is False
+    assert not liquid.result['failures']
+    assert liquid.banner.label.cget('background') == Theme.TONES['warning'][1]
+    target = tmp_path / 'unverified-liquid-phase.txt'
+    assert app.export_result(target)
+    assert '液相尚未驗證' in target.read_text(encoding='utf-8')

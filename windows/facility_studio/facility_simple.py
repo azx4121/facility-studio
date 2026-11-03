@@ -88,6 +88,28 @@ def liquid(data):
     concentration = n(data, "concentration", "20", 0, 100) if name not in ("清水", "UPW／DI／RO", "乙醇", "甲醇", "丙酮") else 0
     mode = choice(data, "properties", "依介質模型", ("依介質模型", "供應商物性"))
     warnings = []
+    # Transport-property overrides do not establish phase stability. These
+    # glycol fits have a freezing boundary but no saturation-pressure model.
+    glycol = {"乙二醇水溶液": "MEG", "丙二醇水溶液": "MPG"}.get(name)
+    glycol_freeze_known = False
+    glycol_is_water = glycol is not None and concentration == 0
+    if glycol_is_water:
+        try:
+            if t < .1:
+                raise ValueError("零濃度乙／丙二醇即為純水；本模型最低操作溫度為 0.1°C")
+            liquid_water(t, pressure)
+        except ValueError as error:
+            raise ValidationError("液體物性模型不適用此溫壓／濃度：" + str(error), "liquid_t") from None
+        glycol_freeze_known = True
+    elif glycol:
+        try:
+            freezing_k = PropsSI("T_freeze", f"INCOMP::{glycol}-{concentration:g}%")
+        except ValueError:
+            warnings.append("此濃度沒有內建凝固點依據；供應商物性不代表液相已確認。")
+        else:
+            glycol_freeze_known = True
+            if t + 273.15 < freezing_k:
+                raise ValidationError("操作溫度低於此濃度的凝固點，不能採用單相液體模型。", "liquid_t")
     if mode == "供應商物性" or name in ("丙酮", "IPA 異丙醇", "污水／混合廢液", "鹽酸", "硫酸", "氫氟酸", "氫氧化鈉", "過氧化氫", "自訂液體"):
         # Supplier transport properties do not override a known pure fluid's
         # phase boundary. Water's range also excludes metastable subzero water.
@@ -168,9 +190,24 @@ def liquid(data):
         warnings.append("保溫條件不可達，不能採用厚度。")
     from .pump_suction import suction_check
     suction = suction_check(data, name, t, rho, v)
+    phase_verified = True if name in ("清水", "UPW／DI／RO", "乙醇", "甲醇", "丙酮") or glycol_is_water else None
+    if suction and name not in ("清水", "UPW／DI／RO", "乙醇", "甲醇", "丙酮"):
+        # The separately entered operating pressure must also be compatible
+        # with the supplied same-condition bubble pressure, not just the tank.
+        if pressure <= suction["vapor_kpa"]:
+            raise ValidationError("液體操作絕壓不高於同工況泡點壓力，不能採用單相液體模型。", "liquid_p")
+    if glycol and not glycol_is_water:
+        phase_verified = bool(glycol_freeze_known and suction is not None)
+        if not phase_verified:
+            pending = "乙／丙二醇模型未提供泡點壓力或此濃度凝固點未確認；本次液相尚未驗證。"
+            warnings.append(pending)
+            if suction:
+                suction["criterion_met"] = False
+                suction["status"] = "待資料或未達 NPSH 條件"
+                suction["warnings"].append(pending)
     if suction:
         warnings.extend(suction["warnings"])
-    return dict(tool="liquid", liquid=name, material=material, flow_lpm=flow, temperature_c=t,
+    return dict(tool="liquid", liquid_phase_verified=phase_verified, liquid=name, material=material, flow_lpm=flow, temperature_c=t,
                 pressure_kpa=pressure, concentration_pct=concentration,
                 velocity_limit_mps=vlimit, friction_limit_pa_m=friction_limit,
                 roughness_mm=rough, length_m=length, k_sum=ksum,

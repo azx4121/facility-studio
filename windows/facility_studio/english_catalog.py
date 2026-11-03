@@ -3,6 +3,49 @@
 TEXT = {}
 
 TEXT.update({
+    "匯出結果": "Export results",
+    "FEED 流明法初估；未計算逐點照度、均勻度、等照度線、直接／反射光或 UGR，不代表 DIALux 模擬或法規符合。": "FEED lumen-method estimate; point illuminance, uniformity, isolux contours, direct/reflected light and UGR are not calculated. This is not a DIALux simulation or a compliance assessment.",
+    "未計算": "Not calculated",
+    "報告專案名稱": "Report project name",
+    "報告空間名稱": "Report room name",
+    "燈具廠牌／型號": "Luminaire manufacturer / model",
+    "型錄／配光資料來源": "Catalogue / photometric data source",
+    "設計基準／U、M依據": "Design criteria / U and M basis",
+    "報告識別": "Report identification",
+    "照明設計報告｜FEED 初估": "Lighting design report | FEED estimate",
+    "表面照度摘要": "Surface illuminance summary",
+    "燈具明細": "Luminaire schedule",
+    "尚需資料與後續檢核": "Required data and further checks",
+    "流明法平均值不是網格平均；不由平均照度推造最小值、最大值或均勻度。": "The lumen-method average is not a grid average. Minimum, maximum and uniformity values are not inferred from average illuminance.",
+    "需提供原廠 IES／LDT 光度檔、每盞位置／方向、房間幾何、計算面與網格，才能進行逐點照度計算。": "Point-by-point calculation requires manufacturer IES/LDT photometry, each luminaire's position/orientation, room geometry, calculation plane and grid.",
+    "需提供表面反射率並採用反射計算模型，才能取得直接／反射光與各表面結果。": "Surface reflectances and a reflection model are needed for direct/reflected light and surface results.",
+    "未讀取光度檔；型錄來源僅為文字記錄。完整燈具流明與光源流明不可混用。": "No photometric file has been read; the catalogue source is a text record only. Do not confuse complete-luminaire flux with lamp flux.",
+    "U、M與光效須另核對來源；目標照度比較不代表法規、眩光或均勻度符合。": "Verify sources for U, M and efficacy. A target illuminance comparison does not establish regulatory, glare or uniformity compliance.",
+    "不適用（平均照度為零）": "Not applicable (zero average illuminance)",
+    "採用輸入與公式": "Adopted inputs and formula",
+    "空間淨高（體積換算採用）": "Clear room height (used for volume conversion)",
+    "燈具安裝高度（K檢核採用）": "Mounting height (used for room index K)",
+    "工作面高度（K檢核採用）": "Workplane height (used for room index K)",
+    "反射率（天花板／牆／地板）": "Reflectance (ceiling / walls / floor)",
+    "計算網格／邊緣區": "Calculation grid / boundary zone",
+    "計算範圍（流明法）": "Calculation area (lumen method)",
+    "空間與計算條件": "Room and calculation conditions",
+    "完整燈具總光通量": "Total complete-luminaire flux",
+    "每 100 lx 功率密度": "Power density per 100 lx",
+    "流明法／單一燈具型式": "Lumen method / single luminaire type",
+    "報告欄位需為不超過 500 字的文字。": "Report fields must be text of at most 500 characters.",
+    "選填；只供報告識別，不影響照度計算。": "Optional report identification; does not affect illuminance calculation.",
+    "選填來源或檔名；文字記錄不等於已匯入光度檔。": "Optional source or filename; a text record is not imported photometry.",
+    "選填適用作業、照度目標來源、利用率與維護計畫；不自動判定法規符合。": "Optionally record the task, illuminance target source, utilization and maintenance plan; no automatic compliance decision.",
+    "完整燈具 [lm/盞]": "Luminaire [lm/unit]",
+    "光源 [lm/盞]": "Lamp [lm/unit]",
+    "輸入 [W/盞]": "Input [W/unit]",
+    "合計 [W]": "Total [W]",
+    "廠牌／型號": "Manufacturer / model",
+    "表面": "Surface", "地板": "Floor", "天花板": "Ceiling", "牆壁": "Walls", "編號": "No.",
+})
+
+TEXT.update({
     "設計電流依據": "Design current basis",
     "馬達負載": "Motor load",
     "設備輸入用電來源": "Equipment electrical input sources",
@@ -327,6 +370,7 @@ q[m³/h]=Kv√(Δp[bar]/SG)；僅不可壓縮液體、非汽化／阻塞流初�
 反算流量時溫差必須大於零	Temperature difference must be positive when calculating flow
 未知反算目標	Unknown calculation target
 濕球必須介於零濕度濕球下限與乾球之間	Wet bulb must be between its zero-humidity limit and dry-bulb temperature
+濕球對應的空氣狀態超出模型範圍	The air state corresponding to the wet bulb is outside the model range
 反算溫差時流量必須大於零	Flow must be positive when calculating temperature difference
 Kv 必須大於零	Kv must be positive
 目前 	Current state 
@@ -3937,6 +3981,25 @@ TEXT.update({'重複開啟設計審查沿用同一視窗': 'Reopening design rev
 
 TEXT.update({'相態篩選：': 'Phase screening: ', '。接近或超過內建液化警戒；單相定寸結果僅供檢討，須依原廠同工況資料確認。': '. Near or above the liquefaction screening threshold; single-phase sizing is for review only and requires matching vendor data.', '。相態尚未確認，不可視為單一氣相已核定；請補原廠同溫度、壓力及組分資料。': '. Phase is unconfirmed; single gas phase is not approved. Supply vendor data at matching temperature, pressure and composition.', '路徑壓力預算不足，請調整風管或可用靜壓後重算。': 'Insufficient path pressure budget. Adjust the duct or available static pressure and recalculate.', '已計算｜相態風險尚未排除，結果僅供檢討': 'Calculated | Phase risk remains; results are for review only', '已計算｜有待確認條件，請查看警告及報告': 'Calculated | Conditions require confirmation; see warnings and report', '匯出期間條件已變更，請重新計算後再匯出。': 'Inputs changed during export. Recalculate before exporting.', '匯出已停止': 'Export stopped', '相態與液化檢核': 'Phase and liquefaction check'})
 
+# Detailed pressure-aware psychrometric chart.
+TEXT.update({
+    "完整空氣線圖": "Complete psychrometric chart",
+    "空氣狀態｜完整空氣線圖": "Air states | Complete psychrometric chart",
+    "開啟當下快照": "Snapshot at opening",
+    "滾輪縮放 · 拖曳平移 · 雙擊適合視窗": "Wheel to zoom · Drag to pan · Double-click to fit",
+    "RH  相對濕度 %": "RH  Relative humidity %",
+    "h  焓 kJ/kg乾空氣": "h  Enthalpy kJ/kg dry air",
+    "WB  濕球 °C": "WB  Wet bulb °C",
+    "v  比容 m³/kg乾空氣": "v  Specific volume m³/kg dry air",
+    "外側綠色刻度：焓 h": "Outer green scale: enthalpy h",
+    "褐色刻度：濕球 WB": "Brown scale: wet bulb WB",
+    "A／B連線僅比較端點，非設備過程保證。": "A/B line compares endpoints; it does not guarantee an equipment process.",
+    "放大 ＋": "Zoom in +",
+    "縮小 −": "Zoom out −",
+    "適合視窗／重設": "Fit / reset",
+    "最大化": "Maximize",
+})
+
 TEXT.update({'不足': 'Insufficient', '條件已變更': 'Inputs changed'})
 
 TEXT.update({'此氣體沒有內建流速參考；指定上限與計算流速須依同工況原廠／專案依據確認。': 'No built-in velocity reference for this gas. Confirm the chosen limit and calculated velocity against matching vendor or project data.', '指定流速上限高於內建參考：': 'Chosen velocity limit exceeds the built-in reference: ', '；計算流速：': '; Calculated velocity: ', '。內建參考不是安全核定值，請確認同工況管材、壓力與設備依據。': '. The built-in reference is not safety approval. Confirm matching material, pressure and equipment data.', '流速依據': 'Velocity basis'})
@@ -3944,3 +4007,412 @@ TEXT.update({'此氣體沒有內建流速參考；指定上限與計算流速須
 TEXT.update({'外氣量超過總送風量，氣流平衡未達條件。': 'Outdoor air exceeds total supply; airflow balance fails the stated conditions.', 'FFU 覆蓋率超過本案可安裝上限。': 'FFU coverage exceeds the project installation limit.', '泵浦吸入條件未達：單相液體假設不成立，請調整工況。': 'Pump suction conditions fail: the single-phase liquid assumption is not met. Adjust the operating conditions.', '計算流速超過本案指定上限，請調整管徑或工況。': 'Calculated velocity exceeds the project limit. Adjust the diameter or operating conditions.', '已計算｜有未達條件，請查看警告及報告': 'Calculated | Criteria are not met; see warnings and report'})
 
 TEXT.update({'直徑': 'Diameter'})
+
+TEXT.update({'零濃度乙／丙二醇即為純水；本模型最低操作溫度為 0.1°C': 'Zero-concentration glycol is pure water; the minimum operating temperature supported here is 0.1 C.', '此濃度沒有內建凝固點依據；供應商物性不代表液相已確認。': 'No built-in freezing boundary is available at this concentration; supplier transport properties do not confirm the liquid phase.', '操作溫度低於此濃度的凝固點，不能採用單相液體模型。': 'Operating temperature is below the freezing point at this concentration; the single-phase liquid model is not applicable.', '液體操作絕壓不高於同工況泡點壓力，不能採用單相液體模型。': 'Operating absolute pressure is at or below the supplied bubble pressure at matching conditions; the single-phase liquid model is not applicable.', '乙／丙二醇模型未提供泡點壓力或此濃度凝固點未確認；本次液相尚未驗證。': 'The glycol model has no bubble-pressure data, or its freezing boundary is unverified at this concentration; the liquid phase remains unverified.', '液槽表面壓力低於泡點／飽和蒸氣壓，單相液體假設不成立。': 'Tank surface pressure is below the bubble or saturation pressure; the single-phase liquid assumption is not met.'})
+
+# Direct photometry workspace and report.
+TEXT.update({'配置／直接照度': 'Layout / direct illuminance',
+ '直接照度配置': 'Direct illuminance layout',
+ '僅計算向下燈具的點光源水平面直接照度；不含反射、遮蔽、UGR，亦非 DIALux 等效結果。': 'Down-facing point-source direct horizontal illuminance '
+                                                   'only; excludes reflections, obstructions and UGR. Not '
+                                                   'equivalent to DIALux.',
+ '匯入 IES／LDT': 'Import IES / LDT',
+ '移除選取來源': 'Remove selected source',
+ '請匯入 1–32 個有效配光來源。': 'Import 1–32 valid photometry sources.',
+ '來源 ID': 'Source ID',
+ '格式': 'Format',
+ '燈具／檔案': 'Luminaire / file',
+ '來源 SHA-256': 'Source SHA-256',
+ '房間與取樣': 'Room and sampling',
+ '長度 (m)': 'Length (m)',
+ '寬度 (m)': 'Width (m)',
+ '工作面高度 (m)': 'Workplane height (m)',
+ '取樣邊界內縮 (m)': 'Sampling inset (m)',
+ 'X 方向取樣數': 'X sample count',
+ 'Y 方向取樣數': 'Y sample count',
+ '維護係數 (0–1)': 'Maintenance factor (0–1)',
+ '明確產生規則排列（會取代下方配置）': 'Generate explicit regular layout (replaces schedule below)',
+ '配光 ID': 'Photometry ID',
+ '列數 (Y)': 'Rows (Y)',
+ '欄數 (X)': 'Columns (X)',
+ '安裝高度 (m)': 'Mounting height (m)',
+ '產生可編輯配置': 'Generate editable schedule',
+ '燈具配置 CSV：ID,x,y,z,yaw,scale（m、度；scale 為 0–1 配光倍率）': 'Fixture CSV: ID,x,y,z,yaw,scale (m, degrees; scale is '
+                                                      'a 0–1 photometry multiplier)',
+ '原點在左下；所有燈具朝下，不支援傾斜。yaw 由上往下看逆時針；yaw=0 時檔案 C0 朝 +X、C90 朝 +Y；檔案軸向不一定對應燈殼正面。': 'Origin at lower left; all '
+                                                                              'fixtures face down, without '
+                                                                              'tilt. Yaw is counterclockwise '
+                                                                              'from above; file C0 points '
+                                                                              'toward +X and C90 toward +Y '
+                                                                              'at yaw=0. File axes need not '
+                                                                              'match the housing front.',
+ '計算直接照度': 'Calculate direct illuminance',
+ '匯出 HTML': 'Export HTML',
+ '匯出 CSV': 'Export CSV',
+ '匯出 JSON': 'Export JSON',
+ '請匯入配光、填寫房間與燈具配置後計算。': 'Import photometry and enter room and fixture schedule before calculating.',
+ '輸入已變更；請重新計算後匯出。': 'Inputs changed; recalculate before exporting.',
+ '尚無有效計算結果。': 'No valid calculation result.',
+ '操作失敗': 'Operation failed',
+ '已匯出': 'Exported',
+ '維護後取樣直接照度': 'Maintained sampled direct illuminance',
+ '初始平均': 'Initial average',
+ '平均': 'Average',
+ '最小': 'Minimum',
+ '最大': 'Maximum',
+ '等照度線': 'Isolux contours',
+ '格心取樣；色塊僅供視覺化': 'Cell-centre samples; colored cells are visualization only',
+ '配置／取樣輸入必須是有限數值。': 'Layout / sampling inputs must be finite numbers.',
+ '長寬須介於 0.1–1000 m，工作面介於 0–100 m，內縮須小於短邊的一半。': 'Length and width must be 0.1–1000 m, workplane 0–100 m; '
+                                               'inset less than half the shorter side.',
+ '維護係數必須介於 0 與 1。': 'Maintenance factor must be between 0 and 1.',
+ '取樣數須為 2–80 的整數。': 'Sample counts must be integers from 2 to 80.',
+ '請至少匯入一個有效配光來源。': 'Import at least one valid photometry source.',
+ '每筆燈具配置須有六欄：ID,x,y,z,yaw,scale。': 'Each fixture row requires six columns: ID,x,y,z,yaw,scale.',
+ '燈具引用了不存在的配光 ID。': 'A fixture references an unknown photometry ID.',
+ '燈具須位於房間內、至少高於工作面 0.01 m，倍率須介於 0 與 1。': 'Fixtures must be inside the room, at least 0.01 m above the '
+                                         'workplane, with scale between 0 and 1.',
+ '燈具數須為 1–200，且取樣點數乘以燈具數不得超過 2000000。': 'Use 1–200 fixtures and at most 2000000 sample-fixture pairs.',
+ '請選擇有效配光 ID，列／欄須為正整數且總燈具數不超過 200。': 'Select a valid source ID and positive integer rows / columns, with at '
+                                     'most 200 fixtures.',
+ '直接照度計算報告': 'Direct illuminance report',
+ '僅直接光／點光源近似': 'Direct only / point-source approximation',
+ '非 DIALux 等價結果；未計算反射、遮擋陰影、日光與 UGR。': 'Not DIALux-equivalent; reflections, obstruction shadows, daylight and '
+                                      'UGR are not calculated.',
+ '直接光平均照度（格點）': 'Mean direct illuminance (samples)',
+ '直接光最小照度（格點）': 'Minimum direct illuminance (samples)',
+ '直接光最大照度（格點）': 'Maximum direct illuminance (samples)',
+ '平面配置與直接光等照度線': 'Layout and direct isolux lines',
+ '色階為格心計算值；等照度線為格點間線性內插，僅繪至取樣範圍。': 'Colours show cell-centre calculations; isolux lines are linear '
+                                   'interpolations within the sample hull.',
+ '坐標與計算條件': 'Coordinates and calculation conditions',
+ '工作面（距地面）': 'Workplane height above floor',
+ '邊緣內縮': 'Boundary inset',
+ '格心取樣': 'Cell-centre samples',
+ '維護係數（只乘一次）': 'Maintenance factor (applied once)',
+ '初始直接光平均照度': 'Initial mean direct illuminance',
+ '維護後直接光平均照度': 'Maintained mean direct illuminance',
+ '每盞位置與朝向': 'Luminaire positions and orientation',
+ '光度資料 ID': 'Photometry ID',
+ '光輸出倍率': 'Light-output multiplier',
+ '光度來源與追溯': 'Photometric sources and traceability',
+ '來源檔名': 'Source filename',
+ '光度格式': 'Photometric format',
+ '燈具名稱': 'Luminaire name',
+ '檔案光通量': 'File luminous flux',
+ '檔案輸入功率': 'File input power',
+ '來源內容 SHA256': 'Source content SHA256',
+ '解析與縮放紀錄': 'Parsing and scaling record',
+ '計算範圍與限制': 'Calculation scope and limitations',
+ '全部燈具垂直向下。yaw=0 時檔案 C0 指向 +x、C90 指向 +y；正 yaw 由上往下看逆時針轉向 +y。C0 不一定是燈具外殼的正面。': 'All luminaires face downward. '
+                                                                              'At yaw=0 the file C0 axis '
+                                                                              'points along +x and C90 along '
+                                                                              '+y; positive yaw rotates '
+                                                                              'counter-clockwise toward +y '
+                                                                              'as seen from above. C0 need '
+                                                                              'not be the housing front.',
+ '照度統計是所選格點的結果，不代表連續空間極值或法規符合。': 'Statistics describe the selected samples, not continuous-space extrema or '
+                                 'compliance.',
+ '光輸出倍率不推估調光後的耗電；未採用照明利用係數 U。': 'Light-output multipliers do not estimate dimmed electrical power; no '
+                                'utilization factor U is applied.',
+ '此報告依本次匯入光度資料及配置計算，未讀取來源檔案的後續變更。': 'This report uses the imported photometry and adopted layout; later '
+                                    'source-file changes are not read into this result.',
+ '未計算（零照度）': 'Not calculated (zero illuminance)'})
+
+# Capacity and expansion planning: authored UI, validation and report text.
+TEXT.update({'僅為同邊界、同工況的容量初篩，不是完整 FEED 或工程核准；未驗證電力 kVA／啟動／短路／保護、管網揚程、風機曲線、共因失效及切換能力。N−1 只扣除最大單台降額容量，假設其餘設備可同時供應；此假設須由設計者確認。': 'Preliminary '
+                                                                                                                  'capacity '
+                                                                                                                  'screening '
+                                                                                                                  'for '
+                                                                                                                  'the '
+                                                                                                                  'same '
+                                                                                                                  'supply '
+                                                                                                                  'boundary '
+                                                                                                                  'and '
+                                                                                                                  'operating '
+                                                                                                                  'conditions '
+                                                                                                                  'only, '
+                                                                                                                  'not '
+                                                                                                                  'a '
+                                                                                                                  'complete '
+                                                                                                                  'FEED '
+                                                                                                                  'study '
+                                                                                                                  'or '
+                                                                                                                  'engineering '
+                                                                                                                  'approval. '
+                                                                                                                  'Electrical '
+                                                                                                                  'kVA, '
+                                                                                                                  'starting, '
+                                                                                                                  'short '
+                                                                                                                  'circuits, '
+                                                                                                                  'protection, '
+                                                                                                                  'piping-network '
+                                                                                                                  'head, '
+                                                                                                                  'fan '
+                                                                                                                  'curves, '
+                                                                                                                  'common-cause '
+                                                                                                                  'failures '
+                                                                                                                  'and '
+                                                                                                                  'changeover '
+                                                                                                                  'capability '
+                                                                                                                  'have '
+                                                                                                                  'not '
+                                                                                                                  'been '
+                                                                                                                  'verified. '
+                                                                                                                  'N−1 '
+                                                                                                                  'only '
+                                                                                                                  'subtracts '
+                                                                                                                  'the '
+                                                                                                                  'largest '
+                                                                                                                  'single-unit '
+                                                                                                                  'derated '
+                                                                                                                  'capacity '
+                                                                                                                  'and '
+                                                                                                                  'assumes '
+                                                                                                                  'the '
+                                                                                                                  'remaining '
+                                                                                                                  'equipment '
+                                                                                                                  'can '
+                                                                                                                  'supply '
+                                                                                                                  'simultaneously; '
+                                                                                                                  'the '
+                                                                                                                  'designer '
+                                                                                                                  'must '
+                                                                                                                  'confirm '
+                                                                                                                  'this '
+                                                                                                                  'assumption.',
+ '容量與擴建規劃': 'Capacity and expansion planning',
+ '計畫名稱': 'Plan name',
+ '服務範圍': 'Service scope',
+ '額外裕度依據': 'Basis for additional margin',
+ '額外裕度': 'Additional margin',
+ '容量／擴建／替代方案初篩': 'Capacity / expansion / alternative screening',
+ '需求取各同時工況總和的最大值，不把各設備不同時間的峰值相加。來源已含裕度保留，不自動扣除或重套。': 'Demand is the largest total across simultaneous '
+                                                     'operating scenarios, not the sum of equipment peaks '
+                                                     'occurring at different times. Margins already included '
+                                                     'in source values are retained, not automatically '
+                                                     'removed or reapplied.',
+ '水量與等效熱量為同一需求的不同表達，不再相加；電力 kW 不由熱量換算。': 'Water flow and equivalent thermal load express the same demand and '
+                                         'are not added together; electrical kW is not converted from '
+                                         'thermal load.',
+ '不支援的容量列種類／系統': 'Unsupported capacity row type / system',
+ '不支援的容量計畫格式': 'Unsupported capacity plan format',
+ '範圍確認／合成案例標記必須為布林值': 'Scope confirmation / synthetic-case flags must be Boolean values',
+ '需有 1 至 12 個同時運轉工況': 'Between 1 and 12 simultaneous operating scenarios are required',
+ '工況': 'Operating conditions',
+ '工況識別碼重複': 'Duplicate operating scenario ID',
+ '替代方案格式不符': 'Invalid alternative format',
+ '不支援的容量列種類': 'Unsupported capacity row type',
+ '服務範圍與需求／供應清單完整性尚未明確確認': 'The service scope and completeness of the demand / supply lists have not been '
+                          'explicitly confirmed',
+ '額外裕度尚未提供依據': 'No basis has been provided for the additional margin',
+ '主案來源已變更或目前無法核對；舊快照不可判定容量足夠，請重新擷取並覆核': 'The main-project source has changed or cannot currently be '
+                                        'verified. An old snapshot cannot establish sufficient capacity; '
+                                        'capture a new snapshot and review it',
+ '報告輸入已變更；請重新計算': 'Report inputs have changed; recalculate',
+ '合成驗證案例，非真實專案驗證': 'Synthetic validation case, not validation of a real project',
+ '使用者填報資料，尚非真實工程驗收': 'User-entered data, not actual engineering acceptance',
+ '計畫 SHA256：': 'Plan SHA256: ',
+ '服務範圍：': 'Service scope: ',
+ ' 文字不合法': ' has invalid text',
+ ' 不可空白': ' must not be blank',
+ ' 數值不合法；未知請填 null，不可填零代替': ' has an invalid numeric value; enter null for unknown values, not zero',
+ '主案來源綁定格式不符': 'Invalid main-project source binding format',
+ '主案來源綁定': 'Main-project source binding',
+ '容量計畫來源過多或格式不符': 'Too many capacity plan sources or invalid source format',
+ '供應邊界': 'Supply boundary',
+ '方案欄位不完整': 'Alternative fields are incomplete',
+ '方案識別碼重複': 'Duplicate alternative ID',
+ '方案未列任何需求，不能把空清單當成零負荷': 'The alternative lists no demand; an empty list cannot be treated as zero load',
+ '額外裕度：': 'Additional margin: ',
+ '%（每一同時工況加總後僅套用一次）；依據：': '% (applied once after summing each simultaneous operating scenario); basis: ',
+ '未填': 'Not entered',
+ '容量計畫列欄位不完整': 'Capacity plan row fields are incomplete',
+ '列識別碼重複；更新相同 ID 應取代，不可再加一列': 'Duplicate row ID; an update with the same ID must replace the row, not add '
+                              'another',
+ '不支援的公用系統': 'Unsupported utility system',
+ '系統工況欄位不完整': 'System operating-condition fields are incomplete',
+ '冷卻迴路回水溫度必須高於供水溫度': 'Cooling-loop return temperature must exceed supply temperature',
+ '台數需為 1 至 10000 的整數': 'Unit count must be an integer from 1 to 10000',
+ '每列需明列所有同時工況；未知值請填 null': 'Each row must explicitly list all simultaneous operating scenarios; enter null '
+                           'for unknown values',
+ '單台需求／容量': 'Per-unit demand / capacity',
+ '來源需有文件、版次及快照指紋欄位': 'Sources must include document, revision and snapshot fingerprint fields',
+ '同時率': 'Coincidence factor',
+ '來源已含裕度': 'Margin already included in source',
+ '容量降額係數': 'Capacity derating factor',
+ '方案來源重複或已不存在': 'An alternative source is duplicated or no longer exists',
+ '同一方案重複計入相同系統／實體來源；替代設備請分開方案，不可加總': 'The same system / physical source is counted more than once in an '
+                                     'alternative; place alternative equipment in separate alternatives '
+                                     'rather than adding it together',
+ '供應邊界或同工況資料未知，不可合併為已核對容量': 'Supply boundary or matching operating-condition data is unknown; these values '
+                            'cannot be combined as verified capacity',
+ '此供應條件沒有相符需求；不同條件不可互抵': 'No demand matches these supply conditions; values under different conditions '
+                         'cannot offset one another',
+ '沒有同邊界同工況的供應容量；缺資料不是零容量': 'No supply capacity is available for the same boundary and operating conditions; '
+                           'missing data is not zero capacity',
+ '至少一個同時工況的需求／容量／係數未知；只顯示已知小計': 'Demand / capacity / factors are unknown for at least one simultaneous '
+                                'operating scenario; only known subtotals are shown',
+ '待資料／待覆核': 'Awaiting data / review',
+ '初篩容量足夠': 'Sufficient capacity in preliminary screening',
+ '主案快照：': 'Main-project snapshot: ',
+ '｜來源過期或未核對': ' | Source outdated or unverified',
+ '｜與本次提供主案一致': ' | Matches the main project supplied for this check',
+ '方案：': 'Alternative: ',
+ '待辦：': 'Open items: ',
+ '工況：': 'Operating conditions: ',
+ '供應': 'Supply',
+ '來源說明格式不符': 'Invalid source description format',
+ '需求需標示現有或擴建': 'Demand must be identified as existing or expansion',
+ '：現有 ': ': existing ',
+ ' + 擴建 ': ' + expansion ',
+ ' → 含額外裕度 ': ' → including additional margin ',
+ '；正常容量 ': '; normal capacity ',
+ '；餘量 ': '; remaining capacity ',
+ '相數只接受 1 或 3': 'Phase count must be 1 or 3',
+ ' 來源文件／版次待補': ' source document / revision is required',
+ ' 來源已含裕度未知；不得誤認為未含裕度': ' margin already included in the source is unknown; do not assume no margin is '
+                        'included',
+ '邊界未知': 'Unknown boundary',
+ '正常：': 'Normal: ',
+ ' kW（不是額外負荷）': ' kW (not an additional load)',
+ '同時工況設計峰值：': 'Design peak across simultaneous operating scenarios: ',
+ '同時率 ': 'Coincidence factor ',
+ '；來源已含裕度 ': '; margin already included in source ',
+ '降額係數 ': 'Derating factor ',
+ '／實體 ': ' / physical source ',
+ ' 必須大於零': ' must be greater than zero',
+ '  同一設計水量的等效熱量：': '  Equivalent thermal load for the same design water flow: ',
+ '  註：': '  Note: ',
+ '  已知小計（非完整需求）：': '  Known subtotal (not the complete demand): ',
+ '列 ID（重複編輯會取代）': 'Row ID (editing the same ID replaces the row)',
+ '實體設備／來源 ID（防重複）': 'Physical equipment / source ID (prevents double counting)',
+ '名稱': 'Name',
+ '供應邊界／盤／迴路': 'Supply boundary / panel / loop',
+ '台數': 'Unit count',
+ '階段 current／expansion': 'Phase: current / expansion',
+ '同時率 0–1（未含在單台值時使用）': 'Coincidence factor 0–1 (use when not included in the per-unit value)',
+ '來源已含裕度 %（僅註記，不再乘）': 'Margin already included in source % (record only; do not multiply again)',
+ '容量降額係數 0–1': 'Capacity derating factor 0–1',
+ '來源文件／依據': 'Source document / basis',
+ '來源版次／日期': 'Source revision / date',
+ '線電壓 V': 'Line voltage V',
+ '相數 1／3': 'Phase count 1 / 3',
+ '頻率 Hz': 'Frequency Hz',
+ '介質／濃度': 'Fluid / concentration',
+ '排氣種類': 'Exhaust type',
+ '實際氣體絕壓 kPa': 'Actual gas absolute pressure kPa',
+ '同工況靜壓 Pa': 'Static pressure at matching operating conditions Pa',
+ '容量／擴建／替代方案': 'Capacity / expansion / alternatives',
+ '主案可能已變更；匯出前會重新核對來源，舊結果不可沿用。': 'The main project may have changed. Sources will be checked again before '
+                                'export; old results must not be reused.',
+ '擷取後已人工修改；來源指紋只追溯原始快照，不代表修改值已由來源確認。': 'Manually modified after capture; the source fingerprint traces only '
+                                       'the original snapshot and does not verify the modified values '
+                                       'against the source.',
+ '替代方案': 'Alternatives',
+ '方案名稱': 'Alternative name',
+ '編輯需求': 'Edit demand',
+ '編輯供應容量': 'Edit supply capacity',
+ '① 身分與用量': '① Identity and usage',
+ '② 同工況與來源': '② Matching operating conditions and sources',
+ '③ 待辦與註記': '③ Open items and notes',
+ '另存計畫': 'Save plan as',
+ '從需求彙整擷取': 'Capture from demand summary',
+ '匯出報告': 'Export report',
+ '① 現有／擴建需求': '① Existing / expansion demand',
+ '② 供應容量': '② Supply capacity',
+ '③ 方案與結果': '③ Alternatives and results',
+ '輸入已變更，舊結果不可沿用；重算／匯出時重新核對。': 'Inputs have changed; old results must not be reused. Verification will run '
+                              'again on recalculation / export.',
+ '輸入已變更，請重算。': 'Inputs have changed; recalculate.',
+ '容量計畫需獨立另存，不會寫回主案。': 'Save the capacity plan separately; it is not written back to the main project.',
+ '未儲存容量計畫': 'Unsaved capacity plan',
+ '容量計畫尚未另存，確定捨棄這些變更嗎？': 'The capacity plan has not been saved separately. Discard these changes?',
+ '請選取一列編輯': 'Select a row to edit',
+ '人工修改值需補新的來源文件／版次並覆核，再移除此待辦。': 'For manually modified values, provide a new source document / revision and '
+                                'review it before removing this open item.',
+ '先在需求頁選取此方案的全部現有／擴建需求，再選取供應列': 'First select all existing / expansion demand for this alternative on the '
+                                'demand tab, then select its supply rows',
+ '刪除方案': 'Delete alternative',
+ '僅移除選取方案，保留來源列？': 'Remove only the selected alternative and retain its source rows?',
+ '容量計畫': 'Capacity plan',
+ '完整服務範圍': 'Complete service scope',
+ '額外裕度 %（只套用一次）': 'Additional margin % (applied only once)',
+ '編輯選取': 'Edit selection',
+ '刪除選取': 'Delete selection',
+ '階段／台數': 'Phase / unit count',
+ '來源已過期，請重新擷取並覆核。': 'The source is outdated; capture it again and review it.',
+ '已依本次輸入重算。': 'Recalculated using the current inputs.',
+ '容量計畫不得超過 4 MB': 'Capacity plans must not exceed 4 MB',
+ '已儲存獨立容量計畫：': 'Saved a separate capacity plan: ',
+ '新的 ID 已存在，不可覆蓋其他列': 'The new ID already exists; another row cannot be overwritten',
+ '刪除選取列及方案中的對應引用？': 'Delete the selected rows and their references in alternatives?',
+ '空白代表未知，明確填 0 才是零；容量為同工況單台額定值，需求為單台用量。': 'Blank means unknown; only an explicit 0 means zero. Capacity is '
+                                          'the per-unit rating at matching operating conditions, and demand '
+                                          'is per-unit usage.',
+ '來源待辦每行一筆。只有資料與工況已核對後才能移除；刪字不代表工程核准。': 'Enter one source open item per line. Remove an item only after '
+                                        'verifying the data and operating conditions; deleting text is not '
+                                        'engineering approval.',
+ '註記／核對依據（每行一筆）': 'Notes / verification basis (one per line)',
+ '核對並儲存此列': 'Validate and save this row',
+ '已核對每個方案的服務範圍、來源清單完整性及 N−1 可同時供應假設（不是工程簽核）': 'The service scope, source-list completeness and N−1 '
+                                              'simultaneous-supply assumption have been checked for each '
+                                              'alternative (not engineering sign-off)',
+ '將兩頁選取列記為方案': 'Save the selected rows from both tabs as an alternative',
+ '刪除該方案': 'Delete this alternative',
+ '未建立方案時評估全部列；已有方案時只評估各方案明選的列。不同方案互為替代，不加總。': 'If no alternatives exist, all rows are assessed. Otherwise, '
+                                              'only the rows explicitly selected for each alternative are '
+                                              'assessed. Alternatives are mutually exclusive and are not '
+                                              'added together.',
+ '容量計畫 JSON': 'Capacity plan JSON',
+ '僅已帶入需求彙整的電力／CHW／PCW／排氣來源；未加主案已含來源的總量。其他既有負荷、基數及供應容量須另核對。': 'Only electrical / CHW / PCW / exhaust sources '
+                                                             'already imported into the demand summary are '
+                                                             'included; main-project totals already '
+                                                             'containing these sources are not added. Other '
+                                                             'existing loads, base quantities and supply '
+                                                             'capacities require separate verification.',
+ '｜容量與擴建': ' | Capacity and expansion',
+ '取來源運轉有功 kW，不重加設計電流或熱負荷；季節分配未提供，暫在兩工況保留相同值。': 'Uses source operating active power in kW without adding '
+                                               'design current or thermal load again. No seasonal allocation '
+                                               'is provided, so the same value is provisionally retained in '
+                                               'both operating scenarios.',
+ '電力頻率、季節同時率及 kW 容量額定條件須覆核；不由 kVA 直接視為 kW。': 'Electrical frequency, seasonal coincidence factors and kW '
+                                             'capacity rating conditions require review; kVA must not be '
+                                             'treated directly as kW.',
+ '來源含自身裕度及同時率，保留已計算水量；介質名稱、原始裕度及實際工況待核對。': 'The source includes its own margin and coincidence factor, so '
+                                           'the calculated water flow is retained. Fluid name, original '
+                                           'margin and actual operating conditions require verification.',
+ '排氣 CMH 的實際溫壓、同時工況及需求靜壓待核對；不同排氣類別不得混合。': 'Actual temperature and pressure, simultaneous operating scenarios '
+                                          'and required static pressure for exhaust CMH require '
+                                          'verification; different exhaust categories must not be combined.',
+ '容量來源排氣需明列 CMH 單位，不能猜測換算': 'Exhaust capacity sources must explicitly specify CMH units; conversion must not '
+                            'be guessed',
+ '空調箱來源已變更或缺少原始資料；先重新計算並帶入來源，不能沿用舊數值。': 'The AHU source has changed or its original data is missing. '
+                                        'Recalculate and import the source first; old values must not be '
+                                        'reused.',
+ '容量來源排氣數值無法解讀；請先修正需求彙整來源': 'The exhaust value in the capacity source cannot be parsed; correct the '
+                            'demand-summary source first',
+ '核對容量與擴建計畫 JSON；0=初篩正常與N−1容量足夠，3=待資料或不足，2=格式錯誤': 'Check capacity and expansion plan JSON; 0=normal and N−1 '
+                                                  'capacity sufficient in preliminary screening, 3=awaiting '
+                                                  'data or insufficient capacity, 2=format error',
+ '核對來源快照的目前整案 JSON；未提供則綁定計畫保持待覆核': 'Current full-project JSON used to verify the source snapshot; if '
+                                   'omitted, a source-bound plan remains pending review',
+ '容量／擴建規劃': 'Capacity / expansion planning'})
+
+TEXT.update({"已核對範圍、完整清單及 N−1 供應假設（非工程簽核）": "Scope, full register and N−1 supply assumptions checked (not approval)"})
+
+TEXT.update({"來源文件／版次由填報者提供；本報告不會重新讀取外部原廠或設備表檔案的後續變更。": "Source documents and revisions are declared by the author; this report does not reread later changes to external manufacturer or equipment-schedule files."})
+
+# Explicit capacity-demand completeness and conservative migration.
+TEXT.update({
+    '舊版計畫未記錄需求完整性；已保留數值為已知小計，請另行核對完整需求。': 'The older plan did not record demand completeness; values are retained as known subtotals. Confirm the complete demand separately.',
+    '需求完整性確認必須為布林值': 'Demand completeness confirmation must be Boolean',
+    '需求完整性尚未確認；數值只列已知小計，不推算完整需求餘量。': 'Demand completeness is unconfirmed; values are known subtotals only, without full-demand headroom.',
+    '只有另行確認完整的需求值才參與完整需求、餘量及缺口；未確認值只保留為已知小計。': 'Only separately confirmed complete demands are used for full demand, headroom and deficits; unconfirmed values remain known subtotals.',
+    '需求完整性：': 'Demand completeness: ',
+    '已另行確認': 'Separately confirmed',
+    '尚未確認': 'Unconfirmed',
+    '需求完整性（需另行核對）': 'Demand completeness (separate confirmation)',
+    '已核對為完整需求，非僅已知小計': 'Confirmed complete demand\n(not only a known subtotal)',
+    '目前全部列': 'All current rows',
+})

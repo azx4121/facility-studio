@@ -18,6 +18,8 @@ on:
       - tools/verify_100x_all_fields_and_reports.py
       - tools/cleanroom100_stress.py
       - docs/development.md
+      - integration/test_capacity*.py
+      - tools/verify_capacity_planning.py
   pull_request:
     paths:
       - .github/workflows/engineering-dashboard-checks.yml
@@ -35,6 +37,8 @@ on:
       - tools/verify_100x_all_fields_and_reports.py
       - tools/cleanroom100_stress.py
       - docs/development.md
+      - integration/test_capacity*.py
+      - tools/verify_capacity_planning.py
   workflow_dispatch:
 
 permissions:
@@ -91,9 +95,18 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "${{ matrix.source }}/evidence" "$RUNNER_TEMP/engineering-dashboard/legacy"
-          for suite in simple_features regression v560_features v557_inactive v558_review v559_resilience bilingual security_checks; do
+          for suite in simple_features regression v560_features v557_inactive v558_review v559_resilience bilingual security_checks lighting_presets lighting_reports photometry_formats lighting_direct_checks; do
             python "${{ matrix.source }}/tests/$suite.py" 2>&1 | tee "$RUNNER_TEMP/engineering-dashboard/legacy/$suite.log"
           done
+      - name: Capacity expansion arithmetic, source guards and actual Tk editor
+        shell: bash
+        env:
+          FACILITY_TEST_PLATFORM: ${{ matrix.source }}
+          FACILITY_REQUIRE_DISPLAY: "1"
+        run: |
+          set -euo pipefail
+          python tools/verify_capacity_planning.py --platform "${{ matrix.source }}" --output "$RUNNER_TEMP/engineering-dashboard/capacity-examples"
+          xvfb-run -a -s "-screen 0 1920x1440x24" python -m pytest integration/test_capacity_planning.py integration/test_capacity_controller.py integration/test_capacity_gui.py -q --junitxml="$RUNNER_TEMP/engineering-dashboard/capacity.xml"
       - name: Historical Windows installer integrity fixtures
         if: matrix.source == 'windows'
         shell: bash
@@ -110,6 +123,7 @@ jobs:
         run: |
           set -euo pipefail
           xvfb-run -a python "${{ matrix.source }}/tests/electrical_units.py" --gui
+          FACILITY_DIRECT_GUI=1 xvfb-run -a python "${{ matrix.source }}/tests/lighting_direct_checks.py"
           xvfb-run -a -s "-screen 0 1920x1440x24" python tools/verify_dashboard_gui.py --platform "${{ matrix.source }}" --output "$RUNNER_TEMP/engineering-dashboard/gui-source-smoke.json" 2>&1 | tee "$RUNNER_TEMP/engineering-dashboard/gui-source-smoke.log"
       - name: Windows report semantic and export regressions
         if: matrix.source == 'windows'

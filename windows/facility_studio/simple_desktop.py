@@ -11,7 +11,7 @@ from .gas_catalog import gas_label, reference_velocity, switched_velocity
 from .tutorial_help import open_tutorial
 from .version import VERSION, BUILD_VERSION
 from .quick_tools import UNITS, UNIT_HELP
-from .air_chart import AirChart
+from .air_chart import AirChart, FullAirChart
 from .simple_engines import calculate_tool, FLOW_FACTORS, GAS_FLOW_FACTORS
 from .simple_engines import AIR_PRESSURE_FACTORS, GAS_PRESSURE_FACTORS
 from .simple_reports import presentation, tool_report
@@ -58,6 +58,7 @@ class SimplePage(ttk.Frame):
         self.upstream_sources = set()
         self.upstream_keys = set()
         self.upstream_stale = False
+        self.upstream_stale_sources = set()
         self.variables = {key: tk.StringVar(self, value) for key, value in defaults(tool).items()}
         self.previous = self.data()
         self.widgets, self.rows, self.labels, self.hints, self.unit_labels = {}, {}, {}, {}, {}
@@ -104,7 +105,8 @@ class SimplePage(ttk.Frame):
                 widget = ttk.Combobox(row, textvariable=self.variables[key], values=spec["options"],
                                       state="readonly", width=12, justify="right", font=(Theme.mono, 11))
             else:
-                widget = ttk.Entry(row, textvariable=self.variables[key], width=12, justify="right", font=(Theme.mono, 11))
+                widget = ttk.Entry(row, textvariable=self.variables[key], width=12,
+                                   justify="left" if key.startswith("report_") else "right", font=(Theme.mono, 11))
             widget.grid(row=0, column=1, sticky="ew", padx=(0, 8))
             widget.bind("<Return>", lambda event: self._enter(), add="+")
             self.widgets[key] = widget
@@ -165,6 +167,7 @@ class SimplePage(ttk.Frame):
                 extras, text="型錄 U／室指數檢核", command=self.apply_dialux_mode
             )
             self.dialux_button.pack(side="left")
+            ttk.Button(extras, text="配置／直接照度", command=self.open_direct_lighting).pack(side="left")
         if tool == "water":
             ttk.Button(
                 extras,
@@ -221,12 +224,34 @@ class SimplePage(ttk.Frame):
         if self.result is None:
             return
         win = tk.Toplevel(self)
-        win.title("空氣狀態｜放大空氣線圖")
-        win.geometry("1100x700")
-        chart = AirChart(win, self.app.family)
-        chart.pack(fill="both", expand=True, padx=14, pady=14)
+        win.title("空氣狀態｜完整空氣線圖")
+        width = min(1440, max(800, win.winfo_screenwidth() - 60))
+        height = min(1000, max(600, win.winfo_screenheight() - 100))
+        win.geometry(f"{width}x{height}")
+        win.minsize(800, 600)
+        toolbar = ttk.Frame(win)
+        toolbar.pack(fill="x", padx=14, pady=(10, 4))
+        chart = FullAirChart(win, self.app.family)
+        for text, command in (("放大 ＋", lambda: chart.zoom_at(1.25)),
+                              ("縮小 −", lambda: chart.zoom_at(.8)),
+                              ("適合視窗／重設", chart.fit_view)):
+            ttk.Button(toolbar, text=text, command=command).pack(side="left", padx=(0, 6))
+        def maximize():
+            try:
+                win.state("zoomed")
+            except tk.TclError:
+                try:
+                    win.attributes("-zoomed", True)
+                except tk.TclError:
+                    win.geometry(f"{win.winfo_screenwidth()}x{win.winfo_screenheight()}+0+0")
+            chart.fit_view()
+        ttk.Button(toolbar, text="最大化", command=maximize).pack(side="left")
+        ttk.Button(toolbar, text="關閉", command=win.destroy).pack(side="right")
+        ttk.Label(win, text="本視窗為開啟當下的狀態快照；輸入變更後請重開核對。", style="Simple.Muted.TLabel").pack(side="bottom", pady=(0, 8))
+        chart.pack(fill="both", expand=True, padx=8, pady=6)
         chart.set_state(self.result["state"], self.result.get("comparison_state"))
-        ttk.Label(win, text="本視窗為開啟當下的狀態快照；輸入變更後請重開核對。", style="Simple.Muted.TLabel").pack(pady=(0, 8))
+        win.bind("<Escape>", lambda event: win.destroy())
+        return win
 
     def open_reference(self):
         if self.result is None:
@@ -271,11 +296,20 @@ class SimplePage(ttk.Frame):
 
     def import_upstream(self, only=None):
         results = {key: page.result for key, page in self.app.pages.items() if page.result is not None}
+        # A single air state cannot refresh an adopted A/B enthalpy difference.
+        if self.tool == "heat_loads" and "air" in results and not results["air"].get("comparison_state"):
+            results.pop("air")
+        available_results = results
         if only:
             results = {key: value for key, value in results.items() if key == only}
         elif self.upstream_sources:
             results = {key: value for key, value in results.items() if key in self.upstream_sources}
         try:
+            # A full refresh must not silently drop an adopted source whose
+            # current result is unavailable and retain its old input values.
+            if not only and self.upstream_sources - results.keys():
+                self.banner.show("上游條件已變更，請重新帶入；亦可修改帶入欄位改為手動輸入。", "warning")
+                return False
             values = upstream_values(self.tool, results, self.data())
             if not values:
                 self.banner.show("尚無可帶入的上游結果；請先完成對應工具計算。", "warning")
@@ -283,9 +317,17 @@ class SimplePage(ttk.Frame):
             sources = {"heat_loads": ("cleanroom", "lighting", "air"), "water": ("heat_loads",), "liquid": ("water",),
                        "pumps": ("water",), "electrical": ("cleanroom", "heat_loads", "lighting", "pumps")}
             fresh_sources = {key for key in sources.get(self.tool, ()) if key in results}
+            if only:
+                # Source-specific buttons must enforce the same shared-scope
+                # validation as a complete refresh (for example room area).
+                retained_sources = self.upstream_sources | fresh_sources
+                upstream_values(self.tool, {key: value for key, value in available_results.items()
+                                           if key in retained_sources}, self.data())
             self.upstream_sources = self.upstream_sources | fresh_sources if only else fresh_sources
             self.upstream_keys = self.upstream_keys | set(values) if only else set(values)
-            self.upstream_stale = False
+            # Refreshing one source does not refresh the other adopted sources.
+            self.upstream_stale_sources.difference_update(fresh_sources)
+            self.upstream_stale = bool(self.upstream_stale_sources)
             self.app.invalidate_dependents(self.tool)
             self.suspended = True
             try:
@@ -302,7 +344,7 @@ class SimplePage(ttk.Frame):
                 self.suspended = False
             self.update_visibility()
             self.calculate(True)
-            if self.result is not None:
+            if self.result is not None and not self.result.get("warnings") and not self.result.get("failures"):
                 if self.tool == "electrical":
                     self.banner.show("已帶入明列設備用電；請核對冰機、MAU、排風及製程設備是否齊全。", "warning")
                 else:
@@ -336,6 +378,7 @@ class SimplePage(ttk.Frame):
         if key in self.upstream_keys:
             self.upstream_sources.clear()
             self.upstream_keys.clear()
+            self.upstream_stale_sources.clear()
             self.upstream_stale = False
         self.app.invalidate_dependents(self.tool)
         self.suspended = True
@@ -604,6 +647,15 @@ class SimplePage(ttk.Frame):
         window.calculate()
         return window
 
+    def open_direct_lighting(self):
+        from .lighting_layout_ui import open_direct_lighting
+        window = getattr(self, "direct_lighting_window", None)
+        if window is not None and window.win.winfo_exists():
+            window.win.lift()
+            return window
+        self.direct_lighting_window = open_direct_lighting(self.winfo_toplevel())
+        return self.direct_lighting_window
+
     def apply_dialux_mode(self):
         if self.tool != "lighting":
             return False
@@ -646,6 +698,7 @@ class SimplePage(ttk.Frame):
         self.app.invalidate_dependents(self.tool)
         self.upstream_sources.clear()
         self.upstream_keys.clear()
+        self.upstream_stale_sources.clear()
         self.upstream_stale = False
         self.suspended = True
         try:
@@ -764,7 +817,7 @@ class SimpleToolsApp:
         self.copy_button = ttk.Button(footer, text="複製結果", command=self.copy_result)
         self.copy_button.grid(row=0, column=2, padx=3)
         self.export_button = ttk.Button(
-            footer, text="匯出TXT", command=self.export_result
+            footer, text="匯出結果", command=self.export_result
         )
         self.export_button.grid(row=0, column=3, padx=3)
         self.summary_button = ttk.Button(footer, text="設計總覽 HTML", command=self.export_summary)
@@ -919,6 +972,7 @@ class SimpleToolsApp:
         visited.add(source)
         for key, page in self.pages.items():
             if source in page.upstream_sources:
+                page.upstream_stale_sources.add(source)
                 page.upstream_stale = True
                 page.clear("上游條件已變更，請重新帶入；亦可修改帶入欄位改為手動輸入。")
                 self.invalidate_dependents(key, visited)
@@ -939,11 +993,15 @@ class SimpleToolsApp:
         if page.result is None:
             return False
         result, data = page.result, page.data()
+        extension = ".html" if self.current == "lighting" else ".txt"
+        filetypes = [("文字結果", "*.txt"), ("HTML 設計報表", "*.html")]
+        if self.current == "lighting":
+            filetypes.reverse()
         path = path or filedialog.asksaveasfilename(
             parent=self.root,
-            defaultextension=".txt",
-            initialfile=TOOLS[self.current]["title"] + ".txt",
-            filetypes=[("文字結果", "*.txt"), ("HTML 設計報表", "*.html")],
+            defaultextension=extension,
+            initialfile=TOOLS[self.current]["title"] + extension,
+            filetypes=filetypes,
         )
         if not path:
             return False

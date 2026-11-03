@@ -222,6 +222,8 @@ def presentation(result):
                 details.append(f"同條件對照｜{label}：每盞 {lm:,.1f} lm" + (f" → {count:,} 盞" if count is not None else ""))
         if comparison.get("catalog_efficacy") is not None:
             details.append(f"型錄整燈光效＝{comparison['catalog_efficacy']:,.1f} lm/W（型錄每盞lm÷每盞輸入W）")
+        from .lighting_report import SCOPE_NOTICE
+        details.append(SCOPE_NOTICE)
         details.extend(result.get("warnings", []))
     elif tool == "water":
         pipe, thermal = result["pipe"], result["thermal"]
@@ -312,7 +314,7 @@ def input_rows(result, inputs=None):
         key = row["key"]
         if key not in inputs or not active_field(tool, key, values):
             continue
-        value = verbatim(values[key]) if key == "gas_name" else str(values[key])
+        value = verbatim(values[key]) if key == "gas_name" or key.startswith("report_") else str(values[key])
         if row["checkbox"]:
             value = "是" if value == "1" else "否"
         unit = input_unit(tool, row, values)
@@ -368,17 +370,29 @@ def tool_report(result, inputs):
     cards, details = presentation(result)
     from .simple_schema import active_field, defaults
 
-    inputs = dict(defaults(result["tool"]), **inputs)
+    if result["tool"] == "lighting":
+        # A legacy/direct result has no verified input snapshot. Do not fill
+        # its report with supplied drafts or current schema defaults.
+        snapshot = result.get("adopted_inputs")
+        inputs = snapshot if isinstance(snapshot, dict) else {}
+    else:
+        inputs = dict(defaults(result["tool"]), **inputs)
 
     lines = [f"廠務簡易工具 {REPORT_VERSION}｜{TOOLS[result['tool']]['title']}", "", "核心設計量"]
     lines += [f"  {label}：{value}" for label, value in cards]
     lines += ["", "輸入條件"]
-    lines += [f"  {label}：{value}" for label, value in input_rows(result, inputs)]
+    conditions = input_rows(result, inputs)
+    lines += [f"  {label}：{value}" for label, value in conditions]
+    if not conditions:
+        lines.append("採用輸入條件未附於此結果，請附原始輸入資料。")
     lines += ["", "結果"] + [f"  {label}：{value}" for label, value in cards]
-    if result["tool"] == "lighting" and inputs["area_mode"] == "體積 m³":
+    if result["tool"] == "lighting" and inputs.get("area_mode") == "體積 m³":
         lines.append(
             f"  地板照明面積＝體積 {inputs['area']}m³ ÷ 淨高 {inputs['height']}m＝{result['area_m2']:,.3f}m²"
         )
     lines += ["  " + text for text in details]
+    if result["tool"] == "lighting":
+        from .lighting_report import lighting_text_sections
+        lines += ["", lighting_text_sections(result)]
     lines += ["", "公式", result["formula"], "", "採用範圍", result["note"]]
     return "\n".join(lines) + "\n"

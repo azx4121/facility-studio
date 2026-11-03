@@ -6,6 +6,19 @@ REFERENCE = "https://www.ksb.com/en-global/centrifugal-pump-lexicon/article/npsh
 PURE = {"清水": "Water", "UPW／DI／RO": "Water", "乙醇": "Ethanol", "甲醇": "Methanol", "丙酮": "Acetone"}
 
 
+def pure_fluid(data, name):
+    """Resolve the zero-glycol limit without trusting a manual bubble point."""
+    if name in PURE:
+        return PURE[name]
+    if name in ("乙二醇水溶液", "丙二醇水溶液"):
+        try:
+            if float(data.get("concentration", "20")) == 0:
+                return "Water"
+        except (TypeError, ValueError):
+            pass  # The active concentration field is validated by liquid().
+    return None
+
+
 def suction_check(data, name, temperature_c, density, velocity):
     enabled = data.get("check_npsh", "0")
     if enabled not in ("0", "1"):
@@ -23,10 +36,11 @@ def suction_check(data, name, temperature_c, density, velocity):
     elevation = n("suction_level_m", -100, 1000)
     nozzle_offset = number(data.get("suction_nozzle_offset_m", "0"), "suction_nozzle_offset_m", -100, 100)
     losses = n("suction_loss_kpa", 0, 10000)
-    if name in PURE:
+    pure = pure_fluid(data, name)
+    if pure:
         from CoolProp.CoolProp import PropsSI
         try:
-            vapor = PropsSI("P", "T", temperature_c + 273.15, "Q", 0, PURE[name]) / 1000
+            vapor = PropsSI("P", "T", temperature_c + 273.15, "Q", 0, pure) / 1000
         except ValueError:
             raise ValidationError("無法求得此溫度的飽和蒸氣壓", "liquid_t") from None
         vapor_source = "純液體操作溫度的飽和蒸氣壓"
@@ -42,8 +56,10 @@ def suction_check(data, name, temperature_c, density, velocity):
     # NPSHa includes velocity head; do not add it again to the vessel equation.
     static_kpa = surface + rho_g * (elevation - nozzle_offset) / 1000 - losses - density * velocity**2 / 2000
     issues = []
-    if surface <= vapor:
-        issues.append("液槽表面壓力不高於泡點／飽和蒸氣壓，單相液體假設不成立。")
+    # A saturated vessel surface is valid with flooded suction. Equality
+    # does not itself prove flashing in the submerged liquid path.
+    if surface < vapor:
+        issues.append("液槽表面壓力低於泡點／飽和蒸氣壓，單相液體假設不成立。")
     if static_kpa <= vapor:
         issues.append("估算吸入口靜壓不高於蒸氣壓，吸入管可能閃蒸；不可採用單相結果選泵。")
     required = margin = None
