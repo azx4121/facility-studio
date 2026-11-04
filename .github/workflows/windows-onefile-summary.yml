@@ -1,0 +1,64 @@
+name: Summarize verified single-file artifact
+on:
+  push:
+    branches: ['codex/windows-onefile-evidence-20261104']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  inspect-existing-artifact:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Download the existing verified artifact and evidence; do not rebuild
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          run-id: 41851339470
+          github-token: ${{ github.token }}
+          path: existing
+      - name: Verify existing EXE checksum and publish precise evidence summary
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path('existing')
+          delivery = root / 'Facility-Studio-5.7.3-Windows-x64-Single-EXE'
+          exe = delivery / 'Facility Studio 5.7.3.exe'
+          digest = hashlib.sha256(exe.read_bytes()).hexdigest()
+          assert (delivery / 'SHA256SUMS.txt').read_text().strip() == digest + '  ' + exe.name
+          expected = '92318582d6d6e7c8eb062f4435e174d907617df8'
+          summary = dict(source_commit=expected, source_run=41851339470, exe_name=exe.name,
+                         exe_size=exe.stat().st_size, exe_sha256=digest, rebuilt=False,
+                         hosts=[], acceptances=[])
+          for path in sorted(root.rglob('Single_File_Verification.json')):
+              value = json.loads(path.read_text(encoding='utf-8-sig'))
+              assert value['passed'] and value['commit'] == expected and value['sha256'] == digest
+              summary['hosts'].append(value)
+          assert len(summary['hosts']) == 2
+          for path in sorted(root.rglob('*.json')):
+              value = json.loads(path.read_text(encoding='utf-8-sig'))
+              if value.get('suite') in ('fusion', 'facilities'):
+                  assert value['passed'] and value['frozen'] and value['build_commit'] == expected
+                  assert all(c['passed'] for c in value['checks'])
+                  summary['acceptances'].append(dict(path=str(path), suite=value['suite'],
+                                                     checks=len(value['checks']),
+                                                     provenance=value['build_provenance_sha256']))
+          assert len(summary['acceptances']) == 6
+          assert len({a['provenance'] for a in summary['acceptances']}) == 1
+          coverage_path = next(root.rglob('Onefile_Archive.json'))
+          coverage = json.loads(coverage_path.read_text(encoding='utf-8-sig'))
+          assert coverage['passed'] and coverage['commit'] == expected
+          summary['embedded_resource_count'] = len(coverage['verified_resource_sha256'])
+          summary['archive_entries'] = coverage['archive_entries']
+          summary['embedded_notices'] = coverage['embedded_notices']
+          summary['embedded_python3_dll'] = coverage['embedded_python3_dll']
+          print(json.dumps(summary, ensure_ascii=False, indent=2))
+          Path('Single_File_Delivery_Summary.json').write_text(
+              json.dumps(summary, ensure_ascii=False, indent=2), encoding='utf-8')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: single-file-delivery-summary
+          path: Single_File_Delivery_Summary.json
+          retention-days: 30
