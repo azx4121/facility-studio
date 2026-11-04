@@ -114,13 +114,13 @@ jobs:
           export FACILITY_STUDIO_FUSION_DATA="$RUNNER_TEMP/facility-native-data"
           mkdir -p "$RUNNER_TEMP/facility-native-source"
           "$FACILITY_PY" windows/tests/lighting_reports.py
-          "$FACILITY_PY" -m pytest integration/test_tutorial_launch.py integration/test_cli_encoding.py -q --junitxml="$RUNNER_TEMP/facility-native-source/cli-tutorial.xml"
-          FACILITY_TEST_PLATFORM=windows FACILITY_REQUIRE_DISPLAY=1 "$FACILITY_PY" -m pytest integration/test_capacity_planning.py integration/test_capacity_controller.py integration/test_capacity_gui.py -q --junitxml="$RUNNER_TEMP/facility-native-source/capacity.xml"
+          "$FACILITY_PY" -m pytest --capture=sys integration/test_tutorial_launch.py integration/test_cli_encoding.py -q --junitxml="$RUNNER_TEMP/facility-native-source/cli-tutorial.xml"
+          FACILITY_TEST_PLATFORM=windows FACILITY_REQUIRE_DISPLAY=1 "$FACILITY_PY" -m pytest --capture=sys integration/test_capacity_planning.py integration/test_capacity_controller.py integration/test_capacity_gui.py -q --junitxml="$RUNNER_TEMP/facility-native-source/capacity.xml"
           "$FACILITY_PY" windows/tests/photometry_formats.py
           FACILITY_DIRECT_GUI=1 "$FACILITY_PY" windows/tests/lighting_direct_checks.py
           "$FACILITY_PY" tools/verify_wetbulb_boundaries.py --platform windows --output "$RUNNER_TEMP/facility-native-source/wetbulb-boundaries-windows.json"
           "$FACILITY_PY" tools/verify_full_air_chart.py --platform windows --gui --output "$RUNNER_TEMP/facility-native-source/full-air-chart-windows.json"
-          "$FACILITY_PY" -m pytest integration/test_guardrails.py integration/test_liquid_phase_guardrails.py windows/tests/test_feed_sandbox.py -q --junitxml="$RUNNER_TEMP/facility-native-source/pytest.xml"
+          "$FACILITY_PY" -m pytest --capture=sys integration/test_guardrails.py integration/test_liquid_phase_guardrails.py windows/tests/test_feed_sandbox.py -q --junitxml="$RUNNER_TEMP/facility-native-source/pytest.xml"
           "$FACILITY_PY" windows/winrelease/source_sandbox_checks.py --output "$RUNNER_TEMP/facility-native-source"
       - name: Native Windows geometry and reviewed candidate regressions
         shell: bash
@@ -151,7 +151,7 @@ jobs:
           if window_system != 'win32':
               raise SystemExit('Actual win32 Tk is required for geometry acceptance.')
           PY
-          "$FACILITY_PY" -m pytest integration/test_window_geometry.py -q -ra --junitxml="$RUNNER_TEMP/facility-native-source/window-geometry.xml"
+          "$FACILITY_PY" -m pytest --capture=sys integration/test_window_geometry.py -q -ra --junitxml="$RUNNER_TEMP/facility-native-source/window-geometry.xml"
           "$FACILITY_PY" - "$RUNNER_TEMP/facility-native-source/window-geometry.xml" <<'PY'
           import json, sys, xml.etree.ElementTree as ET
           from pathlib import Path
@@ -175,7 +175,7 @@ jobs:
           if not complete:
               raise SystemExit('All four exact real Tk geometry cases must pass without skips, failures or errors.')
           PY
-          "$FACILITY_PY" -m pytest integration/test_combobox_wheel.py integration/test_reviewed_ui_defects.py integration/test_di_template.py integration/test_engine_review_guardrails.py integration/test_c2_airflow_search.py integration/test_airflow_remedy.py integration/test_lighting_u_report.py -q -ra --junitxml="$RUNNER_TEMP/facility-native-source/reviewed-candidate.xml"
+          "$FACILITY_PY" -m pytest --capture=sys integration/test_combobox_wheel.py integration/test_reviewed_ui_defects.py integration/test_di_template.py integration/test_engine_review_guardrails.py integration/test_c2_airflow_search.py integration/test_airflow_remedy.py integration/test_lighting_u_report.py -q -ra --junitxml="$RUNNER_TEMP/facility-native-source/reviewed-candidate.xml"
       - name: Build and test standalone executable and installer
         shell: bash
         run: '"$FACILITY_PY" integration/build.py --output "$RUNNER_TEMP/facility-build"'
