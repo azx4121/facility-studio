@@ -84,7 +84,7 @@ NP : operating 1.787 A, design 2.234 A; NFB  Candidate  15 AT, 1  sets ×3.5 mm�
  Continuous load: total operating current x 1.25; the largest-motor draft is excluded.
  Equipment PE: Taiwan User Electrical Equipment Installation Rules table ninety-three, part two, stranded copper sized by the protective breaker rating. Green or green/yellow PVC insulation. Each parallel raceway gets the full PE size, without division by parallel runs.
  5. Key formulas and explanation
- lighting  N=ceil(E×A/(Φ×U×M))=ceil(500×96/(4000×0.6×0.8))=25  luminaires .
+ lighting   Manually entered utilization factor U (dimensionless)= 0.6000; N=ceil(E×A/(Φ×U×M))=ceil(500×96/(4000×0.6×0.8))=25  luminaires .
  Room  Sensible heat  Qs=m_da(1.006+1.86ws)(Tr−Ts)+QDCC=7.870 kW; moisture G = 3600×m_da(wr−ws) = 0.633 kg/h.
  h = 1.006T+w(2501+1.86T); coil Qair = m_da(hin−hout); Qwater = Qair−m_condensate×cp_water×T_condensate.
  Water flow  LPM=60000Q/(ρcpΔT);  Rectangular duct  A=WH / Dh=2WH/(W+H);  parallel runs  v=V̇/(nA); Δp=f(L/Dh)ρv²/2+ Fittings + Equipment  Pressure drop .
