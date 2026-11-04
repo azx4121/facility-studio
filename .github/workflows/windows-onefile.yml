@@ -10,6 +10,8 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build-windows-2022:
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
     runs-on: windows-2022
     timeout-minutes: 35
     steps:
