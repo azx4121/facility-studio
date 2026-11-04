@@ -1,7 +1,7 @@
 name: Simple facilities preview validation
 on:
   push:
-    branches: ['sandbox/simple-facilities-20261102', 'sandbox/feed-readiness-20261103', 'dot/guardrail-integration-20261103']
+    branches: ['sandbox/simple-facilities-20261102', 'sandbox/feed-readiness-20261103', 'dot/guardrail-integration-20261103', 'dot/windows-native-candidate-20261104']
     paths:
       - '.github/workflows/simple-facilities-preview.yml'
       - 'macos/facility_studio/**'
@@ -72,13 +72,16 @@ jobs:
           PYTHONPATH: macos
           FACILITY_STUDIO_FUSION_DATA: /tmp/simple-facilities-data
           FACILITY_TEST_BLOCK_NETWORK: '1'
-          FACILITY_CAPTURE_SYNTHETIC_UI: '1'
         run: xvfb-run -a -s '-screen 0 1440x1200x24' python integration/entry.py --facilities-self-test simple-evidence/Native_GUI.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: simple-facilities-preview-evidence
-          path: simple-evidence
+          path: |
+            simple-evidence/**/*.json
+            simple-evidence/**/*.xml
+            simple-evidence/**/*.log
+            simple-evidence/**/*.txt
           retention-days: 14
 
   native-windows:
@@ -119,6 +122,60 @@ jobs:
           "$FACILITY_PY" tools/verify_full_air_chart.py --platform windows --gui --output "$RUNNER_TEMP/facility-native-source/full-air-chart-windows.json"
           "$FACILITY_PY" -m pytest integration/test_guardrails.py integration/test_liquid_phase_guardrails.py windows/tests/test_feed_sandbox.py -q --junitxml="$RUNNER_TEMP/facility-native-source/pytest.xml"
           "$FACILITY_PY" windows/winrelease/source_sandbox_checks.py --output "$RUNNER_TEMP/facility-native-source"
+      - name: Native Windows geometry and reviewed candidate regressions
+        shell: bash
+        env:
+          FACILITY_TEST_PLATFORM: windows
+          SOURCE_PLATFORM: windows
+          FACILITY_REQUIRE_DISPLAY: '1'
+          MPLBACKEND: Agg
+        run: |
+          export FACILITY_STUDIO_PREFERENCES="$RUNNER_TEMP/facility-candidate-preferences.json"
+          export FACILITY_STUDIO_FUSION_DATA="$RUNNER_TEMP/facility-candidate-data"
+          "$FACILITY_PY" - <<'PY'
+          import json, os, platform, sys, tkinter
+          from pathlib import Path
+          if sys.platform != 'win32' or platform.system() != 'Windows':
+              raise SystemExit('Native Windows is required for geometry acceptance.')
+          root = tkinter.Tk()
+          root.update()
+          window_system = str(root.tk.call('tk', 'windowingsystem'))
+          tcl = str(root.tk.call('info', 'patchlevel'))
+          root.destroy()
+          evidence = dict(host_os=platform.system(), python=sys.version,
+                          source_platform=os.environ['SOURCE_PLATFORM'],
+                          window_system=window_system, tcl=tcl, commit=os.environ['GITHUB_SHA'])
+          out = Path(os.environ['RUNNER_TEMP']) / 'facility-native-source'
+          out.mkdir(parents=True, exist_ok=True)
+          (out / 'window-geometry-host.json').write_text(json.dumps(evidence, indent=2), encoding='utf-8')
+          if window_system != 'win32':
+              raise SystemExit('Actual win32 Tk is required for geometry acceptance.')
+          PY
+          "$FACILITY_PY" -m pytest integration/test_window_geometry.py -q -ra --junitxml="$RUNNER_TEMP/facility-native-source/window-geometry.xml"
+          "$FACILITY_PY" - "$RUNNER_TEMP/facility-native-source/window-geometry.xml" <<'PY'
+          import json, sys, xml.etree.ElementTree as ET
+          from pathlib import Path
+          path = Path(sys.argv[1])
+          expected = {
+              'test_real_tk_repeated_switches_preserve_geometry_and_data[simple]',
+              'test_real_tk_repeated_switches_preserve_geometry_and_data[workbench]',
+              'test_real_tk_maximized_or_fullscreen_switch_keeps_state[zoomed]',
+              'test_real_tk_maximized_or_fullscreen_switch_keeps_state[fullscreen]',
+          }
+          root = ET.parse(path).getroot()
+          native = [case for case in root.findall('.//testcase')
+                    if case.get('name', '').startswith('test_real_tk_')]
+          names = [case.get('name') for case in native]
+          complete = (len(native) == 4 and set(names) == expected
+                      and not any(root.findall('.//' + tag) for tag in ('skipped', 'failure', 'error')))
+          result = dict(native_geometry_complete=complete,
+                        expected_real_tk_cases=sorted(expected), real_tk_cases=sorted(names))
+          path.with_suffix('.gate.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
+          print(json.dumps(result))
+          if not complete:
+              raise SystemExit('All four exact real Tk geometry cases must pass without skips, failures or errors.')
+          PY
+          "$FACILITY_PY" -m pytest integration/test_combobox_wheel.py integration/test_reviewed_ui_defects.py integration/test_di_template.py integration/test_engine_review_guardrails.py integration/test_c2_airflow_search.py integration/test_airflow_remedy.py integration/test_lighting_u_report.py -q -ra --junitxml="$RUNNER_TEMP/facility-native-source/reviewed-candidate.xml"
       - name: Build and test standalone executable and installer
         shell: bash
         run: '"$FACILITY_PY" integration/build.py --output "$RUNNER_TEMP/facility-build"'
@@ -127,8 +184,14 @@ jobs:
         with:
           name: facility-studio-Windows-evidence
           path: |
-            ${{ runner.temp }}/facility-native-source
-            ${{ runner.temp }}/facility-build/evidence
+            ${{ runner.temp }}/facility-native-source/**/*.json
+            ${{ runner.temp }}/facility-native-source/**/*.xml
+            ${{ runner.temp }}/facility-native-source/**/*.log
+            ${{ runner.temp }}/facility-native-source/**/*.txt
+            ${{ runner.temp }}/facility-build/evidence/**/*.json
+            ${{ runner.temp }}/facility-build/evidence/**/*.xml
+            ${{ runner.temp }}/facility-build/evidence/**/*.log
+            ${{ runner.temp }}/facility-build/evidence/**/*.txt
           retention-days: 14
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
@@ -188,6 +251,12 @@ jobs:
         with:
           name: facility-studio-Windows-second-host-evidence
           path: |
-            ${{ runner.temp }}/facility-second-evidence
-            ${{ runner.temp }}/facility-second-installer/evidence
+            ${{ runner.temp }}/facility-second-evidence/**/*.json
+            ${{ runner.temp }}/facility-second-evidence/**/*.xml
+            ${{ runner.temp }}/facility-second-evidence/**/*.log
+            ${{ runner.temp }}/facility-second-evidence/**/*.txt
+            ${{ runner.temp }}/facility-second-installer/evidence/**/*.json
+            ${{ runner.temp }}/facility-second-installer/evidence/**/*.xml
+            ${{ runner.temp }}/facility-second-installer/evidence/**/*.log
+            ${{ runner.temp }}/facility-second-installer/evidence/**/*.txt
           retention-days: 14
