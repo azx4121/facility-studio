@@ -35,7 +35,11 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--allow-dirty", action="store_true",
                         help="Build explicitly non-release development evidence from uncommitted inputs.")
+    parser.add_argument("--windows-onefile", action="store_true",
+                        help="Build a single Windows EXE; no installer or adjacent resources.")
     a = parser.parse_args()
+    if a.windows_onefile and sys.platform != "win32":
+        parser.error("--windows-onefile requires native Windows")
     if sys.version_info[:2] != (3, 12) or sys.platform not in ("darwin", "win32"):
         raise RuntimeError("Native macOS/Windows and supported Python 3.12 are required.")
     if sys.platform == "darwin" and platform.machine() != "arm64":
@@ -73,6 +77,7 @@ def main():
         excluded_unused_wrappers=["hvac.fluids.water", "hvac.fluids.ice", "iapws"],
         engineering_equations_modified=False,
     )
+    manifest["packaging"] = "windows-onefile" if a.windows_onefile else "native-onedir"
     manifest_file.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     development_notice = None
     if not manifest["source_clean"]:
@@ -102,7 +107,7 @@ def main():
     notices.append(python_license.read_text(encoding="utf-8"))
     notice_file = evidence / "第三方授權.txt"
     notice_file.write_text("\n\n".join(notices), encoding="utf-8")
-    args = [sys.executable, "-m", "PyInstaller", "--noconfirm", "--clean", "--onedir", "--windowed", "--noupx",
+    args = [sys.executable, "-m", "PyInstaller", "--noconfirm", "--clean", "--onefile" if a.windows_onefile else "--onedir", "--windowed", "--noupx",
             "--name", NAME, "--paths", source, "--paths", vendor, "--collect-submodules", "facility_studio",
             "--additional-hooks-dir", ROOT / "windows/winrelease/hooks",
             "--hidden-import", "matplotlib.backends.backend_tkagg", "--hidden-import", "CoolProp.CoolProp",
@@ -112,6 +117,13 @@ def main():
             "--add-data", str(notice_file) + os.pathsep + ".",
             "--add-data", str(manifest_file) + os.pathsep + ".",
             "--distpath", output / "dist", "--workpath", output / "work", "--specpath", output]
+    if a.windows_onefile:
+        for guide, name in (("README_繁體中文.md", "操作說明_繁體中文.md"),
+                            ("README_English.md", "User_Guide_English.md")):
+            # Use build-local names while retaining byte-exact committed content.
+            target = evidence / name
+            shutil.copy2(ROOT / "integration" / guide, target)
+            args += ["--add-data", str(target) + os.pathsep + "."]
     if development_notice is not None:
         args += ["--add-data", str(development_notice) + os.pathsep + "."]
     for name in ("PsychroLib", "CoolProp", "fluids", "Pint", "python-hvac"):
@@ -150,13 +162,25 @@ def main():
         run(["/usr/bin/codesign", "--force", "--sign", "-", "--timestamp=none", app], evidence / "Sign_App.txt")
         run(["/usr/bin/codesign", "--verify", "--deep", "--strict", app], evidence / "Signature.txt")
         executable = app / "Contents/MacOS" / NAME
+    elif a.windows_onefile:
+        app = executable = output / "dist" / (NAME + ".exe")
     else:
         app = output / "dist" / NAME
         shutil.copy2(ROOT / "integration/README_繁體中文.md", app / "操作說明_繁體中文.md")
         shutil.copy2(ROOT / "integration/README_English.md", app / "User_Guide_English.md")
         executable = app / (NAME + ".exe")
-    validate_embedded_manifest(app, manifest["commit"], expected_manifest=expected_manifest,
-                               allow_non_release=a.allow_dirty)
+    if a.windows_onefile:
+        try:
+            from .windows_onefile import validate_archive
+        except ImportError:
+            from windows_onefile import validate_archive
+        coverage = validate_archive(executable, ROOT, expected_manifest,
+                                    allow_non_release=a.allow_dirty)
+        (evidence / "Onefile_Archive.json").write_text(
+            json.dumps(coverage, ensure_ascii=False, indent=2), encoding="utf-8")
+    else:
+        validate_embedded_manifest(app, manifest["commit"], expected_manifest=expected_manifest,
+                                   allow_non_release=a.allow_dirty)
     env = dict(os.environ, FACILITY_STUDIO_FUSION_DATA=str(output / "isolated-test-data"), FACILITY_TEST_BLOCK_NETWORK="1")
     run([executable, "--fusion-self-test", evidence / "Fusion_Acceptance.json"], evidence / "Fusion_Acceptance.log", env=env, timeout=180)
     run([executable, "--facilities-self-test", evidence / "Facilities_Acceptance.json"], evidence / "Facilities_Acceptance.log", env=env, timeout=180)
@@ -166,7 +190,7 @@ def main():
     validate_acceptance(evidence / "Facilities_Acceptance.json", expected_commit=manifest["commit"],
                         expected_manifest=expected_manifest, expected_suite="facilities",
                         allow_non_release=a.allow_dirty)
-    if sys.platform == "win32":
+    if sys.platform == "win32" and not a.windows_onefile:
         try:
             from .windows_installer import build as build_installer, verify as verify_installer
         except ImportError:
@@ -175,6 +199,13 @@ def main():
         verify_installer(setup, output, NAME, run, env, expected_commit=manifest["commit"],
                          expected_manifest=expected_manifest, allow_non_release=a.allow_dirty)
     verify_source_unchanged(ROOT, source_platform, expected_manifest)
+    if a.windows_onefile:
+        artifact = output / executable.name
+        shutil.copy2(executable, artifact)
+        (output / "SHA256SUMS.txt").write_text(
+            hashlib.sha256(artifact.read_bytes()).hexdigest() + "  " + artifact.name + "\n",
+            encoding="utf-8")
+        return 0
     artifact = output / (("Facility-Studio-5.7.3-macOS-arm64.zip") if sys.platform == "darwin" else "Facility-Studio-5.7.3-Windows-x64-Portable.zip")
     if sys.platform == "darwin":
         run(["/usr/bin/ditto", "-c", "-k", "--sequesterRsrc", "--keepParent", app, artifact], evidence / "Archive.txt")
