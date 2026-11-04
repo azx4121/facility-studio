@@ -5,6 +5,7 @@ Headless checks are separate; run() always requires actual Tk widgets.
 """
 import copy
 import csv
+import hashlib
 import io
 import json
 import math
@@ -24,6 +25,21 @@ def build_commit():
     if not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{40}", value):
         raise ValueError("Missing or invalid bundled build commit")
     return value
+
+
+def build_identity():
+    """Report the source fingerprint embedded in this executable, never Git."""
+    commit = build_commit()
+    if commit is None:
+        return dict(build_commit=None, build_provenance_sha256=None)
+    path = Path(sys._MEIPASS) / "Build_Manifest.json"
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    fields = ("provenance_schema", "commit", "version", "source_platform",
+              "build_channel", "source_clean", "build_inputs_sha256", "product_source_sha256")
+    selected = {key: manifest[key] for key in fields}
+    digest = hashlib.sha256(json.dumps(selected, ensure_ascii=False, sort_keys=True,
+                                      separators=(",", ":"), allow_nan=False).encode("utf-8")).hexdigest()
+    return dict(build_commit=commit, build_provenance_sha256=digest)
 
 
 def synthetic_plan():

@@ -1,111 +1,75 @@
-# Frequently asked questions
+# FAQ | Facility Studio 5.7.3
 
-[繁體中文](faq.md) · [Downloads](../README.en.md#download-and-run) · [User guides](guides/README.en.md)
+[繁體中文](faq.md) · [Download/status](../README.en.md#download-and-run) · [Guides](guides/README.en.md)
 
-## Do I need Python or an internet connection?
+**Native acceptance and platform publication status are determined by CI records and Release evidence for the exact source commit. A platform download is valid only when its matching Release provides the package and SHA256.** Historical passes do not validate new binaries.
 
-No. The Windows EXE and macOS DMG include their runtime. Calculations, saved projects and equipment imports are processed locally. Bundled help works offline; GitHub documentation, downloads and update links need internet.
+## Do I need Python or internet access?
+
+Packaged builds include the runtime. Calculations, projects and bundled help work locally. GitHub, external references and updates need internet access.
 
 <a id="compatibility"></a>
-## Can I use it on my computer? How do I launch it?
+## Platforms and installation
 
-| Platform | Current download and startup | Completed native acceptance |
-| --- | --- | --- |
-| Windows | Windows 10/11 on Intel/AMD x64 are support targets. Download and double-click the EXE; allow time for the bundled environment to unpack on first launch. | Windows Server 2022/2025 x64 |
-| macOS | Universal App for Apple Silicon / Intel, packaging target macOS 11+. Open the DMG, drag into Applications, then launch there. Eject the DMG after installation. | Apple Silicon / Intel macOS 15 |
+- Windows x64: Windows 10/11 are support targets; the final packages require Windows Server 2022/2025 acceptance. Windows ARM and 32-bit are not claimed tested.
+- Installer: select a new empty directory. It creates application/uninstall entries, must not overwrite an occupied directory, and uninstall should remove only manifest-listed installed files, preserving later user files.
+- Portable: extract the entire ZIP and run its EXE; do not copy the EXE alone. Portable does not imply that all data is beside the executable.
+- Mac: this delivery targets Apple Silicon ARM64 ZIP containing `Facility Studio 5.7.3.app`, not Universal, Intel or DMG. Final tested macOS hosts/minimum support must be stated in the [acceptance record](verification/5.7.3-release-acceptance.md) and Release; old macOS 11+/Intel claims do not transfer.
 
-Windows ARM, 32-bit Windows, and other Mac OS versions/devices were not included in this acceptance. Enterprise policies may also restrict execution. [Windows win.8 acceptance](2026-10-18-windows-report-audit.md#原生發布結果) · [mac.6 acceptance](2026-10-16-gemini-integration-review.md#原生發布狀態)
+Enterprise policies and other physical systems need individual confirmation.
 
-Close the old app before replacing the EXE/App. Saved projects and recovery data are retained.
+<a id="v560-tools"></a><a id="pv"></a>
+## Where are PV and liquid tools?
 
-<a id="decimal"></a>
-## Why can I not enter a decimal with the numeric keypad?
+The 12 direct tools are electrical, ducts, CDA/process gases, PV vacuum, lighting, water/heat, liquid/pure-water piping, psychrometrics, units, cleanroom airflow, heat-load estimate and chilled-water pumps. PV is independent, not a positive-pressure gas option, and does not require opening the full workbench.
 
-Close the old app, download V5.6.0 and check the window version. Recognized keypad decimal/Del events insert a single period, including identifiable keypad Del with Num Lock off. Dedicated Delete and Backspace still delete. Enable an inactive/read-only field before entering a value.
-
-If it persists, report OS, keyboard model, Num Lock, input method, window/field and whether the key inserts nothing or deletes a digit. [Original keypad fix and verification scope](2026-10-11-v5.5.10-keypad.md)
-
-<a id="v560-tools"></a>
-## Where are water, psychrometrics and units? Have pipe and gas choices changed?
-
-All ten V5.6.0 calculators are direct sidebar buttons: electrical, duct, CDA/gas, lighting, water, air states/psychrometrics, units, cleanroom airflow, heat load estimate and chilled-water pump.
-
-Automatic water references extend to 30 inches. The tool selects a single pipe within the adopted velocity before adding parallel circuits. Added 14–30 inch references use STD walls; check actual ID when supplied dimensions differ. [Water and pipe guide](guides/water.en.md)
-
-The calculator and workbench share 50 named gases plus custom mixtures. Added gases have no preset design velocity: enter a design value, using custom velocity in the workbench. The current revision preserves entered velocity when the same gas is selected again; switching to a different added gas requires a new value. Mixtures need a name and composition. T/P/Z conversion covers single-gas-phase volume and velocity estimates only. [Gas and vacuum guide](guides/gas-vacuum.en.md)
-
-In the full workbench, a route with zero flow retains custom velocity and custom/mixture names as drafts without validating or including them in calculations or reports. Added gases with nonzero demand still require custom velocity and an entered design value; mixtures also require a name and composition. The independent gas calculator still requires valid velocity even when its flow is zero.
-
-<a id="pv"></a>
-## Why is the PV option missing?
-
-PV remains under **Gases / vacuum** in the full workbench. The default HVAC task scope hid utility pages. Windows win.8 adds **PV vacuum** on both the homepage and workbench, exposing and scrolling to the PV fields. In older builds select **All engineering pages** first.
-
-PV uses dedicated extraction-flow and absolute-pressure fields, separate from positive-pressure gas choices. Torr/kPa/mbar switching converts equivalent absolute pressure. [Inputs and independent example](guides/gas-vacuum.en.md#case-07)
-
-<a id="security"></a>
-## Why does Windows or macOS show an unknown-publisher prompt?
-
-The Windows EXE has no formal Authenticode signature. The Mac app has ad-hoc integrity signing without Developer ID or Apple notarization. Native tests and matching SHA256 do not establish official publisher identity.
-
-Check this repository's download source and SHA256, then follow the [system security-prompt guide](signing.en.md) and your company policy. Retain and report explicit antivirus threat detections, a damaged-app message, or a launch without a window.
-
-<a id="first-project"></a>
-## Do I need to fill every system before I can start?
-
-Start with an independent calculator for your question, such as electrical sizing, ducts or water.
-
-For a project, use the first example in **Beginner tutorial** and complete the [first six sections](guides/workbench.en.md). **Open practice copy** directly loads the second example: an outside-air MAU project with a staged AHU. Practice files use synthetic data; replace them with your site conditions later.
+Pipe tables and gas/property data have defined limits. Unknown liquids must not silently use water properties; additional gases need a design velocity. See [water](guides/water.en.md) and [gas/vacuum](guides/gas-vacuum.en.md).
 
 <a id="results"></a>
-## What do calculation-complete, data-required and stale states mean?
+## Does a successful calculation approve the design?
 
-| State | Meaning | Next step |
-| --- | --- | --- |
-| Calculation complete | The current inputs can be calculated | Still review capacity, assumptions and pending evidence |
-| Data required | Manufacturer performance, equipment resistance or site conditions are unconfirmed | Supply actual data and review |
-| Condition not met | A known capacity or operating condition fails a requirement | Read the reason, change the configuration and recalculate |
-| Recalculation required | The previous valid result is retained after inputs change | Recalculate successfully before exporting or transferring current results |
+No. Calculation complete means a numeric result exists; data required means missing vendor/site/property/review inputs; conditions not met means a known capacity/condition fails; stale/recalculation required means the result no longer represents current inputs. Recalculate upstream and explicitly reimport downstream. Export success does not remove warnings.
 
-Disabled fields retain their draft values for validation when re-enabled; inactive drafts do not affect that mode's calculation. Advanced fields hidden by Basic mode may still use saved settings. Review the displayed adopted assumptions.
+AHU required states differ from achievable supply. Known subtotals are not complete capacity demand. “Documents complete, ready for engineering review” does not verify identities, signatures or engineering compliance. See [design review](guides/design-review.en.md).
 
-These states do not certify a design. Fault/protection studies, complete pipe networks, equipment performance selection and BIM drawings require separate work.
+The tool assists selected FEED calculations and document preparation within scope; it does not certify FEED, regulatory compliance or vendor performance. Complete networks, protection coordination, construction drawings and field acceptance remain separate.
 
 <a id="saving"></a>
-## How do I save projects, drafts and reports?
+## Data, logs, upgrades and rollback
 
-- **Workspace JSON:** saves the main project, AHUs, schemes and demand sources for reopening. **Save as** changes the path; **Duplicate as new scheme** creates a new project identity.
-- **Standalone AHU JSON:** use **Save AHU as**. The app can save invalid raw drafts after confirmation; correction is still required before calculation/export. Standalone AHUs have no background autosave, so save manually before leaving.
-- **TXT/HTML reports:** for reading, printing or sharing. Print HTML to PDF with a browser. A report cannot be reopened as a workspace.
+The formal default is `~/Facility Studio Data-5.7.3` under the user's home directory (`%USERPROFILE%` normally on Windows). Startup output is in `啟動與驗收記錄.log` there. Advanced environment configuration can override the data root; mention overrides in bug reports. Old LOCALAPPDATA/Library paths are not this release's default.
 
-<a id="equipment"></a>
-## How do I start with equipment Excel/CSV files?
+- Workbench JSON, standalone AHU, capacity plans and design reviews have separate save flows. Saving a workbench project does not save an independent capacity plan.
+- TXT/HTML reports and direct-lighting result JSON are not reopenable full projects.
+- Transfer an entire design-review folder including its evidence snapshots.
+- Back up before upgrading. Old release/preview data is not automatically migrated or overwritten. Import a copy, recalculate and verify it.
+- Roll back with the older application and its original backup, not by overwriting a new-format project with an old application.
 
-Export a template from **Equipment schedules**, enter actual equipment, then import it for analysis. Set **Enabled (1/0)** to 1 for included equipment; template examples default to 0.
+<a id="security"></a>
+## Security prompts
 
-Import template-format `.xlsx` or `.csv`, rather than arbitrary spreadsheets. Legacy `.xls` and macro workbooks are not accepted; paste input formulas as values. Results can be exported, and transfers to the main project are previewed for confirmation. [Fields and grouping](guides/equipment.en.md)
+Windows trusted-publisher signing and Mac Developer ID/Apple notarization require verification evidence for the exact artifact; do not infer them from the version name. Mac ad-hoc integrity checks are not publisher authentication. Check the source and published version/SHA256, follow IT policy, and do not disable antivirus, Gatekeeper or system protection. [Security guide](signing.en.md)
+
+<a id="decimal"></a>
+## Keypad or window problems
+
+Check the version, editable state, Num Lock and input method. Report keyboard, window, scaling and expected/actual action. [Historical keypad fixes](2026-10-11-v5.5.10-keypad.md) are not a new-machine acceptance result.
+
+<a id="first-project"></a><a id="equipment"></a>
+## Starting a project or equipment import
+
+Start with [one tool or the walkthrough](guides/workbench.en.md). Export the equipment template, enable required rows and use its `.xlsx`/`.csv` structure; paste formula values. Arbitrary `.xls`/macro workbooks are not supported. Preview and confirm before import. [Equipment guide](guides/equipment.en.md)
 
 <a id="license"></a>
-## Can a company use it for paid engineering projects?
+## Company and paid engineering work
 
-The current license permits internal company engineering work, paid engineering projects and delivered calculation reports. Software resale, paid packaging/bundling or paid hosted software services need separate written permission.
-
-[LICENSE](../LICENSE) governs the complete terms; see the [licensing guide](../LICENSE_GUIDE.en.md) for examples. The current edition has a restrictive source-available license. Historical MIT editions retain their original license rights.
+See [LICENSE](../LICENSE) and [examples](../LICENSE_GUIDE.en.md) for permitted work and resale/service restrictions. A formal version name does not change licensing.
 
 <a id="support"></a>
-## How do I report a launch problem or a different calculation result?
+## Reporting issues
 
-Use [GitHub Issues](https://github.com/azx4121/facility-studio/issues). Include app/OS version and CPU, steps, every input and unit, expected/actual results and the error screen. For engineering questions, include your independent calculation if available.
+Use [Issues](https://github.com/azx4121/facility-studio/issues) with version, OS/CPU, steps, inputs/units, expected/actual results and relevant logs. Remove secrets, personal paths and customer data.
 
-For startup failures, you can include logs:
+Historical win.6+ ledger v2 incompatibility with mac.6 describes those releases only; 5.7.3 cross-platform round trips still require same-version acceptance.
 
-- Windows: `%LOCALAPPDATA%\Facility_Studio_V5_5\Logs`
-- macOS startup: `~/Library/Logs/Facility_Studio_V5_5/`; UI errors: `~/Library/Application Support/Facility_Studio_V5_5/error.log`
-
-Use synthetic data and remove client/site secrets. Native and historical evidence are available through the [documentation center](README.en.md).
-
-**DESIGNED BY ANDY HUANG ©**
-
-## Can mac.6 open new Windows whole-workspace files?
-
-win.6 and later Windows builds use demand ledger v2, which mac.6 rejects. Matching main schema 12 does not establish whole-workspace compatibility. Keep those files in current Windows until the Mac reader is updated. See [legacy W/kVA recovery and source restoration](2026-10-18-windows-audit-six.md#english).
+正式入口在內部設定專屬資料變數 `FACILITY_STUDIO_DATA`，不改寫系統 `LOCALAPPDATA`；這不是使用者預先設定該變數即可覆寫預設路徑的承諾。 / The entry sets the dedicated `FACILITY_STUDIO_DATA` variable internally without rewriting system `LOCALAPPDATA`; this does not promise that presetting that variable overrides the default.

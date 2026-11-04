@@ -13,11 +13,13 @@ import sys
 
 try:
     from .acceptance_validation import validate_acceptance, validate_embedded_manifest
+    from .source_provenance import expected_source_manifest, verify_source_unchanged
 except ImportError:  # Direct script invocation.
     from acceptance_validation import validate_acceptance, validate_embedded_manifest
+    from source_provenance import expected_source_manifest, verify_source_unchanged
 
 ROOT = Path(__file__).resolve().parents[1]
-NAME = "Facility Studio 5.7.3 測試版"
+NAME = "Facility Studio 5.7.3"
 
 
 def run(args, log, timeout=1500, env=None):
@@ -31,11 +33,15 @@ def run(args, log, timeout=1500, env=None):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--allow-dirty", action="store_true",
+                        help="Build explicitly non-release development evidence from uncommitted inputs.")
     a = parser.parse_args()
     if sys.version_info[:2] != (3, 12) or sys.platform not in ("darwin", "win32"):
         raise RuntimeError("Native macOS/Windows and supported Python 3.12 are required.")
     if sys.platform == "darwin" and platform.machine() != "arm64":
-        raise RuntimeError("This delivery target is the user's Apple Silicon Mac.")
+        raise RuntimeError("The current macOS distribution supports Apple Silicon arm64 only.")
+    source_platform = "macos" if sys.platform == "darwin" else "windows"
+    expected_manifest = expected_source_manifest(ROOT, source_platform, allow_dirty=a.allow_dirty)
     output = a.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     evidence = output / "evidence"
@@ -57,13 +63,8 @@ def main():
             raise RuntimeError("Pinned python-hvac initializer changed; review loading patch.")
         selected = selected.replace(line, "")
     initializer.write_text(selected, encoding="utf-8")
-    manifest = dict(python=platform.python_version(), platform=platform.platform(),
-                    commit=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
-                    build_inputs_sha256={p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
-                                         for p in (ROOT / "integration").glob("*") if p.is_file()},
-                    product_source_sha256={p.relative_to(source).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
-                                           for p in (source / "facility_studio").rglob("*")
-                                           if p.is_file() and "__pycache__" not in p.parts})
+    manifest = dict(expected_manifest, python=platform.python_version(), platform=platform.platform(),
+                    excluded_generated_evidence=["windows/evidence/**", "macos/evidence/**"])
     manifest_file = evidence / "Build_Manifest.json"
     manifest["python_hvac_loading_adapter"] = dict(
         upstream_commit="94247560a667905bfbf67e45a58965a58254fce8",
@@ -73,6 +74,14 @@ def main():
         engineering_equations_modified=False,
     )
     manifest_file.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    development_notice = None
+    if not manifest["source_clean"]:
+        development_notice = evidence / "NON_RELEASE_DEVELOPMENT.txt"
+        development_notice.write_text(
+            "NON-RELEASE DEVELOPMENT BUILD\n"
+            "Built from uncommitted inputs. The recorded commit is the base commit, "
+            "not the identity of these modified bytes. Do not publish as a release.\n"
+            "See Build_Manifest.json for the actual input SHA-256 values.\n", encoding="utf-8")
     notices = []
     for dist in sorted(importlib.metadata.distributions(), key=lambda d: d.metadata["Name"]):
         if dist.metadata["Name"].lower() == "iapws":
@@ -103,6 +112,8 @@ def main():
             "--add-data", str(notice_file) + os.pathsep + ".",
             "--add-data", str(manifest_file) + os.pathsep + ".",
             "--distpath", output / "dist", "--workpath", output / "work", "--specpath", output]
+    if development_notice is not None:
+        args += ["--add-data", str(development_notice) + os.pathsep + "."]
     for name in ("PsychroLib", "CoolProp", "fluids", "Pint", "python-hvac"):
         args += ["--copy-metadata", name]
     # python-hvac imports CoolProp.Plots through hvac.charts even when this
@@ -118,19 +129,22 @@ def main():
                  "--version-file", ROOT / "integration/windows_version.txt",
                  "--icon", source / "facility_studio/resources/app.ico"]
     else:
-        args += ["--osx-bundle-identifier", "com.facilitystudio.preview573",
+        args += ["--osx-bundle-identifier", "com.facilitystudio.release573",
                  "--icon", source / "facility_studio/resources/app.png"]
     args += [ROOT / "integration/entry.py"]
     run(args, evidence / "PyInstaller_Build.txt")
+    # Detect source edits during freezing before accepting or distributing bytes.
+    verify_source_unchanged(ROOT, source_platform, expected_manifest)
     archive_index = output / "work" / NAME / "PYZ-00.toc"
     if "'iapws" in archive_index.read_text(encoding="utf-8"):
         raise RuntimeError("Unused iapws implementation entered the frozen archive.")
     if sys.platform == "darwin":
         app = output / "dist" / (NAME + ".app")
         shutil.copy2(ROOT / "integration/README_繁體中文.md", app / "Contents/Resources/操作說明_繁體中文.md")
+        shutil.copy2(ROOT / "integration/README_English.md", app / "Contents/Resources/User_Guide_English.md")
         info = app / "Contents/Info.plist"
         values = plistlib.loads(info.read_bytes())
-        values.update(CFBundleShortVersionString="5.7.3", CFBundleVersion="5.7.3.1",
+        values.update(CFBundleShortVersionString="5.7.3", CFBundleVersion="5.7.3.2",
                       CFBundleDisplayName=NAME, NSHighResolutionCapable=True)
         info.write_bytes(plistlib.dumps(values))
         run(["/usr/bin/codesign", "--force", "--sign", "-", "--timestamp=none", app], evidence / "Sign_App.txt")
@@ -139,17 +153,28 @@ def main():
     else:
         app = output / "dist" / NAME
         shutil.copy2(ROOT / "integration/README_繁體中文.md", app / "操作說明_繁體中文.md")
+        shutil.copy2(ROOT / "integration/README_English.md", app / "User_Guide_English.md")
         executable = app / (NAME + ".exe")
-    validate_embedded_manifest(app, manifest["commit"])
+    validate_embedded_manifest(app, manifest["commit"], expected_manifest=expected_manifest,
+                               allow_non_release=a.allow_dirty)
     env = dict(os.environ, FACILITY_STUDIO_FUSION_DATA=str(output / "isolated-test-data"), FACILITY_TEST_BLOCK_NETWORK="1")
     run([executable, "--fusion-self-test", evidence / "Fusion_Acceptance.json"], evidence / "Fusion_Acceptance.log", env=env, timeout=180)
     run([executable, "--facilities-self-test", evidence / "Facilities_Acceptance.json"], evidence / "Facilities_Acceptance.log", env=env, timeout=180)
-    validate_acceptance(evidence / "Fusion_Acceptance.json", expected_commit=manifest["commit"])
-    validate_acceptance(evidence / "Facilities_Acceptance.json", expected_commit=manifest["commit"])
+    validate_acceptance(evidence / "Fusion_Acceptance.json", expected_commit=manifest["commit"],
+                        expected_manifest=expected_manifest, expected_suite="fusion",
+                        allow_non_release=a.allow_dirty)
+    validate_acceptance(evidence / "Facilities_Acceptance.json", expected_commit=manifest["commit"],
+                        expected_manifest=expected_manifest, expected_suite="facilities",
+                        allow_non_release=a.allow_dirty)
     if sys.platform == "win32":
-        from windows_installer import build as build_installer, verify as verify_installer
+        try:
+            from .windows_installer import build as build_installer, verify as verify_installer
+        except ImportError:
+            from windows_installer import build as build_installer, verify as verify_installer
         setup = build_installer(app, output, NAME, run)
-        verify_installer(setup, output, NAME, run, env, expected_commit=manifest["commit"])
+        verify_installer(setup, output, NAME, run, env, expected_commit=manifest["commit"],
+                         expected_manifest=expected_manifest, allow_non_release=a.allow_dirty)
+    verify_source_unchanged(ROOT, source_platform, expected_manifest)
     artifact = output / (("Facility-Studio-5.7.3-macOS-arm64.zip") if sys.platform == "darwin" else "Facility-Studio-5.7.3-Windows-x64-Portable.zip")
     if sys.platform == "darwin":
         run(["/usr/bin/ditto", "-c", "-k", "--sequesterRsrc", "--keepParent", app, artifact], evidence / "Archive.txt")

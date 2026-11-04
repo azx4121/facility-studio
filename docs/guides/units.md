@@ -1,5 +1,7 @@
 # 工程單位換算：CFM／CMH、溫度與溫差、壓力、Kv／Cv
 
+**5.7.3 版本指南：原生驗收與發布狀態以對應 commit 的 CI 紀錄及 Release 附件為準，本指南不宣稱已通過。** 下列具舊版標記的案例、截圖與通過數字保留其歷史證據身分，不是 5.7.3 重新執行結果。[發布狀態](../verification/5.7.3-release-acceptance.md)。
+
 [English](units.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
 **Offline engineering unit converter.** 左側「單位換算」選物理量、數值及原單位，就顯示等值結果。可換算風量、水量、壓力、冷熱功率、長度、溫度、溫度差及閥門流量係數。

@@ -1,5 +1,9 @@
 # Excel / CSV equipment demand: electricity, PCW, CDA, N2, EXHAUST, DI and PV
 
+**5.7.3 version guide: native acceptance and publication status are established by CI records and Release attachments for the corresponding commit; this guide does not assert a pass.** Older version-labelled examples, screenshots and pass counts below are historical evidence, not a fresh 5.7.3 run. [Release status](../verification/5.7.3-release-acceptance.md).
+
+DI continuous circulation is not reduced by process duty. With two devices each requiring 10 LPM process plus 2 LPM continuous circulation: 100% gives 24 LPM, 50% gives 14 LPM and 0% still gives 4 LPM. Do not merge different PCW supply groups unconditionally. Aggregate only matching groups, conditions and boundaries; this is not automatic plant-header sizing.
+
 [繁體中文](equipment.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
 Choose **English**, then open **Equipment schedules** at the top right and export a template. Newly exported Excel/CSV templates use the selected language. The bundled and [repository template](../../windows/facility_studio/resources/Equipment_Template.xlsx) may retain Chinese labels; both languages can be imported. Excel contains seven systems; a CSV file represents one selected system.

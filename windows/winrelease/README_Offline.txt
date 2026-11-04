@@ -1,3 +1,15 @@
+Facility Studio 5.7.3 — 版本文件 / Version documentation
+
+此版本的原生驗收與各平台發布狀態，以對應 commit 的 CI 紀錄及 Release 附件為準；只有對應 Release 已提供平台成品及 SHA256 時，該平台下載才有效。
+Native acceptance and platform publication status are determined by CI records and Release evidence for the exact source commit. A platform download is valid only when its matching Release provides the package and SHA256.
+Windows: x64 installer and portable ZIP. Mac: Apple Silicon ARM64 ZIP only, not Intel/Universal/DMG.
+Build: integration/build.py, Python 3.12.16. See repository docs/development.md and integration/README_繁體中文.md or integration/README_English.md.
+Default data: ~/Facility Studio Data-5.7.3. Preserve old data; back up and import copies explicitly.
+Downloads/status: https://github.com/azx4121/facility-studio/releases
+
+以下為歷史版本文件；所有「本版／目前」及舊驗收敘述只指其原版本。
+Historical content below: all current-release and acceptance claims refer only to the named old version.
+
 Facility Studio V5.6.0｜Windows 廠務工程初估工具
 DESIGNED BY ANDY HUANG ©
 

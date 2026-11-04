@@ -1,17 +1,21 @@
 # Full workbench: a beginner walkthrough
 
+**5.7.3 version guide: native acceptance and publication status are established by CI records and Release attachments for the corresponding commit; this guide does not assert a pass.** Older version-labelled examples, screenshots and pass counts below are historical evidence, not a fresh 5.7.3 run. [Release status](../verification/5.7.3-release-acceptance.md).
+
+For 5.7.3, confirm the product identity, adopted inputs and source lock first. Recalculate and explicitly reimport changes before exporting current results. Keep PCW supply groups and operating conditions separate, not as one plant header. CHW cooling, pump shaft power and NP/equipment electrical input have different boundaries and must not be double-counted. Use the rebuilt same-version offline tutorial; legacy example values retain their original evidence version.
+
 [繁體中文](workbench.md) · [Download the app](../../README.en.md#download-and-run) · [Tool guides](README.en.md) · [Offline tutorial package](../tutorial/README.md)
 
-**V5.7.3 preview.1 candidate guide:** finish the six core steps, then read [full air charts](psychrometrics.en.md#full-chart-and-snapshots), [direct-lighting layouts](lighting.en.md#layout--direct-illuminance-second-stage-candidate) and [capacity / expansion planning](capacity.en.md) as needed. This follows candidate source; older release/acceptance statements below are historical context.
+**Facility Studio 5.7.3 version guide:** finish the six core steps, then read [full air charts](psychrometrics.en.md#full-chart-and-snapshots), [direct-lighting layouts](lighting.en.md#layout--direct-illuminance-second-stage-candidate) and [capacity / expansion planning](capacity.en.md) as needed. This follows 5.7.3 source; older release/acceptance statements below are historical context.
 
 Recalculate edited inputs and explicitly reimport changed upstream data. Changes during a save dialog may stop stale export. Copy/export success does not clear engineering warnings. Save capacity plans separately; direct-lighting result JSON cannot yet reopen a project.
 
 Windows win.8 reports show per-unit DCC/RCU/FCU ratings; FCU reports compare airflow- and cooling-driven counts and identify the governing demand. The workbench PV vacuum button exposes the vacuum fields without first changing the task scope. [Report samples and acceptance](../2026-10-18-windows-report-audit.md#english)
 
 <a id="source-revision"></a>
-## Current source: airflow topology, upstream import and design summary
+## Historical feature introduction: airflow topology, upstream import and design summary
 
-These features are included in Windows win.8 and macOS mac.6; the subsequent Windows-only audit corrections are described below.
+This paragraph records the win.8/mac.6 feature introduction and subsequent historical Windows audit; it is not the 5.7.3 platform contract.
 
 For MAU systems, choose the **MAU / FFU airflow path** before interpreting ACH. With DCC set to follow the circulation flow, let `Q=room volume x ACH` and `OA=final design outdoor airflow`:
 
@@ -38,7 +42,7 @@ Import replaces the relevant fields and recalculates; it does not add the old to
 The report starts with an Executive Design Summary for seven equipment groups, separating calculated demand from suggested selection. HTML adds KPI cards and a selection table. Missing, uncalculated, over-catalogue and infeasible results remain distinct. UP/NP panels are listed separately; their AT ratings are not added to invent an uncalculated main breaker. Forms scroll, Enter calculates and inline feedback identifies errors; inspect the adopted assumptions and engineering assessment as well as the KPI cards.
 
 
-For the **V5.7.3 preview.1 Windows/macOS candidate**. Finish sections 1–6 to produce your first practice report. Sections 7–9 are optional extensions. All examples use synthetic data, with no client or company project information.
+For the **Facility Studio 5.7.3 for Windows and macOS ARM64**. Finish sections 1–6 to produce your first practice report. Sections 7–9 are optional extensions. All examples use synthetic data, with no client or company project information.
 
 <a id="start"></a>
 ## 1. Choose the right starting point

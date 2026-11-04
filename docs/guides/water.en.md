@@ -1,13 +1,17 @@
 # PCW / CHW / hot water: flow, kW, RT, ΔT and pipe size
 
+**5.7.3 version guide: native acceptance and publication status are established by CI records and Release attachments for the corresponding commit; this guide does not assert a pass.** Older version-labelled examples, screenshots and pass counts below are historical evidence, not a fresh 5.7.3 run. [Release status](../verification/5.7.3-release-acceptance.md).
+
+Liquid/pure-water piping independently selects medium, material and flow. Importing water-tool flow does not choose materials or certify properties. Temperature, pressure, concentration or source changes require renewed property/phase confirmation; unknown mixtures must not use water defaults. Suction checks need minimum level, surface absolute pressure, total suction losses, same-condition NPSHr and margin; main-route loss is not automatically suction loss. Mixture bubble pressure needs reliable evidence. Insulation uses actual outside diameter, not bore.
+
 [繁體中文](water.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
 Windows win.8 TXT/HTML retain adopted pipe length and fixed units. Review the adopted 30 m/50 m length and corresponding pressure loss directly from the report. The normal desktop length field retains its calculation. [Reports and independent checks](../2026-10-18-windows-report-audit.md#english)
 
 <a id="source-revision"></a>
-## Current source: heat load to chilled water and pump
+## Historical feature introduction: heat load to chilled water and pump
 
-These features are included in Windows win.8 and macOS mac.6; the subsequent Windows-only audit corrections are described below.
+This paragraph records the win.8/mac.6 feature introduction and subsequent historical Windows audit; it is not the 5.7.3 platform contract.
 
 Heat load estimate separates lighting, envelope, occupant sensible/latent heat, equipment room heat and FFU fan heat. Envelope 20 W/m2, FFU 0.18 kW per unit and OA enthalpy difference 50 kJ/kg are editable preliminary assumptions. Keep the enthalpy endpoint and control volume consistent:
 

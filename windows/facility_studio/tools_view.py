@@ -300,6 +300,10 @@ class QuickToolsWindow:
         self.calculate()
         i18n.subscribe(self)
 
+    def winfo_exists(self):
+        """Expose the owned window lifetime to the language subscriber registry."""
+        return self.win.winfo_exists()
+
     def refresh_language(self):
         if self.win.winfo_exists():
             self.draw()

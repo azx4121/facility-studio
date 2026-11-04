@@ -115,8 +115,8 @@ def run(destination):
         candidate_checks(root, app, check)
     finally:
         root.destroy()
-    from .candidate_acceptance import build_commit
-    output = dict(build_commit=build_commit(), version=BUILD_VERSION, frozen=bool(getattr(sys, 'frozen', False)), checks=checks,
+    from .candidate_acceptance import build_identity
+    output = dict(**build_identity(), suite="facilities", version=BUILD_VERSION, frozen=bool(getattr(sys, 'frozen', False)), checks=checks,
                   passed=all(x['passed'] for x in checks), certification=False)
     Path(destination).parent.mkdir(parents=True, exist_ok=True)
     Path(destination).write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding='utf-8')

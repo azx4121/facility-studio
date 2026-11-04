@@ -138,8 +138,8 @@ def run(destination):
         ahu_window.win.destroy()
     finally:
         simple_root.destroy()
-    from .candidate_acceptance import build_commit
-    output = dict(build_commit=build_commit(), version=BUILD_VERSION, python=platform.python_version(), platform=platform.platform(),
+    from .candidate_acceptance import build_identity
+    output = dict(**build_identity(), suite="fusion", version=BUILD_VERSION, python=platform.python_version(), platform=platform.platform(),
                   frozen=bool(getattr(sys, "frozen", False)), backends=manifest(), checks=checks,
                   passed=all(c["passed"] for c in checks), engineering_certification=False,
                   synthetic_water_conditions=conditions, ahu_rating=rating)

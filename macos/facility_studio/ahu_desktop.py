@@ -641,6 +641,10 @@ class AHUWindow(AHUView):
             self.saved_hash = project_hash(self.snapshot())
         self.refresh_link_status()
 
+    def winfo_exists(self):
+        """Expose the owned window lifetime to the language subscriber registry."""
+        return self.win.winfo_exists()
+
     def refresh_language(self):
         if self.win.winfo_exists() and self.result:
             self.set_text(nm_report(self.result))

@@ -1,11 +1,6 @@
-"""One product version for windows, reports, exports and diagnostics."""
-
-import os
+"""One formal product identity for windows, reports and diagnostics."""
 
 VERSION = "5.7.3"
-REVISION = "preview.1"
-if os.environ.get("FACILITY_STUDIO_SANDBOX"):
-    VERSION = "5.7.3"
-    REVISION = "preview.1"
-REPORT_VERSION = VERSION + " · macOS " + REVISION
-BUILD_VERSION = VERSION + "-" + REVISION
+REVISION = "release.1"
+BUILD_VERSION = VERSION
+REPORT_VERSION = VERSION + " · macOS"

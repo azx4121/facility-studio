@@ -379,11 +379,16 @@ def test_real_fusion_settings_routes_to_current_page_and_cancel_keeps_inputs(rea
     page = notebook.nametowidget(notebook.select())
     widget = next(w for w in page.body.winfo_children() if w.winfo_class() == "TCombobox")
     values = {key: value.get() for key, value in win.fusion_values.items()}
-    page.canvas.yview_moveto(.5)
-    before = page.canvas.yview()[0]
+    # Native fonts/theme metrics can leave less than half a page of overflow.
+    # Starting at .5 can clamp to the bottom on Windows (CI first fraction .4928),
+    # where a correctly routed downward wheel cannot move any farther.
+    page.canvas.yview_moveto(0)
+    root.update_idletasks()
+    before = page.canvas.yview()
+    assert before[0] == 0 and before[1] < 1, "Settings page must have room to scroll"
     widget.event_generate("<MouseWheel>", delta=-120)
     root.update()
-    assert page.canvas.yview()[0] > before
+    assert page.canvas.yview()[0] > before[0]
     assert {key: value.get() for key, value in win.fusion_values.items()} == values
     win.destroy()
     root.update()

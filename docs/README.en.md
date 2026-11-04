@@ -1,10 +1,16 @@
 # Facility Studio documentation
 
+## Current 5.7.3 documentation
+
+[Version changes and release contract](releases/v5.7.3.md) · [Formal acceptance evidence schema](verification/5.7.3-release-acceptance.md) · [Design review](guides/design-review.en.md) · [Capacity planning](guides/capacity.en.md)
+
+Windows x64 installer/portable and Mac ARM64 ZIP require final native acceptance before publication. Dated and win.10/mac.8 links below are historical evidence, not a 5.7.3 pass.
+
 [win.10 / mac.8 UI unification](2026-11-01-win10-mac8-ui-unification.md) · [win.9 / mac.7 acceptance record](2026-10-31-win9-mac7-acceptance.md) · [Windows win.8 工程修正與原生驗收 / Corrections and acceptance](2026-10-18-windows-report-audit.md) · [win.4／mac.6 整合歷史](2026-10-16-gemini-integration-review.md)
 
 [繁體中文](README.md) · [Home and downloads](../README.en.md) · [Report a problem](https://github.com/azx4121/facility-studio/issues)
 
-Current version: **V5.6.0 public test release (win.10 / mac.8)**. Choose documentation for your task; use the practice walkthrough when you need a full project.
+Documentation target: **Facility Studio 5.7.3**. Native acceptance and platform publication status are determined by CI records and Release evidence for the exact source commit. A platform download is valid only when its matching Release provides the package and SHA256. Choose documentation for your task; use the practice walkthrough when you need a full project.
 
 ## Start here
 
@@ -25,8 +31,8 @@ Help is bundled: use **This tool's guide** in a quick calculator or **Beginner t
 | Your task | Documentation |
 | --- | --- |
 | Check inputs, formulas and worked results | [20 scenarios: 18 calculations and two scope controls](guides/README.en.md) |
-| Check V5.6.0 water sizes, ten direct calculators and 50 gases | [Current features and sources](2026-10-16-gemini-integration-review.md#english) |
-| Verify native tests, commits and SHA256 of the published EXE/DMG | [Windows win.8 acceptance and SHA256](2026-10-18-windows-report-audit.md#原生發布結果) · [macOS mac.6](2026-10-16-gemini-integration-review.md#原生發布狀態) |
+| Check V5.6.0 water sizes, ten direct calculators and 50 gases | [Historical features and sources](2026-10-16-gemini-integration-review.md#english) |
+| Verify native tests, commits and SHA256 of historical EXE/DMG packages | [Windows win.8 acceptance and SHA256](2026-10-18-windows-report-audit.md#原生發布結果) · [macOS mac.6](2026-10-16-gemini-integration-review.md#原生發布狀態) |
 | Run, build or test source | [Developer entry](development.md#english) |
 | Review previous fixes, tests and search experiments | [Historical records](history/README.md#english) |
 

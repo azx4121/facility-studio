@@ -1,5 +1,9 @@
 # AHU / MAU stages: preheat, precool, water wash, recool and reheat
 
+**5.7.3 version guide: native acceptance and publication status are established by CI records and Release attachments for the corresponding commit; this guide does not assert a pass.** Older version-labelled examples, screenshots and pass counts below are historical evidence, not a fresh 5.7.3 run. [Release status](../verification/5.7.3-release-acceptance.md).
+
+Required states are not achievable supply. An infeasible C2 recool stage, disabled heater or insufficient seasonal supply cannot pass because one target matches. Compare summer/winter airflow, temperature/humidity, capacities and BF/ADP separately; improved search does not guarantee all isolated feasible regions. Recalculate and reimport stale linked sources. Explicitly detach and confirm conditions before independent calculation. A numeric chilled-water reduction is not a feasibility guarantee.
+
 V5.6.0 standalone AHU windows can save invalid raw inputs as an explicitly confirmed draft. Reopening still identifies invalid fields and locks export. Correct inputs and recalculate before producing design outputs; a subsequent ordinary save keeps the draft backup. Cancellation preserves the file. This is manual draft saving, without a new standalone autosave timer.
 
 C1 supersaturation messages identify the season, entering state, ADP and leaving demand. Use **Locate issue** to inspect the automatic target or the seasonal specified outlet. Correct the conditions and recalculate before exporting the report.
@@ -7,7 +11,7 @@ C1 supersaturation messages identify the season, entering state, ADP and leaving
 [繁體中文](ahu.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
 <a id="source-revision"></a>
-## Current source: MAU, DCC, FFU and the system display
+## Historical feature introduction: MAU, DCC, FFU and the system display
 
 This section describes the current engineering/interface revision separately from the retained published-version cases below. Source changes do not rewrite the versions or acceptance evidence of existing EXE/DMG downloads.
 

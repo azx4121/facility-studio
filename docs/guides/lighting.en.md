@@ -1,12 +1,16 @@
 # Lighting calculator: m² / m³, lumens, lux and luminaire count
 
+**5.7.3 version guide: native acceptance and publication status are established by CI records and Release attachments for the corresponding commit; this guide does not assert a pass.** Older version-labelled examples, screenshots and pass counts below are historical evidence, not a fresh 5.7.3 run. [Release status](../verification/5.7.3-release-acceptance.md).
+
+U is an adopted catalogue utilization factor; K supports lookup, not a universal U(K) function. Supported IES/LDT layouts calculate direct illuminance, not complete room reflections or UGR. Retain photometric files, orientation, work-plane and unit evidence; numeric results do not certify a complete lighting design.
+
 [繁體中文](lighting.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
 Open **Lighting** and choose illuminance estimation or luminaire-count calculation. Space input can be m², Taiwan ping, length × width or m³. For volume, enter the clear height of **the same room**: `illuminated area = volume / clear height`. Enter volume, not area, in the m³ field.
 
 Luminaire output is **lumens (lm)**; illuminance is **lux = lm/m²**. Watts alone do not determine lux. Use manufacturer lumens when known; an LED-watts estimate must retain its assumed efficacy.
 
-This guide follows the **V5.7.3 preview.1 isolated candidate**, with matching Windows/macOS source. Older downloads may differ. Catalogue-U/room-index checks preserve area, calculation mode and lumen source. Select length × width and enter actual dimensions when geometry is needed. Hidden drafts are not adopted; K supports catalogue lookup and does not generate U.
+This guide follows the **Facility Studio 5.7.3**, with matching Windows/macOS source. Older downloads may differ. Catalogue-U/room-index checks preserve area, calculation mode and lumen source. Select length × width and enter actual dimensions when geometry is needed. Hidden drafts are not adopted; K supports catalogue lookup and does not generate U.
 
 <a id="case-08"></a>
 ## Case 08: 90 m³, 3 m height, 40 W × 10 luminaires

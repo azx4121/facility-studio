@@ -3,6 +3,7 @@
 Uses benign markers only. All modified input documents are temporary.
 No production files or licensing terms are changed.
 """
+import argparse
 import csv
 import io
 import json
@@ -15,7 +16,9 @@ import zipfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "evidence/Security_Input_Checks.json"
+parser = argparse.ArgumentParser()
+parser.add_argument("--output", type=Path, default=ROOT / "evidence/Security_Input_Checks.json")
+OUTPUT = parser.parse_args().output
 sys.path.insert(0, str(ROOT))
 from facility_studio.equipment_io import Cell, EquipmentImportError, _xml, load_equipment
 from facility_studio.equipment_analysis import analyze_equipment
@@ -292,3 +295,6 @@ OUTPUT.write_text(json.dumps(dict(source=ROOT.name, checks=checks,
 print(json.dumps(dict(source=ROOT.name, cases=len(checks),
                      passed=sum(c["passed"] for c in checks),
                      failed=[c for c in checks if not c["passed"]]), ensure_ascii=False))
+
+# A JSON failure is a process failure too; CI must never report a false green.
+raise SystemExit(0 if checks and all(c["passed"] is True for c in checks) else 1)

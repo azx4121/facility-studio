@@ -219,17 +219,18 @@ class PublisherChecks(unittest.TestCase):
         with self.assertRaises(ValueError):
             public_checksums("0" * 64 + "  other.exe\n", ["app.exe"])
 
-    def test_publishers_do_not_include_zip_assets(self):
+    def test_historical_publishers_cannot_publish_any_assets(self):
         paths = ["windows/winrelease/publish.py", "macos/macos/publish_mac_release.py"]
         for index, path in enumerate(paths):
             spec = importlib.util.spec_from_file_location("publisher" + str(index), ROOT / path)
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
-            if index == 0:
-                self.assertEqual(module.FILENAMES, ("Facility_Studio_V5_6_0_Windows_Offline.exe", "SHA256SUMS.txt"))
-            else:
-                source = (ROOT / path).read_text()
-                self.assertNotIn("_OneClick.zip", source)
+            with self.assertRaisesRegex(SystemExit, "historical 5.6 publisher is retired"):
+                module.main()
+            source = (ROOT / path).read_text()
+            self.assertNotIn("urllib", source)
+            self.assertNotIn("requests", source)
+            self.assertNotIn("FACILITY_GITHUB_TOKEN", source)
 
 
 if __name__ == "__main__":

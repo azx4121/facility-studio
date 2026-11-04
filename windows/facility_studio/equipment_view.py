@@ -20,6 +20,10 @@ from .utils import atomic_text
 
 
 class EquipmentWindow:
+    def winfo_exists(self):
+        """Expose the owned window lifetime to the language subscriber registry."""
+        return self.win.winfo_exists()
+
     def refresh_language(self):
         if self.win.winfo_exists() and self.result:
             self.show_group()

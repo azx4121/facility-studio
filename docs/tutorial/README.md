@@ -2,15 +2,15 @@
 
 [首頁與下載](../../README.md) · [中文跟做教學](../guides/workbench.md) · [English](#english)
 
-**V5.7.3 preview.1 獨立候選版已內建教學，日常使用不必另外下載教學包。**
+**Facility Studio 5.7.3 成品內建教學，日常使用不必另外下載教學包。此版本的原生驗收與各平台發布狀態，以對應 commit 的 CI 紀錄及 Release 附件為準；只有對應 Release 已提供平台成品及 SHA256 時，該平台下載才有效。**
 
-本次修訂對照候選版實際操作，新增完整空氣線圖、直接照度配置、容量／擴建規劃，以及輸入變更後的重算／匯出規則。Windows 與 macOS 來源使用相同章節；本教學不代表舊下載檔已具備候選功能，也不代表原生交付已驗收。
+本次修訂對照 5.7.3 來源操作，新增完整空氣線圖、直接照度配置、容量／擴建規劃，以及輸入變更後的重算／匯出規則。Windows 與 macOS 來源使用相同章節；本教學不代表舊下載檔已具備候選功能，也不代表原生交付已驗收。
 
 簡易工具按「本工具教學」可看目前工具；完整工作台按「新手教學」可跟做第一份報告。教學左側附練習檔案，先完成前六步，其餘章節按需要閱讀。
 
 ## 不開軟體，也可以先看教學
 
-[Windows 測試版教學包](Facility_Studio_Beginner_Tutorial_Windows.zip)／[macOS 測試版教學包](Facility_Studio_Beginner_Tutorial_macOS.zip)。完整解壓縮後用瀏覽器開啟 `START_HERE.html`。新增液體／純水與保溫、PV 真空及潔淨室 ACH／MAU 章節。不需 Python 或套件；只有外部連結需要網路。
+[Windows 5.7.3 教學包](Facility_Studio_Beginner_Tutorial_Windows.zip)／[macOS ARM64 5.7.3 教學包](Facility_Studio_Beginner_Tutorial_macOS.zip)。完整解壓縮後用瀏覽器開啟 `START_HERE.html`。新增液體／純水與保溫、PV 真空及潔淨室 ACH／MAU 章節。不需 Python 或套件；只有外部連結需要網路。
 
 可切換中英文、逐步閱讀或列印。勾選進度只代表已閱讀，存在本機瀏覽器，不代表工程驗證通過。
 
@@ -50,12 +50,12 @@ python3 docs/tutorial/verify_tutorial.py --platform macos --output tutorial-maco
 <a id="english"></a>
 ## English
 
-V5.7.3 preview.1 includes updated offline help for the isolated candidate. Full psychrometric charts, direct-lighting layouts, capacity/expansion plans and stale-result handling are covered in both languages. This does not establish that older downloads include the features or that native delivery has passed acceptance. Use **This tool's guide** in a calculator or **Full workbench → Beginner tutorial** for a first report. Complete the first six sections; additional chapters are optional.
+Facility Studio 5.7.3 includes updated offline help. Native acceptance and platform publication status are determined by CI records and Release evidence for the exact source commit. A platform download is valid only when its matching Release provides the package and SHA256. Full psychrometric charts, direct-lighting layouts, capacity/expansion plans and stale-result handling are covered in both languages. This does not establish that older downloads include the features or that native delivery has passed acceptance. Use **This tool's guide** in a calculator or **Full workbench → Beginner tutorial** for a first report. Complete the first six sections; additional chapters are optional.
 
-To read without launching the app, download the tutorial package above, extract it, and open `START_HERE.html` in a browser. No Python is needed. Progress records reading in local browser storage; only external links need internet.
+To read without launching the app, download the Windows or macOS ARM64 tutorial package above, extract it, and open `START_HERE.html` in a browser. No Python is needed. Progress records reading in local browser storage; only external links need internet.
 
 The [historical delivery status for 731e416](../../handoff/STATUS.json) is not acceptance of this candidate. Its completion flag, paths and CI describe the earlier delivery; verify the actual current candidate commit and artifacts separately.
 
-Start with `01_Practice_AHU.json`, available from the tutorial sidebar, and save your own copy. **Open practice copy** directly loads the second MAU/staged-AHU example with a new project identity. All examples are synthetic and leave unconfirmed manufacturer/site conditions pending.
+Start with `01_Practice_AHU.json`, available from the tutorial sidebar, and save your own copy. **Open practice copy** directly loads the second MAU/staged-AHU example with a new project identity. All examples are synthetic and leave unconfirmed manufacturer/site conditions pending. Platform ZIPs use their corresponding rebuilt reports. The old generic ZIP and root-level reports remain historical material, not current package evidence.
 
 **DESIGNED BY ANDY HUANG ©**

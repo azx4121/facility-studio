@@ -340,6 +340,10 @@ class DesktopApp(SessionController, MainView):
             pass
         messagebox.showerror("操作未完成", str(exc_value), parent=self.root)
 
+    def winfo_exists(self):
+        """Expose the owned window lifetime to the language subscriber registry."""
+        return self.root.winfo_exists()
+
     def refresh_language(self):
         if self.root.winfo_exists() and self.result:
             self.set_report(report(self.result))

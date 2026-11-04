@@ -48,7 +48,7 @@ def test_installer_public_name_and_operation_guide_are_product_only():
     readme = (ROOT/'integration/README_繁體中文.md').read_text(encoding="utf-8")
     assert not BANNED.search(readme)
     build = (ROOT/'integration/build.py').read_text(encoding="utf-8")
-    assert 'NAME = "Facility Studio 5.7.3 測試版"' in build
+    assert 'NAME = "Facility Studio 5.7.3"' in build
     meta = (ROOT/'integration/windows_version.txt').read_text(encoding="utf-8")
     assert 'FacilityStudioEngineeringFusion' not in meta
     assert '五庫' not in meta

@@ -1,5 +1,9 @@
 # Excel／CSV 設備需求分析：電力、PCW、CDA、N2、EXHAUST、DI、PV
 
+**5.7.3 版本指南：原生驗收與發布狀態以對應 commit 的 CI 紀錄及 Release 附件為準，本指南不宣稱已通過。** 下列具舊版標記的案例、截圖與通過數字保留其歷史證據身分，不是 5.7.3 重新執行結果。[發布狀態](../verification/5.7.3-release-acceptance.md)。
+
+DI 連續循環不乘製程同時率。每台製程 10 LPM＋持續循環 2 LPM、兩台時：100% 為 24 LPM，50% 為 14 LPM，0% 仍為 4 LPM。PCW 不同供應群不能無條件合併；只彙整同群、同工況與相同供應邊界，結果不是自動全廠主管選型。
+
 [English](equipment.en.md) · [回到工具指南](README.md) · [下載](../../README.md#下載)
 
 **Equipment-schedule demand analysis.** 開啟主畫面右上「設備表匯入」，先「匯出公檔範本」，依設備填值，再匯入分析。完整懶人包也有範本；[原始範本](../../windows/facility_studio/resources/Equipment_Template.xlsx)可下載。先選 English 再匯出即可取得英文欄位／說明的範本；包內與原始範本可能仍為中文，兩種語言均可匯入。Excel內有七個系統；CSV依所選系統分析。

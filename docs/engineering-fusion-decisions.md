@@ -1,5 +1,7 @@
 # 五庫核心融合：實作邊界與稽核查證
 
+**Historical record / 歷史紀錄。** Versions, screenshots, pass counts and “current” statements below refer to the recorded revision, not final 5.7.3 acceptance. 現行發布狀態見 [5.7.3](verification/5.7.3-release-acceptance.md)。
+
 本輪目標為 PsychroLib、python-hvac、fluids、CoolProp、Pint 實際參與既有計算、選型、單位與報表；不以套件已安裝或只增加獨立檢核頁視為完成。
 基準為 eaab767e92cbb6731e7695f59a49ca7b74ca1f23。原工作樹、正式 App、已驗收包保留；本分支不合併 main。
 

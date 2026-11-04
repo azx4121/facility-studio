@@ -1,3 +1,11 @@
+# 歷史建置流程 / Historical build pipeline
+
+**不要用本頁舊管線發布 5.7.3。Do not use this legacy pipeline to release 5.7.3.**
+
+現行建置／正式 gate 見 [Development](../../docs/development.md)，入口為 `integration/build.py`，Python 3.12.16；Windows x64 installer／portable、Mac ARM64 ZIP。最終原生驗收／平台發布狀態以對應 commit 的 CI 及 Release 附件為準。下方原版本、指令與數字保留作歷史重現，不表示現在支援 Universal／Intel 或採用舊依賴。
+
+---
+
 # Windows V5.6.0 離線發行
 
 [目前下載與英文安裝](../../README.en.md#download-and-run) · [工程覆核與原生驗收](../../docs/2026-10-16-gemini-integration-review.md)

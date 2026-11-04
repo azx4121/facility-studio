@@ -1,8 +1,12 @@
 # Facility Studio 工具指南：20個問題、操作條件與公式
 
+**5.7.3 版本指南：原生驗收與發布狀態以對應 commit 的 CI 紀錄及 Release 附件為準，本指南不宣稱已通過。** 下列具舊版標記的案例、截圖與通過數字保留其歷史證據身分，不是 5.7.3 重新執行結果。[發布狀態](../verification/5.7.3-release-acceptance.md)。
+
+[設計審查](design-review.md) · [容量規劃](capacity.md) · [獨立 PV](gas-vacuum.md) · [液體／純水](water.md)
+
 [繁體中文首頁](../../README.md) · [English guides](README.en.md) · [文件中心](../README.md) · [下載](../../README.md#下載)
 
-依手上的問題選工具，再查看輸入條件、公式與結果。以下是 **18 個計算案例與 2 個範圍對照**，全部使用合成資料；可照數值在 V5.6.0 中文或英文介面操作。
+依手上的問題選工具，再查看輸入條件、公式與結果。以下是 **18 個計算案例與 2 個範圍對照**，全部使用合成資料；原始驗證對應 V5.6.0 中英文介面；在 5.7.3 操作時依目前欄位與採用條件重算，不宣稱這些歷史數字已重新通過。
 
 ## 完整工作台先從這裡開始
 
@@ -74,7 +78,7 @@ python windows/Facility_Studio_V5_5.py --tool air --tool-input docs/examples/12-
 
 [常見問題](../faq.md) · [原生驗收](../2026-10-16-gemini-integration-review.md#原生發布狀態) · [歷史紀錄](../history/README.md)
 
-## 目前版本（win.8／mac.6）
+## 歷史版本（win.8／mac.6）
 
 本版新增潔淨室風量、熱負荷與冰水泵浦快算，並提供明確氣流路徑、上游帶入與 HTML 設計總覽。這些變更已包含在 Windows win.8／Mac mac.6 下載檔中；模型邊界、相容性與原生驗收見[整合覆核](../2026-10-16-gemini-integration-review.md)。
 

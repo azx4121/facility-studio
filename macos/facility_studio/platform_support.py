@@ -10,7 +10,10 @@ def app_data_root(platform=None, home=None, environ=None):
     platform = sys.platform if platform is None else platform
     home = Path.home() if home is None else Path(home)
     environ = os.environ if environ is None else environ
-    # Explicit LOCALAPPDATA is retained for Windows and isolated test sessions.
+    # Product-local override does not change an OS directory for child apps.
+    if environ.get("FACILITY_STUDIO_DATA"):
+        return Path(environ["FACILITY_STUDIO_DATA"])
+    # Explicit LOCALAPPDATA is retained for historical source/test sessions.
     if environ.get("LOCALAPPDATA"):
         return Path(environ["LOCALAPPDATA"]) / "Facility_Studio_V5_5"
     if platform == "darwin":

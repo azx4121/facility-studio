@@ -1,5 +1,7 @@
 # 介面截圖來源 / Screenshot provenance
 
+**歷史圖片 / Historical images.** Each image below belongs to its named version/host/source. No final 5.7.3 screenshot is claimed; do not relabel historical pixels as new acceptance. [5.7.3 status](../verification/5.7.3-release-acceptance.md).
+
 ## 首頁圖片：win.10／mac.8 開啟後的原生畫面（2026-11-01）
 
 - `v560-win10-native-zh.png` SHA256 `0885812517b5fcbbe111d9a103d683fc5f103995645964169be44c35c1395de2`

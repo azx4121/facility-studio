@@ -1,30 +1,10 @@
 @echo off
 setlocal DisableDelayedExpansion
 chcp 65001 >nul 2>nul
-title Facility Studio V5.6.0 (win.4)
-cd /d "%~dp0"
-if exist "Facility_Studio_V5_6_0_Windows_Offline.exe" (
-    start "" "%~dp0Facility_Studio_V5_6_0_Windows_Offline.exe"
-    exit /b 0
-)
-if not exist "windows\Facility_Studio_V5_5.py" goto missing
-where py >nul 2>nul
-if not errorlevel 1 (
-    py -3 "%~dp0windows\Facility_Studio_V5_5.py"
-    if errorlevel 1 goto failed
-    exit /b 0
-)
-where python >nul 2>nul
-if not errorlevel 1 (
-    python "%~dp0windows\Facility_Studio_V5_5.py"
-    if errorlevel 1 goto failed
-    exit /b 0
-)
-echo Preparing Python and packages through the online installer...
-call "%~dp0windows\installer\START.cmd"
-exit /b %errorlevel%
-:missing
-echo Extract the complete source package, or download the tested Windows Offline EXE from GitHub Releases.
-:failed
-pause
+title Facility Studio 5.7.3 - Historical launcher retired
+echo This historical 5.6 launcher is retired. No files were installed or changed.
+echo For packaged software, open the verified Facility Studio 5.7.3 EXE from its complete portable folder,
+echo or install the verified 5.7.3 Setup into a new empty directory.
+echo Source build instructions: docs\development.md
+echo Release status and verified downloads: https://github.com/azx4121/facility-studio/releases
 exit /b 1

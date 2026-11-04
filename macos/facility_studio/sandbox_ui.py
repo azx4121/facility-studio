@@ -1,16 +1,17 @@
-"""Presentation-only sandbox identity and native menus."""
+"""Native menus shared by the formal application and isolated test sessions."""
 
 import os
 
 
 def install_menus(root):
-    if not os.environ.get("FACILITY_STUDIO_SANDBOX"):
+    if not (os.environ.get("FACILITY_STUDIO_NATIVE_MENUS")
+            or os.environ.get("FACILITY_STUDIO_SANDBOX")):
         return
     import tkinter as tk
     from .localized_tk import messagebox
     from .engineering_verification import BUILD
 
-    root.title("Facility Studio 整合測試版 " + BUILD)
+    root.title("Facility Studio " + BUILD)
     menu = tk.Menu(root)
     apple = tk.Menu(menu, name="apple", tearoff=False)
     apple.add_command(

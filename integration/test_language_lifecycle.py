@@ -94,3 +94,108 @@ def test_native_destroyed_interpreter_does_not_block_new_window(listeners):
         assert stale_title not in listeners
     finally:
         second.destroy()
+
+
+@pytest.fixture(params=["desktop", "ahu", "quick_tools", "equipment"])
+def controller(request):
+    """Use production controller types without constructing unrelated form UI."""
+    from facility_studio.desktop import DesktopApp
+    from facility_studio.ahu_desktop import AHUWindow
+    from facility_studio.tools_view import QuickToolsWindow
+    from facility_studio.equipment_view import EquipmentWindow
+    cls, window_attr = {
+        "desktop": (DesktopApp, "root"),
+        "ahu": (AHUWindow, "win"),
+        "quick_tools": (QuickToolsWindow, "win"),
+        "equipment": (EquipmentWindow, "win"),
+    }[request.param]
+    return cls.__new__(cls), window_attr
+
+
+@pytest.mark.parametrize("destroyed_interpreter", [False, True])
+def test_closed_controllers_are_pruned_without_waiting_for_gc(
+        listeners, controller, destroyed_interpreter):
+    owner, window_attr = controller
+    class ClosedWindow:
+        def winfo_exists(self):
+            if destroyed_interpreter:
+                raise TclError('cannot invoke "winfo": application has been destroyed')
+            return False
+    setattr(owner, window_attr, ClosedWindow())
+    refreshed = []
+    owner.refresh_language = lambda: refreshed.append(True)
+    live = Listener()
+    i18n.subscribe(owner)
+    i18n.subscribe(live)
+    i18n.set_language("en", persist=False)
+    assert owner not in listeners and not refreshed
+    assert live.refreshed
+
+
+def test_live_controller_refresh_errors_still_surface(listeners, controller):
+    owner, window_attr = controller
+    class LiveWindow:
+        def winfo_exists(self):
+            return True
+    setattr(owner, window_attr, LiveWindow())
+    def broken_refresh():
+        raise TclError("Invalid live controller translation operation")
+    owner.refresh_language = broken_refresh
+    i18n.subscribe(owner)
+    with pytest.raises(TclError, match="Invalid live controller"):
+        i18n.set_language("en", persist=False)
+    assert owner in listeners
+
+
+def test_native_destroyed_controller_does_not_block_new_window(listeners, controller):
+    from facility_studio.localized_tk import tk, attach_window
+    owner, window_attr = controller
+    try:
+        first = tk.Tk()
+    except TclError as error:
+        if os.environ.get("FACILITY_REQUIRE_DISPLAY") == "1":
+            raise
+        pytest.skip("Native Tk display unavailable: " + str(error))
+    first.withdraw()
+    window = first if window_attr == "root" else tk.Toplevel(first)
+    setattr(owner, window_attr, window)
+    # Keep the real controller strongly reachable after its entire interpreter
+    # is destroyed, as delayed callbacks/reference cycles can do in production.
+    owner.result = None
+    i18n.subscribe(owner)
+    first.destroy()
+    second = tk.Tk()
+    try:
+        second.withdraw()
+        live = tk.Toplevel(second)
+        attach_window(live)
+        live.title("容量／擴建規劃")
+        i18n.set_language("en", persist=False)
+        second.update()
+        assert owner not in listeners
+        assert live.title() == "Capacity / expansion planning"
+    finally:
+        second.destroy()
+
+
+def test_uninitialized_controller_is_not_silently_treated_as_closed(listeners, controller):
+    owner, window_attr = controller
+    # All production constructors set the window before subscribing. If that
+    # contract regresses, do not turn an initialization bug into a silent prune.
+    i18n.subscribe(owner)
+    with pytest.raises(AttributeError, match=window_attr):
+        i18n.set_language("en", persist=False)
+    assert owner in listeners
+
+
+def test_live_controller_still_refreshes(listeners, controller):
+    owner, window_attr = controller
+    class LiveWindow:
+        def winfo_exists(self):
+            return True
+    setattr(owner, window_attr, LiveWindow())
+    refreshed = []
+    owner.refresh_language = lambda: refreshed.append(True)
+    i18n.subscribe(owner)
+    i18n.set_language("en", persist=False)
+    assert refreshed == [True] and owner in listeners

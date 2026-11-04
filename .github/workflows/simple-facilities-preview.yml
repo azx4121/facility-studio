@@ -1,7 +1,7 @@
-name: Simple facilities preview validation
+name: Facility Studio native validation
 on:
   push:
-    branches: ['sandbox/simple-facilities-20261102', 'sandbox/feed-readiness-20261103', 'dot/guardrail-integration-20261103', 'dot/windows-native-candidate-20261104']
+    branches: ['main', 'sandbox/simple-facilities-20261102', 'sandbox/feed-readiness-20261103', 'dot/guardrail-integration-20261103', 'dot/windows-native-candidate-20261104']
     paths:
       - '.github/workflows/simple-facilities-preview.yml'
       - 'macos/facility_studio/**'
@@ -17,6 +17,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+# Keep assertion-rewritten test bytecode out of the exact-source build checkout.
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
 concurrency:
   group: simple-facilities-${{ github.ref }}
   cancel-in-progress: true
@@ -40,7 +43,7 @@ jobs:
       - name: Numerical boundaries, conservation and generated cases
         run: |
           mkdir -p simple-evidence
-          xvfb-run -a -s '-screen 0 1920x1440x24' python -m pytest integration/test_guardrails.py integration/test_release_identity.py integration/test_acceptance_validation.py integration/test_candidate_acceptance.py integration/test_language_lifecycle.py integration/test_tutorial_content.py integration/test_tutorial_launch.py integration/test_cli_encoding.py integration/test_design_basis.py integration/test_design_basis_gui.py integration/test_pump_suction.py integration/test_liquid_phase_guardrails.py integration/test_simple_facilities.py integration/test_fusion.py integration/test_product_wording.py macos/tests/test_feed_sandbox.py -q --hypothesis-show-statistics --junitxml=simple-evidence/pytest.xml > simple-evidence/pytest.log 2>&1
+          xvfb-run -a -s '-screen 0 1920x1440x24' python -m pytest integration/test_guardrails.py integration/test_release_identity.py integration/test_acceptance_validation.py integration/test_source_provenance.py integration/test_source_suite_validation.py integration/test_candidate_acceptance.py integration/test_language_lifecycle.py integration/test_tutorial_content.py integration/test_tutorial_launch.py integration/test_cli_encoding.py integration/test_design_basis.py integration/test_design_basis_gui.py integration/test_pump_suction.py integration/test_liquid_phase_guardrails.py integration/test_simple_facilities.py integration/test_fusion.py integration/test_product_wording.py macos/tests/test_feed_sandbox.py -q --hypothesis-show-statistics --junitxml=simple-evidence/pytest.xml > simple-evidence/pytest.log 2>&1
           cat simple-evidence/pytest.log
           python tools/verify_platform_sync.py
           FACILITY_TEST_PLATFORM=macos FACILITY_REQUIRE_DISPLAY=1 xvfb-run -a -s '-screen 0 1920x1440x24' python -m pytest integration/test_capacity_planning.py integration/test_capacity_controller.py integration/test_capacity_gui.py -q --junitxml=simple-evidence/capacity-macos.xml
@@ -175,7 +178,7 @@ jobs:
           if not complete:
               raise SystemExit('All four exact real Tk geometry cases must pass without skips, failures or errors.')
           PY
-          "$FACILITY_PY" -m pytest --capture=sys integration/test_combobox_wheel.py integration/test_reviewed_ui_defects.py integration/test_di_template.py integration/test_engine_review_guardrails.py integration/test_c2_airflow_search.py integration/test_airflow_remedy.py integration/test_lighting_u_report.py -q -ra --junitxml="$RUNNER_TEMP/facility-native-source/reviewed-candidate.xml"
+          "$FACILITY_PY" -m pytest --capture=sys integration/test_acceptance_validation.py integration/test_source_provenance.py integration/test_source_suite_validation.py integration/test_candidate_acceptance.py integration/test_release_identity.py integration/test_language_lifecycle.py integration/test_combobox_wheel.py integration/test_reviewed_ui_defects.py integration/test_di_template.py integration/test_engine_review_guardrails.py integration/test_c2_airflow_search.py integration/test_airflow_remedy.py integration/test_lighting_u_report.py -q -ra --junitxml="$RUNNER_TEMP/facility-native-source/reviewed-candidate.xml"
       - name: Build and test standalone executable and installer
         shell: bash
         run: '"$FACILITY_PY" integration/build.py --output "$RUNNER_TEMP/facility-build"'
@@ -219,6 +222,9 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           $verifierPython = (Get-Command python.exe).Source
+          $expectedSource = "$env:RUNNER_TEMP/Expected_Source_Manifest.json"
+          & $verifierPython -c "import json, os, pathlib; from integration.source_provenance import expected_source_manifest; root=pathlib.Path.cwd(); source=expected_source_manifest(root,'windows',expected_commit=os.environ['GITHUB_SHA']); (pathlib.Path(os.environ['RUNNER_TEMP'])/'Expected_Source_Manifest.json').write_text(json.dumps(source),encoding='utf-8')"
+          if ($LASTEXITCODE) { throw 'Independent checkout identity failed' }
           $delivery = "$env:RUNNER_TEMP/facility-delivery"
           $sums = Get-Content "$delivery/SHA256SUMS.txt"
           foreach ($file in Get-ChildItem $delivery -File | Where-Object { $_.Name -match '(\.zip|Setup\.exe)$' }) {
@@ -229,7 +235,7 @@ jobs:
           $zips = @(Get-ChildItem "$delivery/*.zip")
           if ($zips.Count -ne 1) { throw 'Expected one portable package' }
           Expand-Archive $zips[0].FullName "$env:RUNNER_TEMP/facility-extracted"
-          $executables = @(Get-ChildItem "$env:RUNNER_TEMP/facility-extracted" -Filter 'Facility Studio 5.7.3 測試版.exe' -Recurse)
+          $executables = @(Get-ChildItem "$env:RUNNER_TEMP/facility-extracted" -Filter 'Facility Studio 5.7.3.exe' -Recurse)
           if ($executables.Count -ne 1) { throw 'Expected one product executable' }
           New-Item -ItemType Directory "$env:RUNNER_TEMP/facility-second-evidence" | Out-Null
           $env:FACILITY_STUDIO_FUSION_DATA = "$env:RUNNER_TEMP/facility-second-data"
@@ -240,17 +246,18 @@ jobs:
             $process = Start-Process -FilePath $executables[0].FullName -ArgumentList @("--$kind-self-test", "`"$result`"") -Wait -PassThru
             if ($process.ExitCode -ne 0) { throw "Standalone acceptance exit $($process.ExitCode)" }
             $acceptance = Get-Content $result -Raw -Encoding UTF8 | ConvertFrom-Json
-            if (-not $acceptance.passed -or -not $acceptance.frozen -or $acceptance.version -ne '5.7.3-preview.1' -or $acceptance.build_commit -ne $env:GITHUB_SHA) { throw 'Standalone acceptance failed' }
+            if (-not $acceptance.passed -or -not $acceptance.frozen -or $acceptance.version -ne '5.7.3' -or $acceptance.build_commit -ne $env:GITHUB_SHA) { throw 'Standalone acceptance failed' }
           }
-          & $verifierPython -c "import os, pathlib, sys; sys.path.insert(0, 'integration'); from acceptance_validation import validate_acceptance, validate_embedded_manifest; base=pathlib.Path(os.environ['RUNNER_TEMP']); expected=os.environ['GITHUB_SHA']; executables=list((base/'facility-extracted').rglob('Facility Studio 5.7.3 測試版.exe')); assert len(executables)==1; validate_embedded_manifest(executables[0].parent,expected); [validate_acceptance(base/'facility-second-evidence'/(kind+'.json'),expected_commit=expected) for kind in ('fusion','facilities')]"
+          & $verifierPython -c "import json, os, pathlib; from integration.acceptance_validation import validate_acceptance, validate_embedded_manifest; base=pathlib.Path(os.environ['RUNNER_TEMP']); expected=os.environ['GITHUB_SHA']; source=json.loads((base/'Expected_Source_Manifest.json').read_text(encoding='utf-8')); executables=list((base/'facility-extracted').rglob('Facility Studio 5.7.3.exe')); assert len(executables)==1; validate_embedded_manifest(executables[0].parent,expected,expected_manifest=source); [validate_acceptance(base/'facility-second-evidence'/(kind+'.json'),expected_commit=expected,expected_manifest=source,expected_suite=kind) for kind in ('fusion','facilities')]"
           if ($LASTEXITCODE) { throw 'Second-host portable identity or acceptance failed' }
-          & $verifierPython -c "import os, pathlib, subprocess, sys; sys.path.insert(0, 'integration'); import windows_installer; base=pathlib.Path(os.environ['RUNNER_TEMP']); out=base/'facility-second-installer'; (out/'evidence').mkdir(parents=True); run=lambda args, log, env=None, timeout=180: subprocess.run([str(a) for a in args], env=env, timeout=timeout, stdout=log.open('w'), stderr=subprocess.STDOUT, check=True); setups=list((base/'facility-delivery').glob('*Setup.exe')); assert len(setups)==1; windows_installer.verify(setups[0],out,'Facility Studio 5.7.3 測試版',run,dict(os.environ),expected_commit=os.environ['GITHUB_SHA'])"
+          & $verifierPython -c "import json, os, pathlib, subprocess, sys; sys.path.insert(0, 'integration'); import windows_installer; base=pathlib.Path(os.environ['RUNNER_TEMP']); source=json.loads((base/'Expected_Source_Manifest.json').read_text(encoding='utf-8')); out=base/'facility-second-installer'; (out/'evidence').mkdir(parents=True); run=lambda args, log, env=None, timeout=180: subprocess.run([str(a) for a in args], env=env, timeout=timeout, stdout=log.open('w'), stderr=subprocess.STDOUT, check=True); setups=list((base/'facility-delivery').glob('*Setup.exe')); assert len(setups)==1; windows_installer.verify(setups[0],out,'Facility Studio 5.7.3',run,dict(os.environ),expected_commit=os.environ['GITHUB_SHA'],expected_manifest=source)"
           if ($LASTEXITCODE) { throw 'Second-host installer verification failed' }
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: facility-studio-Windows-second-host-evidence
           path: |
+            ${{ runner.temp }}/Expected_Source_Manifest.json
             ${{ runner.temp }}/facility-second-evidence/**/*.json
             ${{ runner.temp }}/facility-second-evidence/**/*.xml
             ${{ runner.temp }}/facility-second-evidence/**/*.log

@@ -1,8 +1,12 @@
 # Psychrometric calculator: dry bulb, RH, wet bulb, dew point and enthalpy
 
+**5.7.3 version guide: native acceptance and publication status are established by CI records and Release attachments for the corresponding commit; this guide does not assert a pass.** Older version-labelled examples, screenshots and pass counts below are historical evidence, not a fresh 5.7.3 run. [Release status](../verification/5.7.3-release-acceptance.md).
+
+Confirm local absolute atmospheric pressure and valid A/B states before opening the full chart, zooming or saving snapshots. Wet-bulb and enthalpy lines differ; wet-bulb boundaries must remain within model validity, and RH=0 does not produce an invented finite dew point. Recalculate changed inputs before chart export. Charts do not replace coil heat/moisture and capacity checks.
+
 [繁體中文](psychrometrics.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-This guide follows the **V5.7.3 preview.1 isolated candidate**. Open Psychrometrics and enter A dry bulb °C/RH. Enable the second state for B and choose whether B represents the room or coil leaving/supply air. Valid results update both points and differences. Advanced local atmospheric pressure is kPa(abs), default 101.325, shared by both states; do not enter gauge pressure.
+This guide follows the **Facility Studio 5.7.3**. Open Psychrometrics and enter A dry bulb °C/RH. Enable the second state for B and choose whether B represents the room or coil leaving/supply air. Valid results update both points and differences. Advanced local atmospheric pressure is kPa(abs), default 101.325, shared by both states; do not enter gauge pressure.
 
 <a id="case-12"></a>
 ## Case 12: 35°C, 70% RH, 101.325 kPa(abs)

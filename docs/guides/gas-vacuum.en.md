@@ -1,12 +1,16 @@
 # CDA / factory gas / process vacuum: standard flow, actual flow and pressure
 
+**5.7.3 version guide: native acceptance and publication status are established by CI records and Release attachments for the corresponding commit; this guide does not assert a pass.** Older version-labelled examples, screenshots and pass counts below are historical evidence, not a fresh 5.7.3 run. [Release status](../verification/5.7.3-release-acceptance.md).
+
+Use the independent sidebar PV vacuum calculator. Convert standard flow and absolute pressure to actual pipe volume; PV is not a positive-pressure gas choice. Pump-speed checks include necessary conditions for viscous/transition regimes. Staying below pump speed does not validate pump curves, viscous conductance, leakage, outgassing or the complete system.
+
 [繁體中文](gas-vacuum.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-Pipe size needs **flow, pressure and a velocity limit**. Pressure and velocity without flow cannot determine a diameter. **CDA / gas piping** and the full workbench share 50 factory gases plus custom mixtures; PV keeps its workbench vacuum entry. This is a velocity-based T/P/Z cross-section estimate, not a full compressible pipe-loss solver.
+Pipe size needs **flow, pressure and a velocity limit**. Pressure and velocity without flow cannot determine a diameter. **CDA / gas piping** and the full workbench share 50 factory gases plus custom mixtures; PV has an independent sidebar calculator and a workbench entry for full projects. This is a velocity-based T/P/Z cross-section estimate, not a full compressible pipe-loss solver.
 
 Added process gases have no preset design velocity; enter a design value (choose custom velocity in the workbench). Reselecting the same gas preserves entered velocity; switching to a different added gas requires a new value. Identify mixtures by name and composition. Advanced Zactual/Zstandard defaults to 1; reverse actual-to-standard conversion divides by this ratio. Single gas phase only. [50-gas catalog and scope](../2026-10-12-v5.6-expansion.md)
 
-**Where is PV?** Windows win.8 adds **PV vacuum** on the homepage and workbench. It exposes **Gases / vacuum** and scrolls to the PV standard extraction field. In older builds use **Full workbench → All engineering pages → Gases / vacuum**; the default HVAC task scope hid that page. PV uses dedicated absolute-pressure fields and is absent from the positive-pressure gas dropdown. Opening it preserves project values.
+**Historical entry (win.8):** Windows win.8 adds **PV vacuum** on the homepage and workbench. It exposes **Gases / vacuum** and scrolls to the PV standard extraction field. In older builds use **Full workbench → All engineering pages → Gases / vacuum**; the default HVAC task scope hid that page. PV uses dedicated absolute-pressure fields and is absent from the positive-pressure gas dropdown. Opening it preserves project values.
 
 In the full workbench, a route with zero flow retains custom velocity and custom/mixture names as drafts without validating or including them in calculations or reports. Added gases with nonzero demand still require custom velocity and an entered design value; mixtures also require a name and composition. The independent gas calculator still requires valid velocity even when its flow is zero.
 
@@ -42,7 +46,7 @@ Choose Standard flow for SLPM/SCFM/Sm³/h or Actual pipe flow for ALPM/ACFM/Am³
 <a id="case-07"></a>
 ## Case 07: PV 2,000 SLPM, 150 Torr(abs)
 
-Click **PV vacuum** and enter 2,000 SLPM and 150 Torr absolute. Use advanced mode to set maximum velocity 18 m/s; retain pipe/reference temperature 25°C and Z ratio 1.
+In 5.7.3, use the independent sidebar PV calculator. This historical example was checked through the workbench PV entry. Enter 2,000 SLPM and 150 Torr absolute. Use advanced mode to set maximum velocity 18 m/s; retain pipe/reference temperature 25°C and Z ratio 1.
 
 150 Torr(abs) = 19.9984 kPa(abs) = 199.984 mbar(abs).
 `Q_actual = 2000 × 760/150 = 10,133.333 ALPM`.

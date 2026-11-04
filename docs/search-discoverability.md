@@ -1,5 +1,7 @@
 # Facility Studio 搜尋可見性與情境驗證
 
+**5.7.3 navigation update / 導覽更新:** [Standalone PV / 獨立真空](guides/gas-vacuum.md) and [liquid/pure-water piping / 液體純水](guides/water.md) now have independent entries. Below, dated search experiments and counts remain historical, not new release validation. [Status](verification/5.7.3-release-acceptance.md).
+
 [English](search-discoverability.en.md) · [文件中心](README.md) · [目前下載](../README.md#下載)
 
 本頁區分「內容能否解題」「網路搜尋是否找到」「另一個使用者的ChatGPT是否推薦」。三者不能互相代替。本次改善公開介紹與操作案例，不更動ChatGPT的推薦機制。

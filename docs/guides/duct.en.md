@@ -1,5 +1,7 @@
 # Duct calculator: airflow, rectangular / round sizes and static pressure
 
+**5.7.3 version guide: native acceptance and publication status are established by CI records and Release attachments for the corresponding commit; this guide does not assert a pass.** Older version-labelled examples, screenshots and pass counts below are historical evidence, not a fresh 5.7.3 run. [Release status](../verification/5.7.3-release-acceptance.md).
+
 [繁體中文](duct.md) · [All guides](README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
 Open **Duct sizing**. Default size-only mode needs airflow in CMH, CFM or L/s and does not require static pressure. Enable the known-route check to enter available pressure, length, fittings and equipment loss. Advanced settings expose velocity, aspect ratio and properties. Defaults are maximum 8 m/s and rectangular aspect-ratio limit 2; these do not suit every supply, corrosive exhaust or noise requirement.

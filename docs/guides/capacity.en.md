@@ -1,5 +1,9 @@
 # Optional: capacity / expansion planning
 
+**5.7.3 version guide: native acceptance and publication status are established by CI records and Release attachments for the corresponding commit; this guide does not assert a pass.** Older version-labelled examples, screenshots and pass counts below are historical evidence, not a fresh 5.7.3 run. [Release status](../verification/5.7.3-release-acceptance.md).
+
+A known_subtotal is not complete demand and must not be represented as available supply capacity. Identify current and expansion demands separately and complete operating-condition/boundary evidence before judging capacity. Show N−1 separately from normal operation and review simultaneous remaining supply and common-cause failures.
+
 [繁體中文](capacity.md) · [Beginner workbench](workbench.en.md) · [Offline guide](../tutorial/README.md)
 
 In the full workbench, select Capacity / expansion planning. The separate Capacity / expansion / alternatives window screens ELECTRIC (kW), CHW/PCW (LPM) and EXHAUST (CMH). It is an independent plan, not an automatic appendix to the main workspace.

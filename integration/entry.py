@@ -1,4 +1,4 @@
-"""Independent data directory, native executable, no service or API calls."""
+"""Formal native application with a separate, non-destructive data directory."""
 import os
 from pathlib import Path
 import sys
@@ -6,10 +6,10 @@ import traceback
 
 
 def main():
-    data = Path(os.environ.get("FACILITY_STUDIO_FUSION_DATA", Path.home() / "Facility Studio 測試資料-5.7.3"))
+    data = Path(os.environ.get("FACILITY_STUDIO_FUSION_DATA", Path.home() / "Facility Studio Data-5.7.3"))
     data.mkdir(parents=True, exist_ok=True)
-    os.environ.update(FACILITY_STUDIO_SANDBOX="1", FACILITY_STUDIO_SANDBOX_DATA=str(data),
-                      LOCALAPPDATA=str(data), FACILITY_STUDIO_PREFERENCES=str(data / "preferences.json"),
+    os.environ.update(FACILITY_STUDIO_NATIVE_MENUS="1", FACILITY_STUDIO_DATA=str(data),
+                      FACILITY_STUDIO_PREFERENCES=str(data / "preferences.json"),
                       MPLCONFIGDIR=str(data / "cache/matplotlib"), MPLBACKEND="TkAgg")
     log = (data / "啟動與驗收記錄.log").open("a", encoding="utf-8", buffering=1)
     if sys.stdout is None:
@@ -36,8 +36,7 @@ def main():
             from facility_studio.facilities_acceptance import run
             return run(sys.argv[sys.argv.index("--facilities-self-test") + 1])
         if "--sandbox-self-test" in sys.argv:
-            from facility_studio.sandbox_selftest import run
-            return run(sys.argv[sys.argv.index("--sandbox-self-test") + 1])
+            raise ValueError("The historical sandbox self-test is retired; use --fusion-self-test or --facilities-self-test.")
         from facility_studio.cli import main as app_main
         return app_main()
     except Exception:

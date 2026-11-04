@@ -1,4 +1,4 @@
-"""Offline guide contract for the current candidate, without needing a browser."""
+"""Offline guide contract for the formal 5.7.3 source, without needing a browser."""
 import ast
 from html.parser import HTMLParser
 import json
@@ -56,7 +56,7 @@ def test_same_bilingual_chapters_and_six_required_steps():
     assert 'historical delivery status for 731e416' in readme
     for lang in ('zh-Hant', 'en'):
         assert guide['labels'][lang]['n'] == 6
-        assert 'preview.1' in guide['labels'][lang]['offline']
+        assert guide['labels'][lang]['offline'] == ('離線版｜V5.7.3 | Windows / macOS' if lang == 'zh-Hant' else 'Offline | V5.7.3 | Windows / macOS')
         chapters = {row['id']: row['html'] for row in guide['content'][lang]}
         assert '01_Practice_AHU.json' in chapters['first-case']
         assert 'https://' not in chapters['first-case'], 'First practice must work offline'

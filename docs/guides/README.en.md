@@ -1,8 +1,12 @@
 # Facility Studio guides: 20 questions, inputs and formulas
 
+**5.7.3 version guide: native acceptance and publication status are established by CI records and Release attachments for the corresponding commit; this guide does not assert a pass.** Older version-labelled examples, screenshots and pass counts below are historical evidence, not a fresh 5.7.3 run. [Release status](../verification/5.7.3-release-acceptance.md).
+
+[Design review](design-review.en.md) · [Capacity planning](capacity.en.md) · [Standalone PV](gas-vacuum.en.md) · [Liquid/pure-water piping](water.en.md)
+
 [繁體中文](README.md) · [English home](../../README.en.md) · [Downloads](../../README.en.md#download-and-run)
 
-Choose a tool for your question, then review its inputs, formulas and result. These **18 calculation cases and two scope controls** use synthetic data and can be followed in the V5.6.0 Chinese or English interface.
+Choose a tool for your question, then review its inputs, formulas and result. These **18 calculation cases and two scope controls** use synthetic data and were originally verified against V5.6.0 Chinese/English interfaces. Recalculate using 5.7.3 fields and adopted conditions; historical values are not claimed freshly accepted.
 
 ## Start with the full-workbench walkthrough
 
@@ -72,7 +76,7 @@ See the [licensing examples](../../LICENSE_GUIDE.en.md) for permitted use. Repor
 
 [FAQ](../faq.en.md) · [Native acceptance](../2026-10-16-gemini-integration-review.md#原生發布狀態) · [Historical records](../history/README.md#english)
 
-## Current release (win.8 / mac.6)
+## Historical release (win.8 / mac.6)
 
 This release adds cleanroom airflow, heat-load and water-pump calculators, explicit airflow topology, upstream transfers and HTML executive reports. These changes are included in the Windows win.8 / Mac mac.6 downloads. See the [integration review](../2026-10-16-gemini-integration-review.md#english) for model boundaries, compatibility and native acceptance.
 

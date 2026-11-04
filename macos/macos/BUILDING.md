@@ -1,3 +1,11 @@
+# 歷史建置流程 / Historical build pipeline
+
+**不要用本頁舊管線發布 5.7.3。Do not use this legacy pipeline to release 5.7.3.**
+
+現行建置／正式 gate 見 [Development](../../docs/development.md)，入口為 `integration/build.py`，Python 3.12.16；Windows x64 installer／portable、Mac ARM64 ZIP。最終原生驗收／平台發布狀態以對應 commit 的 CI 及 Release 附件為準。下方原版本、指令與數字保留作歷史重現，不表示現在支援 Universal／Intel 或採用舊依賴。
+
+---
+
 # Native macOS release building (V5.6.0 mac.8)
 
 The original V5.5.4 mac.1 package passed byte-level checks but failed Apple's native deep

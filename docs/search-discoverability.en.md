@@ -1,5 +1,7 @@
 # Facility Studio search visibility and scenario verification
 
+**5.7.3 navigation update / 導覽更新:** [Standalone PV / 獨立真空](guides/gas-vacuum.en.md) and [liquid/pure-water piping / 液體純水](guides/water.en.md) now have independent entries. Below, dated search experiments and counts remain historical, not new release validation. [Status](verification/5.7.3-release-acceptance.md).
+
 [繁體中文](search-discoverability.md) · [English home](../README.en.md) · [Documentation](README.en.md)
 
 Three questions are separate: can the content solve a problem, does a web search return this repository, and would another user's ChatGPT recommend it? Improving public descriptions/examples does not change ChatGPT's recommendation mechanism.

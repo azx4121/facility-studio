@@ -1,4 +1,6 @@
-# Facility Studio 5.7.3 測試版
+# Facility Studio 5.7.3
+
+**5.7.3 操作手冊。此版本的原生驗收與各平台發布狀態，以對應 commit 的 CI 紀錄及 Release 附件為準；只有對應 Release 已提供平台成品及 SHA256 時，該平台下載才有效。** Windows x64 安裝版／portable；Mac 僅 Apple Silicon ARM64 ZIP，不是 Universal、Intel 或 DMG。預設資料目錄為家目錄 `Facility Studio Data-5.7.3`，啟動記錄為其內 `啟動與驗收記錄.log`；保留舊版／preview 資料，不自動搬移或覆寫。升級前備份並用副本匯入／重算；回退用舊程式及舊備份。
 
 本版修正簡易工具、完整工作台及單機空調箱的護鎖與警告顯示：
 
@@ -14,7 +16,7 @@
 
 本版使用獨立名稱與資料目錄，不替換原本的 App 或專案。介面預設繁體中文。
 
-1. Mac 解壓後開啟「Facility Studio 5.7.3 測試版.app」。Windows 使用新的空目錄安裝，或完整解壓 Portable 資料夾後開啟 EXE。
+1. Mac 解壓後開啟「Facility Studio 5.7.3.app」。Windows 使用新的空目錄安裝，或完整解壓 Portable 資料夾後開啟 EXE。
 2. 左側「PV 真空快算」可直接輸入標準氣體流量與絕對壓力，不切換完整工作台。標準量與管內實際量不同；換單位會保持原物理量。
 3. 左側「液體／純水管路」選介質、材料與流量。提供管徑、內徑、流速、壓損、物性及保溫結果。從冷熱水頁按「液體與管材選擇」可帶入流量；不會替你更換介質、材料或物性來源。化學液體或混合廢液缺少可靠工況資料時會要求密度、比熱、動力黏度與來源，不沿用水的數值。
 4. 改變介質、濃度或操作溫壓時，供應商物性來源需重新確認；高流速、過高壓損或不成立的管壁尺寸會在原頁提醒或阻擋。
@@ -25,4 +27,6 @@
 9. 保溫同時使用管外徑、液體溫度、環境溫濕度、導熱係數、外表面熱傳、允許熱損及契約最小厚度。顯示厚度 t 與外表面溫度；外徑未知時需補實測或產品資料，不能把內徑當外徑。
 10. 主工作台「進階工程設定」保留盤管與冬季、水路物性及設備用電連動條件。單機 AHU 可用幾何盤管性能計算核對冷量、乾球與含濕比是否同時可達。
 
-本次為獨立候選版；正式發布須完成工程資料、既有回歸與跨平台成品驗收。詳細測試證據及接續審查清單另附於開發交接資料，不混入工程計算報告。
+5.7.3 的最終成品驗收證據須對應精確來源 commit 與成品雜湊，既有 preview 通過紀錄不能轉用。正式發布須完成工程資料、既有回歸與跨平台成品驗收。請在 https://github.com/azx4121/facility-studio/releases 核對該平台的 CI、來源身份、驗收報告與 SHA256；測試證據不混入工程計算報告。
+
+正式入口在內部設定專屬資料變數 `FACILITY_STUDIO_DATA`，不改寫系統 `LOCALAPPDATA`；這不是使用者預先設定該變數即可覆寫預設路徑的承諾。 / The entry sets the dedicated `FACILITY_STUDIO_DATA` variable internally without rewriting system `LOCALAPPDATA`; this does not promise that presetting that variable overrides the default.

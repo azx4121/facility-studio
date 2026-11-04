@@ -1,3 +1,54 @@
+# Facility Studio 5.7.3 開發、建置與發布 / Development
+
+[首頁](../README.md) · [English](#english) · [正式驗收狀態](verification/5.7.3-release-acceptance.md)
+
+## 現行建置契約
+
+正式化來源以 [integration/build.py](../integration/build.py) 為入口，不能使用下方歷史 Windows 3.13／Mac Universal 發布管線。原生建置使用 **Python 3.12.16**；[requirements.lock.txt](../integration/requirements.lock.txt) 固定套件版本，但不是所有下載成品的 artifact hash-lock。另核對實際來源、下載依賴及包內授權，不能只因名稱叫 lock 就宣稱位元組可重現。
+
+在對應 Windows x64／Mac Apple Silicon ARM64 原生主機、隔離環境且安裝鎖定依賴後，於 repo 根目錄執行：
+
+```sh
+python integration/build.py --output build/formal-5.7.3
+```
+
+兩平台來源分別在 `windows/facility_studio` 與 `macos/facility_studio`；保持平台同步允許清單，不整份覆蓋未核實的平台檔。成品入口由 `integration/entry.py` 提供，舊 `Facility_Studio_V5_5.py` 僅仍供來源 CLI／歷史流程。正式身份為 5.7.3，PE／NSIS 與 Mac build 為 5.7.3.2；Mac bundle `com.facilitystudio.release573`。預設資料為家目錄的 `Facility Studio Data-5.7.3`，保留舊資料。
+
+## 舊發布入口退役 / Retired release routes
+
+`windows-offline-release.yml`、`macos-native-release.yml` 與 `public-downloads-maintenance.yml` 三條 legacy workflow 均移除 push 觸發，手動執行以 exit 1 阻止舊發布／資產清理。兩個舊 publisher 只失敗退出，不做網路動作。保留歷史資產，不能因正式合併順便清除舊 ZIP。 / All three legacy workflows have no push trigger and fail manual dispatch with exit 1. Both legacy publishers fail without network actions; historical ZIPs are preserved.
+
+## 測試與正式 gate
+
+- 每個來源平台使用獨立 Python 程序；integration 測試指定 `FACILITY_TEST_PLATFORM=windows` 或 `macos`，不得把硬編碼 Mac 的測試算作 Windows 證據。
+- 跑既有 aggregate 回歸、安全／工程報表、雙語、資料遷移、來源同步，以及 `integration/test_*.py` 的適用測試。涵蓋 C2、BF/ADP、降冰水診斷、抽速、NP、DI、AHU來源鎖、五欄規範、U、濕球、配光、資料保存及真實視窗幾何。
+- GUI 測試需真實 Tk／顯示服務。Linux/Xvfb 只證明來源測試，不能證明 Windows win32 或 Mac aqua 原生成品。缺顯示或 skip 不能算必需原生測試通過。
+- 工程／安全 suite 有失敗必須非零 exit。用負向案例確認錯版本、錯 suite、來源模式、缺 check、偽造 source hash 均被拒絕。
+- 每份 frozen report 必須綁定精確 commit、來源 manifest digest、suite、正式版本與必需 check 集合。manifest 核對實際打包 input 集合與 bytes，不只 HEAD 字串；未追蹤／ignored 產品檔不可繞過。非產品測試 evidence 排除須明列。
+- Windows 相同 portable／installer 必須在 2022 build host 與 2025 第二主機重驗，無外部 Python、應用內離線 hook、四項真實視窗幾何、空目錄安裝及保留使用者檔的卸載。不得為測試修改 OS 防火牆。
+- Mac 本次僅 ARM64 ZIP：同版環境、frozen acceptance、GUI／選單／語系／存取／教學與包內授權、deep/strict codesign 完整性。ad-hoc 不等於 Developer ID 或公證。
+- 最終正式 tree 重建與重測，不沿用 preview PASS。若 merge 改 commit，重驗最終身份或提供明確相同 tree 與 provenance 規則。
+- 候選全綠才合併；新 tag／draft Release 綁驗過的 commit，核對平台、資產大小、SHA256、文件後公開。若 main 改變，停止發布過期 commit。發布後回讀與下載驗 hash。不得 force push、移舊 tag 或覆寫歷史 binary。
+
+最終證據依[驗收格式](verification/5.7.3-release-acceptance.md)放在對應 Release／附件，綁定精確 commit、平台與成品雜湊；不要為了回填通過狀態修改已凍結的來源或隨包文件。若修改任何來源，須重新建立並驗證其身份。測試清單及實際命令以當前 workflow／測試來源為準；本頁不是本輪通過紀錄。來源、打包、安裝、原生執行與公開下載是不同驗收層。
+
+<a id="english"></a>
+## English
+
+Use `integration/build.py --output build/formal-5.7.3` on native Windows x64 or Mac ARM64 with Python **3.12.16** and the integration requirements. Dependency versions are pinned, but this is not a complete artifact hash-lock. Review actual inputs, dependencies and bundled licenses. The old builders below are historical, not the 5.7.3 release path.
+
+Formal identity is 5.7.3, numeric Windows/Mac build 5.7.3.2, Mac bundle `com.facilitystudio.release573`, and default data `~/Facility Studio Data-5.7.3`. Preserve prior data. Run each source tree in a fresh process with `FACILITY_TEST_PLATFORM=windows|macos`, covering established regression suites and applicable integration tests, including C2/BF, airflow diagnostics, vacuum speed, NP, DI, source locking, specifications, U, wet bulb, lighting and real geometry. Required native GUI checks cannot pass through skips or Linux/Xvfb results.
+
+Reports must bind exact commit, complete input manifest/digest, suite, version and required checks. Negative tests must reject forged hashes, missing checks, wrong identity and source-mode results. Compare actual packaged bytes and input sets, including untracked/ignored product files. Document permitted non-product evidence exclusions.
+
+Windows requires the same installer/portable packages on native 2022/2025 hosts without external Python, application-level offline checks, geometry, empty-directory protection and user-file-preserving uninstall. Do not change OS firewall settings. Mac requires final ARM64 ZIP execution, GUI/menu/language/save/help/license checks and deep/strict signature integrity; no Intel/Universal/DMG claim. Ad-hoc integrity is not notarization.
+
+Build and verify the final formal tree. Do not transfer preview passes. Keep commit/tree provenance across merges, publish a new verified tag/draft and final SHA256 only after gates pass, and download/read back published assets. Stop if main advances unexpectedly. Never move tags, rewrite history or replace historical binaries. Record final evidence in matching Release attachments using the acceptance schema, bound to exact commit/platform/artifact hashes. Do not edit frozen source or packaged manuals merely to replace a status label; any source change requires a newly verified identity.
+
+## 歷史開發文件 / Historical development notes
+
+以下原命令、數字與版本是舊版流程記錄，保留供重現歷史，不是現行建置／發布指令。「當前／本版」等字樣均指該歷史修訂。 / Commands, numbers and “current” claims below refer to their original historical revision only.
+
 # 開發、建置與測試
 
 [首頁](../README.md) · [文件中心](README.md) · [English](#english)
@@ -169,3 +220,4 @@ python tools/refresh_tutorial.py --platform windows   # macOS 同理；再複製
 
 平台差異集中在 `facility_studio/platform_support.py`（資料目錄、字型、滾輪、Mac 快捷鍵、導覽按鈕種類）。驗收紀錄見[本輪驗收](2026-10-31-win9-mac7-acceptance.md)。原生延伸稽核數量：2,188 獨立工程數值、406 報告語意、28 匯出／PV 操作、142 延伸入口／介面。
 
+正式入口在內部設定專屬資料變數 `FACILITY_STUDIO_DATA`，不改寫系統 `LOCALAPPDATA`；這不是使用者預先設定該變數即可覆寫預設路徑的承諾。 / The entry sets the dedicated `FACILITY_STUDIO_DATA` variable internally without rewriting system `LOCALAPPDATA`; this does not promise that presetting that variable overrides the default.
