@@ -26,7 +26,7 @@ def validate_archive(executable, root, expected_manifest, *, allow_non_release=F
     for name in ("第三方授權.txt", "Build_Manifest.json", "python3.dll"):
         if name not in entries or not archive.extract(entries[name]):
             raise RuntimeError("Missing embedded single-file dependency: " + name)
-    notice = archive.extract(entries["第三方授權.txt"]).decode("utf-8")
+    notice = archive.extract(entries["第三方授權.txt"]).decode("utf-8").replace("\r\n", "\n")
     for source in ("LICENSE", "LICENSE_LEGACY_MIT", "THIRD_PARTY_NOTICES.md",
                    "macos/macos/PsychroLib-LICENSE.txt"):
         if (root / source).read_text(encoding="utf-8") not in notice:

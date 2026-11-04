@@ -15,7 +15,7 @@ def make_archive(tmp_path, *, corrupt_resource=False, corrupt_commit=False, miss
     content = {
         'integration/README_繁體中文.md': '操作說明 Ω',
         'integration/README_English.md': 'User guide',
-        'LICENSE': 'main license',
+        'LICENSE': 'main license\nsecond line',
         'LICENSE_LEGACY_MIT': 'legacy terms',
         'THIRD_PARTY_NOTICES.md': 'third-party terms',
         'macos/macos/PsychroLib-LICENSE.txt': 'PsychroLib terms',
@@ -34,7 +34,7 @@ def make_archive(tmp_path, *, corrupt_resource=False, corrupt_commit=False, miss
         embedded['commit'] = 'c' * 40
     notice = '\n'.join(text for name, text in content.items() if not name.startswith('integration/'))
     files = {'Build_Manifest.json': json.dumps(embedded).encode(),
-             '第三方授權.txt': b'incomplete license' if missing_license else notice.encode(),
+             '第三方授權.txt': b'incomplete license' if missing_license else notice.replace('\n', '\r\n').encode(),
              'python3.dll': b'synthetic DLL',
              'facility_studio/resources/測試.bin': b'altered' if corrupt_resource else resource,
              '操作說明_繁體中文.md': content['integration/README_繁體中文.md'].encode(),
