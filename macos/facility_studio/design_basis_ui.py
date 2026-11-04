@@ -1,14 +1,16 @@
 """Traditional Chinese document-register UI, with immutable saved revisions."""
 from pathlib import Path
 from uuid import uuid4
+from tkinter import Text as EditableText
 
-from .localized_tk import tk, ttk, filedialog, messagebox
+from .localized_tk import tk, ttk, filedialog, messagebox, attach_window
 from . import design_basis as model
 
 
 class DesignReviewWindow:
     def __init__(self, parent):
         self.win = tk.Toplevel(parent)
+        attach_window(self.win)
         self.win.title("Facility Studio｜設計依據與交付審查")
         self.win.geometry("1000x760")
         self.win.minsize(820, 650)
@@ -38,7 +40,9 @@ class DesignReviewWindow:
             ttk.Entry(basis_tab, textvariable=var).grid(row=row, column=1, sticky="ew", pady=4)
         ttk.Label(basis_tab, text="規範每行一筆，以 ｜ 分隔：名稱｜版次｜條號｜適用範圍｜來源網址或文件編號",
                   wraplength=740).grid(row=9, column=0, columnspan=2, sticky="w", pady=(14, 4))
-        self.standards = tk.Text(basis_tab, height=6, wrap="word")
+        # User-authored standards, including their full-width separators, are
+        # stored verbatim. Localized Text is only suitable for report views.
+        self.standards = EditableText(basis_tab, height=6, wrap="word")
         self.standards.grid(row=10, column=0, columnspan=2, sticky="nsew")
         basis_tab.rowconfigure(10, weight=1)
         ttk.Label(basis_tab, text="這些是專案指定的適用依據；附件應另保存授權可用的規範／業主文件。",

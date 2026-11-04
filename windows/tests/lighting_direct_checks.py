@@ -14,7 +14,7 @@ import sys
 import tempfile
 from types import SimpleNamespace
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -78,6 +78,51 @@ class DirectLightingChecks(unittest.TestCase):
             self.assertAlmostEqual(point_illuminance(p, fixture(), x, y, 1), intensity * factor)
         self.assertAlmostEqual(point_illuminance(p, fixture(yaw_deg=90), 4, 2, 1), 400 * factor)
         self.assertAlmostEqual(point_illuminance(p, fixture(yaw_deg=90), 2, 4, 1), 100 * factor)
+
+    def test_1995_c90_c270_direct_axes_yaw_and_export_provenance(self):
+        p = parse_photometry(ies(c=(90, 180, 270), g=(0, 45, 90),
+                                 rows=[[100, x, x] for x in (200, 300, 400)],
+                                 version='1995'), 'ies', 'synthetic-1995.ies')
+        factor = (2 / math.sqrt(8)) / 8
+        for x, y, intensity in ((4, 2, 300), (2, 4, 200), (0, 2, 300), (2, 0, 400)):
+            self.assertAlmostEqual(point_illuminance(p, fixture(), x, y, 1), intensity * factor)
+        self.assertAlmostEqual(point_illuminance(p, fixture(yaw_deg=90), 4, 2, 1), 400 * factor)
+        self.assertAlmostEqual(point_illuminance(p, fixture(yaw_deg=90), 2, 4, 1), 300 * factor)
+        result = calculate_direct({'P1': p}, scene())
+        exported = json.loads(json.dumps(result, allow_nan=False))
+        self.assertEqual(exported['sources']['P1']['source_sha256'], p.source_sha256)
+        self.assertEqual(exported['sources']['P1']['metadata']['source_c_angles_deg'], [90, 180, 270])
+        self.assertEqual(exported['sources']['P1']['metadata']['symmetry_plane'], 'C90-C270')
+        self.assertIn(p.source_sha256, direct_html(result))
+        self.assertGreater(len(grid_csv(result)), 100)
+
+    def test_1995_c90_c270_import_controller_repeats_cancel_and_invalid_file(self):
+        # Exercise the real import controller without requiring a display.
+        obj = DirectLightingWindow.__new__(DirectLightingWindow)
+        obj.win = None
+        obj.sources, obj.next_source_id = {}, 1
+        obj.source_tree, obj.source_choice, obj.invalidate = Mock(), Mock(), Mock()
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder)/'synthetic-1995.ies'
+            text = ies(c=(90, 180, 270), rows=[[100, x] for x in (10, 30, 70)], version='1995')
+            path.write_text(text, encoding='utf-8')
+            with patch('facility_studio.lighting_layout_ui.filedialog.askopenfilename', return_value=str(path)):
+                obj.import_source()
+                source = obj.sources['P1']
+                obj.import_source()
+                self.assertEqual(obj.sources, {'P1': source})
+                self.assertEqual(obj.next_source_id, 2)
+                obj.source_tree.insert.assert_called_once()
+                path.write_text(text.replace('1995', '2002'), encoding='utf-8')
+                with self.assertRaisesRegex(ValueError, 'LM-63-1995'):
+                    obj.import_source()
+                self.assertEqual(obj.sources, {'P1': source})
+                self.assertEqual(obj.next_source_id, 2)
+            obj.invalidate.reset_mock()
+            with patch('facility_studio.lighting_layout_ui.filedialog.askopenfilename', return_value=''):
+                obj.import_source()
+            obj.invalidate.assert_not_called()
+            self.assertEqual(obj.sources, {'P1': source})
 
     def test_additivity_multiplier_and_maintenance_once(self):
         single = calculate_direct({"P1": constant()}, scene(maintenance=1))
@@ -300,6 +345,40 @@ class DirectLightingChecks(unittest.TestCase):
                 obj.export("json")
             self.assertEqual(path.read_text(encoding="utf-8"), "preserve existing report")
             self.assertEqual(list(Path(tmp).iterdir()), [path])
+
+    @unittest.skipUnless(os.environ.get("FACILITY_DIRECT_GUI") == "1", "Native Tk check requires an explicit display-enabled run")
+    def test_native_1995_c90_c270_import_calculate_and_export(self):
+        from facility_studio.localized_tk import tk
+        root = tk.Tk()
+        root.withdraw()
+        try:
+            window = DirectLightingWindow(root)
+            with tempfile.TemporaryDirectory() as folder:
+                source = Path(folder)/'synthetic-1995.ies'
+                source.write_text(ies(c=(90, 180, 270), rows=[[100, x] for x in (10, 30, 70)], version='1995'), encoding='utf-8')
+                with patch('facility_studio.lighting_layout_ui.filedialog.askopenfilename', return_value=str(source)):
+                    window.import_source()
+                    window.import_source()
+                self.assertEqual(len(window.sources), 1)
+                self.assertEqual(window.sources['P1'].metadata['symmetry_plane'], 'C90-C270')
+                for key, value in scene().items():
+                    if key != 'fixtures':
+                        window.variables[key].set(str(value))
+                window.schedule.insert('1.0', 'ID,x,y,z,yaw,scale\nP1,2,2,3,0,1\n')
+                root.update()
+                window.calculate()
+                root.update()
+                self.assertGreater(window.result['summary']['average_lux'], 0)
+                for extension in ('json', 'csv', 'html'):
+                    target = Path(folder)/('result.'+extension)
+                    with patch('facility_studio.lighting_layout_ui.filedialog.asksaveasfilename', return_value=str(target)):
+                        window.export(extension)
+                    self.assertGreater(target.stat().st_size, 0)
+                data = json.loads((Path(folder)/'result.json').read_text(encoding='utf-8'))
+                self.assertEqual(data['sources']['P1']['metadata']['symmetry_plane'], 'C90-C270')
+            window.win.destroy()
+        finally:
+            root.destroy()
 
     @unittest.skipUnless(os.environ.get("FACILITY_DIRECT_GUI") == "1", "Native Tk check requires an explicit display-enabled run")
     def test_native_window_import_edit_calculate_repeat_and_export(self):

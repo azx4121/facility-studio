@@ -4416,3 +4416,42 @@ TEXT.update({
     '已核對為完整需求，非僅已知小計': 'Confirmed complete demand\n(not only a known subtotal)',
     '目前全部列': 'All current rows',
 })
+
+# Engineering feasibility is distinct from a calculated demand placeholder.
+TEXT.update({
+    "C2 再冷（不可達需求點）": "C2 cooling (unattainable demand point)",
+    "C2 ADP／BF 不可行：": "C2 ADP/BF infeasible: ",
+    "C2 ADP／BF 不可行；C2 與後續狀態僅為需求點，非可達出風。": "C2 ADP/BF infeasible; C2 and downstream states are demand points, not attainable outlet conditions.",
+    "；C2 與後續狀態僅為需求點，非可達出風。": "; C2 and downstream states are demand points, not attainable outlet conditions.",
+    "指定氣載所需實際抽速大於泵入口抽速，無法維持所填工作壓力。": "Required pumping speed for the specified gas load exceeds pump inlet speed; the specified pressure cannot be maintained.",
+    "指定氣載所需抽速 ": "Required pumping speed for the gas load ",
+})
+
+TEXT.update({
+    "NP 自動加總保留手動馬達 ": "NP auto-sum retains manually entered motors: ",
+    " HP；新增設備輸入仍以 kW 計入。": " HP; added equipment input remains in kW.",
+    "合併設計電流取負載規則與下限的較大值；下限＝手動設計 ": "Combined design current is the greater of the load-rule result and the floor; floor = manual design ",
+    " A＋新增運轉 ": " A + added running current ",
+})
+
+# Airflow search uses the same complete C2 reachability as the final coil.
+TEXT.update({
+    "C2 ADP／BF 與出風可達條件": "C2 ADP/BF and outlet reachability",
+    "搜尋範圍內未找到符合 C2 ADP／BF、出風與再熱設定的送風量：": "No airflow satisfying C2 ADP/BF, outlet conditions and the reheat setting was found within the search range: ",
+})
+
+TEXT.update({"C2 仍有淨除濕需求，但含濕差已低於盤管求解解析度；不能視為旁通可行。": "C2 still has a net moisture-removal load, but the humidity-ratio difference is below coil-solver resolution; bypass cannot be considered feasible."})
+
+# Airflow advice is conditional on complete air-state and coil reachability.
+TEXT.update({
+    "送風飽和／室內露點條件": "supply saturation / room dew-point limit",
+    "；固定目前室內溫濕度與零產濕條件時，允許風量上限所需的送風溫度仍低於室內露點，僅降低冰水供水無法達到此風量門檻；請重新檢討室內目標或系統方案，並重算完整送風與盤管可達性。":
+        "; at the current room temperature and humidity with zero moisture generation, the supply temperature required even at the airflow limit remains below the room dew point. Colder chilled water alone cannot meet this airflow limit. Reassess the room targets or system design and recalculate complete supply-air and coil reachability.",
+    "；尚未驗證可滿足此門檻的冰水供水溫度，不能保證僅降水溫即可改善；請一併核對室內目標、送風露點、盤管 ADP／BF 與再熱設定，並重新計算。":
+        "; no chilled-water temperature has been verified to meet this limit, so colder water alone is not a guaranteed remedy. Check the room targets, supply dew point, coil ADP/BF and reheat settings together, then recalculate.",
+})
+
+# Lighting U is entered by the user; room index K only supports catalog lookup.
+TEXT.update({
+    "手動輸入利用係數 U（無因次）=": "Manually entered utilization factor U (dimensionless)=",
+})

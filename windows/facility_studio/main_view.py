@@ -699,7 +699,7 @@ class MainView:
         if e.widget.winfo_toplevel() != self.root:
             return
         w = e.widget
-        if isinstance(w, (tk.Text, ttk.Treeview, ttk.Combobox)):
+        if isinstance(w, (tk.Text, ttk.Treeview)):
             return
         if self.current == 8:
             return
@@ -749,8 +749,8 @@ class MainView:
             pad = child.pack_info()["pady"]
             side_need += child.winfo_reqheight() + (sum(map(int, pad)) if isinstance(pad, (tuple, list)) else 2 * int(pad))
         need = max(560, sum(w.winfo_reqheight() for w in bands) + self.FORM_MIN_HEIGHT, side_need)
-        if self.root.minsize()[1] != need:
-            self.root.minsize(880, need)
+        from .window_geometry import set_main_window_minimum
+        set_main_window_minimum(self.root, Theme.px(900), need, "workbench")
 
     def sidebar_layout(self, event=None):
         if event is not None and event.widget != self.root:

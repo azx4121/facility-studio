@@ -15,7 +15,7 @@ CSV/JSON 是結果和追溯交付；此版尚未提供專案 JSON 重新載入�
 
 ## 支援的嚴格子集
 
-- IES：UTF-8/ASCII、LM-63-1995 或 2002、Type C、`TILT=NONE`。尺寸 feet/metres 轉成 m。接受 C0 單一旋轉對稱、0–90、0–180 或0–360；垂直角接受完整下半球、上半球或全球。未提供的半球為零，不鏡射。負數形狀尺寸、90–270 特殊方向、其他版本和 TILT 不支援。
+- IES：UTF-8/ASCII、LM-63-1995 或 2002、Type C、`TILT=NONE`。尺寸 feet/metres 轉成 m。接受 C0 單一旋轉對稱、0–90、0–180 或 0–360；1995 另接受 90–270 的平面對稱格式，保留原檔方向並只鏡射缺少的半圓，不旋轉配光。2002 已取消此角域，因此宣告 2002 的 90–270 檔仍拒絕。垂直角接受完整下半球、上半球或全球。未提供的半球為零，不鏡射。負數形狀尺寸、其他版本和 TILT 不支援。
 - LDT：UTF-8/ASCII、單一燈組、Isym 0/1/2/4、均勻全圓 C 平面清單、測量傾角 0。Isym 3、多燈組、Dc=0（包括旋轉對稱單平面）及廠商延伸格式尚未支援。拒絕，不猜修格式。
 - 光強資料需有限、非負、矩陣數量正確，角度遞增，重合極點／C0-C360 接縫一致。只接受精確的半球／對稱端點，不把近零角誤當零。
 - 讀取上限 4 MiB，展開光強矩陣最多500,000個值。全案匯入矩陣合計最多2,000,000個值；每案最多32來源、200盞，網格2–80點／軸。未實作遠場距離認證；過近或大型燈具要另做驗證。檔案尺寸全為零時會提醒其為點光源記法，不能證明實體尺寸或遠場有效距離。0.01 m 只是數值幾何下限，不是精度保證。
@@ -46,3 +46,11 @@ IES 的光強是 cd，乘檔案 candela multiplier 與 ballast factor；不再�
 驗收包含常數100 cd、正下方2m＝25lx、距離倍增照度四分之一、斜入射餘弦、非對稱 C0/C90 及 yaw、兩燈加總、倍率／維護只乘一次、半球缺失、矩形立體角積分收斂、來源追溯、HTML逸出、雙語與存檔護鎖。合成資料不是原廠驗證；[合成 IES](examples/direct-lighting/synthetic-constant-1000cd.ies)只供軟體測試，不能用於工程選型。原生 GUI／瀏覽器列印仍需在有顯示環境的候選版驗收。
 
 C 平面方向另以 [Radiance source.cal 修正後的座標實作](https://www.radiance-online.org/cgi-bin/viewcvs.cgi/ray/src/cv/source.cal?revision=2.12&view=markup)、[Viso IES/LDT 軸向圖](https://data.visosystems.com/content/manuals/guidelines_dimensions%20of%20lighting%20fixtures.pdf)及[AGi32 aiming 定義](https://docs.agi32.com/PhotometricToolbox/Content/Aiming_Parameters.htm)核對。IES 與 LDT 保留各自檔案 C0/C90，不猜測燈殼長軸，也不對非對稱配光做鏡射。JSON 明列座標慣例。
+
+### 1995 年版 90–270 匯入修正
+
+此角域在 LM-63-1995 合法，LM-63-2002 第 4 節才將它移除。舊版匯入器把兩版本一律限制為 C0 起始，會誤拒絕有效的 1995 檔案。修正按照 C90–C270 平面對稱：C0 取 C180、C45 取 C135、C315 取 C225；C90 與 C270 各自保留，不強制相等。[Radiance 的 IES 匯入原始碼](https://www.radiance-online.org/cgi-bin/viewcvs.cgi/ray/src/cv/ies2rad.c?revision=2.38&view=markup)亦明確處理此對稱面。
+
+不等距角度表未量測 C180 時，C0 接縫使用相同的線性內插，不補造量測。JSON 追溯資料記錄原始 C 角度表及對稱面；原始 IES 檔案和 SHA-256 不變。回歸使用合成資料，涵蓋不相等的 C90/C270、37×37 角度矩陣、不等距角度、yaw、重複匯入、取消和匯出，不隨程式公開原廠附件。
+
+English: LM-63-1995 Type C files may use the 90–270 degree horizontal domain, which LM-63-2002 removed. The importer now reflects only the missing half about C90–C270 while preserving file axes and measured rows. C0 maps to C180, C45 to C135 and C315 to C225. A missing C180 sample is linearly interpolated at the periodic seam. Files declaring 2002 with this legacy domain remain rejected. Original bytes and hashes are unchanged; source angles and symmetry are retained in JSON metadata. Synthetic regression data covers asymmetric endpoints, nonuniform grids, scaling, rotation and the import/export workflow.

@@ -121,14 +121,18 @@ def compare_inputs(inputs, case="原版預設合成案例"):
             h_ref = psychrolib.GetMoistAirEnthalpy(point["t"], w_ref) / 1000
             return w_ref, h_ref
 
+        # Seasonal requirements are actual flow at each season's target supply
+        # state. The common flow/basis fields are inactive drafts in this mode.
+        seasonal = result["inputs"]["target_mode"] == "主案分季需求"
         basis = (
             block["target"]
-            if result["inputs"]["flow_basis"].startswith("送風")
+            if seasonal or result["inputs"]["flow_basis"].startswith("送風")
             else block["oa"]
         )
+        flow = result["inputs"][season + "_flow" if seasonal else "flow"]
         basis_w, _ = reference_state(basis)
         volume = psychrolib.GetMoistAirVolume(basis["t"], basis_w, pressure)
-        reference_mass = float(result["inputs"]["flow"]) / 3600 / volume
+        reference_mass = float(flow) / 3600 / volume
         wa, ha = reference_state(block["oa"])
         ws, hs = reference_state(block["sa"])
         net_air_heat = (

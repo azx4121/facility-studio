@@ -56,6 +56,11 @@ jobs:
           FACILITY_DIRECT_GUI=1 xvfb-run -a -s '-screen 0 1920x1440x24' python windows/tests/lighting_direct_checks.py
           xvfb-run -a -s '-screen 0 1920x1440x24' python tools/verify_full_air_chart.py --platform macos --gui --output simple-evidence/full-air-chart-macos.json
           xvfb-run -a -s '-screen 0 1920x1440x24' python tools/verify_full_air_chart.py --platform windows --gui --output simple-evidence/full-air-chart-windows.json
+      - name: Reviewed AHU, design register and DI template regressions
+        run: |
+          for source_platform in macos windows; do
+            FACILITY_TEST_PLATFORM="$source_platform" FACILITY_REQUIRE_DISPLAY=1 xvfb-run -a -s '-screen 0 1920x1440x24' python -m pytest integration/test_reviewed_ui_defects.py integration/test_di_template.py -q --junitxml="simple-evidence/reviewed-ui-$source_platform.xml"
+          done
       - name: Complete existing engineering and interface regression
         env:
           FACILITY_STUDIO_PREFERENCES: /tmp/simple-full-preferences.json

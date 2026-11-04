@@ -144,10 +144,10 @@ with tempfile.TemporaryDirectory(prefix="facility551_") as td, patch.dict(
         "seasonal_preset_retains_flows",
         flows == [c.vars[s + "_flow"].get() for s in ["summer", "winter"]],
     )
-    check("preset_clears_link_claim", c.vars["linked_main_hash"].get() == "尚未連動")
+    check("preset_invalidates_link_claim", c.vars["linked_main_hash"].get().startswith("stale:") and c.source_project_id == a.project_id)
     relink()
     c.vars["summer_sa_t"].set("21")
-    check("manual_target_clears_link", c.vars["linked_main_hash"].get() == "尚未連動")
+    check("manual_target_invalidates_link", c.vars["linked_main_hash"].get().startswith("stale:") and c.source_project_id == a.project_id)
     relink()
     c.vars["h1_kw"].set("500")
     c.calculate()
@@ -163,7 +163,9 @@ with tempfile.TemporaryDirectory(prefix="facility551_") as td, patch.dict(
     check("cached_report_includes_staleness", "已過期" in nm_report(c.result))
     c.target_preset(50)
     c.calculate()
-    check("custom_target_report_clear", "未宣告" in nm_report(c.result))
+    check("custom_target_report_stale", "已過期" in nm_report(c.result))
+    c.make_independent()
+    check("explicit_independent_report_clear", "未宣告" in nm_report(c.result))
     c.close(force=True)
     check("no_unexpected_dialogs", not errors)
     r.destroy()

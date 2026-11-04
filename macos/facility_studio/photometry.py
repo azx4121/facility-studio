@@ -1,7 +1,8 @@
 """Strict, read-only far-field photometry import. No file repair or external TILT IO.
 
 File C0 is retained, not inferred to be the housing's front or long axis.
-Supported: LM-63-1995/2002 Type C TILT=NONE; EULUMDAT one lamp set,
+Supported: LM-63-1995/2002 Type C TILT=NONE, including the 1995-only
+C90-C270 symmetry domain; EULUMDAT one lamp set,
 Isym 0/1/2/4, uniform C grid, zero measurement tilt. Dc=0 is unsupported
 even with Mc=1/Isym=1; no special interpretation is guessed. Dimensions: width,
 length, height in metres. Negative IES shape dimensions are not supported.
@@ -105,10 +106,22 @@ def _expand(c: list[float], rows: list[list[float]], symmetry: int):
             images = [0.0, 360.0]
         elif symmetry == 2:
             images += [360-angle]
+        elif symmetry == 3:
+            # LM-63-1995: reflect across the C90-C270 plane, not a 90-degree
+            # rotation. C90 and C270 remain independent measured directions.
+            images += [(180-angle) % 360]
         elif symmetry == 4:
             images += [180-angle, 180+angle, 360-angle]
         for image in images:
             result[round(image, 10)] = row
+    if symmetry == 3 and 0.0 not in result:
+        # A nonuniform 90-270 grid need not measure C180 (and hence C0).
+        # Split the periodic linear interval at zero without changing its
+        # interpolation or inventing a measured row.
+        first, last = min(result), max(result)
+        fraction = (360-last)/(first+360-last)
+        result[0.0] = [a*(1-fraction)+b*fraction
+                       for a, b in zip(result[last], result[first])]
     result[360.0] = result[0.0]
     angles = sorted(result)
     return angles, [result[a] for a in angles]
@@ -159,9 +172,13 @@ def _ies(text: str):
     c = [_num(t, 'C', 0, 360) for t in tokens[13+nv:13+nv+nh]]
     _gamma(g)
     _angles(c, 'C', 360)
-    if c[0] != 0:
-        raise PhotometryError('IES C angles must start at 0; 90-270 orientation is unsupported')
-    if nh == 1:
+    if c[0] == 90 and c[-1] == 270:
+        if meta['version'] != 'IESNA:LM-63-1995':
+            raise PhotometryError('IES C90-C270 symmetry is supported only for LM-63-1995; LM-63-2002 requires C0')
+        sym = 3
+    elif c[0] != 0:
+        raise PhotometryError('IES C angles must start at 0, or cover exactly 90-270 in LM-63-1995')
+    elif nh == 1:
         sym = 1
     elif c[-1] == 90:
         sym = 4
@@ -171,6 +188,8 @@ def _ies(text: str):
         sym = 0
     else:
         raise PhotometryError('IES horizontal domain must be 0, 0-90, 0-180, or 0-360')
+    if sym == 3:
+        meta.update(source_c_angles_deg=tuple(c), symmetry_plane='C90-C270')
     values = [_num(t, 'Candela', 0, MAX_CANDELA)*mult*bf for t in tokens[13+nv+nh:]]
     rows = [values[i*nv:(i+1)*nv] for i in range(nh)]
     _matrix(c, g, rows)

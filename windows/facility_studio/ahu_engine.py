@@ -228,6 +228,10 @@ def _nm_season_base(i, season):
         c2["adp_req_c"] = c2_sol["adp_req_c"]
         c2["bf_req"] = c2_sol["bf_req"]
         c2["bf_min"] = c2_sol["bf_min"]
+        # An infeasible solver outlet is a demand placeholder, never an attainable state.
+        c2["feasible_adp"] = c2_sol["feasible_adp"]
+        c2["reason"] = c2_sol["reason"]
+        c2["path"] = c2_sol["path"]
     h2 = nm_heater("h2", c2out, pre_fan_t, m, i, p)
     sa = state_tw(h2["outlet"]["t"] + fanheat / (m * (1.006 + 1.86 * w2)), w2, p)
     evap = m * (washed["w"] - wash_in["w"]) * 3600
@@ -257,7 +261,7 @@ def _nm_season_base(i, season):
     else:
         nodes.append(("C1 預冷", c1out))
         add_h(h1)
-    nodes.extend([("水洗濕膜", washed), ("C2 再冷", c2out)])
+    nodes.extend([("水洗濕膜", washed), ("C2 再冷（不可達需求點）" if c2.get("feasible_adp") is False else "C2 再冷", c2out)])
     add_h(h2)
     nodes.extend([("EC 風機", sa), ("PTFE HEPA／送風", sa)])
     sf = 1 + float(i["sf"]) / 100
@@ -689,6 +693,10 @@ def nm_season(i, season):
         c2["adp_req_c"] = c2_sol["adp_req_c"]
         c2["bf_req"] = c2_sol["bf_req"]
         c2["bf_min"] = c2_sol["bf_min"]
+        # An infeasible solver outlet is a demand placeholder, never an attainable state.
+        c2["feasible_adp"] = c2_sol["feasible_adp"]
+        c2["reason"] = c2_sol["reason"]
+        c2["path"] = c2_sol["path"]
     evap = m * (washed["w"] - wash_in["w"]) * 3600
     nodes = [("OA 外氣", oa), ("初／中效濾網", oa)]
 
@@ -724,7 +732,7 @@ def nm_season(i, season):
         nodes.append(("水洗濕膜", washed))
     if steam_on:
         nodes.append(("電極蒸汽" if "電極" in i["humidifier"] else "電熱蒸汽", c2in))
-    nodes.append(("C2 再冷", c2out))
+    nodes.append(("C2 再冷（不可達需求點）" if c2.get("feasible_adp") is False else "C2 再冷", c2out))
     add_h(h2)
     nodes.extend([("EC 風機", sa), ("PTFE HEPA／送風", sa)])
     sf = 1 + n("sf") / 100
@@ -741,9 +749,11 @@ def nm_season(i, season):
         )
         adp = n(tag + "_in") + n(tag + "_adp")
         adpw = state_trh(adp, 100, p)["w"]
-        checks[tag.upper() + " 可達 ADP"] = c["air_kw"] <= 1e-08 or (
-            c["outlet"]["t"] >= adp - 1e-08
-            and c["outlet"]["w"] >= min(c["inlet"]["w"], adpw) - 1e-09
+        checks[tag.upper() + " 可達 ADP"] = c.get("feasible_adp", True) and (
+            c["air_kw"] <= 1e-08 or (
+                c["outlet"]["t"] >= adp - 1e-08
+                and c["outlet"]["w"] >= min(c["inlet"]["w"], adpw) - 1e-09
+            )
         )
     checks["送風乾球目標"] = abs(sa["t"] - target["t"]) <= 0.05
     checks["送風含濕量目標"] = abs(sa["w"] - target["w"]) <= 1e-07

@@ -254,7 +254,13 @@ def vacuum(data):
         regime = "黏滯流；需沿程壓力及層流／紊流校核"
     else:
         regime = "過渡流或短管；須使用適用導通率模型"
-    if effective and std / 60000 * std_p / p * t / std_t * 1000 > effective:
+    required = actual / 60
+    # At the stated operating conditions a passive line cannot provide more
+    # effective speed than the pump. This necessary bound applies in every regime;
+    # a load below pump speed is not proof that the pipe/pump system can deliver it.
+    if required > pump:
+        warnings.append("指定氣載所需實際抽速大於泵入口抽速，無法維持所填工作壓力。")
+    elif effective is not None and required > effective:
         warnings.append("指定氣載所需實際抽速大於管路有效抽速，無法維持所填工作壓力。")
     if v > limit:
         warnings.append(f"PV 實際流速 {v:.2f} m/s 超過本案上限 {limit:g} m/s。")
@@ -263,7 +269,7 @@ def vacuum(data):
                 atmosphere_pa=atmosphere, standard_t_c=std_t-273.15, standard_p_pa=std_p,
                 temperature_c=t-273.15, length_m=length,
                 inner_mm=d*1000, velocity_mps=v, regime=regime, conductance_l_s=conductance,
-                effective_speed_l_s=effective, pump_speed_l_s=pump, warnings=warnings,
+                effective_speed_l_s=effective, pump_speed_l_s=pump, required_speed_l_s=required, warnings=warnings,
                 formula="Qactual=Qstd×Pstd/Pabs×T/Tstd；分子流長直圓管 C=12.1d³/L（cm、L/s、空氣20°C）；1/Seff=1/Sp+1/C。",
                 note="PV 在簡易工具內完成，不切換工作台。導通率只限明列適用條件；特氣／混合氣、管件與真空外壓強度另核。", source=LEYBOLD)
 

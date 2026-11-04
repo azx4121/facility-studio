@@ -731,10 +731,8 @@ class SimpleToolsApp:
         self.verification_active = False
         root.title("廠務簡易工具 V" + BUILD_VERSION)
         self.configure_style()
-        width = min(Theme.px(1440), max(Theme.px(980), root.winfo_screenwidth() - Theme.px(60)))
-        height = min(Theme.px(830), max(Theme.px(600), root.winfo_screenheight() - Theme.px(100)))
-        root.geometry(f"{width}x{height}+20+20")
-        root.minsize(Theme.px(900), Theme.px(600))
+        from .window_geometry import initialize_main_window
+        initialize_main_window(root, Theme.scale)
         app_icon(root)
         root.columnconfigure(1, weight=1)
         root.rowconfigure(1, weight=1)
@@ -855,9 +853,7 @@ class SimpleToolsApp:
         return self.active_page().calculate(True)
 
     def wheel(self, event):
-        if event.widget.winfo_toplevel() is not self.root or isinstance(
-            event.widget, ttk.Combobox
-        ):
+        if event.widget.winfo_toplevel() is not self.root:
             return
         page = self.active_page()
         ancestor = event.widget
@@ -865,8 +861,11 @@ class SimpleToolsApp:
             ancestor = getattr(ancestor, "master", None)
         if ancestor is None:
             return
-        delta = getattr(event, "delta", 0)
-        step = -3 if getattr(event, "num", 0) == 4 or delta > 0 else 3
+        from .platform_support import scroll_units
+
+        step = scroll_units(event)
+        if not step:
+            return
         page.canvas.yview_scroll(step, "units")
         return "break"
 
@@ -1072,9 +1071,9 @@ class SimpleToolsApp:
         return total
 
     def fit_window_to_sidebar(self):
-        self.root.minsize(Theme.px(900), max(Theme.px(600), self.sidebar_required_height()))
-        if self.root.winfo_height() < self.root.minsize()[1]:
-            self.root.geometry(f"{self.root.winfo_width()}x{self.root.minsize()[1]}")
+        from .window_geometry import set_main_window_minimum
+        set_main_window_minimum(self.root, Theme.px(900),
+                                max(Theme.px(600), self.sidebar_required_height()), "simple")
 
     def show_simple_tools(self):
         self.workbench_mode = False

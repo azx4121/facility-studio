@@ -641,13 +641,10 @@ def solve_c2_bypass(
     return feasible("reheat", warm_a, warm_t)
 
 
-def condition_air(i, enter, m, ts, ws, pre=True, *, season="summer"):
-    p = float(i["atm_kpa"])
-    cp = float(i["water_cp"])
+def _precoil_state(i, enter, p, *, pre=True, season="summer"):
+    """Use the same C1 outlet for airflow candidates and final stage calculations."""
     a1 = (float(i["chw1_in"]) + float(i["adp_approach"])
           if i["pre_mode"] != "單盤管（一般空調箱）" else 0.0)
-    a2 = float(i["chw2_in"]) + float(i["coil_approach"])
-    supply = state_tw(ts, ws, p)
     s1 = enter
     beta = None
     mode = i["pre_mode"] if pre else "停用／旁通"
@@ -676,20 +673,32 @@ def condition_air(i, enter, m, ts, ws, pre=True, *, season="summer"):
             raise InputError(f"一段指定出口低於供水＋ADP 裕度", field_name=f"pre_t")
         if s1["w"] < enter["w"] - 1e-10 and dewpoint(s1["w"], p) < a1 - 1e-08:
             raise InputError(f"一段除濕露點低於可達 ADP", field_name=f"pre_rh")
+    return s1, beta
+
+
+def _c2_solution(i, inlet, ts, ws, p, *, raise_on_infeasible=True):
+    """The complete C2 ADP/BF/temperature model shared by search and final use."""
+    wc = min(inlet["w"], ws)
+    if wc >= inlet["w"] - 1e-10:
+        return None
+    return solve_c2_bypass(
+        inlet, ts, wc, float(i["chw2_in"]) + float(i["coil_approach"]), p,
+        allow_reheat=i.get("allow_reheat", "1"),
+        bf_min=float(i.get("c2_bf_min", 0.0)),
+        field_name="chw2_in", raise_on_infeasible=raise_on_infeasible,
+    )
+
+
+def condition_air(i, enter, m, ts, ws, pre=True, *, season="summer"):
+    p = float(i["atm_kpa"])
+    cp = float(i["water_cp"])
+    a2 = float(i["chw2_in"]) + float(i["coil_approach"])
+    supply = state_tw(ts, ws, p)
+    s1, beta = _precoil_state(i, enter, p, pre=pre, season=season)
     c1 = coil_record("一段盤管", enter, s1, m, cp)
     wc = min(s1["w"], ws)
-    c2_sol = None
-    if wc < s1["w"] - 1e-10:
-        c2_sol = solve_c2_bypass(
-            s1,
-            ts,
-            wc,
-            a2,
-            p,
-            allow_reheat=i.get("allow_reheat", "1"),
-            bf_min=float(i.get("c2_bf_min", 0.0)),
-            field_name="chw2_in",
-        )
+    c2_sol = _c2_solution(i, s1, ts, ws, p)
+    if c2_sol is not None:
         tc = c2_sol["tc"]
     else:
         tc = min(s1["t"], ts)
@@ -932,12 +941,17 @@ def calculate(p, isolate_utilities=False):
         coil_moisture = airflow_guard.moisture_to_remove(room, oa, moa, moist)
         coil_moisture_tol = airflow_guard.humidity_tolerance(m_start)
 
+        last_c2_reason = None
+        last_c2_field = "chw2_in"
+        c2_constrained_search = False
+
         def _airflow_feasible(m_cand):
+            nonlocal last_c2_reason, last_c2_field, c2_constrained_search
             ws_c = room["w"] - moist / m_cand
             if ws_c < 0:
                 return False, ws_c, 0.0
             ts_c = room["t"] - qs / (m_cand * (1.006 + 1.86 * max(0, ws_c)))
-            blend(oa, room, moa / m_cand, n("atm_kpa"))  # a supersaturated mixture is still rejected here
+            mixed = blend(oa, room, moa / m_cand, n("atm_kpa"))  # still reject supersaturated mixtures
             humidity_possible = coil_moisture <= coil_moisture_tol or airflow_guard.supply_humidity_reachable(
                 ws_c, minw, minadp, n("atm_kpa")
             )
@@ -947,6 +961,27 @@ def calculate(p, isolate_utilities=False):
                 and humidity_possible
                 and (dewpoint(ws_c, n("atm_kpa")) <= ts_c + 1e-07)
             )
+            if ok:
+                # ADP humidity alone is only a necessary bound: the actual C1
+                # outlet, BF floor, attainable dry bulb and reheat setting must
+                # permit the same C2 solution used by condition_air below.
+                inlet_c2, _ = _precoil_state(i, mixed, n("atm_kpa"))
+                candidate = _c2_solution(i, inlet_c2, ts_c, ws_c, n("atm_kpa"),
+                                         raise_on_infeasible=False)
+                if candidate is not None:
+                    ok = candidate["feasible_adp"] and candidate["path"] != "reheat_required"
+                    if not ok:
+                        last_c2_reason = candidate["reason"]
+                        last_c2_field = ("allow_reheat" if candidate["path"] == "reheat_required"
+                                         else "c2_bf_min" if n("c2_bf_min") > 0 else "chw2_in")
+                        c2_constrained_search = True
+                elif m_cand * max(0.0, inlet_c2["w"] - ws_c) > coil_moisture_tol:
+                    # Never make a real kg/s moisture load disappear merely by
+                    # diluting its humidity-ratio difference at enormous airflow.
+                    ok = False
+                    last_c2_reason = "C2 仍有淨除濕需求，但含濕差已低於盤管求解解析度；不能視為旁通可行。"
+                    last_c2_field = "chw2_in"
+                    c2_constrained_search = True
             return ok, ws_c, ts_c
 
         prev_m = m_floor
@@ -955,6 +990,8 @@ def calculate(p, isolate_utilities=False):
             if ok:
                 if step > 0 and not _airflow_feasible(prev_m)[0]:
                     lo_m, hi_m = prev_m, m
+                    # Refine a local false/true bracket only. Keep hi feasible;
+                    # do not presume that the full coil feasible set is monotone.
                     for _ in range(32):
                         mid_m = 0.5 * (lo_m + hi_m)
                         if _airflow_feasible(mid_m)[0]:
@@ -967,12 +1004,22 @@ def calculate(p, isolate_utilities=False):
             prev_m = m
             m *= airflow_guard.SEARCH_GROWTH
         else:
+            if last_c2_reason:
+                raise InputError("搜尋範圍內未找到符合 C2 ADP／BF、出風與再熱設定的送風量：" + last_c2_reason,
+                                 field_name=last_c2_field)
             raise InputError(f"無法求得滿足顯熱／濕度與供水條件的送風量")
         enter = blend(oa, room, moa / m, n("atm_kpa"))
         airflow_basis = airflow_guard.describe(
             m, m_start, m_floor, room, qs, moist, minw, minadp, n("atm_kpa"), n("coil_approach"),
             n("chw2_in"), "circulation" if i.get("airflow_search_floor") == "circulation" else "load", airflow_exist,
         )
+        airflow_basis["c2_reachability_checked"] = True
+        airflow_basis["c2_constrained_search"] = c2_constrained_search
+        if c2_constrained_search:
+            airflow_basis["governing"] = "C2 ADP／BF 與出風可達條件"
+            # The old analytic water-temperature remedy omits BF/C1. Do not
+            # promise that this temperature alone clears the new constraint.
+            airflow_basis["chw_needed_c"] = None
         if airflow_basis["load_driven"] and airflow_basis["inflation"] > airflow_guard.INFLATION_WARN:
             warn.append(
                 f"供風量由{airflow_basis['governing']}決定：基準 {m_start * room['v_da'] * 3600:,.0f} CMH 增為 {airflow_basis['inflation']:.1f} 倍"
@@ -1158,14 +1205,27 @@ def calculate(p, isolate_utilities=False):
         if i.get("chiller_capacity_basis") == "獨立冷源水路包絡（確認無重複）":
             design_kw = sum(water[k]["capacity_kw"] for k in ("MCHW", "CHW", "DCCW"))
         np_auto = equipment_inputs(i, pressure, ffu_count, summer, winter, design_kw)
+        manual_np = electric["NP"]
         ei = dict(i)
-        for part, kw in np_auto["parts"].items():
-            key = "e_np_" + part
-            base = electrical_power_kw(i[key], i["u_" + key], VOLTAGE_MAP[i["e_volt"]],
-                                       electric["NP"]["pf"], i["e_eff"], key)
-            ei[key], ei["u_" + key] = str(base + kw), "kW"
-        extra_a = np_auto["total_kw"] * 1000 / (math.sqrt(3) * VOLTAGE_MAP[i["e_volt"]] * electric["NP"]["pf"])
-        ei["e_np_design_floor"] = str(electric["NP"]["design_current_a"] + 1.25 * extra_a)
+        # Consolidate only the calculation adapter, not the user's saved parts.
+        # Keep validated manual HP separate from ordinary/automatic kW so that
+        # largest-motor validation, classification and reports retain their basis.
+        hp_kw = manual_np["hp"] * 0.745699871582 / float(i["e_eff"])
+        for part in ("fan", "heat", "humid", "exh", "pump"):
+            ei["e_np_" + part], ei["u_e_np_" + part] = "0", "kW"
+        ei["e_np_fan"] = str(manual_np["hp"])
+        ei["u_e_np_fan"] = "HP" if manual_np["has_motor"] else "kW"
+        ei["e_np_pump"] = str(max(0.0, manual_np["kw"] - hp_kw) + np_auto["total_kw"])
+        extra_a = np_auto["total_kw"] * 1000 / (math.sqrt(3) * VOLTAGE_MAP[i["e_volt"]] * manual_np["pf"])
+        design_floor = manual_np["design_current_a"] + 1.25 * extra_a
+        ei["e_np_design_floor"] = str(design_floor)
+        np_auto["manual_motor_basis"] = {
+            "hp": manual_np["hp"], "largest_hp": manual_np["largest_hp"],
+            "has_motor": manual_np["has_motor"],
+            "design_current_a": manual_np["design_current_a"],
+        }
+        np_auto["added_current_a"] = extra_a
+        np_auto["design_current_floor_a"] = design_floor
         electric = electrical_from_inputs(ei)
         warn.extend(np_auto["pending"])
     gas = {} if isolate_utilities else gas_from_inputs(i)

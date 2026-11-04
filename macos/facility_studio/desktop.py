@@ -348,10 +348,6 @@ class DesktopApp(SessionController, MainView):
     def _build_window(self, root):
         self.root = root
         root.title("廠務工程工作台 V" + BUILD_VERSION)
-        root.geometry(
-            f"{min(1240, max(880, root.winfo_screenwidth() - 60))}x{min(840, max(560, root.winfo_screenheight() - 80))}"
-        )
-        root.minsize(880, 560)
         self.project = default_project()
         self.provenance = self.project["provenance"]
         self.extra_inputs = {}
@@ -384,6 +380,8 @@ class DesktopApp(SessionController, MainView):
         self.pv_unit_last = self.variables["pv_pressure_unit"].get()
         self.latent_text = tk.StringVar(value="等待計算")
         self.configure_style()
+        from .window_geometry import initialize_main_window
+        initialize_main_window(root, Theme.scale)
         root.columnconfigure(1, weight=1)
         root.rowconfigure(1, weight=1)
         side = tk.Frame(root, bg=Theme.NAV, width=184)

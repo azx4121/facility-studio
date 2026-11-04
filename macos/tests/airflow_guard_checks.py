@@ -107,14 +107,8 @@ try:
         advice = [(t, gate(r)["detail"]) for t, r in rows if gate(r) and gate(r)["status"] == "未達"]
         nonsense = [(t, d[-110:]) for t, d in advice if (m := re.search(r"降至 ([\d.]+)°C 以下（目前 ([\d.]+)°C", d)) and float(m.group(1)) >= float(m.group(2))]
         check(f"scan [{label}]: the advice always asks for a lower chilled-water temperature than the current one", not nonsense, nonsense[:2])
-        obeyed = []
-        for t, d in advice[:6]:
-            m = re.search(r"降至 ([\d.]+)°C 以下", d)
-            if m:
-                again, _ = run(sys_type=AHU, chw2_in=float(m.group(1)) - 0.005, **over)
-                if again is not None and (gate(again) or {}).get("status") == "未達":
-                    obeyed.append((t, m.group(1)))
-        check(f"scan [{label}]: following the advice clears the gate", not obeyed, obeyed[:3])
+        check(f"scan [{label}]: failed gates give qualified recalculation guidance, not a numeric water promise",
+              bool(advice) and all("尚未驗證" in d and "盤管 ADP／BF" in d and "降至" not in d for _, d in advice), advice[:1])
         flipped = [i for i in range(1, len(rows)) if (gate(rows[i][1]) or {}).get("status") != (gate(rows[i - 1][1]) or {}).get("status") and (gate(rows[i - 1][1]) or {}).get("status") == "未達"]
         check(f"scan [{label}]: once 未達 the gate never recovers while the water warms", not flipped, flipped[:3])
         # When the sensible design airflow is the baseline, an inflation of 5 is exactly a 2 K supply difference.
@@ -127,12 +121,12 @@ try:
             fail_t, fail_r = next(((t, r) for t, r in rows if (gate(r) or {}).get("status") == "未達"), (None, None))
             needed = fail_r["airflow_basis"]["chw_needed_c"]
             text = gate(fail_r)["detail"]
-            check("the advice names a chilled-water temperature and the numbers add up",
-                  f"{math.floor(needed * 100) / 100:.2f}°C 以下" in text and "基準" in text and "倍" in text, text[:200])
-            good, _ = run(sys_type=AHU, chw2_in=needed - 0.005, **over)
-            bad_, _ = run(sys_type=AHU, chw2_in=needed + 0.005, **over)
-            check("following the advice passes the gate; just above it does not",
-                  good is not None and gate(good)["status"] == "通過" and bad_ is not None and gate(bad_)["status"] == "未達", (needed,))
+            check("unverified water-only remedy is not published as a numeric guarantee",
+                  needed is None and not fail_r["airflow_basis"]["chw_remedy_verified"]
+                  and "尚未驗證" in text and "降至" not in text and "基準" in text and "倍" in text, text[:200])
+            check("the failing gate requests complete air-state and coil recalculation",
+                  "盤管 ADP／BF" in text and "再熱設定" in text and "重新計算" in text
+                  and gate(fail_r)["status"] == "未達", text[-200:])
             check("the gate text translates to English without Chinese", not CJK.search(english(text)), english(text)[:200])
             check("a moisture-limited airflow is also reported as a warning once it doubles",
                   any("供風量由" in w for _, r in rows if r["airflow_basis"]["inflation"] > 2 for w in r["warnings"]))

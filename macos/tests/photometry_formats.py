@@ -1,22 +1,24 @@
 """Synthetic analytic fixtures. No manufacturer file or external IO required."""
 import dataclasses
 import hashlib
+import math
 from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from facility_studio.photometry import (PhotometryError, parse_photometry,
                                        load_photometry, intensity_cd, MAX_FILE_BYTES)
 
 
-def ies(c=(0,), g=(0, 90), rows=None, **changes):
+def ies(c=(0,), g=(0, 90), rows=None, version='2002', **changes):
     rows = rows or [[100 for _ in g] for _ in c]
     header = dict(lamps=1, lumens=-1, mult=1, nv=len(g), nh=len(c), typ=1,
                   units=2, width=.1, length=.2, height=.03, ballast=1, reserved=1, watts=10)
     header.update(changes)
-    return '\n'.join(['IESNA:LM-63-2002', '[TEST]synthetic', '[LUMINAIRE]Test lamp',
+    return '\n'.join(['IESNA:LM-63-'+version, '[TEST]synthetic', '[LUMINAIRE]Test lamp',
                       'TILT=NONE', ' '.join(str(v) for v in header.values()),
                       ' '.join(map(str, g)), ' '.join(map(str, c)),
                       ' '.join(str(v) for row in rows for v in row)])
@@ -66,6 +68,95 @@ class PhotometryFormats(unittest.TestCase):
         self.assertEqual(intensity_cd(p, 90, 90), 30)
         self.assertEqual(intensity_cd(p, 270, 90), 30)
         self.assertEqual(intensity_cd(p, 180, 90), 70)
+
+    def test_1995_c90_c270_preserves_file_axes_and_mirrors_only_missing_half(self):
+        c = (90, 135, 180, 225, 270)
+        rows = [[100, value] for value in (10, 30, 70, 50, 90)]
+        p = parse_photometry(ies(c=c, rows=rows, version='1995'), 'ies')
+        self.assertEqual(p.c_angles_deg, tuple(range(0, 361, 45)))
+        expected = {0: 70, 45: 30, 90: 10, 135: 30, 180: 70,
+                    225: 50, 270: 90, 315: 50, 360: 70, -45: 50, 405: 30}
+        for angle, value in expected.items():
+            with self.subTest(angle=angle):
+                self.assertEqual(intensity_cd(p, angle, 90), value)
+        self.assertEqual(p.metadata['source_c_angles_deg'], c)
+        self.assertEqual(p.metadata['symmetry_plane'], 'C90-C270')
+        self.assertEqual(p.metadata['coordinate_axis'], 'file C0')
+        self.assertEqual(p.metadata['symmetry'], 3)
+        self.assertEqual(intensity_cd(p, 45, 45), 65)
+        self.assertEqual(intensity_cd(p, 45, 100), 0)
+
+    def test_1995_c90_c270_nonuniform_grid_without_c180(self):
+        c = (90, 120, 200, 270)
+        rows = [[100, value] for value in (10, 30, 70, 90)]
+        p = parse_photometry(ies(c=c, rows=rows, version='1995'), 'ies')
+        self.assertEqual(intensity_cd(p, 0, 90), 60)
+        self.assertEqual(intensity_cd(p, 180, 90), 60)
+        for angle, row in zip(c, rows):
+            self.assertEqual(intensity_cd(p, angle, 90), row[-1])
+        # Independent evaluation directly on the original measured half.
+        for angle in range(-360, 721):
+            mapped = angle % 360
+            if mapped < 90:
+                mapped = 180-mapped
+            elif mapped > 270:
+                mapped = 540-mapped
+            index = next(i for i in range(len(c)-1) if c[i] <= mapped <= c[i+1])
+            t = (mapped-c[index])/(c[index+1]-c[index])
+            expected = rows[index][-1]*(1-t)+rows[index+1][-1]*t
+            self.assertAlmostEqual(intensity_cd(p, angle, 90), expected)
+        # Two endpoint rows are also a complete supported half-plane domain.
+        p = parse_photometry(ies(c=(90, 270), rows=[[100, 10], [100, 90]], version='1995'), 'ies')
+        self.assertEqual(intensity_cd(p, 0, 90), 50)
+
+    def test_1995_c90_c270_measured_sample_shape_and_scaling(self):
+        # Synthetic 37 x 37 input exercises the reported grid shape without
+        # redistributing manufacturer data. Values vary across both axes.
+        c, g = tuple(range(90, 271, 5)), tuple(i*2.5 for i in range(37))
+        rows = [[100 + (angle-90)*math.sin(math.radians(gamma)) for gamma in g] for angle in c]
+        p = parse_photometry(ies(c=c, g=g, rows=rows, version='1995', mult=2, ballast=.75), 'ies')
+        self.assertEqual(len(p.c_angles_deg), 73)
+        self.assertEqual(len(p.gamma_angles_deg), 37)
+        for angle, row in zip(c, rows):
+            for gamma, value in zip(g, row):
+                self.assertAlmostEqual(intensity_cd(p, angle, gamma), value*1.5)
+                self.assertAlmostEqual(intensity_cd(p, (180-angle) % 360, gamma), value*1.5)
+
+    def test_1995_c90_c270_does_not_relax_invalid_input_guards(self):
+        bad = [ies(c=c, version='1995') for c in ((90,), (90, 180), (91, 270),
+               (90, 271), (90, 270-1e-8), (90+1e-8, 270), (90, 90, 270))]
+        bad += [ies(c=(90, 270), version='2002'),
+                ies(c=(90, 270), rows=[[100, 20], [90, 20]], version='1995'),
+                ies(c=(90, 270), rows=[[100, -1], [100, 20]], version='1995'),
+                ies(c=(90, 270), nv=3, version='1995'),
+                ies(c=(90, 270), version='1995')+' 12']
+        for value in bad:
+            with self.subTest(value=value), self.assertRaises(PhotometryError):
+                parse_photometry(value, 'ies')
+
+    def test_1995_c90_c270_load_preserves_raw_file(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder)/'synthetic-1995.ies'
+            raw = ies(c=(90, 180, 270), version='1995').replace('\n', '\r\n').encode()
+            path.write_bytes(raw)
+            before = path.stat().st_mtime_ns
+            p = load_photometry(path)
+            self.assertEqual(p.source_sha256, hashlib.sha256(raw).hexdigest())
+            self.assertEqual(path.read_bytes(), raw)
+            self.assertEqual(path.stat().st_mtime_ns, before)
+
+    def test_1995_c90_c270_expansion_keeps_sample_budget(self):
+        text = ies(c=(90, 135, 180, 225, 270), version='1995')
+        # Ten input samples fit, but eighteen expanded samples do not.
+        with patch('facility_studio.photometry.MAX_SAMPLES', 12), \
+                self.assertRaisesRegex(PhotometryError, 'Expanded intensity matrix'):
+            parse_photometry(text, 'ies')
+
+    def test_1995_c90_c270_upper_and_full_sphere(self):
+        for g in ((90, 180), (0, 90, 180)):
+            p = parse_photometry(ies(c=(90, 270), g=g, version='1995'), 'ies')
+            self.assertEqual(intensity_cd(p, 0, 135), 100)
+            self.assertEqual(intensity_cd(p, 315, 45), 0 if g[0] == 90 else 100)
 
     def test_full_asymmetric_preserved(self):
         p = parse_photometry(ies(c=(0,90,180,270,360), rows=[[100,x] for x in (10,20,30,40,10)]), 'ies')

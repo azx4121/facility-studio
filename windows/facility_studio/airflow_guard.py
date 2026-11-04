@@ -129,20 +129,27 @@ def describe(m, m_start, m_floor, room, qs, moisture, min_w, min_adp, p_kpa, app
         parts = {"循環風量／外氣下限": m_floor, "顯熱設計風量": abs(qs) / DESIGN_SUPPLY_DT_K, "產濕設計風量": moisture / 0.002}
         governing = max(parts, key=parts.get)
     kappa = room["w"] / margin_w if searched and exist["m_lat"] > 0 and margin_w > 0 else None
-    # Chilled-water supply at which BOTH engineering criteria hold, so the advice cannot land on the failing side of
-    # either: inflation <= INFLATION_FAIL, and condition number <= CONDITION_FAIL.
-    candidates = [dewpoint(room["w"] * (1.0 - 1.0 / CONDITION_FAIL), p_kpa) - approach]
-    if moisture > 0 and m_start > 0:
-        w_need = room["w"] - moisture / (m_start * INFLATION_FAIL)
-        if w_need > 0:
-            candidates.append(dewpoint(w_need, p_kpa) - approach)
-    needed_chw = min(candidates)
+    # The old moisture-only water-temperature formula was a necessary bound, not
+    # a verified remedy: it omitted supply saturation, sensible balance and the
+    # complete C1/C2/BF/reheat path. Do not publish it as a passing-design promise.
+    # For zero room moisture the supply humidity stays fixed at room humidity.
+    # Its temperature increases monotonically with airflow under positive sensible
+    # load, so failure even at the allowed maximum proves that colder water alone
+    # cannot bring *any* lower airflow inside the engineering limit.
+    limit_mass = m_start * INFLATION_FAIL
+    water_only_remedy_blocked = False
+    if moisture == 0.0 and qs > 1e-9 and limit_mass > 0:
+        limit_supply_t = room["t"] - qs / (limit_mass * (1.006 + 1.86 * room["w"]))
+        water_only_remedy_blocked = dp > limit_supply_t + COIL_DEWPOINT_TOLERANCE_K
+        if searched and dp > min_adp and abs(room["t"] - supply_dt - dp) <= 1e-6:
+            governing = "送風飽和／室內露點條件"
     return dict(
         applicable=True, governing=governing, load_driven=searched,
         m_kg_s=m, m_start_kg_s=m_start, m_floor_kg_s=m_floor, m_sensible_min_kg_s=exist["m_sens"], m_moisture_min_kg_s=exist["m_lat"],
         inflation=inflation, supply_dt_k=supply_dt, dehumid_margin_w=margin_w, dehumid_margin_k=dp - min_adp,
         room_dewpoint_c=dp, adp_floor_c=min_adp, chw_supply_c=chw_in, approach_k=approach,
-        condition_number=kappa, chw_needed_c=needed_chw,
+        condition_number=kappa, chw_needed_c=None, chw_remedy_verified=False,
+        water_only_remedy_blocked=water_only_remedy_blocked,
         limits=dict(inflation_fail=INFLATION_FAIL, inflation_warn=INFLATION_WARN, min_supply_dt_k=MIN_PRACTICAL_SUPPLY_DT_K, condition_fail=CONDITION_FAIL),
     )
 

@@ -1,5 +1,6 @@
-from pathlib import Path
 import sys
+from pathlib import Path
+
 try:
     import tkinter as tk
 except ImportError:
@@ -84,11 +85,66 @@ def install_numeric_keyboard(window):
     attach(widget=window)
 
 
+
+def install_combobox_wheel_guard(window):
+    """Keep wheel events for the page, while retaining native choice controls.
+
+    An application-only class tag copies Tk's actual platform bindings except
+    wheel gestures. Unlike returning "break", omitting these bindings lets the
+    event reach the enclosing scroll frame/window. Focus does not change this
+    policy. Tk 9 precision gestures relay their vertical component through the
+    same wheel path. Popup lists retain native scrolling and selection.
+    """
+    tag = "FacilityCombobox"
+    root = window._root()
+
+    def attach(event=None, widget=None):
+        current = widget if widget is not None else event.widget
+        # A Tk-created popup may arrive as a path, not a Python widget.
+        if not hasattr(current, "winfo_class"):
+            return
+        if current.winfo_class() == "TCombobox":
+            current.bindtags(tuple(tag if item == "TCombobox" else item
+                                   for item in current.bindtags()))
+        if widget is not None:
+            for child in current.winfo_children():
+                attach(widget=child)
+
+    # Keep Tk's global TCombobox bindings intact. Each interpreter receives its
+    # own copy, including its platform-specific keyboard and pointer bindings.
+    if not getattr(root, "_facility_combobox_wheel_guard", False):
+        for sequence in root.bind_class("TCombobox"):
+            if "TouchpadScroll" in sequence:
+                # Tk 9 encodes both trackpad axes in %D. Relay only the
+                # vertical component through the existing page wheel path;
+                # never call Tk's combobox selection-scrolling procedure.
+                root.bind_class(tag, sequence, """
+                    if {[lindex [tk::PreciseScrollDeltas %D] 1] != 0} {
+                        event generate %W <MouseWheel> \
+                            -delta [lindex [tk::PreciseScrollDeltas %D] 1] \
+                            -x %x -y %y
+                    }
+                    break
+                """)
+                continue
+            if any(wheel in sequence for wheel in (
+                "MouseWheel", "TouchpadScroll", "Button-4>", "Button-5>",
+                "Button-6>", "Button-7>",
+            )):
+                continue
+            root.bind_class(tag, sequence, root.bind_class("TCombobox", sequence))
+        root.bind_all("<Map>", attach, add="+")
+        root.bind_all("<FocusIn>", attach, add="+")
+        root._facility_combobox_wheel_guard = True
+    attach(widget=window)
+
+
 def app_icon(window):
     from .localized_tk import attach_window
 
     attach_window(window)
     install_numeric_keyboard(window)
+    install_combobox_wheel_guard(window)
     from .native_redraw import install_native_redraw
 
     install_native_redraw(window)

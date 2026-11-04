@@ -850,8 +850,11 @@ def known_failure_messages(result):
         threshold = suction["threshold_m"]
         if threshold is not None and suction["available_m"] < threshold:
             failures.append("可用 NPSHa 小於原廠 NPSHr 加本案裕度。")
-    if tool == "vacuum" and result.get("effective_speed_l_s") is not None:
-        if result["actual_lpm"] / 60 > result["effective_speed_l_s"]:
+    if tool == "vacuum":
+        required = result["actual_lpm"] / 60
+        if required > result["pump_speed_l_s"]:
+            failures.append("指定氣載所需實際抽速大於泵入口抽速，無法維持所填工作壓力。")
+        elif result.get("effective_speed_l_s") is not None and required > result["effective_speed_l_s"]:
             failures.append("指定氣載所需實際抽速大於管路有效抽速，無法維持所填工作壓力。")
     if tool in ("water", "liquid", "vacuum"):
         actual = result["pipe"]["velocity_mps"] if tool == "water" else result["velocity_mps"]

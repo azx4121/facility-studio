@@ -118,6 +118,12 @@ class AHUWindow(AHUView):
         self.calculate()
         return "break"
 
+    def invalidate_link(self):
+        """Keep source ownership and block return until relink or explicit release."""
+        linked = self.vars["linked_main_hash"].get()
+        if linked != "尚未連動" and not linked.startswith("stale:"):
+            self.vars["linked_main_hash"].set("stale:" + linked)
+
     def changed(self, key=None):
         if self.suspended:
             return
@@ -145,8 +151,7 @@ class AHUWindow(AHUView):
         }
         if key in boundary_keys and self.vars["linked_main_hash"].get() != "尚未連動":
             self.suspended = True
-            self.vars["linked_main_hash"].set("尚未連動")
-            self.source_project_id = ""
+            self.invalidate_link()
             self.suspended = False
         if self.job:
             self.win.after_cancel(self.job)
@@ -176,8 +181,7 @@ class AHUWindow(AHUView):
             else:
                 self.vars["sa_t"].set("16")
                 self.vars["sa_rh"].set(str(rh))
-            self.vars["linked_main_hash"].set("尚未連動")
-            self.source_project_id = ""
+            self.invalidate_link()
         finally:
             self.suspended = False
         self.changed()
@@ -191,8 +195,7 @@ class AHUWindow(AHUView):
             self.vars["winter_c1_mode"].set("旁通")
             for season in ("summer", "winter"):
                 self.vars[season + "_c2_mode"].set("自動需求")
-            self.vars["linked_main_hash"].set("尚未連動")
-            self.source_project_id = ""
+            self.invalidate_link()
         finally:
             self.suspended = False
         self.changed()
@@ -211,8 +214,7 @@ class AHUWindow(AHUView):
             ("p", "atm_kpa"),
         ]:
             self.vars[key].set(self.main_app.variables[source].get())
-        self.vars["linked_main_hash"].set("尚未連動")
-        self.source_project_id = ""
+        self.invalidate_link()
         self.suspended = False
         self.changed()
         self.calculate()

@@ -263,7 +263,7 @@ class AHUView:
         return frame, body, canvas
 
     def wheel(self, e):
-        if isinstance(e.widget, (tk.Text, ttk.Treeview, ttk.Combobox)):
+        if isinstance(e.widget, (tk.Text, ttk.Treeview)):
             return
         selected = self.nb.nametowidget(self.nb.select())
         if self.nb.index(self.nb.select()) == 0:
@@ -528,6 +528,12 @@ class AHUView:
             ylabel="含濕比 g/kg 乾空氣",
             title=self.season.get() + f"需求流程｜{p:g} kPa｜P0 外氣；其餘點號對應上表",
         )
+        if s["c2"].get("feasible_adp") is False:
+            translated_axes(self.ax).text(
+                0.01, 0.02, "C2 ADP／BF 不可行；C2 與後續狀態僅為需求點，非可達出風。",
+                transform=translated_axes(self.ax).transAxes, va="bottom", fontsize=8,
+                color="#b42318", bbox=dict(facecolor="white", alpha=0.9),
+            )
         translated_axes(self.ax).grid(alpha=0.15)
         self.fig.tight_layout()
         annotate_states(self.ax, groups, fontsize=8)

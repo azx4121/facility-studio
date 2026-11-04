@@ -197,11 +197,42 @@ r2 = a.calculate(q)
 check("stated BF floor removes the pending item",
       not any("排數能力" in x["name"] for x in r2["quality"]["items"]) and r2["summer"]["c2"]["bf_min"] == 0.05)
 q["inputs"]["c2_bf_min"] = "0.5"
+# This was a false-negative oracle: a BF-aware airflow search can reach the
+# independently reconstructed 10.4712352199 kg/s point. Preserve the physical
+# bounds and quality gate rather than requiring rejection of a feasible coil.
+r_half = a.calculate(q)
+s_half, c_half = r_half["summer"], r_half["summer"]["c2"]
+check("BF 0.5 finds the independently reconstructed higher-airflow point",
+      s_half["mass"] > r2["summer"]["mass"]
+      and abs(s_half["mass"] - 10.471235219871707) < 1e-6, s_half["mass"])
+bf_half, adp_half = c_half["bf_req"], c_half["adp_req_c"]
+check("accepted main calculation respects its stated BF and ADP floor",
+      bf_half >= 0.5 - 1e-9
+      and adp_half >= float(q["inputs"]["chw2_in"]) + float(q["inputs"]["coil_approach"]) - 1e-9,
+      (bf_half, adp_half))
+sat_half = state_trh(adp_half, 100, P)
+expected_w = bf_half * c_half["inlet"]["w"] + (1 - bf_half) * sat_half["w"]
+expected_h = bf_half * c_half["inlet"]["h"] + (1 - bf_half) * sat_half["h"]
+check("accepted BF point retains moisture, enthalpy and air-side energy balances",
+      abs(c_half["outlet"]["w"] - expected_w) < 1e-10
+      # Existing solver temperature tolerance is 5e-7 K, not exact zero.
+      and abs(c_half["outlet"]["h"] - expected_h) < 1e-6
+      and abs(s_half["energy_residual_kw"]) < 1e-6,
+      (c_half["outlet"]["w"] - expected_w, c_half["outlet"]["h"] - expected_h))
+check("a feasible higher-airflow coil does not certify whole-project quality",
+      r_half["quality"]["status"] == "未達條件"
+      and any(item["status"] == "未達" for item in r_half["quality"]["items"]),
+      r_half["quality"]["status"])
+# Keep a real whole-project negative case: the water/ADP floor is warmer than
+# the room dew point, so no amount of airflow can remove the required moisture.
+unreachable = copy.deepcopy(q)
+unreachable["inputs"]["chw2_in"] = "16"
 try:
-    a.calculate(q)
-    check("unreachable BF floor stops the main calculation", False, "accepted")
+    a.calculate(unreachable)
+    check("a truly unreachable humidity floor still stops the main calculation", False, "accepted")
 except ValidationError as e:
-    check("unreachable BF floor stops the main calculation", "BF" in str(e), e)
+    check("a truly unreachable humidity floor still stops the main calculation",
+          e.field_name == "chw2_in" and "任何風量都無法除濕" in str(e), e)
 ahu = a.nm_calculate(dict(NM_DEFAULTS))
 ahu_c2 = ahu["summer"]["c2"]
 if "bf_min" in ahu_c2 and ahu_c2["air_kw"] > 1e-8:

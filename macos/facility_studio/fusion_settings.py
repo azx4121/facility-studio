@@ -59,7 +59,7 @@ def open_settings(app):
         scrollers.append(page.canvas)
         pages[title] = page.body
     def wheel(event):
-        if not hasattr(event.widget, "winfo_class") or event.widget.winfo_class() == "TCombobox":
+        if not hasattr(event.widget, "winfo_class"):
             return
         from .platform_support import scroll_units
         step = scroll_units(event)

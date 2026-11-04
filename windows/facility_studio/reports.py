@@ -641,16 +641,21 @@ def report(r):
                 if e["largest_hp"] > 0 else
                 "  最大馬達未知：保守採總運轉電流×1.25。"
             )
+        if k == "NP" and (r.get("np_auto") or {}).get("manual_motor_basis"):
+            auto = r["np_auto"]
+            manual = auto["manual_motor_basis"]
+            a(f"  NP 自動加總保留手動馬達 {manual['hp']:g} HP；新增設備輸入仍以 kW 計入。")
+            a(f"  合併設計電流取負載規則與下限的較大值；下限＝手動設計 {manual['design_current_a']:.3f} A＋新增運轉 {auto['added_current_a']:.3f} A×1.25＝{auto['design_current_floor_a']:.3f} A。")
     from .grounding import PE_BASIS
     a(PE_BASIS)
     a("\n五、主要公式與簡短說明")
     if r["light"].get("room_index_k") is not None:
         a(
-            f"照明 K={r['light']['room_index_k']:.2f}，U(K)={r['light']['u']:.4f}；N=ceil(E×A/(Φ×U×M))=ceil({i['light_lux']}×{r['light']['area_m2']:g}/({i['light_lm']}×{r['light']['u']:.4f}×{i['light_m']}))={r['light']['qty']} 盞。"
+            f"照明 K={r['light']['room_index_k']:.2f}，手動輸入利用係數 U（無因次）={r['light']['u']:.4f}；N=ceil(E×A/(Φ×U×M))=ceil({i['light_lux']}×{r['light']['area_m2']:g}/({i['light_lm']}×{r['light']['u']:.4f}×{i['light_m']}))={r['light']['qty']} 盞。"
         )
     else:
         a(
-            f"照明 N=ceil(E×A/(Φ×U×M))=ceil({i['light_lux']}×{r['light']['area_m2']:g}/({i['light_lm']}×{i['light_u']}×{i['light_m']}))={r['light']['qty']} 盞。"
+            f"照明 手動輸入利用係數 U（無因次）={r['light']['u']:.4f}；N=ceil(E×A/(Φ×U×M))=ceil({i['light_lux']}×{r['light']['area_m2']:g}/({i['light_lm']}×{i['light_u']}×{i['light_m']}))={r['light']['qty']} 盞。"
         )
     a(
         f"室內顯熱 Qs=m_da(1.006+1.86ws)(Tr−Ts)+QDCC={r['qs']:.3f} kW；產濕 G=3600×m_da(wr−ws)={r['moisture'] * 3600:.3f} kg/h。"
@@ -719,6 +724,8 @@ def _nm_report_base(r):
         a(
             "段落                    乾球°C      RH%      露點°C       w g/kg      h kJ/kg"
         )
+        if s["c2"].get("feasible_adp") is False:
+            a("C2 ADP／BF 不可行：" + s["c2"]["reason"] + "；C2 與後續狀態僅為需求點，非可達出風。")
         for name, st in s["nodes"]:
             a(
                 f"{name:<19} {st['t']:9.3f} {st['rh']:9.3f} {dewpoint(st['w'], float(i['p'])):10.3f} {st['w'] * 1000:11.6f} {st['h']:12.6f}"

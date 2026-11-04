@@ -39,6 +39,7 @@ def presentation(result):
                      ("管內流速", f"{result['velocity_mps']:.3f} m/s"),
                      ("絕對壓力", f"{result['pressure_pa']:.6g} Pa")]
             details = [result['regime'], f"泵入口抽速 {result['pump_speed_l_s']:g} L/s",
+                       f"指定氣載所需抽速 {result['actual_lpm'] / 60:.6g} L/s",
                        f"流速警戒 {result['velocity_limit_mps']:g} m/s",
                        f"標準流量參考 {result['standard_t_c']:g}°C／{result['standard_p_pa']:g} Pa(abs)；操作 {result['temperature_c']:g}°C；所在地大氣 {result['atmosphere_pa']:g} Pa(abs)；直管長 {result['length_m']:g} m",
                        f"導通率 {result['conductance_l_s']:.6g} L/s；有效抽速 {result['effective_speed_l_s']:.6g} L/s" if result['conductance_l_s'] is not None else "此流態／管長未採用分子流導通率，需適用模型及沿程壓力資料。"]

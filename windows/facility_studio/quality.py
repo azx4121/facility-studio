@@ -1,5 +1,3 @@
-import math
-
 from .utils import dewpoint, state_trh
 
 
@@ -103,10 +101,16 @@ def _airflow_basis(items, r):
         f"供風量由{b['governing']}決定：基準 {cmh(b['m_start_kg_s']):,.0f} CMH 增為 {b['inflation']:.1f} 倍"
         f"（供風溫差 {b['supply_dt_k']:.2f} K）；室內露點 {b['room_dewpoint_c']:.2f}°C 與冰水 ADP {b['adp_floor_c']:.2f}°C 僅差 {b['dehumid_margin_k']:.2f} K"
     )
-    remedy = ""
-    if b.get("chw_needed_c") is not None:
-        needed = math.floor(b["chw_needed_c"] * 100) / 100  # round down: the advice must land on the passing side
-        remedy = f"；請將冰水供水降至 {needed:.2f}°C 以下（目前 {b['chw_supply_c']:.2f}°C）、提高室內相對濕度目標，或改用乾盤管／再熱"
+    if b.get("water_only_remedy_blocked"):
+        remedy = (
+            "；固定目前室內溫濕度與零產濕條件時，允許風量上限所需的送風溫度仍低於室內露點，"
+            "僅降低冰水供水無法達到此風量門檻；請重新檢討室內目標或系統方案，並重算完整送風與盤管可達性。"
+        )
+    else:
+        remedy = (
+            "；尚未驗證可滿足此門檻的冰水供水溫度，不能保證僅降水溫即可改善；"
+            "請一併核對室內目標、送風露點、盤管 ADP／BF 與再熱設定，並重新計算。"
+        )
     if b["inflation"] > lim["inflation_fail"] + 1e-9:
         finding(items, name, "未達",
                 facts + f"，超過可行倍數 {lim['inflation_fail']:g}（供風溫差實務下限 {lim['min_supply_dt_k']:g} K）" + remedy, "chw2_in")
@@ -328,12 +332,12 @@ def assess_ahu(r):
                 or "給水" in key
             ):
                 state = "待資料"
-            finding(
-                items,
-                title + " " + key,
-                state,
-                "依本季需求與已填資料檢核；表列狀態為需求點。",
-            )
+            detail = "依本季需求與已填資料檢核；表列狀態為需求點。"
+            field = None
+            if key == "C2 可達 ADP" and s["c2"].get("feasible_adp") is False:
+                detail = s["c2"]["reason"] + "；C2 與後續狀態僅為需求點，非可達出風。"
+                field = "c2_bf_min" if "BF" in s["c2"]["reason"] else "c2_in"
+            finding(items, title + " " + key, state, detail, field)
         for tag in ["c1", "c2"]:
             c = s[tag]
             if c["air_kw"] > 1e-08:

@@ -19,6 +19,9 @@ on:
       - tools/cleanroom100_stress.py
       - docs/development.md
       - integration/test_capacity*.py
+      - integration/test_engine_review_guardrails.py
+      - integration/test_c2_airflow_search.py
+      - integration/test_airflow_remedy.py
       - tools/verify_capacity_planning.py
   pull_request:
     paths:
@@ -38,6 +41,9 @@ on:
       - tools/cleanroom100_stress.py
       - docs/development.md
       - integration/test_capacity*.py
+      - integration/test_engine_review_guardrails.py
+      - integration/test_c2_airflow_search.py
+      - integration/test_airflow_remedy.py
       - tools/verify_capacity_planning.py
   workflow_dispatch:
 
@@ -98,6 +104,10 @@ jobs:
           for suite in simple_features regression v560_features v557_inactive v558_review v559_resilience bilingual security_checks lighting_presets lighting_reports photometry_formats lighting_direct_checks; do
             python "${{ matrix.source }}/tests/$suite.py" 2>&1 | tee "$RUNNER_TEMP/engineering-dashboard/legacy/$suite.log"
           done
+      - name: C2 and vacuum feasibility, inactive washer and NP motor regressions
+        env:
+          FACILITY_TEST_PLATFORM: ${{ matrix.source }}
+        run: python -m pytest integration/test_engine_review_guardrails.py integration/test_c2_airflow_search.py integration/test_airflow_remedy.py -q --junitxml="${{ runner.temp }}/engineering-dashboard/engine-review.xml"
       - name: Capacity expansion arithmetic, source guards and actual Tk editor
         shell: bash
         env:

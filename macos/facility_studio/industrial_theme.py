@@ -250,7 +250,7 @@ class ScrollableFrame(ttk.Frame):
             return
         # Check the native widget class too: external callers may create a
         # standard Tk Text/Treeview rather than our localized subclass.
-        if widget.winfo_class() not in ("TCombobox", "Treeview", "Text"):
+        if widget.winfo_class() not in ("Treeview", "Text"):
             tags = widget.bindtags()
             if self._wheel_tag not in tags:
                 widget.bindtags((tags[0], self._wheel_tag, *tags[1:]))
