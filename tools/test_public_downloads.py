@@ -227,7 +227,7 @@ class PublisherChecks(unittest.TestCase):
             spec.loader.exec_module(module)
             with self.assertRaisesRegex(SystemExit, "historical 5.6 publisher is retired"):
                 module.main()
-            source = (ROOT / path).read_text()
+            source = (ROOT / path).read_text(encoding="utf-8")
             self.assertNotIn("urllib", source)
             self.assertNotIn("requests", source)
             self.assertNotIn("FACILITY_GITHUB_TOKEN", source)

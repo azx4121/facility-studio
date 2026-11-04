@@ -20,15 +20,16 @@ def git(root, *args):
 def write(root, name, value="example\n"):
     path = root / name
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(value, encoding="utf-8")
+    path.write_text(value, encoding="utf-8", newline="\n")
     return path
 
 
-@pytest.fixture
-def repo(tmp_path):
-    root = tmp_path / "repository"
+def make_repo(root):
     root.mkdir()
     git(root, "init", "-q")
+    # Synthetic repositories need the same byte-preserving rules as the real
+    # checkout; do not inherit a Windows user's automatic line conversion.
+    git(root, "config", "--local", "core.autocrlf", "false")
     git(root, "config", "user.email", "test@example.invalid")
     git(root, "config", "user.name", "Local test")
     for name in ("integration/build.py", "integration/entry.py", "integration/nested/helper.py",
@@ -38,9 +39,16 @@ def repo(tmp_path):
                  "windows/evidence/existing.json", "macos/evidence/existing.json"):
         write(root, name)
     write(root, ".gitignore", "__pycache__/\n*.pyc\n*.so\nignored.py\n")
+    attributes = (Path(__file__).resolve().parents[1] / ".gitattributes").read_text(encoding="utf-8")
+    write(root, ".gitattributes", attributes)
     git(root, "add", ".")
     git(root, "commit", "-qm", "Synthetic test inputs")
     return root
+
+
+@pytest.fixture
+def repo(tmp_path):
+    return make_repo(tmp_path / "repository")
 
 
 def test_clean_source_hashes_are_exact_head_bytes(repo):
@@ -223,3 +231,56 @@ def test_genuine_generated_nonresource_caches_preserve_clean_identity(repo, opti
     for name in ("windows/facility_studio/entry.py", "integration/build.py", "windows/winrelease/hooks/hook-example.py"):
         py_compile.compile(str(repo / name), doraise=True, optimize=optimization)
     assert expected_source_manifest(repo, "windows") == before
+
+
+def test_fixture_writes_canonical_lf_and_isolates_git_conversion(repo):
+    path = repo / "windows/facility_studio/entry.py"
+    assert path.read_bytes() == b"example\n"
+    assert subprocess.check_output(["git", "show", "HEAD:windows/facility_studio/entry.py"], cwd=repo) == path.read_bytes()
+    assert git(repo, "config", "--local", "core.autocrlf") == "false"
+    assert git(repo, "check-attr", "text", "--", "windows/facility_studio/entry.py").endswith(": text: unset")
+
+
+def test_fixture_is_clean_with_inherited_windows_git_defaults(tmp_path, monkeypatch):
+    config = tmp_path / "global-git-config"
+    config.write_text("[core]\n    autocrlf = true\n    eol = crlf\n", encoding="utf-8", newline="\n")
+    monkeypatch.setenv("GIT_CONFIG_GLOBAL", str(config))
+    monkeypatch.setenv("GIT_CONFIG_NOSYSTEM", "1")
+    root = make_repo(tmp_path / "windows-defaults-repository")
+    assert git(root, "config", "--global", "core.autocrlf") == "true"
+    assert git(root, "config", "core.autocrlf") == "false"
+    assert (root / "windows/facility_studio/entry.py").read_bytes() == b"example\n"
+    assert expected_source_manifest(root, "windows")["source_clean"] is True
+
+
+def test_normalized_git_status_does_not_hide_raw_line_ending_drift(repo):
+    # Reproduce Windows text-mode CRLF writes without requiring Windows: Git
+    # normalizes the index to LF while leaving the worktree CRLF bytes intact.
+    git(repo, "rm", ".gitattributes")
+    git(repo, "commit", "-qm", "Synthetic repository without byte preservation")
+    git(repo, "config", "core.autocrlf", "true")
+    path = repo / "windows/facility_studio/entry.py"
+    path.write_bytes(b"example\r\n")
+    git(repo, "add", ".")
+    assert git(repo, "status", "--porcelain") == ""
+    assert subprocess.check_output(["git", "show", "HEAD:windows/facility_studio/entry.py"], cwd=repo) == b"example\n"
+    assert path.read_bytes() == b"example\r\n"
+    with pytest.raises(RuntimeError, match="Dirty source tree.*windows/facility_studio/entry.py"):
+        expected_source_manifest(repo, "windows")
+
+
+def test_production_attributes_preserve_lf_and_crlf_with_windows_checkout_defaults(repo, tmp_path):
+    path = repo / "windows/facility_studio/resources/line-endings.txt"
+    path.write_bytes(b"deliberate CRLF\r\n")
+    git(repo, "config", "core.autocrlf", "true")
+    git(repo, "add", ".")
+    git(repo, "commit", "-qm", "Synthetic resource with authored CRLF")
+    before = expected_source_manifest(repo, "windows")
+    checkout = tmp_path / "fresh-windows-checkout"
+    git(tmp_path, "clone", "--no-checkout", str(repo), str(checkout))
+    git(checkout, "config", "core.autocrlf", "true")
+    git(checkout, "config", "core.eol", "crlf")
+    git(checkout, "checkout", "-q", "HEAD")
+    assert (checkout / "windows/facility_studio/entry.py").read_bytes() == b"example\n"
+    assert (checkout / "windows/facility_studio/resources/line-endings.txt").read_bytes() == b"deliberate CRLF\r\n"
+    assert expected_source_manifest(checkout, "windows") == before

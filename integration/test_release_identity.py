@@ -55,13 +55,13 @@ def test_product_data_override_does_not_mutate_os_environment(platform, tmp_path
     assert support.app_data_root(platform="win32", environ=env) == tmp_path / "product-data"
     assert env == original
     assert support.app_data_root(platform="win32", environ={"LOCALAPPDATA": env["LOCALAPPDATA"]}) == tmp_path / "os-data/Facility_Studio_V5_5"
-    source = (ROOT / platform / "facility_studio/sandbox_ui.py").read_text()
+    source = (ROOT / platform / "facility_studio/sandbox_ui.py").read_text(encoding="utf-8")
     assert 'os.environ.get("FACILITY_STUDIO_NATIVE_MENUS")' in source
     assert 'root.title("Facility Studio " + BUILD)' in source
 
 
 def test_entry_uses_product_data_and_retires_obsolete_selftest():
-    text = (ROOT / "integration/entry.py").read_text()
+    text = (ROOT / "integration/entry.py").read_text(encoding="utf-8")
     assert 'Path.home() / "Facility Studio Data-5.7.3"' in text
     assert "FACILITY_STUDIO_DATA=str(data)" in text
     assert "LOCALAPPDATA=" not in text
@@ -72,7 +72,7 @@ def test_entry_uses_product_data_and_retires_obsolete_selftest():
 
 @pytest.mark.parametrize("filename", ["windows-offline-release.yml", "macos-native-release.yml", "public-downloads-maintenance.yml"])
 def test_legacy_workflow_has_no_automatic_trigger_or_release_step(filename):
-    text = (ROOT / ".github/workflows" / filename).read_text()
+    text = (ROOT / ".github/workflows" / filename).read_text(encoding="utf-8")
     on = text.split("\non:\n", 1)[1].split("\npermissions:", 1)[0]
     assert on.strip() == "workflow_dispatch:"
     assert re.findall(r"^  ([a-z_-]+):", text, re.M) == ["workflow_dispatch", "contents", "retired"]
