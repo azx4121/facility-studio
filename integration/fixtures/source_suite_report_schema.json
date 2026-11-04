@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "platform": "Windows-2025Server-10.0.26100-SP0",
+  "utf8_mode": 0,
+  "default_text_encoding": "cp1252",
+  "numeric_and_report_checks": 2,
+  "gui_checks": 2,
+  "checks": [
+    {
+      "issue_id": "R01",
+      "name": "{'water': {'length_m': '50'}}",
+      "passed": true
+    },
+    {
+      "issue_id": "R01",
+      "name": "{'pump': {}}",
+      "passed": true
+    },
+    {
+      "name": "PV shortcut is visible at minimum width / zh-Hant",
+      "passed": true
+    },
+    {
+      "name": "PV shortcut exposes vacuum without changing project / zh-Hant",
+      "passed": true
+    }
+  ],
+  "callback_errors": [],
+  "_fixture": {
+    "description": "Reduced verbatim historical Windows report observations; counts adjusted to 2 numeric and 2 GUI records. Not current native evidence.",
+    "source": "docs/evidence/2026-10-18-report-audit/source-windows-2025-report-regressions.json",
+    "original_sha256": "893b9c55bccbe0afa81c9d13c4ddd7101f14c3ef9478a4cc352f5552b9bff0ae",
+    "original_counts": {
+      "numeric_and_report_checks": 405,
+      "gui_checks": 28
+    }
+  }
+}

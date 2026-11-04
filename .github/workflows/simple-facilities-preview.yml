@@ -87,8 +87,9 @@ jobs:
             simple-evidence/**/*.txt
           retention-days: 14
 
+  # Independent native acceptance runs alongside Linux source validation.
+  # The whole workflow must pass; no publishing is performed by any job.
   native-windows:
-    needs: numerical-and-native-tk-source
     runs-on: windows-2022
     timeout-minutes: 35
     steps:

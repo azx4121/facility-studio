@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+  "checks": 7,
+  "formula_checks": 2,
+  "gui_checks": 5,
+  "assertions": [
+    {
+      "name": "electrical-equivalent/三相 380V/0.7/kW",
+      "passed": true,
+      "issue_id": null
+    },
+    {
+      "name": "electrical-current/三相 380V/0.7/kW",
+      "passed": true,
+      "issue_id": null
+    },
+    {
+      "name": "F05 zh-Hant/0/m³/h preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/0/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/0/LPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/0/US GPM preserves physical flow and motor input",
+      "passed": true
+    },
+    {
+      "name": "F05 zh-Hant/0/LPM preserves physical flow and motor input",
+      "passed": true
+    }
+  ],
+  "_fixture": {
+    "description": "Reduced verbatim observations from CI; summary counts adjusted to the selected 2 formula and 5 GUI records.",
+    "run_id": 41822871298,
+    "commit": "606227c532c9c0c201c49287ba9ac03b55962d0e",
+    "original_sha256": "cb72171ad7482144b35f2bfddde090c04dff7790fe2b3e2b2fd8b7098cc5c7a8",
+    "original_counts": {
+      "checks": 2502,
+      "formula_checks": 2362,
+      "gui_checks": 140
+    }
+  }
+}

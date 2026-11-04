@@ -67,11 +67,11 @@ def _unique_object(pairs):
     return result
 
 
-def _passing_checks(checks):
+def _passing_checks(checks, *, unique_names=True):
     return (isinstance(checks, list) and bool(checks)
             and all(isinstance(c, dict) and c.get("passed") is True
                     and isinstance(c.get("name"), str) and c["name"].strip() for c in checks)
-            and len({c["name"] for c in checks}) == len(checks))
+            and (not unique_names or len({c["name"] for c in checks}) == len(checks)))
 
 
 def validate_report(path, suite):
@@ -96,10 +96,19 @@ def validate_report(path, suite):
                  and all(isinstance(c, dict) and c.get("software_pass") is True for c in cases))
     elif suite in ("audit_regressions", "report_regressions"):
         checks = report.get("assertions" if suite == "audit_regressions" else "checks")
-        valid = (report.get("passed") is True and _passing_checks(checks)
-                 and type(report.get("gui_checks")) is int and report["gui_checks"] > 0)
-        if suite == "audit_regressions":
-            valid = valid and report.get("checks") == len(checks)
+        # Audit descriptions are not unique IDs: F05 deliberately repeats
+        # the same flow/unit checks during a round trip. Validate every ordered
+        # observation, including repeated ones, and cross-check both counts.
+        audit = suite == "audit_regressions"
+        numeric = report.get("formula_checks" if audit else "numeric_and_report_checks")
+        gui = report.get("gui_checks")
+        valid = (report.get("passed") is True
+                 and _passing_checks(checks, unique_names=not audit)
+                 and type(numeric) is int and numeric > 0
+                 and type(gui) is int and gui > 0
+                 and numeric + gui == len(checks))
+        if audit:
+            valid = valid and type(report.get("checks")) is int and report["checks"] == len(checks)
         else:
             valid = valid and report.get("callback_errors") == []
     else:

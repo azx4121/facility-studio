@@ -22,9 +22,10 @@ def payload(suite):
     if suite == "stress100":
         return dict(passed=True, failed_checks=[], software_failed=0, scenario_count=100,
                     cases=[dict(software_pass=True) for _ in range(100)])
+    checks.append(dict(name="GUI sample", passed=True))
     if suite == "audit_regressions":
-        return dict(passed=True, checks=1, assertions=checks, gui_checks=1)
-    return dict(passed=True, checks=checks, gui_checks=1, callback_errors=[])
+        return dict(passed=True, checks=2, formula_checks=1, assertions=checks, gui_checks=1)
+    return dict(passed=True, checks=checks, numeric_and_report_checks=1, gui_checks=1, callback_errors=[])
 
 
 def execute(tmp_path, monkeypatch, suite, value, *, exit_code=0, failure=None, stale=False):
@@ -117,3 +118,105 @@ def test_duplicate_json_keys_are_rejected(tmp_path, monkeypatch):
 def test_empty_suite_selection_cannot_pass(tmp_path):
     with pytest.raises(RuntimeError, match="No source suites"):
         runner.run_suites([], tmp_path, tmp_path)
+
+
+REAL_SCHEMA_FIXTURES = {
+    "audit_regressions": "source_suite_audit_repeated_labels.json",
+    "report_regressions": "source_suite_report_schema.json",
+}
+
+
+def real_schema(suite):
+    return json.loads((ROOT / "integration/fixtures" / REAL_SCHEMA_FIXTURES[suite]).read_text(encoding="utf-8"))
+
+
+@pytest.mark.parametrize("suite", REAL_SCHEMA_FIXTURES)
+def test_representative_real_source_schema_is_accepted(tmp_path, monkeypatch, suite):
+    report = real_schema(suite)
+    if suite == "audit_regressions":
+        checks = report["assertions"]
+        assert len(checks) > len({check["name"] for check in checks})
+    result, summary = execute(tmp_path, monkeypatch, suite, report)
+    assert result == 0
+    assert summary[0]["passed"] is True
+
+
+@pytest.mark.parametrize("suite", REAL_SCHEMA_FIXTURES)
+@pytest.mark.parametrize("mutation", [
+    "overall_false", "overall_int", "failed_observation", "numeric_passed", "missing_passed",
+    "empty_name", "missing_name", "nonobject_check", "empty_checks", "missing_checks",
+    "dropped_observation", "added_observation", "numeric_count_wrong", "numeric_count_missing",
+    "numeric_count_bool", "numeric_count_zero", "gui_count_wrong", "gui_count_missing",
+    "gui_count_bool", "gui_count_zero",
+])
+def test_real_schema_negative_mutations_fail_closed(tmp_path, monkeypatch, suite, mutation):
+    report = real_schema(suite)
+    key = "assertions" if suite == "audit_regressions" else "checks"
+    numeric = "formula_checks" if suite == "audit_regressions" else "numeric_and_report_checks"
+    checks = report[key]
+    # Mutate the last occurrence, ensuring a passing earlier duplicate cannot
+    # mask failure in a later observation.
+    check = checks[-1]
+    if mutation == "overall_false":
+        report["passed"] = False
+    elif mutation == "overall_int":
+        report["passed"] = 1
+    elif mutation == "failed_observation":
+        check["passed"] = False
+    elif mutation == "numeric_passed":
+        check["passed"] = 1
+    elif mutation == "missing_passed":
+        del check["passed"]
+    elif mutation == "empty_name":
+        check["name"] = " "
+    elif mutation == "missing_name":
+        del check["name"]
+    elif mutation == "nonobject_check":
+        checks[-1] = True
+    elif mutation == "empty_checks":
+        report[key] = []
+    elif mutation == "missing_checks":
+        del report[key]
+    elif mutation == "dropped_observation":
+        checks.pop()
+    elif mutation == "added_observation":
+        checks.append(dict(name="unexpected extra", passed=True))
+    else:
+        field = numeric if mutation.startswith("numeric_count") else "gui_checks"
+        if mutation.endswith("missing"):
+            del report[field]
+        elif mutation.endswith("bool"):
+            report[field] = True
+        elif mutation.endswith("zero"):
+            report[field] = 0
+        else:
+            report[field] += 1
+    result, summary = execute(tmp_path, monkeypatch, suite, report)
+    assert result != 0
+    assert summary[0]["exit_code"] == 0
+    assert summary[0]["passed"] is False
+    assert summary[0]["evidence_error"]
+
+
+@pytest.mark.parametrize("total", [None, True, "7", 6, 8])
+def test_audit_total_is_a_strict_matching_count(tmp_path, monkeypatch, total):
+    report = real_schema("audit_regressions")
+    report["checks"] = total
+    result, _ = execute(tmp_path, monkeypatch, "audit_regressions", report)
+    assert result != 0
+
+
+@pytest.mark.parametrize("errors", [None, {}, "", ["unhandled callback"]])
+def test_report_callback_errors_are_required_and_empty(tmp_path, monkeypatch, errors):
+    report = real_schema("report_regressions")
+    report["callback_errors"] = errors
+    result, _ = execute(tmp_path, monkeypatch, "report_regressions", report)
+    assert result != 0
+
+
+def test_security_and_report_duplicate_names_remain_invalid(tmp_path, monkeypatch):
+    report = real_schema("report_regressions")
+    report["checks"][-1]["name"] = report["checks"][0]["name"]
+    result, _ = execute(tmp_path, monkeypatch, "report_regressions", report)
+    assert result != 0
+    assert not runner._passing_checks([dict(name="same", passed=True)] * 2)
