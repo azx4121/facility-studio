@@ -1,0 +1,35 @@
+{
+  "scope": "External validator source files only; product EXE/native validation pending",
+  "files": {
+    "run_frozen_cli.py": {
+      "bytes": 28831,
+      "sha256": "efcdd32c508efdfdca075350c70ec44f9e71fb21f3ac9ca0e2a8a97c27d80b59"
+    },
+    "capture_windows.py": {
+      "bytes": 13667,
+      "sha256": "3b28421c98658bee919ab17fd172dfd7fb2a816ff799d5d6e698a57d620bf133"
+    },
+    "test_frozen_checks.py": {
+      "bytes": 10399,
+      "sha256": "ccac7b9fce7f58f91f4c3cc0ea1c2bd4dae64e8239ef0c8e40c7272d7d04a95b"
+    },
+    "README.md": {
+      "bytes": 6157,
+      "sha256": "94496a740de1d7100436cd59033b76ef55ba66cb0c1caf55c7ed96cada71b615"
+    }
+  },
+  "local_tests": {
+    "portable_unit_tests": 32,
+    "mocked_or_synthetic": true,
+    "native_windows": false,
+    "source_cli_launches": 34,
+    "source_only_result": "local-source-probe3/Source_Only_Checks.json",
+    "scope_excludes": [
+      "dependency-backed tools",
+      "full project calculation",
+      "GUI",
+      "frozen EXE",
+      "Windows"
+    ]
+  }
+}
