@@ -2,7 +2,7 @@
 
 下載本頁附件 **FACS-v22-r3-UNVALIDATED-COMPILE-ONLY-macOS-arm64.zip**。這是一個完整 ZIP，內含完整 .app，無須拼接或另行下載分片。
 
-**目前是未驗收的 compile-only 候選，不是正式工程發布。** 僅完成受守衛的 Mac ARM64 編譯與靜態檢查；未完成產品啟動、GUI、frozen 或完整工程驗收。不是 FEED 核准、Developer ID 簽署或 Apple 公證版本，不能作為工程核准依據。原有 Mac fixture／完整驗收缺口及電力自動選型限制仍保留。
+**目前是未驗收的 compile-only 候選，不是正式工程發布。** 這份原始 ZIP 來自受守衛的 Mac ARM64 編譯與靜態檢查；完整原生 GUI、frozen 與工程驗收仍未完成。本次發布流程只驗證檔案傳輸完整性。不是 FEED 核准、Developer ID 簽署或 Apple 公證版本，不能作為工程核准依據。原有 Mac fixture／完整驗收缺口及電力自動選型限制仍保留。
 
 - 平台：macOS Apple Silicon ARM64，非 Intel／Universal。
 - 完整 ZIP：78,519,839 bytes。
@@ -15,6 +15,6 @@
 
 Download the single complete ZIP attached to this prerelease. No manual joining or separate component downloads are required.
 
-This is an **unvalidated compile-only Mac ARM64 candidate**, published at the owner's request. It has not passed native application launch, GUI, frozen or full engineering acceptance. It is not FEED approval, a Developer ID signed build or Apple notarization. Preserve existing installations and real project data. The ZIP is byte-for-byte unchanged from the original candidate; its embedded private/unpublished labels describe its build-time status. This tag records distribution, not a source build or a new acceptance result.
+This is an **unvalidated compile-only Mac ARM64 candidate**, published at the owner's request. Full native GUI, frozen and engineering acceptance remain incomplete. This publication workflow checks file-transfer integrity only. It is not FEED approval, a Developer ID signed build or Apple notarization. Preserve existing installations and real project data. The ZIP is byte-for-byte unchanged from the original candidate; its embedded private/unpublished labels describe its build-time status. This tag records distribution, not a source build or a new acceptance result.
 
 DESIGNED BY ANDY HUANG ©

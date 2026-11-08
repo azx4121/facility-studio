@@ -6,9 +6,11 @@
 
 Facility Studio 5.7.3 是廠務工程初估、方案比較與設計需求整理工具，可支援 FEED 階段中符合已列模型範圍的部分計算與文件準備。軟體測試驗證計算及操作實作，不代表專案已通過 FEED、法規或原廠設備性能認證。設計條件、原廠同工況資料、交付範圍及專業覆核仍須由專案團隊完成。
 
-![Facility Studio 功能導覽：單點快算、整案工作台、設備與容量、設計資料審查](docs/images/diagrams/overview.zh.svg)
+![Facility Studio 5.7.3 v22 r3：macOS ARM64 繁中電力頁原生實際畫面](docs/images/facs-5.7.3-v22-macos-arm64-electrical-zh-Hant.jpg)
 
-*文件示意圖，非軟體截圖或驗收證明。看[完整圖解與圖片來源](docs/visual-tour.md)。*
+*實際執行的 5.7.3 v22 r3 macOS ARM64 候選包，繁中介面；原圖未裁切或改圖。已完成原生啟動及部分畫面檢視，仍為 **UNVALIDATED-COMPILE-ONLY**，不是全功能驗收或正式 FEED 核定。圖中自動配線選型已暫停。*
+
+[新版工作台及圖解導覽](docs/visual-tour.md#screenshots) · [成品身份、原圖 SHA256 與測試範圍](docs/images/README.md#v573-v22-r3)。此候選包尚未建立可核對的 Git commit 對應；圖片不代表本倉庫 main 即為 v22 來源，也不代表已公開 Release。
 
 ## 下載
 
@@ -52,7 +54,7 @@ Facility Studio 5.7.3 是廠務工程初估、方案比較與設計需求整理�
 
 5.7.3 整理工程護鎖、來源失效、C2 可行性與 BF／ADP 搜尋、真空抽速必要條件、DI 持續循環量範本公式、報告與語系一致性。舊版「降低冰水至某數值即可修復」的建議不能當保證；須用完整工況重算。詳細範圍見[版本變更與發布契約](docs/releases/v5.7.3.md)與[正式驗收證據格式](docs/verification/5.7.3-release-acceptance.md)。
 
-[歷史截圖與來源](docs/images/README.md)只代表所列舊版本，不能轉用為本版成品畫面；新畫面以附來源及成品身份的 Release 證據為準。正式選型、完整管網、保護協調、施工圖與現場驗收仍須另外完成。
+[圖片來源](docs/images/README.md)分別記錄 5.7.3 v22 r3 真實候選畫面與歷史版本，不互相轉用驗收結果。正式選型、完整管網、保護協調、施工圖與現場驗收仍須另外完成。
 
 [開發與測試](docs/development.md) · [參與維護](CONTRIBUTING.md) · [授權案例](LICENSE_GUIDE.md) · [LICENSE](LICENSE) · [第三方元件](THIRD_PARTY_NOTICES.md)
 

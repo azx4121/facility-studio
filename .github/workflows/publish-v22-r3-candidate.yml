@@ -27,7 +27,7 @@ jobs:
       GH_REPO: azx4121/facility-studio
       TAG: facs-v22-r3-macos-arm64-unvalidated
       ZIP: FACS-v22-r3-UNVALIDATED-COMPILE-ONLY-macOS-arm64.zip
-      EXPECTED_MAIN: ed70a90549cb43aa701aab0c87e00a352192161e
+      EXPECTED_MAIN: b4ba2c0982636142ce878d75d2845f86b38eb9db
     steps:
       - name: Check out the exact distribution commit
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
