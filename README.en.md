@@ -10,17 +10,22 @@ Facility Studio 5.7.3 supports preliminary facility engineering calculations, op
 
 *Actual 5.7.3 v22 r3 macOS ARM64 candidate running natively, **English interface**, uncropped and unretouched. Native launch and selected screens have been checked; the package remains **UNVALIDATED-COMPILE-ONLY**, not fully accepted or FEED-certified. Long English sidebar labels are visibly clipped at this window size.*
 
-[Current workbench and visual tour](docs/visual-tour.en.md#screenshots) · [Artifact identity, original SHA256 and test scope](docs/images/README.md#v573-v22-r3). No verified Git commit mapping is available for this candidate. The images do not establish that repository main is the v22 build source or that a public Release exists.
+[Current workbench and visual tour](docs/visual-tour.en.md#screenshots) · [Artifact identity, original SHA256 and test scope](docs/images/README.md#v573-v22-r3). No verified Git commit mapping is available for this candidate. The images do not establish that repository main is the v22 build source; see the public candidate download and limits below.
 
 <a id="installation-and-first-launch"></a>
 ## Download and run
 
-**Native acceptance and platform publication status are determined by CI records and Release evidence for the exact source commit. A platform download is valid only when its matching Release provides the package and SHA256.** Use the [Releases index](https://github.com/azx4121/facility-studio/releases) to check version, platform, source commit and SHA256. The existence of documentation is not proof of publication or acceptance.
+**The complete Mac v22 r3 ZIP is available below. Windows v22 is not yet available. The Mac download is an unvalidated candidate, not an accepted release.** Formal acceptance requires matching CI/Release evidence for the exact source commit, platform package and SHA256. Historical test results do not establish acceptance of this version.
 
 | 5.7.3 delivery target | Package and launch | Acceptance status |
 | --- | --- | --- |
-| Windows x64; Windows 10/11 support target | Installer and portable ZIP; install into a new empty directory or extract the entire portable folder | Identical packages require Windows Server 2022/2025 native acceptance; consult matching commit CI/Release evidence |
-| macOS Apple Silicon ARM64 | ZIP containing Facility Studio 5.7.3.app; extract fully before launch | Consult matching commit CI/Release evidence for ARM64 acceptance; no 5.7.3 Universal, Intel or DMG claim |
+| [Windows x64 (v22 not yet available; view status)](#windows-v22-download-status); Windows 10/11 support target | Installer and portable ZIP are delivery targets; no v22 download is available yet | Identical packages require Windows Server 2022/2025 native acceptance, which remains incomplete |
+| [macOS Apple Silicon ARM64 (download complete ZIP)](https://github.com/azx4121/facility-studio/releases/download/facs-v22-r3-macos-arm64-unvalidated/FACS-v22-r3-UNVALIDATED-COMPILE-ONLY-macOS-arm64.zip) | One complete v22 r3 ZIP containing Facility Studio 5.7.3.app; extract fully before launch, with no parts to join | **Unvalidated candidate (UNVALIDATED-COMPILE-ONLY)**; full native GUI, frozen and engineering acceptance remain incomplete; no Universal, Intel or DMG claim |
+
+Mac ZIP: 78,519,839 bytes; SHA256: `26dcbac483b5c039486af1d88b750ba7dda5f11dbb9965e88fabc08d0236643a`. See [candidate release notes and limits](https://github.com/azx4121/facility-studio/releases/tag/facs-v22-r3-macos-arm64-unvalidated). Extract to a separate location without replacing existing installations or real project data.
+
+<a id="windows-v22-download-status"></a>
+**Windows v22: not yet available.** Native package acceptance and publication remain incomplete. The Windows link above opens this status note and does not download an older version.
 
 Historical prereleases: [Windows win.10](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.10) / [macOS mac.8](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-mac.8). Their tested hosts and Universal/DMG packages do not establish 5.7.3 acceptance. A formal version name does not establish trusted publisher signing or Apple notarization. See [security prompts](docs/signing.en.md).
 
