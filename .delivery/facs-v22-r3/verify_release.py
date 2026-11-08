@@ -2,7 +2,8 @@ import hashlib
 import json
 import os
 from pathlib import Path
-import subprocess
+import time
+import urllib.request
 
 expected = "26dcbac483b5c039486af1d88b750ba7dda5f11dbb9965e88fabc08d0236643a"
 release = json.loads(Path("release.json").read_text())
@@ -16,7 +17,17 @@ if os.environ.get("VERIFY_PUBLIC") == "1":
     assert release["draft"] is False
     url = asset["browser_download_url"]
     assert url == "https://github.com/azx4121/facility-studio/releases/download/facs-v22-r3-macos-arm64-unvalidated/FACS-v22-r3-UNVALIDATED-COMPILE-ONLY-macOS-arm64.zip"
-    subprocess.run(["curl", "--fail", "--location", "--retry", "3", "--retry-delay", "2", "--output", "public-redownload.zip", url], check=True)
+    for attempt in range(3):
+        try:
+            request = urllib.request.Request(url, headers={"User-Agent": "FACS-public-download-integrity-check"})
+            with urllib.request.urlopen(request, timeout=120) as response, open("public-redownload.zip", "wb") as target:
+                while chunk := response.read(1024 * 1024):
+                    target.write(chunk)
+            break
+        except Exception:
+            if attempt == 2:
+                raise
+            time.sleep(5)
     data = Path("public-redownload.zip").read_bytes()
     assert len(data) == 78519839 and hashlib.sha256(data).hexdigest() == expected
     print("PUBLIC_DOWNLOAD_VERIFIED", url, len(data), expected)

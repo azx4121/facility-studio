@@ -1,6 +1,5 @@
-# One-time owner-requested distribution of an unchanged, unvalidated candidate.
-# This does not invoke or relax any formal product release/build/acceptance gate.
-name: Publish complete v22 r3 Mac candidate
+# Publication is complete. This workflow now has read-only permissions.
+name: Verify published complete v22 r3 Mac ZIP
 
 "on":
   push:
@@ -12,46 +11,26 @@ name: Publish complete v22 r3 Mac candidate
 permissions:
   contents: read
 
-concurrency:
-  group: publish-facs-v22-r3-candidate
-  cancel-in-progress: false
-
 jobs:
-  publish:
+  verify:
     if: github.repository == 'azx4121/facility-studio' && github.ref == 'refs/heads/delivery/facs-v22-r3-macos-arm64-20261108'
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
-    permissions:
-      contents: write
+    timeout-minutes: 10
     env:
       GH_REPO: azx4121/facility-studio
-      TAG: facs-v22-r3-macos-arm64-unvalidated
-      ZIP: FACS-v22-r3-UNVALIDATED-COMPILE-ONLY-macOS-arm64.zip
-      EXPECTED_MAIN: b4ba2c0982636142ce878d75d2845f86b38eb9db
     steps:
-      - name: Check out the exact distribution commit
+      - name: Check out the verifier
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-      - name: Verify unchanged candidate bytes without executing it
-        run: python3 .delivery/facs-v22-r3/assemble.py
-      - name: Verify the exact draft created by this distribution task
+      - name: Read the exact published candidate without changing it
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          test "$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq '.object.sha')" = "$EXPECTED_MAIN"
           gh api "repos/$GH_REPO/releases/438174333" > release.json
-          python3 -c 'import json; r=json.load(open("release.json")); assert r["id"] == 438174333 and r["target_commitish"] == "478f08b236a05409a63a01e646f0e83363c7963e" and r["draft"] is True'
-          python3 .delivery/facs-v22-r3/verify_release.py
-      - name: Publish only that verified draft without replacing assets
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          test "$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq '.object.sha')" = "$EXPECTED_MAIN"
-          gh api --method PATCH "repos/$GH_REPO/releases/438174333" -F draft=false -F prerelease=true -f make_latest=false > release.json
-      - name: Verify the unauthenticated complete public download
+          python3 -c 'import json; r=json.load(open("release.json")); assert r["id"] == 438174333 and r["target_commitish"] == "478f08b236a05409a63a01e646f0e83363c7963e" and r["draft"] is False'
+      - name: Download anonymously and verify complete bytes
         env:
           VERIFY_PUBLIC: "1"
         run: python3 .delivery/facs-v22-r3/verify_release.py
