@@ -1,0 +1,67 @@
+# One-time owner-requested distribution of an unchanged, unvalidated candidate.
+# This does not invoke or relax any formal product release/build/acceptance gate.
+name: Publish complete v22 r3 Mac candidate
+
+"on":
+  push:
+    branches: ["delivery/facs-v22-r3-macos-arm64-20261108"]
+    paths:
+      - ".delivery/facs-v22-r3/**"
+      - ".github/workflows/publish-v22-r3-candidate.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-facs-v22-r3-candidate
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'azx4121/facility-studio' && github.ref == 'refs/heads/delivery/facs-v22-r3-macos-arm64-20261108'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    env:
+      GH_REPO: azx4121/facility-studio
+      TAG: facs-v22-r3-macos-arm64-unvalidated
+      ZIP: FACS-v22-r3-UNVALIDATED-COMPILE-ONLY-macOS-arm64.zip
+      EXPECTED_MAIN: ed70a90549cb43aa701aab0c87e00a352192161e
+    steps:
+      - name: Check out the exact distribution commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Verify unchanged candidate bytes without executing it
+        run: python3 .delivery/facs-v22-r3/assemble.py
+      - name: Refuse a changed main or an existing release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq '.object.sha')" = "$EXPECTED_MAIN"
+          if gh release view "$TAG" --repo "$GH_REPO" >/dev/null 2>&1; then
+            echo "The candidate release already exists. It will not be overwritten."
+            exit 1
+          fi
+      - name: Create a new draft prerelease with the single complete ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release create "$TAG" "$ZIP" --repo "$GH_REPO" --target "$GITHUB_SHA" --draft --prerelease --latest=false --title "FACS v22 r3｜Mac 完整單檔候選（未驗收）" --notes-file .delivery/facs-v22-r3/RELEASE_NOTES.md
+          gh api "repos/$GH_REPO/releases/tags/$TAG" > release.json
+          python3 .delivery/facs-v22-r3/verify_release.py
+      - name: Publish only the verified new candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq '.object.sha')" = "$EXPECTED_MAIN"
+          gh release edit "$TAG" --repo "$GH_REPO" --draft=false --prerelease --latest=false
+          gh api "repos/$GH_REPO/releases/tags/$TAG" > release.json
+      - name: Verify the unauthenticated complete public download
+        env:
+          VERIFY_PUBLIC: "1"
+        run: python3 .delivery/facs-v22-r3/verify_release.py
