@@ -11,6 +11,7 @@ import csv
 import hashlib
 import importlib.util
 import json
+import ntpath
 import math
 import os
 from pathlib import Path
@@ -288,7 +289,7 @@ class Suite:
             # Accept only its exact expected exit form, never a timeout/setup failure.
             require(expected != 0 and str(error) == f"Single EXE acceptance exited {expected}; inspect {log}",
                     "Unexpected process failure: " + str(error))
-            result = {"exit_code": expected, "elapsed_seconds": round(time.monotonic() - start, 3)}
+            result = getattr(error, "process_record", {"exit_code": expected, "elapsed_seconds": round(time.monotonic() - start, 3)})
         require(result["exit_code"] == expected, "Unexpected process exit code")
         record.update(result, passed=True)
         self.persist()
@@ -434,6 +435,26 @@ def load_helpers(candidate):
     return module, path
 
 
+def valid_process_image_audit(audit, expected_image=None):
+    if not isinstance(audit, dict):
+        return False
+    images = audit.get('images')
+    if not isinstance(images, list) or not all(isinstance(row, dict) for row in images):
+        return False
+    return (audit.get('required') is True and audit.get('passed') is True
+            and audit.get('errors') == []
+            and type(audit.get('total_job_processes')) is int
+            and type(audit.get('retained_process_handles')) is int
+            and audit['total_job_processes'] > 0
+            and audit['total_job_processes'] == audit['retained_process_handles'] == len(images)
+            and all(isinstance(row.get('image'), str) and row['image']
+                    and type(row.get('pid')) is int and row['pid'] > 0 for row in images)
+            and len({row['pid'] for row in images}) == len(images)
+            and (expected_image is None or all(
+                ntpath.normcase(ntpath.normpath(row['image'])) ==
+                ntpath.normcase(ntpath.normpath(str(expected_image))) for row in images)))
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--exe", type=Path, required=True)
@@ -458,7 +479,10 @@ def main(argv=None):
                "host": platform.platform(), "executable_sha256": expected,
                "helper_sha256": digest(helper_path), "runner_sha256": digest(__file__),
                "commands": [], "screenshots": [], "observations": [], "installation_performed": False,
-               "external_python_removed_from_child_path": True,
+               "launch_path_policy": "windows-system-directories-only",
+               "external_python_absence_claimed": False,
+               "standalone_process_image_audit_required": True,
+               "standalone_process_image_audit_passed": False,
                "application_network_audit_hook": True, "os_network_isolation_claimed": False,
                "engineering_or_formal_feed_approval_claimed": False,
                "gui_interactions_claimed": False, "screenshots_requested": args.screenshots,
@@ -489,6 +513,11 @@ def main(argv=None):
                             persist()
                 require(digest(copied) == expected, "Launch EXE changed during checks")
                 require(digest(exe) == expected, "Original EXE changed during checks")
+        process_records = list(summary["commands"]) + [item["process"] for item in summary["screenshots"]]
+        for record in process_records:
+            require(valid_process_image_audit(record.get("process_image_audit"), record["command"][0]),
+                    "Missing or incomplete standalone process-image audit")
+        summary["standalone_process_image_audit_passed"] = True
         summary["passed"] = True
     except Exception as error:
         summary["error"] = str(error)

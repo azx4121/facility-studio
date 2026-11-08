@@ -1258,14 +1258,24 @@ REVIEWED_WINDOWS_PORTABLE_R1 = {'windows/facility_studio/english_catalog.py': {'
                                                'windows_portable_r1': {'bytes': 59481,
                                                                        'mode': '100644',
                                                                        'sha256': 'ae3febe265b42d72d37e40897ecf418f4de49458334b90b411b413a532e63a75'}},
- 'windows/facility_studio/desktop.py': {'reason': 'Windows-only native menu installation before first '
-                                                  'layout/map; no calculation or macOS changes.',
+ 'windows/facility_studio/desktop.py': {'reason': 'Windows-only authored menu localization and bounded '
+                                                  'bilingual selector fit; original engineering enums, '
+                                                  'equations, startup ordering and macOS unchanged.',
                                         'v22': {'bytes': 56862,
                                                 'mode': '100644',
                                                 'sha256': '4a3779a0a9adb176da2530dca87074f55ff894c2a9a1a54b116a746e0683a26a'},
-                                        'windows_portable_r1': {'bytes': 56984,
+                                        'windows_portable_r1': {'bytes': 57135,
                                                                 'mode': '100644',
-                                                                'sha256': '070c8cf61e3c38748867a8d4188b5e19a2a7123378bee4da04ae85ad64c67836'}}}
+                                                                'sha256': 'b81a43b35a56acb6ac4c0afd3831a86b0e71f589f6b563057a3e2b9056033f5f'}},
+ 'windows/facility_studio/sandbox_ui.py': {'reason': 'Windows-only authored menu localization and bounded '
+                                                     'bilingual selector fit; original engineering enums, '
+                                                     'equations, startup ordering and macOS unchanged.',
+                                           'v22': {'bytes': 5581,
+                                                   'mode': '100644',
+                                                   'sha256': 'c49f3fe2239dae431bff94837cf2a1afb335206f347becd18b5a9237e327e072'},
+                                           'windows_portable_r1': {'bytes': 7077,
+                                                                   'mode': '100644',
+                                                                   'sha256': '57d264bd3b8118e9dca3ee7213399f7633bf581f451a1b48bee329cca566368f'}}}
 
 def assert_reviewed_product_bytes(relative):
     portable = REVIEWED_WINDOWS_PORTABLE_R1.get(relative)

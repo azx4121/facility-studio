@@ -2,6 +2,8 @@
 
 Python is a test controller only. Existing helpers launch the EXE with a PATH
 containing only Windows/System32 and Windows, from fresh EXE-only directories.
+System Python launchers may remain there. Every retained job process image must
+match the copied EXE; missing process coverage or image queries fail closed.
 The application audit hook is not OS network isolation.
 """
 import argparse
@@ -13,6 +15,8 @@ import platform
 import shutil
 import subprocess
 import sys
+
+from inspect_python_launch import inspect_launch_environment
 
 from private_draft_transfer import (EXE_NAME, MANIFEST_NAME, SOURCE_FIELDS, GateError,
                                     Scope, parse_json, regular_file, require, sha256,
@@ -51,7 +55,7 @@ def main(argv=None):
     integration = source / 'integration'
     sys.path.insert(0, str(integration))
     from source_provenance import expected_source_manifest, verify_source_unchanged
-    from onefile_validation import offline_environment, verify_single_exe
+    from onefile_validation import offline_environment, verify_single_exe, valid_process_image_audit
     expected = expected_source_manifest(source, 'windows')
     require(transfer['source_manifest'] == {key: expected[key] for key in SOURCE_FIELDS},
             'Independent reconstructed source differs from producer provenance.')
@@ -64,7 +68,11 @@ def main(argv=None):
         'release_id': args.release_id, 'asset_id': args.asset_id,
         'executable_sha256': args.sha256, 'same_producer_bytes': True,
         'source_manifest': transfer['source_manifest'], 'source_provenance_matches': True,
-        'external_python_removed_from_tested_launch_path': True,
+        'launch_path_policy': 'windows-system-directories-only',
+        'external_python_absence_claimed': False,
+        'standalone_process_image_audit_required': True,
+        'standalone_process_image_audit_passed': False,
+        'application_launch_attempted': False,
         'application_network_hook': True, 'os_network_isolation_claimed': False,
         'python_installed_on_controller': True, 'installation_performed': False,
         'public_distribution_authorized_by_this_script': False,
@@ -78,18 +86,26 @@ def main(argv=None):
     for key in ('GH_TOKEN', 'GITHUB_TOKEN', 'ACTIONS_RUNTIME_TOKEN',
                 'ACTIONS_ID_TOKEN_REQUEST_TOKEN', 'ACTIONS_ID_TOKEN_REQUEST_URL'):
         os.environ.pop(key, None)
-    test_env = offline_environment(evidence / 'path-check-data')
-    windows = Path(os.environ.get('SystemRoot', 'C:/Windows'))
-    require(test_env['PATH'] == str(windows / 'System32') + os.pathsep + str(windows),
-            'Launch PATH was not stripped to Windows directories.')
-    for name in ('python.exe', 'python3.exe', 'py.exe'):
-        require(shutil.which(name, path=test_env['PATH']) is None,
-                'A Python interpreter is reachable through the tested launch PATH.')
     persist()
     try:
+        test_env = offline_environment(evidence / 'path-check-data')
+        preflight = inspect_launch_environment(test_env)
+        summary['python_launch_preflight'] = preflight
+        persist()  # Preserve the resolved paths even when the gate rejects this host.
+        windows = Path(os.environ.get('SystemRoot', 'C:/Windows'))
+        require(test_env['PATH'] == str(windows / 'System32') + os.pathsep + str(windows),
+                'Launch PATH was not stripped to Windows directories.')
+        require(not preflight['unsafe_path_entries'], 'Unsafe relative or empty launch PATH entry.')
+        require(test_env.get('FACILITY_TEST_REQUIRE_SAME_IMAGE_CHILDREN') == '1',
+                'Standalone process-image audit is not enabled.')
+        summary['application_launch_attempted'] = True
+        persist()
         frozen = verify_single_exe(exe, evidence / 'single-exe', expected)
         require(frozen.get('passed') is True and frozen.get('executable_sha256') == args.sha256
-            and len(frozen.get('records', [])) == 4,
+            and len(frozen.get('records', [])) == 4
+            and frozen.get('standalone_process_image_audit_passed') is True
+            and all(valid_process_image_audit(row.get('process_image_audit'), row['command'][0])
+                    for row in frozen.get('records', [])),
                 'Independent frozen suites failed or used different bytes.')
         runner = regular_file(args.frozen_runner)
         environment = dict(os.environ, PYTHONDONTWRITEBYTECODE='1', PYTHONUTF8='1',
@@ -104,15 +120,23 @@ def main(argv=None):
         external = parse_json((evidence / 'external-frozen' / 'Frozen_External_Checks.json').read_bytes())
         require(external.get('passed') is True and external.get('original_exe_unchanged') is True
             and external.get('executable_sha256') == args.sha256
+            and external.get('standalone_process_image_audit_passed') is True
             and external.get('screenshots_requested') is True and len(external.get('screenshots', [])) == 8
             and len(external.get('commands', [])) == 118,
             'Independent CLI and eight startup captures did not fully pass.')
+        all_external = external['commands'] + [row.get('process', {}) for row in external['screenshots']]
+        require(all(valid_process_image_audit(row.get('process_image_audit'), row['command'][0]) for row in all_external),
+                'Independent process-image coverage is incomplete.')
         verify_source_unchanged(source, 'windows', expected)
         require(sha256(exe) == args.sha256 and sha256(transfer_path) == args.manifest_sha256,
                 'Transferred files changed during validation.')
         summary.update(passed=True, original_exe_unchanged=True,
+            standalone_process_image_audit_passed=True,
             frozen_suite_records=len(frozen.get('records', [])),
             external_commands=len(external['commands']), startup_captures=len(external['screenshots']))
+    except Exception as error:
+        summary['error'] = str(error)
+        raise
     finally:
         summary['original_exe_unchanged'] = sha256(exe) == args.sha256
         if not summary['original_exe_unchanged']:

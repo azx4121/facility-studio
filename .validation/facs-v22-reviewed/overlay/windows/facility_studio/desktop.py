@@ -618,7 +618,7 @@ class DesktopApp(SessionController, MainView):
             modebar,
             textvariable=self.view_mode,
             values=["基本模式", "進階模式"],
-            width=9,
+            width=16,
             state="readonly",
         ).pack(side="left")
         self.ref_button = ttk.Button(
@@ -629,7 +629,9 @@ class DesktopApp(SessionController, MainView):
             modebar, text="復原帶入", command=self.undo_preset
         )
         self.undo_button.pack(side="left")
-        scope = ttk.Combobox(modebar, textvariable=self.task_scope, values=("空調與熱負荷", "全部工程分頁"), state="readonly", width=14)
+        # Reserve room for both translated choices; FlowToolbar wraps locally
+        # on narrow displays without changing the main-window geometry.
+        scope = ttk.Combobox(modebar, textvariable=self.task_scope, values=("空調與熱負荷", "全部工程分頁"), state="readonly", width=26)
         scope.pack(side="left", padx=8)
         scope.bind("<<ComboboxSelected>>", lambda event: self.update_visibility())
         ttk.Button(modebar, text="空調箱管理", command=self.open_ahu_manager).pack(

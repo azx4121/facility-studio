@@ -1,7 +1,7 @@
 [
   {
     "path": "integration/test_independent_tutorial.py",
-    "sha256": "e97747babea74c13faa3bc143da000aaabbd255cafa10a8ffcb3bbc2f3133e38",
+    "sha256": "575a1db7e5cf67294480f637d42cdeb8597211f4bc2d0a9fd611f72316101d35",
     "original_sha256": "eaa866af734820a803c281c4e5b34a5ff25b7aece730d3357df3f4dab67b9b16",
     "kind": "test_harness"
   },
@@ -103,7 +103,7 @@
   },
   {
     "path": "windows/facility_studio/desktop.py",
-    "sha256": "070c8cf61e3c38748867a8d4188b5e19a2a7123378bee4da04ae85ad64c67836",
+    "sha256": "b81a43b35a56acb6ac4c0afd3831a86b0e71f589f6b563057a3e2b9056033f5f",
     "original_sha256": "4a3779a0a9adb176da2530dca87074f55ff894c2a9a1a54b116a746e0683a26a",
     "kind": "windows_menu_startup_order"
   },
@@ -129,6 +129,42 @@
     "path": "integration/test_windows_cold_startup.py",
     "sha256": "012f9b37ff71f9bbafe15cf7af016295203c57287e875782c73f1cf088b7260c",
     "original_sha256": null,
+    "kind": "test_harness"
+  },
+  {
+    "path": "windows/facility_studio/sandbox_ui.py",
+    "original_sha256": "c49f3fe2239dae431bff94837cf2a1afb335206f347becd18b5a9237e327e072",
+    "kind": "windows_english_menu_fit",
+    "sha256": "57d264bd3b8118e9dca3ee7213399f7633bf581f451a1b48bee329cca566368f"
+  },
+  {
+    "path": "integration/test_independent_top_menu_contract.py",
+    "original_sha256": "a6ea1a206f5356377b7b9e855589980da4dd35555f8b40f6364eb759b9e6a3b6",
+    "kind": "test_harness",
+    "sha256": "e96780e7272019c69c7c86d4ab6df515236ecfb1aa5315d4675c0fac75d815bf"
+  },
+  {
+    "path": "integration/independent_top_menu_server.tcl",
+    "original_sha256": "650f4a44b50f475a6a49b230608fc9eb8e96c649fc13df679077408cf67ad9c0",
+    "kind": "test_harness",
+    "sha256": "3bfed18d32659716c0b95dc3804b104b19a61f0ae19efa7008174164f848e499"
+  },
+  {
+    "path": "integration/test_windows_selector_fit.py",
+    "original_sha256": null,
+    "kind": "test_harness",
+    "sha256": "a140426b1800b40c5a5d0a156aec789594f9ed461d1380d3457122baddc75807"
+  },
+  {
+    "path": "integration/test_windows_english_startup_native.py",
+    "original_sha256": null,
+    "kind": "test_harness",
+    "sha256": "d965f58f55ac024c7fa46cca6facab0b877503992078c0557c882a8769a4cac2"
+  },
+  {
+    "path": "integration/test_standalone_process_images.py",
+    "original_sha256": null,
+    "sha256": "bc598340209d11b9576223f2f46a7286b3b2a2d89a3ad747c747d3c25e722ee5",
     "kind": "test_harness"
   }
 ]

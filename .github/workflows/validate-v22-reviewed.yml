@@ -45,6 +45,19 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Dependency verification failed' }
           "FACILITY_PY=$py" >> $env:GITHUB_ENV
           "NATIVE_DIAGNOSTICS_SOURCE=$env:RUNNER_TEMP/facs-v22-exact-source" >> $env:GITHUB_ENV
+      - name: Native same-image and foreign-image process audit controls
+        shell: pwsh
+        run: |
+          & $env:FACILITY_PY -B .validation/facs-v22-private-transfer/inspect_python_launch.py --output "$env:RUNNER_TEMP/facs-v22-evidence/python-launch-preflight.json"
+          if ($LASTEXITCODE -ne 0) { throw 'Malformed standalone launch environment' }
+          Push-Location "$env:RUNNER_TEMP/facs-v22-exact-source"
+          try {
+            & $env:FACILITY_PY -B -m pytest "$env:RUNNER_TEMP/facs-v22-exact-source/integration/test_standalone_process_images.py" -k native_child_identity --capture=sys -x -q --tb=long --junitxml="$env:RUNNER_TEMP/facs-v22-evidence/process-image-preflight.xml"
+            $imageExit = $LASTEXITCODE
+          } finally { Pop-Location }
+          if ($imageExit -ne 0) { throw 'Native process-image controls failed' }
+          & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/verify_process_image_preflight.py "$env:RUNNER_TEMP/facs-v22-evidence/process-image-preflight.xml"
+          if ($LASTEXITCODE -ne 0) { throw 'Incomplete native process-image preflight receipt' }
       - name: Untouched native-menu startup at frozen and small desktop sizes
         shell: pwsh
         run: |
@@ -62,7 +75,7 @@ jobs:
           foreach ($size in @('1920x1080', '1024x768')) {
             $width, $height = $size.Split('x')
             $label = "$width-$height"
-            & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/windows_display.py --width $width --height $height --exact --client 800x600 --evidence "$env:RUNNER_TEMP/facs-v22-evidence/cold-startup-display-$label.json" -- $env:FACILITY_PY -B -m pytest "$env:RUNNER_TEMP/facs-v22-exact-source/integration/test_windows_cold_startup.py" -k cold_real_entry --capture=sys -q --tb=long --basetemp="$env:RUNNER_TEMP/facs-cold-startup-processes-$label" --junitxml="$env:RUNNER_TEMP/facs-v22-evidence/cold-startup-placement-$label.xml"
+            & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/windows_display.py --width $width --height $height --exact --client 800x600 --evidence "$env:RUNNER_TEMP/facs-v22-evidence/cold-startup-display-$label.json" -- $env:FACILITY_PY -B -m pytest "$env:RUNNER_TEMP/facs-v22-exact-source/integration/test_windows_cold_startup.py" -k cold_real_entry --capture=sys -x -q --tb=long --basetemp="$env:RUNNER_TEMP/facs-cold-startup-processes-$label" --junitxml="$env:RUNNER_TEMP/facs-v22-evidence/cold-startup-placement-$label.xml"
             $coldExit = $LASTEXITCODE
             & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/preserve_cold_startup_traces.py --source "$env:RUNNER_TEMP/facs-cold-startup-processes-$label" --output "$env:RUNNER_TEMP/facs-v22-evidence/cold-startup-processes-$label"
             if ($LASTEXITCODE -ne 0) { throw "Cold startup trace preservation failed at $label" }
@@ -70,8 +83,23 @@ jobs:
             & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/verify_cold_startup_receipt.py "$env:RUNNER_TEMP/facs-v22-evidence/cold-startup-placement-$label.xml" --source "$env:RUNNER_TEMP/facs-v22-exact-source"
             if ($LASTEXITCODE -ne 0) { throw "Incomplete cold startup receipt at $label" }
           }
+      - name: Native bilingual menus and selector fit at both desktop sizes
+        shell: pwsh
+        run: |
+          foreach ($size in @('1920x1080', '1024x768')) {
+            $width, $height = $size.Split('x')
+            $label = "$width-$height"
+            $env:FACILITY_NATIVE_DISPLAY_PROFILE = if ($width -eq '1920') { 'frozen1920' } else { 'small1024' }
+            & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/windows_display.py --width $width --height $height --exact --client 800x600 --evidence "$env:RUNNER_TEMP/facs-v22-evidence/native-language-fit-display-$label.json" -- $env:FACILITY_PY -B -m pytest "$env:RUNNER_TEMP/facs-v22-exact-source/integration/test_windows_english_startup_native.py" --capture=sys -x -q --tb=long --junitxml="$env:RUNNER_TEMP/facs-v22-evidence/native-language-fit-$label.xml"
+            if ($LASTEXITCODE -ne 0) { throw "Native bilingual menu/selector fit failed at $label" }
+            & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/verify_native_language_fit.py "$env:RUNNER_TEMP/facs-v22-evidence/native-language-fit-$label.xml" --profile $env:FACILITY_NATIVE_DISPLAY_PROFILE
+            if ($LASTEXITCODE -ne 0) { throw "Incomplete native language/fit receipt at $label" }
+          }
+          Remove-Item Env:FACILITY_NATIVE_DISPLAY_PROFILE
       - name: Full native suites with verified large desktop and sys capture
         shell: pwsh
+        env:
+          FACILITY_NATIVE_DISPLAY_PROFILE: suite1600
         run: |
           & $env:FACILITY_PY .validation/facs-v22-reviewed/native_diagnostics/windows_display.py --width 1600 --height 1200 --client 1480x1000 --evidence "$env:RUNNER_TEMP/facs-v22-evidence/display-large.json" -- $env:FACILITY_PY .validation/facs-v22-reviewed/run_reviewed_validation.py tests
           if ($LASTEXITCODE -ne 0) { throw 'Full native suite or real desktop constraint failed' }

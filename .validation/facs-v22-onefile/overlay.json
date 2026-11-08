@@ -6,12 +6,12 @@
   },
   {
     "path": "integration/onefile_validation.py",
-    "sha256": "590f59411c993cfb1229f4dac5e12a3358e365f63b59a5a9e920529f58744ef6",
+    "sha256": "85f6ad877ed100c7131dd4ceeeccba04056e97f4d70211c32e1effa700ff2e48",
     "original_sha256": null
   },
   {
     "path": "integration/test_onefile_validation.py",
-    "sha256": "f99fd74eb96bfe6ef78ea61bf0171e010bfc83ee276eea37ded81adf81a86ad4",
+    "sha256": "a6eec130cc88dc307c6e702179ea3f345487a115a59b48032873a0ff5ab72e4d",
     "original_sha256": null
   },
   {

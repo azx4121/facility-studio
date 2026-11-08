@@ -2,11 +2,14 @@
 
 This is a packaging gate, not a replacement for source suites, native visual
 review, independent 2022/2025 execution, signing or engineering approval.
-The application network hook is not OS network isolation; only the launch PATH
-is stripped of external Python locations.
+The application network hook is not OS network isolation; the launch PATH
+is restricted to Windows directories, which may still contain Python launchers.
+The opt-in process-image audit proves no other executable was used by job members;
+it does not enumerate loaded DLLs or prevent absolute-path access.
 """
 import hashlib
 import json
+import ntpath
 import os
 from pathlib import Path
 import platform
@@ -92,11 +95,53 @@ def offline_environment(data_directory):
     system_root = Path(env.get('SystemRoot', 'C:/Windows'))
     env.update(PATH=str(system_root / 'System32') + os.pathsep + str(system_root),
                FACILITY_STUDIO_FUSION_DATA=str(data_directory),
-               FACILITY_TEST_BLOCK_NETWORK='1', PYTHONUTF8='1')
+               FACILITY_TEST_BLOCK_NETWORK='1', PYTHONUTF8='1',
+               FACILITY_TEST_REQUIRE_SAME_IMAGE_CHILDREN='1')
     return env
 
 
-def _run_windows_job(command, output, env, timeout):
+def valid_process_image_audit(audit, expected_image=None):
+    if not isinstance(audit, dict):
+        return False
+    images = audit.get('images')
+    if not isinstance(images, list) or not all(isinstance(row, dict) for row in images):
+        return False
+    return (audit.get('required') is True and audit.get('passed') is True
+            and audit.get('errors') == []
+            and type(audit.get('total_job_processes')) is int
+            and type(audit.get('retained_process_handles')) is int
+            and audit['total_job_processes'] > 0
+            and audit['total_job_processes'] == audit['retained_process_handles'] == len(images)
+            and all(isinstance(row.get('image'), str) and row['image']
+                    and type(row.get('pid')) is int and row['pid'] > 0 for row in images)
+            and len({row['pid'] for row in images}) == len(images)
+            and (expected_image is None or all(
+                ntpath.normcase(ntpath.normpath(row['image'])) ==
+                ntpath.normcase(ntpath.normpath(str(expected_image))) for row in images)))
+
+
+def _record_process_image(audit, pid, actual, expected):
+    audit['images'].append(dict(pid=int(pid), image=actual))
+    try:
+        same = (bool(actual) and os.path.normcase(os.path.abspath(actual)) ==
+                os.path.normcase(os.path.abspath(expected)) and os.path.samefile(actual, str(expected)))
+    except OSError as error:
+        audit['errors'].append('Cannot verify process image: ' + str(error))
+        return
+    if not same:
+        audit['errors'].append('Unexpected external process image: ' + actual)
+
+
+def _complete_process_image_audit(audit, total, retained):
+    audit.update(total_job_processes=int(total), retained_process_handles=int(retained))
+    audit['passed'] = (audit.get('required') is True and total > 0 and
+                       not audit['errors'] and total == retained == len(audit['images'])
+                       and len({row['pid'] for row in audit['images']}) == total)
+    if not audit['passed']:
+        raise RuntimeError('Standalone process-image audit failed: ' + json.dumps(audit))
+
+
+def _run_windows_job(command, output, env, timeout, image_audit=None):
     """Assign a suspended process to a kill-on-close job before any app code runs.
 
     No breakaway flag is allowed. Closing the job also kills surviving children
@@ -160,6 +205,7 @@ def _run_windows_job(command, output, env, timeout):
     create = bind('CreateProcessW', [w.LPCWSTR, w.LPWSTR, ctypes.c_void_p, ctypes.c_void_p,
                   w.BOOL, w.DWORD, ctypes.c_void_p, w.LPCWSTR,
                   ctypes.POINTER(STARTUPINFOEX), ctypes.POINTER(PROCESS_INFORMATION)])
+    query_image = bind('QueryFullProcessImageNameW', [w.HANDLE, w.DWORD, w.LPWSTR, ctypes.POINTER(w.DWORD)])
     resume = bind('ResumeThread', [w.HANDLE], w.DWORD)
     wait = bind('WaitForSingleObject', [w.HANDLE, w.DWORD], w.DWORD)
     get_code = bind('GetExitCodeProcess', [w.HANDLE, ctypes.POINTER(w.DWORD)])
@@ -181,6 +227,20 @@ def _run_windows_job(command, output, env, timeout):
     inherited = []
     assigned = False
     members = {}
+    audit_enabled = env.get('FACILITY_TEST_REQUIRE_SAME_IMAGE_CHILDREN') == '1'
+    audit = image_audit if image_audit is not None else {}
+    audit.update(required=audit_enabled, passed=False, images=[], errors=[])
+
+    def capture_image(pid, handle):
+        if not audit_enabled:
+            return
+        buffer = ctypes.create_unicode_buffer(32768)
+        length = w.DWORD(len(buffer))
+        if not query_image(handle, 0, buffer, ctypes.byref(length)):
+            audit['errors'].append('Cannot query process image for PID ' + str(pid)
+                                   + ': WinError ' + str(ctypes.get_last_error()))
+            return
+        _record_process_image(audit, pid, buffer.value, command[0])
 
     def capture_members():
         # Keep handles open: this both provides an actual waitable exit barrier
@@ -214,6 +274,7 @@ def _run_windows_job(command, output, env, timeout):
                 checked(in_job(handle, job, ctypes.byref(owned)))
                 if owned.value:
                     members[pid] = handle
+                    capture_image(pid, handle)
                     handle = None
             finally:
                 if handle:
@@ -256,6 +317,7 @@ def _run_windows_job(command, output, env, timeout):
             checked(assign(job, info.hProcess))
             assigned = True
             members[info.dwProcessId] = info.hProcess
+            capture_image(info.dwProcessId, info.hProcess)
             if resume(info.hThread) == 0xffffffff:
                 raise ctypes.WinError(ctypes.get_last_error())
             deadline = time.monotonic() + max(timeout, 0)
@@ -297,6 +359,8 @@ def _run_windows_job(command, output, env, timeout):
                                 'Cannot prove Windows test process-tree drain: '
                                 f'{accounting.TotalProcesses} job processes, '
                                 f'{len(members)} retained process handles.')
+                        if audit_enabled:
+                            _complete_process_image_audit(audit, accounting.TotalProcesses, len(members))
                         break
                     if time.monotonic() >= deadline:
                         raise RuntimeError('Windows test job did not drain within 30 seconds.')
@@ -326,10 +390,11 @@ def _run_windows_job(command, output, env, timeout):
 def run_bounded(command, log, env, *, timeout=180):
     """Stop this launched test's whole process tree, including bootloader children."""
     start = time.monotonic()
+    image_audit = {}
     with Path(log).open('w', encoding='utf-8') as output:
         try:
             if sys.platform == 'win32':
-                code = _run_windows_job(command, output, env, timeout)
+                code = _run_windows_job(command, output, env, timeout, image_audit)
             else:
                 # Portable unit-test route, never a substitute for the Windows gate.
                 import signal
@@ -346,10 +411,14 @@ def run_bounded(command, log, env, *, timeout=180):
                     process.wait(timeout=30)
         except subprocess.TimeoutExpired as error:
             raise RuntimeError('Single EXE acceptance timed out; inspect ' + str(log)) from error
+    record = dict(command=[str(item) for item in command], exit_code=code,
+                  elapsed_seconds=round(time.monotonic()-start, 3),
+                  process_image_audit=image_audit)
     if code:
-        raise RuntimeError(f'Single EXE acceptance exited {code}; inspect {log}')
-    return dict(command=[str(item) for item in command], exit_code=code,
-                elapsed_seconds=round(time.monotonic()-start, 3))
+        error = RuntimeError(f'Single EXE acceptance exited {code}; inspect {log}')
+        error.process_record = record
+        raise error
+    return record
 
 def verify_single_exe(executable, evidence, expected_manifest, *, allow_non_release=False):
     if sys.platform != 'win32':
@@ -362,7 +431,10 @@ def verify_single_exe(executable, evidence, expected_manifest, *, allow_non_rele
     records = []
     result = dict(passed=False, native_windows=True, host=platform.platform(),
                   executable_sha256=digest, frozen_suites=['fusion', 'facilities'],
-                  external_python_removed_from_path=True, application_network_hook=True,
+                  launch_path_policy='windows-system-directories-only',
+                  external_python_absence_claimed=False,
+                  standalone_process_image_audit_required=True,
+                  standalone_process_image_audit_passed=False, application_network_hook=True,
                   installation_performed=False, formal_feed_accepted=False, records=records)
     summary = evidence / 'Single_EXE_Verification.json'
     summary.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -393,6 +465,9 @@ def verify_single_exe(executable, evidence, expected_manifest, *, allow_non_rele
                 raise RuntimeError('Portable executable changed during verification.')
     if hashlib.sha256(executable.read_bytes()).hexdigest() != digest:
         raise RuntimeError('Original single EXE changed during verification.')
+    if not all(valid_process_image_audit(record.get('process_image_audit'), record['command'][0]) for record in records):
+        raise RuntimeError('Missing standalone process-image audit in frozen suites.')
+    result['standalone_process_image_audit_passed'] = True
     result['passed'] = True
     summary.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding='utf-8')
     return result

@@ -145,7 +145,10 @@ def mock_acceptance_runner(monkeypatch, *, mutate=None):
         output.write_text(json.dumps(payload))
         calls.append((executable, hashlib.sha256(executable.read_bytes()).hexdigest(),
                       list(executable.parent.iterdir()), env))
-        return dict(command=list(map(str, command)), exit_code=0, elapsed_seconds=0)
+        return dict(command=list(map(str, command)), exit_code=0, elapsed_seconds=0,
+                    process_image_audit=dict(required=True, passed=True, errors=[],
+                        total_job_processes=1, retained_process_handles=1,
+                        images=[dict(pid=123, image=str(executable))]))
     monkeypatch.setattr(validation, 'run_bounded', run)
     return calls
 
