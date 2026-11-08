@@ -178,5 +178,11 @@
     "original_sha256": null,
     "kind": "test_harness",
     "sha256": "4b4caa6fd6bc0f2bdf68fb8a970dc9eb80af4f2a4be3d33300cb81461473c737"
+  },
+  {
+    "path": "integration/test_top_menu_language.py",
+    "original_sha256": "97eeb5052315889f7e4fdba7950076fa827c2fad8a5baacbfa1db1423a38efcb",
+    "sha256": "2d89da92886de1f52e9687dcf21d7bd1e5771e68e57269b184511b2a88d1cae9",
+    "kind": "test_harness"
   }
 ]
