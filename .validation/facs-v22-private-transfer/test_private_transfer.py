@@ -3,6 +3,7 @@ import copy
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -10,6 +11,15 @@ from unittest import mock
 import urllib.parse
 
 import private_draft_transfer as transfer
+
+
+def workflow_under_test(test_file, workspace=None):
+    # In CI inspect the actual active workflow, never a stale adjacent copy.
+    path = (Path(workspace) / '.github/workflows/private-windows-handoff.yml'
+            if workspace is not None else Path(test_file).parent / 'private-windows-handoff.yml')
+    if not path.is_file():
+        raise FileNotFoundError(path)
+    return path
 
 
 class FakeClient:
@@ -323,8 +333,23 @@ class ManifestTests(unittest.TestCase):
                 with self.assertRaises(transfer.GateError):
                     transfer.Scope(value, 1, 'a' * 40)
 
+    def test_ci_workflow_inspection_uses_actual_installed_path(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            sibling = root / '.validation/facs-v22-private-transfer/test_private_transfer.py'
+            sibling.parent.mkdir(parents=True)
+            sibling.with_name('private-windows-handoff.yml').write_text('STALE')
+            # No adjacent fallback is permitted when the real workflow is missing.
+            with self.assertRaises(FileNotFoundError):
+                workflow_under_test(sibling, root)
+            active = root / '.github/workflows/private-windows-handoff.yml'
+            active.parent.mkdir(parents=True)
+            active.write_text('ACTUAL')
+            self.assertEqual(workflow_under_test(sibling, root).read_text(), 'ACTUAL')
+            self.assertEqual(workflow_under_test(sibling).read_text(), 'STALE')
+
     def test_workflow_has_no_public_binary_artifact_or_publish(self):
-        workflow = (Path(__file__).parent / 'private-windows-handoff.yml').read_text()
+        workflow = workflow_under_test(__file__, os.environ.get('GITHUB_WORKSPACE')).read_text(encoding='utf-8')
         self.assertEqual(workflow.count('uses: actions/upload-artifact'), 2)
         self.assertIn('path: ${{ runner.temp }}/facs-private-diagnostics-2022/**', workflow)
         self.assertIn('path: ${{ runner.temp }}/facs-private-diagnostics-2025/**', workflow)
