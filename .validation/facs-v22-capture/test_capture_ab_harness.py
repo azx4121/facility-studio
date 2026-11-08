@@ -2,6 +2,8 @@
 import json
 from pathlib import Path
 
+import pytest
+
 import run_tcl_capture_ab as ab
 import test_tcl_capture_probe as probe
 
@@ -40,3 +42,26 @@ def test_inventory_includes_nested_tk_script_files(tmp_path, monkeypatch):
     rows = probe.library_inventory()
     assert len(rows) == 1 and rows[0]["path"] == str(path)
     assert rows[0]["readable"] and len(rows[0]["sha256"]) == 64
+
+
+def test_real_tcl_only_bootstrap_honors_lazy_library_loading():
+    import tkinter as tk
+    interpreter = tk.Tcl()
+    assert not interpreter.call("info", "commands", "tcl_findLibrary"), "Expected a fresh lazy Tcl interpreter"
+    result = probe.verify_tcl_bootstrap(interpreter)
+    assert result == dict(tcl_findLibrary_initially_available=False, tcl_findLibrary_autoload_result=1)
+    assert interpreter.call("info", "procs", "tcl_findLibrary")
+    # Already-loaded Tk-style state must also satisfy the same contract.
+    assert probe.verify_tcl_bootstrap(interpreter)["tcl_findLibrary_initially_available"]
+
+
+@pytest.mark.parametrize("fault", ["missing_auto_load", "failed_load", "empty_success"])
+def test_real_tcl_bootstrap_rejects_broken_initialization_or_autoload(fault):
+    import tkinter as tk
+    interpreter = tk.Tcl()
+    if fault == "missing_auto_load":
+        interpreter.eval("rename auto_load {}")
+    else:
+        interpreter.eval("proc auto_load args {return " + ("0" if fault == "failed_load" else "1") + "}")
+    with pytest.raises(AssertionError):
+        probe.verify_tcl_bootstrap(interpreter)

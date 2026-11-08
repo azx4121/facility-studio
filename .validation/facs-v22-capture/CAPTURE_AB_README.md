@@ -60,3 +60,27 @@ requested fd assertion. The full unchanged suite remains a later acceptance gate
 - CAPTURE_AB_README.md
 
 The earlier six diagnostic files have not been changed for this experiment.
+
+## First A/B run: harness defect preserved
+
+The first native A/B run on Windows 2022 and 2025 incorrectly required
+`tcl_findLibrary` to exist immediately after creating a Tcl-only interpreter.
+Every minimal Tcl-only case therefore failed the probe's assertion, in both
+capture arms. The 50 Tk cases per attempt and all isolated/module-context source
+attempts passed in both arms. This run does not demonstrate a capture-mode cause.
+Retain its artifacts and do not relabel its Tcl-only cases as passed.
+
+The corrected probe requires eager `auto_load` initialization, explicitly calls
+`auto_load tcl_findLibrary`, requires return value 1, and verifies that the library
+procedure was actually defined. It does not retry `Tk()` or ignore an exception.
+Real Tcl-only regression tests cover the normal initially-lazy state, the
+already-loaded state and broken/missing/false-success autoload behavior.
+
+Official Tcl 8.6.15 sources establish this lazy-loading contract:
+- https://github.com/tcltk/tcl/blob/core-8-6-15/library/tclIndex maps
+  `auto_index(tcl_findLibrary)` to `source ... auto.tcl`.
+- https://github.com/tcltk/tcl/blob/core-8-6-15/library/auto.tcl defines the procedure.
+
+The earlier mistake was failing to validate the minimal probe against a real
+Tcl-only interpreter before native submission. The new real-interpreter tests
+must run with future probe edits; portable bookkeeping tests alone are insufficient.

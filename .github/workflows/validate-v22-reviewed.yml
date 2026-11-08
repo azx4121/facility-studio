@@ -19,6 +19,7 @@ jobs:
       PYTHONDONTWRITEBYTECODE: '1'
       FACILITY_REQUIRE_DISPLAY: '1'
       FACILITY_TEST_PLATFORM: windows
+      PYTEST_ADDOPTS: '--capture=sys'
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -44,7 +45,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Dependency verification failed' }
           "FACILITY_PY=$py" >> $env:GITHUB_ENV
           "NATIVE_DIAGNOSTICS_SOURCE=$env:RUNNER_TEMP/facs-v22-exact-source" >> $env:GITHUB_ENV
-      - name: Full native suites with verified large desktop and passive Tk tracing
+      - name: Full native suites with verified large desktop and sys capture
         shell: pwsh
         run: |
           & $env:FACILITY_PY .validation/facs-v22-reviewed/native_diagnostics/windows_display.py --width 1600 --height 1200 --client 1480x1000 --evidence "$env:RUNNER_TEMP/facs-v22-evidence/display-large.json" -- $env:FACILITY_PY .validation/facs-v22-reviewed/run_reviewed_validation.py tests
@@ -59,6 +60,14 @@ jobs:
             !${{ runner.temp }}/facs-v22-evidence/source-v22.zip
           retention-days: 14
           if-no-files-found: error
+      - name: Corrected fresh Tcl and Tk bootstrap contract
+        if: ${{ !cancelled() && env.FACILITY_PY != '' }}
+        shell: pwsh
+        run: |
+          $env:TCL_CAPTURE_PROBE_EVENTS = "$env:RUNNER_TEMP/facs-v22-evidence/corrected-tcl-bootstrap.jsonl"
+          $env:TCL_CAPTURE_PROBE_COUNT = '50'
+          & $env:FACILITY_PY -m pytest .validation/facs-v22-reviewed/native_diagnostics/test_tcl_capture_probe.py --capture=sys -q --tb=long --junitxml="$env:RUNNER_TEMP/facs-v22-evidence/corrected-tcl-bootstrap.xml"
+          if ($LASTEXITCODE -ne 0) { throw 'Fresh Tcl or Tk bootstrap contract failed' }
       - name: Repeated isolated, module-context and predecessor Tk lifecycle checks
         if: ${{ !cancelled() && env.FACILITY_PY != '' }}
         shell: pwsh

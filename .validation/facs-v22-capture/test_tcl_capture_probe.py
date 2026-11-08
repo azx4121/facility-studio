@@ -81,6 +81,21 @@ def record(row):
             stream.write(json.dumps(row, ensure_ascii=True, default=str) + "\n")
 
 
+def verify_tcl_bootstrap(interpreter):
+    """Check eager initialization plus the standard lazy library-load contract.
+
+    Tcl 8.6's init.tcl defines auto_load. Its tclIndex maps tcl_findLibrary
+    to auto.tcl, so a Tcl-only interpreter need not expose that command yet.
+    This explicit load is an assertion, not a retry of failed initialization.
+    """
+    assert interpreter.call("info", "commands", "auto_load"), "Missing initialized Tcl auto_load command"
+    before = bool(interpreter.call("info", "commands", "tcl_findLibrary"))
+    loaded = int(interpreter.call("auto_load", "tcl_findLibrary"))
+    assert loaded == 1, "Tcl could not autoload its tcl_findLibrary library procedure"
+    assert interpreter.call("info", "procs", "tcl_findLibrary"), "Autoload did not define tcl_findLibrary"
+    return dict(tcl_findLibrary_initially_available=before, tcl_findLibrary_autoload_result=loaded)
+
+
 @pytest.mark.parametrize("iteration", range(int(os.environ.get("TCL_CAPTURE_PROBE_COUNT", "50"))))
 @pytest.mark.parametrize("kind", ["tcl", "tk"])
 def test_fresh_tcl_tk_initialization(iteration, kind, request):
@@ -94,7 +109,7 @@ def test_fresh_tcl_tk_initialization(iteration, kind, request):
         root = tk.Tk(useTk=kind == "tk")
         row["tcl"] = root.tk.call("info", "patchlevel")
         row["library"] = root.tk.call("info", "library")
-        assert root.tk.call("info", "commands", "tcl_findLibrary"), "Missing Tcl initialization command"
+        row.update(verify_tcl_bootstrap(root.tk))
         row["channels"] = root.tk.call("chan", "names")
         # This reads through Tcl, distinct from Python's independent file reads.
         path = str(Path(row["library"]) / "init.tcl")

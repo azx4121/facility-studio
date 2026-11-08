@@ -27,13 +27,16 @@ def prepare():
     assert sys.platform == 'win32'
     load('packaging_prepare', HERE.parent / 'facs-v22-onefile/run_packaging_guards.py').prepare()
     corrections = json.loads((HERE / 'corrections.json').read_text(encoding='utf-8'))
-    allowed = {'integration/test_independent_tutorial.py', 'integration/test_independent_ampacity_safety.py', 'tools/verify_engineering_dashboard.py'}
+    allowed = {'integration/test_independent_tutorial.py', 'integration/test_independent_ampacity_safety.py', 'tools/verify_engineering_dashboard.py', 'windows/facility_studio/feed_review_preview.py', 'windows/facility_studio/fusion_settings.py', 'integration/test_windows_dialog_work_area.py', 'windows/facility_studio/template_language.py', 'integration/test_windows_template_sheet_label.py'}
     assert {row['path'] for row in corrections} == allowed
     for row in corrections:
         source = HERE / 'overlay' / row['path']
         target = ROOT / row['path']
         assert hashlib.sha256(source.read_bytes()).hexdigest() == row['sha256']
-        assert hashlib.sha256(target.read_bytes()).hexdigest() == row['original_sha256']
+        if row['original_sha256'] is None:
+            assert not target.exists()
+        else:
+            assert hashlib.sha256(target.read_bytes()).hexdigest() == row['original_sha256']
         shutil.copy2(source, target)
     env = dict(os.environ, GIT_AUTHOR_NAME='FACS Reproducible Validation',
         GIT_AUTHOR_EMAIL='validation@users.noreply.github.com', GIT_COMMITTER_NAME='FACS Reproducible Validation',
@@ -48,11 +51,11 @@ def prepare():
     for row in original['files']:
         if row['mode'] == '100755':
             git('update-index', '--chmod=+x', '--', row['path'])
-    git('commit', '-q', '-m', 'Record exact v22 plus reviewed packaging and native test corrections')
+    git('commit', '-q', '-m', 'Record v22 Windows portable derivative with reviewed dialog, template label and native test repairs')
     result = dict(original_inventory_sha256=original['inventory_sha256'],
         packaging_overlay=json.loads((EVIDENCE / 'packaging-overlay.json').read_text()), test_corrections=corrections,
         snapshot_commit=git('rev-parse', 'HEAD'), snapshot_tree=git('rev-parse', 'HEAD^{tree}'),
-        workflow_commit=os.environ['GITHUB_SHA'], product_equations_changed=False,
+        workflow_commit=os.environ['GITHUB_SHA'], product_equations_changed=False, windows_dialog_ui_changed=True, windows_template_label_changed=True, macos_product_changed=False,
         baseline_native_run=42475494993, binary_published=False, formal_feed_accepted=False)
     (EVIDENCE / 'reviewed-source-provenance.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
     print(json.dumps(result))
@@ -70,7 +73,9 @@ def tests():
     for key in ('PYTHONPATH', 'TCL_LIBRARY', 'TK_LIBRARY'):
         env.pop(key, None)
     env['PYTHONPATH'] = str(HERE / 'native_diagnostics')
-    env['PYTEST_ADDOPTS'] = '-p native_tk_trace'
+    env['PYTEST_ADDOPTS'] = '--capture=sys -o faulthandler_timeout=120'
+    # Keep the complete suite uninstrumented. Separate lifecycle runs retain Tk tracing.
+    # The JUnit gate below still rejects every unexpected native skip.
     env['NATIVE_TK_TRACE'] = str(EVIDENCE / 'full-native-tk-events.jsonl')
     p = sys.executable
     commands = [

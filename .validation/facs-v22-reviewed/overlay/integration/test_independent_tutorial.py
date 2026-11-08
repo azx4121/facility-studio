@@ -1210,7 +1210,57 @@ REVIEWED_V22_DOCUMENT_INDEX_TRANSITIONS = {'docs/images/README.md': {'reason': '
                                    'mode': '100644',
                                    'sha256': '356cbd4451afc4a2053ff840add1f91cddc2555357e107f85dae4e204dc930bf'}}}
 
+
+# Explicit reviewed successors for the Windows portable release. Original v19/v22
+# identities remain frozen; no other product byte or path is exempted.
+REVIEWED_WINDOWS_PORTABLE_R1 = {'windows/facility_studio/feed_review_preview.py': {'reason': 'Windows-only fresh dialog work-area sizing; '
+                                                              'settings footer reservation. No engineering '
+                                                              'calculation changes.',
+                                                    'v22': {'bytes': 17488,
+                                                            'mode': '100644',
+                                                            'sha256': '29762b1396ec27ff31c184e4a5dc7bb980b65f1c8cdd698de78bc72c40557172'},
+                                                    'windows_portable_r1': {'bytes': 17658,
+                                                                            'mode': '100644',
+                                                                            'sha256': '55755cddc6c5068f2ea1e6df378aacf180e6bf13b81bd7d80a8026eca36f3386'}},
+ 'windows/facility_studio/fusion_settings.py': {'reason': 'Windows-only fresh dialog work-area sizing; '
+                                                          'settings footer reservation. No engineering '
+                                                          'calculation changes.',
+                                                'v22': {'bytes': 9234,
+                                                        'mode': '100644',
+                                                        'sha256': 'c95f24261600e7886a5c047dfb3fae5686de409fce15f838901f627cf2539d45'},
+                                                'windows_portable_r1': {'bytes': 9602,
+                                                                        'mode': '100644',
+                                                                        'sha256': 'a175bcc15ac656b7417bf2a80421f7340866092e6a076df4652ff980f0b5469d'}},
+ 'windows/facility_studio/template_language.py': {'reason': 'Windows-only exact application-owned worksheet '
+                                                            'title translation to Instructions; electrical '
+                                                            'restriction and workbook data unchanged.',
+                                                  'v22': {'bytes': 3382,
+                                                          'mode': '100644',
+                                                          'sha256': '69c64da70c1086731e5a587ea77e804ab8497ccd921edd015c4895752548e3fe'},
+                                                  'windows_portable_r1': {'bytes': 3662,
+                                                                          'mode': '100644',
+                                                                          'sha256': '634cbe5c2e8fd6e2596c263aaf215020f4dc4bdbe3389a722f65d511e0b1d3e1'}}}
+
 def assert_reviewed_product_bytes(relative):
+    portable = REVIEWED_WINDOWS_PORTABLE_R1.get(relative)
+    if portable is not None:
+        original = BASELINE_FILES[relative]
+        prior = REVIEWED_V22_PRODUCT_TRANSITIONS.get(relative)
+        if prior is not None:
+            assert {key: original[key] for key in ("sha256", "bytes", "mode")} == prior["v19"], (
+                "Reviewed immutable v19 predecessor changed: " + relative)
+            assert prior["v22"] == portable["v22"], "Reviewed immutable v22 predecessor changed: " + relative
+        else:
+            assert {key: original[key] for key in ("sha256", "bytes", "mode")} == portable["v22"], (
+                "Reviewed immutable predecessor changed: " + relative)
+        expected = portable["windows_portable_r1"]
+        path = ROOT / relative
+        assert path.is_file(), "Reviewed portable repair path missing: " + relative
+        body = path.read_bytes()
+        assert len(body) == expected["bytes"] and hashlib.sha256(body).hexdigest() == expected["sha256"], (
+            "Reviewed Windows portable repair bytes changed: " + relative)
+        assert source_mode(path, relative, body) == expected["mode"], "Reviewed portable mode changed: " + relative
+        return
     transition = REVIEWED_V22_PRODUCT_TRANSITIONS.get(relative)
     if transition is None:
         transition = REVIEWED_V22_DOCUMENT_INDEX_TRANSITIONS.get(relative)
@@ -1261,6 +1311,10 @@ def assert_exact_product_path_inventory(platform):
 def test_all_product_files_match_exact_reviewed_successors():
     assert not (set(REVIEWED_V21_TK_REPAIRS) & set(REVIEWED_V22_PRODUCT_TRANSITIONS))
     assert set(REVIEWED_V22_PRODUCT_TRANSITIONS) <= set(BASELINE_FILES)
+    assert set(REVIEWED_WINDOWS_PORTABLE_R1) <= set(BASELINE_FILES)
+    assert not (set(REVIEWED_WINDOWS_PORTABLE_R1) & set(REVIEWED_V21_TK_REPAIRS))
+    assert set(REVIEWED_WINDOWS_PORTABLE_R1) & set(REVIEWED_V22_PRODUCT_TRANSITIONS) == {
+        "windows/facility_studio/template_language.py"}
     for platform in ("macos", "windows"):
         old = {name for name in BASELINE_FILES if name.startswith(platform + "/")}
         for relative in old:
@@ -1268,7 +1322,7 @@ def test_all_product_files_match_exact_reviewed_successors():
         assert_exact_product_path_inventory(platform)
 
 
-@pytest.mark.parametrize("relative", sorted(set(REVIEWED_V21_TK_REPAIRS) | set(REVIEWED_V22_PRODUCT_TRANSITIONS) | set(REVIEWED_V22_DOCUMENT_INDEX_TRANSITIONS)))
+@pytest.mark.parametrize("relative", sorted(set(REVIEWED_V21_TK_REPAIRS) | set(REVIEWED_V22_PRODUCT_TRANSITIONS) | set(REVIEWED_V22_DOCUMENT_INDEX_TRANSITIONS) | set(REVIEWED_WINDOWS_PORTABLE_R1)))
 def test_each_reviewed_endpoint_rejects_one_wrong_byte(tmp_path, monkeypatch, relative):
     assert_reviewed_product_bytes(relative)
     body = (ROOT / relative).read_bytes()
