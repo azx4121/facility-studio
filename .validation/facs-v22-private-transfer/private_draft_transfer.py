@@ -37,6 +37,43 @@ class GateError(RuntimeError):
     pass
 
 
+class TransportUncertain(GateError):
+    pass
+
+
+def creation_diagnostic(status, headers, data, category):
+    """Bounded constants only; never echo response text, arbitrary headers or URLs."""
+    categories = {'transport_uncertain', 'request_failed', 'response_invalid',
+                  'ownership_mismatch', 'http_rejected'}
+    category = category if category in categories else 'request_failed'
+    record = {'operation': 'create_draft', 'http_status': None,
+              'request_id': None, 'failure_category': category}
+    if type(status) is int and 100 <= status <= 599:
+        record['http_status'] = status
+    if isinstance(headers, dict):
+        for key, value in headers.items():
+            if isinstance(key, str) and key.lower() == 'x-github-request-id':
+                # GitHub request IDs are colon-separated hexadecimal groups.
+                if isinstance(value, str) and re.fullmatch(
+                        r'[0-9A-Fa-f]{1,16}(?::[0-9A-Fa-f]{1,16}){3,4}', value):
+                    record['request_id'] = value
+                break
+    if category == 'http_rejected' and isinstance(data, bytes) and len(data) <= 65536:
+        try:
+            body = parse_json(data)
+        except (GateError, RecursionError):
+            body = None
+        if isinstance(body, dict):
+            # Exact recognition only, never reflect server-controlled strings.
+            messages = {'Resource not accessible by integration': 'resource_not_accessible',
+                        'Not Found': 'not_found', 'Validation Failed': 'validation_failed',
+                        'API rate limit exceeded': 'rate_limited'}
+            message = body.get('message')
+            if isinstance(message, str) and message in messages:
+                record['failure_category'] = messages[message]
+    print(json.dumps(record, sort_keys=True), flush=True)
+
+
 def require(condition, message):
     if not condition:
         raise GateError(message)
@@ -58,7 +95,7 @@ def unique_object(pairs):
 def parse_json(data):
     try:
         return json.loads(data, object_pairs_hook=unique_object)
-    except (ValueError, UnicodeError) as error:
+    except (ValueError, UnicodeError, RecursionError) as error:
         raise GateError('Invalid JSON metadata.') from error
 
 
@@ -136,7 +173,7 @@ class Client:
                 return status, info, data
         except (urllib.error.URLError, TimeoutError, OSError):
             # A POST could already have executed. Caller inspects before any retry.
-            raise GateError('Transport failure; outcome may be uncertain. Inspect the exact draft/asset before retry.') from None
+            raise TransportUncertain('Transport failure; outcome may be uncertain. Inspect the exact draft/asset before retry.') from None
 
     def get_json(self, path):
         status, _, data = self.request('GET', API + path, authenticated=True)
@@ -247,11 +284,27 @@ def verify_asset(data, name, size, digest, asset_id=None):
     return data
 
 
+def inspection_integer(value, minimum=1):
+    # Bound both type and encoded length; bool and arbitrary objects are not IDs.
+    return value if type(value) is int and minimum <= value <= 2**63 - 1 else None
+
+
+def inspection_asset(row):
+    """Closed logging projection only; never reflect untrusted strings or objects."""
+    name = row.get('name')
+    state = row.get('state')
+    return {'id': inspection_integer(row.get('id')),
+            'name': name if isinstance(name, str) and name in ALLOWED_ASSETS else None,
+            'state': state if isinstance(state, str) and state in {'uploaded', 'starter'} else None,
+            'bytes': inspection_integer(row.get('size'), 0)}
+
+
 def inspect_scope(client, scope):
     # Sanitized read-only reconciliation after an uncertain POST, never blind retry.
     matches = [row for row in client.pages('/releases') if row.get('tag_name') == scope.tag]
     print(json.dumps({'inspection_only': True, 'matching_releases': [
-        {'id': row.get('id'), 'draft': row.get('draft'), 'tag': row.get('tag_name')}
+        {'id': inspection_integer(row.get('id')),
+         'draft': row.get('draft') if type(row.get('draft')) is bool else None, 'tag': scope.tag}
         for row in matches]}), flush=True)
     return matches
 
@@ -269,14 +322,22 @@ def create_or_resume(client, scope, release_id):
     payload = canonical_json({'tag_name': scope.tag, 'target_commitish': scope.commit,
         'name': scope.name, 'body': scope.marker, 'draft': True, 'prerelease': True,
         'generate_release_notes': False, 'make_latest': 'false'})
+    status, headers, data = None, None, None
+    failure_category = 'request_failed'
     try:
-        status, _, data = client.request('POST', API + '/releases', authenticated=True,
+        status, headers, data = client.request('POST', API + '/releases', authenticated=True,
             payload=payload, content_type='application/json')
+        failure_category = 'http_rejected'
         require(status == 201, 'Draft creation did not return HTTP 201; outcome requires inspection.')
+        failure_category = 'response_invalid'
         created = parse_json(data)
         release_id = positive(created.get('id'))
+        failure_category = 'ownership_mismatch'
         scope.release(created, release_id)
-    except (GateError, TypeError, AttributeError):
+    except (GateError, TypeError, AttributeError) as error:
+        if isinstance(error, TransportUncertain):
+            failure_category = 'transport_uncertain'
+        creation_diagnostic(status, headers, data, failure_category)
         inspect_scope(client, scope)
         raise GateError('Draft creation uncertain or rejected. Inspected matching releases; do not retry automatically.') from None
     print(json.dumps({'empty_draft_created': True, 'release_id': release_id, 'tag': scope.tag}), flush=True)
@@ -304,8 +365,7 @@ def ensure_asset(client, scope, release_id, path, content_type):
             # Stop even if inspection finds it; explicit resume reconciles bytes.
             rows = inventory(client, release_id)
             print(json.dumps({'inspection_only': True, 'release_id': release_id,
-                'assets': [{'id': row.get('id'), 'name': row.get('name'), 'state': row.get('state'),
-                            'bytes': row.get('size')} for row in rows.values()]}), flush=True)
+                'assets': [inspection_asset(row) for row in rows.values()]}), flush=True)
             raise GateError('Upload outcome uncertain or rejected. Inspected exact draft assets; no automatic retry.') from None
         assets = inventory(client, release_id)
         require(name in assets, 'Uploaded asset missing from exact draft inventory.')
@@ -476,8 +536,7 @@ def main(argv=None):
             for row in assets.values():
                 scope.asset_gate(client, row)
             print(json.dumps({'release_id': args.release_id, 'draft': True, 'anonymous_404': True,
-                'assets': [{'id': x['id'], 'name': x['name'], 'bytes': x['size'], 'state': x['state']}
-                           for x in assets.values()]}))
+                'assets': [inspection_asset(row) for row in assets.values()]}))
 
 
 if __name__ == '__main__':

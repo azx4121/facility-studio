@@ -44,6 +44,14 @@ jobs:
           python-version: '3.12.10'
       - name: Verify local transfer gates without network
         run: python -B -m unittest discover -s .validation/facs-v22-private-transfer -p test_private_transfer.py -v
+      - name: Wait briefly for verified owner-created empty draft before building
+        id: owner_handoff
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python -B .validation/facs-v22-private-transfer/owner_draft_handoff.py --run-id $env:GITHUB_RUN_ID --run-attempt $env:GITHUB_RUN_ATTEMPT --workflow-commit $env:GITHUB_SHA wait --receipt "$env:RUNNER_TEMP/facs-owner-handoff.json" --seconds 300
+          if ($LASTEXITCODE -ne 0) { throw 'Owner handoff absent or invalid; do not build' }
       - name: Reconstruct reviewed source
         run: python -B .validation/facs-v22-reviewed/run_reviewed_validation.py prepare
       - name: Install isolated locked test controller and build dependencies
@@ -126,8 +134,9 @@ jobs:
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
+          OWNER_RELEASE_ID: ${{ steps.owner_handoff.outputs.release_id }}
         run: |
-          & $env:FACILITY_PY -B .validation/facs-v22-private-transfer/private_draft_transfer.py --run-id $env:GITHUB_RUN_ID --run-attempt $env:GITHUB_RUN_ATTEMPT --workflow-commit $env:GITHUB_SHA stage --exe "$env:RUNNER_TEMP/facs-v22-extended-build/Facility-Studio-5.7.3-v22-Windows-x64-Portable.exe" --build-receipt "$env:RUNNER_TEMP/facs-v22-evidence/candidate-build-result.json" --onefile-receipt "$env:RUNNER_TEMP/facs-v22-extended-build/evidence/single-exe/Single_EXE_Verification.json" --external-receipt "$env:RUNNER_TEMP/facs-v22-evidence/external-frozen/Frozen_External_Checks.json" --build-manifest "$env:RUNNER_TEMP/facs-v22-extended-build/evidence/Build_Manifest.json" --github-outputs
+          & $env:FACILITY_PY -B .validation/facs-v22-private-transfer/owner_draft_handoff.py --run-id $env:GITHUB_RUN_ID --run-attempt $env:GITHUB_RUN_ATTEMPT --workflow-commit $env:GITHUB_SHA stage --receipt "$env:RUNNER_TEMP/facs-owner-handoff.json" --resume-release-id $env:OWNER_RELEASE_ID --exe "$env:RUNNER_TEMP/facs-v22-extended-build/Facility-Studio-5.7.3-v22-Windows-x64-Portable.exe" --build-receipt "$env:RUNNER_TEMP/facs-v22-evidence/candidate-build-result.json" --onefile-receipt "$env:RUNNER_TEMP/facs-v22-extended-build/evidence/single-exe/Single_EXE_Verification.json" --external-receipt "$env:RUNNER_TEMP/facs-v22-evidence/external-frozen/Frozen_External_Checks.json" --build-manifest "$env:RUNNER_TEMP/facs-v22-extended-build/evidence/Build_Manifest.json" --github-outputs
           if ($LASTEXITCODE -ne 0) { throw 'Private gate failed; inspect exact release/asset IDs before any retry' }
 
       - name: Prepare allowlisted producer diagnostics only

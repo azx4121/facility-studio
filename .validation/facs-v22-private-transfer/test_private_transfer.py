@@ -507,5 +507,120 @@ class DiagnosticTests(unittest.TestCase):
         self.assertFalse(self.output.exists())
 
 
+"""Offline regression tests for bounded create diagnostics and fail-closed behavior."""
+import contextlib
+import io
+import json
+import socket
+import unittest
+from unittest import mock
+import urllib.error
+
+import private_draft_transfer as t
+
+
+class CreationDiagnosticTests(unittest.TestCase):
+    def setUp(self):
+        self.network = mock.patch.object(socket.socket, 'connect', side_effect=AssertionError('NETWORK FORBIDDEN'))
+        self.network.start()
+        self.addCleanup(self.network.stop)
+        self.scope = t.Scope(123, 1, 'a' * 40)
+        self.client = FakeClient(self.scope)
+
+    def creation_failure(self, result=None, error=None):
+        output = io.StringIO()
+        with mock.patch.object(self.client, 'request', return_value=result, side_effect=error) as post:
+            with contextlib.redirect_stdout(output), self.assertRaises(t.GateError):
+                t.create_or_resume(self.client, self.scope, None)
+            self.assertEqual(post.call_count, 1)
+            self.assertEqual(post.call_args.args[0], 'POST')
+        self.assertEqual(self.client.calls.count(('pages', '/releases')), 2)
+        rows = [json.loads(line) for line in output.getvalue().splitlines()]
+        self.assertEqual(rows[0]['matching_releases'], [])
+        self.assertEqual(rows[-1]['matching_releases'], [])
+        return rows[1], output.getvalue()
+
+    def test_http_rejection_redacts_untrusted_fields(self):
+        row, output = self.creation_failure((403, {'X-GitHub-Request-Id': 'ABCD:1234:5678:ABCD',
+            'Location': 'https://secret.test/?token=SECRET', 'Authorization': 'Bearer SECRET'},
+            b'{"message":"Resource not accessible by integration","errors":[{"message":"SECRET"}],"url":"https://secret.test"}'))
+        self.assertEqual(row, {'operation': 'create_draft', 'http_status': 403,
+            'request_id': 'ABCD:1234:5678:ABCD', 'failure_category': 'resource_not_accessible'})
+        self.assertNotIn('SECRET', output)
+        self.assertNotIn('https:', output)
+
+    def test_invalid_request_ids_are_omitted(self):
+        for value in ['SECRET', 'ABCD:1234:5678:ABCD\nsecret', 'https://secret.test', 'A' * 500]:
+            with self.subTest(value=value):
+                out = io.StringIO()
+                with contextlib.redirect_stdout(out):
+                    t.creation_diagnostic(404, {'x-github-request-id': value}, b'{"message":"Not Found"}', 'http_rejected')
+                row = json.loads(out.getvalue())
+                self.assertIsNone(row['request_id'])
+                self.assertEqual(row['failure_category'], 'not_found')
+
+    def test_unknown_and_malformed_error_bodies_not_echoed(self):
+        for body in [b'SECRET', b'{"message":["SECRET"]}', b'{"message":"SECRET"}', b'SECRET' * 20000]:
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                t.creation_diagnostic(422, {}, body, 'http_rejected')
+            self.assertEqual(json.loads(out.getvalue())['failure_category'], 'http_rejected')
+            self.assertNotIn('SECRET', out.getvalue())
+            self.assertLess(len(out.getvalue()), 200)
+
+    def test_transport_uncertainty_has_no_status_or_exception_text(self):
+        row, output = self.creation_failure(error=t.TransportUncertain('https://secret.test/?SECRET'))
+        self.assertEqual(row['failure_category'], 'transport_uncertain')
+        self.assertIsNone(row['http_status'])
+        self.assertNotIn('SECRET', output)
+
+    def test_real_client_transport_is_typed_and_redacted(self):
+        client = t.Client('synthetic-test-value')
+        with mock.patch.object(client.opener, 'open', side_effect=urllib.error.URLError('SECRET')):
+            with self.assertRaises(t.TransportUncertain) as caught:
+                client.request('POST', t.API + '/releases', authenticated=True)
+        self.assertNotIn('SECRET', str(caught.exception))
+
+    def test_deep_error_json_preserves_reconciliation_and_stop(self):
+        body = b'[' * 10000 + b'0' + b']' * 10000
+        row, output = self.creation_failure((403, {}, body))
+        self.assertEqual(row['failure_category'], 'http_rejected')
+        self.assertLess(len(output), 500)
+
+    def test_invalid_success_response(self):
+        row, _ = self.creation_failure((201, {}, b'{broken SECRET'))
+        self.assertEqual(row['failure_category'], 'response_invalid')
+
+    def test_ownership_mismatch(self):
+        row, output = self.creation_failure((201, {}, b'{"id":55,"draft":false,"secret":"SECRET"}'))
+        self.assertEqual(row['failure_category'], 'ownership_mismatch')
+        self.assertNotIn('SECRET', output)
+
+    def test_uncertain_creation_found_still_stops_then_explicit_resume(self):
+        self.client.uncertain_create = True
+        with contextlib.redirect_stdout(io.StringIO()), self.assertRaises(t.GateError):
+            t.create_or_resume(self.client, self.scope, None)
+        posts = [x for x in self.client.calls if x[0] == 'POST']
+        self.assertEqual(len(posts), 1)
+        with contextlib.redirect_stdout(io.StringIO()), self.assertRaises(t.GateError):
+            t.create_or_resume(self.client, self.scope, None)
+        self.assertEqual(len([x for x in self.client.calls if x[0] == 'POST']), 1)
+        self.assertEqual(t.create_or_resume(self.client, self.scope, 55), 55)
+        self.assertEqual(len([x for x in self.client.calls if x[0] == 'POST']), 1)
+
+    def test_unknown_categories_and_statuses_bounded(self):
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            t.creation_diagnostic('SECRET', {}, b'', 'SECRET')
+        row = json.loads(out.getvalue())
+        self.assertEqual(row['failure_category'], 'request_failed')
+        self.assertIsNone(row['http_status'])
+        self.assertNotIn('SECRET', out.getvalue())
+
+
+
+# Included in the existing exact CI discovery pattern.
+from test_owner_handoff import OwnerHandoffTests
+
 if __name__ == '__main__':
     unittest.main()
