@@ -104,7 +104,14 @@ def test_each_system_can_reimport_one_explicitly_enabled_sample(tmp_path, lang, 
         assert candidate["selected"] is None
 
 
-def test_special_title_translation_does_not_change_generic_description(tmp_path):
+def test_exact_title_catalog_translation_preserves_generic_and_longer_labels():
+    assert i18n.translate("填寫說明", "en") == "Instructions"
+    assert i18n.translate("填寫說明", "zh-Hant") == "填寫說明"
+    assert i18n.translate("說明", "en") == "Description"
+    assert i18n.translate("設備需求表填寫說明", "en") == "Equipment schedule instructions"
+
+
+def test_title_translation_does_not_change_generic_description(tmp_path):
     source, destination = tmp_path / "source.xlsx", tmp_path / "english.xlsx"
     with zipfile.ZipFile(source, "w") as archive:
         archive.writestr("xl/workbook.xml", '<workbook xmlns="' + NS["s"] + '"><sheets>'

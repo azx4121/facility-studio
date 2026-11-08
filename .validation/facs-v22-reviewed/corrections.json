@@ -1,7 +1,7 @@
 [
   {
     "path": "integration/test_independent_tutorial.py",
-    "sha256": "5b205b52b9ee73198c38bac8ce11db73ed926f651f29dd5a0312fb8bfa418760",
+    "sha256": "4090be3f62b92e011e6c6b4a32a30aaaa470fa9695c5f3389ccaea27f8cbaa3d",
     "original_sha256": "eaa866af734820a803c281c4e5b34a5ff25b7aece730d3357df3f4dab67b9b16",
     "kind": "test_harness"
   },
@@ -36,15 +36,45 @@
     "kind": "test_harness"
   },
   {
-    "path": "windows/facility_studio/template_language.py",
-    "kind": "windows_template_label",
-    "sha256": "634cbe5c2e8fd6e2596c263aaf215020f4dc4bdbe3389a722f65d511e0b1d3e1",
-    "original_sha256": "69c64da70c1086731e5a587ea77e804ab8497ccd921edd015c4895752548e3fe"
-  },
-  {
     "path": "integration/test_windows_template_sheet_label.py",
     "kind": "test_harness",
-    "sha256": "b9767f625f806a8d3c57e95295d67095cfdef998d04b512c90ad848efc320302",
+    "sha256": "8753ac6cca94cea8843d524c634639f37685d95c79c498aa37b4c7614a25f8f5",
     "original_sha256": null
+  },
+  {
+    "path": "windows/facility_studio/english_catalog.py",
+    "kind": "windows_template_label",
+    "sha256": "c9b1d7a222e3e867afe19f55b8933f37e1a44b1e1faec495d3aaf7f795fa7ec5",
+    "original_sha256": "4f27d571a6a3aba004761ca341f12eec13249e7960d557442e7d36fda2c507f0"
+  },
+  {
+    "path": "integration/test_dcc_selection_interactions.py",
+    "kind": "headless_test_fixture",
+    "sha256": "7c2b4d02c4a1e526d4efc5f17dfa35d8a0f5da1f90e7fb84ceb1ae421e76dbe5",
+    "original_sha256": "49aafdd9e14a74b22aa57d9ebcaaadd3bb565653921ebebf22a661b00c29f611"
+  },
+  {
+    "path": "integration/dcc_independent_resources/verify_dcc_contract.py",
+    "kind": "headless_test_fixture",
+    "sha256": "686c653b199fc6bf922f1d891e0756cd80a143b05f739a84ee14c3bc972d7cee",
+    "original_sha256": "e59eca2bad4104f49235562ed006eae3f286ccb4acfdd0599348c2cc3939dfa7"
+  },
+  {
+    "path": "integration/test_independent_v11_contracts.py",
+    "kind": "headless_test_fixture",
+    "sha256": "08e887f8d36e6605de9f58ed3b3e03e1618670cfc1cfff4498a4719f198e0f8e",
+    "original_sha256": "da66a64d27a8aa656ad8cee5127e838bc94d5fcfa160812ece20e0dc5c0f20b3"
+  },
+  {
+    "path": "integration/test_native_english_switch.py",
+    "kind": "headless_test_fixture",
+    "sha256": "30c923c042ea28bd643dd8ff93f841eff59baf514dd43f9c49153d3226b30a55",
+    "original_sha256": "62340490d3e4347913b1e875191788ee011c2fff936967f23bb40d57e708ef49"
+  },
+  {
+    "path": "integration/test_v11_repair_interactions.py",
+    "kind": "headless_test_fixture",
+    "sha256": "dd06ca56f32992599bc6079bb1e453a05498a879830d89c8eba754bb39edbf11",
+    "original_sha256": "234a4a65736482fe66fc3e232b8f2e675278546c3b0e8a4b8ece38b375f35dfd"
   }
 ]

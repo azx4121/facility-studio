@@ -27,7 +27,7 @@ def prepare():
     assert sys.platform == 'win32'
     load('packaging_prepare', HERE.parent / 'facs-v22-onefile/run_packaging_guards.py').prepare()
     corrections = json.loads((HERE / 'corrections.json').read_text(encoding='utf-8'))
-    allowed = {'integration/test_independent_tutorial.py', 'integration/test_independent_ampacity_safety.py', 'tools/verify_engineering_dashboard.py', 'windows/facility_studio/feed_review_preview.py', 'windows/facility_studio/fusion_settings.py', 'integration/test_windows_dialog_work_area.py', 'windows/facility_studio/template_language.py', 'integration/test_windows_template_sheet_label.py'}
+    allowed = {'integration/test_independent_tutorial.py', 'integration/test_independent_v11_contracts.py', 'windows/facility_studio/fusion_settings.py', 'integration/test_independent_ampacity_safety.py', 'windows/facility_studio/feed_review_preview.py', 'windows/facility_studio/english_catalog.py', 'integration/test_dcc_selection_interactions.py', 'integration/test_windows_template_sheet_label.py', 'integration/test_windows_dialog_work_area.py', 'integration/test_v11_repair_interactions.py', 'tools/verify_engineering_dashboard.py', 'integration/dcc_independent_resources/verify_dcc_contract.py', 'integration/test_native_english_switch.py'}
     assert {row['path'] for row in corrections} == allowed
     for row in corrections:
         source = HERE / 'overlay' / row['path']
