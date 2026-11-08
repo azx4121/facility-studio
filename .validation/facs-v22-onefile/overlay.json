@@ -1,0 +1,22 @@
+[
+  {
+    "path": "integration/build.py",
+    "sha256": "f868a3ab6ca6dad84518b953ef1fd077801afd0bbd6263e72b80573b7c875ef6",
+    "original_sha256": "06493052c558a7fdaeeee95c78a876a8b81f7a39c2db60ea830def1712e72b63"
+  },
+  {
+    "path": "integration/onefile_validation.py",
+    "sha256": "b11574a5130f42b50ad6ec1afd5172f25e919e05db1ada8a48b04e7d150991e9",
+    "original_sha256": null
+  },
+  {
+    "path": "integration/test_onefile_validation.py",
+    "sha256": "f99fd74eb96bfe6ef78ea61bf0171e010bfc83ee276eea37ded81adf81a86ad4",
+    "original_sha256": null
+  },
+  {
+    "path": "integration/test_onefile_process_native.py",
+    "sha256": "858a16c77d24d4eedea08f41efc288684b97cddbc336581d3c3f7de19cdc56cd",
+    "original_sha256": null
+  }
+]
