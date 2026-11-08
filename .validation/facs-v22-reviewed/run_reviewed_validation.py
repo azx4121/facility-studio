@@ -27,7 +27,7 @@ def prepare():
     assert sys.platform == 'win32'
     load('packaging_prepare', HERE.parent / 'facs-v22-onefile/run_packaging_guards.py').prepare()
     corrections = json.loads((HERE / 'corrections.json').read_text(encoding='utf-8'))
-    allowed = {'integration/test_independent_tutorial.py', 'integration/test_independent_v11_contracts.py', 'windows/facility_studio/fusion_settings.py', 'integration/test_independent_ampacity_safety.py', 'windows/facility_studio/feed_review_preview.py', 'windows/facility_studio/english_catalog.py', 'integration/test_dcc_selection_interactions.py', 'integration/test_windows_template_sheet_label.py', 'integration/test_windows_dialog_work_area.py', 'integration/test_v11_repair_interactions.py', 'tools/verify_engineering_dashboard.py', 'integration/dcc_independent_resources/verify_dcc_contract.py', 'integration/test_native_english_switch.py'}
+    allowed = {'integration/test_independent_ampacity_safety.py', 'tools/verify_engineering_dashboard.py', 'windows/facility_studio/english_catalog.py', 'integration/test_window_geometry.py', 'integration/test_native_english_switch.py', 'windows/facility_studio/feed_review_preview.py', 'integration/test_v11_repair_interactions.py', 'integration/test_windows_template_sheet_label.py', 'integration/test_windows_dialog_work_area.py', 'integration/test_independent_v11_contracts.py', 'windows/facility_studio/fusion_settings.py', 'integration/test_windows_startup_placement.py', 'integration/test_independent_tutorial.py', 'integration/dcc_independent_resources/verify_dcc_contract.py', 'integration/test_dcc_selection_interactions.py', 'windows/facility_studio/window_geometry.py'}
     assert {row['path'] for row in corrections} == allowed
     for row in corrections:
         source = HERE / 'overlay' / row['path']
@@ -51,11 +51,11 @@ def prepare():
     for row in original['files']:
         if row['mode'] == '100755':
             git('update-index', '--chmod=+x', '--', row['path'])
-    git('commit', '-q', '-m', 'Record v22 Windows portable derivative with reviewed dialog, template label and native test repairs')
+    git('commit', '-q', '-m', 'Record v22 Windows portable derivative with reviewed dialog, template label, startup placement and native test repairs')
     result = dict(original_inventory_sha256=original['inventory_sha256'],
         packaging_overlay=json.loads((EVIDENCE / 'packaging-overlay.json').read_text()), test_corrections=corrections,
         snapshot_commit=git('rev-parse', 'HEAD'), snapshot_tree=git('rev-parse', 'HEAD^{tree}'),
-        workflow_commit=os.environ['GITHUB_SHA'], product_equations_changed=False, windows_dialog_ui_changed=True, windows_template_label_changed=True, macos_product_changed=False,
+        workflow_commit=os.environ['GITHUB_SHA'], product_equations_changed=False, windows_dialog_ui_changed=True, windows_template_label_changed=True, windows_startup_placement_changed=True, macos_product_changed=False,
         baseline_native_run=42475494993, binary_published=False, formal_feed_accepted=False)
     (EVIDENCE / 'reviewed-source-provenance.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
     print(json.dumps(result))

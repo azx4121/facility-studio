@@ -51,3 +51,7 @@ From the parent directory:
 `python -B -m unittest discover -s private_transfer -p test_private_transfer.py -v`
 
 The tests are completely offline and use synthetic bytes, including non-public gates, actual untagged URLs, no unintended writes, uncertain outcomes, strict receipt counts, credential redirect handling, and binary artifact exclusion. They are not evidence of live GitHub ACL behavior, Windows execution, or product acceptance. Those have not been run by this worker.
+
+## Startup placement revalidation
+
+The Windows-only first-map placement fix and 16 untouched native launches are now included in the reconstructed source. Rebuild and rerun every same-byte validation gate. Prior source and binary successes do not accept this revision. No capture positioning, cropping or containment gate is changed.

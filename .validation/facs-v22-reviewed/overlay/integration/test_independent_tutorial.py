@@ -1213,19 +1213,19 @@ REVIEWED_V22_DOCUMENT_INDEX_TRANSITIONS = {'docs/images/README.md': {'reason': '
 
 # Explicit reviewed successors for the Windows portable release. Original v19/v22
 # identities remain frozen; no other product byte or path is exempted.
-REVIEWED_WINDOWS_PORTABLE_R1 = {'windows/facility_studio/english_catalog.py': {'reason': 'Windows-only exact application-owned worksheet '
-                                                          'title catalog translation to Instructions; '
-                                                          'exporter and all electrical restrictions '
-                                                          'unchanged.',
+REVIEWED_WINDOWS_PORTABLE_R1 = {'windows/facility_studio/english_catalog.py': {'reason': 'Windows-only exact application-owned '
+                                                          'worksheet title catalog translation to '
+                                                          'Instructions; exporter and all electrical '
+                                                          'restrictions unchanged.',
                                                 'v22': {'bytes': 447988,
                                                         'mode': '100644',
                                                         'sha256': '4f27d571a6a3aba004761ca341f12eec13249e7960d557442e7d36fda2c507f0'},
                                                 'windows_portable_r1': {'bytes': 448014,
                                                                         'mode': '100644',
                                                                         'sha256': 'c9b1d7a222e3e867afe19f55b8933f37e1a44b1e1faec495d3aaf7f795fa7ec5'}},
- 'windows/facility_studio/feed_review_preview.py': {'reason': 'Windows-only fresh dialog work-area sizing; '
-                                                              'settings footer reservation. No engineering '
-                                                              'calculation changes.',
+ 'windows/facility_studio/feed_review_preview.py': {'reason': 'Windows-only fresh dialog work-area '
+                                                              'sizing; settings footer reservation. No '
+                                                              'engineering calculation changes.',
                                                     'v22': {'bytes': 17488,
                                                             'mode': '100644',
                                                             'sha256': '29762b1396ec27ff31c184e4a5dc7bb980b65f1c8cdd698de78bc72c40557172'},
@@ -1240,7 +1240,16 @@ REVIEWED_WINDOWS_PORTABLE_R1 = {'windows/facility_studio/english_catalog.py': {'
                                                         'sha256': 'c95f24261600e7886a5c047dfb3fae5686de409fce15f838901f627cf2539d45'},
                                                 'windows_portable_r1': {'bytes': 9602,
                                                                         'mode': '100644',
-                                                                        'sha256': 'a175bcc15ac656b7417bf2a80421f7340866092e6a076df4652ff980f0b5469d'}}}
+                                                                        'sha256': 'a175bcc15ac656b7417bf2a80421f7340866092e6a076df4652ff980f0b5469d'}},
+ 'windows/facility_studio/window_geometry.py': {'reason': 'Windows-only first-map work-area placement; '
+                                                          'no later user-window repositioning, '
+                                                          'calculation or macOS changes.',
+                                                'v22': {'bytes': 4686,
+                                                        'mode': '100644',
+                                                        'sha256': 'd670cd4ed349b417233985d945914c0202db29568c6cadc99218eaf8c0ba8c73'},
+                                                'windows_portable_r1': {'bytes': 7928,
+                                                                        'mode': '100644',
+                                                                        'sha256': '74fdbf7daeca230ae90f591cd034da2d6233dcd32edd3e0b1e28806a04a59a63'}}}
 
 def assert_reviewed_product_bytes(relative):
     portable = REVIEWED_WINDOWS_PORTABLE_R1.get(relative)

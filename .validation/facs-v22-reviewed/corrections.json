@@ -1,7 +1,7 @@
 [
   {
     "path": "integration/test_independent_tutorial.py",
-    "sha256": "4090be3f62b92e011e6c6b4a32a30aaaa470fa9695c5f3389ccaea27f8cbaa3d",
+    "sha256": "bbd54cc28756d7562cd6baea3804fff77b0e6599bfb3ad2fd1a577a63c327475",
     "original_sha256": "eaa866af734820a803c281c4e5b34a5ff25b7aece730d3357df3f4dab67b9b16",
     "kind": "test_harness"
   },
@@ -76,5 +76,23 @@
     "kind": "headless_test_fixture",
     "sha256": "dd06ca56f32992599bc6079bb1e453a05498a879830d89c8eba754bb39edbf11",
     "original_sha256": "234a4a65736482fe66fc3e232b8f2e675278546c3b0e8a4b8ece38b375f35dfd"
+  },
+  {
+    "path": "windows/facility_studio/window_geometry.py",
+    "kind": "windows_startup_placement",
+    "sha256": "74fdbf7daeca230ae90f591cd034da2d6233dcd32edd3e0b1e28806a04a59a63",
+    "original_sha256": "d670cd4ed349b417233985d945914c0202db29568c6cadc99218eaf8c0ba8c73"
+  },
+  {
+    "path": "integration/test_window_geometry.py",
+    "kind": "test_harness",
+    "sha256": "349d17b4aa51a831faaa32be971a86d0ae2d61fa206d800b6e9252f45d5e7c7b",
+    "original_sha256": "39af57f94eb267dcafc8441528ca45321d88b47d0df7d52346725be979dd25d7"
+  },
+  {
+    "path": "integration/test_windows_startup_placement.py",
+    "kind": "test_harness",
+    "sha256": "f9ef73f4446d82e0d92b0d499de91431603fd07ca5d263661d95189f9ad7c885",
+    "original_sha256": null
   }
 ]
