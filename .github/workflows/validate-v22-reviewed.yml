@@ -69,6 +69,19 @@ jobs:
             & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/verify_startup_receipt.py "$env:RUNNER_TEMP/facs-v22-evidence/startup-placement-$label.xml"
             if ($LASTEXITCODE -ne 0) { throw "Incomplete native startup receipt at $label" }
           }
+      - name: Native bilingual menus and selector fit at both desktop sizes
+        shell: pwsh
+        run: |
+          foreach ($size in @('1920x1080', '1024x768')) {
+            $width, $height = $size.Split('x')
+            $label = "$width-$height"
+            $env:FACILITY_NATIVE_DISPLAY_PROFILE = if ($width -eq '1920') { 'frozen1920' } else { 'small1024' }
+            & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/windows_display.py --width $width --height $height --exact --client 800x600 --evidence "$env:RUNNER_TEMP/facs-v22-evidence/native-language-fit-display-$label.json" -- $env:FACILITY_PY -B -m pytest "$env:RUNNER_TEMP/facs-v22-exact-source/integration/test_windows_english_startup_native.py" --capture=sys -x -q --tb=long --junitxml="$env:RUNNER_TEMP/facs-v22-evidence/native-language-fit-$label.xml"
+            if ($LASTEXITCODE -ne 0) { throw "Native bilingual menu/selector fit failed at $label" }
+            & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/verify_native_language_fit.py "$env:RUNNER_TEMP/facs-v22-evidence/native-language-fit-$label.xml" --profile $env:FACILITY_NATIVE_DISPLAY_PROFILE
+            if ($LASTEXITCODE -ne 0) { throw "Incomplete native language/fit receipt at $label" }
+          }
+          Remove-Item Env:FACILITY_NATIVE_DISPLAY_PROFILE
       - name: Cold real-entry native startup at frozen and small desktop sizes
         shell: pwsh
         run: |
@@ -83,19 +96,6 @@ jobs:
             & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/verify_cold_startup_receipt.py "$env:RUNNER_TEMP/facs-v22-evidence/cold-startup-placement-$label.xml" --source "$env:RUNNER_TEMP/facs-v22-exact-source"
             if ($LASTEXITCODE -ne 0) { throw "Incomplete cold startup receipt at $label" }
           }
-      - name: Native bilingual menus and selector fit at both desktop sizes
-        shell: pwsh
-        run: |
-          foreach ($size in @('1920x1080', '1024x768')) {
-            $width, $height = $size.Split('x')
-            $label = "$width-$height"
-            $env:FACILITY_NATIVE_DISPLAY_PROFILE = if ($width -eq '1920') { 'frozen1920' } else { 'small1024' }
-            & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/windows_display.py --width $width --height $height --exact --client 800x600 --evidence "$env:RUNNER_TEMP/facs-v22-evidence/native-language-fit-display-$label.json" -- $env:FACILITY_PY -B -m pytest "$env:RUNNER_TEMP/facs-v22-exact-source/integration/test_windows_english_startup_native.py" --capture=sys -x -q --tb=long --junitxml="$env:RUNNER_TEMP/facs-v22-evidence/native-language-fit-$label.xml"
-            if ($LASTEXITCODE -ne 0) { throw "Native bilingual menu/selector fit failed at $label" }
-            & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/verify_native_language_fit.py "$env:RUNNER_TEMP/facs-v22-evidence/native-language-fit-$label.xml" --profile $env:FACILITY_NATIVE_DISPLAY_PROFILE
-            if ($LASTEXITCODE -ne 0) { throw "Incomplete native language/fit receipt at $label" }
-          }
-          Remove-Item Env:FACILITY_NATIVE_DISPLAY_PROFILE
       - name: Full native suites with verified large desktop and sys capture
         shell: pwsh
         env:

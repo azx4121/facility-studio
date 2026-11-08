@@ -30,6 +30,75 @@ def ints(value,count):
     return isinstance(value,list) and len(value)==count and all(type(v) is int for v in value)
 
 
+def verify_menu_observation(observation,language):
+    """Validate native structure plus honestly classified Tk ownerdraw labels."""
+    require(isinstance(observation,dict) and observation.get('popup_pixels_verified') is False,
+            'Menu metadata is not popup pixel evidence')
+    native,metadata=observation.get('native'),observation.get('tk_metadata')
+    require(isinstance(native,dict) and isinstance(metadata,dict),'Missing native/Tk menu observations')
+    for key in ('hwnd','menu'):
+        require(type(native.get(key)) is int and native[key]>0,'Invalid native menu/window handle')
+    authored=metadata.get('authored_menu')
+    require(isinstance(authored,str) and authored.startswith('.') and authored!='.'
+            and metadata.get('attached_menu')==authored,'Observed menu is not the authored root-attached menu')
+    version=metadata.get('tk_version')
+    require(isinstance(version,str) and version and all(part.isdigit() for part in version.split('.')),
+            'Missing Tk runtime version')
+    submenus=metadata.get('authored_submenus')
+    require(isinstance(submenus,list) and len(submenus)==5 and len(set(submenus))==5
+            and all(isinstance(p,str) and p.startswith(authored+'.') for p in submenus),
+            'Invalid authored submenu registration')
+    os_top,tk_top=native.get('top'),metadata.get('top')
+    require(isinstance(os_top,list) and isinstance(tk_top,list),'Missing menu item observations')
+    offset=0
+    if tk_top and tk_top[0].get('type')=='tearoff':
+        require(type(tk_top[0].get('index')) is int and tk_top[0]['index']==0,'Unexpected tearoff index')
+        tk_top=tk_top[1:];offset=1
+    require(len(os_top)==len(tk_top)==5,'Incomplete native/Tk menubar counts')
+    ids,pointers,handles=set(),set(),set()
+    def numeric(item):
+        require(isinstance(item,dict) and all(type(item.get(k)) is int and item[k]>=0
+                for k in ('ftype','state','id','submenu','data')),'Invalid native menu item metadata')
+    for position,(item,entry) in enumerate(zip(os_top,tk_top)):
+        numeric(item)
+        require(isinstance(entry,dict) and type(entry.get('index')) is int
+                and entry['index']==position+offset and entry.get('type')=='cascade'
+                and entry.get('state')=='normal','Invalid Tk cascade position/state')
+        require(item.get('native_text')==item.get('label')==entry.get('label')==TOP[language][position],
+                'Top menu native text does not match observed label')
+        require(item['ftype']==0 and item['state']==0,'Top menu is not a normal native string item')
+        handle=item['submenu']
+        require(handle>0 and type(item.get('queried_submenu')) is int and handle==item['queried_submenu']
+                and handle not in handles and handle!=native['menu'],'Invalid native popup linkage')
+        handles.add(handle)
+        require(entry.get('submenu')==submenus[position],'Tk submenu registration order mismatch')
+        children,tk_children=item.get('children'),entry.get('children')
+        expected=CHILDREN[language][position]
+        require(isinstance(children,list) and isinstance(tk_children,list)
+                and len(children)==len(tk_children)==len(expected),'Incomplete native/Tk popup counts')
+        for index,(child,tk_child) in enumerate(zip(children,tk_children)):
+            numeric(child)
+            require(isinstance(tk_child,dict) and type(tk_child.get('index')) is int
+                    and tk_child['index']==index and tk_child.get('type')=='command'
+                    and isinstance(tk_child.get('command'),str) and tk_child['command']
+                    and tk_child.get('label')==expected[index],'Unexpected Tcl popup command/label')
+            state=tk_child.get('state')
+            require(state in ('normal','disabled') and child['state']==(3 if state=='disabled' else 0)
+                    and child['submenu']==0,'Popup state or submenu mismatch')
+            require(0<child['id']<0xffffffff and child['id'] not in ids,'Invalid or duplicate native command ID')
+            ids.add(child['id'])
+            if child['ftype']==0x100:
+                require(child['data']>0 and child['data'] not in pointers and child.get('native_text')==''
+                        and child.get('label_source')=='tk.entrycget(-label);win32.MFT_OWNERDRAW',
+                        'Invalid ownerdraw item or dishonest label source')
+                pointers.add(child['data'])
+            else:
+                require(child['ftype']==0 and child.get('native_text')==expected[index]
+                        and child.get('label_source')=='win32.GetMenuStringW','Unclassified popup representation')
+            require(child.get('observed_label')==expected[index],'Popup observed label mismatch')
+    return True
+
+
 def verify(receipt,profile):
     require(profile in PROFILES,'Unknown native profile')
     raw=Path(receipt).read_bytes()
@@ -50,6 +119,7 @@ def verify(receipt,profile):
                     and ints(row['screen_size'],2),'Wrong actual desktop dimensions')
             require(row.get('language')==language and row.get('top')==TOP[language]
                     and row.get('children')==CHILDREN[language],'Incorrect native menu language or command coverage')
+            verify_menu_observation(row.get('menu_observation'),language)
             selectors=row.get('selectors')
             require(isinstance(selectors,list),'Missing selector evidence')
             if view=='simple':

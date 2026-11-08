@@ -159,12 +159,24 @@
     "path": "integration/test_windows_english_startup_native.py",
     "original_sha256": null,
     "kind": "test_harness",
-    "sha256": "d965f58f55ac024c7fa46cca6facab0b877503992078c0557c882a8769a4cac2"
+    "sha256": "c51af0c06c97447d669cceff68e3fd254c42daa889007394aacc80951ff4850a"
   },
   {
     "path": "integration/test_standalone_process_images.py",
     "original_sha256": null,
     "sha256": "bc598340209d11b9576223f2f46a7286b3b2a2d89a3ad747c747d3c25e722ee5",
     "kind": "test_harness"
+  },
+  {
+    "path": "integration/windows_native_menu_observer.py",
+    "original_sha256": null,
+    "kind": "test_harness",
+    "sha256": "1b3e37d3cdb53d8cf732e7ea0d989dc88f06d4097dbd2063c769f99f90f94c79"
+  },
+  {
+    "path": "integration/test_windows_native_menu_observer.py",
+    "original_sha256": null,
+    "kind": "test_harness",
+    "sha256": "4b4caa6fd6bc0f2bdf68fb8a970dc9eb80af4f2a4be3d33300cb81461473c737"
   }
 ]

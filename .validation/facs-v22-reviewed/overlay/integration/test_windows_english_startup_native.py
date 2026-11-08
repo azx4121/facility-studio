@@ -21,24 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 pytestmark = pytest.mark.skipif(sys.platform != 'win32', reason='Requires real Windows desktop')
 
 
-def native_menu_labels(root):
-    api = ctypes.WinDLL('user32', use_last_error=True)
-    api.GetAncestor.argtypes, api.GetAncestor.restype = [wintypes.HWND, wintypes.UINT], wintypes.HWND
-    api.GetMenu.argtypes, api.GetMenu.restype = [wintypes.HWND], wintypes.HMENU
-    api.GetSubMenu.argtypes, api.GetSubMenu.restype = [wintypes.HMENU, ctypes.c_int], wintypes.HMENU
-    api.GetMenuItemCount.argtypes, api.GetMenuItemCount.restype = [wintypes.HMENU], ctypes.c_int
-    api.GetMenuStringW.argtypes = [wintypes.HMENU, wintypes.UINT, wintypes.LPWSTR, ctypes.c_int, wintypes.UINT]
-    api.GetMenuStringW.restype = ctypes.c_int
-    menu = api.GetMenu(api.GetAncestor(root.winfo_id(), 2))
-    assert menu
-    def labels(handle):
-        result = []
-        for index in range(api.GetMenuItemCount(handle)):
-            buf = ctypes.create_unicode_buffer(256)
-            assert api.GetMenuStringW(handle, index, buf, len(buf), 0x400) > 0
-            result.append(buf.value)
-        return result
-    return labels(menu), [labels(api.GetSubMenu(menu, index)) for index in range(api.GetMenuItemCount(menu))]
+from windows_native_menu_observer import observe_native_menus
 
 
 def descendants(widget):
@@ -81,7 +64,7 @@ def test_actual_native_menu_and_rendered_selector_fit(tmp_path, monkeypatch, ini
         for lang in [initial, 'en', 'zh-Hant', 'en']:
             i18n.set_language(lang, persist=False)
             settle()
-            top, children = native_menu_labels(root)
+            top, children, menu_observation = observe_native_menus(root, lang)
             assert top == (['Facility Studio', 'File', 'Edit', 'Window', 'Help'] if lang == 'en'
                            else ['Facility Studio', '檔案', '編輯', '視窗', '說明'])
             assert children == ([['About Facility Studio'], ['Close window'],
@@ -89,7 +72,7 @@ def test_actual_native_menu_and_rendered_selector_fit(tmp_path, monkeypatch, ini
                 ['Verification purpose and scope']] if lang == 'en' else
                 [['關於 Facility Studio'], ['關閉視窗'], ['復原', '重做', '剪下', '複製', '貼上', '全選'],
                  ['縮到最小'], ['驗證用途與範圍']])
-            row = {'profile': profile, 'screen_size': list(screen_size), 'language': lang, 'top': top, 'children': children, 'selectors': []}
+            row = {'profile': profile, 'screen_size': list(screen_size), 'language': lang, 'top': top, 'children': children, 'menu_observation': menu_observation, 'selectors': []}
             if view == 'workbench':
                 for variable in (app.task_scope, app.view_mode):
                     matches = [w for w in descendants(root) if getattr(w, '_canonical', None) is variable]

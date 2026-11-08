@@ -34,9 +34,65 @@ jobs:
           $env:UV_PYTHON_INSTALL_DIR = "$env:RUNNER_TEMP/facility-managed-python"
           uv venv --python 3.12.16 "$env:RUNNER_TEMP/facility-env"
           if ($LASTEXITCODE -ne 0) { throw 'Python setup failed' }
-          $py = "$env:RUNNER_TEMP/facility-env/Scripts/python.exe"
+          # Only the auxiliary synthetic runner changes. Source, tests and drain rules stay frozen.
+          $venv = "$env:RUNNER_TEMP/facility-env/Scripts/python.exe"
+          $validator = "$env:RUNNER_TEMP/validate-packaging-runner.py"
+          @'
+          import importlib.metadata
+          import json
+          import os
+          from pathlib import Path
+          import sys
+
+          mode = sys.argv[1]
+          if mode not in ('discover', 'verify', 'ready'):
+              raise RuntimeError('Unknown runner validation mode.')
+          if sys.platform != 'win32' or sys.implementation.name != 'cpython':
+              raise RuntimeError('Native Windows CPython is required.')
+          if tuple(sys.version_info) != (3, 12, 16, 'final', 0):
+              raise RuntimeError('Runner must use exactly CPython 3.12.16 final.')
+          temporary = Path(os.environ['RUNNER_TEMP']).resolve(strict=True)
+          managed = Path(os.environ['UV_PYTHON_INSTALL_DIR']).resolve(strict=True)
+          if managed != temporary / 'facility-managed-python':
+              raise RuntimeError('Managed Python must be inside the dedicated RUNNER_TEMP directory.')
+          base_value = getattr(sys, '_base_executable', None)
+          if not base_value or not Path(base_value).is_absolute():
+              raise RuntimeError('Base interpreter path must be present and absolute.')
+          base = Path(base_value).resolve(strict=True)
+          if not base.is_file() or base.name.lower() != 'python.exe' or not base.is_relative_to(managed):
+              raise RuntimeError('Base interpreter must be a managed temporary python.exe.')
+          if mode == 'discover':
+              print(str(base))
+          else:
+              expected = Path(sys.argv[2]).resolve(strict=True)
+              actual = Path(sys.executable).resolve(strict=True)
+              if not actual.samefile(base) or not actual.samefile(expected):
+                  raise RuntimeError('Runner redirected to a different interpreter image.')
+              prefix = Path(sys.prefix).resolve(strict=True)
+              base_prefix = Path(sys.base_prefix).resolve(strict=True)
+              if not prefix.samefile(base_prefix) or not prefix.is_relative_to(managed):
+                  raise RuntimeError('Runner must execute the managed base, not a virtual environment.')
+              pytest_version = importlib.metadata.version('pytest') if mode == 'ready' else None
+              if mode == 'ready' and pytest_version != '9.2.0':
+                  raise RuntimeError('Runner must use exactly pytest 9.2.0.')
+              record = dict(schema_version=1, mode=mode, native_windows=True,
+                            executable=str(actual), base_executable=str(base), prefix=str(prefix),
+                            base_prefix=str(base_prefix), managed_root=str(managed),
+                            version=sys.version, version_info=list(sys.version_info),
+                            pytest_version=pytest_version, workflow_commit=os.environ['GITHUB_SHA'],
+                            source_and_test_bytes_changed=False)
+              evidence = temporary / 'facs-v22-evidence' / 'packaging-runner-interpreter.json'
+              evidence.write_text(json.dumps(record, indent=2) + '\n', encoding='utf-8')
+              print(json.dumps(record))
+          '@ | Set-Content -LiteralPath $validator -Encoding utf8
+          $py = & $venv $validator discover
+          if ($LASTEXITCODE -ne 0 -or -not $py -or $py -is [array]) { throw 'Managed base discovery failed' }
+          & $py $validator verify $py
+          if ($LASTEXITCODE -ne 0) { throw 'Managed base verification failed' }
           uv pip install --python $py pytest==9.2.0
           if ($LASTEXITCODE -ne 0) { throw 'Test runner install failed' }
+          & $py $validator ready $py
+          if ($LASTEXITCODE -ne 0) { throw 'Test runner identity verification failed' }
           "FACILITY_PY=$py" >> $env:GITHUB_ENV
       - name: Check provenance guards and actual native process containment
         shell: pwsh

@@ -5,6 +5,7 @@ No network isolation, installation, visual UI, or PyInstaller behavior is tested
 """
 import concurrent.futures
 import ctypes
+import hashlib
 from ctypes import wintypes
 import os
 from pathlib import Path
@@ -12,7 +13,6 @@ import shutil
 import subprocess
 import sys
 import time
-import venv
 
 import pytest
 
@@ -24,14 +24,41 @@ pytestmark = pytest.mark.skipif(
 )
 
 
+def _base_executable():
+    # A Windows venv launcher spawns a short-lived redirect child. These fixtures
+    # test process outcomes, not venv redirection; use the real interpreter.
+    value = getattr(sys, '_base_executable', None)
+    if not value or not Path(value).is_absolute():
+        raise RuntimeError('Synthetic base interpreter path must be absolute.')
+    executable = Path(value).resolve(strict=True)
+    if not executable.is_file():
+        raise RuntimeError('Synthetic base interpreter must be an existing file.')
+    return str(executable)
+
+
 def _environment():
     return dict(os.environ, PYTHONUTF8='1', PYTHONUNBUFFERED='1')
+
+
+def _copied_interpreter_environment(base):
+    # A copied real python.exe needs its original DLL and standard library.
+    # This is a synthetic runner fixture, never standalone product evidence.
+    prefix = Path(sys.base_prefix)
+    if not prefix.is_absolute():
+        raise RuntimeError('Synthetic base prefix must be absolute.')
+    prefix = prefix.resolve(strict=True)
+    if not prefix.is_dir():
+        raise RuntimeError('Synthetic base prefix must be an existing directory.')
+    env = _environment()
+    env['PYTHONHOME'] = str(prefix)
+    env['PATH'] = str(Path(base).parent) + os.pathsep + env.get('PATH', '')
+    return env
 
 
 @pytest.mark.parametrize('exit_code', [0, 23])
 def test_job_returns_code_and_retains_stdout(tmp_path, exit_code):
     log = tmp_path / 'direct.log'
-    command = [sys.executable, '-c',
+    command = [_base_executable(), '-c',
                f'import sys; print("native stdout 繁體中文", flush=True); '
                f'print("native stderr", file=sys.stderr, flush=True); sys.exit({exit_code})']
     with log.open('w', encoding='utf-8') as output:
@@ -43,17 +70,17 @@ def test_job_returns_code_and_retains_stdout(tmp_path, exit_code):
 
 def test_bounded_success(tmp_path):
     log = tmp_path / 'success.log'
-    result = run_bounded([sys.executable, '-c', 'print("success", flush=True)'],
+    result = run_bounded([_base_executable(), '-c', 'print("success", flush=True)'],
                          log, _environment(), timeout=10)
     assert result['exit_code'] == 0
-    assert result['command'][0] == sys.executable
+    assert result['command'][0] == _base_executable()
     assert 'success' in log.read_text(encoding='utf-8')
 
 
 def test_bounded_nonzero_retains_stdout(tmp_path):
     log = tmp_path / 'nonzero.log'
     with pytest.raises(RuntimeError, match='exited 17'):
-        run_bounded([sys.executable, '-c',
+        run_bounded([_base_executable(), '-c',
                      'import sys; print("before failure", flush=True); sys.exit(17)'],
                     log, _environment(), timeout=10)
     assert 'before failure' in log.read_text(encoding='utf-8')
@@ -62,23 +89,28 @@ def test_bounded_nonzero_retains_stdout(tmp_path):
 def test_bounded_timeout_retains_stdout(tmp_path):
     log = tmp_path / 'timeout.log'
     with pytest.raises(RuntimeError, match='timed out'):
-        run_bounded([sys.executable, '-c',
+        run_bounded([_base_executable(), '-c',
                      'import time; print("before timeout", flush=True); time.sleep(60)'],
                     log, _environment(), timeout=3)
     assert 'before timeout' in log.read_text(encoding='utf-8')
 
 
 def test_unicode_space_executable_and_argument_paths(tmp_path):
-    # A pip-free venv supplies a real Python launcher in the requested path,
-    # without copying an isolated python.exe that cannot find its runtime DLLs.
+    # Copy only the real interpreter image, not a venv launcher or runtime tree.
+    # Explicit runtime lookup below lets this short-lived root have no redirect
+    # child while still exercising Unicode/space executable and argument paths.
+    base = Path(_base_executable())
     folder = tmp_path / '繁體中文 空白路徑'
-    venv.EnvBuilder(with_pip=False, symlinks=False).create(folder)
-    executable = folder / 'Scripts' / 'python.exe'
+    folder.mkdir()
+    executable = folder / 'python.exe'
+    shutil.copyfile(base, executable)
+    assert hashlib.sha256(executable.read_bytes()).digest() == hashlib.sha256(base.read_bytes()).digest()
     script = folder / '測試 程式.py'
     script.write_text('import sys\nprint("unicode path " + sys.argv[1], flush=True)\n',
                       encoding='utf-8')
     log = tmp_path / 'unicode.log'
-    result = run_bounded([executable, script, '參數 含空白'], log, _environment(), timeout=10)
+    result = run_bounded([executable, script, '參數 含空白'], log,
+                         _copied_interpreter_environment(base), timeout=10)
     assert result['exit_code'] == 0
     assert 'unicode path 參數 含空白' in log.read_text(encoding='utf-8')
 
@@ -133,7 +165,7 @@ def test_child_and_grandchild_are_gone_before_return(tmp_path, parent_exit):
     kernel = _owned_process_api()
     handles = {}
     pool = concurrent.futures.ThreadPoolExecutor(max_workers=1)
-    future = pool.submit(run_bounded, [sys.executable, script, tree, 'root'],
+    future = pool.submit(run_bounded, [_base_executable(), script, tree, 'root'],
                          log, _environment(), timeout=12)
     try:
         # Root and descendants stay alive until the explicit gate or timeout.
