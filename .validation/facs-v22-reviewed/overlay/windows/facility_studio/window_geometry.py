@@ -4,6 +4,7 @@ Tk geometry sizes are CLIENT pixels. Do not subtract decorations from the curren
 window, reapply display scaling, or rewrite its geometry when changing views.
 No window placement is persisted in engineering projects or user preferences.
 """
+import os
 import sys
 
 
@@ -50,6 +51,52 @@ def _windows_work_area(root):
     return None
 
 
+def _windows_startup_frame_size(user32, hwnd, width, height):
+    """Include the formal menu even when Tk attaches it after the first Map.
+
+    Simple-view sidebar measurement can map the root before install_menus;
+    the workbench installs its menu at idle. Windows then grows the frame to
+    retain the requested client size. Ask Windows for that menu-bearing frame
+    now, rather than moving the user's window again after construction.
+    """
+    if not (os.environ.get("FACILITY_STUDIO_NATIVE_MENUS")
+            or os.environ.get("FACILITY_STUDIO_SANDBOX")):
+        return width, height
+    import ctypes
+    from ctypes import wintypes
+
+    user32.GetMenu.argtypes = [wintypes.HWND]
+    user32.GetMenu.restype = wintypes.HMENU
+    if user32.GetMenu(hwnd):
+        return width, height  # The measured frame already owns its menu.
+    user32.GetClientRect.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.RECT)]
+    user32.GetClientRect.restype = wintypes.BOOL
+    user32.GetWindowLongW.argtypes = [wintypes.HWND, ctypes.c_int]
+    user32.GetWindowLongW.restype = wintypes.LONG
+    client = wintypes.RECT()
+    if not user32.GetClientRect(hwnd, ctypes.byref(client)):
+        return width, height
+    style = user32.GetWindowLongW(hwnd, -16) & 0xffffffff  # GWL_STYLE
+    extended = user32.GetWindowLongW(hwnd, -20) & 0xffffffff  # GWL_EXSTYLE
+    args = [ctypes.POINTER(wintypes.RECT), wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+    try:
+        adjust = user32.AdjustWindowRectExForDpi
+        adjust.argtypes, adjust.restype = [*args, wintypes.UINT], wintypes.BOOL
+        user32.GetDpiForWindow.argtypes = [wintypes.HWND]
+        user32.GetDpiForWindow.restype = wintypes.UINT
+        dpi = user32.GetDpiForWindow(hwnd)
+        if not dpi:
+            return width, height
+        adjusted = adjust(ctypes.byref(client), style, True, extended, dpi)
+    except AttributeError:
+        # Legacy AdjustWindowRectEx is not per-monitor-DPI aware. Do not mix
+        # its system-DPI frame metrics with this monitor's native coordinates.
+        return width, height
+    if adjusted:
+        return max(width, client.right - client.left), max(height, client.bottom - client.top)
+    return width, height
+
+
 def _place_initial_windows_window(root):
     """Keep a freshly mapped normal window inside its native monitor work area.
 
@@ -83,7 +130,10 @@ def _place_initial_windows_window(root):
         rect = wintypes.RECT()
         if not user32.GetWindowRect(hwnd, ctypes.byref(rect)):
             return
-        width, height = rect.right - rect.left, rect.bottom - rect.top
+        if rect.right <= rect.left or rect.bottom <= rect.top:
+            return
+        width, height = _windows_startup_frame_size(
+            user32, hwnd, rect.right - rect.left, rect.bottom - rect.top)
         if not (0 < width <= right - left and 0 < height <= bottom - top):
             return  # Never resize an existing/user-owned window to force a fit.
         x = min(max(rect.left, left), right - width)
@@ -99,8 +149,9 @@ def _bind_initial_windows_placement(root):
     """Consume exactly the first root Map, never a later user move or remap.
 
     Windows chooses a cascade origin before applying the requested client size.
-    At Map, the real outer frame exists at that size. Correct it synchronously,
-    before user interaction; an idle/timer retry could move a user-owned window.
+    At Map, the outer frame exists; include the enabled upcoming menu frame.
+    Correct it synchronously before user interaction; an idle/timer retry could
+    move a user-owned window.
     Already mapped roots and non-Windows hosts retain their existing behavior.
     """
     if sys.platform != "win32" or root.winfo_ismapped():

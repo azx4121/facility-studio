@@ -1241,15 +1241,16 @@ REVIEWED_WINDOWS_PORTABLE_R1 = {'windows/facility_studio/english_catalog.py': {'
                                                 'windows_portable_r1': {'bytes': 9602,
                                                                         'mode': '100644',
                                                                         'sha256': 'a175bcc15ac656b7417bf2a80421f7340866092e6a076df4652ff980f0b5469d'}},
- 'windows/facility_studio/window_geometry.py': {'reason': 'Windows-only first-map work-area placement; '
-                                                          'no later user-window repositioning, '
-                                                          'calculation or macOS changes.',
+ 'windows/facility_studio/window_geometry.py': {'reason': 'Windows-only first-map placement including '
+                                                          'OS-derived upcoming native menu frame; no '
+                                                          'later repositioning, calculation or macOS '
+                                                          'changes.',
                                                 'v22': {'bytes': 4686,
                                                         'mode': '100644',
                                                         'sha256': 'd670cd4ed349b417233985d945914c0202db29568c6cadc99218eaf8c0ba8c73'},
-                                                'windows_portable_r1': {'bytes': 7928,
+                                                'windows_portable_r1': {'bytes': 10322,
                                                                         'mode': '100644',
-                                                                        'sha256': '74fdbf7daeca230ae90f591cd034da2d6233dcd32edd3e0b1e28806a04a59a63'}}}
+                                                                        'sha256': 'dba6710d8b14e0bc3135b59626c0577b164f697602b286e21d75d1d8786a55a5'}}}
 
 def assert_reviewed_product_bytes(relative):
     portable = REVIEWED_WINDOWS_PORTABLE_R1.get(relative)

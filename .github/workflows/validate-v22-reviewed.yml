@@ -45,6 +45,17 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Dependency verification failed' }
           "FACILITY_PY=$py" >> $env:GITHUB_ENV
           "NATIVE_DIAGNOSTICS_SOURCE=$env:RUNNER_TEMP/facs-v22-exact-source" >> $env:GITHUB_ENV
+      - name: Untouched native-menu startup at frozen and small desktop sizes
+        shell: pwsh
+        run: |
+          foreach ($size in @('1920x1080', '1024x768')) {
+            $width, $height = $size.Split('x')
+            $label = "$width-$height"
+            & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/windows_display.py --width $width --height $height --exact --client 800x600 --evidence "$env:RUNNER_TEMP/facs-v22-evidence/startup-display-$label.json" -- $env:FACILITY_PY -B -m pytest "$env:RUNNER_TEMP/facs-v22-exact-source/integration/test_windows_startup_placement.py" -k native_untouched --capture=sys -q --tb=long --junitxml="$env:RUNNER_TEMP/facs-v22-evidence/startup-placement-$label.xml"
+            if ($LASTEXITCODE -ne 0) { throw "Untouched native-menu startup failed at $label" }
+            & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/verify_startup_receipt.py "$env:RUNNER_TEMP/facs-v22-evidence/startup-placement-$label.xml"
+            if ($LASTEXITCODE -ne 0) { throw "Incomplete native startup receipt at $label" }
+          }
       - name: Full native suites with verified large desktop and sys capture
         shell: pwsh
         run: |

@@ -60,6 +60,16 @@ jobs:
           uv pip check --python $py
           if ($LASTEXITCODE -ne 0) { throw 'Dependency verification failed' }
           "FACILITY_PY=$py" >> $env:GITHUB_ENV
+      - name: Require untouched native-menu startup before expensive EXE build
+        shell: pwsh
+        env:
+          FACILITY_TEST_PLATFORM: windows
+          FACILITY_REQUIRE_DISPLAY: '1'
+        run: |
+          & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/windows_display.py --width 1920 --height 1080 --exact --client 800x600 --evidence "$env:RUNNER_TEMP/facs-v22-evidence/prebuild-startup-display.json" -- $env:FACILITY_PY -B -m pytest "$env:RUNNER_TEMP/facs-v22-exact-source/integration/test_windows_startup_placement.py" -k native_untouched --capture=sys -q --tb=long --junitxml="$env:RUNNER_TEMP/facs-v22-evidence/prebuild-startup-placement.xml"
+          if ($LASTEXITCODE -ne 0) { throw 'Untouched native-menu startup failed; do not build or stage' }
+          & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/verify_startup_receipt.py "$env:RUNNER_TEMP/facs-v22-evidence/prebuild-startup-placement.xml"
+          if ($LASTEXITCODE -ne 0) { throw 'Incomplete native startup receipt; do not build or stage' }
       - name: Build once and pass Windows 2022 frozen checks before private transfer
         shell: pwsh
         run: |
