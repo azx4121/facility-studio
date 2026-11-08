@@ -35,32 +35,22 @@ jobs:
           persist-credentials: false
       - name: Verify unchanged candidate bytes without executing it
         run: python3 .delivery/facs-v22-r3/assemble.py
-      - name: Refuse a changed main or an existing release
+      - name: Verify the exact draft created by this distribution task
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           test "$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq '.object.sha')" = "$EXPECTED_MAIN"
-          if gh release view "$TAG" --repo "$GH_REPO" >/dev/null 2>&1; then
-            echo "The candidate release already exists. It will not be overwritten."
-            exit 1
-          fi
-      - name: Create a new draft prerelease with the single complete ZIP
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          gh release create "$TAG" "$ZIP" --repo "$GH_REPO" --target "$GITHUB_SHA" --draft --prerelease --latest=false --title "FACS v22 r3｜Mac 完整單檔候選（未驗收）" --notes-file .delivery/facs-v22-r3/RELEASE_NOTES.md
-          gh api "repos/$GH_REPO/releases/tags/$TAG" > release.json
+          gh api "repos/$GH_REPO/releases/438174333" > release.json
+          python3 -c 'import json; r=json.load(open("release.json")); assert r["id"] == 438174333 and r["target_commitish"] == "478f08b236a05409a63a01e646f0e83363c7963e" and r["draft"] is True'
           python3 .delivery/facs-v22-r3/verify_release.py
-      - name: Publish only the verified new candidate
+      - name: Publish only that verified draft without replacing assets
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           test "$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq '.object.sha')" = "$EXPECTED_MAIN"
-          gh release edit "$TAG" --repo "$GH_REPO" --draft=false --prerelease --latest=false
-          gh api "repos/$GH_REPO/releases/tags/$TAG" > release.json
+          gh api --method PATCH "repos/$GH_REPO/releases/438174333" -F draft=false -F prerelease=true -f make_latest=false > release.json
       - name: Verify the unauthenticated complete public download
         env:
           VERIFY_PUBLIC: "1"
