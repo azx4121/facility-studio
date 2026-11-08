@@ -1,0 +1,7 @@
+{
+  "source_archive_sha256": "e9dda9765aeceeffa4a22f39fa3cbbb4366deb7cb191d7279b99f1a1f5488285",
+  "original_delivery_archive_sha256": "05be4857b9d4df04849771050cc4a57678f73dda89d5cefa964f0adef6e30e7c",
+  "source_inventory_sha256": "7c3ef3f66382fa44e5ba6e57f11f04083295c506c4da6a8e2036e730d7c1914f",
+  "source_files": 1379,
+  "purpose": "Isolated native Windows test input. No binary publication or all-green claim."
+}
