@@ -1,0 +1,76 @@
+name: Reviewed v22 native Windows validation
+on:
+  push:
+    branches: ['validation/facs-v22-windows-20261108']
+    paths: ['.validation/facs-v22-reviewed/**', '.github/workflows/validate-v22-reviewed.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reviewed-native:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, windows-2025]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      FACILITY_REQUIRE_DISPLAY: '1'
+      FACILITY_TEST_PLATFORM: windows
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12.10'
+      - name: Verify exact v22 bytes and reviewed overlays with indexed modes
+        shell: pwsh
+        run: python .validation/facs-v22-reviewed/run_reviewed_validation.py prepare
+      - name: Install supported runtime and locked dependencies
+        shell: pwsh
+        run: |
+          python -m pip install uv==0.13.6
+          if ($LASTEXITCODE -ne 0) { throw 'uv setup failed' }
+          $env:UV_PYTHON_INSTALL_DIR = "$env:RUNNER_TEMP/facility-managed-python"
+          uv venv --python 3.12.16 "$env:RUNNER_TEMP/facility-env"
+          if ($LASTEXITCODE -ne 0) { throw 'Python setup failed' }
+          $py = "$env:RUNNER_TEMP/facility-env/Scripts/python.exe"
+          uv pip install --python $py -r "$env:RUNNER_TEMP/facs-v22-exact-source/integration/requirements.lock.txt"
+          if ($LASTEXITCODE -ne 0) { throw 'Locked dependency install failed' }
+          uv pip check --python $py
+          if ($LASTEXITCODE -ne 0) { throw 'Dependency verification failed' }
+          "FACILITY_PY=$py" >> $env:GITHUB_ENV
+          "NATIVE_DIAGNOSTICS_SOURCE=$env:RUNNER_TEMP/facs-v22-exact-source" >> $env:GITHUB_ENV
+      - name: Full native suites with verified large desktop and passive Tk tracing
+        shell: pwsh
+        run: |
+          & $env:FACILITY_PY .validation/facs-v22-reviewed/native_diagnostics/windows_display.py --width 1920 --height 1200 --client 1480x1000 --evidence "$env:RUNNER_TEMP/facs-v22-evidence/display-large.json" -- $env:FACILITY_PY .validation/facs-v22-reviewed/run_reviewed_validation.py tests
+          if ($LASTEXITCODE -ne 0) { throw 'Full native suite or real desktop constraint failed' }
+      - name: Repeated isolated, module-context and predecessor Tk lifecycle checks
+        if: ${{ !cancelled() && env.FACILITY_PY != '' }}
+        shell: pwsh
+        run: |
+          & $env:FACILITY_PY .validation/facs-v22-reviewed/native_diagnostics/run_lifecycle_diagnostics.py --source "$env:NATIVE_DIAGNOSTICS_SOURCE" --output "$env:RUNNER_TEMP/facs-v22-evidence/tk-lifecycle" --rounds 3
+          if ($LASTEXITCODE -ne 0) { throw 'At least one Tk lifecycle attempt failed' }
+      - name: Real 1024 by 768 header, wheel and dialog reachability checks
+        if: ${{ !cancelled() && env.FACILITY_PY != '' }}
+        shell: pwsh
+        run: |
+          $env:PYTHONPATH = (Resolve-Path .validation/facs-v22-reviewed/native_diagnostics).Path
+          $env:NATIVE_TK_TRACE = "$env:RUNNER_TEMP/facs-v22-evidence/small-screen-tk-events.jsonl"
+          & $env:FACILITY_PY .validation/facs-v22-reviewed/native_diagnostics/windows_display.py --width 1024 --height 768 --exact --client 980x600 --evidence "$env:RUNNER_TEMP/facs-v22-evidence/display-small.json" -- $env:FACILITY_PY -m pytest -p native_tk_trace .validation/facs-v22-reviewed/native_diagnostics/test_native_smallscreen.py -q --tb=long --junitxml="$env:RUNNER_TEMP/facs-v22-evidence/small-screen.xml"
+          if ($LASTEXITCODE -ne 0) { throw 'Actual small-screen controls or native display checks failed' }
+      - name: Preserve every outcome without publishing binaries
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: v22-reviewed-native-${{ matrix.os }}
+          path: |
+            ${{ runner.temp }}/facs-v22-evidence/**
+            !${{ runner.temp }}/facs-v22-evidence/source-v22.zip
+            !${{ runner.temp }}/**/*.exe
+          retention-days: 14
+          if-no-files-found: error

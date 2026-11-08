@@ -1,0 +1,17 @@
+[
+  {
+    "path": "integration/test_independent_tutorial.py",
+    "sha256": "416817e270a469946de473f0c1f629f700c9e2703c61ed24d2b7e3b53ad688c3",
+    "original_sha256": "eaa866af734820a803c281c4e5b34a5ff25b7aece730d3357df3f4dab67b9b16"
+  },
+  {
+    "path": "integration/test_independent_ampacity_safety.py",
+    "sha256": "bc33fede4634151c366828005fdf911b2a3bf829c344e8b9f59f81d517479745",
+    "original_sha256": "0cbee1638a51621b9385570ff56364a1710641da746e0eab396316d966fa1f04"
+  },
+  {
+    "path": "tools/verify_engineering_dashboard.py",
+    "sha256": "a5ce927b8e802b98535b8de8e8fb0ffa57e84f8ac329a3f2029264b3bfa81e66",
+    "original_sha256": "a901bc37b80a3709fb26a9b4f4501af1df4137f0361bb7259723c406398614c0"
+  }
+]
