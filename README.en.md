@@ -1,10 +1,14 @@
 # Facility Studio 5.7.3 | Facility engineering estimates and HVAC calculations
 
-[繁體中文](README.md) · [Guides](docs/guides/README.en.md) · [FAQ](docs/faq.en.md) · [Documentation](docs/README.en.md)
+[繁體中文](README.md) · [Visual tour](docs/visual-tour.en.md) · [Getting started](docs/getting-started.en.md) · [Guides](docs/guides/README.en.md) · [FAQ](docs/faq.en.md) · [Documentation](docs/README.en.md)
 
 **Traditional Chinese / English · Offline local calculations · Runtime bundled with packaged builds**
 
 Facility Studio 5.7.3 supports preliminary facility engineering calculations, option comparison and design-demand documentation within its stated model scope. It can assist selected FEED activities. Software verification does not certify a project's FEED deliverables, regulatory compliance or vendor equipment performance. Project-specific design inputs, vendor data, deliverable requirements and professional review remain necessary.
+
+![Facility Studio guide map: quick tools, full workbench, equipment and capacity, design review](docs/images/diagrams/overview.en.svg)
+
+*Documentation illustration, not a software screenshot or acceptance evidence. See the [visual tour and image sources](docs/visual-tour.en.md).*
 
 <a id="installation-and-first-launch"></a>
 ## Download and run
@@ -34,6 +38,8 @@ There are 12 direct quick tools, including standalone PV and liquid/pure-water p
 
 ## First use
 
+[Six-step visual workflow](docs/visual-tour.en.md#workflow) · [Installation and SHA256 checks](docs/getting-started.en.md)
+
 1. Check the published version, architecture and SHA256. Confirm **Facility Studio 5.7.3** in the application and choose Traditional Chinese or English.
 2. Enter one tool's actual inputs and units. Calculate and read adopted assumptions, missing data and failed conditions.
 3. Recalculate changed inputs/upstream sources, explicitly reimport downstream values, then save or export. Successful export does not clear engineering warnings.
@@ -48,7 +54,7 @@ The formal default data directory is `Facility Studio Data-5.7.3` under the user
 
 [Historical screenshots](docs/images/README.md) show their named old releases only. Do not relabel them as 5.7.3 package screenshots; use Release evidence that identifies its source and artifact. Complete networks, protection coordination, construction drawings and field acceptance remain outside this tool's delivery.
 
-[Development](docs/development.md) · [License examples](LICENSE_GUIDE.en.md) · [LICENSE](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
+[Development](docs/development.md) · [Contributing](CONTRIBUTING.md) · [License examples](LICENSE_GUIDE.en.md) · [LICENSE](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
 
 Report issues with version, OS/CPU, steps, inputs/units and expected/actual results at [Issues](https://github.com/azx4121/facility-studio/issues). Remove confidential project data.
 

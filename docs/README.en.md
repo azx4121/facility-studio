@@ -1,5 +1,7 @@
 # Facility Studio documentation
 
+[Visual tour](visual-tour.en.md) · [Getting started](getting-started.en.md) · [Tool index](guides/README.en.md) · [Offline tutorial](tutorial/README.md#english)
+
 ## Current 5.7.3 documentation
 
 [Version changes and release contract](releases/v5.7.3.md) · [Formal acceptance evidence schema](verification/5.7.3-release-acceptance.md) · [Design review](guides/design-review.en.md) · [Capacity planning](guides/capacity.en.md)

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="title desc">
+<title id="title">先選問題，再進入工作流程</title><desc id="desc">單點快算 → 整案整理 → 需求與容量比較 → 保存及審查</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="#007e87"/></marker></defs>
+<g font-family="Noto Sans CJK TC, Microsoft JhengHei, PingFang TC, Arial, sans-serif">
+<rect x="0" y="0" width="1280" height="760" rx="0" fill="#f2f6f8" stroke="none"/>
+<rect x="0" y="0" width="1280" height="178" rx="0" fill="#10293c" stroke="none"/>
+<text x="48" y="48" font-size="18" font-weight="600" fill="#9de0de">FACILITY STUDIO   /   5.7.3 DOCUMENTATION</text>
+<text x="48" y="105" font-size="40" font-weight="700" fill="white">先選問題，再進入工作流程</text>
+<text x="48" y="148" font-size="20" font-weight="400" fill="#d7e4ea">單點快算 → 整案整理 → 需求與容量比較 → 保存及審查</text>
+<rect x="48" y="210" width="580" height="168" rx="16" fill="white" stroke="none"/>
+<rect x="68" y="232" width="48" height="44" rx="12" fill="#007e87" stroke="none"/>
+<text x="77" y="262" font-size="23" font-weight="700" fill="white">01</text>
+<text x="132" y="264" font-size="28" font-weight="700" fill="#10293c">單點快算</text>
+<text x="72" y="312" font-size="22" font-weight="400" fill="#526575">電力、風管、氣體與 PV</text>
+<text x="72" y="347" font-size="22" font-weight="400" fill="#526575">水路、照明、空氣狀態、單位</text>
+<rect x="652" y="210" width="580" height="168" rx="16" fill="white" stroke="none"/>
+<rect x="672" y="232" width="48" height="44" rx="12" fill="#007e87" stroke="none"/>
+<text x="681" y="262" font-size="23" font-weight="700" fill="white">02</text>
+<text x="736" y="264" font-size="28" font-weight="700" fill="#10293c">整案工作台</text>
+<text x="676" y="312" font-size="22" font-weight="400" fill="#526575">共同氣候、空間與熱負荷</text>
+<text x="676" y="347" font-size="22" font-weight="400" fill="#526575">潔淨室流路、設備表與整案報告</text>
+<rect x="48" y="402" width="580" height="168" rx="16" fill="white" stroke="none"/>
+<rect x="68" y="424" width="48" height="44" rx="12" fill="#007e87" stroke="none"/>
+<text x="77" y="454" font-size="23" font-weight="700" fill="white">03</text>
+<text x="132" y="456" font-size="28" font-weight="700" fill="#10293c">設備與容量</text>
+<text x="72" y="504" font-size="22" font-weight="400" fill="#526575">分段 AHU 夏冬需求</text>
+<text x="72" y="539" font-size="22" font-weight="400" fill="#526575">現況、擴充與 N−1 初篩</text>
+<rect x="652" y="402" width="580" height="168" rx="16" fill="white" stroke="none"/>
+<rect x="672" y="424" width="48" height="44" rx="12" fill="#007e87" stroke="none"/>
+<text x="681" y="454" font-size="23" font-weight="700" fill="white">04</text>
+<text x="736" y="456" font-size="28" font-weight="700" fill="#10293c">設計資料審查</text>
+<text x="676" y="504" font-size="22" font-weight="400" fill="#526575">採用條件、來源與附件</text>
+<text x="676" y="539" font-size="22" font-weight="400" fill="#526575">缺資料、未達條件、待專業覆核</text>
+<rect x="48" y="618" width="1184" height="80" rx="16" fill="#dceeee" stroke="none"/>
+<text x="72" y="652" font-size="23" font-weight="600" fill="#10293c">先確認版本與平台；改輸入後重算，明確帶入下游，再保存。</text>
+<text x="72" y="682" font-size="19" font-weight="400" fill="#526575">計算完成 ≠ 設備已選型合格；各工作範圍需分別保存。</text>
+<text x="48" y="736" font-size="17" font-weight="400" fill="#526575">文件示意圖，非軟體截圖或驗收證明。</text>
+</g></svg>

@@ -49,9 +49,12 @@ Build and verify the final formal tree. Do not transfer preview passes. Keep com
 
 以下原命令、數字與版本是舊版流程記錄，保留供重現歷史，不是現行建置／發布指令。「當前／本版」等字樣均指該歷史修訂。 / Commands, numbers and “current” claims below refer to their original historical revision only.
 
+<details>
+<summary>展開歷史命令與原始紀錄 / Expand historical commands and records</summary>
+
 # 開發、建置與測試
 
-[首頁](../README.md) · [文件中心](README.md) · [English](#english)
+[首頁](../README.md) · [文件中心](README.md) · [English](#historical-english)
 
 本頁供閱讀原始碼、重現計算或建置套件的人使用。一般使用者直接下載 EXE／DMG，不需要執行以下指令。
 
@@ -136,7 +139,7 @@ GUI smoke 檢查實際欄位顯示／停用狀態、十種工具的 KPI 與表�
 
 保留 **DESIGNED BY ANDY HUANG ©**、[現行 LICENSE](../LICENSE) 及[第三方授權](../THIRD_PARTY_NOTICES.md)。現行授權為 PolyForm Noncommercial 加公司內部使用附加許可；[歷史 MIT](../LICENSE_LEGACY_MIT) 權利保留。
 
-<a id="english"></a>
+<a id="historical-english"></a>
 ## English
 
 This page is for source development, reproducible calculations and packaging. Bundled EXE/DMG users do not need these commands.
@@ -221,3 +224,5 @@ python tools/refresh_tutorial.py --platform windows   # macOS 同理；再複製
 平台差異集中在 `facility_studio/platform_support.py`（資料目錄、字型、滾輪、Mac 快捷鍵、導覽按鈕種類）。驗收紀錄見[本輪驗收](2026-10-31-win9-mac7-acceptance.md)。原生延伸稽核數量：2,188 獨立工程數值、406 報告語意、28 匯出／PV 操作、142 延伸入口／介面。
 
 正式入口在內部設定專屬資料變數 `FACILITY_STUDIO_DATA`，不改寫系統 `LOCALAPPDATA`；這不是使用者預先設定該變數即可覆寫預設路徑的承諾。 / The entry sets the dedicated `FACILITY_STUDIO_DATA` variable internally without rewriting system `LOCALAPPDATA`; this does not promise that presetting that variable overrides the default.
+
+</details>

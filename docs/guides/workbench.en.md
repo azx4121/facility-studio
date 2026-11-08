@@ -1,5 +1,9 @@
 # Full workbench: a beginner walkthrough
 
+![Six-step report workflow](../images/diagrams/workflow.en.svg)
+
+*Documentation illustration, not a UI screenshot or native acceptance.*
+
 **5.7.3 version guide: native acceptance and publication status are established by CI records and Release attachments for the corresponding commit; this guide does not assert a pass.** Older version-labelled examples, screenshots and pass counts below are historical evidence, not a fresh 5.7.3 run. [Release status](../verification/5.7.3-release-acceptance.md).
 
 For 5.7.3, confirm the product identity, adopted inputs and source lock first. Recalculate and explicitly reimport changes before exporting current results. Keep PCW supply groups and operating conditions separate, not as one plant header. CHW cooling, pump shaft power and NP/equipment electrical input have different boundaries and must not be double-counted. Use the rebuilt same-version offline tutorial; legacy example values retain their original evidence version.

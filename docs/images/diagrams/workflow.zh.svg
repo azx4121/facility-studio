@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="900" viewBox="0 0 1280 900" role="img" aria-labelledby="title desc">
+<title id="title">第一份報告：六個步驟</title><desc id="desc">以合成練習案熟悉流程，再換成自己的設計條件。</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="#007e87"/></marker></defs>
+<g font-family="Noto Sans CJK TC, Microsoft JhengHei, PingFang TC, Arial, sans-serif">
+<rect x="0" y="0" width="1280" height="900" rx="0" fill="#f2f6f8" stroke="none"/>
+<rect x="0" y="0" width="1280" height="178" rx="0" fill="#10293c" stroke="none"/>
+<text x="48" y="48" font-size="18" font-weight="600" fill="#9de0de">FACILITY STUDIO   /   5.7.3 DOCUMENTATION</text>
+<text x="48" y="105" font-size="40" font-weight="700" fill="white">第一份報告：六個步驟</text>
+<text x="48" y="148" font-size="20" font-weight="400" fill="#d7e4ea">以合成練習案熟悉流程，再換成自己的設計條件。</text>
+<path d="M77 268 L77 296" fill="none" stroke="#007e87" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="48" y="208" width="58" height="58" rx="29" fill="#007e87" stroke="none"/>
+<text x="68" y="247" font-size="27" font-weight="700" fill="white">1</text>
+<text x="128" y="233" font-size="26" font-weight="700" fill="#10293c">確認版本</text>
+<text x="128" y="268" font-size="20" font-weight="400" fill="#526575">核對平台、來源、SHA256 與程式內版本。</text>
+<path d="M77 362 L77 390" fill="none" stroke="#007e87" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="48" y="302" width="58" height="58" rx="29" fill="#007e87" stroke="none"/>
+<text x="68" y="341" font-size="27" font-weight="700" fill="white">2</text>
+<text x="128" y="327" font-size="26" font-weight="700" fill="#10293c">另存練習副本</text>
+<text x="128" y="362" font-size="20" font-weight="400" fill="#526575">從離線教學取得第一案，再另存自己的檔案。</text>
+<path d="M77 456 L77 484" fill="none" stroke="#007e87" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="48" y="396" width="58" height="58" rx="29" fill="#007e87" stroke="none"/>
+<text x="68" y="435" font-size="27" font-weight="700" fill="white">3</text>
+<text x="128" y="421" font-size="26" font-weight="700" fill="#10293c">填條件與單位</text>
+<text x="128" y="456" font-size="20" font-weight="400" fill="#526575">核對氣候、空間、熱負荷、流路及採用設定。</text>
+<path d="M77 550 L77 578" fill="none" stroke="#007e87" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="48" y="490" width="58" height="58" rx="29" fill="#007e87" stroke="none"/>
+<text x="68" y="529" font-size="27" font-weight="700" fill="white">4</text>
+<text x="128" y="515" font-size="26" font-weight="700" fill="#10293c">重新計算</text>
+<text x="128" y="550" font-size="20" font-weight="400" fill="#526575">改上游後需明確重新帶入下游；過期結果先處理。</text>
+<path d="M77 644 L77 672" fill="none" stroke="#007e87" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="48" y="584" width="58" height="58" rx="29" fill="#007e87" stroke="none"/>
+<text x="68" y="623" font-size="27" font-weight="700" fill="white">5</text>
+<text x="128" y="609" font-size="26" font-weight="700" fill="#10293c">閱讀工程狀態</text>
+<text x="128" y="644" font-size="20" font-weight="400" fill="#526575">逐項查需求、待補資料與未達條件，不只看數字。</text>
+<rect x="48" y="678" width="58" height="58" rx="29" fill="#007e87" stroke="none"/>
+<text x="68" y="717" font-size="27" font-weight="700" fill="white">6</text>
+<text x="128" y="703" font-size="26" font-weight="700" fill="#10293c">保存，再匯出</text>
+<text x="128" y="738" font-size="20" font-weight="400" fill="#526575">整案 JSON 可重開；TXT／HTML 是閱讀用報告。</text>
+<rect x="48" y="792" width="1184" height="58" rx="16" fill="#fff0cf" stroke="none"/>
+<text x="72" y="829" font-size="20" font-weight="600" fill="#10293c">注意：閱讀勾選、成功匯出或附件齊備，都不代表設計／法規／FEED 認證。</text>
+<text x="48" y="876" font-size="17" font-weight="400" fill="#526575">文件示意圖，非軟體截圖或驗收證明。</text>
+</g></svg>

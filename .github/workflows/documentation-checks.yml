@@ -1,0 +1,30 @@
+name: Documentation links and diagrams
+on:
+  push:
+    paths:
+      - 'README*.md'
+      - 'CONTRIBUTING.md'
+      - 'docs/**'
+      - 'tools/verify_documentation.py'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/workflows/documentation-checks.yml'
+  pull_request:
+    paths:
+      - 'README*.md'
+      - 'CONTRIBUTING.md'
+      - 'docs/**'
+      - 'tools/verify_documentation.py'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/workflows/documentation-checks.yml'
+permissions:
+  contents: read
+jobs:
+  documentation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Check local documentation links, anchors and safe SVG illustrations
+        run: python3 tools/verify_documentation.py

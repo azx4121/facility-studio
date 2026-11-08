@@ -8,6 +8,12 @@
 
 簡易工具按「本工具教學」可看目前工具；完整工作台按「新手教學」可跟做第一份報告。教學左側附練習檔案，先完成前六步，其餘章節按需要閱讀。
 
+## 先看操作流程
+
+![先確認版本、另存練習、填條件、重算、讀狀態、保存匯出](../images/diagrams/workflow.zh.svg)
+
+本圖是操作示意，不是新成品截圖。詳細說明見[圖解導覽](../visual-tour.md)及[安裝與起步](../getting-started.md)。現有離線 ZIP 的內容與雜湊保持不變；本次新增圖解供 GitHub 文件閱讀。
+
 ## 不開軟體，也可以先看教學
 
 [Windows 5.7.3 教學包](Facility_Studio_Beginner_Tutorial_Windows.zip)／[macOS ARM64 5.7.3 教學包](Facility_Studio_Beginner_Tutorial_macOS.zip)。完整解壓縮後用瀏覽器開啟 `START_HERE.html`。新增液體／純水與保溫、PV 真空及潔淨室 ACH／MAU 章節。不需 Python 或套件；只有外部連結需要網路。
@@ -49,6 +55,8 @@ python3 docs/tutorial/verify_tutorial.py --platform macos --output tutorial-maco
 
 <a id="english"></a>
 ## English
+
+[Visual workflow](../visual-tour.en.md#workflow) · [Installation and first run](../getting-started.en.md). The illustration above is a documentation diagram, not a new binary screenshot. Existing offline ZIP contents and hashes are unchanged; these new diagrams are for the GitHub documentation.
 
 Facility Studio 5.7.3 includes updated offline help. Native acceptance and platform publication status are determined by CI records and Release evidence for the exact source commit. A platform download is valid only when its matching Release provides the package and SHA256. Full psychrometric charts, direct-lighting layouts, capacity/expansion plans and stale-result handling are covered in both languages. This does not establish that older downloads include the features or that native delivery has passed acceptance. Use **This tool's guide** in a calculator or **Full workbench → Beginner tutorial** for a first report. Complete the first six sections; additional chapters are optional.
 

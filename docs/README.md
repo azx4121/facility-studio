@@ -1,5 +1,7 @@
 # Facility Studio 文件中心
 
+[圖解導覽](visual-tour.md) · [安裝與起步](getting-started.md) · [工具索引](guides/README.md) · [離線教學](tutorial/README.md)
+
 ## 5.7.3 現行文件
 
 [版本變更與發布契約](releases/v5.7.3.md) · [正式驗收證據格式](verification/5.7.3-release-acceptance.md) · [設計審查](guides/design-review.md) · [容量規劃](guides/capacity.md)

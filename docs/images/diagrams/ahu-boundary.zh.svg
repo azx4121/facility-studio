@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="title desc">
+<title id="title">AHU：需求點與設備能力分開看</title><desc id="desc">分季入口 → 逐段處理 → 送風需求；使用實際配置與同工況資料。</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="#007e87"/></marker></defs>
+<g font-family="Noto Sans CJK TC, Microsoft JhengHei, PingFang TC, Arial, sans-serif">
+<rect x="0" y="0" width="1280" height="760" rx="0" fill="#f2f6f8" stroke="none"/>
+<rect x="0" y="0" width="1280" height="178" rx="0" fill="#10293c" stroke="none"/>
+<text x="48" y="48" font-size="18" font-weight="600" fill="#9de0de">FACILITY STUDIO   /   5.7.3 DOCUMENTATION</text>
+<text x="48" y="105" font-size="40" font-weight="700" fill="white">AHU：需求點與設備能力分開看</text>
+<text x="48" y="148" font-size="20" font-weight="400" fill="#d7e4ea">分季入口 → 逐段處理 → 送風需求；使用實際配置與同工況資料。</text>
+<path d="M198 274 L218 274" fill="none" stroke="#007e87" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="48" y="222" width="150" height="112" rx="16" fill="#dfeefa" stroke="none"/>
+<text x="66" y="267" font-size="30" font-weight="700" fill="#10293c">IN</text>
+<text x="66" y="307" font-size="18" font-weight="400" fill="#526575">分季入口</text>
+<path d="M370 274 L390 274" fill="none" stroke="#007e87" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="220" y="222" width="150" height="112" rx="16" fill="#ffedcf" stroke="none"/>
+<text x="238" y="267" font-size="30" font-weight="700" fill="#10293c">H1</text>
+<text x="238" y="307" font-size="18" font-weight="400" fill="#526575">預熱</text>
+<path d="M542 274 L562 274" fill="none" stroke="#007e87" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="392" y="222" width="150" height="112" rx="16" fill="#dceeee" stroke="none"/>
+<text x="410" y="267" font-size="30" font-weight="700" fill="#10293c">C1</text>
+<text x="410" y="307" font-size="18" font-weight="400" fill="#526575">預冷</text>
+<path d="M714 274 L734 274" fill="none" stroke="#007e87" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="564" y="222" width="150" height="112" rx="16" fill="#dceeee" stroke="none"/>
+<text x="582" y="267" font-size="30" font-weight="700" fill="#10293c">HUM</text>
+<text x="582" y="307" font-size="18" font-weight="400" fill="#526575">加濕</text>
+<path d="M886 274 L906 274" fill="none" stroke="#007e87" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="736" y="222" width="150" height="112" rx="16" fill="#dceeee" stroke="none"/>
+<text x="754" y="267" font-size="30" font-weight="700" fill="#10293c">C2</text>
+<text x="754" y="307" font-size="18" font-weight="400" fill="#526575">再冷／除濕</text>
+<path d="M1058 274 L1078 274" fill="none" stroke="#007e87" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="908" y="222" width="150" height="112" rx="16" fill="#ffedcf" stroke="none"/>
+<text x="926" y="267" font-size="30" font-weight="700" fill="#10293c">H2</text>
+<text x="926" y="307" font-size="18" font-weight="400" fill="#526575">再熱</text>
+<rect x="1080" y="222" width="150" height="112" rx="16" fill="#dfeefa" stroke="none"/>
+<text x="1098" y="267" font-size="30" font-weight="700" fill="#10293c">SA</text>
+<text x="1098" y="307" font-size="18" font-weight="400" fill="#526575">送風需求</text>
+<text x="48" y="374" font-size="21" font-weight="400" fill="#526575">各段入口承接上一段；未使用的段落採旁通，不任意填 0°C。</text>
+<rect x="48" y="420" width="376" height="180" rx="16" fill="white" stroke="none"/>
+<text x="70" y="464" font-size="24" font-weight="700" fill="#10293c">需求側</text>
+<text x="70" y="510" font-size="19" font-weight="400" fill="#526575">風量基準、溫度、含濕量與熱濕收支</text>
+<text x="70" y="549" font-size="19" font-weight="400" fill="#526575">夏季與冬季各自重算</text>
+<rect x="452" y="420" width="376" height="180" rx="16" fill="white" stroke="none"/>
+<text x="474" y="464" font-size="24" font-weight="700" fill="#10293c">供應側</text>
+<text x="474" y="510" font-size="19" font-weight="400" fill="#526575">已配置容量、供回水、BF／ADP</text>
+<text x="474" y="549" font-size="19" font-weight="400" fill="#526575">核對原廠同工況可達能力</text>
+<rect x="856" y="420" width="376" height="180" rx="16" fill="white" stroke="none"/>
+<text x="878" y="464" font-size="24" font-weight="700" fill="#10293c">工程判讀</text>
+<text x="878" y="510" font-size="19" font-weight="400" fill="#526575">待資料保留待資料；不可行保留未達</text>
+<text x="878" y="549" font-size="19" font-weight="400" fill="#526575">不把目標點當作實際出風</text>
+<rect x="48" y="630" width="1184" height="62" rx="16" fill="#fff0cf" stroke="none"/>
+<text x="72" y="669" font-size="19" font-weight="600" fill="#10293c">H1 與 H2 容量不能直接挪用；降低冰水溫度或搜尋風量，不是可行性保證。</text>
+<text x="48" y="736" font-size="17" font-weight="400" fill="#526575">文件示意圖，非軟體截圖或驗收證明。</text>
+</g></svg>

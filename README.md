@@ -1,10 +1,14 @@
 # Facility Studio 5.7.3｜廠務工程初估與空調計算
 
-[English](README.en.md) · [工具指南](docs/guides/README.md) · [常見問題](docs/faq.md) · [文件中心](docs/README.md)
+[English](README.en.md) · [圖解導覽](docs/visual-tour.md) · [安裝與起步](docs/getting-started.md) · [工具指南](docs/guides/README.md) · [常見問題](docs/faq.md) · [文件中心](docs/README.md)
 
 **繁體中文／English · 本機離線計算 · 成品內含 Python 執行環境**
 
 Facility Studio 5.7.3 是廠務工程初估、方案比較與設計需求整理工具，可支援 FEED 階段中符合已列模型範圍的部分計算與文件準備。軟體測試驗證計算及操作實作，不代表專案已通過 FEED、法規或原廠設備性能認證。設計條件、原廠同工況資料、交付範圍及專業覆核仍須由專案團隊完成。
+
+![Facility Studio 功能導覽：單點快算、整案工作台、設備與容量、設計資料審查](docs/images/diagrams/overview.zh.svg)
+
+*文件示意圖，非軟體截圖或驗收證明。看[完整圖解與圖片來源](docs/visual-tour.md)。*
 
 ## 下載
 
@@ -35,6 +39,8 @@ Facility Studio 5.7.3 是廠務工程初估、方案比較與設計需求整理�
 
 ## 第一次使用
 
+[圖解六步流程](docs/visual-tour.md#workflow) · [逐步安裝及 SHA256 核對](docs/getting-started.md)
+
 1. 先核對下載版本、平台與 SHA256，開啟後確認名稱為 **Facility Studio 5.7.3**；在介面選繁體中文或 English。
 2. 選單一工具，填實際工況與單位，按計算並閱讀採用條件、待資料與未達條件。
 3. 修改輸入或上游來源後重算，明確重新帶入下游，再保存／匯出。匯出成功不會清除工程警告。
@@ -48,7 +54,7 @@ Facility Studio 5.7.3 是廠務工程初估、方案比較與設計需求整理�
 
 [歷史截圖與來源](docs/images/README.md)只代表所列舊版本，不能轉用為本版成品畫面；新畫面以附來源及成品身份的 Release 證據為準。正式選型、完整管網、保護協調、施工圖與現場驗收仍須另外完成。
 
-[開發與測試](docs/development.md) · [授權案例](LICENSE_GUIDE.md) · [LICENSE](LICENSE) · [第三方元件](THIRD_PARTY_NOTICES.md)
+[開發與測試](docs/development.md) · [參與維護](CONTRIBUTING.md) · [授權案例](LICENSE_GUIDE.md) · [LICENSE](LICENSE) · [第三方元件](THIRD_PARTY_NOTICES.md)
 
 問題請到 [Issues](https://github.com/azx4121/facility-studio/issues)，附版本、主機／CPU、步驟、輸入與單位、預期及實際結果；移除業主機密。
 

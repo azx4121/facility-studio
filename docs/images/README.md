@@ -1,8 +1,27 @@
-# 介面截圖來源 / Screenshot provenance
+# 圖解與截圖來源 / Diagram and screenshot provenance
+
+## 現行文件圖解 / Current documentation illustrations
+
+2026-11-08 新增六張 SVG：功能入口、六步流程、AHU 需求與容量邊界，各有繁體中文及英文。內容對照來源提交 `01e0a3239e1dc962e76d8c23a91a2f623eaebe95` 的 README、workbench 與 AHU 指南。圖解為可閱讀的向量文件，非介面截圖，不是原生成品或 FEED 驗收證據。無外部字型下載、外部圖片或腳本；使用系統字型。原始 SVG 已以 Inkscape 渲染並目視檢查。
+
+Six SVG illustrations were authored on 2026-11-08 against the named source commit: overview, six-step workflow and AHU boundaries, each in Chinese and English. They are explanatory diagrams, not UI screenshots or native/FEED acceptance. They contain no scripts, external images or font downloads. They use system fonts and were rendered with Inkscape for visual review.
+
+[繁中圖解導覽](../visual-tour.md) · [English visual tour](../visual-tour.en.md)
+
+| 圖解 / Diagram | SHA256 |
+| --- | --- |
+| [ahu-boundary.en.svg](diagrams/ahu-boundary.en.svg) | `7d54373df0b2118b617c437b180b45f0d7a65a612ac7f736612529eb5f5f6c8b` |
+| [ahu-boundary.zh.svg](diagrams/ahu-boundary.zh.svg) | `c58316d5d5854bcd0bc2778ce7c81de644a117337ee2dc16b120e7446d8b75e2` |
+| [overview.en.svg](diagrams/overview.en.svg) | `951913256ea149a92bbef3a4650641c609761ed8de44122820fd3b803212915d` |
+| [overview.zh.svg](diagrams/overview.zh.svg) | `126259558e077e63b20e722177500607c1e9fcf0946a09280bc9fc092349df35` |
+| [workflow.en.svg](diagrams/workflow.en.svg) | `81e12da4e7e627e93696e94853d1e7be59ff0015ba5d0f1f6872877d026bc21c` |
+| [workflow.zh.svg](diagrams/workflow.zh.svg) | `de11fba07a22cd2a30bf31aa2c03673043f0f41de9ae295f75731db0e0b983fe` |
+
+## 歷史介面截圖 / Historical screenshots
 
 **歷史圖片 / Historical images.** Each image below belongs to its named version/host/source. No final 5.7.3 screenshot is claimed; do not relabel historical pixels as new acceptance. [5.7.3 status](../verification/5.7.3-release-acceptance.md).
 
-## 首頁圖片：win.10／mac.8 開啟後的原生畫面（2026-11-01）
+## 歷史首頁圖片：win.10／mac.8 開啟後的原生畫面（2026-11-01）
 
 - `v560-win10-native-zh.png` SHA256 `0885812517b5fcbbe111d9a103d683fc5f103995645964169be44c35c1395de2`
 - `v560-win10-native-en.png` SHA256 `079302504860ba83b3d1aa1be65ecd8e58370a85465280025d3ff00c6d2fee15`

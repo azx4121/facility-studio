@@ -1,0 +1,40 @@
+name: 問題回報 / Bug report
+description: 回報計算、介面、啟動或文件問題 / Calculation, UI, launch or documentation issue
+title: '[Bug] '
+body:
+  - type: markdown
+    attributes:
+      value: '請使用合成或可公開資料，移除業主名稱、個人路徑與機密。Use public-safe examples, not original client projects.'
+  - type: input
+    id: version
+    attributes:
+      label: 版本與附件 / Version and package
+      description: '程式內版本、Release 連結、附件全名；候選包請標示修訂。In-app version, Release URL and full asset name.'
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 作業系統與 CPU / OS and CPU
+      placeholder: 'Windows 11 x64 / macOS version and Apple Silicon / source on Linux'
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 重現步驟與輸入 / Steps and inputs
+      description: '列出工具、完整輸入及單位、是否帶入上游、實際操作。Include units and upstream imports.'
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: 預期與實際結果 / Expected and actual result
+      description: '數值問題請附採用公式與邊界；啟動問題附錯誤文字、SHA256。Include calculation basis or launch error and checksum.'
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 去識別截圖或記錄 / Sanitized screenshots or logs
+      description: '選填；先移除個人路徑、客戶資料與機密。Optional; remove private paths and confidential data.'

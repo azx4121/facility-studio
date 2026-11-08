@@ -1,5 +1,9 @@
 # AHU / MAU stages: preheat, precool, water wash, recool and reheat
 
+![AHU stage demand and equipment capacity](../images/diagrams/ahu-boundary.en.svg)
+
+*Documentation illustration, not a UI screenshot or native acceptance.*
+
 **5.7.3 version guide: native acceptance and publication status are established by CI records and Release attachments for the corresponding commit; this guide does not assert a pass.** Older version-labelled examples, screenshots and pass counts below are historical evidence, not a fresh 5.7.3 run. [Release status](../verification/5.7.3-release-acceptance.md).
 
 Required states are not achievable supply. An infeasible C2 recool stage, disabled heater or insufficient seasonal supply cannot pass because one target matches. Compare summer/winter airflow, temperature/humidity, capacities and BF/ADP separately; improved search does not guarantee all isolated feasible regions. Recalculate and reimport stale linked sources. Explicitly detach and confirm conditions before independent calculation. A numeric chilled-water reduction is not a feasibility guarantee.

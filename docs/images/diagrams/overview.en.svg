@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="title desc">
+<title id="title">Start with a question. Choose a workflow.</title><desc id="desc">Quick calculation → project context → demand and capacity → save and review</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="#007e87"/></marker></defs>
+<g font-family="Noto Sans CJK TC, Microsoft JhengHei, PingFang TC, Arial, sans-serif">
+<rect x="0" y="0" width="1280" height="760" rx="0" fill="#f2f6f8" stroke="none"/>
+<rect x="0" y="0" width="1280" height="178" rx="0" fill="#10293c" stroke="none"/>
+<text x="48" y="48" font-size="18" font-weight="600" fill="#9de0de">FACILITY STUDIO   /   5.7.3 DOCUMENTATION</text>
+<text x="48" y="105" font-size="40" font-weight="700" fill="white">Start with a question. Choose a workflow.</text>
+<text x="48" y="148" font-size="20" font-weight="400" fill="#d7e4ea">Quick calculation → project context → demand and capacity → save and review</text>
+<rect x="48" y="210" width="580" height="168" rx="16" fill="white" stroke="none"/>
+<rect x="68" y="232" width="48" height="44" rx="12" fill="#007e87" stroke="none"/>
+<text x="77" y="262" font-size="23" font-weight="700" fill="white">01</text>
+<text x="132" y="264" font-size="28" font-weight="700" fill="#10293c">Quick tools</text>
+<text x="72" y="312" font-size="22" font-weight="400" fill="#526575">Electrical, ducts, gases and PV</text>
+<text x="72" y="347" font-size="22" font-weight="400" fill="#526575">Water, lighting, air states, units</text>
+<rect x="652" y="210" width="580" height="168" rx="16" fill="white" stroke="none"/>
+<rect x="672" y="232" width="48" height="44" rx="12" fill="#007e87" stroke="none"/>
+<text x="681" y="262" font-size="23" font-weight="700" fill="white">02</text>
+<text x="736" y="264" font-size="28" font-weight="700" fill="#10293c">Full workbench</text>
+<text x="676" y="312" font-size="22" font-weight="400" fill="#526575">Climate, rooms and heat loads</text>
+<text x="676" y="347" font-size="22" font-weight="400" fill="#526575">Airflow paths, schedules, reports</text>
+<rect x="48" y="402" width="580" height="168" rx="16" fill="white" stroke="none"/>
+<rect x="68" y="424" width="48" height="44" rx="12" fill="#007e87" stroke="none"/>
+<text x="77" y="454" font-size="23" font-weight="700" fill="white">03</text>
+<text x="132" y="456" font-size="28" font-weight="700" fill="#10293c">Equipment / capacity</text>
+<text x="72" y="504" font-size="22" font-weight="400" fill="#526575">Seasonal staged-AHU demands</text>
+<text x="72" y="539" font-size="22" font-weight="400" fill="#526575">Current, expansion, N−1 screening</text>
+<rect x="652" y="402" width="580" height="168" rx="16" fill="white" stroke="none"/>
+<rect x="672" y="424" width="48" height="44" rx="12" fill="#007e87" stroke="none"/>
+<text x="681" y="454" font-size="23" font-weight="700" fill="white">04</text>
+<text x="736" y="456" font-size="28" font-weight="700" fill="#10293c">Design review</text>
+<text x="676" y="504" font-size="22" font-weight="400" fill="#526575">Adopted inputs and source files</text>
+<text x="676" y="539" font-size="22" font-weight="400" fill="#526575">Missing data and review actions</text>
+<rect x="48" y="618" width="1184" height="80" rx="16" fill="#dceeee" stroke="none"/>
+<text x="72" y="652" font-size="23" font-weight="600" fill="#10293c">Verify the version and platform. Recalculate changes, reimport downstream, then save.</text>
+<text x="72" y="682" font-size="19" font-weight="400" fill="#526575">A completed calculation is not equipment approval. Save each workspace separately.</text>
+<text x="48" y="736" font-size="17" font-weight="400" fill="#526575">Documentation illustration, not a UI screenshot or acceptance evidence.</text>
+</g></svg>

@@ -1,0 +1,17 @@
+name: 文件與圖解 / Documentation and diagrams
+description: 回報錯誤說明、失效連結或缺少圖解 / Incorrect guidance, broken links or missing illustrations
+title: '[Docs] '
+body:
+  - type: input
+    id: page
+    attributes:
+      label: 文件連結 / Page URL
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 問題與建議 / Problem and suggestion
+      description: '請列出段落、語言、所用版本及期待補充的說明。Include section, language, version and the explanation you need.'
+    validations:
+      required: true

@@ -8,6 +8,10 @@
 
 Choose a tool for your question, then review its inputs, formulas and result. These **18 calculation cases and two scope controls** use synthetic data and were originally verified against V5.6.0 Chinese/English interfaces. Recalculate using 5.7.3 fields and adopted conditions; historical values are not claimed freshly accepted.
 
+![Workflow guide map](../images/diagrams/overview.en.svg)
+
+*Conceptual guide, not a UI screenshot. [Visual tour](../visual-tour.en.md) · [Install and start](../getting-started.en.md).*
+
 ## Start with the full-workbench walkthrough
 
 The [beginner guide](workbench.en.md) starts with two reopenable practice projects and explains essential inputs, reports, latent load, water flow, pressure losses and AHU links. The [offline tutorial](../tutorial/README.md) works in a browser on Windows or macOS.
