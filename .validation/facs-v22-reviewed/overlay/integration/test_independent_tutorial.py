@@ -1213,19 +1213,19 @@ REVIEWED_V22_DOCUMENT_INDEX_TRANSITIONS = {'docs/images/README.md': {'reason': '
 
 # Explicit reviewed successors for the Windows portable release. Original v19/v22
 # identities remain frozen; no other product byte or path is exempted.
-REVIEWED_WINDOWS_PORTABLE_R1 = {'windows/facility_studio/english_catalog.py': {'reason': 'Windows-only exact application-owned '
-                                                          'worksheet title catalog translation to '
-                                                          'Instructions; exporter and all electrical '
-                                                          'restrictions unchanged.',
+REVIEWED_WINDOWS_PORTABLE_R1 = {'windows/facility_studio/english_catalog.py': {'reason': 'Windows-only exact application-owned worksheet '
+                                                          'title catalog translation to Instructions; '
+                                                          'exporter and all electrical restrictions '
+                                                          'unchanged.',
                                                 'v22': {'bytes': 447988,
                                                         'mode': '100644',
                                                         'sha256': '4f27d571a6a3aba004761ca341f12eec13249e7960d557442e7d36fda2c507f0'},
                                                 'windows_portable_r1': {'bytes': 448014,
                                                                         'mode': '100644',
                                                                         'sha256': 'c9b1d7a222e3e867afe19f55b8933f37e1a44b1e1faec495d3aaf7f795fa7ec5'}},
- 'windows/facility_studio/feed_review_preview.py': {'reason': 'Windows-only fresh dialog work-area '
-                                                              'sizing; settings footer reservation. No '
-                                                              'engineering calculation changes.',
+ 'windows/facility_studio/feed_review_preview.py': {'reason': 'Windows-only fresh dialog work-area sizing; '
+                                                              'settings footer reservation. No engineering '
+                                                              'calculation changes.',
                                                     'v22': {'bytes': 17488,
                                                             'mode': '100644',
                                                             'sha256': '29762b1396ec27ff31c184e4a5dc7bb980b65f1c8cdd698de78bc72c40557172'},
@@ -1242,15 +1242,30 @@ REVIEWED_WINDOWS_PORTABLE_R1 = {'windows/facility_studio/english_catalog.py': {'
                                                                         'mode': '100644',
                                                                         'sha256': 'a175bcc15ac656b7417bf2a80421f7340866092e6a076df4652ff980f0b5469d'}},
  'windows/facility_studio/window_geometry.py': {'reason': 'Windows-only first-map placement including '
-                                                          'OS-derived upcoming native menu frame; no '
-                                                          'later repositioning, calculation or macOS '
-                                                          'changes.',
+                                                          'OS-derived upcoming native menu frame; no later '
+                                                          'repositioning, calculation or macOS changes.',
                                                 'v22': {'bytes': 4686,
                                                         'mode': '100644',
                                                         'sha256': 'd670cd4ed349b417233985d945914c0202db29568c6cadc99218eaf8c0ba8c73'},
                                                 'windows_portable_r1': {'bytes': 10322,
                                                                         'mode': '100644',
-                                                                        'sha256': 'dba6710d8b14e0bc3135b59626c0577b164f697602b286e21d75d1d8786a55a5'}}}
+                                                                        'sha256': 'dba6710d8b14e0bc3135b59626c0577b164f697602b286e21d75d1d8786a55a5'}},
+ 'windows/facility_studio/simple_desktop.py': {'reason': 'Windows-only native menu installation before first '
+                                                         'layout/map; no calculation or macOS changes.',
+                                               'v22': {'bytes': 59334,
+                                                       'mode': '100644',
+                                                       'sha256': '5b7a50c30afca9a5b33ebd47da345b6ca0f4c54c3dc4b4a3a8d75b511acacdcc'},
+                                               'windows_portable_r1': {'bytes': 59481,
+                                                                       'mode': '100644',
+                                                                       'sha256': 'ae3febe265b42d72d37e40897ecf418f4de49458334b90b411b413a532e63a75'}},
+ 'windows/facility_studio/desktop.py': {'reason': 'Windows-only native menu installation before first '
+                                                  'layout/map; no calculation or macOS changes.',
+                                        'v22': {'bytes': 56862,
+                                                'mode': '100644',
+                                                'sha256': '4a3779a0a9adb176da2530dca87074f55ff894c2a9a1a54b116a746e0683a26a'},
+                                        'windows_portable_r1': {'bytes': 56984,
+                                                                'mode': '100644',
+                                                                'sha256': '070c8cf61e3c38748867a8d4188b5e19a2a7123378bee4da04ae85ad64c67836'}}}
 
 def assert_reviewed_product_bytes(relative):
     portable = REVIEWED_WINDOWS_PORTABLE_R1.get(relative)
@@ -1325,7 +1340,7 @@ def test_all_product_files_match_exact_reviewed_successors():
     assert set(REVIEWED_WINDOWS_PORTABLE_R1) <= set(BASELINE_FILES)
     assert not (set(REVIEWED_WINDOWS_PORTABLE_R1) & set(REVIEWED_V21_TK_REPAIRS))
     assert set(REVIEWED_WINDOWS_PORTABLE_R1) & set(REVIEWED_V22_PRODUCT_TRANSITIONS) == {
-        "windows/facility_studio/english_catalog.py"}
+        "windows/facility_studio/english_catalog.py", "windows/facility_studio/desktop.py"}
     for platform in ("macos", "windows"):
         old = {name for name in BASELINE_FILES if name.startswith(platform + "/")}
         for relative in old:

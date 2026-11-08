@@ -1,7 +1,7 @@
 [
   {
     "path": "integration/test_independent_tutorial.py",
-    "sha256": "a271d23cc75e781a92beb26f1cbc514cf70c1f7da061713a911fd14b3efa1743",
+    "sha256": "e97747babea74c13faa3bc143da000aaabbd255cafa10a8ffcb3bbc2f3133e38",
     "original_sha256": "eaa866af734820a803c281c4e5b34a5ff25b7aece730d3357df3f4dab67b9b16",
     "kind": "test_harness"
   },
@@ -94,5 +94,41 @@
     "kind": "test_harness",
     "sha256": "4148ec07a3f4d4ef66a858c119f9f8b125283f9bc5405994e135cbcf8c1833ad",
     "original_sha256": null
+  },
+  {
+    "path": "windows/facility_studio/simple_desktop.py",
+    "sha256": "ae3febe265b42d72d37e40897ecf418f4de49458334b90b411b413a532e63a75",
+    "original_sha256": "5b7a50c30afca9a5b33ebd47da345b6ca0f4c54c3dc4b4a3a8d75b511acacdcc",
+    "kind": "windows_menu_startup_order"
+  },
+  {
+    "path": "windows/facility_studio/desktop.py",
+    "sha256": "070c8cf61e3c38748867a8d4188b5e19a2a7123378bee4da04ae85ad64c67836",
+    "original_sha256": "4a3779a0a9adb176da2530dca87074f55ff894c2a9a1a54b116a746e0683a26a",
+    "kind": "windows_menu_startup_order"
+  },
+  {
+    "path": "integration/test_windows_menu_startup_order.py",
+    "sha256": "334059bfa0273b7eda3af1b65b0b4240240058f30730203c93e0aeda2d95c85d",
+    "original_sha256": null,
+    "kind": "test_harness"
+  },
+  {
+    "path": "integration/test_windows_pending_menu_control.py",
+    "sha256": "083064917c103d832f1c1984ce867c232b83fe8e3c1d86df14b86914ba257fd6",
+    "original_sha256": null,
+    "kind": "test_harness"
+  },
+  {
+    "path": "integration/windows_cold_startup_probe.py",
+    "sha256": "cd1e1974d854a6eaf7a53886aaa2080e1ed338c9abf23e005b6297ba7e8a9d85",
+    "original_sha256": null,
+    "kind": "test_harness"
+  },
+  {
+    "path": "integration/test_windows_cold_startup.py",
+    "sha256": "012f9b37ff71f9bbafe15cf7af016295203c57287e875782c73f1cf088b7260c",
+    "original_sha256": null,
+    "kind": "test_harness"
   }
 ]
