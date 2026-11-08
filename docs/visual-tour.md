@@ -2,7 +2,7 @@
 
 [English](visual-tour.en.md) · [首頁](../README.md) · [安裝與起步](getting-started.md) · [工具索引](guides/README.md)
 
-以下三張圖解對照 5.7.3 文件與來源提交 `01e0a3239e1dc962e76d8c23a91a2f623eaebe95`，於 2026-11-08 編製。它們是操作與模型示意，不是實際介面截圖，不代表 其他候選包、原生成品或 FEED 已完成驗收。原生平台與公開下載狀態仍以[對應 Release](https://github.com/azx4121/facility-studio/releases)為準。
+以下三張圖解對照 5.7.3 文件與來源提交 `01e0a3239e1dc962e76d8c23a91a2f623eaebe95`，於 2026-11-08 編製。它們是操作與模型示意，不是實際介面截圖，不代表其他候選包、原生成品或 FEED 已完成驗收。原生平台與公開下載狀態仍以[對應 Release](https://github.com/azx4121/facility-studio/releases)為準。
 
 ## 1. 依問題選入口
 
@@ -34,13 +34,31 @@
 H1 容量不足不能拿 H2 餘量直接抵銷。較低冰水溫度或 BF／ADP 風量搜尋也不保證可行。詳細見[分段 AHU 指南](guides/ahu.md)。
 
 <a id="screenshots"></a>
-## 4. 想看真實介面：歷史原生截圖
+## 4. 真實介面：5.7.3 v22 r3 macOS ARM64
 
-以下是 **V5.6.0 mac.8** 的實際原生畫面，保留原圖與版本標題，只供了解舊版介面，不是 5.7.3 截圖。來源為 [GitHub Actions 41278438651](https://github.com/azx4121/facility-studio/actions/runs/41278438651)；主機、擷取方式與 SHA256 見[圖片來源紀錄](images/README.md)。
+以下為 **5.7.3／build 5.7.3.2、v22 r3 UNVALIDATED-COMPILE-ONLY 候選包**在 macOS 27.3 ARM64 上的原生視窗截圖，電力與工作台圖為繁中，PV 圖為透過介面切換後的英文。使用內建範例與測試輸入。原始 JPEG 均為 2880 × 1716，未裁切、未重繪或更改版本標題；不是 mac.8 舊圖。
 
-![歷史 V5.6.0 mac.8 電力頁原生截圖，非本版畫面](images/v560-mac8-native-zh.png)
+### 電力配線
 
-[Windows win.10 原圖](images/v560-win10-native-zh.png)亦保留歷史身分。這些舊圖不可用於證明現行成品已發布、各平台一致或新功能已通過。
+![5.7.3 v22 r3 繁中電力頁，保留自動配線選型暫停與非正式 FEED 警告](images/facs-5.7.3-v22-macos-arm64-electrical-zh-Hant.jpg)
+
+本候選包的電力頁保留輸入電功率、運轉及設計電流；**自動配線選型已暫停**。導線、NFB、有效載流量、壓降及 PE 須另行工程核實，不能把圖中初估數值當成正式選型。
+
+### 完整工程工作台
+
+![5.7.3 v22 r3 繁中工作台，內建範例與未達條件狀態](images/facs-5.7.3-v22-macos-arm64-workbench-zh-Hant.jpg)
+
+畫面保留範例工況與「工程評估：未達條件」狀態。能開啟工作台不代表該範例或所有計算已驗收。
+
+### English：PV 真空
+
+![5.7.3 v22 r3 真實英文 PV 畫面，100 SLPM 測試輸入與未達條件狀態](images/facs-5.7.3-v22-macos-arm64-vacuum-en.jpg)
+
+這是透過介面切換的真實英文畫面，不是翻譯覆蓋圖。100 SLPM 為測試輸入；側欄較長的英文標籤在此原生尺寸下有截斷，保留原貌。原生檢視亦觀察到 AHU 管理視窗預設高度下的底部按鈕文字裁切，尚未完成縮放覆核。
+
+本輪已確認原生啟動、About 5.7.3、部分工具切換、工作台與英文報告頁開啟；另外完成單一 PV 案例核對、英文 TXT 匯出、取消後重開匯出、工作區 JSON 保存及內建 MAU/AHU 練習案載入。這些是局部檢查，不是全功能、全部數值、英文排版、完整匯出或正式 FEED 驗收。工作區重新開啟及單機 AHU 細測尚未完成。候選來源 inventory 有雜湊，但尚無已核對的 Git commit 對應，不能以 main 的 CI 代替此成品驗收，也不宣稱跨平台一致或公開發布。
+
+[精確成品身份、存檔時間及原圖 SHA256](images/README.md#v573-v22-r3)。mac.8／win.10 等[歷史原圖與來源](images/README.md#historical-screenshots)繼續保留原版本身分，不再用於本節的新版展示。
 
 [圖片與圖解來源](images/README.md) · [驗收證據格式](verification/5.7.3-release-acceptance.md)
 

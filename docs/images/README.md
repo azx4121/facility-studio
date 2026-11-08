@@ -1,5 +1,36 @@
 # 圖解與截圖來源 / Diagram and screenshot provenance
 
+<a id="v573-v22-r3"></a>
+## 5.7.3 v22 r3：真實 macOS 候選畫面 / Actual macOS candidate
+
+**狀態 / Status: UNVALIDATED-COMPILE-ONLY candidate.** 已完成原生啟動及部分畫面檢視，不是全功能、全部數值、英文排版、完整匯出或正式 FEED 驗收。 / Native launch and selected screens were checked; full functional, numerical, English-layout, complete export and formal FEED acceptance remain incomplete.
+
+- 平台 / Host: macOS 27.3 (26C5035r), Apple Silicon arm64；bundle 的 Tk script 要求 / bundled Tk script requirement: 9.0.4。
+- App 身份 / Identity: CFBundleShortVersionString `5.7.3`；CFBundleVersion `5.7.3.2`；CFBundleIdentifier `com.facilitystudio.diagnostic.compileonly.v22`。
+- 執行檔 / Executable SHA256: `d5cdf2e018ff5836cbd69b9d3faf893afee77962eb5250fbcc0115749b8ac0e5`。已與交付 ZIP 內同檔核對 / Matched against the same executable inside the delivered ZIP。
+- 候選封裝 / Candidate ZIP: `FACS-v22-r3-UNVALIDATED-COMPILE-ONLY-macOS-arm64.zip`；SHA256 `26dcbac483b5c039486af1d88b750ba7dda5f11dbb9965e88fabc08d0236643a`。這是成品身分記錄，不是公開下載連結 / This identifies the artifact; it is not a public download link。
+- v22 source inventory SHA256: `7c3ef3f66382fa44e5ba6e57f11f04083295c506c4da6a8e2036e730d7c1914f`。尚無已核對的 Git commit 對應；不得標示本倉庫 main 為此候選的編譯來源 / No verified Git commit mapping is available; do not identify repository main as this candidate's build source。
+
+檔案格式已核對 JPEG 標頭與影像解碼。兩張繁中擷取交付檔名原為 `.png`，此處只更正為 `.jpg`，保留原始 bytes 與 SHA256，未重新編碼。 / JPEG signatures and decoding were verified. The two supplied Traditional Chinese captures had `.png` filenames; only the repository extension was corrected to `.jpg`. Original bytes and SHA256 are unchanged, with no re-encoding.
+
+**擷取方式 / Capture method:** 在原生 Mac 上開啟上述精確 App，直接擷取其應用程式視窗。三張均為 2880 × 1716 原始 JPEG，兩張繁中、一張英文，使用內建範例與測試輸入，未裁切、重繪、覆蓋字樣或更改版本；已目視檢查無私人桌面或檔案路徑。 / Direct native application-window capture of the identified App. The three original JPEGs show two Traditional Chinese screens and one English screen with built-in samples and test inputs. No cropping, repainting, overlays or version-label changes were applied. Visual review found no private desktop or file paths.
+
+| 原圖 / Original | Bytes | SHA256 |
+| --- | ---: | --- |
+| [facs-5.7.3-v22-macos-arm64-electrical-zh-Hant.jpg](facs-5.7.3-v22-macos-arm64-electrical-zh-Hant.jpg) | 613544 | `1df86f13d74399cc8d73ebda4831eb1bc630919f29ca37fe84dba304ffdd7e86` |
+| [facs-5.7.3-v22-macos-arm64-workbench-zh-Hant.jpg](facs-5.7.3-v22-macos-arm64-workbench-zh-Hant.jpg) | 460804 | `e111aec436ea4c424513c98291f4f9ef1b1e8d931435196e994b7f341507e645` |
+| [facs-5.7.3-v22-macos-arm64-vacuum-en.jpg](facs-5.7.3-v22-macos-arm64-vacuum-en.jpg) | 565086 | `e4dff050894057c8e8264d0eda781c5ac007c9b4c5906b75c9fbfa03f4ffb464` |
+
+JPEG 存檔時間 / JPEG save times (UTC): electrical `2026-11-08T09:28:35.998Z`；workbench `2026-11-08T09:33:37.182Z`。實際擷取略早，不把存檔時間當成精確擷取時間 / Capture occurred shortly before saving; these are not exact capture timestamps。
+
+英文 PV 圖的實際擷取區間 / English PV capture interval (UTC): `2026-11-08T09:44:49.653Z` to `2026-11-08T09:44:49.711Z`。在 App 介面切換 English 後擷取，PV 流量為測試輸入 100 SLPM / Captured after switching to English through the App UI, with a 100 SLPM PV test input.
+
+**觀察範圍 / Observation scope:** 原生啟動、About 5.7.3、電力預設頁、風管工具切換、工作台及英文報告頁開啟、單一 PV 案例核對、英文 TXT 匯出、取消後重開匯出、工作區 JSON 保存、內建 MAU/AHU 練習案載入及 AHU 管理開啟。電力圖保留配線選型暫停；工作台與英文圖保留「未達條件」。 / Partial checks covered native launch, About 5.7.3, default electrical screen, duct navigation, workbench and English report opening, one PV case, English TXT export, cancelling/reopening export, saving workspace JSON, loading the built-in MAU/AHU practice case and opening the AHU manager. Wiring selection remains suspended; the workbench and English screen retain the conditions-not-met state.
+
+**已知限制 / Known limitations:** 英文側欄長標籤在本次尺寸有截斷；AHU 管理視窗預設高度下的底部按鈕文字亦觀察到裁切，尚未縮放覆核。工作區重新開啟與單機 AHU 細測尚未完成。不得推論全功能、全部數值、英文排版或完整匯出已驗收。 / Long English sidebar labels are clipped at the captured size. Bottom-button text was also observed clipped in the default-height AHU manager, with resizing unreviewed. Workspace reopening and detailed individual-AHU checks remain incomplete. These observations are not full functional, numerical, English-layout or complete export acceptance.
+
+[繁中真實畫面](../visual-tour.md#screenshots) · [Actual screens with English captions](../visual-tour.en.md#screenshots)
+
 ## 現行文件圖解 / Current documentation illustrations
 
 2026-11-08 新增六張 SVG：功能入口、六步流程、AHU 需求與容量邊界，各有繁體中文及英文。內容對照來源提交 `01e0a3239e1dc962e76d8c23a91a2f623eaebe95` 的 README、workbench 與 AHU 指南。圖解為可閱讀的向量文件，非介面截圖，不是原生成品或 FEED 驗收證據。無外部字型下載、外部圖片或腳本；使用系統字型。原始 SVG 已以 Inkscape 渲染並目視檢查。
@@ -17,9 +48,10 @@ Six SVG illustrations were authored on 2026-11-08 against the named source commi
 | [workflow.en.svg](diagrams/workflow.en.svg) | `81e12da4e7e627e93696e94853d1e7be59ff0015ba5d0f1f6872877d026bc21c` |
 | [workflow.zh.svg](diagrams/workflow.zh.svg) | `de11fba07a22cd2a30bf31aa2c03673043f0f41de9ae295f75731db0e0b983fe` |
 
+<a id="historical-screenshots"></a>
 ## 歷史介面截圖 / Historical screenshots
 
-**歷史圖片 / Historical images.** Each image below belongs to its named version/host/source. No final 5.7.3 screenshot is claimed; do not relabel historical pixels as new acceptance. [5.7.3 status](../verification/5.7.3-release-acceptance.md).
+**歷史圖片 / Historical images.** Each image below belongs to its named version/host/source. The 5.7.3 candidate is documented separately above. Do not relabel these historical pixels as current acceptance. [5.7.3 status](../verification/5.7.3-release-acceptance.md).
 
 ## 歷史首頁圖片：win.10／mac.8 開啟後的原生畫面（2026-11-01）
 
@@ -32,7 +64,7 @@ Six SVG illustrations were authored on 2026-11-08 against the named source commi
 
 限制：這是 GitHub 託管的虛擬桌面，不是實體電腦；Windows 為 100% 縮放；macOS 視窗標題列呈未取得焦點的灰色，為擷取當下狀態。兩平台字型（Windows：Microsoft JhengHei UI／Consolas；macOS：PingFang TC／Menlo）與視窗外框由系統提供，所以不會逐像素相同；已知的小差異：Windows 的文字換行位置略不同、語言選單與選取項目的字重不完全相同。
 
-English: the homepage images are the published win.10 EXE and mac.8 DMG started on native desktops (GitHub Actions run 41278438651: Windows Server 2022, macOS 15) with `tools/capture_native_ui.py`, which only pre-sets the language preference file, waits for the window plus 8 s and captures that window, uncropped and unretouched, default inputs (SHA256 values above). Limits: hosted virtual desktops, not physical machines; Windows at 100 % scaling; the macOS title bar is grey because the window had no focus. Fonts and window frames come from each system, so the two platforms are not pixel-identical; known small differences: line-wrap positions on Windows and the weight of the language selector and selected navigation item.
+English: these historical homepage images show the published win.10 EXE and mac.8 DMG started on native desktops (GitHub Actions run 41278438651: Windows Server 2022, macOS 15) with `tools/capture_native_ui.py`, which only pre-sets the language preference file, waits for the window plus 8 s and captures that window, uncropped and unretouched, default inputs (SHA256 values above). Limits: hosted virtual desktops, not physical machines; Windows at 100 % scaling; the macOS title bar is grey because the window had no focus. Fonts and window frames come from each system, so the two platforms are not pixel-identical; known small differences: line-wrap positions on Windows and the weight of the language selector and selected navigation item.
 
 ## 歷史：win.9／mac.7 開啟後的原生畫面（2026-11-01，文字大小與 mac.7 不同）
 

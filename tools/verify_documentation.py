@@ -88,9 +88,25 @@ def check():
                         errors.append(f'{path.name}: unsafe/external attribute {key}')
         except ET.ParseError as exc:
             errors.append(f'{path.name}: invalid XML: {exc}')
+    screenshots = [ROOT/'docs/images'/name for name in (
+        'facs-5.7.3-v22-macos-arm64-electrical-zh-Hant.jpg',
+        'facs-5.7.3-v22-macos-arm64-workbench-zh-Hant.jpg',
+        'facs-5.7.3-v22-macos-arm64-vacuum-en.jpg',
+    )]
+    provenance = (ROOT/'docs/images/README.md').read_text(encoding='utf-8')
+    for path in screenshots:
+        if not path.is_file():
+            errors.append(f'{path.name}: missing original candidate screenshot')
+            continue
+        data = path.read_bytes()
+        digest = hashlib.sha256(data).hexdigest()
+        if f']({path.name}) | {len(data)} | `{digest}`' not in provenance:
+            errors.append(f'{path.name}: bytes/SHA256 do not match the provenance page')
+        if not data.startswith(b'\xff\xd8') or not data.endswith(b'\xff\xd9'):
+            errors.append(f'{path.name}: invalid JPEG signature')
     for error in errors:
         print('FAIL:', error)
-    print(f'{len(docs)} current Markdown documents; {checked} local links; {len(diagrams)} SVG diagrams; {len(errors)} errors.')
+    print(f'{len(docs)} current Markdown documents; {checked} local links; {len(diagrams)} SVG diagrams; {len(screenshots)} candidate screenshots; {len(errors)} errors.')
     return int(bool(errors))
 
 

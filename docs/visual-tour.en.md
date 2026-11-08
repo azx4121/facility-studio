@@ -34,13 +34,31 @@ This is a staged-AHU treatment concept, not a mandatory configuration or a compl
 Surplus H2 capacity cannot directly offset insufficient H1 capacity. Colder chilled water or a BF/ADP airflow search does not guarantee feasibility. See the [AHU guide](guides/ahu.en.md).
 
 <a id="screenshots"></a>
-## 4. Actual interface: historical native screenshot
+## 4. Actual interface: 5.7.3 v22 r3 on macOS ARM64
 
-The image below is the actual **V5.6.0 mac.8** native application, unchanged and retaining its version title. It is not a 5.7.3 screenshot. Source: [GitHub Actions 41278438651](https://github.com/azx4121/facility-studio/actions/runs/41278438651). Host, capture method and SHA256 are documented in the [image provenance](images/README.md).
+These are native application-window screenshots of the **5.7.3 / build 5.7.3.2, v22 r3 UNVALIDATED-COMPILE-ONLY candidate** running on macOS 27.3 ARM64. The electrical and overview screens use the **Traditional Chinese interface**; the PV screen was switched to **English through the UI**. They use built-in samples and test inputs. The original 2880 × 1716 JPEGs are uncropped and unretouched, with their actual version titles. They are not relabeled mac.8 images.
 
-![Historical V5.6.0 mac.8 English electrical screen, not the current version](images/v560-mac8-native-en.png)
+### Electrical tool
 
-The [Windows win.10 original](images/v560-win10-native-en.png) also retains its historical identity. Neither establishes publication, current platform parity or acceptance of new features.
+![5.7.3 v22 r3 electrical screen, Traditional Chinese interface, with suspended wiring selection and non-FEED warning](images/facs-5.7.3-v22-macos-arm64-electrical-zh-Hant.jpg)
+
+This candidate retains input power, operating current and design current. **Automatic wiring selection is suspended.** Conductors, breakers, ampacity, voltage drop and PE require separate engineering verification. The displayed estimates are not a formal selection.
+
+### Full engineering workbench
+
+![5.7.3 v22 r3 workbench, Traditional Chinese interface, with built-in sample and unmet-condition state](images/facs-5.7.3-v22-macos-arm64-workbench-zh-Hant.jpg)
+
+The original sample inputs and “conditions not met” engineering state remain visible. Opening the workbench does not validate the sample or all calculations.
+
+### English PV vacuum screen
+
+![5.7.3 v22 r3 actual English PV screen, with 100 SLPM test input and conditions not met](images/facs-5.7.3-v22-macos-arm64-vacuum-en.jpg)
+
+This is an actual language change through the UI, not a translated overlay. The 100 SLPM value is a test input. Longer English sidebar labels are clipped at this native window size and remain unchanged in the image. Native inspection also found clipped bottom-button text in the default-height AHU manager; resizing has not yet been reviewed.
+
+Partial checks covered native launch, About 5.7.3, selected tool navigation, opening the workbench and English report page, one PV case, English TXT export, cancelling/reopening export, saving workspace JSON and loading the built-in MAU/AHU practice case. These are not full functional, numerical, English-layout, complete export or formal FEED acceptance. Workspace reopening and detailed individual-AHU checks remain incomplete. The candidate source inventory has a digest but no verified Git commit mapping; main's CI cannot substitute for acceptance of this package, platform parity or public publication.
+
+[Exact artifact identity, save times and original SHA256](images/README.md#v573-v22-r3). The [historical mac.8 / win.10 originals and provenance](images/README.md#historical-screenshots) retain their original identities and are no longer used as the current display.
 
 [Image and diagram provenance](images/README.md) · [Acceptance evidence schema](verification/5.7.3-release-acceptance.md)
 

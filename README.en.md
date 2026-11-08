@@ -6,9 +6,11 @@
 
 Facility Studio 5.7.3 supports preliminary facility engineering calculations, option comparison and design-demand documentation within its stated model scope. It can assist selected FEED activities. Software verification does not certify a project's FEED deliverables, regulatory compliance or vendor equipment performance. Project-specific design inputs, vendor data, deliverable requirements and professional review remain necessary.
 
-![Facility Studio guide map: quick tools, full workbench, equipment and capacity, design review](docs/images/diagrams/overview.en.svg)
+![Facility Studio 5.7.3 v22 r3 native macOS ARM64 PV vacuum screen, English interface](docs/images/facs-5.7.3-v22-macos-arm64-vacuum-en.jpg)
 
-*Documentation illustration, not a software screenshot or acceptance evidence. See the [visual tour and image sources](docs/visual-tour.en.md).*
+*Actual 5.7.3 v22 r3 macOS ARM64 candidate running natively, **English interface**, uncropped and unretouched. Native launch and selected screens have been checked; the package remains **UNVALIDATED-COMPILE-ONLY**, not fully accepted or FEED-certified. Long English sidebar labels are visibly clipped at this window size.*
+
+[Current workbench and visual tour](docs/visual-tour.en.md#screenshots) · [Artifact identity, original SHA256 and test scope](docs/images/README.md#v573-v22-r3). No verified Git commit mapping is available for this candidate. The images do not establish that repository main is the v22 build source or that a public Release exists.
 
 <a id="installation-and-first-launch"></a>
 ## Download and run
@@ -52,7 +54,7 @@ The formal default data directory is `Facility Studio Data-5.7.3` under the user
 
 5.7.3 addresses engineering guards, source invalidation, C2 feasibility and BF/ADP search, necessary vacuum pumping speed, DI continuous-circulation template formula, reports and language consistency. Historical numeric chilled-water remedies are not guarantees; recalculate the complete operating conditions. See the [version changes and release contract](docs/releases/v5.7.3.md) and [formal acceptance evidence schema](docs/verification/5.7.3-release-acceptance.md).
 
-[Historical screenshots](docs/images/README.md) show their named old releases only. Do not relabel them as 5.7.3 package screenshots; use Release evidence that identifies its source and artifact. Complete networks, protection coordination, construction drawings and field acceptance remain outside this tool's delivery.
+[Image provenance](docs/images/README.md) distinguishes the actual 5.7.3 v22 r3 candidate from historical screenshots. Acceptance results cannot be transferred between them. Complete networks, protection coordination, construction drawings and field acceptance remain outside this tool's delivery.
 
 [Development](docs/development.md) · [Contributing](CONTRIBUTING.md) · [License examples](LICENSE_GUIDE.en.md) · [LICENSE](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
 
