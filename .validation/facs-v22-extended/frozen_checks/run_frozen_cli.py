@@ -211,7 +211,7 @@ def workbook_sheets(path, language):
         tree = ET.fromstring(archive.read("xl/workbook.xml"))
         sheets = [node.get("name") for node in tree.findall("{*}sheets/{*}sheet")]
     expected = {"Electrical" if language == "en" else "電力", "PCW", "CDA", "N2", "EXHAUST", "DI", "PV",
-                "填寫 Description" if language == "en" else "填寫說明"}
+                "Instructions" if language == "en" else "填寫說明"}
     require(set(sheets) == expected and len(sheets) == 8, "Wrong Excel template sheets: " + repr(sheets))
     return sheets
 
@@ -330,13 +330,7 @@ class Suite:
                     require(value == language_results[tool], "UI language changed canonical tool data: " + tool)
             template = self.output / (language + "-設備 Template.xlsx")
             self.invoke(language + "-template-export", ["--language", language, "--export-equipment-template", template])
-            sheets = workbook_sheets(template, language)
-            if language == "en":
-                self.report.setdefault("observations", []).append({
-                    "case": self.output.name,
-                    "finding": "English template instruction-sheet title is only partially translated",
-                    "sheet_title": sheets[0],
-                    "scope": "Template export/import functionality, not complete localization acceptance"})
+            workbook_sheets(template, language)
             self.refusal(language + "-disabled-template", ["--language", language, "--equipment", template],
                          self.output / (language + "-tool-electrical.json"),
                          self.output / (language + "-tool-electrical.txt"))

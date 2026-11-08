@@ -1,8 +1,5 @@
 name: v22 extended single EXE checks without publication
 on:
-  push:
-    branches: ['validation/facs-v22-windows-20261108']
-    paths: ['.validation/facs-v22-extended/**', '.github/workflows/build-v22-extended-probe.yml']
   workflow_dispatch:
 permissions:
   contents: read

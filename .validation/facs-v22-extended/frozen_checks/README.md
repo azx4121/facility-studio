@@ -75,8 +75,12 @@ executable path cases (eight images). Capture requires an actual visible,
 responsive Tk window whose owning process image matches the unique EXE launch
 copy, a stable window rectangle, foreground identity before and after capture,
 and nonuniform pixels. Physical primary/virtual display bounds and the nearest
-monitor/work area are recorded. Any part of the native window outside that
-monitor or work area fails the visual gate; padded or clipped images cannot pass.
+monitor/work area are recorded. GetWindowRect is retained as the outer bound,
+including its possible invisible resize border. The independently measured DWM
+visible frame and screen-space client area must both fit the display, monitor
+and work area. Missing DWM geometry fails closed. The complete visible frame is
+captured in per-monitor-aware physical coordinates; no guessed border
+subtraction, application movement, or visible-content clipping is allowed.
 Native `WM_CLOSE` must end the bounded launch with exit 0.
 Only the target window rectangle is captured; unrelated desktop windows are
 not captured intentionally. Native metadata, screenshot hashes, and all process

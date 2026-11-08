@@ -1,0 +1,177 @@
+# LOCAL REVIEW TEMPLATE. Not installed or dispatched by preparing this file.
+# Intended destination: .github/workflows/private-windows-handoff.yml
+# Copy scripts to .validation/facs-v22-private-transfer/ only after review.
+name: v22 private Windows 2022 to 2025 same-byte validation
+on:
+  push:
+    branches: ['validation/facs-v22-windows-20261108']
+    paths: ['.validation/facs-v22-private-transfer/**', '.github/workflows/private-windows-handoff.yml']
+  workflow_dispatch:
+# No publish job. Only allowlisted diagnostics enter Actions artifacts.
+permissions:
+  contents: read
+concurrency:
+  group: facs-v22-private-windows-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build-private-candidate:
+    if: github.repository == 'azx4121/facility-studio' && github.ref == 'refs/heads/validation/facs-v22-windows-20261108'
+    runs-on: windows-2022
+    timeout-minutes: 100
+    permissions:
+      contents: write
+    outputs:
+      run_id: ${{ steps.stage.outputs.run_id }}
+      run_attempt: ${{ steps.stage.outputs.run_attempt }}
+      workflow_commit: ${{ steps.stage.outputs.workflow_commit }}
+      release_id: ${{ steps.stage.outputs.release_id }}
+      asset_id: ${{ steps.stage.outputs.asset_id }}
+      manifest_asset_id: ${{ steps.stage.outputs.manifest_asset_id }}
+      sha256: ${{ steps.stage.outputs.sha256 }}
+      bytes: ${{ steps.stage.outputs.bytes }}
+      manifest_sha256: ${{ steps.stage.outputs.manifest_sha256 }}
+      manifest_bytes: ${{ steps.stage.outputs.manifest_bytes }}
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12.10'
+      - name: Verify local transfer gates without network
+        run: python -B -m unittest discover -s .validation/facs-v22-private-transfer -p test_private_transfer.py -v
+      - name: Reconstruct reviewed source
+        run: python -B .validation/facs-v22-reviewed/run_reviewed_validation.py prepare
+      - name: Install isolated locked test controller and build dependencies
+        shell: pwsh
+        run: |
+          python -m pip install uv==0.13.6
+          if ($LASTEXITCODE -ne 0) { throw 'uv setup failed' }
+          $env:UV_PYTHON_INSTALL_DIR = "$env:RUNNER_TEMP/facility-managed-python"
+          uv venv --python 3.12.16 "$env:RUNNER_TEMP/facility-env"
+          if ($LASTEXITCODE -ne 0) { throw 'Python setup failed' }
+          $py = "$env:RUNNER_TEMP/facility-env/Scripts/python.exe"
+          uv pip install --python $py -r "$env:RUNNER_TEMP/facs-v22-exact-source/integration/requirements.lock.txt"
+          if ($LASTEXITCODE -ne 0) { throw 'Locked dependency install failed' }
+          uv pip check --python $py
+          if ($LASTEXITCODE -ne 0) { throw 'Dependency verification failed' }
+          "FACILITY_PY=$py" >> $env:GITHUB_ENV
+      - name: Build once and pass Windows 2022 frozen checks before private transfer
+        shell: pwsh
+        run: |
+          & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/windows_display.py --width 1920 --height 1080 --client 800x600 --evidence "$env:RUNNER_TEMP/facs-v22-evidence/producer-display.json" -- $env:FACILITY_PY -B .validation/facs-v22-extended/build_reviewed_candidate.py
+          if ($LASTEXITCODE -ne 0) { throw 'Windows 2022 validation failed; do not stage' }
+      - name: Stage only in verified non-public Windows draft
+        id: stage
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          & $env:FACILITY_PY -B .validation/facs-v22-private-transfer/private_draft_transfer.py --run-id $env:GITHUB_RUN_ID --run-attempt $env:GITHUB_RUN_ATTEMPT --workflow-commit $env:GITHUB_SHA stage --exe "$env:RUNNER_TEMP/facs-v22-extended-build/Facility-Studio-5.7.3-v22-Windows-x64-Portable.exe" --build-receipt "$env:RUNNER_TEMP/facs-v22-evidence/candidate-build-result.json" --onefile-receipt "$env:RUNNER_TEMP/facs-v22-extended-build/evidence/single-exe/Single_EXE_Verification.json" --external-receipt "$env:RUNNER_TEMP/facs-v22-evidence/external-frozen/Frozen_External_Checks.json" --build-manifest "$env:RUNNER_TEMP/facs-v22-extended-build/evidence/Build_Manifest.json" --github-outputs
+          if ($LASTEXITCODE -ne 0) { throw 'Private gate failed; inspect exact release/asset IDs before any retry' }
+
+      - name: Prepare allowlisted producer diagnostics only
+        if: always()
+        shell: pwsh
+        run: |
+          python -B .validation/facs-v22-private-transfer/prepare_diagnostics.py --output "$env:RUNNER_TEMP/facs-private-diagnostics-2022" --source "$env:RUNNER_TEMP/facs-v22-evidence" --source "$env:RUNNER_TEMP/facs-v22-extended-build/evidence"
+          if ($LASTEXITCODE -ne 0) { throw 'Diagnostics allowlist failed; do not upload' }
+      - name: Retain producer screenshots and diagnostics, never binary assets
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: v22-private-handoff-diagnostics-windows-2022
+          path: ${{ runner.temp }}/facs-private-diagnostics-2022/**
+          retention-days: 14
+          if-no-files-found: error
+
+  verify-same-bytes-2025:
+    needs: build-private-candidate
+    runs-on: windows-2025
+    timeout-minutes: 100
+    # Drafts are restricted to push-capable access. Scope write to this job only;
+    # consumer code never writes the release. Do not grant permissions globally.
+    permissions:
+      contents: write
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      CANDIDATE_RUN_ID: ${{ needs.build-private-candidate.outputs.run_id }}
+      CANDIDATE_RUN_ATTEMPT: ${{ needs.build-private-candidate.outputs.run_attempt }}
+      CANDIDATE_WORKFLOW_COMMIT: ${{ needs.build-private-candidate.outputs.workflow_commit }}
+      CANDIDATE_RELEASE_ID: ${{ needs.build-private-candidate.outputs.release_id }}
+      CANDIDATE_ASSET_ID: ${{ needs.build-private-candidate.outputs.asset_id }}
+      CANDIDATE_MANIFEST_ID: ${{ needs.build-private-candidate.outputs.manifest_asset_id }}
+      CANDIDATE_SHA256: ${{ needs.build-private-candidate.outputs.sha256 }}
+      CANDIDATE_BYTES: ${{ needs.build-private-candidate.outputs.bytes }}
+      CANDIDATE_MANIFEST_SHA256: ${{ needs.build-private-candidate.outputs.manifest_sha256 }}
+      CANDIDATE_MANIFEST_BYTES: ${{ needs.build-private-candidate.outputs.manifest_bytes }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12.10'
+      - name: Reconstruct independent reviewed source
+        run: python -B .validation/facs-v22-reviewed/run_reviewed_validation.py prepare
+      - name: Install isolated locked verification controller
+        shell: pwsh
+        run: |
+          python -m pip install uv==0.13.6
+          if ($LASTEXITCODE -ne 0) { throw 'uv setup failed' }
+          $env:UV_PYTHON_INSTALL_DIR = "$env:RUNNER_TEMP/facility-managed-python"
+          uv venv --python 3.12.16 "$env:RUNNER_TEMP/facility-env"
+          if ($LASTEXITCODE -ne 0) { throw 'Python setup failed' }
+          $py = "$env:RUNNER_TEMP/facility-env/Scripts/python.exe"
+          uv pip install --python $py -r "$env:RUNNER_TEMP/facs-v22-exact-source/integration/requirements.lock.txt"
+          if ($LASTEXITCODE -ne 0) { throw 'Locked dependency install failed' }
+          uv pip check --python $py
+          if ($LASTEXITCODE -ne 0) { throw 'Dependency verification failed' }
+          "FACILITY_PY=$py" >> $env:GITHUB_ENV
+          "PRIVATE_INPUT=$env:RUNNER_TEMP/facs-private-$([guid]::NewGuid())" >> $env:GITHUB_ENV
+      - name: Authenticated exact-ID download and anonymous visibility checks
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          & $env:FACILITY_PY -B .validation/facs-v22-private-transfer/private_draft_transfer.py --run-id $env:CANDIDATE_RUN_ID --run-attempt $env:CANDIDATE_RUN_ATTEMPT --workflow-commit $env:CANDIDATE_WORKFLOW_COMMIT download --release-id $env:CANDIDATE_RELEASE_ID --asset-id $env:CANDIDATE_ASSET_ID --manifest-asset-id $env:CANDIDATE_MANIFEST_ID --sha256 $env:CANDIDATE_SHA256 --bytes $env:CANDIDATE_BYTES --manifest-sha256 $env:CANDIDATE_MANIFEST_SHA256 --manifest-bytes $env:CANDIDATE_MANIFEST_BYTES --output $env:PRIVATE_INPUT
+          if ($LASTEXITCODE -ne 0) { throw 'Private download or digest gate failed' }
+      - name: Test identical EXE on Windows 2025 with Python absent from launched EXE PATH
+        shell: pwsh
+        run: |
+          & $env:FACILITY_PY -B .validation/facs-v22-reviewed/native_diagnostics/windows_display.py --width 1920 --height 1080 --client 800x600 --evidence "$env:RUNNER_TEMP/facs-v22-evidence/consumer-display.json" -- $env:FACILITY_PY -B .validation/facs-v22-private-transfer/validate_downloaded_candidate.py --download $env:PRIVATE_INPUT --candidate "$env:RUNNER_TEMP/facs-v22-exact-source" --frozen-runner "$env:GITHUB_WORKSPACE/.validation/facs-v22-extended/frozen_checks/run_frozen_cli.py" --evidence "$env:RUNNER_TEMP/facs-v22-independent-2025" --sha256 $env:CANDIDATE_SHA256 --bytes $env:CANDIDATE_BYTES --manifest-sha256 $env:CANDIDATE_MANIFEST_SHA256 --release-id $env:CANDIDATE_RELEASE_ID --asset-id $env:CANDIDATE_ASSET_ID --run-id $env:CANDIDATE_RUN_ID --run-attempt $env:CANDIDATE_RUN_ATTEMPT --workflow-commit $env:CANDIDATE_WORKFLOW_COMMIT
+          if ($LASTEXITCODE -ne 0) { throw 'Independent Windows 2025 validation failed; do not publish' }
+      - name: Recheck draft is still anonymous-unreadable after native testing
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          & $env:FACILITY_PY -B .validation/facs-v22-private-transfer/private_draft_transfer.py --run-id $env:CANDIDATE_RUN_ID --run-attempt $env:CANDIDATE_RUN_ATTEMPT --workflow-commit $env:CANDIDATE_WORKFLOW_COMMIT inspect --release-id $env:CANDIDATE_RELEASE_ID
+          if ($LASTEXITCODE -ne 0) { throw 'Post-validation privacy check failed; investigate immediately' }
+      - name: Report same-byte result only
+        shell: pwsh
+        run: |
+          Get-Content "$env:RUNNER_TEMP/facs-v22-independent-2025/Independent_Windows_2025.json"
+          'Both native gates passed. Candidate remains a non-public draft; publication is a separate reviewed action.' >> $env:GITHUB_STEP_SUMMARY
+      - name: Prepare allowlisted consumer diagnostics only
+        if: always()
+        shell: pwsh
+        run: |
+          python -B .validation/facs-v22-private-transfer/prepare_diagnostics.py --output "$env:RUNNER_TEMP/facs-private-diagnostics-2025" --source "$env:RUNNER_TEMP/facs-v22-evidence" --source "$env:RUNNER_TEMP/facs-v22-independent-2025"
+          if ($LASTEXITCODE -ne 0) { throw 'Diagnostics allowlist failed; do not upload' }
+      - name: Retain consumer screenshots and diagnostics, never downloaded assets
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: v22-private-handoff-diagnostics-windows-2025
+          path: ${{ runner.temp }}/facs-private-diagnostics-2025/**
+          retention-days: 14
+          if-no-files-found: error
+# No download directory is uploaded. No gh release edit, PATCH, DELETE, or publication.
+

@@ -2,24 +2,24 @@
   "scope": "External validator source files only; product EXE/native validation pending",
   "files": {
     "run_frozen_cli.py": {
-      "bytes": 28831,
-      "sha256": "efcdd32c508efdfdca075350c70ec44f9e71fb21f3ac9ca0e2a8a97c27d80b59"
+      "bytes": 28411,
+      "sha256": "ec11693d6589b8be1daf50e0c9ec0b34a8fe09b10dde9ed86f93d95d9b35e6d6"
     },
     "capture_windows.py": {
-      "bytes": 13667,
-      "sha256": "3b28421c98658bee919ab17fd172dfd7fb2a816ff799d5d6e698a57d620bf133"
+      "bytes": 20218,
+      "sha256": "3c1e17068ef2d0ee93011d84ae3de90579a637d7421a123811ef5067b439929c"
     },
     "test_frozen_checks.py": {
-      "bytes": 10399,
-      "sha256": "ccac7b9fce7f58f91f4c3cc0ea1c2bd4dae64e8239ef0c8e40c7272d7d04a95b"
+      "bytes": 22181,
+      "sha256": "458da13f96a0333b3ed7c7fab1fda83c4169cafd105dc040a4d19cf53461c4cd"
     },
     "README.md": {
-      "bytes": 6157,
-      "sha256": "94496a740de1d7100436cd59033b76ef55ba66cb0c1caf55c7ed96cada71b615"
+      "bytes": 6460,
+      "sha256": "d0f829d8a134f713bd555df90d9fd972a68a63e3b9294f4fd167492e7bcf603c"
     }
   },
   "local_tests": {
-    "portable_unit_tests": 32,
+    "portable_unit_tests": 57,
     "mocked_or_synthetic": true,
     "native_windows": false,
     "source_cli_launches": 34,
@@ -30,6 +30,15 @@
       "GUI",
       "frozen EXE",
       "Windows"
-    ]
+    ],
+    "subtests": 48
+  },
+  "native_previous_run": {
+    "run": 42478484366,
+    "status": "failed",
+    "passed_cli_commands": 59,
+    "passed_startup_captures": 2,
+    "geometry_hypothesis": "GetWindowRect invisible resize borders may explain five pixels of apparent clipping; DWM verification remains pending",
+    "unchanged_binary": true
   }
 }

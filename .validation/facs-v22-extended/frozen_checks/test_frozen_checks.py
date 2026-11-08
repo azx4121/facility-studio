@@ -3,6 +3,7 @@
 These tests are NOT Windows, frozen EXE, visual, or engineering acceptance.
 """
 import copy
+import ctypes
 import json
 from pathlib import Path
 import tempfile
@@ -73,18 +74,39 @@ class Files(TemporaryCase):
         with self.assertRaises(AssertionError):
             checks.text_report(self.file("a" * 40 + "\ufffd"))
 
+    def workbook(self, names, filename="sheets.xlsx"):
+        path = self.path / filename
+        with zipfile.ZipFile(path, "w") as archive:
+            archive.writestr("[Content_Types].xml", "<Types/>")
+            archive.writestr("xl/workbook.xml", '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheets>'
+                + "".join('<sheet name="' + name + '"/>' for name in names) + "</sheets></workbook>")
+        return path
+
     def test_xlsx_sheet_names(self):
         for language, electrical in (("en", "Electrical"), ("zh-Hant", "電力")):
-            path = self.path / (language + ".xlsx")
-            names = ["填寫 Description" if language == "en" else "填寫說明", electrical,
+            names = ["Instructions" if language == "en" else "填寫說明", electrical,
                      "PCW", "CDA", "N2", "EXHAUST", "DI", "PV"]
-            with zipfile.ZipFile(path, "w") as archive:
-                archive.writestr("[Content_Types].xml", "<Types/>")
-                archive.writestr("xl/workbook.xml", '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheets>'
-                    + "".join('<sheet name="' + name + '"/>' for name in names) + "</sheets></workbook>")
+            path = self.workbook(names, language + ".xlsx")
             self.assertEqual(checks.workbook_sheets(path, language), names)
             with self.assertRaises(AssertionError):
                 checks.workbook_sheets(path, "en" if language == "zh-Hant" else "zh-Hant")
+
+    def test_xlsx_english_rejects_old_or_untranslated_instruction_title(self):
+        for title in ("填寫 Description", "填寫說明", "Description"):
+            with self.subTest(title=title), self.assertRaisesRegex(AssertionError, "Wrong Excel template sheets"):
+                checks.workbook_sheets(self.workbook([
+                    title, "Electrical", "PCW", "CDA", "N2", "EXHAUST", "DI", "PV"]), "en")
+
+    def test_xlsx_all_seven_system_sheets_remain_required(self):
+        names = ["Instructions", "Electrical", "PCW", "CDA", "N2", "EXHAUST", "DI", "PV"]
+        for index in range(1, len(names)):
+            with self.subTest(missing=names[index]), self.assertRaisesRegex(AssertionError, "Wrong Excel template sheets"):
+                checks.workbook_sheets(self.workbook(names[:index] + names[index + 1:]), "en")
+
+    def test_xlsx_duplicate_sheet_title_rejected(self):
+        names = ["Instructions", "Electrical", "PCW", "CDA", "N2", "EXHAUST", "DI", "PV", "Instructions"]
+        with self.assertRaisesRegex(AssertionError, "Wrong Excel template sheets"):
+            checks.workbook_sheets(self.workbook(names), "en")
 
     def test_native_gate_rejects_portable(self):
         with patch.object(checks.sys, "platform", "linux"), self.assertRaisesRegex(AssertionError, "Native Windows"):
@@ -215,6 +237,21 @@ class Launch(TemporaryCase):
 
 
 class NativeCaptureBoundary(unittest.TestCase):
+    @staticmethod
+    def geometry():
+        # Synthetic values illustrate the native failure's plausible cause.
+        # These are NOT measured DWM/client values from the failed native run.
+        return {"outer_rect": [156, 156, 1612, 1045],
+                "visible_frame_rect": [163, 156, 1605, 1038],
+                "client_screen_rect": [164, 187, 1604, 1037],
+                "dwm_hresult": 0, "client_query_succeeded": True}
+
+    @staticmethod
+    def display():
+        return {"virtual_display": [0, 0, 1920, 1080],
+                "nearest_monitor": [0, 0, 1920, 1080],
+                "nearest_work_area": [0, 0, 1920, 1040]}
+
     def test_no_linux_capture_fallback(self):
         with patch.object(capture_windows.sys, "platform", "linux"), self.assertRaisesRegex(RuntimeError, "native Windows"):
             capture_windows.NativeWindows()
@@ -229,6 +266,214 @@ class NativeCaptureBoundary(unittest.TestCase):
 
     def test_negative_coordinate_secondary_display(self):
         self.assertTrue(capture_windows.rect_inside([-1900, 0, -50, 900], [-1920, 0, 0, 1080]))
+
+    def test_zero_reversed_or_invalid_rectangles_fail(self):
+        for rectangle in (None, [], [0, 0, 0, 0], [5, 5, 2, 2], [0, 0, 2], [0., 0, 2, 2], [False, 0, 2, 2]):
+            with self.subTest(rectangle=rectangle):
+                self.assertFalse(capture_windows.rect_inside(rectangle, [0, 0, 1920, 1080]))
+
+    def test_invisible_border_outside_work_area_is_not_visible_clipping(self):
+        geometry, display = self.geometry(), self.display()
+        self.assertEqual(capture_windows.capture_rectangle(geometry, display), geometry["visible_frame_rect"])
+        flags = capture_windows.containment_flags(geometry, display)
+        self.assertFalse(flags["outer_inside_nearest_work_area"])
+        self.assertTrue(flags["visible_frame_inside_nearest_work_area"])
+        self.assertTrue(flags["client_screen_inside_nearest_work_area"])
+
+    def test_no_fixed_eight_pixel_border_assumption(self):
+        geometry = self.geometry()
+        geometry["outer_rect"] = [140, 150, 1630, 1060]
+        self.assertEqual(capture_windows.capture_rectangle(geometry, self.display()), geometry["visible_frame_rect"])
+
+    def test_visible_frame_one_pixel_under_taskbar_fails(self):
+        geometry = self.geometry()
+        geometry["visible_frame_rect"][3] = 1041
+        with self.assertRaisesRegex(RuntimeError, "clipped"):
+            capture_windows.capture_rectangle(geometry, self.display())
+
+    def test_visible_frame_exact_work_area_boundary_passes(self):
+        geometry = self.geometry()
+        geometry["visible_frame_rect"][3] = 1040  # right/bottom coordinates are exclusive
+        self.assertEqual(capture_windows.capture_rectangle(geometry, self.display()), geometry["visible_frame_rect"])
+
+    def test_client_one_pixel_under_taskbar_fails(self):
+        geometry = self.geometry()
+        geometry["visible_frame_rect"][3] = 1043
+        geometry["client_screen_rect"][3] = 1041
+        with self.assertRaisesRegex(RuntimeError, "clipped"):
+            capture_windows.capture_rectangle(geometry, self.display())
+
+    def test_clipped_title_fails_even_when_client_fits(self):
+        geometry = self.geometry()
+        geometry["outer_rect"][1] = -10
+        geometry["visible_frame_rect"][1] = -1
+        with self.assertRaisesRegex(RuntimeError, "clipped"):
+            capture_windows.capture_rectangle(geometry, self.display())
+
+    def test_clipped_display_fails_even_with_bad_larger_work_area(self):
+        display = self.display()
+        display["nearest_monitor"][3] = 1037
+        with self.assertRaisesRegex(RuntimeError, "clipped"):
+            capture_windows.capture_rectangle(self.geometry(), display)
+
+    def test_virtual_desktop_bounds_are_enforced(self):
+        display = self.display()
+        display["virtual_display"][2] = 1604
+        with self.assertRaisesRegex(RuntimeError, "clipped"):
+            capture_windows.capture_rectangle(self.geometry(), display)
+
+    def test_missing_or_failed_dwm_never_falls_back(self):
+        for status in (None, -2147024891, 1):
+            with self.subTest(status=status), self.assertRaisesRegex(RuntimeError, "DWM"):
+                geometry = self.geometry()
+                geometry["dwm_hresult"] = status
+                capture_windows.capture_rectangle(geometry, self.display())
+
+    def test_failed_client_query_never_passes(self):
+        geometry = self.geometry()
+        geometry["client_query_succeeded"] = False
+        with self.assertRaisesRegex(RuntimeError, "Client"):
+            capture_windows.capture_rectangle(geometry, self.display())
+
+    def test_bad_dwm_frame_never_passes(self):
+        for rectangle in (None, [0, 0, 0, 0], [163, 156, 1620, 1038]):
+            with self.subTest(rectangle=rectangle), self.assertRaises(RuntimeError):
+                geometry = self.geometry()
+                geometry["visible_frame_rect"] = rectangle
+                capture_windows.capture_rectangle(geometry, self.display())
+
+    def test_client_outside_visible_frame_never_passes(self):
+        geometry = self.geometry()
+        geometry["client_screen_rect"][3] = 1039
+        with self.assertRaisesRegex(RuntimeError, "Client area"):
+            capture_windows.capture_rectangle(geometry, self.display())
+
+    def test_negative_physical_coordinates_pass_on_secondary_monitor(self):
+        geometry, display = self.geometry(), self.display()
+        for rectangle in ("outer_rect", "visible_frame_rect", "client_screen_rect"):
+            geometry[rectangle][0] -= 1920
+            geometry[rectangle][2] -= 1920
+        for rectangle in display:
+            display[rectangle][0] -= 1920
+            display[rectangle][2] -= 1920
+        self.assertEqual(capture_windows.capture_rectangle(geometry, display), geometry["visible_frame_rect"])
+
+
+class MockNativeGeometry(unittest.TestCase):
+    """ctypes calls below are mocks, not execution of Windows API code."""
+
+    def native(self, dwm_status=0, client_success=True, screen_success=True):
+        owner = self
+        class User:
+            @staticmethod
+            def GetWindowRect(hwnd, out):
+                owner.assertEqual(hwnd, 1234)
+                out._obj.left, out._obj.top, out._obj.right, out._obj.bottom = (156, 156, 1612, 1045)
+                return 1
+
+            @staticmethod
+            def GetClientRect(hwnd, out):
+                out._obj.left, out._obj.top, out._obj.right, out._obj.bottom = (0, 0, 1440, 850)
+                return client_success
+
+            @staticmethod
+            def ClientToScreen(hwnd, point):
+                point._obj.x += 164
+                point._obj.y += 187
+                return screen_success
+
+        class Dwm:
+            @staticmethod
+            def DwmGetWindowAttribute(hwnd, attribute, out, size):
+                owner.assertEqual(hwnd, 1234)
+                owner.assertEqual(attribute, 9)
+                owner.assertEqual(size, ctypes.sizeof(capture_windows.w.RECT))
+                out._obj.left, out._obj.top, out._obj.right, out._obj.bottom = (163, 156, 1605, 1038)
+                return dwm_status
+
+        instance = object.__new__(capture_windows.NativeWindows)
+        instance.user, instance.dwm, instance.dwm_load_error = User(), Dwm(), None
+        return instance
+
+    def test_separate_outer_frame_and_screen_client_queries(self):
+        geometry = self.native().window_geometry({"hwnd": 1234})
+        self.assertEqual(geometry["outer_rect"], [156, 156, 1612, 1045])
+        self.assertEqual(geometry["visible_frame_rect"], [163, 156, 1605, 1038])
+        self.assertEqual(geometry["client_screen_rect"], [164, 187, 1604, 1037])
+        self.assertEqual(geometry["dwm_hresult"], 0)
+        self.assertIs(geometry["client_query_succeeded"], True)
+        self.assertEqual(capture_windows.capture_rectangle(geometry, NativeCaptureBoundary.display()),
+                         [163, 156, 1605, 1038])
+
+    def test_dwm_error_is_recorded_without_using_written_output(self):
+        geometry = self.native(dwm_status=-2147024891).window_geometry({"hwnd": 1234})
+        self.assertEqual(geometry["dwm_hresult"], -2147024891)
+        self.assertIsNone(geometry["visible_frame_rect"])
+        with self.assertRaisesRegex(RuntimeError, "DWM"):
+            capture_windows.capture_rectangle(geometry, NativeCaptureBoundary.display())
+
+    def test_dwm_unavailable_is_recorded_without_fallback(self):
+        native = self.native()
+        native.dwm = None
+        native.dwm_load_error = "mock unavailable library"
+        geometry = native.window_geometry({"hwnd": 1234})
+        self.assertIsNone(geometry["visible_frame_rect"])
+        self.assertEqual(geometry["dwm_load_error"], "mock unavailable library")
+        with self.assertRaisesRegex(RuntimeError, "DWM"):
+            capture_windows.capture_rectangle(geometry, NativeCaptureBoundary.display())
+
+    def test_failed_getclientrect_is_recorded_without_fallback(self):
+        geometry = self.native(client_success=False).window_geometry({"hwnd": 1234})
+        self.assertFalse(geometry["client_query_succeeded"])
+        self.assertIsNone(geometry["client_screen_rect"])
+
+    def test_failed_clienttoscreen_is_recorded_without_fallback(self):
+        geometry = self.native(screen_success=False).window_geometry({"hwnd": 1234})
+        self.assertFalse(geometry["client_query_succeeded"])
+        self.assertIsNone(geometry["client_screen_rect"])
+
+
+class MockDpiContext(unittest.TestCase):
+    def native(self, awareness=2):
+        class User:
+            calls = []
+
+            def SetThreadDpiAwarenessContext(self, value):
+                self.calls.append(value)
+                return 99
+
+            @staticmethod
+            def GetThreadDpiAwarenessContext():
+                return 100
+
+            @staticmethod
+            def GetAwarenessFromDpiAwarenessContext(context):
+                return awareness
+
+        native = object.__new__(capture_windows.NativeWindows)
+        native.user = User()
+        return native
+
+    def test_thread_dpi_context_restored_after_success(self):
+        native = self.native()
+        with native.physical_coordinates():
+            self.assertEqual(len(native.user.calls), 1)
+        self.assertEqual(len(native.user.calls), 2)
+        self.assertEqual(native.user.calls[-1], 99)
+
+    def test_thread_dpi_context_restored_after_exception(self):
+        native = self.native()
+        with self.assertRaisesRegex(ValueError, "test"):
+            with native.physical_coordinates():
+                raise ValueError("test")
+        self.assertEqual(native.user.calls[-1], 99)
+
+    def test_wrong_dpi_context_fails_and_restores(self):
+        native = self.native(awareness=1)
+        with self.assertRaisesRegex(RuntimeError, "per-monitor"):
+            with native.physical_coordinates():
+                self.fail("Must not run a capture in virtualized coordinates")
+        self.assertEqual(native.user.calls[-1], 99)
 
 
 if __name__ == "__main__":
