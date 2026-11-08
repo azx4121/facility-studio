@@ -165,6 +165,8 @@ def _run_windows_job(command, output, env, timeout):
     get_code = bind('GetExitCodeProcess', [w.HANDLE, ctypes.POINTER(w.DWORD)])
     terminate = bind('TerminateProcess', [w.HANDLE, w.UINT])
     terminate_job = bind('TerminateJobObject', [w.HANDLE, w.UINT])
+    open_process = bind('OpenProcess', [w.DWORD, w.BOOL, w.DWORD], w.HANDLE)
+    in_job = bind('IsProcessInJob', [w.HANDLE, w.HANDLE, ctypes.POINTER(w.BOOL)])
     query_job = bind('QueryInformationJobObject', [w.HANDLE, ctypes.c_int,
                      ctypes.c_void_p, w.DWORD, ctypes.c_void_p])
     def checked(value):
@@ -178,6 +180,45 @@ def _run_windows_job(command, output, env, timeout):
     attributes_initialized = False
     inherited = []
     assigned = False
+    members = {}
+
+    def capture_members():
+        # Keep handles open: this both provides an actual waitable exit barrier
+        # and prevents PID reuse from confusing later snapshots.
+        capacity = 16
+        while capacity <= 65536:
+            class PROCESS_LIST(ctypes.Structure):
+                _fields_ = [('NumberOfAssignedProcesses', w.DWORD),
+                            ('NumberOfProcessIdsInList', w.DWORD),
+                            ('ProcessIdList', SIZE_T * capacity)]
+            listing = PROCESS_LIST()
+            if query_job(job, 3, ctypes.byref(listing), ctypes.sizeof(listing), None):
+                break
+            error = ctypes.get_last_error()
+            if error != 234:  # ERROR_MORE_DATA: the job grew beyond this buffer.
+                raise ctypes.WinError(error)
+            capacity = max(capacity * 2, listing.NumberOfAssignedProcesses)
+        else:
+            raise RuntimeError('Windows test job exceeded the process tracking bound.')
+        for pid in listing.ProcessIdList[:listing.NumberOfProcessIdsInList]:
+            if pid in members:
+                continue
+            handle = open_process(0x100000 | 0x1000, False, pid)
+            if not handle:
+                error = ctypes.get_last_error()
+                if error == 87:  # It already exited; final coverage must still match.
+                    continue
+                raise ctypes.WinError(error)
+            owned = w.BOOL()
+            try:
+                checked(in_job(handle, job, ctypes.byref(owned)))
+                if owned.value:
+                    members[pid] = handle
+                    handle = None
+            finally:
+                if handle:
+                    close(handle)
+
     try:
         limits = EXTENDED_LIMIT()
         limits.BasicLimitInformation.LimitFlags = 0x2000  # JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
@@ -214,28 +255,48 @@ def _run_windows_job(command, output, env, timeout):
             inherited.clear()
             checked(assign(job, info.hProcess))
             assigned = True
+            members[info.dwProcessId] = info.hProcess
             if resume(info.hThread) == 0xffffffff:
                 raise ctypes.WinError(ctypes.get_last_error())
-            status = wait(info.hProcess, min(max(int(timeout * 1000), 0), 0xfffffffe))
-            if status == 0x102:
-                raise subprocess.TimeoutExpired(command, timeout)
-            if status != 0:
-                raise ctypes.WinError(ctypes.get_last_error())
+            deadline = time.monotonic() + max(timeout, 0)
+            while True:
+                capture_members()
+                remaining = max(0, int((deadline - time.monotonic()) * 1000))
+                status = wait(info.hProcess, min(10, remaining))
+                if status == 0:
+                    break
+                if status != 0x102:
+                    raise ctypes.WinError(ctypes.get_last_error())
+                if time.monotonic() >= deadline:
+                    raise subprocess.TimeoutExpired(command, timeout)
             code = w.DWORD()
             checked(get_code(info.hProcess, ctypes.byref(code)))
             return code.value
     finally:
         try:
             if assigned:
+                capture_members()
                 checked(terminate_job(job, 1))
-                # Killing a job is asynchronous. Wait for every descendant to exit
-                # before returning and letting the caller remove its test folder.
+                # ActiveProcesses can reach zero before process handles signal.
+                # Wait the actual retained objects, including launcher descendants.
                 deadline = time.monotonic() + 30
+                for handle in members.values():
+                    remaining = max(0, int((deadline - time.monotonic()) * 1000))
+                    if wait(handle, remaining) != 0:
+                        raise RuntimeError('Windows test process did not terminate within 30 seconds.')
                 while True:
                     accounting = BASIC_ACCOUNTING()
                     checked(query_job(job, 1, ctypes.byref(accounting),
                                       ctypes.sizeof(accounting), None))
                     if accounting.ActiveProcesses == 0:
+                        # A PID-list snapshot can miss a short-lived child or one
+                        # created while termination starts. Never claim full drain
+                        # without a retained, signaled handle for every job member.
+                        if accounting.TotalProcesses != len(members):
+                            raise RuntimeError(
+                                'Cannot prove Windows test process-tree drain: '
+                                f'{accounting.TotalProcesses} job processes, '
+                                f'{len(members)} retained process handles.')
                         break
                     if time.monotonic() >= deadline:
                         raise RuntimeError('Windows test job did not drain within 30 seconds.')
@@ -246,6 +307,9 @@ def _run_windows_job(command, output, env, timeout):
                 raise RuntimeError('Windows test root did not terminate within 30 seconds.')
         finally:
             close(job)  # Fail-safe kernel termination even if querying the job fails.
+            for pid, handle in members.items():
+                if handle != info.hProcess:
+                    close(handle)
             if info.hProcess:
                 close(info.hProcess)
             if info.hThread:
