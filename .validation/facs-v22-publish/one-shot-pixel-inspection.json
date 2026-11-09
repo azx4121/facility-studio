@@ -1,0 +1,359 @@
+{
+  "schema_version": 2,
+  "pixel_inspection_completed": true,
+  "approved_for_public_release": true,
+  "blocking_findings": [],
+  "reviewer_role": "ai_assistant",
+  "reviewer": "dot AI assistant, independent startup pixel reviewer inspect_attempt2_windows_pixels",
+  "review_method": "direct_image_inspection",
+  "reviewed_at": "2026-11-09T03:55:40.459873+00:00",
+  "repository": "azx4121/facility-studio",
+  "source_snapshot_commit": "147f26282c724054a748338a3148bc12e13a2e13",
+  "private_run_id": 42538089644,
+  "private_run_attempt": 2,
+  "private_workflow_commit": "526987d5ede3885415a98cb19fa1e66517a47c1b",
+  "executable_sha256": "7835d4b84cf99ea3e5e681b17eecc2bc8c2155a71463bda30a5e27c65351290b",
+  "private_artifact_sha256": {
+    "2022": "e1866b797cdabb0d4916303c22b78ae2c7f1ac9996e316d5867be92f9f1ea99b",
+    "2025": "dfa31beb04430d537dc7c62a1e5d7f267f0c37b2880fe6685fa77bbd4f9dde54"
+  },
+  "approval_scope": "All sixteen exact original startup PNGs directly opened with view_image; English/Traditional Chinese, simple/workbench, plain/Unicode-space, producer 2022 and consumer 2025. Visual startup release gate only.",
+  "limitations": [
+    "Approval is for the directly inspected static startup pixels and visible primary controls only; this receipt does not independently verify provenance or OS identity, which are separately bound by native artifact gates.",
+    "Not a claim of interactive GUI behavior, scrolling operation, calculation correctness, engineering validity, or content outside captured viewports.",
+    "Scrollable lower workbench summary, lower result-table rows, and English simple wiring-status card continue below viewport boundaries. These are body-content viewport cuts, not primary-control clipping.",
+    "English workbench includes a Traditional Chinese example project-name data value. Primary controls and menus match the selected language."
+  ],
+  "captures": [
+    {
+      "os": "2022",
+      "path": "0-facs-v22-evidence/external-frozen/plain/en-simple-startup/startup.png",
+      "sha256": "cb3dd167574e028c8d7c3cd72bb6186b83abd5196b1ad5e93c49649465fb66c3",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 96492,
+      "observations": [
+        "Simple electrical-sizing screen is rendered with readable top menus, full-workbench and tool navigation, language selector, electrical input/unit buttons, power-supply/load selectors, dashboard and bottom calculate/copy/export actions.",
+        "Orange engineering warning says automatic wiring selection is unavailable/suspended and independent verification is required; no runtime error dialog or traceback is visible.",
+        "Lower result-table rows end at scrollable viewport boundary. English wiring-selection status card text also continues below upper dashboard viewport; scrollbar is visible. This is scrollable body text, not a clipped primary control."
+      ],
+      "glyph_notes": "English UI labels readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2022",
+      "path": "0-facs-v22-evidence/external-frozen/plain/en-full-startup/startup.png",
+      "sha256": "04c97978425beb35680dfb5764c9090f479d360132f0f0f3e45e40f75a12a0e3",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 63045,
+      "observations": [
+        "Workbench overview and climate form are rendered. Top app menus, project/open/save controls, mode and HVAC selectors, language selector, sidebar sections and bottom locate/recalculate/export actions are readable and inside window bounds.",
+        "Project-name field contains Traditional Chinese example data even in English UI; this is content, not an untranslated primary control.",
+        "Red footer communicates unmet engineering conditions and pending data; no runtime error dialog or traceback is visible.",
+        "Lower summer-load summary is partially visible at bottom of scrollable body above horizontal scrollbar; no primary-control clipping seen."
+      ],
+      "glyph_notes": "English UI labels readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2022",
+      "path": "0-facs-v22-evidence/external-frozen/plain/zh-Hant-simple-startup/startup.png",
+      "sha256": "ce8fa4a23b2bd011ea9450bba5ada64912460a5f0fdfc67bdd71a31353f9f5a8",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 106902,
+      "observations": [
+        "Simple electrical-sizing screen is rendered with readable top menus, full-workbench and tool navigation, language selector, electrical input/unit buttons, power-supply/load selectors, dashboard and bottom calculate/copy/export actions.",
+        "Orange engineering warning says automatic wiring selection is unavailable/suspended and independent verification is required; no runtime error dialog or traceback is visible.",
+        "Lower result-table rows end at scrollable viewport boundary. Traditional Chinese wiring-selection status card is readable inside the upper dashboard."
+      ],
+      "glyph_notes": "Traditional Chinese glyphs are small but visibly formed/readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2022",
+      "path": "0-facs-v22-evidence/external-frozen/plain/zh-Hant-full-startup/startup.png",
+      "sha256": "0db28db247bdc235075978bdd7e4bd86a30945e43132821da00f00cb44b3ba63",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 74919,
+      "observations": [
+        "Workbench overview and climate form are rendered. Top app menus, project/open/save controls, mode and HVAC selectors, language selector, sidebar sections and bottom locate/recalculate/export actions are readable and inside window bounds.",
+        "Project-name field contains Traditional Chinese example data even in English UI; this is content, not an untranslated primary control.",
+        "Red footer communicates unmet engineering conditions and pending data; no runtime error dialog or traceback is visible.",
+        "Lower summer-load summary is partially visible at bottom of scrollable body above horizontal scrollbar; no primary-control clipping seen."
+      ],
+      "glyph_notes": "Traditional Chinese glyphs are small but visibly formed/readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2022",
+      "path": "0-facs-v22-evidence/external-frozen/unicode-space/en-simple-startup/startup.png",
+      "sha256": "b2cd9f082716d94730d7eb7b46d96990ed71576fca82bcd949fcf2293a4d2c27",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 96318,
+      "observations": [
+        "Simple electrical-sizing screen is rendered with readable top menus, full-workbench and tool navigation, language selector, electrical input/unit buttons, power-supply/load selectors, dashboard and bottom calculate/copy/export actions.",
+        "Orange engineering warning says automatic wiring selection is unavailable/suspended and independent verification is required; no runtime error dialog or traceback is visible.",
+        "Lower result-table rows end at scrollable viewport boundary. English wiring-selection status card text also continues below upper dashboard viewport; scrollbar is visible. This is scrollable body text, not a clipped primary control."
+      ],
+      "glyph_notes": "English UI labels readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2022",
+      "path": "0-facs-v22-evidence/external-frozen/unicode-space/en-full-startup/startup.png",
+      "sha256": "84554d72d4dcba3739e6af53d7abba1fe1a1c884604dd40f969ca28ace9d4f7c",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 63085,
+      "observations": [
+        "Workbench overview and climate form are rendered. Top app menus, project/open/save controls, mode and HVAC selectors, language selector, sidebar sections and bottom locate/recalculate/export actions are readable and inside window bounds.",
+        "Project-name field contains Traditional Chinese example data even in English UI; this is content, not an untranslated primary control.",
+        "Red footer communicates unmet engineering conditions and pending data; no runtime error dialog or traceback is visible.",
+        "Lower summer-load summary is partially visible at bottom of scrollable body above horizontal scrollbar; no primary-control clipping seen."
+      ],
+      "glyph_notes": "English UI labels readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2022",
+      "path": "0-facs-v22-evidence/external-frozen/unicode-space/zh-Hant-simple-startup/startup.png",
+      "sha256": "0fba83ba41deb2a7c8443e1662611250125f36f8052ddb9e42aa9a9cd8f71499",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 106814,
+      "observations": [
+        "Simple electrical-sizing screen is rendered with readable top menus, full-workbench and tool navigation, language selector, electrical input/unit buttons, power-supply/load selectors, dashboard and bottom calculate/copy/export actions.",
+        "Orange engineering warning says automatic wiring selection is unavailable/suspended and independent verification is required; no runtime error dialog or traceback is visible.",
+        "Lower result-table rows end at scrollable viewport boundary. Traditional Chinese wiring-selection status card is readable inside the upper dashboard."
+      ],
+      "glyph_notes": "Traditional Chinese glyphs are small but visibly formed/readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2022",
+      "path": "0-facs-v22-evidence/external-frozen/unicode-space/zh-Hant-full-startup/startup.png",
+      "sha256": "c143ca0cecb3071d4d718ac4f974fcbe19cf1668f2ac20036e09cf1817249e59",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 75097,
+      "observations": [
+        "Workbench overview and climate form are rendered. Top app menus, project/open/save controls, mode and HVAC selectors, language selector, sidebar sections and bottom locate/recalculate/export actions are readable and inside window bounds.",
+        "Project-name field contains Traditional Chinese example data even in English UI; this is content, not an untranslated primary control.",
+        "Red footer communicates unmet engineering conditions and pending data; no runtime error dialog or traceback is visible.",
+        "Lower summer-load summary is partially visible at bottom of scrollable body above horizontal scrollbar; no primary-control clipping seen."
+      ],
+      "glyph_notes": "Traditional Chinese glyphs are small but visibly formed/readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2025",
+      "path": "1-facs-v22-independent-2025/external-frozen/plain/en-simple-startup/startup.png",
+      "sha256": "c1f61297154cbb41846252732f6587ff33387679efb6351b148ea0f0a2b30fa7",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 97140,
+      "observations": [
+        "Simple electrical-sizing screen is rendered with readable top menus, full-workbench and tool navigation, language selector, electrical input/unit buttons, power-supply/load selectors, dashboard and bottom calculate/copy/export actions.",
+        "Orange engineering warning says automatic wiring selection is unavailable/suspended and independent verification is required; no runtime error dialog or traceback is visible.",
+        "Lower result-table rows end at scrollable viewport boundary. English wiring-selection status card text also continues below upper dashboard viewport; scrollbar is visible. This is scrollable body text, not a clipped primary control."
+      ],
+      "glyph_notes": "English UI labels readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2025",
+      "path": "1-facs-v22-independent-2025/external-frozen/plain/en-full-startup/startup.png",
+      "sha256": "c724349bf5fc5a57e825b4fabe9a112f30e3fa5cca7d6be1c650bd9dfc7993fd",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 63246,
+      "observations": [
+        "Workbench overview and climate form are rendered. Top app menus, project/open/save controls, mode and HVAC selectors, language selector, sidebar sections and bottom locate/recalculate/export actions are readable and inside window bounds.",
+        "Project-name field contains Traditional Chinese example data even in English UI; this is content, not an untranslated primary control.",
+        "Red footer communicates unmet engineering conditions and pending data; no runtime error dialog or traceback is visible.",
+        "Lower summer-load summary is partially visible at bottom of scrollable body above horizontal scrollbar; no primary-control clipping seen."
+      ],
+      "glyph_notes": "English UI labels readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2025",
+      "path": "1-facs-v22-independent-2025/external-frozen/plain/zh-Hant-simple-startup/startup.png",
+      "sha256": "823cc76179b3d467cc03515c777bccbb95d3615fe9dbc5830ecbf7d41ad142c5",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 111785,
+      "observations": [
+        "Simple electrical-sizing screen is rendered with readable top menus, full-workbench and tool navigation, language selector, electrical input/unit buttons, power-supply/load selectors, dashboard and bottom calculate/copy/export actions.",
+        "Orange engineering warning says automatic wiring selection is unavailable/suspended and independent verification is required; no runtime error dialog or traceback is visible.",
+        "Lower result-table rows end at scrollable viewport boundary. Traditional Chinese wiring-selection status card is readable inside the upper dashboard.",
+        "Consumer Chinese status-card line wrapping differs slightly from producer but all displayed status lines are readable; no primary-control clipping."
+      ],
+      "glyph_notes": "Traditional Chinese glyphs are small but visibly formed/readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2025",
+      "path": "1-facs-v22-independent-2025/external-frozen/plain/zh-Hant-full-startup/startup.png",
+      "sha256": "8b4bbf5f66d395f005a3a9f541969e497013ff2bbaab4c0c65d2c69d976af8a2",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 76732,
+      "observations": [
+        "Workbench overview and climate form are rendered. Top app menus, project/open/save controls, mode and HVAC selectors, language selector, sidebar sections and bottom locate/recalculate/export actions are readable and inside window bounds.",
+        "Project-name field contains Traditional Chinese example data even in English UI; this is content, not an untranslated primary control.",
+        "Red footer communicates unmet engineering conditions and pending data; no runtime error dialog or traceback is visible.",
+        "Lower summer-load summary is partially visible at bottom of scrollable body above horizontal scrollbar; no primary-control clipping seen."
+      ],
+      "glyph_notes": "Traditional Chinese glyphs are small but visibly formed/readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2025",
+      "path": "1-facs-v22-independent-2025/external-frozen/unicode-space/en-simple-startup/startup.png",
+      "sha256": "4f86985d00beebb9b5c7ca188b68daa351927109a2f7e8d2eae33cde52ca10ca",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 97594,
+      "observations": [
+        "Simple electrical-sizing screen is rendered with readable top menus, full-workbench and tool navigation, language selector, electrical input/unit buttons, power-supply/load selectors, dashboard and bottom calculate/copy/export actions.",
+        "Orange engineering warning says automatic wiring selection is unavailable/suspended and independent verification is required; no runtime error dialog or traceback is visible.",
+        "Lower result-table rows end at scrollable viewport boundary. English wiring-selection status card text also continues below upper dashboard viewport; scrollbar is visible. This is scrollable body text, not a clipped primary control."
+      ],
+      "glyph_notes": "English UI labels readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2025",
+      "path": "1-facs-v22-independent-2025/external-frozen/unicode-space/en-full-startup/startup.png",
+      "sha256": "6cff425cb4d226e6b553bb083d409ab0c6aa7cbbefc6fcaf8c2aaa1cc886008a",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 63339,
+      "observations": [
+        "Workbench overview and climate form are rendered. Top app menus, project/open/save controls, mode and HVAC selectors, language selector, sidebar sections and bottom locate/recalculate/export actions are readable and inside window bounds.",
+        "Project-name field contains Traditional Chinese example data even in English UI; this is content, not an untranslated primary control.",
+        "Red footer communicates unmet engineering conditions and pending data; no runtime error dialog or traceback is visible.",
+        "Lower summer-load summary is partially visible at bottom of scrollable body above horizontal scrollbar; no primary-control clipping seen."
+      ],
+      "glyph_notes": "English UI labels readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2025",
+      "path": "1-facs-v22-independent-2025/external-frozen/unicode-space/zh-Hant-simple-startup/startup.png",
+      "sha256": "7ef66457472b0a6009ce7b173458cba69fb48515e1ba44bb58b8c6575a462a12",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 110973,
+      "observations": [
+        "Simple electrical-sizing screen is rendered with readable top menus, full-workbench and tool navigation, language selector, electrical input/unit buttons, power-supply/load selectors, dashboard and bottom calculate/copy/export actions.",
+        "Orange engineering warning says automatic wiring selection is unavailable/suspended and independent verification is required; no runtime error dialog or traceback is visible.",
+        "Lower result-table rows end at scrollable viewport boundary. Traditional Chinese wiring-selection status card is readable inside the upper dashboard.",
+        "Consumer Chinese status-card line wrapping differs slightly from producer but all displayed status lines are readable; no primary-control clipping."
+      ],
+      "glyph_notes": "Traditional Chinese glyphs are small but visibly formed/readable; no replacement boxes or mojibake observed."
+    },
+    {
+      "os": "2025",
+      "path": "1-facs-v22-independent-2025/external-frozen/unicode-space/zh-Hant-full-startup/startup.png",
+      "sha256": "d25e19c2e374bb219e2fc98522794d1df1b2d8db3e8f674325c6453a8107d54f",
+      "pixels_reviewed": true,
+      "startup_labels_readable": true,
+      "startup_language_appropriate": true,
+      "visible_window_complete": true,
+      "inspection_tool": "view_image",
+      "original_unmodified_png": true,
+      "width": 1442,
+      "height": 882,
+      "bytes": 76464,
+      "observations": [
+        "Workbench overview and climate form are rendered. Top app menus, project/open/save controls, mode and HVAC selectors, language selector, sidebar sections and bottom locate/recalculate/export actions are readable and inside window bounds.",
+        "Project-name field contains Traditional Chinese example data even in English UI; this is content, not an untranslated primary control.",
+        "Red footer communicates unmet engineering conditions and pending data; no runtime error dialog or traceback is visible.",
+        "Lower summer-load summary is partially visible at bottom of scrollable body above horizontal scrollbar; no primary-control clipping seen."
+      ],
+      "glyph_notes": "Traditional Chinese glyphs are small but visibly formed/readable; no replacement boxes or mojibake observed."
+    }
+  ]
+}
