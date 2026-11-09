@@ -1,0 +1,227 @@
+{
+  "original_inventory_sha256": "7c3ef3f66382fa44e5ba6e57f11f04083295c506c4da6a8e2036e730d7c1914f",
+  "packaging_overlay": [
+    {
+      "path": "integration/build.py",
+      "sha256": "f868a3ab6ca6dad84518b953ef1fd077801afd0bbd6263e72b80573b7c875ef6",
+      "original_sha256": "06493052c558a7fdaeeee95c78a876a8b81f7a39c2db60ea830def1712e72b63"
+    },
+    {
+      "path": "integration/onefile_validation.py",
+      "sha256": "85f6ad877ed100c7131dd4ceeeccba04056e97f4d70211c32e1effa700ff2e48",
+      "original_sha256": null
+    },
+    {
+      "path": "integration/test_onefile_validation.py",
+      "sha256": "a6eec130cc88dc307c6e702179ea3f345487a115a59b48032873a0ff5ab72e4d",
+      "original_sha256": null
+    },
+    {
+      "path": "integration/test_onefile_process_native.py",
+      "sha256": "ad3e977b3491335e703f5504c02bd3dbeaae3fbb544bf1dace5e966eb306a787",
+      "original_sha256": null
+    }
+  ],
+  "test_corrections": [
+    {
+      "path": "integration/test_independent_tutorial.py",
+      "sha256": "575a1db7e5cf67294480f637d42cdeb8597211f4bc2d0a9fd611f72316101d35",
+      "original_sha256": "eaa866af734820a803c281c4e5b34a5ff25b7aece730d3357df3f4dab67b9b16",
+      "kind": "test_harness"
+    },
+    {
+      "path": "integration/test_independent_ampacity_safety.py",
+      "sha256": "bc33fede4634151c366828005fdf911b2a3bf829c344e8b9f59f81d517479745",
+      "original_sha256": "0cbee1638a51621b9385570ff56364a1710641da746e0eab396316d966fa1f04",
+      "kind": "test_harness"
+    },
+    {
+      "path": "tools/verify_engineering_dashboard.py",
+      "sha256": "a5ce927b8e802b98535b8de8e8fb0ffa57e84f8ac329a3f2029264b3bfa81e66",
+      "original_sha256": "a901bc37b80a3709fb26a9b4f4501af1df4137f0361bb7259723c406398614c0",
+      "kind": "test_harness"
+    },
+    {
+      "path": "windows/facility_studio/feed_review_preview.py",
+      "sha256": "55755cddc6c5068f2ea1e6df378aacf180e6bf13b81bd7d80a8026eca36f3386",
+      "original_sha256": "29762b1396ec27ff31c184e4a5dc7bb980b65f1c8cdd698de78bc72c40557172",
+      "kind": "windows_dialog_ui"
+    },
+    {
+      "path": "windows/facility_studio/fusion_settings.py",
+      "sha256": "a175bcc15ac656b7417bf2a80421f7340866092e6a076df4652ff980f0b5469d",
+      "original_sha256": "c95f24261600e7886a5c047dfb3fae5686de409fce15f838901f627cf2539d45",
+      "kind": "windows_dialog_ui"
+    },
+    {
+      "path": "integration/test_windows_dialog_work_area.py",
+      "sha256": "213afdac549566ad1b3a503b88b1bd4aa535ebc2d9ca6842a052c87eab7f0f12",
+      "original_sha256": null,
+      "kind": "test_harness"
+    },
+    {
+      "path": "integration/test_windows_template_sheet_label.py",
+      "kind": "test_harness",
+      "sha256": "8753ac6cca94cea8843d524c634639f37685d95c79c498aa37b4c7614a25f8f5",
+      "original_sha256": null
+    },
+    {
+      "path": "windows/facility_studio/english_catalog.py",
+      "kind": "windows_template_label",
+      "sha256": "c9b1d7a222e3e867afe19f55b8933f37e1a44b1e1faec495d3aaf7f795fa7ec5",
+      "original_sha256": "4f27d571a6a3aba004761ca341f12eec13249e7960d557442e7d36fda2c507f0"
+    },
+    {
+      "path": "integration/test_dcc_selection_interactions.py",
+      "kind": "headless_test_fixture",
+      "sha256": "7c2b4d02c4a1e526d4efc5f17dfa35d8a0f5da1f90e7fb84ceb1ae421e76dbe5",
+      "original_sha256": "49aafdd9e14a74b22aa57d9ebcaaadd3bb565653921ebebf22a661b00c29f611"
+    },
+    {
+      "path": "integration/dcc_independent_resources/verify_dcc_contract.py",
+      "kind": "headless_test_fixture",
+      "sha256": "686c653b199fc6bf922f1d891e0756cd80a143b05f739a84ee14c3bc972d7cee",
+      "original_sha256": "e59eca2bad4104f49235562ed006eae3f286ccb4acfdd0599348c2cc3939dfa7"
+    },
+    {
+      "path": "integration/test_independent_v11_contracts.py",
+      "kind": "headless_test_fixture",
+      "sha256": "08e887f8d36e6605de9f58ed3b3e03e1618670cfc1cfff4498a4719f198e0f8e",
+      "original_sha256": "da66a64d27a8aa656ad8cee5127e838bc94d5fcfa160812ece20e0dc5c0f20b3"
+    },
+    {
+      "path": "integration/test_native_english_switch.py",
+      "kind": "headless_test_fixture",
+      "sha256": "30c923c042ea28bd643dd8ff93f841eff59baf514dd43f9c49153d3226b30a55",
+      "original_sha256": "62340490d3e4347913b1e875191788ee011c2fff936967f23bb40d57e708ef49"
+    },
+    {
+      "path": "integration/test_v11_repair_interactions.py",
+      "kind": "headless_test_fixture",
+      "sha256": "dd06ca56f32992599bc6079bb1e453a05498a879830d89c8eba754bb39edbf11",
+      "original_sha256": "234a4a65736482fe66fc3e232b8f2e675278546c3b0e8a4b8ece38b375f35dfd"
+    },
+    {
+      "path": "windows/facility_studio/window_geometry.py",
+      "kind": "windows_startup_placement",
+      "sha256": "dba6710d8b14e0bc3135b59626c0577b164f697602b286e21d75d1d8786a55a5",
+      "original_sha256": "d670cd4ed349b417233985d945914c0202db29568c6cadc99218eaf8c0ba8c73"
+    },
+    {
+      "path": "integration/test_window_geometry.py",
+      "kind": "test_harness",
+      "sha256": "349d17b4aa51a831faaa32be971a86d0ae2d61fa206d800b6e9252f45d5e7c7b",
+      "original_sha256": "39af57f94eb267dcafc8441528ca45321d88b47d0df7d52346725be979dd25d7"
+    },
+    {
+      "path": "integration/test_windows_startup_placement.py",
+      "kind": "test_harness",
+      "sha256": "4148ec07a3f4d4ef66a858c119f9f8b125283f9bc5405994e135cbcf8c1833ad",
+      "original_sha256": null
+    },
+    {
+      "path": "windows/facility_studio/simple_desktop.py",
+      "sha256": "ae3febe265b42d72d37e40897ecf418f4de49458334b90b411b413a532e63a75",
+      "original_sha256": "5b7a50c30afca9a5b33ebd47da345b6ca0f4c54c3dc4b4a3a8d75b511acacdcc",
+      "kind": "windows_menu_startup_order"
+    },
+    {
+      "path": "windows/facility_studio/desktop.py",
+      "sha256": "b81a43b35a56acb6ac4c0afd3831a86b0e71f589f6b563057a3e2b9056033f5f",
+      "original_sha256": "4a3779a0a9adb176da2530dca87074f55ff894c2a9a1a54b116a746e0683a26a",
+      "kind": "windows_menu_startup_order"
+    },
+    {
+      "path": "integration/test_windows_menu_startup_order.py",
+      "sha256": "334059bfa0273b7eda3af1b65b0b4240240058f30730203c93e0aeda2d95c85d",
+      "original_sha256": null,
+      "kind": "test_harness"
+    },
+    {
+      "path": "integration/test_windows_pending_menu_control.py",
+      "sha256": "083064917c103d832f1c1984ce867c232b83fe8e3c1d86df14b86914ba257fd6",
+      "original_sha256": null,
+      "kind": "test_harness"
+    },
+    {
+      "path": "integration/windows_cold_startup_probe.py",
+      "sha256": "cd1e1974d854a6eaf7a53886aaa2080e1ed338c9abf23e005b6297ba7e8a9d85",
+      "original_sha256": null,
+      "kind": "test_harness"
+    },
+    {
+      "path": "integration/test_windows_cold_startup.py",
+      "sha256": "012f9b37ff71f9bbafe15cf7af016295203c57287e875782c73f1cf088b7260c",
+      "original_sha256": null,
+      "kind": "test_harness"
+    },
+    {
+      "path": "windows/facility_studio/sandbox_ui.py",
+      "original_sha256": "c49f3fe2239dae431bff94837cf2a1afb335206f347becd18b5a9237e327e072",
+      "kind": "windows_english_menu_fit",
+      "sha256": "57d264bd3b8118e9dca3ee7213399f7633bf581f451a1b48bee329cca566368f"
+    },
+    {
+      "path": "integration/test_independent_top_menu_contract.py",
+      "original_sha256": "a6ea1a206f5356377b7b9e855589980da4dd35555f8b40f6364eb759b9e6a3b6",
+      "kind": "test_harness",
+      "sha256": "e96780e7272019c69c7c86d4ab6df515236ecfb1aa5315d4675c0fac75d815bf"
+    },
+    {
+      "path": "integration/independent_top_menu_server.tcl",
+      "original_sha256": "650f4a44b50f475a6a49b230608fc9eb8e96c649fc13df679077408cf67ad9c0",
+      "kind": "test_harness",
+      "sha256": "3bfed18d32659716c0b95dc3804b104b19a61f0ae19efa7008174164f848e499"
+    },
+    {
+      "path": "integration/test_windows_selector_fit.py",
+      "original_sha256": null,
+      "kind": "test_harness",
+      "sha256": "a140426b1800b40c5a5d0a156aec789594f9ed461d1380d3457122baddc75807"
+    },
+    {
+      "path": "integration/test_windows_english_startup_native.py",
+      "original_sha256": null,
+      "kind": "test_harness",
+      "sha256": "c51af0c06c97447d669cceff68e3fd254c42daa889007394aacc80951ff4850a"
+    },
+    {
+      "path": "integration/test_standalone_process_images.py",
+      "original_sha256": null,
+      "sha256": "bc598340209d11b9576223f2f46a7286b3b2a2d89a3ad747c747d3c25e722ee5",
+      "kind": "test_harness"
+    },
+    {
+      "path": "integration/windows_native_menu_observer.py",
+      "original_sha256": null,
+      "kind": "test_harness",
+      "sha256": "1b3e37d3cdb53d8cf732e7ea0d989dc88f06d4097dbd2063c769f99f90f94c79"
+    },
+    {
+      "path": "integration/test_windows_native_menu_observer.py",
+      "original_sha256": null,
+      "kind": "test_harness",
+      "sha256": "4b4caa6fd6bc0f2bdf68fb8a970dc9eb80af4f2a4be3d33300cb81461473c737"
+    },
+    {
+      "path": "integration/test_top_menu_language.py",
+      "original_sha256": "97eeb5052315889f7e4fdba7950076fa827c2fad8a5baacbfa1db1423a38efcb",
+      "sha256": "2d89da92886de1f52e9687dcf21d7bd1e5771e68e57269b184511b2a88d1cae9",
+      "kind": "test_harness"
+    }
+  ],
+  "snapshot_commit": "147f26282c724054a748338a3148bc12e13a2e13",
+  "snapshot_tree": "daa9d51b4b8d4420fde9df133b998cefaf7dbccc",
+  "workflow_commit": "036592ac5c19c42b311f38f7f92c7d7aced88724",
+  "product_equations_changed": false,
+  "windows_dialog_ui_changed": true,
+  "windows_template_label_changed": true,
+  "windows_startup_placement_changed": true,
+  "windows_menu_startup_order_changed": true,
+  "windows_english_menu_fit_changed": true,
+  "standalone_process_image_audit_changed": true,
+  "macos_product_changed": false,
+  "baseline_native_run": 42475494993,
+  "binary_published": false,
+  "formal_feed_accepted": false
+}
