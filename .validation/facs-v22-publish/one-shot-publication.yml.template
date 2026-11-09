@@ -36,8 +36,11 @@ jobs:
       FACS_RELEASE_LOCK: ${{ github.workspace }}/.validation/facs-v22-publish/one-shot-lock.json
       FACS_RELEASE_REVIEW: ${{ github.workspace }}/.validation/facs-v22-publish/one-shot-pixel-inspection.json
       FACS_RELEASE_INVOCATION: ${{ github.workspace }}/.validation/facs-v22-publish/one-shot-invocation.json
-      FACS_RELEASE_EVIDENCE: ${{ runner.temp }}/facs-final-evidence-${{ github.run_id }}
     steps:
+      - name: Initialize runner-temp evidence path
+        shell: pwsh
+        run: |
+          "FACS_RELEASE_EVIDENCE=$env:RUNNER_TEMP/facs-final-evidence-$env:GITHUB_RUN_ID" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         env:
           # Scope newline settings to checkout, before any repository bytes land.

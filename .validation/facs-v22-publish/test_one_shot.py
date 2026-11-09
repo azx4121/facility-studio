@@ -250,6 +250,28 @@ class OneShotTests(unittest.TestCase):
         for value in ("GIT_CONFIG_COUNT: '2'",'GIT_CONFIG_KEY_0: core.autocrlf',"GIT_CONFIG_VALUE_0: 'false'",'GIT_CONFIG_KEY_1: core.eol','GIT_CONFIG_VALUE_1: lf'):
             self.assertIn(value,block)
 
+    def test_job_environment_uses_no_unavailable_runner_context(self):
+        text=(p.HERE/'one-shot-publication.yml.template').read_text()
+        job_env=text.split('    env:\n',1)[1].split('    steps:\n',1)[0]
+        self.assertNotRegex(job_env,r'\$\{\{[^}]*\brunner\s*\.')
+        self.assertNotIn('FACS_RELEASE_EVIDENCE:',job_env)
+        self.assertNotIn('GH_TOKEN:',job_env)
+
+    def test_evidence_path_is_initialized_first_outside_clean_checkout_without_token(self):
+        text=(p.HERE/'one-shot-publication.yml.template').read_text()
+        steps=text.split('    steps:\n',1)[1]
+        first_step=steps.split('      - ',2)[1]
+        self.assertEqual(first_step,
+            'name: Initialize runner-temp evidence path\n'
+            '        shell: pwsh\n'
+            '        run: |\n'
+            '          "FACS_RELEASE_EVIDENCE=$env:RUNNER_TEMP/facs-final-evidence-$env:GITHUB_RUN_ID"'
+            ' | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append\n')
+        self.assertNotIn('GH_TOKEN',first_step)
+        self.assertNotIn('github.workspace',first_step)
+        self.assertNotIn('GITHUB_WORKSPACE',first_step)
+        self.assertLess(text.index('name: Initialize runner-temp evidence path'),text.index(' fetch-evidence '))
+
     def test_local_git_receives_no_tokens_and_does_not_lock_index(self):
         environment=dict(os.environ,GH_TOKEN='NEVER-PASS',GITHUB_TOKEN='NEVER-PASS',GIT_CONFIG_COUNT='1',ACTIONS_RUNTIME_TOKEN='NEVER-PASS')
         with patch.dict(os.environ,environment,clear=True),patch.object(g.subprocess,'run',return_value=SimpleNamespace(returncode=0,stdout=b'clean')) as run:
