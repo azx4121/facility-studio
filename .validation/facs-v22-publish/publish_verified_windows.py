@@ -546,8 +546,11 @@ def fetch_evidence(client, lock, directory):
             require(size <= 512 * 1024**2, 'Raw diagnostic ZIP exceeds download bound.')
             output = directory / safe_relative(item['zip'])
             output.parent.mkdir(parents=True, exist_ok=True)
+            # The Actions API negotiates JSON and returns a download redirect;
+            # the separate unauthenticated storage request negotiates ZIP bytes.
+            phase = 'API'
             status, headers, _ = client.request('GET', API + '/actions/artifacts/' + str(item['id']) + '/zip',
-                authenticated=True, accept='application/zip', destination=output, limit=size)
+                authenticated=True, accept='application/vnd.github+json', destination=output, limit=size)
             if status in (301, 302, 303, 307, 308):
                 location = headers.get('Location', headers.get('location', ''))
                 parsed = urllib.parse.urlsplit(location)
@@ -555,10 +558,18 @@ def fetch_evidence(client, lock, directory):
                     parsed.hostname is not None and re.fullmatch(r'productionresultssa[a-z0-9]+\.blob\.core\.windows\.net', parsed.hostname))
                 require(parsed.scheme == 'https' and allowed, 'Unknown Actions artifact storage host; stop for review.')
                 # GH_TOKEN is deliberately NOT forwarded to object storage.
+                phase = 'storage'
                 status, _, _ = client.request('GET', location, authenticated=False,
                     accept='application/zip', destination=output, limit=size)
-            require(status == 200 and output.stat().st_size == size and t.sha256(output) == item['sha256'],
-                    'Raw diagnostic ZIP differs from exact trusted artifact metadata/hash.')
+            # Keep HTTP failures distinct from exact-byte failures. Only a bounded
+            # status and fixed phase may enter diagnostics, never URLs or bodies.
+            status_text = str(status) if type(status) is int and 100 <= status <= 599 else 'invalid'
+            require(status == 200, 'Raw diagnostic ZIP ' + phase + ' request failed with HTTP ' + status_text + '.')
+            require(output.is_file(), 'Raw diagnostic ZIP response did not create the expected file.')
+            require(output.stat().st_size == size,
+                    'Raw diagnostic ZIP byte count differs from exact trusted artifact metadata.')
+            require(t.sha256(output) == item['sha256'],
+                    'Raw diagnostic ZIP SHA-256 differs from the exact trusted artifact hash.')
     print('Exact diagnostic ZIPs downloaded and hashed. No release state changed.')
 
 
