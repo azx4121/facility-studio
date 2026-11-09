@@ -1,0 +1,12 @@
+{
+  "expires_at": "2026-11-09T08:01:18+00:00",
+  "lock_sha256": "d3dde592e933a13e5e5ea353c1f86aff6596f9f2fea3a2387dfcb6d47f3ef5db",
+  "nonce": "42380b6edd70045ca9e03969cab2719bfe75bd2669b44be7d88a21413a2bb3bd",
+  "operation": "stage-existing",
+  "prepared_at": "2026-11-09T06:01:18+00:00",
+  "publisher_commit": "25b482f647dd4f329ab3ea35786450aa9cf0e6a7",
+  "repository": "azx4121/facility-studio",
+  "resume_release_id": 438782812,
+  "review_sha256": "fe99f65c8d3c22fb622412842cfee38732b7a56f6c4befac30683bc6c69846f9",
+  "schema_version": 1
+}
