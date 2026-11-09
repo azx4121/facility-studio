@@ -232,6 +232,13 @@ def verified_public_url(value, kind, name=None):
     return value
 
 
+def exact_ui_text(actual, expected_lf):
+    """Only the exact LF marker or its exact GitHub UI CRLF serialization."""
+    return (isinstance(actual, str) and isinstance(expected_lf, str)
+            and '\r' not in expected_lf
+            and actual in (expected_lf, expected_lf.replace('\n', '\r\n')))
+
+
 class Scope:
     def __init__(self, run_id, run_attempt, workflow_commit):
         self.run_id, self.run_attempt = positive(run_id), positive(run_attempt)
@@ -248,7 +255,7 @@ class Scope:
         require(data.get('prerelease') is True and data.get('tag_name') == self.tag,
                 'Draft tag/type mismatch; refusing unrelated releases.')
         require(data.get('target_commitish') == self.commit and data.get('name') == self.name
-                and data.get('body') == self.marker, 'Draft ownership marker/commit mismatch.')
+                and exact_ui_text(data.get('body'), self.marker), 'Draft ownership marker/commit mismatch.')
         return data
 
     def gate(self, client, release_id):

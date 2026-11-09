@@ -218,6 +218,41 @@ class OwnerHandoffTests(unittest.TestCase):
                          [dict(id=None, draft=None, tag=self.scope.tag)])
         self.assertNotIn('SECRET', output.getvalue())
 
+    def test_exact_ui_text_accepts_only_two_serializations(self):
+        marker = self.scope.marker
+        self.assertTrue(t.exact_ui_text(marker, marker))
+        self.assertTrue(t.exact_ui_text(marker.replace('\n', '\r\n'), marker))
+        variants = [None, [], marker.replace('\n', '\r\n', 1),
+                    marker.replace('\n', '\r'), marker.rstrip('\n'), marker + '\n',
+                    marker + ' ', ' ' + marker, marker.replace('Repository:', 'Repository: '),
+                    marker.replace('FACS_PRIVATE', 'OTHER_PRIVATE'),
+                    marker.replace(str(self.scope.run_id), '99999'),
+                    marker.replace(self.scope.commit, 'b' * 40),
+                    marker.replace('\n', '\r\n').rstrip('\r\n'),
+                    marker.replace('\n', '\r\n') + '\r\n']
+        for value in variants:
+            with self.subTest(value=value):
+                self.assertFalse(t.exact_ui_text(value, marker))
+        self.assertFalse(t.exact_ui_text(marker, marker.replace('\n', '\r\n')))
+
+    def test_scope_accepts_exact_ui_crlf_but_preserves_all_fields(self):
+        from test_private_transfer import FakeClient
+        import io
+        client = FakeClient(self.scope)
+        with mock.patch('sys.stdout', new_callable=io.StringIO):
+            t.create_or_resume(client, self.scope, None)
+        release = copy.deepcopy(client.release)
+        release['body'] = self.scope.marker.replace('\n', '\r\n')
+        self.scope.release(release, 55)
+        changes = [('body', self.scope.marker.replace('\n', '\r\n', 1)),
+                   ('body', release['body'].rstrip('\r\n')), ('body', release['body'] + ' '),
+                   ('target_commitish', t.BRANCH), ('target_commitish', 'b' * 40),
+                   ('draft', False), ('prerelease', False), ('tag_name', 'other'),
+                   ('name', self.scope.name + ' '), ('published_at', '2026-11-08')]
+        for key, value in changes:
+            with self.subTest(key=key, value=value), self.assertRaises(t.GateError):
+                self.scope.release(dict(release, **{key: value}), 55)
+
     def test_explicit_resume_is_required_before_client(self):
         with mock.patch.object(h, 'OwnerClient') as client:
             with self.assertRaises(SystemExit):
