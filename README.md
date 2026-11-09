@@ -14,17 +14,19 @@ Facility Studio 5.7.3 是廠務工程初估、方案比較與設計需求整理�
 
 ## 下載
 
-**目前可下載 Mac v22 r3 完整 ZIP；Windows v22 尚未提供下載。Mac 是未驗收候選，公開下載不代表正式驗收通過。** 正式驗收仍須以精確來源 commit、平台成品及 SHA256 對應的 CI／Release 證據為準；請勿將歷史版本的測試結果轉作本版證據。
+**目前可下載 Windows v22 portable EXE 與 Mac v22 r3 完整 ZIP。Mac 是未驗收候選，公開下載不代表正式驗收通過。** 正式驗收仍須以精確來源 commit、平台成品及 SHA256 對應的 CI／Release 證據為準；請勿將歷史版本的測試結果轉作本版證據。
 
 | 5.7.3 交付目標 | 格式與使用方式 | 驗收狀態 |
 | --- | --- | --- |
-| [Windows x64（v22 尚未提供，查看狀態）](#windows-v22-download-status)，Windows 10／11 為支援目標 | 安裝版與 portable ZIP 為交付目標，目前無 v22 載點 | 同一包須在 Windows Server 2022／2025 原生驗收，目前尚未完成 |
+| [Windows x64（下載 v22 portable EXE）](https://github.com/azx4121/facility-studio/releases/download/facs-v22-windows-verified-42538089644-2/Facility-Studio-5.7.3-v22-Windows-x64-Portable.exe)，Windows 10／11 為支援目標 | 單一 EXE，內含執行環境，下載後直接開啟 | 同一 EXE 已在 GitHub-hosted Windows Server 2022／2025 原生驗證；Windows 10／11 尚未實測，見[驗證範圍](#windows-v22-download-status) |
 | [macOS Apple Silicon ARM64（下載完整 ZIP）](https://github.com/azx4121/facility-studio/releases/download/facs-v22-r3-macos-arm64-unvalidated/FACS-v22-r3-UNVALIDATED-COMPILE-ONLY-macOS-arm64.zip) | v22 r3 單一完整 ZIP，內含 Facility Studio 5.7.3.app；完整解壓後開啟，不需拼檔 | **未驗收候選（UNVALIDATED-COMPILE-ONLY）**；完整原生 GUI、frozen 與工程驗收未完成；非 Universal／Intel／DMG |
 
 Mac ZIP：78,519,839 bytes；SHA256：`26dcbac483b5c039486af1d88b750ba7dda5f11dbb9965e88fabc08d0236643a`。[候選發布說明與限制](https://github.com/azx4121/facility-studio/releases/tag/facs-v22-r3-macos-arm64-unvalidated)。請解壓至獨立位置，不覆蓋既有安裝或真實專案資料。
 
 <a id="windows-v22-download-status"></a>
-**Windows v22：尚未提供下載。** 尚未完成原生成品驗收與發布；上表 Windows 連結只開啟此狀態說明，不會下載舊版。
+**Windows v22：已提供下載。** [發布說明與限制](https://github.com/azx4121/facility-studio/releases/tag/facs-v22-windows-verified-42538089644-2) · [驗證紀錄](https://github.com/azx4121/facility-studio/releases/download/facs-v22-windows-verified-42538089644-2/Windows_Verification.txt) · [SHA256SUMS](https://github.com/azx4121/facility-studio/releases/download/facs-v22-windows-verified-42538089644-2/SHA256SUMS.txt)。EXE：102,853,589 bytes；SHA256：`7835d4b84cf99ea3e5e681b17eecc2bc8c2155a71463bda30a5e27c65351290b`。
+
+測試主機為 GitHub-hosted Windows Server 2022／2025，控制測試的 Python 已安裝；實際 EXE 啟動未使用外部 Python 程序，但這不是無 Python 主機測試。未涵蓋終端使用者 Windows 10／11、高 DPI、完整 GUI 操作或安裝測試；EXE 未簽章，可能出現安全提示。
 
 歷史公開測試版：[Windows win.10](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-win.10)／[macOS mac.8](https://github.com/azx4121/facility-studio/releases/tag/v5.6.0-mac.8)。舊版測試主機、DMG 與 Universal 支援不能轉作 5.7.3 證據。正式版名稱不表示已具備商用簽章或 Apple 公證，見[安全提示](docs/signing.md)。
 
