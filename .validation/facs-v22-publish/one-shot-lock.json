@@ -1,0 +1,84 @@
+{
+  "candidate": {
+    "asset_id": 726091493,
+    "bytes": 102853589,
+    "manifest_asset_id": 726092181,
+    "manifest_bytes": 177901,
+    "manifest_sha256": "280ab54d3c433dc61c43f3aa0d0da3cf6a0322eb65346745b4be3ffa79101d9e",
+    "producer_attempt": 2,
+    "release_id": 438702586,
+    "sha256": "7835d4b84cf99ea3e5e681b17eecc2bc8c2155a71463bda30a5e27c65351290b"
+  },
+  "private_artifacts": {
+    "2022": {
+      "id": 13647399109,
+      "sha256": "e1866b797cdabb0d4916303c22b78ae2c7f1ac9996e316d5867be92f9f1ea99b",
+      "zip": "private2022.zip"
+    },
+    "2025": {
+      "id": 13648456291,
+      "sha256": "dfa31beb04430d537dc7c62a1e5d7f267f0c37b2880fe6685fa77bbd4f9dde54",
+      "zip": "private2025.zip"
+    }
+  },
+  "private_run": {
+    "attempt": 2,
+    "commit": "526987d5ede3885415a98cb19fa1e66517a47c1b",
+    "id": 42538089644,
+    "jobs": {
+      "2022": {
+        "attempt": 2,
+        "id": 128958777718
+      },
+      "2025": {
+        "attempt": 2,
+        "id": 128964793030
+      }
+    },
+    "workflow_id": 411191090
+  },
+  "publisher_commit": "5ac664f64df3904e96de7cab69c18834386dcf50",
+  "repository": "azx4121/facility-studio",
+  "schema_version": 1,
+  "source_artifacts": {
+    "2022": {
+      "id": 13633940076,
+      "sha256": "d7965011a4ef39ab9dbaed9140613d6678d30d2294a970e712f5b054b63f989c",
+      "zip": "source2022.zip"
+    },
+    "2025": {
+      "id": 13634110899,
+      "sha256": "b9cacaa9e01fc8a83ea7cfd3a623a1b926f7951a11e3888e877b7cdbb3f99bcc",
+      "zip": "source2025.zip"
+    }
+  },
+  "source_identity": {
+    "passed_subtests": 90,
+    "passed_tests": 8654,
+    "provenance": {
+      "file": "trusted-source-provenance.json",
+      "sha256": "99d5ae6fd6a7d904c262d25418eb134251944c569f2e419e92473f1473e13814"
+    },
+    "snapshot_commit": "147f26282c724054a748338a3148bc12e13a2e13",
+    "source_manifest": {
+      "file": "trusted-source-manifest.json",
+      "sha256": "eab30c22b13511e7903345785e787f693e19c0b751b6b9484b4cc1c888182caf"
+    }
+  },
+  "source_run": {
+    "attempt": 1,
+    "commit": "036592ac5c19c42b311f38f7f92c7d7aced88724",
+    "id": 42518369425,
+    "jobs": {
+      "2022": {
+        "attempt": 1,
+        "id": 128846250648
+      },
+      "2025": {
+        "attempt": 1,
+        "id": 128846250778
+      }
+    },
+    "workflow_id": 411105069
+  }
+}
